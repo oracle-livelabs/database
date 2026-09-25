@@ -1,0 +1,199 @@
+# Lab 2: Install the My AI Staff Runtime (Manual Path)
+
+## Introduction
+
+In this manual-path lab, you configure runtime dependencies, repositories, virtual environments, and local service access. Slack apps and environment files are covered in Lab 3; external integrations and systemd activation are covered in Labs 4 and 5. If you completed the Fast Path: Click the Magic Button, skip this lab and continue to Lab 3.
+Estimated Time: 90 minutes
+
+### Objectives
+
+In this lab, you will:
+
+- Install platform dependencies and runtime tools.
+- Configure per-agent Python virtual environments.
+- Prepare the runtime for external integrations configured later.
+- Prepare the current agent directories for Slack configuration and service activation.
+
+### Prerequisites
+
+- Completion of Lab 1.
+- SSH access to the OCI compute instance.
+- A personal Gmail account and a personal Slack account/workspace for this workshop. Do not use a corporate or customer-owned account for workshop identities or OAuth consent.
+- Slack admin rights for your personal target workspace.
+
+## Task 1: Install Runtime Packages and Tooling
+
+1. Connect to the OCI compute instance from your laptop. Use either method:
+    - **VS Code:** Open the Command Palette, select **Remote-SSH: Connect to Host**, choose `my-ai-staff-oci`, and open a new terminal with **Terminal > New Terminal**. The commands below must run in that remote terminal.
+    - **Laptop terminal:** Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes to the remote `opc` shell, run the commands below. The `my-ai-staff-oci` alias and key are configured in Lab 1 Task 1.
+
+    Once connected, update system packages:
+
+    ```
+    <copy>
+    sudo dnf update -y
+    sudo dnf install -y dnf-plugins-core git curl unzip python3.12 policycoreutils-python-utils
+    sudo dnf config-manager --set-enabled ol9_developer_EPEL
+    </copy>
+    ```
+
+2. Install Codex CLI on the compute instance with the Linux standalone installer. This avoids installing Node.js or npm on the server just to get the `codex` binary.
+
+    ```
+    <copy>
+    curl -fsSL https://chatgpt.com/codex/install.sh | sh
+    export PATH="$HOME/.local/bin:$PATH"
+    command -v codex
+    codex --version
+    </copy>
+    ```
+
+    If `command -v codex` does not print a path, close and reopen the remote shell, or add the installer output directory to `PATH`. Record the printed path for `CODEX_BIN` in Lab 3.
+
+3. Start Codex CLI and sign in with ChatGPT.
+
+    ```
+    <copy>
+    codex
+    </copy>
+    ```
+
+    In the Codex interface, select **Sign in with Device Code** when the browser does not open automatically from the remote OCI instance.
+
+    ![Codex Device Code Sign In Option](./images/06_codex_device_code_option.png)
+
+    Copy the login URL and one-time code from the terminal. Open the URL in your laptop browser, complete the sign-in, and return to the remote shell prompt before continuing.
+
+    ![Codex Device Code Login URL](./images/07_codex_device_code_url.png)
+
+    After signing in, Codex should look like this:
+
+    ![Codex Terminal in Visual Studio Code](./images/03_codex_vsc.png)
+
+    ![Codex Terminal in Terminal](./images/04_codex_terminal.png)
+
+4. Verify the CLI from the instance shell using a non-destructive test.
+
+    ```
+    <copy>
+    codex exec --skip-git-repo-check "Reply with OK."
+    </copy>
+    ```
+
+## Task 2: Download the Platform ZIP, Install Its Codex Skills, and Build Virtual Environments
+
+1. Download the supplied platform ZIP and extract it into your home directory. The archive already contains the complete `livelabs-ai-staff/` directory; it is not a Git repository, so do not run `git clone` or expect a repository remote. Use `~/livelabs-ai-staff`; the service units co-located with the agents use this path.
+
+    ```
+    <copy>
+    cd ~
+    curl -fL --retry 3 'https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/livelabs-ai-staff.zip' -o /tmp/livelabs-ai-staff.zip
+    test ! -e ~/livelabs-ai-staff || { echo 'Remove or rename the existing ~/livelabs-ai-staff directory before continuing.'; exit 1; }
+    unzip -q /tmp/livelabs-ai-staff.zip -d ~
+    cd ~/livelabs-ai-staff
+    mkdir -p posts pending-posts
+    test -f schema/ai_for_you_fresh_ddl.sql
+    test -d plugins/livelabsagentic-skills/skills
+    find . -maxdepth 1 -type d -print | sort
+    </copy>
+    ```
+
+2. Copy the included Codex skills into your personal skills directory.
+
+    ```
+    <copy>
+    mkdir -p ~/.codex/skills
+    cp -a /home/opc/livelabs-ai-staff/plugins/livelabsagentic-skills/skills/. ~/.codex/skills/
+    </copy>
+    ```
+
+    Verify that Codex can find the copied skill definitions:
+
+    ```
+    <copy>
+    find ~/.codex/skills -maxdepth 2 -name SKILL.md | wc -l
+    </copy>
+    ```
+
+    The command must return a value greater than `0`. Start a new Codex session after the copy so the skills list refreshes. The database schema was completed in Lab 1; do not return to Lab 1 or run the DDL again.
+
+    The next steps create Python virtual environments that systemd services run later in Lab 5. Oracle Linux uses SELinux to enforce extra access controls beyond standard Linux permissions. The `chcon`, `semanage fcontext`, and `restorecon` commands label only the virtual-environment executable directories as `bin_t`, so systemd can execute the Python interpreters inside those directories.
+
+    This does not disable SELinux, open network ports, or make the project directory public. It grants the minimum persistent SELinux file context needed for these service executables. Do not apply these labels broadly to the whole home directory or to files that contain secrets.
+
+3. Build Python 3.9 virtual environments for the current agent directories: `pipeline`, `assistant`, `brand-agent`, `ops`, and `publish`.
+
+    ```
+    <copy>
+    cd ~/livelabs-ai-staff
+    for agent in pipeline assistant brand-agent ops publish; do
+      python3 -m venv "agents/$agent/venv"
+      "agents/$agent/venv/bin/pip" install --upgrade pip
+      "agents/$agent/venv/bin/pip" install -r "agents/$agent/requirements.txt"
+      "agents/$agent/venv/bin/pip" install -r agents/shared/requirements.txt
+      sudo chcon -R -t bin_t "agents/$agent/venv/bin/"
+      sudo chcon -h -t bin_t "agents/$agent/venv/bin/python"*
+      sudo semanage fcontext -a -t bin_t "/home/opc/livelabs-ai-staff/agents/$agent/venv/bin(/.*)?" || \
+        sudo semanage fcontext -m -t bin_t "/home/opc/livelabs-ai-staff/agents/$agent/venv/bin(/.*)?"
+    done
+    sudo restorecon -Rv ~/livelabs-ai-staff/agents
+    </copy>
+    ```
+
+4. Create the Data Agent `agents/data/venv` with Python 3.12; its memory dependencies require Python 3.10 or later.
+
+    ```
+    <copy>
+    cd ~/livelabs-ai-staff
+    python3.12 -m venv agents/data/venv
+    agents/data/venv/bin/pip install --upgrade pip
+    agents/data/venv/bin/pip install -r agents/data/requirements.txt
+    agents/data/venv/bin/pip install -r agents/shared/requirements-common.txt
+    sudo chcon -R -t bin_t agents/data/venv/bin/
+    sudo chcon -h -t bin_t agents/data/venv/bin/python*
+    sudo semanage fcontext -a -t bin_t '/home/opc/livelabs-ai-staff/agents/data/venv/bin(/.*)?' || \
+      sudo semanage fcontext -m -t bin_t '/home/opc/livelabs-ai-staff/agents/data/venv/bin(/.*)?'
+    sudo restorecon -Rv agents/data/venv
+    </copy>
+    ```
+
+5. Create and label the File Editor virtual environment. This step does not start the editor service. It only installs the Python dependencies and SELinux labels needed later. Lab 5 installs and starts `contentkit-file-editor.service`; after that service is active, File Editor serves local edit links on `127.0.0.1:8001`.
+
+    ```
+    <copy>
+    python3 -m venv apps/file-editor/venv
+    apps/file-editor/venv/bin/pip install --upgrade pip
+    apps/file-editor/venv/bin/pip install -r apps/file-editor/requirements.txt
+    apps/file-editor/venv/bin/pip install -r agents/shared/requirements.txt
+    sudo chcon -R -t bin_t apps/file-editor/venv/bin/
+    sudo chcon -h -t bin_t apps/file-editor/venv/bin/python*
+    sudo semanage fcontext -a -t bin_t '/home/opc/livelabs-ai-staff/apps/file-editor/venv/bin(/.*)?' || \
+      sudo semanage fcontext -m -t bin_t '/home/opc/livelabs-ai-staff/apps/file-editor/venv/bin(/.*)?'
+    sudo restorecon -Rv apps/file-editor/venv
+    </copy>
+    ```
+
+6. Create the AI Staff virtual environment only when you plan to enable its Gmail, Calendar, email, or public-intake automation. This optional component is not required for the core content workflow.
+
+    ```
+    <copy>
+    python3 -m venv agents/aistaff/venv
+    agents/aistaff/venv/bin/pip install --upgrade pip
+    agents/aistaff/venv/bin/pip install -r agents/aistaff/requirements.txt
+    agents/aistaff/venv/bin/pip install -r agents/shared/requirements-common.txt
+    sudo chcon -R -t bin_t agents/aistaff/venv/bin/
+    sudo chcon -h -t bin_t agents/aistaff/venv/bin/python*
+    sudo semanage fcontext -a -t bin_t '/home/opc/livelabs-ai-staff/agents/aistaff/venv/bin(/.*)?' || \
+      sudo semanage fcontext -m -t bin_t '/home/opc/livelabs-ai-staff/agents/aistaff/venv/bin(/.*)?'
+    sudo restorecon -Rv agents/aistaff/venv
+    </copy>
+    ```
+
+## Task 3: Prepare for Slack Configuration
+
+1. Confirm the generic role mapping: Assistant Agent/`assistant`, Content Agent and Creative Agent/`pipeline`, Brand Agent/`brand-agent`, Data Agent/`data`, Ops Agent/`ops`, and Publish Agent/`publish`.
+2. Lab 3 creates the apps at [Slack API: Your Apps](https://api.slack.com/apps). Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. Use the personal Slack workspace from the prerequisites.
+## Acknowledgements
+
+- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
+- Last Updated: Cyrce Salinas Rojas, September 2026

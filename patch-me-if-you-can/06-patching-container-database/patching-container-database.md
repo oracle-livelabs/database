@@ -2,7 +2,9 @@
 
 ## Introduction
 
-In this lab, you will manually patch a container database. The *CDB19* database is running on 19.27 and you will patch it to an existing Oracle home on 19.28. In addition, you will check how PDBs behaves during patching.
+In this lab, you will *manually* patch a container database. The *CDB19* database is running on 19.31 and you will patch it to an existing Oracle home on 19.32. In addition, you will check how PDBs behave during patching.
+
+It is safer and easier to patch a database using AutoUpgrade. By patching a database manually, you can compare the two methods and see the benefits of AutoUpgrade.
 
 Estimated Time: 15 Minutes
 
@@ -15,13 +17,11 @@ In this lab, you will:
 
 ### Prerequisites
 
-This lab assumes:
+None.
 
-* You have completed Lab 2: Simple Patching With AutoUpgrade
+## Task 1: Patch a Container Database
 
-## Task 1: Patch a container database
-
-You will patch *CDB19* to 19.28 and use an existing Oracle home.
+You will patch *CDB19* to 19.32 and use an existing Oracle home.
 
 1. Use the *yellow* terminal 🟨. Set the environment to the *CDB19* database and connect.
 
@@ -30,19 +30,9 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     . cdb19
     sql / as sysdba
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
-2. Start the database.
-
-    ``` sql
-    <copy>
-    startup
-    </copy>
-    ```
-
-3. Create a new PDB.
+2. Create a new PDB.
 
     ``` sql
     <copy>
@@ -61,7 +51,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     </details>
 
-4. Check the current version.
+3. Check the current version.
 
     ``` sql
     <copy>
@@ -77,12 +67,12 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     VERSION_FULL
     -----------------
-    19.27.0.0.0
+    19.31.0.0.0
     ```
 
     </details>
 
-5. Shut down the database, so you can patch it to 19.28.
+4. Shut down the database, so you can patch it to 19.32.
 
     ``` sql
     <copy>
@@ -92,75 +82,73 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     * You must shut down a single instance database to patch it. In contrast, if it was an Oracle RAC Database, you could patch it using the *RAC Rolling* method without downtime.
 
-6. Exit SQLcl.
+5. Exit SQLcl.
 
-    ``` sql
+    ``` bash
     <copy>
     exit
     </copy>
     ```
 
-7. Move the SPFile and password file to the new Oracle home.
+6. Move the SPFile and password file to the new Oracle home.
 
     ``` bash
     <copy>
-    export NEW_ORACLE_HOME=/u01/app/oracle/product/19_28
+    export NEW_ORACLE_HOME=/u01/app/oracle/product/dbhome_19_32
     export OLD_ORACLE_HOME=/u01/app/oracle/product/19
     mv $OLD_ORACLE_HOME/dbs/spfileCDB19.ora $NEW_ORACLE_HOME/dbs
     mv $OLD_ORACLE_HOME/dbs/orapwCDB19 $NEW_ORACLE_HOME/dbs
     </copy>
 
-    # Be sure to hit RETURN
+    # Be sure to press RETURN
     ```
 
     * In this lab, there is no PFile, so we don't need to move that one.
-    * Also, there are no network files, like `tnsnames.ora` and `sqlnet.ora` in `$ORACLE_HOME/network/admin` so we don't move those either.
+    * There are also no network files, such as `tnsnames.ora` and `sqlnet.ora`, in `$ORACLE_HOME/network/admin`, so we do not move those either.
     * There might be many other files in the Oracle home. Check the blog post [Files to Move During Oracle Database Out-Of-Place Patching](https://dohdatabase.com/2023/05/30/files-to-move-during-oracle-database-out-of-place-patching/) for details.
 
-8. You need to set the environment to the new Oracle home. Update the profile script and reset the environment.
+7. You need to set the environment to the new Oracle home. Update the profile script and reset the environment.
 
     ``` bash
     <copy>
-    sed -i 's|^ORACLE_HOME=.*|ORACLE_HOME=/u01/app/oracle/product/19_28|' /usr/local/bin/cdb19
+    sed -i 's|^ORACLE_HOME=.*|ORACLE_HOME=/u01/app/oracle/product/dbhome_19_32|' /usr/local/bin/cdb19
     . cdb19
     env | grep ORA
     </copy>
 
-    # Be sure to hit RETURN
+    # Be sure to press RETURN
     ```
 
-9. Update `/etc/oratab` to reflect the new Oracle home.
+8. Update `/etc/oratab` to reflect the new Oracle home.
 
     ``` bash
     <copy>
-    sed 's|^CDB19:.*|CDB19:/u01/app/oracle/product/19_28:Y|' /etc/oratab > /tmp/oratab
+    sed 's|^CDB19:.*|CDB19:/u01/app/oracle/product/dbhome_19_32:Y|' /etc/oratab > /tmp/oratab
     cat /tmp/oratab > /etc/oratab
-    grep "CDB19" /etc/oratab
+    grep "CDB19:" /etc/oratab
     </copy>
 
-    # Be sure to hit RETURN
+    # Be sure to press RETURN
     ```
 
-10. Connect to the database.
+9. Connect to the database.
 
-    ``` bash
+    ``` sql
     <copy>
     sql / as sysdba
     </copy>
     ```
 
-11. Start the database instance and check PDBs.
+10. Start the database instance and check PDBs.
 
     ``` sql
     <copy>
     startup
-    show pdbs
+    select name, open_mode, restricted from v$pdbs;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
-    * Notice how the *INDIGO* PDB doesn't start because you didn't save the state.
+    * Notice that the *INDIGO* PDB is mounted because its open state was not saved.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -176,26 +164,27 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     Redo Buffers                7589888 bytes
     Database mounted.
     Database opened.
-    SQL> show pdbs
+    SQL> select name, open_mode, restricted from v$pdbs;
 
-        CON_ID CON_NAME      OPEN MODE  RESTRICTED
-    ---------- ------------- ---------- ----------
-             2 PDB$SEED      READ ONLY  NO
-             3 INDIGO        MOUNTED
-             4 ORANGE        READ WRITE NO
+    NAME          OPEN_MODE     RESTRICTED
+    _____________ _____________ _____________
+    PDB$SEED      READ ONLY     NO
+    INDIGO        MOUNTED
+    ORANGE        READ WRITE    NO
+    TERRACOTTA    READ WRITE    NO
     ```
 
     </details>
 
-12. Exit SQLcl.
+11. Exit SQLcl.
 
-    ``` sql
+    ``` bash
     <copy>
     exit
     </copy>
     ```
 
-## Task 2: Examine Datapatch behavior
+## Task 2: Examine Datapatch Behavior
 
 1. Remain in the *yellow* terminal 🟨.
 
@@ -215,11 +204,10 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     <summary>*click to see the output*</summary>
 
     ``` text
-    $ $ORACLE_HOME/OPatch/datapatch
-    SQL Patching tool version 19.28.0.0.0 Production on Sun Jul 27 16:34:06 2025
-    Copyright (c) 2012, 2025, Oracle.  All rights reserved.
+    SQL Patching tool version 19.32.0.0.0 Production on Wed Sep  2 08:38:54 2026
+    Copyright (c) 2012, 2026, Oracle.  All rights reserved.
 
-    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_302392_2025_07_27_16_34_06/sqlpatch_invocation.log
+    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_120734_2026_09_02_08_38_54/sqlpatch_invocation.log
 
     Connecting to database...OK
     Gathering database info...done
@@ -234,91 +222,107 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     Determining current state...done
 
     Current state of interim SQL patches:
-    Interim patch 37499406 (OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)):
+    Interim patch 38906621 (OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621)):
       Binary registry: Not installed
-      PDB CDB$ROOT: Applied successfully on 24-JUL-25 11.38.03.761631 AM
-      PDB ORANGE: Applied successfully on 24-JUL-25 11.40.06.122876 AM
-      PDB PDB$SEED: Applied successfully on 24-JUL-25 11.40.06.122876 AM
-    Interim patch 37777295 (DATAPUMP BUNDLE PATCH 19.27.0.0.0):
+      PDB CDB$ROOT: Applied successfully on 01-SEP-26 02.34.09.543024 PM
+      PDB ORANGE: Applied successfully on 01-SEP-26 02.35.56.902699 PM
+      PDB PDB$SEED: Applied successfully on 01-SEP-26 02.35.56.902699 PM
+      PDB TERRACOTTA: Applied successfully on 01-SEP-26 02.35.56.902699 PM
+    Interim patch 39196236 (DATAPUMP BUNDLE PATCH 19.31.0.0.0):
       Binary registry: Not installed
-      PDB CDB$ROOT: Applied successfully on 24-JUL-25 11.40.00.817914 AM
-      PDB ORANGE: Applied successfully on 24-JUL-25 11.41.23.598307 AM
-      PDB PDB$SEED: Applied successfully on 24-JUL-25 11.41.23.598307 AM
-    Interim patch 37847857 (OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)):
+      PDB CDB$ROOT: Applied successfully on 01-SEP-26 02.35.51.553181 PM
+      PDB ORANGE: Applied successfully on 01-SEP-26 02.37.08.635055 PM
+      PDB PDB$SEED: Applied successfully on 01-SEP-26 02.37.08.635055 PM
+      PDB TERRACOTTA: Applied successfully on 01-SEP-26 02.37.08.635055 PM
+    Interim patch 39222882 (OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882)):
       Binary registry: Installed
       PDB CDB$ROOT: Not installed
       PDB ORANGE: Not installed
       PDB PDB$SEED: Not installed
-    Interim patch 38170982 (DATAPUMP BUNDLE PATCH 19.28.0.0.0):
+      PDB TERRACOTTA: Not installed
+    Interim patch 39657094 (DATAPUMP BUNDLE PATCH 19.32.0.0.0):
       Binary registry: Installed
       PDB CDB$ROOT: Not installed
       PDB ORANGE: Not installed
       PDB PDB$SEED: Not installed
+      PDB TERRACOTTA: Not installed
 
     Current state of release update SQL patches:
       Binary registry:
-        19.28.0.0.0 Release_Update 250705030417: Installed
+        19.32.0.0.0 Release_Update 260705220710: Installed
       PDB CDB$ROOT:
-        Applied 19.27.0.0.0 Release_Update 250406131139 successfully on 24-JUL-25 11.39.47.050576 AM
+        Applied 19.31.0.0.0 Release_Update 260514003012 successfully on 01-SEP-26 02.35.39.827433 PM
       PDB ORANGE:
-        Applied 19.27.0.0.0 Release_Update 250406131139 successfully on 24-JUL-25 11.41.15.860182 AM
+        Applied 19.31.0.0.0 Release_Update 260514003012 successfully on 01-SEP-26 02.37.02.349192 PM
       PDB PDB$SEED:
-        Applied 19.27.0.0.0 Release_Update 250406131139 successfully on 24-JUL-25 11.41.15.860182 AM
+        Applied 19.31.0.0.0 Release_Update 260514003012 successfully on 01-SEP-26 02.37.02.349192 PM
+      PDB TERRACOTTA:
+        Applied 19.31.0.0.0 Release_Update 260514003012 successfully on 01-SEP-26 02.37.02.349192 PM
 
     Adding patches to installation queue and performing prereq checks...done
     Installation queue:
-      For the following PDBs: CDB$ROOT PDB$SEED ORANGE
+      For the following PDBs: CDB$ROOT PDB$SEED ORANGE TERRACOTTA
         The following interim patches will be rolled back:
-          37499406 (OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406))
-          37777295 (DATAPUMP BUNDLE PATCH 19.27.0.0.0)
-        Patch 37960098 (Database Release Update : 19.28.0.0.250715 (37960098)):
-          Apply from 19.27.0.0.0 Release_Update 250406131139 to 19.28.0.0.0 Release_Update 250705030417
+          38906621 (OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621))
+          39196236 (DATAPUMP BUNDLE PATCH 19.31.0.0.0)
+        Patch 39472050 (Database Release Update : 19.32.0.0.260721 (39472050)):
+          Apply from 19.31.0.0.0 Release_Update 260514003012 to 19.32.0.0.0 Release_Update 260705220710
         The following interim patches will be applied:
-          37847857 (OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857))
-          38170982 (DATAPUMP BUNDLE PATCH 19.28.0.0.0)
+          39222882 (OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882))
+          39657094 (DATAPUMP BUNDLE PATCH 19.32.0.0.0)
 
     Installing patches...
-    Patch installation complete.  Total patches installed: 15
+    Patch installation complete.  Total patches installed: 20
 
     Validating logfiles...done
-    Patch 37499406 rollback (pdb CDB$ROOT): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37499406/26115603/37499406_rollback_CDB19_CDBROOT_2025Jul27_16_34_50.log (no errors)
-    Patch 37777295 rollback (pdb CDB$ROOT): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37777295/27238855/37777295_rollback_CDB19_CDBROOT_2025Jul27_16_34_50.log (no errors)
-    Patch 37960098 apply (pdb CDB$ROOT): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37960098/27635722/37960098_apply_CDB19_CDBROOT_2025Jul27_16_34_50.log (no errors)
-    Patch 37847857 apply (pdb CDB$ROOT): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37847857/27534561/37847857_apply_CDB19_CDBROOT_2025Jul27_16_34_50.log (no errors)
-    Patch 38170982 apply (pdb CDB$ROOT): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38170982/27628376/38170982_apply_CDB19_CDBROOT_2025Jul27_16_35_19.log (no errors)
-    Patch 37499406 rollback (pdb PDB$SEED): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37499406/26115603/37499406_rollback_CDB19_PDBSEED_2025Jul27_16_35_47.log (no errors)
-    Patch 37777295 rollback (pdb PDB$SEED): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37777295/27238855/37777295_rollback_CDB19_PDBSEED_2025Jul27_16_35_47.log (no errors)
-    Patch 37960098 apply (pdb PDB$SEED): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37960098/27635722/37960098_apply_CDB19_PDBSEED_2025Jul27_16_35_47.log (no errors)
-    Patch 37847857 apply (pdb PDB$SEED): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37847857/27534561/37847857_apply_CDB19_PDBSEED_2025Jul27_16_35_47.log (no errors)
-    Patch 38170982 apply (pdb PDB$SEED): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38170982/27628376/38170982_apply_CDB19_PDBSEED_2025Jul27_16_35_57.log (no errors)
-    Patch 37499406 rollback (pdb ORANGE): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37499406/26115603/37499406_rollback_CDB19_ORANGE_2025Jul27_16_35_47.log (no errors)
-    Patch 37777295 rollback (pdb ORANGE): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37777295/27238855/37777295_rollback_CDB19_ORANGE_2025Jul27_16_35_47.log (no errors)
-    Patch 37960098 apply (pdb ORANGE): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37960098/27635722/37960098_apply_CDB19_ORANGE_2025Jul27_16_35_47.log (no errors)
-    Patch 37847857 apply (pdb ORANGE): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37847857/27534561/37847857_apply_CDB19_ORANGE_2025Jul27_16_35_47.log (no errors)
-    Patch 38170982 apply (pdb ORANGE): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38170982/27628376/38170982_apply_CDB19_ORANGE_2025Jul27_16_35_58.log (no errors)
-    SQL Patching tool complete on Sun Jul 27 16:36:15 2025
+    Patch 38906621 rollback (pdb CDB$ROOT): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38906621/28588735/38906621_rollback_CDB19_CDBROOT_2026Sep02_08_39_39.log (no errors)
+    Patch 39196236 rollback (pdb CDB$ROOT): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39196236/28705537/39196236_rollback_CDB19_CDBROOT_2026Sep02_08_39_39.log (no errors)
+    Patch 39472050 apply (pdb CDB$ROOT): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39472050/28919163/39472050_apply_CDB19_CDBROOT_2026Sep02_08_39_40.log (no errors)
+    Patch 39222882 apply (pdb CDB$ROOT): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39222882/28830205/39222882_apply_CDB19_CDBROOT_2026Sep02_08_39_39.log (no errors)
+    Patch 39657094 apply (pdb CDB$ROOT): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39657094/28915841/39657094_apply_CDB19_CDBROOT_2026Sep02_08_40_02.log (no errors)
+    Patch 38906621 rollback (pdb PDB$SEED): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38906621/28588735/38906621_rollback_CDB19_PDBSEED_2026Sep02_08_40_24.log (no errors)
+    Patch 39196236 rollback (pdb PDB$SEED): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39196236/28705537/39196236_rollback_CDB19_PDBSEED_2026Sep02_08_40_24.log (no errors)
+    Patch 39472050 apply (pdb PDB$SEED): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39472050/28919163/39472050_apply_CDB19_PDBSEED_2026Sep02_08_40_24.log (no errors)
+    Patch 39222882 apply (pdb PDB$SEED): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39222882/28830205/39222882_apply_CDB19_PDBSEED_2026Sep02_08_40_24.log (no errors)
+    Patch 39657094 apply (pdb PDB$SEED): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39657094/28915841/39657094_apply_CDB19_PDBSEED_2026Sep02_08_40_35.log (no errors)
+    Patch 38906621 rollback (pdb ORANGE): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38906621/28588735/38906621_rollback_CDB19_ORANGE_2026Sep02_08_40_24.log (no errors)
+    Patch 39196236 rollback (pdb ORANGE): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39196236/28705537/39196236_rollback_CDB19_ORANGE_2026Sep02_08_40_24.log (no errors)
+    Patch 39472050 apply (pdb ORANGE): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39472050/28919163/39472050_apply_CDB19_ORANGE_2026Sep02_08_40_25.log (no errors)
+    Patch 39222882 apply (pdb ORANGE): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39222882/28830205/39222882_apply_CDB19_ORANGE_2026Sep02_08_40_24.log (no errors)
+    Patch 39657094 apply (pdb ORANGE): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39657094/28915841/39657094_apply_CDB19_ORANGE_2026Sep02_08_40_36.log (no errors)
+    Patch 38906621 rollback (pdb TERRACOTTA): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38906621/28588735/38906621_rollback_CDB19_TERRACOTTA_2026Sep02_08_40_24.log (no errors)
+    Patch 39196236 rollback (pdb TERRACOTTA): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39196236/28705537/39196236_rollback_CDB19_TERRACOTTA_2026Sep02_08_40_24.log (no errors)
+    Patch 39472050 apply (pdb TERRACOTTA): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39472050/28919163/39472050_apply_CDB19_TERRACOTTA_2026Sep02_08_40_25.log (no errors)
+    Patch 39222882 apply (pdb TERRACOTTA): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39222882/28830205/39222882_apply_CDB19_TERRACOTTA_2026Sep02_08_40_24.log (no errors)
+    Patch 39657094 apply (pdb TERRACOTTA): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39657094/28915841/39657094_apply_CDB19_TERRACOTTA_2026Sep02_08_40_36.log (no errors)
+    SQL Patching tool complete on Wed Sep  2 08:41:05 2026
     ```
 
     </details>
 
 3. Connect to the database.
 
-    ``` bash
+    ``` sql
     <copy>
     sql / as sysdba
     </copy>
@@ -357,11 +361,9 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     from   pdb_plug_in_violations
     where  name='INDIGO' and status!='RESOLVED';
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
-    * The PDB won't open because it hasn't been properly patched.
+    * The PDB does not open because it has not been properly patched.
     * The dictionary version of the CDB$ROOT and the PDB are now different and must be aligned.
     * Datapatch skipped the PDB because it was not open.
 
@@ -373,13 +375,13 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
          from   pdb_plug_in_violations
          where  name='INDIGO' and status!='RESOLVED';
 
-    CAUSE          TYPE     MESSAGE
-    -------------- -------- --------------------------------------------------------------------------------------------------------------------------------------------
-    SQL Patch      ERROR    Interim patch 37847857/27534561 (OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)): Installed in the CDB but not in the PDB
-    SQL Patch      ERROR    Interim patch 38170982/27628376 (DATAPUMP BUNDLE PATCH 19.28.0.0.0): Installed in the CDB but not in the PDB
-    SQL Patch      ERROR    Interim patch 37499406/26115603 (OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)): Not installed in the CDB but installed in the PDB
-    SQL Patch      ERROR    Interim patch 37777295/27238855 (DATAPUMP BUNDLE PATCH 19.27.0.0.0): Not installed in the CDB but installed in the PDB
-    SQL Patch      ERROR    '19.28.0.0.0 Release_Update 2507050304' is installed in the CDB but '19.27.0.0.0 Release_Update 2504061311' is installed in the PDB
+    CAUSE        TYPE     MESSAGE
+    ------------ -------- --------------------------------------------------------------------------------------------------------------------------------------------
+    SQL Patch    ERROR    Interim patch 39222882/28830205 (OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882)): Installed in the CDB but not in the PDB
+    SQL Patch    ERROR    Interim patch 39657094/28915841 (DATAPUMP BUNDLE PATCH 19.32.0.0.0): Installed in the CDB but not in the PDB
+    SQL Patch    ERROR    Interim patch 38906621/28588735 (OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621)): Not installed in the CDB but installed in the PDB
+    SQL Patch    ERROR    Interim patch 39196236/28705537 (DATAPUMP BUNDLE PATCH 19.31.0.0.0): Not installed in the CDB but installed in the PDB
+    SQL Patch    ERROR    '19.32.0.0.0 Release_Update 2607052207' is installed in the CDB but '19.31.0.0.0 Release_Update 2605140030' is installed in the PDB
     ```
 
     </details>
@@ -388,7 +390,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     ``` sql
     <copy>
-    show pdbs
+    select name, open_mode, restricted from v$pdbs;
     </copy>
     ```
 
@@ -399,13 +401,12 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> show pdbs
-
-        CON_ID CON_NAME      OPEN MODE  RESTRICTED
-    ---------- ------------- ---------- ----------
-             2 PDB$SEED      READ ONLY  NO
-             3 INDIGO        READ WRITE YES
-             4 ORANGE        READ WRITE NO
+    NAME          OPEN_MODE     RESTRICTED
+    _____________ _____________ _____________
+    PDB$SEED      READ ONLY     NO
+    INDIGO        READ WRITE    YES
+    ORANGE        READ WRITE    NO
+    TERRACOTTA    READ WRITE    NO
     ```
 
     </details>
@@ -418,8 +419,6 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     alter pluggable database indigo close;
     alter pluggable database indigo open;
     </copy>
-
-    -- Be sure to hit RETURN
     ```
 
     * Notice that *INDIGO* now opens without errors.
@@ -449,7 +448,7 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
 
     ``` sql
     <copy>
-    show pdbs
+    select name, open_mode, restricted from v$pdbs;
     </copy>
     ```
 
@@ -459,20 +458,19 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     <summary>*click to see the output*</summary>
 
     ``` text
-    SQL> show pdbs
-
-        CON_ID CON_NAME      OPEN MODE  RESTRICTED
-    ---------- ------------- ---------- ----------
-             2 PDB$SEED      READ ONLY  NO
-             3 INDIGO        READ WRITE NO
-             4 ORANGE        READ WRITE NO
+    NAME          OPEN_MODE     RESTRICTED
+    _____________ _____________ _____________
+    PDB$SEED      READ ONLY     NO
+    INDIGO        READ WRITE    NO
+    ORANGE        READ WRITE    NO
+    TERRACOTTA    READ WRITE    NO
     ```
 
     </details>
 
 9. Exit SQLcl.
 
-    ``` sql
+    ``` bash
     <copy>
     exit
     </copy>
@@ -486,18 +484,17 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     </copy>
     ```
 
-    * The command line parameter `-pdbs` ensure that Datapatch just works on the *INDIGO* PDB.
+    * The command-line parameter `-pdbs` ensures that Datapatch works only on the *INDIGO* PDB.
     * You could also run Datapatch without the parameter. It would then examine the database and determine only *INDIGO* needed patching. However, this might take slightly longer.
 
     <details>
     <summary>*click to see the output*</summary>
 
     ``` text
-    $ $ORACLE_HOME/OPatch/datapatch -pdbs INDIGO
-    SQL Patching tool version 19.28.0.0.0 Production on Sun Jul 27 16:42:12 2025
-    Copyright (c) 2012, 2025, Oracle.  All rights reserved.
+    SQL Patching tool version 19.32.0.0.0 Production on Wed Sep  2 08:43:45 2026
+    Copyright (c) 2012, 2026, Oracle.  All rights reserved.
 
-    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_303293_2025_07_27_16_42_12/sqlpatch_invocation.log
+    Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_121821_2026_09_02_08_43_45/sqlpatch_invocation.log
 
     Connecting to database...OK
     Gathering database info...done
@@ -511,60 +508,323 @@ You will patch *CDB19* to 19.28 and use an existing Oracle home.
     Determining current state...done
 
     Current state of interim SQL patches:
-    Interim patch 37499406 (OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406)):
+    Interim patch 38906621 (OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621)):
       Binary registry: Not installed
-      PDB INDIGO: Applied successfully on 24-JUL-25 11.40.06.122876 AM
-    Interim patch 37777295 (DATAPUMP BUNDLE PATCH 19.27.0.0.0):
+      PDB INDIGO: Applied successfully on 01-SEP-26 02.35.56.902699 PM
+    Interim patch 39196236 (DATAPUMP BUNDLE PATCH 19.31.0.0.0):
       Binary registry: Not installed
-      PDB INDIGO: Applied successfully on 24-JUL-25 11.41.23.598307 AM
-    Interim patch 37847857 (OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857)):
+      PDB INDIGO: Applied successfully on 01-SEP-26 02.37.08.635055 PM
+    Interim patch 39222882 (OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882)):
       Binary registry: Installed
       PDB INDIGO: Not installed
-    Interim patch 38170982 (DATAPUMP BUNDLE PATCH 19.28.0.0.0):
+    Interim patch 39657094 (DATAPUMP BUNDLE PATCH 19.32.0.0.0):
       Binary registry: Installed
       PDB INDIGO: Not installed
 
     Current state of release update SQL patches:
       Binary registry:
-        19.28.0.0.0 Release_Update 250705030417: Installed
+        19.32.0.0.0 Release_Update 260705220710: Installed
       PDB INDIGO:
-        Applied 19.27.0.0.0 Release_Update 250406131139 successfully on 24-JUL-25 11.41.15.860182 AM
+        Applied 19.31.0.0.0 Release_Update 260514003012 successfully on 01-SEP-26 02.37.02.349192 PM
 
     Adding patches to installation queue and performing prereq checks...done
     Installation queue:
       For the following PDBs: INDIGO
         The following interim patches will be rolled back:
-          37499406 (OJVM RELEASE UPDATE: 19.27.0.0.250415 (37499406))
-          37777295 (DATAPUMP BUNDLE PATCH 19.27.0.0.0)
-        Patch 37960098 (Database Release Update : 19.28.0.0.250715 (37960098)):
-          Apply from 19.27.0.0.0 Release_Update 250406131139 to 19.28.0.0.0 Release_Update 250705030417
+          38906621 (OJVM RELEASE UPDATE: 19.31.0.0.260421 (38906621))
+          39196236 (DATAPUMP BUNDLE PATCH 19.31.0.0.0)
+        Patch 39472050 (Database Release Update : 19.32.0.0.260721 (39472050)):
+          Apply from 19.31.0.0.0 Release_Update 260514003012 to 19.32.0.0.0 Release_Update 260705220710
         The following interim patches will be applied:
-          37847857 (OJVM RELEASE UPDATE: 19.28.0.0.250715 (37847857))
-          38170982 (DATAPUMP BUNDLE PATCH 19.28.0.0.0)
+          39222882 (OJVM RELEASE UPDATE: 19.32.0.0.260721 (39222882))
+          39657094 (DATAPUMP BUNDLE PATCH 19.32.0.0.0)
 
     Installing patches...
     Patch installation complete.  Total patches installed: 5
 
     Validating logfiles...done
-    Patch 37499406 rollback (pdb INDIGO): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37499406/26115603/37499406_rollback_CDB19_INDIGO_2025Jul27_16_42_37.log (no errors)
-    Patch 37777295 rollback (pdb INDIGO): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37777295/27238855/37777295_rollback_CDB19_INDIGO_2025Jul27_16_42_37.log (no errors)
-    Patch 37960098 apply (pdb INDIGO): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37960098/27635722/37960098_apply_CDB19_INDIGO_2025Jul27_16_42_37.log (no errors)
-    Patch 37847857 apply (pdb INDIGO): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/37847857/27534561/37847857_apply_CDB19_INDIGO_2025Jul27_16_42_37.log (no errors)
-    Patch 38170982 apply (pdb INDIGO): SUCCESS
-      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38170982/27628376/38170982_apply_CDB19_INDIGO_2025Jul27_16_42_47.log (no errors)
-    SQL Patching tool complete on Sun Jul 27 16:42:57 2025
+    Patch 38906621 rollback (pdb INDIGO): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/38906621/28588735/38906621_rollback_CDB19_INDIGO_2026Sep02_08_44_09.log (no errors)
+    Patch 39196236 rollback (pdb INDIGO): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39196236/28705537/39196236_rollback_CDB19_INDIGO_2026Sep02_08_44_09.log (no errors)
+    Patch 39472050 apply (pdb INDIGO): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39472050/28919163/39472050_apply_CDB19_INDIGO_2026Sep02_08_44_09.log (no errors)
+    Patch 39222882 apply (pdb INDIGO): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39222882/28830205/39222882_apply_CDB19_INDIGO_2026Sep02_08_44_09.log (no errors)
+    Patch 39657094 apply (pdb INDIGO): SUCCESS
+      logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/39657094/28915841/39657094_apply_CDB19_INDIGO_2026Sep02_08_44_19.log (no errors)
+    SQL Patching tool complete on Wed Sep  2 08:44:41 2026
     ```
 
     </details>
+
+## Task 3: Complete Patching
+
+1. Remain in the *yellow* terminal 🟨.
+
+2. Reconnect to *CDB19*.
+
+    ``` sql
+    <copy>
+    sql / as sysdba
+    </copy>
+    ```
+
+3. Check the database directories.
+
+    ``` sql
+    <copy>
+    set pagesize 100
+    select directory_name , directory_path from dba_directories where owner='SYS' order by 2;
+    </copy>
+    ```
+
+    * Some database directories point to the Oracle home.
+    * When you patch out-of-place the Oracle home location changes, and the directory path must point to the new Oracle home.
+    * Some of these directories are not updated and continue to point to the old Oracle home.
+
+    <details>
+    <summary>*click to see the output*</summary>
+
+    ``` text
+    SQL> select directory_name , directory_path from dba_directories where owner='SYS' order by 2;
+
+    DIRECTORY_NAME              DIRECTORY_PATH
+    ___________________________ _____________________________________________________
+    ORACLE_BASE                 /u01/app/oracle
+    ORACLE_HOME                 /u01/app/oracle/product/19
+    ORACLE_OCM_CONFIG_DIR       /u01/app/oracle/product/19/ccr/state
+    ORACLE_OCM_CONFIG_DIR2      /u01/app/oracle/product/19/ccr/state
+    DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/19/cfgtoollogs
+    DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/19/rdbms/admin
+    DATA_PUMP_DIR               /u01/app/oracle/product/19/rdbms/log/
+    XMLDIR                      /u01/app/oracle/product/19/rdbms/xml
+    XSDDIR                      /u01/app/oracle/product/19/rdbms/xml/schema
+    OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+
+    13 rows selected.
+    ```
+
+    </details>
+
+4. The outdated directory paths occur in all containers.
+
+    ``` sql
+    <copy>
+    select   con$name, directory_name , directory_path
+    from     cdb_directories
+    where    owner='SYS'
+    order by 1, 3, 2;
+    </copy>
+    ```
+
+    <details>
+    <summary>*click to see the output*</summary>
+
+    ``` text
+    SQL> select   con$name, directory_name , directory_path
+         from     cdb_directories
+         where    owner='SYS'
+         order by 1, 3, 2;
+
+    CON$NAME      DIRECTORY_NAME              DIRECTORY_PATH
+    _____________ ___________________________ __________________________________________________________________________________
+    CDB$ROOT      ORACLE_BASE                 /u01/app/oracle
+    CDB$ROOT      ORACLE_HOME                 /u01/app/oracle/product/19
+    CDB$ROOT      ORACLE_OCM_CONFIG_DIR       /u01/app/oracle/product/19/ccr/state
+    CDB$ROOT      ORACLE_OCM_CONFIG_DIR2      /u01/app/oracle/product/19/ccr/state
+    CDB$ROOT      DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/19/cfgtoollogs
+    CDB$ROOT      DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/19/rdbms/admin
+    CDB$ROOT      DATA_PUMP_DIR               /u01/app/oracle/product/19/rdbms/log/
+    CDB$ROOT      XMLDIR                      /u01/app/oracle/product/19/rdbms/xml
+    CDB$ROOT      XSDDIR                      /u01/app/oracle/product/19/rdbms/xml/schema
+    CDB$ROOT      OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    CDB$ROOT      OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    CDB$ROOT      JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    CDB$ROOT      OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+    INDIGO        ORACLE_BASE                 /u01/app/oracle
+    INDIGO        ORACLE_HOME                 /u01/app/oracle/product/19
+    INDIGO        DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/19/cfgtoollogs
+    INDIGO        DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/19/rdbms/admin
+    INDIGO        DATA_PUMP_DIR               /u01/app/oracle/product/19/rdbms/log/5A98C02165A191EDE0631D01000AFDFA
+    INDIGO        XMLDIR                      /u01/app/oracle/product/19/rdbms/xml
+    INDIGO        XSDDIR                      /u01/app/oracle/product/19/rdbms/xml/schema
+    INDIGO        OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    INDIGO        OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    INDIGO        JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    INDIGO        OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+    ORANGE        ORACLE_BASE                 /u01/app/oracle
+    ORANGE        ORACLE_HOME                 /u01/app/oracle/product/19
+    ORANGE        DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/19/cfgtoollogs
+    ORANGE        DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/19/rdbms/admin
+    ORANGE        DATA_PUMP_DIR               /u01/app/oracle/product/19/rdbms/log/5A91FC7727F88FEBE0631D01000ABD4F
+    ORANGE        XMLDIR                      /u01/app/oracle/product/19/rdbms/xml
+    ORANGE        XSDDIR                      /u01/app/oracle/product/19/rdbms/xml/schema
+    ORANGE        OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    ORANGE        OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    ORANGE        JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    ORANGE        OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+    TERRACOTTA    ORACLE_BASE                 /u01/app/oracle
+    TERRACOTTA    ORACLE_HOME                 /u01/app/oracle/product/19
+    TERRACOTTA    DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/19/cfgtoollogs
+    TERRACOTTA    DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/19/rdbms/admin
+    TERRACOTTA    DATA_PUMP_DIR               /u01/app/oracle/product/19/rdbms/log/5A91FC7727FA8FEBE0631D01000ABD4F
+    TERRACOTTA    XMLDIR                      /u01/app/oracle/product/19/rdbms/xml
+    TERRACOTTA    XSDDIR                      /u01/app/oracle/product/19/rdbms/xml/schema
+    TERRACOTTA    OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    TERRACOTTA    OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    TERRACOTTA    JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    TERRACOTTA    OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+
+    46 rows selected.
+    ```
+
+    </details>
+
+5. Update the directories.
+
+    ``` sql
+    <copy>
+    @?/rdbms/admin/utlfixdirs.sql
+    </copy>
+    ```
+
+    * You update the directories in the root container.
+    * These directories are shared through metadata links. Once you update the root container, they are updated in all containers.
+
+    <details>
+    <summary>*click to see the output*</summary>
+
+    ``` text
+    SQL> @?/rdbms/admin/utlfixdirs.sql
+
+    Container: CDB$ROOT
+
+    Current  ORACLE_HOME: /u01/app/oracle/product/dbhome_19_32
+    Original ORACLE_HOME: /u01/app/oracle/product/19
+
+    DATA_PUMP_DIR
+    ...OLD: /u01/app/oracle/product/19/rdbms/log/
+    ...NEW: /u01/app/oracle/product/dbhome_19_32/rdbms/log/
+    DBMS_OPTIM_ADMINDIR
+    ...OLD: /u01/app/oracle/product/19/rdbms/admin
+    ...NEW: /u01/app/oracle/product/dbhome_19_32/rdbms/admin
+    DBMS_OPTIM_LOGDIR
+    ...OLD: /u01/app/oracle/product/19/cfgtoollogs
+    ...NEW: /u01/app/oracle/product/dbhome_19_32/cfgtoollogs
+    ORACLE_HOME
+    ...OLD: /u01/app/oracle/product/19
+    ...NEW: /u01/app/oracle/product/dbhome_19_32
+    ORACLE_OCM_CONFIG_DIR
+    ...OLD: /u01/app/oracle/product/19/ccr/state
+    ...NEW: /u01/app/oracle/product/dbhome_19_32/ccr/state
+    ORACLE_OCM_CONFIG_DIR2
+    ...OLD: /u01/app/oracle/product/19/ccr/state
+    ...NEW: /u01/app/oracle/product/dbhome_19_32/ccr/state
+    XMLDIR
+    ...OLD: /u01/app/oracle/product/19/rdbms/xml
+    ...NEW: /u01/app/oracle/product/dbhome_19_32/rdbms/xml
+    XSDDIR
+    ...OLD: /u01/app/oracle/product/19/rdbms/xml/schema
+    ...NEW: /u01/app/oracle/product/dbhome_19_32/rdbms/xml/schema
+
+
+    PL/SQL procedure successfully completed.
+    ```
+
+    </details>
+
+6. Verify the directories are correct.
+
+    ``` sql
+    <copy>
+    select   con$name, directory_name , directory_path
+    from     cdb_directories
+    where    owner='SYS'
+    order by 1, 3, 2;
+    </copy>
+    ```
+
+    * Notice that all Oracle-home-dependent directory paths point to the new Oracle home; `ORACLE_BASE` remains `/u01/app/oracle`.
+
+    <details>
+    <summary>*click to see the output*</summary>
+
+    ``` text
+    SQL> select   con$name, directory_name , directory_path
+         from     cdb_directories
+         where    owner='SYS'
+         order by 1, 3, 2;
+
+    CON$NAME      DIRECTORY_NAME              DIRECTORY_PATH
+    _____________ ___________________________ __________________________________________________________________________________
+    CDB$ROOT      ORACLE_BASE                 /u01/app/oracle
+    CDB$ROOT      ORACLE_HOME                 /u01/app/oracle/product/dbhome_19_32
+    CDB$ROOT      OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    CDB$ROOT      OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    CDB$ROOT      ORACLE_OCM_CONFIG_DIR       /u01/app/oracle/product/dbhome_19_32/ccr/state
+    CDB$ROOT      ORACLE_OCM_CONFIG_DIR2      /u01/app/oracle/product/dbhome_19_32/ccr/state
+    CDB$ROOT      DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/dbhome_19_32/cfgtoollogs
+    CDB$ROOT      JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    CDB$ROOT      DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/dbhome_19_32/rdbms/admin
+    CDB$ROOT      OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+    CDB$ROOT      DATA_PUMP_DIR               /u01/app/oracle/product/dbhome_19_32/rdbms/log/
+    CDB$ROOT      XMLDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml
+    CDB$ROOT      XSDDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml/schema
+    INDIGO        ORACLE_BASE                 /u01/app/oracle
+    INDIGO        ORACLE_HOME                 /u01/app/oracle/product/dbhome_19_32
+    INDIGO        OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    INDIGO        OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    INDIGO        DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/dbhome_19_32/cfgtoollogs
+    INDIGO        JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    INDIGO        DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/dbhome_19_32/rdbms/admin
+    INDIGO        OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+    INDIGO        DATA_PUMP_DIR               /u01/app/oracle/product/dbhome_19_32/rdbms/log/5A98C02165A191EDE0631D01000AFDFA
+    INDIGO        XMLDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml
+    INDIGO        XSDDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml/schema
+    ORANGE        ORACLE_BASE                 /u01/app/oracle
+    ORANGE        ORACLE_HOME                 /u01/app/oracle/product/dbhome_19_32
+    ORANGE        OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    ORANGE        OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    ORANGE        DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/dbhome_19_32/cfgtoollogs
+    ORANGE        JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    ORANGE        DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/dbhome_19_32/rdbms/admin
+    ORANGE        OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+    ORANGE        DATA_PUMP_DIR               /u01/app/oracle/product/dbhome_19_32/rdbms/log/5A91FC7727F88FEBE0631D01000ABD4F
+    ORANGE        XMLDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml
+    ORANGE        XSDDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml/schema
+    TERRACOTTA    ORACLE_BASE                 /u01/app/oracle
+    TERRACOTTA    ORACLE_HOME                 /u01/app/oracle/product/dbhome_19_32
+    TERRACOTTA    OPATCH_INST_DIR             /u01/app/oracle/product/dbhome_19_32/OPatch
+    TERRACOTTA    OPATCH_SCRIPT_DIR           /u01/app/oracle/product/dbhome_19_32/QOpatch
+    TERRACOTTA    DBMS_OPTIM_LOGDIR           /u01/app/oracle/product/dbhome_19_32/cfgtoollogs
+    TERRACOTTA    JAVA$JOX$CUJS$DIRECTORY$    /u01/app/oracle/product/dbhome_19_32/javavm/admin/
+    TERRACOTTA    DBMS_OPTIM_ADMINDIR         /u01/app/oracle/product/dbhome_19_32/rdbms/admin
+    TERRACOTTA    OPATCH_LOG_DIR              /u01/app/oracle/product/dbhome_19_32/rdbms/log
+    TERRACOTTA    DATA_PUMP_DIR               /u01/app/oracle/product/dbhome_19_32/rdbms/log/5A91FC7727FA8FEBE0631D01000ABD4F
+    TERRACOTTA    XMLDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml
+    TERRACOTTA    XSDDIR                      /u01/app/oracle/product/dbhome_19_32/rdbms/xml/schema
+
+    46 rows selected.
+    ```
+
+    </details>
+
+7. Exit SQLcl.
+
+    ``` bash
+    <copy>
+    exit
+    </copy>
+    ```
 
 You may now [*proceed to the next lab*](#next).
 
 ## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
-* **Contributors** - Rodrigo Jorge, Mike Dietrich
-* **Last Updated By/Date** - Daniel Overby Hansen, August 2025
+* **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich, Alejandro Diaz
+* **Last Updated By/Date** - Daniel Overby Hansen, September 2026

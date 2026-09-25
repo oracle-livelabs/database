@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="Helvetica,Arial,sans-serif">
+  <title>Multi-model is a storage claim — a portfolio of engines stitched by pipelines. Converged is a guarantees claim — one engine where every model shares the same transactions, optimizer, consistency, and governance.</title>
+  <style>
+    .panelT { fill:#312d2a; font-size:17px; font-weight:bold; text-anchor:middle; }
+    .panelS { fill:#c74634; font-size:13px; font-style:italic; text-anchor:middle; }
+    .panelS2{ fill:#2f6b4f; font-size:13px; font-style:italic; text-anchor:middle; }
+    .eng    { fill:#ffffff; stroke:#312d2a; stroke-width:1.8; }
+    .engT   { fill:#312d2a; font-size:13.5px; font-weight:bold; text-anchor:middle; }
+    .engS   { fill:#666666; font-size:11px; text-anchor:middle; }
+    .pipe   { stroke:#c74634; stroke-width:1.6; stroke-dasharray:6 4; fill:none; marker-end:url(#pa); }
+    .pipeT  { fill:#c74634; font-size:10.5px; font-weight:bold; }
+    .leak   { fill:#c74634; font-size:12px; }
+    .big    { fill:#ffffff; stroke:#2f6b4f; stroke-width:2.5; }
+    .chip   { fill:#f0f5f2; stroke:#2f6b4f; stroke-width:1.2; }
+    .chipT  { fill:#312d2a; font-size:12px; text-anchor:middle; }
+    .cbo    { fill:#2f6b4f; }
+    .cboT   { fill:#ffffff; font-size:11px; font-weight:bold; text-anchor:middle; }
+    .g      { fill:#2f6b4f; font-size:12px; }
+    .divider{ stroke:#cccccc; stroke-width:1.5; }
+    .tag    { fill:#312d2a; font-size:13.5px; font-weight:bold; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c74634"/></marker>
+  </defs>
+
+  <line class="divider" x1="480" y1="30" x2="480" y2="500"/>
+
+  <!-- LEFT: multi-model portfolio -->
+  <text class="panelT" x="240" y="42">MULTI-MODEL BY PORTFOLIO</text>
+  <text class="panelS" x="240" y="62">a storage claim</text>
+
+  <rect class="eng" x="55"  y="95"  width="150" height="58" rx="8"/>
+  <text class="engT" x="130" y="119">Document DB</text><text class="engS" x="130" y="137">its own transactions</text>
+  <rect class="eng" x="275" y="95"  width="150" height="58" rx="8"/>
+  <text class="engT" x="350" y="119">Relational DB</text><text class="engS" x="350" y="137">its own optimizer</text>
+  <rect class="eng" x="55"  y="255" width="150" height="58" rx="8"/>
+  <text class="engT" x="130" y="279">Graph DB</text><text class="engS" x="130" y="297">its own security model</text>
+  <rect class="eng" x="275" y="255" width="150" height="58" rx="8"/>
+  <text class="engT" x="350" y="279">Vector DB</text><text class="engS" x="350" y="297">its own freshness story</text>
+
+  <path class="pipe" d="M205,124 L273,124"/><text class="pipeT" x="210" y="115">CDC pipeline</text>
+  <path class="pipe" d="M130,155 L130,253"/><text class="pipeT" x="137" y="205">change streams</text>
+  <path class="pipe" d="M350,155 L350,253"/><text class="pipeT" x="357" y="205">nightly ETL</text>
+  <path class="pipe" d="M205,284 L273,284"/><text class="pipeT" x="213" y="275">backfill jobs</text>
+
+  <text class="leak" x="55" y="350">Every arrow leaks:</text>
+  <text class="leak" x="55" y="372">&#8226; a consistency window (stale reads between engines)</text>
+  <text class="leak" x="55" y="392">&#8226; a second (third, fourth) auth model and audit trail</text>
+  <text class="leak" x="55" y="412">&#8226; an ops runbook, an on-call rotation, a bill</text>
+  <text class="leak" x="55" y="432">&#8226; a query planner that cannot see across the seam</text>
+
+  <!-- RIGHT: converged -->
+  <text class="panelT" x="720" y="42">CONVERGED</text>
+  <text class="panelS2" x="720" y="62">a guarantees claim</text>
+
+  <rect class="big" x="530" y="90" width="380" height="240" rx="14"/>
+  <text class="engT" x="720" y="116">ONE ENGINE — Oracle AI Database</text>
+  <rect class="chip" x="552" y="132" width="160" height="34" rx="7"/><text class="chipT" x="632" y="154">relational rows</text>
+  <rect class="chip" x="748" y="132" width="140" height="34" rx="7"/><text class="chipT" x="818" y="154">JSON documents</text>
+  <rect class="chip" x="552" y="176" width="160" height="34" rx="7"/><text class="chipT" x="632" y="198">property graph</text>
+  <rect class="chip" x="748" y="176" width="140" height="34" rx="7"/><text class="chipT" x="818" y="198">vectors + text</text>
+  <rect class="cbo" x="540" y="228" width="360" height="30" rx="7"/>
+  <text class="cboT" x="720" y="248">ONE COST-BASED OPTIMIZER — every model is a row source</text>
+  <text class="engS" x="720" y="286">duality views: the document IS the rows — no copy to reconcile</text>
+  <text class="engS" x="720" y="306">same commit, same grants, same audit trail, every surface</text>
+
+  <text class="g" x="540" y="356">The guarantees are stated ONCE, and hold everywhere:</text>
+  <text class="g" x="540" y="378">&#10003; one ACID transaction boundary&#160;&#160;&#160;&#10003; one optimizer plan</text>
+  <text class="g" x="540" y="398">&#10003; one consistency model&#160;&#160;&#160;&#10003; one governance domain</text>
+  <text class="g" x="540" y="418">&#10003; shared access surfaces over the same data</text>
+
+  <text class="tag" x="480" y="490">Nine of the top ten databases wear the multi-model badge. The badge stopped differentiating.</text>
+  <text class="tag" x="480" y="514">The guarantees never did — and the left panel is the infrastructure you delete.</text>
+</svg>

@@ -1,0 +1,123 @@
+# Getting Started
+
+## Introduction
+
+Start here to open the LiveLabs reservation, sign in to the provisioned **Oracle AI Database** environment, and prepare SQL Worksheet for the public-service exercises. Like getting the right desk, badge, and notebook before an investigation, this setup ensures that each query runs as the workshop user against the prepared State and Local Government schema.
+
+You will work with the Colorado public-service team throughout the workshop: **Jessica**, the State Services Risk Analyst; **Jordan**, the Database Administrator; **Sam**, the Public-Service Application Developer; **Priya**, the Government AI Engineer; and **Maya**, the Resident Services Operations Leader. These roles give each lab a practical decision owner and a clear reason to inspect the database result.
+
+<details>
+<summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
+
+> - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
+>
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to the database details behind them.
+>
+> - `LLUSER` is the workshop database user and schema owner for the hands-on public-service objects. Using the right user matters because this schema owns the tables, views, models, graph objects, and functions that you query.
+
+</details>
+
+Estimated Time: **5 minutes**
+
+### Objectives
+
+In this lab, you will:
+
+- Launch the LiveLabs workshop environment for the prepared public-service schema.
+- Use the reservation login information to open Database Actions.
+- Confirm that SQL Worksheet is ready for the State and Local Government objects.
+- Confirm that SQL Worksheet is connected as the workshop schema user.
+
+## Task 1: Launch the LiveLabs environment
+
+You need the prepared workshop environment before you can trust a public-service result. Launch it now and keep the reservation details visible. They provide the `LLUSER` connection for every later lab.
+
+Start from the **LiveLabs** reservation so **Database Actions** opens with the correct workshop resources and credentials:
+
+1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
+
+2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
+
+3. In **My Reservations**, select **Launch Workshop** for this reservation.
+
+4. Select **View Login Info** and keep the database credentials available for the next task.
+
+    ![Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows](images/reservation-login-info.svg " ")
+
+    *Figure 1: The Reservation Information dialog shows the `LLUSER` login, password, and Login URL for Database Actions.*
+
+## Task 2: Open SQL Worksheet
+
+With the reservation details available, open SQL Worksheet to run and inspect the database results behind the public-service screens. Confirm that you are connected as `LLUSER`. Jessica, Jordan, Sam, Priya, and Maya use this prepared workspace to review every workshop result.
+
+Open **SQL Worksheet** as the workshop user before running the public-service queries. This is where you ask each business question in SQL and immediately review the records and results returned by **Oracle AI Database**:
+
+1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
+
+2. Select **Copy** for **2 - Password**.
+
+    ![Reservation Information dialog with the Copy button highlighted for the Password row](images/reservation-login-copy-password.svg " ")
+
+    *Figure 2: Copy the `LLUSER` password from the Reservation Information dialog.*
+
+3. Select **Open Link** for **3 - Login URL**.
+
+    ![Reservation Information dialog with the Open Link button highlighted for the Login URL row](images/reservation-login-open-link.svg " ")
+
+    *Figure 3: Use Open Link for the Login URL, then use the copied password to sign in as `LLUSER`.*
+
+4. On the Database Actions sign-in page, confirm that **Username** shows `LLUSER`, paste the password from the reservation information, and select **Sign in**.
+
+    ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
+
+    *Figure 4: Sign in to Database Actions as `LLUSER` with the password from the reservation information.*
+
+5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
+
+    ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
+
+    *Figure 5: Open SQL from the Development tools menu.*
+
+6. Use the same SQL Worksheet pattern throughout the workshop.
+
+    ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation.svg " ")
+
+    *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
+
+    - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
+    - Paste each workshop SQL block into the editor.
+    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
+    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Use **Navigator** only when you want to inspect tables, views, or other objects.
+
+7. Run this check.
+
+    This check confirms the right SQL Worksheet user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The State and Local Government labs use `LLUSER`, so both values should point to the workshop schema.
+
+    ```sql
+    <copy>
+    SELECT USER AS "User",
+           SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "Schema",
+           SYSTIMESTAMP AS "Checked At";
+    </copy>
+    ```
+
+    **Expected output: Connected SQL Worksheet Session**
+
+    | User | Schema | Checked At |
+    | --- | --- | --- |
+    | LLUSER | LLUSER | Current SQL Worksheet timestamp |
+
+
+8. Use this connection check whenever you need to confirm that SQL Worksheet is still running as `LLUSER` before continuing the resident-services investigation.
+
+With **SQL Worksheet** ready, you can move from setup into the Colorado **Data Foundation**.
+
+### What have I achieved when the lab ends?
+
+You have opened the prepared State and Local Government environment and SQL Worksheet as `LLUSER`. Jordan's team can now start each investigation in the right workspace, using the shared public-service schema.
+
+## Acknowledgements
+
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

@@ -1,0 +1,214 @@
+{
+  "scope": "Local LiveLabs renderer, not database execution",
+  "pages": [
+    {
+      "lesson": "Getting Started",
+      "heading": "Getting Started",
+      "images": [
+        {
+          "alt": "Reservation Information: info",
+          "loaded": true,
+          "src": "../../getting-started/images/reservation-login-info.svg"
+        },
+        {
+          "alt": "Reservation Information: copy-password",
+          "loaded": true,
+          "src": "../../getting-started/images/reservation-login-copy-password.svg"
+        },
+        {
+          "alt": "Reservation Information: open-link",
+          "loaded": true,
+          "src": "../../getting-started/images/reservation-login-open-link.svg"
+        },
+        {
+          "alt": "Database Actions login screen showing LLUSER as the selected username",
+          "loaded": true,
+          "src": "../../getting-started/images/database-actions-login-main-user.svg"
+        },
+        {
+          "alt": "Database Actions tools page with Development selected and SQL highlighted in the left tools menu",
+          "loaded": true,
+          "src": "../../getting-started/images/database-actions-development-sql.svg"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 1,
+      "sqlBlocks": 1,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 1: Build a Converged Dashboard Query",
+      "heading": "Build a Converged Dashboard Query",
+      "images": [
+        {
+          "alt": "jessica",
+          "loaded": true,
+          "src": "../../subscriber-operations-dashboard/images/jessica.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 2,
+      "sqlBlocks": 2,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 2: Build a JSON Application Model",
+      "heading": "Build a JSON Application Model",
+      "images": [
+        {
+          "alt": "thomas",
+          "loaded": true,
+          "src": "../../service-order-duality/images/thomas.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 5,
+      "sqlBlocks": 15,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 3: Search Service Plans by Meaning",
+      "heading": "Search Service Plans by Meaning",
+      "images": [
+        {
+          "alt": "Gilly :  telecommunications lab banner",
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/gilly.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 5,
+      "sqlBlocks": 8,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 4: Investigate an Activation Fraud Network",
+      "heading": "Investigate an Activation Fraud Network",
+      "images": [
+        {
+          "alt": "Bob :  telecommunications lab banner",
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/bob.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 12,
+      "sqlBlocks": 6,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 5: Find Nearby Network Sites",
+      "heading": "Find Nearby Network Sites",
+      "images": [
+        {
+          "alt": "Moon :  telecommunications lab banner",
+          "loaded": true,
+          "src": "../../network-site-spatial/images/moon.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 4,
+      "sqlBlocks": 4,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 6: Build a Service Plan Demand Watchlist with Oracle Machine Learning",
+      "heading": "Build a Service Plan Demand Watchlist with Oracle Machine Learning",
+      "images": [
+        {
+          "alt": "Otto :  telecommunications lab banner",
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/otto.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 10,
+      "sqlBlocks": 5,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 7: Ask Telecom Questions with Select AI",
+      "heading": "Ask Telecom Questions with Select AI",
+      "images": [
+        {
+          "alt": "Nina :  telecommunications lab banner",
+          "loaded": true,
+          "src": "../../selectai/images/nina.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 6,
+      "sqlBlocks": 9,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 8: Build a Telecom Agent with Select AI Agent",
+      "heading": "Build a Telecom Agent with Select AI Agent",
+      "images": [
+        {
+          "alt": "Nina :  telecommunications lab banner",
+          "loaded": true,
+          "src": "../../selectai-agent/images/nina.png"
+        },
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 3,
+      "sqlBlocks": 12,
+      "expanded": true
+    },
+    {
+      "lesson": "Lab 9: Final Quiz",
+      "heading": "Final Quiz",
+      "images": [
+        {
+          "alt": "",
+          "loaded": false,
+          "src": null
+        }
+      ],
+      "pending": 0,
+      "sqlBlocks": 0,
+      "expanded": true
+    }
+  ],
+  "introductionDiagram": "visually reviewed",
+  "quiz": "7/7 and badge loaded",
+  "sqlCopy": false,
+  "note": "Renderer inserts an empty image element without src; actual image sources all load."
+}

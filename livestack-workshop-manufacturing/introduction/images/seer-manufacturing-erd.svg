@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+<title id="title">SEER MANUFACTURING core data model</title>
+<desc id="desc">Five tables and five one-to-many foreign keys. Scheduled dates and production quantities are independent.</desc>
+<rect width="1200" height="680" fill="#faf9f6"/>
+<text x="40" y="52" font-family="Arial" font-size="28" font-weight="bold" fill="#27312f">SEER MANUFACTURING / core data model</text>
+<rect x="40" y="100" width="300" height="165" rx="6" fill="white" stroke="#4c665b" stroke-width="2"/>
+<text x="56" y="130" font-family="Arial" font-size="17" font-weight="bold" fill="#27312f">CUSTOMER_SITES</text>
+<text x="56" y="163" font-family="Arial" font-size="16" fill="#27312f">PK customer_site_id</text>
+<text x="56" y="189" font-family="Arial" font-size="16" fill="#27312f">site_name; contact details</text>
+<text x="56" y="215" font-family="Arial" font-size="16" fill="#27312f">location; requirements JSON</text>
+<rect x="850" y="100" width="300" height="165" rx="6" fill="white" stroke="#4c665b" stroke-width="2"/>
+<text x="866" y="130" font-family="Arial" font-size="17" font-weight="bold" fill="#27312f">PLANTS</text>
+<text x="866" y="163" font-family="Arial" font-size="16" fill="#27312f">PK plant_id</text>
+<text x="866" y="189" font-family="Arial" font-size="16" fill="#27312f">name; location; daily capacity</text>
+<text x="866" y="215" font-family="Arial" font-size="16" fill="#27312f">capacity utilization snapshot</text>
+<rect x="430" y="100" width="340" height="190" rx="6" fill="white" stroke="#4c665b" stroke-width="2"/>
+<text x="446" y="130" font-family="Arial" font-size="17" font-weight="bold" fill="#27312f">PRODUCTION_ORDERS</text>
+<text x="446" y="163" font-family="Arial" font-size="16" fill="#27312f">PK production_order_id</text>
+<text x="446" y="189" font-family="Arial" font-size="16" fill="#27312f">FK customer_site_id; plant_id</text>
+<text x="446" y="215" font-family="Arial" font-size="16" fill="#27312f">scheduled_start; due_date</text>
+<text x="446" y="241" font-family="Arial" font-size="16" fill="#27312f">order_status; order_total; setup_cost</text>
+<rect x="850" y="400" width="300" height="165" rx="6" fill="white" stroke="#4c665b" stroke-width="2"/>
+<text x="866" y="430" font-family="Arial" font-size="17" font-weight="bold" fill="#27312f">COMPONENTS</text>
+<text x="866" y="463" font-family="Arial" font-size="16" fill="#27312f">PK component_id</text>
+<text x="866" y="489" font-family="Arial" font-size="16" fill="#27312f">FK plant_id</text>
+<text x="866" y="515" font-family="Arial" font-size="16" fill="#27312f">name (revision); material_grade</text>
+<text x="866" y="541" font-family="Arial" font-size="16" fill="#27312f">process_route; unit_cost</text>
+<rect x="430" y="400" width="340" height="190" rx="6" fill="white" stroke="#4c665b" stroke-width="2"/>
+<text x="446" y="430" font-family="Arial" font-size="17" font-weight="bold" fill="#27312f">PRODUCTION_ORDER_LINES</text>
+<text x="446" y="463" font-family="Arial" font-size="16" fill="#27312f">PK order_line_id</text>
+<text x="446" y="489" font-family="Arial" font-size="16" fill="#27312f">FK production_order_id</text>
+<text x="446" y="515" font-family="Arial" font-size="16" fill="#27312f">FK component_id</text>
+<text x="446" y="541" font-family="Arial" font-size="16" fill="#27312f">quantity; unit_cost; line_total</text>
+<path d="M340 175 H430" stroke="#4c665b" stroke-width="2" fill="none"/>
+<text x="351" y="166" font-family="Arial" font-size="18">1</text><text x="406" y="166" font-family="Arial" font-size="18">N</text>
+<path d="M850 175 H770" stroke="#4c665b" stroke-width="2" fill="none"/>
+<text x="826" y="166" font-family="Arial" font-size="18">1</text><text x="780" y="166" font-family="Arial" font-size="18">N</text>
+<path d="M1000 265 V400" stroke="#4c665b" stroke-width="2" fill="none"/>
+<text x="1012" y="285" font-family="Arial" font-size="18">1</text><text x="1012" y="385" font-family="Arial" font-size="18">N</text>
+<path d="M600 290 V400" stroke="#4c665b" stroke-width="2" fill="none"/>
+<text x="612" y="310" font-family="Arial" font-size="18">1</text><text x="612" y="385" font-family="Arial" font-size="18">N</text>
+<path d="M850 480 H770" stroke="#4c665b" stroke-width="2" fill="none"/>
+<text x="826" y="471" font-family="Arial" font-size="18">1</text><text x="780" y="471" font-family="Arial" font-size="18">N</text>
+<text x="40" y="636" font-family="Arial" font-size="17" fill="#27312f">Line total = quantity × unit cost. Order total = material line totals + setup cost.</text></svg>

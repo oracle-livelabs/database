@@ -11,7 +11,7 @@
   </defs>
   <rect width="980" height="560" fill="#f8fafc"/>
   <text x="490" y="38" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#111827" text-anchor="middle">From Service Geography to SLA Decision</text>
-  <text x="490" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569" text-anchor="middle">Oracle Spatial stores points and polygons for SQL distance, coverage, and capacity checks.</text>
+  <text x="490" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569" text-anchor="middle">Oracle Spatial stores points and polygons for SQL distance and coverage checks.</text>
 
   <g filter="url(#shadow)">
     <rect x="48" y="112" width="210" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
@@ -20,7 +20,7 @@
     <text x="68" y="174" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">30 active centers</text>
     <text x="68" y="198" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">latitude, longitude</text>
     <text x="68" y="222" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">SDO point geometry</text>
-    <text x="68" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">branch capacity</text>
+    <text x="68" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">service location</text>
   </g>
 
   <g filter="url(#shadow)">
@@ -59,7 +59,7 @@
     <rect x="682" y="346" width="240" height="36" rx="8" fill="#fee2e2"/>
     <text x="802" y="370" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Coverage Decision</text>
     <text x="704" y="408" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">nearest center</text>
-    <text x="704" y="432" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">capacity risk</text>
+    <text x="704" y="432" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">coverage gap</text>
   </g>
 
   <path d="M448 262 L448 338" stroke="#5b6470" stroke-width="2.5" marker-end="url(#arrow)"/>

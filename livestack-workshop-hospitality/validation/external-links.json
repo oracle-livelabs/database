@@ -1,0 +1,84 @@
+[
+  {
+    "url": "https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/dbms-cloud-ai-agent-package.html",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://docs.oracle.com/en/browseall.html",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://docs.oracle.com/en/cloud/paas/autonomous-database/csgru/load-graphs-memory-programmatically.html",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://docs.oracle.com/en/database/oracle/oracle-database/26/jsnvu/updating-documents-data-duality-views.html",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://docs.oracle.com/pls/topic/lookup?ctx=en/legal&id=cpyr",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/img/favicon.ico",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-1.11.0.min.js",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-ui-1.10.4.custom.js",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/main.min.js",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://pgql-lang.org/",
+    "status": 200,
+    "final_url": "https://pgql-lang.org/",
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://www.oracle.com/corporate/contact/",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://www.oracle.com/corporate/index.html",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://www.oracle.com/legal/privacy/",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html#adchoices",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://www.oracle.com/legal/privacy/privacy-policy.html#11",
+    "error": "<urlopen error timed out>"
+  }
+]

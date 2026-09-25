@@ -55,6 +55,12 @@
           "filename": "../../property-graph/property-graph.md"
       },
       {
+          "title": "Lab: (NEW in 23.26.2) In-Database Graph Algorithms",
+          "description": "Run PageRank and community detection directly in the database with the NEW DBMS_OGA package",
+          "type": "livelabs",
+          "filename": "../../graph-algorithms/graph-algorithms.md"
+      },
+      {
           "title": "Lab: Data Use Case Domains",
           "description": "Using Data Use Case Domains",
           "type": "livelabs",
@@ -109,6 +115,12 @@
               "filename": "../../developer-role/developer-role.md"
           },
           {
+              "title": "Lab: Immutable Tables",
+              "description": "Create tamper-proof audit tables and convert existing tables in place (NEW in 23.26.2)",
+              "type": "livelabs",
+              "filename": "../../immutable-tables/immutable-tables.md"
+          },
+          {
             "title": "Performance & Database Lifecycle Management",
             "description": "Performance & Database Lifecycle Management in 26ai",
             "type": "livelabs",
@@ -145,6 +157,18 @@
             "filename": "../../qualifying-clause/qualifying-clause.md"
         },
         {
+            "title": "Lab: (NEW in 23.26.1) Aggregation Filters",
+            "description": "Attach WHERE conditions directly to aggregate functions with the NEW FILTER clause",
+            "type": "livelabs",
+            "filename": "../../aggregation-filters/aggregation-filters.md"
+        },
+        {
+            "title": "Lab: (NEW in 23.26.1) DATEDIFF and Calendar Functions",
+            "description": "Simplify date math and time-dimension reporting with the NEW DATEDIFF, DATEADD, and calendar functions",
+            "type": "livelabs",
+            "filename": "../../date-functions/date-functions.md"
+        },
+        {
             "title": "Lab: UUID",
             "description": "Embrace the UUID data type in SQL for a more straightforward and efficient representation of unique identifiers.",
             "type": "livelabs",
@@ -173,7 +197,13 @@
               "description": "Optimize update and delete operations by employing direct joins for increased efficiency.",
               "type": "livelabs",
               "filename": "../../direct-joins-for-updates-deletes/direct-joins-for-updates-deletes.md"
-          }, 
+          },
+          {
+              "title": "Lab: (NEW in 23.26.2) JOIN TO ONE",
+              "description": "Join through foreign keys without ON clauses and catch row fan-out bugs with the NEW JOIN TO ONE syntax",
+              "type": "livelabs",
+              "filename": "../../join-to-one/join-to-one.md"
+          },
         {
             "title": "Lab: Enhanced DML RETURNING Clause",
             "description": "Enhanced Data Manipulation with DML RETURNING Clause",
@@ -185,6 +215,18 @@
             "description": "Enhanced Data Manipulation with NEW GROUP BY ALL Clause",
             "type": "livelabs",
             "filename": "../../group-by-all/group-by-all.md"
+        },
+        {
+            "title": "Lab: SQL Macros",
+            "description": "Centralize business logic in reusable scalar and table macros that expand inline at parse time",
+            "type": "livelabs",
+            "filename": "../../sql-macros/sql-macros.md"
+        },
+        {
+            "title": "Lab: Row Pattern Matching with MATCH_RECOGNIZE",
+            "description": "Find shapes across rows - dips, streaks, and trends - with regex-style row patterns",
+            "type": "livelabs",
+            "filename": "../../match-recognize/match-recognize.md"
         },
         {
           "title": "Need Help?",
