@@ -42,33 +42,22 @@ In this lab, you will:
     uses the read-only pre-authenticated Object Storage URL for the release ZIP.
 
     [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://objectstorage.us-ashburn-1.oraclecloud.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/my-ai-staff-oci-stack-v1.0.8.zip)
-
-    ![Accept the Oracle Terms of Use on the Create stack page](images/create-stack-accept-terms.png)
-
-2. Sign in if prompted. Give the stack a non-sensitive name, select the target
+2. Sign in if prompted. Accept the Oracle Terms of Use on the Create stack page, select the target
     compartment, select Terraform 1.5.x, and select **Next**.
 
-    ![Review the stack information and enter a stack name](images/create-stack-information.png)
+    ![Review the stack information and select configuration](images/create-stack.png)
 
 3. Supply the required values. Use the following guidance for each field:
 
     - **Compartment:** Select the compartment where you want to create the
       workshop resources. If you are using a tenancy provided for this
       workshop, this is usually the assigned or root compartment.
-    - **Region:** Select the OCI region where you want to deploy. Use the same
-      region selected for the stack and make sure it offers the Always Free ARM
+
+    - **Region:** Select the OCI region where you want to deploy.
+    Select your home region if you want to use the Always Free
       shape and Autonomous Database 26ai.
 
-    ![Configure the compartment, region, and SSH public key](images/configure-placement-and-ssh-key.png)
 
-    - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
-      or network you will use to connect, followed by `/32`. To find it, open a
-      browser and search for **what is my IP**, or visit a site that displays
-      your public IP, such as [ifconfig.me](https://ifconfig.me). For example, if
-      the site shows `203.0.113.10`, enter `203.0.113.10/32`. Do not enter a
-      private address such as `192.168.x.x` or `10.x.x.x`, and do not use
-      `0.0.0.0/0`. If your public IP changes or you connect from another
-      network, update the security rule before connecting.
     - **SSH public key:** If you do not already have an SSH key pair, run these commands in a
        terminal on your computer:
        ```bash
@@ -83,7 +72,14 @@ In this lab, you will:
 
        Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
 
-    ![Enter the administrator SSH CIDR](images/configure-ssh-cidr.png)
+
+    - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
+      or network you will use to connect, followed by `/32`. To find it, open a
+      browser and search for **what is my IP**, or visit a site that displays
+      your public IP, such as [ifconfig.me](https://ifconfig.me). For example, if
+      the site shows `203.0.113.10`, enter `203.0.113.10/32`. If your public IP changes or you connect from another
+      network, update the security rule before connecting.
+
 
     - **Autonomous Database ADMIN password:** Create a strong password of at
      least 12 characters. This is the password for the database `ADMIN` user.
@@ -91,15 +87,18 @@ In this lab, you will:
     - **`AI_FOR_YOU` password:** Create a different strong password of at least
      12 characters. This is used for the `AI_FOR_YOU` application schema.
 
-     Use letters, numbers, and symbols, do not reuse your OCI password, and
-     keep both values in a secure password manager.
+    - **Autonomous Database tier:** Select one of the two Autonomous Database tier, be sure to select Always-free only if you select your home region in **Region**. The Developer is recommended if this is not a fresh new OCI account or if you already have an Always free ADB.
 
-    ![Input Passwords](images/configure-database-passwords.png)
+    - **Autonomous Database workload:** Choose DW, OLTP, or AJD. Developer tier does NOT support AJD workload.
+
+    ![Configure the compartment, region, and SSH public key](images/configurate-information.png)
+    ![Configure the autonomous database](images/adb-tier.png)
+    ![Configure the autonomous database workload](images/adb-workload.png)
 
 5. Select **Next**, review the values, leave **Run apply** selected, then
     select **Create**. Resource Manager starts the apply automatically.
 
-    ![Review the advanced stack settings and continue](images/review-advanced-settings.png)
+    ![Review the advanced stack settings and continue](images/create-button.png)
 
 ## Task 2: Monitor Provisioning
 
