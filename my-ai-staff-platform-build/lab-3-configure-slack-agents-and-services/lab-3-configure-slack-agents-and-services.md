@@ -414,7 +414,17 @@ In this lab, you will:
 
     ![Slack Agents Tokens for Application](./images/04_agent_token.png)
 
-12. Invite each bot to the channels listed for its role in the table in step 2. A manifest grants scopes but does not grant channel membership; without membership, Slack does not deliver channel messages and file uploads can fail with `not_in_channel`.
+12. Invite each bot to the channels listed in the following Table. A manifest grants scopes but does not grant channel membership; without membership, Slack does not deliver channel messages and file uploads can fail with `not_in_channel`.
+
+    | Agent name | Required channel membership |
+    | --- | --- |
+    | Assistant Agent | `#personal`, `#ideas`, `#content-start`, `#publishing`, `#errors`, `#inbox`, `#briefing`, and direct messages |
+    | Content Agent | `#content-start`, `#content-runs`, `#content-internal`, `#publishing`, `#errors` |
+    | Creative Agent | `#creative-studio`, `#content-runs`, `#content-internal`, `#errors` |
+    | Brand Agent | `#content-runs`, `#errors`, and direct messages |
+    | Data Agent | `#data`, `#errors` |
+    | Ops Agent | `#ops`, `#errors` |
+    | Publish Agent | `#publishing`, `#content-runs`, `#errors` |
 
 13. In your shell, export the Assistant Agent bot token temporarily, then run `auth.test`. Record `team_id` as `SLACK_WORKSPACE_ID` and `bot_id` as `ASSISTANT_BOT_ID`. The Assistant Agent is the only bot allowlisted to issue specialist-agent commands.
 
@@ -674,5 +684,5 @@ The Content Kit configuration is now prepared for Lab 5, when the services are a
 
 ## Acknowledgements
 
-- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
-- Last Updated: Ilan Gomez Guerrero, September 2026
+- Authors: Cyrce Salinas Rojas and Ilan Gómez guerrero
+- Last Updated: Ilan Gómez guerrero, September 2026

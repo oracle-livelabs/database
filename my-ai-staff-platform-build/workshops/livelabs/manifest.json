@@ -14,7 +14,7 @@
         {
             "title": "Fast Path: Click the Magic Button",
             "description": "Alternative to Labs 1 and 2: bootstrap OCI, database, runtime, local plugin, and SELinux labels, then continue with Lab 3",
-            "filename": "../../lab-2-click-the-magic-button/lab-2-click-the-magic-button.md"
+            "filename": "../../lab-0-click-the-magic-button/lab-0-click-the-magic-button.md"
         },
         {
             "title": "Lab 1: Prepare OCI Infrastructure and Database (Manual Path)",
