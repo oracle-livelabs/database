@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-label="Mock screenshot of margin recovery case created chat output">
+  <rect width="1200" height="720" fill="#f7f4ef"/>
+  <rect x="0" y="0" width="1200" height="64" fill="#312d2a"/>
+  <text x="32" y="40" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#ffffff">Private Agent Factory - Agent Test</text>
+  <text x="910" y="40" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#d9d2c8">John Margin Recovery Case Agent</text>
+
+  <rect x="54" y="92" width="1088" height="596" rx="10" fill="#ffffff" stroke="#d8d0c6"/>
+  <rect x="82" y="118" width="720" height="72" rx="10" fill="#f2f6fa" stroke="#b8c8d6"/>
+  <text x="108" y="146" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#2f2a24">John</text>
+  <text x="108" y="171" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#3f3a35">Create a margin recovery case for SO-48192 if the evidence supports human review.</text>
+
+  <rect x="82" y="218" width="956" height="458" rx="10" fill="#fbfaf7" stroke="#cfc5ba"/>
+  <text x="108" y="250" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#2f2a24">ACME Margin Recovery Case Agent</text>
+
+  <rect x="108" y="274" width="372" height="74" rx="8" fill="#f3f7f4" stroke="#7ca37e"/>
+  <text x="128" y="303" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2f5f3a">Margin Recovery Case created</text>
+  <text x="128" y="329" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#2f2a24">Case ID: MRC-10482</text>
+
+  <text x="108" y="386" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Customer</text>
+  <text x="248" y="386" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2f2a24">Northstar Mining Ltd.</text>
+  <text x="108" y="416" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Order</text>
+  <text x="248" y="416" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2f2a24">SO-48192</text>
+  <text x="108" y="446" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Status</text>
+  <text x="248" y="446" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2f2a24">Pending Commercial Review</text>
+  <text x="108" y="476" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Owner</text>
+  <text x="248" y="476" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2f2a24">Elena Brooks, Account Executive</text>
+  <text x="108" y="506" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Audit ID</text>
+  <text x="248" y="506" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2f2a24">AUD-93F18A42</text>
+
+  <rect x="610" y="274" width="396" height="204" rx="8" fill="#ffffff" stroke="#d8d0c6"/>
+  <text x="634" y="304" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Why this case was opened</text>
+  <text x="634" y="336" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#4f4841">- Gross margin below threshold</text>
+  <text x="634" y="362" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#4f4841">- Expired Northstar rebate exposure</text>
+  <text x="634" y="388" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#4f4841">- Absorbed emergency freight</text>
+  <text x="634" y="414" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#4f4841">- Acceptance-after-installation clause</text>
+  <text x="634" y="440" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#4f4841">- Strategic account, relationship at risk</text>
+
+  <rect x="610" y="500" width="396" height="98" rx="8" fill="#fff5e6" stroke="#e0c38b"/>
+  <text x="634" y="530" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#5f4a1d">Safety boundaries</text>
+  <text x="634" y="558" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#5f4a1d">No customer email sent. No pricing changed.</text>
+  <text x="634" y="582" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#5f4a1d">No EBS order status changed.</text>
+
+  <text x="108" y="564" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Required approvals</text>
+  <text x="108" y="594" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#4f4841">Finance Operations, Legal, Revenue Accounting, Account Owner</text>
+  <text x="108" y="636" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2f2a24">Recommended next step</text>
+  <text x="108" y="662" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#4f4841">Schedule an internal commercial recovery review before customer outreach.</text>
+</svg>

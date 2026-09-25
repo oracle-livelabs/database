@@ -1,0 +1,41 @@
+{
+    "workshoptitle": "Create Your OCI Free Tier Account",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Confirm prerequisites and the workshop sequence.",
+            "type": "livelabs",
+            "filename": "../../get-started/get-started.md"
+        },
+        {
+            "title": "Lab 1: Prepare to Sign Up",
+            "description": "Prepare your information and choose a home region.",
+            "type": "livelabs",
+            "filename": "../../prepare-to-sign-up/prepare-to-sign-up.md"
+        },
+        {
+            "title": "Lab 2: Create and Activate Your Account",
+            "description": "Complete the OCI Free Tier registration process.",
+            "type": "livelabs",
+            "filename": "../../create-account/create-account.md"
+        },
+        {
+            "title": "Lab 3: Sign In to OCI for the First Time",
+            "description": "Use the activation email to access the OCI Console.",
+            "type": "livelabs",
+            "filename": "../../first-sign-in/first-sign-in.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Template to link to Need Help lab at the end of workshop.",
+            "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

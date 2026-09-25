@@ -32,7 +32,7 @@ The same is true for scaling down using REMOVE SHARD and load balancing using MO
 
 
 1. We will add another shard named SHARD4 to this setup and see the redistribution happens for the RUs.
-Run in the terminal window logged in as **oracle** user to Create SHARD4 database container
+    Run in the terminal window logged in as **oracle** user to Create SHARD4 database container
 
     ```
     <copy>
@@ -61,7 +61,7 @@ Run in the terminal window logged in as **oracle** user to Create SHARD4 databas
     </copy>
     ```
 
-   ![<add_shard4_command>](./images/t6-1-add-shard4.png " ")
+    ![<add_shard4_command>](./images/t6-1-add-shard4.png " ")
     
 
 2. Open another terminal session to check if the Shard4 database container creation is completed. Run the below command as **oracle** user.
@@ -75,13 +75,13 @@ Run in the terminal window logged in as **oracle** user to Create SHARD4 databas
     ![<add_shard4_logs>](./images/t6-2-add-shard4-logs-1.png " ")
 
 
-   You have to wait until GSM shard set up is completed. Please refer the below screenshot:
+    You have to wait until GSM shard set up is completed. Please refer the below screenshot:
 
-   ![<GSM_shard_setup_completed>](./images/t6-2-add-shard4-logs-gsm-shard-setup-completed.png " ")
+    ![<GSM_shard_setup_completed>](./images/t6-2-add-shard4-logs-gsm-shard-setup-completed.png " ")
 
 
 3. Once the DB is up and running, run the below commands to complete the GSM configuration to deploy the new SHARD4:
-Run the below commands in a terminal window logged in as **oracle**.
+    Run the below commands in a terminal window logged in as **oracle**.
 
     ```
     <copy>
@@ -139,7 +139,7 @@ Run the below commands in a terminal window logged in as **oracle**.
     ```
 
 
- 7. Run the below command in a terminal window that is switched to **GSM** to verify that, shard4 has been deployed.
+    7. Run the below command in a terminal window that is switched to **GSM** to verify that, shard4 has been deployed.
 
     ```
     <copy>
@@ -203,7 +203,7 @@ Run the below commands in a terminal window logged in as **oracle**.
 
 Use MOVE RU to move a follower replica of a replication unit from one shard database to another.
 
-1.  Run below command to the check the status of chunks and RUs 
+1. Run below command to the check the status of chunks and RUs 
 
     ```
     <copy>
@@ -224,8 +224,8 @@ Use MOVE RU to move a follower replica of a replication unit from one shard data
     ![<ru_status_before_move_ru>](./images/t7-2-ru-status-before-move-ru.png " ")
 
 3. Choose the RU with the role follower associated with the respective shard and move to a shard which is NOT having that RU Replica. 
-Following is the example used in the live labs environment.
-User has to substitute values as per their environment.
+    Following is the example used in the live labs environment.
+    User has to substitute values as per their environment.
 
     ```
     gdsctl move ru -ru 1 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
@@ -233,7 +233,7 @@ User has to substitute values as per their environment.
 
     ![<MOVE_RU>](./images/t7-3-move-ru.png " ")
 
-4.  Please check the status of the RU that you just moved.
+4. Please check the status of the RU that you just moved.
 
     ```
     <copy>
@@ -247,7 +247,7 @@ User has to substitute values as per their environment.
 
     ```
     <copy>
-   gdsctl status ru -show_chunks
+    gdsctl status ru -show_chunks
     </copy>
     ```
 
@@ -271,7 +271,7 @@ Copy a replication unit from one shard database to another using COPY RU. This a
     </copy>
     ```
 
-2.  Run the below command to check the status.
+2. Run the below command to check the status.
     
     ```
     <copy>
@@ -337,99 +337,99 @@ Copy a replication unit from one shard database to another using COPY RU. This a
 
 2. To move a chunk from one Raft replication unit to another  replication unit, use the GDSCTL RELOCATE CHUNK command.
 
-   To use RELOCATE CHUNK, the source and target replication unit leaders must be located on the same shard, and their followers must also be on the same shards. If they are not on the same shard, use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
+    To use RELOCATE CHUNK, the source and target replication unit leaders must be located on the same shard, and their followers must also be on the same shards. If they are not on the same shard, use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
 
-   When moving chunks, specify the chunk ID numbers, the source RU ID from which to move them, and the target RU ID to move them to
+    When moving chunks, specify the chunk ID numbers, the source RU ID from which to move them, and the target RU ID to move them to
  
-   Suppose we want to relocate chunk 3 from RU 8 to RU 2, RU 8 and 2 leaders must on same shards and RU 8 and 2 followers must be on same shards, if required; use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
+    Suppose we want to relocate chunk 3 from RU 8 to RU 2, RU 8 and 2 leaders must on same shards and RU 8 and 2 followers must be on same shards, if required; use SWITCHOVER RU to move the leader and MOVE RU to move the followers to co-located shards.
 
-   Check the status of RU's from which you are trying to relocate:
+    Check the status of RU's from which you are trying to relocate:
 
-   ```
-   <copy>
-   gdsctl status ru -ru 8
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -ru 8
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl status ru -ru 2
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -ru 2
+    </copy>
+    ```
 
-   ![<status_ru_source_target>](./images/t9-2-ru-status.png " ")
+    ![<status_ru_source_target>](./images/t9-2-ru-status.png " ")
 
-   Change the RU leader using below command, if required.
+    Change the RU leader using below command, if required.
 
-   ```
-   <copy>
-   gdsctl switchover ru -ru 8 -shard orcl3cdb_orcl3pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl switchover ru -ru 8 -shard orcl3cdb_orcl3pdb
+    </copy>
+    ```
 
-   ![<switchover_ru>](./images/t9-2-switchover_ru.png " ")
+    ![<switchover_ru>](./images/t9-2-switchover_ru.png " ")
 
-   Check the status for RU's again, after switchover completes:
+    Check the status for RU's again, after switchover completes:
 
-   ```
-   <copy>
-   gdsctl status ru -ru 8
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -ru 8
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl status ru -ru 2
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -ru 2
+    </copy>
+    ```
 
-   ![<status_ru_after_switchover>](./images/t9-2a-status-ru-after-switchover.png " ")
+    ![<status_ru_after_switchover>](./images/t9-2a-status-ru-after-switchover.png " ")
 
-   Move the RU follower using below command, if required.
-   This is an example command based on the current environment.
-   User has to substitute values basis their environment.
+    Move the RU follower using below command, if required.
+    This is an example command based on the current environment.
+    User has to substitute values basis their environment.
 
-   ```
-   gdsctl move ru -ru 8 -source orcl1cdb_orcl1pdb -target orcl2cdb_orcl2pdb 
-   ```
+    ```
+    gdsctl move ru -ru 8 -source orcl1cdb_orcl1pdb -target orcl2cdb_orcl2pdb 
+    ```
 
-   ![<move_ru_a>](./images/t9-2-move-ru.png " ")
+    ![<move_ru_a>](./images/t9-2-move-ru.png " ")
 
-   Check the status for RU's again, after move completes, to verify:
+    Check the status for RU's again, after move completes, to verify:
 
-  ```
-  <copy>
-  gdsctl status ru -ru 8
-  </copy>
-  ```
+    ```
+    <copy>
+    gdsctl status ru -ru 8
+    </copy>
+    ```
 
-  ```
-  <copy>
-  gdsctl status ru -ru 2
-  </copy>
-  ```
+    ```
+    <copy>
+    gdsctl status ru -ru 2
+    </copy>
+    ```
 
-  ![<move_status_ru_after>](./images/t9-2b-status_ru.png " ")
+    ![<move_status_ru_after>](./images/t9-2b-status_ru.png " ")
 
 
 2. Run the below command to relocate the chunk from GSM1:
-  This is an example command based on the current live labs environment.
-  User has to substitute values basis their environment.
+    This is an example command based on the current live labs environment.
+    User has to substitute values basis their environment.
 
-   ```
-   gdsctl relocate chunk -chunk 3 -sourceru 8 -targetru 2 
-   ```
+    ```
+    gdsctl relocate chunk -chunk 3 -sourceru 8 -targetru 2 
+    ```
 
-   ![<relocate_chunk>](./images/t9-2-relocate_chunk.png " ")
+    ![<relocate_chunk>](./images/t9-2-relocate_chunk.png " ")
 
 
 3. Please check the status of the chunks and RU, after relocate completes.
 
-   ```
-   <copy>
-   gdsctl status ru -show_chunks
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -show_chunks
+    </copy>
+    ```
 
    ![<staus_chunks_ru_after_relocate>](./images/t9-3-status_chunks.png " ")
 
@@ -439,201 +439,201 @@ Scaling down can be done using REMOVE SHARD and load balancing using MOVE RU.
 
 1. Run below command to the check the status of chunks and RUs 
 
-  ```
-  <copy>
-  gdsctl status ru -show_chunks
-  </copy>
-  ```
+    ```
+    <copy>
+    gdsctl status ru -show_chunks
+    </copy>
+    ```
 
-  ![<chunk_status_before_scale_down>](./images/t10-1-chunk-status-before.png " ")
+    ![<chunk_status_before_scale_down>](./images/t10-1-chunk-status-before.png " ")
 
 2. We want to Scale Down by removing the SHARD4.
-We will first change the replication unit leaders from shard4 to other shards and move the RUs from the SHARD4 to other shards
-These are commands based on the current environment.
-User has to substitute values basis their environment.
+    We will first change the replication unit leaders from shard4 to other shards and move the RUs from the SHARD4 to other shards
+    These are commands based on the current environment.
+    User has to substitute values basis their environment.
 
-   ```
-   <copy>
-   gdsctl switchover ru -ru 7 -shard orcl1cdb_orcl1pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl switchover ru -ru 7 -shard orcl1cdb_orcl1pdb
+    </copy>
+    ```
 
-   ![<change_leader_a>](./images/t10-2a-switchover-ru-leader.png " ")
+    ![<change_leader_a>](./images/t10-2a-switchover-ru-leader.png " ")
 
-   ```
-   <copy>
-   gdsctl switchover ru -ru 4 -shard orcl2cdb_orcl2pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl switchover ru -ru 4 -shard orcl2cdb_orcl2pdb
+    </copy>
+    ```
 
-   ![<change_leader_b>](./images/t10-2b-switchover-ru-leader.png " ")
+    ![<change_leader_b>](./images/t10-2b-switchover-ru-leader.png " ")
 
 
 
-   Check the status of chunks after switchover.
+    Check the status of chunks after switchover.
     
-   ```
-   <copy>
-   gdsctl status ru -show_chunks
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -show_chunks
+    </copy>
+    ```
 
-   ![<status_after_switchover>](./images/t10-2-after-switchover.png " ")
+    ![<status_after_switchover>](./images/t10-2-after-switchover.png " ")
 
-   We perform move ru until all the RU followers are moved from shard4 to other shards.
-   Source database shouldn't contain the replica leader
-   Target database should not already contain another replica of the replication unit.
+    We perform move ru until all the RU followers are moved from shard4 to other shards.
+    Source database shouldn't contain the replica leader
+    Target database should not already contain another replica of the replication unit.
 
-   ```
-   <copy>
-   gdsctl move ru -ru 7 -source orcl4cdb_orcl4pdb -target orcl2cdb_orcl2pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 7 -source orcl4cdb_orcl4pdb -target orcl2cdb_orcl2pdb
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl move ru -ru 8 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 8 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl move ru -ru 2 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 2 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl move ru -ru 5 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 5 -source orcl4cdb_orcl4pdb -target orcl1cdb_orcl1pdb
+    </copy>
+    ```
 
-   ![<move_ru_before_scale_down>](./images/t10-2a-move-ru.png " ")
+    ![<move_ru_before_scale_down>](./images/t10-2a-move-ru.png " ")
 
-   ```
-   <copy>
-   gdsctl move ru -ru 1 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 1 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl move ru -ru 3 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 3 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl move ru -ru 4 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 4 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl move ru -ru 6 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl move ru -ru 6 -source orcl4cdb_orcl4pdb -target orcl3cdb_orcl3pdb
+    </copy>
+    ```
 
-   ![<move_ru_before_scale_down>](./images/t10-2b-move-ru.png " ")
+    ![<move_ru_before_scale_down>](./images/t10-2b-move-ru.png " ")
 
 
 3. Check the status after the move.
 
-   ```
-   <copy>
-   gdsctl status ru -show_chunks
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -show_chunks
+    </copy>
+    ```
 
-   ![<chunk_status_after_move_ru>](./images/t10-3-chunk-status-after-move-ru.png " ")   
+    ![<chunk_status_after_move_ru>](./images/t10-3-chunk-status-after-move-ru.png " ")   
 
 4. Move the chunks out of the SHARD4 before we can delete this SHARD:
-  Run this command from **GSM**.
+    Run this command from **GSM**.
 
-  ```
-  <copy>
-  python3 /opt/oracle/scripts/sharding/scripts/main.py --movechunks="shard_db=ORCL4CDB;shard_pdb=ORCL4PDB"
-  </copy>
-  ```
+    ```
+    <copy>
+    python3 /opt/oracle/scripts/sharding/scripts/main.py --movechunks="shard_db=ORCL4CDB;shard_pdb=ORCL4PDB"
+    </copy>
+    ```
 
-  ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-4-move-all-chunks.png " ")
+    ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-4-move-all-chunks.png " ")
 
 5. Check the status for the chunks across all the RU's again and and make sure no DDL error is seen.
 
-   ```
-   <copy>
-   gdsctl status ru -show_chunks
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -show_chunks
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl show ddl -failed_only
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl show ddl -failed_only
+    </copy>
+    ```
 
-   ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-5-show-ddl-failed-after-move-all.png " ")
+    ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-5-show-ddl-failed-after-move-all.png " ")
 
 6. Complete the SHARD4 delete operation.
 
-   ```
-   <copy>
-   python3 /opt/oracle/scripts/sharding/scripts/main.py --deleteshard="shard_host=oshard4-0;shard_db=ORCL4CDB;shard_pdb=ORCL4PDB;shard_port=1521;shard_group=shardgroup1"
-   </copy>
-   ```
+    ```
+    <copy>
+    python3 /opt/oracle/scripts/sharding/scripts/main.py --deleteshard="shard_host=oshard4-0;shard_db=ORCL4CDB;shard_pdb=ORCL4PDB;shard_port=1521;shard_group=shardgroup1"
+    </copy>
+    ```
 
-   ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-6-delete-shard4.png " ")
+    ![<move_all_chunks_n_verify_ddl_failed>](./images/t10-6-delete-shard4.png " ")
 
 
 7. Check the status after scale down operation is completed.
 
-   ```
-   <copy>
-   gdsctl config shard
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl config shard
+    </copy>
+    ```
 
-   ```
-   <copy>
-   gdsctl config chunks
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl config chunks
+    </copy>
+    ```
 
-   ![<status_after_Scale_down>](./images/t10-7a-status-after-scale-down.png " ")
+    ![<status_after_Scale_down>](./images/t10-7a-status-after-scale-down.png " ")
 
-   ```
-   <copy>
-   gdsctl status ru -show_chunks
-   </copy>
-   ```
+    ```
+    <copy>
+    gdsctl status ru -show_chunks
+    </copy>
+    ```
 
-   ![<status_after_Scale_down>](./images/t10-7b-status-after-scale-down.png " ")
+    ![<status_after_Scale_down>](./images/t10-7b-status-after-scale-down.png " ")
     
 8. Run the below command in a terminal window logged in as **oracle** to stop and remove the shard4 container. Shard4 container is up before stop and remove.
 
-  ![<rm_shard4>](./images/t10-8-stop-rm-shard4-container.png " ")
+    ![<rm_shard4>](./images/t10-8-stop-rm-shard4-container.png " ")
 
-  ```
-  <copy>
-  sudo podman stop shard4
-  </copy>
-  ```
+    ```
+    <copy>
+    sudo podman stop shard4
+    </copy>
+    ```
 
-   ```
-   <copy>
-   sudo podman rm shard4
-   </copy>
-   ```
+    ```
+    <copy>
+    sudo podman rm shard4
+    </copy>
+    ```
 
 9. Check if the shard4 has been removed.
 
-   ```
-   <copy>
-   sudo podman ps -a
-   </copy>
-   ```
+    ```
+    <copy>
+    sudo podman ps -a
+    </copy>
+    ```
 
-   ![<podman_stop>](./images/t10-9-after-scale-down-podman.png " ")
+    ![<podman_stop>](./images/t10-9-after-scale-down-podman.png " ")
 
 10. Run the below command in terminal that is switched to **GSM**,to  auto rebalance the leaders.
 
@@ -658,18 +658,18 @@ This is the end of the Raft Replication Workshop.
 ## Rate this Workshop
 When you are finished don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
 
-1.  Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
-2.  Click on the **Brown Button** to re-access the workshop  
+1. Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
+2. Click on the **Brown Button** to re-access the workshop  
 
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
+    ![Image](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
 
-3.  Click **Rate this workshop**
+3. Click **Rate this workshop**
 
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
+    ![Image](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
 
 If you selected the **Green Button** for this workshop and still have an active reservation, you can also rate by going to My Reservations -> Launch Workshop.
 
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, July 2025
+* **Last Updated By/Date** - Ajay Joshi, Lead Principal Data Systems Engineer, Oracle Globally Distributed Database, September 2026

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#fbfaf8"/>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#2f2b29">Score Healthcare Operating Risk Inside Oracle Database</text>
+  <text x="60" y="108" font-family="Arial, sans-serif" font-size="19" fill="#4b4744">The model, input features, prediction, and review evidence stay close to the governed data.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="55" y="190" width="300" height="265" rx="18" fill="#fff1ed" stroke="#c74634" stroke-width="3"/>
+    <text x="205" y="235" text-anchor="middle" font-size="15" font-weight="700" fill="#c74634">OPERATING FEATURES</text>
+    <text x="90" y="285" font-size="19" font-weight="700" fill="#2f2b29">Current requests</text>
+    <text x="315" y="285" text-anchor="end" font-size="19" fill="#4b4744">17</text>
+    <text x="90" y="330" font-size="19" font-weight="700" fill="#2f2b29">Signals</text>
+    <text x="315" y="330" text-anchor="end" font-size="19" fill="#4b4744">6</text>
+    <text x="90" y="375" font-size="19" font-weight="700" fill="#2f2b29">Capacity ratio</text>
+    <text x="315" y="375" text-anchor="end" font-size="19" fill="#4b4744">1.06</text>
+    <text x="90" y="420" font-size="19" font-weight="700" fill="#2f2b29">Critical alerts</text>
+    <text x="315" y="420" text-anchor="end" font-size="19" fill="#4b4744">2</text>
+
+    <path d="M355 322H450" stroke="#8d8883" stroke-width="5"/>
+    <path d="M440 309l22 13-22 13z" fill="#8d8883"/>
+
+    <rect x="462" y="215" width="330" height="215" rx="18" fill="#edf7f2" stroke="#3f7d68" stroke-width="3"/>
+    <text x="627" y="260" text-anchor="middle" font-size="15" font-weight="700" fill="#3f7d68">ORACLE MACHINE LEARNING</text>
+    <text x="627" y="315" text-anchor="middle" font-size="18" font-weight="700" fill="#2f2b29">CARE_DEMAND_RISK_MODEL</text>
+    <text x="627" y="355" text-anchor="middle" font-size="18" fill="#4b4744">Classification</text>
+    <text x="627" y="385" text-anchor="middle" font-size="18" fill="#4b4744">Generalized Linear Model</text>
+
+    <path d="M792 322H887" stroke="#8d8883" stroke-width="5"/>
+    <path d="M877 309l22 13-22 13z" fill="#8d8883"/>
+
+    <rect x="899" y="190" width="326" height="265" rx="18" fill="#edf6f9" stroke="#287c99" stroke-width="3"/>
+    <text x="1062" y="235" text-anchor="middle" font-size="15" font-weight="700" fill="#287c99">MODEL RESULT</text>
+    <text x="1062" y="310" text-anchor="middle" font-size="44" font-weight="700" fill="#c74634">HIGH</text>
+    <text x="1062" y="355" text-anchor="middle" font-size="20" fill="#4b4744">Probability 0.5046</text>
+    <text x="1062" y="400" text-anchor="middle" font-size="17" fill="#4b4744">Near the model boundary</text>
+
+    <rect x="180" y="520" width="920" height="115" rx="18" fill="#fffdfb" stroke="#d8d2cc" stroke-width="2"/>
+    <text x="640" y="566" text-anchor="middle" font-size="23" font-weight="700" fill="#c74634">The model supplies evidence. A person reviews the decision.</text>
+    <text x="640" y="604" text-anchor="middle" font-size="18" fill="#4b4744">This synthetic workshop model does not diagnose patients or replace healthcare policy.</text>
+  </g>
+</svg>

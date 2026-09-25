@@ -79,7 +79,7 @@ Once the job completes successfully:
 
    ```
    <copy>
-   https://{instance_public_ip}:8080/studio/installation
+   https://{instance_public_ip}:8080/agentFactory/installation
    </copy>
    ```
 
@@ -152,7 +152,7 @@ You may now **proceed to the next lab**
 
 **Authors** 
 
-* Emilio Perez, Member of Technical Staff, Database Applied AI
+* Database Applied AI Technical Staff
 * Allen Hosler, Principal Product Manager, Database Applied AI
 * Kumar Varun, Senior Principal Product Manager, Database Applied AI
 

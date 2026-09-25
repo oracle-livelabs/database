@@ -1,0 +1,71 @@
+{
+  "workshoptitle": "Soluciones financieras con Oracle AI Database 26ai",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introducción",
+      "description": "La historia de Seer Bank, sus finanzas y los objetivos del taller.",
+      "filename": "../../introduction/introduction_es.md"
+    },
+    {
+      "title": "Primeros pasos",
+      "description": "Inicie el entorno y abra SQL Worksheet en Database Actions.",
+      "filename": "../../getting-started/getting-started_es.md"
+    },
+    {
+      "title": "Laboratorio 1: Crear una consulta para un panel convergente",
+      "description": "Conecte riesgos de productos, transacciones, coincidencias semánticas y cobertura de servicio con una consulta convergente.",
+      "filename": "../../risk-operations-dashboard/risk-operations-dashboard_es.md"
+    },
+    {
+      "title": "Laboratorio 2: Crear un modelo JSON para una aplicación",
+      "description": "Ayude a Thomas a elegir entre columnas JSON, colecciones JSON y JSON Relational Duality para una aplicación de clientes.",
+      "filename": "../../transaction-case-duality/transaction-case-duality_es.md"
+    },
+    {
+      "title": "Laboratorio 3: Revisar una búsqueda semántica de riesgos",
+      "description": "Revise cómo Gilly creó una búsqueda semántica con un modelo de embeddings dentro de la base de datos para productos y avisos de riesgo.",
+      "filename": "../../risk-signal-vector-search/risk-signal-vector-search_es.md"
+    },
+    {
+      "title": "Laboratorio 4: Investigar una red de delitos financieros",
+      "description": "Revise el enfoque de grafos de Bob para encontrar cuentas de fraude conectadas con Oracle Property Graph y SQL/PGQ.",
+      "filename": "../../financial-crime-network/financial-crime-network_es.md"
+    },
+    {
+      "title": "Laboratorio 5: Dirigir clientes al centro de servicio más cercano",
+      "description": "Utilice Oracle Spatial para analizar centros de servicio y regiones de SLA.",
+      "filename": "../../service-sla-spatial/service-sla-spatial_es.md"
+    },
+    {
+      "title": "Laboratorio 6: Crear una lista de seguimiento de demanda de productos con Oracle Machine Learning",
+      "description": "Entrene y puntúe un modelo de aumento de demanda dentro de Oracle Database.",
+      "filename": "../../predictive-risk-oml/predictive-risk-oml_es.md"
+    },
+    {
+      "title": "Laboratorio 7: Hacer preguntas financieras con Select AI",
+      "description": "Utilice Select AI para convertir preguntas financieras en lenguaje natural en SQL que pueda inspeccionar y ejecutar.",
+      "filename": "../../selectai/selectai_es.md"
+    },
+    {
+      "title": "Laboratorio 8: Crear un agente financiero con Select AI Agent",
+      "description": "Cree un agente financiero de solo lectura que utilice una herramienta SQL aprobada.",
+      "filename": "../../selectai-agent/selectai-agent_es.md"
+    },
+    {
+      "title": "Laboratorio 9: Conclusión",
+      "description": "Convierta los laboratorios financieros en una conclusión práctica sobre la base de datos convergente.",
+      "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes_es.md"
+    },
+    {
+      "title": "Laboratorio 10: Cuestionario final",
+      "description": "Compruebe sus conocimientos con preguntas puntuadas.",
+      "filename": "../../final-quiz/final-quiz_es.md"
+    },
+    {
+      "title": "¿Necesita ayuda?",
+      "description": "Soluciones para problemas habituales e indicaciones para recibir ayuda en Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

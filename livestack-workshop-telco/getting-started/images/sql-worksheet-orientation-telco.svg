@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="680" viewBox="0 0 1120 680" role="img" aria-labelledby="title desc">
+  <title id="title">Telco SQL Worksheet orientation</title>
+  <desc id="desc">A simplified SQL Worksheet shows the LLUSER connection, a Telco row-count query, the Run button, and query results.</desc>
+  <rect width="1120" height="680" fill="#f7f8f9"/>
+  <style>.title{font:700 27px Arial,sans-serif;fill:#292522}.label{font:700 15px Arial,sans-serif;fill:#0b4974}.ui{font:16px Arial,sans-serif;fill:#292522}.code{font:16px Menlo,Consolas,monospace;fill:#292522}.keyword{fill:#6a3fa0;font-weight:700}.caption{font:15px Arial,sans-serif;fill:#5a5550}.result{font:15px Arial,sans-serif;fill:#292522}</style>
+  <text x="42" y="48" class="title">SQL Worksheet: run each Telco query as LLUSER</text>
+  <rect x="38" y="74" width="1044" height="556" rx="12" fill="#fff" stroke="#d6d3cf"/>
+  <rect x="38" y="74" width="1044" height="52" rx="12" fill="#f0eeeb"/>
+  <rect x="62" y="88" width="134" height="28" rx="14" fill="#e8eff8"/><text x="83" y="108" class="label">LLUSER ▾</text>
+  <rect x="876" y="87" width="128" height="31" rx="6" fill="#c74634"/><text x="910" y="108" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff">Run ▷</text>
+  <text x="62" y="158" class="label">1. Confirm the worksheet user</text>
+  <text x="62" y="189" class="code"><tspan class="keyword">SELECT</tspan> USER <tspan class="keyword">AS</tspan> "User",</text>
+  <text x="62" y="216" class="code">       SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') <tspan class="keyword">AS</tspan> "Schema"</text>
+  <text x="62" y="243" class="code"><tspan class="keyword">FROM</tspan> dual;</text>
+  <text x="62" y="287" class="label">2. Paste a workshop query, then select Run</text>
+  <rect x="62" y="315" width="986" height="40" rx="6" fill="#f8e6e1"/>
+  <text x="82" y="341" class="ui">Each lab provides a read-only SQL block and an expected output table.</text>
+  <rect x="62" y="388" width="986" height="204" rx="8" fill="#fbfbfb" stroke="#d6d3cf"/>
+  <text x="84" y="420" class="label">3. Read Query Result</text>
+  <line x1="84" y1="440" x2="1024" y2="440" stroke="#d6d3cf"/>
+  <text x="102" y="469" class="result" font-weight="700">User</text><text x="325" y="469" class="result" font-weight="700">Schema</text>
+  <line x1="84" y1="483" x2="1024" y2="483" stroke="#e1dedb"/>
+  <text x="102" y="515" class="result">LLUSER</text><text x="325" y="515" class="result">LLUSER</text>
+  <text x="84" y="562" class="caption">If either value differs, return to the reservation login steps before running the lab SQL.</text>
+  <text x="42" y="662" class="caption">The graphic uses Telco workshop SQL and does not display credentials or unrelated database objects.</text>
+</svg>

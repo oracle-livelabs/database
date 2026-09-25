@@ -1,0 +1,110 @@
+[
+  {
+    "id": "APP-01",
+    "lesson": "introduction/introduction.md",
+    "asset": "introduction/images/app-welcome.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "6495525fa8a8eb7867680eafa9abbc7af02830f7fab9b1e50179be15568e4068",
+    "caption": "Welcome page of the supplied telecom operations demo.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-02",
+    "lesson": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+    "asset": "subscriber-operations-dashboard/images/app-dashboard.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "c597eaf33fbd3194728092c301b59fda51fd7e76178a4c18695ec80f479bbdb7",
+    "caption": "Live service-assurance dashboard with incident indicators and charts.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-03",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "asset": "service-order-duality/images/app-service-orders.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "2ecd425424fecd0c6bf8b93db6e238c6b550e51d5dc51bef61e68e553ff45c2e",
+    "caption": "Live subscriber service-order list; separate application data.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-04",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "asset": "subscriber-concern-vector-search/images/app-vector-search.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "e2d91917994c81658cd21704f18c718d6a7dd93d56abedb6b3b8d61cd75aaa71",
+    "caption": "Live semantic search showing the entered phrase and eight ranked telecom services.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-05",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "asset": "activation-fraud-network/images/app-impact-graph.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "b7216f01d3746484e65b3b51c49d5c40de207fb9fb5ecaec3842e73dd9579fcb",
+    "caption": "Live two-step incident-impact graph; this is not a Graph Studio notebook result.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-06",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "asset": "network-site-spatial/images/app-spatial-map.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "4e9e1e1e8ddc766f92b6a1839b8c9d7dd0687c083e9e9df3985b544f9abfecab",
+    "caption": "Live network map with site and demand-region layers enabled.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-07",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "asset": "plan-demand-oml/images/app-predictive-assurance.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "a16a0d0ff976c98c8daf5c9370d4fa1704074ef73bbe4489107651723c25b690",
+    "caption": "Live predictive service-assurance view with model context and scores.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-08",
+    "lesson": "selectai/selectai.md",
+    "asset": "selectai/images/app-ask-data.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "a19edda991eba2c3a88e2c8efbe9f74f18d533b03c18842adda179cae9d9312f",
+    "caption": "Live question interface showing its local runtime and available modes; no answer was submitted for this capture.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  },
+  {
+    "id": "APP-09",
+    "lesson": "selectai-agent/selectai-agent.md",
+    "asset": "selectai-agent/images/app-agent-console.png",
+    "status": "captured_live_application",
+    "source_url": "http://141.144.192.27:8505/",
+    "capture_date": "2026-09-23",
+    "ui_identity": "Jessica Chen / Admin (existing demo session)",
+    "sha256": "4d26339c3f7d0fa3662fdbd2754bd9a9e26eb862d166a909bae6f754e8646cf9",
+    "caption": "Live agent console with runtime selection and suggested telecom questions.",
+    "scope": "Application UI only; separate from workshop loader execution."
+  }
+]

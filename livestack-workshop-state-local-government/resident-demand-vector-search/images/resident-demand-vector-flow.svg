@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="t d">
+  <title id="t">Resident demand semantic-search flow</title><desc id="d">A benefits backlog phrase becomes a vector, is compared with service and signal embeddings, and produces a ranked review queue.</desc>
+  <rect width="900" height="360" rx="22" fill="#f7f8fa"/><style>.h{font:700 27px Arial;fill:#18243b}.s{font:15px Arial;fill:#41506a}.b{font:700 16px Arial;fill:#1f2937}.c{font:14px Arial;fill:#43516a}</style>
+  <text x="34" y="46" class="h">Search Resident-Service Evidence by Meaning</text><text x="34" y="72" class="s">Concrete objects, SQL evidence, and business context remain inside Oracle Database.</text>
+  <g transform="translate(30 118)"><rect width="180" height="128" rx="15" fill="#fff" stroke="#b35c1e" stroke-width="2"/><text x="90" y="35" text-anchor="middle" class="b">Analyst Phrase</text><text x="90" y="67" text-anchor="middle" class="c">Benefits Eligibility</text><text x="90" y="89" text-anchor="middle" class="c">Appointment Backlog</text></g>
+  <path d="M218 182h24" stroke="#7d8799" stroke-width="4"/><path d="m242 182-13-9v18z" fill="#7d8799"/>
+  <g transform="translate(250 118)"><rect width="180" height="128" rx="15" fill="#fff" stroke="#8f55d9" stroke-width="2"/><text x="90" y="35" text-anchor="middle" class="b">VECTOR_EMBEDDING</text><text x="90" y="67" text-anchor="middle" class="c">ALL_MINILM_L12_V2</text><text x="90" y="89" text-anchor="middle" class="c">384 dimensions</text></g>
+  <path d="M438 182h24" stroke="#7d8799" stroke-width="4"/><path d="m462 182-13-9v18z" fill="#7d8799"/>
+  <g transform="translate(470 118)"><rect width="180" height="128" rx="15" fill="#fff" stroke="#457b9d" stroke-width="2"/><text x="90" y="35" text-anchor="middle" class="b">VECTOR_DISTANCE</text><text x="90" y="67" text-anchor="middle" class="c">PRODUCT_EMBEDDINGS</text><text x="90" y="89" text-anchor="middle" class="c">POST_EMBEDDINGS</text></g>
+  <path d="M658 182h24" stroke="#7d8799" stroke-width="4"/><path d="m682 182-13-9v18z" fill="#7d8799"/>
+  <g transform="translate(690 118)"><rect width="180" height="128" rx="15" fill="#e9f6ee" stroke="#17603a" stroke-width="2"/><text x="90" y="35" text-anchor="middle" class="b">Ranked Evidence</text><text x="90" y="76" text-anchor="middle" class="c">Services and Signals</text></g>
+  <rect x="170" y="286" width="560" height="48" rx="12" fill="#eee8fa"/><text x="450" y="316" text-anchor="middle" class="b">Higher 1 - cosine distance means a closer semantic match</text>
+</svg>

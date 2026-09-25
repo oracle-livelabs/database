@@ -1,0 +1,159 @@
+Clear output
+Download script output
+
+Comment created.
+
+Elapsed: 00:00:00.010
+
+
+Copy to clipboard
+LAB7_BLOCK_5
+
+
+Copy to clipboard
+GENERATED_SQL                                                                                                                                                                                                                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+SELECT sp."PLAN_NAME", SUM(sol."LINE_TOTAL") AS total_contracted_charges
+FROM "LLUSER"."SERVICE_PLANS" sp
+JOIN "LLUSER"."SERVICE_ORDER_LINES" sol ON sp."PLAN_ID" = sol."PLAN_ID"
+JOIN "LLUSER"."SERVICE_ORDERS" so ON sol."ORDER_ID" = so."ORDER_ID"
+WHERE so."ORDER_STATUS" IN ('confirmed', 'active', 'completed')
+GROUP BY sp."PLAN_NAME"
+ORDER BY total_contracted_charges DESC
+FETCH FIRST 5 ROWS ONLY 
+
+
+Elapsed: 00:00:07.071
+1 rows selected.
+
+Copy to clipboard
+LAB7_BLOCK_6
+
+
+Copy to clipboard
+ANSWER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+[
+  {
+    "PLAN_NAME" : "Queens Fiber Connect - 12-month contract",
+    "TOTAL_CONTRACTED_CHARGES" : 4560
+  },
+  {
+    "PLAN_NAME" : "Rosemont Fiber Connect - 12-month contract",
+    "TOTAL_CONTRACTED_CHARGES" : 4560
+  },
+  {
+    "PLAN_NAME" : "Oak Park Fiber Connect - 12-month contract",
+    "TOTAL_CONTRACTED_CHARGES" : 4560
+  },
+  {
+    "PLAN_NAME" : "White Plains Fiber Connect - 12-month contract",
+    "TOTAL_CONTRACTED_CHARGES" : 4560
+  },
+  {
+    "PLAN_NAME" : "Newark Fiber Connect - 12-month contract",
+    "TOTAL_CONTRACTED_CHARGES" : 4560
+  }
+] 
+
+
+Elapsed: 00:00:05.535
+1 rows selected.
+
+Copy to clipboard
+LAB7_BLOCK_7
+
+
+Copy to clipboard
+GENERATED_SQL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+SELECT 
+    spl.PLAN_NAME AS "Plan Name",
+    spl.CATEGORY AS "Category",
+    SUM(sol.LINE_TOTAL) AS "Summed Line Total",
+    SUM(sol.CONNECTION_COUNT) AS "Summed Connection Count"
+FROM 
+    "LLUSER"."SERVICE_PLANS" spl
+JOIN 
+    "LLUSER"."SERVICE_ORDER_LINES" sol ON spl.PLAN_ID = sol.PLAN_ID
+JOIN 
+    "LLUSER"."SERVICE_ORDERS" so ON sol.ORDER_ID = so.ORDER_ID
+WHERE 
+    so.ORDER_STATUS IN ('confirmed', 'active', 'completed')
+GROUP BY 
+    spl.PLAN_NAME, 
+    spl.CATEGORY
+ORDER BY 
+    "Summed Line Total" DESC
+FETCH FIRST 5 ROWS ONLY 
+
+
+Elapsed: 00:00:09.424
+1 rows selected.
+
+Copy to clipboard
+LAB7_BLOCK_8
+
+
+Copy to clipboard
+ANSWER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+[
+  {
+    "Plan Name" : "Oak Park Fiber Connect - 12-month contract",
+    "Category" : "Fiber",
+    "Summed Line Total" : 4560,
+    "Summed Connection Count" : 48
+  },
+  {
+    "Plan Name" : "Queens Fiber Connect - 12-month contract",
+    "Category" : "Fiber",
+    "Summed Line Total" : 4560,
+    "Summed Connection Count" : 48
+  },
+  {
+    "Plan Name" : "White Plains Fiber Connect - 12-month contract",
+    "Category" : "Fiber",
+    "Summed Line Total" : 4560,
+    "Summed Connection Count" : 48
+  },
+  {
+    "Plan Name" : "Newark Fiber Connect - 12-month contract",
+    "Category" : "Fiber",
+    "Summed Line Total" : 4560,
+    "Summed Connection Count" : 48
+  },
+  {
+    "Plan Name" : "Rosemont Fiber Connect - 12-month contract",
+    "Category" : "Fiber",
+    "Summed Line Total" : 4560,
+    "Summed Connection Count" : 48
+  }
+] 
+
+
+Elapsed: 00:00:10.234
+1 rows selected.
+
+Copy to clipboard
+LAB7_BLOCK_9
+
+
+Copy to clipboard
+EXPLANATION                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+The top five service plans with the highest contracted monthly charges are:
+
+1. **Oak Park Fiber Connect - 12-month contract** (Fiber): Total monthly charges of $4,560 with 48 connections.  
+2. **Queens Fiber Connect - 12-month contract** (Fiber): Total monthly charges of $4,560 with 48 connections.  
+3. **White Plains Fiber Connect - 12-month contract** (Fiber): Total monthly charges of $4,560 with 48 connections.  
+4. **Newark Fiber Connect - 12-month contract** (Fiber): Total monthly charges of $4,560 with 48 connections.  
+5. **Rosemont Fiber Connect - 12-month contract** (Fiber): Total monthly charges of $4,560 with 48 connections.  
+
+These plans are from the Fiber category and have the same total monthly charges and connection counts. Only orders with statuses 'confirmed', 'active', or 'completed' were considered, and activation fees were excluded. 
+
+
+Elapsed: 00:00:19.924
+1 rows selected.
+
+Copy to clipboard

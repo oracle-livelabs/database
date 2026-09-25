@@ -19,61 +19,68 @@
       "filename": "../../01-initialize-environment/initialize-environment.md"
     },
     {
-      "title": "Lab 2: Explore Multitenant Architecture",
-      "filename": "../../02-explore-multitenant/explore-multitenant.md"
+      "title": "Lab 2: Upgrade Non-CDB Using Refreshable Clone PDB",
+      "filename": "../../02-upg-refresh-clone/upg-refresh-clone.md"
     },
     {
-      "title": "Lab 3: Generate AWR Snapshot",
-      "filename": "../../03-awr-snapshot/awr-snapshot.md"
+      "title": "Lab 3: Upgrade Non-CDB Using Plug-In",
+      "filename": "../../03-noncdb-plug-in-upg/noncdb-plug-in-upg.md"
     },
     {
-      "title": "Lab 4: Capture and Preserve SQL",
-      "filename": "../../04-capture-sql/capture-sql.md"
+      "title": "Lab 4: Upgrade PDB Using Unplug-Plug",
+      "filename": "../../04-pdb-unplug-plug-upg/pdb-unplug-plug-upg.md"
     },
     {
-      "title": "Lab 5: AutoUpgrade",
-      "filename": "../../05-autoupgrade/autoupgrade.md"
+      "title": "Lab 5: Upgrade PDB Using Replay Upgrade",
+      "filename": "../../05-pdb-replay-upg/pdb-replay-upg.md"
     },
     {
-      "title": "Lab 6: AWR Compare Periods",
-      "filename": "../../06-awr-compare/awr-compare.md"
+      "title": "Lab 6: Check Upgrades",
+      "filename": "../../06-check-upgrades/check-upgrades.md"
     },
     {
-      "title": "Lab 7: SQL Performance Analyzer",
-      "filename": "../../07-spa/spa.md"
+      "title": "Lab 7: Troubleshooting",
+      "filename": "../../07-troubleshooting/troubleshooting.md"
     },
     {
-      "title": "Lab 8: SQL Plan Management",
-      "filename": "../../08-spm/spm.md"
+      "title": "Lab 8: Use AI Vector Search",
+      "filename": "../../08-use-ai/use-ai.md"
     },
     {
-      "title": "Lab 9: SQL Tuning Advisor",
-      "filename": "../../09-sqltune/sqltune.md"
+      "title": "Lab 9: Check Your Understanding",
+      "description": "Review key upgrade concepts with a scored quiz.",
+      "filename": "../../09-check-your-understanding/check-your-understanding.md"
     },
     {
-      "title": "Lab 10: Upgrade CDB and Roll Back Using Flashback Database",
-      "filename": "../../10-upg-cdb-flashback/upg-cdb-flashback.md"
+      "title": "OPTIONAL Lab A: Upgrade CDB and Restore",
+      "description": "Upgrade a full CDB and restore.",
+      "filename": "../../a-upg-cdb-flashback/upg-cdb-flashback.md"
     },
     {
-      "title": "Lab 11: Upgrade Non-CDB Using Refreshable Clone PDB",
-      "filename": "../../11-upg-refresh-clone/upg-refresh-clone.md"
+      "title": "OPTIONAL Lab B: Upgrade Encrypted PDB Using Unplug-plug",
+      "description": "Upgrade a single encrypted PDB by plugging in to a new CDB.",
+      "filename": "../../b-enc-pdb-unplug-plug-upg/enc-pdb-unplug-plug-upg.md"
     },
     {
-      "title": "Lab 12: Migrate Using Data Pump",
-      "filename": "../../12-migrate-using-data-pump/migrate-using-data-pump.md"
-    }, 
+      "title": "OPTIONAL Lab C: Upgrade encrypted PDB Using Refreshable Clone",
+      "description": "Upgrade a single encrypted PDB using a refreshable clone PDB.",
+      "filename": "../../c-enc-pdb-refresh-upg/enc-pdb-refresh-upg.md"
+    },
     {
-      "title": "Lab 13: Migrate Using Full Transportable Export/Import",
-      "filename": "../../13-migrate-using-ftex/migrate-using-ftex.md"
-    }, 
+      "title": "OPTIONAL Lab D: Downgrade PDB",
+      "description": "Downgrade a single PDB back to 19c.",
+      "filename": "../../d-pdb-dwgrd/pdb-dwgrd.md"
+    },
     {
-      "title": "Lab 14: Upgrade Encrypted Non-CDB and Convert",
-      "filename": "../../14-encrypted-db-upg-conv/encrypted-db-upg-conv.md"
-    },    
+      "title": "OPTIONAL Lab E: Migrate Data Using Data Pump",
+      "description": "Migrate just the data using a full Data Pump export.",
+      "filename": "../../e-migrate-using-data-pump/migrate-using-data-pump.md"
+    },
     {
-      "title": "Lab 15: Downgrade a PDB",
-      "filename": "../../15-downgrade-pdb/downgrade-pdb.md"
-    },    
+      "title": "OPTIONAL Lab F: Migrate Data using Full Transportable Export/Import",
+      "description": "Migrate all data using transportable tablespaces.",
+      "filename": "../../f-migrate-using-ftex/migrate-using-ftex.md"
+    },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",

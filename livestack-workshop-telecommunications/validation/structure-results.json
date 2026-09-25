@@ -1,0 +1,131 @@
+{
+  "source_unchanged": true,
+  "source_files": 116,
+  "lessons": [
+    {
+      "lesson": "Build Connected Telecommunications Solutions with Oracle AI Database",
+      "path": "introduction/introduction.md",
+      "task_order": [],
+      "sql_blocks": 0
+    },
+    {
+      "lesson": "Getting Started",
+      "path": "getting-started/getting-started.md",
+      "task_order": [
+        "1",
+        "2"
+      ],
+      "sql_blocks": 1
+    },
+    {
+      "lesson": "Lab 1: Build a Converged Dashboard Query",
+      "path": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+      "task_order": [
+        "1",
+        "2"
+      ],
+      "sql_blocks": 1
+    },
+    {
+      "lesson": "Lab 2: Build a JSON Application Model",
+      "path": "service-order-duality/service-order-duality.md",
+      "task_order": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "sql_blocks": 14
+    },
+    {
+      "lesson": "Lab 3: Search Service Plans by Meaning",
+      "path": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+      "task_order": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "sql_blocks": 8
+    },
+    {
+      "lesson": "Lab 4: Investigate an Activation Fraud Network",
+      "path": "activation-fraud-network/activation-fraud-network.md",
+      "task_order": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "sql_blocks": 6
+    },
+    {
+      "lesson": "Lab 5: Find Nearby Network Sites",
+      "path": "network-site-spatial/network-site-spatial.md",
+      "task_order": [
+        "1",
+        "2",
+        "3"
+      ],
+      "sql_blocks": 4
+    },
+    {
+      "lesson": "Lab 6: Build a Service Plan Demand Watchlist with Oracle Machine Learning",
+      "path": "plan-demand-oml/plan-demand-oml.md",
+      "task_order": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "sql_blocks": 5
+    },
+    {
+      "lesson": "Lab 7: Ask Telecom Questions with Select AI",
+      "path": "selectai/selectai.md",
+      "task_order": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "sql_blocks": 9
+    },
+    {
+      "lesson": "Lab 8: Build a Telecom Agent with Select AI Agent",
+      "path": "selectai-agent/selectai-agent.md",
+      "task_order": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "sql_blocks": 12
+    },
+    {
+      "lesson": "Lab 9: Final Quiz",
+      "path": "final-quiz/final-quiz.md",
+      "task_order": [
+        "1"
+      ],
+      "sql_blocks": 0
+    }
+  ],
+  "stack_templates": {
+    "output.tf": "unchanged",
+    "adb.tf": "loader path only",
+    "main.tf": "unchanged",
+    "genai_connection.sql.tmpl": "unchanged",
+    "genai.tf": "unchanged",
+    "variables.tf": "unchanged",
+    "create_user.sql.tmpl": "unchanged"
+  }
+}

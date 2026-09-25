@@ -2,110 +2,116 @@
 
 ## Introduction
 
-Order data serves multiple retail audiences at once. Application teams want a compact order object, operations teams want relational detail, and business teams want one governed source of truth. Frame **JSON Relational Duality** as the way **Oracle AI Database** supports all three without duplicating the order record.
+After you trace dashboard metrics to orders, the next question is how applications should use those orders. Application developers often prefer JSON because it matches the shape of an API response: one order can include customer fields, status, totals, and line items in a single document. That shape is convenient for application code, but it creates synchronization and governance work when JSON becomes a separate copy of the business record.
 
-In this lab, learners move from relational order tables to document-style access, then prove that inserts and updates still land in the same governed business transaction. The point is not just technical flexibility; it is operational consistency.
-
-The application value is API-friendly access. An order detail screen or service call often wants one order document with header fields and line items together. The database value is that the document is not a disconnected copy. Oracle still stores and protects the order in relational tables that SQL, constraints, transactions, and analytics can use.
-
-### Operating Story
-
-| Step | Retail focus |
-| --- | --- |
-| Business Problem | Seer Sporting Goods needs application-friendly order documents without losing relational truth, transactions, or SQL access. |
-| What You Will Prove | The same order can be read and changed as JSON while Oracle stores and protects the underlying relational rows. |
-| Database Capability | JSON Relational Duality maps document-shaped JSON to relational `ORDERS` and `ORDER_ITEMS` tables. |
-| Outcome | Application teams get document APIs while operations and analytics teams keep one governed source of order truth. |
-{: title="Unified Order Intelligence Story"}
-
-**Persona focus:** Application developers want API-friendly order documents. Database and operations teams need those documents to stay transactional, queryable, and tied to relational order evidence.
-
-Estimated Time: **15 minutes**
+**JSON Relational Duality** in **Oracle AI Database 26ai** gives applications document-shaped JSON while relational tables remain the governed source of truth. In this lab, you first read an order document. You then enable document inserts and updates, create and update a reserved test order through JSON, and verify the same changes in relational rows.
 
 ### Objectives
 
-- Inspect the relational order tables that support one governed order record for applications, operations, reporting, and audit needs.
-- Recreate `ORDERS_DV` so learners can see how one governed order record can support document-style insert, update, and delete operations.
-- Query retail orders as JSON documents.
-- Insert a retail order through `ORDERS_DV` and verify that the business transaction is stored correctly in the mapped relational tables.
-- Update order data through both the duality view and the relational tables to show that every team is still working from the same governed order record.
+- Read application-friendly order documents from `ORDERS\_DV`.
+- Enable insert and update operations for the order document and its line items.
+- Create and update a JSON order, then inspect the corresponding relational rows.
+- Project JSON fields into SQL columns for investigation.
 
+Estimated Time: **20 minutes**
 
-## Task 1: Start with relational order tables
+### Business Scenario
 
-JSON Relational Duality starts with relational tables. In this retail workshop, `ORDERS` stores the order header and `ORDER_ITEMS` stores the line items. The duality view presents those rows as one order document.
+| Step | Retail focus |
+| --- | --- |
+| Business Problem | Applications need order documents, while operations still need relational rows and SQL controls. |
+| Technical Challenge | Developers need API-friendly JSON without copying orders into a separate document store. |
+| Persona Focus | An application developer serves document payloads while the database developer preserves relational governance. |
+| What You Will Do | Enable a writable document contract, create and update a test order through JSON, and verify relational evidence. |
+| Database Capability | JSON Relational Duality exposes read and write access over the same relational order data. |
+| Outcome | Application and analytics teams use one governed order record through the access shape each team needs. |
 
-![Diagram showing ORDERS and ORDER_ITEMS flowing through ORDERS_DV into a JSON order document](images/json-relational-duality-order-flow.svg " ")
+<details>
+<summary><strong>Key terms: JSON Relational Duality, duality view, projection, and transaction</strong></summary>
 
-*Figure 1: `ORDERS_DV` presents the `ORDERS` header row and related `ORDER_ITEMS` rows as one JSON order document.*
+> - **JSON Relational Duality** exposes relational data as JSON documents without copying it into a separate document database. The application gets the document shape developers want, while analysts retain SQL access to governed rows.
+>
+> - **Duality view**, often shortened to **DV**, maps relational tables and columns into a JSON document shape. In this lab, `ORDERS\_DV` maps one `ORDERS` row and its related `ORDER_ITEMS` rows into one order document.
+>
+> - **Projection** means returning selected JSON fields as ordinary SQL columns. `JSON_VALUE` lets analysts filter, sort, and join document fields with relational data.
+>
+> - **Transaction** is a logical unit of database work. `COMMIT` makes the test insert and update visible as part of the current workshop session. The workshop environment is deleted and rebuilt for each run, so the reserved test document does not carry into a future workshop.
 
-Perform the following set of steps to start with the relational order tables that support a document-style order experience for the business.
+</details>
 
-1. Review the order detail screen before you run the SQL.
+![JSON Relational Duality order flow](images/json-duality.svg " ")
 
-    ![Order table and detail region from the runbook](images/order-table-detail.png " ")
+*Figure 1: `ORDERS\_DV` presents order data as a JSON document while reads and permitted writes remain connected to relational order tables.*
 
-    *Figure 2: The application works with an order as a business object: one order header with related line items. JSON Relational Duality lets the database expose that same shape as a JSON document while still storing the data in relational `ORDERS` and `ORDER_ITEMS` rows.*
+## Task 1: Inspect a document-shaped order
 
-2. Inspect the core relational columns used by the order document.
+Start by connecting the application order screen to the JSON document returned by Oracle Database.
 
-    Before you query the JSON document, look at the relational columns that make up the document. The order header fields come from `ORDERS`; the nested `items` array comes from `ORDER_ITEMS`. This is the key duality concept for the rest of the lab: the document shape is built from relational tables.
+1. Review the order application screen.
+
+    ![Unified Order Intelligence overview](images/unified-order-intelligence-overview.png " ")
+
+    *Figure 2: The application works with order detail as one business object. The SQL in this lab shows how Oracle Database exposes and updates that shape without creating a second order copy.*
+
+2. Query order `1` from `ORDERS_DV`.
+
+    > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](https://oracle-livelabs.github.io/database/livestack-workshop-retail/workshops/tenancy/index.html?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
+    `JSON_SERIALIZE` displays the JSON document as readable text. The `_id`, customer, status, total, and nested `items` array look like document fields, but their values come from the relational `ORDERS` and `ORDER_ITEMS` tables.
 
     ```sql
     <copy>
-    SELECT table_name AS "Table",
-           column_name AS "Column",
-           data_type AS "Type"
-    FROM user_tab_columns
-    WHERE table_name IN ('ORDERS','ORDER_ITEMS')
-      AND column_name IN (
-        'ORDER_ID','CUSTOMER_ID','ORDER_STATUS','ORDER_TOTAL',
-        'SHIPPING_COST','DEMAND_SCORE','CREATED_AT',
-        'ITEM_ID','PRODUCT_ID','QUANTITY','UNIT_PRICE','LINE_TOTAL'
-      )
-    ORDER BY table_name, column_id;
+    SELECT JSON_SERIALIZE(data RETURNING CLOB PRETTY) AS "Order Document"
+    FROM orders_dv
+    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 1;
     </copy>
     ```
 
-    **Expected output excerpt:**
+    **Expected output excerpt: Order Document**
 
-    | Table | Column | Type |
-    | --- | --- | --- |
-    | ORDERS | ORDER_ID | NUMBER |
-    | ORDERS | CUSTOMER_ID | NUMBER |
-    | ORDERS | ORDER_STATUS | VARCHAR2 |
-    | ORDER_ITEMS | ITEM_ID | NUMBER |
-    | ORDER_ITEMS | PRODUCT_ID | NUMBER |
-    | ORDER_ITEMS | QUANTITY | NUMBER |
-    {: title="Order Relational Columns"}
+    | Order Document |
+    | --- |
+    | `{"_id":1,"_metadata":{...},"customerId":1668,"status":"confirmed","total":1139.93,...}` |
 
-3. The data is still relational: primary keys, foreign keys, data types, SQL joins, and analytics all continue to work.
+3. Review the document shape.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+    One query returns the order header and its line items together. An application can consume that API-friendly structure while SQL constraints, keys, and joins continue to govern the underlying rows.
 
-## Task 2: Add INSERT, UPDATE, and DELETE to a read-only duality view
+## Task 2: Enable document inserts and updates
 
-A JSON Relational Duality view is more than a read-only JSON projection. It defines the document shape that applications see and the operations they are allowed to perform. As the database user who owns the view, you can decide whether the view should only support reads or whether applications should also be able to insert, update, and delete order documents. 
+The loaded `ORDERS_DV` already permits updates to existing documents. In this task, you extend that contract so an application can also create a complete order document with nested line items.
 
-In this task, you recreate the existing retail `ORDERS_DV` view with those operations enabled. The important point is how small and declarative the change is: the following SQL adds the document operations while Oracle Database still maps the work back to the relational `ORDERS` and `ORDER_ITEMS` tables.
+1. Check the current document-write capabilities.
 
-Perform the following set of steps to define which document-style order actions the business can allow through `ORDERS_DV` while keeping relational storage and control in place.
+    `USER_JSON_DUALITY_VIEWS` reports which document operations the duality-view definition permits. Reading is inherent. The three flags show whether the view also accepts inserts, updates, or deletes.
 
+    ```sql
+    <copy>
+    SELECT view_name AS "View Name",
+           allow_insert AS "Allow Insert",
+           allow_update AS "Allow Update",
+           allow_delete AS "Allow Delete"
+    FROM user_json_duality_views
+    WHERE view_name = 'ORDERS_DV';
+    </copy>
+    ```
 
-1. Read the write permissions in the view definition.
+    **Expected output: Current Document Capabilities**
 
-    The `WITH INSERT UPDATE DELETE` clauses are the key syntax in this task. They tell Oracle Database that document-style inserts, updates, and deletes are allowed through this duality view and through the nested `items` array. Without those clauses, the view can still be useful for reading order documents, but it will not support the write operations you use later in the lab.
+    | View Name | Allow Insert | Allow Update | Allow Delete |
+    | --- | --- | --- | --- |
+    | ORDERS\_DV | false | true | false |
 
-    In this view, `FROM orders o WITH INSERT UPDATE DELETE` enables writes for the order header, and `FROM order_items oi WITH INSERT UPDATE DELETE` enables writes for the nested line items.
+    A fresh workshop begins with update access enabled. If you already completed this task, `Allow Insert` remains `true` because replacing a database view is a data definition language operation that commits automatically.
 
-2. Run this block as a script because it contains DDL.
+2. Enable insert and update operations for the order document and its line items.
 
-    In Database Actions SQL Worksheet, use the **Run Script** button for this block. It is the script execution control, not the single-statement green Run Statement control. Run Script is the right choice when a block contains DDL such as `CREATE OR REPLACE`.
+    You are changing the duality-view contract, not creating another data store. The two `WITH INSERT UPDATE` clauses let Oracle Database map permitted JSON writes to the relational order and line-item tables while still enforcing their keys, data types, and constraints.
 
     ```sql
     <copy>
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW orders_dv AS
-      SELECT JSON {
+    SELECT JSON {
         '_id'         : o.order_id,
         'customerId'  : o.customer_id,
         'status'      : o.order_status,
@@ -114,174 +120,96 @@ Perform the following set of steps to define which document-style order actions 
         'demandScore' : o.demand_score,
         'createdAt'   : o.created_at,
         'items' : [
-          SELECT JSON {
-            'itemId'    : oi.item_id,
-            'productId' : oi.product_id,
-            'quantity'  : oi.quantity,
-            'unitPrice' : oi.unit_price
-          }
-          FROM order_items oi WITH INSERT UPDATE DELETE
-          WHERE oi.order_id = o.order_id
+            SELECT JSON {
+                'itemId'    : oi.item_id,
+                'productId' : oi.product_id,
+                'quantity'  : oi.quantity,
+                'unitPrice' : oi.unit_price
+            }
+            FROM order_items oi WITH INSERT UPDATE
+            WHERE oi.order_id = o.order_id
         ]
-      }
-      FROM orders o WITH INSERT UPDATE DELETE;
-    </copy>
-    ```
-
-3. The view now defines both the document shape and the allowed document operations. The relational tables are still the storage and SQL foundation.
-
-## Task 3: Query retail orders as JSON and SQL
-
-Now query the same retail order two ways. First, read it as the JSON document an application might use. Then read the same fields from the relational `ORDERS` and `ORDER_ITEMS` tables. The important learning point is simple: both queries return the same order data. Only the representation changes.
-
-Perform the following set of steps to compare the same retail order in JSON and relational form so learners can see how one governed transaction supports different business uses.
-
-1. Read order `1` as a JSON document.
-
-    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet. In Database Actions, this is the script execution button. It displays the formatted JSON document more reliably than running the statement as a single grid query.
-
-    ```sql
-    <copy>
-    SELECT JSON_SERIALIZE(data RETURNING VARCHAR2(4000) PRETTY) AS "Order JSON"
-    FROM orders_dv
-    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 1;
-    </copy>
-    ```
-
-    **Expected output excerpt:**
-
-    ```json
-    {
-      "_id" : 1,
-      "_metadata" : { ... },
-      "customerId" : 1668,
-      "status" : "confirmed",
-      "total" : 1139.93,
-      "items" : [
-        {
-          "itemId" : 1,
-          "productId" : 173,
-          "quantity" : 1,
-          "unitPrice" : 69.99
-        },
-        { ... }
-      ]
     }
-    ```
-
-2. Read the same order from relational tables.
-
-    This query returns the same order evidence in rows and columns. Make the business point explicit: relational results are easier for joins, reporting, controls, and operational detail, while the JSON document is easier for application-style order retrieval.
-
-    ```sql
-    <copy>
-    SELECT o.order_id AS "Order",
-           o.customer_id AS "Customer",
-           o.order_status AS "Status",
-           o.order_total AS "Order Total",
-           oi.item_id AS "Item",
-           oi.product_id AS "Product",
-           oi.quantity AS "Qty",
-           oi.unit_price AS "Unit Price"
-    FROM orders o
-    JOIN order_items oi ON oi.order_id = o.order_id
-    WHERE o.order_id = 1
-    ORDER BY oi.item_id;
+    FROM orders o WITH INSERT UPDATE;
     </copy>
     ```
 
-    **Expected output:**
+    **Expected output: View Definition Updated**
 
-    | Order | Customer | Status | Order Total | Item | Product | Qty | Unit Price |
-    | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: |
-    | 1 | 1668 | confirmed | 1139.93 | 1 | 173 | 1 | 69.99 |
-    | 1 | 1668 | confirmed | 1139.93 | 2 | 59 | 1 | 599.99 |
-    | 1 | 1668 | confirmed | 1139.93 | 3 | 5 | 3 | 129.99 |
-    | 1 | 1668 | confirmed | 1139.93 | 4 | 182 | 2 | 39.99 |
-    {: title="Relational Order Rows"}
+    Oracle confirms that view `ORDERS_DV` was created or replaced.
 
-3. You just saw the same order fields in two useful shapes. The JSON view is convenient for applications that want one order document. The relational tables are convenient for SQL, reporting, joins, constraints, and operational detail. The `_metadata` field in the JSON output is generated by the duality view; the business data comes from the relational rows.
+    Run the complete code block, including its final semicolon. Do not attempt the document insert until the next capability check shows `true`, `true`, and `false`. If Oracle reports an error while replacing the view, stop and capture the complete `ORA-` message rather than continuing to Task 3.
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
-## Task 4: Insert a JSON order document
-
-Working through a duality view feels like working with JSON documents, but the database stores the values in the mapped relational tables. 
-
-In this task, you use the existing retail `ORDERS_DV` view to delete a previous copy of one workshop order, insert it again as a JSON document, and then query both the document view and the relational tables to prove they represent the same underlying data. 
-
-In the next task, you update that same order through the JSON duality view and then directly through the relational table. Same data, different views, different access patterns.
-
-You will use order `900001` for the rest of the lab. The flow is:
-
-```text
-Delete existing order 900001, if present
-        |
-        v
-Insert order 900001 through ORDERS_DV with status pending
-        |
-        v
-Update order 900001 through ORDERS_DV to status processing
-        |
-        v
-Update ORDERS directly to status confirmed
-```
-
-The status changes are intentional because they show one retail order moving through both document-style writes and relational writes. That is the business value of duality: different teams can work in different shapes without splitting the source of truth.
-
-1. Delete any previous copy of the workshop order.
-
-    This makes the task safe to rerun in the same workshop session. Run each SQL block in this task separately so you can see each result before moving to the next step.
+3. Run the capability query again.
 
     ```sql
     <copy>
-    DELETE FROM orders_dv dv
-    WHERE JSON_VALUE(dv.data, '$._id' RETURNING NUMBER) = 900001;
+    SELECT view_name AS "View Name",
+           allow_insert AS "Allow Insert",
+           allow_update AS "Allow Update",
+           allow_delete AS "Allow Delete"
+    FROM user_json_duality_views
+    WHERE view_name = 'ORDERS_DV';
     </copy>
     ```
 
-    **Expected output:**
+    **Expected output: Document Capabilities Enabled**
 
-    | Check | Result |
-    | --- | --- |
-    | Rerun guard | 0 or 1 row deleted. |
-    {: title="Delete Previous Workshop Order"}
+    | View Name | Allow Insert | Allow Update | Allow Delete |
+    | --- | --- | --- | --- |
+    | ORDERS\_DV | true | true | false |
 
-2. Insert a workshop order document through `ORDERS_DV`.
+    The application can now read, create, and update an order document. Delete remains disabled. The next task uses reserved workshop identifiers so you can test the contract without changing an existing customer order.
 
-    The insert writes a JSON document, and Oracle stores the order header in `ORDERS` and the line item in `ORDER_ITEMS`.
+## Task 3: Create and update a JSON order
+
+Now act as an application developer. You will create one nested JSON document, inspect the relational rows Oracle Database creates, and update the document status through the same duality view.
+
+> **Workshop data boundary:** The statements in this task commit reserved order `900001` and item `990001` for the current workshop session. The workshop environment is deleted and rebuilt for each run, so these test rows are removed with the rest of the workshop schema before the next run.
+
+1. Insert the reserved Retail order document.
+
+    The document uses customer `1` and product `1`, `StormRunner Trail Shell`. One nested line item has quantity `2` at `189.99`, producing a relational line total of `379.98`.
+
+    The `SELECT ... FROM dual` form generates one candidate JSON document without reading an application table: `DUAL` is Oracle's conventional one-row helper table. Keep `FROM dual` because the following `WHERE NOT EXISTS` check is evaluated for that one candidate row. It prevents a duplicate insert if you rerun the task after order `900001` has already been created in this workshop session.
 
     ```sql
     <copy>
-    INSERT INTO orders_dv dv VALUES (
+    INSERT INTO orders_dv (data)
+    SELECT JSON(
       '{
-         "_id"          : 900001,
-         "customerId"   : 1668,
-         "status"       : "pending",
-         "total"        : 149.99,
-         "shippingCost" : 0,
-         "demandScore"  : 42.5,
-         "items" : [
-           {
-             "itemId"    : 900001,
-             "productId" : 1,
-             "quantity"  : 1,
-             "unitPrice" : 149.99
-           }
-         ]
-       }'
+        "_id": 900001,
+        "customerId": 1,
+        "status": "pending",
+        "total": 379.98,
+        "shippingCost": 0,
+        "items": [
+          {
+            "itemId": 990001,
+            "productId": 1,
+            "quantity": 2,
+            "unitPrice": 189.99
+          }
+        ]
+      }'
+    )
+    FROM dual
+    WHERE NOT EXISTS (
+      SELECT 1
+      FROM orders
+      WHERE order_id = 900001
     );
+
     </copy>
     ```
 
-    Expected output:
+    **Expected output: Order Document Inserted**
 
-    | Check | Result |
-    | --- | --- |
-    | JSON document insert | 1 row inserted. |
-    {: title="JSON Document Insert"}
+    Oracle inserts one document. If the reserved order already exists in the current workshop schema, the `NOT EXISTS` check safely inserts zero rows.
 
-3. Commit the insert.
+2. Commit the insert as its own SQL Worksheet action.
+
+    In Database Actions SQL Worksheet, highlight this command and run it explicitly. `COMMIT` makes the new order visible to subsequent statements and other worksheet connections.
 
     ```sql
     <copy>
@@ -289,92 +217,61 @@ The status changes are intentional because they show one retail order moving thr
     </copy>
     ```
 
-    Expected output:
+    **Expected output: Commit Complete**
 
-    | Check | Result |
-    | --- | --- |
-    | Commit | Commit complete. |
-    {: title="Commit Inserted Order"}
+    Oracle reports `Commit complete.`
 
-4. Query `ORDERS_DV` for the inserted document.
-
-    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet. In Database Actions, this is the script execution button. It displays the formatted JSON document more reliably than running the statement as a single grid query.
-
-    ```sql
-    <copy>
-    SELECT JSON_SERIALIZE(data RETURNING VARCHAR2(4000) PRETTY) AS "Inserted Order JSON"
-    FROM orders_dv
-    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
-    </copy>
-    ```
-
-    **Expected output excerpt:**
-
-    ```json
-    {
-      "_id" : 900001,
-      "_metadata" : { ... },
-      "customerId" : 1668,
-      "status" : "pending",
-      "total" : 149.99,
-      "items" : [
-        {
-          "itemId" : 900001,
-          "productId" : 1,
-          "quantity" : 1,
-          "unitPrice" : 149.99
-        }
-      ]
-    }
-    ```
-
-5. Query the relational tables.
+3. Verify that the JSON document created relational rows.
 
     ```sql
     <copy>
     SELECT o.order_id AS "Order",
-           o.customer_id AS "Customer",
            o.order_status AS "Status",
-           o.order_total AS "Total",
-           COUNT(oi.item_id) AS "Lines",
-           ROUND(SUM(oi.line_total), 2) AS "Line Total"
+           c.email AS "Customer Email",
+           oi.item_id AS "Item",
+           p.product_name AS "Product",
+           oi.quantity AS "Quantity",
+           oi.unit_price AS "Unit Price",
+           oi.line_total AS "Line Total"
     FROM orders o
-    JOIN order_items oi ON oi.order_id = o.order_id
-    WHERE o.order_id = 900001
-    GROUP BY o.order_id, o.customer_id, o.order_status, o.order_total;
+    JOIN customers c
+      ON c.customer_id = o.customer_id
+    JOIN order_items oi
+      ON oi.order_id = o.order_id
+    JOIN products p
+      ON p.product_id = oi.product_id
+    WHERE o.order_id = 900001;
     </copy>
     ```
 
-    Expected output:
+    **Expected output: Inserted Order Verified as Relational Rows**
 
-    | Order | Customer | Status | Total | Lines | Line Total |
-    | ---: | ---: | --- | ---: | ---: | ---: |
-    | 900001 | 1668 | pending | 149.99 | 1 | 149.99 |
-    {: title="Relational Storage"}
+    The committed JSON document now returns one relational order row and one related line item.
 
-6. The insert went through the document view, but the data is stored relationally.
+    | Order | Status | Customer Email | Item | Product | Quantity | Unit Price | Line Total |
+    | ---: | --- | --- | ---: | --- | ---: | ---: | ---: |
+    | 900001 | pending | mary.smith1@example.com | 990001 | StormRunner Trail Shell | 2 | 189.99 | 379.98 |
 
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
+4. Update the document status through `ORDERS_DV`.
 
-## Task 5: Update both representations
-
-Updates work in both directions. When you update the retail document, the relational row reflects it. When you update the relational row, the JSON document reflects it. That is the duality: one governed set of data, two useful access patterns.
-
-Perform the following set of steps to update the same retail order through both representations and prove that the governed data stays synchronized.
-
-1. Update the order document with `JSON_TRANSFORM`.
-
-    This changes the document status from `pending` to `processing` through `ORDERS_DV`.
+    `JSON_TRANSFORM` changes only the document's `status` field. Oracle Database maps that field to `ORDERS.ORDER_STATUS`; no application-side JSON parsing, second order copy, or synchronization job is required.
 
     ```sql
     <copy>
-    UPDATE orders_dv dv
-    SET data = JSON_TRANSFORM(data, SET '$.status' = 'processing')
+    UPDATE orders_dv
+    SET data = JSON_TRANSFORM(data, SET '$.status' = 'confirmed')
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
+
     </copy>
     ```
 
-2. Commit the document update.
+    **Expected output: Order Status Updated**
+
+    Oracle updates one document.
+
+5. Commit the status update as its own SQL Worksheet action.
+
+    Highlight and run this command explicitly before you verify the update.
 
     ```sql
     <copy>
@@ -382,83 +279,83 @@ Perform the following set of steps to update the same retail order through both 
     </copy>
     ```
 
-3. Verify the relational row changed.
+    **Expected output: Commit Complete**
+
+    Oracle reports `Commit complete.`
+
+6. 🎯 **Interactive challenge: predict the relational change.**
+
+    Before you run the next query, decide which relational column should now contain `confirmed`. Should the line-item quantity, unit price, or calculated line total change when the JSON update targets only `$.status`?
+
+    <details>
+    <summary><strong>Challenge answer: one document, one governed order</strong></summary>
+
+    **Expected output: One Header Change, Stable Line Item**
+
+    The relational order status changes. The line-item values remain `2`, `189.99`, and `379.98` because the JSON update did not change the nested `items` array.
+
+    > `ORDERS.ORDER_STATUS` changes from `pending` to `confirmed`. The `ORDER_ITEMS` row remains unchanged. The application and the analyst are using two access shapes over the same live Retail data, so Oracle Database does not need to reconcile a document copy with a relational copy.
 
     ```sql
     <copy>
-    SELECT order_id AS "Order",
-           order_status AS "Relational Status"
-    FROM orders
-    WHERE order_id = 900001;
+    SELECT o.order_id AS "Order",
+           o.order_status AS "Status",
+           oi.item_id AS "Item",
+           p.product_name AS "Product",
+           oi.quantity AS "Quantity",
+           oi.line_total AS "Line Total"
+    FROM orders o
+    JOIN order_items oi
+      ON oi.order_id = o.order_id
+    JOIN products p
+      ON p.product_id = oi.product_id
+    WHERE o.order_id = 900001;
     </copy>
     ```
 
-    **Expected output:**
+    **Step 7 expected output: Updated Relational Order Rows**
 
-    | Order | Relational Status |
-    | ---: | --- |
-    | 900001 | processing |
-    {: title="Document Update Reflected Relationally"}
+    | Order | Status | Item | Product | Quantity | Line Total |
+    | ---: | --- | ---: | --- | ---: | ---: |
+    | 900001 | confirmed | 990001 | StormRunner Trail Shell | 2 | 379.98 |
 
-4. Update the relational table.
+    </details>
 
-    This changes `ORDERS.ORDER_STATUS` directly.
+## Task 4: Project document fields into SQL columns
+
+Now use SQL to project selected fields from the updated JSON document and join them to relational customer data.
+
+1. Run the projection query.
+
+    `JSON_VALUE` pulls the order ID, status, and customer ID out of the application-facing document. The customer ID then participates in a normal relational join to `CUSTOMERS`.
 
     ```sql
     <copy>
-    UPDATE orders
-    SET order_status = 'confirmed'
-    WHERE order_id = 900001;
+    SELECT JSON_VALUE(od.data, '$._id' RETURNING NUMBER) AS "Order",
+           JSON_VALUE(od.data, '$.status') AS "Status",
+           c.email AS "Customer Email"
+    FROM orders_dv od
+    JOIN customers c
+      ON c.customer_id = JSON_VALUE(od.data, '$.customerId' RETURNING NUMBER)
+    WHERE JSON_VALUE(od.data, '$._id' RETURNING NUMBER) = 900001;
     </copy>
     ```
 
-5. Commit the relational update.
+    **Expected output: JSON Fields Projected as SQL**
 
-    ```sql
-    <copy>
-    COMMIT;
-    </copy>
-    ```
+    | Order | Status | Customer Email |
+    | ---: | --- | --- |
+    | 900001 | confirmed | mary.smith1@example.com |
 
-6. Read the JSON document again.
+2. Review the two access paths.
 
-    The query shows the JSON document changed too.
+    The application can read and write the order as a document. An analyst can immediately return selected JSON fields as SQL columns and join them to relational customer, product, inventory, fulfillment, or shipment evidence. Both paths use the same governed database record. The reserved order remains available for the rest of this workshop session and is removed when the workshop environment is deleted and rebuilt.
 
-    **Important:** Because this query asks for a `PRETTY` JSON document, select **Run Script** in SQL Worksheet. In Database Actions, this is the script execution button. It displays the formatted JSON document more reliably than running the statement as a single grid query.
+## Next Steps
 
-    ```sql
-    <copy>
-    SELECT JSON_SERIALIZE(data RETURNING VARCHAR2(4000) PRETTY) AS "Updated Order JSON"
-    FROM orders_dv
-    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
-    </copy>
-    ```
-
-    **Expected output excerpt:**
-
-    ```json
-    {
-      "_id" : 900001,
-      "_metadata" : { ... },
-      "customerId" : 1668,
-      "status" : "confirmed",
-      "total" : 149.99,
-      "items" : [ ... ]
-    }
-    ```
-
-7. You used both sides of JSON Relational Duality. A document insert created relational rows. A document update changed a relational row. A relational update changed the document result. The application gets JSON flexibility while Oracle Database keeps the data relational, consistent, and available to SQL.
-
-**Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
-
-## More JSON Relational Duality labs
-
-This lab is meant to give you a sample of the power of Oracle AI Database's JSON capabilities. For a more full-featured hands-on lab on JSON Relational Duality, go to:
-
-[JSON Relational Duality LiveLab](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3635&session=108731215528653)
+Congratulations on completing the JSON duality lab. You enabled a read/write document contract, created and updated a Retail order through JSON, inspected the matching relational rows, and projected document fields into SQL. For a deeper hands-on workshop focused on JSON in Oracle Database, open the [JSON Relational Duality LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=3797).
 
 ## Acknowledgements
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Last Updated By/Date** - Oracle Database Product Management, August 2026

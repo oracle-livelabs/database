@@ -37,7 +37,7 @@ In this task, you will provision the cloud infrastructure required for the works
 
     Download the ZIP package containing the Terraform infrastructure scripts.
 
-    [Download terraform script](https://objectstorage.us-chicago-1.oraclecloud.com/p/3rSJn8VsfglY8wWlj0Q_bxwQZRNvZOnAoURiGMzV3AbbTa0aUj8ZyFsvh_X4Vmzq/n/sehubjapaciaas/b/heatwave_genai/o/Version_3_AI_Demo_infrastructure.zip)
+    [Download terraform script](https://objectstorage.us-chicago-1.oraclecloud.com/p/HEmIqMo-tzyNpfkieGjVIIdtE33TSHBMZv8FuKBi0JDmBNuHiLJ0yh2io6rkPjJk/n/sehubjapaciaas/b/heatwave_genai/o/Version_3_AI_Demo_infrastructure.zip)
 
 
 2. Login to OCI Console
@@ -45,7 +45,8 @@ In this task, you will provision the cloud infrastructure required for the works
     2. Navigate to:
     - **Developer Services → Resource Manager → Stacks**
 
-    You may now **proceed to the next lab**
+    ![Navigate to resource manager](images/lab1image1.png "Navigate to resource manager")
+    
     ![Navigate to stack](images/lab1image2.png "Navigate to stack")
 
 

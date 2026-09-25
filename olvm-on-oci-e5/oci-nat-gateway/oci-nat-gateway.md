@@ -5,7 +5,7 @@
 In this optional lab, you will explore outbound internet access for VMs on the VLAN. This lab is not required for the multi-tier application lab. The application lab uses internal `l2-vm-network` connectivity between VMs.
 
 > **OCI-specific step:**
-> In a real on-prem OLVM deployment, physical routers and firewalls provide internet access for VLAN-based VM networks.
+> In a real on-prem Oracle Linux Virtualization Manager deployment, physical routers and firewalls provide internet access for VLAN-based VM networks.
 > In OCI, VLANs are isolated by default, so you configure a NAT Gateway to enable outbound connectivity.
 
 ### Objectives
@@ -14,12 +14,12 @@ In this lab, you will:
 
 - Create an OCI NAT Gateway for outbound VM traffic
 - Create a route table that sends `0.0.0.0/0` traffic to the NAT Gateway
-- Associate the route table with the VLAN used by the OLVM VMs
-- Access a VM on the VLAN by jumping through the KVM host running the VM
+- Associate the route table with the VLAN used by the Oracle Linux Virtualization Manager VMs
+- Access a VM on the VLAN by jumping through the Oracle Linux KVM host running the VM
 
 Estimated Time: 15-25 minutes
 
-> **Important:** Do not use this lab as the success test for Lab 4 or the prerequisite for Lab 6. Lab 4 validates VM network access through the KVM hosts, and Lab 6 validates application traffic inside `l2-vm-network`.
+> **Important:** Do not use this lab as the success test for Lab 4 or the prerequisite for Lab 6. Lab 4 validates VM network access through the Oracle Linux KVM hosts, and Lab 6 validates application traffic inside `l2-vm-network`.
 
 ### Video Walkthrough
 
@@ -94,12 +94,12 @@ This lab assumes you have:
 
 1. From the `OLV-VCN` page click **VLANs** tab, then click the name of the VLAN in the table.
 
-    ![Show the VLANs page for the OLVM network](images/oci-vcn-vlan-list.png "Show the VLANs page for the OLVM network)
+    ![Show the VLANs page for the Oracle Linux Virtualization Manager network](images/oci-vcn-vlan-list.png "Show the VLANs page for the Oracle Linux Virtualization Manager network)
 
 
 2. Click **Edit**.
 
-    ![Show the VLANs page for the OLVM network](images/oci-vcn-vlan-detail.png "Show the VLANs page for the OLVM network")
+    ![Show the VLANs page for the Oracle Linux Virtualization Manager network](images/oci-vcn-vlan-detail.png "Show the VLANs page for the Oracle Linux Virtualization Manager network")
 
 3. Under **Route Table**, select `vlan-route-table`.
 
@@ -108,9 +108,9 @@ This lab assumes you have:
 4. Click **Save Changes**.
 
 
-## Task 4: Access a VLAN VM through the KVM host
+## Task 4: Access a VLAN VM through the Oracle Linux KVM host
 
-The NAT Gateway only allows the VMs to reach the internet; it does not open a path for you to SSH directly into a VM from your laptop. To reach a VM on the 10.0.10.x network from your laptop, first connect to the `olvm` host, then jump through the KVM host that is running the VM.
+The NAT Gateway only allows the VMs to reach the internet; it does not open a path for you to SSH directly into a VM from your laptop. To reach a VM on the 10.0.10.x network from your laptop, first connect to the `olvm` host, then jump through the Oracle Linux KVM host that is running the VM.
 
 1. From your laptop, open a terminal and connect to the `olvm` host by using the private key you created earlier.
 
@@ -120,7 +120,7 @@ The NAT Gateway only allows the VMs to reach the internet; it does not open a pa
 
     Replace `<olvm-public-ip>` with the public IP address of your `olvm` instance.
 
-2. From the `olvm` host, connect to the VM through the KVM host shown in the **Host** column for `ol9-vm1`.
+2. From the `olvm` host, connect to the VM through the Oracle Linux KVM host shown in the **Host** column for `ol9-vm1`.
 
     If `ol9-vm1` is running on `olkvm01`, run:
 
@@ -146,7 +146,7 @@ The NAT Gateway only allows the VMs to reach the internet; it does not open a pa
     curl -I https://yum.oracle.com</copy>
     ```
 
-    The name lookup and `curl` command should succeed. If SSH through the KVM host works but these commands fail, the VM is alive and the remaining issue is usually the VLAN route table association or NAT Gateway route rule.
+    The name lookup and `curl` command should succeed. If SSH through the Oracle Linux KVM host works but these commands fail, the VM is alive and the remaining issue is usually the VLAN route table association or NAT Gateway route rule.
 
     ![Show VLAN VM connect result](images/vlan-vm-test.png "how VLAN VM connect result")
 
@@ -163,8 +163,8 @@ At this point, you should have:
 - Created the `vm-nat-gateway` NAT Gateway
 - Created the `vlan-route-table` route table
 - Added a `0.0.0.0/0` route that targets the NAT Gateway
-- Associated the route table with the VLAN used by the OLVM VMs
-- Verified that a VLAN VM can be reached through its KVM host
+- Associated the route table with the VLAN used by the Oracle Linux Virtualization Manager VMs
+- Verified that a VLAN VM can be reached through its Oracle Linux KVM host
 - Verified that the VLAN VM has outbound internet access through the NAT Gateway
 
 You may now **proceed to the next lab**

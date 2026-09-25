@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Rights and coverage spatial flow</title>
+  <desc id="desc">Spatial points, boundaries, and SQL distance calculations support coverage decisions.</desc>
+  <rect width="900" height="360" rx="18" fill="#faf9f7"/>
+  <text x="36" y="48" font-family="Arial" font-size="24" font-weight="700" fill="#312d2a">Rights coverage decisions use spatial evidence</text>
+  <rect x="56" y="96" width="220" height="170" rx="14" fill="#fff" stroke="#d8d2c8"/>
+  <text x="82" y="132" font-family="Arial" font-size="17" font-weight="700" fill="#374151">Location records</text>
+  <text x="82" y="166" font-family="Arial" font-size="15" fill="#374151">FULFILLMENT_CENTERS</text>
+  <text x="82" y="194" font-family="Arial" font-size="15" fill="#374151">CUSTOMERS</text>
+  <text x="82" y="222" font-family="Arial" font-size="15" fill="#374151">DEMAND_REGIONS</text>
+  <rect x="340" y="96" width="220" height="170" rx="14" fill="#fff7ed" stroke="#c74634"/>
+  <text x="366" y="132" font-family="Arial" font-size="17" font-weight="700" fill="#374151">Oracle Spatial</text>
+  <text x="366" y="166" font-family="Arial" font-size="15" fill="#374151">SDO_GEOMETRY</text>
+  <text x="366" y="194" font-family="Arial" font-size="15" fill="#374151">SDO_DISTANCE</text>
+  <text x="366" y="222" font-family="Arial" font-size="15" fill="#374151">spatial indexes</text>
+  <rect x="624" y="96" width="220" height="170" rx="14" fill="#fff" stroke="#d8d2c8"/>
+  <text x="650" y="132" font-family="Arial" font-size="17" font-weight="700" fill="#374151">Coverage action</text>
+  <text x="650" y="166" font-family="Arial" font-size="15" fill="#374151">nearest hub</text>
+  <text x="650" y="194" font-family="Arial" font-size="15" fill="#374151">available capacity</text>
+  <text x="650" y="222" font-family="Arial" font-size="15" fill="#374151">audience region risk</text>
+  <path d="M292 182h32" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M320 166l24 16-24 16z" fill="#7a3e2f"/>
+  <path d="M576 182h32" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M604 166l24 16-24 16z" fill="#7a3e2f"/>
+</svg>
