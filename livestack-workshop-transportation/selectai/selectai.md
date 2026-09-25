@@ -202,7 +202,7 @@ Read the statement. The view's definition applies the cancelled/returned exclusi
     | Order | Highest total freight value first |
     | Source | Only the configured freight-value view |
 
-The generated SQL executes as `LLUSER`; ordinary database privileges and policies apply. When exact pre-execution review is required, run the reviewed `showsql` text yourself rather than calling `runsql`.
+    The generated SQL executes as `LLUSER`; ordinary database privileges and policies apply. When exact pre-execution review is required, run the reviewed `showsql` text yourself rather than calling `runsql`.
 
 2. Compare the generated answer with the deterministic view baseline.
 

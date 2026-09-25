@@ -77,11 +77,11 @@ The three counts represent the graph building blocks: the entities under review,
 
 This query starts at the named port-congestion exception, follows `contains_entity` to one of its linked transportation entities, and then follows exactly two directed `related_to` network relationships. Each output row is one full path, so repeated endpoints remain visible when the case reaches the same entity through different evidence paths. Read the graph syntax in five parts:
 
-1. `case_vertex IS exception_case` identifies the case, and the `WHERE` clause fixes it at `CASE-PORT-2026-041`.
-2. `-[case_edge IS contains_entity]->` makes the case-to-entity evidence explicit, including its case role and evidence score.
-3. `-[hop_1 IS related_to]->` and `-[hop_2 IS related_to]->` form a bounded, directed two-hop path.
-4. `COLUMNS` projects both relationship types and the intermediate entity, so the result shows the actual path rather than only its endpoint.
-5. `ONE ROW PER MATCH` keeps one row for each complete path; it deliberately does not hide alternative paths with `DISTINCT`.
+- `case_vertex IS exception_case` identifies the case, and the `WHERE` clause fixes it at `CASE-PORT-2026-041`.
+- `-[case_edge IS contains_entity]->` makes the case-to-entity evidence explicit, including its case role and evidence score.
+- `-[hop_1 IS related_to]->` and `-[hop_2 IS related_to]->` form a bounded, directed two-hop path.
+- `COLUMNS` projects both relationship types and the intermediate entity, so the result shows the actual path rather than only its endpoint.
+- `ONE ROW PER MATCH` keeps one row for each complete path; it deliberately does not hide alternative paths with `DISTINCT`.
 
 Look for the case role, the two edge types, and the intermediate entity before interpreting the reached entity's risk. This is relationship evidence for review, not proof that the endpoint caused the exception.
 

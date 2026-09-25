@@ -318,7 +318,7 @@ The documented states are `RUNNING`, `WAITING_FOR_HUMAN`, `RESUMING`, `SUCCEEDED
     | --- | --- | ---: |
     | NINA_TRANSPORT_TEAM | SUCCEEDED | 1 |
 
-`sql_tool_call_count = 1` verifies that this observed run followed the task guidance. A different count indicates observed behavior, not a failed database enforcement rule.
+    `sql_tool_call_count = 1` verifies that this observed run followed the task guidance. A different count indicates observed behavior, not a failed database enforcement rule.
 
 2. Inspect the task result, prompt, and response for the same team execution. The task history supplies the conversation identifier; the left join preserves the task row if conversation prompt retention or timing leaves no prompt row visible.
 

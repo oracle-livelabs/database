@@ -74,7 +74,7 @@ Thomas starts with settings owned by the shipment-detail feature. The relational
     | ---: | --- | --- | --- |
     | 49651 | shipment-detail | true | exception-alerts and terminal-capacity |
 
-`ORDER_ID` remains a typed relational key, while `APP_DATA` can gain an optional application setting without altering the operational shipment model.
+    `ORDER_ID` remains a typed relational key, while `APP_DATA` can gain an optional application setting without altering the operational shipment model.
 
 2. Optionally add Thomas as the last viewer. This isolated, rerunnable update affects only the workshop application-settings fixture. It does not change `ORDERS`, `ORDER_ITEMS`, or `ORDERS_DV`.
 
@@ -125,7 +125,7 @@ The dispatch-review draft is a separate, application-owned document. It records 
     | --- | --- | --- |
     | DISPATCH-49651 | open | review terminal capacity; monitor port drayage |
 
-`THOMAS_DISPATCH_REVIEW_DOCS` was created `WITH ETAG`, so Oracle provides the generated document ETag in `_metadata`. Its exact hexadecimal value is intentionally dynamic. A service should retain the ETag it read and compare it before accepting an update, so a stale request does not silently overwrite a newer dispatch review.
+    `THOMAS_DISPATCH_REVIEW_DOCS` was created `WITH ETAG`, so Oracle provides the generated document ETag in `_metadata`. Its exact hexadecimal value is intentionally dynamic. A service should retain the ETag it read and compare it before accepting an update, so a stale request does not silently overwrite a newer dispatch review.
 
 2. Inspect the complete document if you want to see the database-managed metadata with the application fields.
 
@@ -167,7 +167,7 @@ The dispatch-review draft is a separate, application-owned document. It records 
     | --- | --- | --- | --- | --- |
     | ORDERS\_DV | VALID | true | true | false |
 
-`ORDERS_DV` permits document inserts and updates for this workshop's order and nested item rows. It does not permit document deletion. Those annotations are specific to this view; they are not a general grant of table privileges or an authorization boundary by themselves.
+    `ORDERS_DV` permits document inserts and updates for this workshop's order and nested item rows. It does not permit document deletion. Those annotations are specific to this view; they are not a general grant of table privileges or an authorization boundary by themselves.
 
 2. Inspect the view definition and its actual write annotations.
 
@@ -218,9 +218,9 @@ The JSON-Relational Duality View exposes each document through its `DATA` column
 
 This query projects application-document fields into a business-readable result. Read it in three parts:
 
-1. `JSON_VALUE` extracts the required order identifier, status, and order total from the document root. `ERROR ON ERROR` makes a malformed or missing required field visible during this contract check.
-2. `JSON_TABLE` turns every member of the nested `items` array into a SQL row containing an item identifier, service identifier, and quantity. Its `ERROR ON ERROR` clauses apply the same fail-fast behavior to required item fields.
-3. `TRANSPORT_SERVICES_V` is a saved SQL query that supplies the transportation-ready service name for each identifier.
+- `JSON_VALUE` extracts the required order identifier, status, and order total from the document root. `ERROR ON ERROR` makes a malformed or missing required field visible during this contract check.
+- `JSON_TABLE` turns every member of the nested `items` array into a SQL row containing an item identifier, service identifier, and quantity. Its `ERROR ON ERROR` clauses apply the same fail-fast behavior to required item fields.
+- `TRANSPORT_SERVICES_V` is a saved SQL query that supplies the transportation-ready service name for each identifier.
 
 Look for one row per service leg in order `49651`. Thomas and an operations analyst can now discuss the same shipment without exchanging or reconciling exports.
 

@@ -118,11 +118,11 @@ The exact catalog label for a specialized object can vary by database release. `
 
 This query creates the ranked service view behind the dashboard used by Jessica. Read it in five parts:
 
-1. `service_pressure` joins business-ready transportation views with the signal-to-service bridge table, then aggregates urgent signals, average urgency, and reach. A bridge table connects a signal to the business service it mentions.
-2. `query_vector` creates the investigation embedding once. `semantic_match` then uses `VECTOR_DISTANCE` to compare that one query vector with stored service embeddings, where a higher similarity score means a closer semantic match.
-3. `shipment_activity` reads `ORDERS_DV` as JSON and uses `JSON_TABLE` to project nested shipment items into SQL rows.
-4. `service_terminal_capacity` joins each service to its own active terminal capacity, retains terminals with positive unreserved capacity, and calculates each terminal's distance to the Northeast Corridor boundary.
-5. `ranked_terminal` ranks those capacity-eligible terminals independently for each service. The closest terminal is selected first; unreserved capacity and terminal ID make ties deterministic.
+- `service_pressure` joins business-ready transportation views with the signal-to-service bridge table, then aggregates urgent signals, average urgency, and reach. A bridge table connects a signal to the business service it mentions.
+- `query_vector` creates the investigation embedding once. `semantic_match` then uses `VECTOR_DISTANCE` to compare that one query vector with stored service embeddings, where a higher similarity score means a closer semantic match.
+- `shipment_activity` reads `ORDERS_DV` as JSON and uses `JSON_TABLE` to project nested shipment items into SQL rows.
+- `service_terminal_capacity` joins each service to its own active terminal capacity, retains terminals with positive unreserved capacity, and calculates each terminal's distance to the Northeast Corridor boundary.
+- `ranked_terminal` ranks those capacity-eligible terminals independently for each service. The closest terminal is selected first; unreserved capacity and terminal ID make ties deterministic.
 
 The final `SELECT` joins the independently aggregated or ranked results. A candidate terminal is therefore relevant to the selected service operationally (it has positive unreserved capacity for that service) and geographically (it is the closest eligible terminal to the region). It does not treat a multiplied signal-by-capacity row set as one causal record.
 
