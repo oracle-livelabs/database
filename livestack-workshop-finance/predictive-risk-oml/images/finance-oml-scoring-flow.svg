@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="590" viewBox="0 0 980 590" role="img" aria-labelledby="title desc">
+  <title id="title">Finance OML scoring flow</title>
+  <desc id="desc">Finance data becomes feature views, OML models, SQL scoring output, and operational action inside Oracle AI Database.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6470"/>
+    </marker>
+    <filter id="shadow" x="-8%" y="-10%" width="116%" height="128%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#111827" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="980" height="590" fill="#f8fafc"/>
+  <text x="490" y="38" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#111827" text-anchor="middle">From Finance Data to In-Database Prediction</text>
+  <text x="490" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569" text-anchor="middle">OML keeps models and finance records in Oracle AI Database while SQL returns scored results.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="48" y="112" width="210" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="48" y="112" width="210" height="36" rx="8" fill="#dbeafe"/>
+    <text x="153" y="136" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Finance Data</text>
+    <text x="68" y="174" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">products</text>
+    <text x="68" y="198" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">transactions</text>
+    <text x="68" y="222" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">signals</text>
+    <text x="68" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">clients</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="338" y="112" width="220" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="338" y="112" width="220" height="36" rx="8" fill="#dcfce7"/>
+    <text x="448" y="136" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Feature Views</text>
+    <text x="358" y="174" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">OML_DEMAND</text>
+    <text x="358" y="198" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">OML_REVENUE</text>
+    <text x="358" y="222" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">OML_SEGMENT</text>
+    <text x="358" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">SQL training set</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="638" y="112" width="242" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="638" y="112" width="242" height="36" rx="8" fill="#fef3c7"/>
+    <text x="759" y="136" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">OML Models</text>
+    <text x="658" y="174" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">classification</text>
+    <text x="658" y="198" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">clustering</text>
+    <text x="658" y="222" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">regression</text>
+    <text x="658" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">stored models</text>
+  </g>
+
+  <path d="M258 187 L328 187" stroke="#5b6470" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M558 187 L628 187" stroke="#5b6470" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="198" y="340" width="250" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="198" y="340" width="250" height="36" rx="8" fill="#ede9fe"/>
+    <text x="323" y="364" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">SQL Scoring</text>
+    <text x="220" y="408" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">PREDICTION and PROBABILITY</text>
+    <text x="220" y="432" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">CLUSTER_ID and model details</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="530" y="340" width="250" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="530" y="340" width="250" height="36" rx="8" fill="#fee2e2"/>
+    <text x="655" y="364" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Business Action</text>
+    <text x="552" y="408" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">triage risk and segment clients</text>
+    <text x="552" y="432" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">forecast demand and offers</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="198" y="492" width="582" height="62" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="222" y="526" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">Predictions are scored where governed finance records already live.</text>
+  </g>
+
+  <path d="M759 262 L759 308 L323 308 L323 332" stroke="#5b6470" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M448 452 L448 470 L655 470 L655 460" stroke="#5b6470" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+</svg>

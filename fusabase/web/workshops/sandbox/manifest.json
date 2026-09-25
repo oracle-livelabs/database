@@ -1,0 +1,46 @@
+{
+  "workshoptitle": "Build a Recipe App with Fusabase",
+  "help": "fusabase",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "filename": "../../introduction/introduction.md",
+      "description": "Review the learner journey and workshop architecture."
+    },
+    {
+      "title": "Lab 1: Create Your First Project",
+      "filename": "../../create-first-project/create-first-project.md",
+      "description": "Open the console, create your first project, and set the starter security rules."
+    },
+    {
+      "title": "Lab 2: Connect the Starter App",
+      "filename": "../../connect-starter-app/connect-starter-app.md",
+      "description": "Clone the repo, install the SDK, start the server, register a web app, paste the config, and verify the connection."
+    },
+    {
+      "title": "Lab 3: Build the Public Recipe Experience",
+      "filename": "../../read-and-write-data/read-and-write-data.md",
+      "description": "Build a Fusabase query with collection(), query(), and getDocs(), then seed demo data."
+    },
+    {
+      "title": "Lab 4: Authentication",
+      "filename": "../../authentication/authentication.md",
+      "description": "Add sign-up, sign-in, and sign-out using the Fusabase auth module."
+    },
+    {
+      "title": "Lab 5: Write Recipe Data",
+      "filename": "../../write-recipe-data/write-recipe-data.md",
+      "description": "Use addDoc(), getDoc(), subcollections, updateDoc(), and auth.currentUser to write recipe data."
+    },
+    {
+      "title": "Lab 6: Photo Upload",
+      "filename": "../../photo-upload/photo-upload.md",
+      "description": "Upload recipe photos and display them using the Fusabase storage module."
+    },
+    {
+      "title": "Lab 7: Security Rules",
+      "filename": "../../security-rules/security-rules.md",
+      "description": "Replace the permissive starter rule with auth-based access controls."
+    }
+  ]
+}

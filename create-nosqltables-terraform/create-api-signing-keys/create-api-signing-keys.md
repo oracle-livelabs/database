@@ -100,7 +100,7 @@ To create a user API key, you will use `openssl` on your local system. If you ar
 
   ![Save configuration file parameters](images/config-file-preview.png)
 
-You may proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Learn More
 
@@ -108,4 +108,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Dave Rubin, Senior Director, NoSQL and Embedded Database Development and Michael Brey, Director, NoSQL Product Development
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
+* **Last Updated By/Date** - Purnima Subramanian, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, October 2025

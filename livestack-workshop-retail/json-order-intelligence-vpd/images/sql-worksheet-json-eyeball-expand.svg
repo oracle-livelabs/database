@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="165" viewBox="0 0 760 165" role="img" aria-labelledby="title desc">
+  <title id="title">SQL Worksheet Query Result with eyeball icon</title>
+  <desc id="desc">Query Result tab showing an ORDER JSON cell and the eyeball icon used to expand the JSON payload.</desc>
+  <defs>
+    <style>
+      .tab { font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; fill:#555; }
+      .tab-active { fill:#111; }
+      .label { font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; fill:#222; font-weight:600; }
+      .text { font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; fill:#111; }
+      .small { font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; fill:#555; }
+      .grid { stroke:#e3e6ea; stroke-width:1; }
+      .accent { stroke:#0077b8; stroke-width:1.5; fill:#f7fcff; }
+      .icon { stroke:#111; stroke-width:1.4; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="760" height="165" fill="#ffffff"/>
+
+  <!-- Tabs -->
+  <rect x="0" y="0" width="760" height="47" fill="#ffffff"/>
+  <text class="tab tab-active" x="20" y="31">Query Result</text>
+  <line x1="18" y1="46" x2="106" y2="46" stroke="#111" stroke-width="3"/>
+  <text class="tab" x="138" y="31">Script Output</text>
+  <text class="tab" x="258" y="31">DBMS Output</text>
+  <text class="tab" x="382" y="31">Explain Plan</text>
+  <text class="tab" x="493" y="31">Autotrace</text>
+  <text class="tab" x="591" y="31">SQL History</text>
+  <line x1="0" y1="47" x2="760" y2="47" stroke="#e1e4e8"/>
+
+  <!-- Toolbar -->
+  <rect x="0" y="48" width="760" height="47" fill="#fafafa"/>
+  <g transform="translate(27 64)">
+    <path class="icon" d="M2 3h13M5 3l1 14h6l1-14M7 3V1h4v2"/>
+  </g>
+  <g transform="translate(64 63)">
+    <circle class="icon" cx="8" cy="8" r="7"/>
+    <path class="icon" d="M8 7v5M8 4.5h.1"/>
+  </g>
+  <g transform="translate(103 64)">
+    <rect class="icon" x="0" y="5" width="11" height="8"/>
+    <rect class="icon" x="6" y="1" width="11" height="8"/>
+  </g>
+  <g transform="translate(143 64)">
+    <circle class="icon" cx="3" cy="8" r="2"/><circle class="icon" cx="13" cy="3" r="2"/><circle class="icon" cx="13" cy="13" r="2"/>
+    <path class="icon" d="M5 7l6-3M5 9l6 3"/>
+  </g>
+  <text class="text" x="182" y="78">Download</text>
+  <path d="M260 68l8 0l-4 5z" fill="#111"/>
+  <text class="small" x="289" y="78">Execution time: 0.015 seconds</text>
+  <line x1="0" y1="95" x2="760" y2="95" stroke="#e1e4e8"/>
+
+  <!-- Result grid -->
+  <rect x="0" y="96" width="760" height="67" fill="#fff"/>
+  <rect x="92" y="96" width="668" height="33" fill="#fafafa"/>
+  <line class="grid" x1="0" y1="96" x2="760" y2="96"/>
+  <line class="grid" x1="0" y1="129" x2="760" y2="129"/>
+  <line class="grid" x1="0" y1="162" x2="760" y2="162"/>
+  <line class="grid" x1="92" y1="96" x2="92" y2="162"/>
+  <text class="label" x="100" y="117">ORDER JSON</text>
+  <text class="label" x="11" y="149">1</text>
+  <rect class="accent" x="93" y="130" width="666" height="31"/>
+  <text class="text" x="101" y="151">{ &quot;_id&quot; : 1, &quot;_metadata&quot; : { &quot;etag&quot; : &quot;617B15517DAEBD3F46A332772D9B3F7D&quot;, &quot;asof&quot; : &quot;00002A...</text>
+
+  <!-- Eye icon at cell edge -->
+  <g transform="translate(733 141)">
+    <path d="M-8 5c3.2-5.2 9.2-5.2 12.4 0c-3.2 5.2-9.2 5.2-12.4 0z" fill="#f2f2f2" stroke="#111" stroke-width="1.2"/>
+    <circle cx="-1.8" cy="5" r="2.1" fill="#111"/>
+  </g>
+</svg>

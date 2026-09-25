@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="660" viewBox="0 0 1320 660" role="img" aria-labelledby="title desc">
+  <title id="title">Property Graph concept flow</title>
+  <desc id="desc">Media creators, signals, studios, and content assets remain in Oracle Property Graph and are queried with GRAPH_TABLE.</desc>
+  <rect width="1320" height="660" fill="#f6f3ef"/>
+  <rect x="28" y="28" width="1264" height="604" rx="28" fill="#ffffff" stroke="#d8d0c5" stroke-width="2"/>
+  <text x="60" y="76" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#312d2a">Why the Creator Network Stays in Oracle Property Graph</text>
+  <rect x="82" y="178" width="214" height="110" rx="20" fill="#fff7f4" stroke="#c74634" stroke-width="2"/>
+  <text x="112" y="218" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#7d2f25">Creator</text>
+  <text x="112" y="250" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">Source account node</text>
+  <rect x="344" y="118" width="214" height="110" rx="20" fill="#f5efe8" stroke="#aa643b" stroke-width="2"/>
+  <text x="376" y="158" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#714121">Connection</text>
+  <text x="376" y="190" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">follow, duet, mention</text>
+  <rect x="344" y="302" width="214" height="110" rx="20" fill="#edf6ef" stroke="#4c825c" stroke-width="2"/>
+  <text x="376" y="342" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f593b">Campaign Signal</text>
+  <text x="376" y="374" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">Shared audience pressure</text>
+  <rect x="618" y="118" width="214" height="110" rx="20" fill="#e9f3f6" stroke="#437c94" stroke-width="2"/>
+  <text x="650" y="158" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#255164">Studio / Label</text>
+  <text x="650" y="190" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">Partner relationship</text>
+  <rect x="618" y="302" width="214" height="110" rx="20" fill="#f0edf7" stroke="#796087" stroke-width="2"/>
+  <text x="650" y="342" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#5b4768">Content Asset</text>
+  <text x="650" y="374" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">Affected title or rights</text>
+  <rect x="902" y="166" width="270" height="196" rx="20" fill="#f7f3ee" stroke="#d8d0c5" stroke-width="2"/>
+  <text x="934" y="206" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#312d2a">GRAPH_TABLE</text>
+  <text x="934" y="242" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">Traverse the network without flattening</text>
+  <text x="934" y="266" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">creators, studios, and signals into one</text>
+  <text x="934" y="290" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">denormalized table. Return the connected</text>
+  <text x="934" y="314" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">evidence needed for launch decisions.</text>
+  <path d="M296 216 H330 V174 H344" stroke="#c74634" stroke-width="4" fill="none"/>
+  <polygon points="344,174 328,166 328,182" fill="#c74634"/>
+  <path d="M296 248 H330 V356 H344" stroke="#c74634" stroke-width="4" fill="none"/>
+  <polygon points="344,356 328,348 328,364" fill="#c74634"/>
+  <path d="M558 174 H604 V174 H618" stroke="#aa643b" stroke-width="4" fill="none"/>
+  <polygon points="618,174 602,166 602,182" fill="#aa643b"/>
+  <path d="M558 356 H604 V356 H618" stroke="#4c825c" stroke-width="4" fill="none"/>
+  <polygon points="618,356 602,348 602,364" fill="#4c825c"/>
+  <path d="M832 174 H886" stroke="#437c94" stroke-width="4" fill="none"/>
+  <polygon points="886,174 870,166 870,182" fill="#437c94"/>
+  <path d="M832 356 H886" stroke="#796087" stroke-width="4" fill="none"/>
+  <polygon points="886,356 870,348 870,364" fill="#796087"/>
+</svg>

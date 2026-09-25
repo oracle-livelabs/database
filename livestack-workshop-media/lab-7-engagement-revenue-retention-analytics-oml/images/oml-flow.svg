@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="700" viewBox="0 0 1320 700" role="img" aria-labelledby="title desc">
+  <title id="title">Oracle Machine Learning concept flow</title>
+  <desc id="desc">Media training views feed deployed OML models, which score and return launch-ready outputs in SQL.</desc>
+  <rect width="1320" height="700" fill="#f6f3ef"/>
+  <rect x="28" y="28" width="1264" height="644" rx="28" fill="#ffffff" stroke="#d8d0c5" stroke-width="2"/>
+  <text x="60" y="76" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#312d2a">Oracle Machine Learning Inside the Media Launch Loop</text>
+  <rect x="76" y="156" width="280" height="320" rx="24" fill="#f5efe8" stroke="#aa643b" stroke-width="2"/>
+  <text x="108" y="198" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#714121">Training Views</text>
+  <text x="108" y="236" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Demand, revenue, and</text>
+  <text x="108" y="260" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">retention features stay in</text>
+  <text x="108" y="284" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">governed database views.</text>
+  <rect x="434" y="116" width="340" height="400" rx="24" fill="#fff7f4" stroke="#c74634" stroke-width="2"/>
+  <text x="452" y="158" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#7d2f25">Deployed OML Models</text>
+  <text x="466" y="198" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">In-database models can be</text>
+  <text x="466" y="222" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">trained, stored, versioned, and</text>
+  <text x="466" y="246" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">scored without exporting data.</text>
+  <rect x="852" y="156" width="320" height="320" rx="24" fill="#edf6ef" stroke="#4c825c" stroke-width="2"/>
+  <text x="884" y="198" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#2f593b">SQL Scoring Outputs</text>
+  <text x="884" y="236" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Forecasts, segments, and</text>
+  <text x="884" y="260" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">launch action lists flow</text>
+  <text x="884" y="284" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">straight into application SQL.</text>
+  <path d="M356 316 H408" stroke="#aa643b" stroke-width="4" fill="none"/>
+  <polygon points="408,316 392,308 392,324" fill="#aa643b"/>
+  <path d="M774 316 H826" stroke="#4c825c" stroke-width="4" fill="none"/>
+  <polygon points="826,316 810,308 810,324" fill="#4c825c"/>
+</svg>

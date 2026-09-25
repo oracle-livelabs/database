@@ -2,7 +2,14 @@
 
 ## Introduction
 
-HeatWave GenAI supports two in-database large language models (LLM): mistral-7b-instruct-v1 and llama2-7b-v1. You can use any of these models to generate response or summarize.
+HeatWave GenAI supports five in-database large language models (LLM):
+- llama3.1-8b-instruct-v1
+- llama3.2-1b-instruct-v1
+- llama3.2-3b-instruct-v1
+- mistral-7b-instruct-v3
+- mistral-7b-instruct-v3  
+
+You can use any of these models to generate response or summarize.
 
 _Estimated Time:_ 10 minutes
 
@@ -15,17 +22,18 @@ In this lab, you will be guided through the following task:
 
 ### Prerequisites
 
-- Must complete Lab 3.
+- Must complete Lab **Connect to the HeatWave Instance from Visual Studio Code**.
 
 
 ## Task 1:  Generate response using in-database LLMs
 
-1. Load the LLM in HeatWave, and click **Execute the selection or full block on HeatWave and create a new block**:
+1. Load the LLM in HeatWave. You can load any one of the four LLM’s, but for this lab, we are only using mistral
 
-    - To load mistral-7b-instruct-v1 model:
+    - Click **Execute the selection or full block on HeatWave and create a new block**:
+    - To load mistral-7b-instruct-v3 model:
 
         ```bash
-        <copy>call sys.ML_MODEL_LOAD('mistral-7b-instruct-v1', NULL);</copy>
+        <copy>call sys.ML_MODEL_LOAD('mistral-7b-instruct-v3', NULL);</copy>
         ```
 
         ![Load LLMs](./images/1-load-llm.png "Load LLMs")
@@ -44,7 +52,7 @@ In this lab, you will be guided through the following task:
 3. Generate the response from LLM by entering the following command and click **Execute the selection or full block on HeatWave and create a new block**:
 
     ```bash
-    <copy>select sys.ML_GENERATE(@query, JSON_OBJECT("task", "generation", "model_id", "mistral-7b-instruct-v1"));</copy>
+    <copy>select sys.ML_GENERATE(@query, JSON_OBJECT("task", "generation", "model_id", "mistral-7b-instruct-v3"));</copy>
     ```
 
     ![Generate response](./images/2-generate-response.png "Generate response")
@@ -71,17 +79,16 @@ In this lab, you will be guided through the following task:
 2. Generate the summarized text by entering the following command and click **Execute the selection or full block on HeatWave and create a new block**:
 
     ```bash
-    <copy>select sys.ML_GENERATE(@text, JSON_OBJECT("task", "summarization","model_id", "mistral-7b-instruct-v1"));</copy>
+    <copy>select sys.ML_GENERATE(@text, JSON_OBJECT("task", "summarization","model_id", "mistral-7b-instruct-v3"));</copy>
     ```
 
     ![Summarize text](./images/5-summarize-text.png "Summarize text")
 
- 3. LLM generates a summary of your text:
+3. LLM generates a summary of your text:
 
     ![Summarized text](./images/6-summarized-text.png "Summarized text")
 
-
-You may now **proceed to the next lab**.
+    You may now **proceed to the next lab**.
 
 ## Learn More
 
@@ -96,5 +103,5 @@ You may now **proceed to the next lab**.
 
 - **Author** - Aijaz Fatima, Product Manager
 - **Contributors** - Mandy Pang, Senior Principal Product Manager, Aijaz Fatima, Product Manager
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, August 2024
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
 

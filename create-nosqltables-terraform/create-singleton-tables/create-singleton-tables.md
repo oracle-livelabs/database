@@ -310,7 +310,7 @@ Only 'yes' will be accepted to approve.
 ```
 On confirmation, the singleton tables are created.
 
-You may proceed to the next lab.
+You may now **proceed to the next lab**.
 
 ## Learn More
 
@@ -319,4 +319,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Vandana Rajamani, Consulting UA Developer, DB Cloud Technical Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, March 2025
+* **Last Updated By/Date** - Purnima Subramanian, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, October 2025

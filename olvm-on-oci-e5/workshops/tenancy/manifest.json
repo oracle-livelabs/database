@@ -1,0 +1,52 @@
+{
+  "workshoptitle": "Oracle Linux Virtualization Manager (OLVM) on OCI - Beginner",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Workshop audience, prerequisites, sequencing rules, and expected outcomes.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Sign in to OCI and confirm access to the tenancy and compartment used for this workshop.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Lab 1: Build E5 OCI Infrastructure with Ansible",
+      "description": "Use a bootstrap instance and Ansible to build the E5 OCI environment when one has not already been provided.",
+      "filename": "../../ansible-infrastructure/ansible-infrastructure.md"
+    },
+    {
+      "title": "Lab 2: Deploy OLVM Engine",
+      "description": "Connect to the manager with SSH, install OLVM Engine, and validate portal access.",
+      "filename": "../../olvm-engine/olvm-engine.md"
+    },
+    {
+      "title": "Lab 3: Configure KVM Cluster",
+      "description": "Add both KVM hosts to the default cluster and wait for them to reach Up status.",
+      "filename": "../../kvm-cluster/kvm-cluster.md"
+    },
+    {
+      "title": "Lab 4: Set Up Networking, Storage, and VM",
+      "description": "Create the VM network, add storage, import the template, and validate a test VM.",
+      "filename": "../../network-storage-vm/network-storage-vm.md"
+    },
+    {
+      "title": "Lab 5: Deploy Multi Tier Application",
+      "description": "Import the application OVAs, start the VMs, and verify the Employee Directory application.",
+      "filename": "../../application/application.md"
+    },
+    {
+      "title": "Lab 6: Perform Live Migration",
+      "description": "Migrate a running virtual machine between hosts and validate continuity without interrupting Lab 5.",
+      "filename": "../../migration/migration.md"
+    },
+
+    {
+      "title": "Need Help?",
+      "description": "Troubleshooting resources and directions for getting assistance during the workshop.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

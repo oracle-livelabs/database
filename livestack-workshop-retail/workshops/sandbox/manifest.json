@@ -1,0 +1,76 @@
+{
+  "workshoptitle": "Build Retail Intelligence with Oracle Database 26ai",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Seer Sporting Goods retail intelligence story and workshop goals.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Launch the LiveLabs environment and open Database Actions SQL Worksheet.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Retail Data Foundation",
+      "description": "Inspect the retail schema foundation and map application outcomes to database capabilities.",
+      "filename": "../../retail-data-foundation/retail-data-foundation.md"
+    },
+    {
+      "title": "Lab 2: Retail Command Center",
+      "description": "Query dashboard KPIs, trending products, and revenue category evidence from Oracle Database.",
+      "filename": "../../retail-command-center/retail-command-center.md"
+    },
+    {
+      "title": "Lab 3: Unified Order Intelligence with JSON Relational Duality",
+      "description": "Use JSON Relational Duality, SQL/JSON, and relational SQL to work with document-shaped data stored relationally.",
+      "filename": "../../json-order-intelligence-vpd/json-order-intelligence-vpd.md"
+    },
+    {
+      "title": "Lab 4: Customer Trend Signals with AI Vector Search",
+      "description": "Verify ALL_MINILM_L12_V2 and run vector search over product and social signal embeddings.",
+      "filename": "../../minilm-vector-search-customer-signals/minilm-vector-search-customer-signals.md"
+    },
+    {
+      "title": "Lab 5: Creator Influence Network with Property Graph",
+      "description": "Use Property Graph and GRAPH_TABLE SQL/PGQ to analyze creator reach.",
+      "filename": "../../creator-influence-property-graph/creator-influence-property-graph.md"
+    },
+    {
+      "title": "Lab 6: Intelligent Fulfillment Network with Oracle Spatial",
+      "description": "Use SDO_GEOMETRY, GeoJSON, and distance analysis for retail fulfillment decisions.",
+      "filename": "../../intelligent-fulfillment-spatial-routing/intelligent-fulfillment-spatial-routing.md"
+    },
+    {
+      "title": "Lab 7: Retail OML Analytics",
+      "description": "Inspect OML feature views and DBMS_DATA_MINING model scoring patterns.",
+      "filename": "../../retail-oml-analytics/retail-oml-analytics.md"
+    },
+    {
+      "title": "Lab 8: Ask Retail Data: Trusted NL2SQL Answers",
+      "description": "Prepare trusted NL2SQL answers with approved views, visible SQL, and governed database evidence.",
+      "filename": "../../ask-retail-data/ask-retail-data.md"
+    },
+    {
+      "title": "Lab 9: Retail AI Agent Console: Trusted Agent Tools",
+      "description": "Call approved database-backed agent tools, return grounded evidence, and inspect auditable action history.",
+      "filename": "../../retail-ai-agent-console/retail-ai-agent-console.md"
+    },
+    {
+      "title": "Lab 10: Conclusion",
+      "description": "Connect demand signals, routing, ML, orders, and agent actions into one practical retail decision path.",
+      "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
+    },
+    {
+      "title": "Lab 11: Final Quiz",
+      "description": "Check your understanding with scored questions.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

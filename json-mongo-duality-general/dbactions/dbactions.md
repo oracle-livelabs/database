@@ -41,7 +41,7 @@ In this lab, you will:
 
 3. Click the navigation menu in the upper left to show top-level navigation choices.
 
-4. Click on **Oracle Database** and choose **Autonomous JSON Database**.
+4. Click on **Oracle AI Database** and choose **Autonomous JSON Database**.
 
     ![Click Autonomous JSON Database](./images/adb-json.png " ")
 

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="340" viewBox="0 0 920 340" role="img" aria-labelledby="title desc">
+  <title id="title">Oracle Machine Learning for SQL scoring flow</title>
+  <desc id="desc">Retail data flows into feature views, in-database OML models, SQL scoring functions, and business actions.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#5b6470"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1f2937" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <rect width="920" height="340" fill="#f8fafc"/>
+  <text x="460" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#111827">From Retail Data to OML Business Action</text>
+  <text x="460" y="64" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4b5563">The model and the data stay inside Oracle AI Database; SQL applies the model and returns an action-ready result.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="112" width="152" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="226" y="112" width="166" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="430" y="112" width="166" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="634" y="112" width="152" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="810" y="112" width="74" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  </g>
+
+  <rect x="36" y="112" width="152" height="30" rx="8" fill="#e0f2fe"/>
+  <text x="112" y="134" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Retail Data</text>
+  <text x="56" y="164" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Products</text>
+  <text x="56" y="184" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Orders and sales</text>
+  <text x="56" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Social signals</text>
+
+  <rect x="226" y="112" width="166" height="30" rx="8" fill="#dcfce7"/>
+  <text x="309" y="134" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Feature Views</text>
+  <text x="246" y="164" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">OML_DEMAND_...</text>
+  <text x="246" y="184" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">OML_CUSTOMER_...</text>
+  <text x="246" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Model-ready rows</text>
+
+  <rect x="430" y="112" width="166" height="30" rx="8" fill="#fef3c7"/>
+  <text x="513" y="134" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0f172a">OML Models</text>
+  <text x="450" y="164" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">DEMAND_SURGE_...</text>
+  <text x="450" y="184" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Classification</text>
+  <text x="450" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Stored in database</text>
+
+  <rect x="634" y="112" width="152" height="30" rx="8" fill="#ede9fe"/>
+  <text x="710" y="134" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0f172a">SQL Scoring</text>
+  <text x="654" y="164" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">PREDICTION</text>
+  <text x="654" y="184" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">PROBABILITY</text>
+  <text x="654" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">USING d.*</text>
+
+  <rect x="810" y="112" width="74" height="30" rx="8" fill="#fee2e2"/>
+  <text x="847" y="134" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Action</text>
+  <text x="822" y="164" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Reorder</text>
+  <text x="822" y="184" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Promote</text>
+  <text x="822" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Monitor</text>
+
+  <line x1="198" y1="168" x2="216" y2="168" stroke="#5b6470" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="402" y1="168" x2="420" y2="168" stroke="#5b6470" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="606" y1="168" x2="624" y2="168" stroke="#5b6470" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="796" y1="168" x2="804" y2="168" stroke="#5b6470" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="116" y="264" width="688" height="58" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="460" y="288" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#334155">Business takeaway: scoring stays close to current, governed retail data.</text>
+  <text x="460" y="308" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#334155">The result can be used immediately in operations.</text>
+</svg>

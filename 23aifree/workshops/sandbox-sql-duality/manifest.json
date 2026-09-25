@@ -11,7 +11,7 @@
         {
             "title": "Get Started with NoVNC",
             "description": "Verify Setup of compute instance",
-            "filename": "https://oracle-livelabs.github.io/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/verify-compute/verify-compute-ssh-and-novnc.md"
         },
         {
             "title": "Lab 1: Setup User",

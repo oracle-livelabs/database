@@ -9,15 +9,15 @@
         {
           "title": "Get Started",
           "description": "Get a Free Trial",
-          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/pre-register-free-tier-account.md"
+          "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
         },
         {
           "title": "Lab 1: Create SSH Keys",
-          "filename": "https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/generate-ssh-keys-cloud-shell.md"
+          "filename": "https://livelabs.oracle.com/cdn/common/labs/generate-ssh-key-cloud-shell/generate-ssh-keys-cloud-shell.md"
         },
         {
           "title": "Lab 2: Setup Network and Compute Instance",
-          "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute/setup-linux-freetier.md"
+          "filename": "https://livelabs.oracle.com/cdn/common/labs/setup-compute/setup-linux-freetier.md"
         },
 		    {
           "title": "Lab 3: Setup Docker on an Oracle Compute Instance",
@@ -46,7 +46,7 @@
         {
           "title": "Need Help?",
           "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+          "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }

@@ -9,7 +9,7 @@ As organizations like LumenCare manage increasingly complex data requirements—
 Estimated Lab Time: 15 minutes
 
 ### Objective:
-The objective of this lab is to demonstrate Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for compliance reporting.
+The objective of this lab is to demonstrate Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations for enterprise data governance. By the end of this lab, you will understand how to create reusable domains, embed structured metadata in your schema with Annotations, and query them for any number of reasons.
 
 **The LumenCare Challenge**
 LumenCare's platform faces several common data governance challenges that many organizations encounter:
@@ -33,7 +33,7 @@ Data Use Case Domains also provide consistent metadata for development, analytic
 
 ### Understanding the Four Types of Data Usecase Domains
 
-Before we dive into our healthcare examples, let's understand the four powerful types of Data Usecase Domains available in Oracle AI Database 26ai:
+Before we dive into our healthcare examples, let's understand the four types of Data Usecase Domains available in Oracle AI Database 26ai:
 
 #### 1. Single Column Domain
 * **Purpose**: Applies constraints and validation rules to a single column across multiple tables.
@@ -59,7 +59,7 @@ Before we dive into our healthcare examples, let's understand the four powerful 
 Schema Annotations, as an extension of traditional comments, offer a more structured and versatile approach to database documentation. They allow us to associate name-value pairs with database objects, allowing us to describe, classify, and categorize them according to our specific requirements.
 
 ### Why Use Them Together?
-The combination creates a powerful data governance framework that benefits any organization:
+The combination creates a data governance framework that benefits any organization:
 - **Domains** enforce consistent data validation rules across all applications
 - **Annotations** provide structured metadata for compliance, documentation, and automation
 - Together they create self-documenting database schemas that reduce maintenance overhead and improve data quality
@@ -88,7 +88,7 @@ The combination creates a powerful data governance framework that benefits any o
 
     ![The Database Actions button is highlighted.](../common-images/simple-db-actions.png =50%x* " ")
 
-1. Now that we understand the four types of Data Usecase Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including compliance annotations.
+1. Now that we understand the four types of Data Usecase Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including annotations.
 
   Let's create single column domains that apply constraints and validation to individual columns that can be reused across multiple tables.
 
@@ -215,11 +215,6 @@ The combination creates a powerful data governance framework that benefits any o
     </copy>
     ```
 
-    **Annotation Pattern Summary**: Notice how each table demonstrates the **contextual annotation approach**:
-    - **Patients**: Focus on clinical care and administrative operations with HIPAA jurisdiction
-    - **Appointments**: Emphasizes workflow management and billing with state-specific requirements
-    
-    The domain annotations (HIPAA flags, PII classification) are inherited automatically, while table annotations provide the specific business context.
 
 ## Task 3: Testing Domain Constraints
 
@@ -260,7 +255,7 @@ The combination creates a powerful data governance framework that benefits any o
 
 ## Task 4: Multi-Column Domain Example
 
-1. Now let's explore the power of multi-column domains with a complex healthcare example that demonstrates how to validate related data points as a logical unit.
+1. Now let's explore the power of multi-column domains with an example that shows how to validate related data points as a logical unit. 
 
     ```sql
     <copy>
@@ -287,8 +282,6 @@ The combination creates a powerful data governance framework that benefits any o
     ```
 
     This multi-column domain demonstrates how to enforce relationships between related data points - all vital signs must fall within medically reasonable ranges, and they're validated as a complete set rather than individual values.
-
-    **Note**: The domain focuses on validation rules and data classification, while retention policies would be managed at the table level following our governance best practices.
 
 2. Now create a table using the multi-column domain
 

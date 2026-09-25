@@ -15,7 +15,7 @@
             "title": "Lab 1: Sample Schema Setup",
             "description": "Setup Schema",
             "publisheddate": "3/24/2020", 
-            "filename": "https://oracle-livelabs.github.io/developer/oracle-db-features-for-developers/setup/setup.md"
+            "filename": "https://livelabs.oracle.com/cdn/developer/oracle-db-features-for-developers/setup/setup.md"
         },
         {
             "title": "Lab 2: Enable OLTP table compression",
@@ -36,7 +36,7 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }

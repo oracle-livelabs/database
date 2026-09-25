@@ -1,0 +1,73 @@
+name: LiveLabs Image Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  check-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Detect oversized images (>1280px)
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAX=1280
+
+          git fetch --no-tags --prune origin "${GITHUB_BASE_REF}:${GITHUB_BASE_REF}" || true
+
+          mapfile -d '' files < <(
+            git diff --name-only --diff-filter=AM -z "origin/${GITHUB_BASE_REF}...HEAD" -- \
+              '*.png' '*.jpg' '*.jpeg' '*.PNG' '*.JPG' '*.JPEG' || true
+          )
+
+          bad=0
+          for f in "${files[@]}"; do
+            [[ -f "$f" ]] || continue
+
+            dims="$(ffprobe -v error -select_streams v:0 \
+              -show_entries stream=width,height \
+              -of csv=p=0:s=x "$f" || true)"
+
+            if [[ -z "$dims" ]]; then
+              echo "Skipping unreadable image: $f"
+              continue
+            fi
+
+            w="${dims%x*}"
+            h="${dims#*x}"
+
+            if [[ "$w" -gt "$MAX" || "$h" -gt "$MAX" ]]; then
+              echo "::error file=$f::${f} is ${w}x${h}. Max allowed is ${MAX}px (either dimension)."
+              bad=1
+            fi
+          done
+
+          if [[ "$bad" -eq 1 ]]; then
+            echo ""
+            echo "One or more images exceed ${MAX}px."
+            echo "Please fix this locally in your fork."
+            echo ""
+            echo "Note: this script requires 'ffmpeg' to be installed on your system."
+            echo "  macOS (Homebrew): brew install ffmpeg"
+            echo "  Ubuntu/Debian:    sudo apt-get install ffmpeg"
+            echo ""
+            echo "From the root directory of your workshop (not the repo root!), run:"
+            echo "  ../_imgscript/resize-image.sh"
+            echo ""
+            echo "The script will only resize images whose width or height is greater than ${MAX}px."
+            exit 1
+          fi

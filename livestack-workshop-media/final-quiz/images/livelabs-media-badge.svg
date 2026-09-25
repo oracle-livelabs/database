@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">LiveLabs Media badge</title>
+  <desc id="desc">Badge awarded for completing the Media LiveStack workshop.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff5e8"/>
+      <stop offset="100%" stop-color="#f5d1a7"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#c74634"/>
+      <stop offset="100%" stop-color="#7d2f25"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <text x="256" y="64" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="2" fill="#7d2f25">ORACLE LIVELABS</text>
+  <circle cx="256" cy="238" r="158" fill="#fffdf8" stroke="url(#ring)" stroke-width="18"/>
+  <circle cx="256" cy="238" r="122" fill="#fff2e1" stroke="#d79f63" stroke-width="4"/>
+  <path d="M176 216 L214 178 L245 209 L320 134 L356 170 L284 243 L251 210 L214 247 Z" fill="#c74634" opacity="0.94"/>
+  <path d="M162 316 C190 285 220 270 254 270 C286 270 318 285 348 316" fill="none" stroke="#255164" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="188" cy="311" r="17" fill="#255164"/>
+  <circle cx="324" cy="311" r="17" fill="#255164"/>
+  <rect x="114" y="354" width="284" height="92" rx="28" fill="#fff8ef" stroke="#d79f63" stroke-width="4"/>
+  <text x="256" y="398" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="800" fill="#312d2a">MEDIA</text>
+  <text x="256" y="428" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4" fill="#255164">LIVESTACK</text>
+</svg>

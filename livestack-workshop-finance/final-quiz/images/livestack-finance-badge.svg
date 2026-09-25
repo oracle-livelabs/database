@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Oracle LiveLabs LiveStack Finance Certificate Badge</title>
+  <desc id="desc">A shield-style Oracle LiveLabs certificate badge for LiveStack Finance.</desc>
+  <defs>
+    <linearGradient id="shieldFill" x1="256" y1="30" x2="256" y2="442" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ad6f82"/>
+      <stop offset="0.58" stop-color="#97566e"/>
+      <stop offset="1" stop-color="#7f435f"/>
+    </linearGradient>
+    <linearGradient id="ribbonFill" x1="70" y1="191" x2="442" y2="269" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f5f3ee"/>
+      <stop offset="0.54" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e3dfda"/>
+    </linearGradient>
+    <filter id="softShadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#4c2938" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="#ffffff"/>
+
+  <path d="M256 25
+           C324 32 385 50 425 76
+           L425 239
+           C425 330 357 396 256 464
+           C155 396 87 330 87 239
+           L87 76
+           C127 50 188 32 256 25Z"
+        fill="#edc88b"/>
+  <path d="M256 42
+           C318 49 373 64 408 86
+           L408 239
+           C408 319 346 378 256 440
+           C166 378 104 319 104 239
+           L104 86
+           C139 64 194 49 256 42Z"
+        fill="url(#shieldFill)" filter="url(#softShadow)"/>
+
+  <path d="M124 89 C160 71 204 61 256 58 C308 61 352 71 388 89" fill="none" stroke="#c68a96" stroke-width="4" opacity="0.55"/>
+  <path d="M127 111 H385" stroke="#eac48a" stroke-width="3" opacity="0.45"/>
+
+  <text x="256" y="93" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#fff3d7">LiveStack</text>
+  <text x="256" y="147" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900" fill="#ffffff">FINANCE</text>
+  <text x="256" y="183" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="900" fill="#ffffff">WORKSHOP</text>
+
+  <path d="M53 249 L104 226 L104 300 L53 327Z" fill="#bdb7b0"/>
+  <path d="M459 249 L408 226 L408 300 L459 327Z" fill="#bdb7b0"/>
+  <path d="M104 226 C150 211 201 203 256 203 C311 203 362 211 408 226
+           L408 300 C362 285 311 277 256 277 C201 277 150 285 104 300Z"
+        fill="url(#ribbonFill)"/>
+  <path d="M104 300 C150 285 201 277 256 277 C311 277 362 285 408 300
+           L408 318 C362 303 311 295 256 295 C201 295 150 303 104 318Z"
+        fill="#8a4862"/>
+  <path d="M104 226 L104 300 L135 283 C127 268 119 249 104 226Z" fill="#d5d0ca"/>
+  <path d="M408 226 L408 300 L377 283 C385 268 393 249 408 226Z" fill="#d5d0ca"/>
+
+  <text x="256" y="256" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#2b2726">Oracle LiveLabs</text>
+  <path d="M197 283 C236 276 276 276 315 283" fill="none" stroke="#7f435f" stroke-width="3" opacity="0.65"/>
+
+  <text x="256" y="344" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800" fill="#ffffff">ORACLE AI Database</text>
+  <text x="256" y="386" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="400" fill="#ffffff">26ai</text>
+</svg>

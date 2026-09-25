@@ -6,9 +6,9 @@
 
 Estimated Lab Time: 15 minutes
 
-**JSON Duality**
+### About JSON Duality
 
-JSON Relational Duality is a landmark capability in Oracle Database 23ai, providing game-changing flexibility and simplicity for Oracle Database developers. This feature overcomes the historical challenges developers have faced when building applications using the relational or document models.
+JSON Relational Duality is a landmark capability in Oracle AI Database, providing game-changing flexibility and simplicity for Oracle AI Database developers. This feature overcomes the historical challenges developers have faced when building applications using the relational or document models.
 
 JSON Relational Duality helps to converge the benefits of both document and relational worlds. Developers now get the flexibility and data access benefits of the JSON document model, plus the storage efficiency and power of the relational model. The new feature enabling this functionality is JSON Relational Duality View (we'll refer to it as a Duality View below).
 
@@ -20,23 +20,27 @@ Key benefits of JSON Relational Duality:
 
 * Enable flexibility and simplicity in building multiple apps on the same set of data. You can use the power of Duality View to define multiple JSON Views across overlapping groups of tables. This flexible data modeling makes building multiple apps against the same data easy and efficient.
 
-* Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views are fully ACID (atomicity, consistency, isolation, durability) transactions across multiple documents and tables. They eliminate data duplication across documents, whereas consistency is maintained automatically.
+* Duality Views eliminate the inherent problem of data duplication and data inconsistency in document databases. Duality Views ensure fully ACID-compliant (atomic, consistent, isolated, and durable) transactions across multiple documents and tables, automatically maintaining data consistency and removing the need for duplicate data.
 
 
 ### Objectives
 
-This lab aims to provide hands-on experience with JSON-relational Duality Views, demonstrating how to get the strengths of both JSON and relational data models. You will learn how to create, query, and update JSON-relational Duality Views using SQL and REST.
+This lab aims to provide hands-on experience with JSON-relational Duality Views, demonstrating how to get the strengths of both JSON and relational data models. 
+In this lab, you will:
+* Create tables with SQL and install a relational model
+* Create a JSON Duality view on the previously created relational tables
+* Realize benefits of JSON Duality Views through centralized storage, automatic data consistency, and schema flexibility.
 
 ### Prerequisites
 
 This lab assumes you have:
 
-- An Oracle Autonomous Database 23ai or any Oracle Database 23ai. Note that if you don't use Oracle Autonomous Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
+- An Oracle Autonomous AI Database or any Oracle AI Database. Note that if you don't use Oracle Autonomous AI Database, you have to manually install and configure Oracle Rest Data Services (ORDS) to use the JSON IDE used in this lab.
 
 
 ## Task 1: Install a relational schema with sample data
 
-1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
+1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
     ![click SQL](images/im1.png)
 
     Using the ADMIN user isn’t typically advised due to the high level of access and security concerns it poses. **However**, for this demo, we’ll use it to simplify the setup and ensure we can show the full range of features effectively. 
@@ -502,4 +506,4 @@ You might have noticed that any JSON document in a Duality View carried addition
 ## Acknowledgements
 * **Author** - Hermann Baer
 * **Contributors** - Beda Hammerschmidt
-* **Last Updated By/Date** - Hermann Baer, April 2025
+* **Last Updated By/Date** - Eileen Beck, November 2025

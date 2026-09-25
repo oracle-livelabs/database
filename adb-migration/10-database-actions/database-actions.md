@@ -31,7 +31,8 @@ This lab assumes:
 
     ![Provide username and password](./images/login.png)
 
-    * Please note you are connecting on *Database Actions* for the *SAPPHIRE* database.
+    * Please note that this page may take longer than usual to load the first time it is accessed.
+    * You are connecting on *Database Actions* for the *SAPPHIRE* database.
     * The *Database Actions* URL for *RUBY* is: [https://localhost/ords/ruby/sql-developer](https://localhost/ords/ruby/sql-developer)
 
 3. In the main screen or clicking on the *hamburger icon* on the top left, note that *Database Actions* is divided in 6 *Feature Areas*:

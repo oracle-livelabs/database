@@ -461,7 +461,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     begin
       dbms_cloud_admin.create_database_link(
         db_link_name => 'SOURCE_DBLINK',
-        hostname => 'hol-server',
+        hostname => 'host.containers.internal',
         port => '1522',
         service_name => 'blue',
         ssl_server_cert_dn => 'CN=holserv1',
@@ -476,6 +476,8 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     -- Be sure to hit RETURN
     ```
 
+   * host.containers.internal is the hostname of the machine running the BLUE database.
+
     <details>
     <summary>*click to see the output*</summary>
 
@@ -483,7 +485,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     SQL> begin
       2    dbms_cloud_admin.create_database_link(
       3      db_link_name => 'SOURCE_DBLINK',
-      4      hostname => 'hol-server',
+      4      hostname => 'host.containers.internal',
       5      port => '1522',
       6      service_name => 'blue',
       7      ssl_server_cert_dn => 'CN=holserv1',

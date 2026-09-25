@@ -1,0 +1,26 @@
+{
+  "workshoptitle": "Oracle Linux Virtualization Manager (OLVM) on OCI - Instructor Setup",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Option A: Build E5 OCI Infrastructure with Ansible",
+      "description": "Use a bootstrap instance and Ansible to build the E5 OCI environment before learners begin.",
+      "filename": "../../ansible-infrastructure/ansible-infrastructure.md"
+    },
+    {
+      "title": "Option B: Manual Instructor Setup for E5 OCI Prerequisites",
+      "description": "Manually build the OCI network, compute, VNIC, VLAN, storage, and SSH prerequisites before learners begin.",
+      "filename": "../../e5-oci-prereq-setup/e5-oci-prereq-setup.md"
+    },
+    {
+      "title": "Learner Lab 1: Verify E5 OCI Network Prerequisites",
+      "description": "Run the learner-facing verification checklist after setup is complete.",
+      "filename": "../../infrastructure/infrastructure.md"
+    },
+    {
+      "title": "Instructor Companion",
+      "description": "Use the one-day delivery plan, timing, checkpoints, and quiz stops while teaching the workshop.",
+      "filename": "../../olvm-instructor/olvm-instructor.md"
+    }
+  ]
+}

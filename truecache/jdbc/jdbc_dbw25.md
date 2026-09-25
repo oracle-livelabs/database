@@ -2,23 +2,25 @@
 
 ## Introduction
 
-In this lab, you will test the connection to True Cache through JDBC and run the transaction processing application against the primary database first, then against True Cache to observe the improvement in performance. 
+In this lab, you will test the connection to True Cache using JDBC and run a transaction processing application against the primary database ,and then against True Cache to observe the performance improvement. 
 
 Estimated Time: 10 minutes
 
+<if type="nonsandbox">
 Watch the video for a quick walk through of the Lab3.
-[Lab3](videohub:1_j4nqgxmz) 
+[Lab3](videohub:1_wx3n5ug3)
+</if>
 
 ### About True Cache using JDBC
-The application maintains one logical connection by using the database application service name of the primary database, and the JDBC Thin driver (Oracle Database 23ai and later) maintains two physical connections. The read/write split between True Cache and the primary database is controlled by the application through special calls to flag the logical connection as read-only or read-write. This mode is only for JDBC-based applications.
+The application maintains a single logical connection using the database application service name of the primary database. The JDBC Thin driver (Oracle Database 23ai and later) establishes two physical connections. The read/write split between True Cache and the primary database is controlled by the application through special calls that designate the logical connection as either read-only or read-write. This mode is supported only for JDBC-based applications.
 
-The application used here is a transaction processing application, which does various transaction operations against a database. Some of the operations include, get the balance of the customer, get customer details and update the balance. Each thread simulates a user performing different operations. 
+The application used in this lab is a transaction processing application that performs various operations against a database. These operations include retrieving a customer's balance, fetching customer details and updating the balance. Each thread simulates a user performing different operations. 
 
 ### Objectives
 
 In this lab, you will:
 * Run the application while connecting to the primary database 
-* Run the application while connecting to True Cache and observe the difference in performance
+* Run the application while connecting to True Cache and observe the performance difference
 
 ### Prerequisites (Optional)
 
@@ -35,7 +37,7 @@ This lab assumes you have:
     sudo podman exec -it appclient /bin/bash
     </copy>
     ```
-![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
+    ![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
 
 2. Go to the directory /stage/clientapp 
 
@@ -52,11 +54,14 @@ This lab assumes you have:
      sh TransactionsApp.sh
     </copy>
     ```
-![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp_dbw25.png " ")
+    ![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp_dbw25.png " ")
 
-3. Observe the improve in performance while using True Cache.
+3. Observe the improvement in performance while using True Cache compare to primary.
 
 4. You can change TransactionApp.sh, to increase the number of users and the duration of the test.
+
+5. You might see a error like the one shown below after the load completes. Ignore this error, as it occurs due to UCP  closing the true cache driver connection.
+    ![transaction app error](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapperror.png " ")
 
 ## Learn More
 

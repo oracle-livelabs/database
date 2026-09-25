@@ -12,7 +12,11 @@ Raft replication is integrated with transaction execution and is completely tran
 
 ![Raft introduction](images/raft-intro.png " ")
 
-[Introduction and verify Lab environment](videohub:1_c5e1jhps)
+<if type="nonsandbox">
+Watch the video for a quick walk through of the Introduction and verify Lab environment.
+
+[Introduction and verify Lab environment](videohub:1_z6opisia)
+</if>
 
 ### Objectives
 In this workshop, you will gain first-hand experience in utilizing the Raft Replication within Oracle Globally Distributed Database, enabling participants to manage Raft-enabled replication for robust distributed database solutions.
@@ -22,7 +26,7 @@ Once you complete your setup, the next lab will cover:
 - Exploring the dynamics of Raft
 - Testing the use-cases
 
-We will use Podman containers, RAFT UI App and demonstrate multiple use cases.
+We will use Podman containers, Raft UI App and demonstrate multiple use cases.
 
 ### Prerequisites
 - An Oracle Cloud Account - Please view this workshop's LiveLabs landing page to see which environments are supported
@@ -36,4 +40,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, September 2025
+* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, March 2026

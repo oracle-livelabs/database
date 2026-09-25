@@ -10,7 +10,7 @@
     {
       "title": "Get Started",
       "description": "nextGen Login",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-23ai.md"
     },
     {
       "title": "Lab 1: Set up the In-Memory Column Store",
@@ -35,7 +35,7 @@
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename":"https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+      "filename":"https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }

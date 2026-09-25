@@ -61,6 +61,8 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
     <copy>
     sudo mkdir -p /nfs_mount
 
+    grep -q "10.89.0.100 nfs-server" /etc/hosts || echo "10.89.0.100 nfs-server" | sudo tee -a /etc/hosts > /dev/null
+
     sudo mount -t nfs nfs-server:/exports /nfs_mount
 
     ls -l /nfs_mount
@@ -76,6 +78,7 @@ In this lab, we will setup a NFS Server that is going to be visible by both our 
 
     ``` text
     $ sudo mkdir -p /nfs_mount
+    $ grep -q "10.89.0.100 nfs-server" /etc/hosts || echo "10.89.0.100 nfs-server" | sudo tee -a /etc/hosts > /dev/null
     $ sudo mount -t nfs nfs-server:/exports /nfs_mount
     $ ls -l /nfs_mount
     total 0

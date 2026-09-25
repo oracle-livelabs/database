@@ -36,7 +36,7 @@ This lab assumes you have:
 
 3. Identify the definition that you want to view, and then click ![View](images/view.png) (View).
 
-	![Prompt Definition details](images/view-prompt1.png)
+    	![Prompt Definition details](images/view-prompt1.png)
 
 4. Click **Close**.
 
@@ -51,7 +51,7 @@ Similarly, you can view the details of the other prompt.
 
 3. Identify the profile that you want to view, and then click ![View](images/view.png) (View).
 
-	![View Database Profile details](images/view-agent-profile.png)
+    	![View Database Profile details](images/view-agent-profile.png)
 
 4. Click **Close**.
 
