@@ -68,7 +68,7 @@ View configuration details of an HTTP tool, which is used in the agentic tasks.
 4. Click **Close**.
 
 
-## Task 4: View details of an MCP Server Connector for Oracle Database
+## Task 4: View details of an MCP Server Connector for Oracle AI Database
 
 1. Open the navigation menu and click **Connectors**.
 
