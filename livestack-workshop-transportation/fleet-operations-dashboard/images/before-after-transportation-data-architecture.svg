@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="666" viewBox="0 0 1280 666" role="img" aria-labelledby="title desc">
+  <title id="title">From fragmented transportation systems to one converged Oracle AI Database</title>
+  <desc id="desc">A left-to-right comparison showing six disconnected specialist stores converging into one governed Oracle AI Database foundation for Seer Transport.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#c74634"/>
+    </marker>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill: #161513; }
+      .subtitle { font: 17px Arial, sans-serif; fill: #56504a; }
+      .panel-title { font: 700 22px Arial, sans-serif; fill: #161513; }
+      .panel-title-inverse { font: 700 22px Arial, sans-serif; fill: #ffffff; }
+      .box-title { font: 700 16px Arial, sans-serif; fill: #161513; }
+      .box-copy { font: 14px Arial, sans-serif; fill: #56504a; }
+      .right-title { font: 700 18px Arial, sans-serif; fill: #ffffff; }
+      .right-copy { font: 14px Arial, sans-serif; fill: #f7f5f2; }
+      .impact-title { font: 700 18px Arial, sans-serif; fill: #161513; }
+      .impact-copy { font: 15px Arial, sans-serif; fill: #3b3734; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="666" fill="#f7f5f2"/>
+  <text x="64" y="54" class="title">Connect transportation evidence without multiplying data copies</text>
+  <text x="64" y="84" class="subtitle">Seer Transport moves from isolated operational stores to one governed, SQL-accessible foundation.</text>
+
+  <rect x="54" y="116" width="510" height="420" rx="20" fill="#ffffff" stroke="#d9d4cf" stroke-width="2"/>
+  <text x="82" y="155" class="panel-title">Before: fragmented specialist stores</text>
+  <text x="82" y="181" class="box-copy">Copies and pipelines separate the evidence needed for one recovery decision.</text>
+
+  <g transform="translate(82 210)">
+    <rect width="205" height="82" rx="12" fill="#f2f0ed" stroke="#b9b3ad"/>
+    <circle cx="28" cy="28" r="13" fill="#5f7d8c"/>
+    <text x="51" y="31" class="box-title">Shipment system</text>
+    <text x="18" y="57" class="box-copy">Orders and service legs</text>
+  </g>
+  <g transform="translate(329 210)">
+    <rect width="205" height="82" rx="12" fill="#f2f0ed" stroke="#b9b3ad"/>
+    <circle cx="28" cy="28" r="13" fill="#8d6e63"/>
+    <text x="51" y="31" class="box-title">Document store</text>
+    <text x="18" y="57" class="box-copy">Application JSON copies</text>
+  </g>
+  <g transform="translate(82 313)">
+    <rect width="205" height="82" rx="12" fill="#f2f0ed" stroke="#b9b3ad"/>
+    <circle cx="28" cy="28" r="13" fill="#9b7042"/>
+    <text x="51" y="31" class="box-title">Vector service</text>
+    <text x="18" y="57" class="box-copy">Disruption embeddings</text>
+  </g>
+  <g transform="translate(329 313)">
+    <rect width="205" height="82" rx="12" fill="#f2f0ed" stroke="#b9b3ad"/>
+    <circle cx="28" cy="28" r="13" fill="#6f6a9b"/>
+    <text x="51" y="31" class="box-title">Graph engine</text>
+    <text x="18" y="57" class="box-copy">Network dependencies</text>
+  </g>
+  <g transform="translate(82 416)">
+    <rect width="205" height="82" rx="12" fill="#f2f0ed" stroke="#b9b3ad"/>
+    <circle cx="28" cy="28" r="13" fill="#3f7f72"/>
+    <text x="51" y="31" class="box-title">Mapping platform</text>
+    <text x="18" y="57" class="box-copy">Terminals and regions</text>
+  </g>
+  <g transform="translate(329 416)">
+    <rect width="205" height="82" rx="12" fill="#f2f0ed" stroke="#b9b3ad"/>
+    <circle cx="28" cy="28" r="13" fill="#7a6f45"/>
+    <text x="51" y="31" class="box-title">ML platform</text>
+    <text x="18" y="57" class="box-copy">Demand and capacity scores</text>
+  </g>
+
+  <line x1="587" y1="326" x2="689" y2="326" stroke="#c74634" stroke-width="7" marker-end="url(#arrow)"/>
+  <text x="594" y="302" class="box-title" fill="#c74634">Converge</text>
+
+  <rect x="716" y="116" width="510" height="420" rx="20" fill="#312d2a"/>
+  <text x="748" y="155" class="panel-title-inverse">After: Oracle AI Database 26ai</text>
+  <text x="748" y="181" class="right-copy">One governed foundation keeps operational evidence connected.</text>
+
+  <rect x="748" y="210" width="446" height="96" rx="14" fill="#4c4743" stroke="#756d67"/>
+  <text x="770" y="237" class="right-title">Same transportation records, multiple models</text>
+  <text x="770" y="260" class="right-copy">Relational SQL • JSON Duality • vectors • graph • spatial • OML</text>
+  <text x="770" y="281" class="right-copy">TRANSPORT_SERVICES_V • ORDERS_DV</text>
+  <text x="770" y="299" class="right-copy">TRANSPORT_SIGNAL_NETWORK</text>
+
+  <rect x="748" y="325" width="211" height="82" rx="14" fill="#5b554f"/>
+  <text x="770" y="356" class="right-title">Govern once</text>
+  <text x="770" y="381" class="right-copy">One learner schema and</text>
+  <text x="770" y="399" class="right-copy">reviewable SQL evidence</text>
+
+  <rect x="983" y="325" width="211" height="82" rx="14" fill="#5b554f"/>
+  <text x="1005" y="356" class="right-title">Investigate faster</text>
+  <text x="1005" y="381" class="right-copy">Trace dashboard signals</text>
+  <text x="1005" y="399" class="right-copy">to orders and capacity</text>
+
+  <rect x="748" y="428" width="446" height="88" rx="14" fill="#8f3f32"/>
+  <text x="770" y="459" class="right-title">What changes for Seer Transport</text>
+  <text x="770" y="483" class="right-copy">Fewer copies, fewer reconciliation points,</text>
+  <text x="770" y="503" class="right-copy">and one repeatable decision path.</text>
+
+  <rect x="54" y="558" width="1172" height="90" rx="16" fill="#ede7df" stroke="#d0c6bb"/>
+  <text x="82" y="586" class="impact-title">Business impact</text>
+  <text x="82" y="612" class="impact-copy">Jessica can connect disruption signals, shipment documents, network paths, terminal geography,</text>
+  <text x="82" y="633" class="impact-copy">and demand predictions without moving the data into separate specialist systems.</text>
+</svg>

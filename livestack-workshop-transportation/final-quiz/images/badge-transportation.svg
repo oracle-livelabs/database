@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="350" viewBox="0 0 350 350" role="img" aria-labelledby="title desc">
+  <title id="title">LiveStack Transportation Workshop completion badge</title>
+  <desc id="desc">A hexagonal completion badge with a trophy, stars, and Oracle AI Database 26ai branding.</desc>
+  <path d="M92 14h166l84 145-84 177H92L8 159z" fill="#faf9f8" stroke="#8b7444" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M31 98h288l23 61-68 120H76L8 159z" fill="#3f7f8f"/>
+  <g fill="#2b312f">
+    <path d="M78 47l19-11 19 11-19 11z"/>
+    <path d="M79 58l18 10 18-10v10L97 78 79 68z"/>
+    <text x="122" y="51" font-family="Arial, sans-serif" font-size="19" font-weight="700">LiveLabs</text>
+    <text x="122" y="72" font-family="Arial, sans-serif" font-size="19" font-weight="700">LiveStack</text>
+  </g>
+  <g fill="#f5c85b" stroke="#007a9f" stroke-width="4" stroke-linejoin="round">
+    <path d="M175 116h33v19c0 24-13 42-33 42s-33-18-33-42v-19z"/>
+    <path d="M143 124h-17c0 20 9 31 24 34M207 124h17c0 20-9 31-24 34" fill="none" stroke-linecap="round"/>
+    <path d="M175 177v20m-18 0h36" fill="none" stroke-linecap="round"/>
+    <path d="M91 131l7 14 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z"/>
+    <path d="M259 131l7 14 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z"/>
+  </g>
+  <text x="175" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">TRANSPORTATION</text>
+  <text x="175" y="254" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#ffffff">WORKSHOP</text>
+  <text x="175" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#c74634">ORACLE</text>
+  <text x="175" y="327" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#2b312f">AI Database 26ai</text>
+</svg>
