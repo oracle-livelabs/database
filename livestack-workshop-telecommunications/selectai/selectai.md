@@ -1,10 +1,8 @@
 # Ask Telecom Questions with Select AI
 
-![Nina :  telecommunications lab banner](images/nina.png)
+![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
 
 ## Introduction
-
-> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
 
 Nina Patel is a subscriber experience analyst at SEER Telecomms. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
@@ -13,7 +11,6 @@ Jessica, the DBA, has already configured a Select AI profile for the telecommuni
 Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the analyst needs.
 
 In this lab, you check the available Select AI profile, ask a telecommunications question, inspect the SQL behind the answer, and improve the question for an answer Nina can use.
-
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -116,15 +113,9 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     </copy>
     ```
 
-    <!-- capture:CAP-24 -->
     ![Add the telecommunications tables to the profile](images/sql-ai-object-list.png)
 
-    *Live LLUSER capture, 23 September 2026.*
-
-
     The result should list `SERVICE_PLANS`, `SERVICE_ORDERS`, `SERVICE_ORDER_LINES`, and `SUBSCRIBERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
-  
-    
 
 ## Task 3: Ask a question and inspect the SQL
 
@@ -144,25 +135,15 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     </copy>
     ```
 
-    <!-- capture:CAP-25 -->
     ![Ask a question and inspect the SQL](images/sql-ai-generated.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-  
-    
 
 2. Read the generated SQL before running it.
 
     Check that the statement joins SERVICE_PLANS, SERVICE_ORDER_LINES, and SERVICE_ORDERS, groups by plan, returns five rows, sums LINE_TOTAL, and filters the stated service order statuses. Exclude ACTIVATION_FEE from monthly recurring charges. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
 
-<!-- application-capture:APP-08 -->
-
 The demo's **Ask Telecom Operations Data** screen illustrates the distinction between **Narrate**, **Chat**, **Show SQL** and **Run SQL**. At capture time its selected runtime was local `llama3.2` through Ollama. This interface example does not establish that the demo uses the `GENAI` profile or executes the Select AI commands in this lab.
 
 ![Live question interface showing its local runtime and available modes; no answer was submitted for this capture.](images/app-ask-data.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ## Task 4: Run the question in the database
 
@@ -180,13 +161,7 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
     </copy>
       ```
 
-    <!-- capture:CAP-26 -->
     ![Run the question in the database](images/sql-ai-answer.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-  
-    
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
@@ -210,13 +185,7 @@ Nina's first question gives her a service plan ranking, but she also needs enoug
     </copy>
     ```
 
-    <!-- capture:CAP-27 -->
     ![Improve the business question](images/sql-ai-refined-generated.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-  
-    
 
 2. Review the generated SQL, then run the revised question with `runsql`:
 
@@ -230,13 +199,7 @@ Nina's first question gives her a service plan ranking, but she also needs enoug
     </copy>
     ```
 
-    <!-- capture:CAP-28 -->
     ![Improve the business question](images/sql-ai-refined-answer.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-  
-    
 
 3. Compare the first and second questions.
 
@@ -258,17 +221,11 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     </copy>
     ```
 
-    <!-- capture:CAP-29 -->
     ![Explain the result](images/sql-ai-narration.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-  
-    
 
 2. Review the explanation against the SQL result.
 
-  The explanation is a convenience for a analyst. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+  The explanation is a convenience for an analyst. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
