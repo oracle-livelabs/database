@@ -16,7 +16,7 @@ host bootstrap.
 In this lab, you will:
 
 - Create an OCI Resource Manager stack from the versioned My AI Staff Terraform ZIP.
-- Provision a VCN, SSH-only public host, Always Free Autonomous AI Database, and database wallet.
+- Provision a VCN, SSH-only public host, Autonomous AI Database, and database wallet.
 - Bootstrap the platform files, local Codex plugin, labeled virtual environments, application schema, and `MINILM_V2` model.
 - Connect to the host, authenticate Codex interactively, and validate the completed runtime handoff.
 - Verify the deployment before continuing directly to Lab 3.
@@ -26,8 +26,6 @@ In this lab, you will:
 - Complete the workshop Introduction and have OCI permissions for networking,
   Compute, Autonomous Database, Object Storage, and the tenancy-level dynamic
   group and policy used only during model bootstrap.
-- Generate an SSH key pair locally and have the public key ready. Do not upload
-  the private key or enter it as a Resource Manager variable.
 - Know your current public IP CIDR, normally `your.public.ip/32`.
 - Have strong values for the Autonomous Database ADMIN password and the
   `AI_FOR_YOU` password. The wallet uses the same password as `ADMIN` because
@@ -75,8 +73,7 @@ In this lab, you will:
 
     - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
       or network you will use to connect, followed by `/32`. To find it, open a
-      browser and search for **what is my IP**, or visit a site that displays
-      your public IP, such as [ifconfig.me](https://ifconfig.me). For example, if
+      browser and search for **what is my IP**. For example, if
       the site shows `203.0.113.10`, enter `203.0.113.10/32`. If your public IP changes or you connect from another
       network, update the security rule before connecting.
 
@@ -89,7 +86,7 @@ In this lab, you will:
 
     - **Autonomous Database tier:** Select one of the two Autonomous Database tier, be sure to select Always-free only if you select your home region in **Region**. The Developer is recommended if this is not a fresh new OCI account or if you already have an Always free ADB.
 
-    - **Autonomous Database workload:** Choose DW, OLTP, or AJD. Developer tier does NOT support AJD workload.
+    - **Autonomous Database workload:** Choose OLTP Workload Type
 
     ![Configure the compartment, region, and SSH public key](images/configurate-information.png)
     ![Configure the autonomous database](images/adb-tier.png)
@@ -230,5 +227,5 @@ In this lab, you will:
 
 ## Acknowledgements
 
-- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
-- Last Updated: September 2026
+- Authors: Cyrce Salinas Rojas and Ilan Gómez guerrero
+- Last Updated: Cyrce Salinas Rojas, September 2026

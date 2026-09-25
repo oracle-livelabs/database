@@ -4,9 +4,9 @@
 
 In this workshop, you deploy My AI Staff, a multi-agent AI operations platform on Oracle Cloud Infrastructure (OCI). You provision OCI resources, configure Autonomous AI Database 26ai and vector embeddings, install the runtime, configure Slack workflows, connect Google Drive delivery, secure and run services with systemd, complete an end-to-end verification, and connect external intake services.
 
-Use generic bot identities for every deployment: Assistant Agent, Content Agent, Creative Agent, Brand Agent, Data Agent, Ops Agent, and Publish Agent. Define their `*_BOT_NAME` values centrally in `.env.shared`; each runtime configuration loads that shared file before its agent-specific `.env`. 
+Use generic bot identities for every deployment: Assistant Agent, Content Agent, Creative Agent, Brand Agent, Data Agent, Ops Agent, and Publish Agent.
 
-Estimated Workshop Time: 315 minutes
+Estimated Workshop Time: 120 minutes
 
 ![Example image](./images/livelabs-ai-staff-image.png)
 
@@ -30,7 +30,7 @@ This workshop assumes you have:
 - `scp` (included with OpenSSH) or an equivalent browser upload method for transferring the database wallet after the instance is reachable.
 - Access to create and configure a Slack workspace, channels, and apps.
 - An OpenAI account or subscription.
-- A personal Gmail account and a personal Slack account/workspace for this workshop. Do not use a corporate or customer-owned account for the workshop identities or OAuth consent flow.
+- A personal Gmail account with [Google Cloud Platform](https://cloud.google.com) Access and a personal [Slack](https://slack.com) account/workspace for this workshop. Do not use a corporate or customer-owned account for the workshop identities or OAuth consent flow.
 - Basic Linux administration and shell-command familiarity.
 - Basic familiarity with OCI networking and Oracle Autonomous Database.
 
@@ -46,8 +46,8 @@ Before you start, create a secure worksheet for values that are unique to the cu
 | OCI | Tenancy access, region, compute public IP, Autonomous Database name, ADMIN password, `AI_FOR_YOU` password, wallet zip, and wallet directory |
 | Slack | Workspace name, seven bot tokens, seven app-level tokens, `ASSISTANT_BOT_ID`, deployment owner member ID, and every channel ID |
 | Runtime | Codex account or API key, OpenAI API key, `CODEX_BIN` path when non-default, ZIP download URL, and deployment path |
-| Content Kit | `base_dir`, NotebookLM Python path, font paths, Data Agent URL, and headshot path |
-| External services | Google OAuth client ID, secret, refresh token, publication Drive folder, SMTP host/user/password/from address, Substack config, and Instagram cookies when those integrations are enabled |
+| Content Kit | `base_dir`, Python, font paths, Data Agent URL, and headshot path |
+| External services | Google OAuth client ID, secret, refresh token, publication Drive folder and Substack config |
 
 ## Choose a Deployment Path
 
@@ -61,26 +61,12 @@ paths on the same host.
 The Fast Path replaces the non-interactive work in Labs 1 and 2. It provisions
 OCI, Autonomous Database, the platform files, the local Codex plugin, labeled
 virtual environments, the application schema, the vector model, and the base
-systemd unit files. After bootstrap, complete the interactive Codex login and
-smoke test before Lab 3. Lab 3 is still required because Slack apps, tokens,
+systemd unit files. Lab 3 is still required because Slack apps, tokens,
 channels, and environment values are deployment-specific. Lab 4 configures
 Google OAuth and the other external services; Lab 5 activates and verifies the
 complete deployment.
 
-## Choose a Deployment Path
-
-Choose one deployment path before starting the numbered labs. Do not run both
-paths on the same host.
-
-**Manual path:** Lab 1 → Lab 2 → Lab 3 → Lab 4 → Lab 5
-
-**Fast path:** Fast Path: Click the Magic Button → Lab 3 → Lab 4 → Lab 5
-
-The Fast Path replaces Labs 1 and 2. It provisions OCI, Autonomous Database,
-the platform files, the local Codex plugin, labeled virtual environments, the
-application schema, the vector model, and the base systemd unit files. Lab 3
-is still required because Slack apps, tokens, channels, environment values,
-Google Drive authorization, and service activation are deployment-specific.
+The Fast Path has been created if you have already used your Always Free Resources in your OCI Account.
 
 ## Workshop Labs
 
@@ -92,5 +78,5 @@ Google Drive authorization, and service activation are deployment-specific.
 
 ## Acknowledgements
 
-- Contributor: CYRCE SALINAS ROJAS
-- Last Updated By/Date: CYRCE SALINAS ROJAS, August 2026
+- Contributor: Cyrca Salinas Rojas
+- Last Updated By/Date: Cyrce Salinas Rojas, August 2026

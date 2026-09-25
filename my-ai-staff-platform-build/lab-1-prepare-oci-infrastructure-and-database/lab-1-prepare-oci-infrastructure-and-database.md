@@ -4,7 +4,7 @@
 
 In this lab, you will prepare the base OCI environment and database foundation for My AI Staff. You will create compute and network resources, provision Autonomous Database 26ai, load the schema, and validate in-database vector embeddings.
 
-Estimated Time: 90 minutes
+Estimated Time: 60 minutes
 
 ### Objectives
 
@@ -69,13 +69,9 @@ In this lab, you will:
 
     Leave the default egress rules unchanged unless your tenancy has a custom network policy. Egress controls outbound traffic from the instance; SSH access from your laptop uses an ingress rule.
 
-7. Do not add ingress rules for ports `8001` through `8005`. These are internal agent service ports.
+9. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Networking** > **Primary VNIC** > **Public IPv4 address**.
 
-    Loopback-only means the services listen on `127.0.0.1`, which is the instance's local-only network address. A service bound to `127.0.0.1:8002` can be reached from the same VM with `curl http://127.0.0.1:8002/health`, but it is not reachable from the public internet. Keep these ports closed in OCI security lists and on the instance firewall.
-
-8. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Networking** > **Primary VNIC** > **Public IPv4 address**.
-
-    Complete the following public IP assignment steps only if the public IP field shows `-`. If a public IP already appears, copy it and skip to step 9.
+    Complete the following public IP assignment steps only if the public IP field shows `-`. If a public IP already appears, copy it and skip to step 8.
 
     On the instance details page, open **Networking**, then click the **Primary VNIC** name under **Attached VNICs**.
 
@@ -91,7 +87,7 @@ In this lab, you will:
 
     Return to the instance details page and copy the new **Public IPv4 address**. Use this value as `<instance-public-ip>` in the SSH commands below.
 
-9. Configure the downloaded key on your laptop. Use the command set that matches your operating system, and replace the placeholder values.
+10. Configure the downloaded key on your laptop. Use the command set that matches your operating system, and replace the placeholder values.
 
     For macOS or Linux, open Terminal and run:
 
@@ -148,7 +144,7 @@ In this lab, you will:
 
     If Windows reports that `ssh` is not recognized, install the OpenSSH Client optional feature or use VS Code Remote - SSH.
 
-10. In VS Code, open the Command Palette, choose **Remote-SSH: Connect to Host**, and select `my-ai-staff-oci`. Edit the agent `.env` files on the instance through this connection; do not copy secrets into an unprotected local project folder or commit them.
+11. In VS Code, open the Command Palette, choose **Remote-SSH: Connect to Host**, and select `my-ai-staff-oci`. Edit the agent `.env` files on the instance through this connection; do not copy secrets into an unprotected local project folder or commit them.
 
 ## Task 2: Provision Autonomous Database 26ai
 
@@ -330,5 +326,5 @@ In this lab, you will:
 
 ## Acknowledgements
 
-- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
-- Last Updated: Ilan Gomez Guerrero, September 2026
+- Authors: Cyrce Salinas Rojas and Ilan Gómez guerrero
+- Last Updated: Ilan Gómez guerrero, September 2026
