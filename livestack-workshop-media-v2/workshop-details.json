@@ -1,0 +1,94 @@
+{
+  "title": "Build Connected Media & Entertainment Solutions with Oracle AI Database",
+  "short_description": "Build Media campaign, content discovery, creator-network, distribution, demand-model, and AI workflows with one Oracle AI Database.",
+  "long_description": "Follow the Seer Media team as they use the supplied Media handoff dataset in Oracle AI Database 26ai. Combine audience signals, content vectors, campaign-order JSON, and spatial data; inspect creator and studio relationships; train and score a demand-surge model; and query the five Media semantic views with Select AI and a SQL-only agent. Labs retain the physical object names and JSON fields defined by the platform loader.",
+  "estimated_workshop_minutes": 90,
+  "outline": [
+    {
+      "title": "Introduction",
+      "description": "The Seer Media Midnight Harbor launch-weekend story and workshop goals."
+    },
+    {
+      "title": "Getting Started",
+      "description": "Launch the environment and open Database Actions SQL Worksheet."
+    },
+    {
+      "title": "Lab 1: Build a Converged Launch Operations Dashboard",
+      "description": "Connect audience signals, content similarity, campaign orders, and distribution geography."
+    },
+    {
+      "title": "Lab 2: Build a Campaign-Order JSON Application Model",
+      "description": "Help Thomas serve campaign orders with JSON Relational Duality."
+    },
+    {
+      "title": "Lab 3: Review Semantic Content Discovery",
+      "description": "Search prepared content-asset embeddings by meaning."
+    },
+    {
+      "title": "Lab 4: Investigate a Creator and Studio Network",
+      "description": "Follow creator connections and shared studio partnerships with Oracle Property Graph."
+    },
+    {
+      "title": "Lab 5: Plan Media Distribution Coverage with Oracle Spatial",
+      "description": "Compare distribution hubs, audience accounts, and seeded demand regions."
+    },
+    {
+      "title": "Lab 6: Predict Content Demand Surges with Oracle Machine Learning",
+      "description": "Train a content-demand model with the loader settings and score a simulated activity snapshot."
+    },
+    {
+      "title": "Lab 7: Ask Media Questions with Select AI",
+      "description": "Turn natural-language media questions into inspectable SQL."
+    },
+    {
+      "title": "Lab 8: Build a Media Operations Agent with Select AI Agent",
+      "description": "Use a SQL-only Media operations agent and review its execution history."
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding with scored questions."
+    }
+  ],
+  "prerequisites": [
+    "Prepared Autonomous Database 26ai workshop schema LLUSER",
+    "ADMIN.ALL_MINILM_L12_V2 embedding model accessible to LLUSER",
+    "Database Actions, Graph Studio, and optional OML UI access",
+    "Enabled SEER_MEDIA_PROFILE and configured AI provider for Labs 7\u20138"
+  ],
+  "runtime_status": "VKDB LLUSER Media load and live preflight passed. All 48 native UI captures are complete and mapped to workshop slots. JSON exercises, the learner OML model and scoring snapshot passed. Lab 7 RUNSQL and the final Lab 8 agent answer match direct SQL; the final team is linked to its SQL tool call. The authentic Lab 7 narration is incomplete and the lesson explains how to review it.",
+  "runtime_validation": {
+    "loader_complete": true,
+    "media_view_count": 5,
+    "loader_oml_model_count": 4,
+    "vector_dimensions": 384,
+    "preflight_status": "passed",
+    "data_assertions_passed": 32,
+    "session_assertions_passed": 1,
+    "evidence": "../output/media-loader-alignment/verify-browser-result-dom.txt",
+    "validated_at": "2026-09-24T18:52:04.152875+00:00",
+    "screenshots": "captured_and_provenance_synchronized",
+    "hosted_ai_profile": "lab7_and_lab8_runtime_verified_with_narration_limitation",
+    "json_tasks_1_2": "create_insert_commit_passed",
+    "json_task_evidence": "../output/media-loader-alignment/capture/remaining-lab-mutations-runtime-dom.txt",
+    "post_exercise_expected_order_count": 3001,
+    "post_exercise_expected_line_count": 8982,
+    "native_capture_count": 48,
+    "hosted_ai_evidence": "../output/media-loader-alignment/capture/selectai/runtime-verification.json",
+    "agent_answer_fields_verified": 40,
+    "agent_tool_invocation_id": 3
+  },
+  "final_quality_review": {
+    "status": "complete",
+    "validated_at": "2026-09-24T20:27:19.793262+00:00",
+    "formatting": "All 11 local labs and preparation guide passed; both manifests passed",
+    "static_validation": "passed; zero errors or warnings; 63 image references resolve",
+    "native_application_captures": 48,
+    "edited_persona_illustrations": 6,
+    "retained_media_illustrations": 2,
+    "svg_illustrations": 7,
+    "manual_prose_rating": "4/5 for each reviewed document; scoped editorial judgments",
+    "raw_lanham_scores": "1\u20132/5 retained in validation-result.md; whole-file algorithm includes SQL, tables, headings and possessives",
+    "report": "output/media-loader-alignment/FINAL-QA.md",
+    "prose_review": "output/media-loader-alignment/PROSE-REVIEW.md"
+  }
+}

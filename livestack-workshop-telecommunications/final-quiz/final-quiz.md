@@ -47,14 +47,14 @@ Estimated Time: **3 minutes**
     - To hide capacity data from service operations leaders.
     * To find the closest network site for a subscriber or high-demand region and combine that location with site capacity and current workload.
     - To replace spatial queries with static labels.
-    > Spatial functions calculate distance and location relationships. SQL combines those results with subscriber, network-site, capacity, and demand data to support routing decisions.
+    > Spatial functions calculate distance and location relationships. SQL combines those results with subscriber, network-site, capacity, and demand data to help the operations team review nearby sites.
 
-    Q: In the OML lab, what does model confidence mean?
+    Q: What does the OML lab's `SURGE_SCORE` represent?
     - It guarantees that the prediction will happen.
-    * It is the model probability for a prediction and should still be reviewed.
+    * The model's probability for the SURGE class, which the analyst should still review.
     - It is the number of rows in the OML model catalog.
     - It means the model no longer needs business context.
-    > Confidence helps compare stronger and weaker predictions, but it is not certainty. The optional AutoML task asks you to inspect the confusion matrix for both classes.
+    > The score ranks plans for review; it does not guarantee a surge. Inspect the model's errors in the confusion matrix. These sample labels describe the same period as the inputs, so the exercise does not measure future-demand accuracy.
 
     Q: What makes the Select AI answers reviewable?
     - The model can query every object in the database automatically.

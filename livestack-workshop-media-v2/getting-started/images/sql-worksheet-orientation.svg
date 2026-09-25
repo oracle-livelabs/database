@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" role="img" aria-labelledby="title desc">
+<title id="title">Media SQL Worksheet orientation</title><desc id="desc">Annotated schematic of a worksheet using the Media handoff loader. This is a guide, not a live database screenshot.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#233330}.small{font-size:15px}.code{font-family:Menlo,Consolas,monospace;font-size:17px}.label{font-size:18px;font-weight:700}.num{font-size:17px;font-weight:700;fill:white}</style>
+<rect width="1280" height="800" rx="16" fill="#f4f1e9"/>
+<text x="34" y="44" font-size="26" font-weight="700">Media SQL Worksheet</text>
+<text x="1245" y="43" text-anchor="end" class="small">ANNOTATED SCHEMATIC · LOADER CONTRACT</text>
+<rect x="24" y="66" width="1232" height="580" rx="8" fill="white" stroke="#c6cfca"/>
+<rect x="24" y="66" width="1232" height="46" rx="8" fill="#233f39"/>
+<text x="43" y="96" style="fill:white" class="label">Database Actions · SQL</text>
+<text x="1208" y="95" text-anchor="end" style="fill:white" class="label">LLUSER</text>
+<path d="M290 112V645" stroke="#c6cfca"/>
+<text x="45" y="147" class="label">Navigator</text><text x="45" y="178" class="small">Tables · LLUSER</text>
+
+<text x="45" y="215" font-family="Menlo" font-size="15">PRODUCTS</text>
+<text x="45" y="247" font-family="Menlo" font-size="15">BRANDS</text>
+<text x="45" y="279" font-family="Menlo" font-size="15">ORDERS</text>
+<text x="45" y="311" font-family="Menlo" font-size="15">ORDER_ITEMS</text>
+<text x="45" y="343" font-family="Menlo" font-size="15">CUSTOMERS</text>
+<text x="45" y="375" font-family="Menlo" font-size="15">SOCIAL_POSTS</text>
+<text x="45" y="407" font-family="Menlo" font-size="15">INFLUENCERS</text>
+<text x="45" y="439" font-family="Menlo" font-size="15">INVENTORY</text>
+<text x="45" y="471" font-family="Menlo" font-size="15">FULFILLMENT_CENTERS</text>
+<text x="45" y="503" font-family="Menlo" font-size="15">DEMAND_REGIONS</text>
+<text x="45" y="535" font-family="Menlo" font-size="15">PRODUCT_EMBEDDINGS</text>
+<text x="312" y="146" class="label">Worksheet</text><rect x="983" y="125" width="134" height="31" rx="5" fill="#176b53"/>
+<text x="1050" y="146" text-anchor="middle" style="fill:white" class="small">▶ Run Statement</text>
+<text x="1140" y="146" class="small">Run Script</text><path d="M291 169H1255" stroke="#dce2de"/>
+<text x="311" y="213" class="small" fill="#83928b">1</text><text x="345" y="213" class="code">SELECT product_id, content_asset, studio_or_label,</text>
+<text x="311" y="248" class="small" fill="#83928b">2</text><text x="345" y="248" class="code">       content_category, campaign_value_proxy</text>
+<text x="311" y="283" class="small" fill="#83928b">3</text><text x="345" y="283" class="code">FROM media_content_assets_v</text>
+<text x="311" y="318" class="small" fill="#83928b">4</text><text x="345" y="318" class="code">WHERE product_id = 1;</text>
+<path d="M291 400H1255" stroke="#c6cfca"/><text x="312" y="431" class="label">Query Result</text>
+<text x="1205" y="431" text-anchor="end" class="small">Seed values shown for orientation</text>
+<rect x="306" y="454" width="932" height="130" rx="5" fill="#f4f7f5"/>
+<text x="328" y="484" class="small">CONTENT ASSET 1</text>
+<text x="328" y="517" font-size="23" font-weight="700">Midnight Harbor Premiere Window</text>
+<text x="328" y="554" class="small">Aurora Studios · Film · Campaign-value proxy: 24.99</text>
+
+<circle cx="56" cy="697" r="16" fill="#176b53"/><text x="56" y="703" text-anchor="middle" class="num">1</text><text x="81" y="703" class="label">Check LLUSER</text><text x="42" y="737" class="small">Use the workshop schema.</text>
+<circle cx="372" cy="697" r="16" fill="#176b53"/><text x="372" y="703" text-anchor="middle" class="num">2</text><text x="397" y="703" class="label">Paste and run SQL</text><text x="358" y="737" class="small">Run Statement: Ctrl+Enter.</text>
+<circle cx="688" cy="697" r="16" fill="#176b53"/><text x="688" y="703" text-anchor="middle" class="num">3</text><text x="713" y="703" class="label">Inspect the result</text><text x="674" y="737" class="small">Review aliases and values.</text>
+<circle cx="989" cy="697" r="16" fill="#176b53"/><text x="989" y="703" text-anchor="middle" class="num">4</text><text x="1014" y="703" class="label">Use actual objects</text><text x="975" y="737" class="small">Media views label shared tables.</text>
+</svg>

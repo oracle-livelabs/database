@@ -2,8 +2,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Jessica Chan is the database administrator responsible for keeping Seer Hotels’ hospitality data reliable and useful. Every morning, the guest service operations team asks her a familiar question: **which stay offer needs attention first, and which guests may need assistance or relocation?**
 
 Jessica needs four kinds of data for the Guest Service and Operations Dashboard. Tables hold service alerts and their impact. JSON documents hold reservation activity. Vectors represent stay offer descriptions for searches by meaning. Spatial data records hotel and demand-region locations. Her query must combine all four.
@@ -182,15 +180,15 @@ The query combines four data types:
     </copy>
     ```
 
-    ![Live hospitality result — dashboard](images/sql-dashboard.jpg)
+    ![SQL Worksheet result — dashboard](images/sql-dashboard.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
 3. Review the result as the stay offer-level data behind Jessica's dashboard. Each row combines service-alert severity, semantic match, reservation activity, and hotel location. This gives the dashboard a ranked stay offer table and the details a business user needs when deciding what to review.
 
     
 
-    Each row should include all four types of data. In the tested dataset, the first investigation returned ten rows, led by Newark’s accessible king offer. The arrival-workload phrase instead ranked a Newark standard-room offer first. A missing embedding or an empty regional property set can leave the result incomplete or empty.
+    Each row should include all four types of data. Compare the semantic rank, service impact, reservation activity, and nearby property. A missing embedding or an empty regional property set can leave the result incomplete or empty.
 
 Use the first row to explain why an offer needs attention. Check its alert severity, reservation counts, match to the search phrase, and nearby hotel. These values help the service team decide where to start.
 

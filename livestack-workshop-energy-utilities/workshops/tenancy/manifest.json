@@ -1,0 +1,18 @@
+{
+  "workshoptitle": "Build Connected Energy and Utilities Solutions with Oracle AI Database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {"title":"Introduction","description":"The Seer Utility Network operations story and workshop goals.","filename":"../../introduction/introduction.md"},
+    {"title":"Getting Started","description":"Launch the environment and open Database Actions SQL Worksheet.","filename":"../../getting-started/getting-started.md"},
+    {"title":"Lab 1: Build a Converged Dashboard Query","description":"Help Jessica connect service requests, reliability signals, field logistics, and capacity evidence.","filename":"../../energy-operations-command-center/energy-operations-command-center.md"},
+    {"title":"Lab 2: Build a JSON Application Model","description":"Help Thomas use JSON Relational Duality for utility service requests.","filename":"../../utility-service-request-duality/utility-service-request-duality.md"},
+    {"title":"Lab 3: Review a Semantic Risk Search","description":"Review how Gilly matches operational signals to utility services by meaning.","filename":"../../reliability-signal-vector-search/reliability-signal-vector-search.md"},
+    {"title":"Lab 4: Investigate an Operational Event Network","description":"Review Bob's graph approach to connected restoration evidence with SQL/PGQ.","filename":"../../operational-event-graph/operational-event-graph.md"},
+    {"title":"Lab 5: Rank Nearby Operations Sites for Review","description":"Use Oracle Spatial to compare service-point and field-site proximity for human review.","filename":"../../field-operations-spatial/field-operations-spatial.md"},
+    {"title":"Lab 6: Build an Asset Risk and Capacity Watchlist with Oracle Machine Learning","description":"Evaluate a held-out split and apply a utility-service demand model inside Oracle Database.","filename":"../../asset-risk-capacity-oml/asset-risk-capacity-oml.md"},
+    {"title":"Lab 7: Ask Energy and Utilities Questions with Select AI","description":"Turn natural-language operations questions into SQL you can inspect and run.","filename":"../../ask-energy-utilities/ask-energy-utilities.md"},
+    {"title":"Lab 8: Build an Energy and Utilities Agent with Select AI Agent","description":"Create a controlled agent that uses approved read-only database tools.","filename":"../../energy-utilities-agent/energy-utilities-agent.md"},
+    {"title":"Lab 9: Final Quiz","description":"Check your understanding with scored questions.","filename":"../../final-quiz/final-quiz.md"},
+    {"title":"Need Help?","description":"Solutions to common problems and directions for receiving Live Help.","filename":"https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"}
+  ]
+}
