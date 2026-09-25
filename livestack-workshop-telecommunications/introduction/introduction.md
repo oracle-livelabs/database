@@ -25,19 +25,13 @@ SEER Telecomms is a fictional communications provider. All people, sites, orders
 
 ![SEER Telecomms model: subscribers and network sites connect to service orders; sites have service plans; orders have lines linked to plans.](images/seer-telecomms-erd.png)
 
-*A service order covers one initial monthly period. Each line selects a plan offered for that site’s service area and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) and read the [complete table and sample-data reference](../validation/schema-contract.md).
+*A service order covers one initial monthly period. Each line selects a plan offered for that site’s service area and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) and read the [complete table and sample-data reference](../reference/tables-and-sample-data.md).
 
 Plans cover mobile voice and data, fixed wireless, fiber, and IoT. Each plan includes access technology, advertised download speed, and a data allowance; a null allowance means unlimited. The workshop links each plan to a site to represent a service area. Commercial mobile plans are not tied to a single radio tower. Subscriber locations are service addresses, not live handset tracking.
 
-> **Workshop status:** Repository checks, manual database validation, Graph Studio notebooks, AutoML, Select AI and the agent example are complete. Authentic captures show the validated run. SQLcl launch step and LiveLabs green-button/Terraform provisioning checks remain for the next phase. See [Getting Started](?lab=getting-started).
-
-<!-- application-capture:APP-01 -->
-
-The [running telecom application](http://141.144.192.27:8505/) follows a game-day 5G congestion incident. Open **Welcome** to see how its screens connect. Its demo dataset and current user, Jessica Chen, differ from the workshop sample data and teaching personas. Application captures below illustrate the user interface; they do not validate the lab SQL.
+The [running telecom application](http://141.144.192.27:8505/) follows a game-day 5G congestion incident. Open **Welcome** to see how its screens connect. Its demo dataset and current user, Jessica Chen, differ from the workshop sample data and teaching personas. Use the lab queries and sample data for the database exercises.
 
 ![Welcome page of the supplied telecom operations demo.](images/app-welcome.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ### What the team builds
 

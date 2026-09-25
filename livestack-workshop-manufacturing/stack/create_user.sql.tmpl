@@ -20,15 +20,17 @@ grant oml_developer to lluser;
 
 grant resource to lluser;
 
+grant spatial_author to lluser;
+
 begin
 
 ords_admin.enable_schema (
         p_enabled               => TRUE,
         p_schema                => 'LLUSER',
         p_url_mapping_type      => 'BASE_PATH',
-        p_auto_rest_auth        => TRUE   
-    ); 
-    
+        p_auto_rest_auth        => TRUE
+    );
+
     -- Allow SELECT_AI_USER to use the resource principal
     dbms_cloud_admin.enable_resource_principal(username  => 'LLUSER');
 
