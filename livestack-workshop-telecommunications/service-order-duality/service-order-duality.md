@@ -2,15 +2,13 @@
 
 ## Introduction
 
-> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
-
 Thomas Brune develops subscriber applications at SEER Telecomms. His team needs service order documents that match its web and mobile screens and reduce calls to the database.
 
 Thomas wants each JSON document to group subscriber and site IDs, service periods, status, monthly service charges, and optional app fields. He needs to change the document as the application grows while keeping relational keys, SQL access, transactions, and database controls.
 
 Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of subscriber data.
 
-![thomas](images/thomas.png)
+![Thomas, application developer, introduces JSON service-order documents.](images/thomas.png)
 
 <details>
 <summary><strong>Key terms: JSON columns, JSON collections, and JSON Relational Duality</strong></summary>
@@ -180,7 +178,6 @@ Thomas now tests the document shape his application can consume directly.
 
 1. Run this query:
 
-
     This query selects the JSON `DATA` column from `SERVICE_ORDERS_DV` so Thomas can inspect the document shape in SQL Worksheet.
 
     <details>
@@ -199,32 +196,18 @@ Thomas now tests the document shape his application can consume directly.
     </copy>
     ```
 
-    <!-- capture:CAP-53 -->
     ![Read a subscriber document from relational data](images/sql-duality-document.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     **Expected output:**
 
-    
-
 2. Expand the document in SQL Worksheet.
-    The query reads the duality view as a document source. Oracle constructs the JSON shape from relational data, so the application gets a service order document without a second copy of the service order record.
-
-    The \_id value appears in the JSON document while the source data remains relational. The document includes `subscriberId`, `status`, totals, timestamps, and monthly service-charge lines. The application gets these fields without a second service order store.
-
-    The same service order now has two useful forms: API-ready JSON for the application and relational rows for analysis.
+    Oracle builds this document from the existing service order and line rows. Check `_id`, `subscriberId`, `status`, totals, timestamps, and `items` in the returned JSON.
 
     > **Note:** Look for `_metadata.etag` in the document. The ETAG changes when the document changes, so Thomas's application can detect a newer version before updating the service order and avoid overwriting another request.
-
-<!-- application-capture:APP-03 -->
 
 In the running demo, open **Subscriber Service Orders** to see an application list of subscriber commitments. This is an order-list example. The demo document structure differs from `SERVICE_ORDERS_DV`, so use the SQL and JSON keys above for this lab.
 
 ![Live subscriber service-order list; separate application data.](images/app-service-orders.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ## Task 4: Enable document inserts and updates
 
@@ -301,11 +284,7 @@ The existing `SERVICE_ORDERS_DV` lets an application update service order docume
     </copy>
     ```
 
-    <!-- capture:CAP-54 -->
     ![Enable document inserts and updates](images/sql-duality-contract.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     **Expected output: Document Capabilities Enabled**
 
@@ -362,7 +341,7 @@ Thomas now tests a complete subscriber service order. He creates it as one neste
 
 2. Confirm the JSON document became relational rows.
 
-    >**Note**: We are querying here the relational tables `SERVICE_ORDERS` and `SERVICE_ORDER_LINES`!
+    >**Note**: This query reads the relational tables `SERVICE_ORDERS` and `SERVICE_ORDER_LINES`.
 
     ```sql
     <copy>
@@ -421,11 +400,7 @@ Thomas now tests a complete subscriber service order. He creates it as one neste
     </copy>
     ```
 
-    <!-- capture:CAP-55 -->
     ![Create and update a JSON service order](images/sql-duality-confirmed.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     **Expected output: Updated Service Order Rows**
 
@@ -441,7 +416,6 @@ Thomas has checked that the application can display and update a document. Jessi
 
     The SQL uses `JSON_VALUE` to extract service order fields from the duality document. That is the projection step. It returns the service order ID and status, reads the embedded subscriber identifier, joins that identifier to `SUBSCRIBERS`, and orders the result for review.
 
-    Thomas does not need to hand-build this document in the application or copy the service order to a separate document store. The application gets JSON, while Jessica still has SQL access to the same service order rows.
 
     ```sql
     <copy>
@@ -455,11 +429,7 @@ Thomas has checked that the application can display and update a document. Jessi
     </copy>
     ```
 
-    <!-- capture:CAP-56 -->
     ![Project JSON fields with SQL](images/sql-duality-projection.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     **Expected output: JSON Field Projection**
 
@@ -479,13 +449,7 @@ Thomas has checked that the application can display and update a document. Jessi
     </copy>
     ```
 
-    <!-- capture:CAP-57 -->
     ![Project JSON fields with SQL](images/sql-duality-relational.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-
-    
 
     Compare the result with the previous query. The service order ID, status, and subscriber email should match. Thomas's application is reading the JSON document, while Jessica's relational query reads the underlying rows.
 
@@ -500,7 +464,6 @@ Thomas does not have to choose one JSON model for the whole application. He can 
 | JSON Relational Duality View      | The data already belongs in relational tables, but the application needs one JSON document. | Return a subscriber service order with its status and monthly service-charge lines, or accept a new service order document from the app. | Relational tables such as `SERVICE_ORDERS` and `SERVICE_ORDER_LINES`; the duality view defines the JSON shape for Thomas' app. |
 
 For Thomas, `SERVICE_ORDERS_DV` is the right choice for the service order feature because `SERVICE_ORDERS` and `SERVICE_ORDER_LINES` already hold shared telecommunications data. The application gets the JSON document it needs, while Jessica keeps SQL, relational constraints, and controlled access to the same data.
-
 
 ## Acknowledgements
 

@@ -1,14 +1,12 @@
 # Build a Telecom Agent with Select AI Agent
 
-![Nina :  telecommunications lab banner](images/nina.png)
+![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
 
 ## Introduction
 
-> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
-
 Nina Patel has used Select AI for individual questions. Her subscriber-review screen now needs an assistant that can handle a request and follow-up questions.
 
-Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the telecommunications tables configured in the previous lab.
+Jessica, the DBA, gives Nina's agent one SQL tool. It uses the `GENAI` profile and the telecommunications tables configured in the previous lab. Database privileges determine what the tool can access.
 
 In this lab, you create an agent, give it the built-in SQL query tool, and run a question through its team. The instructions ask for read-only answers. SQL still runs with the database user’s privileges. `LLUSER` owns the workshop objects, so it is not an example of a production account with restricted access.
 
@@ -41,11 +39,11 @@ Estimated Time: **15 minutes**
 | Step                | Telecommunications focus                                                                                  |
 | ------------------- | ---------------------------------------------------------------------------------------------- |
 | Problem    | Nina needs a telecommunications answer that can feed a subscriber-review screen.                            |
-| Database task | The agent must use database data through an approved capability, not unrestricted access.      |
+| Database task | The agent uses one SQL tool; database privileges determine its access.      |
 | Your role       | You follow Nina as she turns a Select AI question into a small telecommunications assistant.              |
 | What You Will See   | An agent receives a request, calls its SQL tool, and returns a telecommunications answer.                 |
 | Oracle features | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
-| Result             | Nina has a controlled agent that can answer questions from the telecommunications schema.                |
+| Result             | Nina has an agent with one SQL tool. Its instructions request read-only answers; database privileges determine its access.                |
 
 > **Prerequisite:** Complete [Lab 7: Ask Telecom Questions with Select AI](?lab=selectai). This lab uses the `GENAI` SQL profile and the loader's `GENAI_AGENT` reasoning profile.
 
@@ -96,7 +94,7 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
 
 ## Task 2: Register the SQL tool
 
-The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile's object list lists the table and column definitions used to generate SQL.
+The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile lists the tables whose definitions Select AI uses to generate SQL.
 
 1. Register the tool:
 
@@ -176,7 +174,7 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
     </copy>
     ```
 
-    The team is the runnable unit. It connects Nina's role, the task instructions, and the SQL tool.
+    Run the team to use Nina's agent, task instructions, and SQL tool together.
   
 ## Task 4: Run a telecommunications question
 
@@ -194,15 +192,9 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     </copy>
     ```
 
-    <!-- capture:CAP-21 -->
     ![Run a telecommunications question](images/sql-agent-answer.png)
 
-    *Live LLUSER capture, 23 September 2026.*
-
-  
     Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
-
-    
 
 2. Review the answer.
 
@@ -212,13 +204,9 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
 3. Optional challenge: ask a follow-up question that connects the plan with the highest monthly charges to its subscribers and service orders. A more detailed request may take longer because the agent has to interpret more steps.
 
-<!-- application-capture:APP-09 -->
-
-Open **AI-Assisted Service Assurance** to see the demo's agent question interface. The selected runtime at capture time was local `llama3.2`. This is an interface example, does not show `DBMS_CLOUD_AI_AGENT` running. No agent question, intervention or data-changing action was submitted while taking the capture.
+Open **AI-Assisted Service Assurance** to see the demo's agent question interface. The selected runtime at capture time was local `llama3.2`. This interface example does not show `DBMS_CLOUD_AI_AGENT` running. No agent question, intervention or data-changing action was submitted while taking the capture.
 
 ![Live agent console with runtime selection and suggested telecom questions.](images/app-agent-console.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ## Task 5: Inspect what the agent did
 
@@ -239,15 +227,9 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    <!-- capture:CAP-22 -->
     ![Inspect what the agent did](images/sql-agent-history.png)
 
-    The latest row shows the successful run. The two older RUNNING rows in this capture are retained history from timed-out validation attempts, not successful completions.
-
-    *Live LLUSER capture, 23 September 2026.*
-
-
-    
+    Look for `SUCCEEDED` in your latest run. A `RUNNING` status does not confirm completion.
 
 2. Review the latest tool calls:
 
@@ -265,17 +247,11 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    <!-- capture:CAP-23 -->
     ![Inspect what the agent did](images/sql-agent-tools.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-
-  
 
   The history should show `NINA_TELECOM_SQL_TOOL`. Nina and Jessica can use it to check which tool the agent called.
 
-## Conclusion: Give the agent a controlled way to work
+## Conclusion: Review the agent's tool use
 
 In Lab 7, Nina used Select AI to turn a question into SQL. In this lab, she gave an agent a role, a task, and one approved SQL tool. The agent can handle a broader request and decide when it needs database information, while the database still controls the profile, object list, privileges, and tool history.
 
@@ -283,7 +259,7 @@ The application can call this assistant with a request. Jessica can review its t
 
 Two controls apply to table access. The profile’s `object_list` guides which tables the tool considers. Database grants and row-level policies determine which data the session can read. Give an application agent only the access it needs.
 
-The example remains read-only on purpose. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
+This example asks the agent to read data. To enforce read-only access in an application, use a database user with only the required read privileges. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
 
 ## Appendix: Reset the workshop objects
 
