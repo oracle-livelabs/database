@@ -144,6 +144,11 @@ for p in R.rglob('*.svg'):ET.parse(p)
 for p in R.rglob('*.json'):json.loads(p.read_text())
 quiz=(R/'final-quiz/final-quiz.md').read_text();check('quiz',quiz.count('Q:')==7 and len(re.findall(r'^\s*\* ',re.search(r'```quiz score([\s\S]*?)```',quiz).group(1),re.M))==7 and 'passing: 75' in quiz)
 check('loader_entrypoint', '@load_data/manufacturing-platform-handoff-loader.sql ${local.new_password} ATP${var.resId}_high' in (R/'stack/adb.tf').read_text())
+create_user_template=(R/'stack/create_user.sql.tmpl').read_text()
+check('stack_spatial_role_bootstrap',bool(re.search(r'^grant spatial_author to lluser;$',create_user_template,re.I|re.M)))
+genai_template=(R/'stack/genai_connection.sql.tmpl').read_text()
+genai_tf=(R/'stack/genai.tf').read_text()
+check('stack_genai_model_template', '"model":"${ociGenAiModel}"' in genai_template and 'ociGenAiModel       = var.ociGenAiModel' in genai_tf)
 # Columns of aliases bound to base tables or known views must exist.
 missingcols=[]
 for p in lessons:
@@ -155,7 +160,7 @@ for p in lessons:
     if col.lower() not in allowed:missingcols.append((p.parent.name,alias,col,aliases[alias.lower()]))
 check('base_table_and_view_columns',not missingcols,missingcols)
 coverage=json.loads((R/'validation/screenshot-coverage.json').read_text())
-result={'date':'2026-09-23','scope':'Static structure plus SQLite fixture constraints and relational calculations. Not Oracle execution.','passed':not errors,'errors':errors,'checks':checks,'table_counts':{k:len(v) for k,v in D.items()},'foreign_keys':len(fks),'task_counts':taskcounts,'sql_blocks':blockcounts,'image_references':len(image_refs),'unique_images_referenced':len(set(image_refs)),'external_links':sorted(set(links)),'authentic_manufacturing_screenshots':coverage['authentic_manufacturing_captures'],'pending_capture_positions':len(coverage['pending']),'manual_oracle_validation':'see live-validation.json (separate from these static checks)','green_button_validation':'not_run'}
+result={'date':'2026-09-25','scope':'Static structure plus SQLite fixture constraints and relational calculations. Not Oracle execution.','passed':not errors,'errors':errors,'checks':checks,'table_counts':{k:len(v) for k,v in D.items()},'foreign_keys':len(fks),'task_counts':taskcounts,'sql_blocks':blockcounts,'image_references':len(image_refs),'unique_images_referenced':len(set(image_refs)),'external_links':sorted(set(links)),'authentic_manufacturing_screenshots':coverage['authentic_manufacturing_captures'],'pending_capture_positions':len(coverage['pending']),'manual_oracle_validation':'see live-validation.json (separate from these static checks)','green_button_validation':'not_run'}
 (R/'validation/static-results.json').write_text(json.dumps(result,indent=2))
 (R/'validation/schema-contract.json').write_text(json.dumps({'objects':contract,'foreign_keys':fks},indent=2))
 print(json.dumps({k:v for k,v in result.items() if k not in ['checks','external_links']},indent=2))

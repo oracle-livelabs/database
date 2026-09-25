@@ -1,4 +1,4 @@
-# Validation report: 23 September 2026
+# Validation report: 25 September 2026
 
 ### Objectives
 
@@ -48,6 +48,8 @@ Unavoidable platform content includes LiveLabs reservation labels, Oracle proper
 ## Deferred validation
 
 No Terraform or LiveLabs green-button provisioning was attempted. That phase must validate the fresh SQLcl invocation, stack API-key authentication, supplied inference-region/model values and bootstrap prerequisites. The manual tests used resource-principal authentication. Prior public URL HEAD checks timed out; local links and hosted renderer loading passed. Clipboard contents remain unverified although the copy control was exercised. See the [green-button checklist](green-button-checklist.md).
+
+The 25 September stack parity review aligned the target with the tested reference Terraform source. `main.tf`, `output.tf`, and `create_user.sql.tmpl` have identical content; `output.tf` differs only by its final newline. The target now grants `SPATIAL_AUTHOR` before the loader checks it. The remaining target differences are the direct manufacturing loader invocation and the explicit GENAI region/model used by this workshop. Static parity and template-variable checks passed, but Terraform and SQLcl were unavailable locally, so this does not replace the green-button run.
 
 ## Wording review update, 22 September 2026
 

@@ -433,28 +433,28 @@
     },
     {
       "path": "stack/README.md",
-      "bytes": 2546,
-      "sha256": "bde8c20360c3f13f19c4f0fc1cfb3096508ce3c64c1ba55243647197b7ba62ef"
+      "bytes": 3082,
+      "sha256": "4dac3c5d44c99fca92199ac59d36d86bebb9f5ffe43d922ddb90efe40dc175cf"
     },
     {
       "path": "stack/adb.tf",
-      "bytes": 2672,
-      "sha256": "93d55ceb9f5cb51ca6d60074a46e7c33ccc9dcda1862bb804b407199c51ab334"
+      "bytes": 2776,
+      "sha256": "f30fad36c94f21f6c7fbcbc1f0de3cde631136a8b9861e282a38d3805467529a"
     },
     {
       "path": "stack/create_user.sql.tmpl",
-      "bytes": 1218,
-      "sha256": "d9850e397c421a4fa94fb5e0912a331747a5f9be5dd7c6b863e5f802a4c336b4"
+      "bytes": 1243,
+      "sha256": "13f27bd5175f9f5cf33da7ab1f6c03dfca21b1003bf85c7238f2e9eedadd4ff9"
     },
     {
       "path": "stack/genai.tf",
-      "bytes": 1029,
-      "sha256": "68c15392241afd5da30a55375c7d76eb8d082314863395cfdca1d6b6adfd633f"
+      "bytes": 1007,
+      "sha256": "727653d8cca20796f4cfc890ed03872746a4a10c973da4a3d60c5461df618952"
     },
     {
       "path": "stack/genai_connection.sql.tmpl",
-      "bytes": 1060,
-      "sha256": "2b92ddcdfda71d47bb09a0fd9fd2b86af9013be7dc616424d21644dc2f108973"
+      "bytes": 1058,
+      "sha256": "a6f9f186e2367a491f14574d1b20bee1da09f4729386d548a80044fb1f04c276"
     },
     {
       "path": "stack/load_data/manufacturing-platform-handoff-loader.sql",
@@ -463,18 +463,18 @@
     },
     {
       "path": "stack/main.tf",
-      "bytes": 1401,
-      "sha256": "163a13dbb1278063d9500765b358186b457801ff61ebd6a2380bf4efb514b70c"
+      "bytes": 1351,
+      "sha256": "bf43e3631e651edebd487de6c264e4bbdd0b87fdccdbc1eed2c4604ac25cf46e"
     },
     {
       "path": "stack/output.tf",
       "bytes": 255,
-      "sha256": "0e0c95b2850ea5ab541d56bdb795225811d7157b6165d76c76ed9d90d99ae180"
+      "sha256": "d1e0b56e555cb13fbd85f696b76340ef46a0a83ca3a8089a06426afe70b1a327"
     },
     {
       "path": "stack/variables.tf",
-      "bytes": 2060,
-      "sha256": "d98b57c18fba44db7d7fa7df7a0a1a258387d3e284aa6c5ddc07a7cdd6516c37"
+      "bytes": 2075,
+      "sha256": "d3c97e35c1164365d7b5f784537e7cfe63ac20d0c760dfa783edc203cd23a287"
     },
     {
       "path": "validation/banner-preservation.json",
@@ -509,7 +509,7 @@
     {
       "path": "validation/domain-audit.json",
       "bytes": 1049,
-      "sha256": "a33b23529a1a8f100853dde5b7aaebac45416ecf46dd6ebdce67e5c735aacb5d"
+      "sha256": "b661118293038dce9014d74c2b8462d183ae634c8cc9bd0cd3b6fbe5fa43033c"
     },
     {
       "path": "validation/external-links.json",
@@ -523,8 +523,8 @@
     },
     {
       "path": "validation/green-button-checklist.md",
-      "bytes": 1379,
-      "sha256": "d82571ef532e7305a0a3c3bfe6d83ad2ec2490cfc5a944fda934ff267e87d328"
+      "bytes": 2155,
+      "sha256": "782f5a762a0ad424295a9d3f29f9c409a5ff2b69cb188f1ec48feb9141ae27ea"
     },
     {
       "path": "validation/image-review.json",
@@ -597,9 +597,14 @@
       "sha256": "a30dbee789616feffb3327fb40ccff7ad3f49cc8c07211f0c91f694880badad5"
     },
     {
+      "path": "validation/stack-parity.json",
+      "bytes": 887,
+      "sha256": "fb714bf2b1ea6567cf0c64a23dcb4b5628660cbc83c8e66e0599e954c528ada2"
+    },
+    {
       "path": "validation/static-results.json",
-      "bytes": 26041,
-      "sha256": "abfd10af89965ed952b084f87ce5d2c48ebe13b670517d63d5ff4f20a7216720"
+      "bytes": 26211,
+      "sha256": "0930b286201477b106db0a94118f4df8971fa345cc27606f6de280b3263ec8c8"
     },
     {
       "path": "validation/structure-comparison.json",
@@ -608,13 +613,13 @@
     },
     {
       "path": "validation/validate.py",
-      "bytes": 12532,
-      "sha256": "cac9a2f236cb9244db09e29b3c379a4772e931f7dfb02d72f3c580b3bbe1813f"
+      "bytes": 12970,
+      "sha256": "ee1651f38e35440565668e4000d85cecde18fc0c9d2c73f14f6f862fb332cba8"
     },
     {
       "path": "validation/validation-report.md",
-      "bytes": 7172,
-      "sha256": "c6060d55abad6577ee73260e0b07deff380aa2412d7463eab38efffe750cec40"
+      "bytes": 7750,
+      "sha256": "79202c1c38bfbd1887f55ee48844381fe4f8ebb131d5be7c2efcfef994e950c9"
     },
     {
       "path": "validation/workshop-map.md",
