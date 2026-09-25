@@ -540,7 +540,7 @@ Here are the details of a few other tasks that are used in the Agentic planner.
 
 * The **Loan\_Document\_Verification** Agent task verifies the documents using the agent profile `loan_document_verification_agent`. It extracts the document contents using OCR microservice.
 * The **Compliance\_And\_AML\_Check** task uses Loan Compliance microservice, which performs credit score and AML checks. This microservice is pre-configured and available locally in the LiveLabs environment.
-* The **Loan\_Offer\_Underwriter** is as *SIMPLE* task developed using Langraph in Python. It validates the user's debt-to-credit ratio and makes the final loan offer. This agent is pre-created and available locally in the LiveLabs environment.
+* The **Loan\_Offer\_Underwriter** is as *SIMPLE* task developed using Langraph in Python. It validates the user's debt-to-credit ratio and makes the final loan offer. This agent is pre-created and available locally in the LiveLabs environment. To see how a custom integration can be implemented, refer to the [loan-processing-agent microservice](https://github.com/oracle-samples/microtx-samples/tree/main/workflow/loan-application/loan-processing-agent).
 
 ## Task 7: Check the Execution Status of the Orchestrator (AGENTIC_PLANNER)
 
