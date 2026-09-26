@@ -1,0 +1,50 @@
+Clear output
+Download script output
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.113
+
+
+Copy to clipboard
+OBJECT_NAME    OVERLOAD ARGUMENT_NAME   POSITION DATA_TYPE 
+-------------- -------- --------------- -------- --------- 
+SET_ATTRIBUTE  1        OBJECT_NAME            1 VARCHAR2  
+SET_ATTRIBUTE  1        OBJECT_TYPE            2 VARCHAR2  
+SET_ATTRIBUTE  1        ATTRIBUTE_NAME         3 VARCHAR2  
+SET_ATTRIBUTE  1        ATTRIBUTE_VALUE        4 CLOB      
+SET_ATTRIBUTE  2        OBJECT_NAME            1 VARCHAR2  
+SET_ATTRIBUTE  2        OBJECT_TYPE            2 VARCHAR2  
+SET_ATTRIBUTE  2        ATTRIBUTE_NAME         3 VARCHAR2  
+SET_ATTRIBUTE  2        ATTRIBUTE_VALUE        4 VARCHAR2  
+SET_ATTRIBUTE  3        OBJECT_NAME            1 VARCHAR2  
+SET_ATTRIBUTE  3        OBJECT_TYPE            2 VARCHAR2  
+SET_ATTRIBUTE  3        ATTRIBUTE_NAME         3 VARCHAR2  
+SET_ATTRIBUTE  3        ATTRIBUTE_VALUE        4 BOOLEAN   
+SET_ATTRIBUTES null     OBJECT_NAME            1 VARCHAR2  
+SET_ATTRIBUTES null     OBJECT_TYPE            2 VARCHAR2  
+SET_ATTRIBUTES null     ATTRIBUTES             3 CLOB      
+
+
+Elapsed: 00:00:00.725
+15 rows selected.
+
+Copy to clipboard
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.095
+
+
+Copy to clipboard
+TEAM_EXEC_ID                         STATE     START_DATE             END_DATE               TOOL_CALLS 
+------------------------------------ --------- ---------------------- ---------------------- ---------- 
+5C26CC88-4C23-15BC-E063-6210000AA968 SUCCEEDED 9/23/2026, 12:41:15 PM 9/23/2026, 12:41:37 PM          1 
+5C26B993-CFEB-6977-E063-6210000AEA2E RUNNING   9/23/2026, 12:35:57 PM null                            7 
+5C2683BE-42F0-0E6E-E063-6210000A9F8F RUNNING   9/23/2026, 12:24:35 PM null                            6 
+
+
+Elapsed: 00:00:00.032
+3 rows selected.
+
+Copy to clipboard

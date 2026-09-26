@@ -11,18 +11,27 @@
     <script src="https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="https://livelabs.oracle.com/cdn/common/redwood-hol/js/main.min.js"></script>
 
-    <link rel="stylesheet" href="https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css" />
-    <link rel="shortcut icon" href="https://livelabs.oracle.com/cdn/common/redwood-hol/img/favicon.ico" />
+    <link rel="stylesheet" href="https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css">
+    <link rel="shortcut icon" href="https://livelabs.oracle.com/cdn/common/redwood-hol/img/favicon.ico">
+<!-- Retail local table caption override -->
+<style>
+  table caption,
+  .table-title,
+  .tableTitle,
+  .table-caption,
+  .tableCaption {
+    display: none !important;
+  }
+</style>
+<!-- /Retail local table caption override -->
 </head>
-
 <body>
     <header class="hol-Header" role="banner">
         <div class="hol-Header-wrap">
             <div class="hol-Header-logo"><span>Oracle LiveLabs</span></div>
             <a href="https://livelabs.oracle.com" target="_blank" id="livelabs" title="Oracle LiveLabs"></a>
             <div class="hol-Header-actions">
-                <button id="openNav" class="hol-Header-button hol-Header-button--menu rightNav" aria-label="Open Menu"
-                    title="Open Menu">
+                <button id="openNav" class="hol-Header-button hol-Header-button--menu rightNav" aria-label="Open Menu" title="Open Menu">
                     <span class="hol-Header-toggleIcon"></span>
                 </button>
             </div>
@@ -57,5 +66,7 @@
             </div>
         </div>
     </footer>
+
+
 </body>
 </html>
