@@ -1,0 +1,84 @@
+{
+  "date": "2026-09-22",
+  "renderer": "Oracle LiveLabs CDN against local target files",
+  "launch_variants": [
+    "tenancy",
+    "sandbox"
+  ],
+  "introduction_and_erd_rendered": true,
+  "lessons": [
+    {
+      "lesson": "getting-started",
+      "tasks": 2,
+      "copy_controls": 1,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "production-operations-dashboard",
+      "tasks": 2,
+      "copy_controls": 1,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "production-order-duality",
+      "tasks": 6,
+      "copy_controls": 14,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "component-quality-vector-search",
+      "tasks": 4,
+      "copy_controls": 8,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "production-quality-network",
+      "tasks": 7,
+      "copy_controls": 6,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "plant-routing-spatial",
+      "tasks": 3,
+      "copy_controls": 4,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "quality-review-oml",
+      "tasks": 4,
+      "copy_controls": 5,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "selectai",
+      "tasks": 6,
+      "copy_controls": 9,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "selectai-agent",
+      "tasks": 5,
+      "copy_controls": 12,
+      "broken_images_after_render": []
+    },
+    {
+      "lesson": "final-quiz",
+      "tasks": 1,
+      "copy_controls": 0,
+      "broken_images_after_render": []
+    }
+  ],
+  "expand_and_collapse": "passed",
+  "quiz_wrong_answer_feedback": "passed",
+  "quiz_retry": "passed",
+  "quiz_final_score": "7/7 (100%)",
+  "quiz_badge": "rendered with manufacturing text",
+  "copy_action": "button invoked; browser clipboard API returned empty text, so clipboard content is not verified",
+  "browser_errors": [],
+  "oracle_database_execution": true,
+  "latest_render_check": "2026-09-22 after 43 screenshot replacements",
+  "latest_rendered_pages": "rendered-pages.json",
+  "latest_image_load_checks": 63,
+  "latest_quiz_score": "7/7 (100%)",
+  "latest_quiz_badge": "rendered"
+}

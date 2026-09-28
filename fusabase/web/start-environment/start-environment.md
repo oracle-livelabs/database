@@ -150,7 +150,8 @@ This lab assumes you have:
 
     **On the first run, this may take 1 to 2 minutes, depending on your Wi-Fi speed**, while the images download and the services finish initializing. Right now, the compose file is setting up Oracle AI Database Free, ORDS, and configuring Fusabase for the workshop.
 
-    > Note: To learn more about Fusabase configuration, read about it in the docs. [ADD LINK]
+    > Note: To learn more about Fusabase configuration, read about it in the [Developer Docs](https://docs.oracle.com/en/database/oracle/backend-for-firebase/26.1/fusab/setting-oracle-backend-firebase-projects.html#GUID-1143E2B9-E417-48CA-AD5C-6C481CA24FB3)
+
 
 ## Task 5: Confirm the stack is running
 

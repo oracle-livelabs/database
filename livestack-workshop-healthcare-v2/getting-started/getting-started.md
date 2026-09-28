@@ -111,6 +111,5 @@ You can now continue to the finance labs.
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Author** - Linda Foinding, Principal Product Manager, Oracle Database Product Management
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

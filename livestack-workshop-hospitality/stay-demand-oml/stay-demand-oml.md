@@ -4,8 +4,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Otto Spencer is Seer Hotels’ data scientist. His team supplies the predictions used in analytics charts and dashboards.
 
 The stay offer team wants a demand watchlist. A business user should be able to see which stay offers may need more attention, why the model flagged them, and which stay offers are already showing strong bookings or guest activity.
@@ -82,9 +80,9 @@ The view also contains `SURGE_LABEL`. This is the known label used during traini
     </copy>
     ```
 
-    ![Live hospitality result — oml training](images/sql-oml-training.jpg)
+    ![SQL Worksheet result — oml training](images/sql-oml-training.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
 2. Identify the parts of each row.
 
@@ -126,7 +124,7 @@ This task is optional. AutoML can take several minutes to complete, so you can c
   
     ![Hospitality classification experiment settings](images/oml-settings.jpg)
 
-    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime varies; this fixture completed in about two minutes during validation.
+    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime varies; the leaderboard may take several minutes.
 
     
 
@@ -356,9 +354,9 @@ Otto creates sample scoring data by changing values from the training view. This
     </copy>
     ```
 
-    ![Live hospitality result — oml scoring](images/sql-oml-scoring.jpg)
+    ![SQL Worksheet result — oml scoring](images/sql-oml-scoring.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
 3. Read the result as a dashboard user.
 

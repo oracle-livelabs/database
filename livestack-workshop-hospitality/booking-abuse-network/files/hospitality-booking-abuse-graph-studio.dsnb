@@ -1,7 +1,7 @@
 [
   {
     "name": "Booking Abuse Network",
-    "description": "Hospitality booking-evidence investigation; outputs are cleared and must be generated on the deployed dataset.",
+    "description": "Hospitality booking-connection investigation; run the paragraphs against the deployed dataset.",
     "tags": null,
     "version": "7",
     "layout": "zeppelin",
@@ -228,7 +228,6 @@
         "hasTitle": false,
         "message": [
           "%sql",
-          "",
           "SELECT *",
           "FROM GRAPH_TABLE (",
           "  booking_abuse_network",

@@ -1,48 +1,35 @@
 {
   "workshoptitle": "Build Your Own AI Staff",
-  "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "Workshop overview, key terms, and learning outcomes.",
-      "type": "livelabs",
+      "description": "Learn the workshop story, key terms, and the role-based Staff pattern.",
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Get Started",
-      "description": "Open a safe ChatGPT workspace and prepare fictional or approved practice information.",
-      "type": "livelabs",
+      "title": "Getting Started",
+      "description": "Open ChatGPT and prepare a private Staff Room called My AI Staff.",
       "filename": "../../getting-started/getting-started.md"
     },
     {
-      "title": "Lab 1: Define a Focused GPT Task",
-      "description": "Choose one repeat task and create a Task Brief with a useful result and clear boundary.",
-      "type": "livelabs",
+      "title": "Lab 1: Choose Your Task",
+      "description": "Select one repeat task, define success, and choose the smallest useful group of roles.",
       "filename": "../../choose-your-task/choose-your-task.md"
     },
     {
-      "title": "Lab 2: Build the Agent Team",
-      "description": "Create three role-based agents with clear inputs, outputs, guardrails, and handoffs.",
-      "type": "livelabs",
+      "title": "Lab 2: Build The Staff",
+      "description": "Create three to five role-based agents with clear responsibilities and guardrails.",
       "filename": "../../build-the-staff/build-the-staff.md"
     },
     {
-      "title": "Lab 3: Add Memory and Plan the OCI Path",
-      "description": "Review a candidate memory item and map the prototype to an OCI production design.",
-      "type": "livelabs",
-      "filename": "../../memory-and-oci/memory-and-oci.md"
-    },
-    {
-      "title": "Lab 4: Run, Review, and Quiz",
-      "description": "Pass one request through the team, test safe stops, and check the design choices.",
-      "type": "livelabs",
+      "title": "Lab 3: Run The Staff Together",
+      "description": "Pass a safe practice request through the roles using visible handoffs and owner approval.",
       "filename": "../../run-the-staff-together/run-the-staff-together.md"
     },
     {
-      "title": "Need Help?",
-      "description": "Get help with the LiveLabs environment.",
-      "type": "livelabs",
-      "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+      "title": "Lab 4: Final Quiz",
+      "description": "Review the Staff design, safe stops, response variation, and the path to Oracle.",
+      "filename": "../../final-quiz/final-quiz.md"
     }
   ]
 }

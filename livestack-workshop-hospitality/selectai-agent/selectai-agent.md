@@ -4,8 +4,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Nina Patel has used Select AI for individual questions. Her guest-review screen now needs an assistant that can handle a request and follow-up questions.
 
 Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the hospitality tables configured in the previous lab.
@@ -194,9 +192,9 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     </copy>
     ```
 
-    ![Live hospitality result — agent answer](images/sql-agent-answer.jpg)
+    ![SQL Worksheet result — agent answer](images/sql-agent-answer.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
   
     Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
 
@@ -229,9 +227,9 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![Live hospitality result — agent history](images/sql-agent-history.jpg)
+    ![SQL Worksheet result — agent history](images/sql-agent-history.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     
 
@@ -251,9 +249,9 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![Live hospitality result — agent tools](images/sql-agent-tools.jpg)
+    ![SQL Worksheet result — agent tools](images/sql-agent-tools.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
   
 

@@ -29,7 +29,7 @@
     },
     {
       "title": "Lab 4: Investigate a Booking Abuse Network",
-      "description": "Review Bob's graph approach to finding reservations linked by shared booking evidence with Oracle Property Graph and SQL/PGQ.",
+      "description": "Review Bob's graph approach to finding reservations linked by shared booking details with Oracle Property Graph and SQL/PGQ.",
       "filename": "../../booking-abuse-network/booking-abuse-network.md"
     },
     {

@@ -671,5 +671,11 @@
     "target_asset": "selectai-agent/images/nina.png",
     "status": "generated_illustration",
     "reason": "Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot."
+  },
+  {
+    "asset_id": "N_INTRO_SCENE",
+    "target_asset": "introduction/images/seer-hotels-introduction.png",
+    "status": "generated_illustration",
+    "reason": "Redwood-style hospitality introduction scene with Jessica and Thomas. Visually reviewed; illustration, not a database screenshot."
   }
 ]

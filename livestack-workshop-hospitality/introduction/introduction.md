@@ -2,7 +2,13 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator at Seer Hotels. Her teams are building new guest applications, improving guest-service and booking-abuse reviews, routing service work, and adding AI to hospitality dashboards.
+Jessica Chan, the DBA at Seer Hotels, starts the morning with a question from guest services. A hotel has reported an accessible-room availability concern. Which guests have booked the affected stay offers, and what should the team check before arranging assistance?
+
+![Jessica and Thomas review an accessible-room concern and affected reservations in the Seer Hotels lobby.](images/seer-hotels-introduction.png)
+
+Thomas needs reservation details as JSON for the guest application. Gilly will find related stay offers, and Moon will identify nearby hotels for the service team to consider. Bob will investigate suspicious booking connections, Otto will build a demand watchlist, and Nina will ask questions about the same hospitality data.
+
+Jessica brings the team together around the records already held in Oracle AI Database. Each lab follows one part of their work. Before arranging a relocation, the service team still needs to check room availability, accessibility requirements, and stay dates.
 
 The requests look different, but they share one problem. The data is already in Oracle AI Database, and each team wants to use it in a different way:
 
@@ -19,9 +25,7 @@ Seer Hotels is a fictional hotel group. This diagram shows how guests, hotels, r
 
 ![Seer Hotels core ERD: guests and hotel properties each have many reservations; hotel properties have many stay offers; reservations and stay offers each connect to many reservation-night lines.](images/seer-hotels-erd.png)
 
-*One room per reservation. A stay offer combines a room type and a rate plan. Nightly-charge lines record room nights and rates.* [Open the full-size diagram](images/seer-hotels-erd.png) or see the [complete schema and supporting entities](../validation/schema-contract.md).
-
-> **Workshop status:** The hospitality loader, dataset, and lab screenshots are ready. The core SQL labs, Graph Studio notebook, and optional AutoML experiment were tested on a manually provisioned database. LiveLabs green-button provisioning still needs testing. Before starting, confirm the prerequisites in Getting Started.
+*One room per reservation. A stay offer combines a room type and a rate plan. Nightly-charge lines record room nights and rates.* [Open the full-size diagram](images/seer-hotels-erd.png).
 
 Jessica helps each team use the same hospitality records. Oracle AI Database stores the relational tables and lets the teams work with them through JSON, vectors, graphs, spatial queries, machine learning, and AI services. Each team keeps the database access controls that apply to its work.
 
@@ -77,6 +81,6 @@ Estimated Workshop Time: **90 minutes**
 
 ## Running hospitality demo
 
-This screenshot shows the local Hospitality LiveStack demo. It uses a separate dataset from the Seer Hotels workshop. Compare expected records and counts with the lab SQL results.
+This local Hospitality LiveStack demo uses a separate dataset from the Seer Hotels workshop.
 
 ![Hospitality LiveStack welcome page](images/demo-welcome.jpg)

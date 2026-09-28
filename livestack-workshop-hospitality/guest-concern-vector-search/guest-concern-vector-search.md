@@ -4,8 +4,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Gilly Bourne is an AI engineer at Seer Hotels. Her team has built a search feature for the guest service operations application. A business user can enter a question such as **which guests may be affected by an accessible-room availability concern?** The application should find the relevant stay offers first, then show the guests who booked them.
 
 Gilly has the stay offer, reservation, and guest data in Oracle AI Database. She needs to match a plain-language question to stay offers, then find the guests who booked them. The result must give the service team names and reservations to follow up.
@@ -150,9 +148,9 @@ Gilly decides that one vector per stay offer is enough. Each stay offer record i
     </copy>
     ```
 
-    ![Live hospitality result — vector values](images/sql-vector-values.jpg)
+    ![SQL Worksheet result — vector values](images/sql-vector-values.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     
 
@@ -191,9 +189,9 @@ Now Gilly tests the new column with a simple vector query. She asks for stay off
     </copy>
     ```
 
-    ![Live hospitality result — vector distance](images/sql-vector-distance.jpg)
+    ![SQL Worksheet result — vector distance](images/sql-vector-distance.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     **Expected output: Accessible Stay Offer Matches**
 
@@ -222,9 +220,9 @@ Now Gilly tests the new column with a simple vector query. She asks for stay off
     </copy>
     ```
 
-    ![Live hospitality result — vector similarity](images/sql-vector-similarity.jpg)
+    ![SQL Worksheet result — vector similarity](images/sql-vector-similarity.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     The query uses the same vectors and the same cosine calculation. It only changes how the result is shown to the person using the application.
 
@@ -271,9 +269,9 @@ Gilly now has the business requirement for the application. A business user shou
     </copy>
     ```
 
-    ![Live hospitality result — vector guests](images/sql-vector-guests.jpg)
+    ![SQL Worksheet result — vector guests](images/sql-vector-guests.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     The first part ranks stay offers by meaning. The remaining joins use ordinary relational keys to find the matching nightly charges, reservations, and guests.
 

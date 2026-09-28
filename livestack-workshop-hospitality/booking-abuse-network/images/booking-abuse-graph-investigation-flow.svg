@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
   <title id="title">Booking Abuse graph investigation flow</title>
-  <desc id="desc">A seed reservation connects through SQL PGQ graph traversal to booking abuse entities, relationship evidence, and investigation action.</desc>
+  <desc id="desc">A seed reservation connects through SQL PGQ graph traversal to booking abuse entities, relationship details, and investigation action.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6470"/>
@@ -10,7 +10,7 @@
     </filter>
   </defs>
   <rect width="980" height="560" fill="#f8fafc"/>
-  <text x="490" y="38" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#111827" text-anchor="middle">From Seed reservation to Booking Abuse Ring Evidence</text>
+  <text x="490" y="38" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#111827" text-anchor="middle">From Seed Reservation to Booking Abuse Ring</text>
   <text x="490" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569" text-anchor="middle">SQL/PGQ follows graph paths from a suspicious reservation to connected risk entities.</text>
 
   <g filter="url(#shadow)">
@@ -49,7 +49,7 @@
   <g filter="url(#shadow)">
     <rect x="78" y="346" width="548" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
     <rect x="78" y="346" width="548" height="36" rx="8" fill="#e0f2fe"/>
-    <text x="352" y="370" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Relationship Evidence Returned by SQL</text>
+    <text x="352" y="370" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Relationship Details Returned by SQL</text>
     <text x="102" y="408" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">shared device, reused payment token, shared IP, linked phone</text>
     <text x="102" y="432" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">each row explains why an entity is near the seed reservation</text>
   </g>

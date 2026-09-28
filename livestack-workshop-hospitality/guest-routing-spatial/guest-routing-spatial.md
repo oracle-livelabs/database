@@ -4,8 +4,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Moon Kai is Seer Hotels’ spatial specialist. Operations teams ask Moon for help when location affects a service decision: which property is closest to a region with growing demand, and which guests should it handle?
 
 Oracle AI Database stores hotel and guest locations as map points. It stores demand regions as map areas, each with a demand score.
@@ -91,9 +89,9 @@ The same stored location supports distance calculations, relational joins, and J
     </copy>
     ```
 
-    ![Live hospitality result — spatial points](images/sql-spatial-points.jpg)
+    ![SQL Worksheet result — spatial points](images/sql-spatial-points.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
 
@@ -136,9 +134,9 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
     </copy>
     ```
 
-    ![Live hospitality result — spatial new york](images/sql-spatial-new-york.jpg)
+    ![SQL Worksheet result — spatial new york](images/sql-spatial-new-york.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     `SDO_GEOM.SDO_DISTANCE` compares the hotel-property point with the demand-region polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
@@ -155,7 +153,7 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
 
     **Expected output: New York Service Coverage**
 
-    Review the closest property and its distance. Rankings depend on the data your loader supplied. The live capture below shows the tested dataset.
+    Review the closest property and its distance. Rankings depend on the loaded data.
 
     
 
@@ -194,9 +192,9 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
     </copy>
     ```
 
-    ![Live hospitality result — spatial chicago](images/sql-spatial-chicago.jpg)
+    ![SQL Worksheet result — spatial chicago](images/sql-spatial-chicago.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     
 
@@ -279,9 +277,9 @@ Moon now needs a result that an operations application can use: guests inside Ne
     </copy>
     ```
 
-    ![Live hospitality result — spatial routing](images/sql-spatial-routing.jpg)
+    ![SQL Worksheet result — spatial routing](images/sql-spatial-routing.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    *Scroll the result grid to inspect additional rows and columns.*
 
     `SDO_GEOM.RELATE` keeps guests whose point falls inside or touches the New York Visitor Region polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching guest to every active property. `ROW_NUMBER` keeps the nearest property for each guest.
 

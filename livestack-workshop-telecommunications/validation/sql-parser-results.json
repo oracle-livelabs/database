@@ -1,0 +1,302 @@
+[
+  {
+    "lesson": "getting-started/getting-started.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+    "block": 1,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 2,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 3,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 4,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 5,
+    "status": "parsed"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 6,
+    "status": "parsed"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 7,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 8,
+    "status": "parsed"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 9,
+    "status": "parsed"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 10,
+    "status": "parsed"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 11,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 12,
+    "status": "parsed"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 13,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "service-order-duality/service-order-duality.md",
+    "block": 14,
+    "status": "parsed"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 2,
+    "status": "parsed"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 3,
+    "status": "parsed"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 4,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 5,
+    "status": "parsed"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 6,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 7,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "block": 8,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 2,
+    "status": "parsed"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 3,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 4,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 5,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "block": 6,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 2,
+    "status": "parsed"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 3,
+    "status": "parsed"
+  },
+  {
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "block": 4,
+    "status": "parsed"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 2,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 3,
+    "status": "parsed"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 4,
+    "status": "parsed"
+  },
+  {
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "block": 5,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 2,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 3,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 4,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 5,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 6,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 7,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 8,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "block": 9,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 1,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 2,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 3,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 4,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 5,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 6,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 7,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 8,
+    "status": "Oracle-specific manual review"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 9,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 10,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 11,
+    "status": "parsed"
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "block": 12,
+    "status": "Oracle-specific manual review"
+  }
+]

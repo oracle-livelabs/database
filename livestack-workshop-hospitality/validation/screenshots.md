@@ -108,3 +108,5 @@ Updated 21 September 2026. SQL, Graph Studio, AutoML and local-demo captures are
 | N_SCREEN_COMPARISON | `stay-demand-oml/images/oml-model-comparison.jpg` | regenerated_live_capture | Live LLUSER screenshot placed beside the matching OML instruction. |
 
 | N_BANNER_AGENT | `selectai-agent/images/nina.png` | generated_illustration | Character banner restored with hospitality captions using the original illustration as an image-edit reference. Visually reviewed and OCR checked; illustration, not a live screenshot. |
+
+| N_INTRO_SCENE | `introduction/images/seer-hotels-introduction.png` | generated_illustration | Redwood-style hospitality introduction scene with Jessica and Thomas. Visually reviewed; illustration, not a database screenshot. |

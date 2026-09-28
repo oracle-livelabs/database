@@ -20,7 +20,7 @@ To verify reference immutability and structural equivalence as well, supply the 
 python3 validation/validate.py --source /path/to/reference --reference-evidence /path/to/hospitality-migration-evidence
 ```
 
-Static checks cover both manifests, local links, 60 SQL blocks, 18 foreign-key contracts, and 51 notebook paragraphs. They do not execute Oracle SQL or import Graph Studio notebooks. Runtime checks and 54 environment-dependent image captures remain pending Phase 2.
+Static checks cover both manifests, local links, 60 SQL blocks, 18 foreign-key contracts, and 51 notebook paragraphs. The separate [live validation report](live-validation.md) records the completed Oracle SQL, Graph Studio, AutoML, Select AI, and LiveLabs green-button tests. The screenshot inventory is complete.
 
 ## Follow-up verification
 

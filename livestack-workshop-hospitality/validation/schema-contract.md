@@ -1,6 +1,6 @@
 # Hospitality schema contract
 
-This contract lists the objects the hospitality loader and labs need. The [machine-readable contract](schema-contract.json) supports static checks. See the [live validation report](live-validation.md) for the completed manual-database tests and remaining provisioning checks.
+This contract lists the objects the hospitality loader and labs need. The [machine-readable contract](schema-contract.json) supports static checks. See the [live validation report](live-validation.md) for the completed manual-database and LiveLabs green-button tests.
 
 ## Naming and relationships
 

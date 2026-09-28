@@ -1,0 +1,52 @@
+SET TERMOUT ON
+SET ECHO ON
+WHENEVER OSERROR EXIT FAILURE
+WHENEVER SQLERROR EXIT SQL.SQLCODE
+
+
+create user lluser identified by ${user_password};
+
+grant create session to lluser;
+
+alter user lluser quota unlimited on data;
+
+grant execute on dbms_cloud to lluser;
+
+grant execute on dbms_cloud_ai to lluser;
+
+grant execute on dbms_cloud_ai_agent to lluser;
+
+grant oml_developer to lluser;
+
+grant resource to lluser;
+
+begin
+
+ords_admin.enable_schema (
+        p_enabled               => TRUE,
+        p_schema                => 'LLUSER',
+        p_url_mapping_type      => 'BASE_PATH',
+        p_auto_rest_auth        => TRUE   
+    ); 
+    
+    -- Allow SELECT_AI_USER to use the resource principal
+    dbms_cloud_admin.enable_resource_principal(username  => 'LLUSER');
+
+end;
+/
+
+begin
+  dbms_cloud.get_object(
+    object_uri=>'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/all_MiniLM_L12_v2.onnx',
+    directory_name=>'DATA_PUMP_DIR',
+    file_name=>'all_MiniLM_L12_v2.onnx'
+  );
+end;
+/
+
+begin
+  dbms_vector.load_onnx_model('DATA_PUMP_DIR', 'all_MiniLM_L12_v2.onnx', 'ALL_MINILM_L12_V2');
+end;
+/
+
+exit;

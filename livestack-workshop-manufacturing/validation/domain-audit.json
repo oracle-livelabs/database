@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-25",
+  "passed": true,
+  "files_scanned": 132,
+  "prior_domain_matches": 0,
+  "unique_identifier_patterns": 126,
+  "ocr_rasters": 64,
+  "method": "All file paths and textual content; parsed documents, SQL, JSON, DSNB, SVG metadata; PNG text chunks and JPEG printable metadata; macOS Vision OCR for every raster. Normalized escaped underscores.",
+  "persona_banner_artwork": "Historical caption-mask comparison passed; current illustration resizing outside copy edits is documented in copy-review-results.json",
+  "authentic_screenshots": 49,
+  "database_screenshots": 43,
+  "demo_application_screenshots": 6,
+  "pending_capture_markers": 0,
+  "allowed_platform_terms": [
+    "LiveLabs reservation and My Reservations labels",
+    "Oracle property graph terminology",
+    "Graph Studio built-in BANK_GRAPH, MovieStream and sales-history examples/tags",
+    "HTML viewport metadata and generic service help text"
+  ],
+  "limitations": [
+    "OCR can miss text; captured pages and banner artwork were also visually checked."
+  ]
+}
