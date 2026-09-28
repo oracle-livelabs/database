@@ -34,6 +34,16 @@ The function will search the existing `parks` table. It will not create a table,
     %python
     from typing import Optional
 
+    def normalize_filter_values(values, field_name, transform):
+        if values is None:
+            return []
+        if not isinstance(values, list) or any(
+            not isinstance(value, str) or not value.strip()
+            for value in values
+        ):
+            raise ValueError(f"{field_name} must be a list of non-empty strings")
+        return [transform(value.strip()) for value in values]
+
     def validate_context_tool_inputs(
         query: str,
         states: Optional[list[str]] = None,
@@ -43,24 +53,35 @@ The function will search the existing `parks` table. It will not create a table,
         if not isinstance(query, str) or not query.strip():
             raise ValueError("query must be a non-empty string")
 
-        if not isinstance(top_k, int) or not 1 <= top_k <= 10:
+        if isinstance(top_k, bool) or not isinstance(top_k, int) or not 1 <= top_k <= 10:
             raise ValueError("top_k must be an integer from 1 through 10")
 
-        clean_states = [
-            state.strip().upper()
-            for state in (states or [])
-            if isinstance(state, str) and state.strip()
-        ]
-        clean_exclusions = [
-            park_code.strip().lower()
-            for park_code in (exclude_park_codes or [])
-            if isinstance(park_code, str) and park_code.strip()
-        ]
+        clean_states = normalize_filter_values(states, "states", str.upper)
+        clean_exclusions = normalize_filter_values(
+            exclude_park_codes,
+            "exclude_park_codes",
+            str.lower,
+        )
 
         return query.strip(), clean_states, clean_exclusions, top_k
     ```
 
 2. Confirm that the paragraph completes without an error. The validation keeps the tool bounded and prevents an empty request from being sent to the database.
+
+3. Confirm that malformed filter values are rejected instead of being silently ignored.
+
+    ```python
+    %python
+    try:
+        validate_context_tool_inputs(
+            query="waterfalls",
+            states=["MD", 7],
+        )
+    except ValueError as error:
+        print(error)
+    ```
+
+    The paragraph should print a validation error. Rejecting the request prevents an invalid filter from accidentally becoming an unfiltered search.
 
 ## Task 2: Build Metadata Filters from Tool Arguments
 
@@ -244,7 +265,7 @@ Agents need a description of what a tool does and the arguments it accepts. The 
     )
     ```
 
-You now have a read-only retrieval function that can be registered as a tool for an agent. A production agent can use its returned park descriptions as context and can keep conversation history or long-term memory in a separate component.
+You now have a read-only retrieval function and a framework-neutral tool schema. These provide the pieces an agent framework can register as a tool; this lab does not depend on a specific agent library or perform that registration. A production agent can use the returned park descriptions as context and can keep conversation history or long-term memory in a separate component.
 
 You have now **completed the workshop.**
 
