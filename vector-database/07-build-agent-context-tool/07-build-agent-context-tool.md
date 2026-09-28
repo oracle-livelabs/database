@@ -4,7 +4,7 @@
 
 Turn the semantic-search pattern from Lab 6 into a reusable, read-only Python function that an agent can call for current-request context. The function combines natural-language search with optional metadata filters and returns compact, structured park information for the agent to use.
 
-Estimated Time: 15 minutes
+Estimated Time: X
 
 ### Objectives
 
