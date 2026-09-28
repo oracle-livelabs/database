@@ -8,7 +8,7 @@ You will learn how to build scalable, no-code agentic workflows using Oracle® T
 
 The following diagram illustrates how an agentic workflow processes a loan application. This agentic workflow seamlessly blends automation with human oversight to ensure accurate, compliant, and efficient loan application processing.
 
-![Loan application workflow](images/about.png)
+![Loan application workflow](images/about-2.png)
 
 1. Submission and data extraction: The process begins when a user submits a loan application. AI algorithms automatically extract all relevant details from the application, even if the information is provided in natural language.
 2. Completeness check: The system checks whether all required information is present. If any details are missing, the applicant is immediately notified, and the process is paused pending their response.
@@ -19,7 +19,7 @@ The following diagram illustrates how an agentic workflow processes a loan appli
     * Approval: If the application passes all checks, a final manual signoff is requested. Once confirmed, the system updates the application status to approved.
     * Rejection: If any check fails, the applicant is promptly notified of the decision, and the process concludes.
 
-Estimated Workshop Time: 1 hour 30 minutes
+Estimated Workshop Time: 60 minutes
 
 ### Objectives
 
@@ -35,9 +35,9 @@ By the end of this LiveLab, you'll not only understand the architectural benefit
 
 This lab assumes you have:
 * An Oracle account
-* At least 4 OCPUs, 24 GB memory, and 128 GB of bootable storage volume or more is available in your Oracle Cloud Infrastructure tenancy.
+* At least 3 OCPUs, 32 GB memory, and 256 GB of bootable storage volume or more is available in your Oracle Cloud Infrastructure tenancy.
 
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** -  Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, September 2025
+* **Last Updated By/Date** - Sylaja Kannan, September 2026
