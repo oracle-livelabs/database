@@ -31,10 +31,10 @@ This lab assumes you have:
 
 2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
     The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll to view all the tasks in the workflow and how the workflow is executed. In the right pane, the **Workflow** tab displays all the details of the workflow.
-    ![View a workflow](images/view-workflow.png)
+    ![View a workflow](images/view-workflow-2.png)
 
 3. Click **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the JSON.
-   ![View a workflow](images/view-workflow-json.png)
+   ![View a workflow](images/view-workflow-json-2.png)
 
 ## Task 2: Execute the Workflow
 
@@ -64,16 +64,47 @@ This lab assumes you have:
     ![View the workflow execution ID](images/execution-history.png)
 
 6. Click the workflow execution ID. The status of the workflow execution is displayed as shown in the following image. Green tick inside a task indicates that the steps have already been executed successfully.
-    ![View the status of the workflow execution](images/workflow-execution-status.png)
+    ![View the status of the workflow execution](images/workflow-execution-status-2.png)
 
-7. Click **Refresh** to view the updated status of the workflow after a few seconds. It might take 90 seconds or more to execute the workflow completely.
-    When a green tick appears on the Send Email notification step as shown in the following image, the workflow stops executing.
-    ![View the status of the workflow execution](images/human-task-approval.png)
+7. View the TxEventQ Notification and Human Approval Task. Click **Refresh** to view the updated status of the workflow after a few seconds. It might take 90 seconds or more for the workflow to reach the human approval task.
 
-A notification is sent to the Thunderbird email client that you had configured earlier. As shown in the following figure the notification is a request to approve the loan. Note that the email notification is sent for the highlighted workflow ID. This requires a human being to review the documents and approve the loan request.
-![Email notification to approve the loan request](images/email-notification.png)
+    After the Agentic Planner completes successfully, the **Publish\_Loan\_Approval\_Requested** *TXEVENTQ\_PUBLISH* task publishes an approval-request notification to the *LOAN\_APPLICATION\_EVENTS* TxEventQ topic.
 
-The workflow does not progress until a human approves or rejects the loan request.
+    Open **Oracle SQL Developer**, connect to the **livelabsUser** schema, and run the following query to view the queued message:
+
+    ![Connect to the livelabUser schema](images/sql-connect.png)
+
+    ```sql
+    <copy>
+    SELECT
+        RAWTOHEX(msg_id) AS msg_id,
+        enq_timestamp,
+        msg_state,
+        consumer_name,
+        UTL_I18N.RAW_TO_CHAR(
+            DBMS_LOB.SUBSTR(user_data, 32767, 1),
+            'AL32UTF8'
+        ) AS payload
+    FROM AQ$LOAN_APPLICATION_EVENTS
+    WHERE CONSUMER_NAME='LOAN_APP_CONSUMER'
+    ORDER BY enq_timestamp DESC;
+    </copy>
+    ```
+
+    The payload displays the loan application ID, the *LOAN\_APPLICATION\_APPROVAL\_REQUESTED* event type, and the *PENDING\_APPROVAL* status.
+
+
+    Run the following query to view the loan application records and their current status:
+
+    ```sql
+    <copy>
+    SELECT * FROM LOAN_APPLICATIONS;
+    </copy>
+    ```
+
+    Return to the workflow execution page and click Refresh. The **Human\_Loan\_Approval** task is now active and waiting for human input.
+
+    The workflow pauses at the **Human\_Loan\_Approval** task and does not continue until a human approver reviews the request and approves or rejects the loan application.
 
 ## Task 3: Approve the Loan Request
 
@@ -85,24 +116,22 @@ The workflow does not progress until a human approves or rejects the loan reques
 3. Click **Act**.
     The **Take Action on Task** dialog box appears.
 
-4. Select **Completed** in the **Status** drop-down list to approve the loan.
+4. Select the **Approved** check box.
+    ![Approve action](images/take-action-2.png)
 
-5. Select the **Approved** check box.
-    ![Approve action](images/take-action.png)
-
-6. Click **Submit**.
+5. Click **Submit**.
     A message is displayed that the task was updated successfully.
 
-7. Click **OK**.
+6. Click **OK**.
 
-8. Refresh the browser tab where the status of the workflow execution is displayed in Workbench.
+7. Refresh the browser tab where the status of the workflow execution is displayed in Workbench.
     A green tick mark appears on the human approval task to indicate that the steps have been executed successfully and status of the workflow changes to **Completed**.
-    ![Workflow execute complete](images/workflow-run-complete.png)
+    ![Workflow execute complete](images/workflow-run-complete-2.png)
 
 ## Task 4: Verify the Status of the Loan Application
 
-1. Copy the Workflow ID from the execution page of the workflow.
-    ![Workflow ID](images/workflow-id.png)
+1. On the Workflow Executions page, click the **Workflow Input/Output** tab and copy the *loanApplicationId* value, such as `LOAN-C2861741`.
+    ![Workflow ID](images/loan_application_id.png)
 
 1. Open Oracle SQL Developer.
 
@@ -113,16 +142,35 @@ The workflow does not progress until a human approves or rejects the loan reques
 
     ```
     <copy>
-        SELECT * FROM loan_applications
-        WHERE application_id = '<workflow-id>';
+    SELECT * FROM loan_applications
+    WHERE application_id = '<loanApplicationId>';
+    </copy>
+    ```
+
+    To view messages published to TxEventQ, run below query:
+
+    ```sql
+    <copy>
+    SELECT
+        RAWTOHEX(msg_id) AS msg_id,
+        enq_timestamp,
+        msg_state,
+        consumer_name,
+        UTL_I18N.RAW_TO_CHAR(
+            DBMS_LOB.SUBSTR(user_data, 32767, 1),
+            'AL32UTF8'
+        ) AS payload
+    FROM AQ$LOAN_APPLICATION_EVENTS
+    WHERE CONSUMER_NAME='LOAN_APP_CONSUMER'
+    ORDER BY enq_timestamp DESC;
     </copy>
     ```
 
 4. Click Run to run the query.
     As shown in the following image, the **Query Result** displays the status of the application as **APPROVED**. Which indicates that the application has been processed successfully.
-    ![View the status of the workflow](images/sql-workflow-status.png)
+    ![View the status of the workflow](images/sql-workflow-status-2.png)
 
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** -  Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, June 2026
+* **Last Updated By/Date** - Sylaja Kannan, September 2026
