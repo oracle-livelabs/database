@@ -1,6 +1,6 @@
 {
   "workshoptitle": "Improve application performance with True Cache - DBW26",
-  "help": "livelabs-help-**enterarea**_us@oracle.com",
+  "help": "livelabs-help-db_us@oracle.com",
   "variables": [
     "../../variables/variables.json",
     "../../variables/variables-in-another-file.json"
