@@ -121,4 +121,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, September 28, 2026
+* **Last Updated By/Date** - September 28, 2026

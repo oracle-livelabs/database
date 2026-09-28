@@ -43,4 +43,4 @@ Estimated Workshop Time: 30 minutes
 
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Source Workshop** - Getting Started with AI Vector Search
-* **Last Updated By/Date** - Codex, September 28, 2026
+* **Last Updated By/Date** - September 28, 2026

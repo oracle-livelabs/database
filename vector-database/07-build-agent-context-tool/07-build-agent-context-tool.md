@@ -270,4 +270,4 @@ You may now **complete the workshop.**
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, September 28, 2026
+* **Last Updated By/Date** - September 28, 2026
