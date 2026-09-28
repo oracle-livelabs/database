@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will patch an Oracle AI Database using *AutoUpgrade*. You perform an out-of-place patch and use an existing Oracle home.
+In this lab, you will patch an Oracle AI Database using *AutoUpgrade*. You perform an out-of-place patch and use an existing Oracle home. To save time, the new Oracle home has already been created.
 
 Estimated Time: 10 Minutes
 
