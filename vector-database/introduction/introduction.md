@@ -10,7 +10,7 @@ In this workshop, you build a National Parks semantic-search application step by
 
 By the end of the workshop, you will have a practical Python pattern you can adapt for document search, product discovery, support knowledge bases, RAG retrieval, or agent tools. You will understand when to use integrated embedding, when to supply vectors yourself, and how to evolve a working prototype into a more scalable search experience.
 
-Estimated Workshop Time: 2 hours 15 minutes
+Estimated Workshop Time: 30 minutes
 
 ### Objectives
 
@@ -44,4 +44,3 @@ Estimated Workshop Time: 2 hours 15 minutes
 * **Author** - Oracle LiveLabs workshop authoring team
 * **Source Workshop** - Getting Started with AI Vector Search
 * **Last Updated By/Date** - Codex, September 28, 2026
-
