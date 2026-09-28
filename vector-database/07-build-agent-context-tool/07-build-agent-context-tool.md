@@ -244,19 +244,6 @@ Agents need a description of what a tool does and the arguments it accepts. The 
     )
     ```
 
-4. Test a request that is unlikely to return a match by excluding the records that would normally be relevant. An empty list is a valid tool result; the agent should use it to explain that no matching context was found rather than inventing an answer.
-
-    ```python
-    %python
-    no_context = search_parks_context(
-        query="waterfalls and natural water features",
-        states=["ZZ"],
-        top_k=3,
-    )
-
-    print(json.dumps(no_context, indent=2))
-    ```
-
 You now have a read-only retrieval function that can be registered as a tool for an agent. A production agent can use its returned park descriptions as context and can keep conversation history or long-term memory in a separate component.
 
 You may now **complete the workshop.**
