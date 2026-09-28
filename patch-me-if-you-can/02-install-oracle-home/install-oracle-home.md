@@ -1,10 +1,12 @@
 # Install Oracle Home
 
-Out-of-place patching starts with the creation of a new Oracle home. In this lab, you will use AutoUpgrade to install and patch an Oracle home.
-
 ## Introduction
 
+Out-of-place patching starts with the creation of a new Oracle home. In this lab, you will use AutoUpgrade to install and patch an Oracle home.
+
 Estimated Time: 5 Minutes
+
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:TYlnvpYBXNQ)
 
 ### Objectives
 

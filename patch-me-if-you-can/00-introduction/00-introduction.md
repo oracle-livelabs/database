@@ -6,6 +6,8 @@ In this workshop, you will familiarize yourself with patching Oracle AI Database
 
 Estimated Workshop Time: 90 minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:m1AH18Yctu0)
+
 ### Objectives
 
 In this workshop, you will:

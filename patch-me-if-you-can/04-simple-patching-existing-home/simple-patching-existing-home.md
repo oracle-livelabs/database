@@ -6,6 +6,8 @@ In this lab, you will patch an Oracle AI Database using *AutoUpgrade*. You perfo
 
 Estimated Time: 10 Minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:_kXDn-umKYE)
+
 ### Objectives
 
 In this lab, you will:
