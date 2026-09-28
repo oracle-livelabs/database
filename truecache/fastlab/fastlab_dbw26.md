@@ -118,9 +118,9 @@ Keeping the objects tells True Cache which transaction tables and indexes to ret
 5. Compare the live read chart, latency cards/table, and supporting TPS values. With the optional background workload left off, the two read tests provide a direct comparison without additional Primary read pressure.
 6. If you want to observe replication lag under write pressure, expand **Optional Primary Background Load and Apply/Transport Lag** and select **Start Write Load + Observe Lag**. It also defaults to four workers and stops automatically when its run completes; stop it early only if needed.
 7. Review the expanded panel for:
-   - Transport lag and apply lag from replication.
-   - True Cache, RAM, and flash hit ratios.
-   - Single-block, multiblock, and list-of-blocks fetch latency.
+    - Transport lag and apply lag from replication.
+    - True Cache, RAM, and flash hit ratios.
+    - Single-block, multiblock, and list-of-blocks fetch latency.
 8. Select **Next step**.
 
 Each read test runs for the selected duration and stops automatically. Both background workloads are manual and remain off unless started in the expanded panel; they are stopped when you leave the step or reset the lab.
@@ -147,11 +147,11 @@ True Cache is a read-only replica. While the True Cache container and read servi
 
 1. Select a payment from the reference-payment list. The selected payment supplies the vector used for the search.
 2. Choose an investigation:
-   - **Find similar payments** compares payment profiles across the vector sample.
-   - **Account behavior** restricts the candidates to the selected account.
-   - **Cross-border similarity** restricts the candidates to a different country.
-   - **Recent activity** restricts the candidates to recent payments.
-   - **Similar amount profile** finds payments with a similar amount and vector profile.
+    - **Find similar payments** compares payment profiles across the vector sample.
+    - **Account behavior** restricts the candidates to the selected account.
+    - **Cross-border similarity** restricts the candidates to a different country.
+    - **Recent activity** restricts the candidates to recent payments.
+    - **Similar amount profile** finds payments with a similar amount and vector profile.
 3. Read the explanation below the investigation selector. It describes the filter and the vector query used for the selected payment.
 4. Expand **Behind this step** to see the actual SQL and the True Cache route for the request.
 5. Review the result table. FastLab returns the five closest matching payments.

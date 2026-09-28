@@ -6,6 +6,11 @@ This lab demonstrates that True Cache can continue serving eligible read-only wo
 
 *Estimated Time:* 15 minutes.
 
+### Objectives
+
+- Verify that True Cache continues serving eligible reads while Primary is stopped.
+- Restore Primary and confirm that its database service becomes healthy again.
+
 Complete the performance comparison lab first. Use the application-container shell for the read workloads and the host terminal for container stop, health, and restore commands.
 
 ## Task 1: Start Both Read Workloads

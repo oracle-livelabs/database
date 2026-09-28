@@ -28,7 +28,7 @@ This sandbox image is pre-provisioned. You do not need separate Prepare Setup or
     - Oracle True Cache container
     - Client app container
 
-The workshop guide and application may open side-by-side by design. If you need more workspace, open the noVNC control bar on the left and select **Fullscreen**. You can maximize an individual browser window from its title bar when working with only that window.
+    The workshop guide and application may open side-by-side by design. If you need more workspace, open the noVNC control bar on the left and select **Fullscreen**. You can maximize an individual browser window from its title bar when working with only that window.
 
 2. Select Activities in the upper-left corner, then select the Terminal icon next to Chrome.
 

@@ -6,6 +6,12 @@ This lab compares read latency through Primary and True Cache while a bounded wr
 
 *Estimated Time:* 15 minutes.
 
+### Objectives
+
+- Compare read latency through Primary and True Cache.
+- Review TPS as a supporting throughput metric.
+- Observe replication lag, cache-hit ratios, and fetch latency.
+
 Complete the JDBC routing lab first. Keep the application-container shell open for the read workloads and use a separate desktop Terminal window for the Primary update workers.
 
 ## Task 1: Start the Bounded Primary Write Workload
