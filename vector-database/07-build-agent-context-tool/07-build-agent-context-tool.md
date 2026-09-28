@@ -246,7 +246,7 @@ Agents need a description of what a tool does and the arguments it accepts. The 
 
 You now have a read-only retrieval function that can be registered as a tool for an agent. A production agent can use its returned park descriptions as context and can keep conversation history or long-term memory in a separate component.
 
-You may now **complete the workshop.**
+You have now **completed the workshop.**
 
 ## Learn More
 
