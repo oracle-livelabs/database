@@ -69,6 +69,9 @@ None.
     </copy>
     ```
 
+    * AutoUpgrade needs around 20 minutes to install the Oracle home. 
+    * While the installation completes you move on.
+
 3. AutoUpgrade may display *Processing config file ...* for a while as it reads and catalogs the ZIP files in */home/oracle/patch-repo*.
 
     <details>
