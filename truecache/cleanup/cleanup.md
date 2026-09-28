@@ -1,8 +1,8 @@
-# Clean Up the ORM Stack and Instances
+# Clean Up the Stack and Instances
 
 ## Introduction
 
-You can permanently delete (terminate) instances that you no longer need. To do this, use the destroy job on the stack in Resource Manager that you created in the Environment Setup lab. This job tears down the resources and instances and cleans up the associated OCI resources in your tenancy.
+You can permanently delete (terminate) instances that you no longer need. To do this, use the destroy job on the Resource Manager stack that provisioned this workshop. This job tears down the resources and instances and cleans up the associated OCI resources in your tenancy.
 We recommend running a destroy job before deleting a stack to release associated resources first. When you delete a stack, its associated state file is also deleted; therefore, you lose track of the state of its associated resources. Cleaning up resources associated with a deleted stack can be difficult without the state file, especially when those resources are spread across multiple compartments. To avoid difficult cleanup later, we recommend that you release associated resources first by running a destroy job.
 Data on destroyed resources cannot be recovered.
 
@@ -17,7 +17,7 @@ This lab walks you through running a destroy job.
 ### Prerequisites
 
 - You should have provisioned the **Improve application performance with True Cache** workshop by using a Terraform stack.
-- To provision this workshop, follow the Environment Setup lab.
+- You need access to that stack in Resource Manager. No separate Environment Setup lab is required for the sandbox path.
 
 ## Task 1: Terminate a Provisioned Oracle Database Instance
 
@@ -28,7 +28,7 @@ This lab walks you through running a destroy job.
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 
-4. Select the name of the stack that you created in the Environment Setup lab. The Stack Details page opens.
+4. Select the name of the stack that provisioned this workshop. The Stack Details page opens.
 
 5. Click **Destroy**.
 

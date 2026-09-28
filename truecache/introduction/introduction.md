@@ -42,6 +42,15 @@ The DBW26 workshop provides two ways to learn the same True Cache workflow:
 - **FastLab:** use the visual command center for a quick guided demonstration.
 - **Full LiveLab:** use the terminal to run the database, Java, and Podman commands directly.
 
+Both paths use the same LiveLabs remote desktop. For **FastLab**, open Google Chrome inside the remote desktop and navigate to `http://127.0.0.1:8080/`; this opens the local command center. For the **Full LiveLab**, keep this workshop guide open and select **Activities**, then **Terminal**, when the lab asks you to run commands. The detailed labs do not require the FastLab command center.
+
+The outline is:
+
+- **FastLab:** Quick Guided Demo, covering environment health, routing, warmup, performance, availability, and semantic retrieval.
+- **Full LiveLab:** Initialize Environment; Prepare and Warm True Cache; Use True Cache through JDBC; Performance Comparison and Lag Observability; Availability and Failover; New Feature: Semantic Cache with Vector Search. Tenancy deployments continue to Clean Up the Stack and Instances; sandbox deployments are managed by the workshop lifecycle and do not include cleanup.
+
+For tenancy-based workshops, Prepare Setup and Environment Setup appear before the detailed labs because they provision the OCI resources. Sandbox workshops start at Initialize Environment because the image is already provisioned.
+
 The workflow covers environment validation, JDBC routing, cache KEEP and warmup, Primary versus True Cache read performance, availability while Primary is stopped, and semantic payment search with Oracle AI Vector Search. The Full LiveLab path uses terminal commands that require sudo access. The stack writes the generated Transactions password to `/home/opc/.truecache_lab_env`; the JDBC and warmup labs pass that credential into the application container without displaying it. Follow each lab's container-session instructions.
 
 ## Learn More

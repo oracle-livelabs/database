@@ -24,30 +24,39 @@
     },
     {
       "title": "Lab 1: Initialize Environment",
-      "description": "Initialize Environment",
+      "description": "Validate the pre-provisioned containers and start the database services",
       "filename": "../../initialize-environment/initialize-environment_dbw26.md",
       "type": "sandbox"
     },
     {
       "title": "Lab 2: Prepare and Warm True Cache",
+      "description": "Review the preloaded transaction objects, apply KEEP, and warm True Cache",
       "filename": "../../data-load/data-load_dbw26.md",
       "type": "sandbox"
     },
     {
       "title": "Lab 3: Use True Cache through JDBC",
-      "filename": "../../jdbc/jdbc_dbw26.md",
+      "description": "Validate JDBC read routing to Primary and True Cache",
+      "filename": "../../jdbc/jdbc-routing_dbw26.md",
       "type": "sandbox"
     },
     {
-      "title": "Lab 4: New Feature - Semantic Cache with Vector Search",
+      "title": "Lab 4: Performance Comparison and Lag Observability",
+      "description": "Compare Primary and True Cache read latency and review replication statistics",
+      "filename": "../../performance/performance_dbw26.md",
+      "type": "sandbox"
+    },
+    {
+      "title": "Lab 5: Availability and Failover",
+      "description": "Verify True Cache reads while Primary is stopped and restore Primary",
+      "filename": "../../availability/availability_dbw26.md",
+      "type": "sandbox"
+    },
+    {
+      "title": "Lab 6: New Feature: Semantic Cache with Vector Search",
       "description": "Use native Oracle AI Vector Search with the existing transaction payment data",
       "filename": "../../vector-search/vector-search_dbw26.md",
       "type": "sandbox"
-    },
-    {
-      "title": "Clean Up the ORM Stack and Instances",
-      "description": "Release the OCI resources used by the workshop",
-      "filename": "../../cleanup/cleanup.md"
     },
     {
       "title": "Need Help?",
@@ -56,7 +65,7 @@
     },
     {
       "title": "Quiz: True Cache Fundamentals",
-      "description": "Check your understanding of Oracle True Cache and the first three labs.",
+      "description": "Check your understanding of Oracle True Cache and the workshop workflow.",
       "filename": "../../quiz-true-cache/quiz-true-cache.md"
     }
   ]

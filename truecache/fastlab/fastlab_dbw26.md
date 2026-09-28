@@ -19,9 +19,10 @@ Estimated Time: 25 minutes.
 
 ## Before You Begin
 
-1. Open the LiveLabs desktop and launch the True Cache LiveLab UI.
-2. Open `http://127.0.0.1:8080` in the LiveLabs desktop browser. FastLab opens directly.
-3. Keep the command center open while completing each step. The right-hand panel shows environment health, the current workload, and the command or query being demonstrated behind the active step.
+1. Open the LiveLabs remote desktop from the VNC link in the workshop outputs.
+2. In the remote desktop, select **Activities**, then select **Google Chrome**. If Chrome is already open, open a new tab.
+3. In the remote desktop Chrome window, open `http://127.0.0.1:8080/`. This local URL opens the FastLab command center; it does not open the LiveLabs documentation page.
+4. Keep the command center open while completing each step. The right-hand panel shows environment health, the current workload, and the command or query being demonstrated behind the active step.
 
 ## FastLab Validation and Recovery
 

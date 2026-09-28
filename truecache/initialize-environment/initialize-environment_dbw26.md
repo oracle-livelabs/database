@@ -17,11 +17,7 @@ Watch the video for a quick walk-through of Lab 3: Initialize Environment.
 - Verify that the Primary and True Cache services are available.
 
 ### Prerequisites
-This lab assumes you have:
-- A Free Tier, paid OCI, or LiveLabs Oracle Cloud account
-- You have completed:
-    - Lab 1: Prepare Setup (*Free Tier* and *paid tenancies* only)
-    - Lab 2: Environment Setup (*Free Tier* and *paid tenancies* only)
+This sandbox image is pre-provisioned. You do not need separate Prepare Setup or Environment Setup labs, and you do not need to create the database schema or seed data. You need the LiveLabs remote-desktop link from the workshop outputs and access to the host terminal inside that desktop.
 
 ## Task 1: Validate That Required Processes Are Up and Running
 0. If you cannot launch the remote desktop, select View Login Info in the upper-left corner, then select Open Link in the Terraform Outputs section.
