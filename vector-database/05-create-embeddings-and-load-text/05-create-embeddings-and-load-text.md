@@ -98,11 +98,25 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
 
 1. Add a new Python paragraph and run the following code.
 
-    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes about one minute to complete.
+    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes about one minute to complete. It prints periodic progress so you can see that the paragraph is still running.
 
     ```python
     %python
+    eligible_count = sum(
+        1
+        for park in park_data_json
+        if park.get("park_code")
+        and isinstance(park.get("DIRECTIONS_INFO"), str)
+        and park["DIRECTIONS_INFO"].strip()
+    )
+
     direction_vectors = []
+    processed_count = 0
+
+    print(
+        f"Generating embeddings for {eligible_count} eligible records...",
+        flush=True,
+    )
 
     for park in park_data_json:
         park_id = park.get("park_code")
@@ -121,8 +135,20 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
             }
         )
 
+        processed_count += 1
+        if (
+            processed_count == 1
+            or processed_count % 10 == 0
+            or processed_count == eligible_count
+        ):
+            print(
+                f"Generated {processed_count}/{eligible_count} direction embeddings.",
+                flush=True,
+            )
+
     print(f"Prepared {len(direction_vectors)} direction vectors.")
 
+    print(f"Uploading {len(direction_vectors)} direction vectors...", flush=True)
     upsert_result = vecdb.upsert_vectors(
         table_name="directions",
         vectors=direction_vectors,
@@ -131,7 +157,7 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
     print(upsert_result)
     ```
 
-2. Review the output. The embedding step typically takes about one minute. The paragraph prints the number of prepared direction vectors, and the final upsert result confirms that the vectors and metadata were loaded into `directions`.
+2. Review the output. The embedding step typically takes about one minute. The paragraph prints progress while embeddings are generated, the number of prepared direction vectors, and an upload message. The final upsert result confirms that the vectors and metadata were loaded into `directions`.
 
     This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
 
