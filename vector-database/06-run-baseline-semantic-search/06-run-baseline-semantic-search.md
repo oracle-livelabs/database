@@ -107,7 +107,7 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
 
 2. Review the results. Every returned record must satisfy the metadata conditions and be semantically relevant to the request. An empty result is also valid if no records meet both requirements.
 
-You now have a baseline semantic-search pattern. Lab 7 reuses this pattern and enriches it with prior user queries.
+You now have a baseline semantic-search pattern. Lab 7 reuses this pattern and packages it as a read-only context-retrieval tool that an agent can call.
 
 
 You may now **proceed to the next lab.**
@@ -121,4 +121,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, August 27, 2026
+* **Last Updated By/Date** - Codex, September 28, 2026
