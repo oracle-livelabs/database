@@ -2,52 +2,52 @@
 
 ## Introduction
 
-This lab validates the JDBC behavior that keeps one logical connection while routing eligible read-only work to True Cache. Read-write work remains on the Primary database.
+Run the supplied BasicApp to see one logical JDBC connection use Primary for read-write work and True Cache for eligible read-only work.
 
-*Estimated Time:* 10 minutes.
+*Estimated Time:* 5 minutes.
 
-Use one shell for this lab. After entering the application container, run the commands directly in that shell.
+### Objectives
 
-## Objectives
+- Run BasicApp and inspect its database-role output.
+- Identify the change in read routing when the connection is marked read-only.
 
-- Validate JDBC read routing with the supplied BasicApp.
-- Confirm that the read-only operation reaches True Cache while writes remain on Primary.
+### Prerequisites
+
+Complete Prepare and Warm True Cache. Both database services must be active. If a database has since restarted, repeat the service checks in Initialize Environment.
 
 ## Task 1: Open the Application Container
 
-From the desktop Terminal, load the lab environment and open the application container. The environment file contains the generated Transactions password used by the lab services. Do not use the VNC password or a sample password.
+From a host terminal, load the lab's database credentials and enter the application container.
 
-~~~text
+```bash
 <copy>
 source /home/opc/.truecache_lab_env
 sudo podman exec -e DB_PASS="$DB_PASS" -it appclient /bin/bash
-cd /stage/clientapp
 </copy>
-~~~
+```
 
-If `prod` or `truedb` was restarted after Initialize Environment, verify the database services before running the application. The proxy normally performs this reconciliation automatically. Use the idempotent service-start commands in Initialize Environment only when the service query is empty.
+The environment file supplies the database password, not the remote-desktop password. If it is missing or `DB_PASS` is empty, stop and contact the lab administrator.
 
-## Task 2: Validate JDBC Routing
+## Task 2: Run BasicApp
 
-Run the supplied BasicApp from the application container:
+At the application-container prompt, run:
 
-~~~text
+```bash
 <copy>
 cd /stage/clientapp/BasicApp
 /stage/jdk-17.0.6/bin/java -cp ojdbc8.jar:. TrueCache 172.20.1.2:1521/sales1 transactions "$DB_PASS"
-cd /stage/clientapp
 </copy>
-~~~
+```
 
-The result identifies the database role used by the read-only operation. When True Cache is configured and the work is marked read-only, the JDBC driver can route eligible read-only queries to True Cache; read-write operations remain on the Primary database.
+**Expected:** the output identifies Primary first, then True Cache on service `SALES1_TC`. Check the role/service output, not only whether the application exits. Any Oracle error means the validation has not passed.
+
+BasicApp changes the connection's read-only state with `setReadOnly(true)` and `setReadOnly(false)`. The driver can change the physical read route while the application keeps one logical connection; read-write work remains on Primary.
+
+Type `exit` at the container prompt to return to the host.
 
 ## Completion
 
-The routing validation is complete when the output shows the Primary role first and then the True Cache role on service `SALES1_TC`.
-
-## Next Lab
-
-Continue to [Performance Comparison and Lag Observability](../performance/performance_dbw26.md).
+You have identified both routes in the application output. Continue to [Performance Comparison and Lag Observability](../performance/performance_dbw26.md).
 
 ## Acknowledgements
 

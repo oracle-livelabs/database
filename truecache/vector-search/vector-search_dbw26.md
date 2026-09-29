@@ -2,233 +2,172 @@
 
 ## Introduction
 
-This lab adds vector-similarity retrieval to the existing TRANSACTIONS payment workflow by using Oracle AI Vector Search with Oracle True Cache. Vector retrieval is a read-heavy workload that can repeat similar searches against a relatively stable corpus. Eligible read-only similarity queries can be routed to True Cache, reducing repeated reads against Primary, improving response time under concurrent search load, and leaving Primary focused on transactional work. The Primary database remains the system of record for writes, ingestion, corpus refreshes, and freshness-sensitive operations.
+Find payments with similar attributes using Oracle AI Vector Search through True Cache. The image already contains the 20,000-row `PAYMENT_VECTORS` sample and its cosine IVF index.
 
-The vector table is built from PAYMENTS, keeping the search results aligned with the existing schema. The final image pre-provisions the 20,000-row `PAYMENT_VECTORS` sample and its cosine IVF index. The normal path verifies those objects and runs similarity searches through True Cache; the guarded setup blocks below are available only for recovery or an instance where the objects are missing.
+True Cache can serve eligible read-only retrievals and reduce repeated reads against Primary. Primary remains responsible for writes and data refreshes. This lab uses deterministic 16-dimensional payment feature vectors, not an embedding model or an LLM response cache.
 
-![Full LiveLab semantic retrieval using vector search](images/full-livelab-vector-search.png " ")
+*Estimated Time:* 15 minutes.
 
-Estimated Time: 15 minutes.
+### Objectives
 
-## Objectives
+- Check the prebuilt vector sample and index.
+- Run a nearest-neighbor query through True Cache.
+- Interpret cosine distance; optionally compare account and country filters.
 
-- Verify the native Oracle vector table and deterministic 16-dimensional payment feature vectors in the TRANSACTIONS schema.
-- Verify that the cosine IVF vector index is present and valid.
-- Run similar-payment, account-behavior, and cross-border queries through True Cache.
-- Explain why each query returns the five nearest rows under its filter and how to interpret cosine distance.
+### Prerequisites
 
-## Task 1: Semantic Cache Retrieval Using Vector Search
+Complete the previous labs and restore Primary after the availability exercise. Start with a host terminal. The normal path does not create tables, load vectors, or rebuild indexes.
 
-The commands are grouped by container. Open the Primary database container once, complete the Primary SQL*Plus work, and leave that container before opening the True Cache container. The database commands use SYSDBA authentication, so no database password is placed in a command or displayed on screen.
+## Task 1: Verify the Prebuilt Sample on Primary
 
-From the desktop Terminal, open the Primary database container once:
+1. Enter Primary from the host terminal.
 
-~~~text
-<copy>
-sudo podman exec -it prod /bin/bash
-</copy>
-~~~
+    ```bash
+    <copy>
+    sudo podman exec -it prod /bin/bash
+    </copy>
+    ```
 
-At the `prod` container prompt, start SQL*Plus and run the following commands:
+2. At the container prompt, open SQL*Plus.
 
-~~~text
-<copy>
-export ORACLE_SID=ORCLCDB
-sqlplus / as sysdba
-alter session set container=ORCLPDB1;
-</copy>
-~~~
+    ```bash
+    <copy>
+    ORACLE_SID=ORCLCDB sqlplus / as sysdba
+    </copy>
+    ```
 
-Review the payment attributes that will be represented in the vector:
+3. At `SQL>`, check the sample and index.
 
-~~~text
-<copy>
-select id, account_id, country_cd, amount, created_utc
-from transactions.payments
-fetch first 10 rows only;
-</copy>
-~~~
-
-Verify the native vector table. In the normal image it already exists. If it is missing in a recovery environment, the guarded block creates `PAYMENT_VECTORS`; if it exists, verify that its columns and vector dimension match the definition below before continuing:
-
-~~~text
-<copy>
-begin
-  execute immediate 'create table TRANSACTIONS.PAYMENT_VECTORS (payment_id number primary key, account_id number, country_cd varchar2(8), amount number, created_utc timestamp, embedding vector(16, float32))';
-exception
-  when others then
-    if sqlcode != -955 then raise; end if;
-end;
-/
-</copy>
-~~~
-
-Verify the 16-dimensional payment feature vector. If the pre-provisioned sample is missing or incomplete, the following merge repopulates it from the existing payment fields. The first dimensions encode normalized amount, account, country, and transaction-time features. The remaining deterministic values help distinguish otherwise similar rows. These values are a demonstration feature vector derived from transaction attributes:
-
-~~~text
-<copy>
-merge into TRANSACTIONS.PAYMENT_VECTORS target
-using (
-  select id, account_id, country_cd, amount, created_utc,
-    to_vector('[' ||
-      to_char(least(greatest(amount,0)/1000,1),'FM0.000') || ',' ||
-      to_char(mod(account_id,1000)/1000,'FM0.000') || ',' ||
-      to_char(ascii(substr(country_cd,1,1))/255,'FM0.000') || ',' ||
-      to_char(ascii(substr(country_cd,2,1))/255,'FM0.000') || ',' ||
-      to_char(extract(month from created_utc)/12,'FM0.000') || ',' ||
-      to_char(extract(day from created_utc)/31,'FM0.000') || ',' ||
-      to_char(extract(hour from created_utc)/24,'FM0.000') || ',' ||
-      to_char(mod(id,997)/997,'FM0.000') || ',' ||
-      to_char(mod(account_id,97)/97,'FM0.000') || ',' ||
-      to_char(mod(id,89)/89,'FM0.000') ||
-      ',0.100,0.080,0.060,0.050,0.040,0.030]') embedding
-  from TRANSACTIONS.PAYMENTS
-  where rownum <= 20000
-) source
-on (target.payment_id = source.id)
-when not matched then insert
-  (payment_id, account_id, country_cd, amount, created_utc, embedding)
-  values
-  (source.id, source.account_id, source.country_cd, source.amount, source.created_utc, source.embedding);
-commit;
-select count(*) vector_rows from TRANSACTIONS.PAYMENT_VECTORS;
-</copy>
-~~~
-
-Expected result: PAYMENT_VECTORS contains 20,000 rows in the pre-provisioned sample. If you created the table in a different environment, the count reflects the available PAYMENTS rows, up to the 20,000-row limit. If you initialized the table yourself, the count reflects the rows available in `PAYMENTS` up to the 20,000-row sample limit.
-
-Verify the cosine IVF vector index. In the normal image it is already present and valid. If it is missing, or is unusable after a recovery operation such as truncating the base table, the guarded block creates or rebuilds it:
-
-~~~text
-<copy>
-declare
-  v_index_count number;
-  v_index_status varchar2(20);
-begin
-  select count(*)
-    into v_index_count
+    ```sql
+    <copy>
+    alter session set container=ORCLPDB1;
+    select count(*) vector_rows from transactions.payment_vectors;
+    select index_name, index_type, status
     from dba_indexes
-   where owner = 'TRANSACTIONS'
-     and index_name = 'PAYMENT_VECTORS_IVF_IDX';
-  if v_index_count = 0 then
-    execute immediate 'create vector index TRANSACTIONS.PAYMENT_VECTORS_IVF_IDX on TRANSACTIONS.PAYMENT_VECTORS (embedding) organization neighbor partitions distance cosine with target accuracy 90';
-  else
-    select status into v_index_status from dba_indexes where owner = 'TRANSACTIONS' and index_name = 'PAYMENT_VECTORS_IVF_IDX';
-    if v_index_status = 'UNUSABLE' then
-      execute immediate 'alter index TRANSACTIONS.PAYMENT_VECTORS_IVF_IDX rebuild online';
-    end if;
-  end if;
-end;
-/
-select index_name, index_type, status
-from dba_indexes
-where owner = 'TRANSACTIONS'
-  and index_name = 'PAYMENT_VECTORS_IVF_IDX';
-</copy>
-~~~
+    where owner = 'TRANSACTIONS'
+      and index_name = 'PAYMENT_VECTORS_IVF_IDX';
+    </copy>
+    ```
 
-Expected result: `PAYMENT_VECTORS_IVF_IDX` is present and **VALID**.
+    **Expected:** 20,000 rows and `PAYMENT_VECTORS_IVF_IDX` with status `VALID`. If the objects are missing or invalid, stop this normal path and see [Vector Sample Recovery](../recovery/vector-sample-recovery.md). Do not run recovery on a healthy sample.
 
-Select a reference payment:
+4. Type `exit` to leave SQL*Plus, then `exit` to return to the host.
 
-~~~text
+## Task 2: Select a Reference Payment on True Cache
+
+1. Enter True Cache from the host terminal.
+
+    ```bash
+    <copy>
+    sudo podman exec -it truedb /bin/bash
+    </copy>
+    ```
+
+2. At the container prompt, open SQL*Plus.
+
+    ```bash
+    <copy>
+    ORACLE_SID=TRUEDB sqlplus / as sysdba
+    </copy>
+    ```
+
+3. At `SQL>`, list a few reference payments.
+
+    ```sql
+    <copy>
+    alter session set container=ORCLPDB1;
+    set pages 100 lines 160
+    select payment_id, account_id, country_cd, amount
+    from transactions.payment_vectors
+    order by payment_id
+    fetch first 5 rows only;
+    </copy>
+    ```
+
+4. Set the reference once. Use `1` if it appeared in the result; otherwise replace it with a returned payment ID.
+
+    ```sql
+    <copy>
+    define reference_id = 1
+    set verify off
+    </copy>
+    ```
+
+    Later queries reuse `&reference_id`; there is no need to edit the same ID in several places. Keep this SQL*Plus session open for the searches.
+
+## Task 3: Find Similar Payments
+
+Run this query in the same True Cache SQL*Plus session.
+
+```sql
 <copy>
-select payment_id, account_id, country_cd, amount
-from TRANSACTIONS.PAYMENT_VECTORS
-fetch first 1 row only;
-</copy>
-~~~
-
-Leave the Primary SQL*Plus session and container:
-
-~~~text
-<copy>
-exit
-exit
-</copy>
-~~~
-
-From the host terminal, open the True Cache container once:
-
-~~~text
-<copy>
-sudo podman exec -it truedb /bin/bash
-</copy>
-~~~
-
-At the `truedb` container prompt, start SQL*Plus and run the nearest-neighbor query. Replace each occurrence of 1 in the query with the payment ID returned by the preceding query:
-
-~~~text
-<copy>
-export ORACLE_SID=TRUEDB
-sqlplus / as sysdba
-set pages 100 lines 220
-alter session set container=ORCLPDB1;
 select payment_id, account_id, country_cd, amount,
        round(vector_distance(embedding,
-         (select embedding from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1),
-         cosine), 6) distance
-from TRANSACTIONS.PAYMENT_VECTORS
-where payment_id <> 1
+         (select embedding from transactions.payment_vectors
+          where payment_id = &reference_id), cosine), 6) distance
+from transactions.payment_vectors
+where payment_id <> &reference_id
 order by vector_distance(embedding,
-  (select embedding from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1), cosine)
+  (select embedding from transactions.payment_vectors
+   where payment_id = &reference_id), cosine)
 fetch first 5 rows only;
 </copy>
-~~~
+```
 
-This is a nearest-neighbor query. It compares each payment feature vector with the selected payment feature vector, sorts by cosine distance, and returns the five closest rows. For this demonstration feature vector, a smaller cosine distance indicates a closer match under the encoded numeric features. It is not a currency amount, probability, or business-risk score.
+**Expected:** five matching payments, excluding the reference, ordered by increasing distance. Ties may appear in a different order. A smaller cosine distance means greater similarity under the encoded features; it is not a currency amount, probability, or fraud score.
 
-Run the account behavior query:
+This is an exact nearest-neighbor query. Checking that the IVF index exists does not prove that this query uses it. Approximate index-search performance is outside this exercise.
 
-~~~text
+## Optional Exercise: Compare Two Filters
+
+Stay in the same SQL*Plus session. The following examples reuse your reference ID.
+
+### Payments from the Same Account
+
+```sql
 <copy>
-set pages 100 lines 220
 select payment_id, account_id, country_cd, amount,
        round(vector_distance(embedding,
-         (select embedding from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1),
-         cosine), 6) distance
-from TRANSACTIONS.PAYMENT_VECTORS
-where account_id = (select account_id from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1)
-  and payment_id <> 1
+         (select embedding from transactions.payment_vectors
+          where payment_id = &reference_id), cosine), 6) distance
+from transactions.payment_vectors
+where account_id = (select account_id from transactions.payment_vectors
+                    where payment_id = &reference_id)
+  and payment_id <> &reference_id
 order by vector_distance(embedding,
-  (select embedding from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1), cosine)
+  (select embedding from transactions.payment_vectors
+   where payment_id = &reference_id), cosine)
 fetch first 5 rows only;
 </copy>
-~~~
+```
 
-This query limits candidates to the selected account and ranks those payments by vector distance, illustrating an account-scoped similarity search without changing the source PAYMENTS table.
+The filter restricts the candidates to the reference account. The query returns up to five rows; fewer matches are possible for a small account sample.
 
-Run the cross-border similarity query:
+### Similar Payments from a Different Country
 
-~~~text
+```sql
 <copy>
-set pages 100 lines 220
 select payment_id, account_id, country_cd, amount,
        round(vector_distance(embedding,
-         (select embedding from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1),
-         cosine), 6) distance
-from TRANSACTIONS.PAYMENT_VECTORS
-where country_cd <> (select country_cd from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1)
+         (select embedding from transactions.payment_vectors
+          where payment_id = &reference_id), cosine), 6) distance
+from transactions.payment_vectors
+where country_cd <> (select country_cd from transactions.payment_vectors
+                     where payment_id = &reference_id)
 order by vector_distance(embedding,
-  (select embedding from TRANSACTIONS.PAYMENT_VECTORS where payment_id=1), cosine)
+  (select embedding from transactions.payment_vectors
+   where payment_id = &reference_id), cosine)
 fetch first 5 rows only;
-exit
-exit
 </copy>
-~~~
+```
 
-This query finds similar payment profiles from a different country. The country predicate defines the candidate set, and vector distance ranks candidates within that set. It does not calculate a fraud or risk score.
+The country predicate changes the candidate set; cosine distance still ranks similarity. This is not a fraud classification.
 
 ## Completion
 
-The lab is complete when:
+The prebuilt sample and index passed verification, and the similar-payment query returned results through True Cache. You can explain the reference payment, candidate filter, and meaning of distance. The two filtered searches are optional extensions.
 
-- PAYMENT_VECTORS contains the deterministic payment feature-vector sample.
-- PAYMENT_VECTORS_IVF_IDX is present and **VALID**.
-- The similar-payment query returns five rows through True Cache.
-- The account behavior query returns the closest rows for the selected account.
-- The cross-border query returns the closest rows from another country.
-- For each search, you can identify the filter, the reference payment, and the meaning of the returned cosine-distance value.
+Type `exit` to leave SQL*Plus, then `exit` to return to the host. In a LiveLabs sandbox, do not delete the reservation's stack or instances.
 
 ## Acknowledgements
 

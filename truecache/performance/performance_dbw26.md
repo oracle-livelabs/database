@@ -2,125 +2,171 @@
 
 ## Introduction
 
-This lab compares read latency through Primary and True Cache while a bounded write workload runs on Primary. TPS is reported as a supporting throughput metric. The lab also reviews transport lag, apply lag, cache-hit ratios, and fetch latency.
+Compare read latency on Primary and True Cache using the same 10-thread, 30-second workload. Use TPS as a supporting measure, then inspect replication and cache statistics.
+
+This baseline does not start background write or read-pressure jobs. The optional exercise at the end makes one small, committed Primary update so you can inspect its replication separately.
 
 *Estimated Time:* 15 minutes.
 
 ### Objectives
 
-- Compare read latency through Primary and True Cache.
-- Review TPS as a supporting throughput metric.
-- Observe replication lag, cache-hit ratios, and fetch latency.
+- Compare read latency and throughput with consistent run settings.
+- Identify which database served each run.
+- Inspect transport lag, apply lag, and True Cache statistics.
 
-Complete the JDBC routing lab first. Keep the application-container shell open for the read workloads and use a separate desktop Terminal window for the Primary update workers.
+### Prerequisites
 
-## Task 1: Start the Bounded Primary Write Workload
+Complete the JDBC lab and cache warmup. Start with a host terminal. Let any FastLab or earlier workload finish before starting this comparison.
 
-From a separate desktop Terminal window, open the Primary container once:
+## Task 1: Set the Run Options
 
-~~~text
+1. Load the database credentials and enter the application container.
+
+    ```bash
+    <copy>
+    source /home/opc/.truecache_lab_env
+    sudo podman exec -e DB_PASS="$DB_PASS" -it appclient /bin/bash
+    </copy>
+    ```
+
+2. At the application-container prompt, set the shared options once for this session.
+
+    ```bash
+    <copy>
+    cd /stage/clientapp
+    export THREADS=10 DURATION=30
+    export READ_ONLY_WORKLOAD=true DIRECT_READ_ONLY=true
+    export DISABLE_TRUECACHE_PROPERTY=true
+    </copy>
+    ```
+
+    These runs compare direct read connections to the two services. The previous JDBC lab demonstrates automatic driver routing; this exercise deliberately isolates each target.
+
+## Task 2: Run Primary, Then True Cache
+
+1. Run the Primary baseline and wait for completion.
+
+    ```bash
+    <copy>
+    URL=172.20.1.2:1521/sales1 METRICS_PORT=9092 \
+      ./TransactionsApp.sh primary
+    </copy>
+    ```
+
+    **Expected:** the output identifies the Primary read node. Record read p50, p95, p99, and TPS from the completed run.
+
+2. Run the same workload on True Cache and wait for completion.
+
+    ```bash
+    <copy>
+    URL=172.20.1.98:1521/SALES1_TC METRICS_PORT=9093 \
+    ALLOW_DIRECT_FALLBACK=true DIRECT_FALLBACK_URL=172.20.1.98:1521/SALES1_TC \
+      ./TransactionsApp.sh truecache
+    </copy>
+    ```
+
+    **Expected:** the output identifies the True Cache read node. Record the same four metrics. The direct-connection flags are retained from the current guide for compatibility with the supplied client.
+
+3. Compare your results. Lower latency is better; higher TPS indicates greater throughput for this workload.
+
+    | Metric | Primary | True Cache |
+    | --- | --- | --- |
+    | Read p50 (ms) | Record your result | Record your result |
+    | Read p95 (ms) | Record your result | Record your result |
+    | Read p99 (ms) | Record your result | Record your result |
+    | Read TPS | Record your result | Record your result |
+
+    Keep sub-millisecond precision when the application reports it. Results depend on cache state, shared CPU resources, and other activity; a fixed improvement is not a pass criterion. Do not compare runs with different thread counts or background loads as an equivalent baseline.
+
+4. Type `exit` to return to the host. This also discards the session's exported run options.
+
+## Task 3: Inspect Lag and Cache Statistics
+
+1. From the host terminal, enter True Cache.
+
+    ```bash
+    <copy>
+    sudo podman exec -it truedb /bin/bash
+    </copy>
+    ```
+
+2. At the container prompt, open SQL*Plus.
+
+    ```bash
+    <copy>
+    ORACLE_SID=TRUEDB sqlplus / as sysdba
+    </copy>
+    ```
+
+3. At `SQL>`, inspect the current statistics.
+
+    ```sql
+    <copy>
+    alter session set container=ORCLPDB1;
+    select name, value from v$dataguard_stats
+    where lower(name) in ('transport lag', 'apply lag')
+    order by name;
+    select name, value, unit from v$true_cache_stat order by name;
+    </copy>
+    ```
+
+    **Expected:** current replication and cache statistics. Zero lag can be normal after the workload finishes. An empty or unavailable value is not proof of zero lag.
+
+4. For the optional exercise below, keep this session open. Otherwise, type `exit` to leave SQL*Plus and `exit` to return to the host.
+
+## Optional Exercise: Observe a Primary Update
+
+This changes the balance of one sample account by 1 and commits it. Use only the disposable lab data. It is a replication demonstration, not a sustained write-pressure benchmark.
+
+Open a second desktop Terminal window and enter Primary.
+
+```bash
 <copy>
 sudo podman exec -it prod /bin/bash
 </copy>
-~~~
+```
 
-At the `prod` container prompt, run three bounded update-only workers:
+At the container prompt, open SQL*Plus.
 
-~~~text
+```bash
 <copy>
-export ORACLE_SID=ORCLCDB
-: > /tmp/tcwrite.pids
-
-update_accounts() {
-  printf '%s\n' \
-    "alter session set container=ORCLPDB1;" \
-    "update transactions.accounts set balance=balance+1,last_modified_utc=systimestamp where account_id between $1 and $2;" \
-    "commit;" \
-    "exit" | sqlplus -s / as sysdba >/dev/null 2>&1
-}
-
-for worker in 1 2 3; do
-  (
-    start_id=$((1 + (worker - 1) * 2500))
-    end_id=$((worker * 2500))
-    for iteration in $(seq 1 20); do
-      update_accounts "$start_id" "$end_id"
-      sleep 0.15
-    done
-  ) &
-  echo $! >> /tmp/tcwrite.pids
-done
-cat /tmp/tcwrite.pids
+ORACLE_SID=ORCLCDB sqlplus / as sysdba
 </copy>
-~~~
+```
 
-These workers update existing `ACCOUNTS` rows for 20 iterations. They do not add rows and stop automatically.
+At `SQL>`, update and inspect the sample row.
 
-## Task 2: Compare Primary and True Cache Reads
-
-From the application-container shell, run the Primary baseline:
-
-~~~text
+```sql
 <copy>
-cd /stage/clientapp
-READ_ONLY_WORKLOAD=true DIRECT_READ_ONLY=true DISABLE_TRUECACHE_PROPERTY=true URL=172.20.1.2:1521/sales1 THREADS=10 DURATION=30 METRICS_PORT=9092 ./TransactionsApp.sh primary
-</copy>
-~~~
-
-Run the same workload directly against True Cache:
-
-~~~text
-<copy>
-READ_ONLY_WORKLOAD=true DIRECT_READ_ONLY=true DISABLE_TRUECACHE_PROPERTY=true ALLOW_DIRECT_FALLBACK=true DIRECT_FALLBACK_URL=172.20.1.98:1521/SALES1_TC URL=172.20.1.98:1521/SALES1_TC THREADS=10 DURATION=30 METRICS_PORT=9093 ./TransactionsApp.sh truecache
-</copy>
-~~~
-
-The output reports read latency, read TPS, and the last read node. The Primary run should identify Primary; the direct run should identify True Cache.
-
-## Task 3: Review Lag and Cache Statistics
-
-While the comparison is active, open the True Cache container from another desktop Terminal window:
-
-~~~text
-<copy>
-sudo podman exec -it truedb /bin/bash
-</copy>
-~~~
-
-At the `truedb` container prompt, run:
-
-~~~text
-<copy>
-export ORACLE_SID=TRUEDB
-sqlplus / as sysdba
 alter session set container=ORCLPDB1;
-set pages 100 lines 240
-select name, value from v$dataguard_stats where lower(name) in ('transport lag','apply lag') order by name;
-select name, value, unit from v$true_cache_stat where lower(name) in ('true cache hit ratio','ram buffer hit ratio','flash buffer hit ratio','prewarm progress','apply finish time','apply lag','transport lag','estimated startup time','single block fetch latency','multiblock fetch latency','list of blocks fetch latency') order by name;
-exit
-exit
+update transactions.accounts
+set balance = balance + 1, last_modified_utc = systimestamp
+where account_id = 1;
+commit;
+select account_id, balance, last_modified_utc
+from transactions.accounts where account_id = 1;
 </copy>
-~~~
+```
 
-The exact values vary with the workload. The important result is that the queries return current replication and cache statistics.
+**Expected:** one row updated. Return to the True Cache SQL*Plus session and inspect that row and the lag values.
 
-## Task 4: Stop the Write Workers
-
-Return to the original Primary-container shell and clean up the bounded workers:
-
-~~~text
+```sql
 <copy>
-kill $(cat /tmp/tcwrite.pids) 2>/dev/null || true
-rm -f /tmp/tcwrite.pids
-exit
+select account_id, balance, last_modified_utc
+from transactions.accounts where account_id = 1;
+select name, value from v$dataguard_stats
+where lower(name) in ('transport lag', 'apply lag')
+order by name;
 </copy>
-~~~
+```
 
-![Full LiveLab performance and lag](../jdbc/images/full-livelab-performance.png " ")
+The row should eventually match Primary. A single update may apply before you can observe nonzero lag; that is normal. Do not infer replication delay from how long it takes to switch windows. If it does not converge, record the output and investigate before continuing.
 
-## Next Lab
+Leave SQL*Plus and then the container in both windows with `exit` at each prompt. No background workers were started, so there are no worker processes to clean up.
 
-Continue to [Availability and Failover](../availability/availability_dbw26.md).
+## Completion
+
+Both read runs reached the intended database, and you recorded comparable latency/TPS results and inspected the statistics. Continue to [Availability and Failover](../availability/availability_dbw26.md).
 
 ## Acknowledgements
 

@@ -2,145 +2,145 @@
 
 ## Introduction
 
-This lab demonstrates that True Cache can continue serving eligible read-only work while the Primary database is stopped, then verifies that the Primary service is restored before the lab ends.
+Run a read on True Cache, stop Primary, and repeat that same read. Then restore Primary and verify its service before continuing.
+
+This exercise demonstrates availability of an already-read data set. It does not promote True Cache to a writable Primary, test JDBC reconnection, or guarantee that uncached reads can succeed during a Primary outage.
 
 *Estimated Time:* 15 minutes.
 
 ### Objectives
 
-- Verify that True Cache continues serving eligible reads while Primary is stopped.
-- Restore Primary and confirm that its database service becomes healthy again.
+- Observe an eligible cached read while Primary is stopped.
+- Restore Primary and verify its role and active service.
 
-Complete the performance comparison lab first. Use the application-container shell for the read workloads and the host terminal for container stop, health, and restore commands.
+### Prerequisites
 
-## Task 1: Start Both Read Workloads
+Complete cache warmup and the performance comparison. Both database containers must be healthy before starting. Finish other workloads and use only the disposable workshop environment.
 
-From the application-container shell, run:
+You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** for stopping and restoring Primary. Always complete the restore task, even if the read test fails.
 
-~~~text
-<copy>
-cd /stage/clientapp
-pkill -f '[T]ransactions_TrueCache' || true
-READ_ONLY_WORKLOAD=true DIRECT_READ_ONLY=true DISABLE_TRUECACHE_PROPERTY=true URL=172.20.1.2:1521/sales1 THREADS=10 DURATION=120 METRICS_PORT=9092 ./TransactionsApp.sh primary >/tmp/availability-primary.log 2>&1 &
-PRIMARY_PID=$!
-sleep 2
-READ_ONLY_WORKLOAD=true DIRECT_READ_ONLY=true DISABLE_TRUECACHE_PROPERTY=true ALLOW_DIRECT_FALLBACK=true DIRECT_FALLBACK_URL=172.20.1.98:1521/SALES1_TC URL=172.20.1.98:1521/SALES1_TC THREADS=10 DURATION=120 METRICS_PORT=9093 ./TransactionsApp.sh truecache >/tmp/availability-truecache.log 2>&1 &
-TRUECACHE_PID=$!
-pgrep -af '[T]ransactions_TrueCache'
-</copy>
-~~~
+## Task 1: Read the Sample on True Cache
 
-## Task 2: Stop Primary and Verify True Cache
+1. In the first host terminal, enter True Cache.
 
-From the host terminal, stop Primary:
+    ```bash
+    <copy>
+    sudo podman exec -it truedb /bin/bash
+    </copy>
+    ```
 
-~~~text
-<copy>
-sudo podman stop --time 3 prod
-sudo podman ps --format 'table {{.Names}}\t{{.Status}}'
-</copy>
-~~~
+2. At the container prompt, open SQL*Plus.
 
-Open the True Cache container from the host terminal:
+    ```bash
+    <copy>
+    ORACLE_SID=TRUEDB sqlplus / as sysdba
+    </copy>
+    ```
 
-~~~text
-<copy>
-sudo podman exec -it truedb /bin/bash
-</copy>
-~~~
+3. At `SQL>`, verify the role, select the PDB, and read the sample rows.
 
-At the `truedb` container prompt, verify its role and read service:
+    ```sql
+    <copy>
+    select database_role, open_mode from v$database;
+    alter session set container=ORCLPDB1;
+    select account_id, balance
+    from transactions.accounts
+    where account_id between 1 and 5
+    order by account_id;
+    </copy>
+    ```
 
-~~~text
-<copy>
-export ORACLE_SID=TRUEDB
-sqlplus / as sysdba
-set pages 100 lines 180
-select database_role, open_mode from v$database;
-alter session set container=ORCLPDB1;
-select name, network_name from v$services where upper(name) = 'SALES1_TC';
-exit
-exit
-</copy>
-~~~
+    **Expected:** role `TRUE CACHE`, then five account rows. Keep this SQL*Plus session open. Reading the rows before the outage is essential to the demonstration.
 
-Review the True Cache workload from the application-container shell:
+## Task 2: Stop Primary and Repeat the Read
 
-~~~text
-<copy>
-grep -E 'ReadTPS|Read TPS|readNode' /tmp/availability-truecache.log | tail -20
-</copy>
-~~~
+1. Open the second desktop Terminal window. Leave it at the host prompt and stop Primary.
 
-The True Cache process should continue reporting eligible reads while Primary is stopped.
+    ```bash
+    <copy>
+    sudo podman stop --time 3 prod
+    sudo podman ps -a --format 'table {{.Names}}\t{{.Status}}'
+    </copy>
+    ```
 
-## Task 3: Restore Primary and Confirm Recovery
+    **Expected:** `prod` is stopped; `truedb` and `appclient` remain running. Only Primary is stopped by this command.
 
-From the host terminal, restore Primary and wait for its health check:
+2. Return to the True Cache `SQL>` prompt. Type `/` and press Enter to rerun the last SQL statement, the five-row read.
 
-~~~text
-<copy>
-sudo podman start prod
-for attempt in $(seq 1 36); do
-  status=$(sudo podman inspect --format '{{.State.Status}}|{{.State.Health.Status}}' prod 2>/dev/null || true)
-  echo "prod: $status"
-  if [ "$status" = "running|healthy" ]; then
-    break
-  fi
-  sleep 5
-done
-if [ "$status" != "running|healthy" ]; then
-  echo "prod did not become healthy within 3 minutes; do not continue."
-  exit 1
-fi
-sudo podman ps --format 'table {{.Names}}\t{{.Status}}'
-</copy>
-~~~
+    **Expected:** the same five rows while Primary is stopped. Do not run a different query before `/`, because SQL*Plus repeats the last statement in its buffer.
 
-After `prod` reports `running|healthy`, verify its role and service from the Primary container:
+    If the query hangs, press **Ctrl+C**, record the error, and proceed immediately to restore Primary. A failed read is not a passed availability test.
 
-~~~text
-<copy>
-sudo podman exec -it prod /bin/bash
-</copy>
-~~~
+## Task 3: Restore Primary
 
-~~~text
-<copy>
-export ORACLE_SID=ORCLCDB
-sqlplus / as sysdba
-set pages 100 lines 180
-select database_role, open_mode from v$database;
-alter session set container=ORCLPDB1;
-declare
-  l_active number;
-begin
-  select count(*) into l_active from v$active_services where upper(name) = 'SALES1';
-  if l_active = 0 then
-    dbms_service.start_service('SALES1');
-  end if;
-end;
-/
-select name, network_name from v$services where upper(name) = 'SALES1';
-exit
-exit
-</copy>
-~~~
+1. In the host window, start Primary.
 
-Return to the application-container shell and wait for both read processes to finish:
+    ```bash
+    <copy>
+    sudo podman start prod
+    </copy>
+    ```
 
-~~~text
-<copy>
-wait "$PRIMARY_PID" "$TRUECACHE_PID"
-exit
-</copy>
-~~~
+2. Check status. Repeat this command until `prod` is healthy; startup can take several minutes.
 
-![Full LiveLab availability test](../jdbc/images/full-livelab-availability.png " ")
+    ```bash
+    <copy>
+    sudo podman ps -a --format 'table {{.Names}}\t{{.Status}}'
+    </copy>
+    ```
 
-## Next Lab
+    If it remains stopped or unhealthy, contact the lab administrator. Do not proceed to the next lab with Primary down.
+
+3. After Primary is healthy, enter its container in the same host window.
+
+    ```bash
+    <copy>
+    sudo podman exec -it prod /bin/bash
+    </copy>
+    ```
+
+4. At the Primary container prompt, open SQL*Plus.
+
+    ```bash
+    <copy>
+    ORACLE_SID=ORCLCDB sqlplus / as sysdba
+    </copy>
+    ```
+
+5. At `SQL>`, verify the role and active service.
+
+    ```sql
+    <copy>
+    select database_role, open_mode from v$database;
+    alter session set container=ORCLPDB1;
+    select name from v$active_services where upper(name) = 'SALES1';
+    </copy>
+    ```
+
+    **Expected:** `PRIMARY`, `READ WRITE`, and active service `SALES1`. If the service result is empty, use **Troubleshooting** below and verify it again.
+
+6. In the True Cache window, type `/` again. The sample read should still succeed after Primary returns.
+
+7. In both windows, type `exit` to leave SQL*Plus, then `exit` to leave the container.
+
+## Completion
+
+The sample read succeeded before, during, and after the Primary outage. Primary is healthy with `SALES1` active. No background workload or PID files were created in this exercise.
 
 Continue to [New Feature: Semantic Cache with Vector Search](../vector-search/vector-search_dbw26.md).
+
+## Troubleshooting
+
+If the Primary active-service query is empty after restart, run this in the Primary SQL*Plus session, with `ORCLPDB1` selected:
+
+```sql
+<copy>
+execute dbms_service.start_service('SALES1');
+select name from v$active_services where upper(name) = 'SALES1';
+</copy>
+```
+
+Continue only after the service is listed. If a command reports an unexpected error or the service still does not appear, contact [LiveLabs Help](mailto:livelabs-help-db_us@oracle.com) and retain the error output.
 
 ## Acknowledgements
 
