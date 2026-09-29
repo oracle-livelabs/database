@@ -4,11 +4,9 @@
 
 ## Introduction
 
-Nina Patel has used Select AI for individual questions. Her subscriber-review screen now needs an assistant that can handle a request and follow-up questions.
+Nina Patel now needs an assistant for her subscriber-review screen. Jessica gives it one SQL tool using the `GENAI` profile from the previous lab.
 
-Jessica, the DBA, gives Nina's agent one SQL tool. It uses the `GENAI` profile and the telecommunications tables configured in the previous lab. Database privileges determine what the tool can access.
-
-In this lab, you create an agent, give it the built-in SQL query tool, and run a question through its team. The instructions ask for read-only answers. SQL still runs with the database user’s privileges. `LLUSER` owns the workshop objects, so it is not an example of a production account with restricted access.
+Create the agent, task, and team, then check its answer and tool history. Instructions request read-only answers; database privileges enforce access. `LLUSER` owns the workshop tables, so it is not a production example of restricted access.
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
@@ -36,14 +34,7 @@ Estimated Time: **15 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Telecommunications focus                                                                                  |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| Problem    | Nina needs a telecommunications answer that can feed a subscriber-review screen.                            |
-| Database task | The agent uses one SQL tool; database privileges determine its access.      |
-| Your role       | You follow Nina as she turns a Select AI question into a small telecommunications assistant.              |
-| What You Will See   | An agent receives a request, calls its SQL tool, and returns a telecommunications answer.                 |
-| Oracle features | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
-| Result             | Nina has an agent with one SQL tool. Its instructions request read-only answers; database privileges determine its access.                |
+Give Nina's assistant one SQL tool, then verify its answer and tool-call history.
 
 > **Prerequisite:** Complete [Lab 7: Ask Telecom Questions with Select AI](?lab=selectai). This lab uses the `GENAI` SQL profile and the loader's `GENAI_AGENT` reasoning profile.
 

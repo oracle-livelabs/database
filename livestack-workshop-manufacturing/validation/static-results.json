@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-29",
   "scope": "Static structure plus SQLite fixture constraints and relational calculations. Not Oracle execution.",
   "passed": true,
   "errors": [],
@@ -220,31 +220,11 @@
       "pass": true,
       "detail": null
     },
-    "link_README.md:validation/copy-review.md": {
+    "link_README.md:introduction/introduction.md": {
       "pass": true,
       "detail": null
     },
-    "link_README.md:validation/workshop-map.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_README.md:validation/schema-contract.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_README.md:validation/validation-report.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_README.md:validation/screenshots.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_README.md:validation/manual-database-checklist.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_README.md:validation/green-button-checklist.md": {
+    "link_README.md:getting-started/getting-started.md": {
       "pass": true,
       "detail": null
     },
@@ -257,10 +237,6 @@
       "detail": null
     },
     "copy_production-operations-dashboard/production-operations-dashboard.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_production-operations-dashboard/production-operations-dashboard.md:../validation/validation-report.md": {
       "pass": true,
       "detail": null
     },
@@ -297,10 +273,6 @@
       "detail": null
     },
     "link_quality-review-oml/quality-review-oml.md:images/otto.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_quality-review-oml/quality-review-oml.md:../validation/validation-report.md": {
       "pass": true,
       "detail": null
     },
@@ -349,10 +321,6 @@
       "detail": null
     },
     "copy_production-order-duality/production-order-duality.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_production-order-duality/production-order-duality.md:../validation/validation-report.md": {
       "pass": true,
       "detail": null
     },
@@ -408,14 +376,6 @@
       "pass": true,
       "detail": null
     },
-    "link_introduction/introduction.md:../validation/schema-contract.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_introduction/introduction.md:../validation/validation-report.md": {
-      "pass": true,
-      "detail": null
-    },
     "link_introduction/introduction.md:images/demo-welcome.jpg": {
       "pass": true,
       "detail": null
@@ -429,10 +389,6 @@
       "detail": null
     },
     "link_plant-routing-spatial/plant-routing-spatial.md:images/moon.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_plant-routing-spatial/plant-routing-spatial.md:../validation/validation-report.md": {
       "pass": true,
       "detail": null
     },
@@ -468,10 +424,6 @@
       "pass": true,
       "detail": null
     },
-    "link_selectai-agent/selectai-agent.md:../validation/validation-report.md": {
-      "pass": true,
-      "detail": null
-    },
     "nav_?lab=selectai": {
       "pass": true,
       "detail": null
@@ -497,10 +449,6 @@
       "detail": null
     },
     "link_selectai/selectai.md:images/nina.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_selectai/selectai.md:../validation/validation-report.md": {
       "pass": true,
       "detail": null
     },
@@ -537,10 +485,6 @@
       "detail": null
     },
     "link_production-quality-network/production-quality-network.md:images/bob.png": {
-      "pass": true,
-      "detail": null
-    },
-    "link_production-quality-network/production-quality-network.md:../validation/validation-report.md": {
       "pass": true,
       "detail": null
     },
@@ -620,10 +564,6 @@
       "pass": true,
       "detail": null
     },
-    "link_component-quality-vector-search/component-quality-vector-search.md:../validation/validation-report.md": {
-      "pass": true,
-      "detail": null
-    },
     "link_component-quality-vector-search/component-quality-vector-search.md:images/sql-embedding-model.jpg": {
       "pass": true,
       "detail": null
@@ -649,14 +589,6 @@
       "detail": null
     },
     "copy_getting-started/getting-started.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_getting-started/getting-started.md:../validation/screenshots.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_getting-started/getting-started.md:../validation/schema-contract.md": {
       "pass": true,
       "detail": null
     },
@@ -692,15 +624,7 @@
       "pass": true,
       "detail": null
     },
-    "link_stack/README.md:load_data/manufacturing-platform-handoff-loader.sql": {
-      "pass": true,
-      "detail": null
-    },
-    "link_stack/README.md:../validation/manual-database-checklist.md": {
-      "pass": true,
-      "detail": null
-    },
-    "link_stack/README.md:../validation/green-button-checklist.md": {
+    "link_stack/README.md:load_data/manufacturing-platform-handoff-loader.zip": {
       "pass": true,
       "detail": null
     },
@@ -768,6 +692,10 @@
       "pass": true,
       "detail": null
     },
+    "link_validation/validation-report.md:green-button-results.json": {
+      "pass": true,
+      "detail": null
+    },
     "link_validation/validation-report.md:screenshots.md": {
       "pass": true,
       "detail": null
@@ -824,11 +752,19 @@
       "pass": true,
       "detail": null
     },
+    "link_validation/manual-database-checklist.md:green-button-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
     "fences_validation/green-button-checklist.md": {
       "pass": true,
       "detail": null
     },
     "copy_validation/green-button-checklist.md": {
+      "pass": true,
+      "detail": null
+    },
+    "link_validation/green-button-checklist.md:green-button-results.json": {
       "pass": true,
       "detail": null
     },
@@ -844,7 +780,11 @@
       "pass": true,
       "detail": null
     },
-    "loader_entrypoint": {
+    "loader_archive_entrypoint": {
+      "pass": true,
+      "detail": null
+    },
+    "loader_sql_entrypoint": {
       "pass": true,
       "detail": null
     },
@@ -916,5 +856,5 @@
   "authentic_manufacturing_screenshots": 49,
   "pending_capture_positions": 0,
   "manual_oracle_validation": "see live-validation.json (separate from these static checks)",
-  "green_button_validation": "not_run"
+  "green_button_validation": "see green-button-results.json"
 }
