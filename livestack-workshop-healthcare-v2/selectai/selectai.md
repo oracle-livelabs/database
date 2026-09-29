@@ -116,8 +116,7 @@ Before Nina asks a healthcare question, Jessica shows her the settings behind Se
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Reply with READY only.',
              profile_name => 'genai',
-             action       => 'chat',
-             attributes   => '{"model":"xai.grok-4.3"}'
+             action       => 'chat'
            ) AS connection_check;
     </copy>
     ```
@@ -177,8 +176,7 @@ In SQL Worksheet, call `DBMS_CLOUD_AI.GENERATE` with the profile name and action
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Which five care services have the highest demand risk?',
              profile_name => 'genai',
-             action       => 'showsql',
-             attributes   => '{"model":"xai.grok-4.3"}'
+             action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
@@ -200,8 +198,7 @@ Nina has inspected how Select AI interprets her question. She now uses `runsql` 
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Which five care services have the highest demand risk?',
              profile_name => 'genai',
-             action       => 'runsql',
-             attributes   => '{"model":"xai.grok-4.3"}'
+             action       => 'runsql'
            ) AS answer;
     </copy>
     ```
@@ -223,8 +220,7 @@ The first answer identifies the highest-risk services, but Nina needs enough con
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Show the five care services with the highest demand risk. Include the service name, category, region, predicted demand, and demand risk factor.',
              profile_name => 'genai',
-             action       => 'showsql',
-             attributes   => '{"model":"xai.grok-4.3"}'
+             action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
@@ -238,8 +234,7 @@ The first answer identifies the highest-risk services, but Nina needs enough con
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Show the five care services with the highest demand risk. Include the service name, category, region, predicted demand, and demand risk factor.',
              profile_name => 'genai',
-             action       => 'runsql',
-             attributes   => '{"model":"xai.grok-4.3"}'
+             action       => 'runsql'
            ) AS answer;
     </copy>
     ```
@@ -271,8 +266,7 @@ Nina has the detailed rows. She now asks for a short explanation that she can us
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Show the five care services with the highest demand risk. Include the service name, category, region, predicted demand, and demand risk factor.',
              profile_name => 'genai',
-             action       => 'narrate',
-             attributes   => '{"model":"xai.grok-4.3"}'
+             action       => 'narrate'
            ) AS explanation;
     </copy>
     ```
