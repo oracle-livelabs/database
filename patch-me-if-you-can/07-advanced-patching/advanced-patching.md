@@ -6,6 +6,8 @@ This lab allows you to patch *back to an earlier Release Update*. You would do t
 
 Estimated Time: 20 Minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:ZWwPq62SbwE)
+
 ### Objectives
 
 In this lab, you will:

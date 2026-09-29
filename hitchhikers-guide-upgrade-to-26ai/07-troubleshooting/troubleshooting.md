@@ -6,6 +6,8 @@ Sometimes you find a glitch in our code or a bug. In this lab, you will learn a 
 
 Estimated Time: 10 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:HcYI709uwzw)
+
 ### Objectives
 
 In this lab, you will:
