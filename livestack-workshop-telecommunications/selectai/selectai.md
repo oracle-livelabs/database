@@ -4,13 +4,9 @@
 
 ## Introduction
 
-Nina Patel is a subscriber experience analyst at SEER Telecomms. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
+Nina Patel, a subscriber experience analyst at SEER Telecomms, wants to compare monthly charges without writing every query herself. Jessica has prepared a Select AI profile for the workshop tables.
 
-Jessica, the DBA, has already configured a Select AI profile for the telecommunications schema. Nina can ask a question in ordinary language. Select AI uses the profile and table and column definitions to generate SQL, run it, or explain the result.
-
-Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the analyst needs.
-
-In this lab, you check the available Select AI profile, ask a telecommunications question, inspect the SQL behind the answer, and improve the question for an answer Nina can use.
+Help Nina ask a question, inspect the generated SQL, run it, and refine the answer. Check the joins and filters: an AI-generated query can run successfully and still answer the wrong question.
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -38,14 +34,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Telecommunications focus                                                                                |
-| ---------------------| ----------------------------------------------------------------------------------------------|
-| Problem    | Nina needs answers from telecommunications data without writing every query from scratch.               |
-| Database task | The question must be translated into SQL against the shared telecommunications schema.                |
-| Your role       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
-| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
-| Oracle features | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
-| Result             | Nina gets a repeatable way to ask telecommunications questions while keeping SQL review in the process. |
+Help Nina identify the plans with the highest monthly charges, checking the SQL behind each answer.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -167,8 +156,6 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
     Select AI has generated and run SQL against the telecommunications schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the telecommunications data.
 
-    > **Note:** Select AI can generate incorrect SQL or misunderstand a question. Use `showsql` when the exact query matters, and treat the generated answer as a starting point for review.
-
 ## Task 5: Improve the business question
 
 Nina's first question gives her a service plan ranking, but she also needs enough detail to decide what to review. She changes the question to request the service plan category, total monthly charges, and connections ordered.
@@ -231,11 +218,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina asked a telecommunications question, inspected the generated SQL, ran it, and refined the prompt. Select AI reduced the SQL she needed to write. Reviewing the query helped her check that it answered her question.
-
-Nina can ask questions in ordinary language and inspect the queries behind the answers. The queries use the shared telecommunications schema and run with the database user’s access rights.
-
-Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
+Nina compared monthly charges by asking, inspecting, running, and refining a question. She checked the joins, filters, and totals before using the answer.
 
 ## Next Steps
 

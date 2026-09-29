@@ -592,10 +592,6 @@
       "pass": true,
       "detail": null
     },
-    "link_getting-started/getting-started.md:../stack/README.md": {
-      "pass": true,
-      "detail": null
-    },
     "link_getting-started/getting-started.md:images/reservation-login-info.svg": {
       "pass": true,
       "detail": null

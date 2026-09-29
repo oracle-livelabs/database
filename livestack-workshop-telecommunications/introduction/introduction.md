@@ -6,18 +6,7 @@ Jessica Chan, the DBA at SEER Telecomms, starts the morning with a request from 
 
 ![Jessica and Thomas review dropped-call reports, affected subscribers, and network sites in the SEER Telecomms operations office.](images/seer-telecomms-introduction.png)
 
-Thomas needs service-order details as JSON for the subscriber application. Gilly will find plans by meaning. Bob will follow shared devices and contact identifiers in an activation-fraud review. Moon will locate nearby network sites, Otto will build an activation-demand watchlist, and Nina will ask questions about contracted monthly charges.
-
 Jessica brings the team together around records in Oracle AI Database. Each lab follows one part of their work. A nearby site or a matching plan description does not prove the cause of an outage. Support staff still check device compatibility, measured coverage, site alarms, and available capacity before recommending a change.
-
-The teams need different ways to use the same records:
-
-- Thomas needs service orders as JSON for a web and mobile application.
-- Gilly needs semantic search to find relevant service plans when callers use different words.
-- Bob needs to trace service orders linked by activation evidence.
-- Moon needs to compare subscriber service addresses, access sites, and network regions.
-- Otto needs to classify plan demand from accepted orders and support diagnostics.
-- Nina needs to ask telecom questions and inspect the SQL behind each answer.
 
 ### SEER Telecomms data model
 
@@ -44,8 +33,6 @@ The [running telecom application](http://141.144.192.27:8505/) follows a game-da
 | Moon, spatial specialist | Find sites near subscribers needing support. | Spatial SQL filters service addresses by region and ranks active sites by distance. |
 | Otto, data scientist | Build a service-plan demand watchlist. | Oracle Machine Learning classifies synthetic demand and joins scores to supporting activity. |
 | Nina, subscriber experience analyst | Review monthly charges without writing every query. | Select AI shows generated SQL; an agent uses its SQL tool and records the activity. |
-
-The relational records also support documents, semantic search, graph investigations, spatial analysis, model scores, and natural-language questions. The teams can combine those results without maintaining separate copies for each database capability.
 
 <details>
 <summary><strong>Learn more: What does "converged database" mean?</strong></summary>

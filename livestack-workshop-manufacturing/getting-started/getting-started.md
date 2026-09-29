@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Open your LiveLabs reservation, sign in to **Autonomous Database 26ai**, and prepare SQL Worksheet. Run the manufacturing exercises as `LLUSER`, the workshop database user.
+This workshop runs in a **LiveLabs Sandbox**. Provisioning automatically prepares the database, loads the manufacturing data, and configures the workshop user and services. No instructor setup or manual database provisioning is needed.
+
+Once your environment is ready, open **View Login Info** in your reservation. Use the supplied link and credentials to sign in to Database Actions as `LLUSER`, then open SQL Worksheet.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -14,16 +16,6 @@ Open your LiveLabs reservation, sign in to **Autonomous Database 26ai**, and pre
 > - `LLUSER` is the workshop database user and schema owner for the hands-on manufacturing objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
 
 </details>
-
-The sign-in graphics illustrate the navigation steps. Use the connection query to verify your own manufacturing database session.
-
-### Environment prerequisites
-
-Your LiveLabs reservation includes the manufacturing dataset in the `LLUSER` schema on Autonomous Database 26ai. For an instructor-provided environment, the instructor must first prepare a fresh database with the [supporting stack and loader](../stack/README.md).
-
-Required capabilities are Database Actions SQL Worksheet, Graph Studio, native JSON and duality views, Oracle Spatial, Oracle Machine Learning, access to `ADMIN.ALL_MINILM_L12_V2`, and an enabled `GENAI` profile with an approved provider. Labs 1 and 4 require preloaded embeddings and a precreated production order graph. Lab 3 creates a separate teaching vector column. Lab 8 depends on Lab 7. AutoML and the supplemental PGX notebook also need their respective services and privileges.
-
-Open the Database Actions URL from **View Login Info** and sign in as `LLUSER` with the generated workshop password. If you use a manually provisioned database, use the Database Actions URL supplied by your instructor.
 
 Estimated Time: **5 minutes**
 
@@ -43,7 +35,7 @@ Open the LiveLabs reservation for this workshop. It contains the database link a
 
 2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
 
-3. In **My Reservations**, select **Launch Workshop** for this reservation.
+3. Wait for the sandbox environment to finish provisioning. In **My Reservations**, select **Launch Workshop** for this reservation.
 
 4. Select **View Login Info** and keep the database credentials available for the next task.
 
