@@ -2,19 +2,11 @@
 
 ## Introduction
 
-> **Validation status:** The manual LLUSER walkthrough and authentic manufacturing captures are recorded in the [validation report](../validation/validation-report.md). Green-button and Terraform provisioning remain untested.
+Jessica Chan, SEER MANUFACTURING’s DBA, starts with the quality team’s morning question: **which component needs attention first, and which production orders and customer sites may be affected?**
 
-Jessica Chan is the database administrator responsible for maintaining SEER MANUFACTURING’s production data. Every morning, the production quality operations team asks her a familiar question: **which component needs attention first, and which production orders and customer sites may be affected?**
+You will build her dashboard query using four kinds of data: relational quality alerts, JSON production orders, component vectors, and plant locations. One SQL statement brings them together for the team to review.
 
-Jessica needs four kinds of data for the Production Quality and Operations Dashboard. Tables hold quality alerts and their impact. JSON documents hold production order activity. Vectors represent component descriptions for searches by meaning. Spatial data records plant and demand-region locations. Her query must combine all four.
-
-Keeping these data types in separate systems would require Jessica to combine exports and keep them current. Instead, she wants a dashboard answer that the production quality team can check against the source records.
-
-Oracle AI Database can query these data types together. Jessica can join relational rows, JSON documents, vectors, and location data in one SQL statement.
-
-In this lab, you build Jessica’s dashboard query. It combines quality alerts, vector search, JSON production order data, and plant locations in one result.
-
-![jessica](images/jessica.png)
+![Jessica introduces the converged production-quality dashboard lab](images/jessica.png)
 
 ### Objectives
 
@@ -26,16 +18,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Manufacturing focus                                                                                                  |
-| ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Production analysts need a quick way to find severe inspection issues and the production orders they may affect. |
-| Technical Challenge | The query must combine quality alerts, component descriptions, production orders, and plant locations.                         |
-| Persona Focus       | Jessica Chan, the DBA, builds the query that gives production analysts this dashboard view.                         |
-| What You Will Do    | Use a single SQL statement that combines several data types.                                                   |
-| Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
-| Outcome             | Jessica can identify components to review and the production orders they may affect.               |
-
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one shared query that gives production analysts component quality issues alongside production order details.
+Help Jessica identify the components to review first and the production orders they may affect. Run the combined query, then change the search phrase and compare the results.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -184,11 +167,7 @@ The query combines four data types:
 
     ![Converged production-quality query result](images/sql-dashboard.png)
 
-    
-
 3. Review the result as the component-level data behind Jessica's dashboard. Each row combines quality-alert severity, semantic match, production order activity, and plant location. This gives the dashboard a ranked component table and the details a production analyst needs when deciding what to review.
-
-    
 
     Each row should include all four types of data. Compare component names, quality impact and active quantities after each search. Rankings must be measured on the loaded manufacturing data. A missing embedding or an empty regional plant set can leave the result incomplete or empty.
 
@@ -201,7 +180,6 @@ Jessica can use this SQL result for the dashboard table and detail view. Other d
 ## Task 2: Change the investigation question
 
 Jessica meets with a production analyst to review the results before she builds the dashboard. They start with components related to **precision bearing wear and dimensional defects requiring quality review**. Change the embedded investigation phrase to:
-
 
 ```text
 machining capacity and material availability
@@ -218,6 +196,13 @@ Run the query again and compare the top rows.
 
 The query sorts by similarity first, so changing the question changes the review order. Quality impact breaks ties. Jessica can ask a different question using the same query and component data.
 
+## Application example
+
+The live SEER MANUFACTURING application presents plant, work-order, quality, supplier, and agent indicators in its Operations Command Center. It uses the separate AX-400 demo dataset, so its values are not expected output from the workshop SQL query.
+
+![SEER MANUFACTURING operations command center](images/demo-dashboard.jpg)
+
+![SEER MANUFACTURING operations charts](images/demo-dashboard-charts.jpg)
 
 ## Next Steps
 
@@ -228,11 +213,3 @@ Next, use JSON Relational Duality to expose the same production order data as JS
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
-
-## Application example
-
-The live SEER MANUFACTURING application presents plant, work-order, quality, supplier, and agent indicators in its Operations Command Center. It uses the separate AX-400 demo dataset, so its values are not expected output from the workshop SQL query.
-
-![SEER MANUFACTURING operations command center](images/demo-dashboard.jpg)
-
-![SEER MANUFACTURING operations charts](images/demo-dashboard-charts.jpg)

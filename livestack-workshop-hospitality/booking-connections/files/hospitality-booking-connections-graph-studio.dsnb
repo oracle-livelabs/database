@@ -1,6 +1,6 @@
 [
   {
-    "name": "Booking Abuse Network",
+    "name": "Booking Connections",
     "description": "Hospitality booking-connection investigation; run the paragraphs against the deployed dataset.",
     "tags": null,
     "version": "7",
@@ -22,7 +22,7 @@
         "message": [
           "%md",
           "",
-          "**Booking Abuse Network with Property Graph**"
+          "**Booking Connections with Property Graph**"
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -47,7 +47,7 @@
         "message": [
           "%md",
           "",
-          "This query treats the booking abuse data as a graph. In the MATCH pattern, (seed IS entity) is the starting reservation, -[e IS related_to]->{1,2} means follow one or two relationship hops, and (reached IS entity) is every entity reached from that starting point.",
+          "This query treats the booking connection data as a graph. In the MATCH pattern, (seed IS entity) is the starting reservation, -[e IS related_to]->{1,2} means follow one or two relationship hops, and (reached IS entity) is every entity reached from that starting point.",
           "",
           "The WHERE clause anchors the search on RSV-8841, and the COLUMNS clause returns graph properties in a normal SQL result table.",
           "",

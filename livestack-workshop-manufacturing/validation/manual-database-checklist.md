@@ -19,7 +19,7 @@ Estimated Time: **5 minutes**
 
 The loader execution was staged in Database Actions, not a fresh SQLcl run. Preserve the post-lab database for review; do not rerun initial-state assertions into it. The optional destructive reset appendix was not run. Details and remaining platform checks are in the [validation report](validation-report.md).
 
-Terraform and green-button provisioning remain deferred. The API-key stack path still needs its own validation; manual tests used resource principal. No green-button launch was performed.
+This checklist records the earlier manual run. The fresh LiveLabs green-button Resource Manager apply and learner walkthrough followed on 29 September 2026; see [green-button results](green-button-checklist.md). Local Terraform CLI validation remains unrun.
 
 ## Acknowledgements
 

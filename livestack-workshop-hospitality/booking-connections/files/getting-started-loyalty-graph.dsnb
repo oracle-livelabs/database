@@ -22,7 +22,7 @@
         "message": [
           "%md",
           "# Loyalty Points Investigation",
-          "This optional notebook accompanies the hospitality workshop's booking-abuse graph lab. It preserves the PGX algorithm exercises using transferable hotel loyalty points. It is not the SQL/PGQ booking-abuse graph.",
+          "This optional notebook accompanies the hospitality workshop's booking-connections graph lab. It preserves the PGX algorithm exercises using transferable hotel loyalty points. It is not the SQL/PGQ booking-connections graph.",
           "Prerequisites: a PGQL property graph named LOYALTY_GRAPH over LOYALTY_MEMBERS and LOYALTY_POINT_TRANSFERS, the TRANSFERS edge label, the MEMBER_ID vertex property, and access to the in-memory PGX server. The Phase 2 loader must create these objects before this notebook can run.",
           "Members 534, 597, 934, 387, and 406 are sample dataset IDs. Outputs have been cleared. Run every paragraph in sequence to produce results; rankings, paths, and counts depend on the loaded graph."
         ],
@@ -284,7 +284,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Review the members with the highest degree. The fixture includes member 934 as a starting point for a circular points-transfer investigation. A high degree is a review cue, not proof of abuse. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge."
+          "Review the members with the highest degree. The fixture includes member 934 as a starting point for a circular points-transfer investigation. A high degree is a review cue, not proof of wrongdoing. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -438,7 +438,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "List PageRank values in descending order. A high rank means that a member has incoming links from members that themselves carry rank. This is a structural graph measure; it does not prove abuse or measure points volume."
+          "List PageRank values in descending order. A high rank means that a member has incoming links from members that themselves carry rank. This is a structural graph measure; it does not prove wrongdoing or measure points volume."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,
@@ -752,7 +752,7 @@
         "hasTitle": false,
         "message": [
           "%md",
-          "Treat members 934 and 387 as synthetic review seeds, not confirmed offenders. Personalized PageRank ranks graph proximity to this seed set. It helps prioritize review; it is not a probability of abuse.",
+          "Treat members 934 and 387 as synthetic review seeds, not confirmed offenders. Personalized PageRank ranks graph proximity to this seed set. It helps prioritize review; it is not a probability of wrongdoing.",
           "The next Python paragraph uses vertices from LOYALTY_MEMBERS and the built-in analyst object."
         ],
         "selectedVisualization": "html",

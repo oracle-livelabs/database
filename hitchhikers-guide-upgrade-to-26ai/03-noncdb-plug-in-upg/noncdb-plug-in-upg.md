@@ -6,6 +6,8 @@ In this lab, you will upgrade a non-CDB and convert it to a pluggable database (
 
 Estimated Time: 35 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:uZqPIkrcxPs)
+
 ### Objectives
 
 In this lab, you will:

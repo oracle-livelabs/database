@@ -6,6 +6,8 @@ In this lab, you will explore AI Vector Search using a simple example. You will 
 
 Estimated Time: 15 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:oYGUxWfZiCg)
+
 ### Objectives
 
 In this lab, you will:

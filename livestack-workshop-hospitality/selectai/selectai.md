@@ -4,14 +4,9 @@
 
 ## Introduction
 
-Nina Patel is a guest experience analyst at Seer Hotels. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
+Nina Patel, Seer Hotels’ guest experience analyst, wants to know which stay offers earn the most room revenue. Jessica has configured a Select AI profile so Nina can ask in ordinary language.
 
-Jessica, the DBA, has already configured a Select AI profile for the hospitality schema. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
-
-Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the business user needs.
-
-In this lab, you check the available Select AI profile, ask a hospitality question, inspect the SQL behind the answer, and improve the question for a more useful business result.
-
+Help Nina inspect the generated SQL, run the question, and refine it. Review the joins and filters carefully: a model can produce valid SQL that answers the wrong question.
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -37,22 +32,11 @@ In this lab, you check the available Select AI profile, ask a hospitality questi
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-| Step                | Hospitality focus                                                                                |
-| ---------------------| ----------------------------------------------------------------------------------------------|
-| Business Problem    | Nina needs answers from hospitality data without writing every query from scratch.               |
-| Technical Challenge | The question must be translated into SQL against the shared hospitality schema.                |
-| Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
-| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
-| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
-| Outcome             | Nina gets a repeatable way to ask hospitality questions while keeping SQL review in the process. |
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Check the Select AI profile
 
-Select AI uses an AI profile to identify the AI provider and the database objects available for natural-language questions. The workshop database should already contain a profile for the `LLUSER` schema.
+Check the AI profile already configured for `LLUSER`.
 
 1. Run this query:
 
@@ -116,11 +100,7 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
 
     ![SQL Worksheet result — ai object list](images/sql-ai-object-list.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-
     The result should list `STAY_OFFERS`, `RESERVATIONS`, `RESERVATION_NIGHTS`, and `GUESTS`. Select AI can now use these tables when it translates Nina's questions into SQL.
-  
-    
 
 ## Task 3: Ask a question and inspect the SQL
 
@@ -141,10 +121,6 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     ```
 
     ![SQL Worksheet result — ai generated](images/sql-ai-generated.jpg)
-
-    *Scroll the result grid to inspect additional rows and columns.*
-  
-    
 
 2. Read the generated SQL before running it.
 
@@ -168,15 +144,11 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
     ![SQL Worksheet result — ai answer](images/sql-ai-answer.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-  
-    
-
 2. Compare the answer with the SQL you inspected in Task 3.
 
-    Select AI has generated and run SQL against the hospitality schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the hospitality data.
+    Check the offer ranking and revenue totals against the tables and filters from Task 3. The query runs with your database privileges.
 
-    > **Note:** Select AI can generate incorrect SQL or misunderstand a question. Use `showsql` when the exact query matters, and treat the generated answer as a starting point for review.
+    > **Note:** `runsql` may generate different SQL from a previous `showsql` call. Review the returned result as well as the earlier SQL.
 
 ## Task 5: Improve the business question
 
@@ -196,10 +168,6 @@ Nina's first question gives her a stay offer ranking, but she also needs enough 
 
     ![SQL Worksheet result — ai refined generated](images/sql-ai-refined-generated.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-  
-    
-
 2. Review the generated SQL, then run the revised question with `runsql`:
 
     ```sql
@@ -213,10 +181,6 @@ Nina's first question gives her a stay offer ranking, but she also needs enough 
     ```
 
     ![SQL Worksheet result — ai refined answer](images/sql-ai-refined-answer.jpg)
-
-    *Scroll the result grid to inspect additional rows and columns.*
-  
-    
 
 3. Compare the first and second questions.
 
@@ -240,10 +204,6 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
     ![SQL Worksheet result — ai narration](images/sql-ai-narration.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-  
-    
-
 2. Review the explanation against the SQL result.
 
   The explanation is a convenience for a business user. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
@@ -252,11 +212,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina asked a hospitality question, inspected the generated SQL, ran it, and refined the prompt. Select AI reduced the SQL she needed to write. Reviewing the query helped her check that it answered her question.
-
-Nina can ask questions in ordinary language and inspect the queries behind the answers. The queries use the shared hospitality schema and run with the database user’s access rights.
-
-Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
+Nina now has a review workflow: ask, inspect the SQL, run, and refine. Use precise revenue definitions and reservation statuses, then check any generated explanation against the returned rows.
 
 ## Next Steps
 
