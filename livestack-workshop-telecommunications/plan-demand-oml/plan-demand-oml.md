@@ -4,15 +4,9 @@
 
 ## Introduction
 
-Otto Spencer is SEER Telecomms’ data scientist. His team supplies the predictions used in analytics charts and dashboards.
+Otto Spencer, SEER Telecomms’ data scientist, needs a watchlist for the plan team. Analysts want to see which plans deserve attention and the activity behind each score.
 
-The service plan team wants a demand watchlist. A plan analyst should be able to see which service plans may need more attention, why the model flagged them, and which service plans are already showing strong activations or subscriber activity.
-
-Otto has plan details, activation orders, support reports, and network measurements in Oracle AI Database. He could copy the data to a separate machine learning platform, train a model there, and copy the scores back. That would create another copy of telecommunications data and another process for keeping scores current.
-
-Instead, Otto builds and scores the model in the database. The model classifies the September snapshot as `SURGE` or `STABLE`, using order demand and network-support diagnostics. SQL then joins the prediction to the service plan name, activations, and diagnostic values that a dashboard needs.
-
-In this lab, you build Otto's demand-surge model and turn its output into a review list for a plan analyst.
+Train a model inside Oracle AI Database to classify the September sample as `SURGE` or `STABLE`. Then join its scores to plan details, activations, and network diagnostics for review.
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
@@ -41,14 +35,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Telecommunications focus                                                                                                        |
-| ---------------------| ----------------------------------------------------------------------------------------------------------------------|
-| Problem    | A plan analyst needs a short list of service plans that may require attention.                                           |
-| Database task | Otto needs to train and score a model without copying service plan activity to another machine learning system.           |
-| Your role       | You follow Otto as he builds the model and checks the result before it reaches a dashboard.                          |
-| What You Will See   | Optionally compare models with AutoML, then use SQL Worksheet to create and score a Generalized Linear Model.             |
-| Oracle features | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside the database. |
-| Result             | A watchlist for a dashboard combines the model result with the service plan and activity data behind it.                  |
+Help Otto build a plan-demand watchlist and explain the activity behind each score.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -56,7 +43,9 @@ Estimated Time: **10 minutes**
 
 Before Otto creates a model, he checks the data that will teach it. The workshop already provides `OML_PLAN_DEMAND_TRAINING_V`, a view that combines service plan, support reports and network diagnostics, and activations data into one row per active service plan.
 
-The view also contains `SURGE_LABEL`. This is the known label used during training. The sample data assigns `SURGE` when at least 45 connections were ordered and at least two observation intervals had utilization of 60% or more; other plans are `STABLE`. Both aggregations use September 2026. The 192 plans split into 96 examples per class. These labels come from the same month as the model inputs. They teach you how to train and call a classification model, not how to predict future demand. To test a forecast, train on earlier periods and reserve a later period for testing.
+The view also contains `SURGE_LABEL`. This is the known label used during training. The sample data assigns `SURGE` when at least 45 connections were ordered and at least two observation intervals had utilization of 60% or more; other plans are `STABLE`. Both aggregations use September 2026. The 192 plans split into 96 examples per class.
+
+These labels come from the same month as the model inputs. They teach you how to train and call a classification model, not how to predict future demand. To test a forecast, train on earlier periods and reserve a later period for testing.
 
 1. Run the training-data query:
 
@@ -84,19 +73,15 @@ The view also contains `SURGE_LABEL`. This is the known label used during traini
 
     The numeric and category columns are the model inputs. `SURGE_LABEL` is the answer the model learns to predict. `PLAN_ID` identifies the service plan but is not a business feature for this example.
 
-    Otto is checking that the training data already brings together the values he needs. He does not have to export support reports and network diagnostics, activations, and service plan data into separate files before training.
-
 ## Task 2: Compare models with AutoML (optional)
 
 Otto first uses the Oracle Machine Learning AutoML interface to compare candidate models. AutoML can select algorithms, tune them, and show how well each model identifies the two labels.
-
-This shows how a data scientist chooses a model: the leaderboard is a starting point, but Otto also checks whether the model identifies the business outcome he cares about.
 
 This task is optional. AutoML can take several minutes to complete, so you can continue with Task 3 if you want to focus on creating and using the model in SQL Worksheet.
 
 1. Open **Machine Learning** from Database Actions.
 
-    Open **Database Actions**, select **Machine Learning**. Use the username and password you can find on the **View Login Info screen**.
+    Sign in with the credentials from **View Login Info**.
 
 ![Machine Learning on the Database Actions launchpad.](images/oml-launch.png)
 
@@ -141,8 +126,6 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 Create the workshop's Generalized Linear Model, `OTTO_PLAN_DEMAND_SURGE_MODEL`, in SQL Worksheet. If you ran AutoML, compare its results with this SQL model.
 
 The settings table tells Oracle to use the **Generalized Linear Model** used in this exercise. `PREP_AUTO` lets the database handle standard preparation of the input columns.
-
-If you skipped the optional AutoML task, use this setting as the example model for the workshop.
 
 1. Create the settings table and train the model:
 

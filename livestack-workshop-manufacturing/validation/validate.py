@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """Static and local relational validation; does not claim Oracle execution."""
 from pathlib import Path
-import re,json,sqlite3,ast,hashlib,xml.etree.ElementTree as ET
+import re,json,sqlite3,ast,hashlib,zipfile,xml.etree.ElementTree as ET
 from urllib.parse import unquote,urlsplit
 R=Path(__file__).resolve().parents[1]
-L=R/'stack/load_data/manufacturing-platform-handoff-loader.sql';sql=L.read_text();errors=[];checks={}
+L=R/'stack/load_data/manufacturing-platform-handoff-loader.zip'
+with zipfile.ZipFile(L) as loader_archive:
+ loader_members=loader_archive.namelist()
+ if loader_members != ['manufacturing-platform-handoff-loader.sql']:
+  raise SystemExit(f'Unexpected loader archive members: {loader_members!r}')
+ sql=loader_archive.read(loader_members[0]).decode('utf-8')
+errors=[];checks={}
 def check(name,condition,detail=None):
  checks[name]={'pass':bool(condition),'detail':detail}
  if not condition:errors.append(name)
@@ -143,7 +149,9 @@ check('lesson_count',len(lessons)==11)
 for p in R.rglob('*.svg'):ET.parse(p)
 for p in R.rglob('*.json'):json.loads(p.read_text())
 quiz=(R/'final-quiz/final-quiz.md').read_text();check('quiz',quiz.count('Q:')==7 and len(re.findall(r'^\s*\* ',re.search(r'```quiz score([\s\S]*?)```',quiz).group(1),re.M))==7 and 'passing: 75' in quiz)
-check('loader_entrypoint', '@load_data/manufacturing-platform-handoff-loader.sql ${local.new_password} ATP${var.resId}_high' in (R/'stack/adb.tf').read_text())
+adb_tf=(R/'stack/adb.tf').read_text()
+check('loader_archive_entrypoint','unzip -o -q load_data/manufacturing-platform-handoff-loader.zip' in adb_tf)
+check('loader_sql_entrypoint','@manufacturing-platform-handoff-loader.sql ${local.new_password} ATP${var.resId}_high' in adb_tf)
 create_user_template=(R/'stack/create_user.sql.tmpl').read_text()
 check('stack_spatial_role_bootstrap',bool(re.search(r'^grant spatial_author to lluser;$',create_user_template,re.I|re.M)))
 genai_template=(R/'stack/genai_connection.sql.tmpl').read_text()
@@ -160,7 +168,7 @@ for p in lessons:
     if col.lower() not in allowed:missingcols.append((p.parent.name,alias,col,aliases[alias.lower()]))
 check('base_table_and_view_columns',not missingcols,missingcols)
 coverage=json.loads((R/'validation/screenshot-coverage.json').read_text())
-result={'date':'2026-09-25','scope':'Static structure plus SQLite fixture constraints and relational calculations. Not Oracle execution.','passed':not errors,'errors':errors,'checks':checks,'table_counts':{k:len(v) for k,v in D.items()},'foreign_keys':len(fks),'task_counts':taskcounts,'sql_blocks':blockcounts,'image_references':len(image_refs),'unique_images_referenced':len(set(image_refs)),'external_links':sorted(set(links)),'authentic_manufacturing_screenshots':coverage['authentic_manufacturing_captures'],'pending_capture_positions':len(coverage['pending']),'manual_oracle_validation':'see live-validation.json (separate from these static checks)','green_button_validation':'not_run'}
+result={'date':'2026-09-29','scope':'Static structure plus SQLite fixture constraints and relational calculations. Not Oracle execution.','passed':not errors,'errors':errors,'checks':checks,'table_counts':{k:len(v) for k,v in D.items()},'foreign_keys':len(fks),'task_counts':taskcounts,'sql_blocks':blockcounts,'image_references':len(image_refs),'unique_images_referenced':len(set(image_refs)),'external_links':sorted(set(links)),'authentic_manufacturing_screenshots':coverage['authentic_manufacturing_captures'],'pending_capture_positions':len(coverage['pending']),'manual_oracle_validation':'see live-validation.json (separate from these static checks)','green_button_validation':'see green-button-results.json'}
 (R/'validation/static-results.json').write_text(json.dumps(result,indent=2))
 (R/'validation/schema-contract.json').write_text(json.dumps({'objects':contract,'foreign_keys':fks},indent=2))
 print(json.dumps({k:v for k,v in result.items() if k not in ['checks','external_links']},indent=2))

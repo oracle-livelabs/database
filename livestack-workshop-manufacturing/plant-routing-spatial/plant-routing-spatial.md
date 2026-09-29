@@ -4,18 +4,9 @@
 
 ## Introduction
 
-> **Validation status:** The manual LLUSER walkthrough and authentic manufacturing captures are recorded in the [validation report](../validation/validation-report.md). Green-button and Terraform provisioning remain untested.
+Moon Kai, SEER MANUFACTURING’s spatial specialist, helps planners find alternative plants for customer sites in a high-demand region. **Which sites are inside the region, and which plant is closest to each?**
 
-Moon Kai is SEER MANUFACTURING’s spatial specialist. Operations teams ask Moon for help when location affects a production decision: which plant is closest to a region with growing demand, and which customer sites are nearby?
-
-Oracle AI Database stores plant and customer site locations as map points. It stores demand regions as map areas, each with a demand score.
-
-Moon wants a query that a production team can use in a dashboard and map:
-
-> Customer sites in a high-demand region need an alternative plant for production work. **Which customer sites are in that region, and which plant is closest to each one?**
-
-In this lab, you follow Moon's approach. You start with a single point, measure distance to a region, find customer sites inside that region, and list the nearest plant for each customer site.
-
+You will use points for plant and customer-site locations, polygons for demand regions, and spatial queries to measure distances and identify nearby plants.
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
@@ -50,14 +41,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step | Manufacturing focus |
-| --- | --- |
-| Business Problem | Production planners need nearby plants to consider when arranging production reassignment. |
-| Technical Challenge | Moon needs to compare customer site points with a region, then find the closest plant for each customer site. |
-| Persona Focus | You review Moon's spatial approach and interpret the result for an operations user. |
-| What You Will See | Oracle Spatial turns location data into customer-site routing results with SQL. |
-| Database Capability | `SDO_GEOMETRY`, `SDO_GEOM.SDO_DISTANCE`, `SDO_GEOM.RELATE`, and GeoJSON conversion support the analysis. |
-| Outcome | An operations user can see which customer sites are in a region and which plant is closest to each one. |
+Help Moon find customer sites in a high-demand region and the nearest plant for each. The results give planners candidates to check for suitable process routes.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -90,15 +74,11 @@ The same stored location supports distance calculations, relational joins, and J
     </copy>
     ```
 
-    ![spatial points](images/sql-spatial-points.png)
-
-    
+    ![Plant point geometry and GeoJSON results](images/sql-spatial-points.png)
 
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
 
     **Expected output: Plant Points**
-
-    
 
 2. Review the point data.
 
@@ -135,9 +115,7 @@ The sample data gives New York Manufacturing Region a demand index of `91`. Moon
     </copy>
     ```
 
-    ![spatial new york](images/sql-spatial-new-york.png)
-
-    
+    ![Plants ranked by distance to the New York manufacturing region](images/sql-spatial-new-york.png)
 
     `SDO_GEOM.SDO_DISTANCE` compares the plant point with the demand-region polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
@@ -155,8 +133,6 @@ The sample data gives New York Manufacturing Region a demand index of `91`. Moon
     **Expected output: New York Production coverage**
 
     Review the closest plant and its distance. Rankings depend on the data your loader supplied. Read the actual distances from your database result.
-
-    
 
 2. Try another region.
 
@@ -193,11 +169,7 @@ The sample data gives New York Manufacturing Region a demand index of `91`. Moon
     </copy>
     ```
 
-    ![spatial chicago](images/sql-spatial-chicago.png)
-
-    
-
-    
+    ![Plants ranked by distance to the Chicago manufacturing region](images/sql-spatial-chicago.png)
 
     The `unit` parameter controls the measurement unit. Review whether a plant lies inside the Chicago Manufacturing Region polygon. A point inside or touching the polygon has distance zero. The contract assigns this region a synthetic demand index of 78; plant rankings must be checked after loading.
 
@@ -281,9 +253,7 @@ Moon now needs a result that an operations application can use: customer sites i
     </copy>
     ```
 
-    ![spatial routing](images/sql-spatial-routing.png)
-
-    
+    ![Customer sites matched to their closest active plant](images/sql-spatial-routing.png)
 
     `SDO_GEOM.RELATE` keeps customer sites whose point falls inside or touches the New York Manufacturing Region polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching customer site to every active plant. `ROW_NUMBER` keeps the nearest plant for each customer site.
 
@@ -293,21 +263,15 @@ Moon now needs a result that an operations application can use: customer sites i
 
     A dashboard can use this result to show customer sites in the selected region and the closest plant to each customer site. The production team can review the location and capacity details together before assigning production work.
 
-    
-
 3. Change the query to `Chicago Manufacturing Region`.
 
     Compare the customer sites and candidate plants with the New York result. The spatial predicates remain the same; only the region changes. This is the kind of query an operations dashboard can run when a production analyst selects a different demand region.
-
-    
 
 > **Recommendation boundary:** This query finds the nearest active plant by geographic distance. It does not check process capability, certification, material stock, machine schedules, transport time, or delivery commitments. `DAILY_CAPACITY_UNITS` and `CAPACITY_UTILIZATION_PCT` describe a plant snapshot. A planner must check those constraints before reassigning work.
 
 ## Conclusion: Use location in a production decision
 
-Moon used points and polygons to find customer sites in a demand region and rank nearby plants. The result gives the production team customer sites to contact and plants to check for suitable process routes.
-
-One SQL query finds customer sites by location, joins their records to plant details, and returns distance, capacity, and current load. A dashboard can use these results for both its map and customer site list.
+Moon’s query gives planners customer sites to contact and nearby plants to assess. Distance, capacity, and current load help narrow the list; planners still need to check process suitability.
 
 ## Next Steps
 
