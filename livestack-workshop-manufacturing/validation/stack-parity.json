@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-29",
   "passed": true,
   "protected_source_unchanged": true,
   "protected_source_files_hashed": 9,
@@ -9,15 +9,15 @@
     "output.tf"
   ],
   "aligned_with_intentional_differences": [
-    "adb.tf: direct invocation of the single manufacturing SQL loader; no loader ZIP copy",
+    "adb.tf: reference unzip and SQLcl sequence with manufacturing loader names",
     "genai.tf and genai_connection.sql.tmpl: explicit tested model parameter",
     "variables.tf: explicit tested inference-region and model defaults"
   ],
   "spatial_author_bootstrap": "PASS",
   "template_variable_coverage": "PASS",
-  "loader_entrypoint": "PASS",
+  "loader_archive_and_entrypoint": "PASS",
   "loader_sha256": "c829bf144ab1d4436daf8ee784a44b26ed89e27139575ab52d1b0122b72d4c5a",
-  "terraform_cli": "UNAVAILABLE; init, fmt, validate, plan, and apply not run",
-  "sqlcl_cli": "UNAVAILABLE; fresh end-to-end loader invocation not run",
-  "green_button": "NOT RUN"
+  "terraform_cli": "UNAVAILABLE; local init, fmt, validate, and plan not run",
+  "sqlcl_cli": "UNAVAILABLE locally; green-button Resource Manager run populated the fresh schema",
+  "green_button": "CORRECTED STACK APPLY AND COMPLETE LEARNER WALKTHROUGH PASSED 2026-09-29"
 }
