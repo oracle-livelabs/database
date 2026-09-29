@@ -56,7 +56,7 @@ You may now [*proceed to the next lab*](#next).
 * Webinar, [Release and Patching Strategies for Oracle Database 23ai](https://www.youtube.com/watch?v=sF-rmD78zIo)
 * Webinar, [One-Button Patching - makes life easier for every Oracle DBA](https://youtu.be/brnBavVLyM0)
 
-## Acknowledgments
+## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich, Alejandro Diaz
