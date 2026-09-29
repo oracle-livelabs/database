@@ -6,16 +6,16 @@
 ********************
 */
 
-variable "ociTenancyOcid" { default = ""}
-variable "ociUserOcid" {default = ""}
-variable "ociCompartmentOcid" {default = ""}
-variable "ociUserPassword" {default = ""}
-variable "ociRegionIdentifier" { default = ""}
-variable "resId" { default = ""}
-variable "ociPrivateSubnetOcid" {default = ""}
-variable "ociPublicSubnetOcid" {default = ""}
-variable "ociVcnOcid" {default = ""}
-variable "resUserPublicKey" {default = ""}
+variable "ociTenancyOcid" { default = "" }
+variable "ociUserOcid" { default = "" }
+variable "ociCompartmentOcid" { default = "" }
+variable "ociUserPassword" { default = "" }
+variable "ociRegionIdentifier" { default = "" }
+variable "resId" { default = "" }
+variable "ociPrivateSubnetOcid" { default = "" }
+variable "ociPublicSubnetOcid" { default = "" }
+variable "ociVcnOcid" { default = "" }
+variable "resUserPublicKey" { default = "" }
 variable "ociGenAiRegion" {
   description = "OCI Generative AI inference region, independent of the database region."
   default     = "us-chicago-1"
@@ -33,13 +33,13 @@ variable "ociGenAiModel" {
 resource "random_string" "password" {
   length  = 16
   special = false
-  lower = true
-  upper = true
+  lower   = true
+  upper   = true
   numeric = true
   #min_special = 2
   min_numeric = 2
-  min_lower = 2
-  min_upper = 2
+  min_lower   = 2
+  min_upper   = 2
   #override_special = "#"
 }
 
@@ -55,7 +55,7 @@ resource "random_string" "vncpwd" {
 #        Local Variables
 #*************************************
 locals {
-  timestamp           = formatdate("YYYY-MM-DD-hhmmss", timestamp())
+  timestamp = formatdate("YYYY-MM-DD-hhmmss", timestamp())
 }
 
 resource "random_string" "first_char" {
@@ -63,7 +63,7 @@ resource "random_string" "first_char" {
   special = false
   lower   = true
   upper   = true
-  numeric = false  # Ensures it starts with a letter
+  numeric = false # Ensures it starts with a letter
 }
 
 # Remaining characters

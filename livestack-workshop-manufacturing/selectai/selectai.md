@@ -4,16 +4,9 @@
 
 ## Introduction
 
-> **Validation status:** The manual LLUSER walkthrough and authentic manufacturing captures are recorded in the [validation report](../validation/validation-report.md). Green-button and Terraform provisioning remain untested.
+Nina Patel, SEER MANUFACTURING’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the manufacturing schema.
 
-Nina Patel is a production analyst at SEER MANUFACTURING. She wants to ask about components and production orders without writing every table join and filter herself.
-
-Jessica, the DBA, has already configured a Select AI profile for the manufacturing schema. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
-
-Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the business user needs.
-
-In this lab, you check the available Select AI profile, ask a manufacturing question, inspect the SQL behind the answer, and improve the question for a more useful business result.
-
+You will help Nina ask a question, inspect the generated SQL, run it, and refine the result. The model can choose the wrong columns or misunderstand a question, so SQL review remains part of her work.
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -41,14 +34,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Manufacturing focus                                                                                |
-| ---------------------| ----------------------------------------------------------------------------------------------|
-| Business Problem    | Nina needs answers from manufacturing data without writing every query from scratch.               |
-| Technical Challenge | Select AI must choose the correct tables, joins, and filters for Nina’s question.                |
-| Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
-| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
-| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
-| Outcome             | Nina gets a repeatable way to ask manufacturing questions while keeping SQL review in the process. |
+Help Nina rank components by scheduled material value. Inspect the generated SQL, run it, then refine the question and compare the answer.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -116,13 +102,9 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     </copy>
     ```
 
-    ![ai object list](images/sql-ai-object-list.png)
-
-    
+    ![Select AI profile object list for the manufacturing tables](images/sql-ai-object-list.png)
 
     The result should list `COMPONENTS`, `PRODUCTION_ORDERS`, `PRODUCTION_ORDER_LINES`, and `CUSTOMER_SITES`. Select AI can now use these tables when it translates Nina's questions into SQL.
-  
-    
 
 ## Task 3: Ask a question and inspect the SQL
 
@@ -144,11 +126,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     </copy>
     ```
 
-    ![ai generated](images/sql-ai-generated.png)
-
-    
-  
-    
+    ![SQL generated for the scheduled material-value question](images/sql-ai-generated.png)
 
 2. Read the generated SQL before running it.
 
@@ -170,17 +148,11 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
     </copy>
       ```
 
-    ![ai answer](images/sql-ai-answer.png)
-
-    
-  
-    
+    ![Select AI result for the scheduled material-value question](images/sql-ai-answer.png)
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
     Select AI has generated and run SQL against the manufacturing schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the manufacturing data.
-
-    > **Note:** Select AI can generate incorrect SQL or misunderstand a question. Use `showsql` when the exact query matters, and treat the generated answer as a starting point for review.
 
 ## Task 5: Improve the business question
 
@@ -198,11 +170,7 @@ Nina's first question gives her a component ranking, but she also needs enough d
     </copy>
     ```
 
-    ![ai refined generated](images/sql-ai-refined-generated.png)
-
-    
-  
-    
+    ![SQL generated for the refined component-ranking question](images/sql-ai-refined-generated.png)
 
 2. Review the generated SQL, then run the revised question with `runsql`:
 
@@ -216,11 +184,7 @@ Nina's first question gives her a component ranking, but she also needs enough d
     </copy>
     ```
 
-    ![ai refined answer](images/sql-ai-refined-answer.png)
-
-    
-  
-    
+    ![Select AI result for the refined component-ranking question](images/sql-ai-refined-answer.png)
 
 3. Compare the first and second questions.
 
@@ -242,11 +206,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     </copy>
     ```
 
-    ![ai narration](images/sql-ai-narration.png)
-
-    
-  
-    
+    ![Select AI narrative for the refined manufacturing result](images/sql-ai-narration.png)
 
 2. Review the explanation against the SQL result.
 
@@ -256,11 +216,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina asked a manufacturing question, inspected the generated SQL, ran it, and refined the prompt. Select AI reduced the SQL she needed to write. Reviewing the query helped her check that it answered her question.
-
-Nina can ask questions in ordinary language and inspect the queries behind the answers. The queries use the shared manufacturing schema and run with the database user’s access rights.
-
-Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
+Nina now has a component ranking she can check against its SQL. Keep the same routine for new questions: inspect the query, run it, and compare the answer with the manufacturing decision.
 
 ## Next Steps
 

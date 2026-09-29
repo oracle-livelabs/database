@@ -9,7 +9,7 @@ terraform {
 }
 
 variable "home-tenancy" {
-  type    =  map
+  type = map(any)
   default = {
     //C4u04
     "ocid1.tenancy.oc1..aaaaaaaawunzd6xr55ka46cpbrck6ndreki5banncuynudejkajqhqsvdbza" = "us-ashburn-1"
@@ -29,17 +29,17 @@ variable "home-tenancy" {
 }
 
 provider "oci" {
-  region           = var.ociRegionIdentifier
+  region = var.ociRegionIdentifier
   //region           =  var.home-tenancy[var.ociTenancyOcid]
 }
 
 provider "oci" {
-  alias            = "home"
-//  region           = "us-ashburn-1"
-  region           =  var.home-tenancy[var.ociTenancyOcid]
+  alias = "home"
+  //  region           = "us-ashburn-1"
+  region = var.home-tenancy[var.ociTenancyOcid]
 }
 
 provider "oci" {
-  alias            = "main"
-  region           =  var.ociRegionIdentifier
+  alias  = "main"
+  region = var.ociRegionIdentifier
 }

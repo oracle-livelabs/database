@@ -1,19 +1,12 @@
 # Investigate an Activation Fraud Network
 
-![Bob :  telecommunications lab banner](images/bob.png)
+![Bob Green, graph specialist, introduces activation-fraud investigation.](images/bob.png)
 
 ## Introduction
 
-> **Validation status:** Tested as LLUSER in a manually provisioned database on 23 September 2026. Screenshots show that run. Load a fresh workshop schema before starting these exercises.
+Bob Green, SEER Telecomms’ graph specialist, is investigating service order `ORD-8841`. Shared devices, payment tokens, phone numbers, or IP addresses may connect it to other orders.
 
-Bob Green is a graph specialist at SEER Telecomms. He uses property graphs to investigate activation fraud.
-
-A service order row may not show coordinated activity. Shared devices, phone numbers, payment tokens, or IP addresses can reveal connections between service orders.
-
-First, use SQL/PGQ to follow connections between service orders. Then open Graph Studio to view the same relationships as an interactive network.
-
-Graph Studio is Oracle Database’s visual workspace for property graphs. SQL/PGQ returns tables you can sort and compare. Graph Studio shows nodes, edges, and paths you can explore. You will use both to investigate service order `ORD-8841`.
-
+Help Bob follow these connections with SQL/PGQ, then open Graph Studio, Oracle Database’s visual workspace for property graphs, to compare the results as an interactive network.
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
@@ -43,16 +36,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Telecommunications focus                                                                                                  |
-| ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Problem    | Activation Fraud teams need to see relationships that are hard to detect from service order tables alone.                   |
-| Database task | Bob needs to follow paths and find shared identifiers without writing long chains of self-joins.                  |
-| Your role       | You review Bob's graph design and interpret its results for an activation fraud review.                                     |
-| What You Will See   | A property graph shows connected entities and service order pairs with SQL.                                           |
-| Oracle features | ACTIVATION\_FRAUD\_NETWORK and GRAPH\_TABLE support SQL/PGQ traversal.                                                     |
-| Result             | A fraud analyst can see which service orders are connected, what they share, and which relationships deserve review. |
-
-Persona focus: You are reviewing Bob's graph solution with an activation fraud analyst.
+Help Bob investigate `ORD-8841`, then find other orders that share its identifiers.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -60,7 +44,7 @@ Persona focus: You are reviewing Bob's graph solution with an activation fraud a
 
 Jessica has already written a query for Bob. It shows the entities directly connected to suspicious service order `ORD-8841`. The query works, but Jessica is concerned about what happens when investigators need to follow relationships several steps away.
 
-In this lab, a **hop** means one relationship step. The service order to a device is one hop. The service order to that device and then to another service order is two hops. A four-hop search follows four such steps from `ORD-8841`, so it can reveal entities that are not directly connected to the service order.
+Extend the search from direct connections to paths of up to four hops.
 
 1. Run Jessica's ordinary SQL query:
 
@@ -181,19 +165,17 @@ In this lab, a **hop** means one relationship step. The service order to a devic
     </copy>
     ```
 
-    Jessica now needs four separate SELECT statements. The first branch follows one relationship step, the second follows two, the third follows three, and the fourth follows four. Each additional hop adds another relationship join and another entity join. The `UNION` combines the four path lengths and removes duplicate rows. This returns the same one-through-four-hop range as Bob's graph query, but it is much longer and harder to change.
+    Each SELECT handles a different path length. Every extra hop adds a relationship join and an entity join. `UNION` combines the results and removes duplicate rows.
 
 3. Review how the SQL grows more complex when it does not use a graph query.
 
-    Jessica can add another relationship step, but she must join `ACTIVATION_ENTITIES` and `ACTIVATION_RELATIONSHIPS` again. Four hops need four relationship joins and five instances of the entity table. If she wants to support several possible path lengths, the query needs more joins, unions, and duplicate handling. The SQL becomes harder to read just as the investigation becomes more important.
+    Four hops need four relationship joins and five instances of the entity table. Supporting several path lengths also requires unions and duplicate handling.
 
-    This is the problem Bob's graph approach is meant to solve. The relationships already exist in relational tables, but a graph query can express the path directly.
+    Bob's graph query expresses the path directly over the existing relational tables.
 
 ## Task 2: Read the same connections as a graph
 
-Bob has already created the `ACTIVATION_FRAUD_NETWORK` property graph for this lab. You do not need to create it before running the queries. The graph definition uses the existing relational tables as its source; it does not create a second copy of the activation fraud data. Check the appendix to learn how Bob created the graph and mapped the relational tables to vertices and edges.
-
-In graph terms, the service order and connected objects are **vertices**. The row in `ACTIVATION_RELATIONSHIPS` between them is an **edge**. `GRAPH_TABLE` lets Bob query those vertices and edges with a graph pattern while Oracle keeps the source data in the database.
+The workshop loader has created `ACTIVATION_FRAUD_NETWORK` over the existing relational tables. Run Bob’s queries below; the appendix shows how the graph maps those tables to vertices and edges.
 
 1. Run Bob's SQL/PGQ query:
 
@@ -219,23 +201,15 @@ In graph terms, the service order and connected objects are **vertices**. The ro
     </copy>
     ```
 
-    <!-- capture:CAP-08 -->
     ![Read the same connections as a graph](images/sql-graph-direct.png)
 
-    *Live LLUSER capture, 23 September 2026.*
-
-
-    In the `MATCH` pattern, `service order` and `connected` are vertices. `edge` is the edge between them, so this pattern follows one hop. `IS entity` and `IS related_to` refer to the labels defined in `ACTIVATION_FRAUD_NETWORK`.
+    In the `MATCH` pattern, `order_node` and `connected` are vertices. `edge` connects them, so this pattern follows one hop. `IS entity` and `IS related_to` refer to the labels defined in `ACTIVATION_FRAUD_NETWORK`.
 
     The result has the same shape as Jessica's query. The difference is the way Bob describes the investigation: start at one vertex, follow one edge, and return the connected vertex.
-
-<!-- application-capture:APP-05 -->
 
 For an application example of following a set number of graph connections, open **Subscriber and Network Impact Graph** and select **2 Steps** for the game-day congestion event. The demo follows incident impact across sites, services and crews. This illustrates graph traversal; the activation-evidence graph in this lab has different entities and relationships.
 
 ![Live two-step incident-impact graph; this is not a Graph Studio notebook result.](images/app-impact-graph.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ## Task 3: Trace activation evidence across four hops
 
@@ -247,9 +221,7 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
 
     The `WHERE` clause starts the search at `ORD-8841`, and the `COLUMNS` clause returns graph properties in a normal SQL result table.
 
-    This is much easier than writing the same logic with ordinary joins. Without SQL/PGQ graph pattern matching, you would need separate self-joins for one-hop and four-hop paths, extra union logic for each hop level, and more code every time investigators want to follow another type of relationship.
-
-    The graph pattern says the investigation in plain terms: start with this service order, follow the relationships, and show what is connected.
+    Compare this path pattern with the joins in Task 1. It follows one through four hops without a separate SELECT statement for each path length.
 
     ```sql
     <copy>
@@ -275,11 +247,7 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
     </copy>
     ```
 
-    <!-- capture:CAP-09 -->
     ![Trace activation evidence across four hops](images/sql-graph-four-hop.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     RELATIONSHIP_HOPS shows the entity's level in the search. A value of `1` means the entity is directly connected to `ORD-8841`; a value of `2` means the query reached it after one intermediate vertex; values `3` and `4` show deeper connections.
 
@@ -297,9 +265,8 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
     * `IP-198.51.100.44` is an IP address
     * `PHONE-212-0199` is a phone number
     
-    These rows matter because they show what the suspicious service order touched or shared.
 
-    The result gives investigators a risk-sorted list of connected entities. Instead of reviewing a tangle of connections, the analyst gets a table sorted by risk score. High risk scores and large amounts point to entities that may require manual activation review, case escalation, or deeper review before looking at lower-risk connections.
+    Review the highest risk scores and amounts first to decide which connections need manual investigation.
 
 ## Task 4: Find service orders that share identifying information
 
@@ -338,11 +305,7 @@ Bob now moves from one suspicious service order to a broader activation fraud qu
     </copy>
     ```
 
-    <!-- capture:CAP-10 -->
     ![Find service orders that share identifying information](images/sql-graph-shared.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
 
     The pattern starts at service order `a`, follows an edge to a shared entity, and follows another edge back to service order `b`. The two service orders can therefore be connected through the same device, IP address, phone number, or email address. `a.entity_id < b.entity_id` keeps the result from returning the same pair twice in reverse order.
 
@@ -350,32 +313,21 @@ Bob now moves from one suspicious service order to a broader activation fraud qu
 
     The result shows the two service orders, the information they share, the relationship type on each side, and the risk score for each service order. `COMBINED_RISK` helps the analyst review the strongest service order pairs first. A shared identifier does not prove activation fraud, but it gives the activation fraud team a clear reason to investigate the service orders together.
 
-    
-
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
 Oracle Graph Studio displays the service orders and identifiers as an interactive network. Bob can select nodes and follow relationships to find clusters, shared devices, and links between service orders.
 
-In the following tasks, use Graph Studio to turn the SQL results for `ORD-8841` into an investigation map.
-
 1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
 
-    <!-- capture:CAP-11 -->
     ![Graph Studio on the LLUSER development launchpad.](images/graph-launch.png)
 
-    *Live LLUSER capture, 23 September 2026.*
-
 3. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
-
 
 4. If prompted, sign in with the `LLUSER` and the workshop password supplied.
 
 5. Confirm that the Graph Studio home page opens. The landing page provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
 
-    <!-- capture:CAP-12 -->
     ![Visualize the relationship using Oracle Graph Studio](images/graph-studio-overview.png)
-
-    *Live LLUSER capture, 23 September 2026.*
 
 ## Task 6: Download and import the telecommunications notebook
 
@@ -387,29 +339,15 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
 
 2. In Graph Studio, click **Notebooks** in the landing page.
 
-    <!-- capture:CAP-13 -->
     ![Download and import the telecommunications notebook](images/graph-notebooks.png)
-
-    *Live LLUSER capture, 23 September 2026.*
 
 3. Select **Import** in the upper-right corner.
 
-    <!-- capture:CAP-14 -->
     ![Download and import the telecommunications notebook](images/graph-import-dialog.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-    
 
 4. Once the import notebooks tab opens, drag & drop the `telecommunications-activation-fraud-graph-studio.dsnb` file from your local computer into the import window, or browse to the file on your computer. Review the selected filename and click **Import**. Open **Activation Fraud Network** after the import completes.
 
-    <!-- capture:CAP-15 -->
     ![Telecommunications notebook selected for import.](images/graph-import-file.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-    
-
 
 ## Task 7: Run and interpret the Graph Studio notebook
 
@@ -419,19 +357,11 @@ Use the table to rank connected entities. Use the graph to follow the paths and 
 
 1. Start at the top of the **Activation Fraud Network** notebook. Read the explanation for the `ORD-8841` traversal, then run the first SQL paragraph.
 
-    <!-- capture:CAP-16 -->
     ![Activation Fraud Network notebook introduction.](images/graph-notebook-top.png)
-
-    *Live LLUSER capture, 23 September 2026.*
-
-    
 
 2. Review the results in table format in the graph studio notebook:
 
-    <!-- capture:CAP-17 -->
     ![Activation evidence reached from service order ORD-8841.](images/live-09-graph-notebook-table.png)
-
-    *Live LLUSER capture, 23 September 2026.*
 
     This uses the investigation pattern from Task 3 with a shorter one-to-two-hop limit: start from `ORD-8841`, follow one or two relationship hops, and return the connected entities as a table sorted by risk score.
 
@@ -445,25 +375,15 @@ Use the table to rank connected entities. Use the graph to follow the paths and 
 
 3. Under **Graph Visualization of previous query**, run the SQL paragraph that begins with `SELECT *` and follows connections from `ORD-8841`. Review the graph visualization that appears below the paragraph.
 
-    <!-- capture:CAP-18 -->
     ![Seven vertices and ten edges reached across the activation network; labels show risk scores.](images/live-10-graph-order-network.png)
 
-    *Live LLUSER capture, 23 September 2026.*
     Note how the service orders and devices in the previous query were turned into vertices and edges in Graph Studio to display an interactive network.
-
-    
 
 4. Under **Shared Entity Connections**, read the device-centered explanation, then run the final SQL paragraph that starts at `DEV-fp-91a7`. Review the graph visualization that appears below the paragraph. This visualization narrows the investigation to the device DEV-fp-91a7.
 
-    <!-- capture:CAP-19 -->
     ![Shared activation device linked to three service orders and a network address.](images/live-11-graph-shared-device.png)
 
-    *Live LLUSER capture, 23 September 2026.*
-
     Check that the visualization includes ORD-8841, ORD-5077, and ORD-1190 around the shared device; display filters can hide graph elements.
-
-    
-The sample data requires device `DEV-fp-91a7` to link service order vertices ORD-8841, ORD-5077, and ORD-1190. These links illustrate how service orders can share an activation device; verify the edges in your loaded data. This graph matters because it shows what the suspicious service order touched or shared.
 
 > **Result note:** Graph layouts and node positions can vary between runs. Compare entity keys, relationships, and query results.
 
@@ -471,13 +391,11 @@ You have used SQL/PGQ to list connected entities and Graph Studio to explore the
 
 ### Optional graph-algorithms extension
 
-The companion [airtime graph notebook](files/getting-started-airtime-graph.dsnb) preserves the separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `AIRTIME_GRAPH`, with prepaid account holders connected by sample airtime transfers. It is separate from `ACTIVATION_FRAUD_NETWORK` and requires the optional PGQL graph and PGX service described in the schema contract. Before running it, ask the administrator to create the PGQL graph and enable PGX. Closely connected accounts deserve a closer look, but their connections do not prove abuse.
+The companion [airtime graph notebook](files/getting-started-airtime-graph.dsnb) lets you practice PGX graph algorithms: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `AIRTIME_GRAPH`, with prepaid account holders connected by sample airtime transfers. It is separate from `ACTIVATION_FRAUD_NETWORK` and requires the optional PGQL graph and PGX service described in the tables and sample-data reference. Before running it, ask the administrator to create the PGQL graph and enable PGX. Closely connected accounts deserve a closer look, but their connections do not prove abuse.
 
 ## Conclusion: Make Relationships Easy to Review
 
-Bob's graph queries show why a property graph fits activation-fraud investigations. Bob can start with one suspicious service order, follow its relationships, limit the search to a chosen number of hops, and find service order pairs that share identifying information. The queries stay readable as the network grows, while the results still include the risk and activity details needed for review.
-
-Graph Studio displayed the same relationships as an interactive network. Bob compared the notebook results with the earlier SQL Worksheet results, then explored clusters, shared devices, and links between service orders.
+Bob can now trace connections from a suspicious service order and identify order pairs with shared identifiers. SQL results rank the evidence; Graph Studio lets him explore the paths.
 
 ## Appendix: Create the Property Graph
 
@@ -543,7 +461,6 @@ CREATE PROPERTY GRAPH activation_fraud_network
 ```
 
 The statement defines the graph structure over the relational tables. It does not move the rows to a separate graph database. `ACTIVATION_FRAUD_NETWORK` can then be queried with `GRAPH_TABLE` while the relational tables remain the source of the data.
-
 
 ## Acknowledgements
 

@@ -6,18 +6,7 @@ Jessica Chan, the DBA at SEER Telecomms, starts the morning with a request from 
 
 ![Jessica and Thomas review dropped-call reports, affected subscribers, and network sites in the SEER Telecomms operations office.](images/seer-telecomms-introduction.png)
 
-Thomas needs service-order details as JSON for the subscriber application. Gilly will find plans by meaning. Bob will follow shared devices and contact identifiers in an activation-fraud review. Moon will locate nearby network sites, Otto will build an activation-demand watchlist, and Nina will ask questions about contracted monthly charges.
-
 Jessica brings the team together around records in Oracle AI Database. Each lab follows one part of their work. A nearby site or a matching plan description does not prove the cause of an outage. Support staff still check device compatibility, measured coverage, site alarms, and available capacity before recommending a change.
-
-The teams need different ways to use the same records:
-
-- Thomas needs service orders as JSON for a web and mobile application.
-- Gilly needs semantic search to find relevant service plans when callers use different words.
-- Bob needs to trace service orders linked by activation evidence.
-- Moon needs to compare subscriber service addresses, access sites, and network regions.
-- Otto needs to classify plan demand from accepted orders and support diagnostics.
-- Nina needs to ask telecom questions and inspect the SQL behind each answer.
 
 ### SEER Telecomms data model
 
@@ -25,19 +14,13 @@ SEER Telecomms is a fictional communications provider. All people, sites, orders
 
 ![SEER Telecomms model: subscribers and network sites connect to service orders; sites have service plans; orders have lines linked to plans.](images/seer-telecomms-erd.png)
 
-*A service order covers one initial monthly period. Each line selects a plan offered for that site’s service area and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) and read the [complete table and sample-data reference](../validation/schema-contract.md).
+*A service order covers one initial monthly period. Each line selects a plan offered for that site’s service area and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) and read the [complete table and sample-data reference](../reference/tables-and-sample-data.md).
 
 Plans cover mobile voice and data, fixed wireless, fiber, and IoT. Each plan includes access technology, advertised download speed, and a data allowance; a null allowance means unlimited. The workshop links each plan to a site to represent a service area. Commercial mobile plans are not tied to a single radio tower. Subscriber locations are service addresses, not live handset tracking.
 
-> **Workshop status:** Repository checks, manual database validation, Graph Studio notebooks, AutoML, Select AI and the agent example are complete. Authentic captures show the validated run. SQLcl launch step and LiveLabs green-button/Terraform provisioning checks remain for the next phase. See [Getting Started](?lab=getting-started).
-
-<!-- application-capture:APP-01 -->
-
-The [running telecom application](http://141.144.192.27:8505/) follows a game-day 5G congestion incident. Open **Welcome** to see how its screens connect. Its demo dataset and current user, Jessica Chen, differ from the workshop sample data and teaching personas. Application captures below illustrate the user interface; they do not validate the lab SQL.
+The [running telecom application](http://141.144.192.27:8505/) follows a game-day 5G congestion incident. Open **Welcome** to see how its screens connect. Its demo dataset and current user, Jessica Chen, differ from the workshop sample data and teaching personas. Use the lab queries and sample data for the database exercises.
 
 ![Welcome page of the supplied telecom operations demo.](images/app-welcome.png)
-
-*Application capture, 23 September 2026. Separate demo dataset.*
 
 ### What the team builds
 
@@ -50,8 +33,6 @@ The [running telecom application](http://141.144.192.27:8505/) follows a game-da
 | Moon, spatial specialist | Find sites near subscribers needing support. | Spatial SQL filters service addresses by region and ranks active sites by distance. |
 | Otto, data scientist | Build a service-plan demand watchlist. | Oracle Machine Learning classifies synthetic demand and joins scores to supporting activity. |
 | Nina, subscriber experience analyst | Review monthly charges without writing every query. | Select AI shows generated SQL; an agent uses its SQL tool and records the activity. |
-
-The relational records also support documents, semantic search, graph investigations, spatial analysis, model scores, and natural-language questions. The teams can combine those results without maintaining separate copies for each database capability.
 
 <details>
 <summary><strong>Learn more: What does "converged database" mean?</strong></summary>
