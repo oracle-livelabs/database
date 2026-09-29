@@ -397,6 +397,8 @@ Run the notebook paragraphs from top to bottom. Use the triangle **Run** button 
 
     Graph Studio draws the patient journey and every relationship used to reach those care facts. The result should contain **9 vertices** and **9 edges**. Select a vertex to inspect its `NODE_LABEL`, `NODE_TYPE`, `RISK_SCORE`, and `PATHWAY_VOLUME`. Select an edge to inspect its `RELATIONSHIP_TYPE` and `EVIDENCE_SCORE`.
 
+    > **Note:** Below the first graph, increase the displayed element count to **18** to show the complete pathway: **9 vertices and 9 edges**.
+
     ![Graph Studio visualization of the patient journey and connected care facts](images/healthcare-pathway-graph-studio.png " ")
 
 3. Read the first visualization as a pathway rather than a list.
