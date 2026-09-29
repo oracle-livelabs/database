@@ -1,4 +1,4 @@
-# Investigate a Booking Abuse Network
+# Investigate Booking Connections
 
 ![Bob — hospitality lab banner](images/bob.png)
 
@@ -19,7 +19,7 @@ Compare ordinary SQL joins with SQL Property Graph Queries (SQL/PGQ), then explo
 >
 > - A **hop** is one step across an edge from one vertex to another. `RSV-8841` to a device is one hop. `RSV-8841` to that device and then to another reservation is two hops. The hop count tells investigators how far the search travels from the starting reservation; it does not describe physical distance or reservation time.
 >
-> - **SQL Property Graph Queries (SQL/PGQ)** let you describe graph patterns in SQL, such as "start with this reservation and follow related entities." That lets investigators ask relationship questions in SQL without moving booking abuse data into a separate graph-only database.
+> - **SQL Property Graph Queries (SQL/PGQ)** let you describe graph patterns in SQL, such as "start with this reservation and follow related entities." That lets investigators ask relationship questions in SQL without moving booking connection data into a separate graph-only database.
 
 </details>
 
@@ -35,7 +35,7 @@ The local Hospitality LiveStack demo illustrates a related application story usi
 - Follow connections from a suspicious reservation.
 - Find reservation pairs that share identifying information.
 - Open Graph Studio from Database Actions.
-- Import and run the hospitality booking-abuse-network notebook.
+- Import and run the hospitality booking-connections notebook.
 - Explain the result in terms a business user can act on.
 
 Estimated Time: **10 minutes**
@@ -207,7 +207,7 @@ Jessica has already written a query for Bob. It shows the entities directly conn
 
     Compare the result with Task 1: the graph pattern returns the same direct connections.
 
-## Task 3: Trace four-hop booking abuse reach
+## Task 3: Trace booking connections across four hops
 
 Start from suspicious reservation `RSV-8841` and trace the connected entities within four relationship hops.
 
@@ -245,15 +245,15 @@ Start from suspicious reservation `RSV-8841` and trace the connected entities wi
 
     `RELATIONSHIP_HOPS` is the number of steps from `RSV-8841`: `1` is a direct connection; `2`–`4` are longer paths.
 
-    **Expected output: High Risk Booking Abuse Entities**
+    **Expected output: Connected Entities for Review**
 
 2. Review the entities in risk order. Examples include device `DEV-fp-91a7`, payment token `TOKEN-REUSED-017`, IP address `IP-198.51.100.44`, and phone `PHONE-212-0199`.
 
-    Pick a high-risk row and explain which shared detail warrants further investigation. A high score helps prioritize review; it does not prove abuse.
+    Pick a high-risk row and explain which shared detail warrants further investigation. A high score helps prioritize review; shared details may have a legitimate explanation.
 
 ## Task 4: Find reservations that share identifying information
 
-Bob now moves from one suspicious reservation to a broader booking abuse question: **which reservation pairs share a device, IP address, phone number, or email address?** This is the kind of relationship pattern that can be difficult to find with ordinary joins.
+Bob now moves from one suspicious reservation to a broader booking review question: **which reservation pairs share a device, IP address, phone number, or email address?** This is the kind of relationship pattern that can be difficult to find with ordinary joins.
 
 1. Run Bob's reservation-pair query:
 
@@ -294,7 +294,7 @@ Bob now moves from one suspicious reservation to a broader booking abuse questio
 
 2. Review the business result.
 
-    The result shows the two reservations, the information they share, the relationship type on each side, and the risk score for each reservation. `COMBINED_RISK` helps the analyst review the strongest reservation pairs first. A shared identifier does not prove booking abuse, but it gives the booking abuse team a clear reason to investigate the reservations together.
+    The result shows the two reservations, the information they share, the relationship type on each side, and the risk score for each reservation. `COMBINED_RISK` helps the analyst review the strongest reservation pairs first. A shared identifier may have a legitimate explanation. Use it to decide which reservations to review together.
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
@@ -310,49 +310,49 @@ Oracle Graph Studio displays the reservations and identifiers as an interactive 
 
 4. Confirm that the Graph Studio home page opens. The landing page provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
 
-    ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.jpg " ")
+    ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.png " ")
 
 ## Task 6: Download and import the hospitality notebook
 
 The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnable investigation guide that combines SQL/PGQ paragraphs and graph visualizations.
 
-1. Download [hospitality-booking-abuse-graph-studio.dsnb](files/hospitality-booking-abuse-graph-studio.dsnb).
+1. Download [hospitality-booking-connections-graph-studio.dsnb](files/hospitality-booking-connections-graph-studio.dsnb).
 
     If the notebook opens in your browser instead of downloading, right-click the link and select **Save Link As**.
 
 2. In Graph Studio, click **Notebooks** in the landing page.
 
-    ![Graph Studio Notebooks page for LLUSER](images/graph-notebooks.jpg " ")
+    ![Graph Studio Notebooks page for LLUSER](images/graph-notebooks.png " ")
 
 3. Select **Import** in the upper-right corner.
 
-    ![Graph Studio notebook import dialog](images/graph-import-dialog.jpg)
+    ![Graph Studio notebook import dialog](images/graph-import-dialog.png)
 
-4. Drag the downloaded `.dsnb` file into the import window or browse to it. Confirm the filename, click **Import**, then open **Booking Abuse Network**.
+4. Drag the downloaded `.dsnb` file into the import window or browse to it. Confirm the filename, click **Import**, then open **Booking Connections**.
 
-    ![Hospitality notebook selected for import](images/graph-import-file.jpg)
+    ![Hospitality notebook selected for import](images/graph-import-file.png)
 
 ## Task 7: Run and interpret the Graph Studio notebook
 
 Run the notebook’s `RSV-8841` traversal and `DEV-fp-91a7` shared-device view. Compare the ranked table with the paths shown in the graph.
 
-1. Start at the top of the **Booking Abuse Network** notebook. Read the explanation for the `RSV-8841` traversal, then run the first SQL paragraph.
+1. Start at the top of the **Booking Connections** notebook. Read the explanation for the `RSV-8841` traversal, then run the first SQL paragraph.
 
-    ![Booking Abuse Network notebook introduction](images/graph-notebook-top.jpg)
+    ![Booking Connections notebook introduction](images/graph-notebook-top.png)
 
 2. Review the results in table format in the graph studio notebook:
 
-    ![Ranked booking results in Graph Studio](images/live-09-graph-notebook-table.jpg)
+    ![Ranked booking results in Graph Studio](images/live-09-graph-notebook-table.png)
 
     This uses the investigation pattern from Task 3 with a shorter one-to-two-hop limit: start from `RSV-8841`, follow one or two relationship hops, and return the connected entities as a prioritized table.
 
 3. Under **Graph Visualization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `RSV-8841`. Review the graph visualization that appears below the paragraph.
 
-    ![Reservation graph from RSV-8841](images/live-10-graph-reservation-network.jpg)
+    ![Reservation graph from RSV-8841](images/live-10-graph-reservation-network.png)
 
 4. Under **Shared Entity Connections**, run the final SQL paragraph anchored on `DEV-fp-91a7`. Inspect the reservations connected to that device.
 
-    ![Reservations linked to the shared device](images/live-11-graph-shared-device.jpg)
+    ![Reservations linked to the shared device](images/live-11-graph-shared-device.png)
 
     The supplied display filters show four of five vertices and five of seven edges.
 
@@ -362,7 +362,7 @@ Run the notebook’s `RSV-8841` traversal and `DEV-fp-91a7` shared-device view. 
 
 ### Optional graph-algorithms extension
 
-The companion [loyalty graph notebook](files/getting-started-loyalty-graph.dsnb) provides separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `LOYALTY_GRAPH`, with loyalty members connected by allowed points transfers. It is separate from `BOOKING_ABUSE_NETWORK` and requires the optional PGQL graph, a provisioned `LOYALTY_GRAPH`, and an attached PGX service. Skip this extension if those resources are not available. Graph proximity is a review cue, not proof of abuse.
+The companion [loyalty graph notebook](files/getting-started-loyalty-graph.dsnb) provides separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `LOYALTY_GRAPH`, with loyalty members connected by allowed points transfers. It is separate from `BOOKING_ABUSE_NETWORK` and requires the optional PGQL graph, a provisioned `LOYALTY_GRAPH`, and an attached PGX service. Skip this extension if those resources are not available. Graph proximity helps prioritize review; it does not establish intent.
 
 ## Conclusion: Make Relationships Easy to Review
 
