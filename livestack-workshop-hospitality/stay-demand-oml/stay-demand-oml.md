@@ -1,12 +1,12 @@
 # Build a Stay Offer Demand Watchlist with Oracle Machine Learning
 
-![Otto — hospitality lab banner](images/otto.png)
-
 ## Introduction
 
 Otto Spencer, Seer Hotels’ data scientist, is building a demand watchlist. Guest-service staff need to see which stay offers may face a surge and the booking activity behind each prediction.
 
 Train a model to classify offers as `SURGE` or `STABLE`, then combine its scores with stay offer details in SQL. You can also compare candidate models in the optional AutoML task.
+
+![Otto — hospitality lab banner](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>

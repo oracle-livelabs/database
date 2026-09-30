@@ -1,12 +1,12 @@
 # Route Guests to the Closest Hotel Property
 
-![Moon — hospitality lab banner](images/moon.png)
-
 ## Introduction
 
 Moon Kai, Seer Hotels’ spatial specialist, helps guest services find nearby hotels: **which guests are in a high-demand region, and which active property is closest to each one?**
 
 Follow Moon from hotel points and demand-region polygons to a guest routing query that returns distances and property details.
+
+![Moon — hospitality lab banner](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>

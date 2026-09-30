@@ -20,6 +20,17 @@ Jessica, the DBA, helps him compare JSON columns, JSON collections, and JSON Rel
 
 </details>
 
+### Objectives
+
+- Store flexible application attributes as JSON in a relational table.
+- Create and query a JSON Collection Table of production order documents.
+- Read and update relational production order data through `PRODUCTION_ORDERS_DV`.
+- Compare the three JSON approaches and choose the right one for an application feature.
+
+Estimated Time: **10 minutes**
+
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
+
 Here is the document Thomas’s screen needs:
 
 ```json
@@ -35,17 +46,6 @@ Here is the document Thomas’s screen needs:
   ]
 }
 ```
-
-### Objectives
-
-- Store flexible application attributes as JSON in a relational table.
-- Create and query a JSON Collection Table of production order documents.
-- Read and update relational production order data through `PRODUCTION_ORDERS_DV`.
-- Compare the three JSON approaches and choose the right one for an application feature.
-
-Estimated Time: **10 minutes**
-
-> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Store flexible application data as JSON
 
