@@ -1,12 +1,12 @@
 # Ask HighTech Questions with Select AI
 
-![Nina: HighTech lab banner](images/nina-hightech.png)
-
 ## Introduction
 
 Nina Patel, Seer HighTech’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the HighTech schema.
 
 You will help Nina ask a question, inspect the generated SQL, run it, and refine the result. The model can choose the wrong columns or misunderstand a question, so SQL review remains part of her work.
+
+![Nina: HighTech lab banner](images/nina-hightech.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>

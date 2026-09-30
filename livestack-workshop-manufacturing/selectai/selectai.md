@@ -1,12 +1,12 @@
 # Ask Manufacturing Questions with Select AI
 
-![Nina: manufacturing lab banner](images/nina.png)
-
 ## Introduction
 
 Nina Patel, SEER MANUFACTURING’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the manufacturing schema.
 
 You will help Nina ask a question, inspect the generated SQL, run it, and refine the result. The model can choose the wrong columns or misunderstand a question, so SQL review remains part of her work.
+
+![Nina: manufacturing lab banner](images/nina.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>

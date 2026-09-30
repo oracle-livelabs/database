@@ -1,12 +1,12 @@
 # Trace a Production Quality Network
 
-![Bob: manufacturing lab banner](images/bob.png)
-
 ## Introduction
 
 Bob Green, SEER MANUFACTURING’s graph specialist, is investigating production order `PO-8841`. Shared material lots, inspection records, machines, and suppliers may connect it to other orders.
 
 You will follow those connections with SQL/PGQ, then explore the same relationships in Graph Studio. SQL returns tables to compare; Graph Studio displays nodes, edges, and paths.
+
+![Bob: manufacturing lab banner](images/bob.png)
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>

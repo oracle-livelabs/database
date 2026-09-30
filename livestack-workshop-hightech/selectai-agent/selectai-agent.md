@@ -1,7 +1,5 @@
 # Build a HighTech Agent with Select AI Agent
 
-![Nina: HighTech lab banner](images/nina-hightech.png)
-
 ## Introduction
 
 Nina Patel has used Select AI for individual questions. Her production-review screen now needs an assistant that can handle a request and follow-up questions.
@@ -9,6 +7,8 @@ Nina Patel has used Select AI for individual questions. Her production-review sc
 Jessica gives the agent one tool: SQL through the `GENAI` profile configured in the previous lab.
 
 Create an agent, task, and team, then run and verify Nina’s question. The instructions request read-only answers, but SQL retains `LLUSER`’s owner privileges.
+
+![Nina: HighTech lab banner](images/nina-hightech.png)
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>

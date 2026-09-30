@@ -1,12 +1,12 @@
 # Ask Telecom Questions with Select AI
 
-![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
-
 ## Introduction
 
 Nina Patel, a subscriber experience analyst at SEER Telecomms, wants to compare monthly charges without writing every query herself. Jessica has prepared a Select AI profile for the workshop tables.
 
 Help Nina ask a question, inspect the generated SQL, run it, and refine the answer. Check the joins and filters: an AI-generated query can run successfully and still answer the wrong question.
+
+![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>

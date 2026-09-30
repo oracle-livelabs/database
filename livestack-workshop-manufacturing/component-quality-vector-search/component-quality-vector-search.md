@@ -1,12 +1,12 @@
 # Search Components by Meaning
 
-![Gilly: manufacturing lab banner](images/gilly.png)
-
 ## Introduction
 
 Gilly Bourne, SEER MANUFACTURING’s AI engineer, needs to answer **which customer sites may be affected by a bearing dimensional-tolerance concern?** The inspection wording may differ from the component descriptions.
 
 You will create component vectors, search by meaning, and join the matches to production orders and customer sites. Gilly can return a follow-up list directly from Oracle AI Database.
+
+![Gilly: manufacturing lab banner](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
