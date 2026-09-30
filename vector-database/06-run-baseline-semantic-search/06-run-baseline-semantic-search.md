@@ -125,7 +125,7 @@ The `directions` table stores vectors generated in Lab 5 and does not have an in
 
     ```python
     %python
-    direction_query = "directions to a national park near Washington, DC"
+    direction_query = "driving directions from Washington, DC to a national park entrance"
 
     direction_embedding = vecdb.generate_embedding(
         model_name="all_MiniLM_L12_v2",
