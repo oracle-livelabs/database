@@ -17,6 +17,11 @@ Oracle NoSQL Database Cloud Service is a fully managed database cloud service th
 
 You will learn to develop a sample Oracle NoSQL application using multiple language SDKs for Oracle NoSQL. The instructions for different SDKs are contained in tabbed pages. Click the tab corresponding to the language you are interested in.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Download the appropriate Oracle NoSQL SDK in your instance
 <if type="Java">
 
@@ -64,7 +69,7 @@ You will learn to develop a sample Oracle NoSQL application using multiple langu
     </project>
     </copy>
     ```
->   Note: The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). Please make sure to replace the placeholder for the version of the Oracle NoSQL Java SDK in the `pom.xml` file with the exact SDK version number.
+    >   Note: The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). Please make sure to replace the placeholder for the version of the Oracle NoSQL Java SDK in the `pom.xml` file with the exact SDK version number.
 </if>
 
 <if type="Python">
@@ -78,15 +83,15 @@ You will learn to develop a sample Oracle NoSQL application using multiple langu
 3. If you are using the Oracle NoSQL Database cloud service you will also need to install the oci package:
 
     ```
-    <copy> pip3 install oci </copy>
+     <copy> pip3 install oci </copy>
     ```
 </if>
 
 <if type="Go">
 
-1.  Open the [Go Downloads](https://golang.org/doc/install) page in a browser and click the download tab corresponding to your operating system. Save the file to your home folder.
+1. Open the [Go Downloads](https://golang.org/doc/install) page in a browser and click the download tab corresponding to your operating system. Save the file to your home folder.
 
-2.  Install Go in your operating system.
+2. Install Go in your operating system.
     - On Windows systems, Open the MSI file you downloaded and follow the prompts to install Go.
 
       >  Note: By default, the installer will install Go to Program Files or Program Files (x86). You can change the location as needed. After installing, you will need to close and reopen any open command prompts so that changes to the environment made by the installer are reflected at the command prompt.
@@ -99,25 +104,25 @@ You will learn to develop a sample Oracle NoSQL application using multiple langu
         </copy>
         ```
         
-3.  Verify that you've installed Go. In the Command Prompt window that appears, type the following command:
+3. Verify that you've installed Go. In the Command Prompt window that appears, type the following command:
 
       ```
       <copy>
       $ go version
       </copy>
       ```
-  Confirm that the command prints the installed version of Go.
+    Confirm that the command prints the installed version of Go.
 </if>
 
 <if type="Node.js">
 
-The Node SDK supports both JavaScript and TypeScript applications. This lab includes code samples for JavaScript and TypeScript applications. Decide the language that you want to use.
+    The Node SDK supports both JavaScript and TypeScript applications. This lab includes code samples for JavaScript and TypeScript applications. Decide the language that you want to use.
   
-1.  Open the [Node.js Download](https://nodejs.org/en/) link and download Node.js. Follow the prompts to install the Node.js package. The Node Package Manager (npm) is automatically installed.
+1. Open the [Node.js Download](https://nodejs.org/en/) link and download Node.js. Follow the prompts to install the Node.js package. The Node Package Manager (npm) is automatically installed.
 
-With this Node.js package, you can run both JavaScript and TypeScript applications.
+    With this Node.js package, you can run both JavaScript and TypeScript applications.
 
-2.  Add node-v2x.xx.xx-linux-x64/bin to the PATH environment variable.
+2. Add node-v2x.xx.xx-linux-x64/bin to the PATH environment variable.
 
       ```
       <copy>
@@ -136,28 +141,28 @@ With this Node.js package, you can run both JavaScript and TypeScript applicatio
       npm -v
       </copy>
       ```
-3.  Install the Node SDK for Oracle NoSQL Database.
+3. Install the Node SDK for Oracle NoSQL Database.
       
       ```
       <copy>
       npm install oracle-nosqldb
       </copy>
       ```  
-With the command above, npm creates the `node_modules` directory in the current directoy
+    With the command above, npm creates the `node_modules` directory in the current directoy
 </if>
   
 <if type="C-sharp">
 
-1.  Make sure you have [.NET](https://dotnet.microsoft.com/en-us/download) installed in your system. You can add the SDK NuGet Package as a reference to your project by using .Net CLI.
+1. Make sure you have [.NET](https://dotnet.microsoft.com/en-us/download) installed in your system. You can add the SDK NuGet Package as a reference to your project by using .Net CLI.
 
-2.  Add the PATH where you installed .NET in environment variable
+2. Add the PATH where you installed .NET in environment variable
 
     ```
     <copy>
     export PATH=~/Downloads:$PATH
     </copy>
     ```
-3.  Run the following command to create your project directory.
+3. Run the following command to create your project directory.
 
     ```
     <copy>
@@ -165,7 +170,7 @@ With the command above, npm creates the `node_modules` directory in the current 
     </copy>
     ```
 
-4.  Go to your project directory. Add the SDK package to your project.
+4. Go to your project directory. Add the SDK package to your project.
 
     ```
     <copy>
@@ -176,30 +181,30 @@ With the command above, npm creates the `node_modules` directory in the current 
 
 <if type="Rust">
 
-1.  Open the [Rust download page](https://www.rust-lang.org/tools/install) in your browser and download Rust using the instructions given. This creates a `~/.cargo/bin` directory where all the required tools are installed.
+1. Open the [Rust download page](https://www.rust-lang.org/tools/install) in your browser and download Rust using the instructions given. This creates a `~/.cargo/bin` directory where all the required tools are installed.
 
-2.  Add the PATH directory in your environment variables.
+2. Add the PATH directory in your environment variables.
     ```
     <copy>
     export PATH=~/.cargo/bin:$PATH
     </copy>
     ```
 
-3.  Verify the installation using
+3. Verify the installation using
     ```
     <copy>
     rustc --version
     </copy>
     ```
 
-4.  Create a new project directory using
+4. Create a new project directory using
     ```
     <copy>
     cargo new HelloWorld
     </copy>
     ```
 
-5.  Navigate to the project directory and update the Cargo.toml file as shown below.
+5. Navigate to the project directory and update the Cargo.toml file as shown below.
     ```
     <copy>
     [package]
@@ -221,24 +226,24 @@ With the command above, npm creates the `node_modules` directory in the current 
 
 <if type="Java">
 
-1.  Download the provided [Hello World.java](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.java) file and move it to the `test/src/main/java` directory.
+1. Download the provided [Hello World.java](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.java) file and move it to the `test/src/main/java` directory.
 
-2.  Review the sample application. You can access the JavaAPI Reference Guide to know more about Java classes, methods, and interfaces included in this sample application.
+2. Review the sample application. You can access the JavaAPI Reference Guide to know more about Java classes, methods, and interfaces included in this sample application.
 
     >   Note: Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root".
 
     Edit the code in HelloWorld.java file, replace the placeholder of the compartment in the function setDefaultCompartment with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3.  Navigate to the `test` directory you created.
+3. Navigate to the `test` directory you created.
 
-4.  Compile your java code using the command
+4. Compile your java code using the command
     ```
     <copy>
     mvn compile
     </copy>
     ```
 
-5.  Build your maven project using the following command.
+5. Build your maven project using the following command.
 
     ```
     <copy>
@@ -249,15 +254,15 @@ With the command above, npm creates the `node_modules` directory in the current 
 
 <if type="Python">
 
-1.  Download the provided [HelloWorld.py](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.py) file.
+1. Download the provided [HelloWorld.py](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.py) file.
 
-2.  Review the sample application. You can access the [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html) to reference Python classes and methods included in this sample application.
+2. Review the sample application. You can access the [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html) to reference Python classes and methods included in this sample application.
 
     >   Note: Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root".
 
     Edit the code in HelloWorld.py file, replace the placeholder of the compartment in the function `set_default_compartment` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3.  Execute the sample application: Open the terminal and navigate to the directory where you saved the `HelloWorld.py` program. Execute the HelloWorld program.
+3. Execute the sample application: Open the terminal and navigate to the directory where you saved the `HelloWorld.py` program. Execute the HelloWorld program.
 
     ```
     <copy>
@@ -281,17 +286,17 @@ With the command above, npm creates the `node_modules` directory in the current 
 
 <if type="Go">
 
-1.  Download the provided [HelloWorld.go](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.go) file and move it to your desired directory.
+1. Download the provided [HelloWorld.go](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.go) file and move it to your desired directory.
 
-2.  Review the sample application. You can access the [Go API docs](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb) to reference Go classes and methods included in this sample application.
+2. Review the sample application. You can access the [Go API docs](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb) to reference Go classes and methods included in this sample application.
 
     >   Note: Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root".
 
     Edit the code in HelloWorld.go file, replace the placeholder of the compartment in the constructor of `NewSignatureProviderFromFile` with the OCID of your compartment. 
 
-Replace the placeholder for region with the name of your region. Save the file and close it.
+    Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3.  Execute the sample application: Initialize a new module for the example program.
+3. Execute the sample application: Initialize a new module for the example program.
     ```
     <copy>
     go mod init example.com/HelloWorld
@@ -306,7 +311,7 @@ Replace the placeholder for region with the name of your region. Save the file a
     </copy>
     ```
 
-4.  Run the command below to add the various modules to the project
+4. Run the command below to add the various modules to the project
     ```
     <copy>
     go mod tidy
@@ -332,7 +337,7 @@ Replace the placeholder for region with the name of your region. Save the file a
     </copy>
     ```
 
-5.  Build the HelloWorld application
+5. Build the HelloWorld application
     
     ```
     <copy>
@@ -346,22 +351,22 @@ Replace the placeholder for region with the name of your region. Save the file a
     </copy>
     ```
 
->   Note: In the main method of HelloWorld.go, the code for dropping the table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.
+    >   Note: In the main method of HelloWorld.go, the code for dropping the table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.
 </if>
 
 <if type="Node.js">
 
-The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
+    The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
 
-1.  For JavaScript applications, download the [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.ts) file and move it to your home directory.
+1. For JavaScript applications, download the [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.ts) file and move it to your home directory.
 
-2.  Review the sample application. You can access the [Node.js API Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
+2. Review the sample application. You can access the [Node.js API Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
     >   Note: Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root".
 
     Depending on your application, edit either the JavaScript code in HelloWorld.js or the TypeScript code in HelloWorld.ts, replace the placeholder of the compartment in the `NoSQLClient` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3.  Execute the Sample Application
+3. Execute the Sample Application
 
     For JavaScript Application: Open the terminal and navigate to the directory where you saved the `HelloWorld.js` program. Execute the HelloWorld program.
     ```
@@ -379,22 +384,22 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
 <if type="C-sharp">
 
-1.  Download the provided [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.cs) file and move it to your home directory.
+1. Download the provided [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.cs) file and move it to your home directory.
 
-2.  Review the sample application. You can access the [.NET API Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
+2. Review the sample application. You can access the [.NET API Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
 
     >   Note: Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root".
 
     Edit the code in HelloWorld.cs file, replace the placeholder of the compartment in the `NoSQLClient` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
-3.  Go to your project directory. You will see the example source code `Program.cs`. Remove this file.
+3. Go to your project directory. You will see the example source code `Program.cs`. Remove this file.
     ```
     <copy>
     rm Program.cs
     </copy>
     ```
 
-4.  Build and run your project as shown below.
+4. Build and run your project as shown below.
     
     ```
     <copy>
@@ -402,12 +407,12 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
     </copy>
     ```
 
->   Note: Multiple dotnet target frameworks are supported. Currently the supported frameworks are .NET 7.0 and higher.
+    >   Note: Multiple dotnet target frameworks are supported. Currently the supported frameworks are .NET 7.0 and higher.
 </if>
 
 <if type="Rust">
 
-1.  Download the [HelloWorld.rs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.rs) file, navigate to the HelloWorld/src folder. The src folder already contains a `main.rs` file. Replace the content of main.rs with those from the downloaded file.
+1. Download the [HelloWorld.rs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.rs) file, navigate to the HelloWorld/src folder. The src folder already contains a `main.rs` file. Replace the content of main.rs with those from the downloaded file.
 
     To edit the `main.rs` file in editor, run the command below:
     ```
@@ -416,20 +421,20 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
     </copy>
     ```
 
-2.  Review the sample application. You can access the Rust Reference Guide to reference Rust classes and methods included in this sample application.
+2. Review the sample application. You can access the Rust Reference Guide to reference Rust classes and methods included in this sample application.
 
     >   Note: Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root".
     
     Edit the code in `main.rs` file, replace the placeholder of the compartment in the `builder` class with the OCID of your compartment. Save the file and close it.
 
-3.  Navigate back to the project directory and build your project using
+3. Navigate back to the project directory and build your project using
     ```
     <copy>
     cargo build
     </copy>
     ```
 
-4.  Run your project using
+4. Run your project using
     
     ```
     <copy>
@@ -442,17 +447,17 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
 1. On the left hand menu, click **Databases**. In the **Databases** window, click **Tables** under **Oracle NoSQL Database**.
 
-  ![Click NoSQL Database Tables](images/nosql-cloud.png)
+    ![Click NoSQL Database Tables](images/nosql-cloud.png)
 
 2. Click **HelloWorldTable** to open the details page.
 
-  *If you do not see HelloWorldTable select your correct compartment (that you mentioned in your code) on the left dropdown.*
+    *If you do not see HelloWorldTable select your correct compartment (that you mentioned in your code) on the left dropdown.*
 
-  ![Click HelloWorldTable](images/open-helloworldtable.png)
+    ![Click HelloWorldTable](images/open-helloworldtable.png)
 
 3. Click **Columns** under Resources to view the table columns.
 
-  ![View table columns](images/helloworldtable.png)
+    ![View table columns](images/helloworldtable.png)
 
 4. Click **Explore data** under Resources and click **Execute** to execute the select statement and display the record inserted into the table.
 

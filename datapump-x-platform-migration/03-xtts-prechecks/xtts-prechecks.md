@@ -370,3 +370,8 @@ You may now *proceed to the next lab*.
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

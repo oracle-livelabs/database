@@ -30,7 +30,7 @@ This lab assumes you have:
 In this (and the previous) phase, the database is up, and there is no downtime yet. Users make changes in the source database. Let's simulate that by creating a table and adding a data file.
 
 1. Start SQL\*Plus (SOURCE) </br>
-Connect with SQL*Plus as TPCC user to the source database:
+    Connect with SQL*Plus as TPCC user to the source database:
 
     ```
     <copy>
@@ -51,7 +51,7 @@ Connect with SQL*Plus as TPCC user to the source database:
     ![creating a new table in TPCC acount](./images/cre-object-copy.png " ")
 
 3. Connect a sysdba (SOURCE) </br>
-This time connect as sysdba to the source database:
+    This time connect as sysdba to the source database:
 
     ```
     <copy>
@@ -217,7 +217,7 @@ The difference between source and target res.txt starts in line three beginning 
 
 
 1. Copy "res.txt" (TARGET) </br>
-So let's continue with the process and copy the updated res.txt and the newly created incrbackups.txt from the source to the target directory:
+    So let's continue with the process and copy the updated res.txt and the newly created incrbackups.txt from the source to the target directory:
 
     ```
     <copy>
@@ -375,3 +375,8 @@ You may now *proceed to the next lab*.
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

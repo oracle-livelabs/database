@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Welcome to the High Availability focus area of the LiveLab! This section is dedicated to providing in-depth information about the latest high availability features in Oracle AI Database 26ai. With this release, Oracle continues to push the boundaries of technology, ensuring mission-critical applications can operate with minimal downtime and maximum data protection. While this is not an exhaustive list of new features, we will spotlight several particularly significant ones: Rolling Patching for Complex Changes, DBMS_ROLLING with Transparent Application Continuity, RAC Fast Pluggable Database Open, Faster Oracle Data Guard Role Transitions, Data Guard Redo Decryption for Hybrid DR Configurations, and Real-time Query for PDB Standby. This section will be updated over time. 
 
 

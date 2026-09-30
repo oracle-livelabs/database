@@ -46,31 +46,31 @@ This is done as often multiple errors are reported together and we want to ensur
 
 ## Task 2: Log in to the oracle user (if you are not already oracle) and confirm you environment is set up to connect to the database with `sqlplus`
 
-1.	If you are not already the oracle user then you can `sudo su` from both "ops" and "root users"
+1. If you are not already the oracle user then you can `sudo su` from both "ops" and "root users"
 
-	```
-	<copy>
-	sudo su - oracle
-	</copy>
-	```
-	
-2.	Find the local database instance name running on this node using the **srvctl** cli. 
+    	```
+    	<copy>
+    	sudo su - oracle
+    	</copy>
+    	```
+    	
+2. Find the local database instance name running on this node using the **srvctl** cli. 
 
-	```
-	<copy>
-	srvctl status database -d `srvctl config database`
-	</copy>
-	```
-	Command Output:
-	<pre>
-	Instance racUXBVI1 is running on node lldbcs61
-	Instance racUXBVI2 is running on node lldbcs62
-	</pre>
-	> Note: The instance name will be different on this system.
-	>       We can use the `srvctl config database` command in line here as there will only be one database on the system.
-	</pre>
+    	```
+    	<copy>
+    	srvctl status database -d `srvctl config database`
+    	</copy>
+    	```
+    	Command Output:
+    	<pre>
+    	Instance racUXBVI1 is running on node lldbcs61
+    	Instance racUXBVI2 is running on node lldbcs62
+    	</pre>
+    	> Note: The instance name will be different on this system.
+    	>       We can use the `srvctl config database` command in line here as there will only be one database on the system.
+    	</pre>
 
-3.	Ensure your environment is set to connect to the database instance from Step 2
+3. Ensure your environment is set to connect to the database instance from Step 2
 
 	```
 	<copy>
@@ -89,65 +89,65 @@ This is done as often multiple errors are reported together and we want to ensur
 ## Task 3: Connect to the database with `sqlplus` and generate some errors
 
 1. Connect to the datase instance with **sqlplus** with sysdba role
-	```
-	<copy>
-	sqlplus / as sysdba
-	</copy>
-	```
-	
-	Command output:  
-	<pre>
-	SQL*Plus: Release 19.0.0.0.0 - Production on Fri Jul 12 03:37:16 2024
-	Version 19.23.0.0.0
+    	```
+    	<copy>
+    	sqlplus / as sysdba
+    	</copy>
+    	```
+    	
+    	Command output:  
+    	<pre>
+    	SQL*Plus: Release 19.0.0.0.0 - Production on Fri Jul 12 03:37:16 2024
+    	Version 19.23.0.0.0
 
-	Copyright (c) 1982, 2023, Oracle.  All rights reserved.
+    	Copyright (c) 1982, 2023, Oracle.  All rights reserved.
 
 
-	Connected to:
-	Oracle Database 19c EE Extreme Perf Release 19.0.0.0.0 - Production
-	Version 19.23.0.0.0
+    	Connected to:
+    	Oracle Database 19c EE Extreme Perf Release 19.0.0.0.0 - Production
+    	Version 19.23.0.0.0
 
-	SQL>
-	</pre>
+    	SQL>
+    	</pre>
 
 2. Generate a dummy ORA-00600 Error
 
-	At the SQL> prompt type
-	```
-	<copy>
-	oradebug unit_test dbke_test dde_flow_kge_ora kgb livelabs1 17
-	</copy>
-	```
-	Command output:  
-	<pre>
-	Statement processed.
-	</pre>
+    	At the SQL> prompt type
+    	```
+    	<copy>
+    	oradebug unit_test dbke_test dde_flow_kge_ora kgb livelabs1 17
+    	</copy>
+    	```
+    	Command output:  
+    	<pre>
+    	Statement processed.
+    	</pre>
 
 3. Generate a Dummy ORA-04031 Error
 
-	At the SQL> prompt type
-	```
-	<copy>
-	oradebug unit_test dbke_test dde_flow_kge_fac ORA 4031
-	</copy>
-	```
-	Command output:  
-	<pre>
-	Statement processed.
-	</pre>
+    	At the SQL> prompt type
+    	```
+    	<copy>
+    	oradebug unit_test dbke_test dde_flow_kge_fac ORA 4031
+    	</copy>
+    	```
+    	Command output:  
+    	<pre>
+    	Statement processed.
+    	</pre>
 
 4. Change a database init parameter
-	At the SQL> prompt type
-	```
-	<copy>
-	alter system set parallel_threads_per_cpu=4;
-	</copy>
-	```
+    	At the SQL> prompt type
+    	```
+    	<copy>
+    	alter system set parallel_threads_per_cpu=4;
+    	</copy>
+    	```
 
-	Command output:  
-	<pre>
-	Statement processed.
-	</pre>
+    	Command output:  
+    	<pre>
+    	Statement processed.
+    	</pre>
 
 5. Check that AHF detected the incidents using `tfactl events`  
 	

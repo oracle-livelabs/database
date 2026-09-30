@@ -80,7 +80,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![](./images/init-multitenant-tde.png " ")
+    ![Image](./images/init-multitenant-tde.png " ")
 
 <!-- for 21c image only. -->
 2. Create Database Links. During this workshop you will use database links *`cdb1_dblink`* and *`cdb2_dblink`* to perform tasks across between the two CDBs

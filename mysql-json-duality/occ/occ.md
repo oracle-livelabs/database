@@ -213,7 +213,7 @@ In this lab, you will be guided through the following tasks:
         ]
         }'
         WHERE data->'$._id' = 1;
-</copy>
+    </copy>
     ```
      ![Execute Query](./images/patient-update-etag.png " ")
 

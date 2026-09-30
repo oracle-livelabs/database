@@ -30,11 +30,11 @@ This lab assumes you have:
      ORACLE_SID = [FREE] ? FREE
      The Oracle base has been set to /opt/oracle OR The Oracle base remains unchanged with value /opt/oracle.
     [FREE:oracle@hol23cfdr:~]$
-		```
+    		```
 
 3. Next connect to your database.
     ```
-		[FREE:oracle@hol23cfdr:~]$ <copy>sqlplus / as sysdba</copy>
+    		[FREE:oracle@hol23cfdr:~]$ <copy>sqlplus / as sysdba</copy>
 
     SQL*Plus: Release 23.0.0.0.0 - Developer-Release on Wed Apr 5 13:38:14 2023
     Version 23.2.0.0.0
@@ -47,7 +47,7 @@ This lab assumes you have:
     Version 23.2.0.0.0
 
     SQL>
-		```
+    		```
     ![Connect to the database](images/connect-db-sysdba1.png " ")
 
 4. Next change to your pluggable database. If your pluggable database is a different name, make sure to change the command below.
@@ -57,13 +57,13 @@ This lab assumes you have:
     Session altered.
 
     SQL>
-		```
+    		```
     ![Change to PDB](images/alter-session1.png " ")
 
 5. To change the password for the user hol23c use the "alter user \[username\] identified by \[new password\]" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
     ```
-		alter user hol23c identified by [new_password_here];
-		```
+    		alter user hol23c identified by [new_password_here];
+    		```
     ```
     SQL> <copy>alter user hol23c identified by Welcome123;</copy>
 
@@ -76,15 +76,15 @@ This lab assumes you have:
 6. Once the password has been changed you can exit SQL Plus as sysdba.
 
     ```
-		SQL> <copy>exit</copy>
-Disconnected from Oracle Database 23ai Free, Release 23.0.0.0.0 - Developer-Release
-Version 23.2.0.0.0
-[FREE:oracle@hol23cfdr:~]$
-		```
+    		SQL> <copy>exit</copy>
+    Disconnected from Oracle Database 23ai Free, Release 23.0.0.0.0 - Developer-Release
+    Version 23.2.0.0.0
+    [FREE:oracle@hol23cfdr:~]$
+    		```
 
     ![Exit](images/exit1.png " ")
 
-You may now **proceed to the next lab**.
+    You may now **proceed to the next lab**.
 
 ## Learn More
 

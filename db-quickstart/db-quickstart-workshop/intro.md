@@ -1,5 +1,11 @@
 # Introduction                                   
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 The labs in this workshop walk you through all the steps to get started using the **Oracle AI Database** and perform simple operations on tables. While this workshop applies equally to either on-premises databases or cloud-based databases in an Oracle Autonomous AI Database cloud service, the labs will show how to get started using an Oracle Autonomous AI Database.
 
 You will provision a new Oracle Autonomous AI Database instance in the Oracle Cloud, connect to the database using a SQL Worksheet, perform queries, and create a schema in which you will create a user, assign privileges, and create tables.

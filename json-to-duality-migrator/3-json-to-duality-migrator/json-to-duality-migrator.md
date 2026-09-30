@@ -39,12 +39,12 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
 
 1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
-   ![DB Actions](images/dbaction1.png)
+    ![DB Actions](images/dbaction1.png)
 
 
 2. Below you can find the Database Actions homepage. Click the SQL tile under development to open the SQL worksheet.
 
-   ![Homepage Development SQL](./images/development-sql.png)
+    ![Homepage Development SQL](./images/development-sql.png)
 
 
 3. Let's now drop all the objects that we created in the previous lab first.
@@ -78,7 +78,7 @@ In this task, we will create JSON collection tables `speaker`, `attendee`, and `
     SELECT * FROM user_tables;
     </copy>
     ```
-   ![Existing tables in schema](./images/schema-tables.png)
+    ![Existing tables in schema](./images/schema-tables.png)
 
 2. Create the `speaker`, `attendee`, and `lecture` collections.
 

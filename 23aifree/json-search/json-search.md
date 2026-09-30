@@ -40,7 +40,7 @@ In this lab, you will:
 
     ![Query for movies over one billion in gross takings](images/billion-gross.png " ")
 
-3.  Examine the query plan
+3. Examine the query plan
 
     Above the worksheet, click on the "Explain Plan" button.
 

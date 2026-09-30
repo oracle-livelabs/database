@@ -26,20 +26,20 @@ To connect to Oracle Database and run SQL commands, set the environment first.
 
 1. Open a terminal window and run the command *oraenv* to set the environment variables.
 
-	```
-	$ <copy>. oraenv</copy>
-	```
+    	```
+    	$ <copy>. oraenv</copy>
+    	```
 
 1. Enter the Oracle SID, for this lab it is *CDB1*.
 
-	```
-	ORACLE_SID = [oracle] ? <copy>CDB1</copy>
-	The Oracle base has been set to /opt/oracle
-	```
+    	```
+    	ORACLE_SID = [oracle] ? <copy>CDB1</copy>
+    	The Oracle base has been set to /opt/oracle
+    	```
 
-	This command also sets the Oracle home path to `/opt/oracle/product/21c/dbhome_1`.
+    	This command also sets the Oracle home path to `/opt/oracle/product/21c/dbhome_1`.
 
-	> **Note:** Oracle SID is case sensitive.  
+    	> **Note:** Oracle SID is case sensitive.  
 
 1. Change the current working directory to `$ORACLE_HOME/bin`. This is the directory where the listener control utility is located.
 
@@ -111,101 +111,101 @@ The listener starts automatically when the host system turns on. If a problem oc
 
 1. From `$ORACLE_HOME/bin`, stop the listener first, if it is already running. 
 
-	```
-	$ <copy>./lsnrctl stop</copy>
-	```
+    	```
+    	$ <copy>./lsnrctl stop</copy>
+    	```
 
-	## Output
+    	## Output
 
-	The values may differ depending on the system you are using.
+    	The values may differ depending on the system you are using.
 
-	```
-	LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 17-FEB-2022 14:12:41
+    	```
+    	LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 17-FEB-2022 14:12:41
 
-	Copyright (c) 1991, 2021, Oracle.  All rights reserved.
+    	Copyright (c) 1991, 2021, Oracle.  All rights reserved.
 
-	Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost.example.com)(PORT=1521)))
-	The command completed successfully
-	```
+    	Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost.example.com)(PORT=1521)))
+    	The command completed successfully
+    	```
 
-	Now that you have stopped the listener, run the following steps to check if you can still connect to your Oracle Database.
+    	Now that you have stopped the listener, run the following steps to check if you can still connect to your Oracle Database.
 
 1. From `$ORACLE_HOME/bin`, log in to SQL Plus as the *SYSTEM* user using the service name *CDB1*.
 
-	```
-	$ <copy>./sqlplus system@CDB1</copy>
-	```
+    	```
+    	$ <copy>./sqlplus system@CDB1</copy>
+    	```
 
-	## Output
+    	## Output
 
-	```
-	SQL*Plus: Release 21.0.0.0.0 - Production on Thu Feb 17 14:20:00 2022
-	Version 21.4.0.0.0
+    	```
+    	SQL*Plus: Release 21.0.0.0.0 - Production on Thu Feb 17 14:20:00 2022
+    	Version 21.4.0.0.0
 
-	Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+    	Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
-	Enter password:
-	ERROR:
-	ORA-12541: TNS:no listener
-	```
+    	Enter password:
+    	ERROR:
+    	ORA-12541: TNS:no listener
+    	```
 
-	This error indicates that the listener is not running. You can exit the prompt by pressing **Ctrl + C** followed by **Enter**. 
+    	This error indicates that the listener is not running. You can exit the prompt by pressing **Ctrl + C** followed by **Enter**. 
 
-	> **Note:** If the listener is not running on the host, Oracle Enterprise Manager Cloud Control (Oracle EMCC) returns an I/O error indicating failure to establish connection with your Oracle Database.
+    	> **Note:** If the listener is not running on the host, Oracle Enterprise Manager Cloud Control (Oracle EMCC) returns an I/O error indicating failure to establish connection with your Oracle Database.
 
 1. Start the listener again from the $ORACLE_HOME/bin directory.
 
-	```
-	$ <copy>./lsnrctl start</copy>
-	```
+    	```
+    	$ <copy>./lsnrctl start</copy>
+    	```
 
-	## Output
+    	## Output
 
-	The values may differ depending on the system you are using.
+    	The values may differ depending on the system you are using.
 
-	```
-	LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 17-FEB-2022 14:23:59
+    	```
+    	LSNRCTL for Linux: Version 21.0.0.0.0 - Production on 17-FEB-2022 14:23:59
 
-	Copyright (c) 1991, 2021, Oracle.  All rights reserved.
+    	Copyright (c) 1991, 2021, Oracle.  All rights reserved.
 
-	Starting /opt/oracle/product/21c/dbhome_1/bin/tnslsnr: please wait...
+    	Starting /opt/oracle/product/21c/dbhome_1/bin/tnslsnr: please wait...
 
-	TNSLSNR for Linux: Version 21.0.0.0.0 - Production
-	System parameter file is /opt/oracle/homes/OraDB21Home1/network/admin/listener.ora
-	Log messages written to /opt/oracle/diag/tnslsnr/localhost/listener/alert/log.xml
-	Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=localhost.example.com)(PORT=1521)))
-	Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+    	TNSLSNR for Linux: Version 21.0.0.0.0 - Production
+    	System parameter file is /opt/oracle/homes/OraDB21Home1/network/admin/listener.ora
+    	Log messages written to /opt/oracle/diag/tnslsnr/localhost/listener/alert/log.xml
+    	Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=localhost.example.com)(PORT=1521)))
+    	Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
 
-	Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost.example.com)(PORT=1521)))
-	STATUS of the LISTENER
-	------------------------
-	Alias                     LISTENER
-	Version                   TNSLSNR for Linux: Version 21.0.0.0.0 - Production
-	Start Date                17-FEB-2022 14:23:59
-	Uptime                    0 days 0 hr. 0 min. 0 sec
-	Trace Level               off
-	Security                  ON: Local OS Authentication
-	SNMP                      OFF
-	Listener Parameter File   /opt/oracle/homes/OraDB21Home1/network/admin/listener.ora
-	Listener Log File         /opt/oracle/diag/tnslsnr/localhost/listener/alert/log.xml
-	Listening Endpoints Summary...
-	  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=localhost.example.com)(PORT=1521)))
-	  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
-	The listener supports no services
-	The command completed successfully
-	```
+    	Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost.example.com)(PORT=1521)))
+    	STATUS of the LISTENER
+    	------------------------
+    	Alias                     LISTENER
+    	Version                   TNSLSNR for Linux: Version 21.0.0.0.0 - Production
+    	Start Date                17-FEB-2022 14:23:59
+    	Uptime                    0 days 0 hr. 0 min. 0 sec
+    	Trace Level               off
+    	Security                  ON: Local OS Authentication
+    	SNMP                      OFF
+    	Listener Parameter File   /opt/oracle/homes/OraDB21Home1/network/admin/listener.ora
+    	Listener Log File         /opt/oracle/diag/tnslsnr/localhost/listener/alert/log.xml
+    	Listening Endpoints Summary...
+    	  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=localhost.example.com)(PORT=1521)))
+    	  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+    	The listener supports no services
+    	The command completed successfully
+    	```
 
-	You have started the listener on the host again.
+    	You have started the listener on the host again.
 
-	> **Note:** To access Oracle Database, the listener must be up and running. 
+    	> **Note:** To access Oracle Database, the listener must be up and running. 
 
 1. Check the status of the listener as explained in *Task 2: View the Listener Configuration* of this lab.
 
-	```
-	$ <copy>./lsnrctl status</copy>
-	```
+    	```
+    	$ <copy>./lsnrctl status</copy>
+    	```
 
-	You will see an output indicating that the listener service is running.
+    	You will see an output indicating that the listener service is running.
 
 1. Once again log in to SQL Plus as *SYSTEM* using the password and service name.   
    For this lab, the password is *Ora_DB4U* and the service name is *CDB1*.

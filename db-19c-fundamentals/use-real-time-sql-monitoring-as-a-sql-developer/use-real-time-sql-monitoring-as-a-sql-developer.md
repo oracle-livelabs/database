@@ -37,7 +37,7 @@ This lab assumes you have:
     CDB1
     ```
 
-3.	Execute the $HOME/labs/19cnf/RTMonitor.sh SQL script in **session 1**. The script completes the following operations:
+3. Execute the $HOME/labs/19cnf/RTMonitor.sh SQL script in **session 1**. The script completes the following operations:
 
      * Creates the MONI user and MONI_TEST table, and loads the table with thousands of rows
      * Creates a developer user.
@@ -55,7 +55,7 @@ This lab assumes you have:
     $ <copy>sqlplus sys@PDB1 AS SYSDBA</copy>
     ```
 
-5.	Check the privileges and roles granted to the SQLDEV user.
+5. Check the privileges and roles granted to the SQLDEV user.
 
     ```
     SQL> <copy>SELECT * FROM dba_sys_privs WHERE grantee = 'SQLDEV';</copy>
@@ -82,14 +82,14 @@ This lab assumes you have:
 
 1. Open up new terminal window for **session 2**.
 
-2.  Set the Oracle environment variables. At the prompt, enter **CDB1**.
+2. Set the Oracle environment variables. At the prompt, enter **CDB1**.
 
     ```
     $ <copy>. oraenv</copy>
     CDB1
     ```
 
-3.	In **session 2**, connect as the SQLDEV developer.
+3. In **session 2**, connect as the SQLDEV developer.
 
     ```
     $ <copy>sqlplus sqldev@PDB1</copy>
@@ -106,7 +106,7 @@ This lab assumes you have:
 
 ## Task 3: Generate SQL Monitoring Report
 
-1.	In **session 1**, connect as the SQLDEV developer to PDB1.
+1. In **session 1**, connect as the SQLDEV developer to PDB1.
 
     ```
     SQL> <copy>CONNECT sqldev@PDB1</copy>
@@ -212,7 +212,7 @@ This lab assumes you have:
     $
     ```
 
-5.	In **session 2**, interrupt the long-running query. Press CTRL + C.
+5. In **session 2**, interrupt the long-running query. Press CTRL + C.
 
 6. Exit SQL*Plus.
 

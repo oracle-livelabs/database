@@ -72,7 +72,7 @@ Task 2 focuses on testing the new schema privilege feature and comparing it with
 
 By logging in as User 1, we will verify the user and attempt to query Table 1. As expected, User 1 will not be able to access the inventory\_no\_reservations table due to the absence of schema privileges. 
 
-1.  Login to user 1.
+1. Login to user 1.
 
     ```
     <copy>
@@ -104,11 +104,11 @@ By logging in as User 1, we will verify the user and attempt to query Table 1. A
     </copy>
     ```
 
-Note: User 1 can not access this table because they do not have schema privileges feature enabled. 
+    Note: User 1 can not access this table because they do not have schema privileges feature enabled. 
 
-However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
+    However, when we log in as User 2, we will observe successful queries on Table 1 and also attempt to query the second table in the schema, inventory\_reservations.
 
-Watch what happens next with user 2 who has schema privileges enabled:
+    Watch what happens next with user 2 who has schema privileges enabled:
 
 2. Login to user 2 with the username and password you selected.
 
@@ -142,7 +142,7 @@ Watch what happens next with user 2 who has schema privileges enabled:
     </copy>
     ```
 
-  Additionally, we will create a third table, inventory\_third\_table, based on the existing inventory table in Schema 1. We will insert data into this new table and observe the access permissions for User 1 and User 2. While User 2 will have access to the new table, User 1 will not, highlighting the impact of schema privileges on user access.
+    Additionally, we will create a third table, inventory\_third\_table, based on the existing inventory table in Schema 1. We will insert data into this new table and observe the access permissions for User 1 and User 2. While User 2 will have access to the new table, User 1 will not, highlighting the impact of schema privileges on user access.
 
 1. Create the third table:
 
@@ -201,7 +201,7 @@ Watch what happens next with user 2 who has schema privileges enabled:
     </copy>
     ```
 
-  Notice how there is no way user 1 can access the newly created table under the schema due to not have schema level privileges which grant access to all tables. Now watch what happens with u2.
+    Notice how there is no way user 1 can access the newly created table under the schema due to not have schema level privileges which grant access to all tables. Now watch what happens with u2.
 
 3. Login to u2
 

@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## About this Workshop
 
 As a developer at Tech Solutions Company, you’ve been tasked with adding new features to the HR application. As the company grows, so do the challenges of managing both the application and its database.

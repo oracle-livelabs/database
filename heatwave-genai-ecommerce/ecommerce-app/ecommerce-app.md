@@ -428,7 +428,7 @@ If you are a Linux, Mac, or Windows 10 Powershell user, skip the first step.
     ```
     ![Provide your administrator details](./images/rag-replace.png "Provide your administrator details")
 
-8.  Replace the following:
+8. Replace the following:
 
     - **your\_mysql\_host**: Specify the IP address of the HeatWave instance, **heatwave-genai-dbs**. For example, 10.0.0.123.
     - **your\_username**: Specify the username you had used for the HeatWave instance. If you arefollowing the lab instructions, specify **admin**.

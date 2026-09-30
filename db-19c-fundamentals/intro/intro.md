@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 > **Note: Oracle Database 23ai is the current long term support release. Check out the following lab for the newest features in the Oracle Database:**
 
 > [Oracle Database 23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=29237226541700)

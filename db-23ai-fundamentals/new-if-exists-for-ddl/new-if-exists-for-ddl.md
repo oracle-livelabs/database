@@ -15,6 +15,11 @@ In this lab, you will learn how to use the "IF EXISTS" and "IF NOT EXISTS" state
 - Access to Oracle Database 23ai environment.
 - Basic understanding of SQL.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Exploring IF [NOT] EXISTS Clause
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.

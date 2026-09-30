@@ -196,11 +196,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![CONNECT](./images/install-mysql-shell.png "install mysql shell")
 
-   **Connect to MySQL Database Service**
+    **Connect to MySQL Database Service**
 
 6. From your Compute instance, connect to MDS-HW MySQL using the MySQL Shell client tool. 
 
-   The endpoint (IP Address) can be found in your notepad or  the MDS-HW MySQL DB System Details page, under the "Endpoint" "Private IP Address". 
+    The endpoint (IP Address) can be found in your notepad or  the MDS-HW MySQL DB System Details page, under the "Endpoint" "Private IP Address". 
 
     ![CONNECT](./images/connect-shell.png "connect shell")
 

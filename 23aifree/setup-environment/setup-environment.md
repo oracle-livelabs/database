@@ -51,7 +51,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Open SQL Developer Web](./images/check_SDW.png)
+    ![Open SQL Developer Web](./images/check_sdw.png)
 
     No need to login right now. We are going to change the user's password in the next step. 
 
@@ -227,7 +227,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     FROM race r WITH INSERT UPDATE DELETE;</copy>
     ```
 
-    ![Create Race Duality View](./images/create_raceDV.png)
+    ![Create Race Duality View](./images/create_racedv.png)
 
 2. Create a duality view for the driver table. Notice in this duality view, we are specifying that no data alterations are allowed on the team information. That means when preforming PUT, POST, or DELETE actions on this view, we will not be able to alter the `teamId` or `team` fields. 
 
@@ -256,7 +256,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     FROM driver d WITH INSERT UPDATE DELETE;</copy>
     ```
 
-    ![Create Driver Duality View](./images/create_driverDV.png)
+    ![Create Driver Duality View](./images/create_driverdv.png)
 
 3. Create a duality view for the team table. 
 
@@ -276,7 +276,7 @@ You will now create three JSON Duality Views: race\_dv, driver\_dv, and team\_dv
     FROM team t WITH INSERT UPDATE DELETE;</copy>
     ```
 
-    ![Create Team Duality View](./images/create_teamDV.png)
+    ![Create Team Duality View](./images/create_teamdv.png)
 
 
 ## Task 4: Enable the Duality Views for REST APIs

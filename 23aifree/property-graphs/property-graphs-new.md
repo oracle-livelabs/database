@@ -79,10 +79,10 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
     ![Most incoming transfers accounts](images/8-num-transfers.png)
-​
+    ​
     We see that accounts **387** and **934** have a high number of incoming transactions.
 
-2.  What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
+2. What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
 
     ```
     <copy>
@@ -95,7 +95,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
     ![Top 10 accounts](images/9-num-conduits.png)
-​
+    ​
 3. Note that account **387** shows up again, so let's list **accounts that received a transfer from account 387 in 1, 2, or 3 hops**.
     
     ```
@@ -126,7 +126,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
     ![3hop triangle transfers](images/11-num-triangles.png)
-​
+    ​
 5. We can use the same query but **modify the number of hops** to check if there are **any 4-hop transfers that start and end at the same account**.
 
     ```
@@ -138,16 +138,16 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ) GROUP BY acct_id ORDER BY Num_4hop_Chains DESC;
     </copy>
     ```
-​
+    ​
     ![4hop transfers](images/12-num-4hop-chains.png)
-​
+    ​
 6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 5.
 
     Note that although we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the SQL syntax for graphs in Oracle AI Database.
    
     ```
     <copy>
-   SELECT acct_id, COUNT(1) AS Num_5hop_Chains 
+    SELECT acct_id, COUNT(1) AS Num_5hop_Chains 
     FROM graph_table (BANK_GRAPH 
         MATCH (src) - []->{5} (src) 
         COLUMNS (src.id AS acct_id) 
@@ -168,10 +168,10 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ) FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
-​
+    ​
     ![Any 10 accounts that have had circular payment chains](images/13-num-3to5hop-chains.png)
-​
-8.  Let's list the top 10 accounts that have **circular payment chains of 3 to 5 hops** in descending order of the number of such chains.
+    ​
+8. Let's list the top 10 accounts that have **circular payment chains of 3 to 5 hops** in descending order of the number of such chains.
    
     ```
     <copy>
@@ -182,11 +182,11 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ) GROUP BY account_id ORDER BY Num_Cycles DESC FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
-​
+    ​
     ![Top ten accounts that had circular payment chains](images/14-num-cycles.png)
-​
+    ​
     Note that accounts **135**, **934** and **387** are the ones involved in most of the 3 to 5 hops circular payment chains. 
-​
+    ​
 9. Any insert, update, or delete on the underlying tables will also be reflected in the property graph.
 
     Now, let's **insert some more data into BANK\_TRANSFERS**. We will see that when rows are inserted in to the BANK\_TRANSFERS table, the BANK\_GRAPH is updated with corresponding edges.
@@ -220,7 +220,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ![Re-running query to get top 10 accounts with incoming transfers](images/16-second-num-transfers.png)
 
     Notice how accounts **135**, and **934** are now **ahead of 387**.
-​
+    ​
 11. In a previous query we saw that accounts 135 and 934 had a number of 4-hop circular payments chains. Let's check if account **39** had any.
     
     ```
@@ -232,11 +232,11 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     COLUMNS (1 as dummy) );
     </copy>
     ```     
-​
-   ​ ![Querying if account 39 had any 4-hop circular payment chains](images/17-num-4hop-cycles.png " ")
+    ​
+    ​ ![Querying if account 39 had any 4-hop circular payment chains](images/17-num-4hop-cycles.png " ")
 
     **It has zero 4-hop circular payment chains**.
-​
+    ​
 12. Let’s **insert more transfers** which create some circular payment chains for account 39.
 
     We will be adding transfers from accounts 599, 982, and 407 into account 39.
@@ -249,10 +249,10 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     (5010, 407, 39, null, 1000);
     </copy>
     ```
-  ​  
+    ​  
     ![inserting more transfers](images/18-second-insert.png)
-​
-13.  Re-run the previous query to see how the new inserts affect the results.
+    ​
+13. Re-run the previous query to see how the new inserts affect the results.
    
     ```
     <copy>
@@ -263,12 +263,12 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     COLUMNS (1 as dummy) );
     </copy>
     ```
-  ​  
+    ​  
     ![rerun query again](images/19-num-4hop-cycles.png " ")
 
     Notice how we now have **five 4-hop circular payment chains** because the edges of BANK_GRAPH were updated when additional transfers were added to BANK\_TRANSFERS.
 
-14.  We inserted three rows and that resulted in five circular payment chains of length four. Let’s examine why.
+14. We inserted three rows and that resulted in five circular payment chains of length four. Let’s examine why.
 
     By executing the following query we find the number of **3-hop chains from account 39 to one of the accounts 407, 559, or 982**.
 

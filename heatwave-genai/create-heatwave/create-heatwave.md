@@ -68,7 +68,7 @@ In this lab, you will be guided through the following tasks:
     <copy>heatwave-genai-vcn</copy>
     ```
 
- 5. Ensure that **heatwave-genai** compartment is selected, and click **Next**.
+    5. Ensure that **heatwave-genai** compartment is selected, and click **Next**.
 
     ![VCN configuration](./images/6-create-vcn-internet-connectivity.png "VCN configuration")
 
@@ -170,7 +170,7 @@ In this lab, you will be guided through the following tasks:
 
 4. Under **Create in compartment**, ensure **heatwave-genai** is selected, and enter a name for the DB system.
 
-  **Name**:
+    **Name**:
 
     ```bash
     <copy>heatwave-genai-dbs</copy>
@@ -178,7 +178,7 @@ In this lab, you will be guided through the following tasks:
 
 5. Enter the administrator credentials. *Note* the administrator credentials as you will need them to connect to the DB system. 
 
-  **administrator**:
+    **administrator**:
 
     ```bash
     <copy>admin</copy>
@@ -190,7 +190,7 @@ In this lab, you will be guided through the following tasks:
 
 6. Select **Standalone** instance, and select the VCN, **heatwave-genai-vcn**, and private subnet, **private subnet-heatwave-genai-vcn**, which you created earlier.
 
-   ![Configure networking](./images/23-configure-networking.png "Configure networking")
+    ![Configure networking](./images/23-configure-networking.png "Configure networking")
 
 7. Let the **Configure placement** settings remain as is.
 
@@ -202,7 +202,7 @@ In this lab, you will be guided through the following tasks:
 
     Under **Configure hardware**, select **Enable HeatWave cluster**, and click **Change shape**.
 
-   ![Change shape](./images/24-change-shape.png "Change shape")
+    ![Change shape](./images/24-change-shape.png "Change shape")
 
 9. In the **Browse all shapes** page, ensure the compute model is **ECPU**, select **MySQL.32** shape, and click **Select a shape**. The ECPU Shape of the DB system must be MySQL.32.
 
@@ -240,7 +240,7 @@ In this lab, you will be guided through the following tasks:
 
     ![HeatWave hostname](./images/32-heatwave-hostname.png "HeatWave hostname")
 
-17.  While the DB system is created, the state is shown as **CREATING**.
+17. While the DB system is created, the state is shown as **CREATING**.
 
     ![Show creating state](./images/33-dbs-creating.png "Show creating state")
 

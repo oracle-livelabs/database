@@ -46,9 +46,9 @@ In this lab, you will
     <copy>connect admin@ebronline_medium</copy>
     ```
 
-   **If you are using the LiveLabs sandbox, you should refer to the page "View Login Info" for getting the ADMIN credentials. The connection string will also be unique to your environment.**
+    **If you are using the LiveLabs sandbox, you should refer to the page "View Login Info" for getting the ADMIN credentials. The connection string will also be unique to your environment.**
 
-   If you are using the LiveLabs sandbox, replace "ebronline" in the connection string with the full Database Name found on the Login Info page. E.g. for EBRONLINE41137 you must provide:
+    If you are using the LiveLabs sandbox, replace "ebronline" in the connection string with the full Database Name found on the Login Info page. E.g. for EBRONLINE41137 you must provide:
 
     ```text
     <copy>connect admin@ebronline41137_medium</copy>
@@ -56,7 +56,7 @@ In this lab, you will
 
     Save the connect command line for later use. From now on, we'll always show `connect admin@ebronline_medium` or `connect hr@ebronline_medium` regardless of your actual connection string.
 
-   ![ATP Connect](images/atp-connect.png " ")
+    ![ATP Connect](images/atp-connect.png " ")
 
 6. Verify the user is connected as the ADMIN user
 

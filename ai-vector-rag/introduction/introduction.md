@@ -1,5 +1,14 @@
 # AI Vector Search - Rag applications with Oracle AI Vector Search
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Workshop Time: TODO - x minutes
+
+
 ### **About this Workshop**
 
 Generative artificial intelligence (AI) excels at creating text responses based on large language models (LLMs) where the AI is trained on a massive number of data points. The good news is that the generated text is often easy to read and provides detailed responses that are broadly applicable to the questions asked of the software, often called prompts.

@@ -26,54 +26,54 @@ _Estimated Time:_ 11 minutes
 ## Task 1: Create an Oracle NoSQL Table with the Console
 
 1. On the Oracle Cloud Infrastructure menu drop-down on the left,
-go to **Databases** and then select **Tables** under Oracle NoSQL Database.
-This brings you to the 'Tables' screen where you can create a table from the console.
+    go to **Databases** and then select **Tables** under Oracle NoSQL Database.
+    This brings you to the 'Tables' screen where you can create a table from the console.
 
     ![nosql-tables](https://oracle-livelabs.github.io/common/images/console/nosql-tables.png)
 
 <if type="freetier">
 2. On the 'Tables' screen there is a **Compartment** field on the left.
-Please ensure that you select the  **demonosql** compartment.
+    Please ensure that you select the  **demonosql** compartment.
 
-  ![set-compartment](./images/set-compartment.png)
+    ![set-compartment](./images/set-compartment.png)
 </if>
 
 <if type="livelabs">
 2. On the 'Tables' screen there is a **Compartment** field on the left.
-Please make sure the compartment you were assigned is selected. In Lab 2, task 1
-you identified your compartment. You will need to expand the root compartment,
-and then expand the **LiveLabs** compartment to find it. In this example,
-we are using **LL46279-COMPARTMENT**. Yours will be different.
-You will not be able to create tables in any other compartment.
+    Please make sure the compartment you were assigned is selected. In Lab 2, task 1
+    you identified your compartment. You will need to expand the root compartment,
+    and then expand the **LiveLabs** compartment to find it. In this example,
+    we are using **LL46279-COMPARTMENT**. Yours will be different.
+    You will not be able to create tables in any other compartment.
 
-  ![livelab-compartment](./images/livelab-compartment.png)
+    ![livelab-compartment](./images/livelab-compartment.png)
 </if>
 
 3. Click **Create table** and the 'Create table' screen appears.
 
     ![create-tables](./images/create-tables.png)
 
-  This screen allows you to create tables in one of two different ways, either
-  using simple input or using DDL input. For this Lab we are going to use the
-  simple input method.
+    This screen allows you to create tables in one of two different ways, either
+    using simple input or using DDL input. For this Lab we are going to use the
+    simple input method.
 
 4. Enter in values for **Read capacity**, **Write capacity**, and **Disk storage**.
-Enter in 10,10, and 5 respectively.
+    Enter in 10,10, and 5 respectively.
 
-   ![create-reserve](./images/create-reserve.png)
+    ![create-reserve](./images/create-reserve.png)
 
-   Next enter a **name** for your table, a **primary key** and a **column**
-   and click **Set as a shard key.** For this example, we used test as the
-   name, pkey with a type of integer as the primary key, and name with a type
-   of string as an additional column.
+    Next enter a **name** for your table, a **primary key** and a **column**
+    and click **Set as a shard key.** For this example, we used test as the
+    name, pkey with a type of integer as the primary key, and name with a type
+    of string as an additional column.
 
 5. After providing the inputs, click **Create table** at the bottom.
 
-   ![create-my-table](./images/create-my-table.png)
+    ![create-my-table](./images/create-my-table.png)
 
-  In summary, this screen allows to create a table with multiple columns for the
-  primary key, as well as adding many additional columns. You can create simple
-  or more complex tables with this interface.
+    In summary, this screen allows to create a table with multiple columns for the
+    primary key, as well as adding many additional columns. You can create simple
+    or more complex tables with this interface.
 
 7. After clicking **Create table** you will be brought to the 'Tables' screen. This screen shows you a list of tables you have created, as well as basic information about the table. One important thing to notice is that our table has a status of 'Active' which means we are ready to load data into our table.
 
@@ -102,8 +102,8 @@ We need to download those to the Cloud Shell first.
     </copy>
     ```
 3. Let us create NoSQL table using the Oracle Cloud Infrastructure Command Line Interface (CLI).
-The CLI command for Oracle NoSQl is 'oci nosql <command>'. We will create a table
-and  echo the DDL statement so you can see what is being created.
+    The CLI command for Oracle NoSQl is 'oci nosql <command>'. We will create a table
+    and  echo the DDL statement so you can see what is being created.
 
 
     ```shell
@@ -131,13 +131,13 @@ and  echo the DDL statement so you can see what is being created.
 ## Task 3:  Add Data From the Oracle Cloud Console
 
 1. Make sure you see the 'Tables' screen. You should see 2 tables listed. You
-may see different values for read units, write units and storage.
+    may see different values for read units, write units and storage.
 
     ![table-screen](./images/table-screen.png)
 
 2. Let's start with the simple table we created in Task 1. Click **test** table.
-The details screen that shows up, displays all the key information about the table.
-Explore that screen.
+    The details screen that shows up, displays all the key information about the table.
+    Explore that screen.
 
     ![my-test](./images/my-test.png)
 
@@ -146,13 +146,13 @@ Explore that screen.
     ![insert-row](./images/insert-row.png)
 
 4. On the 'Insert row' screen, you will see two ways to input data - a simple and advanced.
-For our test table we will use the simple method. Enter a value for the **pkey** column
-and the **name** column. When done, press **Insert row.**
+    For our test table we will use the simple method. Enter a value for the **pkey** column
+    and the **name** column. When done, press **Insert row.**
 
     ![row-inserted](./images/row-inserted.png)
 
 5. Let's insert rows into another table. First we need to get back to the 'Tables'
-screen. Click **Tables** on top right.
+    screen. Click **Tables** on top right.
 
     ![click-tables](./images/click-tables.png)
 
@@ -162,16 +162,16 @@ screen. Click **Tables** on top right.
 
 7. Click **Explore data**
 
-  Copy/Paste the following command below in the **SQL statement** text box. Because
-  this JSON document is complex, it is easiest to copy/paste into the field.
-  However, you could have typed it all in. You will notice at the end of our UPSERT statement
-  we have a RETURNING clause.   This clause acts the same way as a SELECT clause and
-  in this case it returns the full row.  Click on **Execute.**
+    Copy/Paste the following command below in the **SQL statement** text box. Because
+    this JSON document is complex, it is easiest to copy/paste into the field.
+    However, you could have typed it all in. You will notice at the end of our UPSERT statement
+    we have a RETURNING clause.   This clause acts the same way as a SELECT clause and
+    in this case it returns the full row.  Click on **Execute.**
 
-  ![table-row-insert](./images/table-row-insert.png)
+    ![table-row-insert](./images/table-row-insert.png)
 
 
-  SQL statement
+    SQL statement
 
     ```
     <copy>
@@ -193,7 +193,7 @@ screen. Click **Tables** on top right.
     ```
 8. Let's insert rows using the upload data feature. Download the file `book-file-kvjson.json` in your computer.
 
-   Right click button on this link [upload-file](./files/book-file-kvjson.json), then click on **Save link as**.
+    Right click button on this link [upload-file](./files/book-file-kvjson.json), then click on **Save link as**.
 
 
 9. Click **Upload Data**, and the 'Upload Data' screen appears.
@@ -215,17 +215,17 @@ inserted for that table.
     ![table-row-select](./images/table-row-select.png)
 
 2. In the textbox **SQL statement**, check to see if the text **SELECT * FROM Book** is
-present in the box.   If not, remove what is there and insert it.  This will
-select all the rows from our table. Click **Execute**
+    present in the box.   If not, remove what is there and insert it.  This will
+    select all the rows from our table. Click **Execute**
 
     ![run-query](./images/run-query.png)
 
-  You will see in the bottom of the screen the rows that we inserted.  You will see
-  little arrows pointing either down or to the right.   You can click on arrows pointing to the
-  right to expand the contents OR click on the ones pointing down to compress the
-  contents.
+    You will see in the bottom of the screen the rows that we inserted.  You will see
+    little arrows pointing either down or to the right.   You can click on arrows pointing to the
+    right to expand the contents OR click on the ones pointing down to compress the
+    contents.
 
-  ![explore-row-select](./images/explore-row-select.png)
+    ![explore-row-select](./images/explore-row-select.png)
 
 
 3. Go to the top left, press **Tables**, select the **test** table, and look at

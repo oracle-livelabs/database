@@ -168,7 +168,7 @@ SQL>
     SQL>
     ```
 
-2.  The following will show the current total space used in the IM column store. In-Memory Optimized Arithmetic does use some additional space in the IM column store for the optimized number format.
+2. The following will show the current total space used in the IM column store. In-Memory Optimized Arithmetic does use some additional space in the IM column store for the optimized number format.
 
     Run the script *02\_im\_usage.sql*
 

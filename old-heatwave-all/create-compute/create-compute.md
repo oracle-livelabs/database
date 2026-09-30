@@ -33,7 +33,7 @@ In this lab, you will be guided through the following tasks:
 
 The Cloud Shell machine is a small virtual machine running a Bash shell which you access through the Oracle Cloud Console (Homepage). You will start the Cloud Shell and generate a SSH Key to use  for the Bastion  session.
 
-1.  To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
+1. To start the Oracle Cloud shell, go to your Cloud console and click the cloud shell icon at the top right of the page. This will open the Cloud Shell in the browser, the first time it takes some time to generate it.
 
     ![CONNECT](./images/cloudshellopen.png " ")
 
@@ -41,7 +41,7 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
 
     **Note:**  You can use the icons in the upper right corner of the Cloud Shell window to minimize, maximize, restart, and close your Cloud Shell session.
 
-2.  Once the cloud shell has started, create the SSH Key using the following command:
+2. Once the cloud shell has started, create the SSH Key using the following command:
 
     ```
     <copy>ssh-keygen -t rsa</copy>
@@ -53,9 +53,9 @@ The Cloud Shell machine is a small virtual machine running a Bash shell which yo
     
     ![CONNECT](./images/ssh-key01.png " ")
 
-3.  The public  and  private SSH keys  are stored in ~/.ssh/id_rsa.pub.
+3. The public  and  private SSH keys  are stored in ~/.ssh/id_rsa.pub.
 
-4.  Examine the two files that you just created.
+4. Examine the two files that you just created.
 
     ```
     <copy>cd .ssh</copy>
@@ -102,7 +102,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 6. On Create Compute Instance 
 
- Enter Name
+    Enter Name
     ```
     <copy>MDS-Client</copy>
     ```   
@@ -124,7 +124,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     'Assign a public IP address' should be set to Yes 
    
-  ![CONNECT](./images/05compute04.png " ")
+    ![CONNECT](./images/05compute04.png " ")
 
 11. On Add SSH keys, paste the public key from the notepad. 
   
@@ -136,7 +136,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![CONNECT](./images/05compute07.png " ")
 
-14.	The state 'Running' indicates that the Virtual Machine is ready to use. 
+14. The state 'Running' indicates that the Virtual Machine is ready to use. 
 
     ![CONNECT](./images/05compute08-a.png " ")
 

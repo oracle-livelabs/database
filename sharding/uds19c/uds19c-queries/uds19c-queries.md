@@ -170,7 +170,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![<Connect GSM Global Service to a random shard database>](images/uds19c-connect-gsm-service-directRoutingApp.png " ")
+    ![<Connect GSM Global Service to a random shard database>](images/uds19c-connect-gsm-service-directroutingapp.png " ")
 
 
 ## Task 6: Connect Shard1 using gsm service for direct routing and run a query.

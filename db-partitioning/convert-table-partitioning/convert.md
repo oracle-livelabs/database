@@ -111,7 +111,7 @@ This lab assumes you have completed the following lab:
     ![Image alt text](images/partition-position.png "Convert Non-partitioned Table Partition Position")
 
 6. Global partitioned indexes are untouched and retain their shape. Non-prefixed indexes will become global non-partitioned tables.
-Prefixed indexes will become local partitioned indexes. Bitmap indexes will become local partitioned indexes. So let's check the indexed shape and their status.
+    Prefixed indexes will become local partitioned indexes. Bitmap indexes will become local partitioned indexes. So let's check the indexed shape and their status.
 
     ```
     <copy>

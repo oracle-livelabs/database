@@ -1,3 +1,10 @@
+# TODO: Title
+
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ﻿# Introduction
 
 ## About this workshop
@@ -88,3 +95,8 @@ Click on the next lab to **Get started**. 
 -   **Author** - Aayushi Arora, Database User Assistance Development Team
 -   **Contributors** - Jeff Smith, Manish Garodia, Manisha Mati
 -   **Last Updated By/Date** - Aayushi Arora, October 2024
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

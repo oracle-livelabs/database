@@ -58,20 +58,20 @@ In this lab, you will:
 
 There are multiple ways to access your Autonomous Database.  You can access it via SQL\*Plus or by using SQL Developer Web.  To access it via SQL\*Plus, skip to [Task 1B](#TASK1B:LogintoADBusingSQLPlus).
 
-1.  If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to the next step.
-      ![](../set-operators/images/21c-home-adb.png " ")
+1. If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to the next step.
+      ![Image](../set-operators/images/21c-home-adb.png " ")
 
-2.  If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab, and that you are in the correct region.
+2. If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab, and that you are in the correct region.
 
-3.  Click on the **Display Name** to go to your Oracle Autonomous Database main page.
-      ![](../set-operators/images/21c-adb.png " ")
+3. Click on the **Display Name** to go to your Oracle Autonomous Database main page.
+      ![Image](../set-operators/images/21c-adb.png " ")
 
-4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-      ![](../set-operators/images/tools.png " ")
+4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+      ![Image](../set-operators/images/tools.png " ")
 
-5.  Login using the username *hr* and password *WElcome123##*
+5. Login using the username *hr* and password *WElcome123##*
 
-6.  Click on the **SQL** button.
+6. Click on the **SQL** button.
 
 ## Task 1B: Login to ADB using SQL Plus
 
@@ -82,14 +82,14 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
     export TNS_ADMIN=$(pwd)/wallet
     sqlplus /nolog
-	  conn hr/WElcome123##@adb1_high
-	  ```
+    	  conn hr/WElcome123##@adb1_high
+    	  ```
 
-</if>
+    </if>
 
 ## Task 2: Test the bitwise AND function
 
-1.  A bitwise AND is a binary operation that takes two equal-length binary representations and performs the logical AND operation on each pair of the corresponding bits. If both bits in the compared position are 1, the bit in the resulting binary representation is 1, otherwise, the result is 0. Apply the `BIT_AND_AGG` function on two numbers. The bit pattern for the values used in the examples below are 01 for 1, 10 for 2, and 11 for 3.
+1. A bitwise AND is a binary operation that takes two equal-length binary representations and performs the logical AND operation on each pair of the corresponding bits. If both bits in the compared position are 1, the bit in the resulting binary representation is 1, otherwise, the result is 0. Apply the `BIT_AND_AGG` function on two numbers. The bit pattern for the values used in the examples below are 01 for 1, 10 for 2, and 11 for 3.
 
     ```
     SQL> <copy>
@@ -98,7 +98,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/step2-1.png " ")
+    ![Image](./images/step2-1.png " ")
     </if>
 
     <if type="dbcs">
@@ -122,7 +122,7 @@ A bitwise OR is a binary operation that takes two bit patterns of equal length a
     SELECT BIT_OR_AGG(c1) FROM x;</copy>
     ```
     <if type="atp">
-    ![](./images/step3-1.png " ")
+    ![Image](./images/step3-1.png " ")
     </if>
     <if type="dbcs">
     ```
@@ -144,7 +144,7 @@ A bitwise XOR is a binary operation that takes two bit patterns of equal length 
     ```
 
     <if type="atp">
-    ![](./images/step4-1.png " ")
+    ![Image](./images/step4-1.png " ")
     </if>
 
     <if type="dbcs">
@@ -159,7 +159,7 @@ A bitwise XOR is a binary operation that takes two bit patterns of equal length 
 
 <if type="dbcs">
 
-2.  Exit SQL*Plus
+2. Exit SQL*Plus
 
     ```
     <copy>EXIT</copy>
@@ -169,7 +169,7 @@ A bitwise XOR is a binary operation that takes two bit patterns of equal length 
 
 <if type="atp">
 
-2.  Click on the down arrow in the upper left corner of the SQL Developer Web, click **Sign Out**
+2. Click on the down arrow in the upper left corner of the SQL Developer Web, click **Sign Out**
 </if>
 
 ## Learn More

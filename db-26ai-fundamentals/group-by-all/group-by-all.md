@@ -15,6 +15,11 @@ The goal of this lab is to help you understand and use the GROUP BY ALL clause i
 - Access to Oracle AI Database 26ai
 - Basic understanding of SQL GROUP BY operations is helpful
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Understanding GROUP BY ALL
 
 1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.

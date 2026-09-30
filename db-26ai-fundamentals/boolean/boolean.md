@@ -15,6 +15,11 @@ In this lab, you will explore the boolean data type introduced in Oracle AI Data
 - Access to Oracle AI Database 26ai environment.
 - Basic understanding of SQL and PL/SQL.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Working with the boolean data type
 
 1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database actions and then **click** SQL.

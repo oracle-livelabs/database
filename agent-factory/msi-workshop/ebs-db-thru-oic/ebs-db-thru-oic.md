@@ -79,14 +79,14 @@ To assemble a custom agent in Private Agent Factory using your OIC project, we w
 
     <span style="color:red;">Confirm that your agent looks like this:</span>
 
-    ![Example PAF Agent Builder](./images/OIC-MCP-Workflow.png " ")
+    ![Example PAF Agent Builder](./images/oic-mcp-workflow.png " ")
 
     ### Step 4: Save the flow and test!
 1. Click **Save** on the top right hand corner of your page.
 
 2. **Then**, click **Playground**. You should see the following:
 
-    ![Playground](./images/PAF-Playground.png " ")
+    ![Playground](./images/paf-playground.png " ")
 
 3. Add the following prompts one after the other:
 
@@ -104,7 +104,7 @@ To assemble a custom agent in Private Agent Factory using your OIC project, we w
 
     Please see example output for the above prompts below.
 
-    ![Lab3-Task3](./images/Lab3-Task3-Output.png " ")
+    ![Lab3-Task3](./images/lab3-task3-output.png " ")
 
     Congratulations! You have successfully finished this lab.
 

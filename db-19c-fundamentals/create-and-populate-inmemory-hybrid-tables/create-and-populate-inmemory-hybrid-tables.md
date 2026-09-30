@@ -2,6 +2,9 @@
 
 ## Introduction
 
+Estimated Time: TODO - x minutes
+
+
 Oracle Database enables the population of data from external tables into the In-Memory column store (IM column store). This allows the population of data that is not stored in Oracle Database but in source data files. Nevertheless, the population must be completed manually by executing the DBMS_INMEMORY.POPULATE procedure.
 
 A hybrid partitioned table enables partitions to reside both in database data files (internal partitions) and in external files and sources (external partitions). You can create and query a hybrid partitioned table to utilize the benefits of partitioning with classic partitioned tables, such as pruning, on data that is contained in both internal and external partitions.
@@ -193,11 +196,11 @@ In this task, you create the logical directories to store the source data files 
     SQL>
     ```
 4. Execute the following command to create the `HYPT_INMEM_TAB` hybrid partitioned table with the following attributes:
-* The table is partitioned by range on the `TIME_ID` column.
-* The default tablespace for internal partitions is `TS1`.
-* The default tablespace for external partitions is `CENT20`.
-* The fields in the records of the external files are separated by comma ','.
-* The table is partitioned into five parts:
+    * The table is partitioned by range on the `TIME_ID` column.
+    * The default tablespace for internal partitions is `TS1`.
+    * The default tablespace for external partitions is `CENT20`.
+    * The fields in the records of the external files are separated by comma ','.
+    * The table is partitioned into five parts:
     * Three external partitions: `CENT18` is empty for the moment; `CENT19` has the `cent19.dat` file stored in a directory other than the default, `CENT19`; `CENT20` has the `cent20.dat` file stored in the default directory.
     * Two internal partitions: `Y2000` is stored in tablespace `TS2` and `PMAX` is stored in the default tablespace `TS1`.
 
@@ -214,20 +217,20 @@ In this task, you create the logical directories to store the source data files 
          )
          REJECT LIMIT UNLIMITED
         ) 
-   PARTITION BY RANGE (time_id) 
-   (PARTITION cent18 VALUES LESS THAN 
+    PARTITION BY RANGE (time_id) 
+    (PARTITION cent18 VALUES LESS THAN 
      (TO_DATE('01-Jan-1800','dd-MON-yyyy')) EXTERNAL,
     PARTITION cent19 VALUES LESS THAN 
      (TO_DATE('01-Jan-1900','dd-MON-yyyy')) EXTERNAL 
-	                 DEFAULT DIRECTORY cent19 
-				 LOCATION ('cent19.dat'),
+    	                 DEFAULT DIRECTORY cent19 
+    				 LOCATION ('cent19.dat'),
     PARTITION cent20 VALUES LESS THAN 
      (TO_DATE('01-Jan-2000','dd-MON-yyyy')) EXTERNAL 
-	                          LOCATION('cent20.dat'),
+    	                          LOCATION('cent20.dat'),
     PARTITION y2000 VALUES LESS THAN 
      (TO_DATE('01-Jan-2001','dd-MON-yyyy')) TABLESPACE ts2,
     PARTITION pmax VALUES LESS THAN (MAXVALUE))
-   INMEMORY MEMCOMPRESS FOR QUERY HIGH;
+    INMEMORY MEMCOMPRESS FOR QUERY HIGH;
     </copy>
     Table created.
 

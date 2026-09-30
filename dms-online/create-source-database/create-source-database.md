@@ -26,11 +26,11 @@ The following task is *optional* if a source database is already present.
 
 1. In the OCI Console Menu, go to **Oracle Database > Oracle Base Database Service**.
 
-  ![Screenshot of Oracle Base Database (VM, BM) navigation](images/oracle-base-database.png)
+    ![Screenshot of Oracle Base Database (VM, BM) navigation](images/oracle-base-database.png)
 
 2. Press **Create DB System**.
 
-  ![Screenshot of create db system](images/create-db-system.png)
+    ![Screenshot of create db system](images/create-db-system.png)
 
 3. Enter the following values, otherwise leave defaults. You can adjust shapes and storage to your use case requirements and available quota.
     - Name: **SourceDB**
@@ -43,11 +43,11 @@ The following task is *optional* if a source database is already present.
     - PDB name: **pdb**
     - Create administrator credentials – Password: *password of your choice*
 
-  ![Screenshot of enter db name details](images/name-your-source.png =50%x*)
+    ![Screenshot of enter db name details](images/name-your-source.png =50%x*)
 
-  ![Screenshot of entering ssh key information](images/add-ssh-key.png =50%x*)
+    ![Screenshot of entering ssh key information](images/add-ssh-key.png =50%x*)
 
-  ![Screenshot of network information](images/enter-confirm-pass.png =50%x*)
+    ![Screenshot of network information](images/enter-confirm-pass.png =50%x*)
 
 4. Press **Create**.
 
@@ -57,17 +57,17 @@ The following task is *optional* if a source database is already present.
 ## Task 2: Collect Database Information
 
 1. Open the database system **SourceDB** in the DB Systems table.
-  ![Screenshot of network information](images/open-sourcedb.png =50%x*)
+    ![Screenshot of network information](images/open-sourcedb.png =50%x*)
 
 2. Click on the **sourcedb** in the **Databases** tab.
-![Screenshot of network information](images/databases-sourcedb.png =50%x*)
+    ![Screenshot of network information](images/databases-sourcedb.png =50%x*)
 
 3. Press **DB Connection**.
-  ![Screenshot of network information](images/db-connect.png =50%x*)
+    ![Screenshot of network information](images/db-connect.png =50%x*)
 
 4. Press the three dots menu **(actions)** next to the Easy Connect Connection String. A string similar to **sourcedb.sub12062328210.vcndmsla.oraclevcn.com:1521/sourcedb_iad158.sub12062328210.vcndmsla.oraclevcn.com** should be shown. Click **Copy connection string**.This is the service name of your CDB, you will need this string later for accessing your database and creating migrations. Close the dialog.
 
-  ![Screenshot of network information](images/easy-connect-string.png =50%x*)
+    ![Screenshot of network information](images/easy-connect-string.png =50%x*)
 
 5. Also note the service name of the PDB into a notepad, you need to replace the first section of the CDB service name with the PDB name (if you named it something else, use that), in this case **pdb.sub12062328210.vcndmsla.oraclevcn.com**
 
@@ -88,3 +88,8 @@ You may now [proceed to the next lab](#next).
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Killian Lynch, Hanna Rakhsha, Kiana McDaniel, Solution Engineers, Austin Specialist Hub
 * **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

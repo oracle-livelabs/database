@@ -25,7 +25,7 @@ This labs assumes you have:
 ## Task 1: Setup
 
 1. First things first, let's start
-  Remark: The following scripts are run on an Oracle database 23ai FREE - Developer Release using sqlplus.
+    Remark: The following scripts are run on an Oracle database 23ai FREE - Developer Release using sqlplus.
     
     ```
     <copy>
@@ -151,15 +151,15 @@ For the rest of this post, we'll focus on the [Chance.js](https://www.jsdelivr.c
     <copy>
     create or replace mle env chance_module_env imports ('chance' module chance_module);
     create or replace mle module chance_extended language javascript version '1.1.11' as
-import Chance from 'chance';
-const chance = new Chance();
-const chanceTypes = Object.keys(Object.getPrototypeOf(chance));
+    import Chance from 'chance';
+    const chance = new Chance();
+    const chanceTypes = Object.keys(Object.getPrototypeOf(chance));
 
-function valid(type) {
+    function valid(type) {
     return chanceTypes.indexOf(type) !== -1;
-}
+    }
 
-function getArrayValue(definition) {
+    function getArrayValue(definition) {
     if (definition.length !== 2) {
         return null;
     }
@@ -171,9 +171,9 @@ function getArrayValue(definition) {
     return new Array(count).fill(null).map(function () {
         return getValue(type);
     });
-}
+    }
 
-function getValue(type) {
+    function getValue(type) {
     if (Array.isArray(type)) {
         return getArrayValue(type);
     }
@@ -186,9 +186,9 @@ function getValue(type) {
     } catch (exception) {
         return null;
     }
-}
+    }
 
-function template(json_template) {
+    function template(json_template) {
     const output = {};
     Object.keys(json_template).map(function (key, index) {
         if (typeof key === "string" && key.charAt(0) === '$' && valid(key.substring(1))) {
@@ -198,10 +198,10 @@ function template(json_template) {
         }
     });
     return output;
-}
-chance.yearStr = chance.year;
-chance.year = function (doc) { return parseInt(chance.yearStr(doc)); }
-export { chance, template };
+    }
+    chance.yearStr = chance.year;
+    chance.year = function (doc) { return parseInt(chance.yearStr(doc)); }
+    export { chance, template };
     /
     </copy>
     ```
@@ -466,7 +466,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
      ![Selecting a credit card number using chance](images/lab2_task5_step5.png " _") 
 
 6. Generate 2 random dates (which includes time for Oracle database)
-   first one is a DATE, second one is a formatted string (or varchar2)
+    first one is a DATE, second one is a formatted string (or varchar2)
     ```
     <copy>
     select chance."date", to_char( chance."date", 'yyyy-mm-dd hh24:mi:ss' );
@@ -475,7 +475,7 @@ Installing a PL/SQL package to make Chance functions accessible in SQL
      ![Selecting random dates](images/lab2_task5_step6.png " _") 
 
 7. Generate a random date as a string (or varchar2)
-   here, the format is the one from Chance: american (28th of January 2024, MM/DD/YYYY)
+    here, the format is the one from Chance: american (28th of January 2024, MM/DD/YYYY)
     ```
     <copy>
     select chance."date"( json{ 'string': true } );

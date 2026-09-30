@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 ![mysql heatwave](./images/mysql-heatwave-logo.jpg "mysql heatwave")
 
 This workshop is based on [MySQL HeatWave User Guide: Iris Data Set Machine Learning Quickstart] (https://dev.mysql.com/doc/heatwave/en/mys-hwaml-iris-quickstart.html)

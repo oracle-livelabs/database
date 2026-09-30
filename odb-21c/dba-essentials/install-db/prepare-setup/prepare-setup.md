@@ -18,11 +18,11 @@ This lab assumes you have -
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
-1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
+1. Click on the link below to download the Resource Manager zip file you need to build your environment:
 
-	 - [instdb21c-mkplc-freetier.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/instdb21c-mkplc-freetier.zip)
+    	 - [instdb21c-mkplc-freetier.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/instdb21c-mkplc-freetier.zip)
 
-1.  Save in your downloads folder.
+1. Save in your downloads folder.
 
 We recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an existing VCN then proceed to the next task as indicated below to update your existing VCN with the required Egress rules.
 
@@ -36,15 +36,15 @@ This workshop requires a certain number of ports to be available, a requirement 
 | 6080           | noVNC Remote Desktop                  |
 {: title="Enable ports"}
 
-1.  Go to **Networking** &gt; **Virtual Cloud Networks**
-1.  Choose your network
-1.  Under **Resources**, select **Security Lists**
-1.  Click **Default Security Lists** under the **Create Security List** button
-1.  Click the **Add Ingress Rule** button
-1.  Enter the following:  
+1. Go to **Networking** &gt; **Virtual Cloud Networks**
+1. Choose your network
+1. Under **Resources**, select **Security Lists**
+1. Click **Default Security Lists** under the **Create Security List** button
+1. Click the **Add Ingress Rule** button
+1. Enter the following:  
     - Source CIDR: 0.0.0.0/0
     - Destination Port Range: *Refer to the table*
-1.  Click the **Add Ingress Rules** button
+1. Click the **Add Ingress Rules** button
 
 ## Task 3: Setup compute
 
@@ -60,3 +60,8 @@ You may now **proceed to the next lab**.
  - **Author** - Rene Fontcha, LiveLabs Platform Lead, NA Technology
  - **Contributors** - Manish Garodia
  - **Last Updated By/Date** - Manish Garodia, August 2024
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

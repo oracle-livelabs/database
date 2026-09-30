@@ -42,7 +42,7 @@ This lab walks you through the steps to set up Docker on Oracle Linux 7.7 runnin
     # <copy>dnf install -y docker-ce --nobest</copy>
     ```
 
-    ![](images/docker-installed.png)
+    ![Image](images/docker-installed.png)
 
   Docker is now installed on the compute instance!
 
@@ -68,7 +68,7 @@ Enable a non-root user to communicate with the Docker engine. When Docker was in
     <copy>id opc</copy>
     ```
 
-    ![](images/non-root-enabled.png)
+    ![Image](images/non-root-enabled.png)
 
 ## Task 3: Start Docker
 
@@ -90,7 +90,7 @@ Enable a non-root user to communicate with the Docker engine. When Docker was in
     <copy>systemctl status docker</copy>
     ```
 
-    ![](images/start-docker.png)
+    ![Image](images/start-docker.png)
 
 ## Task 4: Connect to Docker with the non-root user
 
@@ -106,7 +106,7 @@ Enable a non-root user to communicate with the Docker engine. When Docker was in
     <copy>docker run hello-world</copy>
     ```
 
-    ![](images/docker-run-hello.png)
+    ![Image](images/docker-run-hello.png)
 
   You may now *proceed to the next lab*.
 

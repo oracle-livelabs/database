@@ -36,11 +36,11 @@ In this lab, you will be guided through the following task:
 
 2. Click **Sample Queries** and then click **Sample AirportDB Queries**.
 
- ![Sample queries](./images/3-sample-queries.png "Sample queries")
+    ![Sample queries](./images/3-sample-queries.png "Sample queries")
 
 3. Copy Query 1, and click **Cancel**. 
 
- ![Sample airportdb queries](./images/4-copy-sample-airportdb-queries.png "Sample airportdb queries")
+    ![Sample airportdb queries](./images/4-copy-sample-airportdb-queries.png "Sample airportdb queries")
 
 4. Paste the query in the **Query Editor**.
 
@@ -56,11 +56,11 @@ Let us run the same query by turning off HeatWave to find out what query perform
 
 1. Click **Sample Queries**, and then click **Sample AirportDB Queries**.
 
- ![Sample queries](./images/3-sample-queries.png "Sample queries")
+    ![Sample queries](./images/3-sample-queries.png "Sample queries")
 
 2. Copy Query 1 again, and click **Cancel**. 
 
- ![Sample airportdb queries](./images/4-copy-sample-airportdb-queries.png "Sample airportdb queries")
+    ![Sample airportdb queries](./images/4-copy-sample-airportdb-queries.png "Sample airportdb queries")
 
 3. Paste the query in the **Query Editor**.
 

@@ -128,20 +128,20 @@ The `setup_analytic_table.sh` shell script creates in both `PDB21` and `PDB19` t
 
 There are multiple ways to access your Autonomous Database.  You can access it via sqlplus or by using SQL Developer Web.  To access it via sqlplus, skip to [Step 1B](#STEP1B:LogintoADBusingSQLPlus).
 
-1.  If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to #7 of this section.
-    ![](../set-operators/images/21c-home-adb.png " ")
+1. If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to #7 of this section.
+    ![Image](../set-operators/images/21c-home-adb.png " ")
 
-2.  If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab and that you are in the correct region.
+2. If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab and that you are in the correct region.
 
-3.  Click on the **Display Name** to go to your Oracle Autonomous Database main page.
-      ![](../set-operators/images/21c-adb.png " ")
+3. Click on the **Display Name** to go to your Oracle Autonomous Database main page.
+      ![Image](../set-operators/images/21c-adb.png " ")
 
-4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-      ![](../set-operators/images/tools.png " ")
+4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+      ![Image](../set-operators/images/tools.png " ")
 
-5.  Enter the username *report* and password *WElcome123##*
+5. Enter the username *report* and password *WElcome123##*
 
-6.  Click on the **SQL** button.
+6. Click on the **SQL** button.
 
 ## Task 1B: Login to Oracle Autonomous Database using SQL Plus
 
@@ -154,10 +154,10 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
     export TNS_ADMIN=$(pwd)/wallet
     sqlplus /nolog
-	  conn report/WElcome123##@adb1_high
-	  ```
+    	  conn report/WElcome123##@adb1_high
+    	  ```
 
-</if>
+    </if>
 
 ## Task 2: Experiment with the usage of the `GROUPS` clause of the window frame
 
@@ -182,7 +182,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
 </if>
 <if type="atp">
-    ![](./images/step2-1.png " ")
+    ![Image](./images/step2-1.png " ")
 </if>
 <if type="dbcs">
 
@@ -222,7 +222,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/step2-2.png " ")
+    ![Image](./images/step2-2.png " ")
     </if>
 
     <if type="dbcs">
@@ -248,9 +248,9 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     </if>
 
-  The reason why this query works is because it is possible to decompose a sum into partial aggregates, and compute the final sum from those partial aggregates. In this case, the query is decomposing the sum over groups defined by `acno` and `tday`. Then the query gets the sum over 5 trading days by adding the partial sums from the grouped query. `COUNT`, `MAX` and `MIN` are also decomposable aggregates. `AVG` can be decomposed by computing sums and counts and then dividing.
+    The reason why this query works is because it is possible to decompose a sum into partial aggregates, and compute the final sum from those partial aggregates. In this case, the query is decomposing the sum over groups defined by `acno` and `tday`. Then the query gets the sum over 5 trading days by adding the partial sums from the grouped query. `COUNT`, `MAX` and `MIN` are also decomposable aggregates. `AVG` can be decomposed by computing sums and counts and then dividing.
 
-  *When the window name is specified with a windowing clause, it can only be referenced directly, without parentheses.*
+    *When the window name is specified with a windowing clause, it can only be referenced directly, without parentheses.*
 
 3. Query how many distinct ticker symbols were traded in the preceding 5 trading days. This requires a `COUNT DISTINCT`, which cannot be decomposed into partial counts, one for each trading day, because there may be duplicate ticker symbols on different trading days, as can be seen in the sample data. `COUNT DISTINCT` is not decomposable, and the technique in the preceding query cannot be used. Use the keyword `GROUPS` instead of `RANGE` or `ROWS`. The keyword `GROUPS` emphasizes the relationship to grouped queries. Using this kind of keyword, we can answer queries such as, for each account number, for the last five trading days on which the account executed a “buy”, find the amount spent and the number of distinct ticker symbols bought.
 
@@ -262,7 +262,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/step2-3a.png " ")
+    ![Image](./images/step2-3a.png " ")
     </if>
 
     <if type="dbcs">
@@ -284,7 +284,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/step2-3b.png " ")
+    ![Image](./images/step2-3b.png " ")
     </if>
 
     <if type="dbcs">
@@ -360,7 +360,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
 <if type="atp">
 
-1.  Paste the following script into your sql worksheet and press **Run as script** button to run.
+1. Paste the following script into your sql worksheet and press **Run as script** button to run.
 
     ```
     <copy>
@@ -375,7 +375,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     </copy>
     ```
 
-    ![](./images/create-table.png " ")
+    ![Image](./images/create-table.png " ")
 </if>
 
 2. Display the rows of table `T`.
@@ -385,7 +385,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/select-from-v.png " ")
+    ![Image](./images/select-from-v.png " ")
     </if>
     <if type="dbcs">
     ```
@@ -416,7 +416,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/exclude-current-row.png " ")
+    ![Image](./images/exclude-current-row.png " ")
     </if>
 
     <if type="dbcs">
@@ -448,7 +448,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/exclude-current-ties.png " ")
+    ![Image](./images/exclude-current-ties.png " ")
     </if>
     <if type="dbcs">
 
@@ -481,7 +481,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/step3-5.png " ")
+    ![Image](./images/step3-5.png " ")
     </if>
     <if type="dbcs">
 
@@ -517,7 +517,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![](./images/step4-1.png " ")
+    ![Image](./images/step4-1.png " ")
     </if>
     <if type="dbcs">
 
@@ -551,7 +551,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
 2. In the upper left corner, click the down arrow, scroll down and select **Sign Out**.
 
-    ![](./images/exit.png " ")
+    ![Image](./images/exit.png " ")
 
 </if>
 

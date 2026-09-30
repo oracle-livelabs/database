@@ -1,5 +1,14 @@
 # Shared-browser screenshot update
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 All 48 database, Graph Studio and AutoML screenshot placements were replaced with authentic page-only captures from the shared browser. They exclude browser tabs and address bars. Existing screenshot filenames and lesson order are preserved. Original captures are retained under `validation/before-shared-browser-captures` and excluded from the learner ZIP.
 
 SQL results were recaptured through SQL Worksheet as LLUSER. The existing learner-pass Graph Studio notebook and AutoML experiment were reopened for their completed results; this capture pass does not claim a new AutoML training run. Notebook file selection was captured and cancelled without importing another duplicate. Long SQL, JSON and AI values were opened in their result viewers. Grid and scrollable result images are excerpts of the actual UI, not a replacement for executing and inspecting the complete results.
@@ -30,3 +39,8 @@ The revised agent definitions were recreated using the lesson's documented reset
 This was the prepared database, using LLUSER only. No ADMIN access or direct database API execution was used. The six separate HighTech application views still require the absent runnable application. Fresh provisioning/bootstrap and the optional PGX repeat-session property issue are not resolved by replacing screenshots.
 
 Static validation and the source/structure/domain audit passed. OCR completed for all 58 raster images without errors. All 48 installed screenshot hashes match the verified 94-entry ZIP. The replacement agent screenshot loaded in the rendered workshop at its expected 905 × 734 size. The immutable source remains unchanged.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

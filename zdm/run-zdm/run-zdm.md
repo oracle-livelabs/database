@@ -2,14 +2,22 @@
 
 ## Introduction
 
+Estimated Time: TODO - x minutes
+
+
 In this lab, you will be configuring the template file used to inform your migration and then running the offline logical database migration.
 
 Estimate Lab Time: 25 minutes
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Copy the Template File
 1. Return to the command prompt connected to your compute instance as 'zdmuser'.
 
-    ![ZDMUSER Connection](./images/cloudshell.PNG)
+    ![ZDMUSER Connection](./images/cloudshell.png)
 
 2. If you need to reconnect you can do so with the following command. Replace < sshkeyname > and < Your Compute Instance Public IP Address > with the key file name and IP address of your source compute instance:
 
@@ -114,23 +122,23 @@ Estimate Lab Time: 25 minutes
 
 3. Update the following lines in the file. Replace `<Update>` with the information. Be careful and make sure the entire text is pasted as there is a tendency for the first character to sometimes get cut off:
     * TARGETDATABASE\_OCID: On your Autonomous Database home page.
-    ![Configuration Autonomous](./images/config-autonomous.PNG)
+    ![Configuration Autonomous](./images/config-autonomous.png)
     * OCIAUTHENTICATIONDETAILS\_USERPRINCIPAL\_TENANTID: On your API key configuration file preview.
-    ![Configuration Tenancy](./images/config-tenancy.PNG)
+    ![Configuration Tenancy](./images/config-tenancy.png)
     * OCIAUTHENTICATIONDETAILS\_USERPRINCIPAL\_USERID: On your API key configuration file preview.
-    ![Configuration User ID](./images/config-user.PNG)
+    ![Configuration User ID](./images/config-user.png)
     * OCIAUTHENTICATIONDETAILS\_USERPRINCIPAL\_FINGERPRINT: On your API key configuration file preview.
-    ![Configuration Fingerprint](./images/config-fingerprint.PNG)
+    ![Configuration Fingerprint](./images/config-fingerprint.png)
     * OCIAUTHENTICATIONDETAILS\_REGIONID: On your API key configuration file preview.
-    ![Configuration Region](./images/config-region.PNG)
+    ![Configuration Region](./images/config-region.png)
     * DATAPUMPSETTINGS_DATABUCKET\_NAMESPACENAME: On your object storage bucket homepage.
-    ![Bucket Namespace](./images/bucket-namespace.PNG)
+    ![Bucket Namespace](./images/bucket-namespace.png)
     * DATAPUMPSETTINGS_DATABUCKET\_BUCKETNAME: On your object storage bucket homepage.
-    ![Bucket Name](./images/bucket-name.PNG)
+    ![Bucket Name](./images/bucket-name.png)
 
     For easy access go back under your OCI user profile, API Keys, select the ellipses under your fingerprint, and 'View Configuration File'.
 
-    ![Configuration Preview](./images/view-config-prev.PNG)
+    ![Configuration Preview](./images/view-config-prev.png)
 
 4. After the lines are updated save and quit vi editor.
 
@@ -187,7 +195,7 @@ Estimate Lab Time: 25 minutes
     </copy>
     ```
 
-    ![Complete Status](./images/complete-status.PNG)
+    ![Complete Status](./images/complete-status.png)
 
 3. In addition you can confirm the job completion by running the following command:
 
@@ -197,7 +205,7 @@ Estimate Lab Time: 25 minutes
     </copy>
     ```
 
-    ![Job Completion Status](./images/job-completion-status.PNG)
+    ![Job Completion Status](./images/job-completion-status.png)
 
 4. If you need to run the migration multiple times you will have a different job ID each time. In this case, in the tail and query job commands above, you would replace the job ID of 1 with your current job ID. To check for the most recent job ID in the 'scheduled' directory, run the ```ls``` command and the most recent job is the highest number:
 
@@ -207,7 +215,7 @@ Estimate Lab Time: 25 minutes
     </copy>
     ```
 
-    ![Job List](./images/job-lists.PNG)
+    ![Job List](./images/job-lists.png)
 
 ## Task 6: Check Job in Autonomous Database
 1. In your autonomous database SQL command prompt run the command:
@@ -219,7 +227,7 @@ Estimate Lab Time: 25 minutes
     ```
 
 2. If you see the table you have successfully completed the migration.
-    ![Table Result](./images/table-result.PNG)
+    ![Table Result](./images/table-result.png)
 
 
 ## Acknowledgements

@@ -25,25 +25,25 @@ This lab assumes you have:
 
 2. Follow below link to create VCN
 
-  [Create OCI VCN](https://docs.oracle.com/en/learn/lab_virtual_network/index.html#introduction)
+    [Create OCI VCN](https://docs.oracle.com/en/learn/lab_virtual_network/index.html#introduction)
 
 3. Click the Navigation menu and navigate to Databases > Redis > Clusters
 
-  ![navigate to redis cluster](images/redis_cluster.png) 
+    ![navigate to redis cluster](images/redis_cluster.png) 
   
-  Choose the Compartment you created and click **Create cluster**.
+    Choose the Compartment you created and click **Create cluster**.
 
 4. Provide the cluster name **redis-livelab-cluster** , choose compartment  and click **Next**.
-   ![cluster name](images/create_cluster_pg01.png)
+    ![cluster name](images/create_cluster_pg01.png)
 
 5. Keep the default configuration in Configure nodes tab and click **Next**.
-   ![configure cluster](images/create_cluster_pg02.png)
+    ![configure cluster](images/create_cluster_pg02.png)
 
 6. Choose your VCN and Subnet created as part of prerequisite and click **Next**.
-   ![cluster vcn](images/create_cluster_pg03.png)
+    ![cluster vcn](images/create_cluster_pg03.png)
 
 7. Review the details filled in and click **Create Cluster**.
-   ![review and create cluster](images/create_cluster_pg04.png)
+    ![review and create cluster](images/create_cluster_pg04.png)
 
 8. Once cluster up and running, copy **OCID** and **Primary endpoint** and keep it ready for flask app configuration in lab-3.
    ![copy cluster info](images/create_cluster_pg05.png)
@@ -52,23 +52,23 @@ This lab assumes you have:
 
 1. Click the Navigation menu and navigate to Databases > Autonomous Transaction Processing
 
-  ![navigate to ATP](images/atp.png) 
+    ![navigate to ATP](images/atp.png) 
 
 2. Choose the compartment and click **Create Autonomous Database**
 
-  ![create ATP](images/atp_2.png) 
+    ![create ATP](images/atp_2.png) 
 
 3. Give Database name as **REDISLABATP**
 
-  ![give ATP a name](images/atp_3.png)
+    ![give ATP a name](images/atp_3.png)
 
 4. Choose a password and keep rest of the fields with default values and click **Create Autonomous Databse**
 
-  ![choose password](images/atp_4.png)
+    ![choose password](images/atp_4.png)
 
 5. Once the ATP is created , click on **Database Connection**.
 
-  ![database connection](images/atp_5.png)
+    ![database connection](images/atp_5.png)
 
 6. Click on **Download Wallet** . After downloading the wallet, unzip it, collect the endpoint from the tnsnames.ora, and set it aside for lab 3.
 
@@ -79,11 +79,11 @@ This lab assumes you have:
 
 1. Click the Navigation menu and navigate to Compute > Instances 
 
-  ![navigate to compute](images/compute_1.png)
+    ![navigate to compute](images/compute_1.png)
  
 2. Choose the compartment and click **Create Instance**. 
 
-  ![create instance](images/compute_2.png)
+    ![create instance](images/compute_2.png)
 
 3. Give Instance name **redis-livelab-instance** , choose VCN and public subnet of that VCN , and choose 'Generate a key pair for me' option and leave rest values as default and hit 'Create'
 

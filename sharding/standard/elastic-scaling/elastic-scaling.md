@@ -139,8 +139,8 @@ This lab assumes you have:
     shd2_shdpdb2        shardgroup_primary  Ok        Deployed    region1   ONLINE       
     shd3_shdpdb3        shardgroup_primary  U         none        region1   -            
 
-   GDSCTL>
-   ```
+    GDSCTL>
+    ```
 
 
 

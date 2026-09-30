@@ -61,7 +61,7 @@ In this lab, you will:
     ![Click Create Autonomous Database.](./images/adb-start-create.png)
 
 
-2.  Clicking on the "Create Autonomous Database" button will bring up the configuration screen.
+2. Clicking on the "Create Autonomous Database" button will bring up the configuration screen.
 
 
 3. Specify basic information for the autonomous database:
@@ -135,19 +135,19 @@ In this lab, you will:
 
     ![Create Autonomous Database](./images/create-adb.png " ")
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, ECPU count, and storage size.
+11. Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Transaction Processing database is ready to use! Have a look at your instance's details here including its name, database version, ECPU count, and storage size.
 
 ## Task 3: Create the Lab User
 1. After your Autonomous Database has finished provisioning, click on the **Database Actions** button located at the top of the screen. 
 
-	![Database Action](./images/database-actions.png)
+    	![Database Action](./images/database-actions.png)
 
 2. If you're not automatically logged in, double check your browser didnt block the popup. If it did, close out the new tab and select **Database Actions** and click SQL again.
 
 
 3. (Optional database password reset) If you need to reset your database password, it's very simple to do so. Click on **More actions** from the OCI console screen and select **Administrator Password**. Fill in your new password and select **Change**. After you select **Change**, follow from step 1 above.
 
-	![Reset DB Password](./images/db-password-reset.png)
+    	![Reset DB Password](./images/db-password-reset.png)
 
 4. Once logged in as the Admin user, we can create our workshop user one of two ways. Either by writing sql statements or by using  Database Users tile in Database Actions. We'll do that latter. SPress the hamburger menu icon in the top left and select **Database Users** 
 
@@ -155,7 +155,7 @@ In this lab, you will:
 
 5. Here we'll create our lab user. **Select Create User**
 
-	![Select the create user button](./images/create-user.png)
+    	![Select the create user button](./images/create-user.png)
 
 6. The **Create User** form will appear on the right-hand side of your browser window. Use the settings below to complete the form:
 
@@ -186,18 +186,18 @@ In this lab, you will:
     - Leave the **Password Expired** toggle button as off (Note: this controls whether the user is prompted to change their password when they next log in).
     - Leave the **Account is Locked** toggle button as off. 
 
-	![Naming the user](./images/name-user.png)
+    	![Naming the user](./images/name-user.png)
 
 7. Click **Granted Roles** and search for PDB_DBA
 
     - Check the boxes for **Granted**, **Admin** and **Default**.
     - Click **Create User** at the bottom of the form.
 
-	![pdb dba](./images/pdb-dba.png)
+    	![pdb dba](./images/pdb-dba.png)
 
 8. Once we have the lab user created, we can open Database actions and log in as our new user. **Click the Open in New tab** icon to the right of the new user URL.
 
-	![Going to the DB actions home screen](./images/launch-user.png)
+    	![Going to the DB actions home screen](./images/launch-user.png)
 
 9. Once the new tab opens, we can now log in as our NF19C user.
 
@@ -211,19 +211,19 @@ Oracle MovieStream is a fictitious online movie streaming company. Customers log
 
 1. Now that we're signed in as user **NF19C** we can load our data. From the launchpad select Select the Data Load card and press open.
 
-	![Selecting the Data Load Card on the right side of the screen ](./images/load-data.png)
+    	![Selecting the Data Load Card on the right side of the screen ](./images/load-data.png)
 
 2. To make things easier, the data needed for today's lab is stored in Oracle's Object Storage. Select **Load Data**.
 
-	![select cloud storage ](./images/cloud-locations.png)
+    	![select cloud storage ](./images/cloud-locations.png)
 
 3. Select **Cloud Storage** in the top tab bar and paste the link in the empty square and press 'enter' **on your keyboard**
 
     ```
-	<copy>
-		https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o
-	</copy>
-	```
+    	<copy>
+    		https://objectstorage.us-ashburn-1.oraclecloud.com/n/c4u04/b/moviestream_gold/o
+    	</copy>
+    	```
 
     ![Adding the cloud Bucket URI ](./images/cloud-bucket1.png)
 
@@ -231,19 +231,19 @@ Oracle MovieStream is a fictitious online movie streaming company. Customers log
 4. Drag and drop the **customer_contact, custsales, genre,** and **movie** folders into the data loading area. **Select yes** when prompted if you would like to load an object in the folder to the table or SODA Collection. Once all the folders have been moved to the loading area and **press start and run**.
 
 
-	![Drag and drop the folders into the data loading tool ](./images/drag-and-drop-data.gif)
+    	![Drag and drop the folders into the data loading tool ](./images/drag-and-drop-data.gif)
 
 5. Wait for the jobs to finish running. Depending on the size of the database the jobs may take longer may take up to ~7 min to complete.  
 
 6. Once the Jobs have finished - click the hamburger menu in the top left corner and Select the SQL tile. 
 
-	![Click the word Oracle in the top left](./images/launchpad.png)
+    	![Click the word Oracle in the top left](./images/launchpad.png)
 
 7. run the following SQL to verity the data was loaded into the NF19C user. 
 
     ```
-	    <copy>
-		SELECT  (
+    	    <copy>
+    		SELECT  (
         SELECT COUNT(*)
         FROM   customer_contact
         ) AS customer_contact,
@@ -260,12 +260,12 @@ Oracle MovieStream is a fictitious online movie streaming company. Customers log
         FROM   movie
         ) AS movie
         FROM    dual 
-	    </copy>
-	```
+    	    </copy>
+    	```
     
     ![Drag and drop the folders into the data loading tool ](./images/verify-data.png)
 
-You may now **proceed to the next lab**.
+    You may now **proceed to the next lab**.
 
 
 ## Learn more

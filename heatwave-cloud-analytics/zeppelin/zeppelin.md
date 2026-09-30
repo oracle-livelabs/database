@@ -26,7 +26,7 @@ In this lab, you will:
 
 ## Task 1: Access OKE cluster
 
-1. Click the **Hamburger Menu** ![](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
+1. Click the **Hamburger Menu** ![Image](images/hamburger.png) in the upper left, navigate to **Developer Services** and select **Kubernetes Cluster (OKE)**
 
     ![Navigate to OKE](images/navigate-to-oke.png)
 
@@ -57,7 +57,7 @@ In this lab, you will:
 
 4. Execute the kubectl commands to create a namespace
 
-	```
+    	```
     <copy>
     kubectl create namespace zeppelin
     </copy>
@@ -83,19 +83,19 @@ In this lab, you will:
     kubectl get all -n ingress-nginx
     </copy>
     ```
-	![Ingress IP](images/ingress.png)
+    	![Ingress IP](images/ingress.png)
 
 7. Access the deployed Zeppelin application. Point your browser to **https://&lt;INGRESS&#95;PUBLIC&#95;IP&#95;ADDRESS&gt;/zeppelin/**
 
     >Note: Please ensure you have the closing **/** in the url, that is, **zeppelin/**
 
-	![Zeppelin](images/zeppelin.png)
+    	![Zeppelin](images/zeppelin.png)
 
-Task 3: Connect to MySQL HeatWave
+    Task 3: Connect to MySQL HeatWave
 
 1. Create a JDBC interpreter for MySQL HeatWave in Zeppelin.
 
-	![Interpreter](images/interpreter.png)
+    	![Interpreter](images/interpreter.png)
 
 2. Click on **Create** to create a new JDBC driver for MySQL HeatWave. Fill up the details as indicated in the diagram
     Replace the private ip address of your MySQL instance in the **JDBC URL**, admin user and password
@@ -105,15 +105,15 @@ Task 3: Connect to MySQL HeatWave
     * default.password: &lt;your mysql password&gt;
     * default.driver: com.mysql.cj.jdbc.Driver
 
-   ![MySQL JDBC](images/mysql-jdbc.png)
+    ![MySQL JDBC](images/mysql-jdbc.png)
 
 3. Scroll to the bottom of the page and specify the MySQL JDBC driver, **mysql:mysql-connector-java:8.0.28**
 
-	![MySQL JDBC Driver](images/mysql-jdbc-driver.png)
+    	![MySQL JDBC Driver](images/mysql-jdbc-driver.png)
 
 4. Create a new notebook to start connecting to MySQL HeatWave. Specify the name of the notebook, for example, **airportdb**, and select **mysql** as the JDBC interpreter, click on **Create**
 
-	![New Notebook](images/new-notebook.png)
+    	![New Notebook](images/new-notebook.png)
 
 5. You can now start working with MySQL HeatWave!
 

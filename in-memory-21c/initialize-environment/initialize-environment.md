@@ -106,7 +106,7 @@ This lab assumes you have:
 
 ## Task 3: Enable In-Memory
 
-1.  Set your oracle environment and connect to **CDB1** database using SQLcl.
+1. Set your oracle environment and connect to **CDB1** database using SQLcl.
 
     Run the commands below
 

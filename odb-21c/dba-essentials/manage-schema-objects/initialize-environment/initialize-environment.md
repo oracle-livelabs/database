@@ -35,7 +35,7 @@ In this task, you will verify that the required components, such as Listener, Or
 
     ![Listener Service Status](./images/listener-service-status.png " ")
 
-	The status *active* indicates that the listener service is running. If the listener service is not running, you can restart it with the following command. 
+    	The status *active* indicates that the listener service is running. If the listener service is not running, you can restart it with the following command. 
 
     ```
     $ <copy>sudo systemctl restart oracle-db-listener</copy>
@@ -49,7 +49,7 @@ In this task, you will verify that the required components, such as Listener, Or
 
     ![Oracle Database services status](./images/db-service-status.png " ")
 
-	The status *active* indicates that the database service is running. If the database service is not running, you can restart it with the following command. 
+    	The status *active* indicates that the database service is running. If the database service is not running, you can restart it with the following command. 
 
     ```
     $ <copy>sudo systemctl restart oracle-database</copy>
@@ -86,11 +86,11 @@ In this task, you will log in to the Oracle Database Actions console using a web
 If you have reserved a Livelabs environment, then the remote desktop session will have a web browser open and display the *Oracle Database Actions* login page. If it does not display the Database Actions login page, you can access it as follows. 
 
 1. Open a web browser and go to the Database Actions login URL.   
-	For this lab, the login URL is:
+    	For this lab, the login URL is:
 
-	```
-	<copy>http://oms1:8080/ords/sql-developer</copy>
-	```
+    	```
+    	<copy>http://oms1:8080/ords/sql-developer</copy>
+    	```
 
 1. Specify the user credentials for Oracle Database Actions. 
 
@@ -213,3 +213,8 @@ You may now **proceed to the next lab**.
  - **Author**: Manish Garodia, Database User Assistance Development
  - **Contributors**: Aayushi Arora, Manisha Mati
  - **Last Updated By/Date**: Manish Garodia, October 2024
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

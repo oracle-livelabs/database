@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 ## About this Workshop
 
 The main purpose of this workshop is to teach you how you can implement a **RAG** (Retrieval Augmented Generation) chatbot using **vector similarity search** and **Generative AI / LLMs**. 

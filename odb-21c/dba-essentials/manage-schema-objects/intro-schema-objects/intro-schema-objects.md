@@ -1,5 +1,11 @@
 # Schema objects in Oracle Database
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## About this workshop
 
 This workshop enables you to perform various operations like viewing and creating schema objects using Database Actions. You will also learn how to create a new PL/SQL procedure and revalidate schema objects that are invalid.  

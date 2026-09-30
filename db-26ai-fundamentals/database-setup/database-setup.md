@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 In this lab we will setup an Oracle AI Database. For this LiveLab, we will create an Always Free Oracle Autonomous AI Database 26ai (26ai always free ADB). All of the labs in this LiveLab and all of the features we are going to work with today are available and work on any 26ai database, regardless of the deployment style.
 
 Estimated Lab Time: 10 minutes
@@ -10,6 +16,10 @@ The objective of this workshop is to set up the 26ai always free ADB. The follow
 ### Prerequisites:
 - Complete the Get Started Lab.
 - Basic understanding of SQL is helpful.
+
+## Introduction
+
+TODO: Add introduction text here.
 
 ## Task 1: Database creation
 1. Using the hamburger menu in the top left hand of the screen, **click** Oracle AI Database and then click Autonomous AI Database.

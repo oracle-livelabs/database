@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 This section of the workshop highlights enhancements to Oracle Database security, including Blockchain tables, the capability to set the default tables space encryption algorithm, and additional controls on users creating Database Vault controls.
 
 Estimated Time: 60 minutes

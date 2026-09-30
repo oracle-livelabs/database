@@ -12,6 +12,11 @@ You'll also find a second set of resources at the bottom of the page, right belo
 
 ---
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Additional Resources Tab
 
 ### **LiveLabs**
@@ -63,3 +68,8 @@ Browse through Oracle Database features and licensing options to see what's avai
 With ORADiff, you can easily compare two different Oracle database releases, with or without any additional patches, to see what has changed.
 ![ORADiff GIF](./images/oradiff.gif)
 
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

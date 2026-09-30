@@ -20,6 +20,11 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Instant SaaS
 This section shows how Multitenant with Application Containers provides an instant SaaS architecture for an application formerly architected for standalone deployment.
 
@@ -274,7 +279,7 @@ In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Co
 
     ![Screenshot of terminal output](./images/task1.5-syncseed.png " ")
 
-6.  Provision separate application databases for each of the 4 stores.
+6. Provision separate application databases for each of the 4 stores.
 
     ```
     <copy>conn system/Ora_DB4U@localhost:1521/wmStore_Master</copy>
@@ -1545,7 +1550,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task10.1-dba_pdbs.png " ")
+    ![Screenshot of terminal output](./images/task10.1-dba_pdbs.png " ")
 
     ```
     <copy>

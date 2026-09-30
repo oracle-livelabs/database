@@ -24,24 +24,24 @@ In this task, we will review the code using the OCI Code Editor.
 
 1. Open the OCI Code Editor from the top-right menu.
 
-   ![Cloud Editor](https://oracle-livelabs.github.io/common/images/console/cloud-code-editor.png)
+    ![Cloud Editor](https://oracle-livelabs.github.io/common/images/console/cloud-code-editor.png)
 
 2. Click on the Explorer button in the OCI Code Editor.
 
-   ![Expand Cloud Editor](./images/cloud-code-editor-expand.png)
+    ![Expand Cloud Editor](./images/cloud-code-editor-expand.png)
 
 3. Open `microprofile-config.properties` in the directory `books-management/src/main/resources/META-INF/`.
-This configuration file is used to set application properties and database connection settings, enabling flexibility for deployment.
+    This configuration file is used to set application properties and database connection settings, enabling flexibility for deployment.
 
-   ![Code createTable](./images/appl-properties.png)
+    ![Code createTable](./images/appl-properties.png)
 
-   Oracle NoSQL Database offers flexible deployment options to suit the needs of its customers.
-   Whether deploying on an "On-Premises" cluster or utilizing the Oracle NoSQL Database Cloud Service,
-   developers and end-users get the latest in NoSQL technology. Oracle offers a complete range of deployment
-   options to support your Oracle NoSQL database, from on-premises to private cloud to public cloud.
-   Depending on which deployment option you choose, you may need different authentication strategies.
+    Oracle NoSQL Database offers flexible deployment options to suit the needs of its customers.
+    Whether deploying on an "On-Premises" cluster or utilizing the Oracle NoSQL Database Cloud Service,
+    developers and end-users get the latest in NoSQL technology. Oracle offers a complete range of deployment
+    options to support your Oracle NoSQL database, from on-premises to private cloud to public cloud.
+    Depending on which deployment option you choose, you may need different authentication strategies.
 
-   There are 5 authentication methods available (using the property `jnosql.oracle.nosql.deployment`)
+    There are 5 authentication methods available (using the property `jnosql.oracle.nosql.deployment`)
 
     - `CLOUD_API_KEY`: Represents a cloud deployment using an API key for authentication and authorization.
     - `CLOUD_INSTANCE_PRINCIPAL`: Represents a cloud deployment using instance principal for authentication and authorization.
@@ -71,7 +71,7 @@ This configuration file is used to set application properties and database conne
 
     These annotations give developers precise control over how objects are stored and retrieved in NoSQL databases, aligning with NoSQL systems' flexibility and schema-less nature.
 
-   ![Code createTable](./images/appl-code.png)
+    ![Code createTable](./images/appl-code.png)
 
 5. Review `BookRepository.java`, also located in `books-management/src/main/java/expert/os/demos/books/domain`. This repository interface extends `BasicRepository`, which provides CRUD methods to interact with the `Book` entity in Oracle NoSQL.
 
@@ -106,7 +106,7 @@ This configuration file is used to set application properties and database conne
 
 1. Open the Cloud Shell and restart it if it has timed out.
 
-   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the setup shell script in Cloud Shell:
 
@@ -116,7 +116,7 @@ This configuration file is used to set application properties and database conne
     source ~/books-management/env.sh
     </copy>
     ```
-   ![Cloud Shell](./images/cloud-shell-result.png)
+    ![Cloud Shell](./images/cloud-shell-result.png)
 
 3. Set the JAVA HOME to use JDK 21 as the current JDK.
 

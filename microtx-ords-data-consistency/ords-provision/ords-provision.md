@@ -63,7 +63,7 @@ This lab assumes you have:
     </copy>
     ```
 
-   **Example output**
+    **Example output**
 
     ```text
     Status of the Oracle FREE 23ai service:
@@ -71,7 +71,7 @@ This lab assumes you have:
     FREE Database status: RUNNING
     ```
 
-   If the Oracle Database 23ai Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
+    If the Oracle Database 23ai Free service instance is not in the `RUNNING` state, then run the following command to restart the service.
 
     ```text
     <copy>

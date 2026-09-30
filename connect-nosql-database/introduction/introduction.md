@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 ## About this Workshop
 
 This workshop is designed to help you quickly get started with developing applications using Oracle NoSQL Database. It shows the different methods by which your application can connect to the database and perform simple operations on it.
@@ -45,6 +48,10 @@ This lab assumes you have:
 
 * Basic knowledge of Python and SQL
 * Basic understanding of containers
+
+## Introduction
+
+TODO: Add introduction text here.
 
 ## Task 1: Getting started with connecting to Oracle NoSQL Database
 

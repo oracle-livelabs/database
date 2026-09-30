@@ -34,7 +34,7 @@ The screenshots in this lab will use the same coloring.
 
 
 1. Create OS Directory (TARGET)
-Activate the terminal target tab window and create a directory for the XTTS target files.
+    Activate the terminal target tab window and create a directory for the XTTS target files.
 
     ```
     <copy>

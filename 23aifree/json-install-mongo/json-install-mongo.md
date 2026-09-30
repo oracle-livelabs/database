@@ -50,13 +50,13 @@ In this lab, you will:
 
     ![open terminal in launchpad](./images/terminal.png " ")
 
-2.  On a Windows PC:
+2. On a Windows PC:
 
     Press "Run" (Windows-R) and type "cmd.exe". Press enter or click "OK".
 
     ![open command prompt](./images/cmd-exe.png " ")
 
-3.  Create and enter a suitable directory. We'll create a directory 'mongosh' under the default home directory, but you can choose to create it elsewhere. For **Mac or Windows**, enter the following commands:
+3. Create and enter a suitable directory. We'll create a directory 'mongosh' under the default home directory, but you can choose to create it elsewhere. For **Mac or Windows**, enter the following commands:
 
     ```
     <copy>

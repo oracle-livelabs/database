@@ -55,23 +55,23 @@ Watch the video below for an overview of connecting to your DB System lab
 
 You should already be logged in to the OCI console from Task 1.
 
-1.  Open up the hamburger menu in the left hand corner.  
+1. Open up the hamburger menu in the left hand corner.  
 
-2.  From the hamburger menu, select **Oracle Database, and then Oracle Base Database (VM, BM)** in the Oracle Database category.
+2. From the hamburger menu, select **Oracle Database, and then Oracle Base Database (VM, BM)** in the Oracle Database category.
 
-  ![Oracle Cloud DBCS Page](https://oracle-livelabs.github.io/common//images/console/database-dbcs.png " ")
+    ![Oracle Cloud DBCS Page](https://oracle-livelabs.github.io/common//images/console/database-dbcs.png " ")
 
-3.  Select the compartment you were assigned in LiveLabs and identify your database system from your My Reservations page. Click on the database system name to see the details.
+3. Select the compartment you were assigned in LiveLabs and identify your database system from your My Reservations page. Click on the database system name to see the details.
 
-  ![Select DB System](./images/setup-compute-2.png " ")
+    ![Select DB System](./images/setup-compute-2.png " ")
 
 4. Explore the DB Systems home page.  On the left hand side, scroll down to view the Resources section.  Click Nodes.
 
-  ![Examine DB System](./images/setup-compute-3.png " ")
+    ![Examine DB System](./images/setup-compute-3.png " ")
 
 5. Locate your two nodes and jot down their public IP addresses.
 
-  ![Confirm node IP Addresses](./images/setup-compute-4.png " ")
+    ![Confirm node IP Addresses](./images/setup-compute-4.png " ")
 
 6. Now that you have your IP address select the method of connecting. Choose the environment where you created your ssh-key in the previous lab (Generate SSH Keys) and select one of the following steps. If you choose to use Oracle Cloud Shell, you will need to copy your SSH Private to the cloud shell and set the proper permissions, otherwise, choose the platform that matches your local environment.
 
@@ -86,17 +86,17 @@ Your options are:
 
 ## Task 2A: Connect using Oracle Cloud Shell
 
-1.  To start the Oracle Cloud Shell, go to your Cloud console and click the Cloud Shell icon at the top right of the page.
+1. To start the Oracle Cloud Shell, go to your Cloud console and click the Cloud Shell icon at the top right of the page.
 
     ![CloudShell initialising](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png " ")
 
     ![CloudShell opened](https://oracle-livelabs.github.io/common/images/console/cloud-shell-open.png " ")
 
-2.  Click on the Cloud Shell hamburger icon and select **Upload** to upload your private key
+2. Click on the Cloud Shell hamburger icon and select **Upload** to upload your private key
 
     ![Upload Private Key to CloudShell](https://oracle-livelabs.github.io/common//labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
 
-3.  To connect to the compute instance that was created for you, you will need to load your private key.  This is the key that does *not* have a .pub file at the end.  Locate that file on your machine and click **Upload** to process it.
+3. To connect to the compute instance that was created for you, you will need to load your private key.  This is the key that does *not* have a .pub file at the end.  Locate that file on your machine and click **Upload** to process it.
 
     ![Upload Private Key to CloudShell](https://oracle-livelabs.github.io/common//labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
 
@@ -124,7 +124,7 @@ Your options are:
 
     ![Set permissions on private key](https://oracle-livelabs.github.io/common//labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
 
-6.  Using one of the Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.
+6. Using one of the Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.
 
     ```nohighlight
     <copy>
@@ -133,14 +133,14 @@ Your options are:
     ```
     ![SSH to node-1](./images/em-mac-linux-ssh-login.png " ")
 
-3.  When prompted, answer **yes** to continue connecting.
-4.  Repeat step 2 for your 2nd node.
-5.  You may now [proceed to the next lab](#next).  
+3. When prompted, answer **yes** to continue connecting.
+4. Repeat step 2 for your 2nd node.
+5. You may now [proceed to the next lab](#next).  
 
 
 ## Task 2B: Connect using MAC terminal or Windows CYGWIN Emulator
 *NOTE:  If you have trouble connecting and are using your work laptop to connect, your corporate VPN may prevent you from logging in. Log out of your VPN before connecting. *
-1.  Using one of the Public IP addresses, open up a terminal (MAC) or cygwin emulator as the opc user.  Enter yes when prompted.
+1. Using one of the Public IP addresses, open up a terminal (MAC) or cygwin emulator as the opc user.  Enter yes when prompted.
 
     ```
     <copy>
@@ -165,38 +165,38 @@ Your options are:
 
 On Windows, you can use PuTTY as an SSH client. PuTTY enables Windows users to connect to remote systems over the internet using SSH and Telnet. SSH is supported in PuTTY, provides for a secure shell, and encrypts information before it's transferred.
 
-1.  Download and install PuTTY. [http://www.putty.org](http://www.putty.org)
-2.  Run the PuTTY program. On your computer, go to **All Programs > PuTTY > PuTTY**
-3.  Select or enter the following information:
+1. Download and install PuTTY. [http://www.putty.org](http://www.putty.org)
+2. Run the PuTTY program. On your computer, go to **All Programs > PuTTY > PuTTY**
+3. Select or enter the following information:
     - Category: _Session_
     - IP address: _Your service instance’s (node1) public IP address_
     - Port: _22_
     - Connection type: _SSH_
 
-  ![Connect using PUTTY](images/7c9e4d803ae849daa227b6684705964c.jpg " ")
+    ![Connect using PUTTY](images/7c9e4d803ae849daa227b6684705964c.jpg " ")
 
 ### **Configuring Automatic Login**
 
-1.  In the category section, **Click** Connection and then **Select** Data.
+1. In the category section, **Click** Connection and then **Select** Data.
 
-2.  Enter your auto-login username. Enter **opc**.
+2. Enter your auto-login username. Enter **opc**.
 
-  ![Configure PUTTY for AutoLogin](images/36164be0029033be6d65f883bbf31713.jpg " ")
+    ![Configure PUTTY for AutoLogin](images/36164be0029033be6d65f883bbf31713.jpg " ")
 
 ### **Adding Your Private Key**
 
-1.  In the category section, **Click** Auth.
-2.  **Click** browse and find the private key file that matches your VM’s public key. This private key should have a .ppk extension for PuTTy to work.
+1. In the category section, **Click** Auth.
+2. **Click** browse and find the private key file that matches your VM’s public key. This private key should have a .ppk extension for PuTTy to work.
 
-  ![Add Private Key to PUTTY config](images/df56bc989ad85f9bfad17ddb6ed6038e.jpg " ")
+    ![Add Private Key to PUTTY config](images/df56bc989ad85f9bfad17ddb6ed6038e.jpg " ")
 
-3.  To save all your settings, in the category section, **Click** session.
-4.  In the saved sessions section, name your session, for example ( EM13C-ABC ) and **Click** Save.
+3. To save all your settings, in the category section, **Click** session.
+4. In the saved sessions section, name your session, for example ( EM13C-ABC ) and **Click** Save.
 
 ### **Repeat Putty setup for the second node**
 
 1. Repeat the steps above to create a login window for the second node - use the Public IP address of node2
-3.  Select or enter the following information:
+3. Select or enter the following information:
     - Category: _Session_
     - IP address: _Your service instance’s (node2) public IP address_
     - Port: _22_

@@ -32,21 +32,26 @@ For more information on Oracle Database Services visit [http://www.oracle.com/go
 
  [](https://youtu.be/dIMgaujSydQ)
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Login and Identify Database and Instance names
 You should have already identified your database name and instance name.  Each place in this lab where you see replacename make sure you use your correct instance and database names.
-1.  If you aren't already logged in to the Oracle Cloud, open up a web browser and re-login to Oracle Cloud.
-2.  Once you are logged in, open up a 2nd webbrowser tab.
-3.  Start Cloudshell in each.  Maximize both cloudshell instances.
+1. If you aren't already logged in to the Oracle Cloud, open up a web browser and re-login to Oracle Cloud.
+2. Once you are logged in, open up a 2nd webbrowser tab.
+3. Start Cloudshell in each.  Maximize both cloudshell instances.
 
     *Note:* You can also use Putty or MAC Cygwin if you chose those formats in the earlier lab.  
-    ![](./images/start-cloudshell.png " ")
+    ![Image](./images/start-cloudshell.png " ")
 
-4.  Connect to node 1 as the *opc* user (you identified the IP address of node 1 in the Build DB System lab).
+4. Connect to node 1 as the *opc* user (you identified the IP address of node 1 in the Build DB System lab).
 
     ````
     ssh -i ~/.ssh/sshkeyname opc@<<Node 1 Public IP Address>>
     ````
-    ![](./images/racnode1-login.png " ")
+    ![Image](./images/racnode1-login.png " ")
 
 5. Repeat this step for node 2.
 
@@ -54,7 +59,7 @@ You should have already identified your database name and instance name.  Each p
     ssh -i ~/.ssh/sshkeyname opc@<<Node 2 Public IP Address>>
     ps -ef | grep pmon
     ````
-    ![](./images/racnode2-login.png " ")  
+    ![Image](./images/racnode2-login.png " ")  
 
 6. Run the command to determine your database name and additional information about your cluster on **node 1**.  Run this as the *grid* user.
 
@@ -64,13 +69,13 @@ You should have already identified your database name and instance name.  Each p
     crsctl stat res -t
     </copy>
     ````
-    ![](./images/crsctl-1.png " ")
+    ![Image](./images/crsctl-1.png " ")
 
-    ![](./images/crsctl-2.png " ")
+    ![Image](./images/crsctl-2.png " ")
 
 7. Find your database name in the *Cluster Resources* section with the *.db*.  Jot this information down, you will need it for this lab.
 
-    ![](./images/db-crsctl.png " ")
+    ![Image](./images/db-crsctl.png " ")
 
 ## Task 2:  Create a Service
 
@@ -80,7 +85,7 @@ user/password@**//hostname:port/servicename**
 
 EZConnect does not support all service characteristics. A fully specified URL or TNS Connect String is required for Application Continuity and other service characteristics.  
 
-1.  Create a new service **svctest** with *instance1* as a **preferred** instance and *instance2* as an **available instance**. This means that the service will normally run on the *instance1* but will failover to *instance2* if the first instance becomes unavailable.  Run this on node 1.
+1. Create a new service **svctest** with *instance1* as a **preferred** instance and *instance2* as an **available instance**. This means that the service will normally run on the *instance1* but will failover to *instance2* if the first instance becomes unavailable.  Run this on node 1.
 
     *Note:* Remember to replace all instances of *aTFdbVm_replacename* with the database name you identified in Step 1.
 
@@ -92,7 +97,7 @@ EZConnect does not support all service characteristics. A fully specified URL or
     srvctl start service -d aTFdbVm_replacename -s svctest
     </copy>
     ````
-    ![](./images/lab6-step1-num6.png " ")
+    ![Image](./images/lab6-step1-num6.png " ")
 
 2. Examine where the service is running by using **lsnrctl** to check the SCAN listener or a local listener on each node. **srvctl** will also show you where the service is running.
 
@@ -101,22 +106,22 @@ EZConnect does not support all service characteristics. A fully specified URL or
     srvctl status service -d aTFdbVm_replacename -s svctest
     </copy>
     ````
-    ![](./images/lab6-step1-num7.png " ")
+    ![Image](./images/lab6-step1-num7.png " ")
 
-3.  Use the lsnrctl utility to list the services on both **node 1** and **node 2** as the *grid* user.
+3. Use the lsnrctl utility to list the services on both **node 1** and **node 2** as the *grid* user.
     ````
     <copy>
     ORACLE_HOME=/u01/app/19.0.0.0/grid
     $ORACLE_HOME/bin/lsnrctl services
     </copy>
     ````
-    ![](./images/lsnrctl-node1.png " ")
-    ![](./images/lsnrctl-node-2.png " ")
+    ![Image](./images/lsnrctl-node1.png " ")
+    ![Image](./images/lsnrctl-node-2.png " ")
 
 
     Note that this service is only active on one instance at a time, so both **local** listeners will not include an entry for this service. In the example shown here, the listener on racnode2 would **not** have an entry for **Service "svctest.pub.racdblab.oraclevcn.com"*
 
-4.  Any of the SCAN listeners will show where the service is offered. Note that SCAN Listeners run from the GI HOME so you have to change the ORACLE_HOME environment variable in order to view the information about the SCAN Listeners.  Run the lsnrctl command below on **node 2** as the *grid*.
+4. Any of the SCAN listeners will show where the service is offered. Note that SCAN Listeners run from the GI HOME so you have to change the ORACLE_HOME environment variable in order to view the information about the SCAN Listeners.  Run the lsnrctl command below on **node 2** as the *grid*.
 
     ````
     <copy>
@@ -124,11 +129,11 @@ EZConnect does not support all service characteristics. A fully specified URL or
     $ORACLE_HOME/bin/lsnrctl service LISTENER_SCAN2
     </copy>
     ````
-    ![](./images/scan-node2.png " ")
+    ![Image](./images/scan-node2.png " ")
 
 5. Repeat it on **node 1** as well.
 
-    ![](./images/scan-node1.png " ")
+    ![Image](./images/scan-node1.png " ")
 
 
 ## Task 3: Service Failover
@@ -141,8 +146,8 @@ EZConnect does not support all service characteristics. A fully specified URL or
     </copy>
     ````
     This will show the SMON process id of your database  
-    ![](./images/lab6-step2-num1.png " ")
-    ![](./images/lab6-step2-num1-1.png " ")
+    ![Image](./images/lab6-step2-num1.png " ")
+    ![Image](./images/lab6-step2-num1-1.png " ")
 
 
 2. In this example the process ID is 585689, which I can pass to the **kill -9 <process id>** command.  Identify your process id and issue the kill command as the *oracle* user
@@ -163,7 +168,7 @@ EZConnect does not support all service characteristics. A fully specified URL or
 
     Depending on where your service was running beforehand, you will notice something similar to
 
-    ![](./images/lab6-step2-num3.png " ")
+    ![Image](./images/lab6-step2-num3.png " ")
 
 4. Manually relocate the service. Open a connection (with SQL*Plus) to the instance where the service is running. Use the SCAN address and the domain qualified service name in the format:
 
@@ -175,7 +180,7 @@ EZConnect does not support all service characteristics. A fully specified URL or
     ````
      sqlplus system/W3lc0m3#W3lc0m3#@//racnode-scan.tfexsubdbsys.tfexvcndbsys.oraclevcn.com/svctest.tfexsubdbsys.tfexvcndbsys.oraclevcn.com
     ````
-    ![](./images/lab6-step2-num5-2.png " ")
+    ![Image](./images/lab6-step2-num5-2.png " ")
 
 
 6. Using a different cloud shell window (connected to either node) open a SQL*Plus connection as SYS to the PDB associated with this service
@@ -194,7 +199,7 @@ EZConnect does not support all service characteristics. A fully specified URL or
     ````
     This statement will show you the instance this service is running and the number of open connections on this service.
 
-    ![](./images/lab6-step2-num6.png " ")
+    ![Image](./images/lab6-step2-num6.png " ")
 
 
 7. Relocate the service using srvctl.  Execute the command on **node 2**
@@ -206,7 +211,7 @@ EZConnect does not support all service characteristics. A fully specified URL or
     ````
     which will move the service from one instance to another:
 
-    ![](./images/lab6-step3-num7.png " ")
+    ![Image](./images/lab6-step3-num7.png " ")
 
     Re-examine the v$session information:
 

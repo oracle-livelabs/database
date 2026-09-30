@@ -55,9 +55,9 @@ Before upgrading the Oracle Database 19c `CDB19` and the non-CDB `ORCL` to Oracl
     
     ```
   
-  *The `log_dir` parameter sets the location of log files that are generated for database upgrades that are in the set of databases included in the upgrade job identified by the prefix for the parameter. AutoUpgrade creates a hierarchical directory based on the local log file path specified.*
+    *The `log_dir` parameter sets the location of log files that are generated for database upgrades that are in the set of databases included in the upgrade job identified by the prefix for the parameter. AutoUpgrade creates a hierarchical directory based on the local log file path specified.*
   
-  *The `restoration` parameter generates a Guaranteed Restore Point (GRP) for database restoration. If you set it to `no`, then both the database backup and restoration must be performed manually. Use this option for databases that operate in `NOARCHIVELOG` mode, and for Standard Edition and SE2 databases, which do not support the Oracle Flashback technology feature Flashback Database. The default value is `yes`.*
+    *The `restoration` parameter generates a Guaranteed Restore Point (GRP) for database restoration. If you set it to `no`, then both the database backup and restoration must be performed manually. Use this option for databases that operate in `NOARCHIVELOG` mode, and for Standard Edition and SE2 databases, which do not support the Oracle Flashback technology feature Flashback Database. The default value is `yes`.*
   
   
 
@@ -97,7 +97,7 @@ Before upgrading the Oracle Database 19c `CDB19` and the non-CDB `ORCL` to Oracl
 ## Task 2: Launch the AutoUpgrade in analysis mode
 
 Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mode, using the configuration file.
-1.  Run the `autoupgrade.jar` with the config file created in Analyze mode. The AutoUpgrade parameter `console` turns on the AutoUpgrade Console, and provides a set of commands to monitor the progress of AutoUpgrade jobs. Set the environment variables to `CDB21` so that the `ORACLE_HOME` is set to Oracle Database 21c.
+1. Run the `autoupgrade.jar` with the config file created in Analyze mode. The AutoUpgrade parameter `console` turns on the AutoUpgrade Console, and provides a set of commands to monitor the progress of AutoUpgrade jobs. Set the environment variables to `CDB21` so that the `ORACLE_HOME` is set to Oracle Database 21c.
 
   
     ```
@@ -363,7 +363,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     
     ```
 
-9.  From another terminal session that we wil name *Session2*, logged in as oracle user, increase the fast recovery area for `CDB19`.
+9. From another terminal session that we wil name *Session2*, logged in as oracle user, increase the fast recovery area for `CDB19`.
 
   
     ```
@@ -543,7 +543,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     *The `Executing describe` step tells you that the non-CDB `ORCL` is being tested for the compatibility after being unplugged and then plugged into `CDB20` as a new PDB, just as you would run the `DBMS_PDB.DESCRIBE` procedure and `DBMS_PDB.CHECK_PLUG_COMPATIBILITY`function.*
     
 
- 2.  Regularly check the progress of the upgrade.
+    2. Regularly check the progress of the upgrade.
 
     ```
     
@@ -608,7 +608,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     
     ```
 
- 3. If you find that the progress is slow, you can request the status of the upgrade.
+    3. If you find that the progress is slow, you can request the status of the upgrade.
 
     ```
     
@@ -657,7 +657,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
   
   
 
-4.  After some time, any of the jobs completes.
+4. After some time, any of the jobs completes.
 
   
     ```
@@ -750,7 +750,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     
     ```
   
-  The AutoUpgrade created a guaranteed restore point (GRP) during Deploy processing mode because the `CDB19.restoration` parameter was set to `yes`. You do not need to have a previously defined GRP. This requires a lot of space in the FRA and this is the reason why you had to set the `DB_RECOVERY_FILE_DEST_SIZE` to a high value. However, if the parameter was set, you must drop the GRP. “Guaranteed” means that if FRA runs out of space, the database will come to a complete halt.
+    The AutoUpgrade created a guaranteed restore point (GRP) during Deploy processing mode because the `CDB19.restoration` parameter was set to `yes`. You do not need to have a previously defined GRP. This requires a lot of space in the FRA and this is the reason why you had to set the `DB_RECOVERY_FILE_DEST_SIZE` to a high value. However, if the parameter was set, you must drop the GRP. “Guaranteed” means that if FRA runs out of space, the database will come to a complete halt.
 
 6. Drop the guaranteed restore point created for the sake of a possible restoration if the upgrade had failed.
 
@@ -1180,7 +1180,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
   
   
 
-9.  In *Session2*, you made an error by dropping the directory where the upgrade log files are created for `ORCL`.
+9. In *Session2*, you made an error by dropping the directory where the upgrade log files are created for `ORCL`.
 
   
     ```
@@ -1297,7 +1297,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
     *The `restore``-job` command restores the database to its state prior to the upgrade.*
     
 
- 14. After the restoration, resume the job so as to restart the job.
+    14. After the restoration, resume the job so as to restart the job.
 
     ```
     
@@ -1782,7 +1782,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
     
     ```
 
- 33. Increase the `SGA_TARGET`.
+    33. Increase the `SGA_TARGET`.
 
     ```
     

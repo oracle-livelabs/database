@@ -160,7 +160,7 @@ In this task, you create the logical directories to store the source data files 
     ORA-14466: Data in a read-only partition or subpartition cannot be modified.
     ```
 
-The data can be inserted into the external partition only via the external source data file.
+    The data can be inserted into the external partition only via the external source data file.
 
 3. Insert the data for the date of 12 August 1997 into the appropriate external source data file.
 
@@ -475,7 +475,7 @@ The data can be inserted into the external partition only via the external sourc
     ORA-14354: operation not supported for a hybrid-partitioned table
     ```
 
-This command should return an error. External partitions must be dropped first before you can remove external attributes at the table level.
+    This command should return an error. External partitions must be dropped first before you can remove external attributes at the table level.
 
 11. Drop the external partition from the `HYPT.PART_TAB` table. Because there is one external partition left, the attributes for the external partitions cannot be removed from the hybrid partitioned table.
 

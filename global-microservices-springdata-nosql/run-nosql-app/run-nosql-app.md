@@ -35,75 +35,75 @@ In this task we will review the code using OCI Code Editor.
     ![Expand Cloud Editor](./images/cloud-code-editor-expand.png)
 
 3. Go to the Code Editor, and open the file `AppConfig.java` in the following directory
-`global-microservices-springdata-nosql/code-nosql-spring-sdk/src/main/java/com/oracle/nosql/springdatarestnosql` as shown in the screen-shot:
+    `global-microservices-springdata-nosql/code-nosql-spring-sdk/src/main/java/com/oracle/nosql/springdatarestnosql` as shown in the screen-shot:
 
     ![Code createNoSQLClient](./images/appl-code-connection.png)
 
     Oracle NoSQL Database offers **flexible deployment** options to suit the needs of
-its customers. Whether deploying on an "On-Premises" cluster or utilizing the
-Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
-NoSQL technology. Oracle offers a complete range of deployment options to
-support your Oracle NoSQL database, from on-premises to private cloud to public cloud.  Depending
-on which deployment option you choose, you may need different authentication strategies.
+    its customers. Whether deploying on an "On-Premises" cluster or utilizing the
+    Oracle NoSQL Database Cloud Service, developers and end-users get the latest in
+    NoSQL technology. Oracle offers a complete range of deployment options to
+    support your Oracle NoSQL database, from on-premises to private cloud to public cloud.  Depending
+    on which deployment option you choose, you may need different authentication strategies.
 
-  The class `AppConfig.java` illustrates the different authentication options in the case
-statement. We covered the authentication basics in Lab 2. If the function is not visible in your
-screen, go ahead and scroll to it:
+    The class `AppConfig.java` illustrates the different authentication options in the case
+    statement. We covered the authentication basics in Lab 2. If the function is not visible in your
+    screen, go ahead and scroll to it:
     * You can use **Instance Principals** to do the connection to NoSQL Cloud Service as
-shown in this code. Once Instance Principals are set up, you can make API calls to
-different Oracle Cloud Infrastructure services.  The benefit is applications running
-on those instances do not have to configure user credentials or a configuration file.
+    shown in this code. Once Instance Principals are set up, you can make API calls to
+    different Oracle Cloud Infrastructure services.  The benefit is applications running
+    on those instances do not have to configure user credentials or a configuration file.
 
     * You can use **Delegation Tokens** to do the connection to NoSQL Cloud Service
     and in this lab we will use them.
 
     * You can use **Resource Principals** to do the connection to NoSQL Cloud Service as
-shown in this code.
+    shown in this code.
 
     * Finally, **onprem**, allows you to do the connection
-to on-premise non-secure configuration. It is not the topic of this workshop but if you
-want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
+    to on-premise non-secure configuration. It is not the topic of this workshop but if you
+    want to learn more [check here.](https://github.com/oracle/nosql-examples/blob/master/demo-livelab/video-on-demand-with-nosql-database/README.md)
 
-  In this application we will use Common Application Properties and variables for easy setup and changeability when deploying using container services.
+    In this application we will use Common Application Properties and variables for easy setup and changeability when deploying using container services.
 
-  Go to the Code Editor, and open the file `application.properties` in the following directory
-`global-microservices-springdata-nosql/src/main/resources` as shown in the screen-shot:
+    Go to the Code Editor, and open the file `application.properties` in the following directory
+    `global-microservices-springdata-nosql/src/main/resources` as shown in the screen-shot:
 
     ![Code createTable](./images/appl-properties.png)
 
 4. When you create a table, you can choose between **Provisioned Capacity** and
-**On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
-choosing the most cost-effective deployment to meet their business and application
-workload requirements. Such flexibility empowers businesses to solely focus on application
-innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
-You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
+    **On-Demand Capacity**. With the availability of both models, businesses have total flexibility when
+    choosing the most cost-effective deployment to meet their business and application
+    workload requirements. Such flexibility empowers businesses to solely focus on application
+    innovations to delight their customers, making operational costs "worry-free" in their decision-making process.
+    You can also modify the **Capacity mode** from Provisioned Capacity to On Demand Capacity and vice-versa.
 
-  The annotation `NosqlTable` in the class `Movie.java` illustrates this.
+    The annotation `NosqlTable` in the class `Movie.java` illustrates this.
 
-  Go to the Code Editor, and open the file `Movie.java` in the following directory
-  `global-microservices-springdata-nosql/code-nosql-spring-sdk/src/main/java/com/oracle/nosql/springdatarestnosql` as shown in the screen-shot:
+    Go to the Code Editor, and open the file `Movie.java` in the following directory
+    `global-microservices-springdata-nosql/code-nosql-spring-sdk/src/main/java/com/oracle/nosql/springdatarestnosql` as shown in the screen-shot:
 
       ![Code createTable](./images/appl-code.png)
 
-  The Spring Data Framework supports the persistence of entities to Oracle NoSQL Database tables.
-  An entity is mapped to a table. The ID field in that entity is mapped to the primary key column of that table.
-  All other fields in the entity are mapped to a JSON column of that table. Each instance of the entity will be stored as a single row in that table.
-  The value of the ID field in that instance will be stored as the primary key value of that row.
-  The values of all other fields (including other objects) in that instance will be serialized and stored as values in the JSON column of that row.
-  Effectively, the table will always have: a primary key and a JSON column.
+    The Spring Data Framework supports the persistence of entities to Oracle NoSQL Database tables.
+    An entity is mapped to a table. The ID field in that entity is mapped to the primary key column of that table.
+    All other fields in the entity are mapped to a JSON column of that table. Each instance of the entity will be stored as a single row in that table.
+    The value of the ID field in that instance will be stored as the primary key value of that row.
+    The values of all other fields (including other objects) in that instance will be serialized and stored as values in the JSON column of that row.
+    Effectively, the table will always have: a primary key and a JSON column.
 
-  If a persistent POJO has a reference to another persistent POJO (nested objects) that maps to a different table,
-  the Spring Data Framework will not serialize objects to multiple tables. Instead, all the nested objects will be serialized
-  and stored as values in the JSON column.
+    If a persistent POJO has a reference to another persistent POJO (nested objects) that maps to a different table,
+    the Spring Data Framework will not serialize objects to multiple tables. Instead, all the nested objects will be serialized
+    and stored as values in the JSON column.
 
-  We support composite primary keys. You can define a composite key class type to represent the composite keys. In this example we are using a single column key
-  with the option auto generated (UUID GENERATED BY DEFAULT).
+    We support composite primary keys. You can define a composite key class type to represent the composite keys. In this example we are using a single column key
+    with the option auto generated (UUID GENERATED BY DEFAULT).
 
-  The Spring Data Framework looks for the repositories used in the application in the init phase.
-  If the table does not exist, and if the `@NosqlTable` annotation has the `autoCreateTable` as true,
-  then the table will be created in the init phase.
+    The Spring Data Framework looks for the repositories used in the application in the init phase.
+    If the table does not exist, and if the `@NosqlTable` annotation has the `autoCreateTable` as true,
+    then the table will be created in the init phase.
 
-  Finally, the table name is the entity class name but you can overwrite using the attribute `tableName` in the `NosqlTable` Annotation.
+    Finally, the table name is the entity class name but you can overwrite using the attribute `tableName` in the `NosqlTable` Annotation.
 
 
 5. The entity class that is used for persistence is discoverable by the Spring Data Framework either via annotation or inheritance.

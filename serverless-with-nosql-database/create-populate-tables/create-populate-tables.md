@@ -27,20 +27,20 @@ Watch the video below for a quick walk through of the lab.
 <if type="paid">
 1. Please verify you are in the Phoenix region.
 
-  ![Phoenix region](./images/phoenix-location.png)
+    ![Phoenix region](./images/phoenix-location.png)
 
 </if>
 
 <if type="freetier">
 1. If you are in the Phoenix region, you will be able to create always Free tables. If you are in any other region, then you will create paid tables, however, they will be paid for with credits.
 
-  ![Phoenix region](./images/phoenix-location.png)
+    ![Phoenix region](./images/phoenix-location.png)
 </if>
 
 <if type="livelabs">
 1. Please verify you are in the Phoenix region.
 
-  ![Phoenix region](./images/phoenix-location.png)
+    ![Phoenix region](./images/phoenix-location.png)
 
 </if>
 
@@ -51,33 +51,33 @@ Watch the video below for a quick walk through of the lab.
 <if type="paid">
 3. On the 'Tables' screen there is a **Compartment** field on the left. Please make sure **demonosql** compartment is selected.
 
-  ![Choose Compartment](./images/set-compartment.png)
+    ![Choose Compartment](./images/set-compartment.png)
 </if>
 
 <if type="freetier">
 3. On the 'Tables' screen there is a **Compartment** field on the left. Please make sure **demonosql** compartment is selected.
 
-  ![Choose Compartment](./images/set-compartment.png)
+    ![Choose Compartment](./images/set-compartment.png)
 </if>
 
 <if type="livelabs">
 3. On the 'Tables' screen there is a **Compartment** field on the left. Please make sure the compartment you were assigned is selected. In Lab 2, task 1 you identified your compartment. You will need to expand the root compartment, and then expand the **LiveLabs** compartment to find it. In this example, we are using **LL46279-COMPARTMENT**. Yours will be different. You will not be able to create tables in any other compartment.
 
-  ![LiveLab Compartment](./images/livelab-compartment.png)
+    ![LiveLab Compartment](./images/livelab-compartment.png)
 </if>
 
 4. Click **Create table** and the 'Create table' screen appears.
 
     ![Create Table](./images/create-tables.png)
 
-  This screen allows you to create tables in one of two different ways, either using simple input or using DDL input. For this Lab we are going to use the simple input method.
+    This screen allows you to create tables in one of two different ways, either using simple input or using DDL input. For this Lab we are going to use the simple input method.
 
 <if type="paid">
 5. The first thing you want to do is click the **Always Free Configuration** toggle button. This will create an always free table. Each tenancy is allowed 3 always free tables. Always free tables have fixed provisioning at 50 read units, 50 write units and 25 GB of storage. NoSQL always free tables are available in the Phoenix region only and you need to be in the correct region to use them. The toggle button only shows up in the Phoenix region.
 
     ![Always Free Table](./images/always-free.png)
 
-  Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
+    Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
 </if>
 
 <if type="freetier">
@@ -85,13 +85,13 @@ Watch the video below for a quick walk through of the lab.
 
     ![Always Free Table](./images/always-free.png)
 
-  Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.**  For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column. Proceed to step 7.
+    Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.**  For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column. Proceed to step 7.
 
 6. If not in Phoenix, then enter in values for **Read capacity**, **Write capacity**, and **Disk storage**. Enter in 10,10, and 5 respectively. The **Always Free Configuration** button is grayed out and cannot be used.
 
-   ![Capacity Parameters](./images/create-reserve.png)
+    ![Capacity Parameters](./images/create-reserve.png)
 
-   Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
+    Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
 </if>
 
 <if type="livelabs">
@@ -99,15 +99,15 @@ Watch the video below for a quick walk through of the lab.
 
     ![Always Free Table](./images/always-free.png)
 
-  Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
+    Clicking the **Always Free Configuration** button grays out the boxes to input provisioning. Next enter a **name** for your table, a **primary key** and a **column** and click **Set as a shard key.** For this example, we used freeTest as the name, pkey with a type of integer as the primary key, and name with a type of string as an additional column.
 </if>
 
 
 6. When done with inputs click **Create table** at the bottom.
 
-   ![Create Table](./images/create-myfree-table.png)
+    ![Create Table](./images/create-myfree-table.png)
 
-  In summary, this screen allows to create a table with multiple columns for the primary key, as well as adding many additional columns. You can create simple or more complex tables with this interface.
+    In summary, this screen allows to create a table with multiple columns for the primary key, as well as adding many additional columns. You can create simple or more complex tables with this interface.
 
 7. After clicking **Create table** you will be brought to the 'Tables' screen. This screen shows you a list of tables you have created, as well as basic information about the table. One important thing to notice is that our table has a status of 'Active' which means we are ready to load data into our table. If you created an 'Always Free' table, then a tag that is attached to that table. This lets you know it is an always free table. Without the tag, then it is a paid table.
 
@@ -122,7 +122,7 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
-  Execute the following in your Cloud Shell. This creates several JSON documents that will be used in future steps.
+    Execute the following in your Cloud Shell. This creates several JSON documents that will be used in future steps.
 
     ```
     <copy>
@@ -261,7 +261,7 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
     --wait-for-state SUCCEEDED --wait-for-state FAILED
     </copy>
     ```
-</if>    
+    </if>    
 
 4. Minimize the Cloud Shell by clicking the **minimization button.**
 
@@ -296,7 +296,7 @@ In this task we are going to create tables using the Cloud Shell, and Oracle Clo
 
 7. Click **Insert row.** This opens up a new window. This time, choose **Advanced JSON Input.**
 
-  Copy/Paste the JSON Baggage document below in the **JSON input** text box. Because this JSON document is complex, it is easiest to copy/paste into the field. However, you could have typed it all in.
+    Copy/Paste the JSON Baggage document below in the **JSON input** text box. Because this JSON document is complex, it is easiest to copy/paste into the field. However, you could have typed it all in.
 
     ```
     <copy>
@@ -376,7 +376,7 @@ Starting with the demo table, we can go and look at the data we inserted for eac
 
     ![Run Query](./images/run-query.png)
 
-  You will see in the bottom of the screen the row that we inserted.
+    You will see in the bottom of the screen the row that we inserted.
 
 3. Go to the top left, press **Tables**, select the **freeTest** table, and look at the row inserted into that table.
 

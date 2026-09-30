@@ -31,24 +31,24 @@ Estimated Lab Time: 10 minutes
 1. log in to the Oracle Cloud, as shown in the previous lab.
 2. Once logged in, you are taken to the cloud services dashboard, where you can see all available services. Click the navigation menu in the upper left to show top-level navigation choices.
 <if type="freetier">
-	__Note:__ You can also directly access your Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
+    	__Note:__ You can also directly access your Autonomous Transaction Processing service in the __Quick Actions__ section of the dashboard.
 
-	![Quick actions menu in the OCI console](./images/p01-quick-actions-menu-in-the-oci-console.png " ")
+    	![Quick actions menu in the OCI console](./images/p01-quick-actions-menu-in-the-oci-console.png " ")
 </if>
 
 3. The following steps apply similarly to either Autonomous Transaction Processing or Autonomous Data Warehouse. This lab shows the provisioning of an Autonomous Transaction Processing database, so click the **Navigation Menu** in the upper left, navigate to **Oracle Database**, and select **Autonomous Transaction Processing**.
 
-	![OCI Database submenu](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
+    	![OCI Database submenu](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
 4. Use the __List scope__ drop-down menu to select a compartment. 
 
 <if type="freetier">
-	Select your __root compartment__, or __another compartment of your choice__ where you will create your new ATP instance. If you want to create a new compartment, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="\_blank">here</a>. To learn more about compartments, click <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy" target="\_blank">here</a>.
+    	Select your __root compartment__, or __another compartment of your choice__ where you will create your new ATP instance. If you want to create a new compartment, click <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#three" target="\_blank">here</a>. To learn more about compartments, click <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy" target="\_blank">here</a>.
 
     __Note__ - Avoid using the `ManagedCompartmentforPaaS` compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 <if type="livelabs">
-	A compartment has been assigned to you during the setup of your Livelabs Sandbox. 
+    	A compartment has been assigned to you during the setup of your Livelabs Sandbox. 
 
     - You only have permission to create objects in this assigned compartment. 
     - Check your Login Info, make a note of the compartment that has been assigned
@@ -56,11 +56,11 @@ Estimated Lab Time: 10 minutes
 
     If you see the below picture with the "Forbidden" sign, you __do not have access__ to the resources required and need to check the allocated compartment:
 
-	![Autonomous Database console with permissions error](./images/p02-autonomous-database-console-with-permissions-error.png " ")
+    	![Autonomous Database console with permissions error](./images/p02-autonomous-database-console-with-permissions-error.png " ")
 </if>
 5. Make sure your __Workload type__ filter is set to __Transaction Processing__ or __All__ to see your Autonomous Transaction Processing instances. 
 
-	![Autonomous Database Filters secion](./images/p03-autonomous-database-console-filters-section.png " ")
+    	![Autonomous Database Filters secion](./images/p03-autonomous-database-console-filters-section.png " ")
 
 6. This console shows that no databases yet exist. If there were a long list of databases, you could filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by __Workload Type__. 
 
@@ -72,7 +72,7 @@ Estimated Lab Time: 10 minutes
 
     ![Autonomous Database console with Create Autonomous Database highlighted](./images/p05-autonomous-database-console-with-create-database-button-highlighted.png " ")
 
-2.  This brings up the __Create Autonomous Database__ screen, where you will specify the instance's configuration.
+2. This brings up the __Create Autonomous Database__ screen, where you will specify the instance's configuration.
 3. Provide basic information for the autonomous database:
 
     - __Compartment__ - Make sure your compartment is displayed; if not, select it from the drop-down box.
@@ -167,7 +167,7 @@ Estimated Lab Time: 10 minutes
 
 10. Click __Create Autonomous Database__.
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Data Warehouse database is ready to use! Please look at your instance's details, including its name, database version, CPU count and storage size.
+11. Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Data Warehouse database is ready to use! Please look at your instance's details, including its name, database version, CPU count and storage size.
 
     ![License type section with Oracle Database Enterprise Edition option selected](./images/p14-license-type-section-with-ee-edition-selected.png " ")
 

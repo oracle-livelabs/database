@@ -177,7 +177,7 @@ In this lab, you will be guided through the following tasks:
 
     ```bash
     <copy>MySQL HeatWave DB System</copy>
-   ```
+    ```
 
     ![HeatWave credentials](./images/mysql-heatwave-basic.png "HeatWave Basic")
 
@@ -217,7 +217,7 @@ In this lab, you will be guided through the following tasks:
 
     ```
     <copy>
-   https://objectstorage.us-ashburn-1.oraclecloud.com/p/e9-qd9eqC2gatEl4qqsRD4L_mqn433tr00ALKmYzh8AuTQ-drS1thJvgLoz64-vF/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_11272024/
+    https://objectstorage.us-ashburn-1.oraclecloud.com/p/e9-qd9eqC2gatEl4qqsRD4L_mqn433tr00ALKmYzh8AuTQ-drS1thJvgLoz64-vF/n/mysqlpm/b/mysql_customer_orders/o/mco_nocoupon_11272024/
     </copy>
     ```
 14. Click **Create**.

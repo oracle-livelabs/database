@@ -30,15 +30,15 @@ This lab assumes you have-
 
 You can view indexes for *HR* schema.
 
-1.  Log in to Database Actions as *HR* if you are not logged in.  
+1. Log in to Database Actions as *HR* if you are not logged in.  
     
-2.  Click the **SQL** card. This opens the SQL page in Database Actions.
+2. Click the **SQL** card. This opens the SQL page in Database Actions.
     ![Launchpad](../create-indexes-and-views/images/new-launchpad.png)  
       
-3.  In the Navigator tab, verify *HR* schema is selected from the first drop-down and select *Indexes* from the second drop-down list. The navigator pane displays the list of indexes of the selected schema HR.
+3. In the Navigator tab, verify *HR* schema is selected from the first drop-down and select *Indexes* from the second drop-down list. The navigator pane displays the list of indexes of the selected schema HR.
     ![Indexes List](../create-indexes-and-views/images/indexes-list.png)  
       
-4.  Select an index in the left pane. For this task, right-click *COUNTRY\_ C\_ ID\_PK* and select **Open** to view details about the index. The Columns page opens and it is to view the properties of each column in the index.
+4. Select an index in the left pane. For this task, right-click *COUNTRY\_ C\_ ID\_PK* and select **Open** to view details about the index. The Columns page opens and it is to view the properties of each column in the index.
     ![Columns pane](../create-indexes-and-views/images/columns.png)
 
     The Columns page displays the following fields:
@@ -51,7 +51,7 @@ You can view indexes for *HR* schema.
     -   COLUMN_POSITION
     -   DESCEND  
           
-5.  Click the **Details** tab to view additional information about the index.
+5. Click the **Details** tab to view additional information about the index.
     ![Details pane](../create-indexes-and-views/images/details.png)
     
     The Details page displays the fields. Some of them have been mentioned below: 
@@ -68,12 +68,12 @@ You can view indexes for *HR* schema.
     -   PREFIX_LENGTH
     -   TABLESPACE_NAME  
           
-6.  Click the **Statistics** tab.
+6. Click the **Statistics** tab.
     ![Statistics pane](../create-indexes-and-views/images/statistics-tab.png)  
     You can view statistical information about the index.  
     The values may differ depending on the system you are using.  
       
-7.  Click the **Partition** tab.
+7. Click the **Partition** tab.
     ![Partitions pane](../create-indexes-and-views/images/partitions-pane.png)
     
     This page indicates whether the index is partitioned or not. You will view *No items to display* in the Partitions tab if an index is not partitioned.
@@ -84,12 +84,12 @@ Click **Close** at the bottom right to close the properties dialog box.
 
 In this task, you will create an index for *HR* schema.
 
-1.  In the Navigator tab, click the three dots next to the search field and select **Create Object** from the submenu.
+1. In the Navigator tab, click the three dots next to the search field and select **Create Object** from the submenu.
     ![Create object button](../create-indexes-and-views/images/create-object.png)
     
     This opens the Index Properties dialog box.  
     
-2.  In the Definition page of the Index Properties dialog box specify the following fields.
+2. In the Definition page of the Index Properties dialog box specify the following fields.
     
     -   **Schema:** *HR*. This is the database schema that owns the table associated with the index.   
     -   **Table:** *COUNTRIES*. This is the table associated with the index.    
@@ -102,14 +102,14 @@ In this task, you will create an index for *HR* schema.
     In the Columns tab, click the Columns you wish to select for the index from the list of columns available in the table. For this task, select all the columns.  
     You can specify a column expression in the Expression tab of the Definition page.  
       
-3.  Click the **DDL** tab of the Index Properties dialog box to review the SQL statements generated while creating the index. Navigate to the Definition tab to make changes to the properties of the index.
+3. Click the **DDL** tab of the Index Properties dialog box to review the SQL statements generated while creating the index. Navigate to the Definition tab to make changes to the properties of the index.
     ![DDL pane](../create-indexes-and-views/images/ddl-pane.png)  
     
-4.  Click **Create**.  
+4. Click **Create**.  
     The Output page displays the generated DDL commands.  
     ![Output pane](../create-indexes-and-views/images/output-pane.png)     
     
-5.  Click **Close**. 
+5. Click **Close**. 
     ![New Index created](../create-indexes-and-views/images/new-index.png)  
       
     The Database Actions tool creates a new index named *NEW_INDEX* that appears in the list of indexes for the *HR* schema.
@@ -122,9 +122,9 @@ This task will give information on how a SQL Query performs before and after cre
 
 An execution plan is basically the sequence of operations that the database performs to run a SQL statement.
 
-1.  In the Navigator tab, verify the **HR** schema is selected and then select **Tables** from the second drop-down list.  
+1. In the Navigator tab, verify the **HR** schema is selected and then select **Tables** from the second drop-down list.  
     
-2.  First, verify the Elapsed time before creating an index using the following code.
+2. First, verify the Elapsed time before creating an index using the following code.
     
     ```
     <copy>
@@ -138,16 +138,16 @@ An execution plan is basically the sequence of operations that the database pe
     It displays the following output.    
     ![Elapsed time before index](../create-indexes-and-views/images/elapsed-time-bi.png)  
     
-3.  Second, to check the plan output, click the Explain Plan icon ![Explain Plan](../create-indexes-and-views/images/explain-plan-icon.png) 
+3. Second, to check the plan output, click the Explain Plan icon ![Explain Plan](../create-indexes-and-views/images/explain-plan-icon.png) 
 
     It displays the following output.  
     ![Explain Plan before](../create-indexes-and-views/images/explain-plan-before.png)  
       
-4.  Next, create an index. Select **Indexes** from the second drop-down list. Select **Create Object** from the submenu. Then, select **DEPARTMENTS** from the Table drop-down. Change the name of the index to DEPARTMENT\_IX. Next is to select columns **DEPARTMENT\_NAME** and **DEPARTMENT\_ID**. Click **Create**.  
+4. Next, create an index. Select **Indexes** from the second drop-down list. Select **Create Object** from the submenu. Then, select **DEPARTMENTS** from the Table drop-down. Change the name of the index to DEPARTMENT\_IX. Next is to select columns **DEPARTMENT\_NAME** and **DEPARTMENT\_ID**. Click **Create**.  
     ![Create a new index](../create-indexes-and-views/images/index-new.png)  
     You will be able to view a message "Index HR.DEPARTEMENT\_IX created." in the Output tab.  
       
-5.  From the Navigator tab, select **Tables** from the second drop-down list. Run the below code in the editor.
+5. From the Navigator tab, select **Tables** from the second drop-down list. Run the below code in the editor.
     
     ```
     <copy>
@@ -163,7 +163,7 @@ An execution plan is basically the sequence of operations that the database pe
     ![Elapsed time after index](../create-indexes-and-views/images/elapsed-time-ai.png)  
     You can see the Elapsed time had marginally decreased after creating an index.  
     
-6.  Next, check the plan output by clicking the Explain Plan icon ![Explain Plan](../create-indexes-and-views/images/explain-plan-icon.png). To view the expanded version, click Expand All icon ![Expand All Icon](../create-indexes-and-views/images/expand-all.png)
+6. Next, check the plan output by clicking the Explain Plan icon ![Explain Plan](../create-indexes-and-views/images/explain-plan-icon.png). To view the expanded version, click Expand All icon ![Expand All Icon](../create-indexes-and-views/images/expand-all.png)
 
     It displays the following output.  
     ![Explain Plan Output](../create-indexes-and-views/images/explain-plan-after.png)
@@ -174,14 +174,14 @@ As you can see after creating an index, the SQL Query performs better by fetchin
 
 You can see all the existing views in your database. In this lab, you will use the *HR* schema to achieve this task.
 
-1.  In the Navigator tab, verify the **HR** schema is selected and then select **Views** from the second drop-down list.
+1. In the Navigator tab, verify the **HR** schema is selected and then select **Views** from the second drop-down list.
 
     This displays the list of views of the selected schema HR.  
     
-2.  To open and view the properties of the existing view, right-click a view object and select **Open**. 
+2. To open and view the properties of the existing view, right-click a view object and select **Open**. 
     ![Open existing view](../create-indexes-and-views/images/existing-view.png)  
     
-3.  Check the details of the view in the dialog box.  
+3. Check the details of the view in the dialog box.  
     ![Columns pane](../create-indexes-and-views/images/columns-pane-details-view.png)  
     
     The different tabs in the dialog are as follows:  
@@ -200,16 +200,16 @@ Click **Close** at the bottom right to close the properties dialog box.
 
 You can create a view for the *HR* Schema.
 
-1.  In the Navigator tab, select **HR** schema from the first drop-down and select **Views** from the second drop-down list if not already selected.  
+1. In the Navigator tab, select **HR** schema from the first drop-down and select **Views** from the second drop-down list if not already selected.  
     
-2.  Click the Object submenu (three vertical dots next to Search field) and select **Create Object**.
+2. Click the Object submenu (three vertical dots next to Search field) and select **Create Object**.
 
        > Note: To create a view from an existing template for a selected schema, in the Navigator tab, select the view to create from, right-click and select **Use as Template**.
 
        ![Create View](../create-indexes-and-views/images/create-view.png)
        A View Properties dialog box opens.  
     
-3.  Specify the following field values:
+3. Specify the following field values:
     
     **Schema:** *HR*. This is the schema where you create your view.
     **Name:** *MGR\_100\_EMPS*. This is the name of the view.
@@ -221,13 +221,13 @@ You can create a view for the *HR* Schema.
     </copy>
     ```
     
-4.  Click the **Create** button to create a view.  
+4. Click the **Create** button to create a view.  
     ![Create button](../create-indexes-and-views/images/create-button.png)
     
     You will see a successful creation of view message.
     ![New Index created](../create-indexes-and-views/images/index-created.png)  
       
-5.  Click **Close**.  
+5. Click **Close**.  
     ![List after creating new index](../create-indexes-and-views/images/new-index-list.png)
     
     The Database Actions tool creates a new view named *MGR_100_EMPS* that appears in the list of views for the *HR* schema.
@@ -241,3 +241,8 @@ You may now **proceed to the next lab**.
 -   **Author** - Aayushi Arora, Database User Assistance Development Team
 -   **Contributors** - Jeff Smith, Manish Garodia, Manisha Mati
 -   **Last Updated By/Date** - Aayushi Arora, October 2024
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

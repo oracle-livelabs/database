@@ -25,19 +25,19 @@ This lab assumes you have:
 
 1. Open Microsoft Visual Studio Code. Choose **Extensions** and install the **Oracle NoSQL Database Connector**.
 
-  ![Install Oracle NoSQL Database Connector](images/nosqldb-plugin-install.png)
+    ![Install Oracle NoSQL Database Connector](images/nosqldb-plugin-install.png)
 
 2. Choose the **Oracle NoSQL DB** extension.
 
-  ![Open Oracle NoSQL Database Connector](images/nosqldb-extension.png)
+    ![Open Oracle NoSQL Database Connector](images/nosqldb-extension.png)
 
 3. Add a connection to the KVLite instance you started by choosing **Add Connection > Onprem**
 
-  ![Add connection to KVLite](images/add-connection.png)
+    ![Add connection to KVLite](images/add-connection.png)
 
 4. Enter a **Connection Name**. Enter the **Endpoint** as [http://localhost:8080](http://localhost:8080) (This connects to the KVLite instance that you started. KVLite is running in the localhost with the proxy listening at HTTP port 8080).
 
-  ![Enter Connection Details](images/connection-settings.png)
+    ![Enter Connection Details](images/connection-settings.png)
 
 5. Once the connection is established, you can view the connection under **Table Explorer**.
 
@@ -47,19 +47,19 @@ This lab assumes you have:
 
 1. To create a table in the database, right click on the connection and choose **Create Table**.
 
-  ![Create Table](images/create-table.png)
+    ![Create Table](images/create-table.png)
 
 2. In this example, we will create a JSON collection table named **my_albums** using the **Advanced DDL Input** mode.
 
-  ![DDL Input mode](images/ddl-input-mode.png)
+    ![DDL Input mode](images/ddl-input-mode.png)
 
 3. You can now view the table you have created under the **Table Explorer**. Let us add some data to this table. Right-click on the table and choose **Insert Row** to enter the JSON input. Similarly, insert all the rows.
 
-  ![Insert Rows](images/insert-row.png)
+    ![Insert Rows](images/insert-row.png)
 
 4. Right-click on the table, choose **Browse Table** and run the query to view all the rows in the table.
 
-  ![Browse Table](images/browse-table.png)
+    ![Browse Table](images/browse-table.png)
 
 5. You can enter a query, execute it, and view the resultant output.
 

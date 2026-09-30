@@ -42,7 +42,7 @@ In this lab, you will:
     ssh -i ~/.ssh/<sshkeyname> opc@<Your Compute Instance Public IP Address>
     ````
 
-2.  Become a `root` user first, to install docker on compute instance
+2. Become a `root` user first, to install docker on compute instance
 
     ````
     <copy>
@@ -50,7 +50,7 @@ In this lab, you will:
     </copy>
     ````
 
-3.  To install Docker on Oracle Linux 8, install the yum-utils package and enable all the required repositories.
+3. To install Docker on Oracle Linux 8, install the yum-utils package and enable all the required repositories.
 
     ````
     <copy>
@@ -68,7 +68,7 @@ In this lab, you will:
     </copy>
     ```
 
-5.  Grant Docker privileges to the `opc` user.
+5. Grant Docker privileges to the `opc` user.
 
     ````
     <copy>
@@ -93,7 +93,7 @@ In this lab, you will:
     </copy>
     ````
 
-    ![](images/installgit.png " ")
+    ![Image](images/installgit.png " ")
 
 8. Verify the version by switching to the opc user.
 
@@ -106,7 +106,7 @@ In this lab, you will:
     </copy>
     ````
 
-    ![](images/gitversion.png " ")
+    ![Image](images/gitversion.png " ")
 
 9. Place your server in permissive mode.
 
@@ -118,7 +118,7 @@ In this lab, you will:
     </copy>
     ````
 
-    ![](images/setenforce.png " ")
+    ![Image](images/setenforce.png " ")
 
 10. Switch back to the opc user and verify you are the `opc` user.
 
@@ -139,7 +139,7 @@ In this lab, you will:
     </copy>
     ````
 
-    ![](images/dockerversion2.png " ")
+    ![Image](images/dockerversion2.png " ")
 
 2. Start your application, restclient, in docker on port 8002 in json format and verify if containers are running.
 
@@ -159,7 +159,7 @@ In this lab, you will:
     - "--name" The name of the container will be "restclient"
     - "-v" This maps the directory where you downloaded the restclient setup.
 
-    ![](images/dockerps.png " ")
+    ![Image](images/dockerps.png " ")
 
 3. Open up a browser on your laptop and go to your public URL on port 8002. Replace `Enter IP Address` with the Public IP of your compute instance you noted earlier in lab 2.
 
@@ -169,9 +169,9 @@ In this lab, you will:
 
 4. Depending on whether you have a JSON formatter, you should see the products in your application, in RAW or FORMATTED format.  `Note:  If you are on the VPN, disconnect.`
 
-    ![](images/products2-8002.png " ")
+    ![Image](images/products2-8002.png " ")
 
-    ![](images/products.png " ")
+    ![Image](images/products.png " ")
 
 5. The `restclient` container was started earlier with the -rm option.  This means when stopping it will remove ALL allocated resources.  The `ps` command with the `-a` option shows the status of ALL containers that are running.  As you can see, there are no containers running.
 
@@ -182,9 +182,9 @@ In this lab, you will:
     </copy>
     ````
 
-    ![](images/restclient2.png " ")
+    ![Image](images/restclient2.png " ")
 
- 6. Let's start another container on your compute instance's 18002 port.  Type the following command:
+    6. Let's start another container on your compute instance's 18002 port.  Type the following command:
 
     ````
     <copy>
@@ -193,11 +193,11 @@ In this lab, you will:
     </copy>
     ````
 
-    ![](images/restclient.png " ")
+    ![Image](images/restclient.png " ")
 
 7. Go back to your browser and change the port to 18002.
 
-    ![](images/18002.png " ")
+    ![Image](images/18002.png " ")
 
 
 ## Task 3: Docker networking basics
@@ -212,7 +212,7 @@ Now that you know how to start, stop and relocate a container, let's see how to 
     </copy>
     ````
 
-    ![](images/network.png " ")
+    ![Image](images/network.png " ")
 
 2. Ping that address for your restclient container from your compute instance.
 

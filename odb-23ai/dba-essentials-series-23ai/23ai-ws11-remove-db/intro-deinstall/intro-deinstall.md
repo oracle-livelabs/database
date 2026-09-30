@@ -105,3 +105,8 @@ Click the next lab to **Get started**.
  - **Author** - Manish Garodia, Database User Assistance Development
  - **Contributors** - Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Manisha Mati
  - **Last Updated By/Date** - Manish Garodia, October 2024
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

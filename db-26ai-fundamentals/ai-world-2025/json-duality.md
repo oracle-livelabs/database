@@ -30,6 +30,11 @@ Estimated Lab Time: 20 minutes
 - Basic understanding of JSON and SQL
 
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Prepare Data for Duality Views
 
 1. **What we're building:** Duality views present the same underlying relational tables as JSON documents. We'll create views that let applications access patient and appointment data either as SQL tables or as JSON documents, with all changes automatically synchronized.

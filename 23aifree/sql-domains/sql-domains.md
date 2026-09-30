@@ -129,7 +129,7 @@ This lab assumes you have:
     The results:
     ```
       P_ID P_NAME                                  P_SAL P_EMAIL
----- ---------------------------------- ---------- --------------------------
+    ---- ---------------------------------- ---------- --------------------------
          1 Bold                                     3000 XXXX@missingmail.com
          1 Schulte                                  1000 user-schulte@gmx.net
          1 Walter                                   1000 user-walter@t_online.de

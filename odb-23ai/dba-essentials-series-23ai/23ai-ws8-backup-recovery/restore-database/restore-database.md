@@ -144,7 +144,7 @@ The recovery process begins when you either suspect or discover a failure. You c
 
 15. Mount the database.
     ```
-   RMAN> <copy>startup mount;</copy>
+    RMAN> <copy>startup mount;</copy>
     ```
     Output:
     ```
@@ -163,7 +163,7 @@ The recovery process begins when you either suspect or discover a failure. You c
 
 16. Restore the database. In the following output, you can see that the datafile has been restored.
     ```
-   RMAN> <copy>restore database;</copy>
+    RMAN> <copy>restore database;</copy>
     ```
     Output:
     ```
@@ -200,7 +200,7 @@ The recovery process begins when you either suspect or discover a failure. You c
 
 17. Recover the database. In the following output, you can see the recovery completed successfully.
     ```
-   RMAN> <copy>recover database;</copy>
+    RMAN> <copy>recover database;</copy>
     ```
     Output:
     ```

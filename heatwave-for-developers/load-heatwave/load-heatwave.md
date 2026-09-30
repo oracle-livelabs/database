@@ -48,7 +48,7 @@ In this lab, you will be guided through the following task:
 5. Since we haven't loaded any data to the MySQL DB System, the system won't be able to estimate the number of nodes for us
     ![Connect](./images/heatwave-cluster-no-estimate.png "heatwave cluster generate estimate")
 
-   Here is a sample output of the estimation if there is data loaded in the DB System:
+    Here is a sample output of the estimation if there is data loaded in the DB System:
     ![Connect](./images/heatwave-cluster-generate-estimate.png "heatwave cluster generate  estimate ")
    
 

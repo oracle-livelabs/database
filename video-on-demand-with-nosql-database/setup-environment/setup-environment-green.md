@@ -40,22 +40,22 @@ In this task we will copy over a data bundle stored on object storage and place
 that in the Cloud Shell.
 
 1. In this step we need to execute a few commands in the Cloud Shell.
-To start the Cloud Shell, we have to select our compartment first.
-Click on the 'hamburger' menu on the top left. Click on **Databases**
-and then click on **Tables**.
+    To start the Cloud Shell, we have to select our compartment first.
+    Click on the 'hamburger' menu on the top left. Click on **Databases**
+    and then click on **Tables**.
 
     ![Choose Compartment](images/nosql-tables.png)
 
 2. In the **Compartment** drop down on the left, pick you compartment.
-In Task 1, you should have taken note of your compartment. To find it, expand
-the root node (**c4u04**), then expand the **Livelabs** node.
-Your compartment should be listed under there.
-In this example we are using **LL45112-COMPARTMENT**.
+    In Task 1, you should have taken note of your compartment. To find it, expand
+    the root node (**c4u04**), then expand the **Livelabs** node.
+    Your compartment should be listed under there.
+    In this example we are using **LL45112-COMPARTMENT**.
 
     ![pick-compartment](images/pick-compartment.png)
 
 3. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes
-to get the Cloud Shell started.
+    to get the Cloud Shell started.
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 

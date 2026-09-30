@@ -27,10 +27,10 @@ In this lab, you will:
         ```
         rhpctl import image -image gi_current_oci -path /u01/app/19.0.0.0/grid -imagetype ORACLEGISOFTWARE
         ```
-![Output of rhpctl import command above](./images/oraclegisoftware.png)
+    ![Output of rhpctl import command above](./images/oraclegisoftware.png)
         
 
-Notice the `-imagetype ORACLEGISOFTWARE` that tells FPP which image it is about to import
+    Notice the `-imagetype ORACLEGISOFTWARE` that tells FPP which image it is about to import
 
 2. Then, the Oracle Database image: (Est.: 4-5 minutes)
         ```
@@ -46,7 +46,7 @@ The image type `ORACLEDBSOFTWARE` is the default, so you do not need to specify 
         cd /u01/app/grid/
         wget --no-proxy https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/fpp/db1917000.zip
         ```
-![Output of wget command above](./images/wget.png)
+    ![Output of wget command above](./images/wget.png)
 
 2. Then, import it: (Est.: 7-8 minutes)
         ```
@@ -65,19 +65,19 @@ This is an extra step to make sure that the image is usable and can be provision
         ```
         rhpctl query image
         ```
-![Output of rhpctl command above](./images/query-image.png)
+    ![Output of rhpctl command above](./images/query-image.png)
 
 2. Get the detail of a specific image:
         ```
         rhpctl query image -image db_previous
         ```
-![Output of rhpctl query image command above](./images/query-previous.png)
+    ![Output of rhpctl query image command above](./images/query-previous.png)
 
 3. Get the detail of the other one:
         ```
         rhpctl query image -image db_current_oci
         ```
-![Output of rhpctl query image command above](./images/query-oci-current.png)      
+    ![Output of rhpctl query image command above](./images/query-oci-current.png)      
 
 4. Now, take a closer look at the groups:
         ```

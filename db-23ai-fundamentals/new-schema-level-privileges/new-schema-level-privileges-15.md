@@ -13,6 +13,11 @@ The objective of this workshop is to learn how to work with the schema-level pri
 - Access to Oracle Database 23ai.
 - Basic understanding of database schemas and privileges is recommended but not required.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Overview of Traditional Privilege Management
 1. Before we get into the code examples, let's briefly talk about the traditional methods of privilege management in Oracle databases.
 
@@ -250,7 +255,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     INSERT INTO hr_user.projects (project_id, project_name) VALUES (2, 'Project Beta');
     </copy>
     ```
-    ![creating new projects table](images/I.png " ")
+    ![creating new projects table](images/i.png " ")
 
 7. Now, let's grant schema-level privileges to the it_user 
     ```
@@ -284,7 +289,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     </copy>
     ```
 
-    ![it user viewing all the tables](images/J1.png " ")
+    ![it user viewing all the tables](images/j1.png " ")
 
 10. Sign out of the `it_user` session and log into `hr_user`. We will see how the privileges of this user is limited when compared to hr_user.
     - `USERNAME`: hr_user 
@@ -303,7 +308,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     SELECT * FROM hr_user.projects;
     </copy>
     ```
-    ![hr user viewing all the tables](images/J1.png " ")
+    ![hr user viewing all the tables](images/j1.png " ")
 
 
 12. Let's return to the `Admin` account by logging out of the `hr_user` session. To grab the Admin password, return to our reservation information window found in our workshop notebook and copy the value next to `Admin Password`.
@@ -323,7 +328,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     REVOKE SELECT ANY TABLE ON SCHEMA hr_user FROM it_user;
     </copy>
     ```
-    ![revoking access from it user](images/M.png " ")
+    ![revoking access from it user](images/m.png " ")
 
 2. Once the privileges have been revoked, we can verify the updated access by reviewing the remaining privileges granted to `it_user`. `DBA_SCHEMA_PRVIS` will return no data found, but `DBA_TAB_PRIVS` will show that our original privileges are still there.
     ```
@@ -331,7 +336,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     SELECT * FROM DBA_SCHEMA_PRIVS WHERE GRANTEE = 'IT_USER';
     </copy>
     ```
-    ![showing schema level priv is gone](images/N.png " ") 
+    ![showing schema level priv is gone](images/n.png " ") 
 
     ```
     <copy>
@@ -357,7 +362,7 @@ The objective of this workshop is to learn how to work with the schema-level pri
     SELECT * FROM hr_user.projects;
     </copy>
     ```
-    ![view output ](images/P.png " ")
+    ![view output ](images/p.png " ")
 
 5. Let's return to the `Admin` account by logging out of the `it_user` session. To grab the Admin password, return to our reservation information window found in our workshop notebook and copy the value next to `Admin Password`.
     - `USERNAME`: ADMIN 

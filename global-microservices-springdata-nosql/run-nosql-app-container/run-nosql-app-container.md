@@ -66,8 +66,8 @@ When you are done looking at code, go ahead and exit from the Code Editor.
 ## Task 2: Restart the Cloud Shell
 
 1. Let's get back into the Cloud Shell. From the earlier lab, you may have
-minimized it in which case you need to enlarge it. It is possible it may have
-become disconnected and/or timed out. In that case, restart it.
+    minimized it in which case you need to enlarge it. It is possible it may have
+    become disconnected and/or timed out. In that case, restart it.
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -132,7 +132,7 @@ set up your environment. Please copy the values for `OCI_REGION(labeled: NOSQL_R
     source ~/global-microservices-springdata-nosql/env.sh
     </copy>
     ```
-Set the variable IP_CI with the Public IP address value copied in Task 3. Execute in the Cloud Shell.
+    Set the variable IP_CI with the Public IP address value copied in Task 3. Execute in the Cloud Shell.
 
     ```shell
     <copy>

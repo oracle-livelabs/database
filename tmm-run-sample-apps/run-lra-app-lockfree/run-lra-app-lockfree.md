@@ -63,9 +63,9 @@ Follow the instructions in this section to start Minikube. When you start Miniku
     </copy>
     ```
 
-   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
+    In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
 
-   ![minikube start error](./images/minikube-start-error.png)
+    ![minikube start error](./images/minikube-start-error.png)
 
 3. Verify that all resources, such as pods and services, are ready before proceeding to the next task. Use the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
@@ -122,9 +122,9 @@ Before you start a transaction, you must start a tunnel between Minikube and Mic
     **Command syntax**
 
     ```text
-   <copy>
+    <copy>
     export TRIP_SERVICE_URL=http://<copied-external-IP-address>/trip-service/api/sync/trip
-   </copy>
+    </copy>
     ```
 
     **Example command**
@@ -146,7 +146,7 @@ When you start Minikube, the Travel Agent application which uses Saga is deploye
     </copy>
     ```
 
-2.  Deploy the Travel Agent application that uses Saga and lock-free reservation.
+2. Deploy the Travel Agent application that uses Saga and lock-free reservation.
 
     ```text
     <copy>
@@ -173,13 +173,13 @@ Run the Travel Agent application to book a hotel room and flight ticket.
     The Trip Booking Service console is displayed.
 
 2. Type **y** to confirm that you want to run the Travel Agent application, and then press Enter.
-The Travel Agent application provisionally books a hotel room and a flight ticket and displays the details of the provisional booking.
+    The Travel Agent application provisionally books a hotel room and a flight ticket and displays the details of the provisional booking.
 
 3. Type **y** to confirm the provisional booking, and then press Enter.
 
     Your booking is confirmed and information about your confirmed booking is displayed.
 
-   ![Details of the confirmed booking](./images/lra-confirmation.png)
+    ![Details of the confirmed booking](./images/lra-confirmation.png)
 
 4. Call the Trip-Service, Hotel Service and Flight Service REST APIs to view the list of the trip bookings, hotel bookings and flight bookings.
 
@@ -235,10 +235,10 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
     </copy>
     ```
 
-   A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
+    A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
 
 3. Select Graph for the `otmm` namespace.
-![Kiali Dashboard](images/kiali-dashboard-lra.png)
+    ![Kiali Dashboard](images/kiali-dashboard-lra.png)
 
 4. Start the Jaeger Dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
 
@@ -248,11 +248,11 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
     </copy>
     ```
 
-   A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
+    A URL is displayed. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
 
 5. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.
 6. Click **Find Traces**. You can see the list of traces with each trace representing a request.
-![Jaeger Traces List](images/jaeger-traces-list.png)
+    ![Jaeger Traces List](images/jaeger-traces-list.png)
 7. Select one of the traces to view.
 ![Jaeger Trace for Confirmation Step](images/jaeger-trace-confirm-cancel.png)
 

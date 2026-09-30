@@ -33,269 +33,269 @@ This lab assumes that you:
 
 1. Use ttIsql to connect to the cache as the TTCACHEADM user:
 
-```
-<copy>
-ttIsql "dsn=sampledb;uid=ttcacheadm;pwd=ttcacheadm;OraclePWD=ttcacheadm"
-</copy>
-```
+    ```
+    <copy>
+    ttIsql "dsn=sampledb;uid=ttcacheadm;pwd=ttcacheadm;OraclePWD=ttcacheadm"
+    </copy>
+    ```
 
-```
-Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
-Type ? or "help" for help, type "exit" to quit ttIsql.
+    ```
+    Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
+    Type ? or "help" for help, type "exit" to quit ttIsql.
 
-connect "dsn=sampledb;uid=ttcacheadm;pwd=********;OraclePWD=********";
-Connection successful: DSN=sampledb;UID=ttcacheadm;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
-(Default setting AutoCommit=1)
-Command> 
-```
+    connect "dsn=sampledb;uid=ttcacheadm;pwd=********;OraclePWD=********";
+    Connection successful: DSN=sampledb;UID=ttcacheadm;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
+    (Default setting AutoCommit=1)
+    Command> 
+    ```
 2. Create a _dynamic_ readonly cache group encompassing the **PARENT** and **CHILD** tables, which are related through a foreign key:
 
-```
-<copy>
-CREATE DYNAMIC READONLY CACHE GROUP ttcacheadm.cg_parent_child 
-AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS  
-FROM 
-appuser.parent 
-( parent_id          NUMBER(8) NOT NULL
-, parent_c1          VARCHAR2(20 BYTE)
-, PRIMARY KEY (parent_id)
-),
-appuser.child 
-( child_id           NUMBER(8) NOT NULL
-, parent_id          NUMBER(8) NOT NULL
-, child_c1           VARCHAR2(20 BYTE)
-, PRIMARY KEY (child_id)
-, FOREIGN KEY (parent_id)
-  REFERENCES appuser.parent (parent_id)
-) 
-AGING LRU ON;
-</copy>
-```
+    ```
+    <copy>
+    CREATE DYNAMIC READONLY CACHE GROUP ttcacheadm.cg_parent_child 
+    AUTOREFRESH MODE INCREMENTAL INTERVAL 2 SECONDS  
+    FROM 
+    appuser.parent 
+    ( parent_id          NUMBER(8) NOT NULL
+    , parent_c1          VARCHAR2(20 BYTE)
+    , PRIMARY KEY (parent_id)
+    ),
+    appuser.child 
+    ( child_id           NUMBER(8) NOT NULL
+    , parent_id          NUMBER(8) NOT NULL
+    , child_c1           VARCHAR2(20 BYTE)
+    , PRIMARY KEY (child_id)
+    , FOREIGN KEY (parent_id)
+    REFERENCES appuser.parent (parent_id)
+    ) 
+    AGING LRU ON;
+    </copy>
+    ```
 
 3. Display information about the cache group:
 
-```
-<copy>
-cachegroups cg_parent_child;
-</copy>
-```
+    ```
+    <copy>
+    cachegroups cg_parent_child;
+    </copy>
+    ```
 
-```
-Cache Group TTCACHEADM.CG_PARENT_CHILD:
+    ```
+    Cache Group TTCACHEADM.CG_PARENT_CHILD:
 
-  Cache Group Type: Read Only (Dynamic)
-  Autorefresh: Yes
-  Autorefresh Mode: Incremental
-  Autorefresh State: Paused
-  Autorefresh Interval: 2 Seconds
-  Autorefresh Status: ok
-  Aging: LRU on
+    Cache Group Type: Read Only (Dynamic)
+    Autorefresh: Yes
+    Autorefresh Mode: Incremental
+    Autorefresh State: Paused
+    Autorefresh Interval: 2 Seconds
+    Autorefresh Status: ok
+    Aging: LRU on
 
-  Root Table: APPUSER.PARENT
-  Table Type: Read Only
+    Root Table: APPUSER.PARENT
+    Table Type: Read Only
 
 
-  Child Table: APPUSER.CHILD
-  Table Type: Read Only
-```
+    Child Table: APPUSER.CHILD
+    Table Type: Read Only
+    ```
 
-Note the Autorefresh state is _Paused_. 
+    Note the Autorefresh state is _Paused_. 
 
-```
-Autorefresh State: Paused
-```
+    ```
+    Autorefresh State: Paused
+    ```
 
-Unlike static cache group, you do not need to perform an initial load for a dynamic cache group (though it is possible to do so).  The Autofresh state is changed immediately from _Paused_ to _On_ after the first on-demand dynamic load operation.
+    Unlike static cache group, you do not need to perform an initial load for a dynamic cache group (though it is possible to do so).  The Autofresh state is changed immediately from _Paused_ to _On_ after the first on-demand dynamic load operation.
 
 4. Disconnect from the cache as TTCACHEADM user.
 
-```
-<copy>
-quit
-</copy>
-```
+    ```
+    <copy>
+    quit
+    </copy>
+    ```
 
-```
-Disconnecting...
-Done.
-```
+    ```
+    Disconnecting...
+    Done.
+    ```
 
 
 ## Task 2: Run some queries and observe the behavior
 
 1. Use ttIsql to connect to the cache as the APPUSER user:
-```
-<copy>
-ttIsql "dsn=sampledb;uid=appuser;pwd=appuser;OraclePwd=appuser"
-</copy>
-```
-```
-Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
-Type ? or "help" for help, type "exit" to quit ttIsql.
+    ```
+    <copy>
+    ttIsql "dsn=sampledb;uid=appuser;pwd=appuser;OraclePwd=appuser"
+    </copy>
+    ```
+    ```
+    Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
+    Type ? or "help" for help, type "exit" to quit ttIsql.
 
-connect "dsn=sampledb;uid=appuser;pwd=********;OraclePwd=********";
-Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
-(Default setting AutoCommit=1)
-Command> 
-```
+    connect "dsn=sampledb;uid=appuser;pwd=********;OraclePwd=********";
+    Connection successful: DSN=sampledb;UID=appuser;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
+    (Default setting AutoCommit=1)
+    Command> 
+    ```
 
 2. Check the state of the tables:
 
-```
-<copy>
-select count(*) from parent;
-</copy>
-```
+    ```
+    <copy>
+    select count(*) from parent;
+    </copy>
+    ```
 
-```
-< 0 >
-1 row found.
-```
+    ```
+    < 0 >
+    1 row found.
+    ```
 
-```
-<copy>
-select count(*) from child;
-</copy>
-```
+    ```
+    <copy>
+    select count(*) from child;
+    </copy>
+    ```
 
-```
-< 0 >
-1 row found.
-```
+    ```
+    < 0 >
+    1 row found.
+    ```
 
-There is no data in the cached tables.
+    There is no data in the cached tables.
 
 3. Run a query that references the root table's (PARENT table) primary key:
 
-```
-<copy>
-select * from parent where parent_id = 4;
-</copy>
-```
+    ```
+    <copy>
+    select * from parent where parent_id = 4;
+    </copy>
+    ```
 
-```
-< 4, Parent row 4 >
-1 row found.
-```
+    ```
+    < 4, Parent row 4 >
+    1 row found.
+    ```
 
-Even though the table was empty, the query returns a result!
+    Even though the table was empty, the query returns a result!
 
-```
-<copy>
-cachegroups ttcacheadm.cg_parent_child;
-</copy>
-```
-```
-Cache Group TTCACHEADM.CG_PARENT_CHILD:
+    ```
+    <copy>
+    cachegroups ttcacheadm.cg_parent_child;
+    </copy>
+    ```
+    ```
+    Cache Group TTCACHEADM.CG_PARENT_CHILD:
 
-  Cache Group Type: Read Only (Dynamic)
-  Autorefresh: Yes
-  Autorefresh Mode: Incremental
-  Autorefresh State: On
-  Autorefresh Interval: 2 Seconds
-  Autorefresh Status: ok
-  Aging: LRU on
+    Cache Group Type: Read Only (Dynamic)
+    Autorefresh: Yes
+    Autorefresh Mode: Incremental
+    Autorefresh State: On
+    Autorefresh Interval: 2 Seconds
+    Autorefresh Status: ok
+    Aging: LRU on
 
-  Root Table: APPUSER.PARENT
-  Table Type: Read Only
+    Root Table: APPUSER.PARENT
+    Table Type: Read Only
 
 
-  Child Table: APPUSER.CHILD
-  Table Type: Read Only
+    Child Table: APPUSER.CHILD
+    Table Type: Read Only
 
-1 cache group found.
+    1 cache group found.
 
-```
-Note that the Autorefresh State is now set to _On_ because a background dynamic load operation happened on execution of the above select statement.
+    ```
+    Note that the Autorefresh State is now set to _On_ because a background dynamic load operation happened on execution of the above select statement.
 
 4. Next, examine the contents of both tables again:
 
-```
-<copy>
-select * from parent;
-</copy>
-```
+    ```
+    <copy>
+    select * from parent;
+    </copy>
+    ```
 
-```
-< 4, Parent row 4 >
-1 row found.
-```
+    ```
+    < 4, Parent row 4 >
+    1 row found.
+    ```
 
-```
-<copy>
-select * from child;
-</copy>
-```
+    ```
+    <copy>
+    select * from child;
+    </copy>
+    ```
 
-```
-< 4, 4, P4,C4 >
-< 5, 4, P4,C5 >
-< 6, 4, P4,C6 >
-3 rows found.
-```
+    ```
+    < 4, 4, P4,C4 >
+    < 5, 4, P4,C5 >
+    < 6, 4, P4,C6 >
+    3 rows found.
+    ```
 
-Observe that the row that was queried now exists in the PARENT table and the three related rows also exist in the CHILD table. TimesTen performed a dynamic load operation for the cache instance. 
+    Observe that the row that was queried now exists in the PARENT table and the three related rows also exist in the CHILD table. TimesTen performed a dynamic load operation for the cache instance. 
 
-Now that these rows exist in the cache, they will satisfy future read requests. If any of these rows are modified in Oracle, the TimesTen autorefresh mechanism will capture the changes and propagate them to the cache.
+    Now that these rows exist in the cache, they will satisfy future read requests. If any of these rows are modified in Oracle, the TimesTen autorefresh mechanism will capture the changes and propagate them to the cache.
 
-Let’s try something a little more sophisticated. 
+    Let’s try something a little more sophisticated. 
 
 5. Query a row in the CHILD table with a join back to the PARENT table:
 
-```
-<copy>
-select p.parent_id, p.parent_c1, c.child_c1 from parent p, child c where c.child_id = 2 and p.parent_id = c.parent_id;
-</copy>
-```
+    ```
+    <copy>
+    select p.parent_id, p.parent_c1, c.child_c1 from parent p, child c where c.child_id = 2 and p.parent_id = c.parent_id;
+    </copy>
+    ```
 
-```
-< 1, Parent row 1, P1,C2 >
-1 row found.
-```
+    ```
+    < 1, Parent row 1, P1,C2 >
+    1 row found.
+    ```
 
 4. Now check again to see the contents of both tables.
 
-```
-<copy>
-select * from parent;
-</copy>
-```
+    ```
+    <copy>
+    select * from parent;
+    </copy>
+    ```
 
-```
-< 1, Parent row 1 >
-< 4, Parent row 4 >
-2 rows found.
-```
+    ```
+    < 1, Parent row 1 >
+    < 4, Parent row 4 >
+    2 rows found.
+    ```
 
-```
-<copy>
-select * from child;
-</copy>
-```
+    ```
+    <copy>
+    select * from child;
+    </copy>
+    ```
 
-```
-< 1, 1, P1,C1 >
-< 2, 1, P1,C2 >
-< 4, 4, P4,C4 >
-< 5, 4, P4,C5 >
-< 6, 4, P4,C6 >
-5 rows found.
-```
+    ```
+    < 1, 1, P1,C1 >
+    < 2, 1, P1,C2 >
+    < 4, 4, P4,C4 >
+    < 5, 4, P4,C5 >
+    < 6, 4, P4,C6 >
+    5 rows found.
+    ```
 
-Here you queried against a specific *child_id* value and joined back to the parent table. TimesTen dynamically loaded all the expected cache instances. Dynamic caching can be very useful for specific use cases.
+    Here you queried against a specific *child_id* value and joined back to the parent table. TimesTen dynamically loaded all the expected cache instances. Dynamic caching can be very useful for specific use cases.
 
 5. Disconnect from the cache.
 
-```
-<copy>
-quit
-</copy>
-```
+    ```
+    <copy>
+    quit
+    </copy>
+    ```
 
-```
-Disconnecting...
-Done.
-```
+    ```
+    Disconnecting...
+    Done.
+    ```
 
 You can now **proceed to the next lab**. 
 

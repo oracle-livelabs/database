@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## About this workshop
 
 *Database In-Memory* features a highly optimized In-Memory Column Store (IM column store) maintained alongside the existing row formatted buffer cache as depicted below. The primary purpose of the IM column store is to accelerate column-oriented data accesses made by analytics operations.
@@ -20,7 +26,7 @@ Watch the video below for an overview of Oracle In-Memory.
 There are four basic architectural elements of the column store that enable orders of magnitude faster analytic query processing:  
 
 1. *Compressed columnar storage*: Storing data contiguously in compressed column units allows an analytic query to scan only data within the required columns, instead of having to skip past unneeded data in other columns as would be needed for a row major format. Columnar storage therefore allows a query to perform highly efficient sequential memory references while compression allows the query to optimize its use of the available system (processor to memory) bandwidth.
-   ![In-Memory dual format](./images/DBIM.png " ")
+   ![In-Memory dual format](./images/dbim.png " ")
 
 2. *Vector Processing*: In addition to being able to process data sequentially, column organized storage also enables the use of vector processing. Modern CPUs feature highly parallel instructions known as SIMD or vector instructions, for example Intel AVX. These instructions can process multiple values in one instruction –for instance, they allow multiple values to be compared with a given value, for example find sales with State = “California”, in one instruction. Vector processing of compressed columnar data further multiplies the scan speed obtained with columnar storage, resulting in scan speeds exceeding tens of billions of rows per second, per CPU core.
 

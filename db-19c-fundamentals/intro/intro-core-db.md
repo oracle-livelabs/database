@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Welcome to the Core Database section of the workshop, where we will be exploring some advanced features of Oracle database management system. In this lab, we will be focusing on two key topics: Index Compression and Automatic Indexing. These features are designed to help you optimize your database performance, reduce storage requirements, and enhance the overall efficiency of your Oracle database.
 
 Index compression is a powerful technique that helps you reduce the storage space required for database indexes. It enables you to compress your indexes to a fraction of their original size, without sacrificing performance. We will explore the various types of index compression techniques available in Oracle, and demonstrate how to use them effectively to improve query performance.

@@ -13,6 +13,11 @@ The objective of this lab is to familiarize you with JSON Schema validation in O
 - Access to Oracle Database 23ai.
 - Basic understanding of SQL is helpful.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Understanding JSON Schema Validation
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.

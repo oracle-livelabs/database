@@ -1,6 +1,9 @@
 # Connect to Database and Creating Your Migration User
 
 ## Introduction
+
+Estimated Time: TODO - x minutes
+
 In this lab, you will connect to your source database as system database administrator, create two database users to complete the migration, bestow them with the necessary privileges, and create a sample table to track through the migration.
 
 The purpose of creating a database user and loading it with sample data is to simulate the user and data we are looking to migrate in a practical application.
@@ -11,6 +14,11 @@ Disclaimer: The Zero Downtime Migration service host should be a dedicated syste
 
 Estimate Lab Time: 15 minutes
 
+
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
 
 ## Task 1: Connect to Your Database
 1. Verify that you are user 'opc' in your instance.
@@ -45,7 +53,7 @@ Estimate Lab Time: 15 minutes
     </copy>
     ```
 
-    ![Stream Status Before](./images/stream-status-before.PNG)
+    ![Stream Status Before](./images/stream-status-before.png)
 
     Set the parameter:
     ```
@@ -61,7 +69,7 @@ Estimate Lab Time: 15 minutes
     </copy>
     ```
 
-    ![Stream Status After](./images/stream-status-after.PNG)
+    ![Stream Status After](./images/stream-status-after.png)
 
 6. Switch the session of your container database to ORCLPDB.
 

@@ -34,17 +34,17 @@ For this task you need the following info from previous steps:
 * Source DB CDB Service Name
 * Database Administrator Password
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
+1. In the OCI Console Menu ![Image](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![database connection navigation](images/db-connection.png =50%x*)
+    ![database connection navigation](images/db-connection.png =50%x*)
 
 2. Select your assigned compartment. Identify the value assigned to you in the **Reservation Information** then in OCI go to the **Compartment** field and look for the value under Root / Livelabs, an example is displayed below:
 
-  ![Screenshot to select compartment](images/compartment-selection.png =50%x*)
+    ![Screenshot to select compartment](images/compartment-selection.png =50%x*)
 
 3. Press **Create connection**
 
-  ![Screenshot of click create connection](images/click-create-db.png =50%x*)
+    ![Screenshot of click create connection](images/click-create-db.png =50%x*)
 
 4. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourceCDB**
@@ -52,7 +52,7 @@ For this task you need the following info from previous steps:
     - Vault: **DMSVault**
     - Encryption Key: **DMSKey**
 
-  ![Screenshot of database details and click next](images/database-details-cdb.png =50%x*)
+    ![Screenshot of database details and click next](images/database-details-cdb.png =50%x*)
 
 5. On the page Connection details, fill in the following entries, otherwise leave defaults:
     - Database details, select **Enter database connection details**
@@ -67,7 +67,7 @@ For this task you need the following info from previous steps:
 
 6. Press **Create**
 
-  ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
+    ![Screenshot of  confirm create connection](images/connection-details-cdb.png =50%x*)
 
 7. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
 
@@ -83,13 +83,13 @@ For this task you need the following info from previous steps:
 * Source DB PDB Service Name
 * Database Administrator Password
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
+1. In the OCI Console Menu ![Image](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Database Connections navigation](images/db-connection.png =50%x*)
+    ![Screenshot of Database Connections navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection-pdb.png =50%x*)
+    ![Screenshot of click create connection](images/create-connection-pdb.png =50%x*)
 
 3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
@@ -99,7 +99,7 @@ For this task you need the following info from previous steps:
     
 4. Press **Next**
 
-  ![Screenshot of database details and click next](images/database-details-pdb.png =50%x*)
+    ![Screenshot of database details and click next](images/database-details-pdb.png =50%x*)
 
 5. On the page Connection details, fill in the following entries, otherwise leave defaults:
     - Database details, select **Enter database connection details**
@@ -114,7 +114,7 @@ For this task you need the following info from previous steps:
 
 6. Press **Create**
 
-  ![Screenshot of  confirm create connection](images/connection-details-pdb.png =50%x*)
+    ![Screenshot of  confirm create connection](images/connection-details-pdb.png =50%x*)
 
 7. Wait for connection to get created and press **Test connection** to confirm that your Database Connection details are correct
 
@@ -128,13 +128,13 @@ For this task you need the following info from previous steps:
 For this task you need the following info from previous steps:
 * Administrator Password
 
-1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
+1. In the OCI Console Menu ![Image](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-  ![Screenshot of Database Connections navigation](images/db-connection.png =50%x*)
+    ![Screenshot of Database Connections navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-  ![Screenshot of click create connection](images/create-connection-adb.png =50%x*)
+    ![Screenshot of click create connection](images/create-connection-adb.png =50%x*)
 
 3. On the page General information, fill in the following entries, otherwise leave defaults:
     - Name: **TargetADB**
@@ -144,7 +144,7 @@ For this task you need the following info from previous steps:
 
 4. Press **Next**
 
-  ![Screenshot of press next after entering details](images/db-connection-adb.png =50%x*)
+    ![Screenshot of press next after entering details](images/db-connection-adb.png =50%x*)
 
 5. On the page Connection details, fill in the following entries, otherwise leave defaults:
     - Database: **TargetADB#####**
@@ -158,9 +158,9 @@ For this task you need the following info from previous steps:
 
 6. Press **Create**
 
-  ![Screenshot of confirm db connection](images/confirm-db-connection-adb.png =50%x*)
+    ![Screenshot of confirm db connection](images/confirm-db-connection-adb.png =50%x*)
 
-  Please wait for all Database Connection resources to display as **Active** before proceeding to the next task.
+    Please wait for all Database Connection resources to display as **Active** before proceeding to the next task.
 
 7. Press **Test connection** to confirm that your Database Connection details are correct
 
@@ -172,7 +172,7 @@ For this task you need the following info from previous steps:
 
 ## Task 4: Create Migration
 
-  1. In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
+  1. In the OCI Console Menu ![Image](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Migrations**
 
   ![Screenshot of Migrations navigation](images/migration-create.png =50%x*)
 
@@ -217,3 +217,8 @@ You may now [proceed to the next lab](#next).
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
 * **Last Updated By/Date** - Jorge Martinez, Product Manager, May 2025
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

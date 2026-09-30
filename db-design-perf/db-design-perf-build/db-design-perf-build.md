@@ -124,8 +124,8 @@ Oracle Cloud Infrastructure Cloud (OCI) Shell is a web browser-based terminal ac
 
     TNS Locations Used
     ------------------
-    1.  Wallet_your-DB-name.zip
-    2.  /home/mcdonald_c
+    1. Wallet_your-DB-name.zip
+    2. /home/mcdonald_c
 
     Available TNS Entries
     ---------------------

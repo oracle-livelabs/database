@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 ## About this Workshop
 
 HeatWave is a fully managed database service that lets developers quickly
@@ -38,7 +41,7 @@ and explain machine learning models within MySQL HeatWave.
 - Access to dozens of additional Oracle Cloud Services enabling organizations to embrace the shift to the cloud.
 
 **Lab Setup**
-  ![INTRO](./images/heatwave-ML-architecture-compute.png "heatwave architecture ")
+  ![INTRO](./images/heatwave-ml-architecture-compute.png "heatwave architecture ")
 
 ### Objectives
 

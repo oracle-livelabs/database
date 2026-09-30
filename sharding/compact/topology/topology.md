@@ -182,7 +182,7 @@ Shards can be hosted anywhere an Oracle database can be hosted. Oracle Sharding 
 
 For more details see [Oracle Sharding documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/19/shard/oracle-sharding-architecture-and-concepts1.html#GUID-AD61049F-4A94-4298-A8CD-8F2536399CAD)
 
-1.  Run in the terminal as **opc** user and connect to the shard1 DB.
+1. Run in the terminal as **opc** user and connect to the shard1 DB.
 
     ```
     <copy>
@@ -202,11 +202,11 @@ For more details see [Oracle Sharding documentation] (https://docs.oracle.com/en
 
     ```
     <copy>
-   set pagesize 300;
-   set linesize 300;
-   col OBJECT_NAME for a30;
-   col Sharding for a30;
-   select OBJECT_NAME,SHARDED as Sharding from user_objects where SHARDED='Y' and OBJECT_NAME in ('PRODUCTS','REVIEWS','CUSTOMER','CART');
+    set pagesize 300;
+    set linesize 300;
+    col OBJECT_NAME for a30;
+    col Sharding for a30;
+    select OBJECT_NAME,SHARDED as Sharding from user_objects where SHARDED='Y' and OBJECT_NAME in ('PRODUCTS','REVIEWS','CUSTOMER','CART');
     </copy>
     ```
 
@@ -258,9 +258,9 @@ Run each SQL query by logging in to the shard catalog database as well as one of
 
     ![<application queries>](./images/appquery.jpg " ")
 
-**Run Application Queries on sharding Database.**
+    **Run Application Queries on sharding Database.**
 
-Run the below each sql query by login into Catalog database as well as one of the shard database(shard3 in this case). You can notice the difference of row count on Shard catalog vs shard-DB (porcl1cdb\_porcl1pdb, porcl2cdb\_porcl2pdb and porcl3cdb\_porcl3pdb).
+    Run the below each sql query by login into Catalog database as well as one of the shard database(shard3 in this case). You can notice the difference of row count on Shard catalog vs shard-DB (porcl1cdb\_porcl1pdb, porcl2cdb\_porcl2pdb and porcl3cdb\_porcl3pdb).
 
 1. Text search on Products (JSON) table with auto corrections: Oracle Fuzzy matching is a method that provides an improved ability to process word-based matching queries to find matching phrases or sentences from a database.
 
@@ -312,7 +312,7 @@ Run the below each sql query by login into Catalog database as well as one of th
 
     ![<average review>](./images/average.jpg " ")
 
-5.  Let's try one query at **shard2** database. Open another terminal and execute below as **opc** user to connect to **shard2**.
+5. Let's try one query at **shard2** database. Open another terminal and execute below as **opc** user to connect to **shard2**.
 
     ```
     <copy>
@@ -428,14 +428,14 @@ You may now [proceed to the next lab](#next).
 ## Rate this Workshop
 When you are finished don't forget to rate this workshop!  We rely on this feedback to help us improve and refine our LiveLabs catalog.  Follow the steps to submit your rating.
 
-1.  Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
-2.  Click on the **Brown Button** to re-access the workshop  
+1. Go back to your **workshop homepage** in LiveLabs by searching for your workshop and clicking the Launch button.
+2. Click on the **Brown Button** to re-access the workshop  
 
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
+    ![Image](https://oracle-livelabs.github.io/common/labs/cloud-login/images/workshop-homepage-2.png " ")
 
-3.  Click **Rate this workshop**
+3. Click **Rate this workshop**
 
-    ![](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
+    ![Image](https://oracle-livelabs.github.io/common/labs/cloud-login/images/rate-this-workshop.png " ")
 
 If you selected the **Green Button** for this workshop and still have an active reservation, you can also rate by going to My Reservations -> Launch Workshop.
 

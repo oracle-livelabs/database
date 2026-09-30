@@ -29,6 +29,11 @@ Estimated Lab Time: 15 minutes
 
 *Bring on the challenge! **Let’s crush it!***
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Implement Analytics Page
 
 When you check the Analytics page, you will find it locked, not working. In this challenge you will unlock it.

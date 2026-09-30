@@ -7,6 +7,11 @@ In this lab, we will create a compartment for all the OCI resources required to 
 
 Estimated Time: 2 minutes
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Create compartment
 
 1. Log in to **OCI** and click on the **Hamburger Menu**![OCI Menu](images/hamburger.png) at the top left corner of the OCI console, and type **compartment** in the search box. Click on the **Compartments** in the search result

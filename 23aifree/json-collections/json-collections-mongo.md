@@ -34,32 +34,32 @@ Then:
 
 1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
-	![DB Actions](images/dbaction1.png)
+    	![DB Actions](images/dbaction1.png)
 
 
 2. Below you can find the Database Actions homepage.
 
-	![Homepage Database Actions](./images/homepage-dbactions.png)
+    	![Homepage Database Actions](./images/homepage-dbactions.png)
 
 
 3. On the homepage, click the JSON tile under Development.
 
-	![Homepage Development JSON](./images/homepage-json.png)
+    	![Homepage Development JSON](./images/homepage-json.png)
 
 4. To create a collection, click **Create Collection**.
-	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
+    	A tour of this section may automatically begin when the page loads. You can click `next` to continue through the tour and return to this page.
 
-	![JSON Create Collection](./images/json-create-collection.png)
+    	![JSON Create Collection](./images/json-create-collection.png)
 
 5. In the field **Collection Name**, provide the name **movies**. Then click **Create**.
 
-	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
+    	Note that the collection name is case-sensitive. You must enter products in all lower-case, don't use MOVIES or Movies.
 
-	![New Collection: movies](./images/collection-name.png)
+    	![New Collection: movies](./images/collection-name.png)
 
 6. A notification pops up that displays **movies** collections has been created.
 
-	![New collection notification](./images/popup.png)
+    	![New collection notification](./images/popup.png)
 
 9. Click the refresh button to verify the **movies** collection has been created.
 
@@ -69,32 +69,32 @@ Then:
 
 1. Double click **movies** collection to show the **JSON-movies** worksheet. Click the *New JSON Document* button.
 
-	![new document button](./images/new-json-doc.png)
+    	![new document button](./images/new-json-doc.png)
 
 3. A **New JSON Document** panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
-	```
-	<copy>
-	{
-		"_id": 100,
-		"type":"movie",
-		"title": "Coming to America",
-		"format": "DVD",
-		"condition": "acceptable",
-		"price": 5,
-		"comment": "DVD in excellent condition, cover is blurred",
-		"starring": ["Eddie Murphy", "Arsenio Hall", "James Earl Jones", "John Amos"],
-		"year": 1988,
-		"decade": "80s"
-	}
-	</copy>
-	```
+    	```
+    	<copy>
+    	{
+    		"_id": 100,
+    		"type":"movie",
+    		"title": "Coming to America",
+    		"format": "DVD",
+    		"condition": "acceptable",
+    		"price": 5,
+    		"comment": "DVD in excellent condition, cover is blurred",
+    		"starring": ["Eddie Murphy", "Arsenio Hall", "James Earl Jones", "John Amos"],
+    		"year": 1988,
+    		"decade": "80s"
+    	}
+    	</copy>
+    	```
 
-	![add new document](./images/json-object.png)
+    	![add new document](./images/json-object.png)
 
 4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
-	![new document confirmation popup](./images/popup-json-doc.png)
+    	![new document confirmation popup](./images/popup-json-doc.png)
 
 5. Let's repeat this with the following documents:
 
@@ -154,48 +154,48 @@ Now let's issue some simple queries on the **movies** collection we just created
 
 1. Copy and paste the following queries into the worksheet and click the *Run Query* button to run a query.
 
-2.  Lookup by one value:
+2. Lookup by one value:
 
-	Here, it displays the document whose id value is 101.
+    	Here, it displays the document whose id value is 101.
 
-	```
-	<copy>
-	{"_id":101}
-	</copy>
-	```
-	![QBE doc with id 101](./images/qbe-one-value.png)
-	![QBE id 101 results](./images/qbe-one-value-result.png)
+    	```
+    	<copy>
+    	{"_id":101}
+    	</copy>
+    	```
+    	![QBE doc with id 101](./images/qbe-one-value.png)
+    	![QBE id 101 results](./images/qbe-one-value-result.png)
 
-3.	Find all DVDs:
+3. Find all DVDs:
 
-	Running the query will display two documents with format DVD.
+    	Running the query will display two documents with format DVD.
 
-	```
-	<copy>
-	{"format":"DVD"}
-	</copy>
-	```
-	![QBE DVD results](./images/qbe-dvd-result.png)
+    	```
+    	<copy>
+    	{"format":"DVD"}
+    	</copy>
+    	```
+    	![QBE DVD results](./images/qbe-dvd-result.png)
 
-4.	Find all non-movies:
+4. Find all non-movies:
 
-	This query displays the documents that are not of type - movies, which is currently nothing.
+    	This query displays the documents that are not of type - movies, which is currently nothing.
 
-	```
-	<copy>
-	{"type":{"$ne":"movie"}}
-	</copy>
-	```
-	![QBE for "not movies" result](./images/qbe-not-movies-result.png)
+    	```
+    	<copy>
+    	{"type":{"$ne":"movie"}}
+    	</copy>
+    	```
+    	![QBE for "not movies" result](./images/qbe-not-movies-result.png)
 
-5.	Find documents whose condition value contains "new", which means just document (with id) 101.
+5. Find documents whose condition value contains "new", which means just document (with id) 101.
 
-	```
-	<copy>
-	{"condition":{"$like":"%new%"}}
-	</copy>
-	```
-	![QBE condition is new result](./images/qbe-new-result.png)
+    	```
+    	<copy>
+    	{"condition":{"$like":"%new%"}}
+    	</copy>
+    	```
+    	![QBE condition is new result](./images/qbe-new-result.png)
 
 6. Find bargains of all products costing 5 and choose only DVD format documents:
 
@@ -216,19 +216,19 @@ An index will aid fast access to an item (for example speeding up access via the
 
 More generally, constraints can be used to check the data being entered for various aspects.
 
-1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
+1. Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
-	![SQL navigation](./images/development-sql.png)
+    	![SQL navigation](./images/development-sql.png)
 
 2. We want to ensure that our JSON data satisfies minimal data quality, so we will create a constraint to enforce a couple of mandatory fields and their data types. **Enforcing a JSON schema is new functionality in Oracle Database 23ai.**
 
-	To quickly recap what the documents look like, let's look at the first JSON document quickly. (Don't worry, we will have a closer look into the SQL world with JSON later):
-	```
-	<copy>
-	select json_serialize(data pretty) from movies fetch first 1 rows only;
-	</copy>
-	```
-	![Single document in SQL](./images/show-single-json-in-sql.png)
+    	To quickly recap what the documents look like, let's look at the first JSON document quickly. (Don't worry, we will have a closer look into the SQL world with JSON later):
+    	```
+    	<copy>
+    	select json_serialize(data pretty) from movies fetch first 1 rows only;
+    	</copy>
+    	```
+    	![Single document in SQL](./images/show-single-json-in-sql.png)
 
     Now copy and paste the query below in the worksheet and click the *Run query* button to run the SQL query to alter the **movie** table and add constraints.
 
@@ -252,34 +252,34 @@ More generally, constraints can be used to check the data being entered for vari
     }'
     );</copy>
     ```
-	![Create movies constraint in SQL](./images/create-movies-constraint.png)
+    	![Create movies constraint in SQL](./images/create-movies-constraint.png)
 
 3. Add another constraint so that the price cannot be a negative number.
 
-	```
-	<copy>
-	alter table "movies" add constraint no_negative_price
+    	```
+    	<copy>
+    	alter table "movies" add constraint no_negative_price
     check (
             JSON_EXISTS(data, '$?(@.price.number() >= 0)')
           );
-	</copy>
-	```
-	![add constraint](./images/sql-constraint-2.png)
+    	</copy>
+    	```
+    	![add constraint](./images/sql-constraint-2.png)
 
-	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.price.number() >= 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
+    	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.price.number() >= 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
 4. Once the **movies** table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
 
-	![JSON navigation](./images/development-json.png)
+    	![JSON navigation](./images/development-json.png)
 
 5. Validate that the following documents cannot get inserted, since fields are missing or are of wrong type.
 
-	Click the *New JSON Document* icon, copy and paste the following query in the worksheet and click *Create*.
+    	Click the *New JSON Document* icon, copy and paste the following query in the worksheet and click *Create*.
 
-	This throws the error "Unable to add new JSON document" since the following document has missing fields and incorrect data types.
+    	This throws the error "Unable to add new JSON document" since the following document has missing fields and incorrect data types.
 
-	```
-	<copy>
+    	```
+    	<copy>
     {
     "_id": "upc9800432" ,
     "title": "Love Everywhere",
@@ -288,16 +288,16 @@ More generally, constraints can be used to check the data being entered for vari
     "genre": "Romance",
     "starring": "tbd"
     }
-	</copy>
-	```
-	![create a not-allowed item](./images/create-wrong-type.png)
-	![constraint error message](./images/wrong-type.png)
+    	</copy>
+    	```
+    	![create a not-allowed item](./images/create-wrong-type.png)
+    	![constraint error message](./images/wrong-type.png)
 
 6. The following document now satisfies all the constraints: the "id" is a unique number, "starring" is an array, it has all required fields, and the price is a positive number.
 
-	```
-	<copy>
-	{
+    	```
+    	<copy>
+    	{
     "_id": 99999 ,
     "title": "Love Everywhere",
     "type": "movie",
@@ -307,10 +307,10 @@ More generally, constraints can be used to check the data being entered for vari
     "genre": "Romance",
     "starring": ["tbd"]
     }
-	</copy>
-	```
-	![create allowed item](./images/create-right-type.png)
-	![doc successfully created](./images/json-doc-created.png)
+    	</copy>
+    	```
+    	![create allowed item](./images/create-right-type.png)
+    	![doc successfully created](./images/json-doc-created.png)
 
 7. Now that was quite cumbersome to figure out the mistakes manually. But there's a better way: you can ask the database for the problems with your payload. Navigating back to the SQL page, you can enter this command to see the errors with your JSON payload. **JSON schema is new functionality in Oracle Database 23ai.**
 
@@ -331,9 +331,9 @@ More generally, constraints can be used to check the data being entered for vari
     /
     </copy>
     ```
-	The output shows you all the violations in detail, so that it is easier to address the issues.
+    	The output shows you all the violations in detail, so that it is easier to address the issues.
 
-	![SQL to find JSON doc problem](./images/sql-shows-schema-error.png)
+    	![SQL to find JSON doc problem](./images/sql-shows-schema-error.png)
 
 8. You may also check the JSON Schema definition in your data dictionary. **JSON schema is new functionality in Oracle Database 23ai.**
 In the SQL tool, run:
@@ -397,13 +397,13 @@ In this section, you will:
 
     ![open terminal in launchpad](../json-install-mongo/images/terminal.png " ")
 
-2.  On a Windows PC:
+2. On a Windows PC:
 
     Press "Run" (Windows-R) and type "cmd.exe". Press enter or click "OK".
 
     ![open command prompt](../json-install-mongo/images/cmd-exe.png " ")
 
-3.  Create and enter a suitable directory. We'll create a directory 'mongosh' under the default home directory, but you can choose to create it elsewhere. For **Mac or Windows**, enter the following commands:
+3. Create and enter a suitable directory. We'll create a directory 'mongosh' under the default home directory, but you can choose to create it elsewhere. For **Mac or Windows**, enter the following commands:
 
     ```
     <copy>
@@ -573,7 +573,7 @@ In this section, you will:
     </if>
 
 
-   You might need to escape some characters as well.
+    You might need to escape some characters as well.
 
 
 

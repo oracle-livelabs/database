@@ -326,7 +326,7 @@ To review the sharding configurations and related information that is owned by t
        1 Y		3      12072	      1 	 5	    2	       0	  0	     2
     ```
 
-6.  Lists the query type and SQL ID.
+6. Lists the query type and SQL ID.
 
     ```
     SQL> select * from SHARDINGADVISOR_QUERYTYPES;
@@ -351,3 +351,8 @@ To review the sharding configurations and related information that is owned by t
    * **Author** - Minqiao Wang, DB Product Management, Dec 2020 
    * **Last Updated By/Date** - Minqiao Wang, Jun 2021
 
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

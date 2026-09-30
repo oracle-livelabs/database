@@ -74,9 +74,9 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-   In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
+    In rare situations, you may the error message shown below. This message indicates that the stack resources have not been successfully provisioned. In such cases, complete **Lab 6: Environment Clean Up** to delete the stack and clean up the resources. Then perform the steps in Lab 2 to recreate the stack.
 
-   ![minikube start error](./images/minikube-start-error.png)
+    ![minikube start error](./images/minikube-start-error.png)
 
 3. Verify that the application has been deployed successfully.
 
@@ -86,11 +86,11 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-   In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed` as shown in the following image.
+    In the output, verify that the `STATUS` of the `sample-xa-app` is `deployed` as shown in the following image.
 
-   **Example output**
+    **Example output**
 
-   ![Helm install success](./images/list-pods.png)
+    ![Helm install success](./images/list-pods.png)
 
 4. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
@@ -100,9 +100,9 @@ Follow the instructions in this section to start Minikube, and then verify that 
     </copy>
     ```
 
-   **Example output**
+    **Example output**
 
-   ![Status of pods in the otmm namespace](./images/pod-status.png)
+    ![Status of pods in the otmm namespace](./images/pod-status.png)
 
 5. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the namespace `oracledb` and their status.
 
@@ -197,7 +197,7 @@ You can skip this task if you have already completed Task 3. This task provides 
     </copy>
     ```
 
-   **Example command to check balance in Department 2**
+    **Example command to check balance in Department 2**
 
     ```text
     <copy>
@@ -290,7 +290,7 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
     </copy>
     ```
 
-   A URL is displayed.
+    A URL is displayed.
 
 3. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali.`
 
@@ -304,7 +304,7 @@ When you started Minikube while performing Task 1, Kiali, Jaeger, and Prometheus
     </copy>
     ```
 
-   A URL is displayed.
+    A URL is displayed.
    
 6. Open the URL in a new tab in your browser to access the Jaeger dashboard. For example, `http://localhost:16686`.
 7. From the **Service** drop-down list, select **istio-ingressgateway.istio-system**.

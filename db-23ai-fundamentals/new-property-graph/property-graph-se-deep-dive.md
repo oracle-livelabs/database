@@ -21,6 +21,11 @@ This lab is just a short overview of the functionality introduced with Property 
 - Basic understanding of SQL is helpful.
 
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Lab Setup
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
@@ -35,20 +40,20 @@ This lab is just a short overview of the functionality introduced with Property 
 
     ```
     <copy>
-  -- USER SQL
-  CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
+    -- USER SQL
+    CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
 
-  -- ADD ROLES
-  GRANT DB_DEVELOPER_ROLE TO DB23AI;
+    -- ADD ROLES
+    GRANT DB_DEVELOPER_ROLE TO DB23AI;
 
-  GRANT CONNECT TO DB23AI;
-  GRANT RESOURCE TO DB23AI;
-  GRANT CONSOLE_DEVELOPER TO DB23AI;
-  GRANT GRAPH_DEVELOPER TO DB23AI;
+    GRANT CONNECT TO DB23AI;
+    GRANT RESOURCE TO DB23AI;
+    GRANT CONSOLE_DEVELOPER TO DB23AI;
+    GRANT GRAPH_DEVELOPER TO DB23AI;
 
 
-  -- REST ENABLE
-  BEGIN
+    -- REST ENABLE
+    BEGIN
       ORDS_ADMIN.ENABLE_SCHEMA(
           p_enabled => TRUE,
           p_schema => 'DB23AI',
@@ -62,21 +67,21 @@ This lab is just a short overview of the functionality introduced with Property 
               ENABLED => TRUE
       );
       commit;
-  END;
-  /
+    END;
+    /
 
-  ALTER USER DB23AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
-  ALTER USER DB23AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
+    ALTER USER DB23AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
+    ALTER USER DB23AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
 
-  -- QUOTA
-  ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
+    -- QUOTA
+    ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
 
     </copy>
     ```
 
 4. Now sign in as the new user. Click on the admin profile in the top right hand of Database Actions and sign out.
 
-  ![log out of our admin user](images/im12.png " ")
+    ![log out of our admin user](images/im12.png " ")
 
 5. Sign in with the username **DB23AI** and password **Oracledb_4U#**
 
@@ -84,7 +89,7 @@ This lab is just a short overview of the functionality introduced with Property 
 
 6. Click SQL to open the SQL editor.
 
-  ![Open SQL with db23ai](images/im20.png " ")
+    ![Open SQL with db23ai](images/im20.png " ")
 
 7. Let's create some tables for our demo and add some data. We'll create a categories and products table. **Click the Copy button below** and paste the code into the SQL Editor. 
 

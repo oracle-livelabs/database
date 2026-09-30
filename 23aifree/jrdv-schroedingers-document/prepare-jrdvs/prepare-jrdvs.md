@@ -84,7 +84,7 @@ This task looks at a few eccentricities you might encounter when creating your o
     - Select the **hol23c\_free** database from the drop-down list in the upper-right-hand corner of the window to connect to your PDB. 
     - Execute the statement. You should receive an error message after the statement executes:
 
-   ![JRDV Failures](./images/jrdv-failures.png)
+    ![JRDV Failures](./images/jrdv-failures.png)
 
 2. What happened here? The JRDV creation syntax appears to be syntactically correct, but yet Oracle Database 23ai would not create the JDRV as specified. The answer is explained rather cryptically in the more detailed error message explanation for **ORA-40895**:
 

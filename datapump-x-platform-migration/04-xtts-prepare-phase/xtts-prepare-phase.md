@@ -411,7 +411,7 @@ The initial restore on target requires the "xtt.properties" and "res.txt" files 
     ![copying rest.txt from source to target](./images/cpy-res-txt-src-trg.png " ")
 
 4. Setting Environment for Initial Restore (TARGET) </br>
-Starting restore:
+    Starting restore:
 
     ```
     <copy>
@@ -538,3 +538,8 @@ You may now *proceed to the next lab*.
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

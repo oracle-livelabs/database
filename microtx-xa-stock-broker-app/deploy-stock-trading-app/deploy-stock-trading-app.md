@@ -305,11 +305,11 @@ When you start Minikube, the PDBs are created and populated with sample data.
     </copy>
     ```
 
-   In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
+    In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
 
-   **Example output**
+    **Example output**
 
-   ![Helm install success](./images/app-deployed.png)
+    ![Helm install success](./images/app-deployed.png)
 
 2. Verify that all resources, such as pods and services, are ready. Run the following command to retrieve the list of resources in the namespace `otmm` and their status.
 
@@ -319,9 +319,9 @@ When you start Minikube, the PDBs are created and populated with sample data.
     </copy>
     ```
 
-   **Example output**
+    **Example output**
 
-   ![Status of pods in the otmm namespace](./images/get-pods-status.png)
+    ![Status of pods in the otmm namespace](./images/get-pods-status.png)
 
 3. Verify that the database instance is running. The database instance is available in the `oracledb` namespace.  Run the following command to retrieve the list of resources in the `oracledb` namespace and their status.
 
@@ -377,7 +377,7 @@ The Bank and Stock-Trading Application console uses Keycloak to authenticate use
 5. Sign in to Keycloak with the initial administrator username `admin` and password `admin`. After logging in, reset the password for the `admin` user. For information about resetting the password, see the Keycloak documentation.
 
 6. Select the **MicroTx-BankApp** realm, and then click **Users** to view the list of users in the `MicroTx-BankApp` realm. The `MicroTx-BankApp` realm is preconfigured with these default user names.
-   ![Dialog box to view the list of Users](./images/keycloak-users.png)
+    ![Dialog box to view the list of Users](./images/keycloak-users.png)
 
 7. Set the password for each user. For information about providing credentials for users, see the Keycloak documentation.
 
@@ -461,11 +461,11 @@ Install the Bank and Stock-Trading application in the `otmm` namespace, where yo
     </copy>
     ```
 
-   Where, `bankapp` is the name of the application that you want to install. You can provide another name to the installed application.
+    Where, `bankapp` is the name of the application that you want to install. You can provide another name to the installed application.
 
-   In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
+    In the output, verify that the `STATUS` of the `bankapp` is `deployed`.
 
-   **Example output**
+    **Example output**
 
     ```
     NAME: bankapp
@@ -535,7 +535,7 @@ Run the following commands to deploy Kiali and Jaeger in a Minikube cluster.
     </copy>
     ```
 
-   From the output, note down the URL. This is the URL on which you can access the Kiali dashboard in a browser. For example, `http://localhost:20001/kiali`.
+    From the output, note down the URL. This is the URL on which you can access the Kiali dashboard in a browser. For example, `http://localhost:20001/kiali`.
 
 5. Start the Jaeger Dashboard. Run the following command in a new terminal. Ensure that you leave this terminal open. If a new browser opens, close the browser.
 

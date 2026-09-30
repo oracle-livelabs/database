@@ -23,11 +23,11 @@ In this lab, you will:
 
 1. After you log in, the OCI console will be available.
 
-   ![Oracle Cloud Console](images/oracle-cloud.png)
+    ![Oracle Cloud Console](images/oracle-cloud.png)
 
 2. Open the **Navigation** menu in the upper left and under the **Oracle Database**, click on **Autonomous Database**.
 
-  ![Oracle Menu](images/oracle-cloud-adb.png)
+    ![Oracle Menu](images/oracle-cloud-adb.png)
 
 3. The **Autonomous Database** page should be displayed with the pre-provisioned database.
 
@@ -44,7 +44,7 @@ In this lab, you will:
 
 1. On your ADB page, in the **Network** section, access the *Edit* button of the **Access control list**.
 
-  ![Enable MongoAPI step 1](images/enable-mongo-step1.png)
+    ![Enable MongoAPI step 1](images/enable-mongo-step1.png)
 
 2. The **Edit access control list** page will open. From the **IP notation type** choose **IP address** and click on the **Add my IP address** button. Then click **Save**. After the database has processed the changed, the access control list should be now *Enabled*. MongoDB API
 

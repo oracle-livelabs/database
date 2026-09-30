@@ -117,33 +117,33 @@ The primary file responsible for this is `generate_embeddings.php` in the `rag_s
 2. **Film Selection**: It queries the database for films that don't yet have embeddings (where `vector_embedding IS NULL`), limiting to 1000 films at a time to manage processing load.
 
 3. **Text Representation**: For each film, the script creates a comprehensive text representation using the `create_film_text()` function, which combines:
-   - Film title
-   - Description
-   - Release year
-   - Rating
-   - Categories
-   - Additional semantic information about audience suitability (e.g., whether it's family-friendly)
+    - Film title
+    - Description
+    - Release year
+    - Rating
+    - Categories
+    - Additional semantic information about audience suitability (e.g., whether it's family-friendly)
 
 4. **OpenAI API Call**: The script sends this text representation to OpenAI's embedding API using the `generate_embedding()` function from `vector_functions.php`. It specifically uses the `text-embedding-3-small` model.
 
 5. **Vector Storage**: Upon receiving the embedding (a vector of floating-point numbers), the script converts it to a string format and stores it in the database using MySQL's `STRING_TO_VECTOR` function:
 
-   ```markdown
-   $vector_str = "[" . implode(",", $embedding) . "]";
-   $stmt = $conn->prepare("
+    ```markdown
+    $vector_str = "[" . implode(",", $embedding) . "]";
+    $stmt = $conn->prepare("
        UPDATE film 
        SET vector_embedding = STRING_TO_VECTOR(?)
        WHERE film_id = ?
-   ");
-   ```
+    ");
+    ```
 
 6. **Rate Limiting**: The script includes a small delay between processing films to avoid hitting API rate limits.
 
 7. **Error Handling**: Comprehensive error logging is implemented throughout the process to capture any issues during embedding generation.
 
-The embeddings serve as semantic representations of the films, capturing their meaning in a high-dimensional vector space. This allows the application to perform semantic searches later - when a user asks about a film, their query is also converted to an embedding, and the system finds films with similar embeddings, effectively matching based on meaning rather than just keywords.
+    The embeddings serve as semantic representations of the films, capturing their meaning in a high-dimensional vector space. This allows the application to perform semantic searches later - when a user asks about a film, their query is also converted to an embedding, and the system finds films with similar embeddings, effectively matching based on meaning rather than just keywords.
 
-These embeddings power the RAG (Retrieval-Augmented Generation) system, which enhances the AI's responses with relevant information from the database, making it more accurate and informative when discussing films.
+    These embeddings power the RAG (Retrieval-Augmented Generation) system, which enhances the AI's responses with relevant information from the database, making it more accurate and informative when discussing films.
 
 ### The RAG Pipeline Flow
 
@@ -164,18 +164,18 @@ The application primarily implements vector similarity using PHP functions:
 
 1. **API-Based Embeddings and PHP-Based Similarity**: The `vector_functions.php` file contains functions for generating embeddings via the OpenAI API and calculating cosine similarity in PHP. The application retrieves vector embeddings from MySQL and performs similarity calculations in PHP code rather than using database-native vector operations.
 
-The current implementation in `rag_api.php` is configured to always use vector search.
+    The current implementation in `rag_api.php` is configured to always use vector search.
 
-The application uses cURL for API calls with proper error handling and logging:
+    The application uses cURL for API calls with proper error handling and logging:
 
-```markdown
-// Example of error handling in the cURL implementation
-if (curl_errno($ch)) {
+    ```markdown
+    // Example of error handling in the cURL implementation
+    if (curl_errno($ch)) {
     error_log("[RAG] cURL error: " . curl_error($ch));
     curl_close($ch);
     return false;
-}
-```
+    }
+    ```
 
 ### Development Considerations
 
@@ -349,14 +349,14 @@ When running the FilmRAG application, you might need to check the PHP error logs
       ```bash
       <copy>sudo tail -f /var/log/php-fpm/www-error.log</copy>
       ```
-   This command will display new error messages as they occur, which is useful for debugging while actively using the application.
+    This command will display new error messages as they occur, which is useful for debugging while actively using the application.
 
 2. Clear the error log if it becomes too large or cluttered:
 
       ```bash
       <copy>sudo truncate -s 0 /var/log/php-fpm/www-error.log</copy>
       ```
-   This command will empty the error log file without deleting it, giving you a clean slate for new error messages.
+    This command will empty the error log file without deleting it, giving you a clean slate for new error messages.
 
 3. These commands are particularly helpful when:
 
@@ -370,7 +370,7 @@ The application is designed to log detailed error information, which can help id
 ## Task 5: Run and test MySQL Chatbot / RAG Application 
 
 1. Run Script to generate film embeddings  
-   Go to the Application folder
+    Go to the Application folder
 
     ```bash
     <copy>cd /var/www/html</copy>
@@ -399,16 +399,16 @@ The application is designed to log detailed error information, which can help id
 
 3. Test the application by clicking the "Sample Prompts" menu. Select a prompt and hit _Send_
 
-   The sample prompts are organized into different categories:
-   - Basic Queries
-   - Genre-Specific Queries
-   - Semantic Search Queries
-   - Thematic Queries
-   - Complex Queries
+    The sample prompts are organized into different categories:
+    - Basic Queries
+    - Genre-Specific Queries
+    - Semantic Search Queries
+    - Thematic Queries
+    - Complex Queries
 
 4. **Try your own testing and have a little fun**
 
-   Here are some example queries to try:
+    Here are some example queries to try:
       - What movie is about a battle between a cow and a waitress?
       - Tell me about the movie ALIEN CENTER?
       - Click "New Chat" to start a fresh conversation

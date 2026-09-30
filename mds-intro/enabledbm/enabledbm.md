@@ -36,6 +36,10 @@ In this lab, you will be guided through the following steps:
 * An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
 * An active MySQL HeatWave Service DB System
 
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Verify Database Management is enabled for MySQL HeatWave 
 
 By default, the service is enabled during the provisioning of your MySQL HeatWave deployment, but you can enable the service from the MySQL HeatWave DB system details page if not already enabled.  Once enabled, you will have additional monitoring capabilities including a fleet overview of your MySQL HeatWave deployments and Performance Hub monitoring for database systems.
@@ -46,12 +50,12 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
 2. In the DB systems section, select **HeatWave_DB**.
     ![Database list](./images/mysql-list.png "DB System list")
 
-3.	Verify Database Management is enabled in the Associated services section of the DB system information.
+3. Verify Database Management is enabled in the Associated services section of the DB system information.
 
     **If already enabled, proceed to the next task**
     ![Verify database management](./images/dbsystem-details.png "Verify Database Management")
 
-4.	If Database Management is **not enabled**, click on the **Enable** link to launch the enablement window. 
+4. If Database Management is **not enabled**, click on the **Enable** link to launch the enablement window. 
 
     ![Enable database management](./images/enable-dbm.png "Enable Database Management")
 
@@ -64,18 +68,18 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
 1. Click the **Navigation Menu** in the upper left, navigate to **Observability & Management**, and select **Overview under Database Management**
     ![Select Database Management menu](./images/menu-dbm.png "Select Database Management menu")
 
-2.	The MySQL databases (on the Overview page) displays the total number of MySQL HeatWave deployments in the compartment and the number of MySQL HeatWave deployments for which Database Management is **enabled**
+2. The MySQL databases (on the Overview page) displays the total number of MySQL HeatWave deployments in the compartment and the number of MySQL HeatWave deployments for which Database Management is **enabled**
     ![Overview Database Management](./images/overview-dbm.png "Overview Database Management")
 
 
 
 ## Task 3: Database Management for MySQL HeatWave fleet summary 
 
-1.	On the left pane, click **Diagnostics & Management**  
+1. On the left pane, click **Diagnostics & Management**  
     
     ![Select MySQL HeatWave](./images/select-dbm-fleet.png "Select MySQL HeatWave")
 
-2.	Then, click **HeatWave & MySQL**  to navigate to the MySQL HeatWave fleet summary page. 
+2. Then, click **HeatWave & MySQL**  to navigate to the MySQL HeatWave fleet summary page. 
     ![MySQL HeatWave Fleet](./images/dbm-mysql-fleet.png "MySQL HeatWave Fleet")
 
     The following tiles are available on the fleet summary page:
@@ -89,7 +93,7 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
 
     
 ## Task 4: Monitor a single MySQL HeatWave instance
-1.	Select **HeatWave_DB** from the list of monitored deployments.
+1. Select **HeatWave_DB** from the list of monitored deployments.
     ![Fleet Summary](./images/dbm-mysql-select.png "Fleet Summary")
 
      *	 **MySQL database information section** : We can view information for the MySQL HeatWave DB system as well as associated alarms. The alarms section allows drill down to specific errors to quickly resolve any issues that may be occurring within your database.
@@ -127,10 +131,10 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
     ![Config Variables Section](./images/config-var.png "Config Variables Section")
 
 ## Task 5: Realtime Performance Diagnosis 
-1.	On the top of the **HeatWave_DB** details page, click the **Performance Hub** button.
+1. On the top of the **HeatWave_DB** details page, click the **Performance Hub** button.
     ![Select Performance Hub](./images/hub-select.png "Select Performance Hub")
 
-2.	This will launch the Performance Hub page.  
+2. This will launch the Performance Hub page.  
     * Performance Hub provides a single view of the DB system’s performance and enables you to perform a rapid diagnosis of its issues.
     * It provides holistic performance management capabilities providing a single view of the database performance using a varied set of features, such as Active statement latency, statement count charts, top 100 queries sorted by metrics, and the ability to drill down into specific SQL details.  
     * Additional details for SQL statements include SQL text, execution statistics, row information, temporary table usage, and select and sort counts.  
@@ -138,7 +142,7 @@ By default, the service is enabled during the provisioning of your MySQL HeatWav
 
     ![Performancee Hub Page](./images/performance-hub.png "Performancee Hub Page")
 
-3.	The default sorting for statements is Average statement latency.  Click on the **top SQL** to see additional details on the query.
+3. The default sorting for statements is Average statement latency.  Click on the **top SQL** to see additional details on the query.
 
     ![Performancee Hub Select SQL](./images/performance-hub-select.png "Performancee Hub Select SQL")
 

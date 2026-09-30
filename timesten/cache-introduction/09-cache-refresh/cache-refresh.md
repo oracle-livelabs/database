@@ -51,122 +51,122 @@ Open a _second_ terminal session, as the user **oracle**, in the workshop comput
 
 1. In your _primary_ session connect to the TimesTen cache as the OE schema user:
 
-```
-<copy>
-ttIsql "DSN=sampledb;uid=oe;pwd=oe;OraclePWD=oe"
-</copy>
-```
+    ```
+    <copy>
+    ttIsql "DSN=sampledb;uid=oe;pwd=oe;OraclePWD=oe"
+    </copy>
+    ```
 
-```
-Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
-Type ? or "help" for help, type "exit" to quit ttIsql.
+    ```
+    Copyright (c) 1996, 2022, Oracle and/or its affiliates. All rights reserved.
+    Type ? or "help" for help, type "exit" to quit ttIsql.
 
-connect "DSN=sampledb;uid=oe;pwd=********;OraclePWD=********";
-Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
-(Default setting AutoCommit=1)
-Command>
-```
+    connect "DSN=sampledb;uid=oe;pwd=********;OraclePWD=********";
+    Connection successful: DSN=sampledb;UID=oe;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
+    (Default setting AutoCommit=1)
+    Command>
+    ```
 
 2. In your _secondary_ session, connect to the Oracle database as the OE schema user:
 
-```
-<copy>
-sqlplus oe/oe@orclpdb1
-</copy>
-```
+    ```
+    <copy>
+    sqlplus oe/oe@orclpdb1
+    </copy>
+    ```
 
-```
-SQL*Plus: Release 19.0.0.0.0 - Production on Wed Oct 11 21:56:56 2023
-Version 19.19.0.0.0
+    ```
+    SQL*Plus: Release 19.0.0.0.0 - Production on Wed Oct 11 21:56:56 2023
+    Version 19.19.0.0.0
 
-Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+    Copyright (c) 1982, 2022, Oracle.  All rights reserved.
 
-Last Successful login time: Mon Jan 09 2023 11:30:47 +00:00
+    Last Successful login time: Mon Jan 09 2023 11:30:47 +00:00
 
-Connected to:
-Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-Version 19.3.0.0.0
+    Connected to:
+    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    Version 19.3.0.0.0
 
-SQL>
-```
+    SQL>
+    ```
 
 3. In your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
+    ```
+    <copy>
+    SELECT * FROM promotions ORDER BY promo_id;
+    </copy>
+    ```
 
-```
-< 1, everyday low price >
-< 2, blowout sale >
-2 rows found.
-```
+    ```
+    < 1, everyday low price >
+    < 2, blowout sale >
+    2 rows found.
+    ```
 
 4. In your _secondary_ session (**sqlplus**), check the rows in the OE.PROMOTIONS table in Oracle, then insert a new row and commit:
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
+    ```
+    <copy>
+    SELECT * FROM promotions ORDER BY promo_id;
+    </copy>
+    ```
 
-```
-  PROMO_ID PROMO_NAME
----------- --------------------
-	 1 everyday low price
-	 2 blowout sale
-```
+    ```
+    PROMO_ID PROMO_NAME
+    ---------- --------------------
+    	 1 everyday low price
+    	 2 blowout sale
+    ```
 
-```
-<copy>
-INSERT INTO promotions VALUES ( 3, 'christmas sale' );
-</copy>
-```
+    ```
+    <copy>
+    INSERT INTO promotions VALUES ( 3, 'christmas sale' );
+    </copy>
+    ```
 
-```
-1 row created.
-```
+    ```
+    1 row created.
+    ```
 
-```
-<copy>
-commit;
-</copy>
-```
+    ```
+    <copy>
+    commit;
+    </copy>
+    ```
 
-```
-Commit complete.
-```
+    ```
+    Commit complete.
+    ```
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
+    ```
+    <copy>
+    SELECT * FROM promotions ORDER BY promo_id;
+    </copy>
+    ```
 
-```
-  PROMO_ID PROMO_NAME
----------- --------------------
-	 1 everyday low price
-	 2 blowout sale
-	 3 christmas sale
-```
+    ```
+    PROMO_ID PROMO_NAME
+    ---------- --------------------
+    	 1 everyday low price
+    	 2 blowout sale
+    	 3 christmas sale
+    ```
 
 5. Wait for 2 seconds (the cache refresh interval) and then in your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
+    ```
+    <copy>
+    SELECT * FROM promotions ORDER BY promo_id;
+    </copy>
+    ```
 
-```
-< 1, everyday low price >
-< 2, blowout sale >
-< 3, christmas sale >
-3 rows found.
-```
+    ```
+    < 1, everyday low price >
+    < 2, blowout sale >
+    < 3, christmas sale >
+    3 rows found.
+    ```
 
 The inserted row has been captured and propagated to the cached table in TimesTen.
 
@@ -174,40 +174,40 @@ The inserted row has been captured and propagated to the cached table in TimesTe
 
 1. In your _secondary_ session (**sqlplus**), update a row in the OE.PROMOTIONS table in Oracle and commit:
 
-```
-<copy>
-UPDATE promotions SET promo_name = 'easter sale' WHERE promo_id = 3;
-</copy>
-```
+    ```
+    <copy>
+    UPDATE promotions SET promo_name = 'easter sale' WHERE promo_id = 3;
+    </copy>
+    ```
 
-```
-1 row updated.
-```
+    ```
+    1 row updated.
+    ```
 
-```
-<copy>
-commit;
-</copy>
-```
+    ```
+    <copy>
+    commit;
+    </copy>
+    ```
 
-```
-Commit complete.
-```
+    ```
+    Commit complete.
+    ```
 
 2. Wait for 2 seconds (the cache refresh interval) and then in your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
+    ```
+    <copy>
+    SELECT * FROM promotions ORDER BY promo_id;
+    </copy>
+    ```
 
-```
-< 1, everyday low price >
-< 2, blowout sale >
-< 3, easter sale >
-3 rows found.
-```
+    ```
+    < 1, everyday low price >
+    < 2, blowout sale >
+    < 3, easter sale >
+    3 rows found.
+    ```
 
 The update to the row has been captured and propagated to the cached table in TimesTen.
 
@@ -215,92 +215,92 @@ The update to the row has been captured and propagated to the cached table in Ti
 
 1. In your _secondary_ session (**sqlplus**), delete a row in the OE.PROMOTIONS table in Oracle and commit:
 
-```
-<copy>
-DELETE FROM promotions WHERE promo_id =  3;
-</copy>
-```
+    ```
+    <copy>
+    DELETE FROM promotions WHERE promo_id =  3;
+    </copy>
+    ```
 
-```
-1 row deleted.
-```
+    ```
+    1 row deleted.
+    ```
 
-```
-<copy>
-commit;
-</copy>
-```
+    ```
+    <copy>
+    commit;
+    </copy>
+    ```
 
-```
-Commit complete.
-```
+    ```
+    Commit complete.
+    ```
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
+    ```
+    <copy>
+    SELECT * FROM promotions ORDER BY promo_id;
+    </copy>
+    ```
 
-```
-  PROMO_ID PROMO_NAME
----------- --------------------
-	 1 everyday low price
-	 2 blowout sale
-```
+    ```
+    PROMO_ID PROMO_NAME
+    ---------- --------------------
+    	 1 everyday low price
+    	 2 blowout sale
+    ```
 
 2. Wait for 2 seconds (the cache refresh interval) and then in your _primary_ session (**ttIsql**), check the rows in the OE.PROMOTIONS table in TimesTen:
 
-```
-<copy>
-SELECT * FROM promotions ORDER BY promo_id;
-</copy>
-```
+    ```
+    <copy>
+    SELECT * FROM promotions ORDER BY promo_id;
+    </copy>
+    ```
 
-```
-< 1, everyday low price >
-< 2, blowout sale >
-2 rows found.
-```
+    ```
+    < 1, everyday low price >
+    < 2, blowout sale >
+    2 rows found.
+    ```
 
-The row deletion has been captured and propagated to the cached table in TimesTen.
+    The row deletion has been captured and propagated to the cached table in TimesTen.
 
 3. In your _secondary_ session (**sqlplus**), exit from SQL*Plus, disconnect from the TimesTen host and close the terminal session:
 
-```
-<copy>
-quit;
-</copy>
-```
+    ```
+    <copy>
+    quit;
+    </copy>
+    ```
 
-```
-Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-Version 19.3.0.0.0
-```
+    ```
+    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+    Version 19.3.0.0.0
+    ```
 
-```
-<copy>
-exit
-</copy>
-```
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
-```
-<copy>
-exit
-</copy>
-```
+    ```
+    <copy>
+    exit
+    </copy>
+    ```
 
 4. In your _primary_ session (**ttIsql**), exit from ttIsql:
 
-```
-<copy>
-quit
-</copy>
-```
+    ```
+    <copy>
+    quit
+    </copy>
+    ```
 
-```
-Disconnecting...
-Done.
-```
+    ```
+    Disconnecting...
+    Done.
+    ```
 
 You can now **proceed to the next lab**. 
 

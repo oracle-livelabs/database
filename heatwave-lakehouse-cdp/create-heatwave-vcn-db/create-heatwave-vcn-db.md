@@ -23,6 +23,10 @@ In this lab, you will be guided through the following tasks:
 ![INTRO](./images/oci-dashboard.png "land on oci dashboard")
 
 ##  
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Create Virtual Cloud Network
 
 1. Click Navigation Menu

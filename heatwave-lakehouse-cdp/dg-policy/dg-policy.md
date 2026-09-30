@@ -12,6 +12,10 @@ In this lab, you will:
 - Create Policies
 
 ##  
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1 Create Dynamic Group
 
 1. Open the navigation menu and click ***Domains***

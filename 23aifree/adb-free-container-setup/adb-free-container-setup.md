@@ -17,11 +17,11 @@ This lab assumes you have:
 - An Oracle account
 
 ## Task 1: Pull and Start Docker Image
-1.  If the terminal is not displayed as shown below, select Activities and click Terminal.
+1. If the terminal is not displayed as shown below, select Activities and click Terminal.
 
     ![Open the terminal](images/novnc-terminal.png)
  
-2.  Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
+2. Copy the commands below and paste them into the terminal. This will pull the zip file with our podman-compose files and scripts that we'll be running to create and configure the ADB container. This series of commands will also unzip the files, and give them the permissions to be executable within the container.
 
     ```
     <copy>
@@ -58,7 +58,7 @@ This lab assumes you have:
 
     ![Podman Compose is running to start the container](images/podman-compose.png)
 
-<!-- 3. Now that you are prompted to login, type the username in the format of ***tenancy-name***/***username***. The password will be your ***auth-token***. You will find all the necessary information in the Login Details of your LiveLabs reservation. 
+    <!-- 3. Now that you are prompted to login, type the username in the format of ***tenancy-name***/***username***. The password will be your ***auth-token***. You will find all the necessary information in the Login Details of your LiveLabs reservation. 
 
     ![Copy auth token](images/4-auth-token-copy.png)
 
@@ -135,7 +135,7 @@ This lab assumes you have:
 
 6. Now you have access to Database Actions and APEX within your ADB 23ai Container Image! Feel free to explore what's possible within your environment.
 
-<!-- 11. 
+    <!-- 11. 
 9. You can add a database.
 
     ```
@@ -160,16 +160,16 @@ This lab assumes you have:
     </copy>
     ```
 
- 11. 
-mkdir /scratch/
-podman cp adb-free:/u01/app/oracle/wallets/tls_wallet /scratch/tls_wallet
+    11. 
+    mkdir /scratch/
+    podman cp adb-free:/u01/app/oracle/wallets/tls_wallet /scratch/tls_wallet
 
 12. 
 
-hostname fqdn -->
+    hostname fqdn -->
 
 
-<!-- 11. This is how you connect to ORDS.
+    <!-- 11. This is how you connect to ORDS.
 
 12. Finally, this is how you would connect to APEX. -->
 

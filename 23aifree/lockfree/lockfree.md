@@ -57,7 +57,7 @@ Task 1 focuses on normal updates. By opening three windows as User 2, we will pe
     </copy>
     ```
 
-Once connected proceed to step 2.
+    Once connected proceed to step 2.
 
 2. In Window 1 update table1 (inventory\_no\_reservations) decrease a record by 100 but don’t commit
 

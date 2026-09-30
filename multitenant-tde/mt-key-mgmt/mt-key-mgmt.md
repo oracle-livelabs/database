@@ -34,7 +34,7 @@ We start off with an unencrypted database and will be validating that state in t
     </copy>
     ```
 
-2.  Set your oracle environment and connect to **CDB1** using SQLcl.
+2. Set your oracle environment and connect to **CDB1** using SQLcl.
 
     ```
     <copy>. ~/.set-env-db.sh CDB1</copy>
@@ -86,7 +86,7 @@ We start off with an unencrypted database and will be validating that state in t
     </copy>
     ```
 
-   ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
+    ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
 
 
 5. Look at the wallet for CDB1
@@ -99,10 +99,10 @@ We start off with an unencrypted database and will be validating that state in t
 
     ![Screen Capture of Wallet Check](./images/wallet-check-cdb1.png " ")
 
->>**Notes:**
-- You can see the default location of the wallet file.
-- The wallet status will be given.
-- You can see there is no wallet that has been created yet.
+    >>**Notes:**
+    - You can see the default location of the wallet file.
+    - The wallet status will be given.
+    - You can see there is no wallet that has been created yet.
 
     At this point CBD1 does not know about a wallet or encryption
 
@@ -119,7 +119,7 @@ We start off with an unencrypted database and will be validating that state in t
 
     At this point CBD2 does not know about a wallet or encryption
 
-At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
+    At this point neither database knows about encryption and there is no wallet set so let's check the encryption status of CDB1
 
 7. Run this command
 
@@ -131,11 +131,11 @@ At this point neither database knows about encryption and there is no wallet set
 
     ![Screenshot of terminal output](./images/cdb1-check-wallet-status.png " ")
 
->>**Notes:**
-- Shows tablespaces associated with the database
-- Whether they are encrypted or not
-- If they are encrypted what is the master key
-- Status is empty
+    >>**Notes:**
+    - Shows tablespaces associated with the database
+    - Whether they are encrypted or not
+    - If they are encrypted what is the master key
+    - Status is empty
 
 8. We can check the status of CDB2 and see the same thing
 
@@ -237,19 +237,19 @@ In this section we will create a wallet for each CDB. For ease of execution, all
             - Anybody who has this will be able open the database and read the keys
     - Even if somebody got the database on the wallet they can’t get the key that is protecting that database
 
->>**Notes:**
-- Using a unified wallet
-  - This means the wallet that is used for the CDB contains the keys for the CDB and the PDB
-  - When you have Multi-Tenant the CDB and the PDB‘s all have independent keys
-  - In this case the
+    >>**Notes:**
+    - Using a unified wallet
+    - This means the wallet that is used for the CDB contains the keys for the CDB and the PDB
+    - When you have Multi-Tenant the CDB and the PDB‘s all have independent keys
+    - In this case the
     - CDB has it’s own Master Encryption Key
     - The PDB has it’s own Master Encryption Key
     - If there were a second PDB it would also have it’s own unique Master Encryption Key
-- The script also creates a second wallet
-  - No password needed to read
-  - Database able to connect to it at startup
-  - When restarted it will auto read the wallet and pull any keys that are set in that wallet to do the encryption
-  - If you do not create an autologin wallet when you start the database you need to manually open up the wallet using the password in order to access the keys
+    - The script also creates a second wallet
+    - No password needed to read
+    - Database able to connect to it at startup
+    - When restarted it will auto read the wallet and pull any keys that are set in that wallet to do the encryption
+    - If you do not create an autologin wallet when you start the database you need to manually open up the wallet using the password in order to access the keys
     - Not as secure a method, but less effort when you bounce the database
     - Most customers use an auto login wallet
 
@@ -261,8 +261,8 @@ In this section we will create a wallet for each CDB. For ease of execution, all
     </copy>
     ```
 
->>**Notes:**
-Note For RAC Environments
+    >>**Notes:**
+    Note For RAC Environments
 1. In a RAC environment the key needs to be read by all the nodes in the RAC cluster
 2. Wallet can be in a shared location
     - Local copy
@@ -285,7 +285,7 @@ Note For RAC Environments
 
     ![Screenshot of terminal output](./images/wallet-status-2.png " ")
 
-The last time we ran this status check the value was **NOT AVAILABLE**. It has now evolved to **`OPEN_NO_MASTER_KEY`** since we are yet to set the key. As a result, while CDB1 and PDB1 both have the wallet open, there is no master key
+    The last time we ran this status check the value was **NOT AVAILABLE**. It has now evolved to **`OPEN_NO_MASTER_KEY`** since we are yet to set the key. As a result, while CDB1 and PDB1 both have the wallet open, there is no master key
 
 4. Check the Wallet Status For CDB2
 
@@ -405,10 +405,10 @@ In this section we will encrypt tablespaces. However before proceeding we need t
 
     ![Screenshot of terminal output](./images/set_algorithm_cdb1.png " ")
 
->>**Notes:**    
-- By default it is set to AES128. However the recommendation is to set to AES256, which provides a little more security
-- Second parameter set is `encrypt_new_tablespaces` = ALWAYS
-- With this setup, any new tablespaces will be encrypted with AES256
+    >>**Notes:**    
+    - By default it is set to AES128. However the recommendation is to set to AES256, which provides a little more security
+    - Second parameter set is `encrypt_new_tablespaces` = ALWAYS
+    - With this setup, any new tablespaces will be encrypted with AES256
 
 2. Repeat for CDB2
 
@@ -420,7 +420,7 @@ In this section we will encrypt tablespaces. However before proceeding we need t
 
     ![Screenshot of terminal output](./images/set_algorithm_cdb2.png " ")
 
-We are now ready to encrypt
+    We are now ready to encrypt
 
 3. Encrypt the tablespaces in CDB1
 
@@ -439,14 +439,14 @@ We are now ready to encrypt
 
     ![Screenshot of terminal output](./images/encrypt_tablespaces_cdb1.png " ")
 
->>**Note:**
-- You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
-- This can be done in parallel, but more data files are created in parallel so keep your free space in mind
-- This can be at a later point in time
-- You don’t have to do all the tablespaces at once
-- When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
-- The backup should be done as-soon-as it is done encrypting
-- If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
+    >>**Note:**
+    - You need to have enough additional space for the largest data file that is going to be encrypted because a second file will be created
+    - This can be done in parallel, but more data files are created in parallel so keep your free space in mind
+    - This can be at a later point in time
+    - You don’t have to do all the tablespaces at once
+    - When you are finished you need to do a full backup as an incremental will not see the tablespace as encrypted
+    - The backup should be done as-soon-as it is done encrypting
+    - If you do a restore to the data file before doing the full backup and applied the archive logs to bring it forward the restore would be unencrypted
 
 2. Run the encryption for CDB2
 
@@ -466,13 +466,13 @@ We are now ready to encrypt
 
     ![Screenshot of terminal output](./images/key-status-1.png " ")
 
->>**Note:**
-- You can see the Master Encryption Key is set for SYSAUX and SYSTEM
-- It now shows as encrypted
-- It shows as encrypted with AES256
-- The keys starts with AZvR, which matches the key for the CDB
-- If you look at the PDB the Master Encryption Key begins with AaUv and it matches the Key Id at the bottom
-- NOTICE: TEMP and UNDO were not encrypted
+    >>**Note:**
+    - You can see the Master Encryption Key is set for SYSAUX and SYSTEM
+    - It now shows as encrypted
+    - It shows as encrypted with AES256
+    - The keys starts with AZvR, which matches the key for the CDB
+    - If you look at the PDB the Master Encryption Key begins with AaUv and it matches the Key Id at the bottom
+    - NOTICE: TEMP and UNDO were not encrypted
     - Anytime you encrypt the tablespace that means that the data that originated in that tablespace stays encrypted anytime the database uses it for processing.
     - If you have a sort going on and that sort contains data that is in USERS, if it’s a join of multiple tables and only 1 of those tables resides in a tablespace that encrypted that whole join process becomes encrypted
     - Everything that starts with an encrypted tablespace inherits  encryption during sorts
@@ -613,11 +613,11 @@ You will see the same thing as CDB1. The keys are different, so you have 4 Maste
 
     ![Screenshot of terminal output](./images/no-pdb.png " ")
 
->>**Note:**
-- If you were using OKV you could remove it from the wallet
-- You should leave the key in for now
-- If you want to restore to a point in time prior to unplugging, and you were backing it up all along, the database will need that key
-- If you do a backup and want to do a restore later you will need that key
+    >>**Note:**
+    - If you were using OKV you could remove it from the wallet
+    - You should leave the key in for now
+    - If you want to restore to a point in time prior to unplugging, and you were backing it up all along, the database will need that key
+    - If you do a backup and want to do a restore later you will need that key
 
 4. Check CDB2
 
@@ -674,11 +674,11 @@ While executing this workshop should you need to get a fresh start midway throug
 
     ![Screen Capture of Wallet Check](./images/wallet-check-cdb1.png " ")
 
->>**Notes:**
-- You can see the default location of the wallet file.
-- The wallet status will be given.
-- You can see there is no wallet that has been created yet.
-- At this point CBD1 does not know about a wallet or encryption
+    >>**Notes:**
+    - You can see the default location of the wallet file.
+    - The wallet status will be given.
+    - You can see there is no wallet that has been created yet.
+    - At this point CBD1 does not know about a wallet or encryption
 
 
 3. Check the existence of a wallet for **CDB2**
@@ -691,13 +691,13 @@ While executing this workshop should you need to get a fresh start midway throug
 
     ![Screen Capture of Wallet Check](./images/wallet-check-cdb2.png " ")
 
->>**Notes:**
-- You can see the default location of the wallet file.
-- The wallet status will be given.
-- You can see there is no wallet that has been created yet.
-- At this point CBD2 does not know about a wallet or encryption
+    >>**Notes:**
+    - You can see the default location of the wallet file.
+    - The wallet status will be given.
+    - You can see there is no wallet that has been created yet.
+    - At this point CBD2 does not know about a wallet or encryption
 
-At this point neither database knows about encryption and there is no wallet set so let's check the encryption status on the two CDBs
+    At this point neither database knows about encryption and there is no wallet set so let's check the encryption status on the two CDBs
 
 4. Check the encryption status of **CDB1**
 
@@ -709,11 +709,11 @@ At this point neither database knows about encryption and there is no wallet set
 
     ![Screenshot of terminal output](./images/cdb1-check-wallet-status.png " ")
 
->>**Notes:**
-- Shows tablespaces associated with the database
-- Whether they are encrypted or not
-- If they are encrypted what is the master key
-- Status is empty
+    >>**Notes:**
+    - Shows tablespaces associated with the database
+    - Whether they are encrypted or not
+    - If they are encrypted what is the master key
+    - Status is empty
 
 5. Check the encryption status of **CDB2**
 

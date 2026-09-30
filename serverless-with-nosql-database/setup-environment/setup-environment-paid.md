@@ -43,7 +43,7 @@ This lab assumes you have:
 
 1. Top right, click your **Profile**, then **User Settings.**
 
-  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
+    ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 2. Copy your OCID. Make sure to **save your OCID** for future steps. Paste it into notepad or some text file for use in Step 4.
 
@@ -53,7 +53,7 @@ This lab assumes you have:
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
-  **Note:** This must be executed in the **Home region**. Please ensure you are in your home region. The Cloud Shell prompt shows you what region the shell is running out of.  In the example below, there is a mismatch between the two which is incorrect.  It is executing out of Phoenix and the **Home region** is Ashurn.   
+    **Note:** This must be executed in the **Home region**. Please ensure you are in your home region. The Cloud Shell prompt shows you what region the shell is running out of.  In the example below, there is a mismatch between the two which is incorrect.  It is executing out of Phoenix and the **Home region** is Ashurn.   
 
     ![Home Region](https://oracle-livelabs.github.io/common/images/console/region.png)
 

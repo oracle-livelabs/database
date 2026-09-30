@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 ## About this Workshop
 
 In this workshop you will learn how to create and modify a NoSQL table in Oracle Cloud Infrastructure (OCI) using Terraform. You will learn the steps to create both a singleton table and a Global Active table using Terraform. You will also learn how to modify or update both a singleton table and a Global Active table using Terraform.
@@ -31,6 +34,10 @@ In this workshop you will:
 * An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account.
 * Basic understanding of Terraform. Read the brief introduction [here](https://developer.hashicorp.com/terraform/intro).
 * OCI Terraform provider [installed](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraforminstallation.htm).
+
+## Introduction
+
+TODO: Add introduction text here.
 
 ## Task 1: Getting started with using Terraform to provision and manage tables
 The Oracle NoSQL Database Cloud Service is a server-less, fully managed data store that delivers predictable single digit response times and allows application to scale on demand via provisioning API calls. There are simple steps to provision or manage singleton and Global Active tables in the Oracle NoSQL Database Cloud Service using Terraform.

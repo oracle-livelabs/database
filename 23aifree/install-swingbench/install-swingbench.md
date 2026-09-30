@@ -32,7 +32,7 @@ This lab assumes you have:
 
 1. The first step is to open a command prompt. If you are running in a Sandbox environment, click on **Activities** and then select **Terminal**.
 
-  ![Open a new terminal](images/open-terminal.png " ")
+    ![Open a new terminal](images/open-terminal.png " ")
 
 2. Next, set your environment. The `oraenv` command will set all the environment variables based on your database. When prompted, type "FREE" for the database name. If you supplied a different database name during installation, use that instead.
 
@@ -40,7 +40,7 @@ This lab assumes you have:
     <copy>
     . oraenv
     </copy>
-	```
+    	```
 
     ![Set environment](images/oraenv.png " ")
 
@@ -53,7 +53,7 @@ This lab assumes you have:
     <copy>
     unzip ~/Downloads/swingbench15082023_jdk11.zip -d ~/Downloads
     </copy>
-	```
+    	```
 
 5. Navigate to the directory where Swingbench is installed. If Swingbench is installed in the "swingbench" folder within your home directory, you can use the following command:
 
@@ -62,9 +62,9 @@ This lab assumes you have:
     cd Downloads/swingbench/bin
     </copy>
 
-	```
+    	```
 
-  ![Change to Swingbench directory](images/swingnav.png " ")
+    ![Change to Swingbench directory](images/swingnav.png " ")
 
 6. Once you are in the "swingbench/bin" directory, run the following command to execute the Order Entry Install Wizard:
     > **Note:** You can also run the wizards from the command in a noninteractive mode where you specify all of the options but for this demo we will use the GUI  
@@ -140,7 +140,7 @@ This lab assumes you have:
     <copy>
     cd Downloads/swingbench/bin
     </copy>
-	```
+    	```
 
 2. The first thing we want to do is validate the schema was successfully created. From the bin directory run the following command
 
@@ -148,7 +148,7 @@ This lab assumes you have:
     <copy>
     ./sbutil -cs //localhost:1521/FREEPDB1 -u soe -p soe -soe -val
     </copy>
-	```
+    	```
     ![Showing the swingbench UI](images/validate.png " ")
 
 3. We can see there is nothing invalid or missing. Lets take a look at what was created. From the bin directory run the following command
@@ -157,10 +157,10 @@ This lab assumes you have:
     <copy>
     ./sbutil -cs //localhost:1521/FREEPDB1 -u soe -p soe -soe -tables
     </copy>
-	```
+    	```
     ![Showing the swingbench UI](images/sbutil.png " ")
 
-Congratulations! You have finished the setup for this workshop. You may now **proceed to the next lab** 
+    Congratulations! You have finished the setup for this workshop. You may now **proceed to the next lab** 
 
 
 ## Learn More

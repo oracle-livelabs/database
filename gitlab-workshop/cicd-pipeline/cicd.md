@@ -33,12 +33,12 @@ This lab assumes you have:
     - Click Create Repository
 
 
-  ![Container Registry](images/ocir1.png)
+    ![Container Registry](images/ocir1.png)
 
 2. Container Registry is created with the specified name
 
 
-  ![Container Registry](images/ocir2.png)
+    ![Container Registry](images/ocir2.png)
 
 3. Create an Auth token to access the OCIR
 
@@ -63,7 +63,7 @@ This lab assumes you have:
 
 1. In your GitLab project, navigate to **Repository** > **Files** and create a new file
 
-  ![Register OKE Cluster](images/oke-cluster1.png)
+    ![Register OKE Cluster](images/oke-cluster1.png)
 
 2. Create an agent configuration file. The file must be named as *.gitlab/agents/&lt;agent-name&gt;/config.yaml*. Ensure the filename ends in .yaml, not .yml. The agent-name chosen will be used in next step while creating the CI/CD variables. The value for the parameter **id** can be copied from the URL
 
@@ -71,7 +71,7 @@ This lab assumes you have:
     <copy>.gitlab/agents/oke-cluster/config.yaml</copy>
     ```
 
-  ![Register OKE Cluster](images/oke-cluster2.png)
+    ![Register OKE Cluster](images/oke-cluster2.png)
 
 3. You must register an agent before you can install the agent in your cluster. To register an agent:
     -   On the top bar, select **Main menu** > **Projects** and find your project. If you have an agent configuration file, it must be in this project. Your cluster manifest files should also be in this project.
@@ -80,11 +80,11 @@ This lab assumes you have:
         -   Select the configuration file from the drop-down list
     -   Select **Register** an agent
 
-  ![Register OKE Cluster](images/oke-cluster3.png)
+    ![Register OKE Cluster](images/oke-cluster3.png)
 
 4. GitLab generates an access token for the agent. You need this token to install the agent in your cluster and to update the agent to another version.
 
-  ![Register OKE Cluster](images/oke-cluster4.png)
+    ![Register OKE Cluster](images/oke-cluster4.png)
 
 5. Login to the *runner* server and execute the commands obtained from the previous step
 
@@ -120,10 +120,10 @@ This lab assumes you have:
 ## Task 3: Create Project specific CI/CD variables
 
 1. Next, we need to add CI/CD variables to a project’s settings. Variables are commonly used to configure third-party services that are repeatedly used throughout the pipeline. 
-The variables will be available to all the stages within a Pipeline.
+    The variables will be available to all the stages within a Pipeline.
 
 
- To add or update variables in the project settings:
+    To add or update variables in the project settings:
 
     - Go to your project’s **Settings** > **CI/CD** and expand the **Variables** section
     - Select the Add Variable button and fill in the details:
@@ -136,7 +136,7 @@ The variables will be available to all the stages within a Pipeline.
 
 
 2. Below is an example of a variable creation
-  ![GitLab CI/CD variables](images/variable1.png)
+    ![GitLab CI/CD variables](images/variable1.png)
 
 3. In the similar way create the following variables, with appropriate values specific to your tenancy and region
 
@@ -263,7 +263,7 @@ Finally, it's time to create a few project files and put the CI/CD pipeline to t
 
 4. Finally create a file named [**.gitlab-ci.yml**](files/gitlab-ci.yml) in the root of your repository, which contains the CI/CD configuration. The moment the file is created, a CI/CD pipeline would get triggered.  
 
-  **Don't forget to rename the file to .gitlab-ci.yml before uploading to the project repository**
+    **Don't forget to rename the file to .gitlab-ci.yml before uploading to the project repository**
 
     ```
     <copy>stages:
@@ -359,17 +359,17 @@ Finally, it's time to create a few project files and put the CI/CD pipeline to t
 
 1. Navigate to project's **CI/CD** > **Pipelines**. Since the Auto DevOps option is enabled by default, any updates to any file would automatically trigger a pipeline execution
 
-  ![](images/status1.png)
+    ![Image](images/status1.png)
 
 2. Click on the job, and see the status of the individual stages and jobs
 
-  ![](images/status2.png)
+  ![Image](images/status2.png)
 
 ## Task 6: Verify the Deployment Status
 
 1. Navigate to OCI's Container Registry and verify that the container image with the tag (as specified in the IMAGE_VERSION variable) has been created and pushed to the registry 
 
-  ![OCIR](images/status3.png)
+    ![OCIR](images/status3.png)
 
 
 2. As a part of the deployment, a secret is created on the OKE that will be used to pull an image from a private container image registry or repository.
@@ -420,7 +420,7 @@ Finally, it's time to create a few project files and put the CI/CD pipeline to t
 
 5. On the Web Browser, type the IP address of the Public Load Balancer that was deployed in the previous lab, and it should point to the application just deployed
 
-  ![Ingress Resource](images/ingress1.png)
+    ![Ingress Resource](images/ingress1.png)
 
 6. Refresh the webpage a few times, and it should cycle through the available pods in the deployment
 
@@ -434,23 +434,23 @@ The [GitLab's Demo projects](https://gitlab.com/gitlab-com/alliances/oracle/sand
 
 1. Browse to the project link and choose the project that needs to be imported
 
-  ![Import Project](images/fork1.png)
+    ![Import Project](images/fork1.png)
 
 2. In the project's main page click on the **Clone** link on the left side of the screen. Copy the URL from **Clone with HTTPS** option
 
-  ![Import Project](images/fork2.png)
+    ![Import Project](images/fork2.png)
 
 3. In your GitLab account click on **New project** to create a new project
 
-  ![Import Project](images/fork3.png)
+    ![Import Project](images/fork3.png)
 
 4. Create a new project by importing an existing project
 
-  ![Import Project](images/fork4.png)
+    ![Import Project](images/fork4.png)
 
 5. Import a project by selecting **Repository by URL** option. Paste the URL copied earlier and hit **Create project**
 
-  ![Import Project](images/fork5.png)
+    ![Import Project](images/fork5.png)
 
 6. The project is now successfully imported. Feel free to explore and deploy the project into OCI
 

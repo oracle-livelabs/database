@@ -66,7 +66,7 @@ This lab assumes:
 
     ![Sign out from admin](images/logout-v1.png)
 
-2.  Log back in as the admin info you just created along with the workspace name as GRAPHUSER and username as graph.
+2. Log back in as the admin info you just created along with the workspace name as GRAPHUSER and username as graph.
 
     ![log back in](images/login-workspace.png)
 
@@ -82,19 +82,19 @@ This lab assumes:
 
     ![Import f106 sql file](images/file-import.png)
 
-6.  Select Reuse Application ID 106 From Export File. Leave all other options and click Install Application.
+6. Select Reuse Application ID 106 From Export File. Leave all other options and click Install Application.
 
     ![Install the application](images/install-app.png)
 
-7.  Click Install Supporting Objects.
+7. Click Install Supporting Objects.
 
     ![Install supporting objects](images/app-installed.png)
 
-8.  Click Run Application.
+8. Click Run Application.
 
     ![Run the application](images/supporting-obj.png)
 
-9.  Login with your graph user and the password.
+9. Login with your graph user and the password.
 
     **NOTE:** graph is case-sensitive.
 

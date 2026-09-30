@@ -10,6 +10,11 @@ Estimated Time: 5 Minutes
 
 - Validate the workshop environment by ensuring all required containers are running.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Verify Required Podman Containers
 
 This workshop utilizes Podman containers to host:

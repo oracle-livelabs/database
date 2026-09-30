@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 This section of the workshop highlights enhancements in Oracle Database 21c designed to improve performance and high availability. The enhancements include:
 - A point in time recovery (flashback) to recover a database from a specific time
 - Automatic zone maps to allow the pruning of blocks and partitions based on the predicates in the queries, without any user intervention

@@ -25,15 +25,15 @@ In this lab, you will:
 
 1. In OCI console click on the **Cloud Shell** from the top right icon 
 
-	![cloud shell launch](images/login_vm_1.png)
+    	![cloud shell launch](images/login_vm_1.png)
 
 2. In OCI console choose Compute > instance and goto your instance created in Lab-1 and copy the public IP 
 
-	![copy public ip](images/login_vm_2.png)
+    	![copy public ip](images/login_vm_2.png)
 
 3. Upload the private key file (downloaded in lab-1) using cloud shell **upload** option
 
-  ![upload key](images/login_vm_3.png)
+    ![upload key](images/login_vm_3.png)
 
 4. Use below ssh command to login to the VM
 
@@ -84,12 +84,12 @@ In this lab, you will:
 
 1. Create below folder structure.
 
-   ![folder structure](images/deploy_app_1.png)
+    ![folder structure](images/deploy_app_1.png)
   
-  Use command below to create the above directory structure.
-  ```
+    Use command below to create the above directory structure.
+    ```
     <copy>mkdir -p nyctaxi/app/templates
-  mkdir -p nyctaxi/app/static/css</copy>
+    mkdir -p nyctaxi/app/static/css</copy>
     ```
   
 
@@ -111,11 +111,11 @@ In this lab, you will:
 
      ```
     <copy>from flask import render_template, request
-from app import app
-from .models import get_trip_data
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/search', methods=['GET', 'POST'])
-def index():
+    from app import app
+    from .models import get_trip_data
+    @app.route('/', methods=['GET', 'POST'])
+    @app.route('/search', methods=['GET', 'POST'])
+    def index():
       if request.method == 'POST':
         start_date = request.form.get('start_date')
         end_date = request.form.get('end_date')
@@ -205,42 +205,42 @@ def index():
 
      ```
     <copy><!-- base.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NYC Taxi Trips</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/
-4.5.2/css/bootstrap.min.css">
+    4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="/">NYC Taxi Trips</a>
-</nav>
-<div class="container mt-4">
-<!-- {% raw %} -->
+    </nav>
+    <div class="container mt-4">
+    <!-- {% raw %} -->
     {% block content %}{% endblock %}
-<!-- {% endraw %} -->
-</div>
-</body>
-</html></copy>
+    <!-- {% endraw %} -->
+    </div>
+    </body>
+    </html></copy>
     ```
-**Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
+    **Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
 
 6. Copy `index.html` code and paste under the desired directory structure above
 
      ```
     <copy><!-- index.html -->
-<!-- {% raw %} -->
-{% extends "base.html" %}
-{% block content %}
-<!-- {% endraw %} -->
-<h2>Search for Taxi Trips</h2>
-<form action="/search" method="post" class="mt-4">
+    <!-- {% raw %} -->
+    {% extends "base.html" %}
+    {% block content %}
+    <!-- {% endraw %} -->
+    <h2>Search for Taxi Trips</h2>
+    <form action="/search" method="post" class="mt-4">
     <div class="form-group">
         <label for="start_date">Start Date:</label>
         <input type="date" class="form-control" id="start_date"
@@ -252,50 +252,50 @@ def index():
                required>
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
-</form>
-<!-- {% raw %} -->
-{% endblock %}
-<!-- {% endraw %} --></copy>
+    </form>
+    <!-- {% raw %} -->
+    {% endblock %}
+    <!-- {% endraw %} --></copy>
     ```
 
-**Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
+    **Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
 
 7. Copy `index.html` code and paste under the desired directory structure above
 
      ```
     <copy><!-- results.html -->
-<!-- {% raw %} -->
-{% extends "base.html" %}
-{% block content %}
-<!-- {% endraw %} -->
-<h2>Search Results</h2>
-<div class="table-responsive mt-4">
+    <!-- {% raw %} -->
+    {% extends "base.html" %}
+    {% block content %}
+    <!-- {% endraw %} -->
+    <h2>Search Results</h2>
+    <div class="table-responsive mt-4">
     {{ trip_data|safe }}
-</div>
-<a href="/" class="btn btn-secondary mt-3">New Search</a>
-<!-- {% raw %} -->
-{% endblock %}
-<!-- {% endraw %} --></copy>
+    </div>
+    <a href="/" class="btn btn-secondary mt-3">New Search</a>
+    <!-- {% raw %} -->
+    {% endblock %}
+    <!-- {% endraw %} --></copy>
     ```
-**Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
+    **Note:** Please remove *&lt !-- {% raw %} -- &gt* and *&lt !-- {% endraw %} -- &gt* from above code to make html work
 
 8. Copy `style.css` code and paste under the desired directory structure above
 
      ```
     <copy>/* style.css */
-body {
- background-color: #f8f9fa;
-}
-h2 {
- margin-top: 20px;
- margin-bottom: 20px;
-}
-.navbar {
- margin-bottom: 30px;
-}
-.table-responsive {
- margin-top: 20px;
-}</copy>
+    body {
+    background-color: #f8f9fa;
+    }
+    h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+    .navbar {
+    margin-bottom: 30px;
+    }
+    .table-responsive {
+    margin-top: 20px;
+    }</copy>
     ```
 9. Copy `config.py` code and paste under the desired directory structure above. Use vi editor to create/edit the file, and use *Esc + :wq + enter* to save the file.
 
@@ -317,7 +317,7 @@ h2 {
 
      ```
     <copy>from app import app
-if __name__ == "__main__":
+    if __name__ == "__main__":
     app.run(host='0.0.0.0' , debug=True)</copy>
     ```
 Once the file is created, use *cat &ltfilename&gt* to make sure the content is there as expected above.

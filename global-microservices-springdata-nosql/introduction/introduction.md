@@ -53,6 +53,10 @@ This workshop assumes you have:
   * Understanding of query languages
 
 
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Architecture of the Application
 
   1. Read the following information about the architecture.

@@ -98,7 +98,7 @@ With developer tools, you can know exactly what data you can request from your A
 
 1. In a browser window, enter [https://studio.apollographql.com/sandbox/explorer](https://studio.apollographql.com/sandbox/explorer).  When you go to the sandbox, you may initially see the error below. This will go away once you perform step 2.
 
-  ![sandbox-error](images/sandbox-error.png)
+    ![sandbox-error](images/sandbox-error.png)
 
 2. In the sandbox, copy/paste the following url:
 
@@ -124,7 +124,7 @@ With developer tools, you can know exactly what data you can request from your A
 
 1. By default, it may put you in a spot where it wants you to execute an Example Query.  Under "Documentation" you will see something similar to this image below.
 
-  ![Sandbox start](images/sandbox-start.png)
+    ![Sandbox start](images/sandbox-start.png)
 
 2. If that is the case, click on the arrow next to "Query" and it will place you into "Root."  Now that you have moved over to "Root", watch the animated gif below.  This walks you through the steps of triggering a query.  You will build a query from scratch by hitting "Query", then adding the "Streams" array, followed by adding several fields to display.   Finally you will hit the "Query" button to execute the query.   You will see the results of your query to the right.  Feel free to select different fields and re-execute your query and watch how the results change.  
 
@@ -143,11 +143,11 @@ With developer tools, you can know exactly what data you can request from your A
 
 1. GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors.  We can take a look at the schema, and see the different fields and their associated types.  To move to the schema view, click the button marked in the graphic below.
 
-  ![Sandbox start](images/schema.png)
+    ![Sandbox start](images/schema.png)
 
 2. After you do that, click on the SDL tab.
 
-  ![Sandbox start](images/schema-SDL.png)
+    ![Sandbox start](images/schema-sdl.png)
 
 3. Next you should see something similar to the below image.   Go ahead and scroll through the list and review the different parts of the schema.
 

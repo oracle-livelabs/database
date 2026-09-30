@@ -24,7 +24,7 @@ This task will have you login to the Jupyter Notebook environment and run the sp
 
 1. **If you are already logged into the Jupyter Notebook environment skip to step 5 otherwise** open the "View Login Info" section of your workshop.
 
-	![Image alt text](images/lab4_1ba.png)
+    	![Image alt text](images/lab4_1ba.png)
 
 2. Copy the Jupyter Notebook Password and Click the Jupyter Notebook URL
 

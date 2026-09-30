@@ -21,6 +21,10 @@ This lab assumes you have:
 
 Let's begin! If you need to create an Oracle Cloud account, click **Get Started** in the **Contents** menu on the left. Otherwise, if you have an existing account, click **Lab 1**.
 
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task: Learn More
 
 * [Oracle® Transaction Manager for Microservices Developer Guide](https://docs.oracle.com/pls/topic/lookup?ctx=microtx-latest&id=TMMDG)

@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## Introduction to Oracle Fleet Patching & Provisioning ##
 Oracle Database provides incredible features, performance, security and availability. But when your database fleet starts growing from a few units to a few hundreds, keeping it up to date with the latest patches and release versions can be time-consuming, and sometimes error-prone.
 

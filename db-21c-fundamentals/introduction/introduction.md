@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Workshop Time: TODO - x minutes
+
+
 This workshop offers several hands-on labs that highlight the latest enhancements in the latest release of the Oracle Database, 21c.  Our mission is not just to manage your data but help you get value out of your data.  For the world’s most demanding enterprise applications and workloads, Oracle Database 21c is a converged database that delivers a high performance, highly available, secure and scalable data management platform for cloud as well as on-premises environments.
 
 ### About Oracle Database 21c

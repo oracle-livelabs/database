@@ -1,6 +1,9 @@
 # Create an Oracle Cloud Infrastructure VM Database
 ## Introduction
 
+Estimated Time: TODO - x minutes
+
+
 This lab walks you through the steps to create an instance of an Oracle 18c, 19c or the new 21c Database running in Oracle Cloud Infrastructure. Oracle Cloud Infrastructure provides several options for rapidly creating a Database system for development and testing, including fast provisioning of 1-node virtual machine database systems.
 
 ### Objectives
@@ -16,11 +19,11 @@ You can use a 1-node virtual database system to complete labs and tutorials that
 
 1. From the Console menu, click on **Bare Metal, VM, and Exadata**.
 
-  ![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
+    ![Image](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
 2. Select the compartment you want to create the database in and click on **Create DB System**.
 
-  ![](images/create-VM-DB.png " ")
+    ![Image](images/create-vm-db.png " ")
 
 3. On the DB System Information form, enter the following information and click **Next**:
 
@@ -31,7 +34,7 @@ You can use a 1-node virtual database system to complete labs and tutorials that
     * Select the public subnet using the drop down list.
     * Enter a hostname prefix.
 
-    ![](images/create-VM-DB-form1.png " ")
+    ![Image](images/create-vm-db-form1.png " ")
 
 4. On the Database Information form, enter the following information and click **Create DB System**.
 
@@ -40,19 +43,19 @@ You can use a 1-node virtual database system to complete labs and tutorials that
     * In the **PDB name** field, enter "pdb1".
     * Enter a password for your sys user in the **Password** field and then repeat the password in the **Confirm password** field.
 
-    ![](images/create-VM-DB-form2.png " ")
+    ![Image](images/create-vm-db-form2.png " ")
 
 5. After a few minutes, your Database System will change color from yellow (Provisioning) to green.
 
-    ![](images/database-VM-created.png " ")
+    ![Image](images/database-vm-created.png " ")
 
 ## Task 2: Connect to the Database using SSH
 
 1. On the **DB System Details** page, Click **Nodes**.
 
-  ![](images/VM-DB-IP.png " ")
+    ![Image](images/vm-db-ip.png " ")
 
-   Note the IP address.
+    Note the IP address.
 
 2. In a terminal window, navigate to the folder where you created the SSH keys and enter this command, using your IP address:
 

@@ -64,7 +64,7 @@ The goal of this task is to understand the difference between the 2 data models 
 
 3. Insert data into the demo table.
 
-  This will be done using a curl command to transfer data over the network to the NoSQL store using the "express-oracle-nosql" application. Execute in Cloud Shell.
+    This will be done using a curl command to transfer data over the network to the NoSQL store using the "express-oracle-nosql" application. Execute in Cloud Shell.
 
     ```
     <copy>
@@ -164,9 +164,9 @@ The goal of this task is to understand the difference between the 2 data models 
     curl -X GET http://localhost:3500/getPassengersAffectedByFlight?flightNo=BM715  | jq
     </copy>
     ```
-  Each of these produced slightly different results. The first one display the document with a specific ticket number, the second displayed all the records and the third gave a count of the records.
+    Each of these produced slightly different results. The first one display the document with a specific ticket number, the second displayed all the records and the third gave a count of the records.
 
-  For the last one,  you can see in the "message" field "getPassengersAffectedByFlight under construction." In other words the code for that endpoint has not been completed yet. Feel free to take a look at the code using below.
+    For the last one,  you can see in the "message" field "getPassengersAffectedByFlight under construction." In other words the code for that endpoint has not been completed yet. Feel free to take a look at the code using below.
 
       ```
       <copy>
@@ -211,7 +211,7 @@ The goal of this task is to understand the difference between the 2 data models 
     ```
 2. This will create a Python NoSQL shell that you can load data or execute queries in.
 
-   ![Python NoSQL shell](./images/capturepython.png)
+    ![Python NoSQL shell](./images/capturepython.png)
 
 
 3. Load additional data so we can run some queries. Execute in Cloud Shell.
@@ -278,7 +278,7 @@ The goal of this task is to understand the difference between the 2 data models 
 
       - Find the names of passengers that had their bags initially loaded in Chicago. **Hint:** Chicago Airport(ORD).
 
-  **Note:** The Learn More contains a link to the SQL Reference Guide. Lab 3, Task 3 contains an example of the JSON record to look at.
+    **Note:** The Learn More contains a link to the SQL Reference Guide. Lab 3, Task 3 contains an example of the JSON record to look at.
 
 6. Type in **exit** to exit from the Python application.
 
@@ -291,29 +291,29 @@ This task deletes the tables and other OCI components that got created.
 
 <if type="paid">
 1. On the top left, go to menu, then **Databases**, then under Oracle NoSQL Database, press **Tables**
-Set your compartment to 'demonosql'. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and you will need to press **Delete** again.
+    Set your compartment to 'demonosql'. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and you will need to press **Delete** again.
 
-  ![Delete NoSQL Table](./images/delete-freetable.png)
+    ![Delete NoSQL Table](./images/delete-freetable.png)
 
-  Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
+    Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
 </if>
 
 <if type="freetier">
 1. On the top left, go to menu, then **Databases**, then under Oracle NoSQL Database, press **Tables**
-Set your compartment to 'demonosql'. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and you will need to press **Delete** again.
+    Set your compartment to 'demonosql'. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and you will need to press **Delete** again.
 
-  ![Delete NoSQL Table](./images/delete-freetable.png)
+    ![Delete NoSQL Table](./images/delete-freetable.png)
 
-  Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
+    Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
 </if>
 
 <if type="livelabs">
 1. On the top left, go to menu, then **Databases**, then under Oracle NoSQL Database, press **Tables**
-Select your compartment. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and you will need to press **Delete** again.
+    Select your compartment. Click the **freeTest** table, which will bring up the table details screen. Press **More Actions** and then **Delete** under that. This will bring up a new screen and you will need to press **Delete** again.
 
-  ![Delete NoSQL Table](./images/delete-freetable.png)
+    ![Delete NoSQL Table](./images/delete-freetable.png)
 
-  Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
+    Deleting tables is an async operation, so you will not immediately see the results on the Oracle Cloud Console. Eventually the status of the tables will get changed to deleted.
 </if>
 
 2. Return to the 'Tables' screen and repeat the process for the **demo** and **demoKeyVal** tables.
@@ -321,7 +321,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 <if type="paid">
 3. If you created an API Key, delete that. It will show up as a fingerprint. Click your **Profile**, then **User Settings** and **Tokens and keys** . Click the 3 dots on the right of the fingerprint you created. Click **Delete**.
 
-  ![Delete API keys](./images/delete-api.png)
+    ![Delete API keys](./images/delete-api.png)
 
 4. Remove the files added into your Cloud Shell. Open Cloud Shell and execute. Minimize Cloud Shell.
 
@@ -348,7 +348,7 @@ Select your compartment. Click the **freeTest** table, which will bring up the t
 <if type="freetier">
 3. If you created an API Key, delete that. It will show up as a fingerprint. Click your **Profile**, then **User Settings** and **API Key** on the left. Click the 3 dots on the right of the fingerprint you created. Click **Delete**.
 
-  ![Delete API Key](./images/delete-api.png)  
+    ![Delete API Key](./images/delete-api.png)  
 
 4. Remove the files added into your Cloud Shell. Open Cloud Shell and execute. Minimize Cloud Shell.
 

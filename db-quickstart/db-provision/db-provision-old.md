@@ -39,7 +39,7 @@ Estimated Lab Time: 10 minutes
 
 5. This console shows the existing databases. If there is a long list of databases, you can filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by __Workload Type__. Here, the __Data Warehouse__ workload type is selected.
 
-    ![You can filter the list of databases](./images/Compartment.png " ")
+    ![You can filter the list of databases](./images/compartment.png " ")
 
 ## Task 2: Create the Autonomous Database Instance
 
@@ -47,7 +47,7 @@ Estimated Lab Time: 10 minutes
 
     ![Click Create Autonomous Database](./images/click-create-autonomous-database.png " ")
 
-2.  This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
+2. This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
 
 3. Provide basic information for the autonomous database:
 

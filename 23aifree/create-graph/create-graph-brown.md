@@ -24,6 +24,11 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 [Change password](videohub:1_x4hgmc2i)
 </if> -->
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Setup materials
 
 1. Click [this link](https://objectstorage.us-ashburn-1.oraclecloud.com/p/J3-_Q3MMvb_J03-lN4o-eDtcJP0nGQC1OQaQkh3OUXab69VaXJuI1KSa8ZsB2vE1/n/oradbclouducm/b/OperationalPropertyGraphs/o/26ai-property-graph.zip) to download the zip file with our property graph setup materials.
@@ -59,23 +64,23 @@ You begin by loading data for bank accounts and bank transfers from CSV files.
 
 2. In Database Actions, click the main hamburger icon at the top left, and then select SQL.
 
- ![Prepare graph data](images/launch-sql.png)
+    ![Prepare graph data](images/launch-sql.png)
 
 3. Click Data Load in the top right corner
 
- ![Load graph data](images/data-load-sql.png)
+    ![Load graph data](images/data-load-sql.png)
 
 4. Drag and drop the 2 .csv files (bank_accounts.csv and bank_transfers.csv) into the data load page.
 
- ![Load graph data](images/data-load-empty.png)
+    ![Load graph data](images/data-load-empty.png)
 
 5. Click Upload
 
- ![Load graph data](images/data-load-upload.png)
+    ![Load graph data](images/data-load-upload.png)
 
 6. Then click Close
 
- ![Load graph data](images/data-load-close.png)
+    ![Load graph data](images/data-load-close.png)
 
 7. Copy and paste the contents of the file CreateKeys.sql into the worksheet. Click **Run Script**.
 

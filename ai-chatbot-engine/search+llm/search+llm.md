@@ -204,25 +204,25 @@ In a Retrieval-Augmented Generation (RAG) application, the prompt given to a Lar
 <if type="ocw24">
 0. **If you're running this lab at CloudWorld**
 
-In this case, the credentials needed to access the OCI GenAI Service are provided for you. Click on the link below and download the zip file.
+    In this case, the credentials needed to access the OCI GenAI Service are provided for you. Click on the link below and download the zip file.
 
-[Get Your OCI GenAI key](https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/sCxNUExb6_eLVYNxc1Waef-KLO6nSmchNG56nK_xBAkktsX-DiUMa6Xp-RbdW3aR/n/fr1wb0c6sbky/b/bucket-20250115-1555/o/oci-files.zip)
+    [Get Your OCI GenAI key](https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/sCxNUExb6_eLVYNxc1Waef-KLO6nSmchNG56nK_xBAkktsX-DiUMa6Xp-RbdW3aR/n/fr1wb0c6sbky/b/bucket-20250115-1555/o/oci-files.zip)
 
-Unzip the downloaded file and copy the `config` file and non-public pem file to your JupyterLab window.
-Open the `config` file in Jupyter. It will look like this:
-```
-[DEFAULT]
-user=ocid1.user.oc1..zzzzzzzzzzzzz
-fingerprint=80:2a:84:00:29:2d:ec:04:8b:ee:xxxx
-tenancy=ocid1.tenancy.oc1..yyyyyyyyyyyy
-region=us-chicago-1
-key_file=<path to your private keyfile> # TODO
-```
-Enter the path and name of your private key at the end of the `key_file` line.
+    Unzip the downloaded file and copy the `config` file and non-public pem file to your JupyterLab window.
+    Open the `config` file in Jupyter. It will look like this:
+    ```
+    [DEFAULT]
+    user=ocid1.user.oc1..zzzzzzzzzzzzz
+    fingerprint=80:2a:84:00:29:2d:ec:04:8b:ee:xxxx
+    tenancy=ocid1.tenancy.oc1..yyyyyyyyyyyy
+    region=us-chicago-1
+    key_file=<path to your private keyfile> # TODO
+    ```
+    Enter the path and name of your private key at the end of the `key_file` line.
 
-The compartment id (needed later in this tutorial) is stored in the `compartment-id.txt` file.
+    The compartment id (needed later in this tutorial) is stored in the `compartment-id.txt` file.
 
-> Note: The details in paragraph 1 below are provided for your information only. It is safe to skip to point 2.
+    > Note: The details in paragraph 1 below are provided for your information only. It is safe to skip to point 2.
 </if>
 
 1. In Jupyter, create a new file called `config`.

@@ -77,7 +77,7 @@ In this lab, you will be guided through the following tasks:
             )
         )
         FROM patients;
-</copy>
+    </copy>
     ```
      ![Execute Query](./images/create-jdv.png " ")
 

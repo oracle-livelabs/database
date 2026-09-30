@@ -29,7 +29,7 @@ This lab assumes you have:
 
 1. The first step is to open a command prompt. If you are running in a Sandbox environment, click on **Activities** and then select **Terminal**.
 
-  ![Open a new terminal](images/open-terminal.png " ")
+    ![Open a new terminal](images/open-terminal.png " ")
 
 2. Next, set your environment. The `oraenv` command will set all the environment variables based on your database. When prompted, type "FREE" for the database name. If you supplied a different database name during installation, use that instead.
 
@@ -37,7 +37,7 @@ This lab assumes you have:
     <copy>
     . oraenv
     </copy>
-	```
+    	```
 
     ![Set environment](images/oraenv.png " ")
 
@@ -50,7 +50,7 @@ This lab assumes you have:
     <copy>
     unzip ~/Downloads/swingbench15082023_jdk11.zip -d ~/Downloads
     </copy>
-	```
+    	```
     ![unzip swingbench](images/downloadswing.png " ")
 
 5. Navigate to the directory where Swingbench is installed. If Swingbench is installed in the "swingbench" folder within your home directory, you can use the following command:
@@ -60,9 +60,9 @@ This lab assumes you have:
     cd Downloads/swingbench/bin
     </copy>
 
-	```
+    	```
 
-  ![Change to Swingbench directory](images/swingnav.png " ")
+    ![Change to Swingbench directory](images/swingnav.png " ")
 
 6. Once you are in the "swingbench/bin" directory, run the following command to execute the Movie Stream Install Wizard:
 
@@ -170,10 +170,10 @@ This lab assumes you have:
 5. To start ORDS, enter the following command in the same command prompt window:
 
     ```
-	<copy>
+    	<copy>
     ords serve &
     </copy>
-	```
+    	```
     ![Showing the terminal](images/ords-serve.png " ")
     ![Showing the terminal](images/ords-serve-message.png " ")
 

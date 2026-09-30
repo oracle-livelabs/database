@@ -151,7 +151,7 @@ This lab assumes you have:
     <copy>SHOW FUNCTION STATUS WHERE Name LIKE 'ML_%';</copy>
     ```
 
-5.  Check ML procedures. Should see: ML\_TRAIN, ML\_MODEL\_LOAD, ML\_RAG, etc.
+5. Check ML procedures. Should see: ML\_TRAIN, ML\_MODEL\_LOAD, ML\_RAG, etc.
     ```bash
     <copy>SHOW PROCEDURE STATUS WHERE Name LIKE 'ML_%';</copy>
     ```
