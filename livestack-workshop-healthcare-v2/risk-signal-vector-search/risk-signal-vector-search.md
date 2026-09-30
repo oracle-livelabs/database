@@ -81,7 +81,7 @@ Jessica has made the `ALL_MINILM_L12_V2` ONNX model available in Oracle AI Datab
     ORDER BY owner, model_name;
     </copy>
     ```
-![Healthcare semantic search](images/available-embedding-model.png " ")
+    ![Healthcare semantic search](images/available-embedding-model.png " ")
 
     **Expected output: Available embedding model**
 

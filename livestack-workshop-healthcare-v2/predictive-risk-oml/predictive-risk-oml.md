@@ -134,7 +134,7 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
       ![startml](images/startml.png)
 
-  **Note:** To enter the Data source, select the magnifying glass icon next to the **Data Source** field, select *LLUSER* as the **Schema**, and search and select *HC_DEMAND_TRAINING* as the table.
+    **Note:** To enter the Data source, select the magnifying glass icon next to the **Data Source** field, select *LLUSER* as the **Schema**, and search and select *HC_DEMAND_TRAINING* as the table.
 
       ![startml](images/data-source.png)
 

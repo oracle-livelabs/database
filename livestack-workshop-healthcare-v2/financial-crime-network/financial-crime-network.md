@@ -215,7 +215,7 @@ In graph terms, the journey and connected care facts are **vertices**. Each row 
 
     The result has the same shape as Jessica's query. The difference is the way Bob describes the investigation: start at one vertex, follow one edge, and return the connected vertex.
 
-    ![Open Graph Studio from the Database Actions launchpad](images/direct-connections-with-SQL-PGQs.png " ")
+    ![Open Graph Studio from the Database Actions launchpad](images/direct-connections-with-sql-pgqs.png " ")
 
     **Expected output: Direct connections with SQL/PGQ**
 

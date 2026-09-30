@@ -74,7 +74,7 @@ In Lab 7, Nina used the `GENAI` profile to ask and review one question at a time
       AND attribute_name = 'object_list';
     </copy>
     ```
- ![task1](images/check-healthcare-views.png)
+    ![task1](images/check-healthcare-views.png)
 
     **Expected output:** The list contains `CARE_DEMAND_FORECASTS_V`, `CARE_SERVICES_V`, `QUALITY_CAPACITY_SIGNALS_V`, and `CARE_SERVICE_REQUESTS_V`.
 
@@ -216,7 +216,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. In SQL
 
 2. Review the agent's answer.
 
- ![task4](images/run-healthcare-demand-question.png)
+    ![task4](images/run-healthcare-demand-question.png)
 
     **Expected result:** The answer identifies five care service and region combinations and includes service name, category, predicted demand, and demand risk factor. `mRNA LNP Clinical Batch` in the `Northeast Corridor` should lead the result. The wording can vary by model, but the values should match the healthcare data available through `GENAI`.
   
@@ -242,7 +242,7 @@ Nina has an answer, but Jessica also needs an execution trail. Together they ins
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
- ![task4](images/review-latest-team-run.png)
+    ![task4](images/review-latest-team-run.png)
 
     **Expected output:** The latest row identifies `NINA_HEALTHCARE_TEAM`, its execution state, and its start and end times.
 
