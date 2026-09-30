@@ -6,7 +6,7 @@
       "title": "Introduction",
       "description": "Compare specialized agents, data nodes, processing nodes, and governed tools in custom enterprise workflows.",
       "type": "livelabs",
-      "filename": "../../introduction/introduction.md"
+      "filename": "../../enterprise-application-agents-introduction/introduction.md"
     },
     {
       "title": "Lab 1: Build an EBS Payables Agent",
