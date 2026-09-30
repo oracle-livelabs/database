@@ -33,10 +33,6 @@ You will create component vectors, search by meaning, and join the matches to pr
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-Help Gilly turn a bearing-quality concern into a customer follow-up list. Rank components by meaning, then join the matches to production orders and customer sites.
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Check the embedding model
@@ -113,7 +109,7 @@ Gilly decides that one vector per component is enough. Each component record is 
     </copy>
     ```
 
-    The model reads the text in each row and writes the vector back to that same row. No component text leaves the database.
+    Each row’s text becomes its vector.
 
 4. Verify the new column and its data:
 
@@ -127,8 +123,6 @@ Gilly decides that one vector per component is enough. Each component record is 
     ```
 
     ![Component rows populated with vector embeddings](images/sql-vector-values.png)
-
-    Each component now has its own 384-dimensional vector. Gilly can use this column directly when the application searches for components by meaning.
 
     > **Note:** Chunking is not relevant for this data. Each row describes one short component, so splitting it would create several vectors for one component without adding useful detail. Chunking becomes useful for long documents, such as policies or plant quality notices, where each section may answer a different question.
 
@@ -183,11 +177,11 @@ Now Gilly tests the new column with a simple vector query. She asks for componen
 
     ![Components ranked by semantic similarity](images/sql-vector-similarity.png)
 
-    The query uses the same vectors and the same cosine calculation. It only changes how the result is shown to the person using the application.
+    The ranking is unchanged; only its display changes.
 
 ## Task 4: Find customer sites affected by a component concern
 
-Gilly now connects the component search to customer orders. A production analyst should be able to enter a concern and find customer sites with orders for related components. The status filter limits the follow-up to planned, released, and in-production orders. The result gives the production-quality team a short list for follow-up, with the component match, production order status, production order date, and customer contact details.
+Join the matching components to customer orders. Limit follow-up to planned, released, and in-production orders.
 
 1. Run the following query for the concern `precision bearing with low vibration and tight dimensional tolerance`:
 
@@ -233,7 +227,7 @@ Gilly now connects the component search to customer orders. A production analyst
 
     **Expected output: Customer Follow-up List**
 
-    The result shows customer sites with orders for components related to the concern. The similarity score explains why the component was included, while the production order and customer site columns give the production team enough information to decide what to do next.
+    Use the component match, order details, and customer contacts to plan follow-up.
 
 2. Review the business result.
 

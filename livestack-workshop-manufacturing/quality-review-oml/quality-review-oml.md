@@ -33,10 +33,6 @@ You will train a model to classify components as `REVIEW` or `STABLE`, then join
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-Help Otto create a component watchlist. Optionally compare AutoML models, then train and score a SQL model and inspect the measurements behind each prediction.
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Read the training data
@@ -71,19 +67,15 @@ The view also contains `REVIEW_LABEL`. This is the known label used during train
 
     The numeric and category columns are the model inputs. `REVIEW_LABEL` is the answer the model learns to predict. `COMPONENT_ID` identifies the component but is not a business feature for this example.
 
-    Otto is checking that the training data already brings together the values he needs. He does not have to export quality measurements, production orders, and component data into separate files before training.
-
 ## Task 2: Compare models with AutoML (optional)
 
 Otto first uses the Oracle Machine Learning AutoML interface to compare candidate models. AutoML can select algorithms, tune them, and show how well each model identifies the two labels.
 
-This shows how a data scientist chooses a model: the leaderboard is a starting point, but Otto also checks whether the model identifies the business outcome he cares about.
-
-This task is optional. AutoML can take several minutes to complete, so you can continue with Task 3 if you want to focus on creating and using the model in SQL Developer Web.
+AutoML can take several minutes. Skip to Task 3 if you want to focus on SQL.
 
 1. Open **Machine Learning** from Database Actions.
 
-    Open **Database Actions**, select **Machine Learning**. Use the username and password you can find on the **View Login Info screen**.
+    Sign in with the credentials from **View Login Info** if prompted.
 
     ![Machine Learning launch from Database Actions](images/oml-launch.jpg)
 
@@ -109,13 +101,13 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
     ![Completed Component Quality Review leaderboard](images/oml-leaderboard.png)
 
-    The example leaderboard shows five models with balanced accuracy 1.0000. Your results may differ. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
+    Compare model details and confusion matrices, not just leaderboard scores. Your results may differ from the example.
 
     ![AutoML model comparison](images/oml-model-comparison.png)
 
-    Inspect the confusion matrix for both `STABLE` and `REVIEW`. A model that predicts only `STABLE` cannot identify quality escalations, even if its overall accuracy looks high. Check false positives and missed quality escalations before choosing a model.
+    Check false positives and missed `REVIEW` cases. A model predicting only `STABLE` may appear accurate while missing quality escalations.
 
-    The example GLM confusion matrix shows 40.82% REVIEW and 59.18% STABLE, with no off-diagonal entries. The interface also shows ROC AUC as 0.0000; the other perfect scores do not establish that this metric is correct or that the model will perform well on future data. Record the scores for your run. The labels are generated from the same inspection features used for training, so a high score does not demonstrate future predictive quality. The next task creates a separate GLM using SQL.
+    The example matrix shows 40.82% REVIEW and 59.18% STABLE with no off-diagonal entries, but ROC AUC displays 0.0000. Check your own metrics. Labels derive from the training features, so perfect scores do not demonstrate future predictive quality.
 
     ![GLM confusion matrix for component quality classifications](images/oml-confusion-matrix.png)
 
@@ -128,8 +120,6 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 If you ran AutoML, compare its results with the SQL model. Now create `OTTO_QUALITY_REVIEW_MODEL` in SQL Developer Web so you can call it from a query.
 
 The settings table tells Oracle to use the **Generalized Linear Model** used in this exercise. `PREP_AUTO` lets the database handle standard preparation of the input columns.
-
-If you skipped the optional AutoML task, use this setting as the example model for the workshop.
 
 1. Create the settings table and train the model:
 
@@ -278,7 +268,7 @@ Otto creates sample scoring data by changing values from the training view. This
     </copy>
     ```
 
-    This creates a small synthetic scenario from the workshop data, not observed future inspection outcomes. 
+
     > **Note:** The table has the model inputs, but it does not contain `REVIEW_LABEL`. That label belongs to the historical training data and must not be passed to the model as an input.
 
 2. Run the scoring query:
@@ -334,8 +324,6 @@ Otto creates sample scoring data by changing values from the training view. This
 3. Read the result as a dashboard user.
 
   `PREDICTED_REVIEW` tells the dashboard which label the model selected. `REVIEW_SCORE` is the model value between 0 and 1, while `REVIEW_PCT` presents the same value as a percentage for a dashboard user. The production-order and inspection columns give the business user something to review alongside the prediction.
-
-  One SQL result returns the prediction, component name, production orders, and quality measurements. Otto can use the model without moving the data to an external machine learning platform.
 
 ## Conclusion: Put the Prediction Beside the Business Data
 

@@ -6,7 +6,7 @@
 
 Nina Patel has used Select AI for individual questions. Her production-review screen now needs an assistant that can handle a request and follow-up questions.
 
-Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the manufacturing tables configured in the previous lab.
+Jessica gives Nina’s agent one SQL tool using the `GENAI` profile from Lab 7.
 
 In this lab, you create an agent, give it the built-in SQL query tool, and run a question through its team. The instructions ask for read-only answers. SQL still runs with the database user’s privileges. `LLUSER` owns the workshop objects, so it is not an example of a production account with restricted access.
 
@@ -33,10 +33,6 @@ In this lab, you create an agent, give it the built-in SQL query tool, and run a
 - Review the agent's tool history and explain why the tool boundary matters.
 
 Estimated Time: **15 minutes**
-
-### Hands-on Scenario
-
-Help Nina build an assistant using the SQL tool. Create its agent, task, and team, ask a manufacturing question, and inspect the tool history.
 
 > **Prerequisite:** Complete [Lab 7: Ask Manufacturing Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
 
@@ -130,8 +126,7 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     </copy>
     ```
 
-    The tool lets the agent ask Select AI to generate and run SQL. It uses the profile’s table list and the current database user’s privileges.
-  
+
 2. Confirm the tool definition:
 
     ```sql
@@ -224,7 +219,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
 ## Task 5: Inspect what the agent did
 
-Nina needs more than a final answer. She also wants to know whether the agent called the approved tool and how the request was processed.
+Check that Nina’s agent called the approved SQL tool.
 
 1. Review the latest team runs:
 
