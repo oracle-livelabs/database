@@ -1,0 +1,35 @@
+{
+  "workshoptitle": "Build Agents with Oracle AI Database Private Agent Factory",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Lab 1: Introduction to Oracle AI Database Private Agent Factory",
+      "description": "Review the path to agentic AI and the principles that guide Agent Factory.",
+      "type": "livelabs",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Lab 2: Create Knowledge Agent (KA) and Data Analysis (DA) Agents",
+      "description": "Create reusable agents for approved unstructured documents and structured data.",
+      "type": "livelabs",
+      "filename": "../../prebuilt/prebuilt.md"
+    },
+    {
+      "title": "Lab 3: Build an Agent from a Custom Template",
+      "description": "Import, inspect, test, and publish the Market Sync Agent template.",
+      "type": "livelabs",
+      "filename": "../../custom-templates/custom-templates.md"
+    },
+    {
+      "title": "Lab 4: Database Diagnostics Agent",
+      "description": "Use the skeleton for a future expert-approved database diagnostics exercise.",
+      "type": "livelabs",
+      "filename": "../../database-diagnostics-agent/database-diagnostics-agent.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Find solutions to common problems and ways to request help.",
+      "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
