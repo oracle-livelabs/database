@@ -25,17 +25,27 @@
     "lesson": "production-operations-dashboard/production-operations-dashboard.md",
     "section": "## Application example",
     "image": "production-operations-dashboard/images/demo-dashboard.jpg",
-    "alt": "SEER HIGHTECH operations command center",
-    "original_markdown": "![SEER HIGHTECH operations command center](images/demo-dashboard.jpg)",
-    "status": "awaiting_authentic_hightech_capture"
+    "alt": "LiveStack HighTech Demo: Product & Commitment Control Tower",
+    "original_markdown": "![LiveStack HighTech Demo: Product & Commitment Control Tower](images/demo-dashboard.jpg)",
+    "status": "authentic_hightech_application_capture",
+    "sha256": "1e41a576a18186fcecd39426f333c51f3c7bc79ba04ea88e44e7764b5006e9e7",
+    "capture_method": "Shared in-app browser, live Seer Tech application; page content only, no browser tabs or address bar; resized from 1800 to 1280 pixels",
+    "capture_pass": "hightech-application-2026-09-30",
+    "source_url": "http://158.101.222.154:8505/",
+    "source_data_note": "Separate product-lifecycle demo dataset; not the LLUSER workshop schema"
   },
   {
     "lesson": "production-operations-dashboard/production-operations-dashboard.md",
     "section": "## Application example",
     "image": "production-operations-dashboard/images/demo-dashboard-charts.jpg",
-    "alt": "SEER HIGHTECH operations charts",
-    "original_markdown": "![SEER HIGHTECH operations charts](images/demo-dashboard-charts.jpg)",
-    "status": "awaiting_authentic_hightech_capture"
+    "alt": "LiveStack HighTech Demo: Product & Commitment Control Tower",
+    "original_markdown": "![LiveStack HighTech Demo: Product & Commitment Control Tower](images/demo-dashboard-charts.jpg)",
+    "status": "authentic_hightech_application_capture",
+    "sha256": "6dd7135a4dae56ed349d2bfdb7359447acd9ade8349b929cf68bba5d7da8acb8",
+    "capture_method": "Shared in-app browser, live Seer Tech application; page content only, no browser tabs or address bar; resized from 1800 to 1280 pixels",
+    "capture_pass": "hightech-application-2026-09-30",
+    "source_url": "http://158.101.222.154:8505/",
+    "source_data_note": "Separate product-lifecycle demo dataset; not the LLUSER workshop schema"
   },
   {
     "lesson": "quality-review-oml/quality-review-oml.md",
@@ -204,11 +214,16 @@
   },
   {
     "lesson": "plant-routing-spatial/plant-routing-spatial.md",
-    "section": "## Introduction",
+    "section": "## Application example",
     "image": "plant-routing-spatial/images/demo-spatial-map.jpg",
-    "alt": "SEER HIGHTECH plant capacity and routing map",
-    "original_markdown": "![SEER HIGHTECH plant capacity and routing map](images/demo-spatial-map.jpg)",
-    "status": "awaiting_authentic_hightech_capture"
+    "alt": "LiveStack HighTech Demo: Supply & Commitment Map",
+    "original_markdown": "![LiveStack HighTech Demo: Supply & Commitment Map](images/demo-spatial-map.jpg)",
+    "status": "authentic_hightech_application_capture",
+    "sha256": "693bd8c51b777d768cdf20a89c487e2aa05d44e65291ee5b5ea0cead6224d716",
+    "capture_method": "Shared in-app browser, live Seer Tech application; page content only, no browser tabs or address bar; resized from 1800 to 1280 pixels",
+    "capture_pass": "hightech-application-2026-09-30",
+    "source_url": "http://158.101.222.154:8505/",
+    "source_data_note": "Separate product-lifecycle demo dataset; not the LLUSER workshop schema"
   },
   {
     "lesson": "plant-routing-spatial/plant-routing-spatial.md",
@@ -355,19 +370,29 @@
   },
   {
     "lesson": "production-quality-network/production-quality-network.md",
-    "section": "## Introduction",
+    "section": "## Application example",
     "image": "production-quality-network/images/demo-network-overview.jpg",
-    "alt": "SEER HIGHTECH risk graph",
-    "original_markdown": "![SEER HIGHTECH risk graph](images/demo-network-overview.jpg)",
-    "status": "awaiting_authentic_hightech_capture"
+    "alt": "LiveStack HighTech Demo: Product Signal Graph",
+    "original_markdown": "![LiveStack HighTech Demo: Product Signal Graph](images/demo-network-overview.jpg)",
+    "status": "authentic_hightech_application_capture",
+    "sha256": "3e8f8e48725e14f8b5f73f091bd5e31f24c8b424efb0547951cfc208a03ee65a",
+    "capture_method": "Shared in-app browser, live Seer Tech application; page content only, no browser tabs or address bar; resized from 1800 to 1280 pixels",
+    "capture_pass": "hightech-application-2026-09-30",
+    "source_url": "http://158.101.222.154:8505/",
+    "source_data_note": "Separate product-lifecycle demo dataset; not the LLUSER workshop schema"
   },
   {
     "lesson": "production-quality-network/production-quality-network.md",
-    "section": "## Introduction",
+    "section": "## Application example",
     "image": "production-quality-network/images/demo-network-query.jpg",
-    "alt": "SEER HIGHTECH risk graph query and results",
-    "original_markdown": "![SEER HIGHTECH risk graph query and results](images/demo-network-query.jpg)",
-    "status": "awaiting_authentic_hightech_capture"
+    "alt": "LiveStack HighTech Demo: Product Signal Graph",
+    "original_markdown": "![LiveStack HighTech Demo: Product Signal Graph](images/demo-network-query.jpg)",
+    "status": "authentic_hightech_application_capture",
+    "sha256": "98da1bdc3e241cb0bf65c43050b90f9bb441ad653ee3970f3c49f9e7be0ea721",
+    "capture_method": "Shared in-app browser, live Seer Tech application; page content only, no browser tabs or address bar; resized from 1800 to 1280 pixels",
+    "capture_pass": "hightech-application-2026-09-30",
+    "source_url": "http://158.101.222.154:8505/",
+    "source_data_note": "Separate product-lifecycle demo dataset; not the LLUSER workshop schema"
   },
   {
     "lesson": "production-quality-network/production-quality-network.md",
@@ -610,10 +635,15 @@
   {
     "lesson": "introduction/introduction.md",
     "line": 54,
-    "section": "## Running the manufacturing demo",
-    "alt": "SEER MANUFACTURING LiveStack welcome page",
-    "original_markdown": "![SEER MANUFACTURING LiveStack welcome page](images/demo-welcome.jpg)",
+    "section": "## Running the HighTech demo",
+    "alt": "LiveStack HighTech Demo: Welcome",
+    "original_markdown": "![LiveStack HighTech Demo: Welcome](images/demo-welcome.jpg)",
     "image": "introduction/images/demo-welcome.jpg",
-    "status": "awaiting_authentic_hightech_capture"
+    "status": "authentic_hightech_application_capture",
+    "sha256": "5fc9ce2a528fab91717fbe2e9dce35e7a9808e70cd4b5883309f1b0ed551878c",
+    "capture_method": "Shared in-app browser, live Seer Tech application; page content only, no browser tabs or address bar; resized from 1800 to 1280 pixels",
+    "capture_pass": "hightech-application-2026-09-30",
+    "source_url": "http://158.101.222.154:8505/",
+    "source_data_note": "Separate product-lifecycle demo dataset; not the LLUSER workshop schema"
   }
 ]

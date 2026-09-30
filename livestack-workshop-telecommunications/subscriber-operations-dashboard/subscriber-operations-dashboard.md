@@ -173,10 +173,6 @@ Use the first row to explain why a plan needs attention. Check its alert severit
 
 > **Interpretation:** The nearest-site result is regional context shared by every plan row. It does not identify a subscriber's serving cell or verify radio coverage. Affected-subscriber counts are per-report totals and can overlap. Order activity counts pending and confirmed activation orders; it is not the installed subscriber base.
 
-To see how combined data can be presented, open **Service Assurance Dashboard** in the running demo and compare the incident indicators with the signal-velocity and service-line charts. These application metrics use the demo dataset; they are not expected values from the query above.
-
-![Live service-assurance dashboard with incident indicators and charts.](images/app-dashboard.png)
-
 ## Task 2: Change the investigation question
 
 Jessica meets with a subscriber experience analyst to review the results at the data level before she builds the dashboard. They start with service plans related to **weak indoor mobile coverage and dropped calls requiring subscriber support**. Change the embedded investigation phrase to:
@@ -198,6 +194,14 @@ The query sorts by similarity first, so changing the question changes the review
 ## Next Steps
 
 Next, use JSON Relational Duality to expose the same service order data as JSON for an application while keeping SQL access for the database team.
+
+## Application Demo
+
+Open **Service Assurance Dashboard** and compare the incident indicators with the signal-velocity and service-line charts.
+
+![LiveStack Telecomm Demo: Service Assurance Dashboard](images/app-dashboard.png)
+
+*LiveStack Telecomm Demo: Service Assurance Dashboard*
 
 ## Acknowledgements
 

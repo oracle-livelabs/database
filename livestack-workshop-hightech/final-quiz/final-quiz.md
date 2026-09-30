@@ -7,7 +7,7 @@ badge: images/livestack-hightech-badge.svg
 
 ## Introduction
 
-Use this quiz to check how the database results support the SEER HIGHTECH tasks you completed.
+Use this quiz to check how the database results support the Seer HighTech tasks you completed.
 
 ### Objectives
 
@@ -21,7 +21,7 @@ Estimated Time: **3 minutes**
 1. Complete the scored quiz.
 
     ```quiz score
-    Q: What does JSON Relational Duality help SEER HIGHTECH do in the production order lab?
+    Q: What does JSON Relational Duality help Seer HighTech do in the production order lab?
     - Copy production order documents into a separate document database.
     * Use the same production order data as JSON documents or relational tables without maintaining duplicate records.
     - Remove relational tables from the production order review process.
@@ -42,7 +42,7 @@ Estimated Time: **3 minutes**
     - It replaces relationship data with flat component totals.
     > The graph lab focuses on relationship data. A production quality analyst can prioritize connected production orders, material lots, machines, suppliers, and inspection records by following the relationships stored in the graph.
 
-    Q: Why does SEER HIGHTECH use spatial data in the plant-routing lab?
+    Q: Why does Seer HighTech use spatial data in the plant-routing lab?
     - To make coverage decisions outside the shared database.
     - To hide capacity data from production operations leaders.
     * To find the closest plant for a customer site or high-demand region and combine that location with plant capacity and current workload.

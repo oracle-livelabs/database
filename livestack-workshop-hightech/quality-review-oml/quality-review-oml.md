@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Otto Spencer, SEER HIGHTECH’s data scientist, is building a quality-review watchlist. The team needs to see which components may need attention and the electrical-test measurements behind each score.
+Otto Spencer, Seer HighTech’s data scientist, is building a quality-review watchlist. The team needs to see which components may need attention and the electrical-test measurements behind each score.
 
 You will train a model to classify components as `REVIEW` or `STABLE`, then join its predictions to component, production-order, and inspection data for the dashboard.
 
@@ -41,7 +41,7 @@ Otto checks `OML_QUALITY_TRAINING_V`: one row per active component, combining in
 
 `REVIEW_LABEL` is the label the model learns to predict. The sample data assigns `REVIEW` when the mean defect rate is at least 3 percent and at least two observations record 60 or more minutes of downtime. Other components are `STABLE`.
 
-This produces 96 rows in each class. The measurements and labels come from the same period, so the exercise teaches classification without showing how well the model predicts future defects.
+The view has 96 `REVIEW` rows and 96 `STABLE` rows. Because its labels and measurements come from the same period, a score here does not show how well the model predicts future defects.
 
 The view aggregates quality observations and order lines separately before joining them, so neither set is counted more than once.
 
@@ -190,7 +190,7 @@ The settings table tells Oracle to use the **Generalized Linear Model** used in 
 
 ## Task 4: Score sample component measurements in SQL
 
-Otto creates sample scoring data by changing values from the training view. This shows how to score a separate table without including the target label. Because the rows come from training data, they cannot measure accuracy on new, independent data.
+Otto changes several measurements from the training view and scores them without a target label. These sample rows are not independent test data, so their scores do not measure future accuracy.
 
 1. Create the scoring table and add the sample inspection measurements:
 
@@ -316,9 +316,9 @@ Otto creates sample scoring data by changing values from the training view. This
 
     ![Component quality-review predictions and probabilities](images/sql-oml-scoring.png)
 
-3. Read the result as a dashboard user.
+3. Find the component Otto should review first.
 
-  `PREDICTED_REVIEW` is the selected label. `REVIEW_SCORE` is the review-class value from 0 to 1; `REVIEW_PCT` expresses it as a percentage. Compare it with the order and inspection measurements alongside it.
+    Compare its `REVIEW_SCORE` with the inspection measurements and production-order values beside it. `PREDICTED_REVIEW` is the selected label; `REVIEW_PCT` displays the score as a percentage.
 
 ## Acknowledgements
 

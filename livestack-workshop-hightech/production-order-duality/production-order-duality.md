@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Thomas Brune, SEER HIGHTECH’s application developer, needs production-order JSON documents for web and mobile screens, including order lines and optional app fields.
+Thomas Brune, Seer HighTech’s application developer, needs production-order JSON documents for web and mobile screens, including order lines and optional app fields.
 
 Jessica, the DBA, helps him compare JSON columns, JSON collections, and JSON Relational Duality Views while retaining SQL access, transactions, and database controls.
 
@@ -252,7 +252,7 @@ Thomas inserts one nested document, then checks the relational rows Jessica sees
 
     The `INSERT` writes through `PRODUCTION_ORDERS_DV` into relational tables. It uses reserved order ID `900001` and line ID `990001`, with customer site, plant, and component IDs all `1`.
 
-    The sandbox loader supplies those referenced rows. The fixed dates put the due date after the scheduled start; quantity is independent of that range.
+    The sandbox loader supplies those referenced rows.
 
     ```sql
     <copy>
@@ -313,7 +313,7 @@ Thomas inserts one nested document, then checks the relational rows Jessica sees
 
 3. Update the document status through the duality view.
 
-    This statement maps `status` to `PRODUCTION_ORDERS.ORDER_STATUS`. The view also permits updates to other exposed fields; restricting writes to status alone would require a narrower view definition.
+    This statement changes `PRODUCTION_ORDERS.ORDER_STATUS` through the JSON document.
 
     ```sql
     <copy>

@@ -130,10 +130,6 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
     Check that the statement joins SERVICE_PLANS, SERVICE_ORDER_LINES, and SERVICE_ORDERS, groups by plan, returns five rows, sums LINE_TOTAL, and filters the stated service order statuses. Exclude ACTIVATION_FEE from monthly recurring charges. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
 
-The demo's **Ask Telecom Operations Data** screen illustrates the distinction between **Narrate**, **Chat**, **Show SQL** and **Run SQL**. At capture time its selected runtime was local `llama3.2` through Ollama. This interface example does not establish that the demo uses the `GENAI` profile or executes the Select AI commands in this lab.
-
-![Live question interface showing its local runtime and available modes; no answer was submitted for this capture.](images/app-ask-data.png)
-
 ## Task 4: Run the question in the database
 
 Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
@@ -223,6 +219,14 @@ Nina compared monthly charges by asking, inspecting, running, and refining a que
 ## Next Steps
 
 For the full list of Select AI actions, profile attributes, and supported providers, see the [Oracle AI Database 26ai Select AI documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
+
+## Application Demo
+
+Open **Ask Telecom Operations Data** to explore **Narrate**, **Chat**, **Show SQL**, and **Run SQL**.
+
+![LiveStack Telecomm Demo: Ask Telecom Operations Data](images/app-ask-data.png)
+
+*LiveStack Telecomm Demo: Ask Telecom Operations Data*
 
 ## Acknowledgements
 

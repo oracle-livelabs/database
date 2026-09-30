@@ -80,7 +80,7 @@
       ],
       [
         "### SEER MANUFACTURING data model",
-        "### SEER HIGHTECH data model"
+        "### Seer HighTech data model"
       ],
       [
         "## Running the manufacturing demo",
@@ -89,7 +89,9 @@
     ],
     "live_validation_departure": null,
     "editorial_headings_preserved": true,
-    "approved_heading_changes": {},
+    "approved_heading_changes": {
+      "### SEER HIGHTECH data model": "### Seer HighTech data model"
+    },
     "removed_editorial_headings": []
   },
   {
@@ -119,6 +121,10 @@
       ],
       [
         "## Conclusion: Use location in a production decision",
+        "## Application example"
+      ],
+      [
+        "## Next Steps",
         "## Acknowledgements"
       ]
     ],
@@ -149,10 +155,6 @@
       ],
       [
         "## Task 2: Change the investigation question",
-        "## Application example"
-      ],
-      [
-        "## Application example",
         "## Next Steps"
       ],
       [
@@ -264,6 +266,10 @@
       ],
       [
         "## Conclusion: Make Relationships Easy to Review",
+        "## Application example"
+      ],
+      [
+        "## Appendix: Create the Property Graph",
         "## Acknowledgements"
       ]
     ],

@@ -209,7 +209,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
 2. Review the answer.
 
-    Nina checks all five rows against this SQL result: component, category, ranking, material value and planned units. Both numeric totals must appear for every component and match exactly.
+    Compare all five agent rows with the SQL result below. Check each component, category, rank, material value, and planned units. Every row needs both numeric totals.
 
     ```sql
     <copy>
@@ -273,7 +273,7 @@ Nina checks whether the agent called the approved tool and how it processed her 
 
     ![Select AI Agent SQL tool invocation history](images/sql-agent-tools.png)
 
-    The history should show `NINA_HIGHTECH_SQL_TOOL`. Open `INPUT` and `OUTPUT` to inspect the request and returned values. `SUCCEEDED` means the call finished; it does not establish that the ranking or totals are correct.
+    Open `INPUT` and `OUTPUT` for `NINA_HIGHTECH_SQL_TOOL`. Do the returned values match the answer you checked in Task 4? `SUCCEEDED` confirms the call finished, not that its figures are correct.
 
 3. Restore the original model, including if the agent request fails. The value below is the supplied stack default; replace it with the value you recorded in Task 1 if yours differs. Run with **Run Script (F5)**.
 
@@ -292,7 +292,7 @@ Nina checks whether the agent called the approved tool and how it processed her 
     </copy>
     ```
 
-    Confirm that `RESTORED_MODEL` matches the value recorded before this exercise. Runtime and wording vary. If a request times out, its history row may still appear as `RUNNING` with no end time; that row alone does not prove that it is still executing.
+    Confirm that `RESTORED_MODEL` matches the value you recorded in Task 1. A timed-out request may leave a `RUNNING` history row without an end time.
 
 ## Conclusion: Give the agent a controlled way to work
 
