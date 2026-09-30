@@ -2,32 +2,36 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator at Seer Utility Network. Her teams operate electric, gas, water, wastewater, and oil and gas services. They need to respond to reliability signals, coordinate field work, manage service requests, and explain operational decisions with evidence.
+Jessica Chan is the database administrator at Seer Utility Network, which supports electric, gas, water, wastewater, and oil and gas services. Customers depend on reliable service. When a service request needs an operational response, the team must understand the request, investigate possible reliability problems, and check whether field-logistics sites can supply or support that response.
 
-The requests look different, but they share one problem: the data already lives in Oracle AI Database, and each team needs to use it in a different way.
+Jessica helps the team trace each dashboard number and recommendation back to database evidence. In this workshop, **reliability risk** means evidence of a possible utility-service problem, not proof of an outage. **Field-logistics capacity** means the inventory and site workload available to support a response, not electrical generation capacity or an automatic dispatch decision.
 
 - Thomas needs utility service requests as JSON for an application.
-- Gilly needs semantic search that finds operational signals by meaning.
+- Gilly needs semantic search that finds service descriptions related to an operational concern.
 - Bob needs to follow relationships among outages, assets, crews, service points, and reliability gaps.
 - Moon needs to calculate distances between service points and field logistics sites.
-- Otto needs to train and score a service-demand model.
+- Otto needs to evaluate a prepared demand-surge model and combine its scores with capacity constraints.
 - Nina needs to ask utility operations questions in plain language and turn the results into controlled operational review.
 
-![The Seer Utility Network demo welcome screen](images/seer-utility-network-welcome.png " ")
+The welcome screen below shows the broader Seer Utility Network application. Use it as business context, not as an expected SQL result or a checklist of features built in every lab.
 
-Jessica helps each team meet its requirement without creating a new copy of operational data or a separate security model for every feature. Relational tables remain the system of record, while JSON, vectors, graphs, spatial data, machine learning, Select AI, and Select AI Agent work with the same governed foundation.
+![Seer Utility Network application welcome screen, shown as business context](images/seer-utility-network-welcome.png " ")
+
+The workshop demonstrates convergence across successive labs. Lab 1 uses relational SQL; later labs inspect JSON documents, search vectors, follow graph relationships, compare locations, and evaluate machine-learning scores. These exercises keep evidence connected to its business rows. Labs 7–8 introduce provider-backed assistance, which also requires approved external AI configuration and data-sharing controls.
 
 ### What the team builds
 
 | Team member | Requirement | What you will see |
 | --- | --- | --- |
-| Jessica, DBA | Build the query behind an operations command center. | One SQL result connects requests, signals, logistics, and capacity evidence. |
+| Jessica, DBA | Build an energy operations review query. | Relational SQL connects requests, signals, logistics, and capacity evidence. |
 | Thomas, application developer | Give the application flexible service-request documents. | JSON Relational Duality exposes relational request data as application-ready JSON. |
 | Gilly, AI engineer | Find utility services related to an operational concern. | Vector search ranks records by meaning and keeps the result joined to business data. |
-| Bob, graph specialist | Trace restoration and reliability pathways. | A property graph reveals connected assets, crews, events, and gaps. |
-| Moon, spatial expert | Route field work to an appropriate site. | Oracle Spatial calculates distance using stored service-point and site locations. |
-| Otto, data scientist | Identify services likely to face a demand surge. | Oracle Machine Learning trains and scores in the database. |
-| Nina, operations analyst | Ask questions without writing every query from scratch. | Select AI exposes generated SQL; Select AI Agent uses approved tools and records execution history. |
+| Bob, graph specialist | Inspect the evidence linked to an operational event. | A directed, one-hop graph query and prepared findings connect events with assets and other evidence. |
+| Moon, spatial expert | Identify nearby sites for review. | Straight-line geodetic distance ranks candidates; capacity and workload still matter. |
+| Otto, data scientist | Build a demand and capacity watchlist. | A prepared Oracle Machine Learning model is evaluated on held-out labeled cases, then used for scoring. |
+| Nina, operations analyst | Investigate site workload and service capacity in plain language. | Select AI and an operational review agent are planned exercises whose live behavior remains environment-dependent. |
+
+> **Labs 7–8 prerequisite:** Live execution requires an enabled, `LLUSER`-accessible `EU_GENAI` profile, an approved provider credential and model, provider connectivity, and the governed Energy and Utilities context list. Live validation remains pending. If the profile is unavailable, read those labs as a design exercise and continue to the quiz; do not create or configure a profile yourself.
 
 <details>
 <summary><strong>Learn more: What does "converged database" mean?</strong></summary>
@@ -36,14 +40,15 @@ Jessica helps each team meet its requirement without creating a new copy of oper
 
 </details>
 
-Throughout the workshop, select a **Learn more**, **Checkpoint**, or **Interactive challenge** heading to expand it. These sections add context without interrupting the main task flow.
+Throughout the workshop, an arrow beside **Key terms**, **Learn more**, or **Challenge answer** opens optional detail. Try each challenge before expanding its answer.
 
 ### Objectives
 
 - Follow Jessica and her team through one connected Energy and Utilities story.
-- Use relational SQL, JSON, vectors, graphs, spatial data, Oracle Machine Learning, Select AI, and Select AI Agent.
-- Inspect generated SQL and agent execution evidence before trusting an AI-assisted answer.
-- Connect each database task to the Seer Utility Network application experience.
+- Explain how relational review, JSON Relational Duality, AI Vector Search, Property Graph, Spatial, and Oracle Machine Learning answer different operational questions.
+- Distinguish evidence for human review from predictions, proximity rankings, and operational authorization.
+- Describe how to review generated SQL and agent history when the Labs 7–8 environment is available.
+- Connect each result to the service, reliability, or capacity decision it supports.
 
 Estimated Workshop Time: **90 minutes**
 

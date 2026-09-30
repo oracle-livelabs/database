@@ -21,12 +21,12 @@ Estimated Time: **5 minutes**
 1. Complete the scored quiz. A score of **75%** or higher earns the badge.
 
     ```quiz score
-    Q: Why does Jessica build the command-center query from governed views?
+    Q: Why does Jessica build the energy operations review query from governed views?
     - To replace source tables with dashboard screenshots.
     * To connect requests, signals, logistics, and capacity evidence without separate operational data copies.
     - To let every user bypass database privileges.
     - To turn every row into JSON before analysis.
-    > The command center connects evidence from one governed database foundation. Each conclusion can lead back to its source rows.
+    > Lab 1 uses relational SQL to connect evidence from one database foundation. JSON, vector, graph, and spatial operations appear in later labs, not in this query.
 
     Q: What does JSON Relational Duality give Thomas?
     - A second document database that Thomas must synchronize manually.
@@ -42,12 +42,12 @@ Estimated Time: **5 minutes**
     - The result is approved automatically for dispatch.
     > Similarity ranks related meanings. It supports investigation, but it does not prove causality or authorize an operational action.
 
-    Q: What is the main advantage of Bob's property graph?
-    - It removes the need for source rows and keys.
-    - It proves that every connected node caused the event.
-    - It grants unrestricted write access.
-    * It makes multi-hop relationships among events, assets, crews, and evidence easier to express and inspect.
-    > SQL/PGQ describes relationship patterns while the governed entity and relationship tables remain the source.
+    Q: What does Bob inspect with the lab's directed, one-hop graph query?
+    - Every incoming and outgoing path of any length.
+    - Proof that each connected asset caused the event.
+    - A road route between the event and a field site.
+    * The entities reached by an outgoing relationship from a selected operational event.
+    > The SQL property graph query follows one directed edge from a seed entity. The separate prepared findings view summarizes broader evidence; a connection does not prove causality.
 
     Q: Why does Moon include operational status and capacity with distance?
     * The nearest active site may still be constrained, so dispatch requires more than proximity.
@@ -61,21 +61,21 @@ Estimated Time: **5 minutes**
     - As permission to dispatch a crew automatically.
     * As decision-support evidence for a human review queue, checked against known outcomes and capacity data.
     - As a substitute for validation data.
-    > A model probability helps prioritize review. It is not certainty and must remain connected to business evidence.
+    > Otto evaluates a prepared model on labeled cases separate from training, then combines scores with capacity evidence. Probability is model confidence, not certainty; a tiny synthetic test set does not establish production performance.
 
     Q: Why does Nina use SHOWSQL before RUNSQL?
     - To reveal the AI provider credential.
     * To inspect selected objects, filters, ordering, and row limits before generated SQL executes.
     - To grant Select AI access to every schema.
     - To prevent the database from enforcing privileges.
-    > SHOWSQL keeps the database operation visible. Nina can refine the prompt before the generated statement runs.
+    > SHOWSQL exposes the proposed query so Nina can review and refine the request. A later RUNSQL call may generate different SQL; review does not bind that call to the exact displayed statement.
 
     Q: What evidence makes the Select AI Agent workflow reviewable?
     - The agent's confident wording alone.
     - A screenshot without SQL or history.
     - A broad write-capable tool with no confirmation step.
-    * A narrow context list, an approved read-only tool, database privileges, and team and tool execution history.
-    > The object list supplies model context; it does not authorize access. Tool configuration and database security enforce access, while the history views support review. Write actions would require separate narrow tools, explicit approval, and audit controls.
+    * Verified tool permissions, database access controls, and history tied to the specific team execution.
+    > Read-only wording in a prompt is an intention, not enforcement. The object list supplies context; tool configuration and database security enforce access. History supports review but does not prove an answer is correct. Labs 7–8 live behavior remains pending validation.
     ```
 
 2. When you achieve the passing score, the quiz displays your Energy and Utilities completion badge.
