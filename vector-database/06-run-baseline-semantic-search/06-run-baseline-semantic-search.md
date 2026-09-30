@@ -2,13 +2,14 @@
 
 ## Introduction
 
-In this lab, you run semantic searches against the National Parks `parks` table. Each text query uses the embedding model configured on the table to generate its query vector.
+In this lab, you run semantic searches against the National Parks `parks` table and the bring-your-own-vector `directions` table. Text queries use the embedding model configured on `parks`; the `directions` search generates its query vector explicitly.
 
 Estimated Time: X
 
 ### Objectives
 
 - Run semantic searches with natural-language text.
+- Search a bring-your-own-vector table with a precomputed query vector.
 - Review formatted National Parks results.
 - Understand how query text, `top_k`, and metadata filters affect results.
 - Combine semantic search with metadata filters.
@@ -17,7 +18,7 @@ Estimated Time: X
 
 - Complete Lab 5: Create Embeddings and Load Text.
 - Keep the `vecdb` client initialized in your OML Notebook.
-- Load the National Parks records into the `parks` table.
+- Load the National Parks records into the `parks` table and the direction vectors into the `directions` table.
 
 ## Task 1: Search by Text
 
@@ -25,20 +26,29 @@ This task establishes the reusable query-and-display pattern used throughout the
 
 1. Add a new Python paragraph and run the following code.
 
-    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of park names, park codes, and states. If a query returns no items, the function safely returns an empty string.
+    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. Set `include_directions=True` when displaying results from the BYO `directions` table to include the original direction text.
 
     ```python
     %python
-    def format_parks(result):
-        return "\n".join(
-            f"{i}. {r.metadata['name']} ({r.metadata['park_code']}) – {r.metadata['states']}"
-            for i, r in enumerate(result.items or [], 1)
-        )
+    def format_parks(result, include_directions=False):
+        formatted_items = []
+        for i, r in enumerate(result.items or [], 1):
+            metadata = r.metadata
+            fields = [
+                f"{i}. name: {metadata['name']}",
+                f"park_code: {metadata['park_code']}",
+                f"states: {metadata['states']}",
+                f"description: {metadata['description']}",
+            ]
+            if include_directions:
+                fields.append(f"directions: {metadata['DIRECTIONS_INFO']}")
+            formatted_items.append("\n".join(fields))
+        return "\n\n".join(formatted_items)
     ```
 
 2. Add a new Python paragraph and run the following code.
 
-    `table_name="parks"` selects the data to search. `query_by={"text": search_text}` tells the table to embed the natural-language text with its configured model. `top_k=10` returns the ten most similar park records.
+    `table_name="parks"` selects the data to search. `query_by={"text": search_text}` tells the table to embed the natural-language text with its configured model. `top_k=5` returns the five most similar park records.
 
     ```python
     %python
@@ -47,13 +57,13 @@ This task establishes the reusable query-and-display pattern used throughout the
     result = vecdb.query(
         table_name="parks",
         query_by={"text": search_text},
-        top_k=10,
+        top_k=5,
     )
 
     print(format_parks(result))
     ```
 
-3. Review the results. The table converts the query text into an embedding with its configured model, then returns the ten closest park records. Notice that the query does not need to match a park description word-for-word; it searches for records semantically related to Civil War battlefields.
+3. Review the results. The table converts the query text into an embedding with its configured model, then returns the five closest park records. Notice that the query does not need to match a park description word-for-word; it searches for records semantically related to Civil War battlefields.
 
 ## Task 2: Search for Terms Not Present in the Text
 
@@ -70,7 +80,7 @@ This task is a deliberate semantic-search test. The terms “rock climbing” an
     result = vecdb.query(
         table_name="parks",
         query_by={"text": search_text},
-        top_k=10,
+        top_k=5,
     )
 
     print(format_parks(result))
@@ -99,7 +109,7 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
                 {"states": {"$in": ["DC", "MD"]}},
             ]
         },
-        top_k=10,
+        top_k=5,
     )
 
     print(format_parks(result))
@@ -107,7 +117,33 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
 
 2. Review the results. Every returned record must satisfy the metadata conditions and be semantically relevant to the request. An empty result is also valid if no records meet both requirements.
 
-You now have a baseline semantic-search pattern. Lab 7 reuses this pattern and enriches it with prior user queries.
+## Task 4: Search the Bring-Your-Own-Vector Table
+
+The `directions` table stores vectors generated in Lab 5 and does not have an integrated embedding configuration. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
+
+1. Add a new Python paragraph and run the following code.
+
+    ```python
+    %python
+    direction_query = "driving directions from Washington, DC to a national park entrance"
+
+    direction_embedding = vecdb.generate_embedding(
+        model_name="all_MiniLM_L12_v2",
+        inputs=[direction_query],
+    )
+
+    direction_result = vecdb.query(
+        table_name="directions",
+        query_by={"vector": direction_embedding.data[0].embedding},
+        top_k=5,
+    )
+
+    print(format_parks(direction_result, include_directions=True))
+    ```
+
+2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `directions` is a bring-your-own-vector table. The output includes the original `DIRECTIONS_INFO` text as `directions`, along with the other park metadata.
+
+You now have a baseline semantic-search pattern for both integrated-embedding and bring-your-own-vector tables. Lab 7 reuses the integrated `parks` pattern and packages it as a read-only context-retrieval tool that an agent can call.
 
 
 You may now **proceed to the next lab.**
@@ -116,9 +152,10 @@ You may now **proceed to the next lab.**
 
 - [Oracle VecDB Python SDK quick start](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/quickstart.html)
 - [Oracle VecDB query response](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/response-objects/query-response.html)
+- [Oracle VecDB generate embedding operation](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/generate-embedding.html)
 - [Oracle VecDB record and metadata concepts](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/how-oracle-vecdb-works/record.html)
 
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, August 27, 2026
+* **Last Updated By/Date** - September 28, 2026

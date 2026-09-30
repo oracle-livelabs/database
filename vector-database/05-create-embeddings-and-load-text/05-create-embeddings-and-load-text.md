@@ -98,7 +98,7 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
 
 1. Add a new Python paragraph and run the following code.
 
-    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes about one minute to complete.
+    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes a few minutes to complete.
 
     ```python
     %python
@@ -131,7 +131,7 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
     print(upsert_result)
     ```
 
-2. Review the output. The embedding step typically takes about one minute. The paragraph prints the number of prepared direction vectors, and the final upsert result confirms that the vectors and metadata were loaded into `directions`.
+2. Review the output. The embedding step typically takes a few minutes. The paragraph prints the number of prepared direction vectors, and the final upsert result confirms that the vectors and metadata were loaded into `directions`.
 
     This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
 
@@ -148,4 +148,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, August 27, 2026
+* **Last Updated By/Date** - August 27, 2026

@@ -60,7 +60,7 @@ By default, the SDK's purpose-built vector-table schema creates an IVF vector in
 
 A bring-your-own-vector table does not create embeddings automatically. In Lab 5, you will use `vecdb.generate_embedding()` to create vectors from `DIRECTIONS_INFO`, then load those vectors into this table.
 
-Unlike `parks`, `directions` has no `embed_params` setting. Each upsert must therefore provide an ID, a dense vector, and metadata. The `comment` is optional. Although the SDK's purpose-built schema normally creates an IVF vector index automatically, `auto_index=False` defers automatic vector-index creation for this table so you can configure it later.
+Unlike `parks`, `directions` has no `embed_params` setting. Each upsert must therefore provide an ID, a dense vector, and metadata. The `comment` is optional. Although the SDK's purpose-built schema normally creates an IVF vector index automatically, `auto_index=False` intentionally delays vector-index creation to demonstrate how an application can load data before creating an index.
 
 1. Add a new Python paragraph and run the following code to create the `directions` table.
 
@@ -90,4 +90,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, May 28, 2026
+* **Last Updated By/Date** - May 28, 2026
