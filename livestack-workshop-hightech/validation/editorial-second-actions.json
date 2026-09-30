@@ -1,0 +1,42 @@
+[
+  {
+    "file": "introduction/introduction.md",
+    "targeted_prose_changes": 5
+  },
+  {
+    "file": "getting-started/getting-started.md",
+    "targeted_prose_changes": 7
+  },
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "targeted_prose_changes": 8
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "targeted_prose_changes": 17
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "targeted_prose_changes": 17
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "targeted_prose_changes": 21
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "targeted_prose_changes": 20
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "targeted_prose_changes": 10
+  },
+  {
+    "file": "selectai/selectai.md",
+    "targeted_prose_changes": 9
+  },
+  {
+    "file": "selectai-agent/selectai-agent.md",
+    "targeted_prose_changes": 8
+  }
+]

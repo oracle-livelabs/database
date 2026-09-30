@@ -47,7 +47,7 @@
         "message": [
           "%md",
           "",
-          "This query treats the activation fraud data as a graph. In the MATCH pattern, (seed IS entity) is the starting service_order, -[e IS related_to]->{1,2} means follow one or two relationship hops, and (reached IS entity) is every entity reached from that starting point.",
+          "This query treats the activation fraud data as a graph. In the MATCH pattern, (seed IS entity) is the starting service order, -[e IS related_to]->{1,2} means follow one or two relationship hops, and (reached IS entity) is every entity reached from that starting point.",
           "",
           "The WHERE clause starts the search at ORD-8841, and the COLUMNS clause returns graph properties in a normal SQL result table.",
           "",
@@ -204,7 +204,7 @@
         "message": [
           "%md",
           "",
-          "This visualization narrows the investigation to the device DEV-fp-91a7 and shows every entity directly connected to it. The supplied style highlights the device in red. The sample data requires links to service order vertices ORD-8841, ORD-5077, and ORD-1190; verify those shared-device links in your results. If present, an IP-address connection provides supporting context: it may indicate another shared attribute associated with the same device and should be investigated alongside the linked service_orders."
+          "This visualization narrows the investigation to the device DEV-fp-91a7 and shows every entity directly connected to it. The supplied style highlights the device in red. The sample data requires links to service order vertices ORD-8841, ORD-5077, and ORD-1190; verify those shared-device links in your results. If present, an IP-address connection provides supporting context: it may indicate another shared attribute associated with the same device and should be investigated alongside the linked service orders."
         ],
         "selectedVisualization": "html",
         "visualizationConfig": null,

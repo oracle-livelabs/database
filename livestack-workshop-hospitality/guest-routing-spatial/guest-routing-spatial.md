@@ -4,16 +4,9 @@
 
 ## Introduction
 
-Moon Kai is Seer Hotels’ spatial specialist. Operations teams ask Moon for help when location affects a service decision: which property is closest to a region with growing demand, and which guests should it handle?
+Moon Kai, Seer Hotels’ spatial specialist, helps guest services find nearby hotels: **which guests are in a high-demand region, and which active property is closest to each one?**
 
-Oracle AI Database stores hotel and guest locations as map points. It stores demand regions as map areas, each with a demand score.
-
-Moon wants a query that a service team can use in a dashboard and map:
-
-> Guests in a high-demand region need help finding another hotel. **Which guests are in that region, and which property is closest to each one?**
-
-In this lab, you follow Moon's approach. You start with a single point, measure distance to a region, find guests inside that region, and finish with a guest routing result that combines location and service data.
-
+Follow Moon from hotel points and demand-region polygons to a guest routing query that returns distances and property details.
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
@@ -30,13 +23,6 @@ In this lab, you follow Moon's approach. You start with a single point, measure 
 >
 </details>
 
-Oracle Spatial can support a guest-relocation map using the distances calculated in this lab.
-
-The local Hospitality LiveStack demo illustrates a related application story using a separate dataset. Its identifiers and results differ from the Seer Hotels SQL exercises below.
-
-![Local demo hotel coverage map](images/demo-spatial-map.jpg)
-
-
 ### Objectives
 
 - Identify spatial points and polygons in the hospitality data.
@@ -47,28 +33,13 @@ The local Hospitality LiveStack demo illustrates a related application story usi
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-| Step | Hospitality focus |
-| --- | --- |
-| Business Problem | Guest-service staff need nearby hotels to consider when arranging guest relocations. |
-| Technical Challenge | Moon needs to compare guest points with a region, then find the closest property for each guest. |
-| Persona Focus | You review Moon's spatial approach and interpret the result for an operations user. |
-| What You Will See | Oracle Spatial turns location data into guest routing results with SQL. |
-| Database Capability | `SDO_GEOMETRY`, `SDO_GEOM.SDO_DISTANCE`, `SDO_GEOM.RELATE`, and GeoJSON conversion support the analysis. |
-| Outcome | An operations user can see which guests need service in a region and which property is closest to each one. |
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Look at the locations as points
 
 Moon starts with the simplest spatial question: **where are the hotel properties?** The database stores each property as an `SDO_GEOMETRY` point, while the application can use the same point as GeoJSON.
 
-An `SDO_GEOMETRY` point is Oracle Spatial's structured representation of one location. An illustrative hotel point could use a point type, the WGS84 coordinate system, and the coordinate pair longitude `-74.4121` and latitude `40.5187`. This example explains the format; check the actual coordinates supplied by the hospitality loader. Because Oracle stores the location as geometry, Spatial functions can calculate distance and test spatial relationships instead of treating the coordinates as two unrelated numbers.
-
-`SDO_UTIL.TO_GEOJSON` converts that geometry into a standard JSON map object such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`. The application can send this object to a map without maintaining a second location format or a separate conversion service. Oracle uses the same stored geometry for SQL analysis and application display.
-
-The same stored location supports distance calculations, relational joins, and JSON map output.
+`SDO_GEOMETRY` stores a location for spatial calculations. `SDO_UTIL.TO_GEOJSON` converts it to a map object such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`; your loaded coordinates may differ.
 
 1. Run this query:
 
@@ -91,23 +62,17 @@ The same stored location supports distance calculations, relational joins, and J
 
     ![SQL Worksheet result — spatial points](images/sql-spatial-points.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
 
     **Expected output: Hotel Property Points**
 
-    
-
 2. Review the point data.
 
-    Moon has not created a second map database. The point used by the application and the point used by SQL are the same value. The database can calculate with it, and the application can display it.
-
-    Moon keeps each property’s location beside its name, capacity, status, and current load. SQL returns the distance and property details. `SDO_UTIL.TO_GEOJSON` returns the same location for the application map.
+    Compare each property’s location with its name, capacity, status, and current load.
 
 ## Task 2: Find the closest properties to a demand region
 
-The dataset contract assigns New York Visitor Region a synthetic demand index of `91` for the first routing review. Moon now measures the distance from each hotel-property point to the region boundary.
+New York Visitor Region has a sample demand index of `91`. Measure the distance between each hotel point and the region polygon.
 
 1. Run the distance query:
 
@@ -136,8 +101,6 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
 
     ![SQL Worksheet result — spatial new york](images/sql-spatial-new-york.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-
     `SDO_GEOM.SDO_DISTANCE` compares the hotel-property point with the demand-region polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
     The four arguments in this query have simple roles:
@@ -149,13 +112,11 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
 
     The `ROUND(..., 2)` around the function result only formats the answer to two decimal places. It does not change the spatial calculation.
 
-    The query also returns `DEMAND_INDEX`, so Moon can read location and demand together. The property with the smallest distance is the first property operations should check for available capacity.
+    Review the nearest properties alongside `DEMAND_INDEX` to decide where to check capacity first.
 
     **Expected output: New York Service Coverage**
 
     Review the closest property and its distance. Rankings depend on the loaded data.
-
-    
 
 2. Try another region.
 
@@ -194,17 +155,13 @@ The dataset contract assigns New York Visitor Region a synthetic demand index of
 
     ![SQL Worksheet result — spatial chicago](images/sql-spatial-chicago.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
+    Compare the kilometer and mile values. A property inside or touching Chicago Visitor Region has distance zero; the region’s sample demand index is `78`.
 
-    
-
-    The `unit` parameter controls the measurement unit. Review whether a property lies inside the Chicago Visitor Region polygon. A point inside or touching the polygon has distance zero. The contract assigns this region a synthetic demand index of 78; property rankings must be checked after loading.
-
-    This is a useful regional result, but distance to the region boundary does not identify the guests who need service. Moon now uses the region polygon to find those guests and then assigns each one to the closest active property.
+    Next, find guests within the region and calculate the nearest hotel for each guest.
 
 ## Task 3: Route Guests to the closest property
 
-Moon now needs a result that an operations application can use: guests inside New York Visitor Region, their demand region, and the closest active hotel property. The query uses the guest point (**`g.location`**) and demand-region polygon (**`dr.boundary`**) to find the guests first. It then compares each guest point with every active property and keeps the closest one.
+Moon uses guest points (`g.location`) and the region polygon (`dr.boundary`) to select guests, then finds the nearest active hotel for each one.
 
 1. Run the guest routing query:
 
@@ -279,23 +236,15 @@ Moon now needs a result that an operations application can use: guests inside Ne
 
     ![SQL Worksheet result — spatial routing](images/sql-spatial-routing.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-
     `SDO_GEOM.RELATE` keeps guests whose point falls inside or touches the New York Visitor Region polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching guest to every active property. `ROW_NUMBER` keeps the nearest property for each guest.
 
 2. Review the result as an operations decision.
 
-    Guest `LOCATION` is the requested arrival or relocation point. Each row gives a business user a guest to contact, the closest property, and the information needed to decide where the work should go. The result combines the region's demand score, guest details, property capacity, current load, and spatial distance in one SQL result.
-
-    A dashboard can use this result to show guests in the selected region and the closest hotel to each guest. The service team can review the location and capacity details together before arranging a relocation.
-
-    
+    Guest `LOCATION` is the requested arrival or relocation point. Review each guest’s nearest property, distance, capacity, and current load before arranging assistance.
 
 3. Change the query to `Chicago Visitor Region`.
 
-    Compare the guests and assigned properties with the New York result. The spatial predicates stay the same; only the region changes. This is the kind of query an operations dashboard can run when a business user selects a different demand region.
-
-    
+    Compare the guests and assigned properties with the New York result. Only the region changes; the spatial predicates stay the same.
 
 > **Recommendation boundary:** This query finds the nearest active hotel. It does not reserve a room or prove availability for the requested dates. Check room type, accessibility requirements, dates, and available capacity before confirming a relocation. `ROOM_CAPACITY` and `OCCUPIED_ROOMS_PCT` describe a property snapshot, not date-specific inventory.
 
@@ -303,11 +252,17 @@ Moon now needs a result that an operations application can use: guests inside Ne
 
 Moon used points and polygons to find guests in a demand region and rank nearby hotels. The result gives the service team guests to contact and properties to check for suitable rooms.
 
-One SQL query finds guests by location, joins their records to hotel details, and returns distance, capacity, and current load. A dashboard can use these results for both its map and guest list.
-
 ## Next Steps
 
-You used Oracle Spatial to turn points and polygons into a routing decision. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+Explore further in the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+
+## Application example
+
+Explore the [LiveStack Demo Hospitality](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4525).
+
+![LiveStack Demo Hospitality: Housekeeping & Maintenance Coverage Map](images/demo-spatial-map.jpg)
+
+*LiveStack Demo Hospitality: Housekeeping & Maintenance Coverage Map*
 
 ## Acknowledgements
 
