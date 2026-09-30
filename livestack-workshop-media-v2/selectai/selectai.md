@@ -298,6 +298,6 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
+* **Author** - Teodor Constantin Nechita
+* **Contributor** - Vahn Kessler
 * **Last Updated By/Date** - Vahn Kessler, September 2026

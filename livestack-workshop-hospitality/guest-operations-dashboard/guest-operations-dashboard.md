@@ -189,16 +189,20 @@ The query sorts by similarity first, so changing the question changes the review
 
 Next, use JSON Relational Duality to expose the same reservation data as JSON for an application while keeping SQL access for the database team.
 
+## Application example
+
+Explore the [LiveStack Demo Hospitality](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4525).
+
+![LiveStack Demo Hospitality: Property Performance Command Center](images/demo-dashboard.jpg)
+
+*LiveStack Demo Hospitality: Property Performance Command Center*
+
+![LiveStack Demo Hospitality: Property Performance Command Center](images/demo-dashboard-charts.jpg)
+
+*LiveStack Demo Hospitality: Property Performance Command Center*
+
 ## Acknowledgements
 
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
-
-## Application example
-
-The running Hospitality LiveStack application presents portfolio indicators and charts. This application uses a separate demo dataset; these values are not the expected output of the workshop SQL query.
-
-![Live hospitality portfolio dashboard](images/demo-dashboard.jpg)
-
-![Live hospitality portfolio charts](images/demo-dashboard-charts.jpg)

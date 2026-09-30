@@ -10,7 +10,7 @@ Otto could export request, signal, alert, and capacity data to a separate machin
 
 Instead, Otto builds and scores the model in Oracle AI Database. The model uses current requests, connected signals, available capacity, and critical alerts to classify an operating scenario as `HIGH` or `LOW` risk. SQL then places that result beside the stored demand forecast so a planner can review both forms of evidence.
 
-In this lab, you follow Otto from training data through AutoML comparison, model creation, scenario scoring, and careful capacity interpretation.
+In this lab, you follow Otto from training data through model creation, scenario scoring, and careful capacity interpretation. You can then use AutoML to compare alternative models in an optional final task.
 
 ![otto](images/otto.png)
 
@@ -33,9 +33,9 @@ In this lab, you follow Otto from training data through AutoML comparison, model
 ### Objectives
 
 - Inspect the care-demand training data and identify the model target.
-- Optionally compare classification models and review their results in AutoML.
 - Create and confirm a Generalized Linear Model inside Oracle AI Database.
 - Score an operating scenario and interpret it beside the demand forecast.
+- Optionally compare classification models and review their results in AutoML.
 
 Estimated Time: **10 minutes**
 
@@ -45,7 +45,7 @@ Estimated Time: **10 minutes**
 | --- | --- |
 | Business Problem | Care operations needs an early, reviewable indication of capacity pressure. |
 | Technical Challenge | Otto must train and score a model without exporting governed request, signal, alert, or capacity data. |
-| Persona Focus | You follow Otto as he compares models, creates a repeatable baseline, and explains the result to capacity planners. |
+| Persona Focus | You follow Otto as he creates a repeatable baseline, explains the result to capacity planners, and optionally compares alternative models. |
 | What You Will Prove | Oracle Machine Learning can score care-demand risk in the database and return evidence that planners can inspect. |
 | Database Capability | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside Oracle AI Database. |
 | Outcome | Capacity planners receive a traceable risk result beside the demand forecast, without treating either result as an automatic decision. |
@@ -79,6 +79,8 @@ Each row records the current request workload, the number of connected signals, 
 
     `CURRENT_REQUESTS`, `SIGNAL_COUNT`, `CAPACITY_RATIO`, and `CRITICAL_ALERTS` are the model inputs. `RISK_FLAG` is the answer the model learns to predict. `TRAINING_ID` identifies the scenario, but it is not an operating condition that should influence the prediction.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/care-demand-training-scenarios.png " ")
+
     **Expected output: Care-demand training scenarios**
 
     | Training ID | Current Requests | Signal Count | Capacity Ratio | Critical Alerts | Risk Flag |
@@ -102,69 +104,17 @@ Each row records the current request workload, the number of connected signals, 
 
     Otto is checking that the training data already brings together the values he needs. He does not have to export request, signal, and capacity data into separate files before training. These twelve synthetic rows teach the workflow; they do not establish production model accuracy.
 
-## Task 2: Compare care-demand models with AutoML (optional)
+## Task 2: Create the care-demand risk model in SQL Developer Web
 
-Otto first uses the Oracle Machine Learning AutoML interface to compare candidate models. AutoML can select algorithms, tune them, and show how well each model identifies the two labels.
-
-This shows how a data scientist chooses a model: the leaderboard is a starting point, but Otto also checks whether a model identifies both `HIGH` and `LOW`. A model that misses the risk class the capacity-planning team needs to review is not useful simply because it has a strong overall score.
-
-This task is optional. AutoML can take several minutes to complete, so you can continue with Task 3 if you want to focus on creating and using the model in SQL Developer Web.
-
-1. Open **Machine Learning** from Database Actions.
-
-    Open **Database Actions**, select **Machine Learning**. Use the username and password you can find on the **View Login Info screen**.
-    
-    ![open ml](images/open-ml.png)
-    
-2. Click **AutoML**.
-
-    ![automl](images/automl.png) 
-
-3. Create a new experiment with these settings:
-  
-    | Setting         | Value                    |
-    | ----------------| ------------------------ |
-    | Experiment name | `Care Demand Risk Test`  |
-    | Data source     | `HC_DEMAND_TRAINING`     |
-    | Predict         | `RISK_FLAG`              |
-    | Prediction type | `Classification`         |
-    | Case ID         | `TRAINING_ID`            |
-  
-    Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
-
-    ![startml](images/startml.png)
-
-4. Review the leaderboard and model details.
-
-    ![AutoML leaderboard for the completed care-demand experiment](images/leaderboard.png)
-  
-    The leaderboard may rank several algorithms differently. Otto does not choose from one score alone. Open the model details and inspect the confusion matrix. Check whether each model identifies both `HIGH` and `LOW`, and note which errors could cause the capacity-planning team to overlook pressure or review a scenario unnecessarily.
-
-    AutoML results can vary with the database version and experiment settings. The twelve-row workshop dataset is intentionally small, so treat the comparison as a demonstration of the selection process rather than a production evaluation.
-
-    For the repeatable SQL exercise in Task 3, Otto uses the Generalized Linear Model configured for this workshop. If your leaderboard ranks another algorithm first, continue with the workshop model so that your SQL results match the tested example.
-
-    Here is an example of the confusion matrix for the Generalized Linear Model:
-
-    ![Generalized Linear Model confusion matrix for HIGH and LOW risk](images/goodmodel.png)
-
-    The model details also show prediction impact. In the captured Generalized Linear Model run, AutoML retained `CAPACITY_RATIO` as the displayed predictor. Review the values shown in your experiment because AutoML results can vary. Prediction impact gives Otto a starting point for explaining the result to the capacity-planning team, but it does not prove that one condition caused demand pressure.
-
-    Here is the captured example:
-
-    ![Generalized Linear Model prediction impact showing CAPACITY_RATIO](images/imapct.png)
-
-    This is Otto's decision: **use the Generalized Linear Model as the workshop's repeatable baseline, then examine its result before it reaches a planner**. The model supports review; it does not make a staffing, supply, logistics, or clinical decision.
-
-## Task 3: Create the care-demand risk model in SQL Developer Web
-
-AutoML helped Otto compare models. He now moves to SQL Developer Web to create a named model that a SQL query can call repeatedly. The model is stored in Oracle AI Database under the name `OTTO_CARE_DEMAND_RISK_MODEL`.
+Otto has inspected the training data. He now creates a care-demand risk model and verifies that it is ready for scoring. The model is stored in Oracle AI Database under the name `OTTO_CARE_DEMAND_RISK_MODEL`.
 
 The `HC_MODEL_SETTINGS` table tells Oracle to use the **Generalized Linear Model** and automatic data preparation. `HC_DEMAND_TRAINING` supplies the training rows, `TRAINING_ID` identifies each case, and `RISK_FLAG` is the target.
 
-If you skipped the optional AutoML task, continue with this tested workshop configuration.
+Stay in SQL Worksheet for model creation and scoring. The optional AutoML comparison comes after the required SQL tasks.
 
 1. Create the learner model from the training data:
+
+    Copy the entire script, including both PL/SQL blocks and their `/` terminators, into SQL Worksheet. Click **Run Script (F5)** and review **Script Output**. Both blocks must complete successfully.
 
     ```sql
     <copy>
@@ -210,15 +160,19 @@ If you skipped the optional AutoML task, continue with this tested workshop conf
     </copy>
     ```
 
+    ![Open Graph Studio from the Database Actions launchpad](images/ottos-care-demand-model.png " ")
+
     **Expected output: Otto's care-demand model**
 
     | Model Name | Mining Function | Algorithm |
     | --- | --- | --- |
     | OTTO\_CARE\_DEMAND\_RISK\_MODEL | CLASSIFICATION | GENERALIZED\_LINEAR\_MODEL |
 
+    **Checkpoint:** Continue to Task 3 only when this query returns `OTTO_CARE_DEMAND_RISK_MODEL` with mining function `CLASSIFICATION` and algorithm `GENERALIZED_LINEAR_MODEL`. If it returns no rows, inspect the preceding script's output and resolve the model-creation error. Scoring before the model exists produces `ORA-40284`.
+
     Otto has confirmed both the mining function and algorithm. He now has a database model that SQL can call repeatedly.
 
-## Task 4: Score an operating scenario and review the demand forecast
+## Task 3: Score an operating scenario and review the demand forecast
 
 Otto now receives an operating scenario for the next planning period. The model was trained with the synthetic examples in `HC_DEMAND_TRAINING`; it will now score a new combination of request, signal, capacity, and alert values.
 
@@ -247,6 +201,8 @@ Otto now receives an operating scenario for the next planning period. The model 
     ```
 
     The scenario contains 17 current requests, six connected signals, a capacity ratio of `1.06`, and two critical alerts. A capacity ratio of `1.00` means capacity and expected demand are equal, so `1.06` represents a small six-percent cushion.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/operating-scenario-risk.png " ")
 
     **Expected output: Operating-scenario risk**
 
@@ -278,6 +234,8 @@ Otto now receives an operating scenario for the next planning period. The model 
 
     `CARE_DEMAND_FORECASTS_V` contains the planning forecast. The query puts the services and regions with the largest predicted demand first.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/highest-demand-forecasts.png " ")
+
     **Expected output: Highest demand forecasts**
 
     | Service | Region | Predicted Demand | Risk Factor |
@@ -296,9 +254,63 @@ Otto now receives an operating scenario for the next planning period. The model 
 
     ![SQL Worksheet showing a HIGH care-demand risk result with 0.5046 model confidence](images/result.png)
 
+## Task 4: Compare care-demand models with AutoML (optional)
+
+Otto has created and scored the workshop's Generalized Linear Model. He can now use AutoML to compare alternative models and inspect their evaluation results. AutoML can select algorithms, tune them, and show how well each model identifies the two labels.
+
+This shows how a data scientist chooses a model: the leaderboard is a starting point, but Otto also checks whether a model identifies both `HIGH` and `LOW`. A model that misses the risk class the capacity-planning team needs to review is not useful simply because it has a strong overall score.
+
+This task is optional. You have completed the required SQL workflow in Tasks 1-3. Continue here to explore AutoML, or proceed to the conclusion.
+
+1. Open **Machine Learning** from Database Actions.
+
+    Open **Database Actions**, select **Machine Learning**. Use the username and password you can find on the **View Login Info screen**.
+
+    ![open ml](images/open-ml.png)
+
+2. Click **AutoML**.
+
+    ![automl](images/automl.png)
+
+3. Create a new experiment with these settings:
+
+    | Setting         | Value                    |
+    | ----------------| ------------------------ |
+    | Experiment name | `Care Demand Risk Test`  |
+    | Data source     | `HC_DEMAND_TRAINING`     |
+    | Predict         | `RISK_FLAG`              |
+    | Prediction type | `Classification`         |
+    | Case ID         | `TRAINING_ID`            |
+
+    Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
+
+    ![startml](images/startml.png)
+
+4. Review the leaderboard and model details.
+
+    ![AutoML leaderboard for the completed care-demand experiment](images/leaderboard.png)
+
+    The leaderboard may rank several algorithms differently. Otto does not choose from one score alone. Open the model details and inspect the confusion matrix. Check whether each model identifies both `HIGH` and `LOW`, and note which errors could cause the capacity-planning team to overlook pressure or review a scenario unnecessarily.
+
+    AutoML results can vary with the database version and experiment settings. The twelve-row workshop dataset is intentionally small, so treat the comparison as a demonstration of the selection process rather than a production evaluation.
+
+    In Tasks 2 and 3, Otto created and scored the Generalized Linear Model configured for this workshop. If your leaderboard ranks another algorithm first, compare its evaluation results with that baseline. This optional comparison does not require recreating or replacing the model used in the SQL exercise.
+
+    Here is an example of the confusion matrix for the Generalized Linear Model:
+
+    ![Generalized Linear Model confusion matrix for HIGH and LOW risk](images/goodmodel.png)
+
+    The model details also show prediction impact. In the captured Generalized Linear Model run, AutoML retained `CAPACITY_RATIO` as the displayed predictor. Review the values shown in your experiment because AutoML results can vary. Prediction impact gives Otto a starting point for explaining the result to the capacity-planning team, but it does not prove that one condition caused demand pressure.
+
+    Here is the captured example:
+
+    ![Generalized Linear Model prediction impact showing CAPACITY_RATIO](images/imapct.png)
+
+    This is Otto's decision: **use the Generalized Linear Model as the workshop's repeatable baseline, then examine its result before it reaches a planner**. The model supports review; it does not make a staffing, supply, logistics, or clinical decision.
+
 ## Conclusion: Put the Prediction Beside the Planning Evidence
 
-Otto used AutoML to compare classification models, selected the Generalized Linear Model as the workshop's repeatable baseline, recreated it in SQL Developer Web, and scored a new operating scenario. He then reviewed that classification beside the stored demand forecast without claiming that the two results came from the same model.
+Otto inspected the training data, created the Generalized Linear Model in SQL Worksheet, verified it, and scored a new operating scenario. He then reviewed that classification beside the stored demand forecast without claiming that the two results came from the same model. The optional AutoML task extended this workflow with a comparison of alternative models.
 
 This is the business benefit of in-database machine learning. The training data, model, prediction, and related planning evidence stay in Oracle AI Database. Otto does not have to copy governed healthcare data to a separate machine learning platform or reconcile scores from one system with current operating data from another.
 

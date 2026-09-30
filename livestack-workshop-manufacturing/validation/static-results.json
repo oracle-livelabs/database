@@ -392,10 +392,6 @@
       "pass": true,
       "detail": null
     },
-    "link_plant-routing-spatial/plant-routing-spatial.md:images/demo-spatial-map.jpg": {
-      "pass": true,
-      "detail": null
-    },
     "link_plant-routing-spatial/plant-routing-spatial.md:images/sql-spatial-points.png": {
       "pass": true,
       "detail": null
@@ -409,6 +405,10 @@
       "detail": null
     },
     "link_plant-routing-spatial/plant-routing-spatial.md:images/sql-spatial-routing.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/demo-spatial-map.jpg": {
       "pass": true,
       "detail": null
     },
@@ -488,14 +488,6 @@
       "pass": true,
       "detail": null
     },
-    "link_production-quality-network/production-quality-network.md:images/demo-network-overview.jpg": {
-      "pass": true,
-      "detail": null
-    },
-    "link_production-quality-network/production-quality-network.md:images/demo-network-query.jpg": {
-      "pass": true,
-      "detail": null
-    },
     "link_production-quality-network/production-quality-network.md:images/sql-graph-direct.png": {
       "pass": true,
       "detail": null
@@ -549,6 +541,14 @@
       "detail": null
     },
     "link_production-quality-network/production-quality-network.md:files/getting-started-material-flow-graph.dsnb": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/demo-network-overview.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-quality-network/production-quality-network.md:images/demo-network-query.jpg": {
       "pass": true,
       "detail": null
     },
@@ -851,6 +851,7 @@
     "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
     "https://livelabs.oracle.com",
     "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800",
+    "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4442",
     "https://ocw.mit.edu/courses/21l-007j-after-columbus-fall-2003/4cceed8afab4e80aba65fc83b8ec27ed_how_to_3.pdf"
   ],
   "authentic_manufacturing_screenshots": 49,

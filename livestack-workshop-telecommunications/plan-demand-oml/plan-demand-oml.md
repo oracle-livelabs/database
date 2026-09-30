@@ -1,12 +1,12 @@
 # Build a Service Plan Demand Watchlist with Oracle Machine Learning
 
-![Otto Spencer, data scientist, introduces the plan-demand watchlist.](images/otto.png)
-
 ## Introduction
 
 Otto Spencer, SEER Telecomms’ data scientist, needs a watchlist for the plan team. Analysts want to see which plans deserve attention and the activity behind each score.
 
 Train a model inside Oracle AI Database to classify the September sample as `SURGE` or `STABLE`. Then join its scores to plan details, activations, and network diagnostics for review.
+
+![Otto Spencer, data scientist, introduces the plan-demand watchlist.](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
@@ -83,7 +83,7 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
     Sign in with the credentials from **View Login Info**.
 
-![Machine Learning on the Database Actions launchpad.](images/oml-launch.png)
+    ![Machine Learning on the Database Actions launchpad.](images/oml-launch.png)
 
 2. Click **AutoML**.
 
@@ -107,19 +107,19 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
     ![AutoML leaderboard showing the models and their measured scores.](images/oml-leaderboard.png)
 
-  The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
+    The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
 
-  ![Comparison of the AutoML models and their metrics.](images/oml-model-comparison.png)
+    ![Comparison of the AutoML models and their metrics.](images/oml-model-comparison.png)
 
-  **Balanced accuracy** averages the proportion of correct predictions for each class. A **confusion matrix** counts correct and incorrect predictions for each class. Inspect that matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
+    **Balanced accuracy** averages the proportion of correct predictions for each class. A **confusion matrix** counts correct and incorrect predictions for each class. Inspect that matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
 
-  Record the measured balanced accuracy and confusion matrix from your run. The label is derived from connections and utilization from the same month, so even a high score shows how to train and call the model, not how accurately it predicts future demand. The next task creates a separate GLM using SQL.
+    Record the measured balanced accuracy and confusion matrix from your run. The label is derived from connections and utilization from the same month, so even a high score shows how to train and call the model, not how accurately it predicts future demand. The next task creates a separate GLM using SQL.
 
-  ![Confusion matrix for the selected AutoML model.](images/oml-confusion-matrix.png)
+    ![Confusion matrix for the selected AutoML model.](images/oml-confusion-matrix.png)
 
-  Review prediction impact for the selected model. Check which features your model used. A feature’s influence on a prediction does not prove that it causes the outcome.
+    Review prediction impact for the selected model. Check which features your model used. A feature’s influence on a prediction does not prove that it causes the outcome.
 
-  ![Input features and their prediction impact for the selected model.](images/oml-prediction-impact.png)
+    ![Input features and their prediction impact for the selected model.](images/oml-prediction-impact.png)
 
 ## Task 3: Create a Generalized Linear Model in SQL Worksheet
 
@@ -333,15 +333,19 @@ Otto creates sample scoring data by changing values from the training view. This
 
   One SQL result returns the prediction, service plan name, activations, and support reports and network diagnostics. Otto can use the model without moving the data to an external machine learning platform.
 
-Open **Predictive Service Assurance** and review **Impact Risk** to see model scores beside service information. The running application uses a separate model and dataset. Its scores and confidence values are not validation results for `OTTO_PLAN_DEMAND_SURGE_MODEL`.
-
-![Live predictive service-assurance view with model context and scores.](images/app-predictive-assurance.png)
-
 ## Conclusion: Put the Prediction Beside the Business Data
 
 You trained a Generalized Linear Model and scored sample plan activity. If you ran AutoML, you also compared models. The final query joins each score to the plan and activity values the analyst needs to review.
 
 A plan analyst can query the watchlist and inspect the supporting values using the same access controls that protect the source data.
+
+## Application Demo
+
+Open **Predictive Service Assurance** and review **Impact Risk** to see model scores beside service information.
+
+![LiveStack Telecomm Demo: Predictive Service Assurance](images/app-predictive-assurance.png)
+
+*LiveStack Telecomm Demo: Predictive Service Assurance*
 
 ## Acknowledgements
 
