@@ -186,7 +186,7 @@ The context function is the tool boundary. It calls `vecdb.query()` with text an
 
 ## Task 4: Describe and Test the Tool
 
-Agents need a description of what a tool does and the arguments it accepts. The following framework-neutral schema can be adapted to the tool-registration format used by an agent library.
+Agents need a description of what a tool does and the arguments it accepts. The following framework-neutral schema can be adapted to the tool-registration format used by an agent library. It describes the tool for registration but does not register or call it in this notebook.
 
 1. Add a new Python paragraph and run the following code.
 
