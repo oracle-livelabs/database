@@ -76,6 +76,19 @@ Select AI uses an AI profile to identify the AI provider and the database object
   
     ```sql
     <copy>
+    BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'GENAI',
+        attribute_name  => 'model',
+        attribute_value => 'xai.grok-4.3'
+      );
+    END;
+    /
+    </copy>
+    ```
+
+    ```sql
+    <copy>
     SELECT profile_name,
            attribute_name,
            attribute_value

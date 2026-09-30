@@ -79,6 +79,10 @@ Thomas starts with settings that belong to the application but do not need dedic
 
 1. Create the application-data table and add one settings payload.
 
+    Copy the entire setup block into SQL Worksheet and click **Run Script (F5)**. This executes the table creation, insert, and commit in sequence. Review **Script Output** and resolve any errors before continuing.
+
+    `THOMAS_CARE_APP_DATA` is created during this task. It is not present in a fresh workshop schema.
+
     `DROP TABLE IF EXISTS` makes this demonstration object safe to recreate when you repeat the lab. It does not alter the provided healthcare tables.
 
     ```sql
@@ -127,6 +131,8 @@ Thomas starts with settings that belong to the application but do not need dedic
     </copy>
     ```
 
+    **Checkpoint:** The query should return one row for request `170104`. If you receive `ORA-00942`, return to this task's setup block and inspect its Script Output. If the query returns no rows, check that the insert completed successfully.
+
     **Expected output: Application settings**
 
     | Request ID | Screen | Show Logistics Cost | Features |
@@ -140,6 +146,10 @@ Thomas starts with settings that belong to the application but do not need dedic
 Thomas now compares the JSON column with an application-owned collection. The collection stores complete documents in `DATA`, uses a string `_id`, and adds an ETAG that changes with the document.
 
 1. Create the collection and populate it from existing request `170104`.
+
+    Copy the entire setup block into SQL Worksheet and click **Run Script (F5)**. Review **Script Output** and confirm that the collection was created, one document was inserted, and the transaction was committed before running the next query.
+
+    `THOMAS_CARE_REQUEST_DOCS` is created during this task.
 
     The scalar subquery constructs one JSON value before inserting it into the collection. The request, logistics, and line-item values come from `HC_SERVICE_REQUESTS` and `HC_REQUEST_ITEMS`.
 
@@ -203,6 +213,8 @@ Thomas now compares the JSON column with an application-owned collection. The co
     WHERE JSON_VALUE(data, '$._id') = '170104';
     </copy>
     ```
+
+    **Checkpoint:** The query should return one document for request `170104`. If you receive `ORA-00942`, return to this task's setup block and inspect its Script Output. If the query returns no rows, check that the insert completed successfully.
 
     **Expected output: Collection document**
 
