@@ -1,12 +1,12 @@
 # Build a Service Plan Demand Watchlist with Oracle Machine Learning
 
-![Otto Spencer, data scientist, introduces the plan-demand watchlist.](images/otto.png)
-
 ## Introduction
 
 Otto Spencer, SEER Telecomms’ data scientist, needs a watchlist for the plan team. Analysts want to see which plans deserve attention and the activity behind each score.
 
 Train a model inside Oracle AI Database to classify the September sample as `SURGE` or `STABLE`. Then join its scores to plan details, activations, and network diagnostics for review.
+
+![Otto Spencer, data scientist, introduces the plan-demand watchlist.](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>

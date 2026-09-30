@@ -1,12 +1,12 @@
 # Search Components by Meaning
 
-![Gilly: HighTech lab banner](images/gilly.png)
-
 ## Introduction
 
 Gilly Bourne, Seer HighTech’s AI engineer, needs to answer **which customer sites may be affected by a power-module leakage-current concern?** The inspection wording may differ from the component descriptions.
 
 Help Gilly turn matches by meaning into a customer follow-up list.
+
+![Gilly: HighTech lab banner](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>

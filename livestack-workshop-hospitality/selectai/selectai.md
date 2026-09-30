@@ -1,12 +1,12 @@
 # Ask Hospitality Questions with Select AI
 
-![Nina — hospitality lab banner](images/nina.png)
-
 ## Introduction
 
 Nina Patel, Seer Hotels’ guest experience analyst, wants to know which stay offers earn the most room revenue. Jessica has configured a Select AI profile so Nina can ask in ordinary language.
 
 Help Nina inspect the generated SQL, run the question, and refine it. Review the joins and filters carefully: a model can produce valid SQL that answers the wrong question.
+
+![Nina — hospitality lab banner](images/nina.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
