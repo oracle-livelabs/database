@@ -6,6 +6,8 @@ In this lab, you will examine how parts of Datapatch work. This will give you in
 
 Estimated Time: 15 Minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:B6SiOHggaS4)
+
 ### Objectives
 
 In this lab, you will:

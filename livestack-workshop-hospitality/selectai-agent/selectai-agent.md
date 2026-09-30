@@ -4,8 +4,6 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
-
 Nina Patel has used Select AI for individual questions. Her guest-review screen now needs an assistant that can handle a request and follow-up questions.
 
 Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the hospitality tables configured in the previous lab.
@@ -29,29 +27,18 @@ In this lab, you create an agent, give it the built-in SQL query tool, and run a
 
 - Confirm that the `GENAI` profile from the previous lab is available.
 - Verify which hospitality tables the SQL tool may use.
-- Register a read-only SQL tool for the hospitality schema.
+- Register a SQL tool and give the agent read-only task instructions.
 - Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
 - Run a hospitality question through the team.
 - Review the agent's tool history and explain why the tool boundary matters.
 
 Estimated Time: **15 minutes**
 
-### Hands-on Scenario
-
-| Step                | Hospitality focus                                                                                  |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| Business Problem    | Nina needs a hospitality answer that can feed a guest-review screen.                            |
-| Technical Challenge | The agent must use database data through an approved capability, not unrestricted access.      |
-| Persona Focus       | You follow Nina as she turns a Select AI question into a small hospitality assistant.              |
-| What You Will See   | An agent receives a request, calls its SQL tool, and returns a hospitality answer.                 |
-| Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
-| Outcome             | Nina has a controlled agent that can answer questions from the hospitality schema.                |
-
 > **Prerequisite:** Complete [Lab 7: Ask Hospitality Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
 
 ## Task 1: Check the profile and table access
 
-The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_list` limits the tables Select AI may use when it generates SQL. Database privileges provide the second control: the SQL still runs as the current database user and cannot read tables that user cannot access.
+The tool uses `GENAI`. Its `object_list` guides SQL generation; database privileges determine what the current user can access.
 
 1. Check the profile:
 
@@ -96,7 +83,7 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
 
 ## Task 2: Register the SQL tool
 
-The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile's object list limits the schema metadata available for generated SQL.
+Register the built-in SQL tool with the `GENAI` profile.
 
 1. Register the tool:
 
@@ -113,8 +100,6 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     </copy>
     ```
 
-    The tool lets the agent ask Select AI to generate and run SQL. It uses the profile’s table list and the current database user’s privileges.
-  
 2. Confirm the tool definition:
 
     ```sql
@@ -176,8 +161,6 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
     </copy>
     ```
 
-    The team is the runnable unit. It connects Nina's role, the task instructions, and the SQL tool.
-  
 ## Task 4: Run a hospitality question
 
 Database Actions does not support the `SELECT AI AGENT` command directly. Use `DBMS_CLOUD_AI_AGENT.RUN_TEAM` in SQL Worksheet and provide the team name in the function call.
@@ -194,19 +177,15 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     </copy>
     ```
 
-    ![Live hospitality result — agent answer](images/sql-agent-answer.jpg)
+    ![SQL Worksheet result — agent answer](images/sql-agent-answer.jpg)
 
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-  
     Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
-
-    
 
 2. Review the answer.
 
     Look for the stay offer ranking, category, revenue, and room nights booked. The exact wording may vary because an AI provider generates the response, but the answer should be based on the hospitality tables available through `GENAI`.
   
-    > **Note:** This team has a read-only SQL tool. It can query the data, but the task instructions do not give it a tool for inserting, updating, or deleting records.
+    > **Note:** The task requests read-only answers. These instructions do not replace database permissions; the calls run with `LLUSER` privileges.
 
 3. Optional challenge: ask a follow-up question that connects the highest-revenue stay offer to its guests and reservations. A more detailed request may take longer because the agent has to interpret more steps.
 
@@ -229,11 +208,7 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![Live hospitality result — agent history](images/sql-agent-history.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-
-    
+    ![SQL Worksheet result — agent history](images/sql-agent-history.jpg)
 
 2. Review the latest tool calls:
 
@@ -251,23 +226,13 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![Live hospitality result — agent tools](images/sql-agent-tools.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-
-  
+    ![SQL Worksheet result — agent tools](images/sql-agent-tools.jpg)
 
   The history should show `NINA_HOSPITALITY_SQL_TOOL`. Nina and Jessica can use it to check which tool the agent called.
 
 ## Conclusion: Give the agent a controlled way to work
 
-In Lab 7, Nina used Select AI to turn a question into SQL. In this lab, she gave an agent a role, a task, and one approved SQL tool. The agent can handle a broader request and decide when it needs database information, while the database still controls the profile, object list, privileges, and tool history.
-
-The application can call this assistant with a request. Jessica can review its tools and disable the tool or team when access is no longer needed.
-
-Two controls apply to table access. The profile’s `object_list` guides which tables the tool considers. Database grants and row-level policies determine which data the session can read. Give an application agent only the access it needs.
-
-The example remains read-only on purpose. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
+Nina can now call the team and inspect its tool history. For an application deployment, Jessica must limit database grants and any row-level access policies; the profile’s `object_list` and agent instructions are not permission controls.
 
 ## Appendix: Reset the workshop objects
 

@@ -1,0 +1,165 @@
+- paragraph: Experiment Settings - OML
+- text:               
+- banner:
+  - generic "OML Navigation":
+    - button "":
+      - generic: 
+  - img "Oracle Logo": 
+  - heading "Machine Learning" [level=1]
+  - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"':
+    - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"':
+      - button:
+        - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"': 
+        - generic: LLUSER Project
+        - generic: LLUSER Workspace
+  - button "":
+    - generic: 
+    - text: 
+  - separator
+  - button "LLUSER":
+    - generic: 
+    - generic: LLUSER
+  - generic "Help for current page":
+    - button "Help for current page":
+      - generic: 
+      - generic: Help for current page
+  - generic:      
+  - generic:          
+  - generic:  
+- main:
+  - heading "Create Experiment" [level=1]
+  - button "Start":
+    - generic: 
+    - generic: Start
+    - generic: 
+  - generic "Cancel":
+    - button "Cancel":
+      - generic: Cancel
+  - generic "Save":
+    - button "Save":
+      - generic: 
+      - generic: Save
+  - generic: Name
+  - textbox "Name":
+    - /placeholder: ""
+    - text: Component Quality Review (Learner Pass)
+  - generic: Comment
+  - textbox "Comment":
+    - /placeholder: ""
+  - generic: Data Source
+  - textbox [disabled]: LLUSER.OML_QUALITY_TRAINING_V
+  - button "":
+    - generic: 
+  - generic: 
+  - generic: Predict
+  - combobox "Predict": REVIEW_LABEL
+  - generic: 
+  - text: 
+  - generic: Prediction Type
+  - combobox "Prediction Type": Classification
+  - generic: 
+  - text: 
+  - generic: Case ID
+  - combobox "Case ID" [active]: COMPONENT_ID
+  - generic: 
+  - button "":
+    - generic: 
+  - text: 
+  - generic:  
+  - button "Additional Settings": 
+  - heading "Additional Settings" [level=2]
+  - text:            
+  - button "Features" [expanded]: 
+  - heading "Features" [level=1]
+  - toolbar:
+    - button "Refresh":
+      - generic: 
+      - generic: Refresh
+    - generic:   
+    - textbox "Filter"
+  - generic "Features":
+    - application " Refresh":
+      - rowgroup:
+        - row "Name Type":
+          - columnheader:
+            - text: 
+            - checkbox "Checkbox Select All"
+          - columnheader "Name":
+            - generic: Name
+            - generic: 
+          - columnheader "Type":
+            - generic: Type
+            - generic: 
+      - rowgroup:
+        - row "AVG_DEFECT_RATE_PCT NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "AVG_DEFECT_RATE_PCT"
+          - cell "NUMBER"
+        - row "AVG_DOWNTIME_MINUTES NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "AVG_DOWNTIME_MINUTES"
+          - cell "NUMBER"
+        - row "CATEGORY VARCHAR2":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "CATEGORY"
+          - cell "VARCHAR2"
+        - row "COMPONENT_ID NUMBER":
+          - cell
+          - cell "COMPONENT_ID"
+          - cell "NUMBER"
+        - row "MAJOR_STOPPAGES NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "MAJOR_STOPPAGES"
+          - cell "NUMBER"
+        - row "MATERIAL_VALUE NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "MATERIAL_VALUE"
+          - cell "NUMBER"
+        - row "MINOR_STOPPAGES NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "MINOR_STOPPAGES"
+          - cell "NUMBER"
+        - row "PLANNED_UNITS NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "PLANNED_UNITS"
+          - cell "NUMBER"
+        - row "Predict REVIEW_LABEL VARCHAR2":
+          - cell "Predict":
+            - img "Predict"
+          - cell "REVIEW_LABEL"
+          - cell "VARCHAR2"
+        - row "TOTAL_INSPECTED_UNITS NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "TOTAL_INSPECTED_UNITS"
+          - cell "NUMBER"
+        - row "TOTAL_OBSERVATIONS NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "TOTAL_OBSERVATIONS"
+          - cell "NUMBER"
+        - row "TOTAL_REJECTED_UNITS NUMBER":
+          - cell:
+            - text: 
+            - checkbox [checked]
+          - cell "TOTAL_REJECTED_UNITS"
+          - cell "NUMBER"
+    - status
+    - generic: Select Row
+- contentinfo

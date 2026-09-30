@@ -32,6 +32,11 @@ In this lab, you create the agent objects, connect the agent to the SQL tool, an
 
 Estimated Time: **15 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Finance/08-Finance%20Workshop_LAB-8_with-CC.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step                | Finance focus                                                                                  |
@@ -99,6 +104,12 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     ```sql
     <copy>
     BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'GENAI',
+        attribute_name  => 'model',
+        attribute_value => 'xai.grok-4.3'
+      );
+
       DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'NINA_FINANCE_SQL_TOOL',
         attributes  => '{"tool_type": "SQL", "tool_params": {"profile_name": "genai"}}',

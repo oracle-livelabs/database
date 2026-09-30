@@ -4,16 +4,9 @@
 
 ## Introduction
 
-> **Live validation:** The core SQL exercises were run successfully on 21 September 2026. A real result capture is included below. Additional application screen captures are tracked separately in the [image inventory](../validation/screenshots.md).
+Nina Patel, Seer Hotels’ guest experience analyst, wants to know which stay offers earn the most room revenue. Jessica has configured a Select AI profile so Nina can ask in ordinary language.
 
-Nina Patel is a guest experience analyst at Seer Hotels. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
-
-Jessica, the DBA, has already configured a Select AI profile for the hospitality schema. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
-
-Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the business user needs.
-
-In this lab, you check the available Select AI profile, ask a hospitality question, inspect the SQL behind the answer, and improve the question for a more useful business result.
-
+Help Nina inspect the generated SQL, run the question, and refine it. Review the joins and filters carefully: a model can produce valid SQL that answers the wrong question.
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -24,7 +17,7 @@ In this lab, you check the available Select AI profile, ask a hospitality questi
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
-> - A **natural-language prompt** is the question sent to Select AI, such as `Which five stay offers have the highest booked room revenue? Sum reservation_nights.line_total only for confirmed, checked_in, or checked_out reservations.`
+> - A **natural-language prompt** is the question sent to Select AI, such as `Which five stay offers have the highest booked room revenue? Include confirmed reservations and guests who have checked in or checked out. Do not include service fees.`
 
 </details>
 
@@ -39,22 +32,11 @@ In this lab, you check the available Select AI profile, ask a hospitality questi
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-| Step                | Hospitality focus                                                                                |
-| ---------------------| ----------------------------------------------------------------------------------------------|
-| Business Problem    | Nina needs answers from hospitality data without writing every query from scratch.               |
-| Technical Challenge | The question must be translated into SQL against the shared hospitality schema.                |
-| Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
-| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
-| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
-| Outcome             | Nina gets a repeatable way to ask hospitality questions while keeping SQL review in the process. |
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Check the Select AI profile
 
-Select AI uses an AI profile to identify the AI provider and the database objects available for natural-language questions. The workshop database should already contain a profile for the `LLUSER` schema.
+Check the AI profile already configured for `LLUSER`.
 
 1. Run this query:
 
@@ -68,7 +50,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
-    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also support on-demand inference in the profile’s region. The verified test uses `meta.llama-3.3-70b-instruct` in `us-chicago-1`, while the database itself is in Ashburn. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
+    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The configured model must support on-demand inference in the provider region. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before a separate deployment. If the query shows a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
   
@@ -116,37 +98,29 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     </copy>
     ```
 
-    ![Live hospitality result — ai object list](images/sql-ai-object-list.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
+    ![SQL Worksheet result — ai object list](images/sql-ai-object-list.jpg)
 
     The result should list `STAY_OFFERS`, `RESERVATIONS`, `RESERVATION_NIGHTS`, and `GUESTS`. Select AI can now use these tables when it translates Nina's questions into SQL.
-  
-    
 
 ## Task 3: Ask a question and inspect the SQL
 
 Nina starts with a simple question: which stay offers have the highest revenue? She first asks Select AI to show the SQL without running it.
 
-Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use `DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
+In SQL Worksheet, submit your question using the short `DBMS_CLOUD_AI.GENERATE` call below. Write the question in ordinary language inside `prompt`; Select AI works out the SQL. Keep the profile name unchanged. The `action` chooses whether to show the SQL, return results, or explain them.
 
-1. Run the question with the `GENAI` profile:
+1. Ask Nina’s question using the `GENAI` profile. The `showsql` action returns the generated SQL for review:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five stay offers have the highest booked room revenue? Sum reservation_nights.line_total only for confirmed, checked_in, or checked_out reservations.',
+             prompt       => 'Which five stay offers have the highest booked room revenue? Include confirmed reservations and guests who have checked in or checked out. Do not include service fees.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
 
-    ![Live hospitality result — ai generated](images/sql-ai-generated.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-  
-    
+    ![SQL Worksheet result — ai generated](images/sql-ai-generated.jpg)
 
 2. Read the generated SQL before running it.
 
@@ -161,68 +135,56 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five stay offers have the highest booked room revenue? Sum reservation_nights.line_total only for confirmed, checked_in, or checked_out reservations.',
+             prompt       => 'Which five stay offers have the highest booked room revenue? Include confirmed reservations and guests who have checked in or checked out. Do not include service fees.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
     </copy>
       ```
 
-    ![Live hospitality result — ai answer](images/sql-ai-answer.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-  
-    
+    ![SQL Worksheet result — ai answer](images/sql-ai-answer.jpg)
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
-    Select AI has generated and run SQL against the hospitality schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the hospitality data.
+    Check the offer ranking and revenue totals against the tables and filters from Task 3. The query runs with your database privileges.
 
-    > **Note:** Select AI can generate incorrect SQL or misunderstand a question. Use `showsql` when the exact query matters, and treat the generated answer as a starting point for review.
+    > **Note:** `runsql` may generate different SQL from a previous `showsql` call. Review the returned result as well as the earlier SQL.
 
 ## Task 5: Improve the business question
 
-Nina's first question gives her a stay offer ranking, but she also needs enough detail to decide what to review. She changes the question to request the stay offer category, total revenue, and room nights booked.
+Nina has a ranking, but she also needs the offer category and number of room nights booked. She adds those details to her question in ordinary language; she does not need to name database columns or write joins.
 
 1. Use `showsql` to inspect this revised prompt:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five stay offers with the highest booked room revenue. Include offer name, category, summed line_total, and summed room_nights. Include only confirmed, checked_in, or checked_out reservations; exclude service fees.',
+             prompt       => 'Which five stay offers have the highest booked room revenue? For each offer, show its name, category, total room revenue, and number of room nights booked. Include confirmed reservations and guests who have checked in or checked out. Do not include service fees.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
 
-    ![Live hospitality result — ai refined generated](images/sql-ai-refined-generated.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-  
-    
+    ![SQL Worksheet result — ai refined generated](images/sql-ai-refined-generated.jpg)
 
 2. Review the generated SQL, then run the revised question with `runsql`:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five stay offers with the highest booked room revenue. Include offer name, category, summed line_total, and summed room_nights. Include only confirmed, checked_in, or checked_out reservations; exclude service fees.',
+             prompt       => 'Which five stay offers have the highest booked room revenue? For each offer, show its name, category, total room revenue, and number of room nights booked. Include confirmed reservations and guests who have checked in or checked out. Do not include service fees.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
     </copy>
     ```
 
-    ![Live hospitality result — ai refined answer](images/sql-ai-refined-answer.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-  
-    
+    ![SQL Worksheet result — ai refined answer](images/sql-ai-refined-answer.jpg)
 
 3. Compare the first and second questions.
 
-  The revised prompt asks for the columns Nina needs in her review. She still checks that the SQL uses the right joins, totals, and reservation statuses.
+  The revised question asks for the business details Nina needs in her review. She still checks that the SQL uses the right joins, totals, and reservation statuses.
 
 ## Task 6: Explain the result
 
@@ -233,18 +195,14 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five stay offers with the highest booked room revenue. Include offer name, category, summed line_total, and summed room_nights. Include only confirmed, checked_in, or checked_out reservations; exclude service fees.',
+             prompt       => 'Which five stay offers have the highest booked room revenue? For each offer, show its name, category, total room revenue, and number of room nights booked. Include confirmed reservations and guests who have checked in or checked out. Do not include service fees.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
     </copy>
     ```
 
-    ![Live hospitality result — ai narration](images/sql-ai-narration.jpg)
-
-    *Actual LLUSER result; scroll the result grid to inspect additional rows and columns.*
-  
-    
+    ![SQL Worksheet result — ai narration](images/sql-ai-narration.jpg)
 
 2. Review the explanation against the SQL result.
 
@@ -254,11 +212,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina asked a hospitality question, inspected the generated SQL, ran it, and refined the prompt. Select AI reduced the SQL she needed to write. Reviewing the query helped her check that it answered her question.
-
-Nina can ask questions in ordinary language and inspect the queries behind the answers. The queries use the shared hospitality schema and run with the database user’s access rights.
-
-Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
+Nina now has a review workflow: ask, inspect the SQL, run, and refine. Describe the business question clearly, refine it in ordinary language, and check the generated SQL and explanation against the returned rows.
 
 ## Next Steps
 
