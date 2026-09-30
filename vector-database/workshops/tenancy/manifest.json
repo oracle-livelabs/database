@@ -33,7 +33,7 @@
     },
     {
       "title": "Lab 4: Understand Models, Records, and Vector Tables",
-      "description": "Create an integrated embedding table for semantic search.",
+      "description": "Create integrated embedding and bring-your-own-vector tables.",
       "type": "tenancy",
       "filename": "../../04-understand-models-records-and-vector-tables/04-understand-models-records-and-vector-tables.md"
     },
