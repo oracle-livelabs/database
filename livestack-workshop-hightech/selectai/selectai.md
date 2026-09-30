@@ -111,7 +111,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five components have the highest total scheduled material value across released, in-production, or completed orders? Show each component name and its total material value, excluding setup costs.',
+             prompt       => 'Which five components have the highest total scheduled material value across released, in-production, or completed orders? Show each component name and its total material value, excluding setup costs. In this database, the exact stored order status labels are lowercase released, in_production, and completed; use those labels.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -137,7 +137,7 @@ Nina now runs the question and compares the answer with the SQL she inspected.
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five components have the highest total scheduled material value across released, in-production, or completed orders? Show each component name and its total material value, excluding setup costs.',
+             prompt       => 'Which five components have the highest total scheduled material value across released, in-production, or completed orders? Show each component name and its total material value, excluding setup costs. In this database, the exact stored order status labels are lowercase released, in_production, and completed; use those labels.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -159,7 +159,7 @@ Nina adds each component’s category and total planned units to make the rankin
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'For released, in-production, or completed orders, which five components have the highest total scheduled material value? Show each component name, category, total material value, and total planned units. Exclude setup costs.',
+             prompt       => 'For released, in-production, or completed orders, which five components have the highest total scheduled material value? Show each component name, category, total material value, and total planned units. Exclude setup costs. In this database, the exact stored order status labels are lowercase released, in_production, and completed; use those labels.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -173,7 +173,7 @@ Nina adds each component’s category and total planned units to make the rankin
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'For released, in-production, or completed orders, which five components have the highest total scheduled material value? Show each component name, category, total material value, and total planned units. Exclude setup costs.',
+             prompt       => 'For released, in-production, or completed orders, which five components have the highest total scheduled material value? Show each component name, category, total material value, and total planned units. Exclude setup costs. In this database, the exact stored order status labels are lowercase released, in_production, and completed; use those labels.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -193,7 +193,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'For released, in-production, or completed orders, which five components have the highest total scheduled material value? Exclude setup costs. Answer with a table containing exactly five rows and columns for component name, category, total material value, and total planned units, followed by one explanatory sentence. Include both numeric totals for every component exactly as returned by the query, without rounding or abbreviation. If a requested value is missing, say that the answer is incomplete rather than inventing it.',
+             prompt       => 'For released, in-production, or completed orders, which five components have the highest total scheduled material value? Exclude setup costs. Answer with a table containing exactly five rows and columns for component name, category, total material value, and total planned units, followed by one explanatory sentence. Include both numeric totals for every component exactly as returned by the query, without rounding or abbreviation. If a requested value is missing, say that the answer is incomplete rather than inventing it. In this database, the exact stored order status labels are lowercase released, in_production, and completed; use those labels.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
