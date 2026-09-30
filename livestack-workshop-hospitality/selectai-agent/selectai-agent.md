@@ -1,7 +1,5 @@
 # Build a Hospitality Agent with Select AI Agent
 
-![Nina — hospitality lab banner](images/nina.png)
-
 ## Introduction
 
 Nina Patel has used Select AI for individual questions. Her guest-review screen now needs an assistant that can handle a request and follow-up questions.
@@ -9,6 +7,8 @@ Nina Patel has used Select AI for individual questions. Her guest-review screen 
 Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the hospitality tables configured in the previous lab.
 
 In this lab, you create an agent, give it the built-in SQL query tool, and run a question through its team. The instructions ask for read-only answers. SQL still runs with the database user’s privileges. `LLUSER` owns the workshop objects, so it is not an example of a production account with restricted access.
+
+![Nina — hospitality lab banner](images/nina.png)
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>

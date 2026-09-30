@@ -1,0 +1,220 @@
+- banner "livelabs header":
+  - button "Open Menu"
+  - text: Build Connected HighTech Solutions with Oracle AI Database
+  - generic: › Final Quiz
+  - link "Oracle LiveLabs":
+    - /url: https://livelabs.oracle.com
+  - link "Need another language? Learn how to translate this page?":
+    - /url: "#"
+  - link "?":
+    - /url: "mailto:livelabs-help-db_us@oracle.com?subject=Question about workshop: undefined"
+- list:
+  - generic: +
+  - link "Build Connected HighTech Solutions with Oracle AI Database":
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=introduction
+    - generic: Build Connected HighTech Solutions with Oracle AI Database
+  - generic: +
+  - link "Getting Started":
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=getting-started
+    - generic: Getting Started
+  - generic: +
+  - 'link "Lab 1: Build a Converged Dashboard Query"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=production-operations-dashboard
+    - generic: "Lab 1: Build a Converged Dashboard Query"
+  - generic: +
+  - 'link "Lab 2: Build a JSON Application Model"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=production-order-duality
+    - generic: "Lab 2: Build a JSON Application Model"
+  - generic: +
+  - 'link "Lab 3: Search Components by Meaning"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=component-quality-vector-search
+    - generic: "Lab 3: Search Components by Meaning"
+  - generic: +
+  - 'link "Lab 4: Trace a Production Quality Network"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=production-quality-network
+    - generic: "Lab 4: Trace a Production Quality Network"
+  - generic: +
+  - 'link "Lab 5: Find the Closest Manufacturing Plant"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=plant-routing-spatial
+    - generic: "Lab 5: Find the Closest Manufacturing Plant"
+  - generic: +
+  - 'link "Lab 6: Build a Quality Review Watchlist with Oracle Machine Learning"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=quality-review-oml
+    - generic: "Lab 6: Build a Quality Review Watchlist with Oracle Machine Learning"
+  - generic: +
+  - 'link "Lab 7: Ask HighTech Questions with Select AI"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=selectai
+    - generic: "Lab 7: Ask HighTech Questions with Select AI"
+  - generic: +
+  - 'link "Lab 8: Build a HighTech Agent with Select AI Agent"':
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=selectai-agent
+    - generic: "Lab 8: Build a HighTech Agent with Select AI Agent"
+  - generic: "-"
+  - generic: "Lab 9: Final Quiz"
+  - list:
+    - listitem: Introduction
+  - list:
+    - listitem: "Task 1: Answer the quiz questions"
+  - list:
+    - listitem: Acknowledgements
+  - generic: +
+  - link "Need Help?":
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=need-help-freetier
+    - generic: Need Help?
+- main "livelabs main":
+  - article:
+    - heading "Final Quiz" [level=1]
+    - heading "Introduction" [level=2]
+    - paragraph: Use this quiz to check how the database results support the SEER HIGHTECH tasks you completed.
+    - heading "Objectives" [level=3]
+    - list:
+      - listitem: Review the main database capabilities used in the workshop.
+      - listitem: Earn the workshop badge by answering the scored questions.
+    - paragraph:
+      - text: "Estimated Time:"
+      - strong: 3 minutes
+    - button "Collapse All Tasks"
+    - 'heading "Task 1: Answer the quiz questions" [level=2]'
+    - list:
+      - paragraph: Complete the scored quiz.
+      - generic: Scored Quiz
+      - generic: 7/7 correct (100%)
+      - generic: What does JSON Relational Duality help SEER HIGHTECH do in the production order lab?
+      - radio "Copy production order documents into a separate document database." [disabled]
+      - generic: Copy production order documents into a separate document database.
+      - radio "Use the same production order data as JSON documents or relational tables without maintaining duplicate records. ✓" [checked] [disabled]
+      - generic: Use the same production order data as JSON documents or relational tables without maintaining duplicate records.
+      - generic: ✓
+      - radio "Remove relational tables from the production order review process." [disabled]
+      - generic: Remove relational tables from the production order review process.
+      - radio "Force analysts to manually read raw JSON for every review." [disabled]
+      - generic: Force analysts to manually read raw JSON for every review.
+      - generic: A duality view presents relational rows as a JSON document. Applications get the JSON document they need, while analysts still use SQL, keys, joins, and database controls against the same source.
+      - button "Try Again"
+      - generic: Correct!
+      - generic: Scored Quiz
+      - generic: 7/7 correct (100%)
+      - generic: In the vector lab, what does the similarity score help an analyst do?
+      - radio "Prove that the matching component caused a defect." [disabled]
+      - generic: Prove that the matching component caused a defect.
+      - radio "Replace the component and production order tables with embeddings only." [disabled]
+      - generic: Replace the component and production order tables with embeddings only.
+      - radio "Rank components by how closely they match the search phrase. ✓" [checked] [disabled]
+      - generic: Rank components by how closely they match the search phrase.
+      - generic: ✓
+      - radio "Count how many rows exist in each manufacturing table." [disabled]
+      - generic: Count how many rows exist in each manufacturing table.
+      - generic: The query turns vector distance into a similarity score, where a higher score means the stored component text is closer in meaning to the search phrase.
+      - button "Try Again"
+      - generic: Correct!
+      - generic: Scored Quiz
+      - generic: 7/7 correct (100%)
+      - generic: What business problem does the property graph lab solve for production quality investigators?
+      - radio "It scores future component quality from graph paths alone." [disabled]
+      - generic: It scores future component quality from graph paths alone.
+      - radio "It explains connections across production orders and shared entities. ✓" [checked] [disabled]
+      - generic: It explains connections across production orders and shared entities.
+      - generic: ✓
+      - radio "It stores production coverage regions for operations teams." [disabled]
+      - generic: It stores production coverage regions for operations teams.
+      - radio "It replaces relationship data with flat component totals." [disabled]
+      - generic: It replaces relationship data with flat component totals.
+      - generic: The graph lab focuses on relationship data. A production quality analyst can prioritize connected production orders, material lots, machines, suppliers, and inspection records by following the relationships stored in the graph.
+      - button "Try Again"
+      - generic: Correct!
+      - generic: Scored Quiz
+      - generic: 7/7 correct (100%)
+      - generic: Why does SEER HIGHTECH use spatial data in the plant-routing lab?
+      - radio "To make coverage decisions outside the shared database." [disabled]
+      - generic: To make coverage decisions outside the shared database.
+      - radio "To hide capacity data from production operations leaders." [disabled]
+      - generic: To hide capacity data from production operations leaders.
+      - radio "To find the closest plant for a customer site or high-demand region and combine that location with plant capacity and current workload. ✓" [checked] [disabled]
+      - generic: To find the closest plant for a customer site or high-demand region and combine that location with plant capacity and current workload.
+      - generic: ✓
+      - radio "To replace spatial queries with static labels." [disabled]
+      - generic: To replace spatial queries with static labels.
+      - generic: Spatial functions calculate distance and location relationships. SQL combines those results with customer site, plant, capacity, and demand data to support routing decisions.
+      - button "Try Again"
+      - generic: Correct!
+      - generic: Scored Quiz
+      - generic: 7/7 correct (100%)
+      - generic: In the OML lab, what does model confidence mean?
+      - radio "It guarantees that the prediction will happen." [disabled]
+      - generic: It guarantees that the prediction will happen.
+      - radio "It is the model probability for a prediction and should still be reviewed. ✓" [checked] [disabled]
+      - generic: It is the model probability for a prediction and should still be reviewed.
+      - generic: ✓
+      - radio "It is the number of rows in the OML model catalog." [disabled]
+      - generic: It is the number of rows in the OML model catalog.
+      - radio "It means the model no longer needs business context." [disabled]
+      - generic: It means the model no longer needs business context.
+      - generic: Confidence helps compare stronger and weaker predictions, but it is not certainty. The optional AutoML task asks you to inspect the confusion matrix for both classes.
+      - button "Try Again"
+      - generic: Correct!
+      - generic: Scored Quiz
+      - generic: 7/7 correct (100%)
+      - generic: What makes the Select AI answers reviewable?
+      - radio "The model can query every object in the database automatically." [disabled]
+      - generic: The model can query every object in the database automatically.
+      - radio "The narrative wording is guaranteed to be identical every time." [disabled]
+      - generic: The narrative wording is guaranteed to be identical every time.
+      - radio "The profile lists the intended objects and the generated SQL remains visible. ✓" [checked] [disabled]
+      - generic: The profile lists the intended objects and the generated SQL remains visible.
+      - generic: ✓
+      - radio "The answer bypasses the database and uses only general model knowledge." [disabled]
+      - generic: The answer bypasses the database and uses only general model knowledge.
+      - generic: The HighTech Select AI profile has a narrow object list to guide generation; database privileges enforce access. SHOWSQL exposes the generated query, and SQL review lets reviewers compare the narrative with the database result.
+      - button "Try Again"
+      - generic: Correct!
+      - generic: Scored Quiz
+      - generic: 7/7 correct (100%)
+      - generic: What is the main advantage of using Oracle AI Database for all the exercises in this workshop?
+      - radio "Each manufacturing capability must use a separate specialized data store." [disabled]
+      - generic: Each manufacturing capability must use a separate specialized data store.
+      - radio "One Oracle AI Database connects relational, JSON, vector, graph, spatial, machine-learning, and AI capabilities to the same shared data. ✓" [checked] [disabled]
+      - generic: One Oracle AI Database connects relational, JSON, vector, graph, spatial, machine-learning, and AI capabilities to the same shared data.
+      - generic: ✓
+      - radio "Application screenshots replace the need for database results." [disabled]
+      - generic: Application screenshots replace the need for database results.
+      - radio "Production quality teams must reconcile copied data before every investigation." [disabled]
+      - generic: Production quality teams must reconcile copied data before every investigation.
+      - generic: Each lab uses a different capability, but the teams work from connected data in one database. The teams can query those records together while keeping database access controls.
+      - button "Try Again"
+      - generic: Correct!
+      - generic: Congratulations! You passed with 100%!
+      - img "Achievement Badge"
+      - link "Download Your Badge":
+        - /url: ../../final-quiz/images/livestack-hightech-badge.svg
+      - paragraph: "Disclaimer: This badge is not an official Oracle Certification. We do not track or store any user data."
+      - paragraph: When you achieve the passing score, the quiz displays your completion badge.
+    - heading "Acknowledgements" [level=2]
+    - list:
+      - strong: Author
+      - text: "- Matt Kowalik"
+      - strong: Contributor
+      - text: "- Kevin Lazarz"
+      - strong: Last Updated By/Date
+      - text: "- Matt Kowalik, September 2026"
+- contentinfo "livelabs footer":
+  - link "Previous":
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=selectai-agent
+  - link "Return to Top":
+    - /url: "#top"
+  - link "Next":
+    - /url: http://127.0.0.1:8765/workshops/sandbox/?lab=need-help-freetier
+  - list:
+    - link "© Oracle":
+      - /url: https://docs.oracle.com/pls/topic/lookup?ctx=en/legal&id=cpyr
+    - link "About Oracle":
+      - /url: https://www.oracle.com/corporate/index.html
+    - link "Contact Us":
+      - /url: https://www.oracle.com/corporate/contact/
+    - link "Products A-Z":
+      - /url: https://docs.oracle.com/en/browseall.html
+    - link "Terms of Use & Privacy":
+      - /url: https://www.oracle.com/legal/privacy/
+    - link "Cookie Preferences":
+      - /url: https://www.oracle.com/legal/privacy/privacy-policy.html#11
+    - link "Ad Choices":
+      - /url: https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html#adchoices

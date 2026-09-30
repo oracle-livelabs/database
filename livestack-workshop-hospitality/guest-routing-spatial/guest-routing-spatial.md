@@ -1,12 +1,12 @@
 # Route Guests to the Closest Hotel Property
 
-![Moon — hospitality lab banner](images/moon.png)
-
 ## Introduction
 
 Moon Kai, Seer Hotels’ spatial specialist, helps guest services find nearby hotels: **which guests are in a high-demand region, and which active property is closest to each one?**
 
 Follow Moon from hotel points and demand-region polygons to a guest routing query that returns distances and property details.
+
+![Moon — hospitality lab banner](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
@@ -22,10 +22,6 @@ Follow Moon from hotel points and demand-region polygons to a guest routing quer
 > - **GeoJSON** is a JSON format for map locations and shapes. `SDO_UTIL.TO_GEOJSON` lets an application display the same database location on a map.
 >
 </details>
-
-The local Hospitality LiveStack demo illustrates a related application story using a separate dataset. Its identifiers and results differ from the Seer Hotels SQL exercises below.
-
-![Local demo hotel coverage map](images/demo-spatial-map.jpg)
 
 ### Objectives
 
@@ -259,6 +255,14 @@ Moon used points and polygons to find guests in a demand region and rank nearby 
 ## Next Steps
 
 Explore further in the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+
+## Application example
+
+Explore the [LiveStack Demo Hospitality](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4525).
+
+![LiveStack Demo Hospitality: Housekeeping & Maintenance Coverage Map](images/demo-spatial-map.jpg)
+
+*LiveStack Demo Hospitality: Housekeeping & Maintenance Coverage Map*
 
 ## Acknowledgements
 

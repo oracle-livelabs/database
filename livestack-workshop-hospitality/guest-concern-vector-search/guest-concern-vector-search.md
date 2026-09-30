@@ -1,12 +1,12 @@
 # Review a Semantic Guest Concern Search
 
-![Gilly — hospitality lab banner](images/gilly.png)
-
 ## Introduction
 
 Gilly Bourne, Seer Hotels’ AI engineer, is building a guest-concern search. A question such as **“Which guests may be affected by an accessible-room concern?”** must lead to relevant stay offers and the guests who booked them.
 
 Create stay offer vectors, rank matches by meaning, then join the results to reservations and guest contact details.
+
+![Gilly — hospitality lab banner](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>

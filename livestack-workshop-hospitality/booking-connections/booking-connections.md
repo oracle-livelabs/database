@@ -1,12 +1,12 @@
 # Investigate Booking Connections
 
-![Bob — hospitality lab banner](images/bob.png)
-
 ## Introduction
 
 Bob Green, Seer Hotels’ graph specialist, investigates reservation `RSV-8841`. Shared devices, payment tokens, or contact details may connect it to other suspicious bookings.
 
 Compare ordinary SQL joins with SQL Property Graph Queries (SQL/PGQ), then explore the connections visually in Graph Studio.
+
+![Bob — hospitality lab banner](images/bob.png)
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
@@ -22,12 +22,6 @@ Compare ordinary SQL joins with SQL Property Graph Queries (SQL/PGQ), then explo
 > - **SQL Property Graph Queries (SQL/PGQ)** let you describe graph patterns in SQL, such as "start with this reservation and follow related entities." That lets investigators ask relationship questions in SQL without moving booking connection data into a separate graph-only database.
 
 </details>
-
-The local Hospitality LiveStack demo illustrates a related application story using a separate dataset. Its identifiers and results differ from the Seer Hotels SQL exercises below.
-
-![Local demo guest experience network](images/demo-network-overview.jpg)
-
-![Local demo network query and results](images/demo-network-query.jpg)
 
 ### Objectives
 
@@ -334,21 +328,29 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
 
 ## Task 7: Run and interpret the Graph Studio notebook
 
-Run the notebook’s `RSV-8841` traversal and `DEV-fp-91a7` shared-device view. Compare the ranked table with the paths shown in the graph.
+You already ran the SQL/PGQ patterns in SQL Worksheet. Now explore the `RSV-8841` traversal and `DEV-fp-91a7` shared-device view in Graph Studio. Use the table to rank connected entities and the graph to follow the paths and shared identifiers that connect them.
 
 1. Start at the top of the **Booking Connections** notebook. Read the explanation for the `RSV-8841` traversal, then run the first SQL paragraph.
 
     ![Booking Connections notebook introduction](images/graph-notebook-top.png)
 
-2. Review the results in table format in the graph studio notebook:
+2. Review the results in table format in the Graph Studio notebook:
 
     ![Ranked booking results in Graph Studio](images/live-09-graph-notebook-table.png)
 
     This uses the investigation pattern from Task 3 with a shorter one-to-two-hop limit: start from `RSV-8841`, follow one or two relationship hops, and return the connected entities as a prioritized table.
 
+    | SQL paragraph | Result | What to review |
+    | --- | --- | --- |
+    | `SELECT DISTINCT ... WHERE seed.entity_key = 'RSV-8841'` | Table | Entities reached within one or two hops, ranked by risk score. |
+    | `SELECT * ... WHERE src.entity_key = 'RSV-8841'` | Graph visualization | One-hop and two-hop paths from the reservation, under **Graph Visualization of previous query**. |
+    | `SELECT * ... WHERE device.entity_key = 'DEV-fp-91a7'` | Graph visualization | Reservations connected to the device, under **Shared Entity Connections**. |
+
 3. Under **Graph Visualization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `RSV-8841`. Review the graph visualization that appears below the paragraph.
 
     ![Reservation graph from RSV-8841](images/live-10-graph-reservation-network.png)
+
+    Follow the vertices and edges to see how the reservations and devices in the table connect.
 
 4. Under **Shared Entity Connections**, run the final SQL paragraph anchored on `DEV-fp-91a7`. Inspect the reservations connected to that device.
 
@@ -362,7 +364,7 @@ Run the notebook’s `RSV-8841` traversal and `DEV-fp-91a7` shared-device view. 
 
 ### Optional graph-algorithms extension
 
-The companion [loyalty graph notebook](files/getting-started-loyalty-graph.dsnb) provides separate PGX exercises: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `LOYALTY_GRAPH`, with loyalty members connected by allowed points transfers. It is separate from `BOOKING_ABUSE_NETWORK` and requires the optional PGQL graph, a provisioned `LOYALTY_GRAPH`, and an attached PGX service. Skip this extension if those resources are not available. Graph proximity helps prioritize review; it does not establish intent.
+The companion [loyalty graph notebook](files/getting-started-loyalty-graph.dsnb) lets you practice PGX graph algorithms: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `LOYALTY_GRAPH`, with loyalty members connected by allowed points transfers. Graph proximity helps prioritize review; it does not establish intent.
 
 ## Conclusion: Make Relationships Easy to Review
 
@@ -432,6 +434,18 @@ CREATE PROPERTY GRAPH booking_abuse_network
 ```
 
 The statement defines the graph structure over the relational tables. It does not move the rows to a separate graph database. `BOOKING_ABUSE_NETWORK` can then be queried with `GRAPH_TABLE` while the relational tables remain the source of the data.
+
+## Application example
+
+Explore the [LiveStack Demo Hospitality](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4525).
+
+![LiveStack Demo Hospitality: Guest Experience Network Graph](images/demo-network-overview.jpg)
+
+*LiveStack Demo Hospitality: Guest Experience Network Graph*
+
+![LiveStack Demo Hospitality: Guest Experience Network Graph](images/demo-network-query.jpg)
+
+*LiveStack Demo Hospitality: Guest Experience Network Graph*
 
 ## Acknowledgements
 

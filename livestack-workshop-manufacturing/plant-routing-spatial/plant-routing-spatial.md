@@ -1,12 +1,12 @@
 # Find the Closest Manufacturing Plant
 
-![Moon: manufacturing lab banner](images/moon.png)
-
 ## Introduction
 
 Moon Kai, SEER MANUFACTURING’s spatial specialist, helps planners find alternative plants for customer sites in a high-demand region. **Which sites are inside the region, and which plant is closest to each?**
 
 You will use points for plant and customer-site locations, polygons for demand regions, and spatial queries to measure distances and identify nearby plants.
+
+![Moon: manufacturing lab banner](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
@@ -23,12 +23,6 @@ You will use points for plant and customer-site locations, polygons for demand r
 >
 </details>
 
-Oracle Spatial can support a production-routing map using the distances calculated in this lab.
-
-The live SEER MANUFACTURING application shows a related plant-capacity and routing map using the separate AX-400 demo dataset. Its plants, work orders, and map results differ from the workshop SQL fixture.
-
-![SEER MANUFACTURING plant capacity and routing map](images/demo-spatial-map.jpg)
-
 ### Objectives
 
 - Identify spatial points and polygons in the manufacturing data.
@@ -39,21 +33,15 @@ The live SEER MANUFACTURING application shows a related plant-capacity and routi
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-Help Moon find customer sites in a high-demand region and the nearest plant for each. The results give planners candidates to check for suitable process routes.
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Look at the locations as points
 
 Moon starts with the simplest spatial question: **where are the plants?** The database stores each plant as an `SDO_GEOMETRY` point, while the application can use the same point as GeoJSON.
 
-An `SDO_GEOMETRY` point is Oracle Spatial's structured representation of one location. An illustrative plant point could use a point type, the WGS84 coordinate system, and the coordinate pair longitude `-74.4121` and latitude `40.5187`. This example explains the format; check the actual coordinates supplied by the manufacturing loader. Because Oracle stores the location as geometry, Spatial functions can calculate distance and test spatial relationships instead of treating the coordinates as two unrelated numbers.
+A plant point uses WGS84 coordinates, such as longitude `-74.4121` and latitude `40.5187`. Use the coordinates in your query results for the actual workshop locations.
 
-`SDO_UTIL.TO_GEOJSON` converts that geometry into a standard JSON map object such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`. The application can send this object to a map without maintaining a second location format or a separate conversion service. Oracle uses the same stored geometry for SQL analysis and application display.
-
-The same stored location supports distance calculations, relational joins, and JSON map output.
+`SDO_UTIL.TO_GEOJSON` converts the geometry to map-ready JSON, such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`.
 
 1. Run this query:
 
@@ -82,9 +70,7 @@ The same stored location supports distance calculations, relational joins, and J
 
 2. Review the point data.
 
-    Moon has not created a second map database. The point used by the application and the point used by SQL are the same value. The database can calculate with it, and the application can display it.
-
-    Moon keeps each plant’s location beside its name, capacity, status, and current load. SQL returns the distance and plant details. `SDO_UTIL.TO_GEOJSON` returns the same location for the application map.
+    Compare `LOCATION` with its GeoJSON representation: both describe the same plant point.
 
 ## Task 2: Find the closest plants to a demand region
 
@@ -128,7 +114,7 @@ The sample data gives New York Manufacturing Region a demand index of `91`. Moon
 
     The `ROUND(..., 2)` around the function result only formats the answer to two decimal places. It does not change the spatial calculation.
 
-    The query also returns `DEMAND_INDEX`, so Moon can read location and demand together. The plant with the smallest distance is the first plant operations should check for available capacity.
+    Use `DEMAND_INDEX` and distance to identify plants to check for capacity.
 
     **Expected output: New York Production coverage**
 
@@ -171,13 +157,13 @@ The sample data gives New York Manufacturing Region a demand index of `91`. Moon
 
     ![Plants ranked by distance to the Chicago manufacturing region](images/sql-spatial-chicago.png)
 
-    The `unit` parameter controls the measurement unit. Review whether a plant lies inside the Chicago Manufacturing Region polygon. A point inside or touching the polygon has distance zero. The contract assigns this region a synthetic demand index of 78; plant rankings must be checked after loading.
+    Chicago has a synthetic demand index of 78. Compare its plant rankings and check which distances are zero.
 
-    This is a useful regional result, but distance to the region boundary does not identify the customer sites that need production support. Moon now uses the region polygon to find those customer sites and then lists the closest active plant for each one.
+    Next, find customer sites within the region and their nearest active plants.
 
 ## Task 3: Route customer sites to the closest plant
 
-Moon now needs a result that an operations application can use: customer sites inside New York Manufacturing Region, their demand region, and the closest active plant. The query uses the customer site point (**`g.location`**) and demand-region polygon (**`dr.boundary`**) to find the customer sites first. It then compares each customer site point with every active plant and keeps the closest one.
+Moon now finds customer sites inside New York Manufacturing Region, then selects the nearest active plant for each.
 
 1. Run the customer-site routing query:
 
@@ -259,13 +245,11 @@ Moon now needs a result that an operations application can use: customer sites i
 
 2. Review the result as an operations decision.
 
-    Customer site `LOCATION` is the requested customer delivery point. Each row gives a production analyst a production contact at a customer site, the closest plant, and location and capacity details to review before assigning work. The result combines the region's demand score, customer site details, plant capacity, current load, and spatial distance in one SQL result.
-
-    A dashboard can use this result to show customer sites in the selected region and the closest plant to each customer site. The production team can review the location and capacity details together before assigning production work.
+    Each row includes a customer contact, the nearest plant, distance, capacity, and current load. Use these to shortlist plants for review.
 
 3. Change the query to `Chicago Manufacturing Region`.
 
-    Compare the customer sites and candidate plants with the New York result. The spatial predicates remain the same; only the region changes. This is the kind of query an operations dashboard can run when a production analyst selects a different demand region.
+    Compare the customer sites and candidate plants with the New York result.
 
 > **Recommendation boundary:** This query finds the nearest active plant by geographic distance. It does not check process capability, certification, material stock, machine schedules, transport time, or delivery commitments. `DAILY_CAPACITY_UNITS` and `CAPACITY_UTILIZATION_PCT` describe a plant snapshot. A planner must check those constraints before reassigning work.
 
@@ -275,7 +259,15 @@ Moon’s query gives planners customer sites to contact and nearby plants to ass
 
 ## Next Steps
 
-You used Oracle Spatial to find customer sites and nearby plants for planners to review. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+Explore further in the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+
+## Application Demo
+
+[Try the LiveStack Manufacturing demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4442).
+
+Explore the plant-capacity and routing map. Its AX-400 demo data differs from the lab data.
+
+![SEER MANUFACTURING plant capacity and routing map](images/demo-spatial-map.jpg)
 
 ## Acknowledgements
 

@@ -233,6 +233,8 @@ Jessica meets with a care operations analyst to review the results at the data l
     - Which services still have several high-priority signals but a lower semantic similarity to the new question?
     - Does the active request activity make you more or less concerned about the operational impact?
 
+![SQL Worksheet showing the ranked healthcare service result from the converged query](images/product-level-dashboard-modified.png " ")
+
 The result is ordered by semantic similarity first, so changing the question changes the review queue. High-priority signal count breaks ties. The same governed query can answer a different business question without rebuilding a search index or moving the care-service data.
 
 

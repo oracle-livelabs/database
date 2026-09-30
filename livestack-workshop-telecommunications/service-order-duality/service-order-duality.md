@@ -190,10 +190,6 @@ Thomas now tests the document shape his application can consume directly.
 
     > **Note:** Look for `_metadata.etag` in the document. The ETAG changes when the document changes, so Thomas's application can detect a newer version before updating the service order and avoid overwriting another request.
 
-In the running demo, open **Subscriber Service Orders** to see an application list of subscriber commitments. This is an order-list example. The demo document structure differs from `SERVICE_ORDERS_DV`, so use the SQL and JSON keys above for this lab.
-
-![Live subscriber service-order list; separate application data.](images/app-service-orders.png)
-
 ## Task 4: Enable document inserts and updates
 
 The existing `SERVICE_ORDERS_DV` lets an application update service order documents. Here, you also allow inserts. Oracle still enforces the table keys and constraints. An application granted access only to the view can use only the fields and write operations that the view allows.
@@ -446,6 +442,14 @@ Thomas does not have to choose one JSON model for the whole application. He can 
 | JSON Relational Duality View      | The data already belongs in relational tables, but the application needs one JSON document. | Return a subscriber service order with its status and monthly service-charge lines, or accept a new service order document from the app. | Relational tables such as `SERVICE_ORDERS` and `SERVICE_ORDER_LINES`; the duality view defines the JSON shape for Thomas' app. |
 
 Thomas chooses `SERVICE_ORDERS_DV` for shared service orders because their data already belongs in relational tables.
+
+## Application Demo
+
+Open **Subscriber Service Orders** to review subscriber commitments.
+
+![LiveStack Telecomm Demo: Subscriber Service Orders](images/app-service-orders.png)
+
+*LiveStack Telecomm Demo: Subscriber Service Orders*
 
 ## Acknowledgements
 
