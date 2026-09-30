@@ -79,6 +79,7 @@ In Lab 7, Nina used the `GENAI` profile to ask and review one question at a time
     WHERE profile_name = 'GENAI';
     </copy>
     ```
+    ![task1](images/confirm-profile.png)
 
     **Expected output:** `GENAI` appears with the status `ENABLED`. This is the same profile Nina used in Lab 7.
 
@@ -112,6 +113,7 @@ In Lab 7, Nina used the `GENAI` profile to ask and review one question at a time
     ORDER BY attribute_name;
     </copy>
     ```
+    ![task1](images/check-healthcare-views.png)
 
     **Expected output:** Two rows: `model` is `xai.grok-4.3`, and `object_list` contains `CARE_DEMAND_FORECASTS_V`, `CARE_SERVICES_V`, `QUALITY_CAPACITY_SIGNALS_V`, and `CARE_SERVICE_REQUESTS_V`.
 
@@ -151,6 +153,7 @@ Jessica gives the assistant one approved database capability: a read-only SQL to
     WHERE tool_name = 'NINA_HEALTHCARE_SQL_TOOL';
     </copy>
     ```
+ ![task2](images/confirm-tool-definition.png)
 
     **Expected output:** `NINA_HEALTHCARE_SQL_TOOL` appears with the status `ENABLED` and a description of its read-only healthcare access.
   
@@ -273,6 +276,7 @@ Nina has an answer, but Jessica also needs an execution trail. Together they ins
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+    ![task4](images/review-latest-team-run.png)
 
     **Expected output:** The latest row shows `NINA_HEALTHCARE_TEAM`, state `SUCCEEDED`, and start and end times. Note its `TEAM_EXEC_ID` to match the run with its tool calls.
 
@@ -299,6 +303,7 @@ Nina has an answer, but Jessica also needs an execution trail. Together they ins
     ORDER BY start_date DESC;
     </copy>
     ```
+ ![task4](images/review-latest-tool-calls.png)
 
     **Expected output:** Rows for `NINA_HEALTHCARE_SQL_TOOL`, `NINA_HEALTHCARE_AGENT`, and `NINA_HEALTHCARE_TASK`, with the same `TEAM_EXEC_ID` as the latest team run. Count the rows to check how many tool calls occurred.
 
