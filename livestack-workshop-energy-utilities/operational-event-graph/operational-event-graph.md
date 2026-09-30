@@ -84,7 +84,7 @@ Bob and Jessica start with the gas leak response event and follow evidence to th
     ```
     </copy>
 
-    ![Operational event graph showing a restoration risk node](images/restoration-risk-node-example.png " ")
+    ![LLUSER SQL Worksheet showing the directed one-hop SQL/PGQ result for GLK-2208](images/restoration-risk-node-example.png " ")
 
 2. Compare the columns with Task 1. The graph pattern expresses the same directed, one-outgoing-hop traversal; the relational tables remain the source.
 

@@ -209,7 +209,7 @@ Otto reviews the prepared features, checks the deployed model, and builds a huma
     ```
     </copy>
 
-    ![Service demand risk and capacity analytics](images/service-demand-risk.png " ")
+    ![LLUSER SQL Worksheet showing the OML capacity-risk watchlist](images/service-demand-risk.png " ")
 
 > **Checkpoint:** Use the held-out rows in Task 3 to examine errors before changing a threshold. This small synthetic test split demonstrates the workflow; it is not sufficient evidence for production performance. A narrower review queue can miss emerging operational risk.
 

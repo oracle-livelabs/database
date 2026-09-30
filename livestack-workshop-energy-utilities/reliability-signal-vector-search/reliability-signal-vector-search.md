@@ -84,7 +84,7 @@ Gilly begins with a gas pressure and leak-response concern, then changes only th
     ```
     </copy>
 
-    ![Semantic utility service search results in the demo](images/semantic-utility-service-results.png " ")
+    ![LLUSER SQL Worksheet showing five ranked semantic utility-service matches](images/semantic-utility-service-results.png " ")
 
 2. Confirm the result includes readable service and operator context—not only a distance value.
 

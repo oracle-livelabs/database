@@ -11,7 +11,7 @@ The requests look different, but they share one problem: the data already lives 
 - Bob needs to follow relationships among outages, assets, crews, service points, and reliability gaps.
 - Moon needs to calculate distances between service points and field logistics sites.
 - Otto needs to train and score a service-demand model.
-- Nina needs to ask utility operations questions in plain language and turn the results into controlled actions.
+- Nina needs to ask utility operations questions in plain language and turn the results into controlled operational review.
 
 ![The Seer Utility Network demo welcome screen](images/seer-utility-network-welcome.png " ")
 

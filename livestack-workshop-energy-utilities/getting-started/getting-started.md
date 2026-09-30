@@ -39,6 +39,8 @@ Estimated Time: **5 minutes**
 
     ![SQL Worksheet showing the LLUSER connection check](images/sql-worksheet-connection-check.png " ")
 
+    ![SQL Worksheet showing the Energy and Utilities service-request count](images/utility-service-request-count.png " ")
+
     **Expected output pattern**
 
     | Check | Expected evidence |

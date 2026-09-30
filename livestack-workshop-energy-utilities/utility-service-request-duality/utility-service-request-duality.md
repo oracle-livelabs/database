@@ -33,11 +33,11 @@ Thomas verifies the document used by the Service Tickets page, then proves that 
 
 2. Expand the result and locate `_id`, `requestingServicePointId`, `requestStatus`, `requestValue`, and `lineItems`.
 
-    ![Utility service request represented as JSON and relational data](images/utility-request-json-duality.png " ")
+    ![LLUSER SQL Worksheet result for a service-request document from the duality view](images/utility-request-json-duality.png " ")
 
 > **Checkpoint:** The document is assembled from the backing request and line-item tables. It is not a second, independently synchronized copy.
 
-The operations available through a duality view come from its DDL annotations. `WITH UPDATE` in this workshop enables the demonstrated update path; it should not be read as unrestricted insert or delete support. Concurrent document updates also use duality-view concurrency controls such as the document ETAG, so an application should treat a stale ETAG as a conflict rather than silently overwrite newer data.
+The operations available through a duality view come from its DDL annotations. `WITH UPDATE` in this workshop enables updates to the annotated request and line-item fields demonstrated by the workshop; it does not enable unrestricted insert or delete operations. Concurrent document updates also use duality-view concurrency controls such as the document ETAG, so an application should treat a stale ETAG as a conflict rather than silently overwrite newer data.
 
 ## Task 2: Project document fields with SQL
 
