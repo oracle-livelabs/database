@@ -26,16 +26,25 @@ This task establishes the reusable query-and-display pattern used throughout the
 
 1. Add a new Python paragraph and run the following code.
 
-    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of park names, park codes, states, and descriptions. If a query returns no items, the function safely returns an empty string.
+    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. If a query returns no items, the function safely returns an empty string.
 
     ```python
     %python
     def format_parks(result):
-        return "\n".join(
-            f"{i}. {r.metadata['name']} ({r.metadata['park_code']}) – {r.metadata['states']}\n"
-            f"{r.metadata['description']}\n"
-            for i, r in enumerate(result.items or [], 1)
-        )
+        formatted_items = []
+        for i, r in enumerate(result.items or [], 1):
+            metadata = r.metadata
+            formatted_items.append(
+                "\n".join(
+                    [
+                        f"{i}. name: {metadata['name']}",
+                        f"park_code: {metadata['park_code']}",
+                        f"states: {metadata['states']}",
+                        f"description: {metadata['description']}",
+                    ]
+                )
+            )
+        return "\n\n".join(formatted_items)
     ```
 
 2. Add a new Python paragraph and run the following code.
