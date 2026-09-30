@@ -1,0 +1,1904 @@
+Window: "Getting Started/MATERIAL_FLOW_GRAPH", App: Google Chrome.
+0 standard window Getting Started/MATERIAL_FLOW_GRAPH - Google Chrome, Secondary Actions: Raise, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsy3w1aw/paragraph/dsmBOLXa
+	1 container Getting Started/MATERIAL_FLOW_GRAPH - Google Chrome, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsy3w1aw/paragraph/dsmBOLXa
+		2 container
+			3 toolbar
+				4 button Back
+				5 button (disabled) Forward
+				6 button Reload
+				7 container
+					8 pop up button View site information
+					9 text field (settable) Address and search bar, Placeholder: Search Google or type a URL, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsy3w1aw/paragraph/dsmBOLXa
+					10 button This page is allowed to edit files
+					11 button Bookmark this tab
+				12 container
+					13 pop up button Obsidian Web Clipper
+Has access to this site
+					14 pop up button Extensions
+				15 checkbox Downloads, Value: 0
+				16 button You
+				17 pop up button Chrome
+			18 container
+				19 scroll area
+					20 HTML content Getting Started/MATERIAL_FLOW_GRAPH, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsy3w1aw/paragraph/dsmBOLXa
+						21 container
+							22 container
+								23 button Navigation
+								24 link Graph Studio Graph Studio, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/.homepage
+								25 button Help
+								26 button ATTACHED
+								27 container Profile
+									28 pop up button LLUSER
+										29 text 
+										30 text LLUSER
+										31 text 
+							32 container
+								33 button Navigation
+								34 container Application navigation
+									35 container
+										36 heading Graph Tools, Value: 2
+											37 text Graph Tools
+										38 content list
+											39 button  Overview
+											40 button Graph Explorer
+											41 button Modeler
+											42 button  Graphs
+											43 button  Notebooks
+											44 button  Templates
+									45 container
+										46 heading Administrator Dashboard, Value: 2
+											47 text Administrator Dashboard
+										48 content list
+											49 button  Jobs
+							50 container notebook
+								51 container
+									52 text 
+									53 link Getting Started
+										54 text Getting Started
+									55 text 
+									56 text MATERIAL_FLOW_GRAPH
+									57 button Modify Notebook
+									58 container
+										59 button Run Paragraphs
+										60 button Restart Session
+										61 button Delete Notebook
+									62 container
+										63 button Hide Code
+										64 button Hide Result
+										65 button Update Notebook State
+										66 button Show Panel
+									67 toolbar Notebook Toolbar
+										68 container
+											69 pop up button Jump to paragraph
+												70 text Jump to paragraph
+												71 text 
+											72 pop up button Versioning
+												73 text Versioning
+												74 text 
+											75 button Attach Credentials
+										76 container
+											77 button Clear Result
+											78 button Clear Paragraph Dependencies
+											79 button Copy embedded notebook path to clipboard
+											80 button Share Notebook
+											81 button Clone Notebook
+											82 button Export Notebook
+											83 button Print Notebook
+										84 container
+											85 container Select the SELECT AI profile for this notebook
+												86 button SELECT AI
+											87 container Graph QuickView
+												88 button Quickview
+											89 container Default
+												90 container Update Notebook Type
+													91 pop up button Default
+														92 text 
+											93 container Zeppelin
+												94 container Update Notebook Layout
+													95 pop up button Zeppelin
+														96 text 
+											97 container Default Template
+												98 container Update Notebook Template
+													99 pop up button Default Template
+														100 text 
+									101 container
+										102 container Paragraph container
+											103 container
+												104 tab group Visualization selection
+													105 tab (selected) HTML, Value: 1
+														106 image HTML
+													107 tab (settable, integer) Text, Value: 0
+														108 image Text
+												109 splitter
+												110 button Settings
+												111 pop up button Download As
+													112 text 
+													113 text Download As
+													114 text 
+												115 heading Material Flow Investigation, Value: 1
+													116 text Material Flow Investigation
+												117 text This optional notebook accompanies the HighTech workshop's production-quality graph lab. It teaches PGX algorithms using physical component movements between work centers. It is not the SQL/PGQ production-quality graph. Prerequisites: a PGQL property graph named MATERIAL_FLOW_GRAPH over WORK_CENTERS and MATERIAL_TRANSFERS, the TRANSFERS edge label, the CENTER_ID vertex property, and access to the in-memory PGX server. The loader creates the tables; run the optional PGQL graph definition from its final comme
+										118 container Paragraph container
+											119 container
+												120 tab group Visualization selection
+													121 tab (selected) HTML, Value: 1
+														122 image HTML
+													123 tab (settable, integer) Text, Value: 0
+														124 image Text
+												125 splitter
+												126 button Settings
+												127 pop up button Download As
+													128 text 
+													129 text Download As
+													130 text 
+												131 text Run the first 
+												132 text %python-pgx
+												133 text  paragraph. The built-in 
+												134 text session
+												135 text  reads the graph from the database into the in-memory server and creates a 
+												136 text PgXGraph
+												137 text  object for the algorithms.
+										138 container Paragraph container
+											139 container
+												140 editor (settable) Editor content
+											141 container
+												142 tab group Visualization selection
+													143 tab (selected) Text, Value: 1
+														144 image Text
+												145 splitter
+												146 button Settings
+												147 pop up button Download As
+													148 text 
+													149 text Download As
+													150 text 
+												151 text PgxGraph(name: MATERIAL_FLOW_GRAPH, v: 105, e: 114, directed: True, memory(Mb): 0)
+Graph MATERIAL_FLOW_GRAPH successfully loaded
+
+										152 container Paragraph container
+											153 container
+												154 tab group Visualization selection
+													155 tab (selected) HTML, Value: 1
+														156 image HTML
+													157 tab (settable, integer) Text, Value: 0
+														158 image Text
+												159 splitter
+												160 button Settings
+												161 pop up button Download As
+													162 text 
+													163 text Download As
+													164 text 
+												165 text Run the PGQL query to display 100 graph elements. In 
+												166 text MATCH (s)-[t]->(d)
+												167 text , 
+												168 text s
+												169 text  is the source vertex, 
+												170 text t
+												171 text  the directed edge, and 
+												172 text d
+												173 text  the destination. 
+												174 text LIMIT
+												175 text  caps the returned elements. For more syntax examples, see the 
+												176 link PGQL specification, Value: pgql-lang.org/
+												177 text  or the PGQL tutorial in the Getting Started notebook folder.
+										178 container Paragraph container
+											179 container
+												180 editor (settable) Editor content
+											181 container
+												182 tab group Visualization selection
+													183 tab (selected) Graph, Value: 1
+														184 image Graph
+													185 tab (settable, integer) Table, Value: 0
+														186 image Table
+													187 tab (settable, integer) Text, Value: 0
+														188 image Text
+												189 splitter
+												190 button Settings
+												191 pop up button Download As
+													192 text 
+													193 text Download As
+													194 text 
+												195 container
+													196 toggle button Move / Zoom, Value: 0
+														197 text 
+													198 toggle button Fit to Screen, Value: 1
+														199 text 
+													200 toggle button Toggle Sticky Mode, Value: 0
+														201 text 
+													202 toggle button Activate Network Evolution, Value: 0
+														203 text 
+													204 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													205 button (disabled) Select Expand Option
+													206 button (disabled) Drop - Delete selected vertices and edges
+													207 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													208 button Group - Group selected vertices
+													209 button Select Group Option
+													210 button (disabled) Ungroup - Ungroup selected vertices
+													211 button Undo - Undo last action
+													212 button (disabled) Redo - Redo last action
+													213 button Reset - Reset the visualization to its default state
+													214 container
+														215 text 
+														216 text field (settable) Search graph
+														217 toggle button Conditional search, Value: 0
+															218 text 
+														219 button (disabled) Clear search
+													220 container Graph Visualization
+														221 container
+															222 container Edge MATERIAL_TRANSFERS(74), connects 74 to 75
+																223 graphics symbol Edge MATERIAL_TRANSFERS(74), connects 74 to 75
+																224 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg3NCk=
+															225 container Edge MATERIAL_TRANSFERS(62), connects 62 to 63
+																226 graphics symbol Edge MATERIAL_TRANSFERS(62), connects 62 to 63
+																227 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg2Mik=
+															228 container Edge MATERIAL_TRANSFERS(50), connects 50 to 51
+																229 graphics symbol Edge MATERIAL_TRANSFERS(50), connects 50 to 51
+																230 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg1MCk=
+															231 container Edge MATERIAL_TRANSFERS(34), connects 34 to 35
+																232 graphics symbol Edge MATERIAL_TRANSFERS(34), connects 34 to 35
+																233 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygzNCk=
+															234 container Edge MATERIAL_TRANSFERS(22), connects 22 to 23
+																235 graphics symbol Edge MATERIAL_TRANSFERS(22), connects 22 to 23
+																236 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygyMik=
+															237 container Edge MATERIAL_TRANSFERS(10), connects 10 to 11
+																238 graphics symbol Edge MATERIAL_TRANSFERS(10), connects 10 to 11
+																239 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMCk=
+															240 container Edge MATERIAL_TRANSFERS(98), connects 98 to 99
+																241 graphics symbol Edge MATERIAL_TRANSFERS(98), connects 98 to 99
+																242 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg5OCk=
+															243 container Edge MATERIAL_TRANSFERS(4), connects 4 to 5
+																244 graphics symbol Edge MATERIAL_TRANSFERS(4), connects 4 to 5
+																245 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg0KQ==
+															246 container Edge MATERIAL_TRANSFERS(86), connects 86 to 87
+																247 graphics symbol Edge MATERIAL_TRANSFERS(86), connects 86 to 87
+																248 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg4Nik=
+															249 container Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																250 graphics symbol Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																251 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDMp
+															252 container Edge MATERIAL_TRANSFERS(90), connects 90 to 91
+																253 graphics symbol Edge MATERIAL_TRANSFERS(90), connects 90 to 91
+																254 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg5MCk=
+															255 container Edge MATERIAL_TRANSFERS(58), connects 58 to 59
+																256 graphics symbol Edge MATERIAL_TRANSFERS(58), connects 58 to 59
+																257 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg1OCk=
+															258 container Edge MATERIAL_TRANSFERS(46), connects 46 to 47
+																259 graphics symbol Edge MATERIAL_TRANSFERS(46), connects 46 to 47
+																260 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg0Nik=
+															261 container Edge MATERIAL_TRANSFERS(18), connects 18 to 19
+																262 graphics symbol Edge MATERIAL_TRANSFERS(18), connects 18 to 19
+																263 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxOCk=
+															264 container Edge MATERIAL_TRANSFERS(85), connects 85 to 86
+																265 graphics symbol Edge MATERIAL_TRANSFERS(85), connects 85 to 86
+																266 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg4NSk=
+															267 container Edge MATERIAL_TRANSFERS(73), connects 73 to 74
+																268 graphics symbol Edge MATERIAL_TRANSFERS(73), connects 73 to 74
+																269 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg3Myk=
+															270 container Edge MATERIAL_TRANSFERS(61), connects 61 to 62
+																271 graphics symbol Edge MATERIAL_TRANSFERS(61), connects 61 to 62
+																272 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg2MSk=
+															273 container Edge MATERIAL_TRANSFERS(45), connects 45 to 46
+																274 graphics symbol Edge MATERIAL_TRANSFERS(45), connects 45 to 46
+																275 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg0NSk=
+															276 container Edge MATERIAL_TRANSFERS(3), connects 3 to 4
+																277 graphics symbol Edge MATERIAL_TRANSFERS(3), connects 3 to 4
+																278 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygzKQ==
+															279 container Edge MATERIAL_TRANSFERS(33), connects 33 to 34
+																280 graphics symbol Edge MATERIAL_TRANSFERS(33), connects 33 to 34
+																281 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygzMyk=
+															282 container Edge MATERIAL_TRANSFERS(21), connects 21 to 22
+																283 graphics symbol Edge MATERIAL_TRANSFERS(21), connects 21 to 22
+																284 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygyMSk=
+															285 container Edge MATERIAL_TRANSFERS(97), connects 97 to 98
+																286 graphics symbol Edge MATERIAL_TRANSFERS(97), connects 97 to 98
+																287 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg5Nyk=
+															288 container Edge MATERIAL_TRANSFERS(102), connects 597 to 934
+																289 graphics symbol Edge MATERIAL_TRANSFERS(102), connects 597 to 934
+																290 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDIp
+															291 container Edge MATERIAL_TRANSFERS(69), connects 69 to 70
+																292 graphics symbol Edge MATERIAL_TRANSFERS(69), connects 69 to 70
+																293 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg2OSk=
+															294 container Edge MATERIAL_TRANSFERS(57), connects 57 to 58
+																295 graphics symbol Edge MATERIAL_TRANSFERS(57), connects 57 to 58
+																296 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg1Nyk=
+															297 container Edge MATERIAL_TRANSFERS(29), connects 29 to 30
+																298 graphics symbol Edge MATERIAL_TRANSFERS(29), connects 29 to 30
+																299 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygyOSk=
+															300 container Edge MATERIAL_TRANSFERS(17), connects 17 to 18
+																301 graphics symbol Edge MATERIAL_TRANSFERS(17), connects 17 to 18
+																302 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxNyk=
+															303 container Edge MATERIAL_TRANSFERS(96), connects 96 to 97
+																304 graphics symbol Edge MATERIAL_TRANSFERS(96), connects 96 to 97
+																305 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg5Nik=
+															306 container Edge MATERIAL_TRANSFERS(84), connects 84 to 85
+																307 graphics symbol Edge MATERIAL_TRANSFERS(84), connects 84 to 85
+																308 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg4NCk=
+															309 container Edge MATERIAL_TRANSFERS(72), connects 72 to 73
+																310 graphics symbol Edge MATERIAL_TRANSFERS(72), connects 72 to 73
+																311 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg3Mik=
+															312 container Edge MATERIAL_TRANSFERS(60), connects 60 to 61
+																313 graphics symbol Edge MATERIAL_TRANSFERS(60), connects 60 to 61
+																314 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg2MCk=
+															315 container Edge MATERIAL_TRANSFERS(56), connects 56 to 57
+																316 graphics symbol Edge MATERIAL_TRANSFERS(56), connects 56 to 57
+																317 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg1Nik=
+															318 container Edge MATERIAL_TRANSFERS(44), connects 44 to 45
+																319 graphics symbol Edge MATERIAL_TRANSFERS(44), connects 44 to 45
+																320 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg0NCk=
+															321 container Edge MATERIAL_TRANSFERS(2), connects 2 to 3
+																322 graphics symbol Edge MATERIAL_TRANSFERS(2), connects 2 to 3
+																323 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygyKQ==
+															324 container Edge MATERIAL_TRANSFERS(32), connects 32 to 33
+																325 graphics symbol Edge MATERIAL_TRANSFERS(32), connects 32 to 33
+																326 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygzMik=
+															327 container Edge MATERIAL_TRANSFERS(20), connects 20 to 21
+																328 graphics symbol Edge MATERIAL_TRANSFERS(20), connects 20 to 21
+																329 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygyMCk=
+															330 container Edge MATERIAL_TRANSFERS(105), connects 406 to 1
+																331 graphics symbol Edge MATERIAL_TRANSFERS(105), connects 406 to 1
+																332 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDUp
+															333 container Edge MATERIAL_TRANSFERS(16), connects 16 to 17
+																334 graphics symbol Edge MATERIAL_TRANSFERS(16), connects 16 to 17
+																335 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxNik=
+															336 container Edge MATERIAL_TRANSFERS(68), connects 68 to 69
+																337 graphics symbol Edge MATERIAL_TRANSFERS(68), connects 68 to 69
+																338 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg2OCk=
+															339 container Edge MATERIAL_TRANSFERS(28), connects 28 to 29
+																340 graphics symbol Edge MATERIAL_TRANSFERS(28), connects 28 to 29
+																341 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygyOCk=
+															342 container Edge MATERIAL_TRANSFERS(9), connects 9 to 10
+																343 graphics symbol Edge MATERIAL_TRANSFERS(9), connects 9 to 10
+																344 image Edge with id MjlmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUyg5KQ==
+															345 image Vertex 74
+															346 image Vertex 75
+															347 image Vertex 62
+															348 image Vertex 63
+															349 image Vertex 50
+															350 image Vertex 51
+															351 image Vertex 34
+															352 image Vertex 35
+															353 image Vertex 22
+															354 image Vertex 23
+															355 image Vertex 10
+															356 image Vertex 11
+															357 image Vertex 98
+															358 image Vertex 99
+															359 image Vertex 4
+															360 image Vertex 5
+															361 image Vertex 86
+															362 image Vertex 87
+															363 image Vertex 934
+															364 image Vertex 387
+															365 image Vertex 90
+															366 image Vertex 91
+															367 image Vertex 58
+															368 image Vertex 59
+															369 image Vertex 46
+															370 image Vertex 47
+															371 image Vertex 18
+															372 image Vertex 19
+															373 image Vertex 85
+															374 image Vertex 73
+															375 image Vertex 61
+															376 image Vertex 45
+															377 image Vertex 3
+															378 image Vertex 33
+															379 image Vertex 21
+															380 image Vertex 97
+															381 image Vertex 597
+															382 image Vertex 69
+															383 image Vertex 70
+															384 image Vertex 57
+															385 image Vertex 29
+															386 image Vertex 30
+															387 image Vertex 17
+															388 image Vertex 96
+															389 image Vertex 84
+															390 image Vertex 72
+															391 image Vertex 60
+															392 image Vertex 56
+															393 image Vertex 44
+															394 image Vertex 2
+															395 image Vertex 32
+															396 image Vertex 20
+															397 image Vertex 406
+															398 image Vertex 1
+															399 image Vertex 16
+															400 image Vertex 68
+															401 image Vertex 28
+															402 image Vertex 9
+															403 image Vertex 55
+													404 text 59 of 105  vertices 41 of 100  edges
+													405 slider Value: 100, Secondary Actions: Increment, Decrement
+													406 stepper (settable, float) 100
+													407 text of  205  elements ,  48.78 %
+													408 button Hide Legend
+													409 container
+														410 container Graph Legend
+															411 container
+																412 button , Help: Collapse Vertices
+																413 text Vertices
+															414 button , Help: Hide all vertices
+															415 container
+																416 button , Help: Disable all vertex styling
+															417 container CENTER
+																418 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																419 container
+																	420 container Click to disable this style
+																		421 image Vertex legend with id 2f9fac62
+																	422 text CENTER
+															423 container
+																424 button , Help: Collapse Edges
+																425 text Edges
+															426 button , Help: Hide all edges
+															427 container
+																428 button , Help: Disable all edge styling
+																429 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	430 text 句
+															431 container Hidden Connection
+																432 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																433 container
+																	434 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		435 container Edge legend
+																			436 graphics symbol Edge legend
+																			437 image Edge with id 1583324064459
+																	438 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		439 text Hidden Connection
+															440 container TRANSFERS
+																441 checkbox , Help: Click to hide the influenced edges, Value: 1
+																442 container
+																	443 container Click to disable this style
+																		444 container Edge legend
+																			445 graphics symbol Edge legend
+																			446 image Edge with id -a410cd8
+																	447 text TRANSFERS
+														448 image
+										449 container Paragraph container
+											450 container
+												451 tab group Visualization selection
+													452 tab (selected) HTML, Value: 1
+														453 image HTML
+													454 tab (settable, integer) Text, Value: 0
+														455 image Text
+												456 splitter
+												457 button Settings
+												458 pop up button Download As
+													459 text 
+													460 text Download As
+													461 text 
+												462 text This shows the use of bind parameters in a query. The center id value is entered at runtime. Enter 
+												463 text 534
+												464 text  as the center id, and then execute the paragraph.
+										465 container Paragraph container
+											466 container
+												467 editor (settable) Editor content
+											468 container
+												469 text center_id
+												470 text entry area (settable) center_id, Value: 534
+											471 button (disabled) Clear forms
+											472 button Reset forms
+											473 container
+												474 tab group Visualization selection
+													475 tab (selected) Graph, Value: 1
+														476 image Graph
+													477 tab (settable, integer) Text, Value: 0
+														478 image Text
+												479 splitter
+												480 button Settings
+												481 pop up button Download As
+													482 text 
+													483 text Download As
+													484 text 
+												485 container
+													486 toggle button Move / Zoom, Value: 0
+														487 text 
+													488 toggle button Fit to Screen, Value: 1
+														489 text 
+													490 toggle button Toggle Sticky Mode, Value: 0
+														491 text 
+													492 toggle button Activate Network Evolution, Value: 0
+														493 text 
+													494 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													495 button (disabled) Select Expand Option
+													496 button (disabled) Drop - Delete selected vertices and edges
+													497 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													498 button (disabled) Group - Group selected vertices
+													499 button (disabled) Select Group Option
+													500 button (disabled) Ungroup - Ungroup selected vertices
+													501 button (disabled) Undo - Undo last action
+													502 button (disabled) Redo - Redo last action
+													503 button (disabled) Reset - Reset the visualization to its default state
+													504 container
+														505 text 
+														506 text field (settable) Search graph
+														507 toggle button Conditional search, Value: 0
+															508 text 
+														509 button (disabled) Clear search
+													510 container Graph Visualization
+														511 image
+													512 text 0 of 0  vertices 0 of 0  edges
+													513 slider Value: 0, Secondary Actions: Increment, Decrement
+													514 stepper (settable, float) 0
+													515 text of  0  elements ,  NaN %
+													516 button Hide Legend
+										517 container Paragraph container
+											518 container
+												519 tab group Visualization selection
+													520 tab (selected) HTML, Value: 1
+														521 image HTML
+													522 tab (settable, integer) Text, Value: 0
+														523 image Text
+												524 splitter
+												525 button Settings
+												526 pop up button Download As
+													527 text 
+													528 text Download As
+													529 text 
+												530 text Find the 10 centers with the most transfers. 
+												531 text IN_DEGREE
+												532 text  and 
+												533 text OUT_DEGREE
+												534 text  count incoming and outgoing edges for each vertex.
+										535 container Paragraph container
+											536 container
+												537 button Run Paragraph
+												538 button Enter Dependency Mode
+												539 container Comments (0)
+													540 button Comments
+												541 button Expand
+												542 button Show/Hide Line Numbers
+												543 button Hide Code
+												544 button Visibility
+												545 pop up button Settings
+													546 text 
+													547 text Settings
+													548 text 
+											549 container
+												550 editor (settable) Editor content
+											551 container
+												552 tab group Visualization selection
+													553 tab (settable, integer) Graph, Value: 0
+														554 image Graph
+													555 tab (selected) Table, Value: 1
+														556 image Table
+													557 tab (settable, integer) Area Chart, Value: 0
+														558 image Area Chart
+													559 tab (settable, integer) Bar Chart, Value: 0
+														560 image Bar Chart
+													561 tab (settable, integer) Funnel Chart, Value: 0
+														562 image Funnel Chart
+													563 tab (settable, integer) Line Chart, Value: 0
+														564 image Line Chart
+													565 tab (settable, integer) Pie Chart, Value: 0
+														566 image Pie Chart
+													567 tab (settable, integer) Pyramid Chart, Value: 0
+														568 image Pyramid Chart
+													569 tab (settable, integer) TreeMap, Value: 0
+														570 image TreeMap
+													571 tab (settable, integer) Sunburst, Value: 0
+														572 image Sunburst
+													573 tab (settable, integer) Tag Cloud, Value: 0
+														574 image Tag Cloud
+													575 tab (settable, integer) Box Plot, Value: 0
+														576 image Box Plot
+													577 tab (settable, integer) Scatter Plot, Value: 0
+														578 image Scatter Plot
+													579 tab (settable, integer) Maps, Value: 0
+														580 image Maps
+													581 tab (settable, integer) Text, Value: 0
+														582 image Text
+												583 splitter
+												584 button Settings
+												585 pop up button Download As
+													586 text 
+													587 text Download As
+													588 text 
+												589 container
+													590 text field (settable) Type to search
+												591 container Visualizer table
+													592 container Visualizer table
+														593 container
+															594 text CENTER_ID
+															595 text NUM_TRANSFERS
+														596 text 387
+														597 text 6
+														598 text 934
+														599 text 6
+														600 text 406
+														601 text 5
+														602 text 597
+														603 text 4
+														604 text 2
+														605 text 4
+													606 container
+														607 text Select Row
+												608 container
+													609 text Page 1 content loaded
+													610 text 4Pagination
+													611 container 4Pagination
+														612 text Page
+														613 container Go To Page
+															614 text field (settable) Page Page Page, Value: 1
+														615 text of 2 ( 1-5 of 10 items )
+														616 container
+															617 button (disabled) First Page, Help: First
+															618 button (disabled) Previous Page, Help: Previous
+															619 container
+																620 container Go To Page 1
+																	621 text Page 1
+																622 link Page 2, Help: Go To Page 2, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+															623 button Next Page, Help: Next
+															624 button Last Page, Help: Last
+													625 button (disabled) Load More
+											626 text 1s 479ms @ 8 minutes ago
+										627 container Paragraph container
+											628 container
+												629 tab group Visualization selection
+													630 tab (selected) HTML, Value: 1
+														631 image HTML
+													632 tab (settable, integer) Text, Value: 0
+														633 image Text
+												634 splitter
+												635 button Settings
+												636 pop up button Download As
+													637 text 
+													638 text Download As
+													639 text 
+												640 text Review the centers with the highest degree. The fixture includes center 934 as a starting point for a circular material-transfer investigation. A high degree means many connected transfers; inspect those transfers before drawing conclusions about quality. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge.
+										641 container Paragraph container
+											642 container
+												643 editor (settable) Editor content
+											644 text 
+										645 container Paragraph container
+											646 container
+												647 editor (settable) Editor content
+											648 text 
+										649 container Paragraph container
+											650 container
+												651 editor (settable) Editor content
+											652 text 
+										653 container Paragraph container
+											654 text 
+										655 container Paragraph container
+											656 container
+												657 editor (settable) Editor content
+											658 text 
+										659 container Paragraph container
+											660 text 
+										661 container Paragraph container
+											662 container
+												663 editor (settable) Editor content
+											664 text 
+										665 container Paragraph container
+											666 text 
+										667 container Paragraph container
+											668 container
+												669 editor (settable) Editor content
+											670 text 
+										671 container Paragraph container
+											672 text 
+										673 container Paragraph container
+											674 container
+												675 editor (settable) Editor content
+											676 text 
+										677 container Paragraph container
+											678 container
+												679 editor (settable) Editor content
+											680 text 
+										681 container Paragraph container
+											682 text 
+										683 container Paragraph container
+											684 container
+												685 editor (settable) Editor content
+											686 text 
+										687 container Paragraph container
+											688 text 
+										689 container Paragraph container
+											690 container
+												691 editor (settable) Editor content
+											692 container
+												693 tab group Visualization selection
+													694 tab (selected) Graph, Value: 1
+														695 image Graph
+													696 tab (settable, integer) Table, Value: 0
+														697 image Table
+													698 tab (settable, integer) Text, Value: 0
+														699 image Text
+												700 splitter
+												701 button Settings
+												702 pop up button Download As
+													703 text 
+													704 text Download As
+													705 text 
+												706 container
+													707 toggle button Move / Zoom, Value: 0
+														708 text 
+													709 toggle button Fit to Screen, Value: 1
+														710 text 
+													711 toggle button Toggle Sticky Mode, Value: 0
+														712 text 
+													713 toggle button Activate Network Evolution, Value: 0
+														714 text 
+													715 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													716 button (disabled) Select Expand Option
+													717 button (disabled) Drop - Delete selected vertices and edges
+													718 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													719 button Group - Group selected vertices
+													720 button Select Group Option
+													721 button (disabled) Ungroup - Ungroup selected vertices
+													722 button Undo - Undo last action
+													723 button (disabled) Redo - Redo last action
+													724 button Reset - Reset the visualization to its default state
+													725 container
+														726 text 
+														727 text field (settable) Search graph
+														728 toggle button Conditional search, Value: 0
+															729 text 
+														730 button (disabled) Clear search
+													731 container Graph Visualization
+														732 container
+															733 container Edge MATERIAL_TRANSFERS(107), connects 1 to 2
+																734 graphics symbol Edge MATERIAL_TRANSFERS(107), connects 1 to 2
+																735 image Edge with id NzZmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDcp
+															736 container Edge MATERIAL_TRANSFERS(1), connects 1 to 2
+																737 graphics symbol Edge MATERIAL_TRANSFERS(1), connects 1 to 2
+																738 image Edge with id NzZmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxKQ==
+															739 container Edge MATERIAL_TRANSFERS(108), connects 2 to 387
+																740 graphics symbol Edge MATERIAL_TRANSFERS(108), connects 2 to 387
+																741 image Edge with id NzZmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDgp
+															742 container Edge MATERIAL_TRANSFERS(106), connects 934 to 1
+																743 graphics symbol Edge MATERIAL_TRANSFERS(106), connects 934 to 1
+																744 image Edge with id NzZmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDYp
+															745 container Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																746 graphics symbol Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																747 image Edge with id NzZmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDMp
+															748 image Vertex 1
+															749 image Vertex 2
+															750 image Vertex 387
+															751 image Vertex 934
+													752 text 4 of 4  vertices 5 of 5  edges
+													753 slider Value: 9, Secondary Actions: Increment, Decrement
+													754 stepper (settable, float) 9
+													755 text of  9  elements ,  100.00 %
+													756 button Hide Legend
+													757 container
+														758 container Graph Legend
+															759 container
+																760 button , Help: Collapse Vertices
+																761 text Vertices
+															762 button , Help: Hide all vertices
+															763 container
+																764 button , Help: Disable all vertex styling
+															765 container CENTER
+																766 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																767 container
+																	768 container Click to disable this style
+																		769 image Vertex legend with id 2f9fac62
+																	770 text CENTER
+															771 container
+																772 button , Help: Collapse Edges
+																773 text Edges
+															774 button , Help: Hide all edges
+															775 container
+																776 button , Help: Disable all edge styling
+																777 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	778 text 句
+															779 container Hidden Connection
+																780 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																781 container
+																	782 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		783 container Edge legend
+																			784 graphics symbol Edge legend
+																			785 image Edge with id 1583324064459
+																	786 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		787 text Hidden Connection
+															788 container TRANSFERS
+																789 checkbox , Help: Click to hide the influenced edges, Value: 1
+																790 container
+																	791 container Click to disable this style
+																		792 container Edge legend
+																			793 graphics symbol Edge legend
+																			794 image Edge with id -a410cd8
+																	795 text TRANSFERS
+														796 image
+										797 container Paragraph container
+											798 container
+												799 editor (settable) Editor content
+											800 container
+												801 tab group Visualization selection
+													802 tab (selected) Graph, Value: 1
+														803 image Graph
+													804 tab (settable, integer) Table, Value: 0
+														805 image Table
+													806 tab (settable, integer) Text, Value: 0
+														807 image Text
+												808 splitter
+												809 button Settings
+												810 pop up button Download As
+													811 text 
+													812 text Download As
+													813 text 
+												814 container
+													815 toggle button Move / Zoom, Value: 0
+														816 text 
+													817 toggle button Fit to Screen, Value: 1
+														818 text 
+													819 toggle button Toggle Sticky Mode, Value: 0
+														820 text 
+													821 toggle button Activate Network Evolution, Value: 0
+														822 text 
+													823 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													824 button (disabled) Select Expand Option
+													825 button (disabled) Drop - Delete selected vertices and edges
+													826 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													827 button Group - Group selected vertices
+													828 button Select Group Option
+													829 button (disabled) Ungroup - Ungroup selected vertices
+													830 button Undo - Undo last action
+													831 button (disabled) Redo - Redo last action
+													832 button Reset - Reset the visualization to its default state
+													833 container
+														834 text 
+														835 text field (settable) Search graph
+														836 toggle button Conditional search, Value: 0
+															837 text 
+														838 button (disabled) Clear search
+													839 container Graph Visualization
+														840 container
+															841 container Edge MATERIAL_TRANSFERS(110), connects 934 to 406
+																842 graphics symbol Edge MATERIAL_TRANSFERS(110), connects 934 to 406
+																843 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMTAp
+															844 container Edge MATERIAL_TRANSFERS(111), connects 406 to 597
+																845 graphics symbol Edge MATERIAL_TRANSFERS(111), connects 406 to 597
+																846 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMTEp
+															847 container Edge MATERIAL_TRANSFERS(109), connects 387 to 934
+																848 graphics symbol Edge MATERIAL_TRANSFERS(109), connects 387 to 934
+																849 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDkp
+															850 container Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																851 graphics symbol Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																852 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDMp
+															853 container Edge MATERIAL_TRANSFERS(107), connects 1 to 2
+																854 graphics symbol Edge MATERIAL_TRANSFERS(107), connects 1 to 2
+																855 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDcp
+															856 container Edge MATERIAL_TRANSFERS(1), connects 1 to 2
+																857 graphics symbol Edge MATERIAL_TRANSFERS(1), connects 1 to 2
+																858 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxKQ==
+															859 container Edge MATERIAL_TRANSFERS(108), connects 2 to 387
+																860 graphics symbol Edge MATERIAL_TRANSFERS(108), connects 2 to 387
+																861 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDgp
+															862 container Edge MATERIAL_TRANSFERS(106), connects 934 to 1
+																863 graphics symbol Edge MATERIAL_TRANSFERS(106), connects 934 to 1
+																864 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDYp
+															865 container Edge MATERIAL_TRANSFERS(112), connects 597 to 387
+																866 graphics symbol Edge MATERIAL_TRANSFERS(112), connects 597 to 387
+																867 image Edge with id ODRmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMTIp
+															868 image Vertex 934
+															869 image Vertex 406
+															870 image Vertex 597
+															871 image Vertex 387
+															872 image Vertex 1
+															873 image Vertex 2
+													874 text 6 of 6  vertices 9 of 9  edges
+													875 slider Value: 15, Secondary Actions: Increment, Decrement
+													876 stepper (settable, float) 15
+													877 text of  15  elements ,  100.00 %
+													878 button Hide Legend
+													879 container
+														880 container Graph Legend
+															881 container
+																882 button , Help: Collapse Vertices
+																883 text Vertices
+															884 button , Help: Hide all vertices
+															885 container
+																886 button , Help: Disable all vertex styling
+															887 container CENTER
+																888 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																889 container
+																	890 container Click to disable this style
+																		891 image Vertex legend with id 2f9fac62
+																	892 text CENTER
+															893 container
+																894 button , Help: Collapse Edges
+																895 text Edges
+															896 button , Help: Hide all edges
+															897 container
+																898 button , Help: Disable all edge styling
+																899 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	900 text 句
+															901 container Hidden Connection
+																902 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																903 container
+																	904 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		905 container Edge legend
+																			906 graphics symbol Edge legend
+																			907 image Edge with id 1583324064459
+																	908 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		909 text Hidden Connection
+															910 container TRANSFERS
+																911 checkbox , Help: Click to hide the influenced edges, Value: 1
+																912 container
+																	913 container Click to disable this style
+																		914 container Edge legend
+																			915 graphics symbol Edge legend
+																			916 image Edge with id -a410cd8
+																	917 text TRANSFERS
+														918 image
+										919 container Paragraph container
+											920 container
+												921 tab group Visualization selection
+													922 tab (selected) HTML, Value: 1
+														923 image HTML
+													924 tab (settable, integer) Text, Value: 0
+														925 image Text
+												926 splitter
+												927 button Settings
+												928 pop up button Download As
+													929 text 
+													930 text Download As
+													931 text 
+												932 text Use sample centers 934 and 387 as the starting points for review, not as confirmed sources of defects. Personalized PageRank ranks how strongly other centers connect to these starting points. It helps prioritize review; it is not a probability of a defect. The next Python paragraph uses vertices from WORK_CENTERS and the built-in analyst object.
+										933 container Paragraph container
+											934 container
+												935 editor (settable) Editor content
+											936 container
+												937 tab group Visualization selection
+													938 tab (selected) Text, Value: 1
+														939 image Text
+												940 splitter
+												941 button Settings
+												942 pop up button Download As
+													943 text 
+													944 text Download As
+													945 text 
+												946 text VertexProperty(name: personalized_pagerank, type: double, graph: MATERIAL_FLOW_GRAPH)
+
+										947 container Paragraph container
+											948 container
+												949 editor (settable) Editor content
+											950 container
+												951 tab group Visualization selection
+													952 tab (selected) Graph, Value: 1
+														953 image Graph
+													954 tab (settable, integer) Table, Value: 0
+														955 image Table
+													956 tab (settable, integer) Area Chart, Value: 0
+														957 image Area Chart
+													958 tab (settable, integer) Bar Chart, Value: 0
+														959 image Bar Chart
+													960 tab (settable, integer) Funnel Chart, Value: 0
+														961 image Funnel Chart
+													962 tab (settable, integer) Line Chart, Value: 0
+														963 image Line Chart
+													964 tab (settable, integer) Pie Chart, Value: 0
+														965 image Pie Chart
+													966 tab (settable, integer) Pyramid Chart, Value: 0
+														967 image Pyramid Chart
+													968 tab (settable, integer) TreeMap, Value: 0
+														969 image TreeMap
+													970 tab (settable, integer) Sunburst, Value: 0
+														971 image Sunburst
+													972 tab (settable, integer) Tag Cloud, Value: 0
+														973 image Tag Cloud
+													974 tab (settable, integer) Box Plot, Value: 0
+														975 image Box Plot
+													976 tab (settable, integer) Scatter Plot, Value: 0
+														977 image Scatter Plot
+													978 tab (settable, integer) Maps, Value: 0
+														979 image Maps
+													980 tab (settable, integer) Text, Value: 0
+														981 image Text
+												982 splitter
+												983 button Settings
+												984 pop up button Download As
+													985 text 
+													986 text Download As
+													987 text 
+												988 container
+													989 toggle button Move / Zoom, Value: 0
+														990 text 
+													991 toggle button Fit to Screen, Value: 1
+														992 text 
+													993 toggle button Toggle Sticky Mode, Value: 0
+														994 text 
+													995 toggle button Activate Network Evolution, Value: 0
+														996 text 
+													997 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													998 button (disabled) Select Expand Option
+													999 button (disabled) Drop - Delete selected vertices and edges
+													1000 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													1001 button Group - Group selected vertices
+													1002 button Select Group Option
+													1003 button (disabled) Ungroup - Ungroup selected vertices
+													1004 button Undo - Undo last action
+													1005 button (disabled) Redo - Redo last action
+													1006 button Reset - Reset the visualization to its default state
+													1007 container
+														1008 text 
+														1009 text field (settable) Search graph
+														1010 toggle button Conditional search, Value: 0
+															1011 text 
+														1012 button (disabled) Clear search
+													1013 container Graph Visualization
+														1014 container
+															1015 image Vertex 
+															1016 image Vertex 
+															1017 image Vertex 
+															1018 image Vertex 
+															1019 image Vertex 
+															1020 image Vertex 
+															1021 image Vertex 
+															1022 image Vertex 
+															1023 image Vertex 
+															1024 image Vertex 
+															1025 image Vertex 
+															1026 image Vertex 
+															1027 image Vertex 
+															1028 image Vertex 
+															1029 image Vertex 
+															1030 image Vertex 
+															1031 image Vertex 
+															1032 image Vertex 
+															1033 image Vertex 
+															1034 image Vertex 
+															1035 image Vertex 
+															1036 image Vertex 
+															1037 image Vertex 
+															1038 image Vertex 
+															1039 image Vertex 
+															1040 image Vertex 
+															1041 image Vertex 
+															1042 image Vertex 
+															1043 image Vertex 
+															1044 image Vertex 
+															1045 image Vertex 
+															1046 image Vertex 
+															1047 image Vertex 
+															1048 image Vertex 
+															1049 image Vertex 
+															1050 image Vertex 
+															1051 image Vertex 
+															1052 image Vertex 
+															1053 image Vertex 
+															1054 image Vertex 
+															1055 image Vertex 
+															1056 image Vertex 
+															1057 image Vertex 
+															1058 image Vertex 
+															1059 image Vertex 
+															1060 image Vertex 
+															1061 image Vertex 
+															1062 image Vertex 
+															1063 image Vertex 
+															1064 image Vertex 
+															1065 image Vertex 
+															1066 image Vertex 
+															1067 image Vertex 
+															1068 image Vertex 
+															1069 image Vertex 
+															1070 image Vertex 
+															1071 image Vertex 
+															1072 image Vertex 
+															1073 image Vertex 
+															1074 image Vertex 
+															1075 image Vertex 
+															1076 image Vertex 
+															1077 image Vertex 
+															1078 image Vertex 
+															1079 image Vertex 
+															1080 image Vertex 
+															1081 image Vertex 
+															1082 image Vertex 
+															1083 image Vertex 
+															1084 image Vertex 
+															1085 image Vertex 
+															1086 image Vertex 
+															1087 image Vertex 
+															1088 image Vertex 
+															1089 image Vertex 
+															1090 image Vertex 
+															1091 image Vertex 
+															1092 image Vertex 
+															1093 image Vertex 
+															1094 image Vertex 
+															1095 image Vertex 
+															1096 image Vertex 
+															1097 image Vertex 
+															1098 image Vertex 
+															1099 image Vertex 
+															1100 image Vertex 
+															1101 image Vertex 
+															1102 image Vertex 
+															1103 image Vertex 
+															1104 image Vertex 
+															1105 image Vertex 
+															1106 image Vertex 
+															1107 image Vertex 
+															1108 image Vertex 
+															1109 image Vertex 
+															1110 image Vertex 
+															1111 image Vertex 
+															1112 image Vertex 
+															1113 image Vertex 
+															1114 image Vertex 
+													1115 text 100 of 105  vertices 0 of 0  edges
+													1116 slider Value: 100, Secondary Actions: Increment, Decrement
+													1117 stepper (settable, float) 100
+													1118 text of  105  elements ,  95.24 %
+													1119 button Hide Legend
+													1120 container
+														1121 container Graph Legend
+															1122 container
+																1123 button , Help: Collapse Vertices
+																1124 text Vertices
+															1125 button , Help: Hide all vertices
+															1126 container
+																1127 button , Help: Disable all vertex styling
+															1128 container CENTER
+																1129 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																1130 container
+																	1131 container Click to disable this style
+																		1132 image Vertex legend with id 2f9fac62
+																	1133 text CENTER
+															1134 container
+																1135 button , Help: Collapse Edges
+																1136 text Edges
+															1137 button , Help: Show all edges
+															1138 container
+																1139 button , Help: Enable all edge styling
+																1140 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	1141 text 句
+															1142 container Hidden Connection
+																1143 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																1144 container
+																	1145 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1146 container Edge legend
+																			1147 graphics symbol Edge legend
+																			1148 image Edge with id 1583324064459
+																	1149 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1150 text Hidden Connection
+														1151 image
+										1152 container Paragraph container
+											1153 container
+												1154 tab group Visualization selection
+													1155 tab (selected) HTML, Value: 1
+														1156 image HTML
+													1157 tab (settable, integer) Text, Value: 0
+														1158 image Text
+												1159 splitter
+												1160 button Settings
+												1161 pop up button Download As
+													1162 text 
+													1163 text Download As
+													1164 text 
+												1165 text Review the personalized PageRank results from your run. Then inspect sample center 406 and its immediate neighbors. No position in the ranking is assumed.
+										1166 container Paragraph container
+											1167 container
+												1168 editor (settable) Editor content
+											1169 container
+												1170 tab group Visualization selection
+													1171 tab (selected) Graph, Value: 1
+														1172 image Graph
+													1173 tab (settable, integer) Table, Value: 0
+														1174 image Table
+													1175 tab (settable, integer) Text, Value: 0
+														1176 image Text
+												1177 splitter
+												1178 button Settings
+												1179 pop up button Download As
+													1180 text 
+													1181 text Download As
+													1182 text 
+												1183 container
+													1184 toggle button Move / Zoom, Value: 0
+														1185 text 
+													1186 toggle button Fit to Screen, Value: 1
+														1187 text 
+													1188 toggle button Toggle Sticky Mode, Value: 0
+														1189 text 
+													1190 toggle button Activate Network Evolution, Value: 0
+														1191 text 
+													1192 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													1193 button (disabled) Select Expand Option
+													1194 button (disabled) Drop - Delete selected vertices and edges
+													1195 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													1196 button Group - Group selected vertices
+													1197 button Select Group Option
+													1198 button (disabled) Ungroup - Ungroup selected vertices
+													1199 button Undo - Undo last action
+													1200 button (disabled) Redo - Redo last action
+													1201 button Reset - Reset the visualization to its default state
+													1202 container
+														1203 text 
+														1204 text field (settable) Search graph
+														1205 toggle button Conditional search, Value: 0
+															1206 text 
+														1207 button (disabled) Clear search
+													1208 container Graph Visualization
+														1209 container
+															1210 container Edge MATERIAL_TRANSFERS(110), connects 934 to 406
+																1211 graphics symbol Edge MATERIAL_TRANSFERS(110), connects 934 to 406
+																1212 image Edge with id OTdmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMTAp
+															1213 container Edge MATERIAL_TRANSFERS(111), connects 406 to 597
+																1214 graphics symbol Edge MATERIAL_TRANSFERS(111), connects 406 to 597
+																1215 image Edge with id OTdmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMTEp
+															1216 container Edge MATERIAL_TRANSFERS(105), connects 406 to 1
+																1217 graphics symbol Edge MATERIAL_TRANSFERS(105), connects 406 to 1
+																1218 image Edge with id OTdmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDUp
+															1219 container Edge MATERIAL_TRANSFERS(114), connects 387 to 406
+																1220 graphics symbol Edge MATERIAL_TRANSFERS(114), connects 387 to 406
+																1221 image Edge with id OTdmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMTQp
+															1222 container Edge MATERIAL_TRANSFERS(104), connects 387 to 406
+																1223 graphics symbol Edge MATERIAL_TRANSFERS(104), connects 387 to 406
+																1224 image Edge with id OTdmYWxzZSUyQ01BVEVSSUFMX1RSQU5TRkVSUygxMDQp
+															1225 image Vertex 934
+															1226 image Vertex 406
+															1227 image Vertex 597
+															1228 image Vertex 1
+															1229 image Vertex 387
+													1230 text 5 of 5  vertices 5 of 5  edges
+													1231 slider Value: 10, Secondary Actions: Increment, Decrement
+													1232 stepper (settable, float) 10
+													1233 text of  10  elements ,  100.00 %
+													1234 button Hide Legend
+													1235 container
+														1236 container Graph Legend
+															1237 container
+																1238 button , Help: Collapse Vertices
+																1239 text Vertices
+															1240 button , Help: Hide all vertices
+															1241 container
+																1242 button , Help: Disable all vertex styling
+															1243 container CENTER
+																1244 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																1245 container
+																	1246 container Click to disable this style
+																		1247 image Vertex legend with id 2f9fac62
+																	1248 text CENTER
+															1249 container
+																1250 button , Help: Collapse Edges
+																1251 text Edges
+															1252 button , Help: Hide all edges
+															1253 container
+																1254 button , Help: Disable all edge styling
+																1255 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	1256 text 句
+															1257 container Hidden Connection
+																1258 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																1259 container
+																	1260 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1261 container Edge legend
+																			1262 graphics symbol Edge legend
+																			1263 image Edge with id 1583324064459
+																	1264 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1265 text Hidden Connection
+															1266 container TRANSFERS
+																1267 checkbox , Help: Click to hide the influenced edges, Value: 1
+																1268 container
+																	1269 container Click to disable this style
+																		1270 container Edge legend
+																			1271 graphics symbol Edge legend
+																			1272 image Edge with id -a410cd8
+																	1273 text TRANSFERS
+														1274 image
+										1275 container Paragraph container
+											1276 container
+												1277 tab group Visualization selection
+													1278 tab (selected) HTML, Value: 1
+														1279 image HTML
+													1280 tab (settable, integer) Text, Value: 0
+														1281 image Text
+												1282 splitter
+												1283 button Settings
+												1284 pop up button Download As
+													1285 text 
+													1286 text Download As
+													1287 text 
+												1288 text Use shortest_path_hop_distance to compute the minimum number of directed transfer hops from centers 934 and 387 to other centers. Smaller distances mean graph proximity, not a confirmed defect. Run both Python paragraphs. They store separate properties named hop_dist_from_934 and hop_dist_from_387 on the loaded graph.
+										1289 container Paragraph container
+											1290 container
+												1291 editor (settable) Editor content
+											1292 container
+												1293 tab group Visualization selection
+													1294 tab (selected) Text, Value: 1
+														1295 image Text
+												1296 splitter
+												1297 button Settings
+												1298 pop up button Download As
+													1299 text 
+													1300 text Download As
+													1301 text 
+												1302 text AllPaths(source: PgxVertex[provider=WORK_CENTERS,key=934,ID=WORK_CENTERS(934)])
+
+										1303 container Paragraph container
+											1304 container
+												1305 editor (settable) Editor content
+											1306 container
+												1307 tab group Visualization selection
+													1308 tab (selected) Text, Value: 1
+														1309 image Text
+												1310 splitter
+												1311 button Settings
+												1312 pop up button Download As
+													1313 text 
+													1314 text Download As
+													1315 text 
+												1316 text AllPaths(source: PgxVertex[provider=WORK_CENTERS,key=387,ID=WORK_CENTERS(387)])
+
+										1317 container Paragraph container
+											1318 container
+												1319 tab group Visualization selection
+													1320 tab (selected) HTML, Value: 1
+														1321 image HTML
+													1322 tab (settable, integer) Text, Value: 0
+														1323 image Text
+												1324 splitter
+												1325 button Settings
+												1326 pop up button Download As
+													1327 text 
+													1328 text Download As
+													1329 text 
+												1330 text We can GROUP BY the number of hops and list the hop counts in ascending order.
+										1331 container Paragraph container
+											1332 container
+												1333 editor (settable) Editor content
+											1334 container
+												1335 tab group Visualization selection
+													1336 tab (selected) Table, Value: 1
+														1337 image Table
+													1338 tab (settable, integer) Area Chart, Value: 0
+														1339 image Area Chart
+													1340 tab (settable, integer) Bar Chart, Value: 0
+														1341 image Bar Chart
+													1342 tab (settable, integer) Funnel Chart, Value: 0
+														1343 image Funnel Chart
+													1344 tab (settable, integer) Line Chart, Value: 0
+														1345 image Line Chart
+													1346 tab (settable, integer) Pie Chart, Value: 0
+														1347 image Pie Chart
+													1348 tab (settable, integer) Pyramid Chart, Value: 0
+														1349 image Pyramid Chart
+													1350 tab (settable, integer) TreeMap, Value: 0
+														1351 image TreeMap
+													1352 tab (settable, integer) Sunburst, Value: 0
+														1353 image Sunburst
+													1354 tab (settable, integer) Tag Cloud, Value: 0
+														1355 image Tag Cloud
+													1356 tab (settable, integer) Box Plot, Value: 0
+														1357 image Box Plot
+													1358 tab (settable, integer) Scatter Plot, Value: 0
+														1359 image Scatter Plot
+													1360 tab (settable, integer) Maps, Value: 0
+														1361 image Maps
+													1362 tab (settable, integer) Text, Value: 0
+														1363 image Text
+												1364 splitter
+												1365 button Settings
+												1366 pop up button Download As
+													1367 text 
+													1368 text Download As
+													1369 text 
+												1370 container
+													1371 text field (settable) Type to search
+												1372 container Visualizer table
+													1373 container Visualizer table
+														1374 container
+															1375 text COUNT(a.center_id)
+															1376 text HOPS
+														1377 text 3
+														1378 text 1
+														1379 text 2
+														1380 text 2
+														1381 text 1
+														1382 text 3
+														1383 text 1
+														1384 text 4
+														1385 text 1
+														1386 text 5
+													1387 container
+														1388 text Select Row
+												1389 container
+													1390 text Page 1 content loaded
+													1391 text 4Pagination
+													1392 container 4Pagination
+														1393 text Page
+														1394 container Go To Page
+															1395 text field (settable) Page Page, Value: 1
+														1396 text of 20 ( 1-5 of 100 items )
+														1397 container
+															1398 button (disabled) First Page, Help: First
+															1399 button (disabled) Previous Page, Help: Previous
+															1400 container
+																1401 container Go To Page 1
+																	1402 text Page 1
+																1403 link Page 2, Help: Go To Page 2, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1404 link Page 3, Help: Go To Page 3, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1405 link Page 4, Help: Go To Page 4, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1406 link Page 5, Help: Go To Page 5, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1407 text ...
+																1408 link Page 20, Help: Go To Page 20, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+															1409 button Next Page, Help: Next
+															1410 button Last Page, Help: Last
+													1411 button Load More
+										1412 container Paragraph container
+											1413 container
+												1414 editor (settable) Editor content
+											1415 container
+												1416 tab group Visualization selection
+													1417 tab (selected) Table, Value: 1
+														1418 image Table
+													1419 tab (settable, integer) Area Chart, Value: 0
+														1420 image Area Chart
+													1421 tab (settable, integer) Bar Chart, Value: 0
+														1422 image Bar Chart
+													1423 tab (settable, integer) Funnel Chart, Value: 0
+														1424 image Funnel Chart
+													1425 tab (settable, integer) Line Chart, Value: 0
+														1426 image Line Chart
+													1427 tab (settable, integer) Pie Chart, Value: 0
+														1428 image Pie Chart
+													1429 tab (settable, integer) Pyramid Chart, Value: 0
+														1430 image Pyramid Chart
+													1431 tab (settable, integer) TreeMap, Value: 0
+														1432 image TreeMap
+													1433 tab (settable, integer) Sunburst, Value: 0
+														1434 image Sunburst
+													1435 tab (settable, integer) Tag Cloud, Value: 0
+														1436 image Tag Cloud
+													1437 tab (settable, integer) Box Plot, Value: 0
+														1438 image Box Plot
+													1439 tab (settable, integer) Scatter Plot, Value: 0
+														1440 image Scatter Plot
+													1441 tab (settable, integer) Maps, Value: 0
+														1442 image Maps
+													1443 tab (settable, integer) Text, Value: 0
+														1444 image Text
+												1445 splitter
+												1446 button Settings
+												1447 pop up button Download As
+													1448 text 
+													1449 text Download As
+													1450 text 
+												1451 container
+													1452 text field (settable) Type to search
+												1453 container Visualizer table
+													1454 container Visualizer table
+														1455 container
+															1456 text COUNT(a.center_id)
+															1457 text HOPS
+														1458 text 2
+														1459 text 1
+														1460 text 2
+														1461 text 2
+														1462 text 1
+														1463 text 3
+														1464 text 1
+														1465 text 4
+														1466 text 1
+														1467 text 5
+													1468 container
+														1469 text Select Row
+												1470 container
+													1471 text Page 1 content loaded
+													1472 text 4Pagination
+													1473 container 4Pagination
+														1474 text Page
+														1475 container Go To Page
+															1476 text field (settable) 1
+														1477 text of 20 ( 1-5 of 100 items )
+														1478 container
+															1479 button (disabled) First Page, Help: First
+															1480 button (disabled) Previous Page, Help: Previous
+															1481 container
+																1482 container Go To Page 1
+																	1483 text Page 1
+																1484 link Page 2, Help: Go To Page 2, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1485 link Page 3, Help: Go To Page 3, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1486 link Page 4, Help: Go To Page 4, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1487 link Page 5, Help: Go To Page 5, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																1488 text ...
+																1489 link Page 20, Help: Go To Page 20, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+															1490 button Next Page, Help: Next
+															1491 button Last Page, Help: Last
+													1492 button Load More
+										1493 container Paragraph container
+											1494 container
+												1495 tab group Visualization selection
+													1496 tab (selected) HTML, Value: 1
+														1497 image HTML
+													1498 tab (settable, integer) Text, Value: 0
+														1499 image Text
+												1500 splitter
+												1501 button Settings
+												1502 pop up button Download As
+													1503 text 
+													1504 text Download As
+													1505 text 
+												1506 text Inspect the transfer degree of centers within two hops of center 934 or 387. Compare proximity with degree.
+										1507 container Paragraph container
+											1508 container
+												1509 editor (settable) Editor content
+											1510 container
+												1511 tab group Visualization selection
+													1512 tab (selected) Graph, Value: 1
+														1513 image Graph
+													1514 tab (settable, integer) Table, Value: 0
+														1515 image Table
+													1516 tab (settable, integer) Area Chart, Value: 0
+														1517 image Area Chart
+													1518 tab (settable, integer) Bar Chart, Value: 0
+														1519 image Bar Chart
+													1520 tab (settable, integer) Funnel Chart, Value: 0
+														1521 image Funnel Chart
+													1522 tab (settable, integer) Line Chart, Value: 0
+														1523 image Line Chart
+													1524 tab (settable, integer) Pie Chart, Value: 0
+														1525 image Pie Chart
+													1526 tab (settable, integer) Pyramid Chart, Value: 0
+														1527 image Pyramid Chart
+													1528 tab (settable, integer) TreeMap, Value: 0
+														1529 image TreeMap
+													1530 tab (settable, integer) Sunburst, Value: 0
+														1531 image Sunburst
+													1532 tab (settable, integer) Tag Cloud, Value: 0
+														1533 image Tag Cloud
+													1534 tab (settable, integer) Box Plot, Value: 0
+														1535 image Box Plot
+													1536 tab (settable, integer) Scatter Plot, Value: 0
+														1537 image Scatter Plot
+													1538 tab (settable, integer) Maps, Value: 0
+														1539 image Maps
+													1540 tab (settable, integer) Text, Value: 0
+														1541 image Text
+												1542 splitter
+												1543 button Settings
+												1544 pop up button Download As
+													1545 text 
+													1546 text Download As
+													1547 text 
+												1548 container
+													1549 toggle button Move / Zoom, Value: 0
+														1550 text 
+													1551 toggle button Fit to Screen, Value: 1
+														1552 text 
+													1553 toggle button Toggle Sticky Mode, Value: 0
+														1554 text 
+													1555 toggle button Activate Network Evolution, Value: 0
+														1556 text 
+													1557 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													1558 button (disabled) Select Expand Option
+													1559 button (disabled) Drop - Delete selected vertices and edges
+													1560 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													1561 button Group - Group selected vertices
+													1562 button Select Group Option
+													1563 button (disabled) Ungroup - Ungroup selected vertices
+													1564 button Undo - Undo last action
+													1565 button (disabled) Redo - Redo last action
+													1566 button Reset - Reset the visualization to its default state
+													1567 container
+														1568 text 
+														1569 text field (settable) Search graph
+														1570 toggle button Conditional search, Value: 0
+															1571 text 
+														1572 button (disabled) Clear search
+													1573 container Graph Visualization
+														1574 container
+															1575 image Vertex 
+															1576 image Vertex 
+															1577 image Vertex 
+															1578 image Vertex 
+															1579 image Vertex 
+													1580 text 5 of 5  vertices 0 of 0  edges
+													1581 slider Value: 5, Secondary Actions: Increment, Decrement
+													1582 stepper (settable, float) 5
+													1583 text of  5  elements ,  100.00 %
+													1584 button Hide Legend
+													1585 container
+														1586 container Graph Legend
+															1587 container
+																1588 button , Help: Collapse Vertices
+																1589 text Vertices
+															1590 button , Help: Hide all vertices
+															1591 container
+																1592 button , Help: Disable all vertex styling
+															1593 container CENTER
+																1594 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																1595 container
+																	1596 container Click to disable this style
+																		1597 image Vertex legend with id 2f9fac62
+																	1598 text CENTER
+															1599 container
+																1600 button , Help: Collapse Edges
+																1601 text Edges
+															1602 button , Help: Show all edges
+															1603 container
+																1604 button , Help: Enable all edge styling
+																1605 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	1606 text 句
+															1607 container Hidden Connection
+																1608 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																1609 container
+																	1610 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1611 container Edge legend
+																			1612 graphics symbol Edge legend
+																			1613 image Edge with id 1583324064459
+																	1614 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1615 text Hidden Connection
+														1616 image
+										1617 container Paragraph container
+											1618 container
+												1619 editor (settable) Editor content
+											1620 container
+												1621 tab group Visualization selection
+													1622 tab (selected) Graph, Value: 1
+														1623 image Graph
+													1624 tab (settable, integer) Table, Value: 0
+														1625 image Table
+													1626 tab (settable, integer) Area Chart, Value: 0
+														1627 image Area Chart
+													1628 tab (settable, integer) Bar Chart, Value: 0
+														1629 image Bar Chart
+													1630 tab (settable, integer) Funnel Chart, Value: 0
+														1631 image Funnel Chart
+													1632 tab (settable, integer) Line Chart, Value: 0
+														1633 image Line Chart
+													1634 tab (settable, integer) Pie Chart, Value: 0
+														1635 image Pie Chart
+													1636 tab (settable, integer) Pyramid Chart, Value: 0
+														1637 image Pyramid Chart
+													1638 tab (settable, integer) TreeMap, Value: 0
+														1639 image TreeMap
+													1640 tab (settable, integer) Sunburst, Value: 0
+														1641 image Sunburst
+													1642 tab (settable, integer) Tag Cloud, Value: 0
+														1643 image Tag Cloud
+													1644 tab (settable, integer) Box Plot, Value: 0
+														1645 image Box Plot
+													1646 tab (settable, integer) Scatter Plot, Value: 0
+														1647 image Scatter Plot
+													1648 tab (settable, integer) Maps, Value: 0
+														1649 image Maps
+													1650 tab (settable, integer) Text, Value: 0
+														1651 image Text
+												1652 splitter
+												1653 button Settings
+												1654 pop up button Download As
+													1655 text 
+													1656 text Download As
+													1657 text 
+												1658 container
+													1659 toggle button Move / Zoom, Value: 0
+														1660 text 
+													1661 toggle button Fit to Screen, Value: 1
+														1662 text 
+													1663 toggle button Toggle Sticky Mode, Value: 0
+														1664 text 
+													1665 toggle button Activate Network Evolution, Value: 0
+														1666 text 
+													1667 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													1668 button (disabled) Select Expand Option
+													1669 button (disabled) Drop - Delete selected vertices and edges
+													1670 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													1671 button Group - Group selected vertices
+													1672 button Select Group Option
+													1673 button (disabled) Ungroup - Ungroup selected vertices
+													1674 button Undo - Undo last action
+													1675 button (disabled) Redo - Redo last action
+													1676 button Reset - Reset the visualization to its default state
+													1677 container
+														1678 text 
+														1679 text field (settable) Search graph
+														1680 toggle button Conditional search, Value: 0
+															1681 text 
+														1682 button (disabled) Clear search
+													1683 container Graph Visualization
+														1684 container
+															1685 image Vertex 
+															1686 image Vertex 
+															1687 image Vertex 
+															1688 image Vertex 
+													1689 text 4 of 4  vertices 0 of 0  edges
+													1690 slider Value: 4, Secondary Actions: Increment, Decrement
+													1691 stepper (settable, float) 4
+													1692 text of  4  elements ,  100.00 %
+													1693 button Hide Legend
+													1694 container
+														1695 container Graph Legend
+															1696 container
+																1697 button , Help: Collapse Vertices
+																1698 text Vertices
+															1699 button , Help: Hide all vertices
+															1700 container
+																1701 button , Help: Disable all vertex styling
+															1702 container CENTER
+																1703 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																1704 container
+																	1705 container Click to disable this style
+																		1706 image Vertex legend with id 2f9fac62
+																	1707 text CENTER
+															1708 container
+																1709 button , Help: Collapse Edges
+																1710 text Edges
+															1711 button , Help: Show all edges
+															1712 container
+																1713 button , Help: Enable all edge styling
+																1714 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	1715 text 句
+															1716 container Hidden Connection
+																1717 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																1718 container
+																	1719 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1720 container Edge legend
+																			1721 graphics symbol Edge legend
+																			1722 image Edge with id 1583324064459
+																	1723 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1724 text Hidden Connection
+														1725 image
+										1726 container Paragraph container
+											1727 container
+												1728 tab group Visualization selection
+													1729 tab (selected) HTML, Value: 1
+														1730 image HTML
+													1731 tab (settable, integer) Text, Value: 0
+														1732 image Text
+												1733 splitter
+												1734 button Settings
+												1735 pop up button Download As
+													1736 text 
+													1737 text Download As
+													1738 text 
+												1739 text Compare center 406 with the degree, personalized PageRank, and hop-distance results from your run. The final query visualizes two-hop paths from sample centers 934 and 387. Verify whether 406 appears instead of assuming a connection.
+										1740 container Paragraph container
+											1741 container
+												1742 editor (settable) Editor content
+											1743 container
+												1744 tab group Visualization selection
+													1745 tab (selected) Graph, Value: 1
+														1746 image Graph
+													1747 tab (settable, integer) Table, Value: 0
+														1748 image Table
+													1749 tab (settable, integer) Text, Value: 0
+														1750 image Text
+												1751 splitter
+												1752 button Settings
+												1753 pop up button Download As
+													1754 text 
+													1755 text Download As
+													1756 text 
+												1757 container
+													1758 toggle button Move / Zoom, Value: 0
+														1759 text 
+													1760 toggle button Fit to Screen, Value: 1
+														1761 text 
+													1762 toggle button Toggle Sticky Mode, Value: 0
+														1763 text 
+													1764 toggle button Activate Network Evolution, Value: 0
+														1765 text 
+													1766 button (disabled) Expand - Fetch neighbors based on configurable hop count
+													1767 button (disabled) Select Expand Option
+													1768 button (disabled) Drop - Delete selected vertices and edges
+													1769 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+													1770 button Group - Group selected vertices
+													1771 button Select Group Option
+													1772 button (disabled) Ungroup - Ungroup selected vertices
+													1773 button Undo - Undo last action
+													1774 button (disabled) Redo - Redo last action
+													1775 button Reset - Reset the visualization to its default state
+													1776 container
+														1777 text 
+														1778 text field (settable) Search graph
+														1779 toggle button Conditional search, Value: 0
+															1780 text 
+														1781 button (disabled) Clear search
+													1782 container Graph Visualization
+														1783 container
+															1784 container Edge MATERIAL_TRANSFERS(110), connects 934 to 406
+																1785 graphics symbol Edge MATERIAL_TRANSFERS(110), connects 934 to 406
+																1786 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTEwKQ==
+															1787 container Edge MATERIAL_TRANSFERS(111), connects 406 to 597
+																1788 graphics symbol Edge MATERIAL_TRANSFERS(111), connects 406 to 597
+																1789 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTExKQ==
+															1790 container Edge MATERIAL_TRANSFERS(109), connects 387 to 934
+																1791 graphics symbol Edge MATERIAL_TRANSFERS(109), connects 387 to 934
+																1792 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTA5KQ==
+															1793 container Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																1794 graphics symbol Edge MATERIAL_TRANSFERS(103), connects 934 to 387
+																1795 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTAzKQ==
+															1796 container Edge MATERIAL_TRANSFERS(107), connects 1 to 2
+																1797 graphics symbol Edge MATERIAL_TRANSFERS(107), connects 1 to 2
+																1798 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTA3KQ==
+															1799 container Edge MATERIAL_TRANSFERS(1), connects 1 to 2
+																1800 graphics symbol Edge MATERIAL_TRANSFERS(1), connects 1 to 2
+																1801 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMSk=
+															1802 container Edge MATERIAL_TRANSFERS(105), connects 406 to 1
+																1803 graphics symbol Edge MATERIAL_TRANSFERS(105), connects 406 to 1
+																1804 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTA1KQ==
+															1805 container Edge MATERIAL_TRANSFERS(106), connects 934 to 1
+																1806 graphics symbol Edge MATERIAL_TRANSFERS(106), connects 934 to 1
+																1807 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTA2KQ==
+															1808 container Edge MATERIAL_TRANSFERS(114), connects 387 to 406
+																1809 graphics symbol Edge MATERIAL_TRANSFERS(114), connects 387 to 406
+																1810 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTE0KQ==
+															1811 container Edge MATERIAL_TRANSFERS(104), connects 387 to 406
+																1812 graphics symbol Edge MATERIAL_TRANSFERS(104), connects 387 to 406
+																1813 image Edge with id MTA5ZmFsc2UlMkNNQVRFUklBTF9UUkFOU0ZFUlMoMTA0KQ==
+															1814 image Vertex 934
+															1815 image Vertex 406
+															1816 image Vertex 597
+															1817 image Vertex 387
+															1818 image Vertex 1
+															1819 image Vertex 2
+													1820 text 6 of 6  vertices 10 of 10  edges
+													1821 slider Value: 16, Secondary Actions: Increment, Decrement
+													1822 stepper (settable, float) 16
+													1823 text of  16  elements ,  100.00 %
+													1824 button Hide Legend
+													1825 container
+														1826 container Graph Legend
+															1827 container
+																1828 button , Help: Collapse Vertices
+																1829 text Vertices
+															1830 button , Help: Hide all vertices
+															1831 container
+																1832 button , Help: Disable all vertex styling
+															1833 container CENTER
+																1834 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																1835 container
+																	1836 container Click to disable this style
+																		1837 image Vertex legend with id 2f9fac62
+																	1838 text CENTER
+															1839 container
+																1840 button , Help: Collapse Edges
+																1841 text Edges
+															1842 button , Help: Hide all edges
+															1843 container
+																1844 button , Help: Disable all edge styling
+																1845 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																	1846 text 句
+															1847 container Hidden Connection
+																1848 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																1849 container
+																	1850 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1851 container Edge legend
+																			1852 graphics symbol Edge legend
+																			1853 image Edge with id 1583324064459
+																	1854 container The conditions of this legend item do not match any elements of the currently displayed graph
+																		1855 text Hidden Connection
+															1856 container TRANSFERS
+																1857 checkbox , Help: Click to hide the influenced edges, Value: 1
+																1858 container
+																	1859 container Click to disable this style
+																		1860 container Edge legend
+																			1861 graphics symbol Edge legend
+																			1862 image Edge with id -a410cd8
+																	1863 text TRANSFERS
+														1864 image
+							1865 text Copyright © 2026 Oracle and/or its affiliates.
+			1866 pop up button Tab search
+			1867 container
+				1868 tab group
+					1869 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 430 MB, Value: off
+						1870 button Close
+					1871 tab (settable, boolean) New Tab - Memory usage - 175 MB, Value: off
+						1872 button Close
+					1873 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 458 MB, Value: off
+						1874 button Close
+					1875 tab (selected, settable, boolean) Getting Started/MATERIAL_FLOW_GRAPH - Memory usage - 413 MB, Value: on
+						1876 button Close
+					1877 tab (settable, boolean) Experiment - OML - Memory usage - 139 MB, Value: off
+						1878 button Close
+			1879 button New Tab
+		1880 text …oraclecloudapps.com/graphstudio/graphstudio/
+	1881 close button
+	1882 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	1883 minimize button
+1884 menu bar
+	1885 Chrome
+	1886 File
+	1887 Edit
+	1888 View
+	1889 History
+	1890 Bookmarks
+	1891 Profiles
+	1892 Tab
+	1893 Window
+	1894 Help
+
+The focused UI element is 555 tab (selected) Table, Value: 1

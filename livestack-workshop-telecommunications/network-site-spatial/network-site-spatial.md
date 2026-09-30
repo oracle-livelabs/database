@@ -1,18 +1,12 @@
 # Find Nearby Network Sites
 
-![Moon Kai, spatial specialist, introduces nearby network sites.](images/moon.png)
-
 ## Introduction
 
-Moon Kai is SEER Telecomms’ spatial specialist. Operations teams ask Moon for help when location affects a service decision: which site is closest to a region with growing demand, and which subscriber addresses lie nearby?
+Moon Kai, SEER Telecomms’ spatial specialist, is helping support staff investigate poor connectivity in a busy region. **Which subscribers are in that region, and which active network site is nearest to each address?**
 
-Oracle AI Database stores network site and subscriber locations as map points. It stores demand regions as map areas, each with a demand score.
+Use points and polygons to locate subscribers, calculate distances, and combine nearby-site details with service records.
 
-Moon wants a query that a service team can use in a dashboard and map:
-
-> Subscribers in a busy network region report poor connectivity. **Which subscribers are in that region, and which site is closest to each one?**
-
-In this lab, you follow Moon's approach. You start with a single point, measure distance to a region, find subscribers inside that region, and finish with a list of subscribers and nearby sites for the support team.
+![Moon Kai, spatial specialist, introduces nearby network sites.](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
@@ -29,8 +23,6 @@ In this lab, you follow Moon's approach. You start with a single point, measure 
 >
 </details>
 
-Oracle Spatial can support a subscriber-service review map using the distances calculated in this lab.
-
 ### Objectives
 
 - Identify spatial points and polygons in the telecommunications data.
@@ -43,14 +35,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step | Telecommunications focus |
-| --- | --- |
-| Problem | Subscriber-service staff need nearby network sites to consider when arranging subscriber service reviews. |
-| Database task | Moon needs to compare subscriber points with a region, then find the closest site for each subscriber. |
-| Your role | You review Moon's spatial approach and interpret the result for an operations user. |
-| What You Will See | Oracle Spatial turns location data into network-support review results with SQL. |
-| Oracle features | `SDO_GEOMETRY`, `SDO_GEOM.SDO_DISTANCE`, `SDO_GEOM.RELATE`, and GeoJSON conversion support the analysis. |
-| Result | An operations user can see which subscribers need service in a region and which site is closest to each one. |
+Help Moon find subscribers in a busy region and the nearest active site for each service address.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -58,11 +43,9 @@ Estimated Time: **10 minutes**
 
 Moon starts with the simplest spatial question: **where are the network sites?** The database stores each site as an `SDO_GEOMETRY` point, while the application can use the same point as GeoJSON.
 
-An `SDO_GEOMETRY` point is Oracle Spatial's structured representation of one location. An illustrative network site point could use a point type, the WGS84 coordinate system, and the coordinate pair longitude `-74.4121` and latitude `40.5187`. This example explains the format; check the actual coordinates supplied by the telecommunications loader. Because Oracle stores the location as geometry, Spatial functions can calculate distance and test spatial relationships instead of treating the coordinates as two unrelated numbers.
+An `SDO_GEOMETRY` point specifies a point type, coordinate system, and coordinates. For example, a WGS84 point can use longitude `-74.4121` and latitude `40.5187`. Spatial functions use this geometry to calculate distances and test relationships.
 
-`SDO_UTIL.TO_GEOJSON` converts that geometry into a standard JSON map object such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`. The application can send this object to a map without maintaining a second location format or a separate conversion service. Oracle uses the same stored geometry for SQL analysis and application display.
-
-The same stored location supports distance calculations, relational joins, and JSON map output.
+`SDO_UTIL.TO_GEOJSON` converts the same geometry into a map object such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`.
 
 1. Run this query:
 
@@ -93,9 +76,7 @@ The same stored location supports distance calculations, relational joins, and J
 
 2. Review the point data.
 
-    Moon has not created a second map database. The point used by the application and the point used by SQL are the same value. The database can calculate with it, and the application can display it.
-
-    Moon keeps each site’s location beside its name, capacity, status, and current load. SQL returns the distance and site details. `SDO_UTIL.TO_GEOJSON` returns the same location for the application map.
+    Compare the point with its GeoJSON representation. Both describe the same site.
 
 ## Task 2: Find the closest sites to a demand region
 
@@ -186,13 +167,9 @@ The sample data gives New York Network Region a demand index of `91` for the fir
 
     This is a useful regional result, but distance to the region boundary does not identify the subscribers who need service. Moon now uses the region polygon to find those subscribers and then ranks the closest active site for each address.
 
-In **Network Access and Field Operations**, enable **Network Sites** and **Demand Pressure Regions**. Compare the site markers with the region overlays. The demo uses its own locations and capacity data, so this map illustrates spatial presentation rather than the expected New York or Chicago SQL result.
-
-![Live network map with site and demand-region layers enabled.](images/app-spatial-map.png)
-
 ## Task 3: Find the closest site for each subscriber
 
-Moon now needs a result that an operations application can use: subscribers inside New York Network Region, their demand region, and the closest active network site. The query uses the subscriber point (**`g.location`**) and demand-region polygon (**`dr.boundary`**) to find the subscribers first. It then compares each subscriber point with every active site and keeps the closest one.
+Moon now finds subscribers inside New York Network Region and the closest active site to each service address.
 
 1. Run the subscriber-to-site query:
 
@@ -273,8 +250,6 @@ Moon now needs a result that an operations application can use: subscribers insi
 
     Subscriber `LOCATION` is the service address supplied in the sample data. Each row gives an operations analyst a subscriber to contact, the closest site, and the information needed to decide where the work should go. The result combines the region's demand score, subscriber details, site capacity, current load, and spatial distance in one SQL result.
 
-    A dashboard can use this result to show subscribers in the selected region and the closest network site to each subscriber. The service team can review the location and capacity details together before opening a network-support investigation.
-
 3. Change the query to `Chicago Network Region`.
 
     Compare the subscribers and nearest sites with the New York result. The spatial predicates stay the same; only the region changes. This is the kind of query an operations dashboard can run when an operations analyst selects a different demand region.
@@ -285,11 +260,17 @@ Moon now needs a result that an operations application can use: subscribers insi
 
 Moon used points and polygons to find subscribers in a demand region and rank nearby network sites. The result gives the service team subscribers to contact and network sites to investigate.
 
-One SQL query finds subscribers by location, joins their records to network site details, and returns distance, capacity, and current load. A dashboard can use these results for both its map and subscriber list.
-
 ## Next Steps
 
-You used points and polygons to find subscribers in a region and nearby sites for the operations team to review. For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+For more practice, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+
+## Application Demo
+
+In **Network Access and Field Operations**, enable **Network Sites** and **Demand Pressure Regions**. Compare the site markers with the region overlays.
+
+![LiveStack Telecomm Demo: Network Access and Field Operations](images/app-spatial-map.png)
+
+*LiveStack Telecomm Demo: Network Access and Field Operations*
 
 ## Acknowledgements
 

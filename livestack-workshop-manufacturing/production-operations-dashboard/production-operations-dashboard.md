@@ -2,55 +2,31 @@
 
 ## Introduction
 
-> **Validation status:** The manual LLUSER walkthrough and authentic manufacturing captures are recorded in the [validation report](../validation/validation-report.md). Green-button and Terraform provisioning remain untested.
+Jessica Chan, SEER MANUFACTURING’s DBA, starts with the quality team’s morning question: **which component needs attention first, and which production orders and customer sites may be affected?**
 
-Jessica Chan is the database administrator responsible for maintaining SEER MANUFACTURING’s production data. Every morning, the production quality operations team asks her a familiar question: **which component needs attention first, and which production orders and customer sites may be affected?**
+Combine quality alerts, production orders, component vectors, and plant locations in one SQL query.
 
-Jessica needs four kinds of data for the Production Quality and Operations Dashboard. Tables hold quality alerts and their impact. JSON documents hold production order activity. Vectors represent component descriptions for searches by meaning. Spatial data records plant and demand-region locations. Her query must combine all four.
-
-Keeping these data types in separate systems would require Jessica to combine exports and keep them current. Instead, she wants a dashboard answer that the production quality team can check against the source records.
-
-Oracle AI Database can query these data types together. Jessica can join relational rows, JSON documents, vectors, and location data in one SQL statement.
-
-In this lab, you build Jessica’s dashboard query. It combines quality alerts, vector search, JSON production order data, and plant locations in one result.
-
-![jessica](images/jessica.png)
+![Jessica introduces the converged production-quality dashboard lab](images/jessica.png)
 
 ### Objectives
 
-- Explain how one database query combines the data needed for a production-quality review.
 - Run one query that combines relational, vector, JSON, and spatial database capabilities.
 - Modify the query to investigate a different production-quality question and explain the change in results.
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-| Step                | Manufacturing focus                                                                                                  |
-| ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Production analysts need a quick way to find severe inspection issues and the production orders they may affect. |
-| Technical Challenge | The query must combine quality alerts, component descriptions, production orders, and plant locations.                         |
-| Persona Focus       | Jessica Chan, the DBA, builds the query that gives production analysts this dashboard view.                         |
-| What You Will Do    | Use a single SQL statement that combines several data types.                                                   |
-| Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
-| Outcome             | Jessica can identify components to review and the production orders they may affect.               |
-
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one shared query that gives production analysts component quality issues alongside production order details.
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Run a converged production investigation
 
-Run the query below to list components with severe quality alerts. Use the result to decide which components need quality review.
+Find components with severe quality alerts, ranked by their match to the investigation phrase.
 
 The query combines four data types:
 
-- **Relational:** `QUALITY_ALERTS_V`, observation-to-component links, and manufacturing views calculate component quality issues and quality impact.
-- **Vector:** `COMPONENT_EMBEDDINGS` and `VECTOR_DISTANCE` find components related by meaning to the investigation phrase.
-- **JSON:** `PRODUCTION_ORDERS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so production order activity can be counted.
-- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest plant to the high-demand New York Manufacturing Region using latitude and longitude information stored as spatial geometries that can be converted to GeoJSON.
-
-    These are four operations in one investigation. Every row combines component quality issues with production order activity, similarity to the search phrase, and nearby plants.
+- **Relational:** Calculate quality impact from alerts and component records.
+- **Vector:** Rank component matches with `VECTOR_DISTANCE`.
+- **JSON:** Use `JSON_TABLE` to read order lines from `PRODUCTION_ORDERS_DV`.
+- **Spatial:** Find the closest plant to the New York Manufacturing Region with `SDO_GEOM.SDO_DISTANCE`.
 
 1. Open SQL Worksheet as `LLUSER`. 
 
@@ -184,24 +160,15 @@ The query combines four data types:
 
     ![Converged production-quality query result](images/sql-dashboard.png)
 
-    
+3. Inspect the top component’s quality impact, similarity, and active order quantities. What makes it a priority?
 
-3. Review the result as the component-level data behind Jessica's dashboard. Each row combines quality-alert severity, semantic match, production order activity, and plant location. This gives the dashboard a ranked component table and the details a production analyst needs when deciding what to review.
-
-    
-
-    Each row should include all four types of data. Compare component names, quality impact and active quantities after each search. Rankings must be measured on the loaded manufacturing data. A missing embedding or an empty regional plant set can leave the result incomplete or empty.
-
-Use the first row to explain why a component needs attention. Check its alert severity, production order counts, match to the search phrase, and nearby plant. Check that the plant can perform the required process before assigning work. These values help the production team decide where to start.
-
-Jessica can use this SQL result for the dashboard table and detail view. Other dashboard components, such as summary cards, can query the same database.
+    If the result is empty or incomplete, check for missing embeddings or an empty regional plant set.
 
 > **Interpretation:** The nearest-plant result is regional context shared by every row. It is not a machine-capability or scheduling check, and it does not reassign an order. Affected-production order counts are alert totals and may include a production order in more than one alert; do not read their sum as unique customer sites.
 
 ## Task 2: Change the investigation question
 
-Jessica meets with a production analyst to review the results before she builds the dashboard. They start with components related to **precision bearing wear and dimensional defects requiring quality review**. Change the embedded investigation phrase to:
-
+Jessica wants to investigate a different concern. Replace the embedded search phrase with:
 
 ```text
 machining capacity and material availability
@@ -216,23 +183,24 @@ Run the query again and compare the top rows.
 2. Which components still have high relational quality impact but a lower semantic similarity to the new question?
 3. Which components have the most active production orders or units that may need review?
 
-The query sorts by similarity first, so changing the question changes the review order. Quality impact breaks ties. Jessica can ask a different question using the same query and component data.
-
+Similarity determines the ranking; quality impact breaks ties. Compare how the new phrase changes the review order.
 
 ## Next Steps
 
 Next, use JSON Relational Duality to expose the same production order data as JSON for an application while keeping SQL access for the database team.
+
+## Application Demo
+
+[Try the LiveStack Manufacturing demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4442).
+
+Explore the Operations Command Center. Its AX-400 demo dataset differs from the lab data, so totals will not match.
+
+![SEER MANUFACTURING operations command center](images/demo-dashboard.jpg)
+
+![SEER MANUFACTURING operations charts](images/demo-dashboard-charts.jpg)
 
 ## Acknowledgements
 
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
-
-## Application example
-
-The live SEER MANUFACTURING application presents plant, work-order, quality, supplier, and agent indicators in its Operations Command Center. It uses the separate AX-400 demo dataset, so its values are not expected output from the workshop SQL query.
-
-![SEER MANUFACTURING operations command center](images/demo-dashboard.jpg)
-
-![SEER MANUFACTURING operations charts](images/demo-dashboard-charts.jpg)

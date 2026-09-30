@@ -29,18 +29,18 @@ Estimated Time: **3 minutes**
     > A duality view presents relational rows as a JSON document. Applications get the payload they need, while analysts still use SQL, keys, joins, and database controls against the same source.
 
     Q: In the vector lab, what does the similarity score help an analyst do?
-    - Prove that a guest concern confirms booking abuse.
+    - Prove that a guest concern establishes wrongdoing.
     - Replace the stay offer and reservation tables with embeddings only.
     * Rank stay offers by how closely they match the search phrase.
     - Count how many rows exist in each hospitality table.
     > The query turns vector distance into a similarity score, where a higher score means the stored stay offer text is closer in meaning to the search phrase.
 
-    Q: What business problem does the property graph lab solve for booking abuse investigators?
+    Q: What business problem does the property graph lab solve for booking reviewers?
     - It scores future revenue for stay offers and segments.
     * It explains connections across reservations and shared entities.
     - It stores service coverage regions for operations teams.
     - It replaces relationship data with flat stay offer totals.
-    > The graph lab focuses on relationship data. A booking abuse analyst can prioritize connected reservations, devices, payment tokens, IP addresses, and phones without relying on fragile chains of manual joins.
+    > The graph lab focuses on relationship data. A booking reviewer can prioritize connected reservations, devices, payment tokens, IP addresses, and phones without relying on fragile chains of manual joins.
 
     Q: Why does Seer Hotels use spatial data in the guest-routing lab?
     - To make coverage decisions outside the shared database.

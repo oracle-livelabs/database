@@ -2,11 +2,9 @@
 
 ## Introduction
 
-Thomas Brune develops guest applications at Seer Hotels. His team needs reservation documents that match its web and mobile screens and reduce calls to the database.
+Thomas Brune needs JSON reservation documents for Seer Hotels’ guest application. Each document must include stay dates, status, and nightly charges while Jessica retains SQL access and relational constraints.
 
-Thomas wants each JSON document to group guest and property IDs, stay dates, status, nightly charges, and optional app fields. He needs to change the document as the application grows while keeping relational keys, SQL access, transactions, and database controls.
-
-Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of guest data.
+Help Thomas compare a JSON column, a JSON Collection Table, and a JSON Relational Duality View, then create and update a reservation through the view.
 
 ![thomas](images/thomas.png)
 
@@ -38,8 +36,6 @@ Thomas's application needs a payload with the reservation and its nightly-charge
 }
 ```
 
-The application uses this document shape, while the database keeps the reservation and nightly-charge lines in relational form. In this lab, you build and read this type of payload in three ways.
-
 ### Objectives
 
 - Store flexible application attributes as JSON in a relational table.
@@ -48,25 +44,6 @@ The application uses this document shape, while the database keeps the reservati
 - Compare the three JSON approaches and choose the right one for an application feature.
 
 Estimated Time: **10 minutes**
-
-### Hands-on Scenario
-
-| Step | Hospitality focus |
-| --- | --- |
-| Business Problem | Thomas's team needs flexible JSON payloads for a new guest web and mobile application. |
-| Technical Challenge | The team needs application-friendly documents while the database keeps relational keys, joins, and controls. |
-| Persona Focus | Thomas tests JSON storage, collections, and duality with Jessica's database guidance. |
-| What You Will See | One Oracle AI Database supports several JSON access patterns over the hospitality data. |
-| Database Capability | Native JSON, SQL/JSON functions, and JSON Relational Duality work together. |
-| Outcome | Thomas can choose an application shape without creating a second guest-data store. |
-
-Persona focus: You are Thomas, working with Jessica to decide how the new application should store, assemble, and read guest reservation data.
-
-### Thomas's three JSON choices
-
-Thomas does not need one JSON pattern for every feature. A JSON column holds optional application attributes in a relational table. A JSON Collection Table holds documents owned by the application. A duality view assembles a document from existing relational tables. Thomas uses the document shape in the application, while Jessica works with the underlying rows using SQL.
-
-Thomas gets the JSON document his application needs. Jessica keeps SQL access, relational rows, and database controls in the same database.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -157,7 +134,7 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
     </copy>
     ```
 
-    `WITH ETAG` adds an `_metadata.etag` value to each document. Oracle changes the tag whenever the document changes. Thomas's application can send the tag it last read when it updates a document. If the tag no longer matches, the application knows that someone else changed the document first and can avoid overwriting the newer version. This protects guest data when web and mobile requests try updating the same document at the same time.
+    `WITH ETAG` adds `_metadata.etag`, which changes when the document changes. An application can compare the tag it last read before updating, to avoid overwriting another request’s changes.
 
 2. Query the collection as documents.
 
@@ -178,16 +155,7 @@ Thomas now tests the document shape his application can consume directly.
 
 1. Run this query:
 
-
     This query selects the JSON `DATA` column from `RESERVATIONS_DV` so Thomas can inspect the document shape in SQL Worksheet.
-
-    <details>
-    <summary><strong>Why this matters to Thomas</strong></summary>
-
-    > Thomas can use a JSON Collection Table when the application owns the document. But the reservation already has relational tables that Jessica and other teams rely on.
-    > The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the reservation into another store.
-
-    </details>
 
     ```sql
     <copy>
@@ -199,20 +167,9 @@ Thomas now tests the document shape his application can consume directly.
 
     ![SQL Worksheet result — duality document](images/sql-duality-document.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
+2. Expand the document in SQL Worksheet. Find `_id`, `guestId`, `status`, totals, timestamps, and the nested nightly-charge lines. Oracle assembles them from the relational rows.
 
-    **Expected output:**
-
-    
-
-2. Expand the document in SQL Worksheet.
-    The query reads the duality view as a document source. Oracle constructs the JSON shape from relational data, so the application gets a reservation payload without a second copy of the reservation record.
-
-    The \_id value appears in the JSON document while the source data remains relational. The payload includes `guestId`, `status`, totals, timestamps, and nightly-charge lines. The application gets these fields without a second reservation store.
-
-    The same reservation now has two useful forms: API-ready JSON for the application and relational rows for analysis.
-
-    > **Note:** Look for `_metadata.etag` in the document. The ETAG changes when the document changes, so Thomas's application can detect a newer version before updating the reservation and avoid overwriting another request.
+    > **Note:** Find `_metadata.etag` here too; it lets the application detect document changes before an update.
 
 ## Task 4: Enable document inserts and updates
 
@@ -235,11 +192,11 @@ The existing `RESERVATIONS_DV` lets an application update reservation documents.
 
     `RESERVATIONS_DV` should report update enabled and insert disabled in the initial loader definition.
 
-    The view currently allows updates but not new top-level documents. The root `RESERVATIONS` table controls document insertion. The nested `RESERVATION_NIGHTS` rows must also allow inserts so the document can include nightly-charge lines.
+    Inserts must be enabled on both the root `RESERVATIONS` table and the nested `RESERVATION_NIGHTS` rows.
 
 2. Enable insert and update for the document and its nightly-charge lines.
 
-    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses allow developers to create and update the JSON document. Oracle still enforces the relational keys and data types.
+    The two `WITH INSERT UPDATE` clauses enable writes to the reservation and its nightly-charge lines. Relational keys and data types still apply.
 
     ```sql
     <copy>
@@ -270,7 +227,7 @@ The existing `RESERVATIONS_DV` lets an application update reservation documents.
     </copy>
     ```
 
-    This duality view uses two relational tables. `RESERVATIONS` provides the document root. Related `RESERVATION_NIGHTS` rows become the nested `items` collection. The `WITH INSERT UPDATE` clauses let Thomas write the complete JSON document while Oracle maintains the rows and relationships.
+    `RESERVATIONS` supplies the document root; related `RESERVATION_NIGHTS` rows form the nested `items` collection.
 
     **Expected output: View Definition Updated**
 
@@ -291,13 +248,9 @@ The existing `RESERVATIONS_DV` lets an application update reservation documents.
 
     ![SQL Worksheet result — duality contract](images/sql-duality-contract.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-
     **Expected output: Document Capabilities Enabled**
 
     `RESERVATIONS_DV` should report insert and update enabled; delete remains disabled.
-
-    The view can now receive a new JSON reservation document and apply a document update. Thomas has a document API over the existing relational reservation data. He can use it for a guest feature such as submitting a new reservation. The application sends one document, and the database writes the reservation and its nightly-charge lines to the relational tables.
 
 ## Task 5: Create and update a JSON reservation
 
@@ -307,7 +260,7 @@ Thomas now tests a complete guest reservation. He creates it as one nested JSON 
 
     The `INSERT` writes through `RESERVATIONS_DV`; Oracle uses the view definition to update the relational tables. The sample uses reservation `900001`, guest `1`, property `1`, offer `1`, and night-line `990001`. Its two-night stay costs 125.00 per night, for a total of 250.00 in the workshop currency.
 
-    The loader must supply guest 1 and offer 1 at property 1. The reservation and night-line IDs are reserved for this exercise. The fixed dates make the exercise repeatable and put check-out after check-in. On the first run, the reservation has status `pending`. Running the insert again adds no rows and preserves the existing record.
+    The loader supplies guest `1` and offer `1` at property `1`. Reservation `900001` and night-line `990001` are reserved for this exercise. The insert skips an existing reservation, so rerunning it preserves the record.
 
     ```sql
     <copy>
@@ -348,7 +301,7 @@ Thomas now tests a complete guest reservation. He creates it as one nested JSON 
 
 2. Confirm the JSON document became relational rows.
 
-    >**Note**: We are querying here the relational tables `RESERVATIONS` and `RESERVATION_NIGHTS`!
+    Query the underlying `RESERVATIONS` and `RESERVATION_NIGHTS` tables:
 
     ```sql
     <copy>
@@ -409,23 +362,17 @@ Thomas now tests a complete guest reservation. He creates it as one nested JSON 
 
     ![SQL Worksheet result — duality confirmed](images/sql-duality-confirmed.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-
     **Expected output: Updated Reservation Rows**
 
     Reservation 900001 should now have status `confirmed`, with the same night-line values.
 
 ## Task 6: Project JSON fields with SQL
 
-Thomas has checked that the application can display and update a document. Jessica now queries `RESERVATIONS_DV` to check the fields the application receives. She extracts selected JSON values as SQL columns, a step called **projection**. She can use those columns for guest-service searches and status filters.
+Jessica now extracts JSON values as SQL columns, a step called **projection**, and compares them with the underlying reservation rows.
 
 1. Run this SQL/JSON projection query:
 
-    Thomas's document is still available for SQL analysis. The same reservation shape can be queried, filtered, and joined to relational guest data.
-
-    The SQL uses `JSON_VALUE` to extract reservation fields from the duality document. That is the projection step. It returns the reservation ID and status, reads the embedded guest identifier, joins that identifier to `GUESTS`, and orders the result for review.
-
-    Thomas does not need to hand-build this document in the application or copy the reservation to a separate document store. The application gets JSON, while Jessica still has SQL access to the same reservation rows.
+    `JSON_VALUE` extracts the reservation ID, status, and guest identifier. The query joins the guest identifier to `GUESTS` to retrieve the email.
 
     ```sql
     <copy>
@@ -440,8 +387,6 @@ Thomas has checked that the application can display and update a document. Jessi
     ```
 
     ![SQL Worksheet result — duality projection](images/sql-duality-projection.jpg)
-
-    *Scroll the result grid to inspect additional rows and columns.*
 
     **Expected output: JSON Field Projection**
 
@@ -463,24 +408,19 @@ Thomas has checked that the application can display and update a document. Jessi
 
     ![SQL Worksheet result — duality relational](images/sql-duality-relational.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
-
-    
-
     Compare the result with the previous query. The reservation ID, status, and guest email should match. Thomas's application is reading the JSON document, while Jessica's relational query reads the underlying rows.
 
 ## Conclusion: Choose the right JSON approach
 
-Thomas does not have to choose one JSON model for the whole application. He can choose based on who owns the data and whether the application needs a document over existing relational rows.
+Choose by who owns the data and how the application uses it:
 
-| Approach                          | Use it when                                                                                 | Example in Thomas's application                                                                            | Where the data lives                                                                                           |
-| -----------------------------------| ---------------------------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------|
-| JSON column in a relational table | A relational record needs optional or changing attributes.                                  | Store screen settings or guest experience options alongside a reservation key.                          | A normal relational table with a native `JSON` column.                                                         |
-| JSON Collection Table             | The application owns a set of JSON documents and needs document-style access.               | Store saved booking drafts as guests revise stay dates and room preferences.                              | A JSON Collection Table with one document in each `DATA` row.                                                  |
-| JSON Relational Duality View      | The data already belongs in relational tables, but the application needs one JSON document. | Return a guest reservation with its status and nightly-charge lines, or accept a new reservation document from the app. | Relational tables such as `RESERVATIONS` and `RESERVATION_NIGHTS`; the duality view defines the JSON shape for Thomas' app. |
+| Approach | Use in Thomas’s application |
+| --- | --- |
+| JSON column | Optional screen settings beside a relational reservation key. |
+| JSON Collection Table | Application-owned booking drafts stored as documents in `DATA`. |
+| JSON Relational Duality View | Shared reservations exposed as JSON over `RESERVATIONS` and `RESERVATION_NIGHTS`. |
 
-For Thomas, `RESERVATIONS_DV` is the right choice for the reservation feature because `RESERVATIONS` and `RESERVATION_NIGHTS` already hold shared hospitality data. The application gets the JSON payload it needs, while Jessica keeps SQL, relational constraints, and controlled access to the same data.
-
+Thomas chooses the duality view for confirmed reservations: the application writes JSON, and Jessica queries the same rows with SQL.
 
 ## Acknowledgements
 

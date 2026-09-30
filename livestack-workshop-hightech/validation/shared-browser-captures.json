@@ -1,0 +1,434 @@
+[
+  {
+    "image": "production-operations-dashboard/images/sql-dashboard.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "c4e7ce7d4b906425d9a72f7774a19939eea95065169d57928059035e8265dc9a",
+    "source_sha256": "2c0d65e602278a9b9a2fda5343e5936ca83b08ed95391a1d08a50c5b8818de61"
+  },
+  {
+    "image": "production-operations-dashboard/images/sql-dashboard-followup.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "2b6e27b1542e3b0e51f7bee979326fef275091bd04b10346fe98e3eaecbb38c3",
+    "source_sha256": "cf4dc98cc8d96dc21afc29481f1c38ec250d2b6ec1d5c944719d83119f11c038"
+  },
+  {
+    "image": "quality-review-oml/images/sql-oml-training.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "bfe0f146ccdd1a192ce16f42d2ad02fe2eb5db4cb732222915f43df2aed210a9",
+    "source_sha256": "5c292689fd55d63df49dcc209fd1b0de68db4ebeac786cd5ddc1e93f68152681"
+  },
+  {
+    "image": "quality-review-oml/images/oml-launch.jpg",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "b3eed0a1d9e7a297722bc860715058800258e64bb9e1096feddf4aacb5b86236",
+    "source_sha256": "b3eed0a1d9e7a297722bc860715058800258e64bb9e1096feddf4aacb5b86236"
+  },
+  {
+    "image": "quality-review-oml/images/oml-home.jpg",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "d2c98b736343a9aea71318809e8d8fe289a4415d8b3fbcddcd4d61bd399c5ec8",
+    "source_sha256": "d2c98b736343a9aea71318809e8d8fe289a4415d8b3fbcddcd4d61bd399c5ec8"
+  },
+  {
+    "image": "quality-review-oml/images/oml-settings.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "747a0b0c3f54e0d4fb761ba77a5bf4efc2608d97599b0a9c57cf6544e7f8aea7",
+    "source_sha256": "4a7f63089e154256e48fedf5be3e8fea0b54c05b765be652a014e160262defd7"
+  },
+  {
+    "image": "quality-review-oml/images/oml-leaderboard.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "92fff7b7b9910d42ff196f9cda6dbae5c365eddb47220182012cea7c32b4e06d",
+    "source_sha256": "bd7d8c39bdb372bc3a6687e1a4899e07b29d8a398585d4b93c6e314491147904"
+  },
+  {
+    "image": "quality-review-oml/images/oml-model-comparison.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "7f11743dd09c98c1ac8c6d1e777ea9eb710d2318428b250b7bcf32a4e01b68f9",
+    "source_sha256": "59c0bd5aba78ad3282d28e8b99bb2444aa370a533cd07050aaa751aa54e1fd76"
+  },
+  {
+    "image": "quality-review-oml/images/oml-confusion-matrix.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "274b5fbfe117523dd772b28f41691e51569a56efefd8d6d41ce4d743e7b0094d",
+    "source_sha256": "7c10ffaf556b6137b951aeb621c7e4d80b26022c0a18326bf7c2934f5c65101f"
+  },
+  {
+    "image": "quality-review-oml/images/oml-prediction-impact.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "e760e15f909949957b4975f7651165d9308c225360d81290e605d9498877a9fb",
+    "source_sha256": "c86743df54efc5e127db5110941c34fefc63ca47c6ab160526427dfeb5a06e36"
+  },
+  {
+    "image": "quality-review-oml/images/sql-oml-model.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "41aeef5a76fd48bb00a8e452806f8a6ea77a3e4e437722676e337334c9a87c2c",
+    "source_sha256": "62d8a3d65a6e3e9473ac8b626f66370dd915e6e963c1d1eaa172393184a2879b"
+  },
+  {
+    "image": "quality-review-oml/images/sql-oml-scoring.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "83c1dbdd3402424c38d9b909d95e0a9889a387a833ba1fd97767e3d366c17260",
+    "source_sha256": "d6ff972d1277c9a5b9d2f7344201503aa36cca6b90ea7b07a1f56a1f2c3f7c28"
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-document.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "2af1c65e32863fc6e446b690953c775f7a74ea1c9aeede48fbccb15cf38e2db0",
+    "source_sha256": "4ea426016dff11299b35ad10091e865d29012a1e7079ec52e992bd2817913643"
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-contract.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "2d20a681288683a090e05bf102dcaddc7dc3380c376f19602e48ce01611eeb04",
+    "source_sha256": "d43cd406d90cfcb6a8bfcb062f34bc6cba1f51c106ccc9b66ee44f6668f68f5b"
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-released.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "79c0d8fc80ff3611dcaf3939c85a5d22daa76a1cbfe72e5d484e92024eb6a945",
+    "source_sha256": "dbf8ae613c0ee29ce6fbccb4c8c01c231aa6c4a253ef75947d9bfe36c16322bc"
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-projection.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "1f417d2775dbf62643cb668ffc52f7e4060350a1f694990734af2c0a7efedf57",
+    "source_sha256": "63c5425d09edaf278984c9928172dbb8499331fc90e596cd4d7af28b1fad886e"
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-relational.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "78628d88eff41553fea9db1609249f9dd769d58f85827d75b9de2eb1cc1cef11",
+    "source_sha256": "7993a01f49bb659eafd526530127aa454425c46643597c8d273eb499b73f508e"
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-points.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "62ef8c7092bbc72cea1c1b77824251367a0c2818793d03401e6a12d77144225e",
+    "source_sha256": "65a98079350a1eb391f0b4e9a3566777506ad28b13c5c57027e9e9df6c0dc150"
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-new-york.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "bdc1ebe747ac55feebce27c17e9b3f246fda010b4ccd45dc9aecfd5c0989f565",
+    "source_sha256": "e4addf1115fb893057e3a8c33ad3e8bcd0c166e2fad1c393e2a5fd02035dd734"
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-chicago.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "72a8a905998d05a142d58a8cb775126dd026cdc8b42d62cf6d424a76ba38e8eb",
+    "source_sha256": "8dc0e71fb1110b9005c6be43697c581dee8962c9c88d258a9faeadc528ac87d5"
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-routing.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "e8c2dde7ab119d0b4c322cde626197cad387b0dfcf323e8139528e817e53ce9b",
+    "source_sha256": "b30e6cb8bb7c21c07762a74bfcc93d5f57d6fa2325ddd855c4f3d91b155c6165"
+  },
+  {
+    "image": "selectai-agent/images/sql-agent-answer.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "2206ffc923c0338e764e16ed0fbcb21a00bc217db4484ac92358a19fe6e6da68",
+    "source_sha256": "f82852ef766cf42a14cf2b06b492ed5336ae2a8953cd3c76c02b87f2991c951a"
+  },
+  {
+    "image": "selectai-agent/images/sql-agent-history.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "b9cfea0ad154df153ee62a9a4f66fa4f1898774fd9edeb39b2085f191caa4b41",
+    "source_sha256": "22132a6fca33759189c8c418c354bbb4f30f5c5f07864d1dc5a5f0ce9eb62d03"
+  },
+  {
+    "image": "selectai-agent/images/sql-agent-tools.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "d15298d822e3d8fb257c6e9aad77f689ffa21097113fd06a34f024bda91acdf2",
+    "source_sha256": "ee2e9433449bdc8a1a9fe5e64d5b183828525e1068352b12e0de6889d33d435a"
+  },
+  {
+    "image": "selectai/images/sql-ai-object-list.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "e88152303f1eea49f2532de3d47fc2c55ca94128fb4245930d5e9a41cebf54b9",
+    "source_sha256": "b12811c806d952186da2c8b12cefe3acdd98b6c30491797433ac6ccf64da7c46"
+  },
+  {
+    "image": "selectai/images/sql-ai-generated.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "f4dc0be71a1d2e7e39c68ee30636715c7698410633a4cbe1953f0a5c42e53b45",
+    "source_sha256": "e3cb6d44cf6bb4472f6b74c6cf71c92ecdb277f400c6eef713708bc5fa9f7f0f"
+  },
+  {
+    "image": "selectai/images/sql-ai-answer.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "8553c687f9bf7563be0e708a9f22f5c124ed6b48a762c33eb5bf01d846130ec8",
+    "source_sha256": "5bdcd2fc5b2725f72f65df3f8276f3c10f6d6eb3050146180bf8e16dfdb3be31"
+  },
+  {
+    "image": "selectai/images/sql-ai-refined-generated.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "79cdd76acaedb084f7ba138a5c738c1ec46f46ce82a5b1201f7a32ba4de2dfb3",
+    "source_sha256": "e20dad8ee5f8f2b5defb5d60f2f2234c2c11f9448a81816bf1802e799600894f"
+  },
+  {
+    "image": "selectai/images/sql-ai-refined-answer.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "f3d48605c2cb8d31d3ba12e1275ccfa4ea0554b69074d8d9f2bcf3b1df7d7668",
+    "source_sha256": "76464620e28b524ffb475144d2360cfa2d1fb53c8ae8953ad368573719c92e1a"
+  },
+  {
+    "image": "selectai/images/sql-ai-narration.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "e74e2c49f6bc5df17d95bcfb80c9ddf0a6f8f33d7ab7e33abec13178ccfd0482",
+    "source_sha256": "e94d161454d72796cc8b5670e13997d6b457b5a7cec936ac26ae7a58a1ac9e56"
+  },
+  {
+    "image": "production-quality-network/images/sql-graph-direct.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "5a07757f9496c0d9d82312b15ebdd8a108fedd20f534613e918bc519b90fcc1c",
+    "source_sha256": "05203a3baa5085c7f9168f221ec75d050b2867f7f61f135bab19e6f4c9ea5573"
+  },
+  {
+    "image": "production-quality-network/images/sql-graph-four-hop.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "b9fc9c65f9f664f037e007cd5bfd4f419f3730612200c0a04d4cd78900fb70ff",
+    "source_sha256": "697f70ecd53f1a0190bbe1a2fc0e7ce1d7fa63e8091a4740af4e43360a1bda14"
+  },
+  {
+    "image": "production-quality-network/images/sql-graph-shared.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "e538938b4184a5aa118caebabc50ba6c7255b438f4238307a7c25817ad5b6a7e",
+    "source_sha256": "bc32857b72bc4e5f6e7137eb64b574953a613d13d0d00dd2b3550b3c43a94464"
+  },
+  {
+    "image": "production-quality-network/images/graph-launch.jpg",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "cc697d56ef24e5efe44d19b6033f4355c306ce88e2bf0bb1a13745655553a2d0",
+    "source_sha256": "cc697d56ef24e5efe44d19b6033f4355c306ce88e2bf0bb1a13745655553a2d0"
+  },
+  {
+    "image": "production-quality-network/images/graph-studio-overview.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "7f4ac4944bc376bb3fcbfae60d935e9bd47cc1917af9bc22d016af17202a2ebf",
+    "source_sha256": "675126d6683cdb5e00d50d64a15b5aa295683013778fd6678c7cb51f94c32b5a"
+  },
+  {
+    "image": "production-quality-network/images/graph-notebooks.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "53713f6e2ecdb72ad6adc047944a5aee0606283b1ac6a4280c70e789bc0e8a9d",
+    "source_sha256": "4da48b0141a1b256ea1390861f4e5be7067f47ab8dc3fb3d8a3d62ec8f951ba1"
+  },
+  {
+    "image": "production-quality-network/images/graph-import-dialog.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "9856de940cb69fd0b407c24e20a200e2162a1d56778410cf2a365bd7edfd125f",
+    "source_sha256": "dbe0fcdf011cc1fa605a601291c30ec5c16b1bda74262f1e5de8f2260999a75e"
+  },
+  {
+    "image": "production-quality-network/images/graph-import-file.png",
+    "size": [
+      905,
+      734
+    ],
+    "sha256": "6585e589fcb09e1fd5775ec0220b3fc8fe9c705ca91f382cfec42411dd092736",
+    "source_sha256": "134e52447daa09f14bb1e296318cb80316306003b10f09b39debc443262acce1"
+  },
+  {
+    "image": "production-quality-network/images/graph-notebook-top.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "e0469253927ae6c17f6517fea93d4c6c0eaba4a4a4856f59d303db93e1a57825",
+    "source_sha256": "d406d5fc6ef0a62a896f9a4d11b50a98669bc7ade154ee5834ef47e6d0a10517"
+  },
+  {
+    "image": "production-quality-network/images/live-09-graph-notebook-table.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "c20dec99336738641b3a35cf341834b4ad684d09feae19ad94af52094aaa371b",
+    "source_sha256": "e61f2886073775dce215e64c2ba1e6d142f7101002d42205324771ed11e0aa5d"
+  },
+  {
+    "image": "production-quality-network/images/live-10-graph-production-network.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "68229aceac20f90c3990d5be3545facd4141d2e22acc8bd040b4e3483e2b08e7",
+    "source_sha256": "9bbf64967760e73b26bca2b9e0941c5965fbd07c32988d6690c81dffd3a1f6ca"
+  },
+  {
+    "image": "production-quality-network/images/live-11-graph-shared-lot.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "e94a68fed9bf1a030e9455a660861f62ef486a8f7846c17d2eb82de41488b4b8",
+    "source_sha256": "45d2f90215bae4d7b3293c7bbe89c3e2c84125bb32f1b982a357ffccb65870e9"
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-embedding-model.jpg",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "62eebbd2f9c87280c2533bafd6a8a99f0a3e2b72de3bd2dddcedd161a6e55b95",
+    "source_sha256": "62eebbd2f9c87280c2533bafd6a8a99f0a3e2b72de3bd2dddcedd161a6e55b95"
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-values.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "b0071b3e108d5b36ceb10bd9bdebc600706f59d05e6ce950a609392c7e1bc7ae",
+    "source_sha256": "98d210fe9e5f501f796c1aea150d8200fe3a15f2c44108dcdc55398cb42ee6c6"
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-distance.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "0abca57dd7b49f050071a1fda84451ba5fb869708c47a66c230a9fdf704cb9c5",
+    "source_sha256": "5deab3f3480fecb96987e0bf3d9743a271a2ff68f1cdc6ad435f51f89f1b0422"
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-similarity.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "3ed4e3616f2bdd89fd8b90ea2338a6dd99a3fe0d3d0791824e6f939efab2595e",
+    "source_sha256": "f3d99712a193249431092c179866e6871aafb9f11d6bd7feb43df925c1154f8b"
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-customer-sites.png",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "5fe47dae082384566bb9b8f30ff651c21adce4a7f02ea5dd1362d9afbab92506",
+    "source_sha256": "7f38f5de0d755fa4c0fd89e8056d233882928a223542e7cb538d68f4aed4ab50"
+  },
+  {
+    "image": "getting-started/images/sql-connection.jpg",
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "6e7ea63b6b5e07ad078cded60ca0fa826ee7c0305665f82ca43de9b8b9c2a29d",
+    "source_sha256": "6e7ea63b6b5e07ad078cded60ca0fa826ee7c0305665f82ca43de9b8b9c2a29d"
+  }
+]

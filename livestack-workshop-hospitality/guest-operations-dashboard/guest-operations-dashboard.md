@@ -2,15 +2,9 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator responsible for keeping Seer Hotels’ hospitality data reliable and useful. Every morning, the guest service operations team asks her a familiar question: **which stay offer needs attention first, and which guests may need assistance or relocation?**
+Jessica Chan, Seer Hotels’ DBA, starts with the guest-service team's morning question: **which stay offers need attention first, and which guests may need assistance?**
 
-Jessica needs four kinds of data for the Guest Service and Operations Dashboard. Tables hold service alerts and their impact. JSON documents hold reservation activity. Vectors represent stay offer descriptions for searches by meaning. Spatial data records hotel and demand-region locations. Her query must combine all four.
-
-Keeping these data types in separate systems would require Jessica to combine exports and keep them current. Instead, she wants a dashboard answer that the guest service team can check against the source records.
-
-Oracle AI Database can query these data types together. Jessica can join relational rows, JSON documents, vectors, and location data in one SQL statement.
-
-In this lab, you build Jessica’s dashboard query. It combines service alerts, vector search, JSON reservation data, and hotel locations in one result.
+Build her dashboard query by combining service alerts from relational tables, reservation activity from JSON, stay offer matches from vectors, and nearby hotels from spatial data.
 
 ![jessica](images/jessica.png)
 
@@ -21,19 +15,6 @@ In this lab, you build Jessica’s dashboard query. It combines service alerts, 
 - Modify the query to investigate a different guest-service question and explain the change in results.
 
 Estimated Time: **10 minutes**
-
-### Hands-on Scenario
-
-| Step                | Hospitality focus                                                                                                  |
-| ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Business users need a quick way to find stay offer service needs, service impact, reservation activity, and service information. |
-| Technical Challenge | The answer crosses service alerts, stay offer meaning, reservations, and service geography.                         |
-| Persona Focus       | Jessica Chan, the DBA, builds the query that gives business users this dashboard view.                         |
-| What You Will Do    | Use a single SQL statement that combines several data types.                                                   |
-| Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
-| Outcome             | The learner can explain convergence through a useful business result rather than a feature list.               |
-
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one shared query that gives business users a connected view of stay offer service needs and operations.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -46,9 +27,7 @@ The query combines four data types:
 - **Relational:** `SERVICE_ALERTS_V`, stay offer mentions, and hospitality views calculate stay offer service needs and service impact.
 - **Vector:** `OFFER_EMBEDDINGS` and `VECTOR_DISTANCE` find stay offers related by meaning to the investigation phrase.
 - **JSON:** `RESERVATIONS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so reservation activity can be counted.
-- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest hotel property to the high-demand New York Visitor Region using latitude and longitude information stored as spatial geometries that can be converted to GeoJSON.
-
-    These are four operations in one investigation. Every row combines stay offer service needs with reservation activity, semantic relevance, and service-routing context.
+- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest hotel property to the high-demand New York Visitor Region using spatial geometries.
 
 1. Open SQL Worksheet as `LLUSER`. 
 
@@ -182,33 +161,23 @@ The query combines four data types:
 
     ![SQL Worksheet result — dashboard](images/sql-dashboard.jpg)
 
-    *Scroll the result grid to inspect additional rows and columns.*
+3. Review the top stay offer. Compare its alert severity, semantic rank, reservation activity, and nearby hotel to explain why the team should investigate it first.
 
-3. Review the result as the stay offer-level data behind Jessica's dashboard. Each row combines service-alert severity, semantic match, reservation activity, and hotel location. This gives the dashboard a ranked stay offer table and the details a business user needs when deciding what to review.
-
-    
-
-    Each row should include all four types of data. Compare the semantic rank, service impact, reservation activity, and nearby property. A missing embedding or an empty regional property set can leave the result incomplete or empty.
-
-Use the first row to explain why an offer needs attention. Check its alert severity, reservation counts, match to the search phrase, and nearby hotel. These values help the service team decide where to start.
-
-Jessica can use this SQL result for the dashboard table and detail view. Other dashboard components, such as summary cards, can query the same database.
+    A missing embedding or an empty regional property set can leave the result incomplete or empty.
 
 > **Interpretation:** The nearest-property result is regional context shared by every row. It is not a date-specific availability check or an automatic relocation. Affected-reservation counts are alert totals and may include a reservation in more than one alert; do not read their sum as unique guests.
 
 ## Task 2: Change the investigation question
 
-Jessica meets with a guest experience analyst to review the results at the data level before she builds the dashboard. They start with stay offers related to **room accessibility and service disruption requiring guest assistance**. Change the embedded investigation phrase to:
-
+The analyst now wants to investigate a different concern. Replace the investigation phrase with:
 
 ```text
 guest arrival workload and room availability
 ```
 
-
 Run the query again and compare the top rows.
 
-![Live result after changing the investigation phrase](images/sql-dashboard-followup.jpg)
+![Query result after changing the investigation phrase](images/sql-dashboard-followup.jpg)
 
 1. Which stay offers moved into or out of the top ten?
 2. Which stay offers still have high relational service impact but a lower semantic similarity to the new question?
@@ -216,21 +185,24 @@ Run the query again and compare the top rows.
 
 The query sorts by similarity first, so changing the question changes the review order. Service impact breaks ties. Jessica can ask a different question using the same query and stay offer data.
 
-
 ## Next Steps
 
 Next, use JSON Relational Duality to expose the same reservation data as JSON for an application while keeping SQL access for the database team.
+
+## Application example
+
+Explore the [LiveStack Demo Hospitality](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4525).
+
+![LiveStack Demo Hospitality: Property Performance Command Center](images/demo-dashboard.jpg)
+
+*LiveStack Demo Hospitality: Property Performance Command Center*
+
+![LiveStack Demo Hospitality: Property Performance Command Center](images/demo-dashboard-charts.jpg)
+
+*LiveStack Demo Hospitality: Property Performance Command Center*
 
 ## Acknowledgements
 
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
-
-## Application example
-
-The running Hospitality LiveStack application presents portfolio indicators and charts. This application uses a separate demo dataset; these values are not the expected output of the workshop SQL query.
-
-![Live hospitality portfolio dashboard](images/demo-dashboard.jpg)
-
-![Live hospitality portfolio charts](images/demo-dashboard-charts.jpg)

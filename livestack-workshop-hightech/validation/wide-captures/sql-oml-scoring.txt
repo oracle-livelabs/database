@@ -1,0 +1,326 @@
+- generic "Selector":
+  - button "Selector":
+    - generic: 
+    - generic: Selector
+- link "Database Actions, Go to Launchpad":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+  - generic: Database Actions
+- generic: "| SQL"
+- search:
+  - button "Search Database (⌘+K)":
+    - generic: Search Database (⌘+K)
+    - generic: 
+- text:                      
+- generic "Need Help?":
+  - button "Need Help?":
+    - generic: 
+    - generic: Need Help?
+- button "LLUSER User Menu":
+  - generic: 
+  - generic "LLUSER"
+  - generic: 
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - text:                                                                                                                                                                                                                                                                                                                             
+  - generic "Resize":
+    - button "Expand"
+  - toolbar "Editing Toolbar":
+    - button "BROWSER[Worksheet ]*":
+      - generic "[Worksheet ]*":
+        - generic "BROWSER"
+        - generic: "[Worksheet ]*"
+      - generic: 
+    - generic "New file":
+      - button "":
+        - generic: 
+        - generic: New file
+        - generic: 
+        - text:  
+    - generic "Open... (Ctrl+O, ⌘+O)":
+      - button "Open... (Ctrl+O, ⌘+O)":
+        - generic: 
+        - generic: Open... (Ctrl+O, ⌘+O)
+    - generic "Save (Ctrl+S, ⌘+S)":
+      - button "Save (Ctrl+S, ⌘+S)":
+        - generic: 
+        - generic: Save (Ctrl+S, ⌘+S)
+    - generic "Run Statement (Ctrl+⏎, ⌘+⏎)":
+      - button "Run Statement (Ctrl+⏎, ⌘+⏎)" [active]:
+        - generic: 
+        - generic: Run Statement (Ctrl+⏎, ⌘+⏎)
+    - button "Run Statement Options":
+      - generic: 
+      - text:  
+    - generic "Run Script (F5)":
+      - button "Run Script (F5)":
+        - generic:  
+        - generic: Run Script (F5)
+    - generic "Create Chart (Ctrl+F11, ⌘+F11)":
+      - button "Create Chart (Ctrl+F11, ⌘+F11)":
+        - generic:  
+        - generic: Create Chart (Ctrl+F11, ⌘+F11)
+    - generic "Explain Plan (F10)":
+      - button "Explain Plan (F10)":
+        - generic: 
+        - generic: Explain Plan (F10)
+    - generic "Autotrace (F6)":
+      - button "Autotrace (F6)":
+        - generic: 
+        - generic: Autotrace (F6)
+    - generic "Download Editor Content (Ctrl+I, ⌘+I)":
+      - button "Download Editor Content (Ctrl+I, ⌘+I)":
+        - generic: 
+        - generic: Download Editor Content (Ctrl+I, ⌘+I)
+    - generic "Format (Ctrl+F7, ⌘+F7)":
+      - button "Format (Ctrl+F7, ⌘+F7)":
+        - generic: 
+        - generic: Format (Ctrl+F7, ⌘+F7)
+    - generic "Convert Case (Ctrl+B, ⌘+B)":
+      - button "":
+        - generic: 
+        - generic: Convert Case (Ctrl+B, ⌘+B)
+        - generic: 
+    - generic "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+      - button "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+        - generic: 
+        - generic: Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+  - toolbar "Editing Toolbar":
+    - text: .
+    - paragraph:
+      - generic: "Consumer group:"
+    - generic "Consumer group":
+      - button "LOW":
+        - generic: LOW
+        - generic: 
+    - generic "Data Load":
+      - button "Data Load":
+        - generic: Data Load
+    - generic "Open In Fullscreen":
+      - button "Open In Fullscreen":
+        - generic: 
+        - generic: Open In Fullscreen
+    - generic "Tour":
+      - button "Tour":
+        - generic: 
+        - generic: Tour
+    - generic "Help (F1)":
+      - button "Help (F1)":
+        - generic: 
+        - generic: Help (F1)
+  - tabpanel:
+    - code:
+      - textbox "Editor content"
+      - textbox
+      - generic: "31"
+      - generic: "32"
+      - generic: "33"
+      - generic: "34"
+      - generic: "35"
+      - generic: "36"
+      - generic: "37"
+      - generic: 
+      - generic: "38"
+      - generic: "39"
+      - generic: 
+      - generic: "40"
+      - generic: "41"
+      - generic: ROUND(scored_component.review_score * 100, 2) AS review_pct,
+      - generic: scored_component.planned_units,
+      - generic: scored_component.material_value,
+      - generic: scored_component.total_observations,
+      - generic: scored_component.major_stoppages,
+      - generic: scored_component.minor_stoppages
+      - generic: FROM scored_components scored_component
+      - generic: JOIN components so
+      - generic: ON so.component_id = scored_component.component_id
+      - generic: ORDER BY scored_component.review_score DESC,
+      - generic: so.component_id;
+  - generic "Resize":
+    - button "Collapse" [expanded]
+  - tablist:
+    - tab "Query Result" [selected]:
+      - generic: Query Result
+    - tab "Script Output":
+      - generic: Script Output
+    - tab "DBMS Output":
+      - generic: DBMS Output
+    - tab "Explain Plan":
+      - generic: Explain Plan
+    - tab "Autotrace":
+      - generic: Autotrace
+    - tab "SQL History":
+      - generic: SQL History
+    - text: 
+  - generic "Help":
+    - button "Help":
+      - generic: 
+      - generic: Help
+  - tabpanel "Query Result":
+    - toolbar:
+      - generic "Clear Output":
+        - button "Clear Output":
+          - generic: 
+          - generic: Clear Output
+      - generic "Show info":
+        - button "Show info":
+          - generic: 
+          - generic: Show info
+      - generic "Open in new tab":
+        - button "Open in new tab":
+          - generic: 
+          - generic: Open in new tab
+      - generic "Share Query Results":
+        - button "Share Query Results":
+          - generic: 
+          - generic: Share Query Results
+      - button "Download":
+        - generic: Download
+        - generic: 
+        - text:    
+      - generic: "Execution time: 0.007 seconds"
+    - generic "Worksheet Query Result":
+      - application:
+        - generic: This is a data grid with 9 rows and 11 columns.
+        - generic: component_id
+        - generic: component_name
+        - generic: category
+        - generic: predicted_review
+        - generic: review_score
+        - generic: review_pct
+        - generic: planned_units
+        - generic: material_value
+        - generic: total_observations
+        - generic: major_stoppages
+        - generic: minor_stoppages
+        - generic: "1"
+        - generic: "2"
+        - generic: "3"
+        - generic: "4"
+        - generic: "5"
+        - generic: "6"
+        - generic: "7"
+        - generic: "8"
+        - generic: "9"
+        - generic "1"
+        - generic "Power control module P01 Rev A": Power control module P01 Rev A 
+        - generic "Power electronics": Power electronics 
+        - generic "REVIEW": REVIEW 
+        - generic "0.99999921"
+        - generic "100"
+        - generic "1531"
+        - generic "191375"
+        - generic "12"
+        - generic "6"
+        - generic "4"
+        - generic "3"
+        - generic "Motor control module P01 Rev A": Motor control module P01 Rev A 
+        - generic "Motor control": Motor control 
+        - generic "REVIEW": REVIEW 
+        - generic "0.99999921"
+        - generic "100"
+        - generic "1563"
+        - generic "265710"
+        - generic "12"
+        - generic "6"
+        - generic "4"
+        - generic "5"
+        - generic "Sensor interface module P01 Rev A": Sensor interface module P01 Rev A 
+        - generic "Sensing": Sensing 
+        - generic "REVIEW": REVIEW 
+        - generic "0.99999921"
+        - generic "100"
+        - generic "569"
+        - generic "88195"
+        - generic "12"
+        - generic "6"
+        - generic "4"
+        - generic "7"
+        - generic "Pressure interface module P01 Rev A": Pressure interface module P01 Rev A 
+        - generic "Sensing": Sensing 
+        - generic "REVIEW": REVIEW 
+        - generic "0.99999921"
+        - generic "100"
+        - generic "1466"
+        - generic "337180"
+        - generic "12"
+        - generic "6"
+        - generic "4"
+        - generic "9"
+        - generic "Communication module P01 Rev A": Communication module P01 Rev A 
+        - generic "Communications": Communications 
+        - generic "REVIEW": REVIEW 
+        - generic "0.99999921"
+        - generic "100"
+        - generic "1485"
+        - generic "96525"
+        - generic "12"
+        - generic "6"
+        - generic "4"
+        - generic "11"
+        - generic "Servo interface module P01 Rev A": Servo interface module P01 Rev A 
+        - generic "Motor control": Motor control 
+        - generic "REVIEW": REVIEW 
+        - generic "0.99999921"
+        - generic "100"
+        - generic "537"
+        - generic "77865"
+        - generic "12"
+        - generic "6"
+        - generic "4"
+        - generic "2"
+        - generic "Gate driver module P01 Rev A": Gate driver module P01 Rev A 
+        - generic "Power electronics": Power electronics 
+        - generic "STABLE": STABLE 
+        - generic "0.00008122"
+        - generic "0.01"
+        - generic "524"
+        - generic "44540"
+        - generic "12"
+        - generic "1"
+        - generic "1"
+        - generic "4"
+        - generic "Encoder interface module P01 Rev A": Encoder interface module P01 Rev A 
+        - generic "Motor control": Motor control 
+        - generic "STABLE": STABLE 
+        - generic "0.00008122"
+        - generic "0.01"
+        - generic "2478"
+        - generic "520380"
+        - generic "12"
+        - generic "1"
+        - generic "1"
+        - generic "6"
+        - generic "Temperature monitor module P01 Rev A": Temperature monitor module P01 Rev A 
+        - generic "Sensing": Sensing 
+        - generic "STABLE": STABLE 
+        - generic "0.00008122"
+        - generic "0.01"
+        - generic "2498"
+        - generic "237310"
+        - generic "12"
+        - generic "1"
+        - generic "1"
+        - status
+      - text: 
+  - text:            
+- generic "Errors":
+  - generic: 
+  - generic: "0"
+- generic "Warnings":
+  - generic: 
+  - generic: "0"
+- generic "Processes":
+  - generic: 
+  - generic: "1"
+- generic: "|"
+- generic: 7:56:58 PM - 12 rows total
+- generic: 
+- link "Powered by ORDS":
+  - /url: https://oracle.com/rest
+  - generic: Powered by ORDS
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert
