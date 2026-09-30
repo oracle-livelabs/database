@@ -26,13 +26,14 @@ This task establishes the reusable query-and-display pattern used throughout the
 
 1. Add a new Python paragraph and run the following code.
 
-    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of park names, park codes, and states. If a query returns no items, the function safely returns an empty string.
+    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of park names, park codes, states, and descriptions. If a query returns no items, the function safely returns an empty string.
 
     ```python
     %python
     def format_parks(result):
         return "\n".join(
-            f"{i}. {r.metadata['name']} ({r.metadata['park_code']}) – {r.metadata['states']}"
+            f"{i}. {r.metadata['name']} ({r.metadata['park_code']}) – {r.metadata['states']}\n"
+            f"{r.metadata['description']}\n"
             for i, r in enumerate(result.items or [], 1)
         )
     ```
