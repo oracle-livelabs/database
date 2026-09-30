@@ -15,7 +15,7 @@ This lab assumes you have:
 - SSH Keys (optional)
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
-1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
+1. Click on the link below to download the Resource Manager zip file you need to build your environment:
 
 <if type="sql-duality">
     - [sql-duality.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/sql-duality.zip)
@@ -42,7 +42,7 @@ This lab assumes you have:
     - [unify-ocw23](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/23c/23c-install.zip)
 </if>
 
-2.  Save in your downloads folder.
+2. Save in your downloads folder.
 
 ## Task 2: Setup Compute   
 The following lab will be *Environment Setup* where you can setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:
@@ -59,15 +59,15 @@ If you choose the second option, *Compute only*, then you will need to manually 
 | 80   | Application (http)   |
 | 6080 | noVNC Remote Desktop |
 
-1.  Go to *Networking >> Virtual Cloud Networks*
-2.  Choose your network
-3.  Under **Resources**, select **Security Lists**.
-4.  Click Default Security Lists under **Create Security**.
-5.  Click **Add Ingress Rules**.
-6.  Enter the following:  
+1. Go to *Networking >> Virtual Cloud Networks*
+2. Choose your network
+3. Under **Resources**, select **Security Lists**.
+4. Click Default Security Lists under **Create Security**.
+5. Click **Add Ingress Rules**.
+6. Enter the following:  
     - Source CIDR: 0.0.0.0/0
     - Destination Port Range: *Refer to above table*
-7.  Click **Add Ingress Rules**.
+7. Click **Add Ingress Rules**.
 
 ## Acknowledgements
 * **Author** - Kaylien Phan, William Masdon

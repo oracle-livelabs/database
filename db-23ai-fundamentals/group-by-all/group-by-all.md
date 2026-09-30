@@ -15,6 +15,11 @@ The objective of this lab is to familiarize you with GROUP BY ALL in Oracle Data
 - Access to Oracle Database 23ai.
 - Basic understanding of SQL and GROUP BY clauses is helpful.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Understanding GROUP BY ALL
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
@@ -27,7 +32,7 @@ The objective of this lab is to familiarize you with GROUP BY ALL in Oracle Data
     ![click SQL](images/simple-db-actions.png =50%x*)
 
 3. **Traditional GROUP BY Approach:**
-   In traditional SQL queries with aggregation functions, you must explicitly list all non-aggregated columns from the SELECT list in the GROUP BY clause. Let's see an example using the DBA_OBJECTS view to count objects by owner, object type, and status.
+    In traditional SQL queries with aggregation functions, you must explicitly list all non-aggregated columns from the SELECT list in the GROUP BY clause. Let's see an example using the DBA_OBJECTS view to count objects by owner, object type, and status.
 
     ```
     <copy>
@@ -181,10 +186,10 @@ The objective of this lab is to familiarize you with GROUP BY ALL in Oracle Data
 ## Task 4: Best Practices and Limitations
 
 1. **When to Use GROUP BY ALL:**
-   GROUP BY ALL is particularly useful for:
-   - Quick prototyping and ad-hoc analysis
-   - Reports with many grouping columns
-   - Reducing maintenance when SELECT list changes
+    GROUP BY ALL is particularly useful for:
+    - Quick prototyping and ad-hoc analysis
+    - Reports with many grouping columns
+    - Reducing maintenance when SELECT list changes
 
     ```
     <copy>
@@ -200,9 +205,9 @@ The objective of this lab is to familiarize you with GROUP BY ALL in Oracle Data
     ```
 
 2. **Important Considerations:**
-   - GROUP BY ALL only works when you have at least one aggregate function in the SELECT list
-   - It automatically includes all non-aggregated columns from the SELECT list
-   - The feature is available starting from Oracle Database 23ai (23.9)
+    - GROUP BY ALL only works when you have at least one aggregate function in the SELECT list
+    - It automatically includes all non-aggregated columns from the SELECT list
+    - The feature is available starting from Oracle Database 23ai (23.9)
 
     ```
     <copy>

@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## About the JSON Duality Views Workshop
 
 This workshop focuses on working with JSON Duality Views in Oracle AI Database 26ai.

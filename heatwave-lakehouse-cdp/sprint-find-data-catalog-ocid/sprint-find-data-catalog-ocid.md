@@ -17,6 +17,10 @@ _Estimated Lab Time_: 15 minutes
 * An Oracle Cloud Account.
 
 ##  
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Create a data catalog
 
 1. Sign in to the Oracle Cloud Infrastructure Console.
@@ -24,7 +28,7 @@ _Estimated Lab Time_: 15 minutes
 2. Open the **Navigation** menu and click **Analytics & AI**. Under **Data Lake**, click **Data Catalog**.
 
 3. On the **Data Catalog Overview** page, click **Go to Data Catalogs**.
-   ![data ctalog navigate](./images/navigate-catalog.png" ")
+    ![data ctalog navigate](./images/navigate-catalog.png" ")
 
 4. Click on **Create Data Catalog** as shown in the below snapshot
 

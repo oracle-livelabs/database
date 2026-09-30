@@ -22,34 +22,34 @@ In this lab, you will:
 
 1. Connect to the CDB root and display the default tablespace encryption algorithm.
 
-	```
-	$ <copy>sqlplus / AS SYSDBA</copy>
-	Connected to:
+    	```
+    	$ <copy>sqlplus / AS SYSDBA</copy>
+    	Connected to:
 
-	Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-	Version 21.2.0.0.0
-	```
+    	Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
+    	Version 21.2.0.0.0
+    	```
 
-	```
-	SQL> <copy>SHOW PARAMETER TABLESPACE_ENCRYPTION_DEFAULT_ALGORITHM</copy>
+    	```
+    	SQL> <copy>SHOW PARAMETER TABLESPACE_ENCRYPTION_DEFAULT_ALGORITHM</copy>
 
-	NAME                                       TYPE   VALUE
-	------------------------------------------ ------ -----------------------
-	tablespace_encryption_default_algorithm    string AES128
+    	NAME                                       TYPE   VALUE
+    	------------------------------------------ ------ -----------------------
+    	tablespace_encryption_default_algorithm    string AES128
 
-	SQL>
-	```
+    	SQL>
+    	```
 
 2. Change the tablespace encryption algorithm.
 
-	```
-	SQL> <copy>ALTER SYSTEM SET TABLESPACE_ENCRYPTION_DEFAULT_ALGORITHM=AES192;</copy>
-	System altered.
+    	```
+    	SQL> <copy>ALTER SYSTEM SET TABLESPACE_ENCRYPTION_DEFAULT_ALGORITHM=AES192;</copy>
+    	System altered.
 
-	SQL> <copy>EXIT</copy>
+    	SQL> <copy>EXIT</copy>
 
-	$
-	```
+    	$
+    	```
 
 3. Connect to the PDB and create a new tablespace in `PDBTEST`.
 

@@ -25,7 +25,7 @@ In this lab, you will:
 ## Task 1: Connect to a Database system node and determine the location of the AHF Installation
 
 1. 	If you are not already connected to one of you Database System nodes. 
-	Using one of your Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.
+    	Using one of your Public IP addresses, enter the command below to login as the *opc* user and verify connection to your nodes.
 
     ```
     <copy>
@@ -33,11 +33,11 @@ In this lab, you will:
     </copy>
     ```
 
-   When prompted, answer **yes** to continue connecting.
+    When prompted, answer **yes** to continue connecting.
 
->Note: You only need to connect to one Node for Labs 1 to 5 in this workshop
+    >Note: You only need to connect to one Node for Labs 1 to 5 in this workshop
 
-2.  If you are not the **root** user then change to the **root** user from the **opc** user
+2. If you are not the **root** user then change to the **root** user from the **opc** user
      
      ```
      <copy>
@@ -45,22 +45,22 @@ In this lab, you will:
       </copy>
      ```
 
-3.	Determine the location of AHF software.
+3. Determine the location of AHF software.
 
-	AHF writes it's Software base location to */etc/oracle.ahf.loc* on Linux and Unix systems.
+    	AHF writes it's Software base location to */etc/oracle.ahf.loc* on Linux and Unix systems.
 
-	Check the contents of the `/etc/oracle.ahf.loc` file 
-	```
-	<copy>
-	cat /etc/oracle.ahf.loc
-	</copy>
-	```
-	Example Command Output:
-	<pre>
-	/u01/app/oracle.ahf
-	</pre> 
+    	Check the contents of the `/etc/oracle.ahf.loc` file 
+    	```
+    	<copy>
+    	cat /etc/oracle.ahf.loc
+    	</copy>
+    	```
+    	Example Command Output:
+    	<pre>
+    	/u01/app/oracle.ahf
+    	</pre> 
 
-4.	Use this location to check the contents of the AHF install.properties file
+4. Use this location to check the contents of the AHF install.properties file
 
 	```
 	<copy>
@@ -113,47 +113,47 @@ In this lab, you will:
 ## Task 2: Check the Version, Status and Health of AHF
 
 
-1.	Use the **tfactl** CLI to check whether the TFA Daemon processes are running on all nodes, and view the current version.
+1. Use the **tfactl** CLI to check whether the TFA Daemon processes are running on all nodes, and view the current version.
 
-	The process TFAMAin runs on each node of the cluster and these processes communicate to synchroinize monitoring and  
-	diagnostic collection operations.  The Process also has a scheduler to run other tools such as **orachk**.  
-	```
-	<copy>
-	tfactl print status
-	</copy>
-	```
-	Example Command output:
-	<pre>
-	.--------------------------------------------------------------------------------------------------.
-	| Host      | Status of TFA | PID   | Port | Version    | Build ID              | Inventory Status |
-	+-----------+---------------+-------+------+------------+-----------------------+------------------+
-	| lldbcs61  | RUNNING       | 86200 | 5000 | 24.4.1.0.0 | 240410020240513161331 | COMPLETE         |
-	| lldbcs62  | RUNNING       | 91603 | 5000 | 24.4.1.0.0 | 240410020240513161331 | COMPLETE         |
-	'-----------+---------------+-------+------+------------+-----------------------+------------------'
-	</pre>
-	You should see a line for each node in your cluster.  If that is the case then the TFAMain process is running and able to communicate.  
-	If you do not see both all nodes then it is likely either TFAMain is not running on the other node(s) or there is something blocking  
-	communications between the nodes on the public network. 
+    	The process TFAMAin runs on each node of the cluster and these processes communicate to synchroinize monitoring and  
+    	diagnostic collection operations.  The Process also has a scheduler to run other tools such as **orachk**.  
+    	```
+    	<copy>
+    	tfactl print status
+    	</copy>
+    	```
+    	Example Command output:
+    	<pre>
+    	.--------------------------------------------------------------------------------------------------.
+    	| Host      | Status of TFA | PID   | Port | Version    | Build ID              | Inventory Status |
+    	+-----------+---------------+-------+------+------------+-----------------------+------------------+
+    	| lldbcs61  | RUNNING       | 86200 | 5000 | 24.4.1.0.0 | 240410020240513161331 | COMPLETE         |
+    	| lldbcs62  | RUNNING       | 91603 | 5000 | 24.4.1.0.0 | 240410020240513161331 | COMPLETE         |
+    	'-----------+---------------+-------+------+------------+-----------------------+------------------'
+    	</pre>
+    	You should see a line for each node in your cluster.  If that is the case then the TFAMain process is running and able to communicate.  
+    	If you do not see both all nodes then it is likely either TFAMain is not running on the other node(s) or there is something blocking  
+    	communications between the nodes on the public network. 
 
-2.	Use the **tfactl** CLI to check whether the TFA Daemon process is watching the CRS, ASM and Database alert logs for issues.
-	
-	```
-	<copy>
-	tfactl print scanfiles
-	</copy>
-	```
-	Example Command output:
-	<pre>
-	/var/log/messages
-	/u01/app/oracle/diag/rdbms/racximwm_8wz_bom/racXIMWM1/trace/alert_racXIMWM1.log
-	/u01/app/grid/diag/crs/lvracdb-s01-2024-08-08-1452081/crs/trace/alert.log
-	/u01/app/grid/crsdata/lvracdb-s01-2024-08-08-1452081/acfs/event.log.0
-	/u01/app/grid/diag/asm/+asm/+ASM1/trace/alert_+ASM1.log
-	/u01/app/grid/crsdata/lvracdb-s01-2024-08-08-1452081/acfs/acfs.log.0
-	/u01/app/grid/diag/apx/+apx/+APX1/trace/alert_+APX1.log
-	</pre>
+2. Use the **tfactl** CLI to check whether the TFA Daemon process is watching the CRS, ASM and Database alert logs for issues.
+    	
+    	```
+    	<copy>
+    	tfactl print scanfiles
+    	</copy>
+    	```
+    	Example Command output:
+    	<pre>
+    	/var/log/messages
+    	/u01/app/oracle/diag/rdbms/racximwm_8wz_bom/racXIMWM1/trace/alert_racXIMWM1.log
+    	/u01/app/grid/diag/crs/lvracdb-s01-2024-08-08-1452081/crs/trace/alert.log
+    	/u01/app/grid/crsdata/lvracdb-s01-2024-08-08-1452081/acfs/event.log.0
+    	/u01/app/grid/diag/asm/+asm/+ASM1/trace/alert_+ASM1.log
+    	/u01/app/grid/crsdata/lvracdb-s01-2024-08-08-1452081/acfs/acfs.log.0
+    	/u01/app/grid/diag/apx/+apx/+APX1/trace/alert_+APX1.log
+    	</pre>
 
-3.	Use the **ahfctl** CLI to check whether the TFA Daemon processes have any jobs in their scheduler
+3. Use the **ahfctl** CLI to check whether the TFA Daemon processes have any jobs in their scheduler
 
 	By default AHF will schedule **orachk** jobs to run:-
 	- Every day for critical compliance checks
@@ -166,7 +166,7 @@ In this lab, you will:
 	```
 	Example Command output:
 
-	![](../ahf-upgrade/images/orachk_sched.png =60%x*)
+	![Image](../ahf-upgrade/images/orachk_sched.png =60%x*)
 	
 	You can see above that **orachk** will be run each day for `tier 1` critical checks every day except Sunday, and 7 days reports will be retained.  
 	The full run will happen every Sunday and 14 reports will be retained.

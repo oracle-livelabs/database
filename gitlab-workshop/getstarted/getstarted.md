@@ -23,18 +23,18 @@ Estimated Time: 15 minutes
 
 In this section, you will fill out the registration form at [oracle.com/cloud/free](https://signup.cloud.oracle.com).
 
-1.  Click on the "Start for free" button and enter the appropriate information to create your account.
+1. Click on the "Start for free" button and enter the appropriate information to create your account.
     * Enter the same **email address** you used to register for Oracle Open World / Oracle Code One. A popup should appear recognizing your email. If not, the registration form will ask for additional information later.
     * Select your **country/territory**.
     * Click **Next**.
 
     ![Account info](images/signup-for-freetier.png " ")
 
-2.  Enter a few details for your new Oracle Cloud account.
+2. Enter a few details for your new Oracle Cloud account.
     * You can choose almost anything for your Cloud Account Name. Remember what you wrote. You'll need this name later to sign in.
     * Click **Enter Password**.
 
-3.  If your email wasn't recognized or you're using a different email address, you will need to provide additional information.
+3. If your email wasn't recognized or you're using a different email address, you will need to provide additional information.
     * Provide a mobile number and click **Next: Verify Mobile Number**. In a few seconds, you should receive a verification code through SMS-text. Enter this code in the appropriate field and click **Verify**.
     * Click **Add Credit Card Details**. You will NOT be charged unless you elect to upgrade the account later. Enter the billing information, card details, and click **Finish**.
 
@@ -80,7 +80,7 @@ In this section, we will walk through the steps to signup for a free GitLab Tria
 2. Fill in the user details to activate a 30 day trail
     - Alternatively, you can use either your GitHub or Google account to singup
 
-    ![trial](images/gitlabSignup.png)
+    ![trial](images/gitlabsignup.png)
 
 3. Activate the account once the confirmation email is received, and sign in to complete the registration process
 

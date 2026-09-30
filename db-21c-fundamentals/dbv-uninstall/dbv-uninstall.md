@@ -45,7 +45,7 @@ In this lab, you will:
 
     ```
 
-2.  Connect to the CDB root as `C##SEC_ADMIN` to verify the status of Database Vault.
+2. Connect to the CDB root as `C##SEC_ADMIN` to verify the status of Database Vault.
 
 
     ```
@@ -208,7 +208,7 @@ In this lab, you will:
 
     ```
 
-  *Even if the `CON_ID `displays 0, the value for the Database Vault refers to the PDB you are connected to.*
+    *Even if the `CON_ID `displays 0, the value for the Database Vault refers to the PDB you are connected to.*
 
 
 

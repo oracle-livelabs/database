@@ -84,7 +84,7 @@ This lab assumes you have:
 
 ## Task 2: Cross Shard Query
 1. Now, let’s run a Cross Shard Query which does a SELECT with ORDER BY query accessing multiple shards but not all shards.   
-	 ```
+    	 ```
     SQL> set termout on
     SQL> set linesize 120 pagesize 200
     SQL> set echo on
@@ -131,13 +131,13 @@ This lab assumes you have:
        May		     Parker		  east	   Gold
 
        SQL>
-	 ```
+    	 ```
 
 
 
 
 
-​    
+    ​    
 
 2. Let’s run a CSQ query which joins sharded and duplicated table (join on non sharding key) to get the fast moving products (qty sold > 10). The output that you will observe will be different (due to data load randomization).
 

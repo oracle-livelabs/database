@@ -36,7 +36,7 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 1. Top right, click your **Profile**, then **User Settings.**
 
-  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
+    ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 2. Copy your OCID. Make sure to **save your OCID** for future steps. Paste it into notepad or some text file for use in step 10.
 
@@ -54,7 +54,7 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
-  **Note:** Your **Home Region** may be different than the region you are currently connected to. In the example screen below, you are connected to Phoenix but the **Home Region** is Ashburn. You can create Always Free NoSQL tables when connected to Phoenix.
+    **Note:** Your **Home Region** may be different than the region you are currently connected to. In the example screen below, you are connected to Phoenix but the **Home Region** is Ashburn. You can create Always Free NoSQL tables when connected to Phoenix.
 
     ![Home Region](https://oracle-livelabs.github.io/common/images/console/region.png)
 
@@ -80,7 +80,7 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 8. Top right, click your **Profile**, then **User Settings.**
 
-  ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
+    ![User Settings](https://oracle-livelabs.github.io/common/images/console/user-settings.png)
 
 
 
@@ -90,11 +90,11 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
 10. Click on **Paste Public Key** and Paste your public key into the **Public Key** text box. Click **Add** at the bottom.
 
-   ![Add](images/hit-add.png)
+    ![Add](images/hit-add.png)
 
 11. Copy your fingerprint and paste it into notepad or some text file for use in step 12. Click **Close** when done.
 
-  ![Copy fingerprint](images/copy-finger.png)
+    ![Copy fingerprint](images/copy-finger.png)
 
 12. You should have saved 3 pieces of information, the compartment OCID, your user OCID and your fingerprint. This step requires you to edit a shell script and insert that information into the script. We will use vi for this but if you are comfortable with vim or emacs then use either. Expand your Cloud Shell and execute.
 
@@ -111,7 +111,7 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
     </copy>
     ```
 
-  Let's use vi to edit env.sh. Once you go into vi, you will hit 'i' to go into insert mode. You will see 3 variables that need to be set correctly based on real data. Replace **your\_compartment\_ocid**, **your\_user\_ocid**, and **your\_fingerprint** with the actual values that you save from previous steps.
+    Let's use vi to edit env.sh. Once you go into vi, you will hit 'i' to go into insert mode. You will see 3 variables that need to be set correctly based on real data. Replace **your\_compartment\_ocid**, **your\_user\_ocid**, and **your\_fingerprint** with the actual values that you save from previous steps.
 
       ```
       <copy>
@@ -121,13 +121,13 @@ Please make note of the **Region** you are assigned. If you are assigned Phoenix
 
       ![variable-replace](images/variable-replace.png)
 
-  Copy and paste one at a time. We recommend using Right Click and selecting 'Paste' from the menu. Using Ctrl-V can drop characters.
+    Copy and paste one at a time. We recommend using Right Click and selecting 'Paste' from the menu. Using Ctrl-V can drop characters.
 
-  When completed it should look something like this.
+    When completed it should look something like this.
 
-  ![done-replace](images/done-replace.png)
+    ![done-replace](images/done-replace.png)
 
-  To exit out of vi, click esc, then type in ":wq" and your changes will be saved.
+    To exit out of vi, click esc, then type in ":wq" and your changes will be saved.
 
 13. Exit Cloud Shell  
 

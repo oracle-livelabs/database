@@ -23,7 +23,7 @@ In this lab, you will:
 
 3. Double-click on the *Terminal* shortcut on the desktop. 
 
-![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
+    ![Click shortcut to start a terminal](./images/initialize-environment-desktop-click-terminal.jpeg " ")
 
 4. The terminal has two tabs, *yellow* 🟨 and *blue* 🟦.
 
@@ -87,3 +87,8 @@ You may now *proceed to the next lab*.
 * **Author** - Daniel Overby Hansen
 * **Contributors** - William Beauregard, Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, May 2025
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

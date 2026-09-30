@@ -18,7 +18,7 @@ In this lab, you will:
 
 1. On the registration page, enter your country or territory, legal name, and email address. Complete the human-verification challenge when it appears.
 
-    ![Oracle documentation screenshot showing the Sign Up entry point on the Oracle Cloud page](https://docs.oracle.com/en/learn/get-started-with-oci-and-oci-console/images/Getting-Started-OCI3.png)
+    ![Oracle documentation screenshot showing the Sign Up entry point on the Oracle Cloud page](https://docs.oracle.com/en/learn/get-started-with-oci-and-oci-console/images/getting-started-oci3.png)
 
     > Oracle documentation screenshot. The live registration form, labels, and sequence can vary by country and over time.
 

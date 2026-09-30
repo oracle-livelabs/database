@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Welcome to the Oracle AI Database 26ai New Features Workshop! This workshop covers some of the new features and enhancements in Oracle's long-term support release, version 26ai. While this introduction LiveLab provides an overview of the new features, keep in mind that this is not an exhaustive list, rather just a small sample of some of the new features in the database. If there is a specific database feature that you would like to see in this workshop, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
 
 <!-- [](youtube:MPOYjrGhvZk) -->

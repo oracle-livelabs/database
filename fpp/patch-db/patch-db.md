@@ -77,7 +77,7 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ```
     sudo su - oracle
     ```
-  ![Login with opc user](./images/opc.png)
+    ![Login with opc user](./images/opc.png)
 
 
 2. Set the environment:
@@ -87,16 +87,16 @@ It is recommended to use `-eval` whenever possible. For patching, it is a good i
     ORACLE_SID = [oracle] ? fpplive1site
     The Oracle base has been set to /u01/app/oracle
     ```
-  ![Set environment variables with oraenv](./images/oraenv.png)
+    ![Set environment variables with oraenv](./images/oraenv.png)
 
 3. Verify the Oracle Restart configuration for the database:
 
     ```
     srvctl config database -db fpplive1_site1
     ```
-  ![Shows the output of the srvctl config command above](./images/srvctl.png)
+    ![Shows the output of the srvctl config command above](./images/srvctl.png)
 
-  It is running in the new Oracle Home, the `srvctl` configuration has been adapted as well!
+    It is running in the new Oracle Home, the `srvctl` configuration has been adapted as well!
 
 4. Let's see the patching level:
 

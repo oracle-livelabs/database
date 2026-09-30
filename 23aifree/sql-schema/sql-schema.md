@@ -53,7 +53,7 @@ This lab assumes you have:
     ![Image alt text](images/run_buttons.png " ")
 
 2. You will need to create your tables. Copy the code below and run it in the worksheet by clicking the **Run Script** button.
-Note: The script uses the new 23ai syntax of if exists and if not exists. This prevents error messages if you need to rerun the script.
+    Note: The script uses the new 23ai syntax of if exists and if not exists. This prevents error messages if you need to rerun the script.
 
 
     ```
@@ -171,14 +171,14 @@ Note: The script uses the new 23ai syntax of if exists and if not exists. This p
                         FROM driver_race_map drm WITH INSERT UPDATE DELETE
                         WHERE drm.race_id = r.race_id ]}
         FROM race r WITH INSERT UPDATE DELETE;
-		</copy>
+    		</copy>
     ```
-		![Image alt text](images/create_race_dv.png " ")
+    		![Image alt text](images/create_race_dv.png " ")
 
 5. Now we will create the DRIVER\_DV duality view. Since this is for drivers, we don't want them creating teams or races so we set those to noinsert, noupdate, nodelete. Also they can update or insert a driver's race map but not remove them. You can either click the trash to clear the worksheet or delete what is there before pasting the code below. Click **Run Script**.
 
-	```
-	<copy>
+    	```
+    	<copy>
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW driver_dv AS
     SELECT JSON {'_id' IS d.driver_id,
             'name'     IS d.name,
@@ -199,7 +199,7 @@ Note: The script uses the new 23ai syntax of if exists and if not exists. This p
                     FROM driver_race_map drm WITH INSERT UPDATE NODELETE
                     WHERE drm.driver_id = d.driver_id ]}
     FROM driver d WITH INSERT UPDATE DELETE;
-	</copy>
+    	</copy>
     ```
     ![Image alt text](images/create_driver_dv.png " ")
 
@@ -258,13 +258,13 @@ Note: The script uses the new 23ai syntax of if exists and if not exists. This p
                                                 "name"     : "Lewis Hamilton",
                                                 "points"   : 0} ]}');
     COMMIT;
-	</copy>
-	```
-	![Image alt text](images/insert_team_dv.png " ")
+    	</copy>
+    	```
+    	![Image alt text](images/insert_team_dv.png " ")
 
 2. Additionally, we are inserting a collection of race documents into RACE\_DV. This automatically populates the race table. Copy the sql below and click **Run Script**
 
-	```
+    	```
     <copy>
     INSERT INTO race_dv VALUES ('{"_id" : 201,
                                 "name"   : "Bahrain Grand Prix",
@@ -287,7 +287,7 @@ Note: The script uses the new 23ai syntax of if exists and if not exists. This p
     </copy>
     ```
 
-	![Image alt text](images/insert_race_dv.png " ")
+    	![Image alt text](images/insert_race_dv.png " ")
 
 3. Populating a duality view automatically updates data shown in related duality views, by updating their underlying tables.
 

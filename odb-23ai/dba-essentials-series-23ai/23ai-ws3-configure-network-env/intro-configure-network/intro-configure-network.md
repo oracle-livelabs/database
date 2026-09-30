@@ -159,3 +159,8 @@ Click the next lab to **Get started**.
  - **Author** - Manish Garodia, Database User Assistance Development
  - **Contributors**: Binika Kumar, Bhaskar Mathur, Malai Stalin<if type="hidden">Suresh Rajan, Subhash Chandra, Dharma Sirnapalli, Subrahmanyam Kodavaluru</if>
  - **Last Updated By/Date** - Manish Garodia, August 2024
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

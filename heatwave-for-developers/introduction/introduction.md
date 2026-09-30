@@ -2,6 +2,9 @@
 
 ## Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 MySQL HeatWave is a fully managed database service that lets developers quickly develop and deploy secure cloud-native applications using the world’s most popular open-source database. MySQL HeatWave is the only MySQL service with a massively-scalable, integrated, real-time query accelerator, and a fully automated in-database machine learning engine. This service overcomes the limitations of traditional data warehouse, analytics, and machine learning environments that use periodic long-running ETL batch jobs to refresh the data. MySQL HeatWave provides a unified MySQL database platform for OLTP, OLAP and machine learning.
 
 In this workshop, you will first learn to deploy and configure MySQL HeatWave, including its built-in in-memory query accelerator. You will then develop an analytics application allowing retail customers to obtain, visualize, and redeem discount coupons based on their previous purchases. You will build this application using the LAMP (Linux, Apache, MySQL, PHP) stack with step-by-step instructions and sample code, and experience the high performance of MySQL HeatWave to run complex analytics queries.

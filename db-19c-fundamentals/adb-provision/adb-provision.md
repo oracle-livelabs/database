@@ -57,7 +57,7 @@ In this lab, you will:
     ![Click Create Autonomous Database.](./images/adb-start-create.png)
 
 
-2.  This brings up the *Create Autonomous Database* screen where you will specify the configuration of the instance.
+2. This brings up the *Create Autonomous Database* screen where you will specify the configuration of the instance.
 
 
 3. Specify basic information for the autonomous database:
@@ -135,7 +135,7 @@ In this lab, you will:
 
     ![Create Autonomous Database](./images/create-adb.png " ")
 
-11.  Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Data Warehouse database is ready to use! Have a look at your instance's details here including its name, database version, ECPU count, and storage size.
+11. Your instance will begin provisioning. In a few minutes, the state will turn from *Provisioning* to *Available*. At this point, your Autonomous Data Warehouse database is ready to use! Have a look at your instance's details here including its name, database version, ECPU count, and storage size.
 
 
     ![Show Autonomous Database](images/adb-available-freetier.png)

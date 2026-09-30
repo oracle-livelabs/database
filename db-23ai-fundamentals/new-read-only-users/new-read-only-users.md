@@ -1,3 +1,10 @@
+# TODO: Title
+
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Exploring Read-Only User Configuration in Oracle Database
 
 ### Introduction
@@ -14,6 +21,10 @@ The objective of this lab is to familiarize you with setting up read-only users 
 
 - Access to Oracle Database 23ai.
 - Basic understanding of SQL and user management in Oracle.
+
+## Introduction
+
+TODO: Add introduction text here.
 
 ## Task 1: Understanding Read-Only Users
 
@@ -107,3 +118,8 @@ In this lab, we have explored the configuration of read-only users in Oracle Dat
 ## Learn More
 
 - [Oracle Database Documentation: Managing Users](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/CREATE-USER.html#GUID-DCAD8FA0-15B7-40E2-B90F-4DCA1A3C9D35)
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

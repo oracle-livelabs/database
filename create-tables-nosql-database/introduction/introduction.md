@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 ## About this Workshop
 
 In this workshop you will get started with tables in Oracle NoSQL Database Cloud Service and create a API signing key for an Oracle Cloud user account and a configuration file required to connect a client to Oracle Cloud. You will build a sample HelloWorld application to connect to an Oracle NoSQL Database Cloud Service and perform basic table level operations.
@@ -28,6 +31,10 @@ In this workshop you will:
 ### Prerequisites
 
 *  An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
+
+## Introduction
+
+TODO: Add introduction text here.
 
 ## Task 1: Getting started with the Oracle NoSQL Database Cloud Service
 

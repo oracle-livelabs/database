@@ -25,6 +25,11 @@ Estimated Lab Time: 25 minutes
 - Basic SQL knowledge
 
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Load the AI Model for Vector Search
 
 1. **How vector search works:** To find documents by meaning, Oracle needs to convert text into numbers called "vectors." Think of vectors as coordinates that represent the meaning of text. Documents with similar meanings get similar vectors, making them easy to find.
@@ -275,7 +280,7 @@ Estimated Lab Time: 25 minutes
     - Nutrition consultation notes about DASH diet
     - Lab results showing cholesterol levels
    
-   Notice how vector search found these related documents even though they don't mention "diabetes" explicitly! It understands that blood pressure, diet, and cholesterol are all related to diabetes management.
+    Notice how vector search found these related documents even though they don't mention "diabetes" explicitly! It understands that blood pressure, diet, and cholesterol are all related to diabetes management.
 
     ![vecs](./images/v2.png)
 

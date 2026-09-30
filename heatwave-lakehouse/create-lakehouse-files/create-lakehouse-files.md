@@ -2,6 +2,9 @@
 
 ## Introduction
 
+Estimated Time: TODO - x minutes
+
+
 A set of files have been created for you to use in this workshop. You will create an object storage bucket and upload the files to it.
 
 ### Objectives

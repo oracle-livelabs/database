@@ -59,10 +59,10 @@ Estimated Time: 5 minutes
     ![Warning that you might get if you are in the root compartment and not in your own LiveLabs assigned compartment.](./images/wrong-compartment.png " ")
 
 4. Switch to your assigned compartment:
-   - in the center (see the picture below), click the **Compartment** button
-   - Search for your compartment name (looks like **LL#####-COMPARTMENT** with 5 numbers)
-   - Select your assigned compartment when it appears
-   - Verify you're in the correct region shown in your **Reservation Information**
+    - in the center (see the picture below), click the **Compartment** button
+    - Search for your compartment name (looks like **LL#####-COMPARTMENT** with 5 numbers)
+    - Select your assigned compartment when it appears
+    - Verify you're in the correct region shown in your **Reservation Information**
 
     ![The Data Catalogs page in your assigned LiveLabs compartment is displayed. The training-dcat-instance Data Catalog instance provided for you is displayed on this page.](./images/compartment.png " ")
 

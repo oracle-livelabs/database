@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Workshop Time: TODO - x minutes
+
+
 ## About this Workshop
 
 This hands-on workshop provides users with step-by-step instructions on migrating SSAS DBs from On-Premise to OCI (Compute Instance).

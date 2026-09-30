@@ -93,13 +93,13 @@ This lab assumes you have completed the following lab:
 
 2. Data in  interval\_par\_demo  table 
 
-   ![Image alt text](images/interval-partition-select.png "interval_par_demo Select")
+    ![Image alt text](images/interval-partition-select.png "interval_par_demo Select")
 
-   Data in  USER\_TAB\_PARTITIONS 
+    Data in  USER\_TAB\_PARTITIONS 
 
-   ![Image alt text](images/interval-partition-select-data.png "USER_TAB_PARTITIONS Data")
+    ![Image alt text](images/interval-partition-select-data.png "USER_TAB_PARTITIONS Data")
 
-   Note down the two partition names.
+    Note down the two partition names.
 
 3. Here SYS\_P1708 and SYS\_P1709 are auto-generated partitions based on intervals. Let's verify data in newly created partitions. Note that the auto generated partition name might vary in your instance. Replace the SYS\_P1708 and SYS\_P1709 in the below queries with your partition names.
 

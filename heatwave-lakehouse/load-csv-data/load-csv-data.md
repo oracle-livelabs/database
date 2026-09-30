@@ -2,6 +2,9 @@
 
 ## Introduction
 
+Estimated Time: TODO - x minutes
+
+
 To load data from Object Storage to HeatWave, you need to specify the location of the file or folder objects in your Object Storage.
 
 1. Use [Resource Principal](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/resource-principal-enable.html) - It is recommended that you use Resource Principal-based approach for access to data in Object Storage for more sensitive data as this approach is more secure.

@@ -30,13 +30,13 @@ MySQL Database Service Standalone has daily automatic backups and is resilient t
 
 1. If not already connected with SSH, connect to Compute instance using Cloud Shell
 
-   (Example: ssh -i ~/.ssh/id_rsa opc@132.145.17….)
+    (Example: ssh -i ~/.ssh/id_rsa opc@132.145.17….)
 
 2. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the MDS-SA private IP address at the end of the cammand. Also enter the admin user password
 
     (Example  **mysqlsh -uadmin -p -h10.0.1..**)
 
- **[opc@...]$**
+    **[opc@...]$**
     ````
     <copy>mysqlsh -uadmin -p -h 10.0.1....</copy>
     ````
@@ -159,19 +159,19 @@ MySQL Database High Availability uses MySQL Group Replication to provide standby
 
 1. If not already connected with SSH, connect to Compute instance using Cloud Shell
 
-   (Example: ssh -i ~/.ssh/id_rsa opc@132.145.17….)
+    (Example: ssh -i ~/.ssh/id_rsa opc@132.145.17….)
 
 2. From your Compute instance, connect to MDS-HA MySQL using the MySQL Shell client tool.
 
-   The endpoint (IP Address) can be found in the MDS-HA MySQL DB System Details page, under the "Endpoint" "Private IP Address".
+    The endpoint (IP Address) can be found in the MDS-HA MySQL DB System Details page, under the "Endpoint" "Private IP Address".
 
     ![Connect](./images/06connect03.png " ")
 
-3.  Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the MDS-HA private IP address at the end of the cammand. Also enter the admin user password
+3. Use the following command to connect to MySQL using the MySQL Shell client tool. Be sure to add the MDS-HA private IP address at the end of the cammand. Also enter the admin user password
 
     (Example  **mysqlsh -uadmin -p -h10.0.1..**)
 
- **[opc@...]$**
+    **[opc@...]$**
 
     ````
     <copy>mysqlsh -uadmin -p -h 10.0.1....</copy>

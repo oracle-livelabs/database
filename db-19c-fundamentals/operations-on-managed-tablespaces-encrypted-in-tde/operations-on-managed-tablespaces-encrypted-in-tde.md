@@ -197,7 +197,7 @@ In this section, you close the keystore and see which operations on Oracle-manag
     ORA-28365: wallet is not open
     ```
 
-The operation fails because the operation affects the metadata of the Oracle-managed and user-managed tablespaces.
+    The operation fails because the operation affects the metadata of the Oracle-managed and user-managed tablespaces.
 
 4. Create a table and insert data in the tablespace SYSTEM.
 
@@ -223,7 +223,7 @@ The operation fails because the operation affects the metadata of the Oracle-man
     Commit complete.
     ```
 
-The operation completes because the operation affects only the data of the Oracle-managed tablespace and because the tablespace is an Oracle-managed tablespace.
+    The operation completes because the operation affects only the data of the Oracle-managed tablespace and because the tablespace is an Oracle-managed tablespace.
 
 7. Create a table and insert data in the tablespace OMTBS.
 

@@ -26,7 +26,7 @@ For ease of execution of this workshop, your VM instance has been pre-configured
     - Click the drop-down arrow next to your **Username**
     - Click **My Reservations**
 
-   ![my reservation](./images/my-reservations.png "my reservation")
+    ![my reservation](./images/my-reservations.png "my reservation")
 
 2. Find the request you submitted from the list displayed (only one item will be displayed if this is your first request), then click **Launch Workshop**
 
@@ -62,7 +62,7 @@ You may now **proceed to the next lab**.
 
 Access to the compute instance by SSH protocol through the terminal is optional. If you are doing a LiveLab that can be done within a terminal completely, we recommend the Oracle Cloud Shell to upload a key and connect.
 
-1.  Go to **Compute** -> **Instances**. Make sure you choose the correct compartment. Select the instance you created. On the instance homepage, find the **Public IP address** for your instance - you will need this information in Step 7.
+1. Go to **Compute** -> **Instances**. Make sure you choose the correct compartment. Select the instance you created. On the instance homepage, find the **Public IP address** for your instance - you will need this information in Step 7.
 
     ![Compute Instance](https://oracle-livelabs.github.io/common/images/console/compute-instances.png " ")
 
@@ -82,7 +82,7 @@ Access to the compute instance by SSH protocol through the terminal is optional.
 
     ![Verify SSH key](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-finished.png " ")
 
-3.  Secure Shell (SSH) . . . replace the **&lt;sshkeyname&gt;** with the name of your SSH private key . . .
+3. Secure Shell (SSH) . . . replace the **&lt;sshkeyname&gt;** with the name of your SSH private key . . .
 
     ```text
     <copy>ssh -i ~/.ssh/<sshkeyname> opc@<Your Compute Instance Public IP Address></copy>

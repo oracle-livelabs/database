@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 This section of the workshop highlights enhancements in Oracle Database 21c designed to improve performance and functionality of Big Data and Data Warehouse workloads. Included are bitwise aggregation functions that operate at the bit level of records within a group, enhanced analytic functions that operate on the window frame clause, GROUPS and EXCLUDE, and also from the WINDOW clause in the table expression, CHECKSUM aggregate function to detect changes in a table, the SKEWNESS\_POP and SKEWNESS\_SAMP aggregate functions to measure asymmetry in data, and the KURTOSIS\_POP and KURTOSIS\_SAMP aggregate functions to measure tailedness of data.
 
 Estimated Workshop Time: 60 minutes

@@ -1,5 +1,14 @@
 # SEER HIGHTECH conversion and validation
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 The Seer HighTech workshop has been converted, shortened, tested against the supplied Autonomous AI Database and updated with 48 authentic worksheet captures and six related application captures. The learner archive has been rebuilt. The focused instruction changes produced one correct agent retest and a narration with all requested totals; narration format compliance and repeated-run reliability remain unqualified. The deterministic SQL comparison remains in the lesson. The six application captures are complete; fresh provisioning validation remains outstanding.
 
 ## Scenario and preserved structure
@@ -50,3 +59,8 @@ SHA-256: `b16b93d8c3972155a28fc79dcff595ffdfabeaf68d60fbbf6a92c71ce00fdfcb`
 Archive: `/Users/mkowalik/Documents/Codex/2026-09-29/files-pasted-by-the-user-convert/outputs/SEER-HighTech-LiveLabs-production.zip`
 
 The archive contains all 100 current learner files, both notebooks, launchers/manifests and complete supporting stack. It excludes maintainer validation/history, obsolete source captures, the archive itself and macOS metadata. Current evidence remains in `/Users/mkowalik/Documents/GitHub/oracle-livelabs/database/livestack-workshop-hightech/validation`. Historical Manufacturing evidence under source-baseline never establishes a HighTech pass. The production filename follows the request and does not imply completed provisioning qualification.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

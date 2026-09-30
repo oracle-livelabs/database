@@ -124,7 +124,7 @@ In this lab, you will be guided through the following tasks:
       <copy> mysqlsh -h10.0.1.136 -uadmin -p --mysql --file sakila-data.sql</copy>
       ```
 
-   a. List all of the databases
+    a. List all of the databases
 
       ````bash
       <copy>show databases;</copy>

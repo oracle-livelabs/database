@@ -57,13 +57,13 @@ In this lab, you will be guided through the following tasks:
 
     On Basic Information, complete the following fields:
 
- VCN Name: 
+    VCN Name: 
      ```
     <copy>MDS-VCN</copy>
     ```
- Compartment: Select  **(root)**
+    Compartment: Select  **(root)**
 
- Your screen should look similar to the following
+    Your screen should look similar to the following
     ![VCN](./images/03vcn04.png " ")
 
 5. Click 'Next' at the bottom of the screen 
@@ -84,30 +84,30 @@ In this lab, you will be guided through the following tasks:
 1. On MDS-VCN page under 'Subnets in (root) Compartment', click  '**Private Subnet-MDS-VCN**' 
      ![VCN](./images/03vcn07.png " ")
 
-2.	On Private Subnet-MDS-VCN page under 'Security Lists',  click  '**Security List for Private Subnet-MDS-VCN**'
+2. On Private Subnet-MDS-VCN page under 'Security Lists',  click  '**Security List for Private Subnet-MDS-VCN**'
     ![VCN](./images/03vcn08.png " ")
 
-3.	On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**' 
+3. On Security List for Private Subnet-MDS-VCN page under 'Ingress Rules', click '**Add Ingress Rules**' 
     ![VCN](./images/03vcn09.png " ")
 
-4.	On Add Ingress Rules page under Ingress Rule 1
+4. On Add Ingress Rules page under Ingress Rule 1
  
- Add an Ingress Rule with Source CIDR 
+    Add an Ingress Rule with Source CIDR 
     ```
     <copy>0.0.0.0/0</copy>
     ```
- Destination Port Range 
+    Destination Port Range 
      ```
     <copy>3306,33060</copy>
      ```
-Description 
+    Description 
      ```
     <copy>MySQL Port Access</copy>
      ```
- Click 'Add Ingress Rule'
+    Click 'Add Ingress Rule'
     ![VCN](./images/03vcn10.png " ")
 
-5.	On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
+5. On Security List for Private Subnet-MDS-VCN page, the new Ingress Rules will be shown under the Ingress Rules List
     ![VCN](./images/03vcn11.png " ")
 
 ## Task 4: Configure security list to allow HTTP incoming connections
@@ -120,13 +120,13 @@ Description
 
 4. Click Default Security List for mds_vcn
 
-5.	Click Add Ingress Rules page under Ingress Rule 1
+5. Click Add Ingress Rules page under Ingress Rule 1
 
- Add an Ingress Rule with Source CIDR 
+    Add an Ingress Rule with Source CIDR 
     ```
     <copy>0.0.0.0/0</copy>
     ```
- Destination Port Range
+    Destination Port Range
      ````
     <copy>80,443</copy>
      ````
@@ -136,7 +136,7 @@ Description
      ````
 
     ![VCN](./images/03vcn12.png " ")
-6.	On Security List for Default Security List for mds_vcn page, the new Ingress Rules will be shown under the Ingress Rules List
+6. On Security List for Default Security List for mds_vcn page, the new Ingress Rules will be shown under the Ingress Rules List
     ![VCN](./images/03vcn13.png " ")
 
 

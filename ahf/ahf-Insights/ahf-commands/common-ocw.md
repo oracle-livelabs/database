@@ -12,6 +12,11 @@ Estimated Lab Time: 5 Minutes
 - You are connected to one of the DB System Nodes as described in Lab 1: Connect to your DB System
 - You have performed the tasks to generate some incidents as described in Lab 2: Generate Database and Clusterware Incidents for AHF to Detect and take Action on
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Check out some of the AHF DBA tools
 
 When a problem occurs in one of your normally stable database systems the first question you ask is 'What has changed ?'.
@@ -32,7 +37,7 @@ The Insights report will bring all this information in to a dynamic html report 
     Duration for Changes: 1 Hours
 
     Change Records for host: lldbcs61
-[   2024-08-08 18:23:45.000000]: [ racximwm_8wz_bom: racXIMWM1]: Database Parameter parallel_threads_per_cpu Changed From 2 To 4
+    [   2024-08-08 18:23:45.000000]: [ racximwm_8wz_bom: racXIMWM1]: Database Parameter parallel_threads_per_cpu Changed From 2 To 4
     </pre>
 
 2. Check the values for some database init parameters across your databases
@@ -59,7 +64,7 @@ The Insights report will bring all this information in to a dynamic html report 
 
     AHF can also help you check on your major log locations, view or tail those logs and even analyze them.
 
-3.  List out all the major logs AHF has discovered
+3. List out all the major logs AHF has discovered
 
     ```
     <copy>
@@ -85,7 +90,7 @@ The Insights report will bring all this information in to a dynamic html report 
     /u01/app/oracle/diag/rdbms/racqyfvz_jnq_gru/racQYFVZ2/trace/alert_racQYFVZ2.log
     </pre>
 
-4.  Check the latest entries (tail) from one or more of those logs
+4. Check the latest entries (tail) from one or more of those logs
 
     > Note: If the complete name is not given then any matching logs entries are shown as below.
 
@@ -190,7 +195,7 @@ The Insights report will bring all this information in to a dynamic html report 
     NOTE: Assigning number (1,0) to disk (/dev/DATADISK3)
     </pre>
 
-5.  Analyze the logs for most Common Errors
+5. Analyze the logs for most Common Errors
 
     > Note: This command shows analysis for logs on each node. The below is just showing one node.
 
@@ -203,7 +208,7 @@ The Insights report will bring all this information in to a dynamic html report 
 
     ![TFA Analyze](./images/tfactl-analyze-1.png =130%x*)
     
-6.  Run the Real time Database top consumer monitor 'oratop'  
+6. Run the Real time Database top consumer monitor 'oratop'  
     oratop gathers wait and usage metrics from the database and displays them by top session similar to the 'O/S' top command.
     > Note: hit the 'h' key to get help on the various options  
 

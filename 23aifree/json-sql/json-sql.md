@@ -94,7 +94,7 @@ In this lab, you will:
 
     As you can see we're extracting the '_id', the 'title' and the 'year' from each document. Instead of a trailing function we can specify an optional SQL data type like NUMBER - the default (used for the title) is a VARCHAR2(4000). Note that since _id starts with an underscore character it's necessary to put it in quotes. Note also that the other attributes we are extracting are case sensitive. So you need to use 'title' and cannot use 'Title'.
 
-2.  We could have written this query with the simple dot notation, as well, because we do not drill into any JSON array yet. Let's do that in  this query, by using the NESTED clause also in the *COLUMNS* clause.
+2. We could have written this query with the simple dot notation, as well, because we do not drill into any JSON array yet. Let's do that in  this query, by using the NESTED clause also in the *COLUMNS* clause.
 
     ```
     <copy>
@@ -107,7 +107,7 @@ In this lab, you will:
 
     The second 'nested' acts over the JSON array called 'cast'. The '[*]' means that we want to select every item of the array; [0] would only select the first one, for example. Then the second *columns* clause defines which value we want to extract from inside the array. The 'cast' array consists only of string values; we therefore need to select the entire value. This is done with the path expression '$'. We give selected values the column name 'actor'.
 
-3.  Now let's try a simple aggregation of actors using the unnesting method above.
+3. Now let's try a simple aggregation of actors using the unnesting method above.
 
     ```
     <copy>
@@ -146,7 +146,7 @@ Now let's look at the different SQL/JSON operators step by step:
 
 JSON_VALUE takes one **scalar** value from the JSON data and returns it as a SQL scalar value.
 
-1.  The first argument is the input, the column 'data' from the products collection/table. This is followed by a path expression, in this case, we select the value for field 'main\_subject'. The optional 'returning' clause allows us to specify the return type, in this case, a varchar2 value of length 100. Because not every product has a 'main\_subject' value there are cases where no value can be selected. By default NULL is returned in this case. The optional ON EMPTY clause allows us to specify a default value (like 'none') or to raise an error - with ERROR ON EMPTY.
+1. The first argument is the input, the column 'data' from the products collection/table. This is followed by a path expression, in this case, we select the value for field 'main\_subject'. The optional 'returning' clause allows us to specify the return type, in this case, a varchar2 value of length 100. Because not every product has a 'main\_subject' value there are cases where no value can be selected. By default NULL is returned in this case. The optional ON EMPTY clause allows us to specify a default value (like 'none') or to raise an error - with ERROR ON EMPTY.
 
     ```
     <copy>
@@ -158,7 +158,7 @@ JSON_VALUE takes one **scalar** value from the JSON data and returns it as a SQL
     ```
     ![JSON value](./images/json-value.png " ")
 
-2.  JSON_Value can only select one scalar value. The following query will not return a result because it selects the array of actors. (The default is NULL ON ERROR)
+2. JSON_Value can only select one scalar value. The following query will not return a result because it selects the array of actors. (The default is NULL ON ERROR)
 
     ```
     <copy>
@@ -188,7 +188,7 @@ Unlike JSON\_Value (which returns one SQL scalar value) the function JSON\_Query
 
 JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. Instead of using a path expression to select and return a value, this operator just tests if such value exits.
 
-1.  For example, return the year and title of all movies where Jim Carrey was in the cast.
+1. For example, return the year and title of all movies where Jim Carrey was in the cast.
 
     ```
     <copy>
@@ -202,7 +202,7 @@ JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. I
 
     ![JSON exists](./images/json-exists.png " ")
 
-2.  The following selects all movies with two or more genres, one genre has to be 'Sci-Fi' and an actor's name has to begin with 'Sigourney'.
+2. The following selects all movies with two or more genres, one genre has to be 'Sci-Fi' and an actor's name has to begin with 'Sigourney'.
 
     ```
     <copy>
@@ -223,7 +223,7 @@ JSON_Exists is used to filter rows, therefore you find it in the WHERE clause. I
 
 JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of rows and columns. It is commonly used for analytics or reporting over JSON data. Similarly to the 'nested' clause in the simple dot notation JSON\_Table allows us to unnest an embedded JSON array. JSON\_Table consists of 'row' path expressions (which define the rows) and column path expressions (which extract a value and map it to a column with a given data type). Each row can have JSON\_Value, JSON\_Query and JSON\_Exists semantics (meaning that each row can act like JSON\_Value, JSON\_Query or JSON_Exists). This allows you to combine a set of these operations into one single JSON\_Table expression.
 
-1.  In this example, let's combine a set of these operations into one single JSON_Table expression.
+1. In this example, let's combine a set of these operations into one single JSON_Table expression.
 
     ```
     <copy>
@@ -241,7 +241,7 @@ JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of
     </copy>
     ```
    
-2.  Like the other SQL/JSON operators the first input is the JSON data - the column 'data' from the products collection/table. The first path expressions, '$', is the row path expression - in this case, we select the entire document. It would be possible to directly access an embedded object or array here, for example '$.starring[*]' would then generate a row for each actor.
+2. Like the other SQL/JSON operators the first input is the JSON data - the column 'data' from the products collection/table. The first path expressions, '$', is the row path expression - in this case, we select the entire document. It would be possible to directly access an embedded object or array here, for example '$.starring[*]' would then generate a row for each actor.
 
     The *columns* clause then lists each column. Let's go over this line by line:
     *	The '_id' column is defined to be a number instead of the default VARCHAR2(4000).
@@ -250,26 +250,26 @@ JSON\_Table is used to 'flatten' hierarchical JSON data to a table consisting of
     *	Similarly, we use the keyword 'EXISTS' to specify that the next column ('year') or JSON_Exists semantics. We're not interested in the actual year value - only if a value exists or not. You will therefore see true|false values for this column (or 1|0 if you change the return type to NUMBER).
     *	The last column 'num_genres' is an example of using a path item method (or trailing function), in this case, we call 'size()' on an array to count the number of values in the array. There are many other trailing functions that can be used.
 
- ![flatten hierachy with JSON table](./images/json-table.png " ")
+    ![flatten hierachy with JSON table](./images/json-table.png " ")
 
-Note the column actors for the first title 'SuperAction Mars', which has an array of two actors. Like with the simplified nested syntax, you can unflatten this embedded array by another nested clause inside the column expression as follows:
-```
-<copy>select jt.*
-from movies m,
-JSON_TABLE (data, '$' columns (
+    Note the column actors for the first title 'SuperAction Mars', which has an array of two actors. Like with the simplified nested syntax, you can unflatten this embedded array by another nested clause inside the column expression as follows:
+    ```
+    <copy>select jt.*
+    from movies m,
+    JSON_TABLE (data, '$' columns (
     "_id",
     movie_title varchar2(100) path '$.title',
     NESTED path '$.cast[*]' columns (actor path '$'),
     year EXISTS,
     num_genres NUMBER path '$.genre.size()'
     )) jt
-order by m.data.year.number() desc
-fetch first 10 rows only;
-</copy>
-```
- ![flatten hierachy with JSON table two levels](./images/json-table-2.png " ")
+    order by m.data.year.number() desc
+    fetch first 10 rows only;
+    </copy>
+    ```
+    ![flatten hierachy with JSON table two levels](./images/json-table-2.png " ")
    
-3.  A common practice is to define a database view using JSON\_TABLE. Then you can describe and query the view like a relational table. Fast refreshable materialized views are possible with JSON\_Table but not covered in this lab.
+3. A common practice is to define a database view using JSON\_TABLE. Then you can describe and query the view like a relational table. Fast refreshable materialized views are possible with JSON\_Table but not covered in this lab.
 
     For example, create view movie_view as:
 
@@ -323,7 +323,7 @@ Besides replacing an old JSON document with a new one there are two operators wh
 
 JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386](https://datatracker.ietf.org/doc/html/rfc7386). It lets you update a JSON instance with a so-called 'patch' which is a JSON document. The simplest way to think about this is that you merge the patch into the JSON instance.
 
-1.  Let's look at an example. Run this query:
+1. Let's look at an example. Run this query:
 
     ```
     <copy>
@@ -334,7 +334,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
     ```
     ![JSON merge patch - initial query](./images/json-mergepatch.png " ")
 
-2.  There are some actors missing, let's use mergepatch to update the cast array.
+2. There are some actors missing, let's use mergepatch to update the cast array.
 
     ```
     <copy>
@@ -345,7 +345,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
     ```
     ![JSON merge patch update](./images/json-mergepatch-update.png " ")
 
-3.  Run the select query again to see the effect of the change: the cast was updated, and a note got added.
+3. Run the select query again to see the effect of the change: the cast was updated, and a note got added.
 
     ```
     <copy>
@@ -366,7 +366,7 @@ JSON_Mergepatch follows RFC 7386 [https://datatracker.ietf.org/doc/html/rfc7386]
 JSON\_Transform, like the other SQL/JSON operators, relies on path expressions to define the values to be modified. A JSON\_Transform operation consists of one or more modifying operations that are executed in the same sequence as they're defined. Let's explain this with the following example:
 
 
-1.  We want to add a new field (duration), calculate a new price (10% higher) and append a new actor to the array.
+1. We want to add a new field (duration), calculate a new price (10% higher) and append a new actor to the array.
 
     ```
     <copy>
@@ -394,7 +394,7 @@ JSON\_Transform, like the other SQL/JSON operators, relies on path expressions t
 
 Irrespective of whether data is stored relationally or as JSON document, you can switch between relational and JSON format at runtime. Here are some examples:
 
-1.  Let's use the movie_view we created earlier. We can use `json_object` to form our table as a JSON object.
+1. Let's use the movie_view we created earlier. We can use `json_object` to form our table as a JSON object.
 
     ```
     <copy>
@@ -413,7 +413,7 @@ Irrespective of whether data is stored relationally or as JSON document, you can
     ```
     ![JSON object - convert each row to JSON](./images/json-objectagg.png " ")
 
-3.  We can also use `json_array` to extract multiple columns as array per record.
+3. We can also use `json_array` to extract multiple columns as array per record.
 
     ```
     <copy>
@@ -437,7 +437,7 @@ Now that's only one part of the story: there is way more to the duality between 
 
 Often, you do not know all the fields that occur in a collection of JSON data, especially if it is from a third party. JSON\_Dataguide lets you retrieve a JSON schema for this data. It tells you all occurring field names, their data types and the paths to access them. It can even automate the generation of a JSON\_Table-based view.
 
-1.  Let's assume for a second that we do not know anything about the JSON data in the *movies* collection.
+1. Let's assume for a second that we do not know anything about the JSON data in the *movies* collection.
 
     ```
     <copy>
@@ -468,7 +468,7 @@ Often, you do not know all the fields that occur in a collection of JSON data, e
 
     ```
 
-2.  Now we can use a simple PL/SQL procedure DBMS\_JSON.create\_view to automatically create a relational view over the JSON data. The JSON Dataguide provides all information for the columns like their name, data type and the JSON path expression to extract the corresponding values.
+2. Now we can use a simple PL/SQL procedure DBMS\_JSON.create\_view to automatically create a relational view over the JSON data. The JSON Dataguide provides all information for the columns like their name, data type and the JSON path expression to extract the corresponding values.
 
     ```
     <copy>

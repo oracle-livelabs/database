@@ -19,6 +19,11 @@ This lab assumes you have:
 - An Oracle account
 
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Prepare the Workspace
 
 1. **Return to the terminal and connect to the database.**

@@ -21,19 +21,19 @@ features like rate limiting or authentication to protect your application.
 You find the **API Gateway** in the menu unter **Developer Services** right
 below **Functions** we visited before.
 
-  ![](images/apigw_menu.png " ")
+  ![Image](images/apigw_menu.png " ")
 
 Our Setup already created a Gateway called **DemoApp**. Click on it. A single
 Gateway can contain multiple Deployments. To find the Deployment the setup
 generated click on **Deployments** in the Resources menu on the left and
 click on the deployment *apideployment2020....*.
 
-  ![](images/apigw_overview.png " ")
+  ![Image](images/apigw_overview.png " ")
 
 **Note: If `DemoApp` is not listed make sure that the `node-mysql` compartment is
 selected in the box on the left!**
 
-  ![](images/apigw_details.png " ")
+  ![Image](images/apigw_details.png " ")
 
 A Deployment is a set of routes from the frontend to a backend service.
 Your Deployment's public Endpoint URL can be found on the Deployment page top
@@ -44,9 +44,9 @@ right.
 In this deployment we have a pre-configured route. To see it click **Edit** and
 then **Routes** on the left.
 
-  ![](images/apigw_edit.png " ")
+  ![Image](images/apigw_edit.png " ")
 
-  ![](images/apigw_route.png " ")
+  ![Image](images/apigw_route.png " ")
 
 In there the path `/` is being forwarded to a file in the object storage. This
 is what the `htmlpages` *Bucket* is for we saw while exploring the Object Store
@@ -173,14 +173,14 @@ For calling our Function the **Type** is **Oracle Functions**, the **Application
 is **DemoApp** and the **Function** is **peopleService**, the service fucntion
 we built and deployed above.
 
-  ![](images/apigw_route2.png " ")
+  ![Image](images/apigw_route2.png " ")
 
 In order to set our extra **headers** click on **Show Route Request Policies**.
 Be sure to pick **Request** and not Response.
 
 A new panel will appear. Under **Header Transformations** click **Add**.
 
-  ![](images/apigw_route2_header1.png " ")
+  ![Image](images/apigw_route2_header1.png " ")
 
 On the side an overlay will appear. In there pick the **Action** value **Set**
 in order to set a header in the function request, for **Behavior** pick **Overwrite**.
@@ -193,20 +193,20 @@ route's path we declared before.
 
 Then click **+Another Transform** and repeat this for the **X-Mode** header and value **state**.
 
-  ![](images/apigw_route2_header2.png " ")
+  ![Image](images/apigw_route2_header2.png " ")
 
 After clicking **Apply Changes** the panel in the main view updates.
 
-  ![](images/apigw_route2_header3.png " ")
+  ![Image](images/apigw_route2_header3.png " ")
 
 Click **Next** to continue with the Wizard. On the following screen you can verify the route configuration.
 
-  ![](images/apigw_route2_complete.png " ")
+  ![Image](images/apigw_route2_complete.png " ")
 
 After clicking **Save Changes** you will be sent back to the Deployment Overview page and the changes
 will be applied to the Gateway servers. Notifications on top right will notify you about the state.
 
-  ![](images/apigw_route2_confirm.png " ")
+  ![Image](images/apigw_route2_confirm.png " ")
 
 Once the configuration is through you can retrieve the employee list from your browser by adding the
 route's path and state abbreviation to your endpoint's URL. Something like
@@ -294,7 +294,7 @@ You can find the complete code in the `step4/peopleService` directory and apply 
 Again we have to add a route, just as before. This time for the **Path** `/income/{salary}`,
 setting **X-Mode** to `salary` and **X-Value** to `${request.path[salary]}`.
 
-  ![](images/apigw_route3.png " ")
+  ![Image](images/apigw_route3.png " ")
 
 After applying this the search by salary should work and it's time to raise salaries.
 
@@ -356,7 +356,7 @@ Request Header Transformations:
 | Overwrite | X-Id        | `${request.path[id]}` |
 
 
-  ![](images/apigw_route4.png " ")
+  ![Image](images/apigw_route4.png " ")
 
 If all worked well, there shouldn't be a problem in happily raising salaries!
 

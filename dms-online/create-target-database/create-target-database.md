@@ -29,7 +29,7 @@ The following tasks are *optional* if a target autonomous database is already pr
 
 2. Navigate to the **Security** tab , ick **Network Security Groups**, click on **Create Network Security Group**
 
-  ![create network security group](images/create-network-security-group.png =50%x*)
+    ![create network security group](images/create-network-security-group.png =50%x*)
 
 4. Enter Name such as **DMS\_NSG** 
 
@@ -45,7 +45,7 @@ The following tasks are *optional* if a target autonomous database is already pr
 
 1. Now you can create the ADB instance. In the OCI Console Menu, go to **Oracle Database > Autonomous Database**.
 
-  ![Oracle autnomous database navigation menu](images/odb-to-atp.png =50%x*)
+    ![Oracle autnomous database navigation menu](images/odb-to-atp.png =50%x*)
 
 2. Pick a compartment in the applied filters **Compartment** list.
 

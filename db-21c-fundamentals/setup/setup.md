@@ -60,7 +60,7 @@ In this lab, you will:
 
     ```
     [opc@tmdb1 ~]$ <copy>sudo su - oracle</copy>
-  	```
+    	```
 
 5. The first step is to get all of the scripts needed to do this lab.
 
@@ -71,7 +71,7 @@ In this lab, you will:
     </copy>
     ```
 
-6.  Unzip Cloud\_21c\_Labs.zip
+6. Unzip Cloud\_21c\_Labs.zip
 
     ```
     <copy>
@@ -133,18 +133,18 @@ In this lab, you will:
 4. Ensure that the TNS alias have been created for `CDB21`, `PDB21` and `PDB21_2` in the tnsnames.ora file. If they are not there then you will need to add them. The file is located in `/u01/app/oracle/homes/OraDB21Home1/network/admin/tnsnames.ora`.
 
     ```
-	  <copy>
-	  cat /u01/app/oracle/homes/OraDB21Home1/network/admin/tnsnames.ora
-	  </copy>
-	  ```
+    	  <copy>
+    	  cat /u01/app/oracle/homes/OraDB21Home1/network/admin/tnsnames.ora
+    	  </copy>
+    	  ```
 
 5. Then entry for `CDB21` should have been created when the database was created. So for `PDB21` just copy the entry for `CDB21` and change the value `CDB21` to `PDB21` in both places. Repeat this for `PDB21_2`.
 
     ```
-	  <copy>
-	  vi /u01/app/oracle/homes/OraDB21Home1/network/admin/tnsnames.ora
-	  </copy>
-	  ```
+    	  <copy>
+    	  vi /u01/app/oracle/homes/OraDB21Home1/network/admin/tnsnames.ora
+    	  </copy>
+    	  ```
 
 6. There will be more in your tnsnames.ora but the for the three entries we care about should look like the entries below but with your hostname instead.
 
@@ -180,18 +180,18 @@ In this lab, you will:
 7. Test the connection to CDB21.  Connect to CDB21 with SQL*Plus using the password **WElcome123##**.
 
     ```
-	  <copy>
-	  sqlplus sys@cdb21 AS SYSDBA
-	  </copy>
-	  ```
+    	  <copy>
+    	  sqlplus sys@cdb21 AS SYSDBA
+    	  </copy>
+    	  ```
 
 8. Verify that the container name is **CDB$ROOT**.
 
     ```
     <copy>
-	  SHOW CON_NAME;
-	  </copy>
-	  ```
+    	  SHOW CON_NAME;
+    	  </copy>
+    	  ```
 
 9. Test the connection to PDB21 using the same password used in the earlier step.
 
@@ -201,7 +201,7 @@ In this lab, you will:
     </copy>
     ```
 
-10.  Show the container name. It should now display **PDB21**.
+10. Show the container name. It should now display **PDB21**.
 
     ```
     <copy>

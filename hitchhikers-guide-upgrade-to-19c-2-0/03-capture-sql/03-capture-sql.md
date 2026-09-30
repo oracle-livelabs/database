@@ -34,7 +34,7 @@ Capture workload information from the workload you generated in lab 2. This time
     </copy>
     ```
 
-2.  Run the capture script:
+2. Run the capture script:
 
     ```
     <copy>

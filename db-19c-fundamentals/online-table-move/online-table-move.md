@@ -23,16 +23,16 @@ In this lab, you will:
 ## Task 1: Alter Table Move
 1. **If you already have SQL Developer Web up and are logged in as the NF19C user on the SQL tile, skip to step 4.** If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. 
  
-  ![locate adb](./images/oci-navigation-adw.png " ")
+    ![locate adb](./images/oci-navigation-adw.png " ")
  
 2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
-   ![db actions](./images/database-actions.png " ")
+    ![db actions](./images/database-actions.png " ")
    
 3. Log into Database Actions as the NF19C user. Use the picture below to navigate to the SQL editor
-	![JSON Database Actions](./images/db-actions-logout.png)
-	![JSON Database Actions](./images/login-db.png)
-	![JSON Database Actions](./images/new-sql.png)
+    	![JSON Database Actions](./images/db-actions-logout.png)
+    	![JSON Database Actions](./images/login-db.png)
+    	![JSON Database Actions](./images/new-sql.png)
 
 4. Let's start by creating a table and moving it offline to get a feel for how a table move works.
 
@@ -105,7 +105,7 @@ In this lab, you will:
 1. To move our table and automatically maintain its indexes, we'll use the ONLINE keyword. This avoids the need to rebuild the indexes manually. To execute this command, you can click the Run Script button or press (F5). Once the operation is complete, you'll notice that the indexes are still intact. 
 
     ```
-   <copy>
+    <copy>
     ALTER TABLE STORE_LOCATIONS MOVE ONLINE;
     SELECT index_name, status FROM user_indexes where index_name = 'LOCATION_INDEX' OR index_name = 'LOCATION_PK';
     </copy>
@@ -124,8 +124,8 @@ In this lab, you will:
 
 3. Now we can move our table with compression. Use the Run Script button or press (F5) to execute the commands.
 
-   ```
-   <copy>
+    ```
+    <copy>
     ALTER TABLE STORE_LOCATIONS MOVE ONLINE COMPRESS;
     SELECT compression FROM user_tables WHERE table_name = 'STORE_LOCATIONS';
     </copy>

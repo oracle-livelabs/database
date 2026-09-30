@@ -38,7 +38,7 @@ In this workshop, we have made use of Docker as an example. The Docker daemon mu
 
 1. Choose **Extensions** and install the **Container Tools** extension.
 
-  ![Install Container Tools Extension](images/install-container.png)
+    ![Install Container Tools Extension](images/install-container.png)
 
 2. You can view the KVLite instance, which you just started, under **Containers**. To see the log details, right-click on the container and choose **View Logs**.
 

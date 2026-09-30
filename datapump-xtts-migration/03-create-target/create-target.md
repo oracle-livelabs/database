@@ -332,3 +332,8 @@ Oracle recommends migrating to the same database character set. In some situatio
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, August 2024
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

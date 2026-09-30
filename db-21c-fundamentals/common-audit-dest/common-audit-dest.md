@@ -186,11 +186,11 @@ In this lab, you will:
     
     ```
   
-  *Observe that the `UNIFIED_AUDIT_COMMON_SYSTEMLOG` is a CDB level init.ora parameter.*
+    *Observe that the `UNIFIED_AUDIT_COMMON_SYSTEMLOG` is a CDB level init.ora parameter.*
   
   
 
-3.  Restart the database instance because the initialization parameter `UNIFIED_AUDIT_COMMON_SYSTEMLOG` has been set at the `SPFILE` scope. Execute the `/home/oracle/labs/M104781GC10/wallet.sh` to restart the instance and also open the wallet.
+3. Restart the database instance because the initialization parameter `UNIFIED_AUDIT_COMMON_SYSTEMLOG` has been set at the `SPFILE` scope. Execute the `/home/oracle/labs/M104781GC10/wallet.sh` to restart the instance and also open the wallet.
 
   
     ```   
@@ -314,11 +314,11 @@ In this lab, you will:
     
     ```
     
-  *If you query the view `AUDIT_ACTIONS`, you observe that the `ACTION` number 1 is `CREATE TABLE`.*
+    *If you query the view `AUDIT_ACTIONS`, you observe that the `ACTION` number 1 is `CREATE TABLE`.*
   
-  *If you query the view `V$CONTAINERS`, you observe that the `GUID` value corresponds to the CDB root.*
+    *If you query the view `V$CONTAINERS`, you observe that the `GUID` value corresponds to the CDB root.*
   
-  *The single entry corresponds to the `CREATE TABLE` action audited commonly because the `POL_COMMON` audit policy audits all `CREATE TABLE` statements in all containers. The `INSERT` action (`ACTION` number 2 in `AUDIT_ACTIONS` view) is not recorded in this log file because the audit policy that audits `INSERT` statements, `POL_ROOT` is enabled only locally in the CDB root.*
+    *The single entry corresponds to the `CREATE TABLE` action audited commonly because the `POL_COMMON` audit policy audits all `CREATE TABLE` statements in all containers. The `INSERT` action (`ACTION` number 2 in `AUDIT_ACTIONS` view) is not recorded in this log file because the audit policy that audits `INSERT` statements, `POL_ROOT` is enabled only locally in the CDB root.*
   
   
 
@@ -339,9 +339,9 @@ In this lab, you will:
     
     ```
     
-  *The first entry corresponds to the `CREATE TABLE` action audited commonly and thus also locally in the CDB root. The second and third entries correspond to the two `INSERT` actions recorded in this log file because the audit policy `POL_ROOT` that audits `INSERT` statements is enabled locally in the CDB root.*
+    *The first entry corresponds to the `CREATE TABLE` action audited commonly and thus also locally in the CDB root. The second and third entries correspond to the two `INSERT` actions recorded in this log file because the audit policy `POL_ROOT` that audits `INSERT` statements is enabled locally in the CDB root.*
   
-  *If you query the view `V$CONTAINERS`, you observe that the `GUID` value corresponds to `PDB21`.*
+    *If you query the view `V$CONTAINERS`, you observe that the `GUID` value corresponds to `PDB21`.*
   
   
 
@@ -386,7 +386,7 @@ In this lab, you will:
     
     ```
   
-  *The second entry corresponds to the `CREATE TABLE` action audited commonly because the common audit policy `POL_COMMON` audits all `CREATE TABLE` statements in all containers and thus in `PDB21` too. No `INSERT` action is recorded in this log file because the audit policy `POL_ROOT` that audits `INSERT` statements is created only locally in the CDB root and not commonly in all containers.*
+    *The second entry corresponds to the `CREATE TABLE` action audited commonly because the common audit policy `POL_COMMON` audits all `CREATE TABLE` statements in all containers and thus in `PDB21` too. No `INSERT` action is recorded in this log file because the audit policy `POL_ROOT` that audits `INSERT` statements is created only locally in the CDB root and not commonly in all containers.*
   
   
 

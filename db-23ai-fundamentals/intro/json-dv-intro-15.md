@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## About the Workshop
 
 This workshop briefly introduces you to the JSON Duality View feature.

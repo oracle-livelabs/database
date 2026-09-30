@@ -101,7 +101,7 @@ This lab assumes you have:
         PhoneNumber     : phone_number
         CreditCard      : credit_card
     };
-	</copy>
+    	</copy>
     ```
 
 3. The second security benefit comes from the fact we can **HIDE** data. We can create these views however we like. 
@@ -131,7 +131,7 @@ This lab assumes you have:
                 }
             ]
         };
-	</copy>
+    	</copy>
     ```
 
     If you notice, this view doesn’t specify @insert, @update, or @delete on our customers table. You created this view so that you can only update ratings through the `customer_rating_dv` Duality View, and no sensitive customer information (such as customers’ credit card numbers or phone numbers) will be shown. The only way to manage that information is through the `customers_dv` view.
@@ -140,8 +140,8 @@ This lab assumes you have:
 4. Now that the duality view has been created, we can insert data to the relational table or into the duality view. Let's start with adding data directly to the relational tables.
 
 
-	```
-	<copy>
+    	```
+    	<copy>
     INSERT INTO customers (customer_id, first_name, last_name, email, signup_date, has_sub, dob, address, zip, phone_number, credit_card)
     VALUES
     (6, 'David', 'Wilson', 'david.wilson@example.com', SYSDATE, TRUE, TO_DATE('1985-08-15', 'YYYY-MM-DD'), '123 Elm Street', '90210', '555-1234', '4111111111111111');
@@ -150,48 +150,48 @@ This lab assumes you have:
     VALUES
     (6, 6, 1, 5, SYSDATE, 'V.1');
 
-	</copy>
+    	</copy>
     ```
 
 5. Let's now insert data into the duality view of our customer data.
 
-	```
-	<copy>
+    	```
+    	<copy>
     INSERT INTO customers_dv values ('{"_id": 7, "FirstName": "Jim", "LastName":"Brown", "Email": "jim.brown@example.com", "Address": "456 Maple Street", "Zip": 12345}');
 
     commit;
-	</copy>
+    	</copy>
     ```
 
 5. This Duality View will show us the customers.
 
-	```
-	<copy>
+    	```
+    	<copy>
     select json_serialize(data PRETTY) from customers_dv;
-	</copy>
+    	</copy>
     ```
     This Duality View will show us the same customers - some with ratings, some without
 
-	```
-	<copy>
+    	```
+    	<copy>
     select json_serialize(data PRETTY) from customer_rating_dv;
-	</copy>
+    	</copy>
     ```
  
     We can see the same in relational.
 
-	```
-	<copy>
+    	```
+    	<copy>
     select * from customers;
     select * from ratings;
-	</copy>
+    	</copy>
     ```
 
 7. Now, when we created the `customer_rating_dv` Duality View, we specified @insert, @update, @delete operations were allowed for our ratings. Let's update a rating through our Duality View.
 
 
-	```
-	<copy>
+    	```
+    	<copy>
     UPDATE customer_rating_dv c
     SET c.data = json_transform(
         data,
@@ -206,14 +206,14 @@ This lab assumes you have:
 
 
 
- 8. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_rating_dv` Duality View (or allow for sensitive customer information in the document). 
+    8. We talked about the security benefit of the Duality Views earlier. We didn't allow for updates to our customers through the `customer_rating_dv` Duality View (or allow for sensitive customer information in the document). 
  
     Let's take a look at how an update will fail if we try and update customer information through the `customer_rating_dv` document. 
 
     Try and change the name of Jim's last name from Brown to Browne.
 
-	```
-	<copy>
+    	```
+    	<copy>
     UPDATE customer_rating_dv c
     SET c.data = json_transform(
         data,
@@ -230,8 +230,8 @@ This lab assumes you have:
     We can insert some ratings into our Jim Brown customer using `mergepath`.
 
 
-	```
-	<copy>
+    	```
+    	<copy>
     update customer_rating_dv r set data = json_mergepatch(data,'{"ratings" : 
     [
         {
@@ -262,8 +262,8 @@ This lab assumes you have:
     ```
 
 10. Let's imagine we've been tasked with updating the content policy for our ratings. Let's say all ratings with policy of V.1, need to be updated to the current rating policy of V.2.
-	```
-	<copy>
+    	```
+    	<copy>
     select json_serialize(data PRETTY) from customer_rating_dv
     </copy>
     ```
@@ -271,8 +271,8 @@ This lab assumes you have:
 
 11. If we were to do this in JSON, we would need to check every document for a rating that had the policy version 1. With JSON Duality Views, we can easily update the ratings table and this will update all documents with nested ratings that have a policy of V.1.
 
-	```
-	<copy>
+    	```
+    	<copy>
     UPDATE ratings
     SET content_policy = 'V.2'
     WHERE content_policy = 'V.1';
@@ -283,8 +283,8 @@ This lab assumes you have:
 
     We can take a look at all the customer ratings through the Duality View.
 
-	```
-	<copy>
+    	```
+    	<copy>
     SELECT json_serialize(data PRETTY) FROM customer_rating_dv;
     </copy>
     ```
@@ -316,7 +316,7 @@ This lab assumes you have:
 
 5. Here we will use the SQL Developer Web URL to obtain your ADB instance base URL:
 
-	```
+    	```
     ADB_LL_URL = https://xxxxxxxxxx.adb.<region>.oraclecloudapps.com
     ```
 
@@ -330,16 +330,16 @@ This lab assumes you have:
 
 6. Now, create a variable in your terminal (It shouldn't have / at the end.)
 
-	```
-	<copy>
+    	```
+    	<copy>
     export ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
     </copy>
     ```
 
 7. Check it was set.
 
-	```
-	<copy>
+    	```
+    	<copy>
     echo $ADB_LL_URL
     </copy>
     ```
@@ -347,8 +347,8 @@ This lab assumes you have:
 
 8. Make a GET request from your laptop terminal command line.
 
-	```
-	<copy>
+    	```
+    	<copy>
     curl -X GET $ADB_LL_URL/ords/db23ai/customers_dv/ | json_pp
 
     </copy>

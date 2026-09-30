@@ -62,7 +62,7 @@ In this lab, you will:
 
     ![Click Create Autonomous Database.](./images/create-adb.png " ")
 
-2.  This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
+2. This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
 
 3. Provide basic information for the autonomous database:
 
@@ -148,7 +148,7 @@ In this lab, you will:
 
     ![Click Create Autonomous Database.](./images/create-adb-final.png " ")
 
-10.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous JSON database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
+10. Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous JSON database is ready to use! Have a look at your instance's details here including the Database Name, Database Version, OCPU Count, and Storage.
 
     ![Database instance homepage.](./images/provisioning.png " ")
 

@@ -40,10 +40,10 @@ Oracle Cloud Infrastructure (OCI) Virtual Cloud Networks (VCNs) provide customiz
 To create a VCN, click the **Navigation Menu** in the upper left, navigate to **Networking**, and select **Start VCN Wizard** under **Virtual Cloud Networks**.
 
 1. Select the option **Create VCN with Internet Connectivity**
-	![vcn1](images/vcn1.png)
-	
+    	![vcn1](images/vcn1.png)
+    	
 2. Specify Basic Information for your VCN
-	![vcn1](images/vcn2.png)
+    	![vcn1](images/vcn2.png)
 
     - Specify the Name of the VCN
     - Select the same Compartment for your VCN creation, that was created in the previous step
@@ -55,11 +55,11 @@ To create a VCN, click the **Navigation Menu** in the upper left, navigate to **
     
 
 3. Review and Validate the VCN Information and hit **Create**
-	![vcn1](images/vcn3.png)
+    	![vcn1](images/vcn3.png)
 
 4. VCN provisioning is completed
 
-	![vcn1](images/vcn4.png)
+    	![vcn1](images/vcn4.png)
 
 
 5. After Successful creation of a VCN, the following VCN / Subnets will be provisioned
@@ -89,33 +89,33 @@ If you already have an SSH key pair, you may use that to connect to your environ
 
 1. **Generate SSH Keys on MacOS**
 
-The ssh keys on MacOS can be created using the **Terminal** application. If you don't already have a shortcut to the terminal application for MacOS, you can find it in the **Applications > Utilities** menu or (Shift+Command+U) on your keyboard.
+    The ssh keys on MacOS can be created using the **Terminal** application. If you don't already have a shortcut to the terminal application for MacOS, you can find it in the **Applications > Utilities** menu or (Shift+Command+U) on your keyboard.
 
-  ```
-  <copy>ssh-keygen -t rsa</copy>
-  Generating public/private rsa key pair.
-  Enter file in which to save the key (/Users/demo/.ssh/id_rsa):
-  Enter passphrase (empty for no passphrase):
-  Enter same passphrase again:
-  Your identification has been saved in /Users/demo/.ssh/id_rsa
-  Your public key has been saved in /Users/demo/.ssh/id_rsa.pub
-  The key fingerprint is:
-  SHA256:3UYprkLRvQI/QdKyOoeghc/ow/fx0S2noUBnFvzJeLk demo@demo-mac
-  The key's randomart image is:
-  +---[RSA 3072]----+
-  |      ...        |
-  |      o+..   .   |
-  | .    o=o o o    |
-  |. o   .+=+o=     |
-  | * . +.=S*+ o    |
-  |o o =.= o+o.     |
-  |o    =...E o     |
-  | + .  +.o =      |
-  |  o .. o .       |
-  +----[SHA256]-----+
-```
+    ```
+    <copy>ssh-keygen -t rsa</copy>
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/Users/demo/.ssh/id_rsa):
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    Your identification has been saved in /Users/demo/.ssh/id_rsa
+    Your public key has been saved in /Users/demo/.ssh/id_rsa.pub
+    The key fingerprint is:
+    SHA256:3UYprkLRvQI/QdKyOoeghc/ow/fx0S2noUBnFvzJeLk demo@demo-mac
+    The key's randomart image is:
+    +---[RSA 3072]----+
+    |      ...        |
+    |      o+..   .   |
+    | .    o=o o o    |
+    |. o   .+=+o=     |
+    | * . +.=S*+ o    |
+    |o o =.= o+o.     |
+    |o    =...E o     |
+    | + .  +.o =      |
+    |  o .. o .       |
+    +----[SHA256]-----+
+    ```
 
-The command above creates two files under the .ssh folder in the Home directory of the user, a *private key:* ```id_rsa``` and a *public key:* ```id_rsa.pub```. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
+    The command above creates two files under the .ssh folder in the Home directory of the user, a *private key:* ```id_rsa``` and a *public key:* ```id_rsa.pub```. Keep the private key safe and don't share its content with anyone. The public key will be needed for various activities and can be uploaded to certain systems as well as copied and pasted to facilitate secure communications in the cloud.
 
 2. **Generate SSH Keys on Windows**
 
@@ -143,18 +143,18 @@ The command above creates two files under the .ssh folder in the Home directory 
 
 
 
-![compute](images/compute1.png)
+    ![compute](images/compute1.png)
 
 5. Specify the **VCN** and the *public* **Subnet Name**
 6. Make sure to **Assign a Public IPV4 address** to the compute instance. We will use this Public IP to login to to the compute instance
 7. In the **Add SSH keys**, select **Upload Public Key** and specify your public ssh key
 
 
-![compute](images/compute2.png)
+    ![compute](images/compute2.png)
 
 8. Default options for **Boot Volume** should suffice for this Lab. No Change is required. Then click create
 
-![compute](images/compute3.png)
+    ![compute](images/compute3.png)
 
 9. The compute instance will be provisioned shortly
 
@@ -169,7 +169,7 @@ Click the **Navigation Menu** in the upper left, navigate to **Compute**, select
 
 1. Copy the **Public IP** of the Instance, Also, the default user is always *opc* for Oracle Linux images
 
-![compute](images/connect.png)
+    ![compute](images/connect.png)
 
 
 
@@ -193,24 +193,24 @@ Click the **Navigation Menu** in the upper left, navigate to **Compute**, select
 Putty can be used to connect to Linux machines from Windows machines. However, the private ssh key created earlier needs to be converted from a **PEM** format to a **PPK** format before connecting to the instance. Use the steps below to do the conversion of the key before attempting to log in. Ensure to download the [Putty Installer](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) before attempting to perform the key conversion. 
 
 1. On the Windows machine, click on **Start Menu**> **All Programs** > **PuTTY** > **PuTTYgen**.
-![puttygen1](images/puttygen1.png)
+    ![puttygen1](images/puttygen1.png)
 
 2. Click the **Load** button and select the private key *id_rsa*, generated earlier
-![puttygen1](images/puttygen2.png)
+    ![puttygen1](images/puttygen2.png)
 
 3. Click the **Save private key** and save the file with the same name with **ppk** extension
-![puttygen1](images/puttygen3.png)
+    ![puttygen1](images/puttygen3.png)
 
-Once the private key is saved in the ppk format, Putty can be used to connect to the compute instance
+    Once the private key is saved in the ppk format, Putty can be used to connect to the compute instance
 
 4. Open Putty, and input the username and the host IP address
-![puttygen1](images/putty1.png)
+    ![puttygen1](images/putty1.png)
 
 5. Next, in the left hand panel locate the **Connection > SSH > Auth** configuration tab. Specify the location of the Private Key File (converted earlier to ppk format) and hit **Open** button
-![puttygen1](images/putty2.png)
+    ![puttygen1](images/putty2.png)
 
 6. *Accept* the **PuTTy Security Alert**
-![puttygen1](images/putty3.png)
+    ![puttygen1](images/putty3.png)
 
 7. Successful connection is established with the instance
 ![puttygen1](images/putty4.png)
@@ -223,13 +223,13 @@ One of the requirement for GitLab configuration is to use *https* protocol for s
 If you are using an external DNS management service, then configure the Public IP address of the GitLab server to the desired domain. For the purpose of this LiveLab, I will use OCI's DNS Management service to create the DNS entry for the GitLab server. The domain name is already registered with an external registrar, and the nameservers are configured to point to Oracle Cloud Infrastructure's Nameservers. 
 
 1. In the Console, open the navigation menu and click **Networking**. Under **DNS Management**, click **Zones** and create a new **Public Zone**.
-* The domain name registered for this lab is cloudlab.site. Select the Zone Type as Primary from the drop-down list.
+    * The domain name registered for this lab is cloudlab.site. Select the Zone Type as Primary from the drop-down list.
 
-![DNS Management](images/dns1.png)
+    ![DNS Management](images/dns1.png)
 
 2. Add a new **A** record, pointing the Public IP address to the desired Name.
 
-![DNS Management](images/dns2.png)
+    ![DNS Management](images/dns2.png)
 
 3. Verify that the domain name to IP address mapping is resolving correctly, before proceeding.
 

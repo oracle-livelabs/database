@@ -15,6 +15,11 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 - Access to Oracle AI Database 26ai environment.
 - Basic understanding of SQL.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Enabling SQL Firewall
 
 1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
@@ -228,7 +233,7 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
     ```
     ![generate allow list](images/im14.png " ")
 
-4.  Now we can enable SQL firewall so only SQL from our allow list can hit the database. 
+4. Now we can enable SQL firewall so only SQL from our allow list can hit the database. 
 
     ```
     <copy>

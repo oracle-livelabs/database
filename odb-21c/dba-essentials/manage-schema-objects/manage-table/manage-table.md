@@ -30,6 +30,11 @@ This lab assumes you have-
 -   *HR* schema enabled to access Database Actions
 -   Logged in to Oracle Database Actions in a web browser as *HR*
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: View an existing table using Oracle Database Actions
 
 From Oracle Database Actions, you can view existing tables in your Autonomous Database.
@@ -38,21 +43,21 @@ From Oracle Database Actions, you can view existing tables in your Autonomous Da
 
 2. Click the **SQL** card under Development. This opens the SQL page in Database Actions.
 
-   ![SQL Card](./images/sql-card.png " ")
+    ![SQL Card](./images/sql-card.png " ")
 
-   > **Note:** If this is your first time accessing the SQL Worksheet, click the binocular icon to access hopscotch tour. Click the X in the tour popup window to quit the tour.
+    > **Note:** If this is your first time accessing the SQL Worksheet, click the binocular icon to access hopscotch tour. Click the X in the tour popup window to quit the tour.
 
 3. From the **Navigator** tab, select **HR** schema from the drop-down and select **Tables** from the Object type drop-down list.
 
-   ![Table list](./images/table-list.png " ")
+    ![Table list](./images/table-list.png " ")
 
-   The navigator pane displays the list of tables of the selected schema HR.
+    The navigator pane displays the list of tables of the selected schema HR.
 
 4. Right click on one of the tables, for example, *COUNTRIES* and select **OPEN**.
 
-   ![Open Table](./images/open-table.png " ")
+    ![Open Table](./images/open-table.png " ")
 
-  This option opens a window that displays the properties of the selected table. The properties window displays information for the following properties of the table:
+    This option opens a window that displays the properties of the selected table. The properties window displays information for the following properties of the table:
 
       - the Columns
       - the Data
@@ -65,11 +70,11 @@ From Oracle Database Actions, you can view existing tables in your Autonomous Da
       - the Partitions
       - the Indexes
 
-   ![Table properties](./images/properties-table.png " ")
+    ![Table properties](./images/properties-table.png " ")
 
 5. Select the Columns tab from the properties window to view the column names and their definitions.
 
-   ![Columns tab](./images/columns-tab.png " ")
+    ![Columns tab](./images/columns-tab.png " ")
 
 6. Select the Data tab from the properties window to view the data stored in COUNTRIES. The Data tab displays the rows stored in the COUNTRIES table.
 
@@ -83,7 +88,7 @@ You can create a new table and insert data in your Oracle Database using the SQL
 
 1. Click the **Clear** icon in the SQL Toolbar to remove the statements from the editor if they exist.
 
-   ![Clear Icon](./images/clear-icon.png " ")
+    ![Clear Icon](./images/clear-icon.png " ")
 
 2. Copy and paste the following SQL statements in the editor.
 
@@ -109,9 +114,9 @@ You can create a new table and insert data in your Oracle Database using the SQL
 
 3. Select **Run Script** icon to run the script.
 
-   ![Run Script](./images/run-script.png " ")
+    ![Run Script](./images/run-script.png " ")
 
-   The SQL statements above creates a new table named *account* and adds values into it.
+    The SQL statements above creates a new table named *account* and adds values into it.
 
 4. Specify the following values in the Navigator tab to view the table list.
 
@@ -130,20 +135,20 @@ You can load data from a file to an existing table named *account*.
 
 2. Click **Data Loading** and select **Upload Data**.
 
-   ![ALT text is not available for this image](./images/upload-data.png " ")
+    ![ALT text is not available for this image](./images/upload-data.png " ")
 
-   An Upload Data into HR.ACCOUNT dialog box appears.
+    An Upload Data into HR.ACCOUNT dialog box appears.
 
 3. Drag and drop the file that contains data, which you want to load into the table. You can also click **Add Files** to browse for the file in your system and upload it. 
 
-  ![ALT text is not available for this image](images/add-files.png " ")
+    ![ALT text is not available for this image](images/add-files.png " ")
 
-   > **Note:** The file formats that you can load are CSV, XLS, XLSX, TSV, TXT, XML, JSON, and AVRO.
-   After the file uploads, you can preview the file in the Data preview tab of the **Upload Data into HR.ACCOUNT** dialog box.
+    > **Note:** The file formats that you can load are CSV, XLS, XLSX, TSV, TXT, XML, JSON, and AVRO.
+    After the file uploads, you can preview the file in the Data preview tab of the **Upload Data into HR.ACCOUNT** dialog box.
 
 4. Click the **Show/hide options** icon to view and modify the following options for the data preview
 
-   ![Data Preview](./images/data-preview.png " ")
+    ![Data Preview](./images/data-preview.png " ")
 
     - **Column names:** Select **Get from file** to display column headers in the first row.
 
@@ -157,7 +162,7 @@ You can load data from a file to an existing table named *account*.
 
     - Select **Limit rows to upload** checkbox to specify the number of rows to load.
 
-   ![Details tab](./images/details.png " ")
+    ![Details tab](./images/details.png " ")
 
 5. Click **Next** to progress to the Data mapping tab of the dialog box.
 
@@ -169,11 +174,11 @@ You can load data from a file to an existing table named *account*.
 
     - **Preview:** Use the up and down arrow to select the number of rows you want to preview. For example, *7*. If you select None in the **Match columns by** field, you need to select the Target columns present in the target table ACCOUNT from the drop-down to match the data in the file you uploaded in the previous step. If there are any issues with the data mapping, you will view a notification on the top right of the dialog box.
 
-  ![ALT text is not available for this image](./images/data-mapping.png " ")
+    ![ALT text is not available for this image](./images/data-mapping.png " ")
 
 7. Click **Next**. You can view the Column Mapping data with Source and Target columns in the Review tab.
 
-   ![ALT text is not available for this image](./images/review.png " ")
+    ![ALT text is not available for this image](./images/review.png " ")
 
 8. Select **Finish** to finish uploading data from the csv file into the table. An Uploading Data notification appears.
 

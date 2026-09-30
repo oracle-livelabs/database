@@ -33,21 +33,21 @@ Your options are:
 ## Task 1A: Create Stack:  Compute + Networking
 1. Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*
 2. Log in to Oracle Cloud
-3.  Open up the hamburger menu in the top left corner.  Click **Developer Services**, and choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install the stack. Click **Create Stack**.
+3. Open up the hamburger menu in the top left corner.  Click **Developer Services**, and choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install the stack. Click **Create Stack**.
 
-  ![Select Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+    ![Select Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
-  ![Create Stack](./images/create-stack.png " ")
+    ![Create Stack](./images/create-stack.png " ")
 
-4.  Select **My Configuration**, choose the **.Zip file** button, click the **Browse** link, and select the zip file that you downloaded or drag-n-drop for the file explorer.
+4. Select **My Configuration**, choose the **.Zip file** button, click the **Browse** link, and select the zip file that you downloaded or drag-n-drop for the file explorer.
 
-  ![Select zip file](./images/select-zip.png " ")
+    ![Select zip file](./images/select-zip.png " ")
 
-5.  Click **Next**.
+5. Click **Next**.
 
 6. Enter or select the following:
 
-  ![Enter main configurations](./images/main-config-compute-vnc.png " ")
+    ![Enter main configurations](./images/main-config-compute-vnc.png " ")
 
     - **Instance Count:** Accept the default, **1**, unless you intend to create more than one (e.g. for a team)
     - **Select Availability Domain:** Select an availability domain from the dropdown list.
@@ -83,7 +83,7 @@ Your options are:
 8. Click **Next**.
 9. Select **Run Apply** and click **Create**.
 
-  ![Run Apply](./images/run-apply.png " ")
+    ![Run Apply](./images/run-apply.png " ")
 
 10. Your stack has now been created and the *Apply* action triggered is running to deploy your environment!
 
@@ -96,30 +96,30 @@ If you just completed Task 1A, please proceed to Task 2.  If you have an existin
 
   >**Note:** We recommend letting our stack create the VCN to reduce the potential for errors.
 
-1.  Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*
-2.  Log in to Oracle Cloud
-3.  Open up the hamburger menu in the top left corner.  Click **Developer Services**, and choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install the stack. Click **Create Stack**.
+1. Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*
+2. Log in to Oracle Cloud
+3. Open up the hamburger menu in the top left corner.  Click **Developer Services**, and choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install the stack. Click **Create Stack**.
 
-  ![Select Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+    ![Select Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
-  ![Create Stack](./images/create-stack.png " ")
+    ![Create Stack](./images/create-stack.png " ")
 
 4. Select **My Configuration**, choose the **.Zip file** button, click the **Browse** link, and select the zip file that you downloaded or drag-n-drop for the file explorer.
 
-  ![Choose zip](./images/select-zip.png " ")
+    ![Choose zip](./images/select-zip.png " ")
 
-  Enter the following information:
+    Enter the following information:
     - **Name**:  Enter a name  or keep the prefilled default (*DO NOT ENTER ANY SPECIAL CHARACTERS HERE*, including periods, underscores, exclamation, etc, it will mess up the configuration and you will get an error during the apply process)
     - **Description**:  Same as above
     - **Create in compartment**:  Select the correct compartment if not already selected
 
-  >**Note:** If this is a newly provisioned tenant such as freetier with no user-created compartment, stop here and first create it before proceeding.
+    >**Note:** If this is a newly provisioned tenant such as freetier with no user-created compartment, stop here and first create it before proceeding.
 
 5. Click **Next**.
 
 6. Enter or select the following:
 
-  ![Enter main configurations](./images/main-config-compute.png " ")
+    ![Enter main configurations](./images/main-config-compute.png " ")
 
     - **Instance Count:** Accept the default, **1**, unless you intend to create more than one (e.g. for a team)
     - **Select Availability Domain:** Select an availability domain from the dropdown list.
@@ -153,12 +153,12 @@ If you just completed Task 1A, please proceed to Task 2.  If you have an existin
     - **Use Existing VCN?:** Check to select.
     - **Select Existing VCN:** Select existing VCN with the regional public subnet and required security list.
 
-  >**Note:** For an existing VCN Option to be used successfully, read *Appendix 3* at the bottom of this lab.
+    >**Note:** For an existing VCN Option to be used successfully, read *Appendix 3* at the bottom of this lab.
 
-  ![Use existing VCN](./images/use-exisiting-vcn.png " ")
+    ![Use existing VCN](./images/use-exisiting-vcn.png " ")
 
 9. Select **Run Apply** and click **Create**.
-  ![Click Create](./images/click-create.png " ")
+    ![Click Create](./images/click-create.png " ")
 
 9. Your stack is now created and the *Apply* action triggered is running to deploy your environment!
 
@@ -167,13 +167,13 @@ If you just completed Task 1A, please proceed to Task 2.  If you have an existin
 ## Task 2: Terraform Apply
 In the prior steps, we elected to trigger the *terraform apply action* on stack creation.
 
-1.  Review the job output.
+1. Review the job output.
 
-  ![Job output](./images/apply-job-success.png " ")
+    ![Job output](./images/apply-job-success.png " ")
 
-2.  Congratulations, your environment has been created!  Click the **Application Information** tab to get additional information about what you have just done.
+2. Congratulations, your environment has been created!  Click the **Application Information** tab to get additional information about what you have just done.
 
-3.  Your public IP address(es), instance name(s), and remote desktop URL are displayed.
+3. Your public IP address(es), instance name(s), and remote desktop URL are displayed.
 
 ## Task 3: Access the Graphical Remote Desktop
 For ease of execution of this workshop, your VM instance has been pre-configured with a remote graphical desktop accessible using any modern browser on your laptop or workstation. Proceed as detailed below to log in.
@@ -246,12 +246,12 @@ If you encountered any issues during the lab, follow the steps below to resolve 
 When creating a stack and using an existing VCN, the availability domain and the subnet must match, otherwise the stack errors.
 
 #### Fix for Issue #1
-1.  Click **Stack**-> **Edit Stack** -> **Configure Variables**.
-2.  Scroll down to the network definition.
-3.  Make sure the Availability Domain number matches the subnet number.  E.g. If you choose AD-1, you must also choose subnet #1.
-4.  Click **Next**
-5.  Click **Save Changes**
-6.  Click **Terraform Actions** -> **Apply**
+1. Click **Stack**-> **Edit Stack** -> **Configure Variables**.
+2. Scroll down to the network definition.
+3. Make sure the Availability Domain number matches the subnet number.  E.g. If you choose AD-1, you must also choose subnet #1.
+4. Click **Next**
+5. Click **Save Changes**
+6. Click **Terraform Actions** -> **Apply**
 
 ### **Issue #2:** Flex Shape Not Found
 ![flex shape not found error](./images/flex-shape-error.png  " ")

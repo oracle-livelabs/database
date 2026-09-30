@@ -223,7 +223,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 2. From your Compute instance, connect to HEATWAVE-DB  using the MySQL Shell client tool.
 
-   The endpoint (IP Address) can be found in your notepad or  the HEATWAVE-DB  System Details page, under the "Endpoint" "Private IP Address".
+    The endpoint (IP Address) can be found in your notepad or  the HEATWAVE-DB  System Details page, under the "Endpoint" "Private IP Address".
 
     ![mysql endpoint private ip](./images/mysql-endpoint-private-ip.png "mysql endpoint private ip")
 

@@ -13,6 +13,11 @@ Estimated Lab Time: 10 minutes
 * Lab: 21c Setup
 
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Set the parameters
 
 1. Log in to `CDB1` as `SYSTEM.`
@@ -140,7 +145,7 @@ Estimated Lab Time: 10 minutes
       </copy>
       ```
 
-2.  Display the values for `processes` and `aq_tm_processes`.
+2. Display the values for `processes` and `aq_tm_processes`.
 
       ```
       <copy>sqlplus / as sysdba</copy>
@@ -161,7 +166,7 @@ Estimated Lab Time: 10 minutes
       SQL>
 
       ```
- The minimum value between 40 and 10% of `processes` is now 40 (because 10% of 500 is 50). The expression used for setting the `aq_tm_processes` parameter is kept throughout the database instance restarts.
+    The minimum value between 40 and 10% of `processes` is now 40 (because 10% of 500 is 50). The expression used for setting the `aq_tm_processes` parameter is kept throughout the database instance restarts.
 
 
 

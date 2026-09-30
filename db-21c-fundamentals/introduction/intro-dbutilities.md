@@ -1,5 +1,11 @@
 # Introduction 
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 This section of the workshop highlights enhancements in Oracle Data Pump. Oracle Data Pump has the capacity to resume transportable tablespace export and import jobs. Due to errors, or other problems, you can find that transportable tablespace export or import jobs are stopped. Oracle Data Pump's capacity to resume these stopped jobs helps to save you time, and makes the system more available.
 
 Estimated Workshop Time: 60 minutes

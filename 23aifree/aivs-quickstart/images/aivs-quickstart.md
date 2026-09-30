@@ -2,6 +2,9 @@
 
 ## Introduction
 
+Estimated Time: TODO - x minutes
+
+
 To optimize your workflow while developing workshop content, we highly recommend utilizing VSCode as your preferred editor. Leveraging the power of VSCode you can use the optional tasks below and efficiently edit the Markdown files according to your specific needs. As demonstrated in the previous lab, Task 1 has templates that will provide a solid foundation for you to get started with editing process. By incorporating these recommendations from Task 2 to 15 (optional tasks), you can streamline your content development and enhance productivity.
 
 > **Note:** For a comprehensive workshop development experience, we recommended to utilize the sample workshop folder provided in Task 1, while tasks 2 to 15 are optional.
@@ -52,12 +55,12 @@ To create your lab and workshop content:
 6. Similarly, copy the **workshops** folder along with its contents from **sample-livelabs-templates/sample-workshop** to your project folder.
 
 7. To edit a `.md` file of your lab, you click **File > Open**.
-  ![Open md file](./images/file-open.png " ")
+    ![Open md file](./images/file-open.png " ")
 
 8. Navigate to your project folder and click **Open** to open your project folder.
-  ![Navigate to your project folder.](./images/project-folder.png " ")
+    ![Navigate to your project folder.](./images/project-folder.png " ")
 
-  The project folder along with the labs and **workshops** folder will then be displayed in your text editor.
+    The project folder along with the labs and **workshops** folder will then be displayed in your text editor.
     ![Workshops folder displayed in text editor.](./images/project-folder-displayed.png " ")
 
 9. Select the `.md` file you want to edit, for example, select the `data-load/data-load.md` file and edit your lab content. Similarly, edit the `.md` files of the rest of your labs.
@@ -67,9 +70,9 @@ To create your lab and workshop content:
 
 11. Similarly to edit your workshop content, expand the **workshops/tenancy** (if you are creating a workshop running on users' tenancies), **workshops/sandbox** (if you are creating a sandbox/green button workshop), and/or **workshops/desktop** (if you are creating a noVNC workshop) folder in your text editor. Edit the `manifest.json` to list the labs you have added to your workshop (or plan to add) and update the title of the workshop. The `manifest.json` is like your book map file in SDL.
 
-  Besides the list of labs, also update the `workshoptitle` field, and update the `help` field to point to the workshop's stakeholders group email. If the `include` and `variables` field do not apply to your workshop, please remove them, otherwise, your workshop will not render properly.=
+    Besides the list of labs, also update the `workshoptitle` field, and update the `help` field to point to the workshop's stakeholders group email. If the `include` and `variables` field do not apply to your workshop, please remove them, otherwise, your workshop will not render properly.=
 
-  ![Edit manifest json file](./images/manifest.png " ")
+    ![Edit manifest json file](./images/manifest.png " ")
 
 12. If you want to add an introduction to your workshop, then navigate to **sample-livelabs-templates/sample-workshop** and copy the `introduction` folder to your project folder. You can rename the introduction folder if you would want to.
 
@@ -92,11 +95,11 @@ Leverage LiveLabs [Markdown Cheat Sheet](https://c4u04.objectstorage.us-ashburn-
 ## Task 4: Security
 
 1. Blur all personal information (IP addresses, intranet URLs, email addresses, OCIDs, usernames, and passwords) from images.
-  ![Blur all identifiable information.](./images/blur-ip.png " ")
+    ![Blur all identifiable information.](./images/blur-ip.png " ")
 
 2. Every image must have a description: ![DESC] (…/…/name.png “ “)
 
-  ![Every image must have a description.](./images/image-desc.png " ")
+    ![Every image must have a description.](./images/image-desc.png " ")
 
 3. Do not use any IP addresses, intranet URLs (for example links to a Confluence page), email addresses, OCIDs, usernames, or passwords in the text. Do not provide a demo password.
 
@@ -107,7 +110,7 @@ Rather than pointing to images within your lab folder or workshop directory with
 
 1. Here is an example of what the image code block looks like for pointing to a local image using relative pathing.
 
-  ```![Description](images/image.png " ")```
+    ```![Description](images/image.png " ")```
 
 2. To use an image with an absolute path, just replace the path with an URL. In this case, I am pointing to a common image located in the **oracle-livelabs/common** repository.
 
@@ -117,8 +120,8 @@ Rather than pointing to images within your lab folder or workshop directory with
     </copy>
     ```
 
-  Here is how the image path above shows up in production:
-  ![Description](https://oracle-livelabs.github.io/common/images/console/home-page.png " ")
+    Here is how the image path above shows up in production:
+    ![Description](https://oracle-livelabs.github.io/common/images/console/home-page.png " ")
 
 3. You can find all common images in the [oracle-livelabs/common](https://github.com/oracle-livelabs/common/tree/main/images) GitHub repository. For example, if an image is located in **images/console/home-page.png** in the **common** repository, then the link you should use is https://oracle-livelabs.github.io/common/images/console/home-page.png.
 
@@ -144,7 +147,7 @@ If your workshop supports multiple instance types, but the bulk of the content s
 
 2. You may have noticed that the numbering of the substeps within a step that uses conditional formatting may get out of line. Don't worry, as long as you use a number greater than 0, markdown will automatically number them sequentially when it gets rendered on a webpage. Also, note that conditional formatting can be used in-line if needed, you don't **HAVE TO** envelope content in a neat code block... though it's recommended to keep things organized and easy to read.
 
-  ![Recommended to keep code block organization.](./images/conditional-note.png " ")
+    ![Recommended to keep code block organization.](./images/conditional-note.png " ")
 
 3. **Conditional Formatting Tabs** - Conditional formatting can also be utilized to showcase distinct content based on various programming languages. You can follow the steps below to achieve this objective, by incorporating either a single task or multiple tasks, depending on your specific needs.
 
@@ -177,7 +180,7 @@ If your workshop supports multiple instance types, but the bulk of the content s
 
 2. If you want users to copy this code snippet, you can add the *copy* tag around the code.
 
-  ![Add copy tag for code snippet](./images/code-copy.png " ")
+    ![Add copy tag for code snippet](./images/code-copy.png " ")
 
     ```
     <copy>
@@ -242,15 +245,15 @@ With this new feature, you can now cross out text or words in a paragraph by add
 
 1. Old pattern of making URL clickable required markdown formatting. For example, you need to have this format in markdown to make the links clickable.
 
-  *`Please visit [https://livelabs.oracle.com](https://livelabs.oracle.com)`* or *`Please visit <https://livelabs.oracle.com>`* transforms to Please visit [https://livelabs.oracle.com](https://livelabs.oracle.com)
+    *`Please visit [https://livelabs.oracle.com](https://livelabs.oracle.com)`* or *`Please visit <https://livelabs.oracle.com>`* transforms to Please visit [https://livelabs.oracle.com](https://livelabs.oracle.com)
 
 2. With new pattern, type the URL (including https://) and the engine automatically creates a clickable URL.
 
-  *`Please visit https://livelabs.oracle.com`* transforms to Please visit https://livelabs.oracle.com
+    *`Please visit https://livelabs.oracle.com`* transforms to Please visit https://livelabs.oracle.com
 
-3.  The old formatting still works and is required to achieve the below formatting with alternative text in markdown format.
+3. The old formatting still works and is required to achieve the below formatting with alternative text in markdown format.
 
-  *`Please visit [LiveLabs](https://developer.oracle.com)`* transforms to Please visit [LiveLabs](https://developer.oracle.com).
+    *`Please visit [LiveLabs](https://developer.oracle.com)`* transforms to Please visit [LiveLabs](https://developer.oracle.com).
 
 4. The URLs are opened in a new tab in the browser and the same applies to email addresses as well.
 
@@ -270,11 +273,11 @@ If you have installed the LiveServer extension in your VSCode by following the s
 
 1. In the "workshops" folder of your workshop project, locate either your "tenancy" or "sandbox" folder. Right-click on the index.html file within the chosen folder. From the context menu, select **Open with Live Server**.
 
-  ![open-live-server](./images/open-live-server.png " ")
+    ![open-live-server](./images/open-live-server.png " ")
 
 2. This action will launch a local server, and your default web browser will open, displaying your workshop.
 
-  ![view-in-live-server](./images/view-in-live-server.png " ")
+    ![view-in-live-server](./images/view-in-live-server.png " ")
 
 3. With the workshop now open in your browser, you have the flexibility to modify your files as needed. Save the changes you make to the files. To see the changes reflected in real-time, simply reload the page in your browser and the Live Server ensures that any modifications you make to the files are immediately visible.
 

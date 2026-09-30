@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## Oracle Multitenant
 From the point of view of an application, the pluggable database (PDB) is the database in which applications run unchanged. PDBs can be rapidly provisioned and a pluggable database is a portable database, which makes it easy to move around; perhaps for load balancing or migration to the Cloud.
 
@@ -35,10 +41,10 @@ Please *proceed to the next lab*.
 ## Learn more
 
 - Seven Sources of Savings for Companies with Multitenant
-<a href="https://www.youtube.com/watch?v=beB8_jS7Vh0&list=PLdtXkK5KBY55xRePeQfgTOK6rYScVsMcN">![Seven sources of savings](./images/sevensources.png " ") </a>
+[![Seven sources of savings](./images/sevensources.png " ") ](https://www.youtube.com/watch?v=beB8_jS7Vh0&list=PLdtXkK5KBY55xRePeQfgTOK6rYScVsMcN)
 
 - Oracle Database Product Management Videos on Multitenant
-<a href="https://www.youtube.com/channel/UCr6mzwq_gcdsefQWBI72wIQ/search?query=multitenant">![Product management videos on Multitenant](./images/youtube.png " ") </a>
+[![Product management videos on Multitenant](./images/youtube.png " ") ](https://www.youtube.com/channel/UCr6mzwq_gcdsefQWBI72wIQ/search?query=multitenant)
 
 ## Acknowledgements
 

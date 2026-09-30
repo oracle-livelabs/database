@@ -404,7 +404,7 @@ In this lab, you will:
     SQL>
     ```
 
-  If you want to know how many zone maps were created across all executions, run the following query:
+    If you want to know how many zone maps were created across all executions, run the following query:
 
 
     ```
@@ -545,7 +545,7 @@ In this lab, you will:
 
 ## Task 4: Drop the table
 
-1.  Execute the commands to drop the table.
+1. Execute the commands to drop the table.
 
     ```
     SQL> <copy>DROP TABLE sales_zm PURGE;</copy>

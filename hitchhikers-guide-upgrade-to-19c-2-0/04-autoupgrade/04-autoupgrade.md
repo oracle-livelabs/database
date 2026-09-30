@@ -27,7 +27,7 @@ This lab assumes:
 It is strongly recommended to always use the latest version of AutoUpgrade. To use AutoUpgrade, you must create a config file.
 
 1. Use the yellow terminal. 
-   ![Use the yellow terminal for the following commands](./images/04-yellow-term.png " ")
+    ![Use the yellow terminal for the following commands](./images/04-yellow-term.png " ")
 
 2. Set the environment to the UPGR database and check the AutoUpgrade version.
 
@@ -430,7 +430,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     Notice the *Logfiles* section. This is the location of the relevant log files. Note the *Logs Base* location.
 
 5. Switch to the blue terminal. 
-   ![Use the blue terminal for the following commands](./images/04-blue-term.png " ")
+    ![Use the blue terminal for the following commands](./images/04-blue-term.png " ")
 
 6. Go to the *Logs Base* location.
 
@@ -475,7 +475,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     * Notice that each phase (*preupgrade*, *prefixups*, *drain*, *dbupgrade*, etc.) has its own subdirectory. Explore the subdirectories and log files.
 
 7. Switch back to the yellow terminal.
-   ![Use the yellow terminal for the following commands](./images/04-yellow-term.png " ")
+    ![Use the yellow terminal for the following commands](./images/04-yellow-term.png " ")
 
 8. You are still connected to the AutoUpgrade console. Monitor the upgrade using the `status` command. The `-a` parameter instructs AutoUpgrade upgrade to refresh the information at a given interval.
 
@@ -533,7 +533,7 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
 
 10. The following video shows an upgrade to Oracle Database 23ai including conversion to the mulitenant architecture.
 
-   [23aipreview](videohub:1_n5cyl2xg:large)
+    [23aipreview](videohub:1_n5cyl2xg:large)
 
 11. Optionally, you can move to lab 10 *Full Transportable Export/Import* and do it while the upgrade completes.
 

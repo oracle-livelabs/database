@@ -1,5 +1,14 @@
 # Crear un Finanzas Agent con Select AI Agent
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 ## Introducción
 
 Nina Patel has used Select AI un ask one finanzas pregunta at un time. That works para un quick respuesta, but her new cliente-review screen necesita un repeatable finanzas assistant that puede respuesta un pregunta y support follow-up requests.
@@ -278,3 +287,8 @@ Leer la [Oracle AI Base de datos Select AI Agent documentation](https://docs.ora
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Base de datos Product Management, August 2026
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

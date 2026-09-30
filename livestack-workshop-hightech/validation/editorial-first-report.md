@@ -1,5 +1,14 @@
 # HighTech workshop editorial sweep
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Reviewed all 11 lessons, both notebooks, and the learner/supporting README files. Tightened 10 lessons and both notebooks; the quiz and already concise READMEs needed no changes.
 
 Lesson prose decreased from **11,863 to 8,819 words (25.7%)**. Counts exclude fenced code, image markup, HTML tags, and link destinations; headings and instructions are included. This measures text reduction, not a measured reduction in workshop completion time.
@@ -38,3 +47,8 @@ The result-interpretation boundaries, setup prerequisites, rerun instructions, m
 Static validation passes. Local browser checks cover the edited introduction, JSON, graph, and spatial pages with expanded tasks; these are rendering checks, not Oracle execution. Live database validation and the 44 outstanding authentic captures remain outside this editorial pass.
 
 The updated production ZIP is rebuilt from the revised learner files. Maintainer snapshots, reports, and validation scripts are excluded from it.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

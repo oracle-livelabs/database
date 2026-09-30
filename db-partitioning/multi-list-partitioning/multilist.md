@@ -104,7 +104,7 @@ This lab assumes you have completed the following lab:
     ![Image alt text](images/mc-partition-select-2.png "Multi Column Partition")
 
 
- 6. Note that DEFAULT is not a value, so if you were to try to use it as "value" with the partitioned extended syntax you will get an error:
+    6. Note that DEFAULT is not a value, so if you were to try to use it as "value" with the partitioned extended syntax you will get an error:
    
     ```
     <copy>

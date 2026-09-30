@@ -18,6 +18,11 @@ The objective of this lab is to showcase Oracle AI Database 26ai's native JSON d
 - Basic understanding of SQL concepts.
 - Completion of Domains & Annotations lab.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Using the JSON Data Type 
 
 

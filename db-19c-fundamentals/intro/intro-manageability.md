@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Welcome to the Manageability section of the workshop, where we will explore Online Table Move. As a database administrator, you understand the importance of maintaining your database to ensure optimal performance and efficiency. However, traditional methods of moving tables can be time-consuming and often require significant downtime, causing disruptions to user access. That's where Online Table Move comes in. In this section, we will discuss the numerous benefits of Online Table Move, including minimal downtime, improved performance, simplified storage management, efficient space management, and reduced storage costs. 
 
 

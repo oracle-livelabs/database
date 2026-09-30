@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Welcome to the SQL Enhancements focus area of the workshop! This section is dedicated to exploring the latest advancements in SQL within Oracle Database 23ai. SQL, as a cornerstone of database management, has profoundly shaped the software industry, offering a standardized and intuitive language for interacting with data across various database types.
 
 Oracle Database has been committed to prioritizing SQL functionality, and striving to elevate its capabilities. With over four decades of innovation, Oracle has consistently pushed the boundaries of what SQL can achieve.

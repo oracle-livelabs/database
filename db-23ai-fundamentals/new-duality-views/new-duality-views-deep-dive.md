@@ -40,7 +40,7 @@ This lab assumes you have:
 
 ## Task 1: Install a relational schema with sample data
 
-1.  Let's create some tables to use in the lab. Paste the following into the SQL Worksheet and click the **Run as Script Button** (shown in the picture below). 
+1. Let's create some tables to use in the lab. Paste the following into the SQL Worksheet and click the **Run as Script Button** (shown in the picture below). 
     ```
     <copy>
     create table attendee(
@@ -85,7 +85,7 @@ This lab assumes you have:
 
     The relational model ensures data consistency (data types, relationships between entities, etc.) but it comes with the price of establishing a data model. This approach runs the world today, and is proven and mature.
 
-2.  Let's insert some data into our conference schedule management system. Don't worry about the details, a simple copy-n-paste and letting it run does the trick at this point in time.
+2. Let's insert some data into our conference schedule management system. Don't worry about the details, a simple copy-n-paste and letting it run does the trick at this point in time.
     ```
     <copy>
     -- insert data
@@ -138,7 +138,7 @@ We are ready to venture into Duality Views now ...
     name      : name,
     rating    : rating @noupdate
     };
-	</copy>
+    	</copy>
     ```
     ![Duality Views on single table](images/dv1.png)
 
@@ -180,7 +180,7 @@ We are ready to venture into Duality Views now ...
         } 
     }
     } ;
-	</copy>
+    	</copy>
     ```
    ![Duality Views on multiple tables](images/dv2.png)
 
@@ -193,9 +193,9 @@ We are ready to venture into Duality Views now ...
     <copy>
     select * from attendee;
     select * from attendeeV;
-	</copy>
+    	</copy>
     ```
-   ![attendee DV](images/attendeev.png)
+    ![attendee DV](images/attendeev.png)
 
     Remember, this information is coming from the same relational storage!
 
@@ -206,9 +206,9 @@ We are ready to venture into Duality Views now ...
     commit;
 
     select * from attendee;
-	</copy>
+    	</copy>
     ```
-   ![insert into attendee DV](images/insert-into-attendee.png)
+    ![insert into attendee DV](images/insert-into-attendee.png)
 
 2. Benefit from the **normalized data storage**, no data duplication
 
@@ -220,7 +220,7 @@ We are ready to venture into Duality Views now ...
     -- extract some fields from the JSON
     select v.data.name, v.data.schedule[*].speaker
     from scheduleV v;
-	</copy>
+    	</copy>
     ```
        ![Bodo spelling mistake](images/bodo.png)
 
@@ -237,7 +237,7 @@ We are ready to venture into Duality Views now ...
     where v.data."_id" = 1;
 
     commit;
-	</copy>
+    	</copy>
     ```
 
     Let's check quickly whether we did it right:
@@ -246,10 +246,10 @@ We are ready to venture into Duality Views now ...
     select data
     from speakerV v
     where v.data."_id" = 1;
-	</copy>
+    	</copy>
     ```
 
-   ![Beda fixed](images/beda1.png)
+    ![Beda fixed](images/beda1.png)
 
     The speaker is updated correctly. But what about the individual schedules of the attendees?
 
@@ -257,10 +257,10 @@ We are ready to venture into Duality Views now ...
     <copy>
     select v.data.name, v.data.schedule[*].speaker
     from scheduleV v;
-	</copy>
+    	</copy>
     ```
 
-   ![Beda really fixed](images/beda2.png)
+    ![Beda really fixed](images/beda2.png)
 
     You just experienced another major benefit of JSON Duality Views. Unlike JSON Collections that embed all the information of an object within a single document, causing data duplication, Duality Views benefit from the underlying relational storage: the information about a speaker is stored once and any change is automatically changed for all related documents.
 
@@ -273,9 +273,9 @@ We are ready to venture into Duality Views now ...
     update speakerV v
     set data = '{"_id":1,"name":"Beda","rating":11}'
     where v.data."_id" = 1;
-	</copy>
+    	</copy>
     ```
-   ![DML error](images/ora40940.png)
+    ![DML error](images/ora40940.png)
 
     As you see, you are not allowed to change the rating of an existing speaker, it gives you an error:
     ORA-40940: Cannot update field 'rating' corresponding to column 'RATING' of table 'SPEAKER' in JSON Relational Duality View 'SPEAKERV': Missing UPDATE annotation or NOUPDATE annotation specified.
@@ -294,16 +294,16 @@ We are ready to venture into Duality Views now ...
     select v.data
     from attendeeV v
     where v.data."_id" = 3;
-	</copy>
+    	</copy>
     ```
     As you can see, we added a new attribute that is not mapped to any specific column without any problems. Checking the relational underlying table for this duality view will show you where this information ended up: in the flex field extras.
 
     ```
     <copy>
     select * from attendee;
-	</copy>
+    	</copy>
     ```
-   ![Schema flexibility](images/flex.png)
+    ![Schema flexibility](images/flex.png)
 
 5. Advanced Duality View capability - generated columns
 
@@ -326,7 +326,7 @@ We are ready to venture into Duality Views now ...
     },
     numSessions @generated (path : "$.sessions.size()")
     };
-	</copy>
+    	</copy>
     ```
 
     We did not have touched any data on disk, but only changed the metadata of your Duality View. 

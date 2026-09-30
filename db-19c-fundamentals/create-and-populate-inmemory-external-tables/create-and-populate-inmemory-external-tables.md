@@ -27,6 +27,10 @@ In this lab, you will:
 This lab assumes you have:
 - Obtained and signed in to your `workshop-installed` compute instance.
 
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Prepare the environment
 
 > **NOTE:** Unless otherwise stated, all passwords will be `Ora4U_1234`. When copying and pasting a command that includes a password, please replace the word `password` with `Ora4U_1234`. This only applies to instances created through OCI Resource Manager with our provided terraform scripts.
@@ -42,7 +46,7 @@ This lab assumes you have:
 
 ## Task 2: Configure the IM Column Store Size
 
-1.  Log in to the CDB root as SYS.
+1. Log in to the CDB root as SYS.
 
     ```
     $ <copy>sqlplus / AS SYSDBA</copy>
@@ -53,7 +57,7 @@ This lab assumes you have:
     SQL> <copy>ALTER SYSTEM SET inmemory_SIZE = 800M SCOPE=SPFILE; </copy>
     ```
 
-2.  Restart the instance and open the database.
+2. Restart the instance and open the database.
 
     ```
     SQL> <copy>SHUTDOWN IMMEDIATE</copy>
@@ -78,7 +82,7 @@ In this section, you create the logical directory to store the source data files
     Enter password: password
     ```
 
-2.  Create the logical directory CENT20 to store the source data file cent20.dat for the CENT20 external source data file.
+2. Create the logical directory CENT20 to store the source data file cent20.dat for the CENT20 external source data file.
 
     ```
     SQL> <copy>CREATE DIRECTORY cent20 AS '/home/oracle/labs/19cnf/CENT20'; </copy>
@@ -105,10 +109,10 @@ In this section, you create the logical directory to store the source data files
     ```
 
 4. Create the in-memory external table INMEM\_EXT\_TAB with the following attributes:
-  - The table is partitioned by range on the `TIME_ID` column.
-  - The default tablespace for external source data files is CENT20.
-  - The fields in the records of the external files are separated by comma ','.
-  - The in-memory compression is `FOR CAPACITY HIGH`.
+    - The table is partitioned by range on the `TIME_ID` column.
+    - The default tablespace for external source data files is CENT20.
+    - The fields in the records of the external files are separated by comma ','.
+    - The in-memory compression is `FOR CAPACITY HIGH`.
 
     ```
     SQL> <copy>CREATE TABLE hypt.inmem_ext_tab (history_event NUMBER, time_id DATE)
@@ -234,3 +238,8 @@ In this section, you create the logical directory to store the source data files
   - **Author** - Dominique Jeunot, Consulting User Assistance Developer
   - **Contributors** - Blake Hendricks, Austin Specialist Hub
   - **Last Updated By/Date** - Blake Hendricks, Austin Specialist Hub, January 10 2021
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -27,9 +27,9 @@ For this lab, remove the Oracle Database, *CDB1*, using the `deinstall` command.
 
 To remove Oracle Database from your host system, do the following. 
 
-1.  Log in to your host as *oracle*, the user who can remove Oracle Database.
+1. Log in to your host as *oracle*, the user who can remove Oracle Database.
 
-1.  Change the current working directory to `$ORACLE_HOME/deinstall`. This is the directory where `deinstall` is located.   
+1. Change the current working directory to `$ORACLE_HOME/deinstall`. This is the directory where `deinstall` is located.   
     The path may differ depending on the system you are using. For this lab, `deinstall` is located in the following directory. 
 
     ```
@@ -38,7 +38,7 @@ To remove Oracle Database from your host system, do the following. 
 
 	> **Note:** Do not shut down the Oracle Database or stop any database processes before running `deinstall`.
 
-1.  Start the Oracle Database deinstallation process with this command.  
+1. Start the Oracle Database deinstallation process with this command.  
 
     ```
 	$ <copy>./deinstall</copy>
@@ -79,7 +79,7 @@ To remove Oracle Database from your host system, do the following. 
 	Network de-configuration trace file location: /opt/oracle/oraInventory/logs/netdc_check2022-02-27_10-32-43AM.log
 	```
 
-1.  The `deinstall` command prompts to specify all single instance listeners that you want to deconfigure.  
+1. The `deinstall` command prompts to specify all single instance listeners that you want to deconfigure.  
 
 	```
 	Specify all Single Instance listeners that are to be de-configured. Enter .(dot) to deselect all. 
@@ -100,7 +100,7 @@ To remove Oracle Database from your host system, do the following. 
 	Database de-configuration trace file location: /opt/oracle/oraInventory/logs/databasedc_check2022-02-27_10-35-37AM.log
 	```
 
-1.  If you have multiple Database Instances in your Oracle home, then you can either delete specific database instances or remove all instances together using `deinstall`.   
+1. If you have multiple Database Instances in your Oracle home, then you can either delete specific database instances or remove all instances together using `deinstall`.   
 
     > **Note:** To enter specific instance names that you want to delete, use comma as the separator. To remove all the instances, press **Enter**.
 
@@ -128,7 +128,7 @@ To remove Oracle Database from your host system, do the following. 
 	```
 
 
-1.  The `deinstall` command prompts you to modify the details of the discovered databases. The default option is *n* which means no.
+1. The `deinstall` command prompts you to modify the details of the discovered databases. The default option is *n* which means no.
 
 	```
 	The details of database(s) CDB1 have been discovered automatically. Do you still want to modify the details of CDB1 database(s)? [n]: **Enter**
@@ -157,7 +157,7 @@ To remove Oracle Database from your host system, do the following. 
 	Storage used : FS
 	```
 
-1.  The `deinstall` command prompts you to confirm removing your Oracle Database. 
+1. The `deinstall` command prompts you to confirm removing your Oracle Database. 
 
     ```
 	Do you want to continue (y - yes, n - no)? [n]: y

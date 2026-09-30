@@ -1,5 +1,14 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Workshop Time: TODO - x minutes
+
+
 ## About Zero Downtime Migration
 
 With Zero Downtime Migration, you can migrate Oracle databases from on premises, Oracle Cloud Infrastructure Classic, or from one Oracle Cloud Infrastructure region to another. You can move your databases to co-managed or Autonomous Database services in the cloud, or any Exadata Database Machine in the cloud or on premises.

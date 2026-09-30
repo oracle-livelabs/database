@@ -40,7 +40,7 @@ Once the Docker image build is complete, you can start and run the Oracle Databa
     ```
   When you see the DATABASE IS READY FOR USE message, the database is running and ready for connections!
 
-  ![](images/database-ready.png)
+  ![Image](images/database-ready.png)
 
   Note the startup script generated a password for the database accounts. In the next step, you can reset the password to one of your choice.
 
@@ -58,7 +58,7 @@ Once the Docker image build is complete, you can start and run the Oracle Databa
     <copy>docker exec oracle-ee ./setPassword.sh LetsDocker</copy>
     ```
 
-    ![](images/set-password.png)
+    ![Image](images/set-password.png)
 
   You may now *proceed to the next lab*.
 

@@ -26,12 +26,12 @@ This lab assumes you have:
 ## Task 1: Create a Compartment
 
 1. Log into the Oracle Cloud Console using your tenancy. Please make note of
-what region you are at.
+    what region you are at.
 
     ![Oracle Cloud Console](https://oracle-livelabs.github.io/common/images/console/home-page.png)
 
 2. On left side drop down (under Oracle Cloud banner), go to **Identity & Security**
-and then **Compartments.**
+    and then **Compartments.**
 
     ![Identity & Security](https://oracle-livelabs.github.io/common/images/console/id-compartment.png)
 
@@ -51,7 +51,7 @@ In this task we will copy over a data bundle stored on object storage and
 place that in the Cloud Shell.
 
 1. Open the **Cloud Shell** in the top right menu. It can take about 2 minutes
-to get the Cloud Shell started.
+    to get the Cloud Shell started.
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -73,26 +73,26 @@ to get the Cloud Shell started.
 
 1. To deploy the application, we will use a terraform scripts provided for this Lab. Click on the 'Deploy to Oracle Cloud ' button.  This will create a new window in your browser.
 
-  [![Deploy to Oracle Cloud - home](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle/nosql-examples/raw/master/zips/global-microservices-springdata-nosql.zip)
+    [![Deploy to Oracle Cloud - home](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle/nosql-examples/raw/master/zips/global-microservices-springdata-nosql.zip)
 
 2. After successfully hitting the 'Deploy to Oracle Cloud' button, you will be brought to a new screen.
 
-  ![cloud-account-name](images/cloud-account-name.png)
+    ![cloud-account-name](images/cloud-account-name.png)
 
 
 3. Provide your **Cloud Account Name** (tenancy name, not your username or email) and click on Next.
 
-  Log into your account using your credentials (system may have remembered this from a prior log in).  You will see the Create Stack screen below:
+    Log into your account using your credentials (system may have remembered this from a prior log in).  You will see the Create Stack screen below:
 
-  ![create-stack](images/create-stack.png)
+    ![create-stack](images/create-stack.png)
 
-  Click on the box "I have reviewed and accept the Oracle Terms of Use."  After clicking this box, it will populate the stack information, the name and the description.  Check the 'Create in compartment' box and make sure it shows demonosql.   If it does not, change it to demonosql.  
+    Click on the box "I have reviewed and accept the Oracle Terms of Use."  After clicking this box, it will populate the stack information, the name and the description.  Check the 'Create in compartment' box and make sure it shows demonosql.   If it does not, change it to demonosql.  
 
 4. Click on Next on bottom left of screen.  This will move you to the 'Configure Variables' screen. Configure the variables for the infrastructure resources that this stack needs prior to running the apply job.
 
-  Choose demonosql as _Compartment_  from the drop down list.
+    Choose demonosql as _Compartment_  from the drop down list.
 
-  ![configure-var](images/configure-var.png)
+    ![configure-var](images/configure-var.png)
 
 5. Click on Next, which brings you to the 'Review' screen.  Click on Create.
 

@@ -63,7 +63,7 @@ This lab assumes you have:
 
     This gets you to the Database workspace for your project.
 
-    ![Fusabase Database section with the Security rules tab visible](./images/Area.gif =85%x*)
+    ![Fusabase Database section with the Security rules tab visible](./images/area.gif =85%x*)
 
 3. Click the **Security rules** tab and replace the current rule with this rule, then click **Publish changes**.
 

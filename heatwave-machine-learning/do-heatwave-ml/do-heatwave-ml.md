@@ -142,7 +142,7 @@ In this lab, you will be guided through the following task:
 ## Task 4: Predict and Explain for Single Row
 
 1. Make a prediction for a single row of data using the ML\_PREDICT\_ROW routine.
-   In this example, data is assigned to a @row\_input session variable, and the variable is called by the routine. The model handle is called using the @iris\_model session variable:
+    In this example, data is assigned to a @row\_input session variable, and the variable is called by the routine. The model handle is called using the @iris\_model session variable:
 
     ```bash
     <copy>SET @row_input = JSON_OBJECT( "sepal length", 7.3, "sepal width", 2.9, "petal length", 6.3, "petal width", 1.8); </copy>

@@ -22,15 +22,15 @@ In this lab, you will:
 
 1. Navigate to your database by selecting **Oracle AI Database**, then **Autonomous AI Database**. Ensure you're in the correct compartment for the resource. Click the database display name to open the details page.
 
-	![Select your Compartment](images/select-compartment.png)
+    	![Select your Compartment](images/select-compartment.png)
 
 2. Click in the *Database Actions* dropdown list and select **View all database actions**
 
-	![DB Actions](images/dbaction1.png)
+    	![DB Actions](images/dbaction1.png)
 
 3. On the homepage, go to the Development tab and click the SQL tile.
 
-	![Homepage Development SQL](./images/homepage-sql.png)
+    	![Homepage Development SQL](./images/homepage-sql.png)
 
 4. Create a table **movies** that consists of relational columns and one JSON colum.
 
@@ -101,26 +101,26 @@ Your table now consists of relational column and a JSON column, as you will see 
 
 1. First, query your table as-is and see the mixed result set of relational columns and JSON objects:
 
-	```
-	<copy>
-	select * from movies;
-	</copy>
-	```
+    	```
+    	<copy>
+    	select * from movies;
+    	</copy>
+    	```
 
-	![Select star from movies](./images/select-star-movies.png)
+    	![Select star from movies](./images/select-star-movies.png)
 
-	**Note**: Depending on the SQL client you are using, you might not get a textual representation of the JSON column EXTRAS back. Ultimately, this information is stored in a binary format on disk. If your SQL client happens to return gibberish or something like '[BLOB]', use the following SQL command to serialize the JSON information into a textual representation
+    	**Note**: Depending on the SQL client you are using, you might not get a textual representation of the JSON column EXTRAS back. Ultimately, this information is stored in a binary format on disk. If your SQL client happens to return gibberish or something like '[BLOB]', use the following SQL command to serialize the JSON information into a textual representation
 
-	```
-	<copy>
-	select movie_id, title, type, format, condition, year, 
-			json_serialize(extras) as extras
-	from movies;
-	</copy>
-	```
+    	```
+    	<copy>
+    	select movie_id, title, type, format, condition, year, 
+    			json_serialize(extras) as extras
+    	from movies;
+    	</copy>
+    	```
 
 
-2.  Now let's use the ANSI standard SQL/JSON operator JSON_VALUE() to extract the common JSON attributes of interest. You will see that the result set is completely relational.
+2. Now let's use the ANSI standard SQL/JSON operator JSON_VALUE() to extract the common JSON attributes of interest. You will see that the result set is completely relational.
 
 	```
 	<copy>

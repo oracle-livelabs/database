@@ -14,10 +14,10 @@ This lab will show you how to download the Oracle Resource Manager (ORM) stack z
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
-1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
+1. Click on the link below to download the Resource Manager zip file you need to build your environment:
     - [db21c-dbae-mkplc-freetier.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/db21c-dbae-mkplc-freetier.zip)
 
-2.  Save in your downloads folder.
+2. Save in your downloads folder.
 
 We recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an exiting VCN then proceed to the next task as indicated below to update your existing VCN with the required Egress rules.
 
@@ -30,15 +30,15 @@ This workshop requires a certain number of ports to be available, a requirement 
 | 6080           | noVNC Remote Desktop                  |
 | 80             | noVNC Remote Desktop                  |
 
-1.  Go to **Networking** > **Virtual Cloud Networks**
-2.  Choose your network
-3.  Under Resources, select Security Lists
-4.  Click on Default Security Lists under the Create Security List button
-5.  Click Add Ingress Rule button
-6.  Enter the following:  
+1. Go to **Networking** > **Virtual Cloud Networks**
+2. Choose your network
+3. Under Resources, select Security Lists
+4. Click on Default Security Lists under the Create Security List button
+5. Click Add Ingress Rule button
+6. Enter the following:  
     - Source CIDR: 0.0.0.0/0
     - Destination Port Range: *Refer to above table*
-7.  Click the Add Ingress Rules button
+7. Click the Add Ingress Rules button
 
 ## Task 3: Setup Compute   
 Using the details from the two tasks above, proceed to the lab **Setup Compute Instance** to setup your workshop environment using Oracle Resource Manager (ORM) and one of the following options:

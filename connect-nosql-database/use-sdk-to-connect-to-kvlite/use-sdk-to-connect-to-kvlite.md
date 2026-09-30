@@ -39,7 +39,7 @@ This lab assumes you have:
 
 1. Open Microsoft Visual Studio Code. Create a virtual environment. Open the command palette to select the Python interpreter. Select the virtual environment that you have created, from the list of interpreters.
 
-  ![Select Interpreter](images/select-interpreter.png)
+    ![Select Interpreter](images/select-interpreter.png)
 
 2. Activate the virtual environment and install the Python SDK within this environment. You can install the SDK using the pip command. If you are using Python 3, use pip3 command:
 

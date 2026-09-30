@@ -21,18 +21,18 @@ Estimated Lab Time: 10 minutes
 
 1. Click the **Navigation Menu** in the upper left, navigate to **Oracle Database**, and select **Bare Metal, VM, and Exadata**.
 
-	![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
+    	![Image](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
 2. Select the compartment you were assigned. Note that you have a fully provisioned Database. Select it. 
-  ![](images/select-db.png " ")
+    ![Image](images/select-db.png " ")
 
 3. In the Databases section, jot down your **Database Unique Name**.  You will need this for the next lab.
-  ![](images/db-unique-name.png " ")
+    ![Image](images/db-unique-name.png " ")
 
 
 4. On the resources tab, click **Nodes** to gather your IP address. Note your Public IP Address
 
-  ![](images/VM-DB-IP.png " ")
+    ![Image](images/vm-db-ip.png " ")
 
 5. In Cloud Shell or your terminal window, enter the following commands
 
@@ -51,7 +51,7 @@ Estimated Lab Time: 10 minutes
     ```
     $ <copy>chmod 600 ssh-key-2021-03-03
     ```
-6.  Enter this command, using your IP address:
+6. Enter this command, using your IP address:
 
     ```
     $ <copy>ssh -i ~/.ssh/ssh-key-2021-03-03 opc@(ip address)

@@ -33,7 +33,7 @@ We'll assume you're already in Database Actions having just completed the previo
 
 ## Task 2: Synchronization
 
-1.  Let's insert a new row into USER_DATA. Copy the following a click on the "Run Statement" button:
+1. Let's insert a new row into USER_DATA. Copy the following a click on the "Run Statement" button:
 
     ```
     <copy>
@@ -69,7 +69,7 @@ We'll assume you're already in Database Actions having just completed the previo
 
 Running __SYNC\_INDEX__ manually is efficient, and gives you full control. However, you can have the index synchronize automatically, either by specifying that it should be synchronized on commit, or by specifying a regular time period (such as every minute) to perform the synchronization.
 
-1.    Drop the current index first:
+1. Drop the current index first:
 
     ```
     <copy>
@@ -77,7 +77,7 @@ Running __SYNC\_INDEX__ manually is efficient, and gives you full control. Howev
     </copy>
     ```
 
-2.    Whenever non-default index behavior is required, we use a PARAMETERS clause with the index. Here we're going to specify __SYNC(ON COMMIT)__ to have it sync automatically at COMMIT time:
+2. Whenever non-default index behavior is required, we use a PARAMETERS clause with the index. Here we're going to specify __SYNC(ON COMMIT)__ to have it sync automatically at COMMIT time:
 
     ```
     <copy>
@@ -86,7 +86,7 @@ Running __SYNC\_INDEX__ manually is efficient, and gives you full control. Howev
     </copy>
     ```
 
-3.    Now we'll add a new row to the table, and search for it:
+3. Now we'll add a new row to the table, and search for it:
 
     ```
     <copy>
@@ -113,7 +113,7 @@ The longer that time period is (five minutes is often chosen) the less your inde
 
 Time interval SYNCs use the database scheduler, so in 19c and before you must have __CREATE JOB__ privilege to use it.
 
-1.  Drop the existing index:
+1. Drop the existing index:
 
     ```
     <copy>
@@ -121,7 +121,7 @@ Time interval SYNCs use the database scheduler, so in 19c and before you must ha
     </copy>
     ```
 
-2.  Now create the index again, but this time specify that it should be SYNC'd every minute. The syntax for the time period comes from DBMS\_SCHEDULER.
+2. Now create the index again, but this time specify that it should be SYNC'd every minute. The syntax for the time period comes from DBMS\_SCHEDULER.
 
     ```
     <copy>
@@ -130,7 +130,7 @@ Time interval SYNCs use the database scheduler, so in 19c and before you must ha
     </copy>
     ```
 
-3.  Now insert a new row
+3. Now insert a new row
 
     ```
     <copy>
@@ -138,7 +138,7 @@ Time interval SYNCs use the database scheduler, so in 19c and before you must ha
     </copy>
     ```
 
-4.  Search for the new row. Initially, you'll probably find that it doesn't find the new row, but keep repeating the query and it will work 
+4. Search for the new row. Initially, you'll probably find that it doesn't find the new row, but keep repeating the query and it will work 
     within one minute.
 
     ```
@@ -151,7 +151,7 @@ Time interval SYNCs use the database scheduler, so in 19c and before you must ha
 
 ## Task 5: Optimization
 
-1.  Examine the "dollar I" table.
+1. Examine the "dollar I" table.
 
     Now we've done an update to the index, let's take another look at the list of indexed words in the $I table. Run the following:
 
@@ -164,7 +164,7 @@ Time interval SYNCs use the database scheduler, so in 19c and before you must ha
     You should see that there are now two entries for the wors 'order' and 'williams. We won't worry about exactly why (though note they were used in the last update), but let's just say it's an example of index fragmentation. 
     
     
-2.  Optimize the index
+2. Optimize the index
 
     We can optimize the index using another PL/SQL command in the ctx_ddl package: ctx\_ddl.optimize\_index. That takes two mandatory parameters, the name of the index and the type of optimization to perform. Common values are 'FULL' or 'REBUILD'. We'll go with 'FULL':
 

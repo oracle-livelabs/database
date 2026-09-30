@@ -224,3 +224,8 @@ In this task, we will use the *Performance Hub* to check performance issues on t
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Rodrigo Jorge, August 2025
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

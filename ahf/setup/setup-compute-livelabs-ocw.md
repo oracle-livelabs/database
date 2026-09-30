@@ -51,23 +51,23 @@ Estimated Time: 5 minutes
 
 You should already be logged in to the OCI console from Task 1.
 
-1.  Open up the hamburger menu in the left hand corner.  
+1. Open up the hamburger menu in the left hand corner.  
 
-2.  From the hamburger menu, select **Oracle Database, and then Oracle Base Database** in the Oracle Database category.
+2. From the hamburger menu, select **Oracle Database, and then Oracle Base Database** in the Oracle Database category.
 
-  ![Oracle Cloud DBCS Page](https://oracle-livelabs.github.io/common//images/console/database-dbcs.png " ")
+    ![Oracle Cloud DBCS Page](https://oracle-livelabs.github.io/common//images/console/database-dbcs.png " ")
 
-3.  Select the compartment you were assigned in LiveLabs and identify your database system from your My Reservations page. Click on the database system name to see the details.
+3. Select the compartment you were assigned in LiveLabs and identify your database system from your My Reservations page. Click on the database system name to see the details.
 
-  ![Select DB System](./images/setup-compute-2.png " ")
+    ![Select DB System](./images/setup-compute-2.png " ")
 
 4. Explore the DB Systems home page.  On the left hand side, scroll down to view the Resources section.  Click Nodes.
 
-  ![Examine DB System](./images/setup-compute-3.png " ")
+    ![Examine DB System](./images/setup-compute-3.png " ")
 
 5. Locate your two nodes and jot down their public IP addresses.
 
-  ![Confirm node IP Addresses](./images/setup-compute-4.png " ")
+    ![Confirm node IP Addresses](./images/setup-compute-4.png " ")
 
 6. Now that you have the IP Addresses for your cluster nodes you will need to get the SSH keys to connect to those Nodes.
    

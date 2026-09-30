@@ -31,6 +31,11 @@ The objective of this workshop is to familiarize you with some of the new featur
 - Access to Oracle Database 23ai environment.
 - Basic understanding of SQL.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Granting Developer Role and Schema Level Privileges
 
 1. Open the **Navigation** menu.
@@ -421,15 +426,15 @@ The objective of this workshop is to familiarize you with some of the new featur
 
 5. **Congratulations**! You’ve completed the Oracle Database 23ai Quick Start workshop. In this lab, we explored a range of new features introduced in Oracle Database 23ai. Here’s a recap of what we covered:
 
-	1.	**New Data Types:** We created tables using new vector, boolean, and JSON data types. These new data types (and many others) can all be used natively inside Oracle Database 23ai.
-	2.	**Schema Annotations:** We learned how to use schema annotations to document and classify database objects, providing insights into their purpose and usage.
-	3.	**Data Use Case Domains:** We added a single-column domain to our table, ensuring consistent data representation and validation across the application.
-	4.	**Schema-Level Privileges:** We granted schema-level privileges, which simplify privilege management and dynamically adapt to schema changes.
-	5.	**Developer Role**: We assigned the new Developer Role, which includes a comprehensive set of privileges required by application developers, making privilege management simpler and more secure.
-	6.	**IF [NOT] EXISTS Statement:** We used the IF [NOT] EXISTS statement for conditional SQL execution, which helps avoid errors when creating or dropping objects.
-	7.	**Table Value Constructors:** We inserted multiple rows of data using the new Table Value Constructors, streamlining the process of working with multiple rows.
-	8.	**AI Vector Search:** We explored the new vector_distance functions and operators to perform similarity searches. This functionality only scrapes the surface of what Oracle Database 23ai offers for AI in database operations.
-    9.  **Removal of FROM DUAL:** We utilized the new feature that eliminates the need for the FROM DUAL clause, making queries more intuitive and cleaner.
+	1. **New Data Types:** We created tables using new vector, boolean, and JSON data types. These new data types (and many others) can all be used natively inside Oracle Database 23ai.
+	2. **Schema Annotations:** We learned how to use schema annotations to document and classify database objects, providing insights into their purpose and usage.
+	3. **Data Use Case Domains:** We added a single-column domain to our table, ensuring consistent data representation and validation across the application.
+	4. **Schema-Level Privileges:** We granted schema-level privileges, which simplify privilege management and dynamically adapt to schema changes.
+	5. **Developer Role**: We assigned the new Developer Role, which includes a comprehensive set of privileges required by application developers, making privilege management simpler and more secure.
+	6. **IF [NOT] EXISTS Statement:** We used the IF [NOT] EXISTS statement for conditional SQL execution, which helps avoid errors when creating or dropping objects.
+	7. **Table Value Constructors:** We inserted multiple rows of data using the new Table Value Constructors, streamlining the process of working with multiple rows.
+	8. **AI Vector Search:** We explored the new vector_distance functions and operators to perform similarity searches. This functionality only scrapes the surface of what Oracle Database 23ai offers for AI in database operations.
+    9. **Removal of FROM DUAL:** We utilized the new feature that eliminates the need for the FROM DUAL clause, making queries more intuitive and cleaner.
     10. **JSON Schema:** We learned how to define JSON schema constraints during table creation and validate JSON data upon insertion.
 
 This lab provided a high-level overview of some of the new features in Oracle Database 23ai, but there are over 300 new features to explore. For a comprehensive workshop, please visit the [23ai New Features](https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3950&clear=RR,180&session=106510486911799).

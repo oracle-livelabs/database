@@ -15,6 +15,11 @@ In this lab, you will:
 * Experience how the tool focuses on providing deep contextual information.
 * Dive deep into feature comparisons (Workloads, Applications, and Capacity).
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Navigate the View and Compare Services Tool
 
 1. Navigate to [https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/compare-solutions) or click **Explore** then **Compare DB Services** on the navigation bar. 
@@ -65,3 +70,8 @@ You may now **proceed to the next lab**.
 ## Learn More
 
 * [View & Compare OCI Data Management Services Overview (Video)](https://videohub.oracle.com/media/1_5a9man1g "View & Compare OCI Data Management Services Overview (Video)")
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

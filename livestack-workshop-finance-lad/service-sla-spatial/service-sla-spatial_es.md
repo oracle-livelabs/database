@@ -1,5 +1,14 @@
 # Asignar Customers un la Closest Service Center
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 ## Introducción
 
 Moon Kai es Seer Bank's espacial specialist. Operations teams ask Moon para help cuando ubicación affects un service decision: which center es closest un un region con growing demand, y which clientes debe it handle?
@@ -290,3 +299,8 @@ Tú used Oracle Spatial un turn points y polygons en un routing decision. For un
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Base de datos Product Management, August 2026
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

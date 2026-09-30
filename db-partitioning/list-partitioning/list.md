@@ -129,7 +129,7 @@ This lab assumes you have completed the following lab:
       </copy>
       ``` 
 
-   ![Image alt text](images/sales-by-region-select-2.png "Sales by region select")
+    ![Image alt text](images/sales-by-region-select-2.png "Sales by region select")
 
 7. Insert values into the table.
 

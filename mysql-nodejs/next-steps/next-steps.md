@@ -1,5 +1,14 @@
 # Next Steps
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 ## Intro
 
 In this lab series you created a very basic application based on micro services on Oracle Cloud Infrastructure. Of course we only scratched the surface of what is possible.
@@ -51,3 +60,8 @@ For a secure deployment it is also advised not using the admin user (root) for t
 ## And more ...
 
 There is no end. Enjoy your coding!
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

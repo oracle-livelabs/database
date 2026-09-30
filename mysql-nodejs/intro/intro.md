@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 Welcome to the Developing and Deploying a Modern Application in Node.js on MySQL Database Service Workshop. This workshop will build cloud-based microservice database applications using Node.js and the MySQL Database Service.
 
 ## Workshop Overview

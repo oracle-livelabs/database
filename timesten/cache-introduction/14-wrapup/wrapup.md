@@ -1,5 +1,14 @@
 # Wrap Up
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 ## Summary
 
 Congratulations! You completed the workshop. 

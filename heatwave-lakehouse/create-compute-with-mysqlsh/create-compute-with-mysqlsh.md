@@ -149,7 +149,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
 ## Task 4: Connect to Compute and Install MySQl Shell
 
-1.  Go to **Navigation Menu**, **Compute**, and then click **Instances**, and click **heatwave-client**.
+1. Go to **Navigation Menu**, **Compute**, and then click **Instances**, and click **heatwave-client**.
 
     ![Compute Instance List](./images/compute-running.png "compute public ip")
 

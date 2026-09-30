@@ -60,7 +60,7 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-  The profile should be enabled. If it is not present, complete Lab 7 first or ask the DBA which profile to use.
+    The profile should be enabled. If it is not present, complete Lab 7 first or ask the DBA which profile to use.
 
 2. Check the tables listed in the profile:
 
@@ -209,8 +209,8 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
 1. Review the latest team runs:
 
     ```sql
-  <copy>
-  SELECT team_name,
+    <copy>
+    SELECT team_name,
          team_exec_id,
          state,
          start_date,
@@ -226,8 +226,8 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
 2. Review the latest tool calls:
 
     ```sql
-  <copy>
-  SELECT tool_name,
+    <copy>
+    SELECT tool_name,
          invocation_id,
          agent_name,
          task_name,

@@ -31,31 +31,31 @@ In this lab, you will:
 
 1. If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.**
  
-  ![locate adb](./images/oci-navigation-adw.png " ")
+    ![locate adb](./images/oci-navigation-adw.png " ")
  
 2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
-   ![db actions](./images/database-actions.png " ")
+    ![db actions](./images/database-actions.png " ")
    
 3. Log into Database Actions as the NF19C user.
-	![JSON Database Actions](./images/db-actions-logout.png)
+    	![JSON Database Actions](./images/db-actions-logout.png)
 
 4. From the launch pad Select the hamberger menu and the JSON tile on the left hand side of the screen.
 
-	![JSON Database Actions](./images/db-actions-json1.png)
+    	![JSON Database Actions](./images/db-actions-json1.png)
 
 
 5. To create a collection, click **Create Collection**.
 
-	![Create Collection](./images/create-collection.png)
+    	![Create Collection](./images/create-collection.png)
 
 6. Provide a name for the collection in the field, we'll call it  **merchandise** and click **Create**. MAKE SURE you check the **MongoDB Compatible** box. Note that the collection name is case-sensitive. You must enter merchandise in all lower-case, don't use MERCHANDISE or Merchandise.
 
-	![New collection: products](./images/new-products.png)
+    	![New collection: products](./images/new-products.png)
 
 7. A notification pops up informing you the `Merchandise` collections is created.
 
-	![New collection notification](./images/popup.png)
+    	![New collection notification](./images/popup.png)
 
 8. Click the refresh button to verify the `Merchandise` collection is created.
 
@@ -65,36 +65,36 @@ In this lab, you will:
 
 1. Double click **Merchandise** collection to show the **JSON-merchandise** worksheet if it is not up.
 
-	![products worksheet](./images/double-clicked.png)
+    	![products worksheet](./images/double-clicked.png)
 
 2. Click New JSON Document button.
 
-	![new document button](./images/new-document.png)
+    	![new document button](./images/new-document.png)
 
 3. A New JSON Document panel displays. Copy the following JSON object, paste it in the worksheet and click **Create**.
 
-	```
-	<copy>
-	{
-		"_id": 100,
-		"category":"T-shirts",
-		"name":"Men's Standard T-shirt",
-		"color": "Red",
-		"description":"Plain Red T-shirt with the Oracle MovieSteams logo on the back",
-		"baseCost":"4.33",
-		"Material": [
-			"Organic Cotton"
-		],
-		"produced": "USA"
-	}
-	</copy>
-	```
+    	```
+    	<copy>
+    	{
+    		"_id": 100,
+    		"category":"T-shirts",
+    		"name":"Men's Standard T-shirt",
+    		"color": "Red",
+    		"description":"Plain Red T-shirt with the Oracle MovieSteams logo on the back",
+    		"baseCost":"4.33",
+    		"Material": [
+    			"Organic Cotton"
+    		],
+    		"produced": "USA"
+    	}
+    	</copy>
+    	```
 
-	![add new document](./images/paste1.png)
+    	![add new document](./images/paste1.png)
 
 4. A notification pops up that says A New Document is created and the new document is shown in the bottom section of the JSON workshop.
 
-	![new document confirmation popup](./images/popup2.png)
+    	![new document confirmation popup](./images/popup2.png)
 
 5. Let's repeat this with the following documents:
 
@@ -164,38 +164,38 @@ Now let's issue some simple queries on the *merchandise* collection we just crea
 
 1. Copy and paste the following queries in the worksheet and click Run Query button to run a query.
 
-2.  Lookup by one value:
+2. Lookup by one value:
 
-	Here, it displays the document whose id value is 101.
+    	Here, it displays the document whose id value is 101.
 
-	```
-	<copy>
-	{"_id":101}
-	</copy>
-	```
-	![doc with id 101](./images/id101.png)
+    	```
+    	<copy>
+    	{"_id":101}
+    	</copy>
+    	```
+    	![doc with id 101](./images/id101.png)
 
-3.	Find all T-shirts:
+3. Find all T-shirts:
 
-	Running the query will display two documents with category T-Shirts.
+    	Running the query will display two documents with category T-Shirts.
 
-	```
-	<copy>
-	{"category":"T-shirts"}
-	</copy>
-	```
-	![T-shirts search results](./images/tshirt-results.png)
+    	```
+    	<copy>
+    	{"category":"T-shirts"}
+    	</copy>
+    	```
+    	![T-shirts search results](./images/tshirt-results.png)
 
-4.	Find all non-movies:
+4. Find all non-movies:
 
-	This query displays the documents that are not of type - T-shirts.
+    	This query displays the documents that are not of type - T-shirts.
 
-	```
-	<copy>
-	{"category":{"$ne":"T-shirts"}}
-	</copy>
-	```
-	![results for "not T-shirts" search](./images/not-tshirts.png)
+    	```
+    	<copy>
+    	{"category":{"$ne":"T-shirts"}}
+    	</copy>
+    	```
+    	![results for "not T-shirts" search](./images/not-tshirts.png)
 
 
 5. Find bargains of all merchandise costing 15 or less:
@@ -216,47 +216,47 @@ An index will aid fast access to an item (for example speeding up access via the
 
 More generally, constraints can be used to check the data being entered for various aspects.
 
-1.  Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
+1. Let's add a check - or 'constraint' to check our data entry. We will do this using SQL Developer Web. Click the navigation menu on the top left and select **SQL** under Development.
 
-	![SQL navigation](./images/nav.png)
+    	![SQL navigation](./images/nav.png)
 
 
 
 2. Check constraint to make sure every product has a category of string data type and baseCost >=0. 
 
-	Add a constraint to make sure that every item has at least a category and the baseCost. We want the baseCost to be a non-negative number and category to be a string.
+    	Add a constraint to make sure that every item has at least a category and the baseCost. We want the baseCost to be a non-negative number and category to be a string.
 
-	Copy and paste the query below in the worksheet and click Run query button to run the SQL query to alter merchandise table and add constraints.
+    	Copy and paste the query below in the worksheet and click Run query button to run the SQL query to alter merchandise table and add constraints.
 
-	```
-	<copy>
-	alter table merchandise add constraint required_fields 
-		check (
-				JSON_EXISTS(data, '$?(@.category.type() == "string" && @.baseCost.number() > 0)')
-			  );
-	</copy>
-	```
-	![add constraint](./images/sql-query.png)
+    	```
+    	<copy>
+    	alter table merchandise add constraint required_fields 
+    		check (
+    				JSON_EXISTS(data, '$?(@.category.type() == "string" && @.baseCost.number() > 0)')
+    			  );
+    	</copy>
+    	```
+    	![add constraint](./images/sql-query.png)
 
-	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.category.type() == "string" && @.baseCost.number() > 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
+    	JSON_Exists is a SQL/JSON function that checks that a SQL/JSON path expression selects at least one value in the JSON data. The selected value(s) are not extracted – only their existence is checked. Here, *$?(@.category.type() == "string" && @.baseCost.number() > 0)* is a standard, SQL/JSON path expressions. You'll learn more about SQJ/JSON functions later in this lab.
 
 3. Once the *merchandise* table is altered, navigate back to JSON workshop. Click the navigation menu on the top left and select **JSON** under Development.
 
-	![JSON navigation](./images/nav2-json.png)
+    	![JSON navigation](./images/nav2-json.png)
 
 4. Validate that the following documents cannot get inserted if fields are missing or of the wrong type.
 
-	Click New JSON Document icon, copy and paste the following query in the worksheet and click **Create**.
+    	Click New JSON Document icon, copy and paste the following query in the worksheet and click **Create**.
 
-	Throws the error "Unable to add new JSON document" since the following document has missing fields while trying to insert.
+    	Throws the error "Unable to add new JSON document" since the following document has missing fields while trying to insert.
 
-	```
-	<copy>
-	{"_id":"104","category":"Hats"}
-	</copy>
-	```
-	![create a not-allowed item](./images/tester.png)
-	![constraint error message](./images/error2.png)
+    	```
+    	<copy>
+    	{"_id":"104","category":"Hats"}
+    	</copy>
+    	```
+    	![create a not-allowed item](./images/tester.png)
+    	![constraint error message](./images/error2.png)
 
 5. The following document now satisfies all the constraints: the "id" is a unique number, the category is a string, and the baseCost is a positive number. Let's add the document.
 

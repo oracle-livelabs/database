@@ -68,7 +68,7 @@ We'll assume you're already in Database Actions having just completed the previo
 
     ![files listed in bucket](./images/files-in-bucket.png " ")
 
-2.  Create Pre-Authenticated Requests (PARs) for the files
+2. Create Pre-Authenticated Requests (PARs) for the files
 
     For each file in the bucket, we will need to create a "Pre-Authenticated Request". This is a special URL which contains an embedded access key for the file. It means anyone with access to that URL can access the file, but it is virtually impossible to guess the URL.
 
@@ -91,7 +91,7 @@ We'll assume you're already in Database Actions having just completed the previo
 
 Open the Database Actions tab in your browser (or reopen it using earlier instructions if you need to) and go to SQL.
 
-1.    Create a table to hold file data. Run the following statement:
+1. Create a table to hold file data. Run the following statement:
 
     ```
     <copy>
@@ -99,7 +99,7 @@ Open the Database Actions tab in your browser (or reopen it using earlier instru
     </copy>
     ```
 
-2.   Load the files from Object Store into your table. 
+2. Load the files from Object Store into your table. 
 
     Run this once for **each file** you've stored, substituting in the PAR URL (that you saved in the previous step) and a short name or description. Don't forget to give each file a different name/description.
 
@@ -113,7 +113,7 @@ Open the Database Actions tab in your browser (or reopen it using earlier instru
     end;
     </copy>
     ```
-3.  Check the files have loaded properly by fetching the name, and the size of the LOB column
+3. Check the files have loaded properly by fetching the name, and the size of the LOB column
 
     ```
     <copy>
@@ -125,7 +125,7 @@ Open the Database Actions tab in your browser (or reopen it using earlier instru
 
 ## Task 4: Index the documents
 
-1.   Create a FILTER preference
+1. Create a FILTER preference
 
     Oracle Text is clever enough to figure out that if it's indexing a BLOB column, it is clearly dealing with binary files, which need to be passed through the *AUTO\_FILTER* to be recognised and converted into text. So actually we could just create a straightforward text index as we did before. But to illustrate how we can customize index options, we're going to show you how to create a *preference* which explicitly tells text to use AUTO\_FILTER, overriding any defaults for the type of data that it's indexing. We'll also set a TIMEOUT attribute for our preference, telling it not to spend more than 10 seconds filtering any particular file.
 
@@ -140,7 +140,7 @@ Open the Database Actions tab in your browser (or reopen it using earlier instru
 
     (should you need to run that again you can call *ctx\_ddl.drop\_preference* with just the preference name as an argument)
 
-2.  Create the index using our filter preference
+2. Create the index using our filter preference
 
     For any index with non-standard options, we use the *PARAMETERS* clause (we saw it before with SYNC options). The clause takes a single string which is mostly a list of preference types and preference names. Here, our preference type is 'filter' and our preference name is 'my\_filter\_pref'. We'll also include *sync(on commit)* in case we want to add some more files.
 
@@ -155,7 +155,7 @@ Open the Database Actions tab in your browser (or reopen it using earlier instru
 
 ## Task 5: Search the files
 
-1.    Our *CONTAINS* will run against the indexed CONTENT column, but since that's binary there's no point selecting it, so we'll just select the NAME column. You can substitute in your own search string here if you're not indexing the HelloWorld document. 
+1. Our *CONTAINS* will run against the indexed CONTENT column, but since that's binary there's no point selecting it, so we'll just select the NAME column. You can substitute in your own search string here if you're not indexing the HelloWorld document. 
 
     ```
     <copy>

@@ -159,7 +159,7 @@ This first pipeline will be responsible for creating isolated environments for f
 6. Under Pipeline, select `Pipeline script from SCM`
 7. Under Pipeline > SCM, set `Git`
 8. Set the Repository HTTPS URL to your Fork's HTTPS URL
-9.  Set the Credentials to your GitHub credentials created earlier, which should appear as `<github-username>/******`
+9. Set the Credentials to your GitHub credentials created earlier, which should appear as `<github-username>/******`
 10. Under Branch Specifier, change `*/master`  to 
 
     ```bash
@@ -205,7 +205,7 @@ This second pipeline will be responsible for tearing down your isolated environm
 6. Under Pipeline, select `Pipeline script from SCM`
 7. Under Pipeline > SCM, set `Git`
 8. Set the Repository HTTPS URL to your Fork's HTTPS URL
-9.  Set the Credentials to your GitHub credentials created earlier, which should appear as `<github-username>/******`
+9. Set the Credentials to your GitHub credentials created earlier, which should appear as `<github-username>/******`
 10. Under Branch Specifier, change `*/master` to
     
       ```bash
@@ -245,7 +245,7 @@ This third pipeline will build the applications on push to dev and feature-branc
 
     ![Configure Push Pipeline](./images/configure-push-pipeline.png)
 
-9.  For Build Configuration, set the Script Path to the location of the Jenkinsfile in the lab repository:
+9. For Build Configuration, set the Script Path to the location of the Jenkinsfile in the lab repository:
    
     ```bash
     <copy>

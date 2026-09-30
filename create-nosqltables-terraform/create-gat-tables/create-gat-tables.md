@@ -18,6 +18,11 @@ Oracle NoSQL Database Cloud Service supports a global active table architecture 
 
 It is easy to deploy a Global Active table on OCI using Terraform. In [Lab 2 : Create singleton tables using Terraform](?lab=create-singleton-tables), you have created a singleton table called **nosql_demo**. In this lab, you will create a regional replica of this table and make it a Global Active table.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1:  Create NoSQL Terraform configuration file
 Resources are the most important element in the Terraform language. Terraform creates a NoSQL table and a table replica as a resource. The NoSQL Terraform configuration file will define the resources to be created. In this lab the resources created are a NoSQL table and a table replica.
 

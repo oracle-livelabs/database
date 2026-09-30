@@ -17,6 +17,11 @@ This lab assumes you have:
 - An Oracle account
 
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Install and Configure the ADB Free 23ai Container Image
 
 In the LiveLabs Sandbox, we will download the image from an OCI bucket. However, when using your own environment you will download the image directly from the Oracle Container Registry. That process is detailed in the free tier instructions.

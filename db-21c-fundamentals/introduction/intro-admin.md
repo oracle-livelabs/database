@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 This section of the workshop highlights enhancements in Oracle Database 21c to improve the security of passwords.
 
 Estimated Time: 60 minutes

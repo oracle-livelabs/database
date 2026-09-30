@@ -123,12 +123,12 @@ and exit from the Code Editor.
     Press the **Enter** key on your keypad to get the command line prompt back.
 
 3. Lets review the data that we entered in the Lab 3 using the GraphQL query `Streams`.
-Execute in the Cloud Shell.
+    Execute in the Cloud Shell.
 
     ```shell
     <copy>
     curl --request POST --header 'content-type: application/json' --url 'localhost:3000' \
---data '{"query":"query Streams { streams { id  info { firstName  lastName country } }}"}' | jq
+    --data '{"query":"query Streams { streams { id  info { firstName  lastName country } }}"}' | jq
     </copy>
     ```
 
@@ -143,12 +143,12 @@ Execute in the Cloud Shell.
     --header 'content-type: application/json' \
     --url 'localhost:3000' \
     --data '{
-  "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
+    "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
     </copy>
     ```
 
 5. Execute one of the reports using the GraphQL queries - For every show aired
-by the application, fetch the total watch time by all users
+    by the application, fetch the total watch time by all users
 
     ```shell
     <copy>
@@ -187,7 +187,7 @@ by the application, fetch the total watch time by all users
 
 
 7. You can also execute sql statements using Oracle Cloud Infrastructure CLI commands.
-Going this route, you will be querying the data over REST. Execute in Cloud Shell.
+    Going this route, you will be querying the data over REST. Execute in Cloud Shell.
 
     ```shell
     <copy>
@@ -201,7 +201,7 @@ Going this route, you will be querying the data over REST. Execute in Cloud Shel
     oci nosql query execute -c  $NOSQL_COMPID --statement "$SQL_STATEMENT"
     </copy>
     ```
-  In this case, the data is formatted as a nice JSON document.
+    In this case, the data is formatted as a nice JSON document.
 
 8. Load information for 91 users. For the shows, we will insert 5 random shows
 selected from a set of 46 shows.

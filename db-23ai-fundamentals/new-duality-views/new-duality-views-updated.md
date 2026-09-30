@@ -35,6 +35,11 @@ This lab assumes you have:
 * Oracle Database 23ai
 * Completed the Get Started Lab
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Create Relational Tables
 
 1. Create the 'customers' and 'orders' relational tables. The following code block creates two tables for customer and order data. Copy and run the following SQL script:
@@ -99,8 +104,8 @@ This lab assumes you have:
         joinedDate      : joined_date 
         goldStatus      : gold_customer
     }
-;
-	</copy>
+    ;
+    	</copy>
     ```
 
 2. Say we want to exclude sensitive personally identifiable information like customers credit card or phone numbers. Let's create another view without those identifiers. 
@@ -126,7 +131,7 @@ This lab assumes you have:
                 }
             ]
         };
-	</copy>
+    	</copy>
     ```
 
     If you notice, this view doesn’t specify @insert, @update, or @delete on our customers table. You created this view so that you can only update orders through the `customer_orders_dv` Duality View, and no sensitive customer information (such as customers’ credit card numbers or phone numbers) will be shown. The only way to manage that information is through the `customers_dv` view.
@@ -138,8 +143,8 @@ This lab assumes you have:
 1. Now that the duality view has been created, we can insert data to the relational table or into the duality view. Let's start with adding data directly to the relational tables.
 
 
-	```
-	<copy>
+    	```
+    	<copy>
     INSERT INTO customers (id, first_name, last_name, dob, email, address, zip, phone_number, credit_card)
     VALUES (1, 'Alice', 'Brown', DATE '1990-01-01', 'alice.brown@example.com', '123 Maple Street', '12345', '555-1234', '4111 1111 1111 1111');
 
@@ -147,35 +152,35 @@ This lab assumes you have:
     INSERT INTO orders (id, customer_id, product_id, order_date, total_value)
     VALUES (100, 1, 101, SYSTIMESTAMP, 300.00);
 
-	</copy>
+    	</copy>
     ```
     ![inserting into our new_customers table](images/im3.png " ")
 
 2. Let's now insert data into the duality view of our customer data.
 
-	```
-	<copy>
+    	```
+    	<copy>
     INSERT INTO customers_DV values ('{"_id": 2, "FirstName": "Jim", "LastName":"Brown", "Email": "jim.brown@example.com", "Address": "456 Maple Street", "Zip": 12345}');
 
     commit;
-	</copy>
+    	</copy>
     ```
 
 3. Let's see how the duality views have changed.
 
     This Duality View will show us two customers.
 
-	```
-	<copy>
+    	```
+    	<copy>
     SELECT json_serialize(data PRETTY) FROM customers_dv;
-	</copy>
+    	</copy>
     ```
     This Duality View will show us the same two customers - one with an order and one without.
 
-	```
-	<copy>
+    	```
+    	<copy>
     SELECT json_serialize(data PRETTY) FROM customer_orders_dv;
-	</copy>
+    	</copy>
     ```
 4. Let's see how the relational tables have changed.
 
@@ -190,8 +195,8 @@ This lab assumes you have:
 1. Remember, the `customer_orders_dv` duality view only allows us to modify the order data. Let's update Alice's orders.
 
 
-	```
-	<copy>
+    	```
+    	<copy>
     UPDATE customer_orders_dv c
     SET c.data = json_transform(
         data,
@@ -209,8 +214,8 @@ This lab assumes you have:
 
 2. Let's now try and update Alice's last name. You'll see that this is not allowed!
 
-	```
-	<copy>
+    	```
+    	<copy>
     UPDATE customer_orders_dv c
     SET c.data = json_transform(
         data,
@@ -224,8 +229,8 @@ This lab assumes you have:
 
 3. Let's insert some orders for our customer Jim Brown using `mergepatch`.
 
-	```
-	<copy>
+    	```
+    	<copy>
     update customer_orders_dv o set data = json_mergepatch(data,'{"orders" : 
     [
         {
@@ -300,7 +305,7 @@ If the eTags do not match, which can occur if another concurrent operation updat
 
 5. Here we will use the SQL Developer Web URL to obtain your ADB instance base URL:
 
-	```
+    	```
     ADB_LL_URL = https://xxxxxxxxxx.adb.<region>.oraclecloudapps.com
     ```
 
@@ -314,16 +319,16 @@ If the eTags do not match, which can occur if another concurrent operation updat
 
 6. Now, create a variable in your terminal (It shouldn't have / at the end.)
 
-	```
-	<copy>
+    	```
+    	<copy>
     export ADB_LL_URL=https://ajs6esm7pafcr84-atp97134.adb.us-ashburn-1.oraclecloudapps.com
     </copy>
     ```
 
 7. Check it was set.
 
-	```
-	<copy>
+    	```
+    	<copy>
     echo $ADB_LL_URL
     </copy>
     ```
@@ -331,8 +336,8 @@ If the eTags do not match, which can occur if another concurrent operation updat
 
 8. Make a GET request from your laptop terminal command line.
 
-	```
-	<copy>
+    	```
+    	<copy>
     curl -X GET $ADB_LL_URL/ords/admin/customers_dv/ | json_pp
 
     </copy>

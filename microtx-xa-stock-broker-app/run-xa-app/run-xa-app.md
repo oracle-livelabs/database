@@ -71,7 +71,7 @@ When you send a request to purchase stocks, the Stock Broker service debits the 
     6. Click **Close** to close the **Purchase Stocks** dialog box.
 
 6. Click **Stocks** to view the updated list of stocks.
-   The following image shows the number of shares of Blue Semiconductor has increased by 5, the purchased amount, in your account.
+    The following image shows the number of shares of Blue Semiconductor has increased by 5, the purchased amount, in your account.
     ![User Portfolio Details section](./images/purchased-stocks-list.png)
 
 7. Click **Statement** to view the transaction statement as shown in the image below.

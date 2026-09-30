@@ -46,23 +46,23 @@ the private ssh key and the IP, which were created by Terraform. The key from th
 previous Lab has to be stored in a file.
 
 1. Before being able to use it, the key has to be converted to PuTTY's format. For that
-the **PuTTYgen** tool is being used. In that tool open the **Conversion** menu and 
-pick **Import key**. After picking the file you stored the key details will be
-shown in the main window. Now click **Save private key** and store that file.
+    the **PuTTYgen** tool is being used. In that tool open the **Conversion** menu and 
+    pick **Import key**. After picking the file you stored the key details will be
+    shown in the main window. Now click **Save private key** and store that file.
 
-  ![](images/putty_key_convert.png " ")
+    ![Image](images/putty_key_convert.png " ")
 
 2. After the conversion you can close **PuTTYgen** and open **PuTTY**. In there pick
-the **SSH**, **Auth** section and load the **Private Key**.
+    the **SSH**, **Auth** section and load the **Private Key**.
 
-  ![](images/putty_key.png " ")
+    ![Image](images/putty_key.png " ")
 
 3. After that go to the **Session** section, enter the **IP** address from your compute
 instance, as shown in the Terraform Application Information make sure **SSH** is set
 as protocol and **Port 22** is selected. After clicking **Open** enter **opc** as
 username when asked.
 
-  ![](images/putty_connect.png " ")
+  ![Image](images/putty_connect.png " ")
 
 ## Task 2: Use MySQL Shell to Access the MySQL Database Service Instance
 
@@ -137,15 +137,15 @@ Information* the previous Lab. This could be something like `us-ashburn-1` or
 The user OCID (Oracle Cloud Identifier) is your unique user id. It can be found on your
 profile page, which you can find by clicking on your name in the menu on the top right.
 
-  ![](images/menu_user.png " ")
+  ![Image](images/menu_user.png " ")
 
-  ![](images/user_ocid.png " ")
+  ![Image](images/user_ocid.png " ")
 
 The tenancy OCID is the ID of the tenancy. It's on the tenancy's page:
 
-  ![](images/menu_tenancy.png " ")
+  ![Image](images/menu_tenancy.png " ")
 
-  ![](images/tenancy_oci.png " ")
+  ![Image](images/tenancy_oci.png " ")
 
 After gathering the data, invoke the wizard using
 
@@ -165,7 +165,7 @@ Cloud console.
 For registering the API key go back to your profile page via the menu on the top right of the
 Console. On the profile page click the **API Keys** link under **Resources** (bottom left corner) and then click the **Add Public Key** Button. In the popup you can paste the key and confirm by clicking **Add**.
 
-  ![](images/api_key.png " ")
+  ![Image](images/api_key.png " ")
 
 Having this configured you can now access OCI services from the command line, in
 addition to the Web Console. For instance you can get information on the MySQL
@@ -226,21 +226,21 @@ login from our compute instance to docker in able to publish our code.
 
 You can find the **namespace** on the overview of the **Container Registry** service:
   
-  ![](images/menu_docker.png " ")
+  ![Image](images/menu_docker.png " ")
   
-  ![](images/docker.png " ")
+  ![Image](images/docker.png " ")
 
 Also, you have to generate an **API Key** for Docker to login.
 
 The **API Key** can be generated on the **Auth Tokens** section on your
 profile page.
 
-  ![](images/auth_token.png " ")
+  ![Image](images/auth_token.png " ")
 
 After providing a name for the token you get a popup which allows you to copy
 the Token
 
-  ![](images/auth_token2.png " ")
+  ![Image](images/auth_token2.png " ")
 
 *Important: When closing the popup the token can not be retrieved again and a
 new token has to be created. Make sure you noted the token before closing the

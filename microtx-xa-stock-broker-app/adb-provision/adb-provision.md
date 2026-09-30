@@ -33,9 +33,9 @@ In this lab, you will:
 
 4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your ATP-S instances. Use the **Compartment** drop-down menu to select a compartment.
 
- **Note** - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+    **Note** - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 
-   ![View ATP-S instances in compartment](./images/atp-compartment.png)
+    ![View ATP-S instances in compartment](./images/atp-compartment.png)
 
 5. This console shows that no databases exist as yet. If there were a long list of databases, you could filter the list by the state of the databases (Available, Stopped, Terminated).
 
@@ -94,9 +94,9 @@ In this lab, you will:
     ![Set administrator credentials](./images/create-admin.png " ")
 8. Choose network access. For this lab, accept the default, **Secure access from everywhere**, and then select the **Require mutual TLS (mTLS) authentication** option.
 
-   Skip and go to the next step if the **Require mutual TLS (mTLS) authentication** option is unavailable or disabled. mTLS will be required to authenticate connections to your Autonomous Database.
+    Skip and go to the next step if the **Require mutual TLS (mTLS) authentication** option is unavailable or disabled. mTLS will be required to authenticate connections to your Autonomous Database.
 
-   TLS connections allow Oracle Data Provider for .NET to connect to your Autonomous Database without a wallet. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
+    TLS connections allow Oracle Data Provider for .NET to connect to your Autonomous Database without a wallet. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
 
     ![Choose the network access type](./images/network-access.png " ")
 
@@ -128,12 +128,12 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
 2. Click **DB Connection**.
 
-   ![Download client credentials](./images/select-db-cnxn.png)
+    ![Download client credentials](./images/select-db-cnxn.png)
 
 3. On the Database Connection page, under **Wallet type**, select **Instance Wallet**.
 
 4. Click **Download Wallet**.
-   ![Create wallet](./images/wallet-type.png)
+    ![Create wallet](./images/wallet-type.png)
 
 5. In the **Download Wallet** dialog, enter a wallet password in the **Password** field and confirm the password in the **Confirm Password** field.
 
@@ -141,9 +141,9 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
     ![Download wallet](./images/download-wallet.png)
 
-   By default, the filename is: `Wallet_`*databasename*`.zip`. For example, `Wallet_BankingServiceDB.zip`. You can save this file with any filename you want.
+    By default, the filename is: `Wallet_`*databasename*`.zip`. For example, `Wallet_BankingServiceDB.zip`. You can save this file with any filename you want.
 
-   You must protect this file to prevent unauthorized database access.
+    You must protect this file to prevent unauthorized database access.
 
 7. Unzip the wallet file into the `Database_Wallet` folder. Replace the ZIP file name in following example code based on your environment.
 
@@ -273,9 +273,9 @@ Create tables in the `BankingServiceDB` ATP-S instance and populate it with samp
       </copy>
       ```
 
-   ![Create table](./images/tables-branch-banking.png)
+    ![Create table](./images/tables-branch-banking.png)
 
-   Table with the name `SAVINGS_ACCOUNT` is created.
+    Table with the name `SAVINGS_ACCOUNT` is created.
 
 3. Populate the `SAVINGS_ACCOUNT` table with sample values.
 
@@ -380,7 +380,7 @@ Create tables with sample values for the Stock Broker service.
 
     Tables with the names `BRANCH`, `ACCOUNT`, and `HISTORY` are created.
 
-   ![Create table](./images/tables-stock-broker.png)
+    ![Create table](./images/tables-stock-broker.png)
 
 3. Populate the tables with sample values.
 
@@ -463,7 +463,7 @@ To provide the details of the ATP-S database instances in the `values.yaml` file
 
 3. Similarly, under `StockBroker` enter values for the database connection string, user name, and password for the ATP-S instance that you have created for the Stock Broker service.
 
-   The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
+    The `values.yaml` file contains many properties. For readability, only the resource manager properties for which you must provide values are listed in the following sample code snippet.
 
     ```
     <copy>

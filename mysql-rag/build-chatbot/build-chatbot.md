@@ -94,7 +94,7 @@ In this lab, you will be guided through the following tasks:
 
       </copy> ```
 
-   ![Chat generated file](./images/claude-ai.png "Chat generated file")
+    ![Chat generated file](./images/claude-ai.png "Chat generated file")
 
 4. Copy generated index.html file to "chatbot"" folder
 

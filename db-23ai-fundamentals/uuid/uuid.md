@@ -20,6 +20,11 @@ The objective of this lab is to familiarize you with UUID generation in Oracle D
 ### Note on Oracle Database 23ai SQL Simplification:
 This lab takes advantage of Oracle Database 23ai's ability to omit the `FROM DUAL` clause when selecting expressions or calling functions. This makes SQL more concise and readable while maintaining the same functionality.
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Understanding UUID vs SYS_GUID
 
 1. If you haven't done so already, from the Autonomous Database home page, **click** Database action and then **click** SQL.
@@ -32,7 +37,7 @@ This lab takes advantage of Oracle Database 23ai's ability to omit the `FROM DUA
     ![click SQL](images/simple-db-actions.png =50%x*)
 
 3. **Understanding SYS_GUID() Limitations:**
-   First, let's examine the traditional SYS_GUID() function and understand why it's considered predictable. The SYS_GUID() function generates a globally unique identifier, but the sequence can be predictable.
+    First, let's examine the traditional SYS_GUID() function and understand why it's considered predictable. The SYS_GUID() function generates a globally unique identifier, but the sequence can be predictable.
 
     ```
     <copy>
@@ -50,7 +55,7 @@ This lab takes advantage of Oracle Database 23ai's ability to omit the `FROM DUA
     ```
 
 4. **Understanding the New UUID() Function:**
-   Now let's examine the new UUID() function, which generates RFC 9562-compliant version 4 variant 1 UUIDs that are truly random and unpredictable.
+    Now let's examine the new UUID() function, which generates RFC 9562-compliant version 4 variant 1 UUIDs that are truly random and unpredictable.
 
     ```
     <copy>
@@ -191,7 +196,7 @@ This lab takes advantage of Oracle Database 23ai's ability to omit the `FROM DUA
 ## Task 4: Practical UUID Applications
 
 1. **Transaction Tracking Example:**
-   Create a transaction log table that uses UUID for correlation across distributed systems.
+    Create a transaction log table that uses UUID for correlation across distributed systems.
 
     ```
     <copy>
@@ -265,7 +270,7 @@ This lab takes advantage of Oracle Database 23ai's ability to omit the `FROM DUA
 ## Task 5: UUID Performance and Best Practices
 
 1. **Indexing with UUID:**
-   Let's examine how UUIDs perform as primary keys and create appropriate indexes.
+    Let's examine how UUIDs perform as primary keys and create appropriate indexes.
 
     ```
     <copy>
@@ -305,7 +310,7 @@ This lab takes advantage of Oracle Database 23ai's ability to omit the `FROM DUA
     ```
 
 3. **UUID vs Sequential ID Comparison:**
-   Let's compare UUID with traditional sequential IDs.
+    Let's compare UUID with traditional sequential IDs.
 
     ```
     <copy>
@@ -359,7 +364,7 @@ This lab takes advantage of Oracle Database 23ai's ability to omit the `FROM DUA
 ## Task 6: Working with UUID in Applications
 
 1. **Converting UUID for Application Use:**
-   Applications often need UUIDs in different formats. Let's create utility queries for common conversions.
+    Applications often need UUIDs in different formats. Let's create utility queries for common conversions.
 
     ```
     <copy>

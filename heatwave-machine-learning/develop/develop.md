@@ -145,10 +145,10 @@ In this lab, you will be guided through the following tasks:
     <copy>sudo unzip iris_app.zip</copy>
     ```
 
-   **Note** This application uses the "ml_dev" database username that you should have used to create  the Machine Learning Model.
+    **Note** This application uses the "ml_dev" database username that you should have used to create  the Machine Learning Model.
 
 3. Configure the application to connect to MySQL HeatWave.
-   Replace the database IP in config.php file with your heatwave database IP and save the file.
+    Replace the database IP in config.php file with your heatwave database IP and save the file.
 
     ```bash
     <copy>sudo nano iris_app/config.php</copy>

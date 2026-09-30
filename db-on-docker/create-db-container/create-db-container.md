@@ -29,7 +29,7 @@ Estimated Lab Time: 15 minutes.
     ssh -i ~/.ssh/<sshkeyname> opc@<Your Compute Instance Public IP Address>
     ````
 
-2.  Verify your docker version.
+2. Verify your docker version.
 
     ````
     <copy>
@@ -37,7 +37,7 @@ Estimated Lab Time: 15 minutes.
     docker version
     </copy>
     ````
-3.  Make sure you are in the /home/opc directory.  You will clone some setup scripts from git.
+3. Make sure you are in the /home/opc directory.  You will clone some setup scripts from git.
     ````
     <copy>
     pwd
@@ -47,7 +47,7 @@ Estimated Lab Time: 15 minutes.
      </copy>
     ````
 
-4.  Login with your Docker Hub credentials.
+4. Login with your Docker Hub credentials.
 
     ````
     <copy>
@@ -55,9 +55,9 @@ Estimated Lab Time: 15 minutes.
     </copy>
     ````
 
-    ![](images/section5step2.png " ")
+    ![Image](images/section5step2.png " ")
 
-5.  There are database setup files that you cloned in an earlier step.   Ensure the listener has stopped.  Let's see how easy it is to deploy an Oracle Database to a docker container.  Issue the command below.
+5. There are database setup files that you cloned in an earlier step.   Ensure the listener has stopped.  Let's see how easy it is to deploy an Oracle Database to a docker container.  Issue the command below.
 
     ````
     <copy>
@@ -65,7 +65,7 @@ Estimated Lab Time: 15 minutes.
     </copy>
     ````
 
-    ![](images/section5step3.png " ")
+    ![Image](images/section5step3.png " ")
 
     - -d runs the command in the background
     - -h assigns it the hostname oracleadb-ao
@@ -75,7 +75,7 @@ Estimated Lab Time: 15 minutes.
 
 ## Task 2: Follow the progress of container creation
 
-1.  To watch the progress type the following command passing the name of the container:  orcl.  This takes time, **please be patient**.
+1. To watch the progress type the following command passing the name of the container:  orcl.  This takes time, **please be patient**.
 
     ````
     <copy>
@@ -83,16 +83,16 @@ Estimated Lab Time: 15 minutes.
     </copy>
     ````
 
-    ![](images/section5step4.png " ")
+    ![Image](images/section5step4.png " ")
 
-2.  When the database creation is complete, you may see "The database is ready for use". *The instance creation may happen quickly and that message may scroll past*. Press control-c to continue.
+2. When the database creation is complete, you may see "The database is ready for use". *The instance creation may happen quickly and that message may scroll past*. Press control-c to continue.
 
-    ![](images/section5step4b.png " ")
+    ![Image](images/section5step4b.png " ")
 
 
 ## Task 3: Create a schema in container running Oracle Database and login to EM Express
 
-1.  To create the schema we need to "login" to the container.  Type the following:
+1. To create the schema we need to "login" to the container.  Type the following:
 
     ````
     <copy>
@@ -100,7 +100,7 @@ Estimated Lab Time: 15 minutes.
     </copy>
     ````
 
-2.  Let's make sure the /dbfiles directory mapped earlier is writeable.
+2. Let's make sure the /dbfiles directory mapped earlier is writeable.
 
     ````
     <copy>
@@ -110,9 +110,9 @@ Estimated Lab Time: 15 minutes.
     </copy>
     ````
 
-    ![](images/section6step2.png " ")
+    ![Image](images/section6step2.png " ")
 
-3.  Now run the sql script from inside the container using sqlplus.
+3. Now run the sql script from inside the container using sqlplus.
 
     ````
     <copy>
@@ -122,9 +122,9 @@ Estimated Lab Time: 15 minutes.
      </copy>
     ````
 
-    ![](images/section6step3.png " ")
+    ![Image](images/section6step3.png " ")
 
-4.  Now that our schema is created, let's login to Enterprise Manager Express.  Enter the address below into your browser.  If you've never downloaded flash player, you may need to install it and restart your browser.
+4. Now that our schema is created, let's login to Enterprise Manager Express.  Enter the address below into your browser.  If you've never downloaded flash player, you may need to install it and restart your browser.
 
     ````
     <copy>
@@ -132,7 +132,7 @@ Estimated Lab Time: 15 minutes.
     </copy>
     ````
 
-5.  If prompted to enable Adobe Flash, click Allow.  Login using the credentials below.  Leave the container name field blank.
+5. If prompted to enable Adobe Flash, click Allow.  Login using the credentials below.  Leave the container name field blank.
 
     ````
     Username: sys
@@ -140,9 +140,9 @@ Estimated Lab Time: 15 minutes.
     Check the "as SYSDBA" checkbox
     ````
 
-    ![](images/em-express.png " ")
+    ![Image](images/em-express.png " ")
 
-    ![](images/emexpress.png " ")
+    ![Image](images/emexpress.png " ")
 
 6. Explore the database using Enterprise Manager Express.
 

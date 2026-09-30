@@ -26,7 +26,7 @@ This lab assumes you have:
 
 1. Click [here] (https://www.kaggle.com/c/nyc-taxi-trip-duration/data) and select **test.zip** file and hit download icon.
 
-  ![download taxi trip data](images/download_data_1.png)
+    ![download taxi trip data](images/download_data_1.png)
 
 2. Once the data is downloaded , unzip and extract the file **test.csv**.
 
@@ -35,31 +35,31 @@ This lab assumes you have:
 
 1. From OCI console go to Databases > Autonomous transaction Processing. Choose your compartment and select the database **REDISLABATP** you created
 
-  ![select atp database](images/upload_data_1.png)
+    ![select atp database](images/upload_data_1.png)
 
 2. Click on Database actions and select **All Database Actions** and then click on **Data Load**
 
-  ![data load](images/upload_data_2.png)
+    ![data load](images/upload_data_2.png)
 
-  ![data load inside](images/upload_data_3.png)
+    ![data load inside](images/upload_data_3.png)
 
 3. Click on **Load Data** and select the file **test.csv** to upload
 
-  ![upload data file](images/upload_data_4.png)
+    ![upload data file](images/upload_data_4.png)
 
-  ![browse file to upload](images/upload_data_5.png)
+    ![browse file to upload](images/upload_data_5.png)
 
 4. When file is ready to upload , click on **pencil** icon to edit the table name
 
-  ![edit database name](images/upload_data_6.png)
+    ![edit database name](images/upload_data_6.png)
 
 5. Change the table name to **TAXI_TRIPS** and click on close
 
-  ![change database name and close](images/upload_data_7.png)
+    ![change database name and close](images/upload_data_7.png)
 
 6. Click **Start** and then click **Run** .
 
-  ![run upload](images/upload_data_8.png)
+    ![run upload](images/upload_data_8.png)
 
 7. Once load is completed, click on **Done**  ad close the window.
 

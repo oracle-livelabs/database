@@ -55,9 +55,9 @@ Before upgrading the Oracle Database 19c `CDB19` and `ORCL` to Oracle Database 2
     
     ```
   
-  *The `log_dir` parameter sets the location of log files that are generated for database upgrades that are in the set of databases included in the upgrade job identified by the prefix for the parameter. AutoUpgrade creates a hierarchical directory based on the local log file path specified.*
+    *The `log_dir` parameter sets the location of log files that are generated for database upgrades that are in the set of databases included in the upgrade job identified by the prefix for the parameter. AutoUpgrade creates a hierarchical directory based on the local log file path specified.*
   
-  *The `restoration` parameter generates a Guaranteed Restore Point (GRP) for database restoration. If you set it to `no`, then both the database backup and restoration must be performed manually. Use this option for databases that operate in `NOARCHIVELOG` mode, and for Standard Edition and SE2 databases, which do not support the Oracle Flashback technology feature Flashback Database. The default value is `yes`.*
+    *The `restoration` parameter generates a Guaranteed Restore Point (GRP) for database restoration. If you set it to `no`, then both the database backup and restoration must be performed manually. Use this option for databases that operate in `NOARCHIVELOG` mode, and for Standard Edition and SE2 databases, which do not support the Oracle Flashback technology feature Flashback Database. The default value is `yes`.*
   
   
 
@@ -131,7 +131,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     
     ```
 
-2.  According to the message, open the non-CDB.
+2. According to the message, open the non-CDB.
 
   
     ```
@@ -180,7 +180,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     
     ```
 
-3.  Relaunch the autoupgrade utility.
+3. Relaunch the autoupgrade utility.
 
   
     ```
@@ -545,7 +545,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     *The `Executing describe` step tells you that the non-CDB `ORCL` is being tested for the compatibility after being unplugged and then plugged into `CDB20` as a new PDB, just as you would run the `DBMS_PDB.DESCRIBE` procedure and `DBMS_PDB.CHECK_PLUG_COMPATIBILITY`function.*
     
 
-3.  Regularly check the progress of the upgrade.
+3. Regularly check the progress of the upgrade.
 
     ```
     
@@ -752,7 +752,7 @@ Before upgrading the CDB and non-CDB, run the AutoUpgrade utility in Analyze mod
     
     ```
   
-  The AutoUpgrade created a guaranteed restore point (GRP) during Deploy processing mode because the `CDB19.restoration` parameter was set to `yes`. You do not need to have a previously defined GRP. This requires a lot of space in the FRA and this is the reason why you had to set the `DB_RECOVERY_FILE_DEST_SIZE` to a high value. However, if the parameter was set, you must drop the GRP. “Guaranteed” means that if FRA runs out of space, the database will come to a complete halt.
+    The AutoUpgrade created a guaranteed restore point (GRP) during Deploy processing mode because the `CDB19.restoration` parameter was set to `yes`. You do not need to have a previously defined GRP. This requires a lot of space in the FRA and this is the reason why you had to set the `DB_RECOVERY_FILE_DEST_SIZE` to a high value. However, if the parameter was set, you must drop the GRP. “Guaranteed” means that if FRA runs out of space, the database will come to a complete halt.
 
 5. Drop the guaranteed restore point created for the sake of a possible restoration if the upgrade had failed.
 
@@ -1442,7 +1442,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
   
   
 
-  20. The AutoUpgrade may display another error while upgrading `CDB19`.
+    20. The AutoUpgrade may display another error while upgrading `CDB19`.
 
   
     ```
@@ -1535,7 +1535,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
   
   
 
-24.  Suddenly, the AutoUpgrade displays an error while upgrading `ORCL`.
+24. Suddenly, the AutoUpgrade displays an error while upgrading `ORCL`.
 
   
     ```
@@ -1573,7 +1573,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
     
 
     
-25.  In Session2, test the command.
+25. In Session2, test the command.
 
     ```
     
@@ -1622,7 +1622,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
     
     ```
 
-27.  After fixing the issue, resume the job in the AutoUpgrade session.
+27. After fixing the issue, resume the job in the AutoUpgrade session.
 
   
   
@@ -1660,7 +1660,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
     
     
 
-29.  In *Session2*, read the log file to examine the root cause of the error for `ORCL`.
+29. In *Session2*, read the log file to examine the root cause of the error for `ORCL`.
 
     ```
     
@@ -1709,7 +1709,7 @@ Let's handle possible errors while analyzing or upgrading databases. The cases b
   
   
 
-30.  The AutoUpgrade displays the following error.
+30. The AutoUpgrade displays the following error.
 
   
     ```
@@ -2307,7 +2307,7 @@ You may have to abort a running AutoUpgrade operation to restart a new upgrade o
 
 ## Task 6: Clean up directories
 
-1.  If you plan to use the same log directories, clean up the log files in the directories defined in the configuration file.
+1. If you plan to use the same log directories, clean up the log files in the directories defined in the configuration file.
 
   
     ```

@@ -1,5 +1,14 @@
 # Crear un Product Demand Watchlist con Oracle Machine Learning
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 ## Introducción
 
 Otto Spencer es Seer Bank's datos scientist. His equipo supplies la predictions used in analytics charts y dashboards.
@@ -364,3 +373,8 @@ Oracle AI Base de datos makes la modelo part de la dashboard consulta. A negocio
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Base de datos Product Management, August 2026
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -64,7 +64,7 @@ Ensure you have administrative access before proceeding with database creation, 
     Apply the changes:
 
     ```sql
-   <copy> FLUSH PRIVILEGES;</copy>
+    <copy> FLUSH PRIVILEGES;</copy>
     ```
 
 4. Grant Access to GenAI Routines
@@ -72,7 +72,7 @@ Ensure you have administrative access before proceeding with database creation, 
     Provide access to call GenAI / HeatWave system routines:
 
     ```sql
-   <copy> GRANT EXECUTE ON sys.* TO 'app_user'@'%';</copy>
+    <copy> GRANT EXECUTE ON sys.* TO 'app_user'@'%';</copy>
     ```
 
     Apply the changes:

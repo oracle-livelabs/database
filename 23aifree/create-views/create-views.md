@@ -38,14 +38,14 @@ This lab assumes you have:
             'genre_name' : g.GENRE_NAME,
             'genre_description' : g.GENRE_DESCRIPTION}
     FROM genres g WITH INSERT UPDATE DELETE;
-	</copy>
+    	</copy>
     ```
-	![Creating the genre view](images/genre-dv.png " ")
+    	![Creating the genre view](images/genre-dv.png " ")
 
 2. On the other hand, we can use a GraphQL syntax to create the view. In this example we will create the `movies_dv` duality view. With GraphQL we will rely on the database to work out the relationships between the tables. The `movies_dv` lists out movie details including an array of genres. We will also set this view to @insert, @update, @delete. You can either click the trash icon to clear the worksheet or delete what is there before pasting the code below. Copy the GraphQL syntax below and click **Run Script**
 
-	```
-	<copy>
+    	```
+    	<copy>
     CREATE OR REPLACE JSON DUALITY VIEW movies_dv
         AS MOVIE_DETAILS @insert @update @delete
         {
@@ -65,7 +65,7 @@ This lab assumes you have:
                     genre_description: GENRE_DESCRIPTION}
                 }
      };
-	</copy>
+    	</copy>
     ```
     ![Creating the movie view](images/movies-dv.png " ")
 
@@ -81,10 +81,10 @@ This lab assumes you have:
 ## Task 2: Adding to our movie schema
 1. Insert a new genre into the `GENRES_DV` table to include kid-friendly movies. Copy the sql below and click **Run Statement**
 
-	```
-	<copy>
+    	```
+    	<copy>
     INSERT INTO GENRES_DV VALUES('{"genre_name" : "Kids"}');
-	</copy>
+    	</copy>
     ```
     ![adding into genre](images/kids.png " ")
 
@@ -125,9 +125,9 @@ This lab assumes you have:
                                     
                                 ]}'
     );
-	</copy>
-	```
-	![adding new movies](images/surfs.png " ")
+    	</copy>
+    	```
+    	![adding new movies](images/surfs.png " ")
 
 
 4. to reiterate, populating a duality view automatically updates the data shown in related duality views by updating their underlying tables. For example, inserting documents into the `MOVIES_DV` duality view updates both the `MOVIE_DETAILS` table and the `movies_genre_map` table.

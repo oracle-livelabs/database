@@ -34,9 +34,9 @@ Watch the video below for a quick walk-through of the lab.
 
 4. On the left side, make sure your **Workload Type** is **Transaction Processing** or **All** to see your Autonomous Transaction Processing instances. You can use the **Compartment** drop-down menu to select a compartment. Select your root compartment, or another compartment of your choice where you will create your new ATP instance. If you want to learn how to create a new compartment, click [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#Working). To learn more about compartments, click [here](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/settinguptenancy.htm#Setting_Up_Your_Tenancy).
 
- **Note** - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+    **Note** - Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 
-   ![View Oracle Autonomous Transaction Processing Databases in compartment](./images/atp-compartment.png)
+    ![View Oracle Autonomous Transaction Processing Databases in compartment](./images/atp-compartment.png)
 
 5. This console in the last screenshot shows that no databases yet exist. If there were a long list of databases, you could filter the list by the state of the databases (available, stopped, terminated, and so on). You can also sort by **Workload Type**. Here, the **Transaction Processing** workload type is selected.
 
@@ -95,9 +95,9 @@ Watch the video below for a quick walk-through of the lab.
     ![Set administrator credentials](./images/create-admin.png " ")
 8. Choose network access. For this lab, accept the default, **Secure access from everywhere**, and then select the **Require mutual TLS (mTLS) authentication** option.
 
-   Skip and go to the next step if the **Require mutual TLS (mTLS) authentication** option is unavailable or disabled. mTLS will be required to authenticate connections to your Autonomous Database.
+    Skip and go to the next step if the **Require mutual TLS (mTLS) authentication** option is unavailable or disabled. mTLS will be required to authenticate connections to your Autonomous Database.
 
-   TLS connections allow Oracle Data Provider for .NET to connect to your Autonomous Database without a wallet. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
+    TLS connections allow Oracle Data Provider for .NET to connect to your Autonomous Database without a wallet. See the [documentation for network options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/support-tls-mtls-authentication.html#GUID-3F3F1FA4-DD7D-4211-A1D3-A74ED35C0AF5) for options to allow TLS, or to require only mutual TLS (mTLS) authentication.
 
     ![Choose the network access type](./images/network-access.png " ")
 
@@ -129,12 +129,12 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
 2. Click **DB Connection**.
 
-   ![Download client credentials](./images/select-db-cnxn.png)
+    ![Download client credentials](./images/select-db-cnxn.png)
 
 3. On the Database Connection page, under **Wallet type**, select **Instance Wallet**.
 
 4. Click **Download Wallet**.
-   ![Create wallet](./images/wallet-type.png)
+    ![Create wallet](./images/wallet-type.png)
 
 5. In the **Download Wallet** dialog, enter a wallet password in the **Password** field and confirm the password in the **Confirm Password** field.
 
@@ -142,9 +142,9 @@ To download client credentials from the Oracle Cloud Infrastructure Console:
 
     ![Download wallet](./images/download-wallet.png)
 
-   By default, the filename is: `Wallet_`*databasename*`.zip`. For example, `Wallet_Department1DB.zip`. You can save this file with any filename you want.
+    By default, the filename is: `Wallet_`*databasename*`.zip`. For example, `Wallet_Department1DB.zip`. You can save this file with any filename you want.
 
-   You must protect this file to prevent unauthorized database access.
+    You must protect this file to prevent unauthorized database access.
 
 7. Unzip the wallet file into the `Database_Wallet` folder. Replace the ZIP file name in following example code based on your environment.
 
@@ -190,41 +190,41 @@ To create a table with sample values for the Department 1 application, execute t
 
 2. Copy and paste the following code snippet to your SQL Worksheet to create an `accounts` table with `account_id` as the primary key. Replace `<password>` with a password that you want to specify for the `department_helidon` user. Remember the password that you specify.
 
-   **Syntax**
+    **Syntax**
 
-   ```text
-   <copy>
-   CREATE USER department_helidon IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
-   GRANT CREATE SESSION TO department_helidon;
-   ALTER SESSION SET CURRENT_SCHEMA=department_helidon;
-   CREATE TABLE accounts
-   (
-   account_id VARCHAR(10) not null,
-   name VARCHAR(60) not null,
-   amount decimal(10,2) not null,
-   PRIMARY KEY (account_id)
-   );
-   INSERT INTO accounts VALUES ('account1', 'account1', 1000.00);
-   INSERT INTO accounts VALUES ('account2', 'account2', 2000.00);
-   INSERT INTO accounts VALUES ('account3', 'account3', 3000.00);
-   INSERT INTO accounts VALUES ('account4', 'account4', 4000.00);
-   INSERT INTO accounts VALUES ('account5', 'account5', 5000.00);
-   </copy>
-   ```
+    ```text
+    <copy>
+    CREATE USER department_helidon IDENTIFIED BY <password> QUOTA UNLIMITED ON DATA;
+    GRANT CREATE SESSION TO department_helidon;
+    ALTER SESSION SET CURRENT_SCHEMA=department_helidon;
+    CREATE TABLE accounts
+    (
+    account_id VARCHAR(10) not null,
+    name VARCHAR(60) not null,
+    amount decimal(10,2) not null,
+    PRIMARY KEY (account_id)
+    );
+    INSERT INTO accounts VALUES ('account1', 'account1', 1000.00);
+    INSERT INTO accounts VALUES ('account2', 'account2', 2000.00);
+    INSERT INTO accounts VALUES ('account3', 'account3', 3000.00);
+    INSERT INTO accounts VALUES ('account4', 'account4', 4000.00);
+    INSERT INTO accounts VALUES ('account5', 'account5', 5000.00);
+    </copy>
+    ```
 
 3. Run the queries one at a time.
 
-   ![Create table](./images/sql-dept1.png)
+    ![Create table](./images/sql-dept1.png)
 
-   A table with the name `accounts` is created and populated with sample values.
+    A table with the name `accounts` is created and populated with sample values.
 
 4. Run the following `SELECT` query on the `accounts` table to verify that the correct is available data in the table.
 
-   ```text
-   <copy>
-   SELECT * from accounts;
-   </copy>
-   ```
+    ```text
+    <copy>
+    SELECT * from accounts;
+    </copy>
+    ```
 
 ## Task 6: Create an Autonomous Database Instance for Department 2
 
@@ -272,17 +272,17 @@ To create a table with sample values for the Department 2 application, execute t
 
 3. Run the queries one at a time.
 
-   ![Create table](./images/sql-dept2.png)
+    ![Create table](./images/sql-dept2.png)
 
-   A table with the name `accounts` is created and populated with sample values.
+    A table with the name `accounts` is created and populated with sample values.
 
 4. Run the following `SELECT` query on the `accounts` table to verify that the correct is available data in the table.
 
-   ```text
-   <copy>
-   SELECT * from accounts;
-   </copy>
-   ```
+    ```text
+    <copy>
+    SELECT * from accounts;
+    </copy>
+    ```
 
 You may now **proceed to the next lab.**
 

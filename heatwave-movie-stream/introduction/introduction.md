@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 ![mysql heatwave](./images/mysql-heatwave-logo.jpg "mysql heatwave")
 
 ## About this Workshop

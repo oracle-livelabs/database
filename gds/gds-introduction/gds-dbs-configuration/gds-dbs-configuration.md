@@ -1,5 +1,11 @@
 # Database Updates for Enabling GDS
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ##  Introduction
 
 Before configuring GDS using GDSCTL, each database must be GDS-enabled. In this lab, we will execute shell scripts containing the necessary SQL commands for database configuration.
@@ -21,6 +27,10 @@ Before starting this lab, ensure that you have:
     * Lab: Validate Workshop Environment
     * Lab: GDS Installation
 
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Configure the Catalog Database
 Before proceeding with GDS configuration, the GDS Catalog Database must be prepared. The GDS Catalog database can be a standalone or shared database and will contain the GDS catalog (a repository of metadata about the GDS configuration such as regions, database pools, global services, etc.).
 
@@ -37,25 +47,25 @@ You will run the script configure_catalog.sh. This script performs the following
 
 **Steps to Configure the Catalog Database**
 
-1.	Access the Catalog Database container:
+1. Access the Catalog Database container:
     ```nohighlighting
     <copy>
     sudo podman exec -it catalog /bin/bash
     </copy>
     ```
-2.	View the contents of configure_catalog.sh (No modifications are required for this LiveLab task):
+2. View the contents of configure_catalog.sh (No modifications are required for this LiveLab task):
     ```nohighlighting
     <copy>
     cat configure_catalog.sh
     </copy>
     ```
-3.	Execute the script to apply the necessary configurations:
+3. Execute the script to apply the necessary configurations:
     ```nohighlighting
     <copy>
     ./configure_catalog.sh
     </copy>
     ```
-4.	Exit the container session:
+4. Exit the container session:
     ```nohighlighting
     <copy>
     exit
@@ -78,25 +88,25 @@ You will run the script configure_primary.sh, which performs the following tasks
 
 **Steps to Configure the Primary Database**
  
-1.	Access the Primary Database container:
+1. Access the Primary Database container:
     ```nohighlighting
     <copy>
     sudo podman exec -it primary /bin/bash
     </copy>
     ```
-2.	View the contents of configure_primary.sh (No modifications are required for this LiveLab task):
+2. View the contents of configure_primary.sh (No modifications are required for this LiveLab task):
     ```nohighlighting
     <copy>
     cat configure_primary.sh
     </copy>
     ```
-3.	Execute the script to apply the necessary configurations:
+3. Execute the script to apply the necessary configurations:
     ```nohighlighting
     <copy>
     ./configure_primary.sh
     </copy>
     ```
-4.	Exit the container session:
+4. Exit the container session:
     ```nohighlighting
     <copy>
     exit
@@ -109,31 +119,31 @@ Although no updates are required for the standby database at this stage, you can
 
 **Steps to Verify the Standby Database**
  
-1.	Access the Standby Database container:
+1. Access the Standby Database container:
     ```nohighlighting
     <copy>
     sudo podman exec -it standby /bin/bash
     </copy>
     ```
-2.	Log in as SYSDBA and verify the PDB open mode:
+2. Log in as SYSDBA and verify the PDB open mode:
     ```nohighlighting
     <copy>
     sqlplus / as sysdba
     </copy>
     ```
-3.	Check the status of all PDBs:
+3. Check the status of all PDBs:
     ```nohighlighting
     <copy>
     show pdbs
     </copy>
     ```
-4.	Confirm that the database is in READ ONLY mode:
+4. Confirm that the database is in READ ONLY mode:
     ```nohighlighting
     <copy>
     select name, open_mode from v$database;
     </copy>
     ```
-5.	Exit the SQL session and container:
+5. Exit the SQL session and container:
     ```nohighlighting
     <copy>
     exit

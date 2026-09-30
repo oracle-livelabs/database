@@ -29,7 +29,7 @@ This lab assumes you have:
     - Three Oracle shard Database containers
     - Appclient Container
 
-2.  Open a terminal session and proceed as indicated below to validate the services.
+2. Open a terminal session and proceed as indicated below to validate the services.
 
     - Oracle Sharding container Details
 

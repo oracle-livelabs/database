@@ -21,7 +21,7 @@ This lab assumes you have:
 ## Task 1: Create OS Source Directory and Unzip XTTS ZIP File (SOURCE)
 
 1. Create OS Directories (SOURCE) </br>
-Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another as XTTS source, and a third directory for RMAN files.
+    Activate the source terminal window and create three directories; one for the Data Pump metadata dump file, another as XTTS source, and a third directory for RMAN files.
 
     ```
     <copy>
@@ -71,7 +71,7 @@ Switch to the source directory
 
 ## Task 2: Configure Source Database (SOURCE)
 1. Set Source Environment (SOURCE) </br>
-Activate the source terminal window, set the source environment, and start SQL*Plus:
+    Activate the source terminal window, set the source environment, and start SQL*Plus:
 
     ```
     <copy>
@@ -116,7 +116,7 @@ Activate the source terminal window, set the source environment, and start SQL*P
 The next parameters you will set for RMAN work well in the lab. For your environment, you might have to adopt them by increasing parallelism, the backup destination, etc.
 
 1. Open RMAN Console (SOURCE) </br>
-On the source, start the RMAN console connecting to the source database: 
+    On the source, start the RMAN console connecting to the source database: 
 
     ```
     <copy>
@@ -149,3 +149,8 @@ You may now *proceed to the next lab*.
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

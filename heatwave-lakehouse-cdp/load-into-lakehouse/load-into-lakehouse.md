@@ -27,6 +27,10 @@ Before you Begin with Data Flow lab, you must have:
 - Previous Labs have been completed
 - We will use the PAR URL Created in previous lab for the bucket e2e-demo-events-silver-mysqlhw
 
+## Introduction
+
+TODO: Add introduction text here.
+
 ## Task 1: Run Autoload to infer the schema and estimate capacity required to upload the aggregate device data 
 
 1. Aggregated data information is in the csv files in the object store for which we have created a PAR URL in the earlier task. Now run the following commands:
@@ -95,7 +99,7 @@ Before you Begin with Data Flow lab, you must have:
 
 8. The execution result contains the SQL statements needed to create the table. As there was no header in the csv file generated, now execute the following **CREATE TABLE** command by replacing your **PAR Value**. In following create table we have mentioned the required column name for this lab.
  
- **NOTE: Ensure to Replace you PAR VALUE after copying the following command**
+    **NOTE: Ensure to Replace you PAR VALUE after copying the following command**
 
 
     ```bash

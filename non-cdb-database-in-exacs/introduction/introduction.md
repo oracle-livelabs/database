@@ -1,5 +1,11 @@
 # Introduction
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
 ## About this Workshop
 
 This hands-on workshop provides step-by-step instructions on creating a non-container database in ExaCS using the dbaascli utility.

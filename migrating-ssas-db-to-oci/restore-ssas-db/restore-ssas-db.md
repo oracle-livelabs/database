@@ -29,11 +29,11 @@ This lab assumes you have:
 
 1. Connect to SQL Server Management Studio as **Admin** and connect to SQL Server Analysis Services. To restore the SSAS database, right-click on the SSAS database in the Object Explorer window of SSMS, and select Restore.
 
-  ![Microsoft SQL Server Management Studio - restore database](./images/mssql-mgmt-studio.png "Microsoft SQL Server Management Studio - restore database")
+    ![Microsoft SQL Server Management Studio - restore database](./images/mssql-mgmt-studio.png "Microsoft SQL Server Management Studio - restore database")
 
 2. Select the location of the Backup file and click OK.
 
-  ![Microsoft SQL Server Management Studio - restore database disk location](./images/msql-backupfile.png "Microsoft SQL Server Management Studio - restore database disk location")
+    ![Microsoft SQL Server Management Studio - restore database disk location](./images/msql-backupfile.png "Microsoft SQL Server Management Studio - restore database disk location")
 
 3. Once the SQL Server Analysis Service database is successfully restored, it looks like the below.
 

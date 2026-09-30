@@ -29,11 +29,11 @@ The VCN in which you want to create and deploy OKE cluster must have specific se
 
 1. Modify the Ingress rules in Security List of the *Public Subnet* as follows:
 
-	![PublicSubnetSL](images/publicSL.png)
+    	![PublicSubnetSL](images/publicsl.png)
 
 2. Modify the Ingress rules in Security List of the *Private Subnet* as follows:
 
-  ![PrivateSubnetSL](images/privateSL.png)
+    ![PrivateSubnetSL](images/privatesl.png)
 
 3. The default Egress rules for both *Public and Private Subnets* should suffice. 
 
@@ -47,14 +47,14 @@ Oracle Cloud Infrastructure Identity and Access Management (IAM) lets you contro
     - Navigate to the compartment that is being used for this Live Lab and copy the **OCID** of the compartment
 
 
-  ![Compartment](images/dynamicgroup1.png)
+    ![Compartment](images/dynamicgroup1.png)
 
 2. Click on the main Navigation Menu, Select **Identity & Security** and then under **Identity** select **Dynamic Groups** and click **Create Dynamic Group**
     - Specify the Name and Description for the dynamic group
     - Specify the Rule for the Dynamic Group by specifying the OCID of the Compartment
         - Optionally, Rule Builder can also be used to specify the Rule
 
-  ![DynamicGroup](images/dynamicgroup2.png)
+    ![DynamicGroup](images/dynamicgroup2.png)
 
 3. Click on the main Navigation Menu, Select **Identity & Security** and then under **Identity** select **Policies** and click **Create Policy**
     - Specify the Name and Description for the policy
@@ -68,11 +68,11 @@ Oracle Cloud Infrastructure Identity and Access Management (IAM) lets you contro
 
 1. In the Console, open the navigation menu and click **Developer Services**. Under **Containers & Artifacts**, click **Kubernetes Clusters (OKE)** and select the option **Create Cluster**. Use the **Custom Create** workflow option to create a cluster
 
-  ![Container Engine for Kubernetes](images/oke1.png)
+    ![Container Engine for Kubernetes](images/oke1.png)
 
 2. Select the **Compartment** and the **Kubernetes version** from the drop-down menu.
 
-  ![Container Engine for Kubernetes](images/oke2.png)
+    ![Container Engine for Kubernetes](images/oke2.png)
 
 3. Under the **Network type** selection, specify the **Flannel overlay**. Specify the VCN name, and the Public Subnet for *Kubernetes Service LB Subnet* and *Kubernetes API endpoint Subnet*. Make sure to assign a Public IP address to the API endpoint.
 
@@ -84,25 +84,25 @@ Oracle Cloud Infrastructure Identity and Access Management (IAM) lets you contro
     - Shape: The shape to use for worker nodes in the node pool. The shape determines the number of CPUs and the amount of memory allocated to each node
     - Image: The image to use on worker nodes in the node pool. Make sure to select the image that is compatible with Kubernetes version
 
-  ![Container Engine for Kubernetes](images/oke4.png)
+    ![Container Engine for Kubernetes](images/oke4.png)
 
 5. Number of Worker Nodes: Specify the number of worker nodes to create in the node pool.
 6. Use the default Boot volume options
 7. Placement Configuration: Specify one or more availability domains for the worker nodes, and specify the private regional subnet
 
-![Container Engine for Kubernetes](images/oke5.png)
+    ![Container Engine for Kubernetes](images/oke5.png)
 
 8. Add an SSH Key: The public key portion of the key pair you want to use for SSH access to each node in the node pool. The public key is installed on all worker nodes in the cluster
 
-  ![Container Engine for Kubernetes](images/oke6.png)
+    ![Container Engine for Kubernetes](images/oke6.png)
 
 9. Review the details you entered for the new cluster. Click **Create Cluster** to create the new cluster. 
 
-  ![Container Engine for Kubernetes](images/oke7.png)
+    ![Container Engine for Kubernetes](images/oke7.png)
 
 10. Cluster creation continues
 
-  ![Container Engine for Kubernetes](images/oke8.png)
+    ![Container Engine for Kubernetes](images/oke8.png)
 
     - Container Engine for Kubernetes starts creating the cluster with the name you specified
     - Container Engine for Kubernetes creates:
@@ -110,7 +110,7 @@ Oracle Cloud Infrastructure Identity and Access Management (IAM) lets you contro
         - worker nodes with auto-generated names in the format oke-c&lt;part-of-cluster-OCID&gt;-n&lt;part-of-node-pool-OCID&gt;-s&lt;part-of-subnet-OCID&gt;-&lt;slot&gt;
     - Do not change the auto-generated names of worker nodes
 
-Click Close to return to the Console. The cluster creation would continue and completes shortly.
+    Click Close to return to the Console. The cluster creation would continue and completes shortly.
 
 11. Cluster creation completes
 
@@ -190,9 +190,9 @@ OCI CLI installation is required to access the OKE cluster.
 ## Task 6: Access the OKE Cluster
 1. To access the Kubernetes cluster access details, click the **Navigation Menu** in the upper left, navigate to **Developer Services** , and select **Kubernetes Clusters (OKE)**. Click the cluster name created earlier and click on **Access Cluster**. This shows all the steps needed to be performed on a machine to access the OKE Cluster successfully. Since a Public IP was assigned to the Kubernetes API endpoint, therefore the cluster would be accessible from anywhere.
 
-* **Copy** the instructions to access the kubeconfig for your cluster using the **VCN-Native public endpoint**
+    * **Copy** the instructions to access the kubeconfig for your cluster using the **VCN-Native public endpoint**
 
-  ![accessoke](images/access_oke1.png)
+    ![accessoke](images/access_oke1.png)
 
 2. Create a directory to contain the kubeconfig file
     ```
@@ -234,11 +234,11 @@ An Ingress controller is a specialized load balancer for Kubernetes that is resp
 
 1. To get the user OCID, Navigate to Upper Right-Hand corner of the OCI Console, and click on **Profile**, and select **User settings** from the menu.  Copy the User **OCID** from the console.
 
-![user OCID](images/userOCID.png)
+    ![user OCID](images/userocid.png)
 
 2. Create the Access Rules for the Ingress Controller
-Note that you must set up your own kubeconfig file. You cannot access a cluster using a kubeconfig file that a different user set up. Replace the User OCID with the one for your account.
-*If your Oracle Cloud Infrastructure user is a tenancy administrator, skip this step and go straight to Creating the Service Account, and the Ingress Controller.*
+    Note that you must set up your own kubeconfig file. You cannot access a cluster using a kubeconfig file that a different user set up. Replace the User OCID with the one for your account.
+    *If your Oracle Cloud Infrastructure user is a tenancy administrator, skip this step and go straight to Creating the Service Account, and the Ingress Controller.*
 
   
     ```
@@ -249,31 +249,31 @@ Note that you must set up your own kubeconfig file. You cannot access a cluster 
 
 3. Create the Service Account, and the Ingress Controller
 
-  **NOTE:** To find out the version number of the latest version of the script, see the [kubenetes/ingress-nginx documentation on GitHub](https://github.com/kubernetes/ingress-nginx#support-versions-table). Make sure to use the version of Ingress Controller that is compatible with the Kubernetes version.
+    **NOTE:** To find out the version number of the latest version of the script, see the [kubenetes/ingress-nginx documentation on GitHub](https://github.com/kubernetes/ingress-nginx#support-versions-table). Make sure to use the version of Ingress Controller that is compatible with the Kubernetes version.
 
-	```
+    	```
   <copy>kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml</copy>
 
-  namespace/ingress-nginx created
-  serviceaccount/ingress-nginx created
-  serviceaccount/ingress-nginx-admission created
-  role.rbac.authorization.k8s.io/ingress-nginx created
-  role.rbac.authorization.k8s.io/ingress-nginx-admission created
-  clusterrole.rbac.authorization.k8s.io/ingress-nginx created
-  clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
-  rolebinding.rbac.authorization.k8s.io/ingress-nginx created
-  rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
-  clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
-  clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
-  configmap/ingress-nginx-controller created
-  service/ingress-nginx-controller created
-  service/ingress-nginx-controller-admission created
-  deployment.apps/ingress-nginx-controller created
-  job.batch/ingress-nginx-admission-create created
-  job.batch/ingress-nginx-admission-patch created
-  ingressclass.networking.k8s.io/nginx created
-  validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
-  ```
+    namespace/ingress-nginx created
+    serviceaccount/ingress-nginx created
+    serviceaccount/ingress-nginx-admission created
+    role.rbac.authorization.k8s.io/ingress-nginx created
+    role.rbac.authorization.k8s.io/ingress-nginx-admission created
+    clusterrole.rbac.authorization.k8s.io/ingress-nginx created
+    clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
+    rolebinding.rbac.authorization.k8s.io/ingress-nginx created
+    rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+    clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
+    clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+    configmap/ingress-nginx-controller created
+    service/ingress-nginx-controller created
+    service/ingress-nginx-controller-admission created
+    deployment.apps/ingress-nginx-controller created
+    job.batch/ingress-nginx-admission-create created
+    job.batch/ingress-nginx-admission-patch created
+    ingressclass.networking.k8s.io/nginx created
+    validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
+    ```
 
 
 4. Verify that the Public IP address is assigned to the Load Balancer

@@ -81,11 +81,11 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
 ## Task 3: Upload files to the bucket folder
 
-1.  In the **Bucket Details** page, under **Objects**, click the bucket folder name.
+1. In the **Bucket Details** page, under **Objects**, click the bucket folder name.
 
     ![Click bucket folder](./images/33-click-bucket-folder.png "Click bucket folder")
 
-2.  Click **Upload**.
+2. Click **Upload**.
 
     ![Click upload](./images/34-click-upload.png "Click upload")
 
@@ -200,14 +200,14 @@ To access Object Storage from HeatWave, you must define a policy that enables th
     <copy>Allow dynamic-group heatwave-genai-dynamic-group to read objects in compartment heatwave-genai</copy>
     ```
 
-  6. Click **Create**.
+    6. Click **Create**.
 
     ![Enter policy details](./images/30-enter-policy-details.png "Enter policy details")
 
 
-<!-- /*## Task 3: Create a Pre-Authenticated Request
+    <!-- /*## Task 3: Create a Pre-Authenticated Request
 
-Pre-authenticated requests provide a way to let you access a bucket or an object without having your own credentials.
+    Pre-authenticated requests provide a way to let you access a bucket or an object without having your own credentials.
 
 1. In the **Bucket Details** page, under **Resources**, click **Pre-Authenticated Request**, and then click **Create Pre-Authenticated Request**.
 
@@ -238,7 +238,7 @@ Pre-authenticated requests provide a way to let you access a bucket or an object
 
     ```bash
     <copy>create database genai_db;</copy>
-	<copy>use genai_db;</copy>
+    	<copy>use genai_db;</copy>
     ```
 
     ![Create database](./images/11-create-database.png "Create database")

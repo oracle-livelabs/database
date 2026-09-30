@@ -25,34 +25,39 @@ Before starting this lab, ensure that you have:
     * Lab: Database Updates to Enable GDS
     * Lab: GDS Configuration Using GDSCTL
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
 ## Task 1: Create a Schema from the appclient Podman Container
 
 **Step 1: Access the appclient Container**
  
-1.  Open a new terminal window and ensure you are logged in as the oracle user.
-2.  Run the following command to access the appclient container:
+1. Open a new terminal window and ensure you are logged in as the oracle user.
+2. Run the following command to access the appclient container:
     ```nohighlighting
     <copy>
     sudo podman exec -i -t appclient /bin/bash
     </copy>
     ```
 
-3.  Switch to the oracle user inside the container:
+3. Switch to the oracle user inside the container:
     ```nohighlighting
     <copy>
     su - oracle
     </copy>
     ```
 
-**Step 2: Prepare app_schema Using a Global Service**
+    **Step 2: Prepare app_schema Using a Global Service**
  
-1.  View the contents of the schema preparation script:
+1. View the contents of the schema preparation script:
     ```nohighlighting
     <copy>
     cat appclient_schema_prep.sh
     </copy>
     ```
-2.  Execute the script to create app_schema:
+2. Execute the script to create app_schema:
     ```nohighlighting
     <copy>
     ./appclient_schema_prep.sh
@@ -71,7 +76,7 @@ Before starting this lab, ensure that you have:
 
 We are using a Global Service connection in the script insert\_records.sh, which continuously inserts records into the app\_schema.emp table.
 
-1.  To review the script contents, run:
+1. To review the script contents, run:
 
     ```nohighlighting
     <copy>
@@ -79,9 +84,9 @@ We are using a Global Service connection in the script insert\_records.sh, which
     </copy>
     ```
 
-**Step 2: Run the Script**
+    **Step 2: Run the Script**
 
-1.  Execute the script to start inserting records:
+1. Execute the script to start inserting records:
 
     ```nohighlighting
     <copy>
@@ -102,7 +107,7 @@ This result shows the "HOST_NAME" value as primary database in Data-Guard config
 ## Task 3. Test Global Service Connection String with Both GSMs (For Load Balancing & Disaster Recovery)
 **Step 1: Connect to app_schema Using the Global Service Connection String**
  
-1.  To enable load balancing and disaster recovery, connect to app_schema using the Global Service connection string that includes both gsm1 and gsm2:
+1. To enable load balancing and disaster recovery, connect to app_schema using the Global Service connection string that includes both gsm1 and gsm2:
 
     ```nohighlighting
     <copy>
@@ -121,8 +126,8 @@ This result shows the "HOST_NAME" value as primary database in Data-Guard config
     </copy>
     ```
 
-**Step 2: (Optional) Connect an Application Using a JDBC URL for Global Service**
-1.  For **Java-based applications**, you can use the following **JDBC connection URL** to connect via the Global Service gds01\_rw_srvc\_1.dbpoolora\.gds01:
+    **Step 2: (Optional) Connect an Application Using a JDBC URL for Global Service**
+1. For **Java-based applications**, you can use the following **JDBC connection URL** to connect via the Global Service gds01\_rw_srvc\_1.dbpoolora\.gds01:
 
     ```nohighlighting
     <copy>

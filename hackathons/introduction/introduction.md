@@ -1,5 +1,8 @@
 # Introduction
 
+Estimated Workshop Time: TODO - x minutes
+
+
 Welcome to Oracle Major League Hackathon Challenges
 
 ## About this Workshop

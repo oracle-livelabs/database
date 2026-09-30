@@ -178,7 +178,7 @@ An *initContainer* is just like an regular application container, except it will
 
 **Liquibase** is an open-source tool that enables you to define, manage, and version control your database schema. It utilises ChangeLogs, which contain a series of database changes, to modify and evolve your schema. These ChangeLogs are applied to the database, and **Liquibase** keeps track of the changes that have been executed, allowing for easier management and tracking of database schema modifications.
 
-![initContainer](images/initContainer.png "initContainer")
+![initContainer](images/initcontainer.png "initContainer")
 
 The below *ConfigMap* will create two new users in the ADB: `ORDS_PUBLIC_USER_K8S` and `ORDS_PLSQL_GATEWAY_K8S`.  It will also grant the required permissions for them to run the ORDS Microservice application.
 
@@ -605,7 +605,7 @@ While you could delete the individual resources manually, or by using the *manif
 
 2. Refresh your browser accessing the application:
 
-    ![Application Down](images/FourOhFour.png "Application Down")
+    ![Application Down](images/fourohfour.png "Application Down")
 
     **Note:** instead of the 404, you may experience spinning with an eventual timeout.  This is because the deleted *Ingress* resource will eventually cause the *cloud-controller-manager* to reconcile away the public IP exposing the application.
 

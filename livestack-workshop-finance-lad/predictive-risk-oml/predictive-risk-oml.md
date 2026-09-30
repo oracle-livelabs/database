@@ -97,27 +97,27 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
 1. Open **Machine Learning** from Database Actions.
 
-  Open **Database Actions**, select **Machine Learning**. Use the username and password you can find on the **View Login Info screen**.
+    Open **Database Actions**, select **Machine Learning**. Use the username and password you can find on the **View Login Info screen**.
     
-  ![open ml](images/open-ml.png)
+    ![open ml](images/open-ml.png)
     
 2. Click **AutoML**.
 
-  ![automl](images/automl.png) 
+    ![automl](images/automl.png) 
 
 3. Create a new experiment with these settings:
   
-  | Setting         | Value                   |
-  | -----------------| -------------------------|
-  | Experiment name | `Product Demand Surge`  |
-  | Data source     | `OML_DEMAND_TRAINING_V` |
-  | Predict         | `SURGE_LABEL`           |
-  | Prediction type | `Classification`        |
-  | Case ID         | `PRODUCT_ID`            |
+    | Setting         | Value                   |
+    | -----------------| -------------------------|
+    | Experiment name | `Product Demand Surge`  |
+    | Data source     | `OML_DEMAND_TRAINING_V` |
+    | Predict         | `SURGE_LABEL`           |
+    | Prediction type | `Classification`        |
+    | Case ID         | `PRODUCT_ID`            |
   
-  Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
+    Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
 
-  ![startml](images/startml.png)
+    ![startml](images/startml.png)
 
 4. Review the leaderboard and model details.
 

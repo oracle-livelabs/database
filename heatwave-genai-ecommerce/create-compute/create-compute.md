@@ -76,7 +76,7 @@ You need a compute instance to connect to the HeatWave instance.
   
     ![Add SSH Keys](./images/ssh-keys.png "Add SSH Keys")
 
-12.  Click **Download private key** and save in your ssh folder, and rename the key. For example:
+12. Click **Download private key** and save in your ssh folder, and rename the key. For example:
 
     ```bash
     <copy>ssh-key-2025</copy>

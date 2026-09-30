@@ -355,7 +355,7 @@ Performing Task 2 in Lab 2 requires that you uninstall AHF (version 22.1.0.0.0) 
     </copy>
     ```
 
-  	Command output:
+    	Command output:
 
     ```
     .-------------------------------------------------------------------------------------------------------------.
