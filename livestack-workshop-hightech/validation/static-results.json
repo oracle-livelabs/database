@@ -256,6 +256,14 @@
       "pass": true,
       "detail": null
     },
+    "link_production-operations-dashboard/production-operations-dashboard.md:images/demo-dashboard.jpg": {
+      "pass": true,
+      "detail": null
+    },
+    "link_production-operations-dashboard/production-operations-dashboard.md:images/demo-dashboard-charts.jpg": {
+      "pass": true,
+      "detail": null
+    },
     "fences_quality-review-oml/quality-review-oml.md": {
       "pass": true,
       "detail": null
@@ -368,6 +376,10 @@
       "pass": true,
       "detail": null
     },
+    "link_introduction/introduction.md:images/demo-welcome.jpg": {
+      "pass": true,
+      "detail": null
+    },
     "fences_plant-routing-spatial/plant-routing-spatial.md": {
       "pass": true,
       "detail": null
@@ -393,6 +405,10 @@
       "detail": null
     },
     "link_plant-routing-spatial/plant-routing-spatial.md:images/sql-spatial-routing.png": {
+      "pass": true,
+      "detail": null
+    },
+    "link_plant-routing-spatial/plant-routing-spatial.md:images/demo-spatial-map.jpg": {
       "pass": true,
       "detail": null
     },
@@ -524,11 +540,11 @@
       "pass": true,
       "detail": null
     },
-    "link_production-quality-network/production-quality-network.md:files/getting-started-material-flow-graph.dsnb": {
+    "link_production-quality-network/production-quality-network.md:images/demo-network-overview.jpg": {
       "pass": true,
       "detail": null
     },
-    "link_production-quality-network/production-quality-network.md:../stack/load_data/hightech-platform-handoff-loader.sql": {
+    "link_production-quality-network/production-quality-network.md:images/demo-network-query.jpg": {
       "pass": true,
       "detail": null
     },
@@ -688,16 +704,18 @@
     "component-quality-vector-search": 8,
     "getting-started": 1
   },
-  "image_references": 63,
-  "unique_images_referenced": 63,
+  "image_references": 69,
+  "unique_images_referenced": 69,
   "external_links": [
     "https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm",
     "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
+    "https://github.com/oracle-livelabs/database/blob/main/livestack-workshop-hightech/production-quality-network/files/getting-started-material-flow-graph.dsnb",
     "https://livelabs.oracle.com",
-    "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800"
+    "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800",
+    "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461"
   ],
-  "new_hightech_captures": 48,
-  "pending_capture_positions": 6,
+  "new_hightech_captures": 54,
+  "pending_capture_positions": 0,
   "manual_oracle_validation": "See live-validation-report.md and live-runtime for executed Oracle checks and answer-quality failures",
   "green_button_validation": "not run; awaiting explicit authorization"
 }

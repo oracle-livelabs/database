@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Bob Green, SEER HIGHTECH’s graph specialist, is investigating production order `PO-8841`. Shared material lots, inspection records, machines, and suppliers may connect it to other orders.
+Bob Green, Seer HighTech’s graph specialist, is investigating production order `PO-8841`. Shared material lots, inspection records, machines, and suppliers may connect it to other orders.
 
 You will follow those connections with SQL/PGQ, then explore the same relationships in Graph Studio. SQL returns tables to compare; Graph Studio displays nodes, edges, and paths.
 
@@ -233,11 +233,9 @@ Start from flagged production order `PO-8841` and trace the connected entities w
 
     ![Entities reached within four graph hops of production order PO-8841](images/sql-graph-four-hop.png)
 
-2. Review the high-risk entities in the risk-sorted table.
+2. Find the highest-risk entities connected to `PO-8841`.
 
-    Look for the material lot `LOT-SEMI-91A7`, test station `MACHINE-ATE-017`, supplier `SUPPLIER-044`, and inspection `INSPECTION-0199`.
-
-    A high risk score identifies a review candidate; material value estimates the production work involved. Neither establishes the cause of a defect.
+    Find lot `LOT-SEMI-91A7`, test station `MACHINE-ATE-017`, supplier `SUPPLIER-044`, and inspection `INSPECTION-0199`. Which connection would Bob investigate first? Risk and material value help him prioritize; they do not establish the cause of a defect.
 
 ## Task 4: Find production orders that share traceability records
 
@@ -280,9 +278,9 @@ Bob widens the investigation: **which order pairs share a material lot, supplier
 
     The pattern connects orders `a` and `b` through a shared entity. `a.entity_id < b.entity_id` prevents returning the same pair in reverse order.
 
-2. Review the business result.
+2. Find an order pair linked by a shared traceability record.
 
-    `COMBINED_RISK` helps prioritize order pairs. Check the shared record and relationship types to decide which orders to investigate together; sharing a record does not prove a defect.
+    Check its relationship types and `COMBINED_RISK`. Bob can investigate the pair together, but a shared record does not prove both orders are defective.
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
@@ -340,13 +338,11 @@ Compare the SQL results with Graph Studio views of `PO-8841` and shared lot `LOT
 
     Review the displayed vertex and edge counts. Remove display filters when checking the full query result.
 
-Verify that `LOT-SEMI-91A7` links to order vertices `PO-8841`, `PO-5077`, and `PO-1190` in your loaded data.
-
-> **Result note:** Graph layouts and node positions can vary between runs. Compare entity keys, relationships, and query results.
+Find the paths from `LOT-SEMI-91A7` to `PO-8841`, `PO-5077`, and `PO-1190`. Use the entity keys and edges to confirm the links; node positions on the screen can vary.
 
 ### Optional graph-algorithms extension
 
-The [material flow notebook](files/getting-started-material-flow-graph.dsnb) teaches PGX paths, degree, PageRank, personalized PageRank, and hop distance on `MATERIAL_FLOW_GRAPH`. It connects work centers by material transfers, separately from `PRODUCTION_QUALITY_NETWORK`. Before running it, prepare the optional PGQL graph and PGX service described in the final comment of the [loader SQL](../stack/load_data/hightech-platform-handoff-loader.sql).
+The companion [material flow graph notebook](https://github.com/oracle-livelabs/database/blob/main/livestack-workshop-hightech/production-quality-network/files/getting-started-material-flow-graph.dsnb) lets you practice PGX algorithms: paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `MATERIAL_FLOW_GRAPH` to connect work centers through material transfers, separately from the `PRODUCTION_QUALITY_NETWORK` used in this lab. A connection shows where material can move; it does not establish the cause of a quality issue.
 
 ## Appendix: Create the Property Graph
 
@@ -410,6 +406,18 @@ CREATE PROPERTY GRAPH production_quality_network
   );
 </copy>
 ```
+
+## Application example
+
+The [HighTech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows a two-hop graph and a SQL/PGQ query result.
+
+![LiveStack HighTech Demo: Product Signal Graph](images/demo-network-overview.jpg)
+
+*LiveStack HighTech Demo: Product Signal Graph*
+
+![LiveStack HighTech Demo: Product Signal Graph](images/demo-network-query.jpg)
+
+*LiveStack HighTech Demo: Product Signal Graph*
 
 ## Acknowledgements
 

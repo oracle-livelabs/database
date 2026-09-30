@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Nina Patel, SEER HIGHTECH’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the HighTech schema.
+Nina Patel, Seer HighTech’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the HighTech schema.
 
 You will help Nina ask a question, inspect the generated SQL, run it, and refine the result. The model can choose the wrong columns or misunderstand a question, so SQL review remains part of her work.
 

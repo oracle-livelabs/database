@@ -44,7 +44,12 @@ for p in sorted(S.rglob('*.md')):
   '## Task 3: Create the selected model in SQL Developer Web':'## Task 3: Create a GLM in SQL Developer Web',
   '## Task 4: Score new component inspection measurements in SQL':'## Task 4: Score sample component measurements in SQL'
  } if rel.parts[0]=='quality-review-oml' else {}
- x['editorial_headings_preserved']=h(b)==[approved_headings.get(z,z) for z in h(baseline.read_text()) if z not in expected_removed]
+ if rel.parts[0]=='introduction':approved_headings['### SEER HIGHTECH data model']='### Seer HighTech data model'
+ expected_headings=[approved_headings.get(z,z) for z in h(baseline.read_text()) if z not in expected_removed]
+ if rel.parts[0] in {'production-operations-dashboard','production-quality-network','plant-routing-spatial'}:
+  if '## Application example' in expected_headings:expected_headings.remove('## Application example')
+  expected_headings.insert(expected_headings.index('## Acknowledgements'),'## Application example')
+ x['editorial_headings_preserved']=h(b)==expected_headings
  x['approved_heading_changes']=approved_headings
  x['removed_editorial_headings']=[z for z in h(baseline.read_text()) if z in expected_removed]
  structure.append(x)

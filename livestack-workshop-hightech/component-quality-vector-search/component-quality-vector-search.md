@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Gilly Bourne, SEER HIGHTECH’s AI engineer, needs to answer **which customer sites may be affected by a power-module leakage-current concern?** The inspection wording may differ from the component descriptions.
+Gilly Bourne, Seer HighTech’s AI engineer, needs to answer **which customer sites may be affected by a power-module leakage-current concern?** The inspection wording may differ from the component descriptions.
 
 Help Gilly turn matches by meaning into a customer follow-up list.
 
@@ -146,7 +146,7 @@ Gilly tests whether the vectors find components related to the leakage-current c
 
 2. Review the ranked components.
 
-    Power control and gate driver modules are candidates for this concern. Check your ranking and distances; a semantic match does not confirm an electrical defect.
+    Which power control or gate driver modules rank closest to the concern? Note their distances before Gilly sends them for inspection; similarity alone does not confirm a defect.
 
 3. Show the result as a similarity score:
 
@@ -214,9 +214,9 @@ Gilly joins component matches to customer orders, limiting follow-up to planned,
 
     The joins connect the ranked components to order lines, production orders, and customer sites.
 
-2. Review the business result.
+2. Identify customer sites for Gilly’s follow-up list.
 
-    Check the matched component, order status, date, and contact before deciding whom to contact. Only components need vectors; joins supply the customer details.
+    For each matched component, check the production order, status, date, and customer contact. The vectors find components; the joins supply the orders and contacts.
 
 ## Acknowledgements
 

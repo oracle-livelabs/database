@@ -333,15 +333,19 @@ Otto creates sample scoring data by changing values from the training view. This
 
   One SQL result returns the prediction, service plan name, activations, and support reports and network diagnostics. Otto can use the model without moving the data to an external machine learning platform.
 
-Open **Predictive Service Assurance** and review **Impact Risk** to see model scores beside service information. The running application uses a separate model and dataset. Its scores and confidence values are not validation results for `OTTO_PLAN_DEMAND_SURGE_MODEL`.
-
-![Live predictive service-assurance view with model context and scores.](images/app-predictive-assurance.png)
-
 ## Conclusion: Put the Prediction Beside the Business Data
 
 You trained a Generalized Linear Model and scored sample plan activity. If you ran AutoML, you also compared models. The final query joins each score to the plan and activity values the analyst needs to review.
 
 A plan analyst can query the watchlist and inspect the supporting values using the same access controls that protect the source data.
+
+## Application Demo
+
+Open **Predictive Service Assurance** and review **Impact Risk** to see model scores beside service information.
+
+![LiveStack Telecomm Demo: Predictive Service Assurance](images/app-predictive-assurance.png)
+
+*LiveStack Telecomm Demo: Predictive Service Assurance*
 
 ## Acknowledgements
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica Chan, SEER HIGHTECH’s DBA, starts with the quality team’s morning question: **which component needs attention first, and which production orders and customer sites may be affected?**
+Jessica Chan, Seer HighTech’s DBA, starts with the quality team’s morning question: **which component needs attention first, and which production orders and customer sites may be affected?**
 
 Build Jessica’s dashboard query from relational alerts, JSON orders, component vectors, and plant locations.
 
@@ -161,11 +161,9 @@ The query combines four data types:
 
     ![Converged production-quality query result](images/sql-dashboard.png)
 
-3. Use the first row to explain why a component needs attention. Compare alert severity, production order counts, semantic similarity, and the nearby plant.
+3. Which component ranks first? Compare its urgent alerts, active orders, average severity, and similarity score.
 
-    A missing embedding or an empty regional plant set can leave the result incomplete or empty. Read rankings from your loaded data.
-
-> **Interpretation:** The nearest-plant result is regional context shared by every row. It is not a machine-capability or scheduling check, and it does not reassign an order. Affected-production order counts are alert totals and may include a production order in more than one alert; do not read their sum as unique customer sites.
+    `NEAREST_PLANT` gives regional context; it does not reassign an order. Do not add alert counts to estimate unique affected orders, since one order can have more than one alert.
 
 ## Task 2: Change the investigation question
 
@@ -181,17 +179,25 @@ Run the query again and compare the top rows.
 2. Which components still have high relational quality impact but a lower semantic similarity to the new question?
 3. Which components have the most active production orders or units that may need review?
 
-The query sorts by similarity first, with quality impact breaking ties. How does the new question change the review order?
+Which component would Jessica investigate first now?
 
 ![Result after changing the investigation phrase](images/sql-dashboard-followup.png)
-
-## Application example
-
-An operations application can show module test alerts, customer build commitments, and candidate assembly plants using the queries in this workshop.
 
 ## Next Steps
 
 Next, use JSON Relational Duality to expose the same production order data as JSON for an application while keeping SQL access for the database team.
+
+## Application example
+
+The [HighTech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows these signals in a product and commitment control tower.
+
+![LiveStack HighTech Demo: Product & Commitment Control Tower](images/demo-dashboard.jpg)
+
+*LiveStack HighTech Demo: Product & Commitment Control Tower*
+
+![LiveStack HighTech Demo: Product & Commitment Control Tower](images/demo-dashboard-charts.jpg)
+
+*LiveStack HighTech Demo: Product & Commitment Control Tower*
 
 ## Acknowledgements
 

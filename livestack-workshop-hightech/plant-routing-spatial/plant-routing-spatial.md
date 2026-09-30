@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Moon Kai, SEER HIGHTECH’s spatial specialist, helps planners find alternative plants for customer sites in a high-demand region. **Which sites are inside the region, and which plant is closest to each?**
+Moon Kai, Seer HighTech’s spatial specialist, helps planners find alternative plants for customer sites in a high-demand region. **Which sites are inside the region, and which plant is closest to each?**
 
 Help Moon route customer sites using points, region polygons, and distance queries.
 
@@ -110,7 +110,7 @@ The sample data gives New York Electronics Region a demand index of `91`. Moon m
 
     `ROUND(..., 2)` formats the answer to two decimal places.
 
-    Use the returned distance and `DEMAND_INDEX` to select plants to check for available capacity.
+    Which plant is closest to the New York region? Note its distance and the region’s `DEMAND_INDEX` before checking capacity.
 
 2. Try another region.
 
@@ -233,19 +233,27 @@ Moon combines two checks: which customer sites lie inside New York Electronics R
 
     `SDO_GEOM.RELATE` keeps customer sites whose point falls inside or touches the New York Electronics Region polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching customer site to every active plant. `ROW_NUMBER` keeps the nearest plant for each customer site.
 
-2. Review the result as an operations decision.
+2. Find the closest active plant for each customer site.
 
-    Customer site `LOCATION` is the delivery point. Review each site’s contact, nearest plant, distance, capacity, and current load before assigning work.
+    Check the site contact, distance, `DAILY_CAPACITY_UNITS`, and `CAPACITY_UTILIZATION_PCT`. Which site would Moon investigate first for a possible reassignment?
 
 3. Change the query to `Chicago Electronics Region`.
 
     Compare the customer sites and candidate plants with New York. The predicates stay the same; only the region changes.
 
-> **Recommendation boundary:** This query finds the nearest active plant by geographic distance. It does not check process capability, certification, material stock, machine schedules, transport time, or delivery commitments. `DAILY_CAPACITY_UNITS` and `CAPACITY_UTILIZATION_PCT` describe a plant snapshot. A planner must check those constraints before reassigning work.
+Distance and a capacity snapshot are only a first pass. Before moving an order, Moon also needs to check whether the plant can build that component, has material and machine time, and can meet the delivery date.
 
 ## Next Steps
 
 Explore further in the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+
+## Application example
+
+The [HighTech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows supply sites, customer commitments, and order routes on a map.
+
+![LiveStack HighTech Demo: Supply & Commitment Map](images/demo-spatial-map.jpg)
+
+*LiveStack HighTech Demo: Supply & Commitment Map*
 
 ## Acknowledgements
 
