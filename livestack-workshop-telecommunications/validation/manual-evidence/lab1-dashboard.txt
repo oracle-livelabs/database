@@ -1,0 +1,78 @@
+Clear Output
+Show info
+Open in new tab
+Share Query Results
+Download
+Execution time: 1.107 seconds
+This is a data grid with 8 rows and 7 columns.
+PLAN_NAME
+SITE_NAME
+PLAN_CATEGORY
+URGENT_SERVICE_ALERTS
+AVG_SEVERITY
+AFFECTED_SUBSCRIBERS
+CASES_OPENED
+1
+2
+3
+4
+5
+6
+7
+8
+Midtown Mobile Plus - Monthly rolling
+SEER Midtown Access Site
+Mobile
+2
+85.5
+5
+3
+Newark Mobile Plus - Business managed
+SEER Newark Access Site
+Mobile
+2
+85.5
+5
+3
+Newark Mobile Plus - Monthly rolling
+SEER Newark Access Site
+Mobile
+2
+85.5
+5
+3
+Edison Mobile Plus - Monthly rolling
+SEER Edison Access Site
+Mobile
+2
+85.5
+5
+3
+Midtown Mobile Plus - Business managed
+SEER Midtown Access Site
+Mobile
+2
+85.5
+5
+3
+Midtown Mobile Plus - 12-month contract
+SEER Midtown Access Site
+Mobile
+2
+85.5
+5
+3
+Rosemont Mobile Plus - Monthly rolling
+SEER Rosemont Access Site
+Mobile
+2
+85.5
+5
+3
+White Plains Mobile Plus - Monthly rolling
+SEER White Plains Access Site
+Mobile
+2
+85.5
+5
+3

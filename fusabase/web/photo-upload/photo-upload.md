@@ -27,9 +27,12 @@ This lab assumes you have:
 
 ## Task 1: Show the photo field
 
-1. Return to your code editor and open `starter/index.html`.
+1. Return to your code editor and open **`starter/index.html`.**
 
-2. Find the photo field (line 167):
+    ![shows the code. ](images/file.png =45%x*)
+
+
+2. Find the photo field (around line 172):
 
     ```html
     <label class="form-field" id="modalPhotoField" hidden>
@@ -38,7 +41,7 @@ This lab assumes you have:
     </label>
     ```
 
-3. Remove the `hidden` attribute from `#modalPhotoField`:
+3. Delete the `hidden` attribute from `#modalPhotoField`:
 
     ```html
     <copy><label class="form-field" id="modalPhotoField">

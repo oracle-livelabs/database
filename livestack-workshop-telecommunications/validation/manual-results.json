@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-23",
+  "owner": "LLUSER",
+  "version": "23.26.3.3.0",
+  "labs": {
+    "1": {
+      "status": "SQL and changed investigation phrase PASS",
+      "rows": 10,
+      "capture_pending": false
+    },
+    "2": {
+      "status": "14 SQL blocks PASS",
+      "inserted_order_id": 900001,
+      "updated_status": "confirmed"
+    },
+    "3": {
+      "status": "8 SQL blocks PASS"
+    },
+    "4": {
+      "status": "5 SQL query blocks PASS; appendix graph DDL passed in loader",
+      "graph_studio_notebooks": "PASS: main notebook (8 paragraphs), 7-row table, 7 vertices/10 edges, shared-device graph 5 vertices/7 edges; supplemental notebook (43 paragraphs) loaded AIRTIME_GRAPH with 105 vertices/114 edges and executed all paragraphs after correcting the Python graph_source option to lowercase pg_pgql. Parameters account_id=934 and 534."
+    },
+    "5": {
+      "status": "4 SQL query blocks PASS"
+    },
+    "6": {
+      "status": "5 SQL blocks PASS",
+      "model": "OTTO_PLAN_DEMAND_SURGE_MODEL",
+      "algorithm": "GENERALIZED_LINEAR_MODEL",
+      "scoring_rows": 12,
+      "oml_ui": "PASS: AutoML experiment Service Plan Demand Surge, ID 604, Completed; five models, balanced accuracy and accuracy 1.0000 on synthetic same-window labels. This is not evidence of future forecast accuracy."
+    },
+    "7": {
+      "status": "9 SQL blocks PASS after status-case correction",
+      "baseline_monthly_charges": 4560,
+      "baseline_connections": 48
+    },
+    "8": {
+      "status": "PASS after separating reasoning and SQL-generation profiles",
+      "profile": "GENAI_AGENT",
+      "sql_tool_profile": "GENAI",
+      "team_execution": "5C26CC88-4C23-15BC-E063-6210000AA968",
+      "state": "SUCCEEDED",
+      "duration_seconds": 22.159,
+      "tool_calls": 1,
+      "monthly_charges": 4560,
+      "connections": 48,
+      "earlier_attempts": "Two Cohere reasoning runs repeated tool calls and timed out. Their history rows retain RUNNING with null end dates; they are not successful runs. Final Meta reasoning run succeeded."
+    }
+  },
+  "limitations": [
+    "Canonical Oracle statements executed in browser sections and seed batches; SQLcl CONNECT/password entrypoint not executed.",
+    "No LiveLabs green-button or Terraform provisioning validation.",
+    "Optional agent cleanup not run; validation objects retained for review."
+  ]
+}

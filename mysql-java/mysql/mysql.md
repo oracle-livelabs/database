@@ -17,11 +17,16 @@ MySQL Database Service is a fully managed service, running on Oracle Cloud Infra
 * Create the table
 
 ## Task 1: Clone the GIT repository
-Open the Oracle Cloud Shell and clone this repository:
-
-```
-<copy>git clone https://github.com/mgueury/oke_mysql_java_101.git</copy>
-```
+1. Open the Oracle Cloud Shell.
+2. Check that the Code Editor architecture is x86_64.
+    - Go to Actions / Architecture
+    - Check that the current architecture is x86_64.
+    - If not, change it to x86_64 and confirm. It will restart.
+        ![Architecture](images/cloud-shell-architecture.png)
+3. Clone this repository:
+    ```
+    <copy>git clone https://github.com/mgueury/oke_mysql_java_101.git</copy>
+    ```
 ## Task 2: Install MySQL
 
 * Option 1: Install MySQL Database Service
@@ -196,6 +201,6 @@ select * from t1;
 * Stuart Davey - MySQL EMEA
 * Mario Beck - MySQL EMEA
 * Olivier Dasini - MySQL EMEA
-* Last Updated - Feb 2022
+* Last Updated - Sep 2026
 
 

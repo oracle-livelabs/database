@@ -62,7 +62,7 @@ This lab assumes you have:
 
 If both browser windows are not shown for some reason, reload the browser windows at anytime with steps as in above Task1.
 
-## Task 2: Validate That Required Processes are Up and Running from a terminal window.
+## Task 3: Validate That Required Processes are Up and Running from a terminal window.
 1. Now with access to your remote desktop session, proceed as indicated below to validate your environment before you start executing the subsequent labs. The following Processes should be up and running:
 
     - Oracle Sharding GSM1 Container
@@ -108,4 +108,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, April 2026
+* **Last Updated By/Date** - Ajay Joshi, Lead Principal Data Systems Engineer, Oracle Globally Distributed Database, September 2026

@@ -36,6 +36,11 @@ In this lab, you check the available Select AI profile, ask a finance question, 
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Finance/07-Finance%20Workshop_LAB-7_with-CC.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step                | Finance focus                                                                                |
@@ -69,6 +74,19 @@ Select AI uses an AI profile to identify the AI provider and the database object
 
 2. Review the profile attributes:
   
+    ```sql
+    <copy>
+    BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'GENAI',
+        attribute_name  => 'model',
+        attribute_value => 'xai.grok-4.3'
+      );
+    END;
+    /
+    </copy>
+    ```
+
     ```sql
     <copy>
     SELECT profile_name,
