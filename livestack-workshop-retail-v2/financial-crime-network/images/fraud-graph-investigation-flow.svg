@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">Fraud graph investigation flow</title>
+  <desc id="desc">A seed account connects through SQL PGQ graph traversal to fraud entities, relationship evidence, and investigation action.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6470"/>
+    </marker>
+    <filter id="shadow" x="-8%" y="-10%" width="116%" height="128%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#111827" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="980" height="560" fill="#f8fafc"/>
+  <text x="490" y="38" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#111827" text-anchor="middle">From Seed Account to Fraud Ring Evidence</text>
+  <text x="490" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569" text-anchor="middle">SQL/PGQ follows graph paths from a suspicious account to connected risk entities.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="48" y="112" width="210" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="48" y="112" width="210" height="36" rx="8" fill="#dbeafe"/>
+    <text x="153" y="136" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Seed Entity</text>
+    <text x="68" y="174" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">ACCT-8841</text>
+    <text x="68" y="198" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">Premier Checking</text>
+    <text x="68" y="222" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">risk score 96.5</text>
+    <text x="68" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">case seed</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="338" y="112" width="220" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="338" y="112" width="220" height="36" rx="8" fill="#dcfce7"/>
+    <text x="448" y="136" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Graph Traversal</text>
+    <text x="358" y="174" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">FRAUD_NETWORK</text>
+    <text x="358" y="198" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">MATCH path pattern</text>
+    <text x="358" y="222" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">one to two hops</text>
+    <text x="358" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">GRAPH_TABLE rows</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="638" y="112" width="242" height="150" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="638" y="112" width="242" height="36" rx="8" fill="#fef3c7"/>
+    <text x="759" y="136" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Reached Entities</text>
+    <text x="658" y="174" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">DEV-fp-91a7</text>
+    <text x="658" y="198" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">PAYEE-MULE-017</text>
+    <text x="658" y="222" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">IP-198.51.100.44</text>
+    <text x="658" y="246" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">PHONE-212-0199</text>
+  </g>
+
+  <path d="M258 187 L328 187" stroke="#5b6470" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M558 187 L628 187" stroke="#5b6470" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="78" y="346" width="548" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="78" y="346" width="548" height="36" rx="8" fill="#e0f2fe"/>
+    <text x="352" y="370" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Relationship Evidence Returned by SQL</text>
+    <text x="102" y="408" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">shared device, mule payee, shared IP, linked phone</text>
+    <text x="102" y="432" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">each row explains why an entity is near the seed account</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="682" y="346" width="240" height="112" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="682" y="346" width="240" height="36" rx="8" fill="#fee2e2"/>
+    <text x="802" y="370" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Investigation Action</text>
+    <text x="704" y="408" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">prioritize case</text>
+    <text x="704" y="432" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#334155">trace shared assets</text>
+  </g>
+
+  <path d="M448 262 L448 338" stroke="#5b6470" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M759 262 L759 338" stroke="#5b6470" stroke-width="2.5" marker-end="url(#arrow)"/>
+</svg>
