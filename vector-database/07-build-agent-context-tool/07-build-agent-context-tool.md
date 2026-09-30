@@ -182,7 +182,7 @@ The context function is the tool boundary. It calls `vecdb.query()` with text an
     print(context)
     ```
 
-3. Review the output. Each item contains the park fields an agent can use as context, together with its record ID and distance. The function only reads from `parks`; it does not create or update any memory table.
+3. Review the output. Each item contains the park fields an agent can use as context, together with its record ID and distance. The function only reads from `parks`; it does not create or update any other table.
 
 ## Task 4: Describe and Test the Tool
 
@@ -263,7 +263,7 @@ Agents need a description of what a tool does and the arguments it accepts. The 
     )
     ```
 
-You now have a read-only retrieval function and a framework-neutral tool schema. These provide the pieces an agent framework can register as a tool; this lab does not depend on a specific agent library or perform that registration. A production agent can use the returned park descriptions as context and can keep conversation history or long-term memory in a separate component.
+You now have a read-only retrieval function and a framework-neutral tool schema. These provide the pieces an agent framework can register as a tool; this lab does not depend on a specific agent library or perform that registration. A production agent can use the returned park descriptions as context within its own workflow.
 
 You have now **completed the workshop.**
 
