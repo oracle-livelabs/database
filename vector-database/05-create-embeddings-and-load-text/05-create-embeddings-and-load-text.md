@@ -62,18 +62,18 @@ The National Parks data set is in Oracle Object Storage. A pre-authenticated req
 
 ## Task 2: Load National Parks Records into `parks`
 
-This task loads National Parks records into the `parks` integrated embedding table that you created in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends an ID and metadata; you do not specify the embedding field or vector again. In Task 3, the bring-your-own-vector `directions` table requires an ID, dense vector, and metadata because it has no integrated embedding configuration.
+This task loads National Parks records into the `parks` integrated embedding table that you created in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends metadata only; you do not specify the embedding field again. In Task 3, the bring-your-own-vector `directions` table requires an ID, dense vector, and metadata because it has no integrated embedding configuration.
 
 1. Add a new Python paragraph and run the following code to prepare the vector records.
 
-    Each item has the upsert shape required for an integrated embedding table: a dictionary containing an application-supplied `id` and `metadata`. The filter excludes records without a `description` or `park_code`, because `description` supplies the text for automatic embedding and `park_code` is the stable record ID.
+    Each item has the upsert shape required for an integrated embedding table: a dictionary containing `metadata`. The filter excludes records without a `description`, because that is the field configured for automatic embedding. No ID is provided because `parks` uses `auto_generate_id=True`.
 
     ```python
     %python
     park_data = [
-        {"id": park["park_code"], "metadata": park}
+        {"metadata": park}
         for park in park_data_json
-        if park.get("description") and park.get("park_code")
+        if park.get("description")
     ]
 
     print(f"Prepared {len(park_data):,} park records.")
@@ -90,7 +90,7 @@ This task loads National Parks records into the `parks` integrated embedding tab
 
 3. Review the output from both paragraphs. Confirm that the number of uploaded rows matches the number of prepared records.
 
-    The `parks` table uses each park's `park_code` as its ID. Running the upsert paragraph again updates the existing park records instead of creating duplicates.
+    The `parks` table automatically generates IDs. Run the upsert paragraph once; running it again creates additional records because the submitted records do not have fixed IDs.
 
 ## Task 3: Create Direction Embeddings and Load the Directions Table
 

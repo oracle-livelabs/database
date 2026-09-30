@@ -34,9 +34,9 @@ An integrated embedding vector table requires an embedding model that is already
 
 ## Task 2: Create an Integrated Embedding Table
 
-An integrated embedding table creates a dense vector when you insert metadata. `embed_metadata_jsonpath` establishes the embedding rule once by identifying the metadata field that supplies text. In Lab 5, you will upsert park records with stable IDs and metadata; this table definition tells the database to embed `description` automatically.
+An integrated embedding table creates a dense vector when you insert metadata. `embed_metadata_jsonpath` establishes the embedding rule once by identifying the metadata field that supplies text. In Lab 5, you will upsert metadata-only park records because this table definition tells the database to embed `description` automatically.
 
-By default, the SDK's purpose-built vector-table schema creates an IVF vector index and metadata indexes automatically. This gives the `parks` table a search-ready starting point without manual index configuration. The table uses application-supplied IDs so the same park can be upserted again without creating a duplicate. Lab 5 uses `park_code` as each record's ID.
+By default, the SDK's purpose-built vector-table schema creates an IVF vector index and metadata indexes automatically. This gives the `parks` table a search-ready starting point without manual index configuration. `auto_generate_id=True` tells the database to assign each record ID; repeating an upsert with the same metadata creates new records because the submitted records do not have fixed IDs.
 
 1. Add a new Python paragraph and run the following code to create the `parks` table.
 
@@ -48,7 +48,7 @@ By default, the SDK's purpose-built vector-table schema creates an IVF vector in
             "model": "all_MiniLM_L12_v2",
             "embed_metadata_jsonpath": "description",
         },
-        table_params={"auto_generate_id": False},
+        table_params={"auto_generate_id": True},
     )
     ```
 
