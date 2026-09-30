@@ -48,7 +48,7 @@ This task establishes the reusable query-and-display pattern used throughout the
 
 2. Add a new Python paragraph and run the following code.
 
-    `table_name="parks"` selects the data to search. `query_by={"text": search_text}` tells the table to embed the natural-language text with its configured model. `top_k=10` returns the ten most similar park records.
+    `table_name="parks"` selects the data to search. `query_by={"text": search_text}` tells the table to embed the natural-language text with its configured model. `top_k=5` returns the five most similar park records.
 
     ```python
     %python
@@ -57,13 +57,13 @@ This task establishes the reusable query-and-display pattern used throughout the
     result = vecdb.query(
         table_name="parks",
         query_by={"text": search_text},
-        top_k=10,
+        top_k=5,
     )
 
     print(format_parks(result))
     ```
 
-3. Review the results. The table converts the query text into an embedding with its configured model, then returns the ten closest park records. Notice that the query does not need to match a park description word-for-word; it searches for records semantically related to Civil War battlefields.
+3. Review the results. The table converts the query text into an embedding with its configured model, then returns the five closest park records. Notice that the query does not need to match a park description word-for-word; it searches for records semantically related to Civil War battlefields.
 
 ## Task 2: Search for Terms Not Present in the Text
 
@@ -80,7 +80,7 @@ This task is a deliberate semantic-search test. The terms “rock climbing” an
     result = vecdb.query(
         table_name="parks",
         query_by={"text": search_text},
-        top_k=10,
+        top_k=5,
     )
 
     print(format_parks(result))
@@ -109,7 +109,7 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
                 {"states": {"$in": ["DC", "MD"]}},
             ]
         },
-        top_k=10,
+        top_k=5,
     )
 
     print(format_parks(result))
