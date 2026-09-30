@@ -26,24 +26,23 @@ This task establishes the reusable query-and-display pattern used throughout the
 
 1. Add a new Python paragraph and run the following code.
 
-    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. If a query returns no items, the function safely returns an empty string.
+    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. Set `include_directions=True` when displaying results from the BYO `directions` table to include the original direction text.
 
     ```python
     %python
-    def format_parks(result):
+    def format_parks(result, include_directions=False):
         formatted_items = []
         for i, r in enumerate(result.items or [], 1):
             metadata = r.metadata
-            formatted_items.append(
-                "\n".join(
-                    [
-                        f"{i}. name: {metadata['name']}",
-                        f"park_code: {metadata['park_code']}",
-                        f"states: {metadata['states']}",
-                        f"description: {metadata['description']}",
-                    ]
-                )
-            )
+            fields = [
+                f"{i}. name: {metadata['name']}",
+                f"park_code: {metadata['park_code']}",
+                f"states: {metadata['states']}",
+                f"description: {metadata['description']}",
+            ]
+            if include_directions:
+                fields.append(f"directions: {metadata['DIRECTIONS_INFO']}")
+            formatted_items.append("\n".join(fields))
         return "\n\n".join(formatted_items)
     ```
 
@@ -139,10 +138,10 @@ The `directions` table stores vectors generated in Lab 5 and does not have an in
         top_k=5,
     )
 
-    print(format_parks(direction_result))
+    print(format_parks(direction_result, include_directions=True))
     ```
 
-2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `directions` is a bring-your-own-vector table. The returned metadata comes from the park records loaded in Lab 5.
+2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `directions` is a bring-your-own-vector table. The output includes the original `DIRECTIONS_INFO` text as `directions`, along with the other park metadata.
 
 You now have a baseline semantic-search pattern for both integrated-embedding and bring-your-own-vector tables. Lab 7 reuses the integrated `parks` pattern and packages it as a read-only context-retrieval tool that an agent can call.
 
