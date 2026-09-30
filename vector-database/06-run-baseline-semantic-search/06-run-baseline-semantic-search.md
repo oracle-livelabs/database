@@ -2,13 +2,14 @@
 
 ## Introduction
 
-In this lab, you run semantic searches against the National Parks `parks` table. Each text query uses the embedding model configured on the table to generate its query vector.
+In this lab, you run semantic searches against the National Parks `parks` table and the bring-your-own-vector `directions` table. Text queries use the embedding model configured on `parks`; the `directions` search generates its query vector explicitly.
 
 Estimated Time: X
 
 ### Objectives
 
 - Run semantic searches with natural-language text.
+- Search a bring-your-own-vector table with a precomputed query vector.
 - Review formatted National Parks results.
 - Understand how query text, `top_k`, and metadata filters affect results.
 - Combine semantic search with metadata filters.
@@ -17,7 +18,7 @@ Estimated Time: X
 
 - Complete Lab 5: Create Embeddings and Load Text.
 - Keep the `vecdb` client initialized in your OML Notebook.
-- Load the National Parks records into the `parks` table.
+- Load the National Parks records into the `parks` table and the direction vectors into the `directions` table.
 
 ## Task 1: Search by Text
 
@@ -107,7 +108,33 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
 
 2. Review the results. Every returned record must satisfy the metadata conditions and be semantically relevant to the request. An empty result is also valid if no records meet both requirements.
 
-You now have a baseline semantic-search pattern. Lab 7 reuses this pattern and packages it as a read-only context-retrieval tool that an agent can call.
+## Task 4: Search the Bring-Your-Own-Vector Table
+
+The `directions` table stores vectors generated in Lab 5 and does not have an integrated embedding configuration. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
+
+1. Add a new Python paragraph and run the following code.
+
+    ```python
+    %python
+    direction_query = "directions to a national park near Washington, DC"
+
+    direction_embedding = vecdb.generate_embedding(
+        model_name="all_MiniLM_L12_v2",
+        inputs=[direction_query],
+    )
+
+    direction_result = vecdb.query(
+        table_name="directions",
+        query_by={"vector": direction_embedding.data[0].embedding},
+        top_k=5,
+    )
+
+    print(format_parks(direction_result))
+    ```
+
+2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `directions` is a bring-your-own-vector table. The returned metadata comes from the park records loaded in Lab 5.
+
+You now have a baseline semantic-search pattern for both integrated-embedding and bring-your-own-vector tables. Lab 7 reuses the integrated `parks` pattern and packages it as a read-only context-retrieval tool that an agent can call.
 
 
 You may now **proceed to the next lab.**
@@ -116,6 +143,7 @@ You may now **proceed to the next lab.**
 
 - [Oracle VecDB Python SDK quick start](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/quickstart.html)
 - [Oracle VecDB query response](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/response-objects/query-response.html)
+- [Oracle VecDB generate embedding operation](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/generate-embedding.html)
 - [Oracle VecDB record and metadata concepts](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/how-oracle-vecdb-works/record.html)
 
 ## Acknowledgements
