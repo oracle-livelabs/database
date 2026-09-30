@@ -1,0 +1,457 @@
+{
+  "date": "2026-09-29",
+  "passed": true,
+  "lesson_pages": 11,
+  "local_image_placements": 63,
+  "local_image_assets_with_badge_and_linked_erd": 65,
+  "direct_lazy_image_checks": 23,
+  "shared_help_images": 6,
+  "local_references": 95,
+  "local_http_targets": 81,
+  "internal_lesson_links": 8,
+  "navigation_checks": [
+    {
+      "text": "Build Connected HighTech Solutions with Oracle AI Database",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=introduction",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=introduction#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Running the HighTech demo",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=introduction#RunningtheHighTechdemo",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=introduction#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 1: Build a Converged Dashboard Query",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-operations-dashboard",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-operations-dashboard#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Run a converged production investigation",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-operations-dashboard#Task1:Runaconvergedproductioninvestigation",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Change the investigation question",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-operations-dashboard#Task2:Changetheinvestigationquestion",
+      "valid": true
+    },
+    {
+      "text": "Application example",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-operations-dashboard#Applicationexample",
+      "valid": true
+    },
+    {
+      "text": "Next Steps",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-operations-dashboard#NextSteps",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-operations-dashboard#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 2: Build a JSON Application Model",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Store flexible application data as JSON",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Task1:StoreflexibleapplicationdataasJSON",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Create a JSON Collection Table",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Task2:CreateaJSONCollectionTable",
+      "valid": true
+    },
+    {
+      "text": "Task 3: Read a customer site document from relational data",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Task3:Readacustomersitedocumentfromrelationaldata",
+      "valid": true
+    },
+    {
+      "text": "Task 4: Enable document inserts and updates",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Task4:Enabledocumentinsertsandupdates",
+      "valid": true
+    },
+    {
+      "text": "Task 5: Create and update a JSON production order",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Task5:CreateandupdateaJSONproductionorder",
+      "valid": true
+    },
+    {
+      "text": "Task 6: Project JSON fields with SQL",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Task6:ProjectJSONfieldswithSQL",
+      "valid": true
+    },
+    {
+      "text": "Conclusion: Choose the right JSON approach",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Conclusion:ChoosetherightJSONapproach",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-order-duality#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 3: Search Components by Meaning",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=component-quality-vector-search",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=component-quality-vector-search#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Check the embedding model",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=component-quality-vector-search#Task1:Checktheembeddingmodel",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Create a component vector",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=component-quality-vector-search#Task2:Createacomponentvector",
+      "valid": true
+    },
+    {
+      "text": "Task 3: Test the component vector",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=component-quality-vector-search#Task3:Testthecomponentvector",
+      "valid": true
+    },
+    {
+      "text": "Task 4: Find customer sites affected by a component concern",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=component-quality-vector-search#Task4:Findcustomersitesaffectedbyacomponentconcern",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=component-quality-vector-search#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 4: Trace a Production Quality Network",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Follow a flagged production order with SQL",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Task1:FollowaflaggedproductionorderwithSQL",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Read the same connections as a graph",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Task2:Readthesameconnectionsasagraph",
+      "valid": true
+    },
+    {
+      "text": "Task 3: Trace four-hop quality traceability",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Task3:Tracefourhopqualitytraceability",
+      "valid": true
+    },
+    {
+      "text": "Task 4: Find production orders that share traceability records",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Task4:Findproductionordersthatsharetraceabilityrecords",
+      "valid": true
+    },
+    {
+      "text": "Task 5: Visualize the relationship using Oracle Graph Studio",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Task5:VisualizetherelationshipusingOracleGraphStudio",
+      "valid": true
+    },
+    {
+      "text": "Task 6: Download and import the HighTech notebook",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Task6:DownloadandimporttheHighTechnotebook",
+      "valid": true
+    },
+    {
+      "text": "Task 7: Run and interpret the Graph Studio notebook",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Task7:RunandinterprettheGraphStudionotebook",
+      "valid": true
+    },
+    {
+      "text": "Appendix: Create the Property Graph",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Appendix:CreatethePropertyGraph",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=production-quality-network#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 5: Find the Closest Manufacturing Plant",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=plant-routing-spatial",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=plant-routing-spatial#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Look at the locations as points",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=plant-routing-spatial#Task1:Lookatthelocationsaspoints",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Find the closest plants to a demand region",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=plant-routing-spatial#Task2:Findtheclosestplantstoademandregion",
+      "valid": true
+    },
+    {
+      "text": "Task 3: Route customer sites to the closest plant",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=plant-routing-spatial#Task3:Routecustomersitestotheclosestplant",
+      "valid": true
+    },
+    {
+      "text": "Next Steps",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=plant-routing-spatial#NextSteps",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=plant-routing-spatial#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 6: Build a Quality Review Watchlist with Oracle Machine Learning",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=quality-review-oml",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=quality-review-oml#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Read the training data",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=quality-review-oml#Task1:Readthetrainingdata",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Compare models with AutoML (optional)",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=quality-review-oml#Task2:ComparemodelswithAutoML(optional)",
+      "valid": true
+    },
+    {
+      "text": "Task 3: Create the selected model in SQL Developer Web",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=quality-review-oml#Task3:CreatetheselectedmodelinSQLDeveloperWeb",
+      "valid": true
+    },
+    {
+      "text": "Task 4: Score new component inspection measurements in SQL",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=quality-review-oml#Task4:ScorenewcomponentinspectionmeasurementsinSQL",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=quality-review-oml#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 7: Ask HighTech Questions with Select AI",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Check the Select AI profile",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Task1:ChecktheSelectAIprofile",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Add the HighTech tables to the profile",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Task2:AddtheHighTechtablestotheprofile",
+      "valid": true
+    },
+    {
+      "text": "Task 3: Ask a question and inspect the SQL",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Task3:AskaquestionandinspecttheSQL",
+      "valid": true
+    },
+    {
+      "text": "Task 4: Run the question in the database",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Task4:Runthequestioninthedatabase",
+      "valid": true
+    },
+    {
+      "text": "Task 5: Improve the business question",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Task5:Improvethebusinessquestion",
+      "valid": true
+    },
+    {
+      "text": "Task 6: Explain the result",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Task6:Explaintheresult",
+      "valid": true
+    },
+    {
+      "text": "Next Steps",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#NextSteps",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 8: Build a HighTech Agent with Select AI Agent",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Check the profile and table access",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Task1:Checktheprofileandtableaccess",
+      "valid": true
+    },
+    {
+      "text": "Task 2: Register the SQL tool",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Task2:RegistertheSQLtool",
+      "valid": true
+    },
+    {
+      "text": "Task 3: Create Nina's agent, task, and team",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Task3:CreateNinasagenttaskandteam",
+      "valid": true
+    },
+    {
+      "text": "Task 4: Run a HighTech question",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Task4:RunaHighTechquestion",
+      "valid": true
+    },
+    {
+      "text": "Task 5: Inspect what the agent did",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Task5:Inspectwhattheagentdid",
+      "valid": true
+    },
+    {
+      "text": "Conclusion: Give the agent a controlled way to work",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Conclusion:Givetheagentacontrolledwaytowork",
+      "valid": true
+    },
+    {
+      "text": "Appendix: Reset the workshop objects",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Appendix:Resettheworkshopobjects",
+      "valid": true
+    },
+    {
+      "text": "Next Steps",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#NextSteps",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=selectai-agent#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Lab 9: Final Quiz",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=final-quiz",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=final-quiz#Introduction",
+      "valid": true
+    },
+    {
+      "text": "Task 1: Answer the quiz questions",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=final-quiz#Task1:Answerthequizquestions",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=final-quiz#Acknowledgements",
+      "valid": true
+    },
+    {
+      "text": "Need Help?",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=need-help-freetier",
+      "valid": true
+    },
+    {
+      "text": "Introduction",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=need-help-freetier#Introduction",
+      "valid": true
+    },
+    {
+      "text": "How to Format Your Support Email Request",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=need-help-freetier#HowtoFormatYourSupportEmailRequest",
+      "valid": true
+    },
+    {
+      "text": "Connectivity Issues?",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=need-help-freetier#ConnectivityIssues?",
+      "valid": true
+    },
+    {
+      "text": "Cannot Create Passwords for Database Users?",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=need-help-freetier#CannotCreatePasswordsforDatabaseUsers?",
+      "valid": true
+    },
+    {
+      "text": "Cannot find Groups under Identity and Security in my tenancy?",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=need-help-freetier#CannotfindGroupsunderIdentityandSecurityinmytenancy?",
+      "valid": true
+    },
+    {
+      "text": "Acknowledgements",
+      "url": "http://localhost:8765/workshops/sandbox/?lab=need-help-freetier#Acknowledgements",
+      "valid": true
+    }
+  ],
+  "quiz": "7/7; badge displayed and decoded at 512x512",
+  "launchers": [
+    "sandbox",
+    "tenancy"
+  ],
+  "source_changes": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "fix": "Ad Choices previously redirected to Data Services Contracts; both launchers now point to the verified cookie and advertising-choice section at https://www.oracle.com/legal/privacy/privacy-policy/#11.",
+  "external_pages": "All authored external content and footer destinations resolve through browser or web checks; Oracle CDN dependencies render the pages. Initial non-browser LiveLabs fetch errors were resolved with actual browser checks, not counted as broken links.",
+  "upstream_note": "Oracle-hosted Need Help page links database password restrictions to https://docs.oracle.com/en/cloud/saas/marketing/responsys-user/Account_PasswordRestrictions.htm. The page is reachable but belongs to Responsys. Shared upstream content was not modified.",
+  "boundaries": [
+    "Mailto link targets were inspected; no email sent.",
+    "No cloud provisioning or database exercise rerun was needed.",
+    "No new image captures or image edits.",
+    "This checks referenced images, downloads, navigation, and external link reachability, not every link within external websites."
+  ]
+}

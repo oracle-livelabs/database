@@ -18,15 +18,15 @@ SEER MANUFACTURING is a fictional manufacturer. This diagram shows how customer 
 
 ### What the team builds
 
-| Team member                   | Requirement                                                     | What you will see                                                                                                                          |
-| -------------------------------| -----------------------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------------------|
-| Jessica, DBA                  | Build the query behind a Production Quality and Operations dashboard.         | One SQL result combines relational quality-alert data, semantic component matching, JSON production order data, and location data.                         |
-| Thomas, application developer | Give the application flexible production order documents.            | JSON columns, JSON collections, and JSON Relational Duality Views provide different ways to serve application data.                        |
-| Gilly, AI engineer            | Find components related to a production-quality question.                       | Jessica loads an ONNX embedding model into the database, and Gilly creates vectors where the component data already lives.                   |
-| Bob, graph specialist         | Find connected production orders and entities in a production quality investigation.  | A property graph uses the existing relational data to show paths that become difficult to manage with repeated SQL joins.                  |
-| Moon, spatial expert          | Route work using plant and region locations.           | The database calculates distance from geographic data that the application can also display.                                               |
-| Otto, data scientist          | Flag components for quality review.                 | Oracle Machine Learning trains and scores a model inside the database, using the component and inspection data.                             |
-| Nina, production analyst            | Ask manufacturing questions without writing every query from scratch. | Select AI generates SQL that Nina can inspect, run, and refine. Select AI Agent adds an approved SQL query tool and records the agent activity. |
+| Team member | Your task |
+| --- | --- |
+| Jessica, DBA | Combine quality alerts, JSON orders, vectors, and locations in a dashboard query. |
+| Thomas, developer | Read and update production orders as JSON. |
+| Gilly, AI engineer | Find related components and affected customer sites. |
+| Bob, graph specialist | Trace orders connected through shared material lots and records. |
+| Moon, spatial expert | Find nearby plants for planners to assess. |
+| Otto, data scientist | Build a component quality-review watchlist. |
+| Nina, production analyst | Ask questions with Select AI, then build an assistant using a SQL tool. |
 
 <details>
 <summary><strong>Learn more: What does "converged database" mean?</strong></summary>
@@ -47,7 +47,9 @@ SEER MANUFACTURING is a fictional manufacturer. This diagram shows how customer 
 
 Estimated Workshop Time: **90 minutes**
 
-## Running the manufacturing demo
+## Application Demo
+
+[Try the LiveStack Manufacturing demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4442).
 
 The live SEER MANUFACTURING application follows the AX-400 production-recovery story. It uses a separate demo dataset from the workshop SQL fixture, so its identifiers and totals are not expected results for the lab queries.
 

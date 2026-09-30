@@ -140,7 +140,6 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
 
     The SQL creates an embedding for the phrase `weak indoor mobile coverage with Wi-Fi calling`, compares it with the vectors in `SERVICE_PLANS.PLAN_EMBEDDING`, and returns the cosine distance. A smaller distance means the two vectors are closer in meaning, so the query orders the smallest distance first.
 
-
     ```sql
     <copy>
     SELECT so.plan_name,
@@ -185,10 +184,6 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
     ```
 
     ![Test the service plan vector](images/sql-vector-similarity.png)
-
-In **Subscriber Signals**, enter `weak indoor mobile coverage and dropped calls` in **Mobile Service Signal Search**, then select **Search**. The captured demo returned eight services. Compare the ranked matches with their similarity scores; the rankings belong to the demo dataset, not the lab sample data.
-
-![Live semantic search showing the entered phrase and eight ranked telecom services.](images/app-vector-search.png)
 
 ## Task 4: Find subscribers affected by a service plan concern
 
@@ -246,6 +241,14 @@ Help the support analyst find subscribers who ordered matching plans. Keep pendi
 ## Conclusion
 
 Gilly has built a search that helps the support team decide which subscribers to contact. A plain-language concern can produce ranked service plans and a subscriber follow-up list using vectors, relational joins, and SQL in Oracle AI Database. 
+
+## Application Demo
+
+In **Subscriber Signals**, enter `weak indoor mobile coverage and dropped calls` in **Mobile Service Signal Search**, then select **Search**. Compare the ranked matches and their similarity scores.
+
+![LiveStack Telecomm Demo: Subscriber Signals](images/app-vector-search.png)
+
+*LiveStack Telecomm Demo: Subscriber Signals*
 
 ## Acknowledgements
 

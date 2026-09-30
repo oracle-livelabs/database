@@ -1,0 +1,43 @@
+- link "Database Actions,":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+  - generic: Database Actions
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - generic "Show Info":
+    - button "Show Info":
+      - generic: 
+      - generic: Show Info
+  - generic "Worksheet Query Result":
+    - application:
+      - generic: This is a data grid with 1 rows and 1 columns.
+      - generic: generated_sql
+      - generic: "1"
+      - text: SELECT c.COMPONENT_NAME AS "Component Name", c.CATEGORY AS "Category", SUM(pol.LINE_TOTAL) AS "Summed Line Total", SUM(pol.QUANTITY) AS "Summed Quantity" FROM "LLUSER"."COMPONENTS" c JOIN "LLUSER"."PRODUCTION_ORDER_LINES" pol ON c.COMPONENT_ID = pol.COMPONENT_ID JOIN "LLUSER"."PRODUCTION_ORDERS" po ON pol.PRODUCTION_ORDER_ID = po.PRODUCTION_ORDER_ID WHERE po.ORDER_STATUS IN ('released', 'in_production', 'completed') GROUP BY c.COMPONENT_NAME, c.CATEGORY ORDER BY "Summed Line Total" DESC FETCH FIRST 5 ROWS ONLY
+      - button [disabled]:
+        - generic: 
+      - status: Enter navigation mode, press F2 to enter edit or actionable mode.
+      - generic: . Contains Controls.
+      - generic: Row 1, Column 1.
+    - text: 
+    - heading "Column \"GENERATED_SQL\" row 1" [level=3]
+    - textbox
+    - button "Close":
+      - generic: Close
+- list:
+  - listitem: Copyright © 2026, Oracle and/or its affiliates.
+  - link "About Oracle":
+    - /url: https://www.oracle.com/us/corporate/
+  - link "Contact Us":
+    - /url: https://www.oracle.com/us/corporate/contact/
+  - link "Legal Notices":
+    - /url: https://www.oracle.com/us/legal/
+  - link "Terms Of Use":
+    - /url: https://www.oracle.com/us/legal/terms/
+  - link "Your Privacy Rights":
+    - /url: https://www.oracle.com/us/legal/privacy/
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert

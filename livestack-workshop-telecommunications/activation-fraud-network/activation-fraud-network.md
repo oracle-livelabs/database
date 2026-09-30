@@ -207,10 +207,6 @@ The workshop loader has created `ACTIVATION_FRAUD_NETWORK` over the existing rel
 
     The result has the same shape as Jessica's query. The difference is the way Bob describes the investigation: start at one vertex, follow one edge, and return the connected vertex.
 
-For an application example of following a set number of graph connections, open **Subscriber and Network Impact Graph** and select **2 Steps** for the game-day congestion event. The demo follows incident impact across sites, services and crews. This illustrates graph traversal; the activation-evidence graph in this lab has different entities and relationships.
-
-![Live two-step incident-impact graph; this is not a Graph Studio notebook result.](images/app-impact-graph.png)
-
 ## Task 3: Trace activation evidence across four hops
 
 Start from suspicious service order `ORD-8841` and trace the connected entities within four relationship hops.
@@ -391,7 +387,7 @@ You have used SQL/PGQ to list connected entities and Graph Studio to explore the
 
 ### Optional graph-algorithms extension
 
-The companion [airtime graph notebook](files/getting-started-airtime-graph.dsnb) lets you practice PGX graph algorithms: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `AIRTIME_GRAPH`, with prepaid account holders connected by sample airtime transfers. It is separate from `ACTIVATION_FRAUD_NETWORK` and requires the optional PGQL graph and PGX service described in the tables and sample-data reference. Before running it, ask the administrator to create the PGQL graph and enable PGX. Closely connected accounts deserve a closer look, but their connections do not prove abuse.
+The companion [airtime graph notebook](files/getting-started-airtime-graph.dsnb) lets you practice PGX graph algorithms: parameterized paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `AIRTIME_GRAPH`, with prepaid account holders connected by sample airtime transfers. It is separate from `ACTIVATION_FRAUD_NETWORK` and requires the optional PGQL graph and PGX service described in the tables and sample-data reference. Closely connected accounts deserve a closer look, but their connections do not prove abuse.
 
 ## Conclusion: Make Relationships Easy to Review
 
@@ -461,6 +457,14 @@ CREATE PROPERTY GRAPH activation_fraud_network
 ```
 
 The statement defines the graph structure over the relational tables. It does not move the rows to a separate graph database. `ACTIVATION_FRAUD_NETWORK` can then be queried with `GRAPH_TABLE` while the relational tables remain the source of the data.
+
+## Application Demo
+
+Open **Subscriber and Network Impact Graph** and select **2 Steps** for the game-day congestion event. Follow the incident’s impact across sites, services, and crews.
+
+![LiveStack Telecomm Demo: Subscriber and Network Impact Graph](images/app-impact-graph.png)
+
+*LiveStack Telecomm Demo: Subscriber and Network Impact Graph*
 
 ## Acknowledgements
 

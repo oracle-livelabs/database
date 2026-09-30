@@ -167,10 +167,6 @@ The sample data gives New York Network Region a demand index of `91` for the fir
 
     This is a useful regional result, but distance to the region boundary does not identify the subscribers who need service. Moon now uses the region polygon to find those subscribers and then ranks the closest active site for each address.
 
-In **Network Access and Field Operations**, enable **Network Sites** and **Demand Pressure Regions**. Compare the site markers with the region overlays. The demo uses its own locations and capacity data, so this map illustrates spatial presentation rather than the expected New York or Chicago SQL result.
-
-![Live network map with site and demand-region layers enabled.](images/app-spatial-map.png)
-
 ## Task 3: Find the closest site for each subscriber
 
 Moon now finds subscribers inside New York Network Region and the closest active site to each service address.
@@ -267,6 +263,14 @@ Moon used points and polygons to find subscribers in a demand region and rank ne
 ## Next Steps
 
 For more practice, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
+
+## Application Demo
+
+In **Network Access and Field Operations**, enable **Network Sites** and **Demand Pressure Regions**. Compare the site markers with the region overlays.
+
+![LiveStack Telecomm Demo: Network Access and Field Operations](images/app-spatial-map.png)
+
+*LiveStack Telecomm Demo: Network Access and Field Operations*
 
 ## Acknowledgements
 

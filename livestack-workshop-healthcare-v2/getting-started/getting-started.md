@@ -79,9 +79,10 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
     *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
 
     - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
-    - Paste each workshop SQL block into the editor.
-    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
-    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Paste and run each copied block separately.
+    - For `SELECT` queries, use **Run Statement (Ctrl+Enter or Command+Enter)** and read **Query Result**.
+    - For PL/SQL blocks and multi-statement scripts, use **Run Script (F5)** and read **Script Output**.
+    - Wait for each request to finish before continuing.
     - Use **Navigator** only when you want to inspect tables, views, or other objects.
 
 7. Run this check.
