@@ -15,11 +15,6 @@ The objective of this lab is to provide hands-on experience with Schema Annotati
 - Access to Oracle AI Database 26ai.
 - Basic understanding of SQL is helpful.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Adding Schema Annotations 
 
 1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.

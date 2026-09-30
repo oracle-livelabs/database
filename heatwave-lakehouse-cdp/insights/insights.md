@@ -23,10 +23,6 @@ In this section, you will:
 - All previous sections have been successfully completed.
 
 ##  
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Open the port
 
 1. Login to your same compute machine as opc, which we created earlier:
@@ -85,17 +81,17 @@ TODO: Add introduction text here.
       ```
       <copy> cd /home/opc/model </copy>
       ```
-6. Download the Lab Files and scp the files(devices.csv & model_deployement.py) from Lab3 to /home/opc/model 
+6.  Download the Lab Files and scp the files(devices.csv & model_deployement.py) from Lab3 to /home/opc/model 
 
       ```
       <copy> ls </copy>
       ```
    
-    output :
+   output :
          
          devices.csv  model_deployement.py
 
-7. Now run the ML code in virtual environment and keep this running in the terminal:
+7.  Now run the ML code in virtual environment and keep this running in the terminal:
 
       ```
       <copy> python3 model_deployement.py  </copy>

@@ -78,23 +78,23 @@ To create a user API key, you will use `openssl` on your local system. If you ar
 
 7. Having created the API key pair, upload the public key value to Oracle Cloud Infrastructure. In the top-right corner of the Console, open the Profile menu and then click **User Settings** to view the details.
 
-    ![View User Settings](images/user-settings.png)
+  ![View User Settings](images/user-settings.png)
 
 8. On the **Tokens and keys** menu, click **Add API key**.
 
-    ![Add Public key](images/add-public-key.png)
+  ![Add Public key](images/add-public-key.png)
 
 9. Select **Choose public key file** and click **Drop a file or select one**. Navigate to your `~/.oci` directory, and select the `oci_api_key_public.pem` file. Click **Add**.
 
-    ![Add API Key](images/upload-public-key.png)
+  ![Add API Key](images/upload-public-key.png)
 
 10. The fingerprint value is listed in the **Token and keys** page.
 
-    ![Save fingerprint value](images/copy-fingerprint.png)
+  ![Save fingerprint value](images/copy-fingerprint.png)
 
 11. Select **View configuration file** from the action menu at the end of the fingerprint row. 
 
-    ![View configuration file](images/view-configuration.png)
+  ![View configuration file](images/view-configuration.png)
 
 12. On the **Configuration file preview** page, select copy to record the configuration parameters required for API key sign-in authentication. Save the value in a note file. 
 

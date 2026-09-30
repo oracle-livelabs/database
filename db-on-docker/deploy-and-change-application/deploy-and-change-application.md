@@ -32,7 +32,7 @@ In this section, you will deploy an application, twitterfeed, that is stored in 
     ssh -i ~/.ssh/<sshkeyname> opc@<Your Compute Instance Public IP Address>
     ````
 
-2. Make sure you have exited out of the docker container.  Download the docker image, twitterfeed, extract it and run the container.  The download is from the wvbirder docker hub account where this application is staged.
+2.  Make sure you have exited out of the docker container.  Download the docker image, twitterfeed, extract it and run the container.  The download is from the wvbirder docker hub account where this application is staged.
 
     ````
     <copy>
@@ -40,9 +40,9 @@ In this section, you will deploy an application, twitterfeed, that is stored in 
     </copy>
     ````
 
-    ![Image](images/section7step1.png " ")
+    ![](images/section7step1.png " ")
 
-3. Check to see which containers are running.
+3.  Check to see which containers are running.
 
     ````
     <copy>
@@ -50,13 +50,13 @@ In this section, you will deploy an application, twitterfeed, that is stored in 
     </copy>
     ````
 
-    ![Image](images/section7step2.png " ")
+    ![](images/section7step2.png " ")
 
-4. Open up a broswer to see the application with the stream of texts.  http://Public IP address:9080/statictweets.  Expand to see the full json file.
+4.  Open up a broswer to see the application with the stream of texts.  http://Public IP address:9080/statictweets.  Expand to see the full json file.
 
-    ![Image](images/section7step3.png " ")
+    ![](images/section7step3.png " ")
 
-5. Let's run the restclient with the Oracle Database as the datasource.
+5.  Let's run the restclient with the Oracle Database as the datasource.
 
     ````
     <copy>
@@ -64,11 +64,11 @@ In this section, you will deploy an application, twitterfeed, that is stored in 
     </copy>
     ````
 
-6. Go back to your broswer to see the application with the stream of texts.  *http://Public IP address:8002/products*
+6.  Go back to your broswer to see the application with the stream of texts.  *http://Public IP address:8002/products*
 
-    ![Image](images/twitterproducts.png " ")
+    ![](images/twitterproducts.png " ")
 
-7. An application called AlphaOfficeUI has been staged in the docker hub account, wvbirder.  Let's download it, extract and run it.  Later on in this lab you will push a modified application up to your docker account.
+7.  An application called AlphaOfficeUI has been staged in the docker hub account, wvbirder.  Let's download it, extract and run it.  Later on in this lab you will push a modified application up to your docker account.
 
     ````
     <copy>
@@ -76,11 +76,11 @@ In this section, you will deploy an application, twitterfeed, that is stored in 
     </copy>
     ````
 
-    ![Image](images/section7step6.png " ")
+    ![](images/section7step6.png " ")
 
-8. Go back to your broswer to see the application running on port 8085.  http://Public IP address:8085.  Click on one of the products to see the details and the twitterfeed comments.
+8.  Go back to your broswer to see the application running on port 8085.  http://Public IP address:8085.  Click on one of the products to see the details and the twitterfeed comments.
 
-   ![Image](images/alphaoffice.png " ")
+   ![](images/alphaoffice.png " ")
 
 ## Task 2: Change application (Container in place modifications)
 
@@ -93,7 +93,7 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-2. wvbirder's container does not have vim (an editor) installed.  So you will configure it and use it to make changes to the css and html pages of the application.  First you need to login to the docker container using the command `docker exec`.
+2.  wvbirder's container does not have vim (an editor) installed.  So you will configure it and use it to make changes to the css and html pages of the application.  First you need to login to the docker container using the command `docker exec`.
 
     ````
     <copy>
@@ -103,11 +103,11 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-    ![Image](images/section8step1.png " ")
+    ![](images/section8step1.png " ")
 
-    ![Image](images/section8step2.png " ")
+    ![](images/section8step2.png " ")
 
-3. Verify the dark_blue.jpg file is in the container and then use vim to edit the html file for the main page in your application.
+3.  Verify the dark_blue.jpg file is in the container and then use vim to edit the html file for the main page in your application.
 
     ````
     <copy>
@@ -115,7 +115,7 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-4. Use the vim editor to change the name of the application (between the H1 tags) to your name.
+4.  Use the vim editor to change the name of the application (between the H1 tags) to your name.
 
     ````
     <copy>
@@ -123,9 +123,9 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-    ![Image](images/section8step4.png " ")
+    ![](images/section8step4.png " ")
 
-5. Let's edit the css file as well and change the background color of the app.  Change the bg image to the dark_blue.jpg image you copied into the container.
+5.  Let's edit the css file as well and change the background color of the app.  Change the bg image to the dark_blue.jpg image you copied into the container.
 
     ````
     <copy>
@@ -134,23 +134,23 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-    ![Image](images/section8step5b.png " ")
+    ![](images/section8step5b.png " ")
 
     *Old Version of File*
 
-    ![Image](images/section8oldversion.png " ")
+    ![](images/section8oldversion.png " ")
 
-6. Let's view the running application now.  Notice the name and the background has changed.
+6.  Let's view the running application now.  Notice the name and the background has changed.
 
-    ![Image](images/section8step9.png " ")
+    ![](images/section8step9.png " ")
 
     *Old Version of Application*
 
-    ![Image](images/oldalphaoffice.png " ")
+    ![](images/oldalphaoffice.png " ")
 
 ## Task 3: Updating an image to Docker Hub
 
-1. If you were working with a team and needed to get this updated online, you would commit it.  Let's commit this new docker image to your docker hub now.  Wvbirder thanks but we have our own Docker account.  Once commited, list the images.  Note that your image is now listed.
+1.  If you were working with a team and needed to get this updated online, you would commit it.  Let's commit this new docker image to your docker hub now.  Wvbirder thanks but we have our own Docker account.  Once commited, list the images.  Note that your image is now listed.
 
     ````
     <copy>
@@ -159,11 +159,11 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-    ![Image](images/section8step5a.png " ")
+    ![](images/section8step5a.png " ")
 
-    ![Image](images/section8step5.png " ")
+    ![](images/section8step5.png " ")
 
-2. Let's start a container based on your image.  First we need to stop the existing container.
+2.  Let's start a container based on your image.  First we need to stop the existing container.
 
     ````
     <copy>
@@ -172,9 +172,9 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-    ![Image](images/section8step6.png " ")
+    ![](images/section8step6.png " ")
 
-3. Let's download, extract and install the new container from your docker account.
+3.  Let's download, extract and install the new container from your docker account.
 
     ````
     <copy>
@@ -182,7 +182,7 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-    ![Image](images/section8step7.png " ")
+    ![](images/section8step7.png " ")
 
 4. Go back to your broswer to view the application.  http://Public IP address:8085
 
@@ -194,7 +194,7 @@ This lab will show how you can share applications and make modifications in the 
     </copy>
     ````
 
-6. Open up a new browswer tab and login to hub.docker.com.  Verify your new image was successfully pushed. 
+6.  Open up a new browswer tab and login to hub.docker.com.  Verify your new image was successfully pushed. 
 
 Congratulations, this is the end of this lab.
 

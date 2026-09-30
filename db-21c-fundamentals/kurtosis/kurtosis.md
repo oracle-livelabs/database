@@ -93,19 +93,19 @@ In this lab, you will:
 ## Task 1: Login to SQL Developer Web on Oracle Autonomous Database
 There are multiple ways to access your Autonomous Database.  You can access it via SQL*Plus or by using SQL Developer Web.  To access it via SQL*Plus, skip to [Step 1B](#STEP1B:LogintoADBusingSQLPlus).
 
-1. If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Oracle Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to the next step.
-      ![Image](../set-operators/images/21c-home-adb.png " ")
+1.  If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Oracle Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to the next step.
+      ![](../set-operators/images/21c-home-adb.png " ")
 
-2. If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab and that you are in the correct region.
+2.  If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab and that you are in the correct region.
 
-3. Click on the **Display Name** to go to your Oracle Autonomous Database main page.
-      ![Image](../set-operators/images/21c-adb.png " ")
+3.  Click on the **Display Name** to go to your Oracle Autonomous Database main page.
+      ![](../set-operators/images/21c-adb.png " ")
 
-4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-      ![Image](../set-operators/images/tools.png " ")
-5. Enter the username *hr* and password *WElcome123##*
-6. Click on the **SQL** button.
-7. Skip to [Step 2](#STEP2:Examinethekurtosisofthedistribution)
+4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+      ![](../set-operators/images/tools.png " ")
+5.  Enter the username *hr* and password *WElcome123##*
+6.  Click on the **SQL** button.
+7.  Skip to [Step 2](#STEP2:Examinethekurtosisofthedistribution)
 
 ## Task 1B: Login to Oracle Autonomous Database using SQL Plus
 1. If you aren't logged into the cloud, log back in
@@ -115,20 +115,20 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
     export TNS_ADMIN=$(pwd)/wallet
     sqlplus /nolog
-    	conn hr/WElcome123##@adb1_high
-    	```
-    </if>
+	conn hr/WElcome123##@adb1_high
+	```
+</if>
 
 ## Task 2: Examine the kurtosis of the distribution
 <if type="dbcs">
-1. Make some modifications to the display
+1.  Make some modifications to the display
 
-    	```
-    	SQL> <copy>SET PAGES 100</copy>
-    	```
+	```
+	SQL> <copy>SET PAGES 100</copy>
+	```
 </if>
 <if type="atp">
-1. If you aren't logged in to SQL Developer Web, login as the *HR* user. We used the *REPORT* user in the skewness lab, this *HR* user has a fresh **houses** table for us to modify.
+1.  If you aren't logged in to SQL Developer Web, login as the *HR* user. We used the *REPORT* user in the skewness lab, this *HR* user has a fresh **houses** table for us to modify.
 
 </if>
 1. Display the table rows. The `HOUSE` column values refer to types of house that you want to look at and categorize the data that you look at statistically and compare with each other.
@@ -138,7 +138,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
      SQL> <copy>SELECT * FROM houses;</copy>
     ```
     <if type="atp">
-    ![Image](./images/step2-2.png " ")
+    ![](./images/step2-2.png " ")
     </if>
     <if type="dbcs">
     ```
@@ -200,7 +200,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     </if>
      <if type="atp">
-     ![Image](./images/step2-3.png " ")
+     ![](./images/step2-3.png " ")
     </if>
 
 
@@ -231,18 +231,18 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 <if type="atp">
 1. Insert more rows in the table.
 
-    	```
-    	SQL> <copy>INSERT INTO houses SELECT * FROM houses;</copy>
-    	```
+	```
+	SQL> <copy>INSERT INTO houses SELECT * FROM houses;</copy>
+	```
 
 2. Press the play button in SQL Developer Web to submit.
 
 3. Press the play button 3 more times to submit a total of 152 rows.
 
-     ![Image](./images/step3-3.png " ")
+     ![](./images/step3-3.png " ")
 </if>
 
-2. Issue select statements to examine the kurtosis of the distribution now.
+2.  Issue select statements to examine the kurtosis of the distribution now.
 
      ```
      SQL> <copy>SELECT house, KURTOSIS_POP(price_big_city), KURTOSIS_POP(price_small_city) FROM houses
@@ -272,11 +272,11 @@ There are multiple ways to access your Autonomous Database.  You can access it v
      ```
      </if>
      <if type="atp">
-     ![Image](./images/step3-4.png " ")
+     ![](./images/step3-4.png " ")
      </if>
 
 
-    As you can see, as the number of values in the data set increases, the difference between the computed values of `KURTOSIS_SAMP` and `KURTOSIS_POP` decreases.
+  As you can see, as the number of values in the data set increases, the difference between the computed values of `KURTOSIS_SAMP` and `KURTOSIS_POP` decreases.
 
 2. Determine the kurtosis of distinct values in columns `PRICE_SMALL_CITY` and `PRICE_BIG_CITY`.
 
@@ -292,7 +292,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     ```
    <if type="atp">
-    ![Image](./images/step3-5a.png " ")
+    ![](./images/step3-5a.png " ")
     </if>
     <if type="dbcs">
     ```
@@ -304,7 +304,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
      ```
      </if>
 
-    Is the result much different if the query does not evaluate the distinct values in columns `PRICE_BIG_CITY` and `PRICE_SMALL_CITY`?
+  Is the result much different if the query does not evaluate the distinct values in columns `PRICE_BIG_CITY` and `PRICE_SMALL_CITY`?
 
 
      ```
@@ -318,7 +318,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     ```
     <if type="atp">
-    ![Image](./images/step3-5b.png " ")
+    ![](./images/step3-5b.png " ")
     </if>
     <if type="dbcs">
     ```
@@ -330,7 +330,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
      ```
      </if>
 
-    The population tailedness value is not different because the same exact rows were inserted.
+  The population tailedness value is not different because the same exact rows were inserted.
 
 <if type="dbcs">
 3. Insert more rows in the table with a big data set for `HOUSE` number 1.
@@ -363,16 +363,16 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 <if type="atp">
 3. Insert more rows in the table with a big data set for `HOUSE` number 1.
 
-    	```
-    	SQL> <copy>INSERT INTO houses (house, price_big_city, price_small_city)
+	```
+	SQL> <copy>INSERT INTO houses (house, price_big_city, price_small_city)
                     SELECT house, price_big_city*0.5, price_small_city*0.1
                     FROM houses WHERE house=1;</copy>
-    	```
+	```
 2. Press the play button in SQL Developer Web to submit.
 
 3. Press the play button 4 more times to submit a total of 2304 rows.
 
-     ![Image](./images/step3-8.png " ")
+     ![](./images/step3-8.png " ")
 </if>
 
 2. Select and count the houses.
@@ -412,16 +412,16 @@ There are multiple ways to access your Autonomous Database.  You can access it v
      ```
     </if>
      <if type="atp">
-     ![Image](./images/step3-9.png " ")
+     ![](./images/step3-9.png " ")
      </if>
 
-    Now the tailedness of the data becomes positive for house number 1 which means that data is skewed to right. `PRICE_SMALL_CITY` has a much higher kurtosis compared to `PRICE_BIG_CITY`. This implies that in `PRICE_SMALL_CITY`, more of the variance is the result of many infrequent extreme deviations, whereas in `PRICE_BIG_CITY`, the variance is attributed to very frequent modestly sized deviations.
+  Now the tailedness of the data becomes positive for house number 1 which means that data is skewed to right. `PRICE_SMALL_CITY` has a much higher kurtosis compared to `PRICE_BIG_CITY`. This implies that in `PRICE_SMALL_CITY`, more of the variance is the result of many infrequent extreme deviations, whereas in `PRICE_BIG_CITY`, the variance is attributed to very frequent modestly sized deviations.
 
 <if type="atp">
 5. Click the down arrow in the upper right corner and **Sign Out** of the HR user.
 </if>
 <if type="dbcs">
-5. Exit from the sql prompt
+5.  Exit from the sql prompt
 
 	```
 	SQL> <copy>EXIT</copy>

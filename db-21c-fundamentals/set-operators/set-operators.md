@@ -40,19 +40,19 @@ In this lab, you will:
 
 In this step you will execute the `/home/oracle/labs/M104783GC10/setup_oe_tables.sh` shell script. The shell script creates and loads the `OE.INVENTORIES`, `OE.ORDERS` and `OE.ORDER_ITEMS` tables.
 
-1. Open up the Oracle Cloud Shell or terminal of your choice and login to the 21c instance in DB Systems.  Switch to the oracle user.
-    	```
-    	ssh -i ~/.ssh/sshkeyname opc@Your Compute Instance Public IP Address
-    	sudo su - oracle
-    	```
+1.  Open up the Oracle Cloud Shell or terminal of your choice and login to the 21c instance in DB Systems.  Switch to the oracle user.
+	```
+	ssh -i ~/.ssh/sshkeyname opc@Your Compute Instance Public IP Address
+	sudo su - oracle
+	```
 
-2. Change to the lab directory and run the shell script to setup the tables
+2.  Change to the lab directory and run the shell script to setup the tables
 
-    	```
+	```
 
-    	$ <copy>cd /home/oracle/labs/M104783GC10</copy>
+	$ <copy>cd /home/oracle/labs/M104783GC10</copy>
 
-    	```
+	```
 
 2. Run the script to setup the Order Entry (OE) tables.
 
@@ -76,18 +76,18 @@ In this step you will execute the `/home/oracle/labs/M104783GC10/setup_oe_tables
 
 There are multiple ways to access your Autonomous Database.  You can access it via SQL\*Plus or by using SQL Developer Web.  To access it via SQL\*Plus, skip to [Step 1B](#STEP1B:LogintoADBusingSQLPlus).
 
-1. If you aren't still logged in, login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
-      ![Image](./images/21c-home-adb.png " ")
+1.  If you aren't still logged in, login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
+      ![](./images/21c-home-adb.png " ")
 
-2. If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
-3. Click on the **Display Name** to go to your ADB main page.
-      ![Image](./images/21c-adb.png " ")
+2.  If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
+3.  Click on the **Display Name** to go to your ADB main page.
+      ![](./images/21c-adb.png " ")
 
-4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-      ![Image](./images/tools.png " ")
+4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+      ![](./images/tools.png " ")
 
-6. Enter the username *oe* and password *WElcome123##*
-7. Click on the **SQL** button.
+6.  Enter the username *oe* and password *WElcome123##*
+7.  Click on the **SQL** button.
 
 
 ## Task 1B: Login to ADB using SQL Plus
@@ -98,81 +98,81 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
     export TNS_ADMIN=$(pwd)/wallet
     sqlplus /nolog
-    	conn oe/WElcome123##@adb1_high
-    	```
-    </if>
+	conn oe/WElcome123##@adb1_high
+	```
+</if>
 ## Task 2: Test the set operator with the `EXCEPT` clause
 
 <if type="dbcs">
 
 1. Connect to `PDB21` as `OE`.
 
-    	```
-    	$ <copy>sqlplus oe@PDB21</copy>
-    	Copyright (c) 1982, 2020, Oracle.  All rights reserved.
-    	Enter password: <b><i>WElcome123##</i></b>
-    	Last Successful login time: Mon Mar 16 2020 11:32:00 +00:00
-    	Connected to:
-    	```
+	```
+	$ <copy>sqlplus oe@PDB21</copy>
+	Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+	Enter password: <b><i>WElcome123##</i></b>
+	Last Successful login time: Mon Mar 16 2020 11:32:00 +00:00
+	Connected to:
+	```
 </if>
 <if type="atp">
-    For the subsequent sections you will be pasting sql into the SQL worksheet and pressing the green play button or Ctrl+Enter to execute the highlighted statement.  You can also run this in the terminal by logging in to SQL\*Plus as oe/WElcome123##@adb1_high.
+For the subsequent sections you will be pasting sql into the SQL worksheet and pressing the green play button or Ctrl+Enter to execute the highlighted statement.  You can also run this in the terminal by logging in to SQL\*Plus as oe/WElcome123##@adb1_high.
 
 1. Click the admin drop down and scroll down and choose the OE schema.  Note that there are 3 tables that you setup in the previous lab.  Enter the following sql queries to explore set operators.
 </if>
 2. Count in both tables, `INVENTORIES` and `ORDER_ITEMS`, respectively the number of products available in the inventory and the number of products that customers ordered.  Start with the `INVENTORIES` table.
 
 
-    	```
-    	SQL> <copy>SELECT count(distinct product_id) FROM inventories;</copy>
-    	```
-    	<if type="atp">
-    ![Image](images/step2-inventories.png)
-    	</if>
-    	<if type="dbcs">
-    	```
-    	COUNT(PRODUCT_ID)
-    	-----------------
-    				208
-    	```
-    	</if>
+	```
+	SQL> <copy>SELECT count(distinct product_id) FROM inventories;</copy>
+	```
+	<if type="atp">
+    ![](images/step2-inventories.png)
+	</if>
+	<if type="dbcs">
+	```
+	COUNT(PRODUCT_ID)
+	-----------------
+				208
+	```
+	</if>
 
 3. Run a count in the `ORDER_ITEMS` table.  Note the difference.
 
-    	```
-    	SQL> <copy>SELECT count(distinct product_id) FROM order_items;</copy>
-    	```
-    	<if type="atp">
-    ![Image](images/step2-order.png)
-    	</if>
-    	<if type="dbcs">
-    	```
-    	COUNT(PRODUCT_ID)
-    	-----------------
-    				185
+	```
+	SQL> <copy>SELECT count(distinct product_id) FROM order_items;</copy>
+	```
+	<if type="atp">
+    ![](images/step2-order.png)
+	</if>
+	<if type="dbcs">
+	```
+	COUNT(PRODUCT_ID)
+	-----------------
+				185
 
-    	```
-    	</if>
+	```
+	</if>
 
 4. How many products are in the inventory that were never ordered? Use the `EXCEPT` operator to retrieve only unique rows returned by the first query but not by the second. For multi-line statements, select all the lines you want to run before hitting the Run Statement button.
 
 
-    	```
-    	SQL> <copy>SELECT count(*) FROM
-    			(SELECT product_id FROM inventories
-    				EXCEPT
-    			SELECT product_id FROM order_items);</copy>
-    	```
-    	<if type="atp">
-    ![Image](images/step2-except-inventories.png)
-    	</if>
-    	<if type="dbcs">
-    	```
-    	COUNT(*)
-    	----------
-    		84
-    	```
-    	</if>
+	```
+	SQL> <copy>SELECT count(*) FROM
+			(SELECT product_id FROM inventories
+				EXCEPT
+			SELECT product_id FROM order_items);</copy>
+	```
+ 	<if type="atp">
+    ![](images/step2-except-inventories.png)
+	</if>
+	<if type="dbcs">
+	```
+	COUNT(*)
+	----------
+		84
+	```
+	</if>
 
 5. How many products were ordered that are now missing in the inventory? The order of the queries is relevant for the result.
 
@@ -185,7 +185,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 		</copy>
 	```
 	<if type="atp">
-    ![Image](images/step2-except-order.png)
+    ![](images/step2-except-order.png)
 	</if>
 	<if type="dbcs">
 	```
@@ -200,38 +200,38 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
 1. Would the usage of ALL in the set operator defined in a query in a previous step mean anything? Run the SQL statement using the *EXCEPT ALL* operator.
 
-    	```
-    	SQL> <copy>SELECT product_id FROM inventories
-    		EXCEPT ALL
-    		SELECT product_id FROM order_items;</copy>
-    	```
-    	<if type="atp">
-    ![Image](images/step3-exceptall.png)
-    	</if>
-    	<if type="dbcs">
-    	```
-    	PRODUCT_ID
-    	----------
-    		1729
-    		1729
-    		1729
-    		1733
-    		1733
-    		1733
-    	...
-    		3502
-    		3502
-    		3502
-    		3502
-    		3502
-    		3503
-    		3503
-    		3503
-    		3503
-    		3503
-    	826 rows selected.
-    	```
-    	</if>
+	```
+	SQL> <copy>SELECT product_id FROM inventories
+		EXCEPT ALL
+		SELECT product_id FROM order_items;</copy>
+	```
+	<if type="atp">
+    ![](images/step3-exceptall.png)
+	</if>
+	<if type="dbcs">
+	```
+	PRODUCT_ID
+	----------
+		1729
+		1729
+		1729
+		1733
+		1733
+		1733
+	...
+		3502
+		3502
+		3502
+		3502
+		3502
+		3503
+		3503
+		3503
+		3503
+		3503
+	826 rows selected.
+	```
+	</if>
 
 2. Run the same query but reverse the tables.  
 
@@ -243,7 +243,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 	```
 
 	<if type="atp">
-    ![Image](images/step3-exceptreverse.png)
+    ![](images/step3-exceptreverse.png)
 	</if>
 
 	<if type="dbcs">
@@ -260,24 +260,24 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
 1. How many products that were ordered are still orderable? The statement combining the results from two queries with the `INTERSECT` operator returns only those unique rows returned by both queries.
 
-    	```
-    	SQL> <copy>SELECT count(*) FROM
-    		(SELECT product_id FROM inventories
-    		INTERSECT
-    		SELECT product_id FROM order_items);</copy>
-    	```
-    	<if type="atp">
-    ![Image](images/step4-inventories.png)
-    	</if>
+	```
+	SQL> <copy>SELECT count(*) FROM
+		(SELECT product_id FROM inventories
+		INTERSECT
+		SELECT product_id FROM order_items);</copy>
+	```
+	<if type="atp">
+    ![](images/step4-inventories.png)
+	</if>
 
-    	<if type="dbcs">
-    	```
-    	COUNT(*)
-    	----------
-    		124
+	<if type="dbcs">
+	```
+	COUNT(*)
+	----------
+		124
 
-    	```
-    	</if>
+	```
+	</if>
 
 2. Run the sql statement below reversing the intersect clause.
 
@@ -289,7 +289,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 		</copy>
 	```
 	<if type="atp">
-    ![Image](images/step4-order.png)
+    ![](images/step4-order.png)
 	</if>
 	<if type="dbcs">
 	```
@@ -303,26 +303,26 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
 1. Would the usage of `ALL` in the operator defined in the query in step 8 mean anything?
 
-    	```
-    	SQL> <copy>SELECT count(*) FROM
-    		(SELECT product_id FROM order_items
-    		INTERSECT ALL
-    		SELECT product_id FROM inventories);</copy>
-    	```
+	```
+	SQL> <copy>SELECT count(*) FROM
+		(SELECT product_id FROM order_items
+		INTERSECT ALL
+		SELECT product_id FROM inventories);</copy>
+	```
 
-    	<if type="atp">
-    ![Image](images/step5-all.png)
-    	</if>
+	<if type="atp">
+    ![](images/step5-all.png)
+	</if>
 
-    	<if type="dbcs">
-    	```
-    	COUNT(*)
-    	----------
-    		286
-    	```
-    	</if>
+	<if type="dbcs">
+	```
+	COUNT(*)
+	----------
+		286
+	```
+	</if>
 
-    	The result shows all rows in the `INVENTORIES` table that contain products that were ordered. This does not mean that these products were ordered from these warehouses. The query does not mean anything relevant. The use of `ALL` in operators must be appropriate.
+	The result shows all rows in the `INVENTORIES` table that contain products that were ordered. This does not mean that these products were ordered from these warehouses. The query does not mean anything relevant. The use of `ALL` in operators must be appropriate.
 
 <if type="dbcs">
 2. Exit SQL\*Plus.

@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 This hands-on workshop provides users with step-by-step instructions on enabling Multipath-IO (MPIO) on Windows Server 2019 and attaching the Block Storage in Windows for **Microsoft SQL Server** workloads.

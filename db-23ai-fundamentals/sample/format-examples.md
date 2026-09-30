@@ -44,15 +44,15 @@ This lab assumes you have:
 
 1. Standard method to include an image.
 
-    ![Image](images/sample1.png)
+    ![](images/sample1.png)
 
-    	The image alt text is optional.
+	The image alt text is optional.
 
     ![image alt text](images/sample1.png)
 
-2. Image with a link to the text description below it. This provides screen readers with an accessible way to "see" the image. The `sample1.txt` file must be added to the `files` folder.
+2.	Image with a link to the text description below it. This provides screen readers with an accessible way to "see" the image. The `sample1.txt` file must be added to the `files` folder.
 
-    	![Image alt text](images/sample1.png "Image title")
+	![Image alt text](images/sample1.png "Image title")
 
 3. Inline image icon ![Image alt text](images/sample2.png) click **Navigation**.
 
@@ -60,17 +60,17 @@ This lab assumes you have:
 
 4. One example with bold **text**.
 
-    If you add another paragraph, add 3 spaces before the beginning of the line to keep it in line with the numbered step.
+   If you add another paragraph, add 3 spaces before the beginning of the line to keep it in line with the numbered step.
 
 5. Use tables sparingly:
 
-    | Column 1 | Column 2 | Column 3 |
-    | --- | --- | --- |
-    | 1 | Some text or a link | More text  |
-    | 2 |Some text or a link | More text |
-    | 3 | Some text or a link | More text |
+ | Column 1 | Column 2 | Column 3 |
+ | --- | --- | --- |
+ | 1 | Some text or a link | More text  |
+ | 2 |Some text or a link | More text |
+ | 3 | Some text or a link | More text |
 
-6. You can also include bulleted lists - make sure to indent 4 spaces:
+6.	You can also include bulleted lists - make sure to indent 4 spaces:
 
     - List item 1
     - List item 2
@@ -194,12 +194,12 @@ This lab assumes you have:
 9. Use the copy function to allow your users to copy code snippets from LiveLabs into the clipboard.
 
     ```
-    	<copy>Enclose the text you want to copy using the <copy> element.</copy>
+  	<copy>Enclose the text you want to copy using the <copy> element.</copy>
     ```
 
 10. Code snippets that include variables
 
-    	```
+  	```
     <copy>ssh -i <ssh-key-file></copy>
     ```
 
@@ -254,28 +254,28 @@ This lab assumes you have:
 
 1. Files that you want the reader to download:
 
-    When the file type is not recognized by the browser, you can use the following format.
+  When the file type is not recognized by the browser, you can use the following format.
 
-    > **Note:** _The filename must be in lowercase letters and CANNOT include any spaces._
+  > **Note:** _The filename must be in lowercase letters and CANNOT include any spaces._
 
-    Download the [starter SQL code](files/starter-file.sql).
+  Download the [starter SQL code](files/starter-file.sql).
 
-    When the file type is recognized by the browser, it will attempt to render it. So you can use the following format to force the download dialog box.
+  When the file type is recognized by the browser, it will attempt to render it. So you can use the following format to force the download dialog box.
 
-    > **Note:** _The filename must be in lowercase letters and CANNOT include any spaces._
+  > **Note:** _The filename must be in lowercase letters and CANNOT include any spaces._
 
-    Download the [sample JSON code](files/sample.json?download=1).
+  Download the [sample JSON code](files/sample.json?download=1).
 
-    *IMPORTANT: do not include zip files, CSV, PDF, PSD, JAR, WAR, EAR, bin or exe files - you must have those objects stored somewhere else. We highly recommend using Oracle Cloud Object Store and creating a PAR URL instead. See [Using Pre-Authenticated Requests](https://docs.cloud.oracle.com/en-us/iaas/Content/Object/Tasks/usingpreauthenticatedrequests.htm)*
+  *IMPORTANT: do not include zip files, CSV, PDF, PSD, JAR, WAR, EAR, bin or exe files - you must have those objects stored somewhere else. We highly recommend using Oracle Cloud Object Store and creating a PAR URL instead. See [Using Pre-Authenticated Requests](https://docs.cloud.oracle.com/en-us/iaas/Content/Object/Tasks/usingpreauthenticatedrequests.htm)*
 
 3. Conditional content example (type="livelabs")
 
     Select your compartment. <if type="livelabs">If you are using a LiveLabs environment, be sure to select the compartment provided by the environment. Leave Always Free unchecked,</if><if type="alwaysfree">Choose any compartment, select "Always Free",</if> and enter `SecretPassw0rd` for the ADMIN password, then click **Create Autonomous Database**.
 
-    ![Image](images/atp-settings-1.png)
-    <if type="livelabs">![Image](images/atp-settings-2-notaf.png)</if>
-    <if type="alwaysfree">![Image](images/atp-settings-2.png)</if>
-    ![Image](images/atp-settings-3.png)
+    ![](images/atp-settings-1.png)
+    <if type="livelabs">![](images/atp-settings-2-notaf.png)</if>
+    <if type="alwaysfree">![](images/atp-settings-2.png)</if>
+    ![](images/atp-settings-3.png)
 
 ## Learn More
 

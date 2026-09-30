@@ -32,15 +32,15 @@ In this lab, you will be guided through the following tasks:
     ![MySQL Shell installed](./images/2-installed-mysql-shell-for-vscode.png "MySQL Shell installed")
 
 
-    <!-- ## Task 2:  Connect to the OCI tenancy
+<!-- ## Task 2:  Connect to the OCI tenancy
 
-    Before you can get started, you must set up a DB Connection to the HeatWave instance on the Oracle Cloud Infrastructure (OCI). This has to be done once since MySQL Shell for VS Code will store all registered DB connections.
+Before you can get started, you must set up a DB Connection to the HeatWave instance on the Oracle Cloud Infrastructure (OCI). This has to be done once since MySQL Shell for VS Code will store all registered DB connections.
 
 1. On the right side of the OCI Console, click **Profile**, and select **My Profile**.
 
     ![My profile](./images/3-profile.png "My profile")
 
-2. Under **Resources**, click **API keys**, and click **Add API key**.
+2.  Under **Resources**, click **API keys**, and click **Add API key**.
 
 3. Click **Download private key**.
     

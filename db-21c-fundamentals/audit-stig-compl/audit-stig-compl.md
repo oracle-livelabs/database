@@ -72,7 +72,7 @@ In this lab, you will:
     SQL>
     ```
   
-    *None of these are enabled.*
+  *None of these are enabled.*
   
   
 4. Verify the actions audited by `ORA_STIG_RECOMMENDATIONS`. 
@@ -168,7 +168,7 @@ In this lab, you will:
     SQL>
     ```
   
-    *The policy once enabled audits all major actions that could damage the security and the smooth running of the database, and also all Oracle Label Security actions. This result shows that you should enable the policy for all users.*
+  *The policy once enabled audits all major actions that could damage the security and the smooth running of the database, and also all Oracle Label Security actions. This result shows that you should enable the policy for all users.*
   
   
 5. Verify the actions audited by  `ORA_ALL_TOPLEVEL_ACTIONS`.  
@@ -189,7 +189,7 @@ In this lab, you will:
     
     ```
   
-    *The policy once enabled audits all top level actions of privileged users on any object that could damage the security of the database. This result shows that you should enable the policy for all users.*
+  *The policy once enabled audits all top level actions of privileged users on any object that could damage the security of the database. This result shows that you should enable the policy for all users.*
   
   
 
@@ -219,7 +219,7 @@ In this lab, you will:
 
 ## Task 2: Enable all three audit policies for all users
 
-1. Enter the commands below to enable the audit policies.
+1.  Enter the commands below to enable the audit policies.
    
     ```
     SQL> <copy>AUDIT POLICY ORA_STIG_RECOMMENDATIONS;

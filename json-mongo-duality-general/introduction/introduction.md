@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 In this workshop, you will experience Oracle's JSON capabilities using both relational and document-store APIs. You will be learn all variants of how to leverage JSON in the Oracle AI Database, starting from the native JSON datatype over JSON Collections and JSON Duality Views - the latest groundbreaking JSON-related functionality, to the Oracle AI Database API for MongoDB that provides full MongoDB compatibility in a plug-and-play fashion.

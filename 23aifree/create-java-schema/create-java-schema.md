@@ -78,7 +78,7 @@ Watch the video below for a quick walk-through of the lab.
     </copy>
     ```
 
-    Once Eclipse is launched, the workspace will open.
+   Once Eclipse is launched, the workspace will open.
 
     ![Eclipse workspace](images/eclipse-empty.png)
 

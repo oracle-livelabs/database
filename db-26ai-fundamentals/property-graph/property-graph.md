@@ -22,11 +22,6 @@ This lab is just a short overview of the functionality introduced with Property 
 - Basic understanding of SQL is helpful.
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Lab Setup
 
 1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
@@ -41,20 +36,20 @@ In this lab, you will:
 
     ```
     <copy>
-    -- USER SQL
-    CREATE USER DB26AI IDENTIFIED BY Oracledb_4U#;
+  -- USER SQL
+  CREATE USER DB26AI IDENTIFIED BY Oracledb_4U#;
 
-    -- ADD ROLES
-    GRANT DB_DEVELOPER_ROLE TO DB26AI;
+  -- ADD ROLES
+  GRANT DB_DEVELOPER_ROLE TO DB26AI;
 
-    GRANT CONNECT TO DB26AI;
-    GRANT RESOURCE TO DB26AI;
-    GRANT CONSOLE_DEVELOPER TO DB26AI;
-    GRANT GRAPH_DEVELOPER TO DB26AI;
+  GRANT CONNECT TO DB26AI;
+  GRANT RESOURCE TO DB26AI;
+  GRANT CONSOLE_DEVELOPER TO DB26AI;
+  GRANT GRAPH_DEVELOPER TO DB26AI;
 
 
-    -- REST ENABLE
-    BEGIN
+  -- REST ENABLE
+  BEGIN
       ORDS_ADMIN.ENABLE_SCHEMA(
           p_enabled => TRUE,
           p_schema => 'DB26AI',
@@ -68,20 +63,20 @@ In this lab, you will:
               ENABLED => TRUE
       );
       commit;
-    END;
-    /
+  END;
+  /
 
-    ALTER USER DB26AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
-    ALTER USER DB26AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
+  ALTER USER DB26AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
+  ALTER USER DB26AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
 
-    -- QUOTA
-    ALTER USER DB26AI QUOTA UNLIMITED ON DATA;
+  -- QUOTA
+  ALTER USER DB26AI QUOTA UNLIMITED ON DATA;
 
     </copy>
     ```
 4. Let's sign in as our new user. Click on the admin profile in the top right hand of Database Actions and sign out.
 
-    ![log out of our admin user](images/im12.png " ")
+  ![log out of our admin user](images/im12.png " ")
 
 5. Sign in with the username **DB26AI** and password **Oracledb_4U#**
 
@@ -89,7 +84,7 @@ In this lab, you will:
 
 6. Click SQL to open the SQL editor.
 
-    ![Open SQL with db26ai](images/im20.png " ")
+  ![Open SQL with db26ai](images/im20.png " ")
 
 7. Lets create some tables for our demo. We'll create a people and relationship table which will be our vertices (people) and edges (relationship) of the graph. 
 

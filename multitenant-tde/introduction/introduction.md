@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Workshop Time: TODO - x minutes
-
-
 ## Encryption & Key Management with Wallets of Oracle Multitenant Databases
 
 With the increased risk of a cyberattacks protection of one of your most valuable asset’s, your data, is vital.  Data within the Oracle database is generally the most vital and/or sensitive data within the company.  The best way to start protecting that data is with Transparent Data Encryption (TDE).  Some of the benefits of using TDE are:

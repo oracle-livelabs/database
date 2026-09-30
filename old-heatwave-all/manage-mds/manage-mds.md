@@ -1,27 +1,14 @@
 # Manage HeatWave Standard DB System
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Start, Stop, or Reboot MySQL Database System
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **DB Systems**.
 
-    ![MDS](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png " ")
+   ![MDS](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png " ")
 
 2. List Database Systems.
 
-    ![MDS](./images/04mysql02_06.png " ")
+   ![MDS](./images/04mysql02_06.png " ")
 
 3. Select the **heatwave** Compartment and click **heatwave-sa** to open the MySQL DB System Details page.
 
@@ -52,11 +39,11 @@ Deleting a database system is permanent. Any manual backups associated with the 
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **DB Systems**.
 
-    ![MDS](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png " ")
+   ![MDS](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png " ")
 
 2. List Database Systems.
 
-    ![MDS](./images/04mysql02_06.png " ")
+   ![MDS](./images/04mysql02_06.png " ")
 
 3. Choose the **heatwave** Compartment.
 

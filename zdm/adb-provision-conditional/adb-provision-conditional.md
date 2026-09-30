@@ -36,7 +36,7 @@ In this lab, you will:
     <if type="freetier">
     ![Check the workload type on the left.](images/list-scope-freetier.png " ")
 
-    > **Note:** Avoid the use of the `ManagedCompartmentforPaaS` compartment as this is an Oracle default used for Oracle Platform Services.
+   > **Note:** Avoid the use of the `ManagedCompartmentforPaaS` compartment as this is an Oracle default used for Oracle Platform Services.
    </if>
 
 5. This console shows that no databases yet exist. If there were a long list of databases, you could filter the list by the **State** of the databases (Available, Stopped, Terminated, and so on). You can also sort by __Workload Type__. Here, the __Data Warehouse__ workload type is selected.
@@ -46,22 +46,22 @@ In this lab, you will:
 <if type="freetier">
 6. If you are using a Free Trial or Always Free account, and you want to use Always Free Resources, you need to be in a region where Always Free Resources are available. You can see your current default **region** in the top, right hand corner of the page.
 
-    ![Select region on the far upper-right corner of the page.](./images/region.png " ")
+    ![Select region on the far upper-right corner of the page.](./images/Region.png " ")
 </if>
 
 ## Task 2: Creating the ADB instance
 
 1. Click **Create Autonomous Database** to start the instance creation process.
 
-    ![Click Create Autonomous Database.](./images/picture100-23.png " ")
+    ![Click Create Autonomous Database.](./images/Picture100-23.png " ")
 
-2. This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
+2.  This brings up the __Create Autonomous Database__ screen where you will specify the configuration of the instance.
 
     <if type="livelabs">
-    ![Image](./images/create-adb-screen-livelabs-default.png " ")
+    ![](./images/create-adb-screen-livelabs-default.png " ")
     </if>
     <if type="freetier">
-    ![Image](./images/create-adb-screen-freetier-default.png " ")
+    ![](./images/create-adb-screen-freetier-default.png " ")
     </if>
 
 3. Provide basic information for the autonomous database:
@@ -72,7 +72,7 @@ In this lab, you will:
     For this lab, use __ZDMTargAuton__.
 
     <if type="livelabs">
-    ![Enter the required details.](./images/picture100-26-livelabs.png " ")
+    ![Enter the required details.](./images/Picture100-26-livelabs.png " ")
     </if>
     <if type="freetier">
     ![Enter the required details.](./images/create-adb-screen-freetier.png " ")
@@ -84,7 +84,7 @@ In this lab, you will:
     - __Data Warehouse__ - For this lab, choose __Data Warehouse__ as the workload type.
     - __Transaction Processing__ - Alternatively, you could have chosen Transaction Processing as the workload type.
 
-    ![Choose a workload type.](./images/picture100-26b.png " ")
+    ![Choose a workload type.](./images/Picture100-26b.png " ")
 
 5. Choose a deployment type. Select the deployment type for your database from the choices:
 
@@ -104,7 +104,7 @@ In this lab, you will:
 
     > **Note:** You cannot scale up/down an Always Free autonomous database.
 
-    ![Choose the remaining parameters.](./images/picture100-26c.png " ")
+    ![Choose the remaining parameters.](./images/Picture100-26c.png " ")
 
 7. Create administrator credentials:
 
@@ -116,14 +116,14 @@ In this lab, you will:
     - The password must not be the same password that is set less than 24 hours ago.
     - Re-enter the password to confirm it. Make a note of this password.
 
-    ![Enter password and confirm password.](./images/picture100-26d.png " ")
+    ![Enter password and confirm password.](./images/Picture100-26d.png " ")
 
 8. Choose network access:
     - For this lab, accept the default, "Allow secure access from everywhere".
     - If you want a private endpoint, to allow traffic only from the VCN you specify - where access to the database from all public IPs or VCNs is blocked, then select "Virtual cloud network" in the Choose network access area.
     - You can control and restrict access to your Autonomous Database by setting network access control lists (ACLs). You can select from 4 IP notation types: IP Address, CIDR Block, Virtual Cloud Network, Virtual Cloud Network OCID).
 
-    ![Choose the network access.](./images/picture100-26e.png " ")
+    ![Choose the network access.](./images/Picture100-26e.png " ")
 
 <if type="livelabs">
 9. Choose a license type. For this lab, choose __Bring Your Own License (BYOL)__. The two license types are:
@@ -136,17 +136,17 @@ In this lab, you will:
     - __License Included__ - Select this type when you want to subscribe to new database software licenses and the database cloud service.
 
 <if type="livelabs">
-    ![Click Create Autonomous Database.](./images/picture100-27-byol.png " ")
+    ![Click Create Autonomous Database.](./images/Picture100-27-byol.png " ")
 </if>
 <if type="freetier">
-    ![Image](./images/license.png " ")
+    ![](./images/license.png " ")
 </if>
 
 10. Click __Create Autonomous Database__.
 
-11. Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Data Warehouse database is ready to use! Have a look at your instance's details here including its name, database version, OCPU count, and storage size.
+11.  Your instance will begin provisioning. In a few minutes, the state will turn from Provisioning to Available. At this point, your Autonomous Data Warehouse database is ready to use! Have a look at your instance's details here including its name, database version, OCPU count, and storage size.
 
-    ![Database instance homepage.](./images/picture100-32.png " ")
+    ![Database instance homepage.](./images/Picture100-32.png " ")
 
 Please *proceed to the next lab*.
 

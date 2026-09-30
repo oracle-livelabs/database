@@ -24,18 +24,13 @@ Estimated Lab Time: 5 Minutes
 - You have performed the tasks to generate some incidents as described in Lab 2: Generate some Incidents in RAC Database
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1:  Generate an AHF Insights report
-1. Generate an Insights report for the last hour
-    ```
-    <copy>
-    ahf analysis create --type insights --last 1h
-    </copy>
-    ```
+1.  Generate an Insights report for the last hour
+```
+<copy>
+ahf analysis create --type insights --last 1h
+</copy>
+```
 Command Output:
 ```
 Starting analysis and collecting data for insights

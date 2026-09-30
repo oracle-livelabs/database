@@ -17,11 +17,6 @@ In this lab, you will:
 * This workshop section requires having set up a compute instance ,source database and target ABD instance.
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Connect to your database and configure the required parameters
 
 **Disclaimer**: Throughout the workshop there will be locations where you are copying and pasting multiple lines of code at a time from the instructions into SQLPlus. However, the last line pasted will not commit until you manually press enter a second time. To avoid statement failure, please be cognizant of this and press enter twice when pasting.
@@ -30,9 +25,9 @@ In this lab, you will:
 
     1. Download the preparation script from this [link] (https://support.oracle.com/epmos/main/downloadattachmentprocessor?attachid=2953866.1%3ASETUP_SCRIPT&docType=REFERENCE&action=download)
     2. Locate the file and run it ./dms-db-prep-v2.sh
-    3. Follow the instructions:
+    3.  Follow the instructions:
     
-    	- Database type [(s)ource/(t)arget]?: **s**
+	- Database type [(s)ource/(t)arget]?: **s**
     - Is your source database hosted in AWS RDS (Amazon Relational Database Service)? [y/n]: **n**
     - Is your database multi-tenant or single-tenant? [(m)ulti/(s)ingle]: **m**
     - Please provide your PDB service name (e.g. amer.subnet1.alimavcn.oraclevcn.com): pdb.sub03132344240.vcndmssj.oraclevcn.com
@@ -130,26 +125,26 @@ In this lab, you will:
 
 For your source database connectivity, you must perform the following steps:
 
-1. Create a new directory: 
-    ```
+1.  Create a new directory: 
+```
     <copy>    
     mkdir /u01/app/oracle/wallet
 
     </copy>
-    ```
+```
 2. Download a pre created SSL wallet using the following command:
-    ```
+```
     <copy>    
     curl -o walletSSL.zip https://objectstorage.us-phoenix-1.oraclecloud.com/p/YYkalHlLbbrfOAMIor-Mzl1qcFxaAZOvrYABKzRQYPErFQdzJrVjma1cUg4SIXEu/n/axsdric7bk0y/b/SSL-Wallet-For-No-SSH-Migrations-Setup/o/walletSSL.zip
 
     </copy>
-    ```
+```
 3. Unzip the files:
-    ```
+```
     <copy>    
     unzip walletSSL.zip
     </copy>
-    ```
+```
 4. Make sure these files are present in your desired directory path:
 
     1. 2022 ewallet.p12.lck
@@ -165,28 +160,28 @@ For your source database connectivity, you must perform the following steps:
 
 6. The user performing the export or import requires the necessary network ACL to be granted to access the network from the source and target database host. For this guide, run the following commands as SYS if the export or import user is SYSTEM. Since your database is multitenant, the following actions need to be performed in CDB$ROOT. Replace clouduser and sslwalletdir accordingly:
 
-    ```
+```
     <copy>    
     define clouduser='system';/*user performing export at source or import at target*/
-    define sslwalletdir='/u01/app/oracle/dumpdir/wallet'; /* OCI wallet path*/
-    BEGIN
+define sslwalletdir='/u01/app/oracle/dumpdir/wallet'; /* OCI wallet path*/
+BEGIN
     dbms_network_acl_admin.append_host_ace(host => '*', lower_port => 443, upper_port => 443, ace => xs$ace_type(privilege_list => xs$name_list(
     'http', 'http_proxy'), principal_name => upper('&clouduser'), principal_type => xs_acl.ptype_db));
 
     dbms_network_acl_admin.append_wallet_ace(wallet_path => 'file:&sslwalletdir', ace => xs$ace_type(privilege_list => xs$name_list('use_client_certificates',
     'use_passwords'), principal_name => upper('&clouduser'), principal_type => xs_acl.ptype_db));
 
-    END;
+END;
     </copy>
-    ```
+```
 7. Once the connect privilege is granted, connect as the relevant user such as, SYSTEM, and verify if the privilege is granted using the following query:
-    ```
+```
     <copy>    
     SELECT host, lower_port, upper_port, privilege, status 
     FROM user_network_acl_privileges;
 
     </copy>
-    ```
+```
 
 You should see a similar output to the following:
 
@@ -206,7 +201,7 @@ Connect to the source database as in Task 1, once connected we should be able to
 
 1. Enter the following commands:
 
-    ```
+   ```
     <copy>
     sqlplus admin/ <ATP password>@ ATP connection string
     </copy>
@@ -238,8 +233,3 @@ You may now [proceed to the next lab](#next).
 * **Author** - Ameet Kumar Nihalani, Senior Principal Support Engineer, Oracle Cloud Database Migration
 * **Contributors** - LiveLabs Team, ZDM Development Team
 * **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

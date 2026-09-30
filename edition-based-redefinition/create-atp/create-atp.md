@@ -103,7 +103,7 @@ In this lab, you will
     ![Click Create Autonomous Database.](./images/task2-9.png " ")
 </if>
 <if type="freetier">
-    ![Image](./images/task2-9.png " ")
+    ![](./images/task2-9.png " ")
 </if>
 
 10. For this lab, do not provide a contact email address. The **Contact Email** field allows you to list contacts to receive operational notices and announcements as well as unplanned maintenance notifications.

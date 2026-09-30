@@ -83,7 +83,7 @@ In this lab, you will:
 
 ## Task 2: Create a table, a `CONTEXT` index, and a `JSON` search index
 
-1. Connect in `PDB21` as `TEXTUSER`, create a table and insert rows.
+1.  Connect in `PDB21` as `TEXTUSER`, create a table and insert rows.
 
 
     ```
@@ -173,7 +173,7 @@ In this lab, you will:
 
     ```
 
-    The first `INMEMORY` keyword indicates that the table is to be loaded into the IM Column Store and `INMEMORY TEXT` is a separate clause indicating you want to be able to search using text and json queries on the `TEXT` and `JSON_TEXT` columns.
+  The first `INMEMORY` keyword indicates that the table is to be loaded into the IM Column Store and `INMEMORY TEXT` is a separate clause indicating you want to be able to search using text and json queries on the `TEXT` and `JSON_TEXT` columns.
 
 2. Load the table into the IM Column Store by querying the table.
 

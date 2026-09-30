@@ -833,20 +833,20 @@ In this lab, you will:
 
     ```
     SQL> <copy>BEGIN
-    DBMS_MACADM.CREATE_REALM(
+   DBMS_MACADM.CREATE_REALM(
     realm_name    => 'Root Test Realm',
     description   => 'Test Realm description',
     enabled       => DBMS_MACUTL.G_YES,
     audit_options => DBMS_MACUTL.G_REALM_AUDIT_FAIL,
     realm_type    => 1);
-    END;
-    /</copy>  2    3    4    5    6    7    8    9
+  END;
+  /</copy>  2    3    4    5    6    7    8    9
 
-    PL/SQL procedure successfully completed.
-    ```
-    ```
-    SQL> <copy>BEGIN
-    DBMS_MACADM.ADD_OBJECT_TO_REALM(
+  PL/SQL procedure successfully completed.
+  ```
+  ```
+  SQL> <copy>BEGIN
+   DBMS_MACADM.ADD_OBJECT_TO_REALM(
     realm_name   => 'Root Test Realm',
     object_owner => 'C##TEST1',
     object_name  => '%',

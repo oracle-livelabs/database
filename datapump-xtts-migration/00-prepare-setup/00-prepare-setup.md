@@ -19,9 +19,9 @@ This lab assumes you have:
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
-1. Click on the link below to download the Resource Manager zip file you need to build your environment: [xtts.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/upgrade-and-patching/xtts.zip)
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment: [xtts.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/upgrade-and-patching/xtts.zip)
 
-2. Save in your downloads folder.
+2.  Save in your downloads folder.
 
 We strongly recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Step 3* to follow our recommendations. If you would rather use an exiting VCN then proceed to the next step as indicated below to update your existing VCN with the required Egress rules.
 
@@ -34,21 +34,21 @@ This workshop requires a certain number of ports to be available, a requirement 
 | 22   | SSH                     |
 | 6080 | Remote Desktop noVNC () |
 
-1. Go to *Networking >> Virtual Cloud Networks*
+1.  Go to *Networking >> Virtual Cloud Networks*
 
-2. Choose your network
+2.  Choose your network
 
-3. Under Resources, select Security Lists
+3.  Under Resources, select Security Lists
 
-4. Click on Default Security Lists under the Create Security List button
+4.  Click on Default Security Lists under the Create Security List button
 
-5. Click Add Ingress Rule button
+5.  Click Add Ingress Rule button
 
-6. Enter the following:
+6.  Enter the following:
     - Source CIDR: 0.0.0.0/0
     - Destination Port Range: *Refer to above table*
 
-7. Click the Add Ingress Rules button
+7.  Click the Add Ingress Rules button
 
 ## Task 3: Setup compute
 
@@ -62,8 +62,3 @@ You may now *proceed to the next lab*.
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Klaus Gronau, Rodrigo Jorge, Mike Dietrich
 * **Last Updated By/Date** - Daniel Overby Hansen, July 2024
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

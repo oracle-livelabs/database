@@ -17,24 +17,19 @@ In this lab, you will run a RAG application interactively using a user-friendly 
 This lab assumes you have:
 - All previous labs successfully completed
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Open the Jupyter Notebook Interface
 
 1. In the upper-left corner, select **View Login Info**. 
 
-    ![View login info.](images/lab1-1-view-login-info.png)
+   ![View login info.](images/lab1-1-view-login-info.png)
 
 2. You can now see all reservation details relevant to completing this workshop. Copy the Jupyter Notebook password and open the Jupyter Notebook URL.
 
-    ![Copy the Jupyter Notebook pasword.](images/lab1-2-jupyter-notebook-info.png)
+   ![Copy the Jupyter Notebook pasword.](images/lab1-2-jupyter-notebook-info.png)
 
 3. Paste the Jupyter Notebook password into the password field, as shown below.
 
-    ![Enter the password.](images/lab1-3-jupyter-login.png)
+   ![Enter the password.](images/lab1-3-jupyter-login.png)
 
 4. After a successfull login, you will see the Jupyter Notebook's landing page. 
    ![The Jupyter Notebook landing page.](images/lab1-4-landing-page.png)
@@ -42,7 +37,7 @@ In this lab, you will:
 ## Task 2: Run the RAG Application
 
 1. In the top navigation bar, open the terminal by clicking **File** >> **New** >> **Terminal**.
-    ![Open the terminal.](images/lab1-5-open-terminal.png)
+   ![Open the terminal.](images/lab1-5-open-terminal.png)
 
 2. In the terminal, copy and paste the code below.
       ````
@@ -54,7 +49,7 @@ In this lab, you will:
       ![Run the code snippet in the terminal.](images/lab1-6-terminal-commands.png)
 
 3. The above commands will start a streamlit application running your Chatbot. A URL will appear. Click on the URL to interact with the application from your browser. 
-    ![Launch the app in your browser.](images/lab1-7-app-urls.png)
+   ![Launch the app in your browser.](images/lab1-7-app-urls.png)
 
 4. You should now see the landing page of the application you'll be building shortly. Explore the application by following the instructions on the landing page. Feel free to explore the documents with your own questions and discover how the RAG application can retrieve and provide accurate responses based on the document’s content.
 

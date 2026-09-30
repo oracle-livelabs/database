@@ -78,13 +78,13 @@ The ORDS installation includes SQL Developer Web, an online tool for managing yo
 
 7. Now, for any of the views, click the three dots on the right and select **OpenAPI View**. Lets do this for the the `MOVIES_DV` view. 
 
-    ![Click on OpenAPI View](./images/openapi_view.png)
+    ![Click on OpenAPI View](./images/openAPI_view.png)
 
 8. Here, you can see the automatically configured REST calls that were enabled on the view.
 
     Expand the **GET** section. 
 
-    ![Expand the GET section](./images/race_openapi.png)
+    ![Expand the GET section](./images/race_openAPI.png)
 
 9. By default, this section shows sample parameters and responses. However, you can use it to try out the calls themselves.
 

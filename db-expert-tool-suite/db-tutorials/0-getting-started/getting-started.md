@@ -17,11 +17,6 @@
 - Web Browser
 - Oracle account (optional)
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Navigate to DBExpert website
 
 1. Open a web browser (e.g. [Chrome](https://www.google.com/chrome/browser-tools/) and/or [Firefox](https://www.mozilla.org/en-US/firefox/all/))
@@ -238,8 +233,3 @@ Use the banner to set the source and destination for migration to the cloud and 
 ![ORADIFF Image](./images/services_oradiff.png)
 
 ---
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

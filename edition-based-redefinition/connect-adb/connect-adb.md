@@ -34,7 +34,7 @@ This lab assumes you have performed the previous lab on provisioning an Oracle A
 
 4. Now gather the OCID (Oracle Cloud Identifier) of the Autonomous Database.
 
-    You should be able to see an Autonomous Database, similar to the one below. Make sure to change to the compartment which was assigned to you.
+   You should be able to see an Autonomous Database, similar to the one below. Make sure to change to the compartment which was assigned to you.
 
     ![ATP Database](images/atp-database.png " ")
 
@@ -77,7 +77,7 @@ This lab assumes you have performed the previous lab on provisioning an Oracle A
 
     Verify the download of the file `ebronline.zip` using the list command ls -ltr as provided in the screenshot.
 
-    ![Download ebronline](images/download-ebronline.png " ")
+   ![Download ebronline](images/download-ebronline.png " ")
 
 2. Unzip the ebronline file
 

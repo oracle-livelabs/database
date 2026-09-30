@@ -2,9 +2,6 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 Oracle Database enables the user to collect diagnostic files for an ORA-00600 error. This critical error is the result of a problem SQL statement. It is catchall message that indicates an error internal to the database code. It is signaled when a code check fails within the database. Oracle Database performs health checks on the information being used in internal processing and that the variables used are within a valid range. It studies that changes are being made in a consistent structure, while ensuring that the changes won't put a structure into an unstable state. This terminates the operation to protect the health of the database. 
 
 Oracle Trace File Analyzer Service Request Data Collections (SRDCs) enable you to quickly collect the right diagnostic data. Oracle Support often asks the user to run a SDRC, which can be difficult to collect manually. Oracle Trace File Analyzer (TFA) can run SDRC collections with a single command. Oracle TFA is run through the command 'tfactl`. This daemon runs on a local node when installed as the "root" user on the server, which allows it to be a reactive tool. Each TFA collection produces a single zip file that can be uploaded to My Oracle Support (MOS).
@@ -29,7 +26,7 @@ In this practice, you collect diagnostic files for an ORA-00600 error, and uploa
 
 ## Task 1: Install Trace File Analyzer (TFA)
 
-1. Log in as root to the server and install Trace File Analyzer in $ORACLE_BASE/tfa.
+1.	Log in as root to the server and install Trace File Analyzer in $ORACLE_BASE/tfa.
 
       ```
       $ <copy>cd $HOME/u01/app/oracle</copy>
@@ -158,7 +155,7 @@ In this practice, you collect diagnostic files for an ORA-00600 error, and uploa
 
 ## Task 2: Verify TFA Collector is Runnning
 
-2. Switch to oracle and check that the TFA Collector is running.
+2.	Switch to oracle and check that the TFA Collector is running.
 
       ```
       $ <copy>$HOME/u01/app/oracle/tfa/bin/tfactl -help</copy>
@@ -195,7 +192,7 @@ In this practice, you collect diagnostic files for an ORA-00600 error, and uploa
 
 ## Task 3: Collect all ORA-00600 Error using Service Request Data Collection (SRDC)
 
-3. Start a Service Request Data Collection (SRDC) for all ORA-00600 errors that occurred in  ORCL.
+3.	Start a Service Request Data Collection (SRDC) for all ORA-00600 errors that occurred in  ORCL.
 
       Q1/ How do you get the list of possible types of SRDC?
 

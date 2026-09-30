@@ -76,14 +76,14 @@ To assemble this custom agent in Private Agent Factory we will need our MCP serv
 
     <span style="color:red;">Confirm that your agent looks like this:</span>
 
-    ![Example PAF Agent Builder](./images/ebs-workflow.png " ")
+    ![Example PAF Agent Builder](./images/EBS-Workflow.png " ")
 
     #### Step 4: Save the flow and test!
 1. Click **Save** on the top right hand corner of your page.
 
 2. **Then**, click **Playground**. You should see the following:
 
-    ![Playground](./images/paf-playground.png " ")
+    ![Playground](./images/PAF-Playground.png " ")
 
 3. Add the following prompt:
 
@@ -95,7 +95,7 @@ To assemble this custom agent in Private Agent Factory we will need our MCP serv
 
     Please see example output for the above prompt below.
 
-    ![Playground](./images/lab2-task2-output.png " ")
+    ![Playground](./images/Lab2-Task2-Output.png " ")
 
 4. These are other prompts that may be used to interact with this agent.
 

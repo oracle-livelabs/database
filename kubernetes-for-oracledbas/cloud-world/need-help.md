@@ -2,19 +2,11 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 ![CloudWorld Logo](images/ocw23-dark-2.png "CloudWorld Logo")
 
 It is a pleasure to welcome you to the Oracle CloudWorld Hands-On Lab (HOL) Experience. We want to encourage you to get hands-on in each session and follow the hands-on lab instructions.
 
 >In the following sections, you can find frequently asked questions, technical requirements, and tips & tricks.
-
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
 
 ## Technical Requirements for Hands-on Labs
 

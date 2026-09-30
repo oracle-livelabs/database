@@ -70,13 +70,13 @@ In this section, you will:
 
     ![open terminal in launchpad](./images/terminal.png " ")
 
-2. On a Windows PC:
+2.  On a Windows PC:
 
     Press "Run" (Windows-R) and type "cmd.exe". Press enter or click "OK".
 
     ![open command prompt](./images/cmd-exe.png " ")
 
-3. Create and enter a suitable directory. We'll create a directory 'mongosh' under the default home directory, but you can choose to create it elsewhere. For **Mac or Windows**, enter the following commands:
+3.  Create and enter a suitable directory. We'll create a directory 'mongosh' under the default home directory, but you can choose to create it elsewhere. For **Mac or Windows**, enter the following commands:
 
     ```
     <copy>
@@ -187,7 +187,7 @@ Copy **ONE** of the following *curl* commands and paste it to the command or ter
 
 3. Keep the command or terminal window open for later use. If you close it and need to reopen it, you will need to set the PATH again according to the instructions above.
 
-    Mongo Shell is now set up on your PC or Mac.
+Mongo Shell is now set up on your PC or Mac.
 
 ### 5: Alternatively, you can install MongoDB Compass, the GUI for MongoDB
 
@@ -311,7 +311,7 @@ In this section, you will:
     </if>
 
 
-    You might need to escape some characters as well.
+   You might need to escape some characters as well.
 
 
 
@@ -488,7 +488,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
 
     Indeed, the record was properly updated.
 
-    	![New result for after 2020 edit](./images/json-ide-find-superaction-mars-after-update.png)
+	![New result for after 2020 edit](./images/json-ide-find-superaction-mars-after-update.png)
 
 5. We are now updating a shared nested JSON Object in our JSON Duality View. Unlike JSON Collections where data is duplicated in any document that shares the same content, we update the content of our Duality View in ONE place, and all JSON Collections (Duality Views) that share the JSON Object will be magically and automatically updated, too.
 

@@ -47,18 +47,18 @@ In this lab, you will be guided through the following tasks:
     airline.airlinename,
     AVG(datediff(departure,birthdate)/365.25) as avg_age,
     count(*) as nb_people
-    FROM
+FROM
     booking, flight, airline, passengerdetails
-    WHERE
+WHERE
     booking.flight_id=flight.flight_id AND
     airline.airline_id=flight.airline_id AND
     booking.passenger_id=passengerdetails.passenger_id AND
     country IN ("SWITZERLAND", "FRANCE", "ITALY")
-    GROUP BY
+GROUP BY
     airline.airlinename
-    ORDER BY
+ORDER BY
     airline.airlinename, avg_age
-    LIMIT 10\G</copy>
+LIMIT 10\G</copy>
     ```
 
     ![RUN](./images/heatwave-query-company-explain.png "heatwave query company explain")
@@ -70,19 +70,19 @@ In this lab, you will be guided through the following tasks:
     airline.airlinename,
     AVG(datediff(departure,birthdate)/365.25) as avg_age,
     count(*) as nb_people
-    FROM
+FROM
     booking, flight, airline, passengerdetails
-    WHERE
+WHERE
     booking.flight_id=flight.flight_id AND
     airline.airline_id=flight.airline_id AND
     booking.passenger_id=passengerdetails.passenger_id AND
     country IN ("SWITZERLAND", "FRANCE", "ITALY")
-    GROUP BY
+GROUP BY
     airline.airlinename
-    ORDER BY
+ORDER BY
     airline.airlinename, avg_age
-    LIMIT 10;
-    </copy>
+LIMIT 10;
+</copy>
     ```
     ![Connect](./images/heatwave-query-company.png "heatwave query company")
 
@@ -101,18 +101,18 @@ In this lab, you will be guided through the following tasks:
     airline.airlinename,
     AVG(datediff(departure,birthdate)/365.25) as avg_age,
     count(*) as nb_people
-    FROM
+FROM
     booking, flight, airline, passengerdetails
-    WHERE
+WHERE
     booking.flight_id=flight.flight_id AND
     airline.airline_id=flight.airline_id AND
     booking.passenger_id=passengerdetails.passenger_id AND
     country IN ("SWITZERLAND", "FRANCE", "ITALY")
-    GROUP BY
+GROUP BY
     airline.airlinename
-    ORDER BY
+ORDER BY
     airline.airlinename, avg_age
-    LIMIT 10;</copy>
+LIMIT 10;</copy>
     ```
     ![RUN](./images/heatwave-query-average.png "heatwave-query-average")
 
@@ -143,18 +143,18 @@ In this lab, you will be guided through the following tasks:
     airline.airlinename,
     SUM(booking.price) as price_tickets,
     count(*) as nb_tickets
-    FROM
+FROM
     booking, flight, airline, airport_geo
-    WHERE
+WHERE
     booking.flight_id=flight.flight_id AND
     airline.airline_id=flight.airline_id AND
     flight.from=airport_geo.airport_id AND
     airport_geo.country = "UNITED STATES"
-    GROUP BY
+GROUP BY
     airline.airlinename
-    ORDER BY
+ORDER BY
     nb_tickets desc, airline.airlinename
-    LIMIT 10;
+LIMIT 10;
     </copy>
     ```
 
@@ -171,18 +171,18 @@ In this lab, you will be guided through the following tasks:
     airline.airlinename,
     SUM(booking.price) as price_tickets,
     count(*) as nb_tickets
-    FROM
+FROM
     booking, flight, airline, airport_geo
-    WHERE
+WHERE
     booking.flight_id=flight.flight_id AND
     airline.airline_id=flight.airline_id AND
     flight.from=airport_geo.airport_id AND
     airport_geo.country = "UNITED STATES"
-    GROUP BY
+GROUP BY
     airline.airlinename
-    ORDER BY
+ORDER BY
     nb_tickets desc, airline.airlinename
-    LIMIT 10;
+LIMIT 10;
     </copy>
     ```
 
@@ -197,16 +197,16 @@ In this lab, you will be guided through the following tasks:
     firstname,
     lastname,
     COUNT(booking.passenger_id) AS count_bookings
-    FROM
+FROM
     passenger,
     booking
-    WHERE
+WHERE
     booking.passenger_id = passenger.passenger_id
         AND passenger.lastname = 'Aldrin'
         OR (passenger.firstname = 'Neil'
         AND passenger.lastname = 'Armstrong')
         AND booking.price > 400.00
-    GROUP BY firstname , lastname;</copy>
+GROUP BY firstname , lastname;</copy>
     ```
 
     ```bash
@@ -218,16 +218,16 @@ In this lab, you will be guided through the following tasks:
     firstname,
     lastname,
     COUNT(booking.passenger_id) AS count_bookings
-    FROM
+FROM
     passenger,
     booking
-    WHERE
+WHERE
     booking.passenger_id = passenger.passenger_id
         AND passenger.lastname = 'Aldrin'
         OR (passenger.firstname = 'Neil'
         AND passenger.lastname = 'Armstrong')
         AND booking.price > 400.00
-    GROUP BY firstname , lastname;</copy>
+GROUP BY firstname , lastname;</copy>
     ```
 
 15. Keep HeatWave processing enabled

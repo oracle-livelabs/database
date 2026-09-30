@@ -29,20 +29,20 @@ In this lab, you will:
 
 1. Unzip the **ahf\_setup** installer script, **/home/opc/Downloads/AHF-LINUX\_v21.4.3.zip** in the **/tmp** directory.
 
-    	```
-    	<copy>
-    	unzip /home/opc/Downloads/AHF-LINUX_v21.4.3.zip -d /tmp/ahf21.4.3
-    	</copy>
-    	```
-    	Command output:
+	```
+	<copy>
+	unzip /home/opc/Downloads/AHF-LINUX_v21.4.3.zip -d /tmp/ahf21.4.3
+	</copy>
+	```
+	Command output:
 
-    	```
-    	Archive:  /home/opc/Downloads/AHF-LINUX_v21.4.3.zip
-    	inflating: /tmp/ahf21.4.3/ahf_setup  
-    	extracting: /tmp/ahf21.4.3/ahf_setup.dat  
-    	inflating: /tmp/ahf21.4.3/README.txt  
-    	inflating: /tmp/ahf21.4.3/oracle-tfa.pub
-    	```
+	```
+	Archive:  /home/opc/Downloads/AHF-LINUX_v21.4.3.zip
+	inflating: /tmp/ahf21.4.3/ahf_setup  
+	extracting: /tmp/ahf21.4.3/ahf_setup.dat  
+	inflating: /tmp/ahf21.4.3/README.txt  
+	inflating: /tmp/ahf21.4.3/oracle-tfa.pub
+	```
 2. Install AHF 21.4.3.
 
 	```
@@ -108,167 +108,167 @@ In this lab, you will:
 
 1. Configure the software storage location where the new version of AHF zip file exists.
 
-    	```
-    	<copy>
-    	ahfctl setupgrade -swstage /opt/oracle.ahf -autoupgrade on
-    	</copy>
-    	```
-    	Command output:
-    	```
-    	AHF autoupgrade parameters successfully updated
-    	Successfully synced AHF configuration
-    	refreshConfig() completed successfully.
-    	```
+	```
+	<copy>
+	ahfctl setupgrade -swstage /opt/oracle.ahf -autoupgrade on
+	</copy>
+	```
+	Command output:
+	```
+	AHF autoupgrade parameters successfully updated
+	Successfully synced AHF configuration
+	refreshConfig() completed successfully.
+	```
 
 2. Verify the configuration.
 
-    	```
-    	<copy>
-    	ahfctl getupgrade
-    	</copy>
-    	```
-    	Command output:
+	```
+	<copy>
+	ahfctl getupgrade
+	</copy>
+	```
+	Command output:
 
-    	```
-    	autoupgrade : on
-    	autoupgrade.swstage : /opt/oracle.ahf
-    	autoupgrade.frequency : [not set]
-    	autoupgrade.servicename : [not set]
-    	```
+	```
+	autoupgrade : on
+	autoupgrade.swstage : /opt/oracle.ahf
+	autoupgrade.frequency : [not set]
+	autoupgrade.servicename : [not set]
+	```
 
 3. Copy the **AHF-LINUX_22.1.1.zip** file from **/home/opc/Downloads** and paste it into the **/opt/oracle.ahf** directory.
 
-    	```
-    	<copy>
-    	cp -rf /home/opc/Downloads/AHF-LINUX_v22.1.1.zip /opt/oracle.ahf
-    	</copy>
-    	```
+	```
+	<copy>
+	cp -rf /home/opc/Downloads/AHF-LINUX_v22.1.1.zip /opt/oracle.ahf
+	</copy>
+	```
 
 4. Validate if the AHF zip file is copied to the **/opt/oracle.ahf** directory.
 
-    	```
-    	 <copy>
-    	 ls -l /opt/oracle.ahf
-    	 </copy>
-    	 ```
-    	 Command output:
+	```
+	 <copy>
+	 ls -l /opt/oracle.ahf
+	 </copy>
+	 ```
+	 Command output:
 
-    	 ```
-    	 total 277720
-    	 drwxr-xr-x. 5 root root        43 Apr 30 09:35 ahf
-    	 -rw-r--r--. 1 root root 284378255 Jul  6 15:20 AHF-LINUX_v22.1.1.zip
-    	 drwxr-x--x. 2 root root         6 Jul  6 14:51 analyzer
-    	 drwxr-xr-x. 2 root root        60 Jul  6 14:53 bin
-    	 drwxr-x--x. 3 root root        17 Jul  6 14:51 chm
-    	 drwxr-xr-x. 7 root root        64 Apr 30 09:35 common
-    	 drwxr-xr-x. 5 root root        64 Jul  6 14:51 data
-    	 -rw-r--r--. 1 root root       984 Jul  6 14:51 install.properties
-    	 drwxr-x--x. 6 root root       198 Apr 30 09:35 jre
-    	 drwxr-xr-x. 7 root root       251 Jul  6 14:51 orachk
-    	 drwxr-xr-x. 6 root root       226 Mar 15 12:00 python
-    	 drwx------. 2 root root        57 Apr 30 09:35 rpms
-    	 drwxr-x--x. 9 root root       209 Jul  6 14:51 tfa
-    	 ```
+	 ```
+	 total 277720
+	 drwxr-xr-x. 5 root root        43 Apr 30 09:35 ahf
+	 -rw-r--r--. 1 root root 284378255 Jul  6 15:20 AHF-LINUX_v22.1.1.zip
+	 drwxr-x--x. 2 root root         6 Jul  6 14:51 analyzer
+	 drwxr-xr-x. 2 root root        60 Jul  6 14:53 bin
+	 drwxr-x--x. 3 root root        17 Jul  6 14:51 chm
+	 drwxr-xr-x. 7 root root        64 Apr 30 09:35 common
+	 drwxr-xr-x. 5 root root        64 Jul  6 14:51 data
+	 -rw-r--r--. 1 root root       984 Jul  6 14:51 install.properties
+	 drwxr-x--x. 6 root root       198 Apr 30 09:35 jre
+	 drwxr-xr-x. 7 root root       251 Jul  6 14:51 orachk
+	 drwxr-xr-x. 6 root root       226 Mar 15 12:00 python
+	 drwx------. 2 root root        57 Apr 30 09:35 rpms
+	 drwxr-x--x. 9 root root       209 Jul  6 14:51 tfa
+	 ```
 
 5. Run the upgrade command and specify the **-nomos** command option to upgrade without MOS configuration.
 
-    	```
-    	<copy>
-    	ahfctl upgrade -nomos
-    	</copy>
-    	```
-    	Command output:
+	```
+	<copy>
+	ahfctl upgrade -nomos
+	</copy>
+	```
+	Command output:
 
-    	```
-    	/opt/oracle.ahf/AHF-LINUX_v22.1.1.zip successfully extracted at /opt/oracle.ahf
-    	AHF software signature has been validated successfully
-    	```
+	```
+	/opt/oracle.ahf/AHF-LINUX_v22.1.1.zip successfully extracted at /opt/oracle.ahf
+	AHF software signature has been validated successfully
+	```
 
 6. Validate if the upgrade is done correctly and check the upgrade logs after 4 minutes.
 
-    	```
-    	<copy>
-    	ls -l /opt/oracle.ahf/data/$HOSTNAME/diag/ahf
-    	</copy>
-    	```
-    	Command output:
+	```
+	<copy>
+	ls -l /opt/oracle.ahf/data/$HOSTNAME/diag/ahf
+	</copy>
+	```
+	Command output:
 
-    	```
-    	total 44
-    	-rw-r--r--. 1 root root   801 Jul  6 15:25 ahf_auto_upgrade_console_78122.log
-    	-rw-r--r--. 1 root root  9219 Jul  6 15:25 ahfctl.log
-    	-rw-------. 1 root root 26693 Jul  6 14:54 ahf_install_214300_61521_2022_07_06-14_51_09.log
-    	```
+	```
+	total 44
+	-rw-r--r--. 1 root root   801 Jul  6 15:25 ahf_auto_upgrade_console_78122.log
+	-rw-r--r--. 1 root root  9219 Jul  6 15:25 ahfctl.log
+	-rw-------. 1 root root 26693 Jul  6 14:54 ahf_install_214300_61521_2022_07_06-14_51_09.log
+	```
 
-    	```
-    	<copy>
-    	vi /opt/oracle.ahf/data/$HOSTNAME/diag/ahf/ahf_auto_upgrade*
-    	</copy>
-    	```
-    	Command output:
+	```
+	<copy>
+	vi /opt/oracle.ahf/data/$HOSTNAME/diag/ahf/ahf_auto_upgrade*
+	</copy>
+	```
+	Command output:
 
-    	```
-    	Wed Jul  6 15:25:00 GMT 2022
+	```
+	Wed Jul  6 15:25:00 GMT 2022
 
-    	AHF Installer for Platform Linux Architecture x86_64
+	AHF Installer for Platform Linux Architecture x86_64
 
-    	AHF Installation Log : /tmp/ahf_install_221100_78142_2022_07_06-15_25_00.log
+	AHF Installation Log : /tmp/ahf_install_221100_78142_2022_07_06-15_25_00.log
 
-    	Starting Autonomous Health Framework (AHF) Installation
+	Starting Autonomous Health Framework (AHF) Installation
 
-    	AHF Version: 22.1.1 Build Date: 202205161959
+	AHF Version: 22.1.1 Build Date: 202205161959
 
-    	AHF is already installed at /opt/oracle.ahf
+	AHF is already installed at /opt/oracle.ahf
 
-    	Installed AHF Version: 21.4.3 Build Date: 202204300235
+	Installed AHF Version: 21.4.3 Build Date: 202204300235
 
-    	Upgrading /opt/oracle.ahf
+	Upgrading /opt/oracle.ahf
 
-    	Shutting down AHF Services
-    	Removing orachk cache discovery....
-    	No orachk cache discovery found.
+	Shutting down AHF Services
+	Removing orachk cache discovery....
+	No orachk cache discovery found.
 
-    	Successfully copied Daemon Store to Remote Nodes
+	Successfully copied Daemon Store to Remote Nodes
 
-    	Removed orachk from inittab
+	Removed orachk from inittab
 
-    	Stopping orachk scheduler ...
-    	Stopped orachk
-    	Nothing to do !
-    	Stopping TFA from the Command Line
-    	Nothing to do !
-    	Please wait while TFA stops
-    	Please wait while TFA stops
-    	TFA-00002 Oracle Trace File Analyzer (TFA) is not running
-    	TFA Stopped Successfully
-    	Successfully stopped TFA..
-    	Telemetry adapter is not running
+	Stopping orachk scheduler ...
+	Stopped orachk
+	Nothing to do !
+	Stopping TFA from the Command Line
+	Nothing to do !
+	Please wait while TFA stops
+	Please wait while TFA stops
+	TFA-00002 Oracle Trace File Analyzer (TFA) is not running
+	TFA Stopped Successfully
+	Successfully stopped TFA..
+	Telemetry adapter is not running
 
-    	Starting AHF Services
-    	Starting TFA..
-    	Waiting up to 100 seconds for TFA to be started..
-    	. . . . .
-    	. . . . .
-    	Successfully started TFA Process..
-    	. . . . .
-    	TFA Started and listening for commands
+	Starting AHF Services
+	Starting TFA..
+	Waiting up to 100 seconds for TFA to be started..
+	. . . . .
+	. . . . .
+	Successfully started TFA Process..
+	. . . . .
+	TFA Started and listening for commands
 
-    	Adding default users to TFA Access list...
+	Adding default users to TFA Access list...
 
-    	Oracle Trace File Analyzer (TFA) is already running
+	Oracle Trace File Analyzer (TFA) is already running
 
-    	INFO: Starting orachk scheduler in background. Details for the process can be found at /opt/oracle.ahf/data/ll46863-instance-ahf/diag/orachk/compliance_start_060722_152803.log
+	INFO: Starting orachk scheduler in background. Details for the process can be found at /opt/oracle.ahf/data/ll46863-instance-ahf/diag/orachk/compliance_start_060722_152803.log
 
-    	AHF is successfully upgraded to latest version
+	AHF is successfully upgraded to latest version
 
-    	.----------------------------------------------------------------------------.
-    	| Host                 | TFA Version | TFA Build ID         | Upgrade Status |
-    	+----------------------+-------------+----------------------+----------------+
-    	| ll46863-instance-ahf |  22.1.1.0.0 | 22110020220516195917 | UPGRADED       |
-    	'----------------------+-------------+----------------------+----------------'
+	.----------------------------------------------------------------------------.
+	| Host                 | TFA Version | TFA Build ID         | Upgrade Status |
+	+----------------------+-------------+----------------------+----------------+
+	| ll46863-instance-ahf |  22.1.1.0.0 | 22110020220516195917 | UPGRADED       |
+	'----------------------+-------------+----------------------+----------------'
 
-    	Moving /tmp/ahf_install_221100_78142_2022_07_06-15_25_00.log to /opt/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
-    	```
+	Moving /tmp/ahf_install_221100_78142_2022_07_06-15_25_00.log to /opt/oracle.ahf/data/ll46863-instance-ahf/diag/ahf/
+	```
 
 7. Run the **tfactl status** command to check the run status of Oracle Trace File Analyzer.
 
@@ -293,17 +293,17 @@ Run the **ahfctl unsetupgrade** command to unset a specific upgrade parameter or
 
 1. To unset upgrade configuration:
 
-    	```
-    	<copy>
-    	ahfctl unsetupgrade -all
-    	</copy>
-    	```
-    	Command output:
-    	```
-    	AHF upgrade parameters successfully removed
-    	Successfully synced AHF configuration
-    	refreshConfig() completed successfully.
-    	```
+	```
+	<copy>
+	ahfctl unsetupgrade -all
+	</copy>
+	```
+	Command output:
+	```
+	AHF upgrade parameters successfully removed
+	Successfully synced AHF configuration
+	refreshConfig() completed successfully.
+	```
 
 2. To verify if all the parameters are unset:
 

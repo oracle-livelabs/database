@@ -1,14 +1,5 @@
 # Soluciones financieras con Oracle AI Database 26ai
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Introducción
 
 Jessica Chan es la administradora de la base de datos de Seer Bank. Sus equipos están creando nuevas aplicaciones para clientes, mejorando las revisiones de riesgos y fraudes, asignando el trabajo de servicio y añadiendo IA a los paneles financieros.
@@ -76,8 +67,3 @@ Tiempo estimado del taller: **110 minutos**
 * **Autor** - Pat Shepherd, Senior Principal Database Product Manager
 * **Colaborador** - Linda Foinding, Principal Database Product Manager
 * **Última actualización por/fecha** - Oracle Database Product Management, agosto de 2026
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -35,7 +35,7 @@ This lab assumes you have:
   
 ## Task 1: Enable automatic data optimization
 
-1. Create table students 
+1.  Create table students 
 
     ```
     <copy>
@@ -45,7 +45,7 @@ This lab assumes you have:
     </copy>
     ```  
 
-2. A segment-level ADO policy is created to automatically compress the entire table after there have been no modifications for at least 30 days, using Advanced Row Compression.
+2.  A segment-level ADO policy is created to automatically compress the entire table after there have been no modifications for at least 30 days, using Advanced Row Compression.
 
     ```
     <copy> 

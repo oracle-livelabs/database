@@ -1,12 +1,6 @@
 
 # **Introduction**
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 ## About this workshop
 Welcome to Live Labs, where we explore and delve into the fascinating realm of Oracle database management! In today's session, we will be focusing on two intriguing topics: Oracle Schema Level Privileges and Lock Free Column Reservations.
 

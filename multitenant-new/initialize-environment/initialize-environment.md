@@ -34,7 +34,7 @@ This lab assumes you have:
 
     You may test database connectivity clicking on the *+* sign next to the Database(s) as shown below in the *SQL Developer Oracle Connections* panel.
 
-    ![Image](./images/19c_hol_landing.png " ")
+    ![](./images/19c_hol_landing.png " ")
 
 2. Click the *Terminal* icon on the desktop to launch a session, then run the following to validate that expected processes are up.
 
@@ -46,9 +46,9 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Image](./images/check-pmon-up.png " ")
-    ![Image](./images/check-db-service-up.png " ")
-    ![Image](./images/check-dblistner-service-up.png " ")
+    ![](./images/check-pmon-up.png " ")
+    ![](./images/check-db-service-up.png " ")
+    ![](./images/check-dblistner-service-up.png " ")
 
     If all expected processes are shown in your output as seen above, then your environment is ready for the next task.  
 
@@ -72,9 +72,9 @@ This lab assumes you have:
     </copy>
     ```
 
-    ![Image](./images/init-multitenant.png " ")
+    ![](./images/init-multitenant.png " ")
 
-    <!-- for 21c image only.
+<!-- for 21c image only.
 2. Create Database Links. During this workshop you will use database links *cdb1_dblink* and *cdb2_dblink* to perform tasks across between the two CDBs
 
     ```

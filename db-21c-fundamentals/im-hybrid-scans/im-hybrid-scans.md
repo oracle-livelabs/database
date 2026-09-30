@@ -215,7 +215,7 @@ The `IM_Hybrid_setup.sh` shell script configures the IM column store to 110M, cr
     SQL>
     ```
 
-    The optimizer in both sessions choose the `TABLE ACCESS FULL` method because the predicate does not contain only `INMEMORY` columns.
+  The optimizer in both sessions choose the `TABLE ACCESS FULL` method because the predicate does not contain only `INMEMORY` columns.
 
 2. Execute a second query on the `IMU.IMTAB` table. The SELECT list contains the `NO INMEMORY` column and the predicate contains both a `NO INMEMORY` column and an `INMEMORY` column. Then examine the execution plan.
 
@@ -254,7 +254,7 @@ The `IM_Hybrid_setup.sh` shell script configures the IM column store to 110M, cr
     SQL>
     ```
 
-    The optimizer in both sessions choose the `TABLE ACCESS FULL` access method because the predicate does not contain only `INMEMORY` columns. It contains a `INMEMORY` column and an `NO INMEMORY` columns.
+  The optimizer in both sessions choose the `TABLE ACCESS FULL` access method because the predicate does not contain only `INMEMORY` columns. It contains a `INMEMORY` column and an `NO INMEMORY` columns.
 
 3. Execute a third query on the `IMU.IMTAB` table. The SELECT list contains the `NO INMEMORY` column and the predicate contains only `INMEMORY` columns. Then examine the execution plan.
 

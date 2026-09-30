@@ -187,9 +187,9 @@ In this Task, you will create and configure a MySQL HeatWave DB System.
 
 11. Go to the Networking tab, in the Hostname field enter (same as DB System Name):
 
-    	```
-    	<copy>mdshw</copy> 
-    	```
+	```
+	<copy>mdshw</copy> 
+	```
 
 12. Review **Create MySQL DB System**  Screen
 

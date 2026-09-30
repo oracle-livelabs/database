@@ -27,28 +27,28 @@ Once you have successfully completed this lab, if at any point you want to start
 
 1. In the terminal session, change to the **lab** directory:
 
-    ```
-    <copy>
-    cd ~/lab
-    </copy>
-    ```
+```
+<copy>
+cd ~/lab
+</copy>
+```
 
 2. Initialize the workshop:
 
-    ```
-    <copy>
-    labSetup.sh cache-intro
-    </copy>
-    ```
+```
+<copy>
+labSetup.sh cache-intro
+</copy>
+```
 
-    ```
-    info: setting up workshop 'cache-intro', this will take several minutes...
-    info: starting hosts: OK
-    info: host initialization: OK
-    info: resetting Oracle Database state, please be patient...
-    info: Oracle Database state successfully reset
-    info: starting Oracle Database: OK
-    ```
+```
+info: setting up workshop 'cache-intro', this will take several minutes...
+info: starting hosts: OK
+info: host initialization: OK
+info: resetting Oracle Database state, please be patient...
+info: Oracle Database state successfully reset
+info: starting Oracle Database: OK
+```
 
 This command will take between 5 and 8 minutes to complete. Once the setup script has completed successfully, **proceed to the next lab**. 
 

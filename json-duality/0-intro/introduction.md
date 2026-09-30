@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About the JSON Duality Views Workshop
 
 This workshop focuses on working with JSON Duality Views in Oracle AI Database.

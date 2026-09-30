@@ -38,7 +38,7 @@ In this lab you will:
 
     After uploading successfully, the console displays the total number of rows that were inserted. You can close the window.
 
-    ![Upload rows](images/console-table-uploadrows.png)
+   ![Upload rows](images/console-table-uploadrows.png)
 
 6. To verify, you can scroll down to **Explore data**. The SQL query to fetch all the table rows is displayed by default. 
 

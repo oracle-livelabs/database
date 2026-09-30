@@ -46,15 +46,15 @@ This is done as often multiple errors are reported together and we want to ensur
 
 ## Task 2: Log in to the oracle user (if you are not already oracle) and confirm you environment is set up to connect to the database with `sqlplus`
 
-1. If you are not already the oracle user then you can `sudo su` from both "ops" and "root users"
+1.	If you are not already the oracle user then you can `sudo su` from both "ops" and "root users"
 
-    	```
-    	<copy>
-    	sudo su - oracle
-    	</copy>
-    	```
+	```
+	<copy>
+	sudo su - oracle
+	</copy>
+	```
 
-3. Check the oracle user environment is set up to access your database using **sqlplus**
+3.	Check the oracle user environment is set up to access your database using **sqlplus**
 
 	```
 	<copy>
@@ -73,79 +73,79 @@ This is done as often multiple errors are reported together and we want to ensur
 ## Task 3: Connect to the database with `sqlplus` and generate some errors
 
 1. Connect to the datase instance with **sqlplus** with sysdba role
-    	```
-    	<copy>
-    	sqlplus / as sysdba
-    	</copy>
-    	```
-    	
-    	Example Command Output:  
-    	<pre>
-    	SQL*Plus: Release 19.0.0.0.0 - Production on Fri Jul 12 03:37:16 2024
-    	Version 19.23.0.0.0
+	```
+	<copy>
+	sqlplus / as sysdba
+	</copy>
+	```
+	
+	Example Command Output:  
+	<pre>
+	SQL*Plus: Release 19.0.0.0.0 - Production on Fri Jul 12 03:37:16 2024
+	Version 19.23.0.0.0
 
-    	Copyright (c) 1982, 2023, Oracle.  All rights reserved.
+	Copyright (c) 1982, 2023, Oracle.  All rights reserved.
 
 
-    	Connected to:
-    	Oracle Database 19c EE Extreme Perf Release 19.0.0.0.0 - Production
-    	Version 19.23.0.0.0
+	Connected to:
+	Oracle Database 19c EE Extreme Perf Release 19.0.0.0.0 - Production
+	Version 19.23.0.0.0
 
-    	SQL>
-    	</pre>
+	SQL>
+	</pre>
 
 2. Generate a dummy ORA-00600 Error
 
-    	At the SQL> prompt type ( Use the Copy )
-    	```
-    	<copy>
-    	exec dbms_system.ksdwrt(dbms_system.alert_file,'ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [], [], [], [], [], [], [], [], []');
-    	</copy>
-    	```
-    	Example Command Output:  
-    	<pre>
-    	Statement processed.
-    	</pre>
+	At the SQL> prompt type ( Use the Copy )
+	```
+	<copy>
+	exec dbms_system.ksdwrt(dbms_system.alert_file,'ORA-00600: internal error code, arguments: [kgb], [livelabs1], [17], [], [], [], [], [], [], [], [], []');
+	</copy>
+	```
+	Example Command Output:  
+	<pre>
+	Statement processed.
+	</pre>
 
 3. Generate a Dummy ORA-04031 Error
 
-    	At the SQL> prompt type ( Use the Copy )
-    	```
-    	<copy>
-    	exec dbms_system.ksdwrt(dbms_system.alert_file,'ORA-04031: unable to allocate 90342 bytes of shared memory ("","","","")');
-    	</copy>
-    	```
-    	Example Command Output:  
-    	<pre>
-    	Statement processed.
-    	</pre>
+	At the SQL> prompt type ( Use the Copy )
+	```
+	<copy>
+	exec dbms_system.ksdwrt(dbms_system.alert_file,'ORA-04031: unable to allocate 90342 bytes of shared memory ("","","","")');
+	</copy>
+	```
+	Example Command Output:  
+	<pre>
+	Statement processed.
+	</pre>
 
 4. Change a database init parameter
-    	At the SQL> prompt type
-    	```
-    	<copy>
-    	alter system set parallel_threads_per_cpu=4;
-    	</copy>
-    	```
+	At the SQL> prompt type
+	```
+	<copy>
+	alter system set parallel_threads_per_cpu=4;
+	</copy>
+	```
 
-    	Example Command Output:  
-    	<pre>
-    	Statement processed.
-    	</pre>
+	Example Command Output:  
+	<pre>
+	Statement processed.
+	</pre>
 
 5. Exit from sqlplus
-    	At the SQL> prompt type
-    	```
-    	<copy>
-    	exit
-    	</copy>
-    	```
+	At the SQL> prompt type
+	```
+	<copy>
+	exit
+	</copy>
+	```
 
-    	Example Command Output:  
-    	<pre>
-    	Disconnected from Oracle Database 19c EE Extreme Perf Release 19.0.0.0.0 - Production
-    	Version 19.24.0.0.0
-    	</pre>
+	Example Command Output:  
+	<pre>
+	Disconnected from Oracle Database 19c EE Extreme Perf Release 19.0.0.0.0 - Production
+	Version 19.24.0.0.0
+	</pre>
 
 6. Check that AHF detected the incidents using `tfactl events`  
 	

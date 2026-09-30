@@ -27,12 +27,12 @@ In this task, we will create a duality view called `attendee` that represents a 
 
 1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
-    ![DB Actions](images/dbaction1.png)
+   ![DB Actions](images/dbaction1.png)
 
 
 2. Below you can find the Database Actions homepage. Click the SQL tile under development to open the SQL worksheet.
 
-    ![Homepage Development SQL](./images/development-sql.png)
+   ![Homepage Development SQL](./images/development-sql.png)
 
 3. Create the `attendees` and `lectures` tables using the SQL worksheet, using the 'run script' functionality (or your SQL client of choice). We also need to create a mapping table between attendees and lectures (`map_attendees_to_lectures` tables) to model the many-to-many relationship between them.
 
@@ -113,7 +113,7 @@ In this task, we will create a duality view called `attendee` that represents a 
       </copy>
       ```
 
-    Note how the view definition uses GraphQL-like what-you-see-is-what-you-get syntax which makes it easy to determine what the view output will look like.
+   Note how the view definition uses GraphQL-like what-you-see-is-what-you-get syntax which makes it easy to determine what the view output will look like.
 
 3. Insert data into the attendee duality view.
 

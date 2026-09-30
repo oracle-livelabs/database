@@ -125,7 +125,7 @@ You must enable the archiving of redo log files to back up the Oracle Database w
     connected to target database: CDB1 (DBID=1701812036)
     ```
 
-5. Shut down the Oracle Database instance.
+5.  Shut down the Oracle Database instance.
     ```
     RMAN> <copy>shutdown immediate;</copy>
     ```

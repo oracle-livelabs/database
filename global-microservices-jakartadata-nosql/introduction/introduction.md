@@ -86,10 +86,6 @@ This workshop assumes you have:
 * Programming knowledge in Java, Helidon, and Jakarta EE
 * Familiarity with query languages
 
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Architecture of the Application
 
 1. Review the architecture information below.

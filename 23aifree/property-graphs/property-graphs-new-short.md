@@ -77,10 +77,10 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
     ![Most incoming transfers accounts](images/8-num-transfers.png)
-    ​
+​
     We see that accounts **387** and **934** have a high number of incoming transactions.
     
-2. What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
+2.  What if we want to find the accounts where money was simply passing through? Let's find the **top 10 accounts in the middle of a 2-hop chain** of transfers.
     
     ```
     <copy>
@@ -93,7 +93,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
     ![Top 10 accounts](images/9-num-conduits.png)
-    ​
+​
 3. Note that account **387** shows up again, so let's list **accounts that received a transfer from account 387 in 1, 2, or 3 hops**.
     
     ```
@@ -124,7 +124,7 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ```
 
     ![3hop triangle transfers](images/11-num-triangles.png)
-    ​
+​
 5. We can use the same query but **modify the number of hops** to check if there are **any 4-hop transfers that start and end at the same account**. 
 
     ```
@@ -136,16 +136,16 @@ A common query in analyzing money flows is to see if there is a sequence of tran
     ) GROUP BY acct_id ORDER BY Num_4hop_Chains DESC;
     </copy>
     ```
-    ​
+​
     ![4hop transfers](images/12-num-4hop-chains.png)
-    ​
+​
 6. Lastly, check if there are **any 5-hop transfers that start and end at the same account** by just changing the number of hops to 
 
     Note that though we are looking for longer chains we reuse the same MATCH pattern with a modified parameter for the desired number of hops. This compactness and expressiveness is a primary benefit of the new SQL syntax for graphs in Oracle AI Database.
    
     ```
     <copy>
-    SELECT acct_id, COUNT(1) AS Num_5hop_Chains 
+   SELECT acct_id, COUNT(1) AS Num_5hop_Chains 
     FROM graph_table (BANK_GRAPH 
         MATCH (src) - []->{5} (src) 
         COLUMNS (src.id AS acct_id) 

@@ -16,11 +16,6 @@ The objective of this lab is to show you the `shrink_tablespace` procedure in Or
 - Access to Oracle Database 23ai.
 - Basic understanding of Oracle SQL and database management concepts.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Understanding the need for tablespace shrinkage
 
 1. Before we jump into the process of using the `shrink_tablespace` procedure, let's understand why reclaiming unused space in tablespaces is important.

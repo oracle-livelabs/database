@@ -40,7 +40,7 @@ All collections are copied back to the initiating node ready for analysis or upl
 
 ## Task 2: Review Automatic Diagnostic Collection for Lab 2 Incidents
 
-1. Use the `tfactl get` command to check auto collection was enabled (ON).
+1.  Use the `tfactl get` command to check auto collection was enabled (ON).
     ```
     <copy>
     tfactl get autodiagcollect
@@ -71,7 +71,7 @@ All collections are copied back to the initiating node ready for analysis or upl
     This collection was a clusterwide collection (you can see both nodes in the node list) with files from both nodes that are copied back to a common directory on the initiating node.
 
 
-3. Review the Contents of the Automatic Diagnostic Collection.  
+3.  Review the Contents of the Automatic Diagnostic Collection.  
 
     All of the collection files and logs are copied back to the Inititating node in a directory under that directory.
     We can now go to that directory and see what files were collected.  
@@ -161,12 +161,12 @@ You will be prompted to choose:-
 
 
 ## Task 5:  Generate a manual collection using problem chooser
-1. Simply run the `tfactl diagcollect` command and let the problem chooser guide you.
-    ```
-    <copy>
-    tfactl diagcollect
-    </copy>
-    ```
+1.  Simply run the `tfactl diagcollect` command and let the problem chooser guide you.
+```
+<copy>
+tfactl diagcollect
+</copy>
+```
 Example Command Output:
 <pre>
 AHF has detected following events from 2024-08-08 16:23:07.000 to 2024-08-08 20:23:07.000

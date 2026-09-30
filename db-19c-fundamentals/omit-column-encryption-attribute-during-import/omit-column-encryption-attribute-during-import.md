@@ -88,7 +88,7 @@ This lab assumes you have:
     Job "SYSTEM"."SYS_SQL_FILE_FULL_01" successfully completed at Thu Aug 26 16:08:53 2021 elapsed 0 00:00:04
     ```
 
-9. View the `tabenc1.sql` file to verify that the `ENCRYPT` attribute is set on the `LABEL` column. Look for this line in the file: `"LABEL" VARCHAR2(50 BYTE) ENCRYPT USING 'AES192' 'SHA-1'`.
+9.  View the `tabenc1.sql` file to verify that the `ENCRYPT` attribute is set on the `LABEL` column. Look for this line in the file: `"LABEL" VARCHAR2(50 BYTE) ENCRYPT USING 'AES192' 'SHA-1'`.
 
     ```
     $ <copy>cat tabenc1.sql</copy>
@@ -103,7 +103,7 @@ This lab assumes you have:
     -- new object type path: TABLE_EXPORT/TABLE/TABLE
     CREATE TABLE "TEST"."TABENC"
        (  "C1" NUMBER,
-    	    "LABEL" VARCHAR2(50 BYTE) ENCRYPT USING 'AES192' 'SHA-1'
+	    "LABEL" VARCHAR2(50 BYTE) ENCRYPT USING 'AES192' 'SHA-1'
        ) SEGMENT CREATION IMMEDIATE
       PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
      NOCOMPRESS LOGGING

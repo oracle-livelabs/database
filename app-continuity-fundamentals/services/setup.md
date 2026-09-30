@@ -1,9 +1,6 @@
 # Sample Schema Setup
 
 ## Introduction
-
-Estimated Time: TODO - x minutes
-
 This lab will show you how to setup your database schemas for the subsequent labs.
 
 ### Prerequisites
@@ -14,11 +11,6 @@ This lab will show you how to setup your database schemas for the subsequent lab
 Watch the video below for an overview of the Install Sample Schema lab
 [](youtube:UDuY0uWc_Hc)
   
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task: Install Sample Data
 
 In this step, you will install a selection of the Oracle Database Sample Schemas.  For more information on these schemas, please review the Schema agreement at the end of this lab.
@@ -27,21 +19,21 @@ By completing the instructions below the sample schemas **SH**, **OE**, and **HR
 
 Copy the following commands into your terminal. These commands download the files needed to run the lab.  (Note: *You should run these scripts as the oracle user*.  Run a *whoami* to ensure the value *oracle* comes back.)
 
-1. If you aren't already logged in to the Oracle Cloud, open up a web browser and re-login to Oracle Cloud. 
+1.  If you aren't already logged in to the Oracle Cloud, open up a web browser and re-login to Oracle Cloud. 
 
-2. Start Cloudshell
+2.  Start Cloudshell
    
     *Note:* You can also use Putty or MAC Cygwin if you chose those formats in the earlier lab.  
-    ![Image](../clusterware/images/start-cloudshell.png " ")
+    ![](../clusterware/images/start-cloudshell.png " ")
 
-3. Connect to node 1 as the *opc* user (you identified the IP address of node 1 in the Build DB System lab). 
+3.  Connect to node 1 as the *opc* user (you identified the IP address of node 1 in the Build DB System lab). 
 
     ````
     ssh -i ~/.ssh/sshkeyname opc@<<Node 1 Public IP Address>>
     ````
-    ![Image](../clusterware/images/racnode1-login.png " ")
+    ![](../clusterware/images/racnode1-login.png " ")
 
-4. Switch to the oracle user
+4.  Switch to the oracle user
    
     ````
     <copy>
@@ -50,7 +42,7 @@ Copy the following commands into your terminal. These commands download the file
     ````
 
     Note: If you are running in Windows using putty, ensure your Session Timeout is set to greater than 0.
-5. Get the seutp files
+5.  Get the seutp files
     ````
     <copy>    
     whoami   
@@ -63,14 +55,14 @@ Copy the following commands into your terminal. These commands download the file
     chmod +x setupDB.sh
     </copy>
     ````
-    ![Image](./images/setup-num5.png " " )
+    ![](./images/setup-num5.png " " )
 
 6. The script **setupDB.sh** assumes the password for SYS and SYSTEM user. Edit the script using vi.
 
     ````
     vi setupDB.sh
     ````
-    ![Image](./images/setup-num6.png " " )
+    ![](./images/setup-num6.png " " )
 
 7. Replace the db_pwd with the password you entered when your database was setup.
 
@@ -78,11 +70,11 @@ Copy the following commands into your terminal. These commands download the file
     # Pwds may need to be changed
     db_pwd="W3lc0m3#W3lc0m3#"
     ````
-     ![Image](./images/setup-num7.png " " )
+     ![](./images/setup-num7.png " " )
 
 8. To save the file press the **esc** key and **wq!** to save the file.
    
-9. No other lines need to be changed.  Run the **setupDB.sh** script
+9.  No other lines need to be changed.  Run the **setupDB.sh** script
 
     ````
     <copy>
@@ -90,7 +82,7 @@ Copy the following commands into your terminal. These commands download the file
     </copy>
     ````
 
-    ![Image](./images/setup-num7.png " " )
+    ![](./images/setup-num7.png " " )
 
     *Note:* There may be some drop user errors, ignore them.  Please be patient as this script takes some time.
 

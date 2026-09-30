@@ -2,9 +2,6 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 Congrats! Now that you are done with the workshop, you can now clean up your OCI resources. This lab will guide you through the steps to do that.
 
 ### Objectives

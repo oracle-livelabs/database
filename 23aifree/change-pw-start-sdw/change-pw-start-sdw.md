@@ -31,14 +31,14 @@ This lab assumes you have:
      ORACLE_SID = [FREE] ? <copy>FREE</copy>
      The Oracle base has been set to /opt/oracle OR The Oracle base remains unchanged with value /opt/oracle.
     [FREE:oracle@hol23cfdr:~]$
-    		```
+		```
 
     <!-- ![Set environment](images/set-envt-free1.png " ") -->
 
 
 3. Next connect to your database.
     ```
-    		[FREE:oracle@hol23cfdr:~]$ <copy>sqlplus / as sysdba</copy>
+		[FREE:oracle@hol23cfdr:~]$ <copy>sqlplus / as sysdba</copy>
 
     SQL*Plus: Release 23.0.0.0.0 - Developer-Release on Wed Apr 5 13:38:14 2023
     Version 23.2.0.0.0
@@ -50,7 +50,7 @@ This lab assumes you have:
     Version 23.2.0.0.0
 
     SQL>
-    		```
+		```
     ![Connect to the database](images/connect-db-sysdba1.png " ")
 
 4. Next change to your pluggable database. If your pluggable database is a different name, make sure to change the command below.
@@ -60,13 +60,13 @@ This lab assumes you have:
     Session altered.
 
     SQL>
-    		```
+		```
     ![Change to PDB](images/alter-session1.png " ")
 
 5. To change the password for the user hol23c use the "alter user \[username\] identified by \[new password\]" command. The syntax below for the hol23c user, make sure to replace new\_password\_here to your new password. Throughout this workshop we will use the Welcome123 password.
     ```
-    		<copy>alter user hol23c identified by </copy>[new_password_here];
-    		```
+		<copy>alter user hol23c identified by </copy>[new_password_here];
+		```
     ```
     SQL> alter user hol23c identified by Welcome123;
 
@@ -79,21 +79,21 @@ This lab assumes you have:
 6. Once the password has been changed you can exit SQL Plus.
 
     ```
-    		SQL> <copy>exit</copy>
-    Disconnected from Oracle Database 23ai Free, Release 23.0.0.0.0 - Developer-Release
-    Version 23.2.0.0.0
-    [FREE:oracle@hol23cfdr:~]$
-    		```
+		SQL> <copy>exit</copy>
+Disconnected from Oracle Database 23ai Free, Release 23.0.0.0.0 - Developer-Release
+Version 23.2.0.0.0
+[FREE:oracle@hol23cfdr:~]$
+		```
 
     ![Exit](images/exit1.png " ")
 
 7. To start ORDS, from the same command prompt use the following command. The output of [1] 204454 is just an example, your output could be different.
 
     ```
-    		[FREE:oracle@hol23cfdr:~]$ <copy>ords serve > /dev/null 2>&1 &</copy>
-    [1] 204454
-    [FREE:oracle@hol23cfdr:~]$
-    		```
+		[FREE:oracle@hol23cfdr:~]$ <copy>ords serve > /dev/null 2>&1 &</copy>
+[1] 204454
+[FREE:oracle@hol23cfdr:~]$
+		```
 
     **NOTE:** You must leave this terminal open and the process running. Closing either will stop ORDS from running, and you will not be able to access other applications that are used in this lab.
 

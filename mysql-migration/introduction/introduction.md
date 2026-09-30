@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 This workshop will cover the migration of a conventional LAMP stack application from any cloud or on-premises environment to Oracle Cloud Infrastructure (OCI). We will walk you through the process of

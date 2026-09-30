@@ -6,10 +6,6 @@ In this workshop, you will get to know the basic XML capabilities of Oracle's Co
 
 Estimated Workshop Time: 1 hours, 30 minutes
 
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: What Is XML?
 
 XML is a human-readable, machine-readable, and self-describing format to represent data in a hierarchical format. The following is an example of an XML document containing information about a purchase order. 

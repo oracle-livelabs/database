@@ -100,7 +100,7 @@ In this lab, you will be guided through the following tasks:
       </copy>
       ```
 
-    ![Chat generated file](./images/claude-ai.png "Chat generated file")
+   ![Chat generated file](./images/claude-ai.png "Chat generated file")
 
 4. Copy generated index.html file to "chatbot"" folder
 
@@ -230,7 +230,7 @@ In this lab, you will be guided through the following tasks:
     <copy> sudo nano api_key.php</copy>
     ```
 
-    **Update to the following values:**
+  **Update to the following values:**
 
     // MySQL AI Database Connection Details
     - `define('DB_HOST', 'localhost');`

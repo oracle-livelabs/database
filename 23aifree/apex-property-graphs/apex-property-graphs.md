@@ -75,7 +75,7 @@ This lab assumes:
     ![sign out from admin](images/logout.png)
 
 
-2. Log back in as the admin info you just created along with the workspace name as graph.
+2.  Log back in as the admin info you just created along with the workspace name as graph.
     ![log back in](images/log-back-in.png)
 
 
@@ -95,20 +95,20 @@ This lab assumes:
 6. Click next.
     ![Import f106 sql file](images/f106-import-2.png)
     
-7. Select Reuse Application ID 106 From Export File. Leave all other options and click Install Application.
+7.  Select Reuse Application ID 106 From Export File. Leave all other options and click Install Application.
 
     ![Install the application](images/install-application.png)
 
 
-8. Click Install Supporting Objects.
+8.  Click Install Supporting Objects.
 
     ![Install supporting objects](images/install-supporting-objects.png)
 
-9. Click Run Application.
+9.  Click Run Application.
 
     ![Run the application](images/run-application.png)
 
-10. Login.
+10.  Login.
     **NOTE:** admin is case-sensitive.
 
     ![Log back in](images/login-final.png)

@@ -87,11 +87,11 @@ The Object Storage service provides reliable, secure, and scalable object storag
 
 ## Task 3: Upload files to the bucket folder
 
-1. In the **Bucket Details** page, under **Objects**, click the bucket folder name.
+1.  In the **Bucket Details** page, under **Objects**, click the bucket folder name.
 
     ![Click bucket folder](./images/33-click-bucket-folder.png "Click bucket folder")
 
-2. Click **Upload Objects**.
+2.  Click **Upload Objects**.
 
     ![Click upload](./images/34-click-upload.png "Click upload")
 
@@ -161,7 +161,7 @@ Pre-authenticated requests provide a way to let HeatWave access your bucket or o
 
     ```bash
     <copy>create database genai_db;</copy>
-    	<copy>use genai_db;</copy>
+	<copy>use genai_db;</copy>
     ```
 
     ![Create database](./images/11-create-database.png "Create database")

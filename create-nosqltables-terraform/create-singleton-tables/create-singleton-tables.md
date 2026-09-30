@@ -17,11 +17,6 @@ Oracle NoSQL Database Cloud Service is a fully managed database cloud service th
 
 To create resources in OCI, you need to configure terraform. You need to create the basic terraform configuration files for terraform provider definition, NoSQL resource definitions, authentication, and input variables.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1:  Create OCI Terraform provider configuration
 You will create a new file named **provider.tf** that contains the OCI Terraform provider definition, and also associated variable definitions. The OCI Terraform provider requires ONLY the region argument. However, you might have to configure additional arguments with authentication credentials for an OCI account based on the authentication method.
 

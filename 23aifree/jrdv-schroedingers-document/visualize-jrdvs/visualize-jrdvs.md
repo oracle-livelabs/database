@@ -105,17 +105,17 @@ Now that our APEX environment is fully configured, we'll use the installed APEX 
 
     - Observe the intensity of the color scheme for these heat islands. The color scheme is based on the median income of the populous living within the heat island.
 
-    ![View Heat Island Map](images/app-302-initial-view.png)
+   ![View Heat Island Map](images/app-302-initial-view.png)
 
     - Navigate to and then zoom into one of the heat islands that shows green, yellow, and red icons within them. The icons represent trees that were newly planted by the volunteer teams.
 
     - If you click on the heat island polygon, some of its attributes - including its census tract information, median income levels, and area in square miles - will be displayed.  
 
-    ![Explore Heat Islands](images/app-302-heat-island-details.png)
+   ![Explore Heat Islands](images/app-302-heat-island-details.png)
 
     - Finally, click on a few of the icons within the heat island to see attributes of the planted tree, including its common name and its precise latitude and longitude.
 
-    ![Explore Planted Trees](images/app-302-tree-details.png)
+   ![Explore Planted Trees](images/app-302-tree-details.png)
 
 
 3. Close the application, return to the APEX development environment, and sign out.

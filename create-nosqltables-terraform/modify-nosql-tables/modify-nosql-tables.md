@@ -14,11 +14,6 @@ Estimated Lab Time: 15 Minutes
 
 You can modify resources in OCI using terraform. To modify a NoSQL table, you need to create an override NOSQL Terraform configuration file with the necessary changes. You can use terraform to run the new configuration files.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1:  Overwrite or update the NoSQL Terraform configuration file
 
 **Option 1: Modifying a singleton table:**

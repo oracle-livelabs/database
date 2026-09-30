@@ -151,10 +151,10 @@ This lab assumes you have:
 5. Get the external IP address of your load balancer. Wait 30 seconds if the external IP address is not ready
 
     ```bash
-    <copy>
-    kubectl get service -n grafana --watch
-    </copy>
-    ```
+   <copy>
+   kubectl get service -n grafana --watch
+   </copy>
+   ```
 
   Once you have the External IP provisioned, you can press **CTL+C** to terminate the command
 
@@ -232,7 +232,7 @@ This lab assumes you have:
 
 2. Click on 'Add an empty panel'
 
-    ![Dashboard](images/grafana-panel-add.png)
+   ![Dashboard](images/grafana-panel-add.png)
 
 3. Click on the **Edit SQL** button
 

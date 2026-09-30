@@ -28,11 +28,11 @@ In this lab, you will:
 
 1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-    ![registered database navigation](images/db-connection.png =50%x*)
+  ![registered database navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-    ![Screenshot of click create db](images/db-connection-pdb.png =50%x*)
+  ![Screenshot of click create db](images/db-connection-pdb.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **SourcePDB**
@@ -40,13 +40,13 @@ In this lab, you will:
     - Vault: **DMS_Vault**
     - Encryption Key: **DMS_Key**
 
-    Select Database details: Select an OCI database
-    - Database System: **SourceDB**
-    - Pluggable database: **pdb**
-    - Initial load database username: **system**
-    - Initial load database password: \****
+  Select Database details: Select an OCI database
+   - Database System: **SourceDB**
+   - Pluggable database: **pdb**
+   - Initial load database username: **system**
+   - Initial load database password: \****
 
-    Don’t check create private endpoint option.
+Don’t check create private endpoint option.
 
 
 4. Press **Create**
@@ -64,11 +64,11 @@ For this task you need the following info from previous steps:
 
 1. In the OCI Console Menu ![menu hamburger](images/hamburger.png =22x22), go to **Migration & Disaster Recovery > Database Migration > Database Connections**
 
-    ![registered database navigation](images/db-connection.png =50%x*)
+  ![registered database navigation](images/db-connection.png =50%x*)
 
 2. Press **Create connection**
 
-    ![Screenshot of click register db](images/click-create-db-atp.png =50%x*)
+   ![Screenshot of click register db](images/click-create-db-atp.png =50%x*)
 
 3. On the page Database Details, fill in the following entries, otherwise leave defaults:
     - Name: **TargetATP**
@@ -76,12 +76,12 @@ For this task you need the following info from previous steps:
     - Vault: **DMS_Vault**
     - Encryption Key: **DMS_Key**
 
-    Select the Autonomous database name in your compartment i.e: dmsatp2
+   Select the Autonomous database name in your compartment i.e: dmsatp2
     - Initial load database username: **admin**
     - Initial load database password: \****
 
       
-    Network connectivity: Create private endpoint to access this database and select the correct subnet.
+   Network connectivity: Create private endpoint to access this database and select the correct subnet.
 
 4. Press **create**
 
@@ -141,8 +141,3 @@ You may now [proceed to the next lab](#next).
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian Lynch, Solution Engineers, Austin Specialist Hub
 * **Last Updated By/Date** - Jorge Martinez, Product Management, May 2025
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

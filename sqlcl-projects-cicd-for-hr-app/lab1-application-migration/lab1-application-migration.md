@@ -22,11 +22,6 @@ Estimated Lab Time: 15 minutes
 * Completion of previous labs
 * Basic understanding of Git
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Understand Environments and Database CICD Challenges
 
 ### **Environments Overview**

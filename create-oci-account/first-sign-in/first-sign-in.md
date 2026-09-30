@@ -26,7 +26,7 @@ In this lab, you will:
 
 1. Select the activation link or the official access link in the email. Follow the prompted activation or password-change steps.
 
-    ![Oracle documentation screenshot of the OCI account sign-in screen](https://docs.oracle.com/en/learn/get-started-with-oci-and-oci-console/images/getting-started-oci22.png)
+    ![Oracle documentation screenshot of the OCI account sign-in screen](https://docs.oracle.com/en/learn/get-started-with-oci-and-oci-console/images/Getting-Started-OCI22.png)
 
     > Oracle documentation screenshot. Use the account details and sign-in path in your activation email; the live OCI sign-in flow can vary.
 

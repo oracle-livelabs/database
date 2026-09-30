@@ -33,7 +33,7 @@ This lab assumes you have:
      ORACLE_SID = [FREE] ? FREE
      The Oracle base has been set to /opt/oracle
     [FREE:oracle@hol23cfdr:~]$
-    		```
+		```
 
     <!-- ![Set environment](images/set-envt-free1.png " ") -->
 
@@ -120,7 +120,7 @@ We're going to allow the HR user to access some of the tables in the SH schema.
     </copy>
     ```
 
-2. Now grant SELECT access to the HR user on the tables PRODUCTS and CUSTOMERS
+2.  Now grant SELECT access to the HR user on the tables PRODUCTS and CUSTOMERS
 
     ```
     <copy>
@@ -134,7 +134,7 @@ We're going to allow the HR user to access some of the tables in the SH schema.
 
 ## Task 3: Enable the HR schema for ORDS
 
-1. Still in our terminal window, start SQLcl and log in to the HR schema in the PDB. If you chose a password other than "oracle" earlier, you will need to use it here:
+1.  Still in our terminal window, start SQLcl and log in to the HR schema in the PDB. If you chose a password other than "oracle" earlier, you will need to use it here:
 
     ```
     <copy>
@@ -143,7 +143,7 @@ We're going to allow the HR user to access some of the tables in the SH schema.
     </copy>
     ```
 
-2. To be able to use Database Actions (formerly known as SQL Developer Web), we must enable it from the schema we wish to use:
+2.  To be able to use Database Actions (formerly known as SQL Developer Web), we must enable it from the schema we wish to use:
 
     ```
     <copy>
@@ -157,10 +157,10 @@ We're going to allow the HR user to access some of the tables in the SH schema.
 1. To start ORDS, from the same command prompt use the following command. The output of [1] 204454 is just an example, your output could be different. Using "nohup" means the termainal window may be closed but ORDS will stay running.
 
     ```
-    		[FREE:oracle@hol23cfdr:~]$ <copy>nohup ords serve > /dev/null 2>&1 &</copy>
-    [1] 204454
-    [FREE:oracle@hol23cfdr:~]$
-    		```
+		[FREE:oracle@hol23cfdr:~]$ <copy>nohup ords serve > /dev/null 2>&1 &</copy>
+[1] 204454
+[FREE:oracle@hol23cfdr:~]$
+		```
 
     ![Start ORDS](images/ords1.png " ")
 

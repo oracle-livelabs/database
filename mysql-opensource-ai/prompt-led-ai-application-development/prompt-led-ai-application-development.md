@@ -349,7 +349,7 @@ Use the following command to securely connect your local machine to the private 
 1. open Terminal and run the following
 
     ```bash
-    <copy> ssh -i &lt;private_key&gt; -L 3306:&lt;db_private_ip&gt;:3306 opc@&lt;vm_public_ip&gt;</copy>
+   <copy> ssh -i &lt;private_key&gt; -L 3306:&lt;db_private_ip&gt;:3306 opc@&lt;vm_public_ip&gt;</copy>
     ```
 
 Replace:

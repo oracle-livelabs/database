@@ -32,20 +32,20 @@ To connect to Oracle Database and run SQL commands, set the environment first.
 
 1. Open a terminal window and run the command *oraenv* to set the environment variables.
 
-    	```
-    	$ <copy>. oraenv</copy>
-    	```
+	```
+	$ <copy>. oraenv</copy>
+	```
 
 1. Enter the Oracle SID, for this lab it is *CDB1*.
 
-    	```
-    	ORACLE_SID = [oracle] ? <copy>CDB1</copy>
-    	The Oracle base has been set to /opt/oracle
-    	```
+	```
+	ORACLE_SID = [oracle] ? <copy>CDB1</copy>
+	The Oracle base has been set to /opt/oracle
+	```
 
-    	This command also sets the Oracle home path to `/opt/oracle/product/21c/dbhome_1`.
+	This command also sets the Oracle home path to `/opt/oracle/product/21c/dbhome_1`.
 
-    	> **Note:** Oracle SID is case sensitive.  
+	> **Note:** Oracle SID is case sensitive.  
 
 1. Change the current working directory to `$ORACLE_HOME/bin`.
 
@@ -65,25 +65,25 @@ A dispatcher starts automatically on the TCP/IP protocol. Log in to Oracle Datab
 
 1. From `$ORACLE_HOME/bin`, log in to SQL Plus as `SYSDBA`.
 
-    	```
-    	$ <copy>./sqlplus / as sysdba</copy>
-    	```
+	```
+	$ <copy>./sqlplus / as sysdba</copy>
+	```
 
-    	The values may differ depending on the system you are using.
+	The values may differ depending on the system you are using.
 
-    	```
-    	SQL*Plus: Release 21.0.0.0.0 - Production on Thu Feb 17 13:36:39 2022
-    	Version 21.4.0.0.0
+	```
+	SQL*Plus: Release 21.0.0.0.0 - Production on Thu Feb 17 13:36:39 2022
+	Version 21.4.0.0.0
 
-    	Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+	Copyright (c) 1982, 2021, Oracle.  All rights reserved.
 
 
-    	Connected to:
-    	Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
-    	Version 21.4.0.0.0
+	Connected to:
+	Oracle Database 21c Enterprise Edition Release 21.0.0.0.0 - Production
+	Version 21.4.0.0.0
 
     SQL>
-    	```
+	```
 
 2. View the `DISPATCHERS` parameter in the initialization parameter file.
 
@@ -110,36 +110,36 @@ The default port for CDB is `5500`. For this lab, change the port to, say, *5506
 
 1. 	Verify that the container shows the CDB name, *CDB$ROOT*.
 
-    	```
-    	SQL> <copy>show con_name</copy>
-    	```
-    	```
-    	CON_NAME
-    	------------------------------
-    	CDB$ROOT
-    	```
+	```
+	SQL> <copy>show con_name</copy>
+	```
+	```
+	CON_NAME
+	------------------------------
+	CDB$ROOT
+	```
 
 2. View the current port number of CDB.
 
-    	```
-    	SQL> <copy>select dbms_xdb_config.gethttpsport() from dual;</copy>
-    	```
+	```
+	SQL> <copy>select dbms_xdb_config.gethttpsport() from dual;</copy>
+	```
 
-    	The values may differ depending on the system you are using.
+	The values may differ depending on the system you are using.
 
-    	```
-    	DBMS_XDB_CONFIG.GETHTTPSPORT()
-    	------------------------------
-    							  5501
-    	```
+	```
+	DBMS_XDB_CONFIG.GETHTTPSPORT()
+	------------------------------
+							  5501
+	```
 
 3. Change the HTTPS port number of CDB to *5506*.
 
-    	```
-    	SQL> <copy>exec DBMS_XDB_CONFIG.SETHTTPSPORT(5506);</copy>
+	```
+	SQL> <copy>exec DBMS_XDB_CONFIG.SETHTTPSPORT(5506);</copy>
 
-    	PL/SQL procedure successfully completed.
-    	```
+	PL/SQL procedure successfully completed.
+	```
 
 5. Check the new port number of CDB.
 
@@ -160,72 +160,72 @@ The default port for PDB is `0`. For this lab, change the port to, say, *5507*.
 
 1. View the existing PDBs in your Oracle Database.
 
-    	```
-    	SQL> <copy>show pdbs</copy>
-    	```
-    	The values may differ depending on the system you are using.
+	```
+	SQL> <copy>show pdbs</copy>
+	```
+	The values may differ depending on the system you are using.
 
-    	```
-    		CON_ID CON_NAME			  			  OPEN MODE  RESTRICTED
-    	---------- ------------------------------ ---------- ----------
-    			 2 PDB$SEED			  		   READ ONLY  NO
-    			 3 PDB1 			  			  READ WRITE NO
+	```
+		CON_ID CON_NAME			  			  OPEN MODE  RESTRICTED
+	---------- ------------------------------ ---------- ----------
+			 2 PDB$SEED			  		   READ ONLY  NO
+			 3 PDB1 			  			  READ WRITE NO
 
-    	```
+	```
 
 2. Change the container to PDB, for this lab it is *PDB1*.
 
-    	```
-    	SQL> <copy>alter session set container=PDB1;</copy>
+	```
+	SQL> <copy>alter session set container=PDB1;</copy>
 
-    	Session altered.
-    	```
+	Session altered.
+	```
 
-3. Verify that the container shows the PDB name you entered.
+3.	Verify that the container shows the PDB name you entered.
 
-    	```
-    	SQL> <copy>show con_name</copy>
-    	```
+	```
+	SQL> <copy>show con_name</copy>
+	```
 
-    	The values may differ depending on the system you are using.
+	The values may differ depending on the system you are using.
 
-    	```
-    	CON_NAME
-    	------------------------------
-    	PDB1
-    	```
+	```
+	CON_NAME
+	------------------------------
+	PDB1
+	```
 
-    	Open the PDB, if not already open.
+	Open the PDB, if not already open.
 
-    	```
-    	SQL> <copy>alter pluggable database PDB1 open;</copy>
+	```
+	SQL> <copy>alter pluggable database PDB1 open;</copy>
 
-    	Pluggable database altered.
-    	```
+	Pluggable database altered.
+	```
 
-    	> **Note:** If the PDB is in `open` state, the above command returns an error message that the PDB is already open.
+	> **Note:** If the PDB is in `open` state, the above command returns an error message that the PDB is already open.
 
 5. View the current port number of PDB.
 
-    	```
-    	SQL> <copy>select dbms_xdb_config.gethttpsport() from dual;</copy>
-    	```
+	```
+	SQL> <copy>select dbms_xdb_config.gethttpsport() from dual;</copy>
+	```
 
-    	The values may differ depending on the system you are using.
+	The values may differ depending on the system you are using.
 
-    	```
-    	DBMS_XDB_CONFIG.GETHTTPSPORT()
-    	------------------------------
-    								 0
-    	```
+	```
+	DBMS_XDB_CONFIG.GETHTTPSPORT()
+	------------------------------
+								 0
+	```
 
 6. Change the HTTPS port number of PDB to *5507*.
 
-    	```
-    	SQL> <copy>exec DBMS_XDB_CONFIG.SETHTTPSPORT(5507);</copy>
+	```
+	SQL> <copy>exec DBMS_XDB_CONFIG.SETHTTPSPORT(5507);</copy>
 
-    	PL/SQL procedure successfully completed.
-    	```
+	PL/SQL procedure successfully completed.
+	```
 
 7. Check the new port number of PDB.
 

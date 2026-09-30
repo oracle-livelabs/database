@@ -35,7 +35,7 @@ Oracle has provided a complete set of Docker build files on an Oracle GitHub rep
     <copy>unzip main.zip</copy>
     ```
 
-    ![Image](images/unzip-main.png)
+    ![](images/unzip-main.png)
 
 ## Task 2: Upload Oracle Database zip to your compute instance
 
@@ -48,7 +48,7 @@ Oracle has provided a complete set of Docker build files on an Oracle GitHub rep
   
 
 
-  ![Image](images/download_par.png " ")
+  ![](images/download_PAR.png " ")
 
 ## Task 3: Build the Docker image
 
@@ -65,7 +65,7 @@ Oracle has provided a complete set of Docker build files on an Oracle GitHub rep
     <copy>./buildContainerImage.sh -v 19.3.0 -e</copy>
     ```
 
-    ![Image](images/build-completed.png)
+    ![](images/build-completed.png)
 
   Note when the script completes, it lists the new Docker image: `oracle/database:19.3.0-ee`.
 

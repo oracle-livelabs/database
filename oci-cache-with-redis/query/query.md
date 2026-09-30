@@ -23,8 +23,8 @@ This lab assumes you have:
 
 1. In VM go to folder **nyctaxi** and run command below.
   
-    Use command below to create the above directory structure.
-    ```
+  Use command below to create the above directory structure.
+  ```
     <copy>python run.py</copy>
     ```
   

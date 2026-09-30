@@ -29,28 +29,28 @@ In this lab, you will:
 
 2. Select **TestMigration**
 
-    ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
+  ![Screenshot of select testmigration](images/select-testmigration.png =50%x*)
 
 3. If Migration is still being created, wait until Lifecycle State is Active
 
 4. Press **Validate** button
 
-    ![Screenshot of press validate](images/press-validate.png =50%x*)
+  ![Screenshot of press validate](images/press-validate.png =50%x*)
 
 5. Press **Validate** button to confirm   
 
-    ![Screenshot of confirm validate](images/press-validate-again.png =40%x*)
+![Screenshot of confirm validate](images/press-validate-again.png =40%x*)
 
 6. Click on **View Details** in the information box above the validate button. You can also navigate to the Jobs resources of this migration.
 
-    ![Screenshot of click jobs](images/migration-view-details.png)
+  ![Screenshot of click jobs](images/migration-view-details.png)
 
 7. Phases will be shown, and status will be updated as phases are completed. It can take 2 minutes before the first phase is shown.
     ![Screenshot of phases with updated status](images/pump.png =90%x*)
 
 8. If a phase has failed, it will show with the status **Failed**. In this case, press on the phase name to learn more about the reason for failure. Resolve the issue described and rerun the validation by pressing the Validate button again.
 
-    ![Screenshot of dowload log](images/job-error.png =90%x*)
+  ![Screenshot of dowload log](images/job-error.png =90%x*)
 
 9. Once all phases show complete, move to the next step.
 
@@ -115,7 +115,7 @@ In this lab, you will:
     You can close the Cloud Shell window now.
 
  10. Let's review the migrated data in the autonomous database.
-    In the OCI Console Menu ![Image](images/hamburger.png =22x22), go to **Oracle Database > Autonomous Database**
+    In the OCI Console Menu ![](images/hamburger.png =22x22), go to **Oracle Database > Autonomous Database**
 
     ![Screenshot of migration navigation](images/adb-navigation.png =90%x*) 
 
@@ -171,8 +171,3 @@ In this lab, you will:
 * **Author** - Alex Kotopoulis, Director, Product Management
 * **Contributors** -  Kiana McDaniel, Hanna Rakhsha, Killian, Lynch, Solution Engineers, Austin Specialist Hub
 * **Last Updated By/Date** - Jorge Martinez, Product Manager, June 2024
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

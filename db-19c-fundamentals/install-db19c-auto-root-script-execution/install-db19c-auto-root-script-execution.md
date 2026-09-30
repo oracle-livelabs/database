@@ -56,12 +56,12 @@ This lab assumes you have:
     dbjava      jdbc           ords     root.sh.old.1    xdk
     dbs         jdk            oss      runInstaller
     deinstall   jlib           oui      schagent.conf
-    demo        ldap           owm      sdk
+   demo        ldap           owm      sdk
     ```
 
 4. Launch the Oracle Database 19c installer by executing the `runInstaller` file. To apply the Oracle Database release update for 19.12.0.0, you can include the `applyRU` parameter. The installer first applies the patch (this takes about 7.5 minutes), and then it opens the Oracle Universal Installer wizard. If you don't want to patch the database to release 19.12, you can leave out the -`applyRU` parameter and value, and Oracle Database release 19.3 will be installed.
 
-    *Enter the command carefully and check that it is correct before you run it! If you make an error while installing the database, you cannot easily undo the changes made to the compute instance. It is fastest to obtain a fresh `workshop-staged` compute instance and try the lab again.*
+  *Enter the command carefully and check that it is correct before you run it! If you make an error while installing the database, you cannot easily undo the changes made to the compute instance. It is fastest to obtain a fresh `workshop-staged` compute instance and try the lab again.*
 
     ```
     $ <copy>./runInstaller -applyRU 32904851</copy>

@@ -1,11 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 ## About this Workshop
 
 [DBExpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) provides users with comprehensive information on the Oracle Cloud Database Services across all supported cloud environments. 
@@ -25,8 +19,3 @@ In this workshop, you will learn how to:
 * **Author** - [](var:author_names), [](var:group_name)
 * **Contributors** -  [](var:contributors_names)
 * **Last Updated By/Date** - [](var:author_names), [](var:last_updated)
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

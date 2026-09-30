@@ -1,14 +1,5 @@
 # SEER HIGHTECH live validation — 29 September 2026
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Latest shared-browser capture and instruction retest
 
 48 page-only captures now replace the earlier images. The revised agent returned the five verified rows in one fresh conversation; revised narration included all ten totals but used a numbered list instead of the requested table. The original profile model was restored. See shared-browser-capture-report.md for the current results and limits. The earlier observations below remain historical evidence.
@@ -60,8 +51,3 @@ The original lessons contain 63 SQL blocks. The live correction adds one determi
 Raw SQL results, the executed PGX export, UI accessibility observations and comparison SQL are retained under validation/live-runtime, outside the learner archive. The unsupported WHENEVER SQLERROR wrapper in an early ORDS attempt was a harness error; the subsequent individual lesson blocks were executed successfully. A sandbox DNS failure and initial editor input problem are likewise not counted as lesson SQL defects.
 
 Six separate application screenshots remain outstanding because no runnable HighTech application was included in the supplied source. No substitute application screens were fabricated. Fresh SQLcl/API-key bootstrap, Terraform and green-button provisioning remain unrun. External links and responsive/accessibility behavior were not comprehensively revalidated.
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -22,22 +22,22 @@ Estimated time: 30 mins
 
 ## Task 1: Create a dynamic group
 
-1. Log in to the OCI console.
+1.  Log in to the OCI console.
 
-2. Select the **Navigation Menu**, navigate to **Identity & Security**, and select **Domains**.![Navigation Menu](./images/domains.png)
+2.  Select the **Navigation Menu**, navigate to **Identity & Security**, and select **Domains**.![Navigation Menu](./images/domains.png)
 
-3. Select the Compartment you want to work in, then select the Domain.![Select the domain](./images/select-domain.png)
+3.  Select the Compartment you want to work in, then select the Domain.![Select the domain](./images/select-domain.png)
 
-4. Select the **Dynamic groups** tab from the horizontal bar at the top.![Dynamic group tab](./images/dg-section.png)
+4.  Select the **Dynamic groups** tab from the horizontal bar at the top.![Dynamic group tab](./images/dg-section.png)
 
-5. Select the **Create dynamic group** button. ![Create Dynamic Group button](./images/new-dg.png)
+5.  Select the **Create dynamic group** button. ![Create Dynamic Group button](./images/new-dg.png)
 
-6. In the Create dynamic group window, enter the following details:
+6.  In the Create dynamic group window, enter the following details:
     - **Name**: Enter a unique name for the group. The name must be unique across all groups in your tenancy. For the example, enter *New_Dynamic_Group*.
 
     - **Description**: Enter a friendly description.![Dynamic group creation](./images/create-dg1.png)
 
-7. Enter Matching Rules. Resources entered in the rule are the members of the group. When unsure about defining a rule, select the **Rule Builder** option.
+7.  Enter Matching Rules. Resources entered in the rule are the members of the group. When unsure about defining a rule, select the **Rule Builder** option.
 
     In the **Create matching rule** window, select the following from dropdown list
     -  For **Include instances that match**, select **Any of the following**.
@@ -45,29 +45,29 @@ Estimated time: 30 mins
     -  In the **Value** text box, enter the OCID of the instance. Select the **+ Additional line** button to add more resources.
     -  Select the **Add rule** button.
    
-    ![Rule builder](./images/add-rule.png)
+   ![Rule builder](./images/add-rule.png)
 
-8. Select **Create**.
+8.  Select **Create**.
 ![Create Dynamic Group button](./images/create-dg.png)
 
 ## Task 2: Create a policy for the dynamic group
 
-1. Log in to the OCI console.
+1.  Log in to the OCI console.
 
-2. Select the **Navigation Menu**, navigate to **Identity & Security**, and select **Policies**.
-    ![Navigation Menu](./images/policies.png)
+2.  Select the **Navigation Menu**, navigate to **Identity & Security**, and select **Policies**.
+![Navigation Menu](./images/policies.png)
 
-3. Select the Compartment you want to work in and select **Create Policy**.
-    ![New Policy button](./images/new-pol.png)
+3.  Select the Compartment you want to work in and select **Create Policy**.
+![New Policy button](./images/new-pol.png)
 
-4. In the Create Policy window, enter the following details:
+4.  In the Create Policy window, enter the following details:
     
     - **Name**: Enter a non-changeable name for the policy. The name must be unique across all policies in the compartment where you create it. For this example, enter *NewPolicy*.
     - **Description**: Enter a friendly description.
     - **Compartment**: This displays the compartment to which you want to attach the policy. To change the compartment, select from the dropdown list.
     ![New policy](./images/create-pol.png)
 
-5. Enter policy statements using the [Policy Builder](https://docs.oracle.com/en-us/iaas/Content/Identity/policymgmt/managingpolicies_topic-Using_the_Policy_Builder.htm).
+5.  Enter policy statements using the [Policy Builder](https://docs.oracle.com/en-us/iaas/Content/Identity/policymgmt/managingpolicies_topic-Using_the_Policy_Builder.htm).
     
     - Select a use case from **Policy use cases** dropdown to filter the policy templates list. For this example, select **All** to browse all the templates.
 
@@ -77,7 +77,7 @@ Estimated time: 30 mins
     - OCI creates the Policy Statements. For this example, select an **Identity Domain**, the **Dynamic group** created in the earlier task. You must also choose the **Location**. This is the compartment that the policy will grants access to.
     ![Policy statements](./images/pol-stmt.png)
 
-6. Select the **Create** button.
+6.  Select the **Create** button.
     
     >  Note: To edit or add more policy statements after the creation, select the policy you have created. Select **Edit Policy **and select **Save Changes**.
 

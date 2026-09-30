@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 
 ## About this Workshop
 

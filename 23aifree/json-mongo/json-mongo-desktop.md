@@ -138,7 +138,7 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     ![New result for after 2020](images/mongo-2020-new.png " ")
 
 3. Return to the browser window that contains SQL Developer Web. We will query for the same movies using the JSON tool. Navigate to the JSON tool using the menu in the top left corner of the webpage if you are not there already.
-    	![Homepage Development JSON](./images/development-json.png)
+	![Homepage Development JSON](./images/development-json.png)
 
 4. Let's edit the entries in SQL Developer Web and see the changes in Mongo Shell. First, double click on the document referencing the movie "SuperAction Mars," or click the "Edit Document" icon next to it. In the dialog page, change the year to 2025 and then save the document. Seems Tom Cruise is busy and won't have enough time to finish the movie before then.
 
@@ -147,8 +147,8 @@ Let's take some time to demonstrate the interactivity between the Oracle and Mon
     </copy>
     ```
 
-    	![Find SuperAction Mars](./images/find-superaction-mars.png)
-    	![Edit SuperAction Mars](./images/edit-superaction-mars.png)
+	![Find SuperAction Mars](./images/find-superaction-mars.png)
+	![Edit SuperAction Mars](./images/edit-superaction-mars.png)
 
 5. Finally, return the to Terminal window and using the Mongo Shell instance running, query for movies released after 2020 again. You will see the updated information for the "SuperAction Mars" movie.
 

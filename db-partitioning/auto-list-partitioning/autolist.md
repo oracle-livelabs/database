@@ -70,7 +70,7 @@ This lab assumes you have completed the following lab:
       </copy>
       ```
 
-    ![Image alt text](images/sales-auto-list-select-2.png "Auto List Partition")
+ ![Image alt text](images/sales-auto-list-select-2.png "Auto List Partition")
 
 3. Insert data into SALES\_AUTO\_LIST table
 

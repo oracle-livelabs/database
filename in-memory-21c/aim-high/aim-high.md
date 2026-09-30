@@ -572,7 +572,7 @@ SQL>
 
     Notice that now all of the tables are enabled for inmemory and notice that all but the LINEORDER partitions have an inmemory compression level of AUTO. This is new with AIM level high.
 
-8. Now lets take a look at what is happening with IM column store population.
+8.  Now lets take a look at what is happening with IM column store population.
 
     Run the script *08\_im\_populated.sql*
 

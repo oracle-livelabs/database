@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 Welcome to the workshop's Application Development focus area! This section includes hands-on labs that demonstrate the latest enhancements and features. While this is not an exhaustive list of new features, we've chosen to showcase four particularly exciting ones: JSON in the database, SQL Macros, Hybrid Partitioning and Blockchain. Through these labs, you'll gain practical experience with these features and learn how they can benefit your development projects.
 
 [Oracle Breakthrough Innovations](youtube:LcsPSJrZDrI)

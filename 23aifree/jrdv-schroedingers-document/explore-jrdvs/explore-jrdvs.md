@@ -49,7 +49,7 @@ Let's review the current data within each JRDV in both *JSON* and *tabular* form
 
     Open the file named **view\_planting\_activity\_as\_json.sql** and execute that script to see the contents of the **PLANTING\_ACTIVITY\_DV** JRDV. This query uses the **JSON\_SERIALIZE** SQL function to return data in native JSON format; the PRETTY directive shows output in a stacked format:
 
-    ![Query Planting Deliveries DV](images/view-planting-activity-as-json-before.png)
+   ![Query Planting Deliveries DV](images/view-planting-activity-as-json-before.png)
 
     To see the contents of the **TEAM\_ASSIGNMENTS** JRDV in JSON format, open the file named **view\_team\_assignments\_as\_json.sql** and execute it (F5):
 

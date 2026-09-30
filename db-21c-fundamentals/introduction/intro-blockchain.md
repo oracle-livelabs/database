@@ -1,11 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 This workshop highlights enhancements to Oracle Database security, including Blockchain tables.
 
 Estimated Workshop Time: 60 minutes

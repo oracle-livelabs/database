@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 **If AI can't remember what it did yesterday, it can't run your business tomorrow.**

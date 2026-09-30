@@ -52,7 +52,7 @@ In this lab, you will:
     sudo su - oracle
     ```
 
-    ![Log in as opc](./images/opc.png)
+  ![Log in as opc](./images/opc.png)
 
 2. As user `oracle`, set the environment for the new database:
 

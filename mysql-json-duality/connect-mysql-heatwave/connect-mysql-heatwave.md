@@ -54,10 +54,10 @@ Estimated time: 10 minutes
 
 9. Expand the SSH tunnel section and configure:
 
-    * SSH Host: Public IP or hostname of your Compute instance
-    * SSH Port: 22 (default SSH port)
-    * SSH Username: Username for the Compute instance (e.g., opc on Oracle Linux)
-    * SSH Key: Browse and Select your private key file
+* SSH Host: Public IP or hostname of your Compute instance
+* SSH Port: 22 (default SSH port)
+* SSH Username: Username for the Compute instance (e.g., opc on Oracle Linux)
+* SSH Key: Browse and Select your private key file
 
     ![SSH Tunnel](./images/ssh-tunneling.png " ")
 
@@ -65,7 +65,7 @@ Estimated time: 10 minutes
 
     ![Click OK](./images/click-ok.png " ")
 
-    > **Note:** _The MySQL Shell extension with route your connection securely through the tunnel._
+> **Note:** _The MySQL Shell extension with route your connection securely through the tunnel._
 
 11. If the connection is successful, you will see a connection created and the MySQL DB system connection name appears under Database Connections as well.
 

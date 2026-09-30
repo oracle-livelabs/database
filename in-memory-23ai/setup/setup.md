@@ -365,7 +365,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL>
     ```
 
-    Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format fully cached in the buffer cache.
+  Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format fully cached in the buffer cache.
 
 7. To identify which segments have been populated into the IM column store you can query the view V$IM\_SEGMENTS.  Once the data population is complete, the BYTES\_NOT\_POPULATED attribute should be 0 for each segment.  
 
@@ -393,7 +393,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     from   v$im_segments
     order by owner, segment_name, partition_name;
     </copy>
-    ```
+   ```
 
     Query result:
 
@@ -478,10 +478,10 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
 
     Note that there is currently plenty of space available in the IM column store. One of the characteristics of AIM is that it does not take action until the IM column store becomes full. Once it is full, or under memory pressure, then AIM will take over all population and evictions of segments in the IM column store. However, once the column store is under memory pressure no IM performance features will be created. For now, we do not want the IM column store to be full so that we can let AIM create in-memory perfomance features if it decides that there will be benefit to the SQL statements being run.
 
-9. Next we will run a Swingbench workload in order to generate enough workload to trigger the creation of AIM performance features. We will do this now to give the database time to analyze the workload and create any beneficial features. We will take a look at the results in the AIM lab.
+9.  Next we will run a Swingbench workload in order to generate enough workload to trigger the creation of AIM performance features. We will do this now to give the database time to analyze the workload and create any beneficial features. We will take a look at the results in the AIM lab.
 
     Run the script *08\run\workload.sql
-    ```
+```
     <copy>
     @08_run_workload.sql
     </copy>    
@@ -499,7 +499,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     prompt To view status of the Swingbench process exit sqlplus and type: tail -f nohup.out
     prompt Use ctrl-C to exit from the tail command
     </copy>
-    ```
+   ```
 
     Query result:
 
@@ -596,7 +596,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
       OBJECT_NAME,
       SUBOBJECT_NAME;
     </copy>
-    ```
+   ```
 
     Query result:
 

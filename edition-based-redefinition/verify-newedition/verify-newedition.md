@@ -62,8 +62,3 @@ You have successfully verified both editions of the HR schema. [Proceed to the n
 
 - Authors - Ludovico Caldara,Senior Principal Product Manager,Oracle MAA PM Team and Suraj Ramesh,Principal Product Manager,Oracle MAA PM Team
 - Last Updated By/Date -Suraj Ramesh, November 2024
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

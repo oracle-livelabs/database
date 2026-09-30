@@ -1,14 +1,5 @@
 # Haz preguntas financieras con Select AI
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Introducción
 
 Nina Patel es analista de riesgos en Seer Bank. Sabe qué preguntas de negocio quiere hacer, pero no quiere que cada respuesta dependa de encontrar primero la tabla, la columna, la unión y el filtro correctos.
@@ -246,8 +237,3 @@ Para consultar las acciones de Select AI, los atributos de perfil y los proveedo
 * **Autor** - Kevin Lazarz
 * **Colaborador** - Eugenio Galiano
 * **Última actualización por/fecha** - Oracle Database Product Management, agosto de 2026
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

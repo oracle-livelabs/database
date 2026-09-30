@@ -20,10 +20,6 @@ In this lab, you will:
 - Oracle Free Trial Account.
 
 ##  
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Create an Oracle Analytics Cloud (OAC) Instance
 
 1. Return to the Home Page and go to the **Menu** > **Analytics & AI** > **Analytics Cloud**.

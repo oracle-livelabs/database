@@ -33,11 +33,11 @@ In this lab, you will be guided through the following tasks:
 
 2. Click the **Navigation Menu** in the upper left, navigate to **Storage** and select **Buckets**.
 
-    ![OCI Console Buckets ](./images/oci-console-buckets.png "oci-console-buckets ")
+![OCI Console Buckets ](./images/oci-console-buckets.png "oci-console-buckets ")
 
 3. On the Buckets page, select the **movies** compartment. Click **Create Bucket**.
 
-    ![Create Bucket ](./images/create-bucket.png "create-bucket ")
+![Create Bucket ](./images/create-bucket.png "create-bucket ")
 
 4. Enter a name for the bucket
 

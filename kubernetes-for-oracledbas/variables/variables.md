@@ -2,16 +2,8 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 You can specify variables in another file and refer to them in your Markdown.
 
-
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
 
 ## Task 1:
 
@@ -74,8 +66,3 @@ or
 - What is the best name for my database? It is **[](var:name_of_database)**
 
 - Here you can find more info: **[](var:doc_link)**
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

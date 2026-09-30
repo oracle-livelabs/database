@@ -1,14 +1,5 @@
 # Workshop language review
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 Reviewed the full SEER Telecomms workshop against the plain-language criteria in the supplied JARGONCHECK.md. Its unrelated role and output instructions were not applied.
 
 - Read all 11 lessons, including seven quiz questions, and the explanatory paragraphs in both Graph Studio notebooks. Checked the supporting documentation, readable metadata, SQL comments, SVG text, and existing image-text review records.
@@ -27,8 +18,3 @@ Reviewed the full SEER Telecomms workshop against the plain-language criteria in
 Validation passed: 45 static check groups, all 60 SQL blocks unchanged, both notebooks' executable content and configuration unchanged, task headings unchanged, all 77 images unchanged, and loader/deployment files unchanged. The domain check found no old-domain terms in readable release files. All 116 source files retain their original hashes.
 
 No database queries or provisioning were run for this editorial pass. Previous manual-database results still apply to the unchanged code. SQLcl launch and LiveLabs green-button/Terraform validation remain for the next phase.
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

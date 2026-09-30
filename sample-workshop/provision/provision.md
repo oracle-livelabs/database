@@ -68,9 +68,9 @@ This lab assumes you have:
 
     ```
     Adding code examples
-    	Indentation is important for the code example to appear inside the step
+  	Indentation is important for the code example to appear inside the step
     Multiple lines of code
-    	<copy>Enclose the text you want to copy in <copy></copy>.</copy>
+  	<copy>Enclose the text you want to copy in <copy></copy>.</copy>
     ```
 
 4. Code examples that include variables

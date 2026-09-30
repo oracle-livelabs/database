@@ -60,13 +60,13 @@ In this lab, you will:
     ![Choose database name](./images/database-name.png " ")
 
 
-7. On the database page, choose SQL under __Database Actions__.
+7.  On the database page, choose SQL under __Database Actions__.
 
     ![Choose dbactions button](./images/dbactions-button.png " ")
 
     Depending on your machine's preference, the following dialogs might be in white or dark system theme.
 
-8. You are now in Database Actions.
+8.  You are now in Database Actions.
 
     Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will be using three of those tools:
     
@@ -172,7 +172,7 @@ So far we've looked at a document-centric view of our data, from Mongo Shell and
 
 Now we're going to look at a SQL view of the same data, showing how you can swap between document and SQL views.
 
-1. Get to the Database Actions menu
+1.  Get to the Database Actions menu
 
     If you've just finished the previous task, click on 'Database Actions' in the top bar. If you've closed that window, then follow the instructions for Task 3 to get to the Database Actions menu.
 
@@ -182,7 +182,7 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
     ![dbactions menu sql](./images/homepage-sql.png " ")
 
-2. Examine the EMP table
+2.  Examine the EMP table
 
     On the left-hand panel, we will see all the tables in our database. Notice that there are two tables, EMP and NEWCOLLECTION.
     These correspond with the two collections we created - "emp" from Mongo Shell and "newcollection" from JSON.
@@ -220,7 +220,7 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
     This is great, we're accessing the JSON from a relational table. But it would be better if we could get at individual elements of the JSON, right?
 
-3. Simple dot notation
+3.  Simple dot notation
 
     We can do that using something called "simple dot notation". To use that, we **must** give our table an alias, then we can refer to an element in the JSON as "alias.column.elementname". Run the following:
 
@@ -250,7 +250,7 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
     Simple dot notation is great for straightforward "flat" JSON. There are many other JSON functions available to access data within JSON, such as JSON\_VALUE, JSON\_OBJECT and JSON\_TABLE, but we won't go into those here.
 
-4. JSON Dataguide
+4.  JSON Dataguide
 
     JSON Dataguide examines the JSON stored in a collection and shows us the schema of that JSON - what elements are available, and their size and data types. Let's run it on our EMP table to see what the collection looks like:
 
@@ -266,7 +266,7 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
 
 
-5. Generate a view from Dataguide
+5.  Generate a view from Dataguide
 
     JSON Dataguide is useful for examing the layout of our JSON. But we can also use it to automatically create a relational view over the JSON data.
 
@@ -311,7 +311,7 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
 
     Looking good! We've now automatically created a view over our collection, and can run SQL queries over it without even knowing that it's based on a JSON datasource.
 
-6. Create a Pie Chart of salaries
+6.  Create a Pie Chart of salaries
 
     Let's see if we can get that last query output in a more pleasing visual pattern. Click on "Database Actions" at the top of the page, and then choose Charts from the Database Actions menu.
 
@@ -341,15 +341,15 @@ Now we're going to look at a SQL view of the same data, showing how you can swap
     ``` 
     On the right Choose "Pie Chart" in the "Chart type" drop-down. Click "Create" when done.
 
-    ![Image](./images/chart-create-3.png " ")
+    ![](./images/chart-create-3.png " ")
 
     On the next page, click the "three dots" menu to the right of our Salary Breakdown panel, and choose "View Chart".
 
-    ![Image](./images/view-chart.png " ")
+    ![](./images/view-chart.png " ")
 
     And now we should see a nice pie chart of our salary costs - we can see that Programmers are by far our largest cost at 63.6% of the total salary bill.
 
-    ![Image](./images/chart-display.png " ")
+    ![](./images/chart-display.png " ")
 
 
 ## Acknowledgements

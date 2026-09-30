@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 Welcome to the Performance and Database Lifecycle Management focus area of the workshop. This section covers managing and optimizing Oracle Database 23ai.
 
 As businesses evolve and new requirements arise, database performance optimization and efficient lifecycle management are key. Oracle Database 23ai brings tons of advancements in these areas, giving developers and administrators new features to improve database performance, management and efficiency throughout its lifecycle. This section of the LiveLab only shows a small number of the new features in these focus areas. 

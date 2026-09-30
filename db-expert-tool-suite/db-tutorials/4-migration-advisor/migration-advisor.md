@@ -13,11 +13,6 @@ This lab walks you through how to use DBExpert's [Migration Methods Advisor](htt
 In this lab, you will:
 * Identify your options to migrate to Oracle Cloud or Oracle Database@Azure.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Provide the Migration Methods Advisor with source and target information 
 
 1. Navigate to [https://www.oracle.com/dbexpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) and scroll down to the Migration Methods Advisor section
@@ -35,8 +30,3 @@ You may now **proceed to the next lab**.
 
 * [Migration Methods Advisor Overview (Video)](https://videohub.oracle.com/media/1_xko1jfib "Migration Methods Advisor Overview (Video)")
 
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

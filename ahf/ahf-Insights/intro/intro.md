@@ -1,11 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 ## About this Workshop
 
 Welcome to the Navigating Oracle Database Troubleshooting with Oracle Autonomous Health Framework(AHF) and AHF Insights Workshop!  

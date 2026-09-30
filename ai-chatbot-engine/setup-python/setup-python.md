@@ -42,11 +42,11 @@ Open your Oracle Cloud Infrastructure Cloud Console and make sure you are in the
 7. Create your instance by clicking on the `Create` button.
 
 8. Connect to your remote instance using SSH.
-    ```
-    <copy>
-    ssh -i <private_ssh_key> opc@<public_ip_address>
-    </copy>
-    ```
+   ```
+   <copy>
+   ssh -i <private_ssh_key> opc@<public_ip_address>
+   </copy>
+   ```
 
 ## Task 2: Install Python
 

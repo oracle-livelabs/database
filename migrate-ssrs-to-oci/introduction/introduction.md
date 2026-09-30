@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 This hands-on workshop provides users with step-by-step instructions on migrating Microsoft SSRS Services from On-Premise to OCI (Compute Instance) and configuring the Microsoft SSRS Reporting services.

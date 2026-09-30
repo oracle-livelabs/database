@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 Oracle Text is a standard component of the database that allows you to do fast, full-text searching in textual data in Oracle Database. It would, for example, let you find mis-spelled words in an address field or get a list of Microsoft Word documents containing a particular phrase.

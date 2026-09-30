@@ -1,14 +1,5 @@
 # SEER Telecomms schema contract
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 The main loader is [telecommunications-platform-handoff-loader.sql](../stack/load_data/telecommunications-platform-handoff-loader.sql). This document describes the table definitions and sample data. See [manual results](manual-results.md) for the database run. The [offline validator](validate.py) reads the SQL inserts, compares the [sample-data export](fixture.json), and checks keys, totals, geometry constructors, graphs, and lab references.
 
 ## Model and accounting rules
@@ -286,8 +277,3 @@ PLAN_EMBEDDINGS receives 192 rows through VECTOR_EMBEDDING during loading, in ad
 ## Technical references checked
 
 Oracle documents [partial updates through duality views](https://docs.oracle.com/en/database/oracle/oracle-database/26/jsnvu/updating-documents-data-duality-views.html), the [Select AI Agent package](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/dbms-cloud-ai-agent-package.html), and [loading graphs into PGX](https://docs.oracle.com/en/cloud/paas/autonomous-database/csgru/load-graphs-memory-programmatically.html). These references informed static review. They do not replace executing the exact SQL on the target Oracle version.
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -24,7 +24,7 @@ For ease of execution of this workshop, your VM instance has been pre-configured
  
 1. Now that your instance has been provisioned, navigate to **My Reservations**, find the request you submitted from the list displayed (only one item will be displayed if this is your first request).
 
-    ![my reservation](images/my-reservations.png "my reservation")
+   ![my reservation](images/my-reservations.png "my reservation")
 
 2. Click on **Launch Workshop** after the reservation provisioning has been completed.
 

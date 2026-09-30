@@ -29,12 +29,12 @@ In this task, we will create a JSON collection table called `attendee` that repr
 
 1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
-    ![DB Actions](images/dbaction1.png)
+   ![DB Actions](images/dbaction1.png)
 
 
 2. Below you can find the Database Actions homepage. Click the SQL tile under development to open the SQL worksheet.
 
-    ![Homepage Development SQL](./images/development-sql.png)
+   ![Homepage Development SQL](./images/development-sql.png)
 
 3. In the SQL worksheet, create the `attendee` collection. 
 
@@ -200,16 +200,16 @@ In this task, we will update lecture name for lecture id 40, from "JSON Duality 
       </copy>
       ```
 
-    This statement updates three documents, each of which references lecture id 40. **Note that we needed to update three documents to correct the lecture name for all our attendees.**
+   This statement updates three documents, each of which references lecture id 40. **Note that we needed to update three documents to correct the lecture name for all our attendees.**
 
 3. Select all documents from the view to see the updated documents.
 
-    ```sql
-    <copy>
-    SELECT data
-    FROM attendee;
-    </copy>
-    ```
+   ```sql
+   <copy>
+   SELECT data
+   FROM attendee;
+   </copy>
+   ```
 
    You can scroll through the documents or drill down into the detail of individual documents. For illustration purposes we highlight two of the changed entries in the screenshot below. (We actually updated three documents before, so you will find the third one when scrolling to the right.)
 

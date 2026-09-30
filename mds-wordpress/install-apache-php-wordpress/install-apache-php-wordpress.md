@@ -61,7 +61,7 @@ In this lab, you will be guided through the following tasks:
     ```
     ![CONNECT](./images/06connect01-signin.png " ")
 
-4. Install app server
+4.	Install app server
 
     ````
     <copy>sudo yum install httpd -y</copy>
@@ -83,13 +83,13 @@ In this lab, you will be guided through the following tasks:
     <copy>sudo firewall-cmd --reload</copy>
     ````
 
-5. From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
+5.	From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
 
     Example: http://129.213....
 
 ## **Task 2:** Intall PHP 
 
-1. Install php:
+1.	Install php:
 
     ````
     <copy> sudo dnf module install php:7.4 -y</copy>
@@ -108,7 +108,7 @@ In this lab, you will be guided through the following tasks:
     <copy>sudo systemctl restart httpd</copy>
     ````
 
-2. Create test php file (info.php)
+2.	Create test php file (info.php)
 
     ````
     <copy>sudo nano /var/www/html/info.php</copy>   

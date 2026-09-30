@@ -18,16 +18,11 @@ This lab assumes you have:
 - An Oracle account
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Configure the Clothing Retail Schema
 
 **_Note:_** _All of the following commands are to be run in the terminal._
 
-1. **Return to the terminal.**
+1.  **Return to the terminal.**
     ![Return to terminal.](images/return-to-terminal.png)
 
 2. **Connect to the database.** You can connect to the database using any of the TNS aliases listed in 'tnsnames.ora", using the following format: 'user'/'password'@'tns_alias'.

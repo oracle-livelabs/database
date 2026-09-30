@@ -107,13 +107,13 @@ You can continue to use this tool for the rest of the workshop, but the instruct
 
 3. Now on any one of the views, you can click the three dots on the right and click **OpenAPI View**. Do this now for the `RACE_DV` view. 
 
-    ![Click on OpenAPI View](./images/openapi_view.png)
+    ![Click on OpenAPI View](./images/openAPI_view.png)
 
 4. Here you can see the automatically configured REST calls that were enabled on the view. Let's run the same code in this environment as we just did on the Terminal. 
 
     Expand the **GET** section. 
 
-    ![Expand the GET section](./images/race_openapi.png)
+    ![Expand the GET section](./images/race_openAPI.png)
 
 5. By default, this section shows sample parameters and responses, but we can use it to try the calls themselves. 
 

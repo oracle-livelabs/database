@@ -135,33 +135,33 @@ In this lab, you will:
 
 There are multiple ways to access your Autonomous Database.  You can access it via sqlplus or by using SQL Developer Web.  To access it via sqlplus, skip to [Step 1B](#STEP1B:LogintoADBusingSQLPlus).
 
-1. If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to the next step.
-      ![Image](../set-operators/images/21c-home-adb.png " ")
+1.  If you aren't still logged in, login to your Oracle Autonomous Database screen by clicking on the navigation menu and selecting the Autonomous Database flavor you selected (Oracle Autonomous Transaction Processing, Oracle Autonomous Data Warehouse, or Oracle Autonomous JSON Database). Otherwise skip to the next step.
+      ![](../set-operators/images/21c-home-adb.png " ")
 
-2. If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab and that you are in the correct region.
+2.  If you can't find your Oracle Autonomous Database instance, ensure you are in the correct compartment, you have chosen the flavor of Oracle Autonomous Database you choose in the earlier lab and that you are in the correct region.
 
-3. Click on the **Display Name** to go to your Oracle Autonomous Database main page.
-      ![Image](../set-operators/images/21c-adb.png " ")
+3.  Click on the **Display Name** to go to your Oracle Autonomous Database main page.
+      ![](../set-operators/images/21c-adb.png " ")
 
-4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-      ![Image](../set-operators/images/tools.png " ")
+4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+      ![](../set-operators/images/tools.png " ")
 
-5. Login with the *admin* user, click **Next**.  Enter the password *WElcome123##*
+5.  Login with the *admin* user, click **Next**.  Enter the password *WElcome123##*
 
-6. Enter the username *admin* and password *WElcome123##*
+6.  Enter the username *admin* and password *WElcome123##*
 
-7. Click on the **SQL** button.
+7.  Click on the **SQL** button.
 
 ## Task 1B: Login to Oracle Autonomous Database using SQL Plus
 
-1. Open up Cloud Shell below if it isn't already open
+1.  Open up Cloud Shell below if it isn't already open
 
-2. Connect to the OE user using sqlplus by entering the commands below.
+2.  Connect to the OE user using sqlplus by entering the commands below.
     ```
-    	conn admin/WElcome123##@adb1_high
-    	```
+  	conn admin/WElcome123##@adb1_high
+  	```
 
-    </if>
+</if>
 
 ## Task 2: Examine data before tampering
 
@@ -206,7 +206,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 <if type="atp">
 
     ```
-    <copy>SELECT amount_sold FROM sh.sales s
+<copy>SELECT amount_sold FROM sh.sales s
       JOIN sh.times t ON (s.time_id = t.time_id)
       WHERE fiscal_month_number = 12 AND fiscal_year = 1998;</copy>
     ```
@@ -229,7 +229,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
 <if type="atp">
-      ![Image](./images/checksum.png " ")
+      ![](./images/checksum.png " ")
 
 3. If you aren't logged into the cloud, log back in
 
@@ -240,14 +240,14 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
     export TNS_ADMIN=$(pwd)/wallet
     sqlplus /nolog
-    	  conn admin/WElcome123##@adb1_high
+	  conn admin/WElcome123##@adb1_high
     UPDATE sh.sales SET amount_sold = amount_sold*2 WHERE time_id='30-NOV-98';
 
-    	  ```
+	  ```
 
-    </if>
+</if>
 
-3. Meanwhile in another terminal session, called SH session, someone executes a batch that updates the amount sold.
+3.  Meanwhile in another terminal session, called SH session, someone executes a batch that updates the amount sold.
 
     ```
     $ <copy>/home/oracle/labs/M104784GC10/app_SH_tables.sh</copy>				  
@@ -283,7 +283,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL>
     ```
 
-    Since the checksum value is different from the value retrieved in step 4, someone tampered the data.
+  Since the checksum value is different from the value retrieved in step 4, someone tampered the data.
 
 2. What happens if someone attempted to tamper with old sales? In the SH session, update some old sales but then rolls the transaction back.
 
@@ -321,7 +321,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL>
     ```
 
-    The checksum value for the column is still the same as it was before the rolled back update.
+  The checksum value for the column is still the same as it was before the rolled back update.
 
 4. Verify also the quantity sold at the end of fiscal year 1998 and the checksum value.
 
@@ -337,7 +337,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL>
     ```
 
-    As you can see, the quantity sold for any sales is one.
+  As you can see, the quantity sold for any sales is one.
 
     ```
 
@@ -353,9 +353,9 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     ```
 
-    The checksum value is 0 which is not a distinguishable value from another quantity value.
+  The checksum value is 0 which is not a distinguishable value from another quantity value.
 
-    What if you use the `DISTINCT` (or `UNIQUE`- `UNIQUE` is an Oracle specific keyword and not an ANSI standard)?
+  What if you use the `DISTINCT` (or `UNIQUE`- `UNIQUE` is an Oracle specific keyword and not an ANSI standard)?
 
     ```
 
@@ -415,7 +415,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     ```
 
-    The checksum value for the column is different from the one retrieved previously.
+  The checksum value for the column is different from the one retrieved previously.
 
 7. How is NULL considered? Still in the initial terminal session, check that no one tampered with customer email addresses.
 

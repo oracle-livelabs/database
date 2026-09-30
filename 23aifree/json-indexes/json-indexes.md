@@ -42,18 +42,18 @@ In this lab, you will:
 
     ```
     <copy>db.SALES.insertMany([
-    	{ "_id" : 1, "item" : "Espresso", "price" : 5, "size": "Short", "quantity" : 22, "date" : ISODate("2024-01-15T08:00:00Z") },
-    	{ "_id" : 2, "item" : "Cappuccino", "price" : 6, "size": "Short","quantity" : 12, "date" : ISODate("2024-01-16T09:00:00Z") },
-    	{ "_id" : 3, "item" : "Latte", "price" : 10, "size": "Grande","quantity" : 25, "date" : ISODate("2024-01-16T09:05:00Z") },
-    	{ "_id" : 4, "item" : "Mocha", "price" : 8,"size": "Tall", "quantity" : 11, "date" : ISODate("2024-02-17T08:00:00Z") },
-    	{ "_id" : 5, "item" : "Americano", "price" : 1, "size": "Grande","quantity" : 12, "date" : ISODate("2024-02-18T21:06:00Z") },
-    	{ "_id" : 6, "item" : "Cortado", "price" : 7, "size": "Tall","quantity" : 20, "date" : ISODate("2024-02-20T10:07:00Z") },
-    	{ "_id" : 7, "item" : "Macchiato", "price" : 9,"size": "Tall", "quantity" : 30, "date" : ISODate("2024-02-21T10:08:00Z") },
-    	{ "_id" : 8, "item" : "Turkish Coffee", "price" : 20, "size": "Grande","quantity" : 21, "date" : ISODate("2024-02-22T14:09:00Z") },
-    	{ "_id" : 9, "item" : "Iced Coffee", "price" : 15, "size": "Grande","quantity" : 17, "date" : ISODate("2024-02-23T14:09:00Z") },
-    	{ "_id" : 10, "item" : "Dirty Chai", "price" : 12, "size": "Tall","quantity" : 15, "date" : ISODate("2024-02-25T14:09:00Z") },
-    	{ "_id" : 11, "item" : "Decaf", "price" : 4, "size": "Normal", "quantity" : 2, "date" : ISODate("2024-01-16T11:01:00Z") },
-    	{ "_id" : 12, "item" : "Finlandia", "price" : 50, "size": "Grande","quantity" : 7, "date" : ISODate("2024-05-16T10:00:00Z") }
+	{ "_id" : 1, "item" : "Espresso", "price" : 5, "size": "Short", "quantity" : 22, "date" : ISODate("2024-01-15T08:00:00Z") },
+	{ "_id" : 2, "item" : "Cappuccino", "price" : 6, "size": "Short","quantity" : 12, "date" : ISODate("2024-01-16T09:00:00Z") },
+	{ "_id" : 3, "item" : "Latte", "price" : 10, "size": "Grande","quantity" : 25, "date" : ISODate("2024-01-16T09:05:00Z") },
+	{ "_id" : 4, "item" : "Mocha", "price" : 8,"size": "Tall", "quantity" : 11, "date" : ISODate("2024-02-17T08:00:00Z") },
+	{ "_id" : 5, "item" : "Americano", "price" : 1, "size": "Grande","quantity" : 12, "date" : ISODate("2024-02-18T21:06:00Z") },
+	{ "_id" : 6, "item" : "Cortado", "price" : 7, "size": "Tall","quantity" : 20, "date" : ISODate("2024-02-20T10:07:00Z") },
+	{ "_id" : 7, "item" : "Macchiato", "price" : 9,"size": "Tall", "quantity" : 30, "date" : ISODate("2024-02-21T10:08:00Z") },
+	{ "_id" : 8, "item" : "Turkish Coffee", "price" : 20, "size": "Grande","quantity" : 21, "date" : ISODate("2024-02-22T14:09:00Z") },
+	{ "_id" : 9, "item" : "Iced Coffee", "price" : 15, "size": "Grande","quantity" : 17, "date" : ISODate("2024-02-23T14:09:00Z") },
+	{ "_id" : 10, "item" : "Dirty Chai", "price" : 12, "size": "Tall","quantity" : 15, "date" : ISODate("2024-02-25T14:09:00Z") },
+	{ "_id" : 11, "item" : "Decaf", "price" : 4, "size": "Normal", "quantity" : 2, "date" : ISODate("2024-01-16T11:01:00Z") },
+	{ "_id" : 12, "item" : "Finlandia", "price" : 50, "size": "Grande","quantity" : 7, "date" : ISODate("2024-05-16T10:00:00Z") }
     ]);
     </copy>
     ```
@@ -106,7 +106,7 @@ In this lab, you will:
 
     ```
     <copy>
-    db.SALES.find({size:3}).explain();
+   db.SALES.find({size:3}).explain();
     </copy>
     ```
 

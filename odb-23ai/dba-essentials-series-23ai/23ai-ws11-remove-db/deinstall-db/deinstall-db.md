@@ -30,130 +30,130 @@ In this task, you will remove the database, *orcl1*, from Oracle home 2 using th
 > **Note**: The `deinstall` command deletes Oracle Database configuration files, user data, and fast recovery area (FRA) files even if they are outside the Oracle base directory.
 
 1. Open a terminal window and go to Oracle home 2 where the `deinstall` command resides.   
-    	In the Livelabs environment, `deinstall` resides in the following directory.
+	In the Livelabs environment, `deinstall` resides in the following directory.
 
     ```
-    	$ <copy>cd /u01/app/oracle/product/23.4.0/dbhome_2/deinstall</copy>
-    	```
+	$ <copy>cd /u01/app/oracle/product/23.4.0/dbhome_2/deinstall</copy>
+	```
 
-    	> **Caution**: Do not shut down the database or stop any processes for the database that you are removing before running `deinstall`.
+	> **Caution**: Do not shut down the database or stop any processes for the database that you are removing before running `deinstall`.
 
-1. Run this command to start the deinstallation process.  
+1.  Run this command to start the deinstallation process.  
 
     ```
-    	$ <copy>./deinstall</copy>
-    	```
+	$ <copy>./deinstall</copy>
+	```
 
     > **Note**: For every step, `deinstall` displays the values in square brackets `[ ]`. You can press **Enter** to use the default or specify a different value manually. 
 
-    	## Output
+	## Output
 
-    	It returns the following.
+	It returns the following.
 
-    	```
-    	Checking for required files and bootstrapping ...
-    	Please wait ...
-    	Location of logs /u01/app/oracle/oraInventory/logs/
+	```
+	Checking for required files and bootstrapping ...
+	Please wait ...
+	Location of logs /u01/app/oracle/oraInventory/logs/
 
-    	############ ORACLE DECONFIG TOOL START ############
-
-
-    	######################### DECONFIG CHECK OPERATION START #########################
-    	## [START] Install check configuration ##
+	############ ORACLE DECONFIG TOOL START ############
 
 
-    	Checking for existence of the Oracle home location /u01/app/oracle/product/23.4.0/dbhome_2
-    	Oracle Home type selected for deinstall is: Oracle Single Instance Database
-    	Oracle Base selected for deinstall is: /u01/app/oracle
-    	Checking for existence of central inventory location /u01/app/oracle/oraInventory
-
-    	## [END] Install check configuration ##
+	######################### DECONFIG CHECK OPERATION START #########################
+	## [START] Install check configuration ##
 
 
-    	Network Configuration check config START
+	Checking for existence of the Oracle home location /u01/app/oracle/product/23.4.0/dbhome_2
+	Oracle Home type selected for deinstall is: Oracle Single Instance Database
+	Oracle Base selected for deinstall is: /u01/app/oracle
+	Checking for existence of central inventory location /u01/app/oracle/oraInventory
 
-    	Network de-configuration trace file location: /u01/app/oracle/oraInventory/logs/netdc_check20XX-06-17_10-32-43AM.log
-    	```
+	## [END] Install check configuration ##
 
-1. The window prompts to specify the listeners that you want to unconfigure.
 
-    	```
-    	Specify all Single Instance listeners that are to be de-configured. Enter .(dot) to deselect all.
-    	[LISTENER]: **Enter**
-    	```
+	Network Configuration check config START
+
+	Network de-configuration trace file location: /u01/app/oracle/oraInventory/logs/netdc_check20XX-06-17_10-32-43AM.log
+	```
+
+1.  The window prompts to specify the listeners that you want to unconfigure.
+
+	```
+	Specify all Single Instance listeners that are to be de-configured. Enter .(dot) to deselect all.
+	[LISTENER]: **Enter**
+	```
 
     For this task, press **Enter** to remove the current listener.
 
-    	It returns the following.
+	It returns the following.
 
-    	```
-    	Network Configuration check config END
+	```
+	Network Configuration check config END
 
-    	Database Check Configuration START
+	Database Check Configuration START
 
-    	Database de-configuration trace file location: /u01/app/oracle/oraInventory/logs/databasedc_check20XX-06-17_10-35-37AM.log
-    	```
+	Database de-configuration trace file location: /u01/app/oracle/oraInventory/logs/databasedc_check20XX-06-17_10-35-37AM.log
+	```
 
 1. The window provides an option to specify the database instances that you want to remove from the current Oracle home. 
 
     > **Tip**: If you have multiple database instances in an Oracle home, then you can either remove a specific database instance or remove all database instances together using `deinstall`. To specify multiple databases, enter the database name followed by a comma.
 
-    	```
-    	Use comma as separator when specifying list of values as input
+	```
+	Use comma as separator when specifying list of values as input
 
-    	Specify the list of database names that are configured in this Oracle home [orcl1]: **Enter**
-    	```
+	Specify the list of database names that are configured in this Oracle home [orcl1]: **Enter**
+	```
 
-    	For this task, press **Enter** to remove the default database instance from Oracle home 2.
+	For this task, press **Enter** to remove the default database instance from Oracle home 2.
 
-    	## Output
+	## Output
 
-    	It returns the following.
+	It returns the following.
 
-    	```
-    	###### For Database 'orcl1' ######
+	```
+	###### For Database 'orcl1' ######
 
-    	Single Instance Database
-    	The diagnostic destination location of the database: /u01/app/oracle/diag/rdbms/orcl1
-    	Storage type used by the Database: FS
-    	Database file location: /u01/app/oracle/oradata/orcl1,/opt/oracle/recovery_area/orcl1
-    	Fast recovery area location: /u01/app/oracle/recovery_area/orcl1
-    	database spfile location: /u01/app/oracle/product/23.4.0/dbhome_2/dbs/spfileorcl1.ora
-    	```
+	Single Instance Database
+	The diagnostic destination location of the database: /u01/app/oracle/diag/rdbms/orcl1
+	Storage type used by the Database: FS
+	Database file location: /u01/app/oracle/oradata/orcl1,/opt/oracle/recovery_area/orcl1
+	Fast recovery area location: /u01/app/oracle/recovery_area/orcl1
+	database spfile location: /u01/app/oracle/product/23.4.0/dbhome_2/dbs/spfileorcl1.ora
+	```
 
-1. The `deinstall` command discovers the details of the databases automatically in the current Oracle home and asks if you want to modify them. The default option is *n*, which means no.
+1.  The `deinstall` command discovers the details of the databases automatically in the current Oracle home and asks if you want to modify them. The default option is *n*, which means no.
 
-    	```
-    	The details of database(s) orcl1 have been discovered automatically. Do you still want to modify the details of orcl1 database(s)? [n]: **Enter**
-    	```
+	```
+	The details of database(s) orcl1 have been discovered automatically. Do you still want to modify the details of orcl1 database(s)? [n]: **Enter**
+	```
 
-    	For this task, press **Enter** to continue with the default values.
+	For this task, press **Enter** to continue with the default values.
 
-    	> **Note**: To verify each detail and to specify this information manually, enter `y`. You can then provide the details of your database, for example, the database name, storage type, location for diagnostic destination, fast recovery area, spfile, and so on. 
+	> **Note**: To verify each detail and to specify this information manually, enter `y`. You can then provide the details of your database, for example, the database name, storage type, location for diagnostic destination, fast recovery area, spfile, and so on. 
 
-    	## Output
+	## Output
 
-    	It returns the following.
+	It returns the following.
 
-    	```
-    	Database Check Configuration END
+	```
+	Database Check Configuration END
 
-    	######################### DECONFIG CHECK OPERATION END #########################
+	######################### DECONFIG CHECK OPERATION END #########################
 
 
-    	####################### DECONFIG CHECK OPERATION SUMMARY #######################
-    	Oracle Home selected for deinstall is: /u01/app/oracle/product/23.4.0/dbhome_2
-    	Inventory Location where the Oracle home registered is: /u01/app/oracle/oraInventory
-    	Following Single Instance listener(s) will be de-configured: LISTENER
-    	The following databases were selected for de-configuration. The databases will be deleted and will not be useful upon de-configuration : orcl1
-    	Database unique name : orcl1
-    	Storage used : FS
-    	```
+	####################### DECONFIG CHECK OPERATION SUMMARY #######################
+	Oracle Home selected for deinstall is: /u01/app/oracle/product/23.4.0/dbhome_2
+	Inventory Location where the Oracle home registered is: /u01/app/oracle/oraInventory
+	Following Single Instance listener(s) will be de-configured: LISTENER
+	The following databases were selected for de-configuration. The databases will be deleted and will not be useful upon de-configuration : orcl1
+	Database unique name : orcl1
+	Storage used : FS
+	```
 
-1. The window awaits for your confirmation to remove the Oracle Database instance from your host.
+1.  The window awaits for your confirmation to remove the Oracle Database instance from your host.
 
     ```
-    	Do you want to continue (y - yes, n - no)? [n]: y
+	Do you want to continue (y - yes, n - no)? [n]: y
     ```
 
     Enter ***y*** to start removing the database.
@@ -283,8 +283,3 @@ In this workshop, you learned how to:
  - **Author** - Manish Garodia, Database User Assistance Development
  - **Contributors** - Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Manisha Mati
  - **Last Updated By/Date** - Manish Garodia, October 2024
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

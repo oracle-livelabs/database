@@ -95,10 +95,10 @@ The following section provides reference information about each line of code tha
     **Sample command**
 
     ```java
-    <copy>
-    microTxUserTransaction.rollback();
-    microTxUserTransaction.commit();
-    </copy>
+   <copy>
+   microTxUserTransaction.rollback();
+   microTxUserTransaction.commit();
+   </copy>
     ```
 
 7. Uncomment the following line of code under `sell()` to begin the XA transaction to sell stocks.
@@ -116,10 +116,10 @@ The following section provides reference information about each line of code tha
     **Sample command**
 
     ```java
-    <copy>
-    microTxUserTransaction.rollback();
-    microTxUserTransaction.commit();
-    </copy>
+   <copy>
+   microTxUserTransaction.rollback();
+   microTxUserTransaction.commit();
+   </copy>
     ```
 
 9. Uncomment the catch blocks in the `buy()` and `sell()` methods.
@@ -234,7 +234,7 @@ To configure the Stock Broker application as a transaction participant:
 You can register your initiator and participant services to receive notifications when an event occurs. To achieve this you must perform the additional steps described in this task.
 
 1. Uncomment the `TransactionEventsUtility.java` class, located in the `/com/oracle/tmm/stockbroker/utils/` package of the `StockBroker` application.
-    The `TransactionEventsUtility.java` class registers the events and you can use the `BuyStockEventListenerResource.java` and `SellStockEventListenerResource.java` classes to listen to the transaction events.
+The `TransactionEventsUtility.java` class registers the events and you can use the `BuyStockEventListenerResource.java` and `SellStockEventListenerResource.java` classes to listen to the transaction events.
 
 2. Update the `UserStockTransactionServiceImpl.java` class, located in the `/com/oracle/tmm/stockbroker/service/impl` package of the `StockBroker` application. Add the following lines of code to register the transaction events within the transaction boundary. Note that you must register the transaction event after the transaction begins.
 

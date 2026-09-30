@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 MySQL HeatWave is a fully managed database service powered by the HeatWave in-memory query accelerator. It’s the only cloud service that combines transactions, real-time analytics across data warehouses and data lakes, and machine learning in one MySQL Database—without the complexity, latency, risks, and cost of ETL duplication. It’s available on OCI, AWS, and Azure.
@@ -50,10 +47,6 @@ In this lab, you will be guided through the following steps:
 
 - An Oracle Free Tier, Paid or LiveLabs Cloud Account
 - Some Experience with MySQL Shell - [MySQL Site](https://dev.MySQL.com/doc/MySQL-shell/8.0/en/).
-
-## Introduction
-
-TODO: Add introduction text here.
 
 ## Task 1: You may now **proceed to the next lab**
 

@@ -179,12 +179,12 @@ Jessica meets the operations team to review the data before adding it to the das
     - For a product present in both, did the social and order values change, or only its relevance to the question?
     - Which product has enough existing order activity to merit a closer operational review?
 
-    The query orders semantic similarity first, then signal views and product ID. Changing the question changes the review queue while retaining the same source measures. Use both product name and brand when comparing the two TrailFlex rows; a product name alone is not a unique identifier. Orders added in later labs can change the order totals if you return to this query.
+The query orders semantic similarity first, then signal views and product ID. Changing the question changes the review queue while retaining the same source measures. Use both product name and brand when comparing the two TrailFlex rows; a product name alone is not a unique identifier. Orders added in later labs can change the order totals if you return to this query.
 
 <details>
 <summary><strong>Optional discovery: inspect the shared retail foundation</strong></summary>
 
-    Jessica can also explain which database objects support the team's next questions. These catalog queries make the connection visible without opening application code.
+Jessica can also explain which database objects support the team's next questions. These catalog queries make the connection visible without opening application code.
 
 1. Inventory the named object families used throughout the workshop.
 

@@ -13,11 +13,6 @@ The objective of this lab is to familiarize you with the improvements being made
 - Access to Oracle Database 23ai.
 - Basic understanding of Oracle database concepts.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Understanding the Importance of Error Messages
 
 1. Error messages play a crucial role in diagnosing and resolving database issues. Clear and descriptive error messages can greatly reduce the time and effort (and headache) required to troubleshoot problems. This has the chance to lead to faster resolution and better database reliability.

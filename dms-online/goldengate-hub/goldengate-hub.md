@@ -11,11 +11,6 @@ Estimated Time: 30 minutes
 In this lab, you will:
 * Learn how to configure the required GoldenGate Hub for DMS's Logical Online Migration
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Verify VCN Correct Configuration
 
 This workshop section requires having access to an Oracle cloud account, having created SSH Keys and verify the Virtual Cloud Network Configuration. This last step will be described below.
@@ -26,23 +21,23 @@ This workshop section requires having access to an Oracle cloud account, having 
 
     ![Screenshot of Oracle Cloud Networking menu with Virtual Cloud Networks option](./images/ogg-vcn.png " ")
 
-3. Click on the Name of the only available VCN in your compartment
+3.  Click on the Name of the only available VCN in your compartment
 
     ![Screenshot of Oracle Cloud Virtual Cloud Networks menu for current compartment](./images/ogg-available-vcn.png " ")
 
-4. Scroll down to the __Subnets__ section and click on the only available subnet in your compartment
+4.  Scroll down to the __Subnets__ section and click on the only available subnet in your compartment
 
     ![Screenshot of Oracle Subnets menu for current compartment](./images/ogg-subnet.png " ")
 
-5. Scroll down to the __Security Lists__ section and click on the only available Security List in your compartment
+5.  Scroll down to the __Security Lists__ section and click on the only available Security List in your compartment
 
     ![Screenshot of Oracle Security Lists menu for current compartment](./images/ogg-security-list.png " ")
 
-6. Scroll down to the __Ingress Rules__ section. If there are no rules for __Port 443__ and __Port 1521__, they must be added. The absence of rules would look like this:
+6.  Scroll down to the __Ingress Rules__ section. If there are no rules for __Port 443__ and __Port 1521__, they must be added. The absence of rules would look like this:
 
     ![Screenshot of Oracle Ingress rules](./images/ogg-no-rules.png " ")
 
-7. If there are no rules present, click on the __Add Ingress Rules__ button. Otherwise if you have the required rules available , you may proceed to __Task 2__.
+7.  If there are no rules present, click on the __Add Ingress Rules__ button. Otherwise if you have the required rules available , you may proceed to __Task 2__.
 
 8. An __Add Ingress Rules__ pane will pop up. Enter the following parameters. 
 
@@ -241,8 +236,3 @@ You may now [proceed to the next lab](#next).
 * **Authors** - Ameet Kumar Nihalani, Senior Principal Support Engineer, Oracle Cloud Database Migration
 * **Contributors** - LiveLabs Team, ZDM Development Team
 * **Last Updated By/Date** - Jorge Martinez, Product Manager, January 2022
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

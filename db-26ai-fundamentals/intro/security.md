@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 Welcome to the Oracle AI Database Security Lab for Oracle AI Database 26ai! In this lab, we will explore some of the new security features introduced in Oracle AI Database 26ai, focusing on Security Firewall, Schema Level Privileges, and the Developer Role. By the end of this lab, you will have a deeper understanding of how these features can help improve the security of your database environment. This section will be updated over time. If you'd like to see a specific feature added, tag me on X (twitter) with your suggestion! [@Killianlynchh](https://twitter.com/Killianlynchh)
 
 ## About Oracle AI Database 26ai

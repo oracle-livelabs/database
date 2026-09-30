@@ -2,9 +2,6 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 The Oracle Database Development Tools team launched the Database Tools service in OCI providing instance web browser to create connections to the MySQL Database Service in OCI. 
 
 Using APEX, developers can quickly develop and deploy compelling apps that solve real problems and provide immediate value. You don't need to be an expert in a vast array of technologies to deliver sophisticated solutions. Focus on solving the problem and let APEX take care of the rest.[https://apex.oracle.com/en/platform/why-oracle-apex/](https://apex.oracle.com/en/platform/why-oracle-apex/)
@@ -12,11 +9,6 @@ Using APEX, developers can quickly develop and deploy compelling apps that solve
 **Tasks Guide** 
 [https://medium.com/oracledevs/get-insight-on-mysql-data-using-apex-22-1-7fe613c76ca5e](https://medium.com/oracledevs/get-insight-on-mysql-data-using-apex-22-1-7fe613c76ca5)
 
-
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
 
 ## Task 1 Setup MySQL Support in Database Tools in OCI
 
@@ -44,15 +36,15 @@ In this lab, you will:
 ## Task 3 Create and Configure APEX
 
 1. Create and Launch APEX
-    ![MDS](./images/start_apex_deploy.png "start apex deploy")
-    ![MDS](./images/continue_apex_deploy.png "continue apex deploy")
-    ![MDS](./images/set_password_apex_deploy.png "set apex password")
-    ![MDS](./images/completed_apex_deploy.png "completed apex deploy")
+![MDS](./images/start_apex_deploy.png "start apex deploy")
+![MDS](./images/continue_apex_deploy.png "continue apex deploy")
+![MDS](./images/set_password_apex_deploy.png "set apex password")
+![MDS](./images/completed_apex_deploy.png "completed apex deploy")
 2. Create Workspace
-    ![MDS](./images/login_apexd.png "login apexd")
-    ![MDS](./images/create_apex_workspace.png "create apex workspace")
-    ![MDS](./images/name_apex_workspace.png "name apex workspace")
-    ![MDS](./images/apex_logout.png "apex logout")
+![MDS](./images/login_apexd.png "login apexd")
+![MDS](./images/create_apex_workspace.png "create apex workspace")
+![MDS](./images/name_apex_workspace.png "name apex workspace")
+![MDS](./images/apex_logout.png "apex logout")
 3. Create Web Credentials
 ![MDS](./images/apex_web_credentials.png "apex web credentials")
 ![MDS](./images/apex_rest.png "apex rest")

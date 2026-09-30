@@ -13,11 +13,6 @@ The objective of this workshop is to learn how to work with the schema-level pri
 - Access to Oracle AI Database 26ai.
 - Basic understanding of database schemas and privileges is recommended but not required.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Understanding Schema-Level Privileges
 
 1. Before we get into the code examples, let's briefly talk about the traditional methods of privilege management in Oracle AI Database.

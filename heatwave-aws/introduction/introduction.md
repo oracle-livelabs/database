@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 MySQL HeatWave is the only MySQL based service that combines transaction processing (OLTP), real-time analytics (OLAP), and machine learning in a single database. MySQL HeatWave eliminates the need for complex and time-consuming ETL operations between separate databases and thus avoids the latency and security risks of data movement between data stores while at the same time reducing costs.
 
 MySQL HeatWave is now available on AWS. MySQL HeatWave’s native integration with AWS enables the applications already deployed in AWS to benefit from MySQL HeatWave without incurring the latency associated with accessing a database service running outside of AWS. You also don’t incur the high data egress fees charged by AWS that would be necessary to migrate data to a service running outside of AWS. Lastly, the tight integration of MySQL HeatWave with other AWS services such as Amazon S3, CloudWatch, and PrivateLink, makes it easy for you to rely on MySQL HeatWave for new applications.

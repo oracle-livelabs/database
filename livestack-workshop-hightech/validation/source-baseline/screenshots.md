@@ -1,14 +1,5 @@
 # Screenshot Coverage
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 The workshop contains 43 live LLUSER database captures and six captures from the live SEER MANUFACTURING application. Every capture is placed beside the instruction or explanation it supports. The application uses a separate AX-400 demo dataset, so its identifiers and totals are not expected results for the workshop SQL fixture.
 
 | ID | Lesson | Position | Image | Evidence |
@@ -62,8 +53,3 @@ The workshop contains 43 live LLUSER database captures and six captures from the
 | APP-004 | `plant-routing-spatial/plant-routing-spatial.md` | Introduction | `plant-routing-spatial/images/demo-spatial-map.jpg` | captured_live_demo_application |
 | APP-005 | `production-quality-network/production-quality-network.md` | Introduction | `production-quality-network/images/demo-network-overview.jpg` | captured_live_demo_application |
 | APP-006 | `production-quality-network/production-quality-network.md` | Introduction | `production-quality-network/images/demo-network-query.jpg` | captured_live_demo_application |
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

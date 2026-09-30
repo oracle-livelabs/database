@@ -53,7 +53,7 @@ In this lab, you will be guided through the following tasks:
             }
         ]
         }');
-    </copy>
+</copy>
     ```
      ![Execute Query](./images/json-insert.png " ")
 
@@ -139,7 +139,7 @@ In this lab, you will be guided through the following tasks:
             }
         ]
         }');
-    </copy>
+</copy>
     ```
      ![Execute Query](./images/insert-new-record.png " ")
 

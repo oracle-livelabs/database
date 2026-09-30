@@ -10,7 +10,7 @@
         {
           "title": "Get Started",
           "description": "Prerequisites for LiveLabs (Oracle-owned tenancies).",
-          "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
+          "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
 		    {
           "title": "Lab 1: Upload data to Oracle NoSQL table",
@@ -18,7 +18,7 @@
         },
         {
           "title": "Lab 2: Download Migrator Utility and Upload to Cloud Shell",
-          "filename": "https://livelabs.oracle.com/cdn/database/create-nosqlmigrator-ndcs-ocios/download-migrator-utility/download-migrator-utility.md"
+          "filename": "https://oracle-livelabs.github.io/database/create-nosqlmigrator-ndcs-ocios/download-migrator-utility/download-migrator-utility.md"
         },        
 		    {
           "title": "Lab 3: Create a Configuration File",
@@ -31,7 +31,7 @@
         {
           "title": "Need Help?",
           "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-          "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+          "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
         }
     ]
 }

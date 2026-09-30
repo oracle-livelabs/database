@@ -19,11 +19,11 @@ This lab assumes you have:
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
 
-1. Click on the link below to download the Resource Manager zip file you need to build your environment:
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
-    [ll-timesten-cache-intro.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/ll-timesten-cache-intro.zip)
+ [ll-timesten-cache-intro.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/ll-timesten-cache-intro.zip)
 
-2. Save in your downloads folder.
+2.  Save in your downloads folder.
 
 
 
@@ -64,21 +64,21 @@ This workshop requires a certain number of ports to be available, a requirement 
 **Note:** If you plan to only use SSH connectivity, or only Remote Desktop connectivity, then you only need to open the appropriate port(s).
 
 
-1. Go to *Networking >> Virtual Cloud Networks*.
+1.  Go to *Networking >> Virtual Cloud Networks*.
 
-2. Choose your network.
+2.  Choose your network.
 
-3. Select *Security* tab from the sub-menu bar.
+3.  Select *Security* tab from the sub-menu bar.
 
-4. Under *Security Lists*, click on the Create Security List button.
+4.  Under *Security Lists*, click on the Create Security List button.
 
-5. Click the *Add Ingress Rule* button.
+5.  Click the *Add Ingress Rule* button.
 
-6. Enter the following:
+6.  Enter the following:
     - Source CIDR: 0.0.0.0/0
     - Destination Port Range: *Refer to the above table*
 
-7. Click the **Add Ingress Rules** button.
+7.  Click the **Add Ingress Rules** button.
 
 ## Acknowledgements
 

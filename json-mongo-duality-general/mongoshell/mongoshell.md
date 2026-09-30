@@ -28,9 +28,9 @@ You will need the following information, saved from previous labs:
 
 ## Task 1: Locate or Open Terminal or Command Prompt
 
-1. If your terminal or command prompt window is still open from Lab 1, navigate to it.
+1.  If your terminal or command prompt window is still open from Lab 1, navigate to it.
 
-2. If you closed the window, then repeat the instructions from Lab 1 to open a terminal or command prompt, change directory to the 'mongosh' directory you created then, and set the PATH variable again according to the instructions there.
+2.	If you closed the window, then repeat the instructions from Lab 1 to open a terminal or command prompt, change directory to the 'mongosh' directory you created then, and set the PATH variable again according to the instructions there.
 
 ## Task 2: Edit the connection URL
 
@@ -82,82 +82,82 @@ You will need the following information, saved from previous labs:
 
 You should now be in Mongo Shell. This is a command-line utility to interact with MongoDB databases (and, by extension, any other database which implements the MongoDB API). Other tools are available such as the graphical Compass tool, but we will stick with the command line to avoid the complexities of installing a GUI-based tool.
 
-1. Create a collection.
+1.  Create a collection.
 
-    	Copy the following into mongosh and press the enter key.
+	Copy the following into mongosh and press the enter key.
 
-    	```
-    	<copy>
-    	db.createCollection('emp')
+	```
+	<copy>
+	db.createCollection('emp')
     </copy>
-    	```
+	```
     ![Create a collection](./images/create-collection.png)
 
-    	That will have created a new document collection called "emp". If you wish, you can type "show collections" to confirm it has been created.
+	That will have created a new document collection called "emp". If you wish, you can type "show collections" to confirm it has been created.
 
-2. Add some employee documents to the collection.
+2.	Add some employee documents to the collection.
 
-    	Copy the following into mongosh, pressing the enter key after each:
+	Copy the following into mongosh, pressing the enter key after each:
 
-    	```
-    	<copy>
-    	db.emp.insertOne(
-    		{ "name":"Blake", "job": "Intern", "salary":30000 }
-    	)
-    	</copy>
-    	```
+	```
+	<copy>
+	db.emp.insertOne(
+  		{ "name":"Blake", "job": "Intern", "salary":30000 }
+	)
+	</copy>
+	```
 
-    	That created a single employee record document. Now we'll create another two. Notice that the second one has an email address, which the first doesn't. With JSON we can change the schema at will.
+	That created a single employee record document. Now we'll create another two. Notice that the second one has an email address, which the first doesn't. With JSON we can change the schema at will.
 
-    	```
-    	<copy>
-    	db.emp.insertMany([
-    		{ "name":"Smith", "job": "Programmer", "salary": 60000, "email" : "smith@example.com" },
-    		{ "name":"Miller", "job": "Programmer", "salary": 70000 }
-    	]
-    	)	
-    	</copy>
-    	```
-3. Do some searches against the data we just inserted
+	```
+	<copy>
+	db.emp.insertMany([
+		{ "name":"Smith", "job": "Programmer", "salary": 60000, "email" : "smith@example.com" },
+		{ "name":"Miller", "job": "Programmer", "salary": 70000 }
+	]
+	)	
+	</copy>
+	```
+3.	Do some searches against the data we just inserted
 
-    	Queries in MongoDB (and most JSON databases) use '**Query By Example**' or **QBE**. For a simple QBE, you provide a JSON document fragment, and the system returns all documents that contain that fragment. For example:
+	Queries in MongoDB (and most JSON databases) use '**Query By Example**' or **QBE**. For a simple QBE, you provide a JSON document fragment, and the system returns all documents that contain that fragment. For example:
 
-    	```
-    	<copy>
-    	db.emp.find({"name":"Miller"})
-    	</copy>
-    	```
+	```
+	<copy>
+ 	db.emp.find({"name":"Miller"})
+	</copy>
+	```
 
-    	will return all documents which have a name field of "Miller". Try it now.
+	will return all documents which have a name field of "Miller". Try it now.
 
-    	Note: MongoDB Shell allows a "relaxed" JSON syntax where the key name strings don't need to be quoted. So you could use **{name:"Miller"}** 
-    	instead of **{"name":"Miller"}**. We will use that syntax in some of the following examples.
+	Note: MongoDB Shell allows a "relaxed" JSON syntax where the key name strings don't need to be quoted. So you could use **{name:"Miller"}** 
+	instead of **{"name":"Miller"}**. We will use that syntax in some of the following examples.
 
-    	A more advanced QBE will use special match operators. For example, **$gt** means "greater than". So:
+	A more advanced QBE will use special match operators. For example, **$gt** means "greater than". So:
 
-    	```
-    	<copy>
-    	db.emp.find({"salary":{"$gt":50000}}) 
-    	<copy>
-    	```
+	```
+	<copy>
+	db.emp.find({"salary":{"$gt":50000}}) 
+	<copy>
+	```
 
-    	will find all documents where the salary field is numeric and contains a value greater than 50,000.
+	will find all documents where the salary field is numeric and contains a value greater than 50,000.
 
     ![QBE to find salary greater than 50000](./images/find-salary.png)
 
-4. Projection
+4.	Projection
 
-    	In the QBEs used so far, the database has returned the entire document involved. Not a problem here where the documents are short, but we may only want specific parts of the documents. Doing that is called "projection" and is similar to a SELECT clause in a SQL statement. Let's say we want just the name and salary info for our programmers. To get that we specify a second argument to the **find** command, which is a JSON document specifying the parts of the document to return:
+	In the QBEs used so far, the database has returned the entire document involved. Not a problem here where the documents are short, but we may only want specific parts of the documents. Doing that is called "projection" and is similar to a SELECT clause in a SQL statement. Let's say we want just the name and salary info for our programmers. To get that we specify a second argument to the **find** command, which is a JSON document specifying the parts of the document to return:
 
-    	```
-    	<copy>
-    	db.emp.find({ job:"Programmer" }, { name:1, salary:1 })
-    	<copy>
-    	```
+	```
+	<copy>
+	db.emp.find({ job:"Programmer" }, { name:1, salary:1 })
+	<copy>
+	```
 
-    	![Projection example](./images/projection.png " ")
+	![Projection example](./images/projection.png " ")
 
-5. Updates
+5.	Updates
 
 	We can use the updateOne or updateMany commands to make changes to one, or a number, of documents. They both take a first argument which is a QBE specifying which documents to update, and a second argument which is the changes to be made to the document. For example, the following will add an email address to our "Miller" employer.
 

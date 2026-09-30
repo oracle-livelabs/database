@@ -42,9 +42,9 @@ In this lab, you will
 
 5. You should refer to the page "View Login Info" for getting the Database Admin Password and Database Name. Make a note of these values.
 
-    ![ATP Credentials](images/atp-credentials.png " ")
+   ![ATP Credentials](images/atp-credentials.png " ")
 
-    For example if your database name is "EBRONLINE57859", use "ebronline57859_medium" as connect string. 
+   For example if your database name is "EBRONLINE57859", use "ebronline57859_medium" as connect string. 
 
     ```text
     <copy>connect admin@ebronline57859_medium</copy>
@@ -62,9 +62,9 @@ In this lab, you will
     - **connect admin@ebronline57859\_medium**  --- Use this for admin user
     - **connect hr@ebronline57859\_medium** --- Use this for HR user
 
-    ![ATP Connect](images/atp-connect.png " ")
+   ![ATP Connect](images/atp-connect.png " ")
 
-    **You must use the database name assigned to you with fail, if not the you will not be able to connect the database**
+   **You must use the database name assigned to you with fail, if not the you will not be able to connect the database**
 
 6. Verify the user is connected as the ADMIN user
 

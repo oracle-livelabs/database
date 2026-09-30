@@ -75,7 +75,7 @@ You need a compute instance to connect to perform the database and application t
 
 
 9. In the final **Image and Shape** field, keep the default shape and the new **Oracle Linux 8** image , and click **Next**.
-    ![New Compute image and shape](./images/4-compute-image-shape.png "New Compute image and shape")
+   ![New Compute image and shape](./images/4-compute-image-shape.png "New Compute image and shape")
 
 10. Under **Security** panel, click **Next**.
 

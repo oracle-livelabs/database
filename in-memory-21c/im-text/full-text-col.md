@@ -82,7 +82,7 @@ SQL> set lines 150
 SQL>
 ```
 
-1. This lab will be using an open source dataset from the City of Chicago. It has crime information with text items that the SSB schema, the dataset the other examples are based on, does not have.
+1.  This lab will be using an open source dataset from the City of Chicago. It has crime information with text items that the SSB schema, the dataset the other examples are based on, does not have.
 
     Run the script *01\_chicago\_data.sql*
 
@@ -144,7 +144,7 @@ SQL>
     SQL>
     ```
 
-2. Next we will run a query accessing the CHICAGO_DATA table looking for a count of all descriptions in district 009 that have the word "BATTERY" in the description.
+2.  Next we will run a query accessing the CHICAGO_DATA table looking for a count of all descriptions in district 009 that have the word "BATTERY" in the description.
 
     Run the script *02\_text\_query.sql*
 

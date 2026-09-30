@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 In this workshop you will perform a data migration from Oracle NoSQL Database Cloud Service table to a JSON file in the OCI Object Storage.

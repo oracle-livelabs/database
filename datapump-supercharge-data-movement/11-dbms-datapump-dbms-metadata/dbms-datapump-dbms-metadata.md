@@ -238,8 +238,3 @@ A lot of the Data Pump functionality is in the `DBMS_DATAPUMP` package. If you u
 * **Author** - Daniel Overby Hansen
 * **Contributors** - William Beauregard, Rodrigo Jorge, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Daniel Overby Hansen, May 2025
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

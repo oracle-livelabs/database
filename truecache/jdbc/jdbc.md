@@ -32,7 +32,7 @@ This lab assumes you have:
     sudo podman exec -it appclient /bin/bash
     </copy>
     ```
-    ![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
+![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
 
 2. Go to the directory /stage/clientapp 
 
@@ -49,7 +49,7 @@ This lab assumes you have:
      sh TransactionApp.sh
     </copy>
     ```
-    ![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp.png " ")
+![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp.png " ")
 
 3. Observe the improve in performance while using True Cache.
 

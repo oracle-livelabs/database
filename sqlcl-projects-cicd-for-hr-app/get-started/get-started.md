@@ -27,18 +27,13 @@ In this lab, you will:
 * Access to Database Actions
 * Beginner-level experience in javascript, HTML, and Integrated Developer Environments
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Get To Know Your Workshop Environment
 
 Before diving into the workshop, take a moment to familiarize yourself with the tools and resources available.
 
 1. Accessing Your Workshop Tools
 
-    You have been provided various URLs. One for accessing Database Actions, and another one for accessing a Jupyter lab. First, navigate to Database Actions using the provided URL. You can find these details by clicking **View Login Info** near the top of the Workshop outline.
+   You have been provided various URLs. One for accessing Database Actions, and another one for accessing a Jupyter lab. First, navigate to Database Actions using the provided URL. You can find these details by clicking **View Login Info** near the top of the Workshop outline.
 
     ![Workshop view Login info](images/workshop-login-info.png " ")
 
@@ -57,7 +52,7 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
 1. Click the SQL Developer Web URL in the Reservation information to access it.
 
-    ![Reservation info](images/reservation-info-for-sdw.png " ")
+   ![Reservation info](images/reservation-info-for-sdw.png " ")
 
 2. Several users have been created for you, including a new `DEV_USER` user. Its schema has already been REST-enabled, meaning you will be able to Sign in to Database Actions.
 
@@ -69,18 +64,18 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
 
     Once the Sign-in screen appears, enter the following credentials, and click the <button type="button" style="pointer-events: none;">Sign-in</button> button:
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Username:** `DEV_USER`
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Password:** `[Can be found in your Reservation details - see image in Step 1 for reference]`
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Username:** `DEV_USER`
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Password:** `[Can be found in your Reservation details - see image in Step 1 for reference]`
 
 3. The Database Actions Launchpad will appear. Navigate to the `Development` category, then click `SQL`. A blank SQL Worksheet will appear.
 
-    ![A new SQL Worksheet.](images/sql-database-actions.png " ")
+   ![A new SQL Worksheet.](images/sql-database-actions.png " ")
 
       > **NOTE:** If this is your first time visiting the SQL Worksheet, a guided tour will appear. You may continue with the tour, or click the <button type="button" style="pointer-events: none;">X</button> (as seen in the image) to exit the tour.
 
 4. You'll notice an `Employees` table has already been created for you. This table has also been pre-populated with data.
 
-    To view a sample of the table's data<span class="fa fa-file-play" aria-hidden="true"></span> copy and paste the following SQL statement into the SQL Worksheet and click then `Run Statement` icon.
+   To view a sample of the table's data<span class="fa fa-file-play" aria-hidden="true"></span> copy and paste the following SQL statement into the SQL Worksheet and click then `Run Statement` icon.
 
       ```sql
       <copy>
@@ -88,9 +83,9 @@ Before diving into the workshop, take a moment to familiarize yourself with the 
       </copy>
       ```
 
-    You will see results similar to the following image:
+   You will see results similar to the following image:
 
-    ![Reviewing the results](images/run-select-from-employees-unenabled.png " ")
+   ![Reviewing the results](images/run-select-from-employees-unenabled.png " ")
 
 5. You may notice the varied data types in this table. To take a closer look at how this `EMPLOYEES` table is structured, right-click on the `EMPLOYEES` table, then select `Edit...`. When the `Table Properties` slider appears, click `DDL`, then select the `Create` tab.
 
@@ -121,30 +116,30 @@ In this task, you will use ORDS to enable a REST endpoint for the Departments ta
 
 6. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
 
-    ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
+   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
 
 7. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
 
-    ![Click AUTOREST](images/autorest.png " ")
+   ![Click AUTOREST](images/autorest.png " ")
 
-    There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.
+There, you will find all the REST-enabled objects for the user along with their corresponding endpoints. Since this user only has the EMPLOYEES table REST-enabled, it will be the only one displayed.
 
-    Once you are satisfied, return to the Reservation information for this workshop.
+Once you are satisfied, return to the Reservation information for this workshop.
 
-    ![View Login info](images/workshop-login-info.png " ")
-    <!--1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
+   ![View Login info](images/workshop-login-info.png " ")
+<!--1. Navigate to the SQL Worksheet. Then paste (easily done with keyboard shortcuts) the contents of the `users.sql` file to the SQL Worksheet.
 
 2. Click the `Run Script` icon. Upon completion, a `PL/SQL procedure successfully completed` message will appear in the `Script Output` tab.-->
 
-    <!--1. We have created the ORDS APIs for the DEV_USER user and REST-enabled the EMPLOYEES table.
+<!--1. We have created the ORDS APIs for the DEV_USER user and REST-enabled the EMPLOYEES table.
 
       >**Note:** The icon next to the table name indicates that the table is REST-enabled.
 
-    ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
+   ![Employees table enabled icon](images/employees-rest-enabled-icon.png " ")
 
 2. Click the hamburger menu at the top of Oracle Database Actions, then select REST.
 
-    ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
+   ![Navigating to the REST using hamburger](images/hamburger-rest.png " ")
 
 3. In the Workshop's Object panel, you will see a single AUTOREST. Click it.
 
@@ -160,31 +155,31 @@ There, you will find all the REST-enabled objects for the user along with their 
 
 1. Using the URL you were provided, log in to your Jupyter lab. *It is recommended you open the Juptyer Lab in a new tab or window.*
 
-    ![Jupyter lab URI](images/jupyter-lab-uri.png " ")
+   ![Jupyter lab URI](images/jupyter-lab-uri.png " ")
 
-    Use the same password from the previous task.
+   Use the same password from the previous task.
 
-    ![Jupyter password](images/jupyter-pwd.png " ")
+   ![Jupyter password](images/jupyter-pwd.png " ")
 2. Once logged in, you may see several directories. Navigate (i.e., double or single-click on the directory) to the `workshops` directory, then to the `sqlcl-projects-react-app` directory. This last directory is the folder containing the application you will use and work with throughout this workshop. Take a moment to locate it, explore its contents, and get familiar with its structure.
 
-    ![Navigating to SQLcl Projects react app directory.](images/go-to-app-folder.png " ")
+   ![Navigating to SQLcl Projects react app directory.](images/go-to-app-folder.png " ")
 
-    <!--3. Next, navigate to the `scripts` directory, then open the `DEV_USERstream_resource_module_definitions.sql` file.  
+<!--3. Next, navigate to the `scripts` directory, then open the `DEV_USERstream_resource_module_definitions.sql` file.  
 
     > **TIP:** You may open a file by clicking on the file name *or* right-clicking a file and choose to "Open with > Editor".  
     >
     > ![Option to right-click and open with editor.](images/right-click-file-for-editor-to-view-python-file.png " " )
 
-    This file contains the definitions for your Resource Module, Templates, and Handlers, which are your ORDS APIs.  
+   This file contains the definitions for your Resource Module, Templates, and Handlers, which are your ORDS APIs.  
 
-    ![Reviewing the resource definitions file.](images/scripts-then-dev_userstream-sql.png " ")
-    *Navigate to `sqlcl-projects-react-app` then `scripts` then `DEV_USERstream_resource_module_definitions.sql`*
+   ![Reviewing the resource definitions file.](images/scripts-then-DEV_USERstream-sql.png " ")
+   *Navigate to `sqlcl-projects-react-app` then `scripts` then `DEV_USERstream_resource_module_definitions.sql`*
 
 4. Select all contents and copy the contents to your clipboard. Then, return to the SQL Worksheet.
 
     > **TIP:** Refer to Task 1, Step 1 for keyboard shortcuts for copy and paste actions.
 
-   ![Copying contents of the DEV_USERstream module.](images/the-dev_userstream-resource-module.png " ")-->
+   ![Copying contents of the DEV_USERstream module.](images/the-DEV_USERstream-resource-module.png " ")-->
 
 ## Task 5: Prepare Your Application Environment Variables
 
@@ -221,7 +216,7 @@ Next, you will modify the .env file, which is located in your application's root
    </details></br>
 
 1. Open the terminal
-    ![Open jupyter terminal](images/open-the-terminal.png " ")
+   ![Open jupyter terminal](images/open-the-terminal.png " ")
       >**Tip:** You can reduce the font size by pressing **Ctrl + Minus (-)** on Windows/Linux or **Command (⌘) + Minus (-)** on Mac.
 
 2. Edit the `.env` file with:
@@ -289,7 +284,7 @@ Vite automatically loads environment variables from a .env file only if they sta
 
 1. From the Jupyter Launcher, open a new Terminal.
 
-    ![Launching a new terminal.](images/launch-terminal.png " ")
+   ![Launching a new terminal.](images/launch-terminal.png " ")
 
       > **Note:** If a new Launcher window is not present, you can click the Blue Box (the box with the `+` inside) to open a new Launcher. Then you may open a new Terminal.
 
@@ -315,26 +310,26 @@ Vite automatically loads environment variables from a .env file only if they sta
 
 4. Your application will be available on port `5000`. However, you will need to open the application in a new tab. Modify the URL, so you are using the one provided to you for this lab *plus* port `5000`.
 
-    ![Copy correct portion of url for the app](images/copy-correct-portion-of-url-for-sample-app.png " ")
+   ![Copy correct portion of url for the app](images/copy-correct-portion-of-url-for-sample-app.png " ")
 
-    ![Navigating to the correct address plus port 5000.](images/your-virtual-labs-uri-for-app.png " ")
-    *Open in a new tab or window.*
+   ![Navigating to the correct address plus port 5000.](images/your-virtual-labs-uri-for-app.png " ")
+   *Open in a new tab or window.*
 
 5. Navigate to the new tab and combine the lab's URI with port `5000`. Accept any warnings and your application will load.
 
-    ![Click continue if a warning alert appears](images/secure-site-not-available-warning.png " ")
+   ![Click continue if a warning alert appears](images/secure-site-not-available-warning.png " ")
 
 6. The HR application will load. Scroll right left or up down to see all the infos.
 
-    ![HR application up and running.](images/application-up-and-running.png " ")
+   ![HR application up and running.](images/application-up-and-running.png " ")
 
 7. You can switch from the light mode to dark mode
 
-    ![Light mode vs dark mode](images/light-vs-dark-mode.png " ")
+   ![Light mode vs dark mode](images/light-vs-dark-mode.png " ")
 
 8. Check the Update Records page.
 
-    ![Update records page](images/update-records-page.png " ")
+   ![Update records page](images/update-records-page.png " ")
 
 9. Move to the Departments page.
 

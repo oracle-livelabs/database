@@ -1,11 +1,5 @@
 # Introduction                                   
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 The labs in this workshop walk you through a series of activities to tap into the full performance potential of the **Oracle Autonomous Database** through good Database Design. You will provision a new autonomous database instance in the Oracle Cloud, connect to the database using Database Actions and Cloud Shell, conduct an initial performance benchmark, and then optimise the design for both single session throughput and concurrent throughput.
 
 With Oracle Autonomous Database, we make it quick and easy for you to create a secure, fully managed database service in the Oracle Cloud and start building applications and then optimising the database design immediately.

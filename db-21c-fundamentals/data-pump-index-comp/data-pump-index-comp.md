@@ -71,7 +71,7 @@ In this lab, you will:
 
     ```
 
-3. Create a directory for Oracle Data Pump dumpfiles.
+3.  Create a directory for Oracle Data Pump dumpfiles.
 
 
     ```
@@ -174,7 +174,7 @@ Export the `HR.EMPLOYEES` table. Ignore any Database Vault warning.
 
     ```
 
-    Ignore the errors.
+  Ignore the errors.
 
 3. Verify that the table imported is using compression and that its indexes use compression too.
 

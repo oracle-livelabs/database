@@ -29,17 +29,12 @@ If you accidentally exit the SQLcl client during a lab exercise, the client can 
 
 **Please run all workshop tasks in the order in which they appear in this guide.**
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Log in and create the application database
 
 In this first task, you will create and explore a new pluggable database **HRAPPDB** in the container database **CDBTEST**.  Typically, the database administrators would provide the developers with the appropriate privileges to allow self-service database provisioning, cloning, de-provisioning and other tasks that DevOps requires.  For the sake of simplicity, you will use the database superuser privilege SYSDBA to perform many of these tasks throughout this workshop. 
 
 
-1. Connect to **CDBTEST** using SQLcl. The database **CDBTEST** is a container database, or CDB.  The CDB contains the root of the database, and is also associated with the database memory (SGA, PGA, etc.) and background processes on the system that are part of the Oracle Database instance.
+1.  Connect to **CDBTEST** using SQLcl. The database **CDBTEST** is a container database, or CDB.  The CDB contains the root of the database, and is also associated with the database memory (SGA, PGA, etc.) and background processes on the system that are part of the Oracle Database instance.
 
     ```
     <copy>
@@ -150,7 +145,7 @@ In this first task, you will create and explore a new pluggable database **HRAPP
     </copy>
     ```
 
-    ![The output shows a summary of schema HR's objects.](./images/task1.4-hrobjectcounts.png " ")
+   ![The output shows a summary of schema HR's objects.](./images/task1.4-hrobjectcounts.png " ")
 
 5. Connect again in SQLcl as **SYS** to the container database **CDBTEST** and view the tablespaces and datafiles created, plus the database (PDB or CDB) to which each datafile belongs.
 
@@ -215,7 +210,7 @@ First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archi
     ```
 
 
-    ![The PDB HRAPPDB is closed and unlpugged into a ".pdb" archive file.](./images/task2.2-unplughrappdb.png " ")
+   ![The PDB HRAPPDB is closed and unlpugged into a ".pdb" archive file.](./images/task2.2-unplughrappdb.png " ")
 
 3. After unplugging the database, you will cleanup the container database by dropping all references to the unplugged PDB.  
 
@@ -227,7 +222,7 @@ First, you'll unplug **HRAPPDB** from **CDBTEST** into a ".pdb" compressed archi
     </copy>
     ```
 
-    ![The unplugged PDB shows as still in MOUNTED status until it is dropped.](./images/task2.3-drophrappdb.png " ")
+   ![The unplugged PDB shows as still in MOUNTED status until it is dropped.](./images/task2.3-drophrappdb.png " ")
 
 4. Now, query the datafiles that are part of **CDBTEST**.  You can see in the results that the datafiles for **HRAPPDB** are no longer part of the container database. To run the query, either copy and paste the code below, or use the up arrow on your keyboard to recall that statement in SQLcl.
     

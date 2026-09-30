@@ -321,11 +321,11 @@ _Estimated Time:_ 20 minutes
     ```bash
     <copy>cd /var/www/html</copy>
     ```
-    <!--
-    The application source files are in this workshop developHEATWAVE-GENAI/delop-app/files folder
-    The PAR bucket is at Tenancy mysqlpm  compartment mysqlpm/livelabs/mysql_gen_ai/php-rag-chat-app/app.zip
-    Contact perside.foster@oracle.com for more details
-    -->
+<!--
+The application source files are in this workshop developHEATWAVE-GENAI/delop-app/files folder
+The PAR bucket is at Tenancy mysqlpm  compartment mysqlpm/livelabs/mysql_gen_ai/php-rag-chat-app/app.zip
+Contact perside.foster@oracle.com for more details
+-->
 
 2. Download the application code.
 
@@ -371,7 +371,7 @@ _Estimated Time:_ 20 minutes
     ```
     ![Provide your administrator details](./images/rag-replace.png "Provide your administrator details")
 
-8. Replace the following:
+8.  Replace the following:
 
     - **your\_mysql\_host**: Specify the IP address of the HeatWave instance, **heatwave-genai-db**. For example, 10.0.0.123.
     - **your\_username**: Specify the username you had used for the Heatwave instance. If you arefollowing the lab instructions, specify **admin**.

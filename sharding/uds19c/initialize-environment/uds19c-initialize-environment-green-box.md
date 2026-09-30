@@ -23,7 +23,7 @@ This lab assumes you have requested a Livelabs instance with access details.
     - Two Oracle shard Database containers: shard1 and shard2
     - Oracle Sharding GSM Containers: gsm1 and gsm2
 
-2. Open a terminal session and proceed as indicated below to validate the services.
+2.  Open a terminal session and proceed as indicated below to validate the services.
 
     - Oracle Sharding container Details
 

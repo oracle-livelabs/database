@@ -14,18 +14,13 @@ Estimated Lab Time: 10 minutes
 * An open port (1521) on your Oracle Virtual Cloud Network (VCN)
 * [Oracle SQL Developer](https://www.oracle.com/tools/downloads/sqldev-downloads.html)
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Create a connection through SQL Developer
 
 1. If you do not have Oracle SQL Developer installed in your computer, first download it using the above link and install it on your computer.
 
 2. Launch Oracle SQL Developer and select **New Connection** (the green + sign).
 
-    ![Image](images/sd-create-connection.png " ")
+  ![](images/sd-create-connection.png " ")
 
 3. In the New / Select Database Connection window, enter the following information:
      * In the **Name** field, enter **DockerDB** as the name of this connection.
@@ -36,19 +31,19 @@ In this lab, you will:
      * In the **Hostname** field, enter your Oracle Compute instance Public IP address.
      * Click **Service name** and enter **ORCLPDB1**.
 
-    ![Image](images/sd-new-connection.png " ")
+   ![](images/sd-new-connection.png " ")
 
 4. Click **Test** to check your connection. You will see a Success message in the **Status** field.
 
-    *Note: If you see `The Network Adapter could not establish the connection` error, you may want to check if the Source CIDR of Ingress Rule was entered correctly in the previous lab.*  
+  *Note: If you see `The Network Adapter could not establish the connection` error, you may want to check if the Source CIDR of Ingress Rule was entered correctly in the previous lab.*  
 
 5. Click **Save** to save your connection details and then click **Connect**.
 
-    ![Image](images/sd-save.png " ")
+  ![](images/sd-save.png " ")
 
 6. You now have a connection to your Oracle VM Database system, and you can expand the connection and Tables.
 
-  ![Image](images/sd-connected.png " ")
+  ![](images/sd-connected.png " ")
 
   You may now *proceed to the next lab*.
 

@@ -476,7 +476,7 @@ Let's now try the same code on the *SAPPHIRE* database. However, we need to crea
     -- Be sure to hit RETURN
     ```
 
-    * host.containers.internal is the hostname of the machine running the BLUE database.
+   * host.containers.internal is the hostname of the machine running the BLUE database.
 
     <details>
     <summary>*click to see the output*</summary>
@@ -1231,8 +1231,3 @@ You may now [*proceed to the next lab*](#next).
 * **Author** - Rodrigo Jorge
 * **Contributors** - William Beauregard, Daniel Overby Hansen, Mike Dietrich, Klaus Gronau, Alex Zaballa
 * **Last Updated By/Date** - Rodrigo Jorge, August 2025
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

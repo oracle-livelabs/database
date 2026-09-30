@@ -225,7 +225,7 @@ In this lab, you will:
 
     ```
 
-    *Observe that the description displays only the visible columns.*
+*Observe that the description displays only the visible columns.*
 
 
 
@@ -298,7 +298,7 @@ In this lab, you will:
 
     ```
 
-2. Display the internal values of the first row of the chain.
+2.  Display the internal values of the first row of the chain.
 
 
     ```
@@ -450,7 +450,7 @@ In this lab, you will:
 
     ```
 
-    *You cannot delete rows in a blockchain table with the DML `DELETE` command. You must use the `DBMS_BLOCKCHAIN_TABLE` package.*
+  *You cannot delete rows in a blockchain table with the DML `DELETE` command. You must use the `DBMS_BLOCKCHAIN_TABLE` package.*
 
     ```
 
@@ -472,10 +472,10 @@ In this lab, you will:
 
     ```
 
-    *You can delete rows in a blockchain table only by using the `DBMS_BLOCKCHAIN_TABLE` package, and only rows that are outside the retention period. This is the reason why the procedure successfully completes without deleting any row.
+  *You can delete rows in a blockchain table only by using the `DBMS_BLOCKCHAIN_TABLE` package, and only rows that are outside the retention period. This is the reason why the procedure successfully completes without deleting any row.
 
 
-    If the Oracle Database release installed is 20.0.0, then the procedure to use is `DBMS_BLOCKCHAIN_TABLE.DELETE_ROWS` and not `DBMS_BLOCKCHAIN_TABLE.DELETE_EXPIRED_ROWS`.*
+  If the Oracle Database release installed is 20.0.0, then the procedure to use is `DBMS_BLOCKCHAIN_TABLE.DELETE_ROWS` and not `DBMS_BLOCKCHAIN_TABLE.DELETE_EXPIRED_ROWS`.*
 
 
 
@@ -542,10 +542,10 @@ In this lab, you will:
 
     ```
 
-    *Observe that the error message is slightly different. The error message from the `TRUNCATE TABLE` command explained that the operation was not possible on a blockchain table. The current error message explains that the `DROP TABLE` is not possible but on this `LEDGER_EMP` table.
+  *Observe that the error message is slightly different. The error message from the `TRUNCATE TABLE` command explained that the operation was not possible on a blockchain table. The current error message explains that the `DROP TABLE` is not possible but on this `LEDGER_EMP` table.
 
 
-    The blockchain table was created so that it cannot be dropped before 31 days of inactivity.*
+  The blockchain table was created so that it cannot be dropped before 31 days of inactivity.*
 
 
 

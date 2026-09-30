@@ -352,7 +352,7 @@ Estimated Lab Time: 8 minutes
       { _id: "s_100" },
       { name: 1, "menus.categories.name":1, "menus.categories.items.name": 1, "menus.categories.items.price": 1 }
     )    
-    </copy>
+ </copy>
     ```
 
     **What you should see:** the same document, trimmed to the fields you asked for.

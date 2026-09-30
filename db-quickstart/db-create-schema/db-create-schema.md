@@ -123,7 +123,7 @@ Database users, who are not service administrators, do not have access to the Or
     </copy>
     ```
 
-    where:    
+  where:    
     
     * **`p_enabled:`** Set `TRUE` to enable Oracle REST Data Services access; Set to `FALSE` to disable Oracle REST Data Services access.
     * **`p_schema:`** The database schema name. For this lab, use your new user `ONLINE_SHOPPE` as the schema name.
@@ -165,11 +165,11 @@ Database users, who are not service administrators, do not have access to the Or
     </copy>
     ```
 
-    ![Paste URL.](./images/paste-user-url.png " ")
+   ![Paste URL.](./images/paste-user-url.png " ")
 
 3. On the **Sign-in** page, enter **`online_shoppe`** as the username and **`Lab_practice1`** as the password, and then click **Sign in**.
 
-    The SQL Worksheet is displayed. Click the **X** control to close the informational box.
+   The SQL Worksheet is displayed. Click the **X** control to close the informational box.
 
     ![The SQL Worksheet is displayed.](./images/sql-worksheet-displayed.png " ")
 
@@ -193,7 +193,7 @@ Database users, who are not service administrators, do not have access to the Or
         </copy>
         ```
 
-    Perform the following steps to create the **`CUSTOMERS`**, **`COMMODITIES`**, and **`ORDERS`** tables in the **`ONLINE_SHOPPE`** schema.
+Perform the following steps to create the **`CUSTOMERS`**, **`COMMODITIES`**, and **`ORDERS`** tables in the **`ONLINE_SHOPPE`** schema.
 
 3. Create the **`CUSTOMERS`** table with the **`CUSTOMER_ID`** column as the primary key. Copy and paste the following statement into your SQL Worksheet, and then click the **Run Script** icon in the Worksheet toolbar.
 
@@ -267,7 +267,7 @@ In this section, you will manipulate the records in the newly created tables.
 - SQL Worksheet is a handy tool to perform simple tasks, as in this lab. For the bulk of your database work, you will commonly use tools such as SQL Developer, SQLcl, and SQL*Plus augmented by Database Actions.
 
 1. **Inserting data**   
-    You execute the `INSERT` statement to add rows of data to a database table.
+You execute the `INSERT` statement to add rows of data to a database table.
 
     **Syntax**: 
     
@@ -295,7 +295,7 @@ In this section, you will manipulate the records in the newly created tables.
     ![Insert data into the tables](./images/insert-into-tables-online-shoppe.png " ")
 
 2. **Modifying data**    
-    You use the `UPDATE` statement to modify rows of data in a database table. Execute the following statement to change the unit price of the DVD player from `$109` to **`$129`**.
+You use the `UPDATE` statement to modify rows of data in a database table. Execute the following statement to change the unit price of the DVD player from `$109` to **`$129`**.
 
     ```
     <copy>
@@ -346,7 +346,7 @@ In this section, you execute the `REVOKE` statement to revoke user and role syst
 
 1. In the lab, you should be signed in to the SQL Worksheet as the **`online_shoppe`** user. Log out of the `online_shoppe` user. On the **Oracle Database Actions | SQL** banner, click the drop-down list next to the `online_shoppe` user, and then select **Sign Out** from the drop-down menu. 
 
-    ![Log out of admin.](./images/signout-online-shoppe.png " ")
+  ![Log out of admin.](./images/signout-online-shoppe.png " ")
 
 
 2. Sign in to the SQL Worksheet as the **`admin`** user. On the **Sign-in** page, enter `admin` as the username and `Training4ADW` as the password.

@@ -27,19 +27,15 @@ In this workshop you will:
 
 -   An Oracle Cloud Account
 
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Getting started with the Oracle NoSQL Database Cloud Service
 
 The Oracle NoSQL Database Cloud Service is a server-less, fully managed data store that delivers predictable single digit response times and allows application to scale on demand via provisioning API calls. There are four steps to getting started with the Oracle NoSQL Database Cloud Service.
 
-1. Download an Oracle NoSQL Database SDK
-2. Connect to the Oracle NoSQL Database Cloud Service
-3. Create an NDCS table 
-4. Write data to the table and read data from the table
-5. Click on the next lab to get started
+1.  Download an Oracle NoSQL Database SDK
+2.  Connect to the Oracle NoSQL Database Cloud Service
+3.  Create an NDCS table 
+4.  Write data to the table and read data from the table
+5.  Click on the next lab to get started
 
 ## Learn More
 

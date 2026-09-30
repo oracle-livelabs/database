@@ -13,11 +13,6 @@ The goal of this lab is to help you understand and use the enhanced RETURNING cl
 - Access to Oracle AI Database 26ai
 - Basic understanding of SQL is helpful
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Working with the Enhanced RETURNING clause
 
 1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.

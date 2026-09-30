@@ -1,11 +1,5 @@
 # Introduction to Oracle Global Data Services (GDS)
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 ## About Oracle Database Global Data Services (GDS)
 
 Oracle Database provides a powerful workload management feature called database services. Database services are named representations of one or more database instances. Database services allow you to group database workloads, ensure client requests are routed to the optimal instance that offers a service, and provide high availability by transparently failing client connections over to surviving instances when a planned or unplanned instance outage occurs.

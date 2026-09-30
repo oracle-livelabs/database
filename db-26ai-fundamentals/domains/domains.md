@@ -17,11 +17,6 @@ The objective of this lab is to provide comprehensive hands-on experience with D
 - Basic understanding of SQL concepts.
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Understanding Data Use Case Domains
 
 1. If you haven't done so already, from the Autonomous AI Database home page, **click** Database action and then **click** SQL.
@@ -34,7 +29,7 @@ In this lab, you will:
     ![click SQL](images/simple-db-actions.png =50%x*)
 
 2. **Overview of Data Use Case Domains:**
-    Data Use Case Domains serve as a way for defining properties and constraints associated with columns. They ensure consistency in data representation and validation throughout the application. Data Use Case Domains also provide consistent metadata for development, analytics, and ETL applications and tools helping to ensure data consistency and validation throughout the schema.
+   Data Use Case Domains serve as a way for defining properties and constraints associated with columns. They ensure consistency in data representation and validation throughout the application. Data Use Case Domains also provide consistent metadata for development, analytics, and ETL applications and tools helping to ensure data consistency and validation throughout the schema.
 
 3. **Types of Data Use Case Domains:**
    - Single Column Domain: Applies constraints to a single column.

@@ -55,7 +55,7 @@ In this lab, you will:
     ```text
     <copy>
     kubectl create ns jhub
-    </copy>
+   </copy>
     ```
 
 4. Add Jupyter repository using helm

@@ -21,14 +21,9 @@ Before starting this lab, ensure that you have:
     * Lab: GDS Installation
     * Lab: Database Updates to Enable GDS
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Verify Podman Container Status & Connect to gsm1
 
-1. Check the status of Podman containers (Ensure all required containers are running):
+1.  Check the status of Podman containers (Ensure all required containers are running):
 
     ```nohighlighting
     <copy>
@@ -38,7 +33,7 @@ In this lab, you will:
 
     ![podman containers](images/gds-podman-containers.png " ")
 
-2. Access the gsm1 container from the terminal:
+2.  Access the gsm1 container from the terminal:
 
     ```nohighlighting
     <copy>
@@ -46,7 +41,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Verify /etc/hosts file:
+3.  Verify /etc/hosts file:
     ```nohighlighting
     <copy>
     cat /etc/hosts
@@ -58,21 +53,21 @@ In this lab, you will:
 
 **Step 1: Configure GDS for the LiveLab Environment**
  
-1. Launch GDSCTL:
+1.	Launch GDSCTL:
     ```nohighlighting
     <copy>
     gdsctl
     </copy>
     ```
 
-2. set gsm to gsm1:
+2.	set gsm to gsm1:
     ```nohighlighting
     <copy>
     set gsm -gsm gsm1
     </copy>
     ```
 
-3. Verify connectivity to the databases:
+3.	Verify connectivity to the databases:
     - GDS Catalog:
     ```nohighlighting
     <copy>
@@ -94,14 +89,14 @@ In this lab, you will:
     </copy>
     ```
 
-4. Reconnect to the catalog database (as all GDSCTL steps must be executed from the catalog):
+4.	Reconnect to the catalog database (as all GDSCTL steps must be executed from the catalog):
     ```nohighlighting
     <copy>
     connect gsmcatuser/Oracle_23ai@catalog.example.com:1521/CAT1PDB;
     </copy>
     ```
 
-5. Configure the GDS Driver and Display Configuration:
+5.	Configure the GDS Driver and Display Configuration:
     ```nohighlighting
     <copy>
     configure -driver oci
@@ -110,23 +105,23 @@ In this lab, you will:
     ```
 
 
-    **Step 2: Create the GDS Catalog and Add GSM Instances**
+**Step 2: Create the GDS Catalog and Add GSM Instances**
  
-1. Create the GDS catalog:
+1.	Create the GDS catalog:
     ```nohighlighting
     <copy>
     create gdscatalog -database "(DESCRIPTION=(CONNECT_TIMEOUT=90)(RETRY_COUNT=50)(RETRY_DELAY=3)(TRANSPORT_CONNECT_TIMEOUT=3)(ADDRESS_LIST=(LOAD_BALANCE=ON)(ADDRESS=(PROTOCOL=TCP)(HOST=catalog.example.com)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=CAT1PDB)))" -user gsmcatuser/Oracle_23ai -region region1 -configname gds01 -autovncr off
     </copy>
     ```
 
-2. Add gsm1 to the GDS configuration:
+2.	Add gsm1 to the GDS configuration:
     ```nohighlighting
     <copy>
     add gsm -gsm gsm1 -catalog "(DESCRIPTION=(CONNECT_TIMEOUT=90)(RETRY_COUNT=50)(RETRY_DELAY=3)(TRANSPORT_CONNECT_TIMEOUT=3)(ADDRESS_LIST=(LOAD_BALANCE=ON)(ADDRESS=(PROTOCOL=TCP)(HOST=catalog.example.com)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=CAT1PDB)))" -region region1 -pwd Oracle_23ai
     </copy>
     ```
 
-3. Save and start the GSM configuration:
+3.	Save and start the GSM configuration:
     ```nohighlighting
     <copy>
     configure -save_config
@@ -134,8 +129,8 @@ In this lab, you will:
     </copy>
     ```
  
-    **Step 3: Add Database Hosts to the GDS Configuration**
-1. For each database get the ip address and add those to the GDS configuration:
+**Step 3: Add Database Hosts to the GDS Configuration**
+1.  For each database get the ip address and add those to the GDS configuration:
 
     ```nohighlighting
     <copy>
@@ -156,16 +151,16 @@ In this lab, you will:
     config vncr
      </copy>
     ```
-    Ensure that the three IP addresses listed above appear in the output.
+Ensure that the three IP addresses listed above appear in the output.
 
-3. Verify the GSM configuration:
+3.	Verify the GSM configuration:
     ```nohighlighting
     <copy>
     config gsm
      </copy>
     ```
 
-4. Exit and restart GDSCTL:
+4.	Exit and restart GDSCTL:
     ```nohighlighting
     <copy>
     exit
@@ -173,70 +168,70 @@ In this lab, you will:
      </copy>
     ```
 
-5. Validate GSM status:
+5.	Validate GSM status:
     ```nohighlighting
     <copy>
     status gsm
     validate
     </copy>
     ```
-    Expected output:
-    "Total errors: 0. Total warnings: 4"
-6. Display the current configuration:
+Expected output:
+"Total errors: 0. Total warnings: 4"
+6.	Display the current configuration:
     ```nohighlighting
     <copy>
     config
     </copy>
     ```
 
-    **Step 4: Register Databases with GDS**
+**Step 4: Register Databases with GDS**
  
-    **Note** that 23ai onwards, add database replaces add brokerconfig.
+**Note** that 23ai onwards, add database replaces add brokerconfig.
  
-1. Add the Primary Database:
+1.  Add the Primary Database:
     ```nohighlighting
     <copy>
     add database -connect 10.0.20.103:1521/PORCLCDB -region region1 -gdspool dbpoolora -pwd Oracle_23ai -savename
     </copy>
     ```
 
-2. Add the Standby Database:
+2.  Add the Standby Database:
     ```nohighlighting
     <copy>
     add database -connect 10.0.20.104:1521/SORCLCDB -region region1 -gdspool dbpoolora -pwd Oracle_23ai -savename
     </copy>
     ```
  
-    **Step 5: Create and Start Global Services**
+**Step 5: Create and Start Global Services**
  
-1. Create a Read-Write Service for the Primary Database:
+1.	Create a Read-Write Service for the Primary Database:
     ```nohighlighting
     <copy>
     add service -gdspool dbpoolora -service gds01_rw_srvc_1 -preferred_all -role primary -pdbname ORCLPDB1
     </copy>
     ```
-2. Start the Read-Write Service:
+2.	Start the Read-Write Service:
     ```nohighlighting
     <copy>
     start service -service gds01_rw_srvc_1
     </copy>
     ```
-3. Create a Read-Only Service for the Standby Database:
+3.	Create a Read-Only Service for the Standby Database:
     ```nohighlighting
     <copy>
     add service -gdspool dbpoolora -service gds01_ro_srvc_1 -preferred_all -role physical_standby -pdbname ORCLPDB1
     </copy>
     ```
-4. Start the Read-Only Service:
+4.	Start the Read-Only Service:
     ```nohighlighting
     <copy>
     start service -service gds01_ro_srvc_1
     </copy>
     ```
 
-    **Step 6: Verify the GDS Configuration**
+**Step 6: Verify the GDS Configuration**
  
-1. Check GSM status:
+1.	Check GSM status:
     ```nohighlighting
     <copy>
     status gsm
@@ -246,7 +241,7 @@ In this lab, you will:
 
  
  
-2. Check databases status:
+2.	Check databases status:
     ```nohighlighting
     <copy>
     databases
@@ -254,7 +249,7 @@ In this lab, you will:
     ```
     ![gdsctl databases](images/gdsctl_databases.png " ")
  
-3. Check services status:
+3.	Check services status:
     ```nohighlighting
     <copy>
     services
@@ -262,7 +257,7 @@ In this lab, you will:
     ```
     ![gdsctl status service or services](images/gdsctl_status_service_or_services.png " ")
  
-4. Use validate command to validate GDS configuration:
+4.	Use validate command to validate GDS configuration:
     ```nohighlighting
     <copy>
     validate
@@ -271,7 +266,7 @@ In this lab, you will:
     ![gdsctl validate](images/gdsctl_validate.png " ")
  
  
-5. Check overall configuration
+5.	Check overall configuration
     ```nohighlighting
     <copy>
     config
@@ -279,7 +274,7 @@ In this lab, you will:
     ```
     ![gdsctl config](images/gdsctl_config.png " ")
  
-6. Use the “gdsctl” command to display help
+6.	Use the “gdsctl” command to display help
     ```nohighlighting
     <copy>
     help
@@ -293,19 +288,19 @@ In this lab, you will:
  
 **Step 1: Connect to the Read-Write Global Service Using gsm1**
  
-1. Access the gsm1 container:
+1.	Access the gsm1 container:
     ```nohighlighting
     <copy>
     sudo podman exec -it gsm1 /bin/bash
     </copy>
     ```
-2. Connect to the Read-Write Global Service using sqlplus (Global service connections can be used by the application):
+2.	Connect to the Read-Write Global Service using sqlplus (Global service connections can be used by the application):
     ```nohighlighting
     <copy>
     sqlplus gsmuser/Oracle_23ai@gsm1.example.com:1522/gds01_rw_srvc_1.dbpoolora.gds01;
     </copy>
     ```
-3. Exit the gsm1 container:
+3.	Exit the gsm1 container:
     ```nohighlighting
     <copy>
     exit
@@ -315,19 +310,19 @@ In this lab, you will:
 
 **Step 2: Connect to the Read-Only Global Service Using gsm1**
  
-1. Access the gsm1 container:
+1.	Access the gsm1 container:
     ```nohighlighting
     <copy>
     sudo podman exec -it gsm1 /bin/bash
     </copy>
     ```
-2. Connect to the Read-Only Global Service using sqlplus (Global service connections can be used by the application):
+2.	Connect to the Read-Only Global Service using sqlplus (Global service connections can be used by the application):
     ```nohighlighting
     <copy>
     sqlplus gsmuser/Oracle_23ai@gsm1.example.com:1522/gds01_ro_srvc_1.dbpoolora.gds01;
     </copy>
     ```
-3. Exit the gsm1 container:
+3.	Exit the gsm1 container:
     ```nohighlighting
     <copy>
     exit
@@ -336,19 +331,19 @@ In this lab, you will:
 
 **Step 3: Connect to a Local Service on the Catalog Database Using gsm1**
  
-1. Access the gsm1 container:
+1.	Access the gsm1 container:
     ```nohighlighting
     <copy>
     sudo podman exec -it gsm1 /bin/bash
     </copy>
     ```
-2. Connect to the catalog's local service (GSM services can also be accessed from other Podman containers, such as appclient):
+2.	Connect to the catalog's local service (GSM services can also be accessed from other Podman containers, such as appclient):
     ```nohighlighting
     <copy>
     sqlplus gsmcatuser/Oracle_23ai@gsm1.example.com:1522/GDS\$CATALOG.gds01;
     </copy>
     ```
-3. Exit the gsm1 container:
+3.	Exit the gsm1 container:
     ```nohighlighting
     <copy>
     exit
@@ -361,40 +356,40 @@ Note: GSM services can be accessed from any Podman container, such as the appcli
  
 If you have already installed GDS on gsm2 (as described in Task 5 of the "GDS Install" Lab), you can now add gsm2 to the GDS configuration.
  
-1. Access the gsm2 Podman container:
+1.	Access the gsm2 Podman container:
     ```nohighlighting
     <copy>
     sudo podman exec -it gsm2 /bin/bash
     </copy>
     ```
-2. Launch GDSCTL and set GSM to gsm2:
+2.	Launch GDSCTL and set GSM to gsm2:
     ```nohighlighting
     <copy>
     gdsctl
     set gsm -gsm gsm2
     </copy>
     ```
-3. Add gsm2 to the GDS configuration:
+3.	Add gsm2 to the GDS configuration:
     ```nohighlighting
     <copy>
     add gsm -gsm gsm2 -catalog "(DESCRIPTION=(CONNECT_TIMEOUT=90)(RETRY_COUNT=50)(RETRY_DELAY=3)(TRANSPORT_CONNECT_TIMEOUT=3)(ADDRESS_LIST=(LOAD_BALANCE=ON)(ADDRESS=(PROTOCOL=TCP)(HOST=catalog.example.com)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=CAT1PDB)))" -region region1 -pwd Oracle_23ai
     </copy>
     ```
-4. Save the configuration and start gsm2:
+4.	Save the configuration and start gsm2:
     ```nohighlighting
     <copy>
     configure -save_config
     start gsm
     </copy>
     ```
-5. Verify that both gsm1 and gsm2 are now part of the GDS configuration:
+5.	Verify that both gsm1 and gsm2 are now part of the GDS configuration:
     ```nohighlighting
     <copy>
     config gsm
     config
     </copy>
     ```
-6. Exit the gsm2 container:
+6.	Exit the gsm2 container:
     ```nohighlighting
     <copy>
     exit

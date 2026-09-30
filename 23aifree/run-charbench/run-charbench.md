@@ -34,7 +34,7 @@ This lab assumes you have:
     ```
     <copy>
     ./charbench -cs //localhost:1521/FREEPDB1 -u soe -p soe -uc 24 -rt 0:1.00 -v tps,tpm,errs,vresp -c ../configs/SOE_Server_Side_V2.xml 
-    	</copy>
+	</copy>
     ```
 	![Creating the genre view](images/charbench.png " ")
 

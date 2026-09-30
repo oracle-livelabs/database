@@ -101,18 +101,18 @@ In this lab, you will:
 ## Task 1: Login to SQL Developer Web on ADB
 There are multiple ways to access your Autonomous Database.  You can access it via SQL\*Plus or by using SQL Developer Web.  To access it via SQL\*Plus, skip to [Step 1B](#STEP1B:LogintoADBusingSQLPlus).
 
-1. If you aren't still logged in, login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
-      ![Image](../set-operators/images/21c-home-adb.png " ")
+1.  If you aren't still logged in, login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
+      ![](../set-operators/images/21c-home-adb.png " ")
 
-2. If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
-3. Click on the **Display Name** to go to your ADB main page.
-      ![Image](../set-operators/images/21c-adb.png " ")
+2.  If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
+3.  Click on the **Display Name** to go to your ADB main page.
+      ![](../set-operators/images/21c-adb.png " ")
 
-4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-      ![Image](../set-operators/images/tools.png " ")
+4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+      ![](../set-operators/images/tools.png " ")
 
-5. Login with the *hr* user, click **Next**.  Enter the password *WElcome123##*
-6. Click on the **SQL** button.
+5.  Login with the *hr* user, click **Next**.  Enter the password *WElcome123##*
+6.  Click on the **SQL** button.
 
 ## Task 1B: Login to ADB using SQL Plus
 1. If you aren't logged into the cloud, log back in
@@ -122,20 +122,20 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
     export TNS_ADMIN=$(pwd)/wallet
     sqlplus /nolog
-    	  conn hr/WElcome123##@adb1_high
-    	  ```
-    </if>
+	  conn hr/WElcome123##@adb1_high
+	  ```
+</if>
 
 ## Task 2: Shrink the SecureFile LOB after rows inserted and updated
 
 <if type="atp">
-1. You can create a Large Object table as below. In our example, the table is already created.
+1.  You can create a Large Object table as below. In our example, the table is already created.
     ```
     SQL> <copy>
     CREATE TABLE hr.t1 ( a CLOB) LOB(a) STORE AS SECUREFILE TABLESPACE data;
     </copy>
     ```
-    ![Image](./images/step2-1.png " ")
+    ![](./images/step2-1.png " ")
 
 </if>
 
@@ -184,7 +184,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL> <copy>UPDATE hr.t1 SET a=a||a||a||a||a||a||a;</copy>
     SQL> <copy>COMMIT;</copy>
     ```
-    ![Image](./images/step2-2.png " ")
+    ![](./images/step2-2.png " ")
 </if>
 
 2. Shrink the LOB segment.
@@ -204,7 +204,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL> <copy>ALTER TABLE hr.t1 MODIFY LOB(a) (SHRINK SPACE);</copy>
     ```
 
-    ![Image](./images/step2-3.png " ")
+    ![](./images/step2-3.png " ")
 </if>
 
 <if type="dbcs">
@@ -277,7 +277,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL> <copy>COMMIT;</copy>
     ```
 
-    ![Image](./images/step3-1.png " ")
+    ![](./images/step3-1.png " ")
 </if>
 
 2. Shrink the LOB segment.
@@ -298,10 +298,10 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL> <copy>ALTER TABLE hr.t1 MODIFY LOB(a) (SHRINK SPACE);</copy>
     ```
 
-    ![Image](./images/step3-2.png " ")
+    ![](./images/step3-2.png " ")
 </if>
 
-    <if type="dbcs">    
+<if type="dbcs">    
 
 3. Display the number of extents or blocks freed. **Put the LOB_OBJD you saved from previous in and run the command**
 
@@ -354,7 +354,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     ```
 
-    As a result, 2648 blocks are freed. Observe that the first row remains static.
+  As a result, 2648 blocks are freed. Observe that the first row remains static.
 </if>
 
 4. Update the CLOB.
@@ -381,7 +381,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL> <copy>COMMIT;</copy>
     ```
 
-    ![Image](./images/step3-3.png " ")
+    ![](./images/step3-3.png " ")
 </if>
 
 
@@ -393,7 +393,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
     ```
     <if type="atp">
-    ![Image](./images/step3-4.png " ")
+    ![](./images/step3-4.png " ")
     </if>
     <if type="dbcs">
     ```
@@ -404,7 +404,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     </if>
 
 
-    <if type="dbcs">    
+<if type="dbcs">    
 
 6. Display the number of extents or blocks freed. **Put the LOB_OBJD you saved from the previous step in and run the command**
 
@@ -442,14 +442,14 @@ There are multiple ways to access your Autonomous Database.  You can access it v
                 16          3
     ```
 
-    As a result, 2552 blocks are freed. Observe that only the row of the previous shrinking operation is kept.
+  As a result, 2552 blocks are freed. Observe that only the row of the previous shrinking operation is kept.
 </if>
 
 <if type="atp">
 5. Click the down arrow in the upper right corner and **Sign Out** of the HR user.
 </if>
 <if type="dbcs">
-5. Exit from the sql prompt
+5.  Exit from the sql prompt
 
 	```
 	SQL> <copy>EXIT</copy>

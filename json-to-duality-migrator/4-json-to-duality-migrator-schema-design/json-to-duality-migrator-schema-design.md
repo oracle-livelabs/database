@@ -29,12 +29,12 @@ Just like the previous lab, we will start with JSON collection tables `speaker`,
 
 1. Click in the *Database Actions* dropdown list and select **View all database actions**
 
-    ![DB Actions](images/dbaction1.png)
+   ![DB Actions](images/dbaction1.png)
 
 
 2. Below you can find the Database Actions homepage. Click the SQL tile under development to open the SQL worksheet.
 
-    ![Homepage Development SQL](./images/development-sql.png)
+   ![Homepage Development SQL](./images/development-sql.png)
 
 3. Let's drop all the objects that we created in the previous lab first.
 
@@ -345,7 +345,7 @@ In this task, we will import data from input JSON collections into the duality v
 
     ![Task 3 Step 4 Output](../4-json-to-duality-migrator-schema-design/images/task3-step4.png " ")
 
-    > **_NOTE:_** In case you find that some documents have different content that the input document, you can look at the error message to understand the reason for the difference, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
+   > **_NOTE:_** In case you find that some documents have different content that the input document, you can look at the error message to understand the reason for the difference, fix the error by either modifying the relational schema or document contents, and reimport the failed document set.
 
 5. Now let's look at our duality views and compare them quickly with the original documents in our JSON collection.
 

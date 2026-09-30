@@ -53,7 +53,7 @@ I suggest you take a look at those files before we continue. You will find that 
 
 5. Use the __List Scope__ drop-down menu on the left to select the same compartment where you created your Autonomous Database in Lab 1.
 
-    <if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
+<if type="livelabs">Enter the first part of your user name, for example `LL185` in the Search Compartments field to quickly locate your compartment.
 
     ![select your compartment.](./images/livelabs-compartment.png " ")
 
@@ -65,7 +65,7 @@ I suggest you take a look at those files before we continue. You will find that 
 </if>
 
 <if type="freetier">
-    **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+   **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 
 6. In the list of buckets, choose the bucket name you created earlier. 

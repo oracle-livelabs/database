@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 Oracle Advanced Compression provides a comprehensive set of compression features to reduce costs and improve performance by enabling compression for structured data, unstructured data, indexes and backups. Although storage cost savings and optimization across servers is the most tangible benefit, all of the features with Advanced Compression are designed to improve performance across components of your IT infrastructure, including memory, network bandwidth and storage. In this hands-on lab, we will work on compression based hands-on labs to understand the compression concepts and their corresponding use cases.

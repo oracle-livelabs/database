@@ -78,27 +78,27 @@ This lab assumes you have:
 
 1. Open the navigation menu, click Compute, and click Instances.
 
-    ![OCI Compute Instance](./images/compute-instance-oci.png "OCI Compute Instance")
+  ![OCI Compute Instance](./images/compute-instance-oci.png "OCI Compute Instance")
 
 2. Click on the **Compute Instance** to add the secondary IPs.
 
-    ![OCI Compute Instance](./images/compute-instance-selectinstance.png "OCI Compute Instance")
+  ![OCI Compute Instance](./images/compute-instance-selectinstance.png "OCI Compute Instance")
 
 3. In the **Resource** section, click on **Attached VNICs**, and then click on Primary VNIC to add the secondary IPs.
 
-    ![OCI Compute Instance attached VNICs](./images/compute-instance-nic.png "OCI Compute Instance attached VNICs")
+  ![OCI Compute Instance attached VNICs](./images/compute-instance-nic.png "OCI Compute Instance attached VNICs")
 
 4. Open VNIC and click on **IPv4 Address**.
 
-    ![OCI Compute Instance attached VNICs IP](./images/compute-instance-ipv.png "OCI Compute Instance attached VNICs IP")
+  ![OCI Compute Instance attached VNICs IP](./images/compute-instance-ipv.png "OCI Compute Instance attached VNICs IP")
 
 5. The **IPv4 Address** show the Primary IP address details, and then click on **Assign Secondary Private IP Address**.
 
-    ![OCI Compute Instance attached VNICs secondary IP](./images/compute-instance-ipv-secondary.png "OCI Compute Instance attached VNICs secondary IP")
+  ![OCI Compute Instance attached VNICs secondary IP](./images/compute-instance-ipv-secondary.png "OCI Compute Instance attached VNICs secondary IP")
 
 6. Click on **Assign** will automatically assign the available private IP. Repeat the same step to assign another private IP.
 
-    ![OCI Compute Instance attached VNICs secondary private IP](./images/compute-instance-ipv-assign.png "OCI Compute Instance attached VNICs secondary private IP")
+  ![OCI Compute Instance attached VNICs secondary private IP](./images/compute-instance-ipv-assign.png "OCI Compute Instance attached VNICs secondary private IP")
 
 7. In the **IPv4 Addresses** Section, we can see one Primary IP and two secondary IP addresses, as shown in the following image.
 
@@ -114,79 +114,79 @@ This lab assumes you have:
 
 2. From the taskbar, click the **search button** and search for **Failover Cluster**.
 
-    ![Windows search command](./images/windows-command-search.png "Windows search command")
+  ![Windows search command](./images/windows-command-search.png "Windows search command")
 
-    The **Failover Cluster Manager** opens as shown in the following image, right-click **Failover Cluster Manager**and click on **Create Cluster**.
+  The **Failover Cluster Manager** opens as shown in the following image, right-click **Failover Cluster Manager**and click on **Create Cluster**.
 
-    ![Windows create Failover Cluster](./images/windows-fcm-create.png "Windows create Failover Cluster")
+  ![Windows create Failover Cluster](./images/windows-fcm-create.png "Windows create Failover Cluster")
 
 3. The **Cluster Wizard** is shown in the following image, then click on **Next**.
 
-    ![Windows create cluster wizard](./images/windows-fcm-begin.png "Windows create cluster wizard")
+  ![Windows create cluster wizard](./images/windows-fcm-begin.png "Windows create cluster wizard")
 
 4. Click on Browse and search for the two servers which we created in **Lab 2**.
 
-    ![Windows cluster wizard select servers](./images/windows-fcm-selectservers.png "Windows cluster wizard select servers")
+  ![Windows cluster wizard select servers](./images/windows-fcm-selectservers.png "Windows cluster wizard select servers")
 
 5. After adding the two servers, it will show as below, and then click on **Next**.
 
-    ![Windows cluster wizard select servers](./images/windows-fcm-name.png "Windows cluster wizard select servers")
+  ![Windows cluster wizard select servers](./images/windows-fcm-name.png "Windows cluster wizard select servers")
 
 6. In the Validation warning section, select **yes**and click on **Next**.
 
-    ![Windows Cluster wizard validation warning check](./images/windows-fcm-validation.png "Windows Cluster wizard validation warning check")
+  ![Windows Cluster wizard validation warning check](./images/windows-fcm-validation.png "Windows Cluster wizard validation warning check")
 
 7. The validation configuration wizard is shown as follows, and then click on **Next** to continue validation.
 
-    ![Windows cluster wizard validation testing](./images/windows-fcm-config-validation.png "Windows cluster wizard validation testing")
+  ![Windows cluster wizard validation testing](./images/windows-fcm-config-validation.png "Windows cluster wizard validation testing")
 
 8. In the **Testing Options** tab, choose the **Run all tests (recommended)** option and click on **Next**.
 
-    ![Windows cluster wizard validation testing options](./images/windows-fcm-testing.png "Windows cluster wizard validation testing options")
+  ![Windows cluster wizard validation testing options](./images/windows-fcm-testing.png "Windows cluster wizard validation testing options")
 
 9. The confirmation screen shows all servers we added to cluster validation, and then click on **Next**.
 
-    ![Windows cluster wizard validation testing confirmation](./images/windows-fcm-confirmationtest.png "Windows cluster wizard validation testing confirmation")
+  ![Windows cluster wizard validation testing confirmation](./images/windows-fcm-confirmationtest.png "Windows cluster wizard validation testing confirmation")
 
 10. The validation will run a test.
 
-    ![Windows cluster wizard validation test run](./images/windows-fcm-confirmationtestrun.png "Windows cluster wizard validation test run")
+  ![Windows cluster wizard validation test run](./images/windows-fcm-confirmationtestrun.png "Windows cluster wizard validation test run")
 
 11. Once the validation is completed, we can see the status as **Validated**and click on **View Report** to view the complete report in **Html** format.
 
-    ![Windows cluster wizard validation test results](./images/windows-fcm-configvalidationrun.png "Windows cluster wizard validation test results")
+  ![Windows cluster wizard validation test results](./images/windows-fcm-configvalidationrun.png "Windows cluster wizard validation test results")
 
 12. In **Access Point for Administering the Cluster**, choose the **Cluster Name** and then click on **Next**.
 
-    ![Windows cluster name](./images/windows-fcm-summary.png "Windows cluster name")
+  ![Windows cluster name](./images/windows-fcm-summary.png "Windows cluster name")
 
 13. The **Confirmation** screen shows the cluster name, node details, and another few domain-related information, and then click on **Next** to continue with the configuration.
 
-    ![Windows cluster name conformation](./images/windows-fcm-clustername.png "Windows cluster name conformation")
+  ![Windows cluster name conformation](./images/windows-fcm-clustername.png "Windows cluster name conformation")
 
 14. Once the Cluster is configured, you can see the confirmation that **You have completed the Create Cluster Wizard** message as shown follows.
 
-    ![Windows cluster creation results](./images/windows-fcm-successful.png "Windows cluster creation results")
+  ![Windows cluster creation results](./images/windows-fcm-successful.png "Windows cluster creation results")
 
 15. The cluster details are shown below after successfully creating the Cluster.
 
-    ![Windows cluster wizard](./images/windows-fcm-clusterdetails.png "Windows cluster wizard")
+  ![Windows cluster wizard](./images/windows-fcm-clusterdetails.png "Windows cluster wizard")
 
 16. Select the Cluster and navigate to **Cluster Core Resources**. The cluster resource will show offline, as shown in the following image. To bring the Cluster online, we need to update the **Static IP Address**, which we created in **Task 3** and **Task4**.
 
-    ![Windows cluster server name](./images/windows-fcm-clustercoreservices.png "Windows cluster server name")
+  ![Windows cluster server name](./images/windows-fcm-clustercoreservices.png "Windows cluster server name")
 
 17. Right-click on **IP Address on Cluster Network 1**, and then click on **Properties**. Select the Static IP Address and provide the secondary IP address which we created in **Task 3** for node1.
 
-    ![Windows cluster network static ip](./images/windows-fcm-staticip.png "Windows cluster network static IP")
+  ![Windows cluster network static ip](./images/windows-fcm-staticip.png "Windows cluster network static IP")
 
 18. Repeat the same above step for the Node2 network.
 
-    ![Windows cluster network static ip](./images/windows-fcm-staticip-secondnode.png "Windows cluster network static IP")
+  ![Windows cluster network static ip](./images/windows-fcm-staticip-secondnode.png "Windows cluster network static IP")
 
 19. Once the static secondary IP is updated, right-click on SQLName and click on **Bring online** cluster.
 
-    ![Windows cluster core resources](./images/windows-fcm-bringonline.png "Windows cluster core resources")
+  ![Windows cluster core resources](./images/windows-fcm-bringonline.png "Windows cluster core resources")
 
 20. The Cluster should come online, as shown in the following image. Since the Cluster is a multi-subnet cluster, we can see only one network online.
 

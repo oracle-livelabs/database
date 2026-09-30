@@ -19,10 +19,6 @@ This lab assumes you have:
 - Previous lab has been successfully completed
 
 ## 
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Enable MySQL HeatWave Lakehouse in MySQL Database System
 
 1. Go to Navigation Menu Databases MySQL

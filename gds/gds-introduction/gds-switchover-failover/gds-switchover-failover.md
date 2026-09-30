@@ -25,11 +25,6 @@ Before starting this lab, ensure that you have:
     * Lab: GDS Configuration Using GDSCTL
     * Lab: Prepare a Sample Schema and Test Global Service
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Ensure insert_records.sh is Running Before Switchover
 
 Before performing a Switchover from Primary to Standby, ensure that the insert\_records.sh script is running on the appclient container. This verifies that data insertion continues seamlessly during the transition.
@@ -42,13 +37,13 @@ Before performing a Switchover from Primary to Standby, ensure that the insert\_
     sudo podman exec -i -t appclient /bin/bash
     </copy>
     ```
-2. Switch to the oracle user inside the container:
+2.  Switch to the oracle user inside the container:
     ```nohighlighting
     <copy>
     su - oracle
     </copy>
     ```
-3. Run the script to start continuous record insertion:
+3.  Run the script to start continuous record insertion:
     ```nohighlighting
     <copy>
     ./insert_records.sh
@@ -59,56 +54,56 @@ Before performing a Switchover from Primary to Standby, ensure that the insert\_
 
 **Step 1: Initiate the Switchover from Primary to Standby**
  
-1. Open a new terminal and connect to the primary container:
+1.  Open a new terminal and connect to the primary container:
     ```nohighlighting
     <copy>
     sudo podman exec -it primary /bin/bash
     </copy>
     ```
-2. Launch Data Guard Manager (DGMGRL) and connect to the primary database:
+2.  Launch Data Guard Manager (DGMGRL) and connect to the primary database:
     ```nohighlighting
     <copy>
     dgmgrl
     connect sys/Oracle_23ai@primary.example.com:1521/porclcdb
     </copy>
     ```
-3. Check the current Data Guard configuration:
+3.  Check the current Data Guard configuration:
     ```nohighlighting
     <copy>
     show configuration
     </copy>
     ```
-4. Perform the Switchover to Standby (sorclcdb):
+4.  Perform the Switchover to Standby (sorclcdb):
     ```nohighlighting
     <copy>
     switchover to sorclcdb
     </copy>
     ```
 
-    **Step 2: Monitor Connection Errors During Switchover (From appclient)**
+**Step 2: Monitor Connection Errors During Switchover (From appclient)**
  
-1. Switch to the appclient container (where insert_records.sh is running):
+1.  Switch to the appclient container (where insert_records.sh is running):
     -   As the Switchover process begins, connection errors may briefly appear.
     -   The process typically completes within a few minutes but may take up to 3 minutes in this LiveLab environment.
-2. Wait for the Switchover to complete and observe that records begin inserting again, now using the new primary (sorclpdb).
-3. After the Switchover completes, verify that HOST_NAME now reflects the new primary database.
+2.  Wait for the Switchover to complete and observe that records begin inserting again, now using the new primary (sorclpdb).
+3.  After the Switchover completes, verify that HOST_NAME now reflects the new primary database.
     ![switchover_from_primary_to_standby_started](./images/switchover_from_primary_to_standby_started.png " ")
 
-    **Step 3: Verify the Switchover Completion**
+**Step 3: Verify the Switchover Completion**
  
-1. Confirm that records are being inserted again using the new primary database (sorclpdb).
-2. Check the value of ID before and after the Switchover:
+1.  Confirm that records are being inserted again using the new primary database (sorclpdb).
+2.  Check the value of ID before and after the Switchover:
     - The ID sequence should not skip, confirming a successful Switchover with zero data loss.
 
     ![switchover_from_primary_to_standby_completed](./images/switchover_from_primary_to_standby_completed.png " ")
 
 
-    **Step 4: Validate Switchover to Standby (sorclcdb)**
+**Step 4: Validate Switchover to Standby (sorclcdb)**
  
-1. Ensure that the Switchover to sorclcdb (previously Standby) is complete.
+1.  Ensure that the Switchover to sorclcdb (previously Standby) is complete.
     ![verify_switchover_to_standby_completed](./images/verify_switchover_to_standby_completed.png " ")
 
-    **Step 5: (Optional) Verify from the Standby Container**
+**Step 5: (Optional) Verify from the Standby Container**
  
 1. Access the standby container:
     ```nohighlighting
@@ -148,93 +143,93 @@ Proceed to the next task to test Failover scenarios.
  
 Before initiating the Failover, ensure that the insert\_records.sh script is running.
  
-1. Access the appclient container:
+1.  Access the appclient container:
     ```nohighlighting
     <copy>
     sudo podman exec -it appclient /bin/bash
     </copy>
     ```
 
-2. Start the insert script (if not already running):
+2.  Start the insert script (if not already running):
     ```nohighlighting
     <copy>
     ./insert_records.sh
     </copy>
     ```
 
-    **Step 2: Initiate Failover to the Current Standby (porclcdb)**
+**Step 2: Initiate Failover to the Current Standby (porclcdb)**
  
-1. Open a new terminal and connect to the primary container:
+1.  Open a new terminal and connect to the primary container:
     ```nohighlighting
     <copy>
     sudo podman exec -it primary /bin/bash
     </copy>
     ```
-2. Launch Data Guard Manager (DGMGRL) and connect to the primary database:
+2.  Launch Data Guard Manager (DGMGRL) and connect to the primary database:
     ```nohighlighting
     <copy>
     dgmgrl
     connect sys/Oracle_23ai@primary.example.com:1521/porclcdb
     </copy>
     ```
-3. Check the current Data Guard configuration:
+3.  Check the current Data Guard configuration:
     ```nohighlighting
     <copy>
     show configuration
     </copy>
     ```
-4. Perform the Failover to PORCLCDB:
+4.  Perform the Failover to PORCLCDB:
     ```nohighlighting
     <copy>
     failover to PORCLCDB
     </copy>
     ```
  
-    **Step 3: Monitor the insert_records.sh Output from appclient**
+**Step 3: Monitor the insert_records.sh Output from appclient**
  
-    - Observe the output from the appclient terminal while Failover is in progress.
-    - Before Failover completes, HOST_NAME will be "standby".
-    ![failover_to_porclcdb_started_when_sorclcdb_is_primary](./images/failover_to_porclcdb_started_when_sorclcdb_is_primary.png " ")
+- Observe the output from the appclient terminal while Failover is in progress.
+- Before Failover completes, HOST_NAME will be "standby".
+![failover_to_porclcdb_started_when_sorclcdb_is_primary](./images/failover_to_porclcdb_started_when_sorclcdb_is_primary.png " ")
 
 
-    **Step 4: Wait for Failover Completion**
+**Step 4: Wait for Failover Completion**
  
-    -   The Failover process may complete quickly, but in some cases, it might take up to 3 minutes in this LiveLab environment.
-    -   Once complete, records will begin inserting again, now using the new primary (sorclpdb).
-    -   After Failover, verify that HOST_NAME is now "primary"` as expected.
+-   The Failover process may complete quickly, but in some cases, it might take up to 3 minutes in this LiveLab environment.
+-   Once complete, records will begin inserting again, now using the new primary (sorclpdb).
+-   After Failover, verify that HOST_NAME is now "primary"` as expected.
 
     ![failover_to_porclcdb_completed_now_porclcdb_is_primary](./images/failover_to_porclcdb_completed_now_porclcdb_is_primary.png " ")
 
-    **Step 5: Confirm That porclcdb is the New Primary Database**
+**Step 5: Confirm That porclcdb is the New Primary Database**
  
-1. Access the primary container:
+1.  Access the primary container:
     ```nohighlighting
     <copy>
     sudo podman exec -it primary /bin/bash
     </copy>
     ```
-2. Launch DGMGRL and reconnect to the database:
+2.  Launch DGMGRL and reconnect to the database:
     ```nohighlighting
     <copy>
     dgmgrl
     connect sys/Oracle_23ai@primary.example.com:1521/porclcdb
     </copy>
     ```
-3. Check the updated Data Guard configuration:
+3.  Check the updated Data Guard configuration:
     ```nohighlighting
     <copy>
     show configuration
     </copy>
     ```
-    ![dgmgrl_configuration_after_failover_completion](./images/dgmgrl_configuration_after_failover_completion.png " ")
+![dgmgrl_configuration_after_failover_completion](./images/dgmgrl_configuration_after_failover_completion.png " ")
 
-    Note: Application continues to run on the new primary database.
+Note: Application continues to run on the new primary database.
  
-    **Step 6: Reinstate the Standby Database (sorclcdb)**
+**Step 6: Reinstate the Standby Database (sorclcdb)**
  
-1. While insert\_records.sh continues running, you may see an error indicating that
-    "The standby database must be reinstated."
-2. Start the standby database and verify its state:
+1.  While insert\_records.sh continues running, you may see an error indicating that
+"The standby database must be reinstated."
+2.  Start the standby database and verify its state:
     ```nohighlighting
     <copy>
     sudo podman exec -it standby /bin/bash
@@ -243,26 +238,26 @@ Before initiating the Failover, ensure that the insert\_records.sh script is run
     show pdbs
     </copy>
     ```
-3. Confirm that OPEN_MODE is now READ ONLY, which indicates that the standby database is in the desired state.
+3.  Confirm that OPEN_MODE is now READ ONLY, which indicates that the standby database is in the desired state.
     ![startup_standby_after_failover_completed_confirm_read_only](./images/startup_standby_after_failover_completed_confirm_read_only.png " ")
 
 
-    **Step 7: Verify the Final Configuration from the Primary Container**
+**Step 7: Verify the Final Configuration from the Primary Container**
  
-1. Access the primary container:
+1.  Access the primary container:
     ```nohighlighting
     <copy>
     sudo podman exec -it primary /bin/bash
     </copy>
     ```
-2. Launch DGMGRL and reconnect to the database:
+2.  Launch DGMGRL and reconnect to the database:
     ```nohighlighting
     <copy>
     dgmgrl
     </copy>
     ```
-    connect sys/Oracle_23ai@primary.example.com:1521/porclcdb
-3. Check the final Data Guard configuration:
+connect sys/Oracle_23ai@primary.example.com:1521/porclcdb
+3.  Check the final Data Guard configuration:
     ```nohighlighting
     <copy>
     show configuration

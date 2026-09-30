@@ -1,14 +1,5 @@
 # Crear un Converged Dashboard Consulta
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Introducción
 
 Jessica Chan es la base de datos administrator responsible para keeping Seer Bank's finanzas datos reliable y useful. Every morning, la riesgo operations equipo asks her un familiar pregunta: **which producto necesita attention first, y puede la bank respond si la riesgo becomes operational work?**
@@ -228,8 +219,3 @@ Next, use JSON Relational Duality un expose la mismo transaction datos como JSON
 * **Author** - Kevin Lazarz, Auguste 2026
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Base de datos Product Management, August 2026
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

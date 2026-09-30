@@ -61,7 +61,7 @@ In this lab, you will:
 </if>
 
 <if type="freetier">
-    **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+   **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 
 <if type="freetier">
@@ -74,11 +74,11 @@ In this lab, you will:
 
     ![database name](./images/database-name.png " ")
 
-7. On the database page, choose __Database Actions__.
+7.  On the database page, choose __Database Actions__.
 
     ![dbactions button](./images/dbactions-button.png " ")
 
-8. You are now in Database Actions.
+8.  You are now in Database Actions.
 
     Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
 
@@ -141,7 +141,7 @@ In this lab, you will:
 
     ![wrong output - no rows inserted](./images/wrong-output.png " ")
 
-4. Check that we have rows in the table
+4.  Check that we have rows in the table
 
     Copy the following simple SELECT into the worksheet area and press "Run Statement".
 
@@ -198,7 +198,7 @@ Text indexes are an example of a **domain index**. Domain indexes are specialize
 
     That tells us that our index MYINDEX is created on table USER_DATA, column NOTE.
 
-3. Look at the underlying tables created.
+3.  Look at the underlying tables created.
 
     Text indexes are implemented as a set of underlying tables. These usually have the form DR$&lt;indexname&gt;$&lt;suffix&gt;, where the suffix indicates the particular type of table. There's normally no need to know what is in these indexes, but one in particular (the "dollar I" table) is interesting.
 

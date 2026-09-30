@@ -202,9 +202,9 @@ In case of ad-hoc or free-form XML queries, that don’t follow a well-defined s
 
     ![Create XML search index](./images/img-8.png)
 
-    Now that the search index has been set up, try running a variety of different queries and verify if the index is picked for each one of them by clicking on explain plan.
+Now that the search index has been set up, try running a variety of different queries and verify if the index is picked for each one of them by clicking on explain plan.
 
-    Let’s look at a few text-search queries:
+Let’s look at a few text-search queries:
 
 1. Find all “Overnight” orders
     ```

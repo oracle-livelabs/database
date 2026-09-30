@@ -73,7 +73,7 @@ This lab assumes you have:
     $ <copy>curl -i -X POST --data-binary @teamMercedes.json -H "Content-Type: application/json" http://localhost:8080/ords/hol23c/team_dv/</copy>
     ```
 
-    ![POST data for the Mercedes team](./images/insert_mercedes.png)
+    ![POST data for the Mercedes team](./images/insert_Mercedes.png)
 
 3. Examine the response you received from the database. You will see the Oracle Database generated two fields under a "_metadata" tag: "etag" and "asof".
 

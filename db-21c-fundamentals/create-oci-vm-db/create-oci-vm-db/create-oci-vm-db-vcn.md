@@ -24,23 +24,23 @@ Fortunately, Oracle Cloud Infrastructure provides a wizard that simplifies the c
 1. Login to Oracle Cloud
 2. Click the **Navigation Menu** in the upper left, navigate to **Networking**, and select **Virtual Cloud Networks**.
 
-    	![Image](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
+	![](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
 
 2. Select your compartment and click on **Start VCN Wizard**. If you haven't created any compartments yet, just leave it as the default (root) compartment.  If you were assigned a compartment, enter it here.
 
-    ![Image](../create-virtual-cloud-network/images/networking-quickstart.png " ")
+  ![](../create-virtual-cloud-network/images/networking-quickstart.png " ")
 
 3. Be sure the default "VCN with Internet Connectivity" is selected and click **Start VCN Wizard**.
 
-    ![Image](../create-virtual-cloud-network/images/start-workflow.png " ")
+  ![](../create-virtual-cloud-network/images/start-workflow.png " ")
 
 4. Enter a name for your VCN, and enter the default values for the VCN CIDR block(10.0.0.0/16), Public Subnet CIDR block (10.0.0.0/24) and Private CIDR block (10.0.1.0/24), and click **Next**.
 
-    ![Image](../create-virtual-cloud-network/images/vcn-configuration.png " ")
+  ![](../create-virtual-cloud-network/images/vcn-configuration.png " ")
 
 5. Review your selections on the next screen and click **Create**.
 
-    ![Image](../create-virtual-cloud-network/images/create-vcn.png " ")
+  ![](../create-virtual-cloud-network/images/create-vcn.png " ")
 
 6. On the summary screen, click **View Virtual Cloud Network**.
    
@@ -48,11 +48,11 @@ Fortunately, Oracle Cloud Infrastructure provides a wizard that simplifies the c
 
 1. From the Console menu, click on **Bare Metal, VM, and Exadata**.
 
-    ![Image](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
 2. Select the compartment you want to create the database in and click on **Create DB System**.
 
-    ![Image](images/create-vm-db.png " ")
+  ![](images/create-VM-DB.png " ")
 
 3. On the DB System Information form, enter the following information and click **Next**  Enter the following
 
@@ -70,7 +70,7 @@ Fortunately, Oracle Cloud Infrastructure provides a wizard that simplifies the c
     * **Specify the Network information - Client subnet**:  *Public subnet* using the drop down list.
     * **Hostname prefix**:  Enter a short hostname prefix of 2-3 characters.  *Note: Hostname should start with a letter*
 
-    ![Image](images/create-vm-db-form1.png " ")
+    ![](images/create-VM-DB-form1.png " ")
 
 4. On the Database Information form, enter the following information and click **Create DB System**.
 
@@ -80,13 +80,13 @@ Fortunately, Oracle Cloud Infrastructure provides a wizard that simplifies the c
     * **Create administrator credentials**: Use the password `WElcome123##` for your sys user in the **Password** field and then repeat the password in the **Confirm password** field.  This password will be used for all exercises in the 21c workshop series.  Please enter it carefully.
     * Accept all other defaults.
 
-    ![Image](images/create-vm-db-form3.png " ")
-    ![Image](images/create-vm-db-form2.png " ")
+    ![](images/create-VM-DB-form3.png " ")
+    ![](images/create-VM-DB-form2.png " ")
 
 
 5. After a few minutes, your Database System will change color from yellow (Provisioning) to green.  *Note:  If you use a smaller VM Shape, the provisioning may take longer*.  If you encounter any errors, please see our Appendix: Troubleshooting tips
 
-    ![Image](images/database-vm-created.png " ")
+    ![](images/database-VM-created.png " ")
 
 ## Task 3: Gather system details and connect to the Database using SSH
 
@@ -94,11 +94,11 @@ Fortunately, Oracle Cloud Infrastructure provides a wizard that simplifies the c
 2. In the Databases section, jot down your **Database Unique Name**.  You will need this for the next lab.
 3. Check your storage management software to ensure you selected **Logical Volume Manager**.  This is necessary for the next lab.
    
-    ![Image](images/database-vm-created.png " ")
+    ![](images/database-VM-created.png " ")
 
 4. On the resources tab, click **Nodes** to gather your IP address. Note your Public IP Address
 
-    ![Image](images/vm-db.png " ")
+  ![](images/vm-db.png " ")
 
 5. In Cloud Shell or your terminal window, navigate to the folder where you created the SSH keys and enter this command, using your IP address:
 

@@ -84,11 +84,11 @@ Finally, let's start to code.
 
 1. Enter this code into the first cell in our notebook:
 
-    ```python
-    <copy>
-    import os
+   ```python
+   <copy>
+   import os
 
-    def loadFAQs(directory_path):
+   def loadFAQs(directory_path):
       faqs = {}
 
       for filename in os.listdir(directory_path):
@@ -103,13 +103,13 @@ Finally, let's start to code.
 
       return faqs
       </copy>
-    ```
+   ```
 
-    The function will open all the .txt files in a specified folder, read them, split the content using the `========` separator. It will then put all the resulting chunks in an array.
+   The function will open all the .txt files in a specified folder, read them, split the content using the `========` separator. It will then put all the resulting chunks in an array.
 
-    The array is stored inside a dictionary with the file name used as the key. This will be useful later if many other FAQ files are available inside the folder, helping to differentiate between the sources.
+   The array is stored inside a dictionary with the file name used as the key. This will be useful later if many other FAQ files are available inside the folder, helping to differentiate between the sources.
 
-    To execute it, click inside it and press Shift + Enter.
+   To execute it, click inside it and press Shift + Enter.
 
 2. Now, let's call the function above with our data.
 
@@ -129,14 +129,14 @@ Finally, let's start to code.
 
 3. The final step in preparing the source data is to arrange the above dictionary in a way that is easy to ingest in the vector database. Enter this code into a new cell.
 
-    ```python
-    <copy>
-    docs = [{'text': filename + ' | ' + section, 'path': filename} for filename, sections in faqs.items() for section in sections]
+   ```python
+   <copy>
+   docs = [{'text': filename + ' | ' + section, 'path': filename} for filename, sections in faqs.items() for section in sections]
 
-    # Sample the resulting data
-    docs[:2]
-    </copy>
-    ```
+   # Sample the resulting data
+   docs[:2]
+   </copy>
+   ```
 
    ![docs prepared](images/image13.png)
 
@@ -151,33 +151,33 @@ It is now time to insert the prepared chunks into the vector database.
 ### Step 1: Create a database connection
 <if type="freetier">1. Drag and drop the wallet file you downloaded previosly into the Jupyter file pane. Unzip it in folder named "wallet".</if>
 1. The connection details should be pinned down in a cell.
-    ```python
-    <copy>
-    un = "<your database username>"
-    pw = "<your database password>"
-    <if type="livelabs">cs = "host.containers.internal/FREEPDB1"</if>
-    <if type="ocw24">cs = "host.containers.internal/FREEPDB1"</if>
-    </copy>
-    ```
-    > Note: Use the exact username and password you set up for the database in the previous lab.
+   ```python
+   <copy>
+   un = "<your database username>"
+   pw = "<your database password>"
+   <if type="livelabs">cs = "host.containers.internal/FREEPDB1"</if>
+   <if type="ocw24">cs = "host.containers.internal/FREEPDB1"</if>
+   </copy>
+   ```
+   > Note: Use the exact username and password you set up for the database in the previous lab.
 
 2. And now we connect to the database.
-    ```python
-    <copy>
-    import oracledb
-    <if type="freetier">
-    dsn = '<NAME OF THE DATABASE>_high' 
+   ```python
+   <copy>
+   import oracledb
+   <if type="freetier">
+   dsn = '<NAME OF THE DATABASE>_high' 
 
-    connection = oracledb.connect(
+   connection = oracledb.connect(
       config_dir='../Graphs/wallet',
       user=un,
       password=pw,
       dsn=dsn,
       wallet_location='./wallet',
       wallet_password=<your wallet password>)
-    </if><if type="livelabs">connection = oracledb.connect(user=un, password=pw, dsn=cs)</if><if type="ocw24">connection = oracledb.connect(user=un, password=pw, dsn=cs)</if>
-    </copy>
-    ```
+   </if><if type="livelabs">connection = oracledb.connect(user=un, password=pw, dsn=cs)</if><if type="ocw24">connection = oracledb.connect(user=un, password=pw, dsn=cs)</if>
+   </copy>
+   ```
 
 ### Step 2: Create the `faqs` table
 We need a table inside our database to store our vectors and metadata.
@@ -206,38 +206,38 @@ with connection.cursor() as cursor:
 ### Step 3: Vectorize the text chunks
 1. We need an encoder to handle the vectorization for us.
 
-    ```python
-    <copy>
-    from sentence_transformers import SentenceTransformer
-    <if type="freetier">encoder = SentenceTransformer('all-MiniLM-L12-v2')</if>
-    <if type="livelabs">encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)</if>
-    <if type="ocw24">encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)</if>
-    </copy>
-    ```
-    Ignore the warning saying `IProgress not found.`, among others.
+   ```python
+   <copy>
+   from sentence_transformers import SentenceTransformer
+   <if type="freetier">encoder = SentenceTransformer('all-MiniLM-L12-v2')</if>
+   <if type="livelabs">encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)</if>
+   <if type="ocw24">encoder = SentenceTransformer('./transformers/all-MiniLM-L12-v2', local_files_only=True)</if>
+   </copy>
+   ```
+   Ignore the warning saying `IProgress not found.`, among others.
 
 2. We go through all our chunks (stored in the `docs` dictionary) and encode the text content.
-    ```python
-    <copy>
-    import array
+   ```python
+   <copy>
+   import array
 
-    # Define a list to store the data
-    data = [
+   # Define a list to store the data
+   data = [
       {"id": idx, "vector_source": row['text'], "payload": row} 
       for idx, row in enumerate(docs)
-    ]
+   ]
 
-    # Collect all texts for batch encoding
-    texts = [f"{row['vector_source']}" for row in data]
+   # Collect all texts for batch encoding
+   texts = [f"{row['vector_source']}" for row in data]
 
-    # Encode all texts in a batch
-    embeddings = encoder.encode(texts, batch_size=32, show_progress_bar=True)
+   # Encode all texts in a batch
+   embeddings = encoder.encode(texts, batch_size=32, show_progress_bar=True)
 
-    # Assign the embeddings back to your data structure
-    for row, embedding in zip(data, embeddings):
+   # Assign the embeddings back to your data structure
+   for row, embedding in zip(data, embeddings):
       row['vector'] = array.array("f", embedding)
-    </copy>
-    ```
+   </copy>
+   ```
 
 That's it, now we have a structure with all our chunks, including its context—the source file name, in this simple example—and the vector representation for each of them.
 

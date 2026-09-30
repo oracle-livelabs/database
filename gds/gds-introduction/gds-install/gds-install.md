@@ -45,11 +45,6 @@ These prerequisites are already configured in this LiveLabs environment but may 
     
     - LiveLabs Configuration: The databases in this LiveLabs environment already meet this requirement, so no further action is required.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Verify Running Containers in Your VM
 1. Open a terminal window and ensure you are logged in as the **oracle** user.
 2. Execute the following command to list all containers:
@@ -73,7 +68,7 @@ In this lab, you will:
 
 ## Task 2: GSM Pre-Installation Steps
 
-1. Verify ORACLE_HOME
+1.  Verify ORACLE_HOME
 
     - The ORACLE\_HOME environment variable is already set to /u01/app/oracle/product/23ai/gsmhome_1
     ```nohighlighting
@@ -83,7 +78,7 @@ In this lab, you will:
     ```
     - For GDS-related operations, this directory is referred to as gsmhome.
 
-2. Extract the GSM software
+2.  Extract the GSM software
     
     - Run the following command to extract the GSM software zip file into the Oracle Home directory:
     ```nohighlighting
@@ -92,7 +87,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Use the Default GDS Response File for Installation
+3.  Use the Default GDS Response File for Installation
     - The GDS installation utilizes the pre-configured response file 23ai\_gsm\_install.rsp without any modifications.
     - To review the response file, run:
     ```nohighlighting
@@ -117,21 +112,21 @@ In this lab, you will:
     cd $ORACLE_HOME
     </copy>
     ```
-3. Run the GSM Installation Command:
+3.	Run the GSM Installation Command:
     ```nohighlighting
     <copy>
     ./runInstaller -silent -responseFile /opt/oracle/install/23ai_gsm_install.rsp
     </copy>
     ```
 
-4. Wait for the installation to complete (approximately 20 seconds)
+4.	Wait for the installation to complete (approximately 20 seconds)
 
     ![gds-run-install](./images/gds-run-install.png " ")
 
 
 ## Task 4: Post-Installation Steps
 
-1. Run orainstRoot.sh as the root user:
+1.  Run orainstRoot.sh as the root user:
     - Switch to the root user:
     ```nohighlighting
     <copy>
@@ -147,9 +142,9 @@ In this lab, you will:
     </copy>
     ```
     - Verify the script output
-    ![gds-orainstRoot](./images/gds-orainstroot.png " ")
+    ![gds-orainstRoot](./images/gds-orainstRoot.png " ")
     
-2. Modify /etc/oratab as the root user:
+2.  Modify /etc/oratab as the root user:
 
     - Append the following line to /etc/oratab: 
     ```nohighlighting
@@ -169,12 +164,12 @@ In this lab, you will:
     exit
     </copy>
     ```
-3. Verify the output
+3.  Verify the output
     ![gds-etc-oratab](./images/gds-root-oratab.png " ")
 
 ## Task 5: Verify GDSCTL Installation
 
-1. Access the gsm1 container (if not already inside):
+1.  Access the gsm1 container (if not already inside):
 
     ```nohighlighting
     <copy>
@@ -182,21 +177,21 @@ In this lab, you will:
     </copy>
     ```
 
-2. Launch GDSCTL to confirm the installation:
+2.	Launch GDSCTL to confirm the installation:
     ```nohighlighting
     <copy>
     gdsctl
     </copy>
     ```
 
-3. Verify the GDSCTL prompt appears, then exit:
+3.	Verify the GDSCTL prompt appears, then exit:
     ```nohighlighting
     <copy>
     exit
     </copy>
     ```
 
-4. The output would like as below:
+4.  The output would like as below:
 
     ![gdsctl-verify](./images/gdsctl-verify.png " ")
 
@@ -204,14 +199,14 @@ In this lab, you will:
 ## Task 6: (Optional) Install GDS on gsm2 for High Availability
 For high availability, you can install GDS on "gsm2" container. To do so:
 
-1. Access the gsm2 container:
+1.  Access the gsm2 container:
     ```nohighlighting
     <copy>
     sudo podman exec -it gsm2 /bin/bash
     </copy>
     ```
 
-2. Follow the same installation steps as gsm1:
+2.  Follow the same installation steps as gsm1:
 
     - Repeat Task 2, Task 3, and Task 4 inside the gsm2 container.
       Edit commands to use **gsm2** container only for gsm2 installation.

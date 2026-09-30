@@ -19,63 +19,63 @@ Estimated Lab Time: 25 minutes
 
 Terraform provides a reusable process for creating infrastructure. In some cases, like this one, you don't have to know anything about how the process works. You can deploy different pre-designed infrastructure designs for many different purposes, which frees up users to focus on their projects. This will create your cloud resources (VCN, Compute Image, Autonomous Transaction Processing Instance, among other things).
 
-1. We provide an archive containing the Terraform configuration and sample code. You can download it from [here: node-mysql-hol-tf.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/node-mysql-hol-tf.zip)
+1.  We provide an archive containing the Terraform configuration and sample code. You can download it from [here: node-mysql-hol-tf.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/node-mysql-hol-tf.zip)
 
-    *Note: Keep the file around! We will refer to it later!*
+ *Note: Keep the file around! We will refer to it later!*
 
 2. Log into the Oracle Cloud and on the OCI console, click on the hamburger menu upper left and scroll down to **Solutions and Platform**. Hover over **Resource Manager** and click on **Stacks**.
 
-    ![Image](images/010.png " ")
+   ![](images/010.png " ")
 
 3. Make sure the **Compartment** on the left side says root. If not, then change it to root. Then, click **Create Stack**.
 
-    ![Image](images/011.png " ")
+  ![](images/011.png " ")
 
 4. Select **My Configuration**, choose the **.ZIP FILE** button, Click on **Browse** and find the zipped **node-mysql-hol-tf.zip** file. Then, you can give your **Stack** a name (or accept default). You can also give a description if you'd like, but it is not necessary. Then click **Next**.
 
-    ![Image](./images/zip-file.png)
+  ![](./images/zip-file.png)
 
 5. You can configure different variables on this screen. A password for the MySQL user is suggested. You can change it according to your wishes, as long as you fulfill the requirements. **For this Hands-on-Lab the password will not be stored securely. Don't use a password you use elsewhere**.  Select Next.
 
-    ![Image](images/terra02.png " ")
+  ![](images/terra02.png " ")
 
 6. Click **create**.  Note the screen will freeze for a few seconds before returning...be patient.
 
-  ![Image](images/terra03.png " ")
+  ![](images/terra03.png " ")
 
-  ![Image](images/015.png " ")
+  ![](images/015.png " ")
 
 ## Task 2: Create OCI Resources in Resource Manager
 
 1. Now inside of the resource manager, hover over **Terraform Actions** and click on **Plan**.
 
-    ![Image](images/terra04.png " ")
+  ![](images/terra04.png " ")
 
 2. You can give the plan a name, or keep the default. Then click on **Plan** to begin.
 
-    ![Image](images/017.png " ")
+  ![](images/017.png " ")
 
 3. Wait for the plan to succeed.
 
-    ![Image](images/018.png " ")
+  ![](images/018.png " ")
 
 4. Return to `Stacks` upper left, select your stack, and select **Terraform Actions** and click on **Apply**.
 
-    ![Image](images/018.1.png " ")
+  ![](images/018.1.png " ")
 
-    ![Image](images/terra06.png " ")
+  ![](images/terra06.png " ")
 
 5. You can give the **Apply** action a name, or keep the default. You can leave the other settings the same. Then click on **Apply**. **This will take about 15 minutes. Please be patient.**
 
-    ![Image](images/020.png " ")
+  ![](images/020.png " ")
 
-    ![Image](images/004.png " ")
+  ![](images/004.png " ")
 
-6. The job will take several minutes. When it completes, scroll to the top and click **Application Information**. That screen will contain data you are going to need in the next steps.
+6.  The job will take several minutes. When it completes, scroll to the top and click **Application Information**. That screen will contain data you are going to need in the next steps.
 
-  ![Image](images/terra08.png " ")
+  ![](images/terra08.png " ")
 
-  ![Image](images/terra09.png " ")
+  ![](images/terra09.png " ")
 
 Copy the information from the different fields, so you have it available fot the next steps.
 

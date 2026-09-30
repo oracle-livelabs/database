@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 Welcome to the "Database Tools" section of this workshop. In the following two labs, you will learn about two different tools that you can use to access the Oracle Database. We will cover both Database Actions (AKA SQL Developer Web) and the new SQL Developer VS Code Extension. These two labs will focus on what they are and how to set them up. 
 
 ### **SQL Developer Web**

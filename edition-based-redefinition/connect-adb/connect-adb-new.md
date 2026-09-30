@@ -32,7 +32,7 @@ The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (A
 
     ![Select Compartment](images/select-compartment.png " ")
 
-4. You should be able to see an Autonomous Database, similar to the one below. Make sure to change to the compartment which was assigned to you in case if you don't see the ATP database. Now gather the **OCID (Oracle Cloud Identifier)** of the Autonomous Database.
+4.  You should be able to see an Autonomous Database, similar to the one below. Make sure to change to the compartment which was assigned to you in case if you don't see the ATP database. Now gather the **OCID (Oracle Cloud Identifier)** of the Autonomous Database.
 
     ![ATP Database](images/atp-database.png " ")
 
@@ -75,7 +75,7 @@ The LiveLabs Sandbox environment comes with a pre-created Autonomous Database (A
 
     Verify the download of the file `ebronline.zip` using the list command ls -ltr as provided in the screenshot.
 
-    ![Download ebronline](images/download-ebronline.png " ")
+   ![Download ebronline](images/download-ebronline.png " ")
 
 2. Unzip the ebronline file
 

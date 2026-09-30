@@ -22,10 +22,10 @@ In this lab, you will be guided through the following tasks:
 ## Task 1:  Create an Oracle Analytic Cloud Service
 
 1. From the OCI console, navigate to Analytics & AI-> Analytics Clouds
-    ![MDS](./images/15oac01.png " ")
+ ![MDS](./images/15oac01.png " ")
 
 2. Click Create Instance
-    ![MDS](./images/15oac02.png " ")
+ ![MDS](./images/15oac02.png " ")
 
 3. On the Create Analytics Instance enter the required information as shown below
 

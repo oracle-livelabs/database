@@ -4,9 +4,6 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 When working in the cloud, there are often times when your servers and services are not exposed to the public internet. The Oracle Cloud Infrastructure (OCI) MySQL cloud service is an example of a service that is only accessible via private networks. Since the service is fully managed, we keep it siloed away from the internet to help protect your data from potential attacks and vulnerabilities. It’s a good practice to limit resource exposure as much as possible, but at some point, you’ll likely want to connect to those resources. That’s where bastion hosts enter the picture. A bastion host is a resource that sits between the private resource and the endpoint which requires access to the private network and can act as a “jump box” to allow you to log in to the private resource via protocols like SSH or RDP.  The bastion host requires a Virtual Cloud Network to connect with the MySQL DB Systems.
 
 Oracle added a Bastion Service to OCI. And you may also have noticed that the OCI Dashboard offers you the possibility to use a browser based terminal: Cloud Shell.
@@ -35,11 +32,11 @@ The new Bastion Service will allow you to create a SSH Tunnel to your MySQL DB S
 
 1. Go to Navigation Menu > Identity Security > Bastion
 
-    ![Image](./images/bastion-01.png "new bastion ")
+    ![](./images/bastion-01.png "new bastion ")
 
 2. Click Create Bastion
 
-    ![Image](./images/bastion-02.png "bastion intro ")
+    ![](./images/bastion-02.png "bastion intro ")
 
 3. On Create bastion, complete the following fields:
 
@@ -65,31 +62,31 @@ The new Bastion Service will allow you to create a SSH Tunnel to your MySQL DB S
 
     Click `0.0.0.0/0(New)`
 
-     ![Image](./images/bastion-03.png "bastion show ")
+     ![](./images/bastion-03.png "bastion show ")
 
 4. Click `Create Bastion` button
 
     When completed your screen should look like this:
 
-    ![Image](./images/bastion-04.png "bastion complete ")
+    ![](./images/bastion-04.png "bastion complete ")
 
 ## Task 2: Create Bastion Session
 
 1. Before creating the Bastion Session open a notepad. Do the following steps to record the MySQL Database System private IP address:
 
     - Go to Navigation Menu > Databases > MySQL
-     ![Image](./images/db-list.png "db list")
+     ![](./images/db-list.png "db list")
 
     - Click on the `MDS-HW` Database System link
 
-     ![Image](./images/db-active.png "active ")
+     ![](./images/db-active.png "active ")
 
     - Copy the `Private IP Address` to the notepad
 
 2. Do the followings steps to copy  the public SSH key to the  notepad
 
     - Open the Cloud shell
-     ![Image](./images/cloudshell-10.png "cloud shell")
+     ![](./images/cloudshell-10.png "cloud shell")
 
     - Enter the following command
         ```bash
@@ -97,17 +94,17 @@ The new Bastion Service will allow you to create a SSH Tunnel to your MySQL DB S
      <copy>cat .ssh/id_rsa.pub</copy>
         ```
 
-    ![Image](./images/cloudshell-11.png "new cloud shell")
+    ![](./images/cloudshell-11.png "new cloud shell")
 
 3. Copy the id_rsa.pub content the notepad
         Your notepad should look like this
-    ![Image](./images/notepad1.png "notepad ")  
+    ![](./images/notepad1.png "notepad ")  
 
 4. Go to Navigation Menu > Identity Security > Bastion
 
 5. Click the `MDSBastion` link
 
-     ![Image](./images/bastion-05.png "bastion identity ")
+     ![](./images/bastion-05.png "bastion identity ")
 
 6. Click `Create Session`
 
@@ -127,10 +124,10 @@ The new Bastion Service will allow you to create a SSH Tunnel to your MySQL DB S
 
 9. Add SSH Key -  Copy SSH Key from notepad
     - The screen should look like this
-    ![Image](./images/bastion-06.png "ssh key ")
+    ![](./images/bastion-06.png "ssh key ")
     - Click the `Create Session` button
 10. The completed Bastion Session should look like this
-    ![Image](./images/bastion-07.png "bastion session ")
+    ![](./images/bastion-07.png "bastion session ")
 
 **Note: The Session will expire in 180 minutes**
 
@@ -138,11 +135,11 @@ The new Bastion Service will allow you to create a SSH Tunnel to your MySQL DB S
 
 1. Click on the 3 vertical dots on the Bastion Session
 
-    ![Image](./images/bastion-08.png "connect with bastion ")
+    ![](./images/bastion-08.png "connect with bastion ")
 
 2. Click `View SSH Command`  
 
-    ![Image](./images/bastion-09.png "view ssh ")
+    ![](./images/bastion-09.png "view ssh ")
 
 3. Click copy and paste the information to your notepad and hit Close
 
@@ -152,7 +149,7 @@ The new Bastion Service will allow you to create a SSH Tunnel to your MySQL DB S
 
     The command from your notepad should look like this
 
-    ![Image](./images/notepad2.png "notepad display")
+    ![](./images/notepad2.png "notepad display")
 
 5. Open the cloud shell and enter the command from the notepad. It should like this..
     *Don't forget the -v  character*

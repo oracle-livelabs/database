@@ -30,7 +30,7 @@ This lab assumes you have:
 
 2. On the *Web Browser* window on the right preloaded with *eShop Application*, click on the *Login* button to login to the Application and select the saved credentials to login. These credentials have been saved within *Web Browser* and are provided below for reference
 
-    ![oracle sharding noVNC](images/oracle-shading-novnc.png " ")
+    ![oracle sharding noVNC](images/oracle-shading-noVnc.png " ")
     ```
     Username: <copy>demo@eshop.com</copy>
     ```

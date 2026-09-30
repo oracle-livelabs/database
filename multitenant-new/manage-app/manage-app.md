@@ -1,14 +1,5 @@
 # Hands-on with Multitenant (Advanced)
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Lab Introduction
 
 This is a series of 12 hands-on labs designed to familiarize you with the Application Container functionality of Oracle Multitenant. In these labs, We will dive into the concepts of Application container and Proxy PDBs.
@@ -67,7 +58,7 @@ All the scripts for this lab are located in the /home/oracle/labs/multitenant/sc
       show pdbs;
       ```
 
-      ![Image](.../images/mt01_createapproot.png)****
+      ![](.../images/MT01_createAppRoot.png)****
 
       
 
@@ -630,9 +621,9 @@ In some application in a Multitenant environment , It may **not be possible** to
 
 ## Proxy PDBs
 
-![Image](./images/mt_proxypdb.png " ")
+![](./images/MT_proxyPDB.png " ")
 
-![Image](https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/img/admin110.png1)
+![](https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/img/admin110.png1)
 
 You can create a PDB as a proxy PDB by referencing it in a remote CDB.
 
@@ -757,7 +748,7 @@ A good scenario is hosting a multi tenant Application environment where each ten
 
 
 
-![Image](../images/mt03_rr.png)
+![](../images/MT03_RR.png)
 
 
 
@@ -1205,8 +1196,3 @@ Note that one of the APP ROOT CLONE F3345058508_3_1 is deleted as we set the com
 
 
 
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -111,7 +111,7 @@ We have pre-created these scripts and the scope of the lab is not to explain the
 
 ## Task 2: Run the Liquibase update for the new changelog 
 
-1. The home directory will be different in your environment.
+1.  The home directory will be different in your environment.
 
     ![Cloud Shell home](images/cloudshell-home.png " ")
 

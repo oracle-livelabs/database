@@ -17,11 +17,6 @@ Oracle NoSQL Database Cloud Service is a fully managed database cloud service th
 
 This workshop contains different language implementation in the form of different tabs. Click the tab corresponding to the language you are interested in.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Download the appropriate Oracle NoSQL SDK
 <if type="Java">
 
@@ -68,7 +63,7 @@ In this lab, you will:
     </project>
     </copy>
     ```
-    **Note:** The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). Please make sure to replace the placeholder for the version of the Oracle NoSQL Java SDK in the `pom.xml` file with the exact SDK version number.
+**Note:** The latest SDK can be found here [Oracle NoSQL Database SDK For Java](https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver). Please make sure to replace the placeholder for the version of the Oracle NoSQL Java SDK in the `pom.xml` file with the exact SDK version number.
 </if>
 
 <if type="Python">
@@ -82,13 +77,13 @@ In this lab, you will:
 3. If you are using the Oracle NoSQL Database cloud service you will also need to install the oci package:
 
     ```
-     <copy> pip3 install oci </copy>
+    <copy> pip3 install oci </copy>
     ```
 </if>
 
 <if type="Go">
-    1. Open the [Go Downloads](https://golang.org/doc/install) page in a browser and click the download tab corresponding to your operating system. Save the file to your home folder.
-    2. Install Go in your operating system.
+  1. Open the [Go Downloads](https://golang.org/doc/install) page in a browser and click the download tab corresponding to your operating system. Save the file to your home folder.
+  2. Install Go in your operating system.
     - On Windows systems, Open the MSI file you downloaded and follow the prompts to install Go.
 
       *Note: By default, the installer will install Go to Program Files or Program Files (x86). You can change the location as needed. After installing, you will need to close and reopen any open command prompts so that changes to the environment made by the installer are reflected at the command prompt.*
@@ -99,25 +94,25 @@ In this lab, you will:
         export PATH=$PATH:/usr/local/go/bin
         </copy>
         ```
-    3. Verify that you've installed Go. In the Command Prompt window that appears, type the following command:
+  3. Verify that you've installed Go. In the Command Prompt window that appears, type the following command:
 
       ```
       <copy>
       $ go version
       </copy>
       ```
-    Confirm that the command prints the installed version of Go.
+  Confirm that the command prints the installed version of Go.
   </if>
  <if type="Node.js">
-    The Node SDK supports both JavaScript and TypeScript applications.
+ The Node SDK supports both JavaScript and TypeScript applications.
 
-    1. This lab includes code samples for JavaScript and TypeScript applications. Decide the language that you want to use.  
+  1. This lab includes code samples for JavaScript and TypeScript applications. Decide the language that you want to use.  
 
-    2. Open the [Node.js Download](https://nodejs.org/en/) link and download Node.js. Follow the prompts to install the Node.js package. The Node Package Manager (npm) is automatically installed.
+  2. Open the [Node.js Download](https://nodejs.org/en/) link and download Node.js. Follow the prompts to install the Node.js package. The Node Package Manager (npm) is automatically installed.
 
-    With this Node.js package, you can run both JavaScript and TypeScript applications.
+   With this Node.js package, you can run both JavaScript and TypeScript applications.
 
-    3. Install the Node SDK for Oracle NoSQL Database.
+  3. Install the Node SDK for Oracle NoSQL Database.
 
       ```
       <copy>
@@ -125,20 +120,20 @@ In this lab, you will:
       </copy>
       ```
 
-    With the above command, npm creates the `node_modules` directory in the current directory.
+   With the above command, npm creates the `node_modules` directory in the current directory.
 
-    Another option is to install the SDK globally:
+   Another option is to install the SDK globally:
 
       ```
       <copy>
       npm install -g oracle-nosqldb
       </copy>
       ```
-    You can choose one of the above options depending on the permissions you have.
+   You can choose one of the above options depending on the permissions you have.
 </if>
   <if type="C-sharp">
 
-    You can add the SDK NuGet Package as a reference to your project by using .Net CLI:
+You can add the SDK NuGet Package as a reference to your project by using .Net CLI:
 1. Make sure you have [.NET](https://dotnet.microsoft.com/en-us/download) installed in your system. You can add the SDK NuGet Package as a reference to your project by using .Net CLI:
 2. Run the following command to create your project directory.
 
@@ -158,30 +153,30 @@ In this lab, you will:
 
 <if type="Rust">
 
-1. Open the [Rust download page](https://www.rust-lang.org/tools/install) in your browser and download Rust using the instructions given. This creates a `~/.cargo/bin` directory where all the required tools are installed.
+1.  Open the [Rust download page](https://www.rust-lang.org/tools/install) in your browser and download Rust using the instructions given. This creates a `~/.cargo/bin` directory where all the required tools are installed.
 
-2. Add the PATH directory in your environment variables.
+2.  Add the PATH directory in your environment variables.
     ```
     <copy>
     export PATH=~/.cargo/bin:$PATH
     </copy>
     ```
 
-3. Verify the installation using
+3.  Verify the installation using
     ```
     <copy>
     rustc --version
     </copy>
     ```
 
-4. Create a new project directory using
+4.  Create a new project directory using
     ```
     <copy>
     cargo new HelloWorld
     </copy>
     ```
 
-5. Navigate to the project directory and update the Cargo.toml file as shown below.
+5.  Navigate to the project directory and update the Cargo.toml file as shown below.
     ```
     <copy>
     [package]
@@ -207,7 +202,7 @@ In this lab, you will:
 
 2. Review the sample application. You can access the [JavaAPI Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html) to reference Java classes, methods, and interfaces included in this sample application.
 
-    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.java file, replace the placeholder of the compartment in the function ```setDefaultCompartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+  Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.java file, replace the placeholder of the compartment in the function ```setDefaultCompartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory.
 
@@ -218,13 +213,13 @@ In this lab, you will:
     </copy>
     ```
 
-    Use `vi` or `nano` or any text editor to create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
+  Use `vi` or `nano` or any text editor to create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
   
-    Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
-    ![View config file](images/config-file.png)
-    When `SignatureProvider` is constructed without any parameters, the default [Configuration File](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdkconfig.htm) is located in the `~/.oci/config` directory.
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
+  ![View config file](images/config-file.png)
+  When `SignatureProvider` is constructed without any parameters, the default [Configuration File](https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdkconfig.htm) is located in the `~/.oci/config` directory.
 
 4. Compile your java code using the command `mvn compile`.
 5. Build your maven project using the following command.
@@ -235,7 +230,7 @@ In this lab, you will:
     </copy>
     ```
 
-    *Note: In the main method of `HelloWorld.java`, the `dropTable(handle)` is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*
+*Note: In the main method of `HelloWorld.java`, the `dropTable(handle)` is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*
 </if>
 
 <if type="Python">
@@ -244,18 +239,18 @@ In this lab, you will:
 
 2. Review the sample application. You can access the [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html) to reference Python classes and methods included in this sample application.
 
-    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.py file, replace the placeholder of the compartment in the function ```set_default_compartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.py file, replace the placeholder of the compartment in the function ```set_default_compartment``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
   
-    Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
-    ![View config file](images/config-file.png)
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
+  ![View config file](images/config-file.png)
 
 4. Execute the sample application:
-    Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.py` program.
-    Execute the HelloWorld program.
+   Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.py` program.
+   Execute the HelloWorld program.
 
     ```
     <copy>
@@ -275,7 +270,7 @@ In this lab, you will:
     </copy>
     ```
 
-    *Note: In the main method of `HelloWorld.py`, the `drop_table` method is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*  
+*Note: In the main method of `HelloWorld.py`, the `drop_table` method is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*  
 </if>
 <if type="Go">
 
@@ -283,16 +278,16 @@ In this lab, you will:
 
 2. Review the sample application. You can access the [Go API docs](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb?utm_source=godoc) to reference Go classes and methods included in this sample application.
 
-    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.go file, replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.go file, replace the placeholder of the compartment in the constructor of ```NewSignatureProviderFromFile``` with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
   
-    Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
-    ![View config file](images/config-file.png)
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
+  ![View config file](images/config-file.png)
 
-4. Execute the sample application:
+4.  Execute the sample application:
     Initialize a new module for the example program.
 
       ```
@@ -323,14 +318,14 @@ In this lab, you will:
     </copy>
     ```
 
-    Build the HelloWorld application.
+  Build the HelloWorld application.
 
        ```
        <copy>
        go build -o HelloWorld
        </copy>
        ```
-    Run the HelloWorld application.
+  Run the HelloWorld application.
 
        ```
        <copy>
@@ -338,45 +333,45 @@ In this lab, you will:
        </copy>
        ```
 
-    *Note: In the main method of `HelloWorld.go`, the code for dropping the table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
+*Note: In the main method of `HelloWorld.go`, the code for dropping the table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
 </if>
 <if type="Node.js">
-    The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
+The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
 
 1. For JavaScript applications, download the [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/hP3lO4cVou3C1XqL-oxJi4F3IC3fsqwO6jsoq4b4-j6uhJ3DjFffEJwf6O5M0ABf/n/c4u04/b/livelabsfiles/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts] (https://objectstorage.us-ashburn-1.oraclecloud.com/p/-_rOKBbY7zRRg6fyYdm3vvRIatks_zGuJ3ZX4QhRDm8UfgAqsotpcDo4phLRuQAL/n/c4u04/b/livelabsfiles/o/HelloWorld.ts) file and move it to your home directory.
 
 2. Review the sample application. You can access the [Node.js API  Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
-    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Depending on your application, edit either the JavaScript code in HelloWorld.js or the TypeScript code in HelloWorld.ts, replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it. 
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Depending on your application, edit either the JavaScript code in HelloWorld.js or the TypeScript code in HelloWorld.ts, replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it. 
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
   
-    Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
-    ![View config file](images/config-file.png)
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
+   ![View config file](images/config-file.png)
 
 4. Execute the Sample Application
 
-    For JavaScript Application:
+  For JavaScript Application:
     Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.js` program.
-    Execute the HelloWorld program.
+   Execute the HelloWorld program.
 
     ```
-        <copy>
+    <copy>
     node HelloWorld.js
     </copy>
     ```
-    For TypeScript Application:
+  For TypeScript Application:
     Open the Command Prompt, and navigate to the directory where you saved the `HelloWorld.ts` program.
-    Execute the HelloWorld program.
+   Execute the HelloWorld program.
 
     ```
-        <copy>
+    <copy>
     npx tsx HelloWorld.ts
     </copy>
     ``` 
-    *Note: In the main method of `HelloWorld.js` and `HelloWorld.ts`, the `dropTable(handle)` is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
+*Note: In the main method of `HelloWorld.js` and `HelloWorld.ts`, the `dropTable(handle)` is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
 </if>
 <if type="C-sharp">
 
@@ -384,14 +379,14 @@ In this lab, you will:
 
 2. Review the sample application. You can access the [.NET API  Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
 
-    Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.cs file, replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
+   Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in HelloWorld.cs file, replace the placeholder of the compartment in the ```NoSQLClient``` constructor with the OCID of your compartment. Replace the placeholder for region with the name of your region. Save the file and close it.
 
 3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
   
-    Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
-    ![View config file](images/config-file.png)
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
+  ![View config file](images/config-file.png)
 
 4. Go to your project directory. You will see the example source code ```Program.cs```. Remove this file.
 
@@ -400,39 +395,39 @@ In this lab, you will:
     rm Program.cs
     </copy>
     ```
-    Build and run your project as shown below.
+  Build and run your project as shown below.
 
-    *Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET 7.0 and higher.*
+  *Note: You have multiple dotnet target frameworks which are supported. Currently the supported frameworks are .NET 7.0 and higher.*
 
     ```
     <copy>
     dotnet run
     </copy>
     ```
-    *Note: In the RunBasicExample method of `HelloWorld.cs`, the section to drop table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
+*Note: In the RunBasicExample method of `HelloWorld.cs`, the section to drop table is commented out to allow you to see the result of creating the tables in the Oracle Cloud Console.*    
 </if>
 
 <if type="Rust">
 
-1. Download the [HelloWorld.rs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service/o/helloworld-rsHelloWorld.rs) file, navigate to the `HelloWorld/src` folder, and replace the contents of `main.rs` with those from the downloaded file. Edit the `main.rs` file in editor using
+1.  Download the [HelloWorld.rs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service/o/helloworld-rsHelloWorld.rs) file, navigate to the `HelloWorld/src` folder, and replace the contents of `main.rs` with those from the downloaded file. Edit the `main.rs` file in editor using
     ```
     <copy>
     vi main.rs
     </copy>
     ```
 
-2. Review the sample application. You can access the [Rust Reference Guide](https://docs.rs/oracle-nosql-rust-sdk/latest/oracle_nosql_rust_sdk/index.html) to reference Rust classes and methods included in this sample application.
+2.  Review the sample application. You can access the [Rust Reference Guide](https://docs.rs/oracle-nosql-rust-sdk/latest/oracle_nosql_rust_sdk/index.html) to reference Rust classes and methods included in this sample application.
 
     Oracle NoSQL Database Cloud Service tables are created in a compartment and are scoped to that compartment. It is recommended not to create tables in the "root" compartment, but to create them in your own compartment created under "root". Edit the code in main.rs file, replace the placeholder of the compartment in the builder class with the OCID of your compartment. Save the file and close it.
 
-3. From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
+3.  From your home directory, navigate to ".oci" directory. Create a file named `config` in the `.oci` directory. Copy the configuration file parameters from your note file to the `config` file. You saved these parameters into a note file in Lab 1.
 
-    The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
+  The `config` file will include the [USER-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), fingerprint value, [TENANCY-OCID] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five), region, and key file. Update the [key_file] (https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#How) with the private key that you generated. 
   
-    Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
-    ![View config file](images/config-file.png)
+  Include the **pass_phrase** parameter with the passphrase value that you entered in Lab 1. 
+  ![View config file](images/config-file.png)
 
-4. Navigate back to the project directory and build then run your project using
+4.  Navigate back to the project directory and build then run your project using
     ```
     <copy>
     cargo build
@@ -452,17 +447,17 @@ In this lab, you will:
 
 1. On the left hand menu, click **Databases**. In the **Databases** window, click **Tables** under **Oracle NoSQL Database**.
 
-    ![Click NoSQL Database Tables](images/nosql-cloud.png)
+  ![Click NoSQL Database Tables](images/nosql-cloud.png)
 
 2. Click **HelloWorldTable** to open the details page.
 
-    *If you do not see HelloWorldTable select your correct compartment (that you mentioned in your code) on the left dropdown.*
+  *If you do not see HelloWorldTable select your correct compartment (that you mentioned in your code) on the left dropdown.*
 
-    ![Click HelloWorldTable](images/open-helloworldtable.png)
+  ![Click HelloWorldTable](images/open-helloworldtable.png)
 
 3. Click **Columns** under Resources to view the table columns.
 
-    ![View table columns](images/helloworldtable.png)
+  ![View table columns](images/helloworldtable.png)
 
 4. Click **Explore data** under Resources and click **Execute** to execute the select statement and display the record inserted into the table.
 

@@ -278,7 +278,7 @@ Gilly first tests the vector column directly. She uses the same trail-running ph
 <details>
 <summary><strong>Optional comparison: search the existing product and customer-signal embeddings</strong></summary>
 
-    Gilly can compare the new product column with the two search sources that already support the retail application. These queries retain their existing grouping by product name and category. They summarize matching labels rather than uniquely identifying every product row.
+Gilly can compare the new product column with the two search sources that already support the retail application. These queries retain their existing grouping by product name and category. They summarize matching labels rather than uniquely identifying every product row.
 
 1. Search the existing product embeddings with a broad service-and-demand phrase.
 

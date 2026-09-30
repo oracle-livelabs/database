@@ -26,25 +26,25 @@ _Estimated Time:_ 20 minutes
 Before deploying the application in multiple regions, we will create replicas for the `movie` table.
 
 1. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
-    Click the **Movie** table. Under **Resources**, click **Replicas**.
-    The list of replicas already created in the table is listed. In our case, the list start empty
-    ![list-replicas](./images/list-replicas.png)
+Click the **Movie** table. Under **Resources**, click **Replicas**.
+The list of replicas already created in the table is listed. In our case, the list start empty
+![list-replicas](./images/list-replicas.png)
 
 2. Click on `Add replica` button.
 
 3. Choose a Replication region from the list. It does not matter which one is selected. Other information does not need to be changed for this LiveLab. Click **Add Replica**.
 
-    ![add-replica](./images/add-replica.png)
+  ![add-replica](./images/add-replica.png)
 
 4. Wait few seconds until the deployment is created - Status will change from Updating to Active.  Any data that was in the originating table (the table created in Lab 2) will be immediately pushed to the newly created replica.  
 
-    ![list-replicas](./images/list-replicas-with-new.png)
+  ![list-replicas](./images/list-replicas-with-new.png)
 
-    Click on the link for the `replica` added. It will open a new Tab with the information for the region selected.
+  Click on the link for the `replica` added. It will open a new Tab with the information for the region selected.
 
 5. You can query the table created as we learned in lab 3. You will have exactly the same data in both regions.
 
-    ![ashburn-replica](./images/ashburn-replica-table.png)
+   ![ashburn-replica](./images/ashburn-replica-table.png)
 
 6. Modify a row in a region and query in the other region to verify that the changes got pushed to the other region.
 
@@ -55,10 +55,10 @@ We are going to set up the Movie Stream Microservice in the new region and follo
 
 1. Make sure you are in the region where you added your replica.  Let's get into the Cloud Shell from that region.
 
-    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following environment setup shell script in the Cloud Shell to
-    set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
+set up your environment. If you close/open the Cloud Shell Console, please re-execute it.
 
     ```shell
     <copy>

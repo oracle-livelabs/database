@@ -1,9 +1,6 @@
 # How can I terminate Oracle Autonomous Database and my Object Storage Bucket?
 
 ## Introduction
-
-Estimated Time: TODO - x minutes
-
 Duration: 5 minutes
 
 You can permanently delete (terminate) instances that you no longer need. Terminating an Oracle Autonomous Database permanently deletes the database data. However, automatic backups are not deleted if you have chosen Recovery Appliance or NFS as a backup destination. You can delete automatic backups directly from the Recovery Appliance or NFS.
@@ -58,7 +55,7 @@ In this lab, you will:
 
     ![Confirm to terminate your Oracle Autonomous Database, type your database name in the confirmation dialog and click Terminate Autonomous Database](./images/demoatp-terminate.png " ")
 
-8. Your instance will begin to terminate, the Lifecycle State will turn from Available to Terminating.
+8.  Your instance will begin to terminate, the Lifecycle State will turn from Available to Terminating.
 
     ![Your instance Lifecycle State will turn from Available to Terminating](./images/terminating.png " ")
 
@@ -73,7 +70,7 @@ You have successfully terminated an Oracle Autonomous Database instance.
 
 2. Click the **3 dots** located to the right side of the bucket name and **select Delete**.
 
-    ![Delete Bucket](./images/delete-bucket.png " ")
+   ![Delete Bucket](./images/delete-bucket.png " ")
 
 3. Type the Bucket name into the space provided and **select Delete**.
 
@@ -84,8 +81,3 @@ You have successfully terminated an Oracle Autonomous Database instance.
 ## Learn More
 
 * Click [here](https://docs.oracle.com/en-us/iaas/exadata/doc/eccmanagingadbs.html#GUID-A00BC3BB-3AE6-4FBF-AEAF-2D9C14CD1D9A) to know more about Managing Autonomous Databases.
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -67,8 +67,8 @@ When you are done looking at code, go ahead and exit from the Code Editor.
 ## Task 2: Restart the Cloud Shell
 
 1. Let's get back into the Cloud Shell. From the earlier lab, you may have
-    minimized it in which case you need to enlarge it. It is possible it may have
-    become disconnected and/or timed out. In that case, restart it.
+minimized it in which case you need to enlarge it. It is possible it may have
+become disconnected and/or timed out. In that case, restart it.
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
@@ -133,7 +133,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
     source ~/video-on-demand-with-nosql-database/env.sh
     </copy>
     ```
-    Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
+Set the variable IP_CI with the value copied in the previous section. Execute in the Cloud Shell.
 
     ```shell
     <copy>
@@ -143,12 +143,12 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
     **Note:** The "demo-vod" application is running in the container.
 
 2. Read back the data that we entered in the Lab 4 using the GraphQL query `Streams`.
-    Execute in the Cloud Shell.
+Execute in the Cloud Shell.
 
     ```shell
     <copy>
     curl --request POST --header 'content-type: application/json' --url $IP_CI:3000 \
-    --data '{"query":"query Streams { streams { id  info { firstName  lastName country } }}"}' | jq
+--data '{"query":"query Streams { streams { id  info { firstName  lastName country } }}"}' | jq
     </copy>
     ```
 
@@ -162,7 +162,7 @@ set up your environment. Please copy the values for `NOSQL_REGION` and `NOSQL_CO
     --header 'content-type: application/json' \
     --url $IP_CI:3000 \
     --data '{
-    "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
+  "query": "query Stream($streamId: Int) { user1:stream(id: $streamId) {id   info{ country shows {showName}} } }", "variables": { "streamId": 1} }'|jq
     </copy>
     ```
 

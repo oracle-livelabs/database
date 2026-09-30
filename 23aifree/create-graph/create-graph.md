@@ -25,11 +25,6 @@ Watch the video below for a quick walk-through of the lab. The lab instructions 
 [Change password](videohub:1_x4hgmc2i)
 </if> -->
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Setup materials
 
 These files we will not be using throughout the lab, but are available if you would like to see what commands we chose to create the schema with (CreateKeys.sql) or the data that populates the tables that we've created (BANK\_ACCOUNTS.csv and BANK\_TRANSFERS.csv).

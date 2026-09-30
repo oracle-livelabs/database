@@ -20,24 +20,19 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
 - Completion of the Get Started with LiveLabs lab
 - Basic understanding of SQL is helpful.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Lab setup and understanding the developer role
 
 **Scenario** Oracle MovieStreams is expanding its development team to include a new developer working on different aspects of the database. To ensure that each developer has the appropriate level of access and to streamline the management of permissions, we will create a new user and grant them the **NEW** Developer role in Oracle Database 23ai. This role will allow developers to perform their tasks without compromising the security or stability of the database.
 
 1. To make this workshop as realistic as possible, let us introduce the business scenario you will use during this workshop - Oracle MovieStream.
 
-    ![Logo graphic of Oracle MovieStream](images/moviestream-logo.jpeg)
+  ![Logo graphic of Oracle MovieStream](images/moviestream-logo.jpeg)
 
-    Oracle MovieStream is a fictitious online movie streaming company. As Oracle MovieStream continues to grow, it faces new technological challenges around data storage, performance, and security. To meet these challenges, Oracle MovieStreams is leveraging the new features of Oracle Database 23ai.
+  Oracle MovieStream is a fictitious online movie streaming company. As Oracle MovieStream continues to grow, it faces new technological challenges around data storage, performance, and security. To meet these challenges, Oracle MovieStreams is leveraging the new features of Oracle Database 23ai.
  
-    The company has decided to adopt Oracle Database 23ai for its advanced features, including AI-driven search capabilities, JSON duality views, property graphs, SQL Firewall and more.
+  The company has decided to adopt Oracle Database 23ai for its advanced features, including AI-driven search capabilities, JSON duality views, property graphs, SQL Firewall and more.
 
-    Many of the scenarios in this workshop will be based on challenges companies are seeing in their own businesses, and we hope the following labs and accompanying workshops will give you some insight into how Oracle can help you solve these common everyday business and technical challenges.
+  Many of the scenarios in this workshop will be based on challenges companies are seeing in their own businesses, and we hope the following labs and accompanying workshops will give you some insight into how Oracle can help you solve these common everyday business and technical challenges.
 
 2. The Developer Role gives us a full set of system privileges, object privileges, predefined roles, PL/SQL package privileges, and tracing privileges required by application developers. It simplifies privilege management and helps keep the database as secure as possible for the development environment. As always, please review the privileges granted and compare with your organizations security protocol.
 
@@ -58,20 +53,20 @@ In this lab, you will:
 
     ```
     <copy>
-    -- USER SQL
-    CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
+  -- USER SQL
+  CREATE USER DB23AI IDENTIFIED BY Oracledb_4U#;
 
-    -- ADD ROLES
-    GRANT DB_DEVELOPER_ROLE TO DB23AI;
+  -- ADD ROLES
+  GRANT DB_DEVELOPER_ROLE TO DB23AI;
 
-    GRANT CONNECT TO DB23AI;
-    GRANT RESOURCE TO DB23AI;
-    GRANT CONSOLE_DEVELOPER TO DB23AI;
-    GRANT GRAPH_DEVELOPER TO DB23AI;
+  GRANT CONNECT TO DB23AI;
+  GRANT RESOURCE TO DB23AI;
+  GRANT CONSOLE_DEVELOPER TO DB23AI;
+  GRANT GRAPH_DEVELOPER TO DB23AI;
 
 
-    -- REST ENABLE
-    BEGIN
+  -- REST ENABLE
+  BEGIN
       ORDS_ADMIN.ENABLE_SCHEMA(
           p_enabled => TRUE,
           p_schema => 'DB23AI',
@@ -85,14 +80,14 @@ In this lab, you will:
               ENABLED => TRUE
       );
       commit;
-    END;
-    /
+  END;
+  /
 
-    ALTER USER DB23AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
-    ALTER USER DB23AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
+  ALTER USER DB23AI DEFAULT ROLE CONSOLE_DEVELOPER,DB_DEVELOPER_ROLE,GRAPH_DEVELOPER;
+  ALTER USER DB23AI GRANT CONNECT THROUGH GRAPH$PROXY_USER;
 
-    -- QUOTA
-    ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
+  -- QUOTA
+  ALTER USER DB23AI QUOTA UNLIMITED ON DATA;
 
     </copy>
     ```
@@ -115,19 +110,19 @@ In this lab, you will:
 
 1. Let's sign in as our new user. Click on the admin profile in the top right hand of Database Actions and sign out.
 
-    ![log out of our admin user](images/im12.png " ")
+  ![log out of our admin user](images/im12.png " ")
 
 2. Sign in with the username **DB23AI** and password **Oracledb_4U#**
 
-    ![sign in with db23ai](images/im11.png =50%x*)
+  ![sign in with db23ai](images/im11.png =50%x*)
 
 3. Click SQL to open the SQL editor.
 
-    ![Open SQL with db23ai](images/im9.png " ")
+  ![Open SQL with db23ai](images/im9.png " ")
 
 4. Oracle has introduced NEW functionality that eliminates the need for the `FROM DUAL' clause, making queries more intuitive and more compatible with other database offerings. You can still use from dual without any impact.
 
-    We can check our user has the developer role without having to specify FROM DUAL.
+  We can check our user has the developer role without having to specify FROM DUAL.
 
     ```
     <copy>

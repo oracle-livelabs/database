@@ -179,7 +179,7 @@ You will need a compute Instance to connect to your brand new MySQL database.
     <copy>ssh -i ~/.ssh/id_rsa opc@<your_compute_instance_ip></copy>
     ```
 
-    ![CONNECT](./images/06connect-signin.png "connect-signin ")
+   ![CONNECT](./images/06connect-signin.png "connect-signin ")
 
     **Install MySQL Shell on the Compute Instance**
 
@@ -195,11 +195,11 @@ You will need a compute Instance to connect to your brand new MySQL database.
 
     ![CONNECT](./images/06connect-shell.png "connect-shell ")
 
-    **Connect to MySQL Database Service**
+   **Connect to MySQL Database Service**
 
 6. From your Compute instance, connect to MDS-HW MySQL using the MySQL Shell client tool.
 
-    The endpoint (IP Address) can be found in your notepad or the MDS-HW MySQL DB System Details page, under the "Endpoint" "Private IP Address".
+   The endpoint (IP Address) can be found in your notepad or the MDS-HW MySQL DB System Details page, under the "Endpoint" "Private IP Address".
 
     ![CONNECT](./images/06connect-end-point.png "connect-end-point ")
 

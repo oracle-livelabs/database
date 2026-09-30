@@ -196,7 +196,7 @@ Increase the fast recovery area size to 100GB to provide enough space for the fl
     name,
     to_char(space_limit, '999,999,999,999') as space_limit,
     to_char(space_limit - space_used + space_reclaimable,
-    '999,999,999,999') as space_available,
+   '999,999,999,999') as space_available,
     round((space_used - space_reclaimable)/space_limit * 100, 1) as pct_full
     from
     v$recovery_file_dest;</copy>

@@ -11,11 +11,6 @@ Estimated Lab Time: 5 minutes
 * SSH keys
 * A Docker container running Oracle Database 19c
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Stopping a Docker container
 
  You can stop the Docker container using the docker `stop` command with the container name or id. The stop command triggers the container to issue a immediate shutdown  for the database inside the container. By default, Docker will only allow 10 seconds for the container to shutdown before killing it. For applications that may be fine, but for persistent containers such as the Oracle Database container you may want to give the container a bit more time to shutdown the database appropriately. The `t` parameter allows you to specify a timeout in seconds for the container to shutdown the database gracefully. Note that once the database has successfully shutdown, the container will exit normally. Therefore, a good practice is to specify a long timeout (600 seconds is 10 minutes), knowing that command will return control to the terminal as soon as the database is shutdown.

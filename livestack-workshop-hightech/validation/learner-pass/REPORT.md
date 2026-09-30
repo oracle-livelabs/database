@@ -1,14 +1,5 @@
 # SEER HIGHTECH — LLUSER learner pass
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 The core exercise sequence was executed through the shared browser as LLUSER. Database execution completed, but the AI agent's answer failed the lesson's SQL comparison. Screenshot replacement is unfinished: the database browser viewport clips wide results. The existing production ZIP has not been refreshed for this pass.
 
 ## Execution boundary
@@ -59,8 +50,3 @@ Fixed two Markdown identifiers in the Select AI instructions (`LINE_TOTAL` and `
 Next: widen the shared database browser panel, capture readable results and dialogs, resolve the optional PGX repeat-run issue, update screenshot coverage, rerun OCR, and rebuild/verify the learner archive. The six separate application views, fresh bootstrap and LiveLabs provisioning remain outside the evidence supplied by this prepared database session.
 
 The evidence ZIP contains the observed text, draft captures and their SHA-256 manifest. It is maintainer evidence, not a learner publication package.
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

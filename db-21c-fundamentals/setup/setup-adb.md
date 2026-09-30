@@ -20,41 +20,41 @@ Estimated Time: 20 Minutes
 
 2. Click on the hamburger menu and navigate to **Storage** and click on **Buckets**.
 
-      ![Image](./images/object_storage.png " ")
+      ![](./images/object_storage.png " ")
 
 3. Choose the compartment where your ATP is provisioned and click **Create Bucket**.
 
-      ![Image](./images/step1-3.png " ")
+      ![](./images/step1-3.png " ")
 
 4. Name your bucket **adb1** and click **Create**.
 
-      ![Image](./images/step1-4.png " ")
+      ![](./images/step1-4.png " ")
 
 5. Once the bucket is created, click on the bucket and make note of the `bucket name` and `namespace`.
 
-      ![Image](./images/step1-5.png " ")
+      ![](./images/step1-5.png " ")
 
 ## Task 2: Create Oracle Wallet in Cloud Shell
 
 There are multiple ways to create an Oracle Wallet for ADB.  We will be using Oracle Cloud Shell as this is not the focus of this workshop.  To learn more about Oracle Wallets and use the interface to create one, please refer to the lab in this workshop: [Analyzing Your Data with ADB - Lab 6](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?p180_id=553)
 
-1. Login to the Oracle Cloud if you aren't logged in already.
+1.  Login to the Oracle Cloud if you aren't logged in already.
    
-2. Click the Cloud Shell icon to start up Cloud Shell
-      ![Image](./images/cloud-shell.png " ")
-3. While your Cloud Shell is starting up, click on the Hamburger Menu -> **Autonomous Transaction Processing** 
-      ![Image](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
+2.  Click the Cloud Shell icon to start up Cloud Shell
+      ![](./images/cloud-shell.png " ")
+3.  While your Cloud Shell is starting up, click on the Hamburger Menu -> **Autonomous Transaction Processing** 
+      ![](https://oracle-livelabs.github.io/common/images/console/database-atp.png " ")
 
-4. Click on the **Display Name** to go to your ADB main page.
+4.  Click on the **Display Name** to go to your ADB main page.
 
-      ![Image](./images/step2-4.png " ")
+      ![](./images/step2-4.png " ")
    
-5. Locate and copy the **OCID** (Oracle Cloud ID) you will need that in a few minutes. 
+5.  Locate and copy the **OCID** (Oracle Cloud ID) you will need that in a few minutes. 
 
-      ![Image](./images/locate-ocid.png " ")
+      ![](./images/locate-ocid.png " ")
 
-6. Use your autonomous\_database\_ocid to create the Oracle Wallet. You will be setting the wallet password to the same value as the ADB admin password for ease of use: *WElcome123##* Note: This is not a recommended practice and just used for the purposes of this lab. 
-7. Copy the command below and paste it into Cloud Shell.  Do not hit enter yet.  
+6.  Use your autonomous\_database\_ocid to create the Oracle Wallet. You will be setting the wallet password to the same value as the ADB admin password for ease of use: *WElcome123##* Note: This is not a recommended practice and just used for the purposes of this lab. 
+7.  Copy the command below and paste it into Cloud Shell.  Do not hit enter yet.  
 
       ````
       <copy>
@@ -62,44 +62,44 @@ There are multiple ways to create an Oracle Wallet for ADB.  We will be using Or
       oci db autonomous-database generate-wallet --password WElcome123## --file 21c-wallet.zip --autonomous-database-id  </copy> ocid1.autonomousdatabase.oc1.iad.xxxxxxxxxxxxxxxxxxxxxx
       ````
 
-      ![Image](./images/wallet.png " ")
+      ![](./images/wallet.png " ")
 
-8. Press copy to copy the OCID from Step 5 and fill in the autonomous database ocid that is listed in the output section of your terraform.  Make sure there is a space between the --autonomous-database-id phrase and the ocid.  Click **enter**.  Be patient, it takes about 20 seconds.
+8.  Press copy to copy the OCID from Step 5 and fill in the autonomous database ocid that is listed in the output section of your terraform.  Make sure there is a space between the --autonomous-database-id phrase and the ocid.  Click **enter**.  Be patient, it takes about 20 seconds.
 
-9. The wallet file will be downloaded to your cloud shell file system in /home/yourtenancyname
+9.  The wallet file will be downloaded to your cloud shell file system in /home/yourtenancyname
 
 10. Enter the list command in your cloud shell below to verify the *21c-wallet.zip* was created
    
       ````
       ls
       ````
-      ![Image](./images/21cwallet.png " ")
+      ![](./images/21cwallet.png " ")
 
 ## Task 3: Create Auth Token
 
-1. Click on the person icon in the upper right corner.
-2. Select **User Settings**
+1.  Click on the person icon in the upper right corner.
+2.  Select **User Settings**
 
-      ![Image](./images/select-user.png " ")
+      ![](./images/select-user.png " ")
 
-3. Copy the **Username**.
+3.  Copy the **Username**.
 
-      ![Image](./images/copy-username.png " ")
+      ![](./images/copy-username.png " ")
 
-4. Under the **User Information** tab, click the **Copy** button to copy your user **OCID**.
+4.  Under the **User Information** tab, click the **Copy** button to copy your user **OCID**.
 
-      ![Image](./images/copy-user-ocid.png " ")
+      ![](./images/copy-user-ocid.png " ")
 
-5. Create your auth token with description `adb1` using the command below by substituting your actual *user OCID* for the userid below.  *Note: If you already have an auth token, you may get an error if you try to create more than 2 per user*
+5.  Create your auth token with description `adb1` using the command below by substituting your actual *user OCID* for the userid below.  *Note: If you already have an auth token, you may get an error if you try to create more than 2 per user*
    
       ````
       <copy>
        oci iam auth-token create --description adb1 --user-id </copy> ocid1.user.oc1..axxxxxxxxxxxxxxxxxxxxxx
       ````
-      ![Image](./images/token.png " ")
+      ![](./images/token.png " ")
 
-6. Identify the line in the output that starts with **"token"**.
-7. Copy the value for the **token** somewhere safe, you will need it in the following steps.
+6.  Identify the line in the output that starts with **"token"**.
+7.  Copy the value for the **token** somewhere safe, you will need it in the following steps.
 
 ## Task 4:  Load ADB Instance with Application Schemas
 
@@ -117,102 +117,102 @@ There are multiple ways to create an Oracle Wallet for ADB.  We will be using Or
       </copy>
       ````
 
-3. Run the load script passing in the two arguments from your notepad, your admin password and the name of your ATP instance.  This script will import all the data into your ATP instance for your application and set up SQL Developer Web for each schema.  This script runs as the opc user.  Your ATP name should be the name of your ADB instance.  In the example below we used *adb1*.  This load script takes approximately 3 minutes to run.  *Note : If you use a different ADB name, replace adb1 with your adb instance name*
+3.   Run the load script passing in the two arguments from your notepad, your admin password and the name of your ATP instance.  This script will import all the data into your ATP instance for your application and set up SQL Developer Web for each schema.  This script runs as the opc user.  Your ATP name should be the name of your ADB instance.  In the example below we used *adb1*.  This load script takes approximately 3 minutes to run.  *Note : If you use a different ADB name, replace adb1 with your adb instance name*
 
       ``` 
       <copy> 
       ./load-21c.sh WElcome123## adb1 2>&1 > load-21c.out</copy>
       ```
 
-      ![Image](./images/load21c-1.png " ")
+      ![](./images/load21c-1.png " ")
 
 ## Task 5: Grant Roles and Privileges to Users
 
-1. Go back to your Autonomous Database Homepage.
+1.  Go back to your Autonomous Database Homepage.
 
-      ![Image](./images/step4-0.png " ") 
+      ![](./images/step4-0.png " ") 
 
-      ![Image](./images/step4-1.png " ") 
+      ![](./images/step4-1.png " ") 
 
-2. Click on the **Tools** tab.
+2.  Click on the **Tools** tab.
 
-      ![Image](./images/step4-tools.png " ") 
+      ![](./images/step4-tools.png " ") 
 
-3. Click **Database Actions**.
+3.  Click **Database Actions**.
 
-      ![Image](./images/step4-database.png " ") 
+      ![](./images/step4-database.png " ") 
 
-4. Select **admin** for your username.
+4.  Select **admin** for your username.
 
-      ![Image](./images/step4-admin.png " ") 
+      ![](./images/step4-admin.png " ") 
 
-5. Password:  **WElcome123##**.
+5.  Password:  **WElcome123##**.
 
-      ![Image](./images/step4-password.png " ") 
+      ![](./images/step4-password.png " ") 
 
 6. Under Administration, select **Database Users**.
 
-      ![Image](./images/step4-databaseuser.png " ")
+      ![](./images/step4-databaseuser.png " ")
 
 7. For **HR** user, click the **3 Dots** to expand the menu and select **Edit**.
 
-      ![Image](./images/step4-edit.png " ")
+      ![](./images/step4-edit.png " ")
 
 8. Enable the **REST Enable** and **Authorization required** sliders.
 
-      ![Image](./images/step4-enable-rest.png " ")
+      ![](./images/step4-enable-rest.png " ")
 
 9. Click on the **Granted Roles** tab at the top. 
 
-      ![Image](./images/step4-roles.png " ")
+      ![](./images/step4-roles.png " ")
 
 10. Scroll down **DWROLE**, and make sure the **1st** and **3rd** check boxes are enabled.
 
-      ![Image](./images/step4-dwrole.png " ")
+      ![](./images/step4-dwrole.png " ")
 
 11. Scroll all the way to the bottom, and click **Apply Changes**.
 
-      ![Image](./images/step4-apply.png " ")
+      ![](./images/step4-apply.png " ")
 
 12. Click the **X** in the search bar to view all the users again. 
 
-      ![Image](./images/step4-cancel-search.png " ")
+      ![](./images/step4-cancel-search.png " ")
 
 13. Repeat steps 7-12 for **OE** user.
 
-      ![Image](./images/step5-13a.png " ")
+      ![](./images/step5-13a.png " ")
       
-      ![Image](./images/step5-13b.png " ")
+      ![](./images/step5-13b.png " ")
       
-      ![Image](./images/step5-13c.png " ")
+      ![](./images/step5-13c.png " ")
       
-      ![Image](./images/step5-13d.png " ")
+      ![](./images/step5-13d.png " ")
       
-      ![Image](./images/step5-13e.png " ")
+      ![](./images/step5-13e.png " ")
 
 14. Repeat steps 7-12 for **REPORT** user.
 
-      ![Image](./images/step5-14a.png " ")
+      ![](./images/step5-14a.png " ")
       
-      ![Image](./images/step5-14b.png " ")
+      ![](./images/step5-14b.png " ")
       
-      ![Image](./images/step5-14c.png " ")
+      ![](./images/step5-14c.png " ")
       
-      ![Image](./images/step5-14d.png " ")
+      ![](./images/step5-14d.png " ")
       
-      ![Image](./images/step5-14e.png " ")
+      ![](./images/step5-14e.png " ")
 
 ## Task 6: Login to SQL Developer Web
 
-1. Test to ensure that your data has loaded by logging into SQL Developer Web. 
+1.  Test to ensure that your data has loaded by logging into SQL Developer Web. 
 
-2. In the upper left, select the **Hamburger Button** and expand out the **Development** tab. Select **SQL**.
+2.  In the upper left, select the **Hamburger Button** and expand out the **Development** tab. Select **SQL**.
 
-      ![Image](./images/step4-sql.png " ") 
+      ![](./images/step4-sql.png " ") 
 
 3. Click the **X** to dismiss the pop-up.
 
-      ![Image](./images/step4-sql-x.png " ") 
+      ![](./images/step4-sql-x.png " ") 
 
 4. Run the code snippet below and verify that there are 665 items.
 
@@ -222,7 +222,7 @@ There are multiple ways to create an Oracle Wallet for ADB.  We will be using Or
       </copy>
       ````
 
-      ![Image](./images/step4-run.png " ") 
+      ![](./images/step4-run.png " ") 
 
 ## Task 7: Create a Database Credential for Your Users
 
@@ -230,30 +230,30 @@ To access data in the Object Store you have to enable your database user to auth
 
 1. Copy and paste this the code snippet in to SQL Developer worksheet. Specify the credentials for your Oracle Cloud Infrastructure Object Storage service by replacing the `<username>` and `<token>` with the following username and password:
 
-    	- Credential name: Description of the auth token. In this example, the auth token is created with the description - `adb1` from step 1.
-    	- Username: The username will be the **OCI Username** you noted in step 3
-    	- Password: The password will be the OCI Object Store Auth **Token** you generated in step 3.
+	- Credential name: Description of the auth token. In this example, the auth token is created with the description - `adb1` from step 1.
+	- Username: The username will be the **OCI Username** you noted in step 3
+	- Password: The password will be the OCI Object Store Auth **Token** you generated in step 3.
 
-    	```
-    	<copy>
-    	BEGIN
-    		DBMS_CLOUD.CREATE_CREDENTIAL(
+	```
+	<copy>
+	BEGIN
+  		DBMS_CLOUD.CREATE_CREDENTIAL(
     		credential_name => 'adb1',
     		username => '<username>',
     		password => '<token>'
-    		);
-    	END;
-    	/
-    	</copy>
-    	```
+  		);
+	END;
+	/
+	</copy>
+	```
 
-      ![Image](./images/step7-1.png " ") 
+      ![](./images/step7-1.png " ") 
 
     Now you are ready to load data from the Object Store.
     
-2. Click the down arrow next to the word **ADMIN** and **Sign Out**.
+2.  Click the down arrow next to the word **ADMIN** and **Sign Out**.
 
-      ![Image](./images/step4-signout.png " ") 
+      ![](./images/step4-signout.png " ") 
 
 You may now **proceed to the next lab**.
 

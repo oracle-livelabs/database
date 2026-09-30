@@ -24,7 +24,7 @@ This lab walks you through the steps to running a destroy job
 1. Login to Oracle cloud
 
 2. Open the navigation menu and click **Developer Services**. Under **Resource Manager**, click **Stacks**.
-    ![stack](./images/stack.png " ")
+  ![stack](./images/stack.png " ")
 
 3. Choose the compartment that you chose in Lab 1 to install your stack (on the left side of the page).
 

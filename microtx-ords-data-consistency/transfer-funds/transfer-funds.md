@@ -251,7 +251,7 @@ Run the following commands to deploy Kiali and Jaeger.
     </copy>
     ```
 
-    A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali`.
+   A URL is displayed. Open the URL in a new tab in your browser to access the Kiali dashboard. For example, `http://localhost:20001/kiali`.
 
 5. Start the Jaeger dashboard. Open a new tab in the terminal window and then run the following command. Leave the terminal running. If a new browser window appears, close the browser window.
 
@@ -278,7 +278,7 @@ When you run the Transfer application, it starts an XA transaction. The Teller a
     </copy>
     ```
 
-    **Command to check the initial balance in account 2 of Department 2**
+   **Command to check the initial balance in account 2 of Department 2**
 
     ```text
     <copy>

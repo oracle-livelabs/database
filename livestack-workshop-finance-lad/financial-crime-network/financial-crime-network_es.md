@@ -1,14 +1,5 @@
 # Investigar un Financiero Crime Network
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Introducción
 
 Bob Green es un seasoned grafo specialist at Seer Bank. He has worked on fraud detection y investigation para la past decade. When la bank necesita un improve how it finds y investigates financiero crime, Bob recommends un property grafo.
@@ -404,8 +395,3 @@ La statement defines la grafo structure over la relacional tablas. It does no mo
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Base de datos Product Management, June 2026
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

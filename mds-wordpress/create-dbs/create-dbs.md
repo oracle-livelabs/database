@@ -49,34 +49,34 @@ In this lab, you will be guided through the following tasks:
    
 4. Provide basic information for the DB System:
 
-    Select Compartment **(root)**
+ Select Compartment **(root)**
 
-    Enter Name
+ Enter Name
      ```
     <copy>MDS-SA</copy>
     ```
-    Enter Description 
+ Enter Description 
     ```
     <copy>MySQL Database Service Standalone instance</copy>
     ```
  
-    Select Standalone to specify a Standalone DB System
+ Select Standalone to specify a Standalone DB System
     ![MDS](./images/04mysql03-1.png " ")
 
 5. Create Administrator Credentials. 
 
-    Enter Username
+ Enter Username
     ```
     <copy>admin</copy>
     ```
 
-    **Note:** Be sure to choose and remember your password
+ **Note:** Be sure to choose and remember your password
 
-    Enter Password
+ Enter Password
     ```
     <copy>????</copy>
     ```   
-    Confirm Password
+ Confirm Password
     ```
     <copy>????</copy>
     ```

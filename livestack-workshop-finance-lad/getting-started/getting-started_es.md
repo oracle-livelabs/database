@@ -1,14 +1,5 @@
 # Primeros pasos
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Introducción
 
 Utilice este laboratorio para abrir la reserva de LiveLabs, acceder a la instancia provisionada de **Autonomous Database 26ai** y preparar SQL Worksheet para los ejercicios financieros prácticos. Piense en esto como preparar el escritorio, la credencial y el cuaderno antes de comenzar la investigación: cada consulta financiera se ejecuta como el usuario del taller contra el esquema financiero preparado.
@@ -120,8 +111,3 @@ Ya puede continuar con los laboratorios financieros.
 * **Autor** - Pat Shepherd, Senior Principal Database Product Manager
 * **Colaborador** - Linda Foinding, Principal Database Product Manager
 * **Última actualización por/fecha** - Oracle Database Product Management, mayo de 2026
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

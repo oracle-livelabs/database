@@ -165,7 +165,7 @@ In this lab, you will:
     SQL>
     ```
 
-    *Observe that the description displays only the visible columns.*
+*Observe that the description displays only the visible columns.*
 
 5. Use the `USER_TAB_COLS` view to display all internal column names used to store internal information like the users number, the users signature.
 
@@ -209,7 +209,7 @@ In this lab, you will:
     SQL>
     ```
 
-2. Display the internal values of the first row of the chain.
+2.  Display the internal values of the first row of the chain.
 
     ```
     SQL> <copy>COL "Chain date" FORMAT A17</copy>
@@ -227,7 +227,7 @@ In this lab, you will:
     Chain HASH
     --------------------------------------------------------------------------------
           14         1 06-Apr-2020 12-26      119
-    5812238B734B019EE553FF8A7FF573A14CFA1076AB312517047368D600984CFAB001FA1FF2C98B139AB03DDCCF8F6C14ADF16FFD678756572F102D43420E69B3
+5812238B734B019EE553FF8A7FF573A14CFA1076AB312517047368D600984CFAB001FA1FF2C98B139AB03DDCCF8F6C14ADF16FFD678756572F102D43420E69B3
 
     SQL>
     ```
@@ -309,7 +309,7 @@ In this lab, you will:
     SQL>
     ```
 
-    *You cannot delete rows in a blockchain table with the DML `DELETE` command. You must use the `DBMS_BLOCKCHAIN_TABLE` package.*
+  *You cannot delete rows in a blockchain table with the DML `DELETE` command. You must use the `DBMS_BLOCKCHAIN_TABLE` package.*
 
     ```
     SQL> <copy>SET SERVEROUTPUT ON</copy>
@@ -327,9 +327,9 @@ In this lab, you will:
     SQL>
     ```
 
-    *You can delete rows in a blockchain table only by using the `DBMS_BLOCKCHAIN_TABLE` package, and only rows that are outside the retention period. This is the reason why the procedure successfully completes without deleting any row.
+  *You can delete rows in a blockchain table only by using the `DBMS_BLOCKCHAIN_TABLE` package, and only rows that are outside the retention period. This is the reason why the procedure successfully completes without deleting any row.
 
-    If the Oracle Database release installed is 20.0.0, then the procedure to use is `DBMS_BLOCKCHAIN_TABLE.DELETE_ROWS` and not `DBMS_BLOCKCHAIN_TABLE.DELETE_EXPIRED_ROWS`.*
+  If the Oracle Database release installed is 20.0.0, then the procedure to use is `DBMS_BLOCKCHAIN_TABLE.DELETE_ROWS` and not `DBMS_BLOCKCHAIN_TABLE.DELETE_EXPIRED_ROWS`.*
 
 2. Truncate the table.
 
@@ -368,9 +368,9 @@ In this lab, you will:
     SQL>
     ```
 
-    *Observe that the error message is slightly different. The error message from the `TRUNCATE TABLE` command explained that the operation was not possible on a blockchain table. The current error message explains that the `DROP TABLE` is not possible but on this `LEDGER_EMP` table.
+  *Observe that the error message is slightly different. The error message from the `TRUNCATE TABLE` command explained that the operation was not possible on a blockchain table. The current error message explains that the `DROP TABLE` is not possible but on this `LEDGER_EMP` table.
 
-    The blockchain table was created so that it cannot be dropped before 31 days of inactivity.*
+  The blockchain table was created so that it cannot be dropped before 31 days of inactivity.*
 
 2. Change the behavior of the table to allow a lower retention.
 

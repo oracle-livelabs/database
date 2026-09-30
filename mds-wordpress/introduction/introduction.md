@@ -1,7 +1,4 @@
 # Introduction
-
-Estimated Workshop Time: TODO - x minutes
-
 ![INTRO](./images/00-mds-image.png " ") 
 
 

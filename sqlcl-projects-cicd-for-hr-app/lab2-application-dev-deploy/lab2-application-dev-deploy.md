@@ -22,11 +22,6 @@ Estimated Lab Time: 15 minutes
 * Basic knowledge of SQL and coding.
 * Completion of the previous lab.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Unlock Departments Page
 
 Find the placeholder component within the application's code, and replace it with Department implementation.
@@ -151,8 +146,8 @@ If you are still connected to DEV_USER in Database Actions, skip to step 3.
 5. Refresh the tables list, and you'll notice the REST-enabled icon appear next to the DEPARTMENTS table, confirming that it is now ready for REST interactions
     <!--![The REST enabled icon appears](./images/rest-enable-icon-for-departments.png " ")-->
 
-    Your DEPARTMENTS table is now ready for REST interactions.
-    <!--
+Your DEPARTMENTS table is now ready for REST interactions.
+<!--
 3. Select **Tables**, right-click on **`DEPARTMENTS`**, choose **REST**, and then click **Enable**
     ![Enable ORDS Endpoint For Departments Table](./images/enable-ords-for-departments.png " ")
 4. Click **Enable** at the bottom right

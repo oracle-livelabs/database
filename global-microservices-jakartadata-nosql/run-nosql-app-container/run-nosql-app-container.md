@@ -28,14 +28,14 @@ In this task, we will review the code using the OCI Code Editor.
 
 1. Open the OCI Code Editor in the top-right menu.
 
-    ![Cloud Editor](https://oracle-livelabs.github.io/common/images/console/cloud-code-editor.png)
+   ![Cloud Editor](https://oracle-livelabs.github.io/common/images/console/cloud-code-editor.png)
 
 2. Open `microprofile-config.properties` in the directory `books-management/src/main/resources/META-INF/`. This file configures the database connection and deployment settings, providing flexibility for different environments.
 
-    ![Code createTable](./images/appl-properties.png)
+   ![Code createTable](./images/appl-properties.png)
 
-    Let us take a look at the class ` microprofile-config.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
-    In this lab, we are going to be running application using Resource Principals.
+   Let us take a look at the class ` microprofile-config.properties` again. In the previous lab, we ran the application code using Cloud Shell and used delegation tokens.
+   In this lab, we are going to be running application using Resource Principals.
 
     As discussed in the Lab 2 - Task 4: Understand Credentials, and Policies. To use them you have to set up a dynamic group and create a policy
     that grants the dynamic group access to a resource. We did it for you in Lab 2 - Task 3: Deploy Infrastructure using Terraform.
@@ -58,7 +58,7 @@ After reviewing the code, you can close the Code Editor.
 
 1. Open the Cloud Shell. If you minimized it earlier, expand it. If it is disconnected or timed out, restart it.
 
-    ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
+   ![Cloud Shell](https://oracle-livelabs.github.io/common/images/console/cloud-shell.png)
 
 2. Execute the following setup shell script in Cloud Shell to set up your environment. Please copy the values for `OCI_REGION` and `OCI_NOSQL_COMPID` (labeled `NOSQL_REGION` and `NOSQL_COMPID` in your environment):
 
@@ -75,11 +75,11 @@ After reviewing the code, you can close the Code Editor.
 
 1. In the left side menu (under the Oracle Cloud banner), go to Developer Services and select **Containers & Artifacts** - **Container Instances**.
 
-    ![Open Containers & Artifacts](images/menu-container-instance.png)
+   ![Open Containers & Artifacts](images/menu-container-instance.png)
 
 2. Click on **Create Container Instance**. In the new window, enter **Book Management Catalog with OCI and NoSQL** as the name. Ensure the compartment is `demonosql`. Verify the 'Networking' section as shown below. Click **Next**.
 
-    ![Create Container Instances](images/create-container-instance-1.png)
+   ![Create Container Instances](images/create-container-instance-1.png)
 
 3. Enter **demo-nosql-book-management-app** as the name. Click **Select Image**, choose **External Registry**, and enter:
     - **Registry hostname**: `ghcr.io`
@@ -98,11 +98,11 @@ After reviewing the code, you can close the Code Editor.
 
 5. Click **Next**, review the setup, and then click **Create**.
 
-    ![Create Deployment](images/create-container-instance-4.png)
+   ![Create Deployment](images/create-container-instance-4.png)
 
 6. Wait a few seconds for the deployment to complete. The status will change from **Creating** to **Active**.
 
-    ![Create Deployment](images/create-container-instance-5.png)
+   ![Create Deployment](images/create-container-instance-5.png)
 
 7. Copy the Public IP address of the container instance.
 
@@ -133,7 +133,7 @@ After reviewing the code, you can close the Code Editor.
     </copy>
     ```
 
-    This will display all the rows in the table. You can execute additional queries as needed.
+   This will display all the rows in the table. You can execute additional queries as needed.
 
 4. Exit the Cloud Shell
 

@@ -22,10 +22,6 @@ _Estimated Lab Time_: 75 minutes
 - Completion of the previous labs.
 
 ##  
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Create a Function Application
 
 1. From the OCI services menu click **Policies** under **Identity** , Create "FunctionApplicationPolicies" into the name section and type "Allow functions to work" in the description section. Scroll down to the Policy statements section. Click the **+ Another Statement**.
@@ -75,7 +71,7 @@ Here we will be performing the below steps to Launch Cloud Console ,Create, depl
     ![Getting Started ](images/func-cloudshell.png)
 
 2. Create, deploy, and invoke your function
-    Create the Function : (Step No 8 on OCI console) ```
+   Create the Function : (Step No 8 on OCI console) ```
     <copy>
     fn init --runtime python streamhwfunc
     </copy> ```
@@ -96,7 +92,7 @@ Here we will be performing the below steps to Launch Cloud Console ,Create, depl
     [Refer to downloadbled MYSQLLakehouse_labfiles.zip]
     Changes in the func.py script is as below:
        ```
-    <copy>
+<copy>
     Line No -33 - In the endpoint replace the ML model deployment URL.
     endpoint = "http://IP:5000/predict" # change here for the lab with your compute ipfor Lab
     </copy>
@@ -173,13 +169,13 @@ For simple archiving operations, we don’t need to write a single line of code.
 
 6. For the compartment, choose the demo compartment.
 
-    ![Service Connector](./images/oci-service-connector.png)
+![Service Connector](./images/oci-service-connector.png)
 
 7. Now to configure your service connector, Choose  ’Streaming’ as the ***source***, and ‘function’ as the ***target***. Chose the compartment where the stream pool resides, choose the stream pool, and the stream. You can choose to read from either the ‘Latest’ offset or ’Trim Horizon’ (the oldest non-committed offset).
 
-    ![Service Connector](./images/func-eventhub.png)
+![Service Connector](./images/func-eventhub.png)
 
-    ![Service Connector](./images/func-eventhub2.png)
+![Service Connector](./images/func-eventhub2.png)
 8. Click ***Create*** and the service connector is ready to collect the streams.
 
 You may now **proceed to the next lab**

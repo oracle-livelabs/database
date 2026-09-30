@@ -53,7 +53,7 @@ In this lab, you will
 
 3. Make sure to run the lb generate-schema command from the directory ***changes/hr.00000.base***.
 
-    Change the working directory to ***changes/hr.00000.base***, remove any existing files and run lb generate-schema
+   Change the working directory to ***changes/hr.00000.base***, remove any existing files and run lb generate-schema
 
     ```text
     <copy>cd changes/hr.00000.base</copy>

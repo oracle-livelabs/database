@@ -430,7 +430,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     SQL>
     ```
 
-    Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format. This is not required to initiate Database In-Memory population.
+  Note the FULL and NOPARALLEL hints. These have been added to ensure that the table data is also read into the KEEP pool that was defined. This is only done for this Lab so that we can show you a true memory based comparison of the performance of the Database In-Memory columnar format versus the traditional row format. This is not required to initiate Database In-Memory population.
 
 9. There is a function available that enables the ability to programatically check if the IM column store has been populated. The function, dbms\_inmemory\_admin.populate_wait returns a code based on populate priority and percentage of population:
 
@@ -533,7 +533,7 @@ In this Lab we will explore how the In-Memory column store is enabled in Oracle 
     from   v$im_segments
     order by owner, segment_name, partition_name;
     </copy>
-    ```
+   ```
 
     Query result:
 

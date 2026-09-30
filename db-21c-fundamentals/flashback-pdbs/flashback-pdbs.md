@@ -138,7 +138,7 @@ In this lab, you will:
 
     ```
 
-    Possible `ORPHAN` incarnations would come from previous PDB resetlogs.
+  Possible `ORPHAN` incarnations would come from previous PDB resetlogs.
 
 2. Display the number of rows in `HR.EMPLOYEES` table.
 
@@ -356,7 +356,7 @@ In this lab, you will:
 
     ```
 
-    This command exists only in RMAN.
+  This command exists only in RMAN.
 
 
     ```
@@ -424,7 +424,7 @@ In this lab, you will:
 
     ```
 
-    What does this error mean?
+  What does this error mean?
 
 
     ```
@@ -450,7 +450,7 @@ In this lab, you will:
 
     ```
 
-    Use the SCN displayed at the end of step when the user increased the salary of the employees.
+  Use the SCN displayed at the end of step when the user increased the salary of the employees.
 
 
     ```

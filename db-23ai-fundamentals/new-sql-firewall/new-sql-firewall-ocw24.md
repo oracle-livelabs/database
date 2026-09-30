@@ -18,11 +18,6 @@ The objective of this workshop is to familiarize you with the SQL Firewall featu
 - Access to Oracle Database 23ai environment.
 - Basic understanding of SQL.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Enabling SQL Firewall
 
 
@@ -173,7 +168,7 @@ In this lab, you will:
     ```
     ![generate allow list](images/im14.png =50%x*)
 
-4. Now we can enable SQL firewall so only SQL from our allow list can hit the database. 
+4.  Now we can enable SQL firewall so only SQL from our allow list can hit the database. 
 
     ```
     <copy>

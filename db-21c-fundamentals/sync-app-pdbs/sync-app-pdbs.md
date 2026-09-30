@@ -108,17 +108,17 @@ In this lab, you will:
 1. Synchronize the application PDBs with the new applications.
 
     ```
-    	  <copy>sqlplus sys@localhost:1521/robots AS SYSDBA</copy>
-    	  Enter password: WElcome123##
+	  <copy>sqlplus sys@localhost:1521/robots AS SYSDBA</copy>
+	  Enter password: WElcome123##
     ```
     ```
 
-    	  SQL> <copy>ALTER PLUGGABLE DATABASE APPLICATION toys_app, sales_toys_app SYNC;</copy>
-    	  Pluggable database altered.
+	  SQL> <copy>ALTER PLUGGABLE DATABASE APPLICATION toys_app, sales_toys_app SYNC;</copy>
+	  Pluggable database altered.
 
-    	  SQL>
+	  SQL>
 
-    	```
+  	```
 
 2. Display the applications installed in the application container.
 

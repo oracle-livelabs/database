@@ -25,7 +25,7 @@ In this lab, you will:
 ## Task 1: Open Database Actions
 
 1. If you have just completed the previous lab, you can skip this task as you will already be in Database Actions.
-    Otherwise, log in to the Oracle Cloud.
+Otherwise, log in to the Oracle Cloud.
 
 <if type="freetier">
 
@@ -60,18 +60,18 @@ In this lab, you will:
     ![check workload type](./images/workload-type.png " ")
 
 <if type="freetier">
-    > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+   > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 
 7. You should see your database **TEXTDB** listed in the center. Click on the database name "JSONDB".
 
     ![database name](./images/database-name.png " ")
 
-8. On the database page, choose __Database Actions__.
+8.  On the database page, choose __Database Actions__.
 
     ![dbactions button](./images/dbactions-button.png " ")
 
-9. You are now in Database Actions.
+9.  You are now in Database Actions.
 
     Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
     
@@ -82,7 +82,7 @@ In this lab, you will:
 
 ## Task 2: Run Text Queries
 
-1. First familiarize yourself with the text contained in USER_DATA. Copy the following and press the "Run Command" button.
+1.  First familiarize yourself with the text contained in USER_DATA. Copy the following and press the "Run Command" button.
 
     ```
     <copy>
@@ -95,7 +95,7 @@ In this lab, you will:
     There are three rows in our table. Take a minute to review each one.
 
 
-2. The CONTAINS operator
+2.  The CONTAINS operator
 
     To search an Oracle Text CONTEXT index you must use the CONTAINS operator. CONTAINS is specific to that type of index.
     Unlike 'ordinary' indexes, you can't get the same results with or without an index. CONTAINS simply won't work if there is no CONTEXT index present.
@@ -104,8 +104,8 @@ In this lab, you will:
 
     CONTAINS takes two or three arguments. The third is optional and we'll leave it for later. The two required arguments are:
 
-    1. The name of the column to be searched
-    2. A string value to search for. The string can be a literal string, or anything that evaluates to a string (VARCHAR2 or CLOB).
+    1.  The name of the column to be searched
+    2.  A string value to search for. The string can be a literal string, or anything that evaluates to a string (VARCHAR2 or CLOB).
     
     Let's try a simple example. We'll look for the word 'John':
 
@@ -121,7 +121,7 @@ In this lab, you will:
 
     You could also try searching for upper-case JOHN. You'll get the same result. CONTAINS searches (at least for an English index) are not case-sensitive, unlike LIKE searches.
 
-3. Mixed Queries
+3.  Mixed Queries
 
     CONTAINS is a SQL operator. So you can, of course, combine it with any other WHERE clause. For example, we can look for the word 'Smith' where the value of AMOUNT is less than 100. Let's try that:
 
@@ -135,7 +135,7 @@ In this lab, you will:
 
     ![A mixed query](./images/mixed-query.png " ")
 
-4. An OR search
+4.  An OR search
 
     The search string argument to CONTAINS has its own syntax, with various internal operators such as __AND__, __OR__, __NEAR__ and many others. We'll just show one example here, for more information you should refer to the [Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/ccref/oracle-text-CONTAINS-query-operators.html).
 
@@ -152,7 +152,7 @@ In this lab, you will:
 
     ![an OR search](./images/or-search.png " ")
 
-5. Wildcards
+5.  Wildcards
 
     An alternative way to run the previous search would be to use the wildcard operator __%__. As with standard SQL, a percentage sign __%__ matches any string of characters, and an underscore _____ character matches any single character.
 
@@ -171,7 +171,7 @@ In this lab, you will:
 
     ![wildcard search with percent](./images/wild-cards.png " ")
 
-6. Phrase searches
+6.  Phrase searches
 
     If you want to find two words in the same document, you can do an __AND__ search, similar to the __OR__ you did above. If you want to find two words together, you just enter them as a phrase. No need to add quotes or anything, two words together automatically constitute a phrase search and will match only if they appear together in the indexed text.
 
@@ -186,7 +186,7 @@ In this lab, you will:
 
     ![phrase search](./images/phrase-search.png " ")
 
-7. Fuzzy searches
+7.  Fuzzy searches
 
     If you make a mistake or simply don't remember the exact spelling, you can do a __FUZZY__ search. It will find not only the original search word, but also all those similar to it.
 
@@ -201,7 +201,7 @@ In this lab, you will:
 
     ![phrase search](./images/fuzzy-search.png " ")
 
-8. Near searches
+8.  Near searches
 
     You can find words close to each other using the __NEAR__ operator. It will find words within specified distance of each other. For example, the following query doesn't find any result. Because there are two words between "order" and "smith", but we specified that we wanted a maximum of 1 word between them.
 

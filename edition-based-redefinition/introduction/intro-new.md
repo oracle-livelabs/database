@@ -1,11 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 ## About this Workshop
 
 This workshop will cover how to evolve your oracle database applications entirely online. While building automated development pipelines is highly regarded by development teams, making changes to database schemas and stored procedures without interrupting application traffic is tricky. What if the database changes were both safe and online? We will use Oracle Database features that allow for online data movement, schema redefinitions, table reorganizations, and, thanks to the integration with DevOps tools, controlling code versioning (Liquibase).

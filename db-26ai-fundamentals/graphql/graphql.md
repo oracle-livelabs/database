@@ -25,11 +25,6 @@ Estimated Lab Time: 35 minutes
 - Basic understanding of SQL and JSON
 - Familiarity with database tables and relationships
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Understanding GraphQL in Oracle AI Database
 
 Before we start writing queries, let's understand what GraphQL is and how it works in Oracle AI Database.
@@ -97,11 +92,11 @@ Before we begin, here are the key concepts you'll use:
 
 
 ## Task 1: Create the Database Schema
-1. Imagine you're building the backend for an online electronics store. Your frontend team needs product catalogs, order details, and customer info in JSON format. GraphQL makes this straightforward. 
+1.  Imagine you're building the backend for an online electronics store. Your frontend team needs product catalogs, order details, and customer info in JSON format. GraphQL makes this straightforward. 
 
-    In this task, you'll create the tables and data for the demo. Pay attention to the foreign key constraints here. The `graphql()` function uses these to understand how to get related data automatically. First, create the database tables. 
+  In this task, you'll create the tables and data for the demo. Pay attention to the foreign key constraints here. The `graphql()` function uses these to understand how to get related data automatically. First, create the database tables. 
   
-    Click the copy button and run this inside SQL Developer Web. Be sure to click the 'Run Script' button (shown in the screenshot).
+  Click the copy button and run this inside SQL Developer Web. Be sure to click the 'Run Script' button (shown in the screenshot).
 
     ```
     <copy>
@@ -272,9 +267,9 @@ Now you'll write your first GraphQL queries. The key benefit is you can get data
 
 1. Query categories with all their products.
 
-    In the query below, notice how you put **`products`** directly inside **`categories`**. The database uses the foreign key relationship between these tables to automatically get all products for each category. No JOIN statement needed.
+   In the query below, notice how you put **`products`** directly inside **`categories`**. The database uses the foreign key relationship between these tables to automatically get all products for each category. No JOIN statement needed.
 
-    Also notice the syntax like **`categoryName: category_name`**. This lets you rename columns - the part before the colon is what appears in your JSON output, and the part after the colon is the actual database column name.
+   Also notice the syntax like **`categoryName: category_name`**. This lets you rename columns - the part before the colon is what appears in your JSON output, and the part after the colon is the actual database column name.
 
     ```sql
     <copy>
@@ -294,7 +289,7 @@ Now you'll write your first GraphQL queries. The key benefit is you can get data
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - JSON output with each category containing an array of its products
     - For example, the "Laptops" category will show MacBook Pro, Dell XPS, and Gaming Laptop ROG
     - All the data came from one query, even though it's spread across two tables
@@ -321,13 +316,13 @@ Now you'll write your first GraphQL queries. The key benefit is you can get data
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Only one category: "Laptops"
     - Three products: MacBook Pro, Dell XPS, and Gaming Laptop ROG
 
 3. Query customers with complete order details.
 
-    GraphQL can handle multiple levels of nesting. This statement gets customers, their orders, the items in each order, and the product details for each item. 
+   GraphQL can handle multiple levels of nesting. This statement gets customers, their orders, the items in each order, and the product details for each item. 
 
     ```sql
     <copy>
@@ -359,7 +354,7 @@ Now you'll write your first GraphQL queries. The key benefit is you can get data
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Each customer with their orders nested inside
     - Each order showing the items purchased
     - Each item showing the product name and category
@@ -391,7 +386,7 @@ Basic GraphQL queries are useful, but real apps need to filter and sort data. Di
 
 1. Filter products by price range using `@where`.
 
-    The `@where` directive lets you filter results. You provide a SQL condition inside it. The query below finds products priced between $800 and $1500.
+   The `@where` directive lets you filter results. You provide a SQL condition inside it. The query below finds products priced between $800 and $1500.
 
     ```sql
     <copy>
@@ -407,7 +402,7 @@ Basic GraphQL queries are useful, but real apps need to filter and sort data. Di
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Only products in that price range: Dell XPS 13 ($1299), Gaming Laptop ROG ($1899), Samsung Galaxy S24 ($849)
     - Notice how we also got the category name by requesting `categories` inside products - GraphQL follows relationships in both directions
 
@@ -418,7 +413,7 @@ Basic GraphQL queries are useful, but real apps need to filter and sort data. Di
 
 2. Sort products by price using `@orderby`.
 
-    The `@orderby` directive sorts results. The SQL below shows all categories, with products sorted by price (highest first).
+   The `@orderby` directive sorts results. The SQL below shows all categories, with products sorted by price (highest first).
 
     ```sql
     <copy>
@@ -435,13 +430,13 @@ Basic GraphQL queries are useful, but real apps need to filter and sort data. Di
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Each category with its products sorted by price
     - In the Laptops category: MacBook Pro ($2499) appears first, then Gaming Laptop ROG ($1899), then Dell XPS 13 ($1299)
 
 3. Calculate new values using `@generated`.
 
-    The `@generated` directive creates calculated fields that don't exist in your database. The SQL below calculates the inventory value by multiplying price by quantity.
+   The `@generated` directive creates calculated fields that don't exist in your database. The SQL below calculates the inventory value by multiplying price by quantity.
 
     ```sql
     <copy>
@@ -456,7 +451,7 @@ Basic GraphQL queries are useful, but real apps need to filter and sort data. Di
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Only products with more than 20 units in stock
     - A new `inventoryValue` field showing the total value (price × quantity)
     - For example, Dell XPS 13 has 23 units at $1299 each = inventory value of $29,877
@@ -506,7 +501,7 @@ Think of it like a function: you define the parameters once, then call it with d
 
 1. Use a variable to query different categories.
 
-    The query below uses `$categoryId` as a placeholder. You provide the actual value with `PASSING 2 AS "categoryId"`. Try changing the 2 to 1 or 3 to see different categories.
+   The query below uses `$categoryId` as a placeholder. You provide the actual value with `PASSING 2 AS "categoryId"`. Try changing the 2 to 1 or 3 to see different categories.
 
     ```sql
     <copy>
@@ -532,7 +527,7 @@ Think of it like a function: you define the parameters once, then call it with d
 
 2. Get customer order details with a variable.
 
-    This query gets one customer's complete order history. Change the customer ID to see different customers.
+   This query gets one customer's complete order history. Change the customer ID to see different customers.
 
     ```sql
     <copy>
@@ -564,7 +559,7 @@ Think of it like a function: you define the parameters once, then call it with d
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Customer 2: Michael Chen
     - His order from January 20, 2024
     - Order items showing he bought a Dell XPS 13 and USB-C Hub
@@ -573,7 +568,7 @@ Think of it like a function: you define the parameters once, then call it with d
 
 3. Use multiple variables in one query.
 
-    You can pass multiple variables. This query uses two: minimum price and minimum stock quantity.
+   You can pass multiple variables. This query uses two: minimum price and minimum stock quantity.
 
     ```sql
     <copy>
@@ -591,7 +586,7 @@ Think of it like a function: you define the parameters once, then call it with d
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Products priced at least $1000 with at least 20 units in stock
     - Should show: MacBook Pro ($2499, 15 units) and iPhone 15 Pro ($999, 45 units)
     - Try different values like `PASSING 2000 AS "minPrice", 10 AS "minStock"` to see different results
@@ -631,7 +626,7 @@ Oracle's GraphQL includes a number of other directives and features. This task s
 
 1. Group related fields with `@nest`.
 
-    The `@nest` directive lets you group related fields under a single object. This is useful for organizing your JSON output into logical sections.
+   The `@nest` directive lets you group related fields under a single object. This is useful for organizing your JSON output into logical sections.
 
     ```sql
     <copy>
@@ -648,14 +643,14 @@ Oracle's GraphQL includes a number of other directives and features. This task s
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Each product with a nested `pricingInfo` object
     - Price, stock, and calculated inventory value grouped together
     - This makes the JSON structure cleaner and more organized
 
 2. Flatten nested data with `@unnest`.
 
-    The `@unnest` directive does the opposite of nesting - it brings fields from a related table directly into the parent object instead of creating a nested structure.
+   The `@unnest` directive does the opposite of nesting - it brings fields from a related table directly into the parent object instead of creating a nested structure.
 
     ```sql
     <copy>
@@ -671,12 +666,12 @@ Oracle's GraphQL includes a number of other directives and features. This task s
     </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Products with `categoryName` as a direct field
     - Instead of a nested `categories` object, the category name appears at the top level
     - This is useful when you only need one or two fields from a related table
 
-3. When you have multiple foreign keys between tables, the `@link` directive explicitly tells GraphQL which one to use. While GraphQL can auto-detect foreign keys, `@link` gives you explicit control
+3.    When you have multiple foreign keys between tables, the `@link` directive explicitly tells GraphQL which one to use. While GraphQL can auto-detect foreign keys, `@link` gives you explicit control
 
     ```sql
     <copy>
@@ -691,7 +686,7 @@ Oracle's GraphQL includes a number of other directives and features. This task s
     }');    </copy>
     ```
 
-    **What you should see:**
+   **What you should see:**
     - Categories with their products
     - The `@link` directive explicitly specifies which columns to join (from categories.category\_id to products.category\_id)
 

@@ -22,11 +22,6 @@ This lab is just a short overview of the functionality introduced with Property 
 - Basic understanding of SQL is helpful.
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Lab Setup and Creating Property Graphs  
 
 1. Let's first enhance our customers and ratings datasets. 

@@ -1,9 +1,6 @@
 # Configure Your Host Environment
 
 ## Introduction
-
-Estimated Time: TODO - x minutes
-
 In this lab on your host instance, you will:
 * Install Oracle Cloud Infrastructure Command Line Interface (OCI CLI)
 * Create a Zero Downtime Migration (ZDM) group and user
@@ -21,11 +18,6 @@ The API keys you are generating are to allow the OCI CLI you installed on your h
 The reason your OCI directory is being copied to 'zdmuser', 'oracle', and 'opc' is so that each of these 3 users can utilize the OCI CLI.
 
 Estimate Lab Time: 20 minutes
-
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
 
 ## Task 1: Install OCI CLI
 1. Return to your compute instance command prompt as 'opc'. If you navigated away while creating your target database, you can reconnect through your command prompt with the following command. Replace < sshkeyname > and < Your Compute Instance Public IP Address > with the key file name and IP address of your source compute instance:
@@ -211,16 +203,16 @@ In this lab, you will:
     ```
 
 3. On your OCI Dashboard navigate to and click on your user profile in the top right. Select the top option, your user.
-    ![Dashboard Profile](./images/dashboard-profile.png)
+    ![Dashboard Profile](./images/dashboard-profile.PNG)
 
 4. Select 'API Keys' and 'Add API Key'.
-    ![Add API Keys](./images/add-api-keys.png)
+    ![Add API Keys](./images/add-api-keys.PNG)
 
 5. Paste your public OCI API key file you catted and copied to clipboard from above.
-    ![Paste Public Key](./images/paste-pub-key.png)
+    ![Paste Public Key](./images/paste-pub-key.PNG)
 
 6. You will see a configuration file preview. Copy its contents to clipboard. You will be using it to populate your configuration file in the following step.
-    ![Configuration File Preview](./images/config-file-preview.png)
+    ![Configuration File Preview](./images/config-file-preview.PNG)
 
 ## Task 5: Creating Your Configuration File and Copying Your Directory
 1. Back in your command prompt create your config file.
@@ -249,7 +241,7 @@ In this lab, you will:
     </copy>
     ```
 
-    ![Update Path](./images/update-path.png)
+    ![Update Path](./images/update-path.PNG)
 
 5. Press the escape key to escape insert.
 
@@ -322,7 +314,7 @@ In this lab, you will:
     </copy>
     ```
 
-    ![OCI CLI Test](./images/cli-test.png)
+    ![OCI CLI Test](./images/cli-test.PNG)
 
 13. Repeat the steps for 'oracle'.
 
@@ -411,7 +403,7 @@ In this lab, you will:
     </copy>
     ```
 
-    ![RSA Key Check](./images/cat-rsa.png)    
+    ![RSA Key Check](./images/cat-rsa.PNG)    
 
 5. Switch back to 'zdmuser':
 

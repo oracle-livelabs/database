@@ -14,11 +14,11 @@ This lab assumes you have:
 - An Oracle Cloud account
 
 ## Task 1: Download Oracle Resource Manager (ORM) stack zip file
-1. Click on the link below to download the Resource Manager zip file you need to build your environment:
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment:
 
     - [ods-ha-mkplc-freetier.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/ods-ha-mkplc-freetier.zip)
 
-2. Save in your downloads folder.
+2.  Save in your downloads folder.
 
 We strongly recommend using this stack to create a self-contained/dedicated VCN with your instance(s). Skip to *Task 3* to follow our recommendations. If you would rather use an exiting VCN then proceed to the next task to update your existing VCN with the required Ingress rules.
 
@@ -43,19 +43,19 @@ This workshop requires a certain number of ports to be available, a requirement 
 {: title="List of Optional Network Security Rules"}
 -->
 
-1. Go to *Networking >> Virtual Cloud Networks*
-2. Choose your network
-3. Under Resources, select Security Lists
-4. Click on Default Security Lists under the Create Security List button
-5. Click Add Ingress Rule button
-6. Enter the following:  
+1.  Go to *Networking >> Virtual Cloud Networks*
+2.  Choose your network
+3.  Under Resources, select Security Lists
+4.  Click on Default Security Lists under the Create Security List button
+5.  Click Add Ingress Rule button
+6.  Enter the following:  
     - Source Type: CIDR
     - Source CIDR: 0.0.0.0/0
     - IP Protocol: TCP
     - Source Port Range: All (Keep Default)
     - Destination Port Range: *Select from above table*
     - Description: *Select corresponding description from above table*
-7. Click the Add Ingress Rules button
+7.  Click the Add Ingress Rules button
 8. Repeat steps [5-7] until a rule is created for each port listed in the table
 
 ## Task 3: Setup Compute   

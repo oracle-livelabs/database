@@ -1,14 +1,5 @@
 # Revisar un Semantic Riesgo Search
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Introducción
 
 Gilly Bourne es un AI engineer at Seer Bank. Her equipo has built un búsqueda feature para la riesgo operations aplicación. A negocio usuario puede enter un pregunta such como **which clientes may be affected by un mortgage pre-approval concern?** La aplicación debe find la relevant productos first, then show la clientes who ordered them.
@@ -283,8 +274,3 @@ Gilly has built la búsqueda behind la aplicación y connected it un un negocio 
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Base de datos Product Management, August 2026
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -142,7 +142,7 @@ This lab assumes that you have completed the previous labs and successfully enab
 ## Task 2: Connect to the database with a token.
 
 1. Generate a token used for database access. It is possible to use a token when using a ‘/’ (slash) login because of the OCI_TOKEN parameter we added to the connect string in the tnsnames.ora file in the previous lab. Using a token instead of a password is more secure since you’re not using and sending a password verifier to the database.
-    >**Note:** The IAM token is stored in a default location which is also known by the database client. A directory location can also be specified when retrieving and using the token.
+>**Note:** The IAM token is stored in a default location which is also known by the database client. A directory location can also be specified when retrieving and using the token.
 
     ```
     <copy>oci iam db-token get</copy>

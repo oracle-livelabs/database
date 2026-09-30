@@ -27,11 +27,6 @@ By the end of this lab you will be able to:
 - VS Code installed on your machine
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Download Your Wallet
 
 **What is a wallet?**
@@ -42,8 +37,8 @@ We're going to use the wallet to connect the SQL Developer VS code extension wit
 
 1. From your Autonomous Database home page, **click** Database connection and download the database **Wallet**.  
 
-    ![download wallet](./images/wallet.png " ")
-    ![download wallet](./images/wallet-download.png " ")
+   ![download wallet](./images/wallet.png " ")
+   ![download wallet](./images/wallet-download.png " ")
 
 2. Give the wallet a password. You can make your password anything you like, just don't forget it. (I suggest using the same password for the workshop) and click Download in the bottom right
     * Password: **OracleAIworld2025**
@@ -65,15 +60,15 @@ This extension will store your database connection details
 
 1. Open VS Code and go to the **Extensions** view.  
 2. Search for “Oracle SQL Developer” and click **Install**.  
-    Or install directly from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer).  
+   Or install directly from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=Oracle.sql-developer).  
 
-    ![install sql dev extension](./images/lab-2/4-search-for-sql-developer-web-vscode-extension.png " ")
+   ![install sql dev extension](./images/lab-2/4-search-for-sql-developer-web-vscode-extension.png " ")
 
 3. Once installed, open the SQL Developer Extension in the Activity Bar.  
-    ![install sql dev extension](./images/lab-2/6-creating-your-first-sql-developer-web-extension-connection.png " ")
+   ![install sql dev extension](./images/lab-2/6-creating-your-first-sql-developer-web-extension-connection.png " ")
 
 4. Click **Create Connection** 
-    ![install sql dev extension](./images/lab-2/7-entering-your-free-sql-credentials-for-new-connection.png " ")
+   ![install sql dev extension](./images/lab-2/7-entering-your-free-sql-credentials-for-new-connection.png " ")
 
 5. Enter your wallet connection details:
 
@@ -97,20 +92,20 @@ This extension will store your database connection details
 Cline is an open-source AI Coding agent.
 
 1. In VS Code Extensions, search for “Cline” and install it.  
-    ![install cline](./images/lab-2/13-searching-for-cline-vs-code-extension.png " ")
+   ![install cline](./images/lab-2/13-searching-for-cline-vs-code-extension.png " ")
 
 2. Open Cline in the Activity Bar.
 
-    ![alt text](./images/c8.png =30%x* )
+   ![alt text](./images/c8.png =30%x* )
 
 3. Configure your AI provider. You have several options:
       - Use Cline's free service (click **Get started for free**)
       - Use your own API key from OpenAI, Anthropic, or other providers
       - Use Oracle Code Assist with your Oracle SSO
 
-    For this demo, we'll show the free option. Click **Get started for free** if you want to use Cline's service.
+   For this demo, we'll show the free option. Click **Get started for free** if you want to use Cline's service.
 
-    ![alt text](./images/c10.png =30%x* )
+   ![alt text](./images/c10.png =30%x* )
 
 4. If using Cline's free service, you'll be prompted to sign up. Follow the instructions to create an account (this is optional - you can skip if you have your own API keys).
 
@@ -118,7 +113,7 @@ Cline is an open-source AI Coding agent.
       - Click the **gear icon** to open Cline settings
       - Click **API Configuration**
 
-    ![choose provider](./images/w3.png =30%x* " ")
+   ![choose provider](./images/w3.png =30%x* " ")
 
 6. Select your preferred AI provider and model. For the free option, choose one of Cline's available free models.
 
@@ -160,15 +155,15 @@ This step connects Cline (your AI assistant) to the SQLcl MCP Server. Once confi
 Without this configuration, Cline can't access your database. The MCP Server acts as a secure bridge, allowing Cline to run SQL queries and manage your database connections safely.
 
 1. In VS Code, click the Cline extension on the left-hand side and click the **MCP Servers** icon at the top of the screen.  
-    ![choose provider](./images/w5.png =60%x* " ")
+   ![choose provider](./images/w5.png =60%x* " ")
 
 2. Click **Configure** and then **Configure MCP Servers**. This opens a JSON configuration file.  
-    ![choose provider](./images/w6.png =60%x* " ")
+   ![choose provider](./images/w6.png =60%x* " ")
 
 3. **Update the JSON configuration** with your SQLcl path. Replace the placeholder text with the actual path to your SQLcl installation from Task 4.
 
-    **For downloaded SQLcl:** Use the path to your unzipped folder
-    **For Homebrew installation:** Use `/opt/homebrew/bin/sql` (or `/usr/local/bin/sql` on older Macs)
+   **For downloaded SQLcl:** Use the path to your unzipped folder
+   **For Homebrew installation:** Use `/opt/homebrew/bin/sql` (or `/usr/local/bin/sql` on older Macs)
 
       ```json
       <copy>
@@ -183,25 +178,25 @@ Without this configuration, Cline can't access your database. The MCP Server act
       </copy>
       ```
    
-    **Example paths:**
+   **Example paths:**
       - Downloaded: `/Users/yourname/Downloads/sqlcl/bin/sql`
       - Homebrew: `/opt/homebrew/bin/sql`
 
-    ![installed servers](./images/w8.png " ")
+   ![installed servers](./images/w8.png " ")
 
 4. **Save the file**. You should see SQLcl appear under **Installed MCP Servers**.  
-    ![installed servers](./images/w9.png " ")
+   ![installed servers](./images/w9.png " ")
 
-    **Verify your configuration:**
+   **Verify your configuration:**
       - SQLcl should appear in the "Installed MCP Servers" list
       - If you don't see it, double-check your file path in the JSON configuration
       - If there's an error, make sure your SQLcl installation is working by testing it in a terminal
 
 5. Click anywhere in the SQLcl bar to expand it. You'll see the available database tools that Cline can now use:
 
-    ![installed servers](./images/w11.png " ")
+   ![installed servers](./images/w11.png " ")
 
-    **Available tools:**
+   **Available tools:**
       - **`list-connections`** - Shows your saved database connections
       - **`connect`** - Connects to a specific database
       - **`disconnect`** - Safely disconnects from the database  
@@ -230,9 +225,9 @@ In this task, you'll use natural language to interact with your Oracle AI Databa
 
 1. In Cline, make sure you're in **Plan** mode and "Auto-Approve" is disabled.
 
-    ![installed servers](./images/cline-1.png =30%x* " ")
+   ![installed servers](./images/cline-1.png =30%x* " ")
 
-    > &#9888; **IMPORTANT:** For security best practices, ensure the "Auto-Approve" option is disabled.
+   > &#9888; **IMPORTANT:** For security best practices, ensure the "Auto-Approve" option is disabled.
 
 
 2. Enable **Plan** mode. Then, in the Task input area of Cline, enter the following prompt:
@@ -242,11 +237,11 @@ In this task, you'll use natural language to interact with your Oracle AI Databa
       Using the sqlcl mcp server, list my database connections.
       </copy>
       ```
-    ![installed servers](./images/c1.png =30%x* " ")
+   ![installed servers](./images/c1.png =30%x* " ")
 
 3. Cline will create a plan and ask permission to use the `list-connections` tool. Review the request and click **Approve** if it looks correct.
 
-    ![cline-2](./images/cline-2.png " ")
+   ![cline-2](./images/cline-2.png " ")
 
 4. The output will return the list of connections available to the SQLcl MCP Server. Here we can see the AIWorld-HOL connection we made earlier in the lab
 
@@ -321,7 +316,7 @@ In this task, you'll use natural language to interact with your Oracle AI Databa
 
 6. **Save the file** in VS Code.
 
-    ![cline-2](./images/c5.png " ")
+   ![cline-2](./images/c5.png " ")
 
 7. Now ask Cline to load the data into your database. Enter this prompt:
 
@@ -333,10 +328,10 @@ In this task, you'll use natural language to interact with your Oracle AI Databa
 
 8. **Review the plan:** Cline will show you what it wants to do. This is your chance to verify the SQL commands before they execute. Click **Approve** if everything looks correct.
 
-    **Verify the data was loaded:**
-    The MCP Server should confirm successful execution, and you should see confirmation that the table was created and data was inserted.
+   **Verify the data was loaded:**
+   The MCP Server should confirm successful execution, and you should see confirmation that the table was created and data was inserted.
 
-    ![cline-2](./images/c6.png " ")
+   ![cline-2](./images/c6.png " ")
 
 
 
@@ -350,10 +345,10 @@ In this task, you'll use natural language to interact with your Oracle AI Databa
 
 10. **Review carefully:** Cline will create a plan to build your application. Review the SQL queries it plans to use to ensure they match your data structure.
 
-    > &#9888; **Warning:** Always review the SQL statements Cline wants to execute. You can modify the prompt to be more specific about what queries to use.
+   > &#9888; **Warning:** Always review the SQL statements Cline wants to execute. You can modify the prompt to be more specific about what queries to use.
 
-    **What you should see:**
-    Cline will build a working trivia application using the data from your database, demonstrating the power of natural language database interaction.
+   **What you should see:**
+   Cline will build a working trivia application using the data from your database, demonstrating the power of natural language database interaction.
 
 11. **Disconnect safely:** When finished, ask Cline to close your database connection:
 
@@ -363,7 +358,7 @@ In this task, you'll use natural language to interact with your Oracle AI Databa
       </copy>
       ```
 
-    Approve the disconnect request to ensure proper cleanup.
+   Approve the disconnect request to ensure proper cleanup.
 
 12. The SQLcl MCP Server logs all operations in the `DBTOOLS$MCP_LOG` table. You can query this table to see a history of all SQL, PL/SQL, and scripts executed on your behalf.
 

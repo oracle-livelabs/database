@@ -40,115 +40,115 @@ In this lab, you will:
 
 2. Create the phpMyAdmin yaml deployment script
 
-    	```
-    	<copy>
-    	cat <<EOF >> phpmyadmin.yaml
-    	apiVersion: v1
-    	kind: Pod
-    	metadata:
-    		name: phpmyadmin
-    		labels:
-    		app: phpmyadmin
-    	spec:
-    		containers:
-    		- name: phpmyadmin
-    			image: phpmyadmin/phpmyadmin
-    			env:
-    			- name: PMA_HOST
-    				value: "MYSQL_HOST"
-    			- name: PMA_PORT
-    				value: "3306"
-    			ports:
-    			- containerPort: 80
-    				name: phpmyadmin
-    	---
-    	apiVersion: v1
-    	kind: Service
-    	metadata:
-    		labels:
-    		app: phpmyadmin-svc
-    		name: phpmyadmin-svc
-    	spec:
-    		ports:
-    		- port: 80
-    		targetPort: 80
-    		selector:
-    		app: phpmyadmin
-    	EOF
-    	</copy>
-    	```
+	```
+	<copy>
+	cat <<EOF >> phpmyadmin.yaml
+	apiVersion: v1
+	kind: Pod
+	metadata:
+		name: phpmyadmin
+		labels:
+		app: phpmyadmin
+	spec:
+		containers:
+		- name: phpmyadmin
+			image: phpmyadmin/phpmyadmin
+			env:
+			- name: PMA_HOST
+				value: "MYSQL_HOST"
+			- name: PMA_PORT
+				value: "3306"
+			ports:
+			- containerPort: 80
+				name: phpmyadmin
+	---
+	apiVersion: v1
+	kind: Service
+	metadata:
+		labels:
+		app: phpmyadmin-svc
+		name: phpmyadmin-svc
+	spec:
+		ports:
+		- port: 80
+		targetPort: 80
+		selector:
+		app: phpmyadmin
+	EOF
+	</copy>
+	```
 
 3. Specify your MySQL private IP address in the yaml file, replace **MYSQL_IP_ADDRESS** with your MySQL Private IP Address. For example, if your MySQL Private IP address is 10.0.30.11, then the sed command will be "sed -i -e 's/MYSQL_HOST/10.0.30.11/g' phpmyadmin.yaml"
 
-    	```
-    	<copy>
-    	sed -i -e 's/MYSQL_HOST/<MYSQL_IP_ADDRESS>/g' phpmyadmin.yaml 
-    	</copy>
-    	```
+	```
+	<copy>
+	sed -i -e 's/MYSQL_HOST/<MYSQL_IP_ADDRESS>/g' phpmyadmin.yaml 
+	</copy>
+	```
 
 4. Create a phpmyadmin namespace in OKE
 
-    	```
-    	<copy>
-    	kubectl create ns phpmyadmin
-    	</copy>
-    	```
+	```
+	<copy>
+	kubectl create ns phpmyadmin
+	</copy>
+	```
 
 5. Create the phpmyadmin service
 
-    	```
-    	<copy>
-    	kubectl apply -f phpmyadmin.yaml -n phpmyadmin
-    	</copy>
-    	```
+	```
+	<copy>
+	kubectl apply -f phpmyadmin.yaml -n phpmyadmin
+	</copy>
+	```
 
 6. Create the phpmyadmin ingress service
 
-    	```
-    	<copy>
-    	cat <<EOF | kubectl apply -n phpmyadmin -f -
-    	apiVersion: networking.k8s.io/v1
-    	kind: Ingress
-    	metadata:
-    		name: phpmyadmin-ing
-    		annotations:
-    		nginx.ingress.kubernetes.io/rewrite-target: /$2
-    		nginx.ingress.kubernetes.io/app-root: /phpmyadmin/
-    		nginx.ingress.kubernetes.io/configuration-snippet: |
-    			rewrite ^/themes/(.*)$ /phpmyadmin/themes/$1 redirect;
-    			rewrite ^/index.php(.*)$ /phpmyadmin/index.php$1 redirect;
-    			rewrite ^/config/(.*)$ /phpmyadmin/config/$1 redirect;
-    	spec:
-    		ingressClassName: nginx
-    		rules:
-    		- http:
-    			paths:
-    			- path: /phpmyadmin(/|$)(.*)
-    				pathType: Prefix
-    				backend:
-    				service:
-    					name: phpmyadmin-svc
-    					port:
-    					number: 80
-    			- path: /index.php(.*)
-    				pathType: Prefix
-    				backend:
-    				service:
-    					name: phpmyadmin-svc
-    					port:
-    					number: 80
-    	EOF
-    	</copy>
-    	```
+	```
+	<copy>
+	cat <<EOF | kubectl apply -n phpmyadmin -f -
+	apiVersion: networking.k8s.io/v1
+	kind: Ingress
+	metadata:
+		name: phpmyadmin-ing
+		annotations:
+		nginx.ingress.kubernetes.io/rewrite-target: /$2
+		nginx.ingress.kubernetes.io/app-root: /phpmyadmin/
+		nginx.ingress.kubernetes.io/configuration-snippet: |
+			rewrite ^/themes/(.*)$ /phpmyadmin/themes/$1 redirect;
+			rewrite ^/index.php(.*)$ /phpmyadmin/index.php$1 redirect;
+			rewrite ^/config/(.*)$ /phpmyadmin/config/$1 redirect;
+	spec:
+		ingressClassName: nginx
+		rules:
+		- http:
+			paths:
+			- path: /phpmyadmin(/|$)(.*)
+				pathType: Prefix
+				backend:
+				service:
+					name: phpmyadmin-svc
+					port:
+					number: 80
+			- path: /index.php(.*)
+				pathType: Prefix
+				backend:
+				service:
+					name: phpmyadmin-svc
+					port:
+					number: 80
+	EOF
+	</copy>
+	```
 
 7. Find out the public IP of OKE Ingress Controller
 
-    	```
-    	<copy>
-    	kubectl get all -n ingress-nginx
-    	</copy>
-    	```
-    	![Ingress IP](images/ingress.png)
+	```
+	<copy>
+	kubectl get all -n ingress-nginx
+	</copy>
+	```
+	![Ingress IP](images/ingress.png)
 
 8. Access the deployed PhpMyAdmin application using your browser, http:://&lt;LOAD&#95;BALANCER&#95;PUBLIC&#95;IP&gt;/phpmyadmin
 
@@ -164,8 +164,3 @@ In this lab, you will:
 	* Rayes Huang, OCI Solution Specialist, OCI APAC
 
 * **Last Updated By/Date** - Ryan Kuan, March 2022
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

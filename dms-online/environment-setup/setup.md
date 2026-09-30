@@ -32,19 +32,19 @@ The following task is *optional* if a suitable VCN is already present.
 
 1. In the OCI Console Menu, go to **Networking** > **Virtual cloud networks**.
 
-    ![screenshot of VCN menu navigation](images/vcn-location.png =50%x*)
+  ![screenshot of VCN menu navigation](images/vcn-location.png =50%x*)
 
 2. Pick a compartment in the **Applied filters**/**Compartment**  list. You need to have the necessary permissions for the compartment.
 
-    ![screenshot where to select compartment](images/create-vcn-in-compartment.png =50%x*)
+  ![screenshot where to select compartment](images/create-vcn-in-compartment.png =50%x*)
 
 3. Press **Actions**/**Start VCN Wizard** and pick **VCN with Internet Connectivity**.
 
-    ![screenshot of start VCN wizzard ](images/vcn-with-internet-wizard.png =50%x*)
+  ![screenshot of start VCN wizzard ](images/vcn-with-internet-wizard.png =50%x*)
 
 4. Enter a **VCN Name**, such as VCN\_DMS. Leave CIDR block defaults, unless you need non-overlapping addresses for peering later. Press **Next**.
 
-    ![screenshot of where to enter VCN name](images/vcn-configuration.png =50%x*)
+  ![screenshot of where to enter VCN name](images/vcn-configuration.png =50%x*)
 
 5. Review Summary and press **Create**.
 
@@ -56,19 +56,19 @@ This task assumes default permissions in your public subnet. If you disabled or 
 
 1. In the OCI Console Menu, go to **Networking** > **Virtual cloud networks** and pick your VCN.
 
-    ![screenshot of navigation to Virtual Cloud Networks](images/created-vcn.png =50%x*)
+  ![screenshot of navigation to Virtual Cloud Networks](images/created-vcn.png =50%x*)
 
 2. In the **Subnets** list, pick **Public Subnet-VCN NAME**.
 
-    ![Screenshot of subnets selection ](images/vcn-public-subnet.png =50%x*)
+  ![Screenshot of subnets selection ](images/vcn-public-subnet.png =50%x*)
 
 3. Click in the **Security** tab and in the **Security Lists** list, pick **Default Security List for VCN NAME**.
 
-    ![screenshot of Default Security List for VCN NAME](images/public-subnet-default-sl.png =50%x*)
+  ![screenshot of Default Security List for VCN NAME](images/public-subnet-default-sl.png =50%x*)
 
 4. Click to the **Security rules** tab and in the **Ingress Rules** section press **Add Ingress Rules**.
 
-    ![Screenshot of Ingress rules navigation and add ingress rules](images/add-ingress.png =50%x*)
+  ![Screenshot of Ingress rules navigation and add ingress rules](images/add-ingress.png =50%x*)
 
 5. Enter the following values, otherwise leave defaults:
     - Source CIDR: **0.0.0.0/0**
@@ -76,7 +76,7 @@ This task assumes default permissions in your public subnet. If you disabled or 
     - Description: **OGG HTTPS**
     - Close dialog by pressing **Add Ingress Rules**.
 
-    ![Screenshot of values for ingress rules](images/ogg-ingress.png =50%x*)
+  ![Screenshot of values for ingress rules](images/ogg-ingress.png =50%x*)
 
 6. In the **Ingress Rules** list press **Add Ingress Rules**.
 
@@ -100,27 +100,27 @@ The following task is *optional* if a Vault is already present.
 
 1. In the OCI Console Menu, go to **Identity & Security** > **Vault**.
 
-    ![Screenshot of Vault navigation](images/vault-oci-menu.png =50%x*)
+  ![Screenshot of Vault navigation](images/vault-oci-menu.png =50%x*)
 
 2. Pick a compartment in the **Applied filters**/**Compartment**  list.
 
 3. Press **Create Vault**.
 
-    ![Screenshot of create vault](images/create-vault.png =50%x*)
+  ![Screenshot of create vault](images/create-vault.png =50%x*)
 
 4. In the **Create Vault** dialog, enter a Name such as **DMS\_Vault**.
 
 5. Close the dialog by pressing **Create Vault**.
 
-    ![screenshot of vault creation](images/vault-name.png =50%x*)
+  ![screenshot of vault creation](images/vault-name.png =50%x*)
 
 6. Wait until the state of the new vault is **Active**. This takes about 5 minutes.
 
-    ![Screenshot where Vault is active](images/active-vault.png =50%x*)
+  ![Screenshot where Vault is active](images/active-vault.png =50%x*)
 
 7. Click on the new vault and press **Create Key** in the **Master Encryption Keys** list.
 
-    ![Screenshot of create new key ](images/create-key.png =50%x*)
+  ![Screenshot of create new key ](images/create-key.png =50%x*)
 
 8. In the **Create Key** dialog, enter a Name such as **DMS\_Key**.
 
@@ -136,11 +136,11 @@ Create an empty Object Storage bucket for use in the migration.
 
 1. In the OCI Console Menu, go to **Storage > Object Storage & Archive Storage**
 
-    ![Screenshot of Object Storage & Archive Storage nvigation](images/object-storage-location.png =50%x*)
+  ![Screenshot of Object Storage & Archive Storage nvigation](images/object-storage-location.png =50%x*)
 
 2. Press **Create Bucket**
 
-    ![Screenshot of create bucket](images/create-bucket.png =50%x*)
+  ![Screenshot of create bucket](images/create-bucket.png =50%x*)
 
 3. On the page Create Bucket, fill in the following entries, otherwise leave defaults:
 

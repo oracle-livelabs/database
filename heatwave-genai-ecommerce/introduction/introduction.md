@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 HeatWave GenAI lets organizations easily process and analyze vast amounts of proprietary unstructured documents in Object Storage. They can develop turnkey AI-powered applications with enhanced performance and enterprise-grade data security. HeatWave GenAI supports in-database large language models (LLMs), an automated, in-database vector store, scale-out vector processing, and has the ability to have contextual conversations in natural language. 
 
 HeatWave GenAI is unique because it seamlessly integrates large language models (LLMs) and embedding generation within the database, eliminating the need for external services. This integration enhances performance and security, simplifies application complexity, and reduces costs as it runs on CPUs. HeatWave GenAI integrates seamlessly with other in-database HeatWave capabilities such as machine learning, analytics, and Lakehouse, opening up a new class of applications. With HeatWave GenAI, you can effortlessly generate new content, speed up manual or repetitive tasks like summarizing large documents, and engage in natural language interactions.

@@ -2,9 +2,6 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 Oracle Database enables the user to diagnose a SQL statements for poor performance. It also, gives recommendations to improve the performance by changing the SQL statement. The implementation is easy and automated, as the result of SQL Repair Advisor. This can be implemented after a SQL statement fails with a critical error, ORA-00600 error. After implementation, the applied SQL patch circumvents failure in future events by causing the query optimizer to choose an alternate execution plan. 
 
 The SQL Repair Advisor is run by creating and executing a diagnostic task using the `CREATE_DIAGNOSIS_TASK` and `EXECUTE_DIAGNOSIS_TASK` respectively. This reproduces the critical error and then attempts to produce a workaround in the form of a SQL patch. First, one must identify the problem SQL statement. Then, one must create a diagnostic task and execute it. Lastly, one will report the diagnostic task, apply the patch, and then, test the patch. 
@@ -30,7 +27,7 @@ This lab assumes you have:
 
 ## Task 1: Clean up PDBs and Format Tables
 
-1. Execute the /home/oracle/labs/admin/cleanup_PDBs.sh shell script. The shell script drops all PDBs that may have been created by any of the practices in ORCL, and finally re-creates PDB1. You are in Session1.
+1.	Execute the /home/oracle/labs/admin/cleanup_PDBs.sh shell script. The shell script drops all PDBs that may have been created by any of the practices in ORCL, and finally re-creates PDB1. You are in Session1.
      
      ```
      $ <copy>$HOME/labs/19cnf/cleanup_PDBs_in_CDB1.sh</copy>
@@ -41,7 +38,7 @@ This lab assumes you have:
      ```
 
 
-2. Before starting the practice, execute the $HOME/labs/DIAG/glogin.sh shell script. It sets formatting for all columns selected in queries.
+2.	Before starting the practice, execute the $HOME/labs/DIAG/glogin.sh shell script. It sets formatting for all columns selected in queries.
 
      ```
      $ <copy>$HOME/labs/19cnf/glogin.sh</copy>
@@ -51,7 +48,7 @@ This lab assumes you have:
      $
      ```
 
-3. Execute the /home/oracle/labs/19cnf/table.sh shell script. The shell script creates and loads the DIAG.TAB1 table, and creates an index on the table, in PDB1.
+3.	Execute the /home/oracle/labs/19cnf/table.sh shell script. The shell script creates and loads the DIAG.TAB1 table, and creates an index on the table, in PDB1.
     
     ```
     $ <copy>$HOME/labs/19cnf/table.sh</copy>
@@ -63,7 +60,7 @@ This lab assumes you have:
 
 ## Task 2: Execute Poor Performing SQL Statement
 
-4. Log in to PDB1 as DIAG and execute the query. The SQL statement executes with a poor performance.
+4.	Log in to PDB1 as DIAG and execute the query. The SQL statement executes with a poor performance.
     
      ```
      $ <copy>sqlplus system@PDB1</copy> 
@@ -93,7 +90,7 @@ This lab assumes you have:
 
 ## Task 3: Diagnose SQL Statement and Determine Recommendations
 
-5. Call the function to diagnose and automatically implement the recommendations to improve performance of the SQL statement.
+5.	Call the function to diagnose and automatically implement the recommendations to improve performance of the SQL statement.
 
      ```
      SQL> <copy>DESC dbms_sqldiag</copy>
@@ -140,7 +137,7 @@ This lab assumes you have:
      SQL>
      ```
 
-6. Find the recommendations generated from the diagnosis.
+6.	Find the recommendations generated from the diagnosis.
      ```
      SQL> <copy> SELECT finding_id, type FROM dba_advisor_recommendations 
      WHERE  task_name = to_char(:incident_id);</copy>
@@ -154,7 +151,7 @@ This lab assumes you have:
      
      SQL>
      ```
-7. Report the details of the recommendations.
+7.	Report the details of the recommendations.
      ```
      SQL> <copy>VAR b_report CLOB</copy>
      
@@ -311,7 +308,7 @@ This lab assumes you have:
 
 ## Task 4: Verify Recommendations and Implement
 
-8. Check the SQL profile automatically created by the diagnosis and repair function.
+8.	Check the SQL profile automatically created by the diagnosis and repair function.
      ```
      SQL> <copy>SELECT sql_text, status FROM dba_sql_profiles;</copy>
 
@@ -327,7 +324,7 @@ This lab assumes you have:
      SQL>
      ```
 
-9. Verify that the poor performing SQL statement is now using the SQL profile.
+9.	Verify that the poor performing SQL statement is now using the SQL profile.
 
      ```
      SQL> <copy>EXPLAIN PLAN FOR SELECT /*+ FULL(a) FULL (b) */ sum(a.num),sum(b.num),count(*) FROM diag.tab1 a,diag.tab1 b WHERE a.id = b.id and a.id = 100;</copy>
@@ -383,7 +380,7 @@ This lab assumes you have:
      SQL> 
      ```
 
-10. Call the function on the poor performing SQL statement. 
+10.	Call the function on the poor performing SQL statement. 
 
     Q2/ What happens if you ask the diagnosis function to explore all alternative plans for the SQL query?
 
@@ -417,7 +414,7 @@ This lab assumes you have:
 
 ## Task 5: Test Implementation
 
-11. You now test a failing SQL statement for which SQL Diagnose and Repair provides and implements a patch. Execute the /home/oracle/labs/DIAG/crash_delete.sql SQL script. The SQL statement fails with an ORA-00600 error. Press Enter after each pause.
+11.	You now test a failing SQL statement for which SQL Diagnose and Repair provides and implements a patch. Execute the /home/oracle/labs/DIAG/crash_delete.sql SQL script. The SQL statement fails with an ORA-00600 error. Press Enter after each pause.
 
      ```
      SQL><copy>CONNECT system@PDB1</copy>
@@ -611,8 +608,8 @@ This lab assumes you have:
      SQL>
      ```
 
-12. Call the function to diagnose and automatically implement the patch for the failing SQL statement.
-    a.	Find the SQL_ID for the failing statement.
+12.	Call the function to diagnose and automatically implement the patch for the failing SQL statement.
+a.	Find the SQL_ID for the failing statement.
 
      ```
      SQL> <copy>SELECT sql_id FROM v$sql 
@@ -670,7 +667,7 @@ This lab assumes you have:
      SQL>
      ```
 
-13. Find the recommendations generated from the diagnosis.
+13.	Find the recommendations generated from the diagnosis.
 
      ```
      SQL> <copy>SELECT finding_id, type FROM dba_advisor_recommendations 
@@ -690,7 +687,7 @@ This lab assumes you have:
 
 ## Task 6: Find and Implement Patches
 
-14. Find the SQL patch.
+14.	Find the SQL patch.
 
      ```
      SQL> <copy>SELECT name, task_exec_name, status FROM dba_sql_patches 
@@ -803,7 +800,7 @@ This lab assumes you have:
      A3/ The SQL patch is automatically implemented.
      
 
-15. Re-execute the failing SQL statement with the implemented patch.
+15.	Re-execute the failing SQL statement with the implemented patch.
 
      ```
      SQL> <copy>delete /*+ USE_HASH_AGGREGATION(@"SEL$80F8B8C6") USE_HASH(@"SEL$80F8B8C6" "T1"@"DEL$1") LEADING(@"SEL$80F8B8C6" "T2"@"SEL$1" "T1"@"DEL$1") FULL(@"SEL$80F8B8C6" "T1"@"DEL$1") FULL(@"SEL$80F8B8C6" "T2"@"SEL$1") OUTLINE(@"DEL$1") OUTLINE(@"SEL$1") OUTLINE(@"SEL$AD0B6B07") OUTLINE(@"SEL$7D4DB4AA") UNNEST(@"SEL$1") OUTLINE(@"SEL$75B5BFA2") MERGE(@"SEL$7D4DB4AA") OUTLINE_LEAF(@"SEL$80F8B8C6") ALL_ROWS OPT_PARAM('_optimizer_cost_model' 'fixed') DB_VERSION('11.1.0.7') OPTIMIZER_FEATURES_ENABLE('11.1.0.7') NO_INDEX(@"SEL$1" "T2"@"SEL$1") */ from simple_table t1 where t1.a = 'a' and rowid <> (select max(rowid) from simple_table t2 where t1.a= t2.a and t1.b = t2.b and t1.d=t2.d);</copy>
@@ -837,7 +834,7 @@ This lab assumes you have:
 
 ## Task 7: Clean up Schema
 
-16. Set the fix for the error back ON and clean up the DIAG schema.
+16.	Set the fix for the error back ON and clean up the DIAG schema.
 
      ```
      $ <copy>$HOME/oracle/labs/19cnf/cleanup_crash.sh</copy>

@@ -122,19 +122,19 @@ In this lab, you will:
 1. Connect to `PDB21` as the user `U2` and execute the `U1.PROCEMP` procedure.
 
   
-    	```
-    	
-    	SQL> <copy>CONNECT u2@PDB21</copy>	
-    	Enter password: <i><copy>password</copy></i>	
-    	SQL> <copy>SET SERVEROUTPUT ON</copy>	
-    	SQL> <copy>EXECUTE u1.procemp(206)</copy>
-    	
-    	Salary is : 8300 for Employee ID: 206
-    	
-    	PL/SQL procedure successfully completed.	
-    	SQL> 
-    	
-    	```
+	```
+	
+	SQL> <copy>CONNECT u2@PDB21</copy>	
+	Enter password: <i><copy>password</copy></i>	
+	SQL> <copy>SET SERVEROUTPUT ON</copy>	
+	SQL> <copy>EXECUTE u1.procemp(206)</copy>
+	
+	Salary is : 8300 for Employee ID: 206
+	
+	PL/SQL procedure successfully completed.	
+	SQL> 
+	
+	```
 
 2. Display the `DBUSERNAME` (the login user) and the `CURRENT_USER` being the user who executed the procedure from the unified audit trail.
 

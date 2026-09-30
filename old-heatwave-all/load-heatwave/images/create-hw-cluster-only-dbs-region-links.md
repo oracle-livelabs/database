@@ -192,7 +192,7 @@ In this lab, you will be guided through the following tasks:
 
 13. Use the Image below identify your OCI Region.
 
-    ![MDS](./images/regionselector.png "regionSelector ")
+    ![MDS](./images/regionSelector.png "regionSelector ")
 
 14. Click on your localized geographic area
 
@@ -482,8 +482,8 @@ In this lab, you will be guided through the following tasks:
 5. Click “Estimate Node Count” button
     ![Connect](./images/mysql-add-heat-estimate.png "mysql add heat estimate ")
 6. On the “Estimate Node Count” page, click “Generate Estimate”. This will trigger the auto
-    provisioning advisor to sample the data stored in InnoDB and based on machine learning
-    algorithm, it will predict the minimum number of nodes needed.
+provisioning advisor to sample the data stored in InnoDB and based on machine learning
+algorithm, it will predict the minimum number of nodes needed.
     ![Connect](./images/mysql-heat-cluster-estimate.png "mysql heat cluster estimate ")
 7. Once the estimations are calculated, it shows list of database schemas in MySQL node. If you expand the schema and select different tables, you will see the estimated memory required in the Summary box, There is a Load Command (heatwave_load) generated in the text box window, which will change based on the selection of databases/tables
 8. Select the airportdb schema and click “Apply Node Count Estimate” to apply the node count

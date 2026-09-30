@@ -135,7 +135,7 @@ This lab assumes you have:
 
 20. In the AD DS section, and then click on **next**.
 
-    ![Windows server manager AD DS selection](./images/windows-servermanager-adds.png "Windows server manager AD DS selection")
+    ![Windows server manager AD DS selection](./images/windows-servermanager-ADDS.png "Windows server manager AD DS selection")
 
 21. The confirmation will show the details for roles, role services, or features on selected servers. Select **Restart the destination server automatically if required**. A pop-up will appear asking you to confirm the auto restart. Click **Install** to continue with the installation.
 

@@ -23,33 +23,33 @@ This lab assumes that you:
 
 1. In the terminal session, use ssh to connect to the TimesTen host (**tthost1**):
 
-    ```
-    <copy>
-    ssh tthost1
-    </copy>
-    ```
+```
+<copy>
+ssh tthost1
+</copy>
+```
 
-    ```
-    Your current directory is:  /tt/livelab
-    [oracle@tthost1 livelab]$
-    ```
+```
+Your current directory is:  /tt/livelab
+[oracle@tthost1 livelab]$
+```
 2. Review the directory contents:
 
-    ```
-    <copy>
-    ls -l
-    </copy>
-    ```
+```
+<copy>
+ls -l
+</copy>
+```
 
-    ```
-    total 16
-    drwxr-xr-x. 2 oracle oinstall   97 Oct 18 15:33 bin
-    drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 extras
-    drwxr-xr-x. 2 oracle oinstall  102 Oct 18 15:33 queries
-    drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 scripts
-    -rw-r--r--. 1 oracle oinstall  741 Jun  7  2022 tables_appuser.sql
-    -rw-r--r--. 1 oracle oinstall 3879 May 10  2022 tables_oe.sql
-    ```
+```
+total 16
+drwxr-xr-x. 2 oracle oinstall   97 Oct 18 15:33 bin
+drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 extras
+drwxr-xr-x. 2 oracle oinstall  102 Oct 18 15:33 queries
+drwxr-xr-x. 2 oracle oinstall 4096 Oct 18 15:33 scripts
+-rw-r--r--. 1 oracle oinstall  741 Jun  7  2022 tables_appuser.sql
+-rw-r--r--. 1 oracle oinstall 3879 May 10  2022 tables_oe.sql
+```
 
 ## Task 2: Create a TimesTen instance
 
@@ -57,84 +57,84 @@ A TimesTen _installation_ is comprised of the TimesTen software components. An i
 
 1. List the top level software directory.
 
-    ```
-    <copy>
-    ls -l /shared/sw
-    </copy>
-    ```
+```
+<copy>
+ls -l /shared/sw
+</copy>
+```
 
-    ```
-    total 0
-    dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.18.0
-    ```
+```
+total 0
+dr-xr-x---. 17 oracle oinstall 277 May  5 22:20 tt22.1.1.18.0
+```
 
 2. List the contents of the TimesTen installation top level directory.
 
-    ```
-    <copy>
-    ls -l /shared/sw/tt22.1.1.18.0
-    </copy>
-    ```
+```
+<copy>
+ls -l /shared/sw/tt22.1.1.18.0
+</copy>
+```
 
-    ```
-    total 244
-    dr-xr-x---. 3 oracle oinstall     89 Sep  7 17:47 3rdparty
-    dr-xr-x---. 2 oracle oinstall   4096 Sep  7 17:47 bin
-    dr-xr-x---. 4 oracle oinstall     31 Sep  7 17:47 grid
-    dr-xr-x---. 3 oracle oinstall    240 Sep  7 17:47 include
-    dr-xr-x---. 2 oracle oinstall    167 Sep  7 17:47 info
-    dr-xr-x---. 2 oracle oinstall     26 Sep  7 17:47 kubernetes
-    dr-xr-x---. 3 oracle oinstall   4096 Sep  7 17:47 lib
-    dr-xr-x---. 3 oracle oinstall     19 Sep  7 17:47 network
-    dr-xr-x---. 3 oracle oinstall     18 Sep  7 17:47 nls
-    dr-xr-x---. 2 oracle oinstall    274 Sep  7 17:47 oraclescripts
-    dr-xr-x---. 4 oracle oinstall     40 Sep  7 17:47 PERL
-    dr-xr-x---. 7 oracle oinstall     68 Sep  7 17:47 plsql
-    -r--r-----. 1 oracle oinstall 241352 Sep  7 17:47 README.html
-    dr-xr-x---. 2 oracle oinstall     54 Sep  7 17:47 startup
-    dr-xr-x---. 2 oracle oinstall    103 Sep  7 17:47 support
-    dr-xr-x---. 3 oracle oinstall     54 Sep  7 17:47 ttoracle_home
+```
+total 244
+dr-xr-x---. 3 oracle oinstall     89 Sep  7 17:47 3rdparty
+dr-xr-x---. 2 oracle oinstall   4096 Sep  7 17:47 bin
+dr-xr-x---. 4 oracle oinstall     31 Sep  7 17:47 grid
+dr-xr-x---. 3 oracle oinstall    240 Sep  7 17:47 include
+dr-xr-x---. 2 oracle oinstall    167 Sep  7 17:47 info
+dr-xr-x---. 2 oracle oinstall     26 Sep  7 17:47 kubernetes
+dr-xr-x---. 3 oracle oinstall   4096 Sep  7 17:47 lib
+dr-xr-x---. 3 oracle oinstall     19 Sep  7 17:47 network
+dr-xr-x---. 3 oracle oinstall     18 Sep  7 17:47 nls
+dr-xr-x---. 2 oracle oinstall    274 Sep  7 17:47 oraclescripts
+dr-xr-x---. 4 oracle oinstall     40 Sep  7 17:47 PERL
+dr-xr-x---. 7 oracle oinstall     68 Sep  7 17:47 plsql
+-r--r-----. 1 oracle oinstall 241352 Sep  7 17:47 README.html
+dr-xr-x---. 2 oracle oinstall     54 Sep  7 17:47 startup
+dr-xr-x---. 2 oracle oinstall    103 Sep  7 17:47 support
+dr-xr-x---. 3 oracle oinstall     54 Sep  7 17:47 ttoracle_home
 
-    ```
+```
 
-    You can create one or more TimesTen _instances_ from an installation. A TimesTen instance consists of various configuration files, log files and other files that together let you create and manage TimesTen databases. An instance is linked to the installation used to create it, so the installation must not be removed, renamed or modified in any way otherwise the operation of all linked instances will be affected.
+You can create one or more TimesTen _instances_ from an installation. A TimesTen instance consists of various configuration files, log files and other files that together let you create and manage TimesTen databases. An instance is linked to the installation used to create it, so the installation must not be removed, renamed or modified in any way otherwise the operation of all linked instances will be affected.
 
-    When it is operational, a TimesTen instance also includes a set of associated processes that cooperate to manage the TimesTen databases that are owned by the instance.
+When it is operational, a TimesTen instance also includes a set of associated processes that cooperate to manage the TimesTen databases that are owned by the instance.
 
 3. Use the **ttInstanceCreate** command, located in the installation’s **bin** directory, to create a TimesTen instance called **ttinst**:
 
-    ```
-    <copy>
-    /shared/sw/tt22.1.1.18.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
-    </copy>
-    ```
+```
+<copy>
+/shared/sw/tt22.1.1.18.0/bin/ttInstanceCreate -location /tt/inst -name ttinst -tnsadmin /shared/tnsadmin
+</copy>
+```
 
-    ```
-    Creating instance in /tt/inst/ttinst ...
+```
+Creating instance in /tt/inst/ttinst ...
 
-    NOTE: The TimesTen daemon startup/shutdown scripts have not been installed.
+NOTE: The TimesTen daemon startup/shutdown scripts have not been installed.
 
-    The startup script is located here :
-    	'/tt/inst/ttinst/startup/tt_ttinst'
+The startup script is located here :
+	'/tt/inst/ttinst/startup/tt_ttinst'
 
-    Run the 'setuproot' script :
-    	/tt/inst/ttinst/bin/setuproot -install
-    This will move the TimesTen startup script into its appropriate location.
+Run the 'setuproot' script :
+	/tt/inst/ttinst/bin/setuproot -install
+This will move the TimesTen startup script into its appropriate location.
 
-    The 22.1 Release Notes are located here :
-    '/shared/sw/tt22.1.1.18.0/README.html'
+The 22.1 Release Notes are located here :
+  '/shared/sw/tt22.1.1.18.0/README.html'
 
-    Instance created successfully.
+Instance created successfully.
 
-    ```
+```
 
 4. Copy the predefined **sys.odbc.ini** configuration file (more on that later) to the instance, overwriting the existing template file:
 
-    ```
-    <copy>
-    cp scripts/sys.odbc.ini /tt/inst/ttinst/conf/sys.odbc.ini
-    </copy>
-    ```
+```
+<copy>
+cp scripts/sys.odbc.ini /tt/inst/ttinst/conf/sys.odbc.ini
+</copy>
+```
 
 ## Task 3: Start the instance
 

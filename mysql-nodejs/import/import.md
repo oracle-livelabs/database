@@ -84,17 +84,17 @@ To learn more about Fn please check the [Fn Project Website](https://fnproject.i
 
 In the Web Console you can find *Functions* under the *Developer Services* menu. 
 
-  ![Image](images/faas_menu.png " ")
+  ![](images/faas_menu.png " ")
 
 When opening it you see the Application, click on _DemoApp_.
 
-  ![Image](images/faas_application.png " ")
+  ![](images/faas_application.png " ")
 
 If you can't find that entry make sure the `node-mysql` compartment has been
 selected on the left. In case the `node-mysql` compartment is not listed in
 the drop-down try reloading the page.
 
-  ![Image](images/faas_func.png " ")
+  ![](images/faas_func.png " ")
 
 In this screen you can see the list of functions, currently our `import`
 function. On the left is a menu leading, among other things, to metrics and
@@ -105,7 +105,7 @@ configuration.
 variables which are available to the functions within this application. We will
 make use of those in the next step.
 
-  ![Image](images/faas_config.png " ")
+  ![](images/faas_config.png " ")
 
 *Note: As you can see here the MySQL user's password is stored in plain sight
 in this setup. Since this is a tutorial this is tolerable. In a production
@@ -241,9 +241,9 @@ After getting the code ready it has to be deployed as before:
 First thing we do is take a look at the Object Store in the console. Navigate
 to it in your Web Browser.
 
-  ![Image](images/os_menu.png " ")
+  ![](images/os_menu.png " ")
 
-  ![Image](images/os_buckets.png " ")
+  ![](images/os_buckets.png " ")
 
 You will see that our initial setup already created two Buckets. A Bucket
 is a collection of related files in Object store. For now we care about
@@ -254,7 +254,7 @@ activated. In the center area you could upload files. In the left you get
 access to different options. You can take a look, but don't have to make
 any changes.
 
-  ![Image](images/os_import_event.png " ")
+  ![](images/os_import_event.png " ")
 
 *Note: The Bucket is configured as Public. This makes Objects accessible to
 everybody (who can guess the exact URL) world-wide. Outside this Lab you
@@ -263,7 +263,7 @@ should protect the files and use signed requests to download files*
 Next configure the Event to trigger the Function. For that navigate to
 *Application Integration* - *Events Service*.
 
-  ![Image](images/event_menu.png " ")
+  ![](images/event_menu.png " ")
 
 
 And click *Create Rule* to create our Event. Enter `import` as *Display Name*
@@ -280,7 +280,7 @@ Finally configure the Action, by setting *Action Type* `Functions`, *Function
 Compartment* `node-mysql`, *Function Application* `DemoApp` and *Function*
 `import`.
 
-  ![Image](images/event.png " ")
+  ![](images/event.png " ")
 
 With a click on *Create Rule* this rule becomes effective.
 

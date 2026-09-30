@@ -101,8 +101,3 @@ Click the next lab to **Get Started**.
  - **Author**: Manish Garodia, Database User Assistance Development
  - **Contributors**: Suresh Rajan, Prakash Jashnani, Subhash Chandra, Subrahmanyam Kodavaluru, Dharma Sirnapalli
  - **Last Updated By/Date**: Manish Garodia, August 2024
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

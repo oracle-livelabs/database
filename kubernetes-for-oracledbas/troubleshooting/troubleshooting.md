@@ -2,15 +2,7 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 Every effort is made to ensure this Workshop functions in its entirety without any errors.  Unfortunately, variables and the continual evolution of technology will inevitably cause some tasks to fail.  Below are known issues and their resolutions.
-
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
 
 ## Task 1: IAM User Error
 

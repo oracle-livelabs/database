@@ -24,11 +24,6 @@ Estimated Lab Time: 15 minutes
 * Completion of previous labs
 * Basic understanding of Git
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Export Database Changes (project export)
 
 First, you have to be connect to DEV_USER in SQLcl and make sure you are in the application folder </br> /home/assets/assets/workshops/**sqlcl-projects-react-app**.
@@ -68,18 +63,18 @@ Before exporting, create a new git branch from main branch and switch to it for 
 1. Export the entire schema, including all its objects, using the -schemas option, which accepts a list of schemas to export (in our case, just one: "DEV_USER").
 2. Export specific objects using the -objects option.
 
-    Since we only need the departments table from "DEV_USER", we will use the -objects option.
+Since we only need the departments table from "DEV_USER", we will use the -objects option.
 
-    >**Note:** Use `help project export` for more details on the export command.
+>**Note:** Use `help project export` for more details on the export command.
     ```sql
     <copy>
      help project export
     </copy>
     ```
 
-    **Export Database Objects:**
+**Export Database Objects:**
 
-    To see what's happen when exporting the whole schema drop down **Export schema** just below. But for this task you will not export the whole schema, you will export just the departments object.
+To see what's happen when exporting the whole schema drop down **Export schema** just below. But for this task you will not export the whole schema, you will export just the departments object.
     <details><summary>**Export schema**</summary>
         * Execute the following command to export the newly created "Departments" table to the application folder:
             ```sql
@@ -91,7 +86,7 @@ Before exporting, create a new git branch from main branch and switch to it for 
         This command **exports database objects** into your repository.
     </details>
 
-    * Execute the following command to export the newly created "Departments" table to the application folder:
+* Execute the following command to export the newly created "Departments" table to the application folder:
             ```sql
         <copy>
             project export -objects DEPARTMENTS -verbose
@@ -100,19 +95,19 @@ Before exporting, create a new git branch from main branch and switch to it for 
         ![Run project export command](./images/project-export-object.png " ")
         This command **exports database objects** into your repository.
 
-    >**Note:** In the export command the object is not fully qualified (DEV_USER.DEPARTMENTS) since you are currently connected to its schema (DEPARTMENTS).
+>**Note:** In the export command the object is not fully qualified (DEV_USER.DEPARTMENTS) since you are currently connected to its schema (DEPARTMENTS).
 
-    * Locate the exported object files in the database folder
+* Locate the exported object files in the database folder
 
     ![Exported Objects](./images/database-folder-location.png " ")
 
-    * Double click on the 'departments.sql' to see its content
+* Double click on the 'departments.sql' to see its content
 
     ![Departments.sql content](./images/departments-sql-content.png " ")
 
-    * **Now we have made the database changes, we export our objects to have them included in our project folders.**-->
+* **Now we have made the database changes, we export our objects to have them included in our project folders.**-->
 
-    **Export Database Objects:**
+**Export Database Objects:**
 
 1. Execute the following command to export the departments table database object to the application folder:
 

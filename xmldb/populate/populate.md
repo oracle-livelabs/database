@@ -7,24 +7,24 @@ Estimated Time: 15 minutes
 
 ### Objectives
 In this lab, you will learn:
-1. How to create and populate a table with an XMLType column
+1.	How to create and populate a table with an XMLType column
 
 ### Prerequisites
 - Access to an Oracle Autonomous Database, Database Actions web interface.
 
 ## Task 1: Open Database Actions
-1. Log in to the Oracle Cloud.
-6. Navigate to your previously created Autonomous Database "XMLDB" (or the name you have chosen).
-7. On the database detail page, choose Database Actions. You can navigate to the Database Actions overview page or go directly to the SQL Worksheet
+1.	Log in to the Oracle Cloud.
+6.	Navigate to your previously created Autonomous Database "XMLDB" (or the name you have chosen).
+7.	On the database detail page, choose Database Actions. You can navigate to the Database Actions overview page or go directly to the SQL Worksheet
 
 ![Database Actions](./images/database_actions.png)
 
 ## Task 2: Create and Populate a Table with an XMLType Column
-1. Enter the SQL Worksheet
+1.	Enter the SQL Worksheet
 
     When you first enter SQL, you will get a tour of the features. We recommend you step through it, but you can skip the tour by clicking on the "X" The tour is available at any time by clicking the tour button. You can dismiss the warning that you are logged in as an ADMIN user.
 
-2. Create a table with XMLType column
+2.	Create a table with XMLType column
 
     We will create a simple table to record the sample purchase orders. It contains a numeric column for purchase ID and an XMLType column for our purchase details.
 
@@ -59,7 +59,7 @@ In this lab, you will learn:
     ```
 
 
-3. Populate the table with a few rows
+3.	Populate the table with a few rows
 
     Use the 'trashcan' icon to delete the previous statement from the Worksheet area. Copy the following SQL into the worksheet area. Make sure you highlight the whole statement with your mouse and press the "Run Statement" button:
 
@@ -193,7 +193,7 @@ In this lab, you will learn:
 
     ![Number of rows](./images/img-4.png)
 
-4. Check that we have rows in the table
+4.	Check that we have rows in the table
 
     Copy the following simple SELECT into the worksheet area and press "Run Statement".
 

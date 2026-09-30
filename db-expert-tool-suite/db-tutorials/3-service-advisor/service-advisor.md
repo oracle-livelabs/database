@@ -17,11 +17,6 @@ In this lab, you will:
 * Learn the anatomy of the Service Advisor, review recommendations, and explore what-if scenario
 * Dive deep into TCO and download your TCO Summary
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Provide the Service Advisor with basic requirements 
 
 1. Navigate to [https://www.oracle.com/dbexpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) and scroll down to the Service Advisor section
@@ -76,8 +71,3 @@ You may now **proceed to the next lab**.
 ## Learn More
 
 * [Service Advisor Overview (Video)](https://videohub.oracle.com/media/1_0klpfez6 "Service Advisor Overview (Video)")
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

@@ -2,9 +2,6 @@
 
 ## Introduction
 
-Estimated Time: TODO - x minutes
-
-
 Watch the following video for a brief walkthrough of the lab:
 
 [](videohub:1_02twssdb)
@@ -32,28 +29,23 @@ Throughout this section we will be leveraging a Jupyter Notebook to explore vect
 This lab assumes you have:
 - All previous labs successfully completed
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Open Notebook
 This task will have you login to the Jupyter environment and run specific notebooks for this lab.
 
 1. **If you have already logged into the Jupyter environment skip to step 5, otherwise** open "**View Login Info**" section of your workshop.
 
-    ![View login info.](images/lab1-1-view-login-info.png)
+   ![View login info.](images/lab1-1-view-login-info.png)
 
 2. Copy the Jupyter Notebook Password and click the Jupyter Notebook URL.
 
-    ![Copy login details.](images/lab1-2-jupyter-notebook-info.png)
+   ![Copy login details.](images/lab1-2-jupyter-notebook-info.png)
 
 3. Paste the Jupyter Notebook password you copied in the previous step into the password field.
 
-    ![Enter the password.](images/lab1-3-jupyter-login.png)
+   ![Enter the password.](images/lab1-3-jupyter-login.png)
    
 4. After a successfull login, you will see the Jupyter Notebook's landing page. 
-    ![The Jupyter Notebook landing page.](images/lab1-4-landing-page.png)
+   ![The Jupyter Notebook landing page.](images/lab1-4-landing-page.png)
 
 5. In the left File Explorer panel, open the (**workshop**) and open(**workshop.ipynb**) notebook.
 

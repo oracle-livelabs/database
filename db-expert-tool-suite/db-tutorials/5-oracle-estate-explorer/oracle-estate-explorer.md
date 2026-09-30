@@ -15,14 +15,9 @@ In this lab, you will:
 * Learn about Oracle Estate Explorer's via presentation
 * Dive deeper into Oracle Estate Explorer @ Oracle Database World or Online
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Learn about Oracle Estate Explorer's via presentation
 
-[Download PDF version](../../db-tutorials/5-oracle-estate-explorer/images/oee_pres.pdf) 
+<a href="../../db-tutorials/5-oracle-estate-explorer/images/oee_pres.pdf">Download PDF version</a> 
 
 
 <section typeof='http://purl.org/ontology/bibo/Slide'>

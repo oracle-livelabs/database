@@ -262,7 +262,7 @@ In this task, you will configure Database Vault at the CDB root level, ensuring 
     Connected.
     ```
 
-8. Enable Database Vault Operations Control in the CDB root. An error should occur when running this command because the Database Vault is not enabled in the CDB root. The next step will show how to first enable Oracle Database Vault in the CDB root.
+8.  Enable Database Vault Operations Control in the CDB root. An error should occur when running this command because the Database Vault is not enabled in the CDB root. The next step will show how to first enable Oracle Database Vault in the CDB root.
 
     ```
     SQL> <copy>EXEC dvsys.dbms_macadm.enable_app_protection</copy>
@@ -274,7 +274,7 @@ In this task, you will configure Database Vault at the CDB root level, ensuring 
     ORA-06512: at line 1
     ```
 
-9. Log in to CDB1 as the Oracle Database Vault owner, `C##SEC_ADMIN`.
+9.  Log in to CDB1 as the Oracle Database Vault owner, `C##SEC_ADMIN`.
 
     ```
     SQL> <copy>CONNECT c##sec_admin/password@CDB1</copy>
@@ -333,7 +333,7 @@ In this task, you will configure Database Vault at the CDB root level, ensuring 
     SQL> <copy>CONNECT c##sec_admin/password</copy>
     ```
 
-17. Enable Database Vault Operations Control.
+17.  Enable Database Vault Operations Control.
 
     ```
     SQL> <copy>EXEC dvsys.dbms_macadm.enable_app_protection</copy>
@@ -439,7 +439,7 @@ In this task, you back up the PDB although Oracle Database Vault Operations Cont
     RMAN> <copy>BACKUP DATABASE;</copy>
     ```
 
-    Although common users cannot query application data in PDBs, they can still complete administrative tasks for which they are granted privileges.
+Although common users cannot query application data in PDBs, they can still complete administrative tasks for which they are granted privileges.
 
 6. Quit the RMAN session.
 
@@ -503,7 +503,7 @@ HR application data in PDB1 is very sensitive and should be protected against co
     ORA-01031: insufficient privileges
     ```
 
-    The behavior is expected because Oracle Database Vault Operations Control is enabled.
+The behavior is expected because Oracle Database Vault Operations Control is enabled.
 
 7. Connect as `C##SEC_ADMIN`.
 
@@ -521,7 +521,7 @@ HR application data in PDB1 is very sensitive and should be protected against co
     PL/SQL procedure successfully completed.
     ```
 
-9. Query the exception list.
+9.  Query the exception list.
 
     ```
     SQL> <copy>SELECT * FROM DVSYS.DBA_DV_APP_EXCEPTION;</copy>
@@ -531,7 +531,7 @@ HR application data in PDB1 is very sensitive and should be protected against co
     C##REPORT      %
     ```
 
-    Automation accounts frequently have procedure or functions that need to access local data. In this case, include the package name so that only the package name can access local data and not someone who has stolen the credentials and runs SQL statements.
+Automation accounts frequently have procedure or functions that need to access local data. In this case, include the package name so that only the package name can access local data and not someone who has stolen the credentials and runs SQL statements.
 
 1. Re-connect as the common user in PDB1.
 
@@ -606,7 +606,7 @@ HR application data in PDB1 is very sensitive and should be protected against co
     User dropped.
     ```
 
-8. Quit the session.
+8.  Quit the session.
 
     ```
     SQL> <copy>exit</copy>

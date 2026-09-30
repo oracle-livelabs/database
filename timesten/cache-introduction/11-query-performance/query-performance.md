@@ -12,11 +12,11 @@ When timing database query execution, it is important to understand what you are
 
 When the Oracle SQL\*Plus tool, the TimesTen ttIsql tool, or an application submits a SQL statement to the database several things occur.
 
-1. The database parses the SQL statement to make sure that it is a syntactically correct, valid SQL statement.
-2. The database query optimizer prepares an optimal query execution plan for the statement.
-3. The prepared query plan is executed.
-4. The results (result set) is returned.
-5. The query tool formats and displays the returned results.
+1.	The database parses the SQL statement to make sure that it is a syntactically correct, valid SQL statement.
+2.	The database query optimizer prepares an optimal query execution plan for the statement.
+3.	The prepared query plan is executed.
+4.	The results (result set) is returned.
+5.	The query tool formats and displays the returned results.
 
 Steps 1 and 2 are referred to as ‘preparing’ the query. Depending on the complexity of the query, these steps may be quite costly.
 

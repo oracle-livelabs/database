@@ -177,7 +177,7 @@ Execute a metadata export using this par file:
     So you're going to create a SQL file containing all metadata called "upgr\_metadata.sql" located in the database directory "XTTS\_METADATA\_DIR" 
 
 
-2. Generating Metadata SQL
+2.  Generating Metadata SQL
 
     ```
     <copy>
@@ -324,8 +324,3 @@ You successfully completed all stages of this XTTS lab migrating an Oracle 11g d
 * **Author** - Klaus Gronau
 * **Contributors** Mike Dietrich, Daniel Overby Hansen  
 * **Last Updated By/Date** - Klaus Gronau, June 2023
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

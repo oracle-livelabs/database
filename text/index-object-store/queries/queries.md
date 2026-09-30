@@ -22,7 +22,7 @@ In this lab, you will:
 ## Task 1: Open Database Actions
 
 1. If you have just completed the previous lab, you can skip this task as you will already be in Database Actions.
-    Otherwise, log in to the Oracle Cloud.
+Otherwise, log in to the Oracle Cloud.
 
 <if type="freetier">
 
@@ -57,18 +57,18 @@ In this lab, you will:
     ![check workload type](./images/workload-type.png " ")
 
 <if type="freetier">
-    > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
+   > **Note:** Avoid the use of the ManagedCompartmentforPaaS compartment as this is an Oracle default used for Oracle Platform Services.
 </if>
 
 7. You should see your database **TEXTDB** listed in the center. Click on the database name "TEXTDB".
 
     ![database name](./images/database-name.png " ")
 
-8. On the database page, choose __Database Actions__.
+8.  On the database page, choose __Database Actions__.
 
     ![dbactions button](./images/dbactions-button.png " ")
 
-9. You are now in Database Actions.
+9.  You are now in Database Actions.
 
     Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
     
@@ -79,7 +79,7 @@ In this lab, you will:
 
 ## Task 2: Run Text Queries
 
-1. First familiarize yourself with the text contained in the table which was created for the external text index. Copy the following and press the "Run Command" button.
+1.  First familiarize yourself with the text contained in the table which was created for the external text index. Copy the following and press the "Run Command" button.
 
     ```
     <copy>
@@ -92,7 +92,7 @@ In this lab, you will:
     That should show you four rows in the table, one row per indexed document (if it does not, then follow the trouble-shooting section at the end of the last lab).
     Remember that our text index is created on the _contents_ of the files, so you may wish to take a look at the actual files you uploaded, in order to see what we indexed.
 
-2. The CONTAINS operator
+2.  The CONTAINS operator
 
     To search an Oracle Text CONTEXT index you must use the CONTAINS operator. CONTAINS is specific to that type of index.
     Unlike 'ordinary' indexes, you can't get the same results with or without an index. CONTAINS simply won't work if there is no CONTEXT index present.
@@ -101,8 +101,8 @@ In this lab, you will:
 
     CONTAINS takes two or three arguments. The third is optional and we won't discuss it here. The two required arguments are:
 
-    1. The name of the column to be searched. In the case of external text indexes, the index is always created on the column **OBJECT\_NAME**, so that's what we need to use. 
-    2. A string value to search for. The string can be a literal string, or anything that evaluates to a string (VARCHAR2 or CLOB).
+    1.  The name of the column to be searched. In the case of external text indexes, the index is always created on the column **OBJECT\_NAME**, so that's what we need to use. 
+    2.  A string value to search for. The string can be a literal string, or anything that evaluates to a string (VARCHAR2 or CLOB).
     
     An external text index is an example of an _indirect index_. Although the index is created on the column **OBJECT\_NAME** column, we actually fetch the data to be indexed from somewhere else - in this case from the contents of the file referenced by the combination of **OBJECT\_NAME** and **OBJECT\_PATH**
 

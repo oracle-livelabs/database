@@ -34,7 +34,7 @@ Estimated Time: 20 minutes
     <copy>ssh -i private_key_file opc@new_compute_instance_ip</copy>
      ```
 
-2. Install app server
+2.	Install app server
 
     a. Install Apache
     
@@ -63,13 +63,13 @@ Estimated Time: 20 minutes
     <copy>sudo firewall-cmd --reload</copy>
     ```
 
-3. From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
+3.	From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
 
     **Example: http://129.213....**
 
 ## Task 2: Install PHP
 
-1. Install php:
+1.	Install php:
 
     a. Install php:7.4
 
@@ -99,7 +99,7 @@ Estimated Time: 20 minutes
     <copy>sudo systemctl restart httpd</copy>
     ```
 
-2. Create test php file (info.php)
+2.	Create test php file (info.php)
 
     ```bash
     <copy>sudo nano /var/www/html/info.php</copy>
@@ -108,8 +108,8 @@ Estimated Time: 20 minutes
 
     ```bash
     <copy><?php
-    phpinfo();
-    ?></copy>
+phpinfo();
+?></copy>
     ```
 4. From your local machine, browse the page info.php
 
@@ -123,7 +123,7 @@ Estimated Time: 20 minutes
     <copy> sudo setsebool -P httpd_can_network_connect 1 </copy>
     ```
 
-2. Create config.php
+2.	Create config.php
 
     ```bash
     <copy>cd /var/www/html</copy>
@@ -136,27 +136,27 @@ Estimated Time: 20 minutes
 
     ```bash
     <copy><?php
-    // Database credentials
-    define('DB_SERVER', '10.0.1...');// MDS server IP address
-    define('DB_USERNAME', 'admin');
-    define('DB_PASSWORD', 'Welcome#12345');
-    define('DB_NAME', 'airportdb');
-    //Attempt to connect to MySQL database
-    $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    // Check connection
-    if($link === false){
+// Database credentials
+define('DB_SERVER', '10.0.1...');// MDS server IP address
+define('DB_USERNAME', 'admin');
+define('DB_PASSWORD', 'Welcome#12345');
+define('DB_NAME', 'airportdb');
+//Attempt to connect to MySQL database
+$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+// Check connection
+if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
-    }
-    // Print host information
-    echo 'Successfull Connect.';
-    echo 'Host info: ' . mysqli_get_host_info($link);
-    ?>
-    </copy>
+}
+// Print host information
+echo 'Successfull Connect.';
+echo 'Host info: ' . mysqli_get_host_info($link);
+?>
+</copy>
     ```
 
     - Test Config.php on Web sever http://150.230..../config.php
 
-4. Create dbtest.php
+4.	Create dbtest.php
 
     ```bash
     <copy>cd /var/www/html</copy>
@@ -170,15 +170,15 @@ Estimated Time: 20 minutes
 
     ```bash
     <copy><?php
-    require_once "config.php";
-    $query = "select firstname, lastname, count(booking.passenger_id) as count_bookings from passenger, booking
-    where booking.passenger_id = passenger.passenger_id
-    and passenger.lastname = 'Aldrin' or (passenger.firstname = 'Neil' and passenger.lastname = 'Armstrong')
-    and booking.price > 400.00 group by firstname, lastname;";
-    if ($stmt = $link->prepare($query)) {
-    $stmt->execute();
-    $stmt->bind_result($firstname,$lastname,$count_bookings);
-    echo "<table>";
+require_once "config.php";
+$query = "select firstname, lastname, count(booking.passenger_id) as count_bookings from passenger, booking
+where booking.passenger_id = passenger.passenger_id
+and passenger.lastname = 'Aldrin' or (passenger.firstname = 'Neil' and passenger.lastname = 'Armstrong')
+and booking.price > 400.00 group by firstname, lastname;";
+if ($stmt = $link->prepare($query)) {
+   $stmt->execute();
+   $stmt->bind_result($firstname,$lastname,$count_bookings);
+   echo "<table>";
         echo "<tr>";
         echo "<th>Firstname</th>";
         echo "<th>Lastname</th>";
@@ -194,10 +194,10 @@ Estimated Time: 20 minutes
      }
 
     $stmt->close();
-    }
-    ?>
+}
+?>
 
-    </copy>
+</copy>
     ```
 
 6. From your local  machine connect to dbhwtest.php
@@ -232,7 +232,7 @@ Estimated Time: 20 minutes
     - Save the mydbchart.php 
 
 
-6. From your local  machine connect to dbhwtest.php
+6.	From your local  machine connect to dbhwtest.php
 
     Example: http://129.213.167..../mydbchart.php
     ![MDS](./images/mydbchart-out.png " ")

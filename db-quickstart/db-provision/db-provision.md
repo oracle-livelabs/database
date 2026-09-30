@@ -17,10 +17,6 @@ In this lab, you will:
 
 - This lab requires completion of the **Get Started** section in the **Contents** menu on the left.
 
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: (Optional) Create a Compartment
 [](include:iam-compartment-create-body.md)
 
@@ -42,7 +38,7 @@ TODO: Add introduction text here.
     ![Click Create Autonomous AI Database.](images/click-create-new-adb.png =65%x*)
 </if>
 
-    The **Create Autonomous AI Database Serverless** page is displayed.
+The **Create Autonomous AI Database Serverless** page is displayed.
 
 2. Specify the following:
 
@@ -128,9 +124,9 @@ TODO: Add introduction text here.
 
     ![Click Create.](images/click-create.png =65%x*)
 
-10. The **Autonomous AI Database details** page is displayed. The status of your ADB instance is **`Provisioning`**.
+10.  The **Autonomous AI Database details** page is displayed. The status of your ADB instance is **`Provisioning`**.
 
-    ![Database Provisioning message.](./images/adb-create-provisioning-message-new.png =75%x*)
+   ![Database Provisioning message.](./images/adb-create-provisioning-message-new.png =75%x*)
 
     A **Check database lifecycle state** informational box is displayed. You can navigate through this tour or choose to skip it. Click **Skip tour**. A **Skip guided tour** dialog box is displayed. Click **Skip**.
 

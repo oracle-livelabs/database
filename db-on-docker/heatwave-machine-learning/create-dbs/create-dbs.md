@@ -214,7 +214,7 @@ In this lab, you will be guided through the following tasks:
     ![Connect](./images/10addheat-list.png "list ")
 
 3. In the list of DB Systems, click the **MDS-HW** system.
-    click **More Action ->  Add HeatWave Cluster**.
+click **More Action ->  Add HeatWave Cluster**.
 
     ![Connect](./images/10addheat-cluster.png "addheat-cluster ")
 

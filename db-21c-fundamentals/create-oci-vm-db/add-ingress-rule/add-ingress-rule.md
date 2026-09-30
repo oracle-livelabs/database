@@ -1,8 +1,5 @@
 # Add an Ingress Rule to Open a Port to VCN
 ## Introduction
-
-Estimated Time: TODO - x minutes
-
 This lab walks you through the steps to open a port to your Oracle Cloud network to allow access to an Oracle Database instance running on an Oracle Cloud Compute, Bare Metal or Virtual Machine instance. For example, by opening port 1521, you will allow Oracle Database clients and external applications to access your Oracle Database.
 
 ### Objectives
@@ -17,30 +14,30 @@ Oracle Cloud Infrastructure provides a quick and easy way to create an Oracle Da
 
 1. After logging into your Oracle Cloud account, click the **Navigation Menu** in the upper left, navigate to **Networking**, and select **Virtual Cloud Networks**.
 
-    	![Image](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
+	![](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png " ")
 
 3. On the left menu, click **Security Lists**.
 
-    ![Image](images/security-lists.png " ")
+  ![](images/security-lists.png " ")
 
 4. Click the link for the **Default Security List**.
 
-    ![Image](images/default-security-list.png " ")
+  ![](images/default-security-list.png " ")
 
 5. Click **Add Ingress Rules**.
 
-    ![Image](images/add-ingress-rule-1.png " ")
+  ![](images/add-ingress-rule-1.png " ")
 
 6. In the Add Ingress Rules dialog, enter the public IP address of your PC followed by `/32` as the source CIDR. Enter `1521` as the destination port number (of the database), and click **Add Ingress Rules**.
 
-    ![Image](images/add-ingress-rule-2.png " ")
+  ![](images/add-ingress-rule-2.png " ")
 
-    *Note 1: If you reconnect at a later date or connect to your company's VPN, your local machine's IP address may change.*
-    *Note 2: Make sure to enter your PC's IP address, not your LAN/Wifi's IP address.*
+  *Note 1: If you reconnect at a later date or connect to your company's VPN, your local machine's IP address may change.*
+  *Note 2: Make sure to enter your PC's IP address, not your LAN/Wifi's IP address.*
 
 7. You can remove or edit the Ingress rule by clicking the checkbox for the rule and the clicking the **Edit** or **Remove** buttons.
 
-  ![Image](images/remove-ingress-rule.png " ")
+  ![](images/remove-ingress-rule.png " ")
 
   You can *proceed to the next lab*.
 

@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 Welcome to "Migrate From On-Premises to MySQL HeatWave" workshop. The purpose of this LiveLab is to show you, how easy it is to migrate your data into MySQL HeatWave if you are coming from an on-prem environment.
 
 
@@ -52,10 +49,6 @@ In this lab, you will learn how to:
 
 - An Oracle Cloud Account
 - Some Experience with MySQL Shell - [MySQL shell] (https://dev.MySQL.com/doc/MySQL-shell/8.0/en/)
-
-## Introduction
-
-TODO: Add introduction text here.
 
 ## Task 1: You may now **proceed to the next lab**
 

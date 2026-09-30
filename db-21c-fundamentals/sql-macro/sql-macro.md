@@ -38,11 +38,11 @@ In this lab, you will:
 ## Task 1: Use SQL Macro as a scalar expression
 
 
-1. Open up the Oracle Cloud Shell or terminal of your choice and login to the 21c instance in DB Systems.  Switch to the oracle user.
-    	````
-    	ssh -i ~/.ssh/sshkeyname opc@Your Compute Instance Public IP Address
-    	sudo su - oracle
-    	````
+1.  Open up the Oracle Cloud Shell or terminal of your choice and login to the 21c instance in DB Systems.  Switch to the oracle user.
+	````
+	ssh -i ~/.ssh/sshkeyname opc@Your Compute Instance Public IP Address
+	sudo su - oracle
+	````
 
 2. Ensure that `PDB21` is opened. If it is not opened, open it first.
 
@@ -136,19 +136,19 @@ In this lab, you will:
 
 There are multiple ways to access your Autonomous Database.  You can access it via SQL\*Plus or by using SQL Developer Web.  To access it via SQL\*Plus, skip to [Step 1B](#STEP1B:LogintoADBusingSQLPlus).
 
-1. If you aren't still logged in, login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
-      ![Image](../set-operators/images/21c-home-adb.png " ")
+1.  If you aren't still logged in, login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
+      ![](../set-operators/images/21c-home-adb.png " ")
 
-2. If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
-3. Click on the **Display Name** to go to your ADB main page.
-      ![Image](../set-operators/images/21c-adb.png " ")
+2.  If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
+3.  Click on the **Display Name** to go to your ADB main page.
+      ![](../set-operators/images/21c-adb.png " ")
 
-4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-      ![Image](../set-operators/images/tools.png " ")
+4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+      ![](../set-operators/images/tools.png " ")
 
-5. Enter the username *hr* and password *WElcome123##*
+5.  Enter the username *hr* and password *WElcome123##*
 
-6. Click on the **SQL** button.
+6.  Click on the **SQL** button.
 
 ## Task 1B: Login to ADB using SQL Plus
 1. If you aren't logged into the cloud, log back in
@@ -158,7 +158,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
     export TNS_ADMIN=$(pwd)/wallet
     sqlplus /nolog
-    		conn hr/WElcome123##@adb1_high
+		conn hr/WElcome123##@adb1_high
     ```
 </if>
 
@@ -172,10 +172,10 @@ There are multiple ways to access your Autonomous Database.  You can access it v
           IS BEGIN
                 RETURN 'rpad(str, cnt * length(str), str)';
     END;
-    		/</copy>
+		/</copy>
     ```
 
-    ![Image](./images/step2-sqm.png " ")
+    ![](./images/step2-sqm.png " ")
 </if>
 
 1. Use the SQM to query the table and display the employees names doubled.
@@ -186,27 +186,27 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step2-double.png " ")
+    ![](./images/step2-double.png " ")
     </if>
 
     <if type="dbcs">
 
     ```
-    	  LAST_NAME                 CONCAT_SELF(LAST_NAME,2)
-    	  ------------------------- ----------------------------------------
-    	  Abel                      AbelAbel
-    	  Ande                      AndeAnde
-    	  Atkinson                  AtkinsonAtkinson
-    	  Austin                    AustinAustin
-    	  Baer                      BaerBaer
-    	  Baida                     BaidaBaida
-    	  Banda                     BandaBanda
-    	  Bates                     BatesBates
-    	  Bell                      BellBell
-    	  Bernstein                 BernsteinBernstein
-    	  Bissot                    BissotBissot
-    	  ...
-    	  107 rows selected.
+	  LAST_NAME                 CONCAT_SELF(LAST_NAME,2)
+	  ------------------------- ----------------------------------------
+	  Abel                      AbelAbel
+	  Ande                      AndeAnde
+	  Atkinson                  AtkinsonAtkinson
+	  Austin                    AustinAustin
+	  Baer                      BaerBaer
+	  Baida                     BaidaBaida
+	  Banda                     BandaBanda
+	  Bates                     BatesBates
+	  Bell                      BellBell
+	  Bernstein                 BernsteinBernstein
+	  Bissot                    BissotBissot
+	  ...
+	  107 rows selected.
     ```
     </if>
 
@@ -219,7 +219,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step2-triple.png " ")
+    ![](./images/step2-triple.png " ")
     </if>
 
     <if type="dbcs">
@@ -247,22 +247,22 @@ There are multiple ways to access your Autonomous Database.  You can access it v
 
 ## Task 3: Use SQL Macro as a table expression
 <if type="notused">
-1. Login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
+1.  Login to your ADB screen by clicking on the Hamburger Menu and selecting the Autonomous Database flavor you selected (ATP, ADW or AJD). Otherwise skip to the next step.
 
 
-2. If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
+2.  If you can't find your ADB instance, ensure you are in the correct compartment, you have chosen the flavor of ADB you choose in the earlier lab and that you are in the correct region.
 
-    ![Image](../set-operators/images/21c-home-adb.png " ")
-3. Click on the **Display Name** to go to your ADB main page.
-    ![Image](../set-operators/images/21c-adb.png " ")
+    ![](../set-operators/images/21c-home-adb.png " ")
+3.  Click on the **Display Name** to go to your ADB main page.
+    ![](../set-operators/images/21c-adb.png " ")
 
-4. Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
-    ![Image](../set-operators/images/tools.png " ")
+4.  Click on the **Tools** tab, select **Database Actions**, a new browser will open up.
+    ![](../set-operators/images/tools.png " ")
 
-5. Login with the *admin* user, click **Next**.  Enter the password *WElcome123##*
-6. Click on the **SQL** button.
-7. Change the word *admin* in the URL to *hr*.  You will be logging in to the admin schema
-8. Enter the username *hr* and password *WElcome123##*
+5.  Login with the *admin* user, click **Next**.  Enter the password *WElcome123##*
+6.  Click on the **SQL** button.
+7.  Change the word *admin* in the URL to *hr*.  You will be logging in to the admin schema
+8.  Enter the username *hr* and password *WElcome123##*
 </if>
 
 1. The first usage of an SQL macro as a table expression shows how to use the SQM to implement a polymorphic view.
@@ -277,7 +277,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-create.png " ")
+    ![](./images/step3-create.png " ")
     </if>
 
     <if type="dbcs">
@@ -294,7 +294,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-query1.png " ")
+    ![](./images/step3-query1.png " ")
     </if>
 
     <if type="dbcs">
@@ -321,7 +321,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-function1.png " ")
+    ![](./images/step3-function1.png " ")
     </if>
 
     <if type="dbcs">
@@ -338,7 +338,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-query2.png " ")
+    ![](./images/step3-query2.png " ")
     </if>
 
     <if type="dbcs">
@@ -369,7 +369,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-function2.png " ")
+    ![](./images/step3-function2.png " ")
     </if>
 
     <if type="dbcs">
@@ -386,7 +386,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-query3.png " ")
+    ![](./images/step3-query3.png " ")
     </if>
 
     <if type="dbcs">
@@ -403,7 +403,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-query4.png " ")
+    ![](./images/step3-query4.png " ")
     </if>
 
     <if type="dbcs">
@@ -437,7 +437,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     ```
 
     <if type="atp">
-    ![Image](./images/step3-function3.png " ")
+    ![](./images/step3-function3.png " ")
     </if>
 
     <if type="dbcs">
@@ -505,7 +505,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL> <copy>SELECT * FROM budget_per_job('ST_CLERK') WHERE department_id = 50;</copy>
     ```
 
-    ![Image](./images/step3-query5.png " ")
+    ![](./images/step3-query5.png " ")
 
 
 12. Use the `USER_PROCEDURES` view to display the new values of the `SQL_MACRO` column.
@@ -514,7 +514,7 @@ There are multiple ways to access your Autonomous Database.  You can access it v
     SQL> <copy>SELECT object_name, sql_macro, object_type FROM user_procedures;</copy>
     ```
 
-    ![Image](./images/step3-query6.png " ")
+    ![](./images/step3-query6.png " ")
 
 </if>
 

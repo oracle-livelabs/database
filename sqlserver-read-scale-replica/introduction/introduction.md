@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 This hands-on workshop provides users with step-by-step instructions on installing and configuring the MS SQL Server 2019 Read-Scale Availability Group without a cluster in Windows. 

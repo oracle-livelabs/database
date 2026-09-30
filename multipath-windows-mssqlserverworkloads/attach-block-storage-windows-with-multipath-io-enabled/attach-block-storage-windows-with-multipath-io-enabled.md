@@ -22,19 +22,19 @@ This lab assumes you have:
 
 2. From the taskbar, click **search button** and search for Server Manager and click on Server Manager.
 
-    ![Windows Command Search](./images/windows-command-search.png "Windows Command Search")
+  ![Windows Command Search](./images/windows-command-search.png "Windows Command Search")
 
 3. once successful open the Server Manager, click on **Tools** and select the **MPIO**
 
-    ![Windows Server Manager select MPIO Role](./images/servermangermpio.png "Windows Server Manager select MPIO Roleora")
+  ![Windows Server Manager select MPIO Role](./images/servermangermpio.png "Windows Server Manager select MPIO Roleora")
 
 4. In the **MPIO Properties** selection
     * Click on **Discover Multi-Paths**
     * In Others section, select the **ORACLE BlockVolume** and then click on **Add**, and click on **Ok** to add the **ORACLE BlockVolume**.
 
-    ![Windows Oracle block volume](./images/oracleblockvloume.png "Windows Oracle block volume")
+  ![Windows Oracle block volume](./images/oracleblockvloume.png "Windows Oracle block volume")
 
-    You may now proceed to the **next Task**.
+  You may now proceed to the **next Task**.
 
 5. The **ORACLE BlockVolume** was added to MPIO as shown in the following image. 
 

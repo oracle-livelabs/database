@@ -42,7 +42,7 @@ In this task, you will verify that the required components, such as Listeners, O
 
     ![Listener Service Status](./images/listener-service-status.png " ")
 
-    	The status *active* indicates that the listener service is running. If the listener service is not running, you can restart it with the following command. 
+	The status *active* indicates that the listener service is running. If the listener service is not running, you can restart it with the following command. 
 
     ```
     $ <copy>sudo systemctl restart oracle-db-listener</copy>
@@ -58,7 +58,7 @@ In this task, you will verify that the required components, such as Listeners, O
 
     ![Oracle Database services status 2](./images/db-service-status2.png " ")
 
-    	The status *active* indicates that the database service is running. If the database service is not running, you can restart it with the following command. 
+	The status *active* indicates that the database service is running. If the database service is not running, you can restart it with the following command. 
 
     ```
     $ <copy>sudo systemctl restart oracle-database</copy>
@@ -72,9 +72,9 @@ In this task, you will verify that the required components, such as Listeners, O
 
     ![EM Service Status](./images/em-service-status.png " ")
 
-    	> **Note**: You can access the Oracle Enterprise Manager login page in a web browser only if OMS and emagent services are running. 
+	> **Note**: You can access the Oracle Enterprise Manager login page in a web browser only if OMS and emagent services are running. 
 
-    	The status *active* indicates that these services are running. If the services are not running, you can restart them with the following command. 
+	The status *active* indicates that these services are running. If the services are not running, you can restart them with the following command. 
 
     ```
     $ <copy>sudo systemctl restart oracle-emcc</copy>
@@ -98,11 +98,11 @@ In this task, you will log in to the Oracle Enterprise Manager using a web brows
 If you have reserved a Livelabs environment, then the remote desktop session will have a web browser open and display the *Oracle Enterprise Manager* login page. If it does not display the EM login page, you can access it as follows. 
 
 1. Open a web browser and go to the Oracle Enterprise Manager login URL.   
-    	For this lab, the login URL is:
+	For this lab, the login URL is:
 
-    	```
-    	<copy>http://oms1:7803/em</copy>
-    	```
+	```
+	<copy>http://oms1:7803/em</copy>
+	```
 
 1. Specify the user credentials for Oracle Enterprise Manager. 
 
@@ -136,7 +136,7 @@ In this task, you will generate a public-private key pair required for system au
 
     ![Generate SSH Keys](./images/ssh-key-gen.png " ")
 
-1. Update *`~/.ssh/authorized_keys`* and copy the *private key* to */tmp*.
+1.  Update *`~/.ssh/authorized_keys`* and copy the *private key* to */tmp*.
 
     ```
     <copy>
@@ -175,7 +175,7 @@ In this task, you will use the SSH keys to set up Named Credentials in Oracle En
     ![Credential Operation Successful](images/update-ssh-creds-4.png " ")
 
 1. Setup Oracle Named Credentials using Job System. This will set up the user oracle password on the host and update the Named Credentials used in this workshop.   
-    	Navigate to **Enterprise** &gt; **Job** &gt; **Library**, select *SETUP ORACLE CREDENTIALS*, and click **Submit**.
+	Navigate to **Enterprise** &gt; **Job** &gt; **Library**, select *SETUP ORACLE CREDENTIALS*, and click **Submit**.
 
     ![Job Library](images/named-creds-job.jpg " ")
 
@@ -307,8 +307,3 @@ You may now **proceed to the next lab**.
  - **Author**: Manish Garodia, Database User Assistance Development
  - **Contributors**: Aayushi Arora, Manisha Mati, Rene Fontcha
  - **Last Updated By/Date**: Manish Garodia, October 2024
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

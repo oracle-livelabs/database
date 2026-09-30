@@ -129,7 +129,7 @@ In this lab, you will:
 
 
 
-    *The checksum algorithm defaults to `SHA256` 256-bit.*
+  *The checksum algorithm defaults to `SHA256` 256-bit.*
 
 
 

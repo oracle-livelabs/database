@@ -96,7 +96,7 @@ In this lab, you will:
 
     ```
 
-    After two minutes, observe that the statement is executed.
+  After two minutes, observe that the statement is executed.
 
 
     ```
@@ -226,7 +226,7 @@ In this lab, you will:
 
     ```
 
-    You can also read the PMON trace file. Make sure to change the tracefile to your tracefile name.
+  You can also read the PMON trace file. Make sure to change the tracefile to your tracefile name.
 
     ```
 

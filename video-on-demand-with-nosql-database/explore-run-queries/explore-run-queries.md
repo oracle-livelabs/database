@@ -28,40 +28,40 @@ Before exploring nested arrays, create the indexes on `stream_acct` table that w
 You will create two new indexes from the OCI console as shown below.
 
 1. From the hamburger menu, click **Databases**. Under Oracle NoSQL Databases, click **Tables**.
-    Click the **stream_acct** table. Under **Resources**, click **Indexes**.
-    The list of indexes already created in the table is listed.
-    ![list-indexes](./images/list-indexes.png)
+Click the **stream_acct** table. Under **Resources**, click **Indexes**.
+The list of indexes already created in the table is listed.
+![list-indexes](./images/list-indexes.png)
 
 2. Click on `Add Index` button.
 
 3. Create the index `idx_country_showid_date` using the following information.
 
-    Index column name|JSON path to index field|Type of JSON index field|
-    ---|---|---|
-    info|country|String
-    info|shows[].showId|Integer
-    info|shows[].seriesInfo[].episodes[].date|String
-    {: title="Index parameters"}
+  Index column name|JSON path to index field|Type of JSON index field|
+  ---|---|---|
+  info|country|String
+  info|shows[].showId|Integer
+  info|shows[].seriesInfo[].episodes[].date|String
+  {: title="Index parameters"}
 
-    See the animated gif below with details on how to create the index.
+  See the animated gif below with details on how to create the index.
 
-    ![crtind-country-showid-date](./images/crtind-country-showid-date.gif)
+  ![crtind-country-showid-date](./images/crtind-country-showid-date.gif)
 
-    When done entering all the fields, click 'Add index' button.
+  When done entering all the fields, click 'Add index' button.
 
 4. Create the index `idx_country_genre` using the following information.
 
-    Index column name|JSON path to index field|Type of JSON index field|
-    ---|---|---|
-    info|country|String
-    info|shows[].genres[]|String
-    {: title="Index parameters"}
+  Index column name|JSON path to index field|Type of JSON index field|
+  ---|---|---|
+  info|country|String
+  info|shows[].genres[]|String
+  {: title="Index parameters"}
 
-    See the animated gif below with details on how to create the index.
+  See the animated gif below with details on how to create the index.
 
-    ![crtind-country-genre](./images/crtind-country-genre.gif)
+  ![crtind-country-genre](./images/crtind-country-genre.gif)
 
-    When done entering all the fields, click 'Add index' button.
+  When done entering all the fields, click 'Add index' button.
 
 5. Here are the DDL statement you would have used for reference.
 
@@ -92,14 +92,14 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 
 1. **A simple introductory query**
 
-    Click on  'Explore data' on the left so we can examine some of the data.
+  Click on  'Explore data' on the left so we can examine some of the data.
 
-    ![explore-data](./images/explore-data.png)
+  ![explore-data](./images/explore-data.png)
 
-    Write a query that returns the number of users in USA that have shown an interest in the show with id 16.
-    Copy and paste into SQL statement box and hit 'Execute.'
+  Write a query that returns the number of users in USA that have shown an interest in the show with id 16.
+  Copy and paste into SQL statement box and hit 'Execute.'
 
-    **Method 1:**
+  **Method 1:**
     ```
     <copy>
     select count(*) as cnt
@@ -112,7 +112,7 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 
     See [Sequence Comparison operators] (https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/sequence-comparison-operators.html) for more details on the `=any` operations.
 
-    **Method 2:**
+  **Method 2:**
     The query could also be written like this:
 
     ```
@@ -130,20 +130,20 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
     Since the path expression `u.info.shows[$element.showId = 16]` returns a set of shows (at most one show in this case), rather than a boolean value, the exists operator is needed to convert this set to a boolean value (returning true if the set is not empty).
     See [Path expressions](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/path-expressions.html) for the full specification of path expressions.
 
-    **Indexes used:**
+  **Indexes used:**
 
     Both the above queries uses the `idx_country_showid_date` index. Both the query conditions are pushed to the index. In fact, the index is “covering” each query, i.e., it contains all the info needed by the query, and as a
     result, no table rows are scanned during execution. Click [Query Optimization ](https://docs.oracle.com/en/database/other-databases/nosql-database/22.3/sqlreferencefornosql/query-optimization.html) for more examples and details about how indexes are used by queries.
 
-    **Query Plan:**
+  **Query Plan:**
 
     To confirm the use of the index and to see what conditions are pushed to it, you can display the query execution plan from the OCI console as shown below. Once you provide your query in the 'SQL statement' box, click **Show query execution plan** to view the execution plan for the query.
 
-    **Method 1:**
+  **Method 1:**
 
     ![query1a-plan](./images/query1a-plan.png)
 
-    **Method 2:**
+  **Method 2:**
 
     ![query1b-plan](./images/query1b-plan.png)
 
@@ -151,9 +151,9 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 
 2. **Placing conditions on the elements of nested arrays**
 
-    Write a query that returns the details of users in USA who have watched at least one episode of show 16 after 2022-04-01. Copy and paste into SQL statement box and hit 'Execute.'
+  Write a query that returns the details of users in USA who have watched at least one episode of show 16 after 2022-04-01. Copy and paste into SQL statement box and hit 'Execute.'
 
-    **Query 2 a:**
+  **Query 2 a:**
 
     ```
     <copy>
@@ -197,11 +197,11 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 
 3. **Which index to choose?**
 
-    The query processor identifies which of the available indexes is used for a query. What happens when there is more than one index possible for the query? Can you force using a particular index? Let's review some examples to understand the usage of indexes in queries.
+  The query processor identifies which of the available indexes is used for a query. What happens when there is more than one index possible for the query? Can you force using a particular index? Let's review some examples to understand the usage of indexes in queries.
 
-    **Example:**
+  **Example:**
 
-    Write a query that returns the number of users who have watched at least one episode of show 15 after 2022-04-01. Copy and paste into SQL statement box and hit 'Execute.'
+  Write a query that returns the number of users who have watched at least one episode of show 15 after 2022-04-01. Copy and paste into SQL statement box and hit 'Execute.'
 
     ```
     <copy>
@@ -211,17 +211,17 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
     </copy>
     ```
 
-    **Choice of Indexes:**
+  **Choice of Indexes:**
 
-    In this case, the query can use either `idx_country_showid_date` or `idx_showId` based on the conditions specified in the WHERE clause, and it’s not clear which index is the better choice. If it chooses `idx_country_showid_date`, it will do a full scan of the whole index applying the two conditions on each index key. Recall that `idx_country_showid_date` is a 3 column index, and that the field country is not specified in the WHERE clause.  As a result, it will access and filter-out many non-qualifying index keys. If it chooses `idx_showId` (a single column index), it will scan only the index keys with `showId = 15`, but it will then have to retrieve the associated table rows in order to apply the date conditions on them. So,`idx_showid` scans far fewer index keys than `idx_country_showid_date`, but `idx_showId` is not covering whereas `idx_country_showid_date` is.  The query plan when using the `idx_showId` is shown below.
+   In this case, the query can use either `idx_country_showid_date` or `idx_showId` based on the conditions specified in the WHERE clause, and it’s not clear which index is the better choice. If it chooses `idx_country_showid_date`, it will do a full scan of the whole index applying the two conditions on each index key. Recall that `idx_country_showid_date` is a 3 column index, and that the field country is not specified in the WHERE clause.  As a result, it will access and filter-out many non-qualifying index keys. If it chooses `idx_showId` (a single column index), it will scan only the index keys with `showId = 15`, but it will then have to retrieve the associated table rows in order to apply the date conditions on them. So,`idx_showid` scans far fewer index keys than `idx_country_showid_date`, but `idx_showId` is not covering whereas `idx_country_showid_date` is.  The query plan when using the `idx_showId` is shown below.
 
-    ![query3a-plan](./images/query3a-plan.png)
+  ![query3a-plan](./images/query3a-plan.png)
 
-    Whether `idx_showId` or `idx_country_showid_date` is better depends on how selective the show id condition is. Oracle NoSQL does not currently collect statistics on index keys distribution, so it relies on a simple heuristic to choose among multiple applicable indexes. In this case, the heuristic chooses `idx_showId` on the assumption that the `showId = 15` predicate must be a highly selective one because `showId` is the complete key of an index. If this turns out to be the wrong choice, you can force the use of `idx_country_showid_date` by using an index hint, as shown in the next example.
+  Whether `idx_showId` or `idx_country_showid_date` is better depends on how selective the show id condition is. Oracle NoSQL does not currently collect statistics on index keys distribution, so it relies on a simple heuristic to choose among multiple applicable indexes. In this case, the heuristic chooses `idx_showId` on the assumption that the `showId = 15` predicate must be a highly selective one because `showId` is the complete key of an index. If this turns out to be the wrong choice, you can force the use of `idx_country_showid_date` by using an index hint, as shown in the next example.
 
-    **Forcing the use of a specific index**
+  **Forcing the use of a specific index**
 
-    Copy and paste into SQL statement box and hit 'Execute.'
+  Copy and paste into SQL statement box and hit 'Execute.'
 
     ```
     <copy>
@@ -237,12 +237,12 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
 
 4. **Placing conditions on the elements of sibling arrays**
 
-    You can place conditions on the elements of any arrays.
+  You can place conditions on the elements of any arrays.
 
-    **Example:**
+  **Example:**
 
-    Write a query that returns the number of users in USA who have watched a French or Danish
-    show in 2022. Copy and paste into SQL statement box and hit 'Execute.'
+  Write a query that returns the number of users in USA who have watched a French or Danish
+  show in 2022. Copy and paste into SQL statement box and hit 'Execute.'
 
     ```
     <copy>
@@ -255,15 +255,15 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
           and $element.date <= "2022-12-31"] ]
     </copy>
     ```
-    Here, the genres and episodes arrays are not nested into each other, but both are nested inside the shows array (hence genres and episodes are `sibling` arrays). Since both the genre and date conditions must apply to the same show, the conditions are written as two filtering predicates at the level of the shows array.
+  Here, the genres and episodes arrays are not nested into each other, but both are nested inside the shows array (hence genres and episodes are `sibling` arrays). Since both the genre and date conditions must apply to the same show, the conditions are written as two filtering predicates at the level of the shows array.
 
-    **Indexes used:**
+  **Indexes used:**
 
-    The query uses the `idx_country_genre `index. The country and genres conditions are pushed to the index. Two index scans will be performed: one scanning the keys with value (`USA`, `french`) and another scanning the keys with value (`USA`,`danish`). The date conditions will be applied on the table rows associated with the qualifying index keys. This can be viewed in the query plan as shown below.
+  The query uses the `idx_country_genre `index. The country and genres conditions are pushed to the index. Two index scans will be performed: one scanning the keys with value (`USA`, `french`) and another scanning the keys with value (`USA`,`danish`). The date conditions will be applied on the table rows associated with the qualifying index keys. This can be viewed in the query plan as shown below.
 
-    ![query4a-plan](./images/query4a-plan.png)
+  ![query4a-plan](./images/query4a-plan.png)
 
-    Two more things are worth mentioning here:
+  Two more things are worth mentioning here:
 
     * The query could have benefited by an index on all three fields: country, genre, and episode date. If such an index existed, all the query conditions could be pushed to the index. However, you cannot create such an index as all the arrays indexed must be nested into each other. Here the genres arrays and the episodes arrays do not satisfy this constraint.
     * The expression `exists $element.genres[$element in ("french", "danish")]` can been rewritten in one of the following ways:
@@ -271,15 +271,15 @@ Although Oracle NoSQL supports unnesting (but not subqueries), it also includes 
     or
     `$element.genres[] =any seq_concat(“french”, “danish”)`. However, either of these two forms would cause the condition to be pushed to the index as a `filtering predicate` and not as a `start/stop` predicate that establishes the boundaries of the index scan.  In this case, the country predicate is pushed as a start/stop predicate. In summary, the IN operator is optimizable, whereas the OR operator and an `any` operator whose right operand returns more than one value are not optimizable.
 
-    Let's move onto another topic.
+  Let's move onto another topic.
 
 5. **Aggregating array elements**
 
-    You can transform the shape of JSON documents and aggregate array elements.
+  You can transform the shape of JSON documents and aggregate array elements.
 
-    **Example:**
+  **Example:**
 
-    Write a query that returns the user’s account, user ids, the total time the user has spent watching show 16, and an array containing information about all the episodes of show 16 that the user has watched. The users should have watched at least one episode of show 16 after 2022-4-01. Copy and paste into SQL statement box and hit 'Execute.'
+  Write a query that returns the user’s account, user ids, the total time the user has spent watching show 16, and an array containing information about all the episodes of show 16 that the user has watched. The users should have watched at least one episode of show 16 after 2022-4-01. Copy and paste into SQL statement box and hit 'Execute.'
 
     ```
     <copy>
@@ -354,7 +354,7 @@ In the previous section you used path expressions with filtering conditions on a
 
 1. **Unnesting for the sake of it**
 
-    **Example:** For each user in USA who has watched at least one episode of show 16 after 2022-04-01, return one result for every episode of show 16 that the user has watched. Each such result contains the user's account and user ids, the show name, the season number, the episode id, and the date the episode was watched. Copy and paste into SQL statement box and hit 'Execute.'
+  **Example:** For each user in USA who has watched at least one episode of show 16 after 2022-04-01, return one result for every episode of show 16 that the user has watched. Each such result contains the user's account and user ids, the show name, the season number, the episode id, and the date the episode was watched. Copy and paste into SQL statement box and hit 'Execute.'
 
     ```
     <copy>
@@ -375,9 +375,9 @@ In the previous section you used path expressions with filtering conditions on a
 
 2. **Grouping by a field in a top-level array**
 
-    **Example:**
+  **Example:**
 
-    For each show, write a query that returns the number of users who have shown an interest in that show. Sort the results by the number of users in descending order. Copy and paste into SQL statement box and hit 'Execute.'
+   For each show, write a query that returns the number of users who have shown an interest in that show. Sort the results by the number of users in descending order. Copy and paste into SQL statement box and hit 'Execute.'
 
     ```
     <copy>
@@ -406,9 +406,9 @@ In the previous section you used path expressions with filtering conditions on a
 
 3. **Grouping by a field in a top-level array, but aggregating over deeply nested fields**
 
-    **Example:**
+  **Example:**
 
-    For each show, return the total time users have spent watching that show. Sort the results in descending order of the total time. Copy and paste into SQL statement box and hit 'Execute.'
+  For each show, return the total time users have spent watching that show. Sort the results in descending order of the total time. Copy and paste into SQL statement box and hit 'Execute.'
 
     ```
     <copy>

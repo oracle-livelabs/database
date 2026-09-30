@@ -153,7 +153,7 @@ This lab assumes you have:
 MySQL now supports writing stored functions and stored procedures using JavaScript. Please note that this functionality is only available in MySQL Enterprise Edition.  
 
 1. Setup  MLE Component when using JavaScript. As part of enabling Javascript SP: INSTALL COMPONENT 'file://component_mle';
-    This  is a prerequisite step in the OS shell that runs before installing the MLE component. 
+This  is a prerequisite step in the OS shell that runs before installing the MLE component. 
 
 2. First set SELinux to permissive mode
 
@@ -247,7 +247,7 @@ Creating a MySQL stored function to handle this would be possible, but it might 
             return lng.trim()
             break
     }
-    $$; </copy>
+$$; </copy>
     ```
 4. Test the **secondsToHoursMinsSecs** function in short mode
 

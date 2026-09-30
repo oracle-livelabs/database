@@ -23,11 +23,6 @@ LumenCare's platform faces several common data governance challenges that many o
 - Access to Oracle AI Database 26ai.
 - Basic understanding of SQL concepts.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## What are Data Usecase Domains?
 Data Usecase Domains provide reusable data types with built-in constraints and validation rules. Unlike simple data types, domains can enforce complex business rules and provide consistent metadata across your entire schema, reducing development time and ensuring data quality.
 
@@ -95,7 +90,7 @@ The combination creates a data governance framework that benefits any organizati
 
 1. Now that we understand the four types of Data Usecase Domains, let's see them in action by creating specialized healthcare domains that demonstrate each type while including annotations.
 
-    Let's create single column domains that apply constraints and validation to individual columns that can be reused across multiple tables.
+  Let's create single column domains that apply constraints and validation to individual columns that can be reused across multiple tables.
 
     **Note**: We're using `IF NOT EXISTS` syntax, an Oracle AI Database 26ai feature that can prevents errors when running scripts multiple times. The feature lets you to create objects only if they don't already exist, making your database scripts more robust and reusable - particularly valuable in development environments where scripts may be executed repeatedly.
 
@@ -228,13 +223,13 @@ The combination creates a data governance framework that benefits any organizati
     ```sql
     <copy>
     -- Insert valid patient data
-    INSERT INTO patients (id, name, dob, sex, primary_reason) 
-    VALUES (1, 'Sarah Johnson', DATE '1985-03-15', 'Female', 'Annual checkup'),
+  INSERT INTO patients (id, name, dob, sex, primary_reason) 
+  VALUES (1, 'Sarah Johnson', DATE '1985-03-15', 'Female', 'Annual checkup'),
         (2, 'Alex Chen', DATE '1992-07-22', 'Male', 'Follow-up consultation');
 
-    -- Insert valid appointment
-    INSERT INTO appointments (patient_id, start_time, reason, status, provider_name)
-    VALUES (1, TIMESTAMP '2025-02-15 10:00:00', 'Routine physical', 'Scheduled', 'Dr. Martinez');
+  -- Insert valid appointment
+  INSERT INTO appointments (patient_id, start_time, reason, status, provider_name)
+  VALUES (1, TIMESTAMP '2025-02-15 10:00:00', 'Routine physical', 'Scheduled', 'Dr. Martinez');
 
     COMMIT;
     </copy>

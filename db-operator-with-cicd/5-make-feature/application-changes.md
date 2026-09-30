@@ -294,7 +294,7 @@ After finishing the feature, you can merge these changes back to `dev`. Navigate
 
 1. Navigate to Pull Requests and click on New pull request
 
-    ![Make Pull Request](./images/make-pull-request.png)
+   ![Make Pull Request](./images/make-pull-request.png)
    
 2. Open a Pull Request from `feature/cbtransfer01/transaction_date` to `dev`.
 

@@ -33,7 +33,7 @@ Estimated Time: 20 minutes
     <copy>ssh -i private_key_file opc@new_compute_instance_ip</copy>
      ````
 
-2. Install app server
+2.	Install app server
 
     a. Install Apache
     
@@ -62,13 +62,13 @@ Estimated Time: 20 minutes
     <copy>sudo firewall-cmd --reload</copy>
     ````
 
-3. From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
+3.	From a browser test apache from your loacal machine using the Public IP Address of your Compute Instance
 
     **Example: http://129.213....**
 
 **Subtask 2 – Install PHP**   
 
-1. Install php:
+1.	Install php:
 
     a. Install php:7.4
 
@@ -98,7 +98,7 @@ Estimated Time: 20 minutes
     <copy>sudo systemctl restart httpd</copy>
     ````
 
-2. Create test php file (info.php)
+2.	Create test php file (info.php)
 
     ````
     <copy>sudo nano /var/www/html/info.php</copy>
@@ -122,7 +122,7 @@ phpinfo();
     <copy> sudo setsebool -P httpd_can_network_connect 1 </copy>
     ````
 
-2. Create config.php
+2.	Create config.php
 
     ````
     <copy>cd /var/www/html</copy>
@@ -155,7 +155,7 @@ echo 'Host info: ' . mysqli_get_host_info($link);
 
     - Test Config.php on Web sever http://150.230..../config.php
 
-4. Create dbtest.php
+4.	Create dbtest.php
 
     ````
     <copy>cd /var/www/html</copy>
@@ -231,7 +231,7 @@ if ($stmt = $link->prepare($query)) {
     - Save the mydbchart.php 
 
 
-3. From your local  machine connect to dbhwtest.php
+3.	From your local  machine connect to dbhwtest.php
 
     Example: http://129.213.167..../mydbchart.php
     ![MDS](./images/mydbchart-out.png " ")

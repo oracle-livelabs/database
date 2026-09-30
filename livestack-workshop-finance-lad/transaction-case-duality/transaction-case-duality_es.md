@@ -1,14 +1,5 @@
 # Crear un JSON Application Model
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 ## Introducción
 
 Thomas Brune es un aplicación developer at Seer Bank. He y his equipo son building un new web y mobile aplicación para clientes. La equipo wants un faster cliente experience, con fewer round trips y payloads that match la screens y services they son building.
@@ -461,8 +452,3 @@ For Thomas, `ORDERS_DV` es la right choice para la transaction feature porque `O
 * **Author** - Kevin Lazarz
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Base de datos Product Management, August 2026
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

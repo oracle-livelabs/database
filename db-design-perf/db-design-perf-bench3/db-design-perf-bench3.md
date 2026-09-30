@@ -10,11 +10,6 @@ Estimated lab time: 15 minutes
 
 -   This lab requires completing the preceding labs in the Contents menu on the left.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Run Benchmark3 via Cloud Shell
 
 1. Using Cloud Shell, run the benchmark3 shell script.

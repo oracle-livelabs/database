@@ -50,7 +50,7 @@ Lakehouse mappings enable you to perform analytics on the data in Amazon S3.
     ![Create Lakehouse mapping](./images/5-create-lakehouse-mapping.png "Create Lakehouse mapping")
 
 5. Select the **Load into HeatWave after creating Lakehouse mapping** checkbox to load data into HeatWave directly from the Amazon S3 bucket, and click **Create Lakehouse Mapping**.  
-    Autopilot schema inference, a machine learning-powered automation, adaptively samples a small fraction of data in Amazon S3 and infers the number of columns, their data types, and their precision, creates the table definition, and also the script needed to load the table into HeatWave. This works on files that contain some metadata, like Parquet and Avro, and also on files that contain no metadata, like CSV.
+Autopilot schema inference, a machine learning-powered automation, adaptively samples a small fraction of data in Amazon S3 and infers the number of columns, their data types, and their precision, creates the table definition, and also the script needed to load the table into HeatWave. This works on files that contain some metadata, like Parquet and Avro, and also on files that contain no metadata, like CSV.
 
     ![Auto schema inference](./images/6-auto-schema-inference.png "Auto schema inference")
 

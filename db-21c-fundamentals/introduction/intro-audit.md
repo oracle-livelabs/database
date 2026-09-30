@@ -1,11 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 This section of the workshop highlights enhancements in Oracle Database 21c for Oracle Audit Policies. Starting with this release, unified audit policies are enforced on the current user who executes the SQL statement.
 
 In previous releases, unified audit policies were enforced on the user who owned the top-level user session (that is, the login user session) in which the SQL statement is executed.

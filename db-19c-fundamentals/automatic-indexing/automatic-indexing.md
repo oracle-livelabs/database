@@ -33,16 +33,16 @@ This lab assumes you have:
 
 1. **If you already have SQL Developer Web up and are logged in as the NF19C user, skip to step 4.** If you're not already looking at the SQL Developer Web interface, locate your Autonomous Database by clicking the hamburger menu in the top left of the screen, selecting Oracle Databases and choose Autonomous Database. 
  
-    ![locate adb](./images/oci-navigation-adw.png " ")
+  ![locate adb](./images/oci-navigation-adw.png " ")
  
 2. Select the name of your database and click on the Database Actions button located at the top of the screen.
 
-    ![db actions](./images/database-actions.png " ")
+   ![db actions](./images/database-actions.png " ")
    
 3. Log into Database Actions as the NF19C user. Use the picture below to navigate to the SQL editor
-    	![1JSON Database Actions](./images/db-actions-logout.png)
-    	![2](./images/login-db.png)
-    	![3JSON Database Actions](./images/new-sql.png)
+	![1JSON Database Actions](./images/db-actions-logout.png)
+	![2](./images/login-db.png)
+	![3JSON Database Actions](./images/new-sql.png)
 
 4. The DBMS\_AUTO\_INDEX package is used to manage the automatic indexing feature. The CDB\_AUTO\_INDEX\_CONFIG view shows the current automatic indexing configuration. Let's check our current index mode.
 
@@ -52,7 +52,7 @@ This lab assumes you have:
       FROM cdb_auto_index_config;
       </copy>
       ``` 
-    ![index compression is off](./images/auto-off.png " ")
+   ![index compression is off](./images/auto-off.png " ")
 
 5. To configure automatic indexing, you can use the CONFIGURE procedure of the DBMS\_AUTO\_INDEX package. The AUTO\_INDEX\_MODE property controls the on-off switch for automatic indexing and can have one of the following allowed values:
 
@@ -72,8 +72,8 @@ This lab assumes you have:
 ## Task 2: Create and Populate an Application Table
 1. Create an application table and prepare it for auto indexing. This will take around three minutes.
 
-    	```
-    	<copy>
+	```
+	<copy>
     create table AUTO_INDEX_TEST_TABLE as
     select 1                sum_col,
         rownum              f1,
@@ -89,40 +89,40 @@ This lab assumes you have:
         pad
     from   (select dbms_random.string('u',1000) pad from dual connect by level<=100) a,
         (select 1 c from dual connect by level<=1000) b;
-    	
-    	--
-    	-- Statistics will be generated during table creation (above), 
-    	-- but we'll perform this step to remind ourselves that 
-    	-- statistics must not be stale. Auto indexing will
-    	-- not consider new indexes for tables with stale statistics.
-    	--
-    	exec dbms_stats.gather_table_stats(user,'AUTO_INDEX_TEST_TABLE')
-    	--
-    	-- Oracle Autonomous Database has optimizations 
-    	-- for aggregate queries,improving query performance
-    	-- using database statistics.
-    	--
-    	-- For the sake of this demo, we'll make sure 
-    	-- that this will not kick in and queries will
-    	-- need to scan the table or use the result cache.
-    	--
-    	insert into AUTO_INDEX_TEST_TABLE 
-    	            values (0,0,0,0,0,0,0,0,0,0,0,'X');
-    	commit;
-    	</copy>
+	
+	--
+	-- Statistics will be generated during table creation (above), 
+	-- but we'll perform this step to remind ourselves that 
+	-- statistics must not be stale. Auto indexing will
+	-- not consider new indexes for tables with stale statistics.
+	--
+	exec dbms_stats.gather_table_stats(user,'AUTO_INDEX_TEST_TABLE')
+	--
+	-- Oracle Autonomous Database has optimizations 
+	-- for aggregate queries,improving query performance
+	-- using database statistics.
+	--
+	-- For the sake of this demo, we'll make sure 
+	-- that this will not kick in and queries will
+	-- need to scan the table or use the result cache.
+	--
+	insert into AUTO_INDEX_TEST_TABLE 
+	            values (0,0,0,0,0,0,0,0,0,0,0,'X');
+	commit;
+	</copy>
 
-    	```
+	```
 
-2. Enable automatic indexing by setting the auto index mode to IMPLEMENT.
-    	
-    	```
-    	<copy>
+2.  Enable automatic indexing by setting the auto index mode to IMPLEMENT.
+	
+	```
+	<copy>
     exec dbms_auto_index.configure('AUTO_INDEX_MODE', 'IMPLEMENT')
     </copy>
     ```
 
 
-3. Set the result cache mode to MANUAL. The database result cache is enabled by default in ADW. In this lab we want to clearly see before vs after performance, so we'll set it to manual-only for now.
+3.  Set the result cache mode to MANUAL. The database result cache is enabled by default in ADW. In this lab we want to clearly see before vs after performance, so we'll set it to manual-only for now.
 	
 	```
 	<copy>
@@ -231,16 +231,16 @@ The Oracle Autonomous Database collects workload SQL periodically (every 15 minu
 
     ![Report summary](./images/summary.png)
 
-    You might see some differences in your report because the results depend on measured workload performance, and relative SQL performance may change over time.
+You might see some differences in your report because the results depend on measured workload performance, and relative SQL performance may change over time.
 
-    In the report above, we can see:
+In the report above, we can see:
 
-    - Ten index candidates were identified. Auto indexing identifies table columns used in query predicates. These columns are candidates for indexing. In general, auto indexing will identify a many candidates.
-    - Six indexes were created. Usually, a _subset_ of candidates will be deemed potentially useful by the Oracle Optimizer. Auto indexing test parses the workload SQL to see which indexes are likely to be useful. These candidates are built and internal workload performance testing will decide which ones are _sufficiently_ useful to be made visible to the workload.
-    - Four indexes were made visible. These indexes were found to improve the performance of the workload (above a threshold value).
-    - Two indexes remain invisible because, when tested using the workload, they did not improve workload sufficiently to be made visible to the workload. If no new workload queries are found that benefit from these indexes, they will remain INVISIBLE and the auto index task will make them INVALID after a period of 24 hours.
-    - Four queries in the workload we found to have improved performance with the new indexes.
-    - One workload query suffers a potential performance regression due to the new auto indexes. A SQL plan baseline has been created to prevent this.
+- Ten index candidates were identified. Auto indexing identifies table columns used in query predicates. These columns are candidates for indexing. In general, auto indexing will identify a many candidates.
+- Six indexes were created. Usually, a _subset_ of candidates will be deemed potentially useful by the Oracle Optimizer. Auto indexing test parses the workload SQL to see which indexes are likely to be useful. These candidates are built and internal workload performance testing will decide which ones are _sufficiently_ useful to be made visible to the workload.
+- Four indexes were made visible. These indexes were found to improve the performance of the workload (above a threshold value).
+- Two indexes remain invisible because, when tested using the workload, they did not improve workload sufficiently to be made visible to the workload. If no new workload queries are found that benefit from these indexes, they will remain INVISIBLE and the auto index task will make them INVALID after a period of 24 hours.
+- Four queries in the workload we found to have improved performance with the new indexes.
+- One workload query suffers a potential performance regression due to the new auto indexes. A SQL plan baseline has been created to prevent this.
 
 2. The indexes created are listed in the report (invisible ones are asterisked):
 

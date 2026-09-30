@@ -54,7 +54,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    We will use this AutoPilot feature, **heatwave_load** function to offload the data from MySQL to HeatWave cluster
+   We will use this AutoPilot feature, **heatwave_load** function to offload the data from MySQL to HeatWave cluster
 
     ```text
     <copy>

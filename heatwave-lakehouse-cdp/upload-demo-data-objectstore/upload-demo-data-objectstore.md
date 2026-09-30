@@ -20,10 +20,6 @@ In this lab, you will be guided through the following tasks:
 
 <!-- This is a extra hashes(##) for Task1 extendable issue-->
 ##  
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Create Demo Compartment
 
 1. Click the **Navigation Menu** in the upper left, navigate to **Identity & Security** and select **Compartments**.
@@ -43,18 +39,18 @@ TODO: Add introduction text here.
     ```bash
     <copy>Compartment for end to end workshop </copy>
     ```
-    *** You can use any other compartment name based up on your needs .Please ensure to create all the OCI services under the same compartment and region which you created in the step No 3.
+   *** You can use any other compartment name based up on your needs .Please ensure to create all the OCI services under the same compartment and region which you created in the step No 3.
 4. The **Parent Compartment** should be **root** and click **Create Compartment**
     ![VCN](./images/compartment-create.png "create the compartment")
 
 ## Task 2: Create the following buckets in object storage before proceeding.
 1. RAW Bucket :
-    Bucket Name - **demo-events-raw-mysqlhw**
+   Bucket Name - **demo-events-raw-mysqlhw**
 
-    Bucket Purpose - The the streaming payloads will be continously written to this bucket .
+   Bucket Purpose - The the streaming payloads will be continously written to this bucket .
 2. Silver Bucket - **demo-events-silver-mysqlhw**
 
-    Bucket Purpose - This bucket is used by the Data flow to write the aggregated data from RAW bucket .
+   Bucket Purpose - This bucket is used by the Data flow to write the aggregated data from RAW bucket .
 
 3. OCI Data flow buckets - **Dataflowbucket** and **dataflow-logs**
 
@@ -68,10 +64,10 @@ The below steps shows ,how to create the ObjectStorage buckets. In this task we 
 
     * From the OCI Services menu, click **Storage** and then click **Buckets** under Object Storage
 
-       ![Image](images/obj-storage-01.png " ")
+       ![](images/obj-storage-01.png " ")
 
     * Click **Create Bucket**
-       ![Image](images/bucket.png " ")
+       ![](images/bucket.png " ")
 
       **NOTE:** Ensure the correct Compartment is selected under COMPARTMENT list
       **NOTE** Ensure for the workshop make the below buckets ***PUBLIC*** .For customized set up the buckets can be marked private .

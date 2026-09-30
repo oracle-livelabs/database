@@ -65,7 +65,7 @@ This lab assumes you have:
 
 Create a PDB named PDB19 to act as the recovery catalog database. This database provides an optional backup store for the RMAN repository.
 
-1. Run the `create_PDB19_in_CDB1.sh` shell script to create PDB19 in CDB1.
+1.  Run the `create_PDB19_in_CDB1.sh` shell script to create PDB19 in CDB1.
 
     ```
     $ <copy>$HOME/labs/19cnf/create_PDB19_in_CDB1.sh</copy>
@@ -416,7 +416,7 @@ In RMAN, connect to PDB1 (the target PDB) and to the recovery catalog database a
 
     The backup fails again because `vpc_pdb2` is not allowed to access metadata for PDB1. The VPC user can perform operations only on the target PDB to which the user is granted access.
 
-8. Exit RMAN.
+8.  Exit RMAN.
 
     ```
     $ <copy>EXIT</copy>

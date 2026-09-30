@@ -36,15 +36,15 @@ The *Quick Create* feature uses the default settings to create a *quick cluster*
 
 In the Console, open the navigation menu. Go to *Developer Services* and select **Container Clusters (OKE)**.
 
-![Image](images/010.clusters.png)
+![](images/010.clusters.png)
 
 On the Cluster List page, click **Create Cluster**.
 
-![Image](images/020.create.cluster.png)
+![](images/020.create.cluster.png)
 
 In the Create Cluster Solution dialog, select *Quick Create* and click **Submit**.
 
-![Image](images/030.quick.create.png)
+![](images/030.quick.create.png)
 
 **Quick Create** will create a new cluster with default settings, along with new network resources for the new cluster.
 
@@ -57,17 +57,17 @@ Specify the following configuration details on the Cluster Creation page:
 - **Shape**: The shape to use for each node in the node pool. The shape determines the number of CPUs and the amount of memory allocated to each node. The list shows only those shapes available in your tenancy that are supported by OKE. Select the available *VM.Standard.E6.Flex*.
 - **Number of nodes**: The number of worker nodes to create. Leave the default value, *3*
 
-![Image](images/040.quick.details.png)
+![](images/040.quick.details.png)
 
 Click **Next** to review the details you entered for the new cluster.
 
 On the *Review* page, click **Submit** to create the new network resources and the new cluster.
 
-![Image](images/050.quick.review.png)
+![](images/050.quick.review.png)
 
 You see the network resources being created for you.
 
-![Image](images/060.quick.submitted.png)
+![](images/060.quick.submitted.png)
 
 Wait until request to create node pool is initiated and then click **Close**. Then the new cluster is shown on the *Cluster Details* page. When the master nodes are created the new cluster gains a green status of *Active* (it takes about 7 minutes). You may continue your labs then.
 
@@ -81,7 +81,7 @@ In order for `kubectl` to find and access a Kubernetes cluster, it needs a `kube
 
 Click **Access Kubeconfig** on your cluster detail page. (If you moved away from that page, then open the navigation menu and under **Developer Services**, select **Clusters**. Select your cluster and go the detail page.)
 
-![Image](images/080.ocishell.access.config.png)
+![](images/080.ocishell.access.config.png)
 
 A dialog appears which offers to open Cloud Shell and contains the customized OCI command that you need to execute, to create a Kubernetes configuration file.
 
@@ -89,7 +89,7 @@ Leave the default *Cloud Shell Access* and first select the **Copy** link to cop
 
 Now click the **Launch Cloud Shell** to open the built in console.
 
-![Image](images/100.ocishell.config.dialog.launch.shell.png)
+![](images/100.ocishell.config.dialog.launch.shell.png)
 
 Copy the command from the clipboard (Ctrl+V or right click and copy) into the Cloud Shell and execute.
 
@@ -113,7 +113,7 @@ If you see the node's information, then the configuration was successful.
 
 You can always minimize and restore the terminal size at any time using the buttons on the top right corner of the Cloud Shell.
 
-![Image](images/110.ocishell.config.complete.png)
+![](images/110.ocishell.config.complete.png)
 
 You may now **proceed to the next lab**.
 

@@ -13,11 +13,6 @@ Estimated Lab Time: 5 Minutes
 - You have performed the tasks to generate some incidents as described in Lab 3: Generate Database and Clusterware Incidents for AHF to Detect and take Action on
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Common post installation configuration tasks
 
 >Note: These commands are provided for reference and *should not be* attempted in the lab.

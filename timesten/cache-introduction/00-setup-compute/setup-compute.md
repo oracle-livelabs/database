@@ -39,21 +39,21 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
 
 1. Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*.
 2. Login to Oracle Cloud.
-3. Open up the hamburger menu in the left hand corner.  Click **Developer Services**, choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install. Click **Create Stack**.  
+3.  Open up the hamburger menu in the left hand corner.  Click **Developer Services**, choose **Resource Manager > Stacks**. Choose the compartment in which you would like to install. Click **Create Stack**.  
 
-    ![Choose Developer Services and Resource Manager Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+  ![Choose Developer Services and Resource Manager Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
-    ![Create stack](./images/create-stack.png " ")
+  ![Create stack](./images/create-stack.png " ")
 
-4. Select **My Configuration**, choose the **.ZIP FILE** button, click the **Browse** link and select the zip file that you downloaded or drag-n-drop for the file explorer.
+4.  Select **My Configuration**, choose the **.ZIP FILE** button, click the **Browse** link and select the zip file that you downloaded or drag-n-drop for the file explorer.
 
-    ![Select My Configuration and zipfile](./images/create-stack-novnc-1.png " ")
+  ![Select My Configuration and zipfile](./images/create-stack-novnc-1.png " ")
 
-5. Click **Next**.
+5.  Click **Next**.
 
 6. Enter or select the following:
 
-    ![Provide input for Main configuration and options](./images/create-stack-novnc-2.png " ")
+  ![Provide input for Main configuration and options](./images/create-stack-novnc-2.png " ")
 
     - **Instance Count:** Accept the default, **1**.
     - **Select Availability Domain:** Select an availability domain from the dropdown list.
@@ -64,11 +64,11 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Keep the default as checked (unless you plan on using a fixed shape).
     - **Instance Shape:** Keep the default or select from the list of Flex shapes in the dropdown menu (e.g *VM.Standard.E4.Flex*).
     - **Instance OCPUS:** Accept the default shown. e.g. **4** will provision 4 OCPUs and 64GB of memory, which is the minimum for this workshop. Please ensure you have the capacity available before increasing the resources.
-8. If don't have quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise skip to the next step.
+8.  If don't have quota for Flex Shapes or you prefer to use fixed shapes, follow the instructions below.  Otherwise skip to the next step.
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Unchecked
     - **Instance Shape:** Accept the default shown or select from the dropdown. e.g. VM.Standard2.4
 
-    ![Uncheck flex shape button](./images/create-stack-novnc-3.png " ")
+  ![Uncheck flex shape button](./images/create-stack-novnc-3.png " ")
 
 10. In this section we are provisioning a new VCN with all the appropriate ingress and egress rules needed to run this workshop (recommended).
     - **Use Existing VCN?:** Accept the default by leaving this unchecked. This will create a **new VCN**.
@@ -77,7 +77,7 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
 
 12. Make sure that **Run Apply** is checked and click **Create**.
 
-    ![Check Run Apply and Create](./images/create-stack-novnc-4.png " ")
+  ![Check Run Apply and Create](./images/create-stack-novnc-4.png " ")
 
 13. Your stack has now been created and the *Apply* action is running to deploy your environment.
 
@@ -86,12 +86,12 @@ If you wish to use an existing network (see *Lab: Prepare Setup* for details of 
 ## Task 3: Apply Terraform
 In the prior steps we elected to trigger the *terraform apply action* on stack creation.
 
-1. Review the job output.
+1.  Review the job output.
 
-    ![Review completed stack environment](./images/create-stack-novnc-9.png " ")
+  ![Review completed stack environment](./images/create-stack-novnc-9.png " ")
 
-2. Congratulations, your environment has been created!  Click on the *Application Information* tab to get additional information about your environment.
-3. Your public IP address(es), instance name(s), and remote desktop URL are displayed.
+2.  Congratulations, your environment has been created!  Click on the *Application Information* tab to get additional information about your environment.
+3.  Your public IP address(es), instance name(s), and remote desktop URL are displayed.
 
 You can now **proceed to the next lab**.
 
@@ -119,12 +119,12 @@ If you encountered any issues during the lab, follow the steps below to resolve 
 When creating a stack and using an existing VCN, the availability domain and the subnet must match otherwise the stack errors.  
 
 #### Fix for Issue #1
-1. Click on **Stack**-> **Edit Stack** -> **Configure Variables**.
-2. Scroll down to the network definition.
-3. Make sure the Availability Domain number matches the subnet number.  E.g. If you choose AD-1, you must also choose subnet #1.
-4. Click **Next**
-5. Click **Save Changes**
-6. Click **Terraform Actions** -> **Apply**
+1.  Click on **Stack**-> **Edit Stack** -> **Configure Variables**.
+2.  Scroll down to the network definition.
+3.  Make sure the Availability Domain number matches the subnet number.  E.g. If you choose AD-1, you must also choose subnet #1.
+4.  Click **Next**
+5.  Click **Save Changes**
+6.  Click **Terraform Actions** -> **Apply**
 
 ### **Issue #2:** Flex Shape Not Found
 ![Flex shape not found error](images/flex-shape-error.png  " ")
@@ -196,9 +196,9 @@ If you have an existing VCN which you wish to use, and are comfortable updating 
 
 *Note:* We recommend letting our stack create the VCN to reduce the potential for error.
 
-1. Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*.
-2. Login to Oracle Cloud.
-3. Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Choose **Developer Services** -> **Resource Manager > Stacks**.  
+1.  Identify the ORM stack zip file downloaded in *Lab: Prepare Setup*.
+2.  Login to Oracle Cloud.
+3.  Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Choose **Developer Services** -> **Resource Manager > Stacks**.  
 
   ![Choose Developer Services and Resource Manager Stacks](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 

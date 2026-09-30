@@ -418,7 +418,7 @@ Execute the `-createDuplicateDB` command again to duplicate CDB1 as a single ind
              3 PDB1                            READ WRITE NO
     ```
 
-9. View the list of data files. Notice how the files are named when Oracle Managed Files is enabled on the CDB.
+9.  View the list of data files. Notice how the files are named when Oracle Managed Files is enabled on the CDB.
 
     ```
     SQL> <copy>COL name FORMAT A78</copy>
@@ -508,7 +508,7 @@ To restore your environment, delete DUPCDB1 and OMFCDB1 and disable `ARCHIVELOG`
     $ <copy>rm -rfv /u01/app/oracle/recovery_area/DUPCDB1</copy>
     ```
 
-4. Remove the `/u01/app/oracle/recovery_area/OMFCDB1` directory.
+4.  Remove the `/u01/app/oracle/recovery_area/OMFCDB1` directory.
 
     ```
     $ <copy>rm -rfv /u01/app/oracle/recovery_area/OMFCDB1</copy>
@@ -521,7 +521,7 @@ To restore your environment, delete DUPCDB1 and OMFCDB1 and disable `ARCHIVELOG`
     CDB1
     ```
 
-6. Replace the modified `listener.ora` file with the original. A copy of the original is stored with the lab files.
+6.  Replace the modified `listener.ora` file with the original. A copy of the original is stored with the lab files.
 
     ```
     $ <copy>cp /home/oracle/labs/19cnf/listener.ora $ORACLE_HOME/network/admin/listener.ora</copy>

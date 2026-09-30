@@ -278,7 +278,7 @@ This lab assumes you have:
     spool off
 
     [oracle@shd3 ~]$
-    ```
+   ```
 
 3. Use SQLPLUS to run this sql scripts.
 
@@ -1078,7 +1078,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
 
 
-8. Switch to your browser's remote desktop session connected to host cata as user oracle, open a Terminal session
+8.  Switch to your browser's remote desktop session connected to host cata as user oracle, open a Terminal session
 
 
 9. In the home directory, make a `.ssh` directory and edit the authorized_keys file.

@@ -1,14 +1,5 @@
 # Introduction to Oracle AI Database 26ai: Hands-On Lab Session
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 Welcome to the Oracle AI World hands-on lab session featuring Oracle AI Database 26ai! In this interactive workshop, we'll explore how Oracle AI Database 26ai's features solve real-world challenges through the lens of **LumenCare**, a fictitious healthcare technology company modernizing their application and  data management infrastructure, along with other mock scenarios.
 
 <!-- [](youtube:MPOYjrGhvZk) -->

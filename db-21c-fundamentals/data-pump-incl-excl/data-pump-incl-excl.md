@@ -13,11 +13,6 @@ Estimated Lab Time: 15 minutes
 * Lab: 21c Setup
 
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Set up the environment
 
 1. Use the `/home/oracle/labs/M104780GC10/create_PDB21_2.sh` shell script to create the `PDB21_2` PDB and the `HR` user in `PDB21_2`.
@@ -156,27 +151,27 @@ $
 ## Task 3: Import tables
 
 1. Create the data pump directory in the database.
-    ```
+```
 
-    $ <copy>sqlplus system@PDB21_2</copy>
+$ <copy>sqlplus system@PDB21_2</copy>
 
-    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+Copyright (c) 1982, 2020, Oracle.  All rights reserved.
 
-    Enter password: <b><i>WElcome123##</i></b>
-    Last Successful login time: Tue Mar 17 2020 02:23:18 +00:00
+Enter password: <b><i>WElcome123##</i></b>
+Last Successful login time: Tue Mar 17 2020 02:23:18 +00:00
 
-    Connected to:
-    ```
-    ```
-    SQL> <copy>CREATE OR REPLACE DIRECTORY dp_dir AS '/home/oracle/labs';</copy>
-    Directory created.
+Connected to:
+```
+```
+SQL> <copy>CREATE OR REPLACE DIRECTORY dp_dir AS '/home/oracle/labs';</copy>
+Directory created.
 
-    SQL> <copy>CREATE TABLESPACE users DATAFILE '/u02/app/oracle/oradata/pdb21/pdb21_2_users01.dbf' size 100M reuse;</copy>
+SQL> <copy>CREATE TABLESPACE users DATAFILE '/u02/app/oracle/oradata/pdb21/pdb21_2_users01.dbf' size 100M reuse;</copy>
 
-    SQL> <copy>EXIT</copy>
-    $
+SQL> <copy>EXIT</copy>
+$
 
-    ```
+```
 
 
 2. Import the dumpfile into another PDB, `PDB21_2` in `CDB21`.
@@ -212,7 +207,7 @@ $
 
     ```
 
-    The import completes with errors due to missing constraints for `HR.DEPARTMENTS` that requires constraints referring other `HR` tables.
+  The import completes with errors due to missing constraints for `HR.DEPARTMENTS` that requires constraints referring other `HR` tables.
 
 3. Re-execute the export operation excluding statistics and constraints.
 
@@ -275,7 +270,7 @@ $
 
     ```
 
-    *Observe that the import does not issue errors related to constraints. Constraints that should have been added to the `HR.DEPARTMENTS` table were excluded.*
+  *Observe that the import does not issue errors related to constraints. Constraints that should have been added to the `HR.DEPARTMENTS` table were excluded.*
 
 
 

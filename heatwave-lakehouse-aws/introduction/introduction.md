@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 HeatWave Lakehouse on AWS brings industry-leading query performance on semi-structured data to AWS. With HeatWave Lakehouse you can now query up to a quarter of a petabyte of data in Amazon S3 in various file formats, such as CSV, Parquet, Avro, JSON (Newline delimited), and exports from databases like Aurora, Redshift, MySQL, and Oracle. You can combine query on the data in Amazon S3 with transactional data in MySQL databases without copying the data from S3 into the MySQL database. Furthermore, you can perform machine learning (ML) tasks, such as training, inferences, and explanations, on this data stored in S3. This eliminates the need to load data into a database or move it to a machine learning service, thereby improving security, maintainability, and reducing complexity. The speed of querying data in Amazon S3 is on par with that of querying the data in the database.
 
 HeatWave Lakehouse can scale up to 512 nodes on a single cluster, offering you the flexibility and power you need for your data and analytics tasks.

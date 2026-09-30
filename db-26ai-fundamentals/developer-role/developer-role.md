@@ -13,11 +13,6 @@ The objective of this lab is to familiarize you with the Developer Role in Oracl
 - Access to Oracle AI Database 26ai.
 - Basic understanding of SQL is helpful.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Lab setup and understanding the developer role
 
 1. The Developer Role gives us a full set of system privileges, object privileges, predefined roles, PL/SQL package privileges, and tracing privileges required by application developers. It simplifies privilege management and helps keep the database as secure as possible for the development environment. As always, please review the privileges granted and compare with your organizations security protocol.

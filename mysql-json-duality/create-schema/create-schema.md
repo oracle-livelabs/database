@@ -36,7 +36,7 @@ In this lab, you will be guided through the following tasks:
      ![Execute Query](./images/use-database.png " ")
 
 3. Once the database is created, we need to set up four key tables: patients, doctors, appointments, and lab reports.
-    These tables will store the main information for our hospital database, and later on, we’ll use them to build JSON Duality Views, which allow you to see and work with this data in both relational and JSON formats.
+These tables will store the main information for our hospital database, and later on, we’ll use them to build JSON Duality Views, which allow you to see and work with this data in both relational and JSON formats.
 
 4. The patients table will store demographic and medical data for each patient, serving as a key entity for the hospital schema.
 
@@ -51,8 +51,8 @@ In this lab, you will be guided through the following tasks:
     email VARCHAR(100) DEFAULT NULL,
     address TEXT DEFAULT NULL,
     medical_history TEXT DEFAULT NULL
-    );
-    </copy>
+);
+</copy>
     ```
      ![Execute Query](./images/patients-table.png " ")
 
@@ -68,8 +68,8 @@ In this lab, you will be guided through the following tasks:
     contact_number VARCHAR(15) DEFAULT NULL,
     email VARCHAR(100) DEFAULT NULL,
     department VARCHAR(100) DEFAULT NULL
-    );
-    </copy>
+);
+</copy>
     ```
      ![Execute Query](./images/doctors-table.png " ")
 
@@ -86,8 +86,8 @@ In this lab, you will be guided through the following tasks:
     notes TEXT DEFAULT NULL,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
-    );
-    </copy>
+);
+</copy>
     ```
      ![Execute Query](./images/appointments-table.png " ")
 
@@ -105,8 +105,8 @@ In this lab, you will be guided through the following tasks:
     remarks TEXT DEFAULT NULL,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
-    );
-    </copy>
+);
+</copy>
     ```
      ![Execute Query](./images/labreports-table.png " ")
 

@@ -82,11 +82,11 @@ In this lab, you will:
 
     ![database name](./images/database-name.png " ")
 
-7. On the database page, choose __Database Actions__.
+7.  On the database page, choose __Database Actions__.
 
     ![dbactions button](./images/dbactions-button.png " ")
 
-8. You are now in Database Actions.
+8.  You are now in Database Actions.
 
     Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
 

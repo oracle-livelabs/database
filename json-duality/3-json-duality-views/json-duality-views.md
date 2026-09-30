@@ -90,7 +90,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing describe view](images/lab030103.png " ")
+   ![Showing describe view](images/lab030103.png " ")
 
 
 4. We can also pretty print the `STUDENT_SCHEDULE` definition.
@@ -103,7 +103,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing describe duality view](images/lab030104.png " ")
+   ![Showing describe duality view](images/lab030104.png " ")
 
 
 5. We can also query the `STUDENT_SCHEDULE` using regular SQL syntax.
@@ -116,7 +116,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing describe duality view](images/lab030105.png " ")
+   ![Showing describe duality view](images/lab030105.png " ")
 
 
 6. Once again, the output can be pretty printed too-
@@ -130,7 +130,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing select from duality view](images/lab030106.png " ")
+   ![Showing select from duality view](images/lab030106.png " ")
 
 
 7. Now that we understand how to view the contents of the `STUDENT_SCHEMA` Duality View, we can try a *Query-By-Example* (QBE) operation. We can start by displaying just the schedule for a Student named "Janet" -
@@ -145,7 +145,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing qbe on duality view](images/lab030107.png " ")
+   ![Showing qbe on duality view](images/lab030107.png " ")
 
     **NOTE:** You should see 3 rows returned.
 
@@ -161,7 +161,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing qbe on duality view](images/lab030108.png " ")
+   ![Showing qbe on duality view](images/lab030108.png " ")
 
     *NOTE: This query does not return any rows and it incorrectly displays: "No rows selected"*
 
@@ -221,7 +221,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing unnest create duality view](images/lab030201.png " ")
+   ![Showing unnest create duality view](images/lab030201.png " ")
 
     **NOTE:** Notice the UNNEST parameter when selecting the Teacher information.
 
@@ -235,7 +235,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing describe duality view](images/lab030202.png " ")
+   ![Showing describe duality view](images/lab030202.png " ")
 
     **NOTE:**  You should notice that the "teacherId" and "teacherName" are now at the same level as the "courseId" and "courseName".
 
@@ -252,7 +252,7 @@ This lab assumes you have:
 
     You should see the following:
 
-    ![Showing describe duality view](images/lab030203.png " ")
+   ![Showing describe duality view](images/lab030203.png " ")
 
     **NOTE:** You should see 3 rows returned.
 
@@ -296,7 +296,7 @@ For our first scenario let's see how the `STUDENT_SCHEDULE` is affected when we 
 
     You should see the following:
 
-    ![Showing select from duality view](images/lab030301.png " ")
+   ![Showing select from duality view](images/lab030301.png " ")
 
 
 2. Update the `teacherid` from **543** (Adam) to **645** (Anna) for course C124-
@@ -309,7 +309,7 @@ For our first scenario let's see how the `STUDENT_SCHEDULE` is affected when we 
 
     You should see the following:
 
-    ![Showing update from duality view](images/lab030302.png " ")
+   ![Showing update from duality view](images/lab030302.png " ")
 
 
 3. Let's revisit the entry for *MATH_02* by looking again at the Schedule for Course C124-
@@ -338,7 +338,7 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
 1. Let's take a look at the Student Schedule before we perform any updates.
 
-    a. We can start by checking the `student_schedule` JSON Duality View-
+  a. We can start by checking the `student_schedule` JSON Duality View-
 
     ```
     <copy>
@@ -354,12 +354,12 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
     You should see the following:
 
-    ![Showing select from duality view](images/lab030401a.png " ")
+   ![Showing select from duality view](images/lab030401a.png " ")
 
     **NOTE:** You should see no rows returned from this query. We're running this query to confirm that Jane is not enrolled in any existing courses, so there's no entries in the student_schedule.
 
 
-    b. Also take a look at the underlying tables:
+  b. Also take a look at the underlying tables:
 
     ```
     <copy>
@@ -371,7 +371,7 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
     You should see the following:
 
-    ![Showing select from duality view](images/lab030401b.png " ")
+   ![Showing select from duality view](images/lab030401b.png " ")
 
     **NOTE:** For this code, we see a row returned for the `student` table as *Jane* is a existing student. However we see no rows returned for the `student_schedule` as *Jane* is not yet enrolled in any courses.
 
@@ -395,7 +395,7 @@ In this task, we will see what happens when we add a new Student into the JSON d
 
     You should see the following:
 
-    ![Showing insert into duality view](images/lab030402.png " ")
+   ![Showing insert into duality view](images/lab030402.png " ")
 
 
 3. We should now see the newly enrolled Student in our JSON Duality View as well as all of the related underlying tables.

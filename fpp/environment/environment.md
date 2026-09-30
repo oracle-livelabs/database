@@ -40,9 +40,9 @@ In this lab, you will:
 
 To create your LiveLabs reservation, you used a ssh key that you created on your desktop.  We recommend you run this workshop in Cloud Shell.  We will be uploading the private key you created to Cloud Shell to continue the workshop.  If you do not wish to run in cloud shell, you can connect using the terminal of your choice.
 
-1. Navigate from the Hamburger Menu (top-left corner) to **Oracle Database** -> **Bare Metal, VM, and Exadata**. 
-2. Under **List Scope**, verify that you select the **same compartment** that you received in the reservation confirmation. 
-3. To start the Oracle Cloud Shell, click the Cloud Shell icon at the top right of the page. *Note: Ensure before you click the console you have selected your assigned compartment or you will get an error.*
+1.  Navigate from the Hamburger Menu (top-left corner) to **Oracle Database** -> **Bare Metal, VM, and Exadata**. 
+2.  Under **List Scope**, verify that you select the **same compartment** that you received in the reservation confirmation. 
+3.  To start the Oracle Cloud Shell, click the Cloud Shell icon at the top right of the page. *Note: Ensure before you click the console you have selected your assigned compartment or you will get an error.*
 
     ![Open Cloud Shell](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshellopen.png " ")
 
@@ -50,11 +50,11 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
 
     ![Cloud Shell](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/cloudshell.png " ")
 
-2. Click on the Cloud Shell hamburger icon and select **Upload** to upload your private key
+2.  Click on the Cloud Shell hamburger icon and select **Upload** to upload your private key
    
     ![Click on upload in cloud shell to upload private key](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key.png " ")
 
-3. To connect to the compute instance that was created for you, you will need to load your private key.  This is the key that does *not* have a .pub file at the end.  Locate that file on your machine and click **Upload** to process it.
+3.  To connect to the compute instance that was created for you, you will need to load your private key.  This is the key that does *not* have a .pub file at the end.  Locate that file on your machine and click **Upload** to process it.
    
     ![Select the key](https://oracle-livelabs.github.io/common/labs/generate-ssh-key-cloud-shell/images/upload-key-select.png " ")
 
@@ -82,8 +82,8 @@ To create your LiveLabs reservation, you used a ssh key that you created on your
 </if>
 ## Task 1: Connect to the FPP Server via SSH
 1. Connect to the FPP Server via SSH using the user `opc` and the private key that you have created during the LiveLab setup.
-    As IP address, specify the public address of the FPP Server.
-    E.g. if you have a terminal with ssh available:
+As IP address, specify the public address of the FPP Server.
+E.g. if you have a terminal with ssh available:
 
       ````
       ssh -i ~/.ssh/<sshkeyname> opc@<Your Compute Instance Public IP Address>

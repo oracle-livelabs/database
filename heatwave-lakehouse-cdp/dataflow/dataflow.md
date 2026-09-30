@@ -35,10 +35,6 @@ Before you Begin with Data Flow lab, you must have:
     * Google Chrome 42+
 * Familiarity with Object Storage Service.
 
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Object Storage Bucket : Validation Check
 
 Before running the application in the Data Flow service.
@@ -131,13 +127,13 @@ We'll create a user, a group, and policies to understand the concept.
 ## Task 2(b): Deploy the PySpark Application to the data flow
 In this task we will be deploying the PySpark Application to OCI Objectstore and will be creating a Data flow application.
 1. Modify the PySpark script - Open the script locall
-    - Download the Labfiles and navigate to the below folder location to collect the codepump.zip file.
+- Download the Labfiles and navigate to the below folder location to collect the codepump.zip file.
 
-    Download file [`MYSQLLakehouse_labfiles.zip`](https://objectstorage.us-ashburn-1.oraclecloud.com/p/RPka_orWclfWJmKN3gTHfEiv-uPckBJTZ3FV0sESZ3mm3PDCQcVDCT-uM2dsJNGf/n/orasenatdctocloudcorp01/b/MYSQLLakehouse_labfiles/o/MYSQLLakehouse_labfiles.zip)
+   Download file [`MYSQLLakehouse_labfiles.zip`](https://objectstorage.us-ashburn-1.oraclecloud.com/p/RPka_orWclfWJmKN3gTHfEiv-uPckBJTZ3FV0sESZ3mm3PDCQcVDCT-uM2dsJNGf/n/orasenatdctocloudcorp01/b/MYSQLLakehouse_labfiles/o/MYSQLLakehouse_labfiles.zip)
 
-    *** Python Framework Location in the Zip file - MYSQLLakehouse_labfiles\_Lab6a
+  *** Python Framework Location in the Zip file - MYSQLLakehouse_labfiles\_Lab6a
 
-    ![Spark Application code](images/spark-code.png " ")
+  ![Spark Application code](images/spark-code.png " ")
 
       ```
       <copy>
@@ -153,29 +149,29 @@ In this task we will be deploying the PySpark Application to OCI Objectstore and
     ![Spark Application code](images/script-upload.png " ")
 
 3. Create a PySpark application on Data Flow.
-    Navigate to DataFlow
+  Navigate to DataFlow
 
-    ![Spark Application code](images/df-navigate.png " ")
+  ![Spark Application code](images/df-navigate.png " ")
 
-    Create the Data Flow Application
+  Create the Data Flow Application
 
-    DataFlow Application Name - 
+  DataFlow Application Name - 
       ```
       <copy>
       dfPipeline
       </copy>
  
      ```
-    *** Note - Select the parameters based on the below snapshot provided.
-    ![Spark Application Navigate](images/df-create-app.png " ")
+  *** Note - Select the parameters based on the below snapshot provided.
+  ![Spark Application Navigate](images/df-create-app.png " ")
 
-    ![Spark Application Create](images/create-one.png " ")
+  ![Spark Application Create](images/create-one.png " ")
 
-    ![Spark Application Allocate Resources](images/create-two.png " ")
+  ![Spark Application Allocate Resources](images/create-two.png " ")
 
-    ![Spark Application Allocate Resources](images/df-app-executor.png" ")
+  ![Spark Application Allocate Resources](images/df-app-executor.png" ")
 
-    ![Spark Application Allocate Resources](images/df-app-selection.png" ")
+  ![Spark Application Allocate Resources](images/df-app-selection.png" ")
 
 4. Run the PySpark App
    ![Spark Application Run](images/run-app.png " ")

@@ -1,11 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
 ## About this Workshop
 
 ### Building  A Pure RAG Application with MySQL Enterprise Edition for MySQL AI

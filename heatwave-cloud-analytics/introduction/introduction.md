@@ -1,8 +1,5 @@
 # Introduction
 
-Estimated Workshop Time: TODO - x minutes
-
-
 ## About this Workshop
 
 The main purpose of this workshop is to teach you how you can implement a cloud-native analytics solution using **MySQL HeatWave** and various popular open-source tools on Oracle Cloud Infrastructure (OCI). MySQL HeatWave is not only proven to accelerate your most complicated SQL queries with in-memory partitioning technology, but it is also enhanced with Oracle AutoML-based machine learning technology lately to add prediction capabilities to your applications.

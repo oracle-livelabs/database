@@ -34,7 +34,7 @@ In this lab, you will:
 ## Task 1: Open Database Actions
 
 1. If you have just completed the previous lab, you can skip this task as you will already be in Database Actions.
-    Otherwise, log in to the Oracle Cloud.
+Otherwise, log in to the Oracle Cloud.
 
 2. Click the navigation menu in the upper left to show top-level navigation choices.
 
@@ -48,11 +48,11 @@ In this lab, you will:
 
     ![database name](./images/database-name.png " ")
 
-6. On the database page, choose __Database Actions__.
+6.  On the database page, choose __Database Actions__.
 
     ![dbactions button](./images/dbactions-button.png " ")
 
-7. You are now in Database Actions.
+7.  You are now in Database Actions.
 
     Database Actions allows you to connect to your Autonomous Database through various browser-based tools. We will just be using the SQL workshop tool.
     
@@ -63,36 +63,36 @@ In this lab, you will:
 
 ## Task 2: Use the Default Classifier
 
-1. Load review data for analysis
+1.  Load review data for analysis
 
     This is the actual data that you want to analyze. In this case, we'll create a "camera_review" table and load review text into this table.
-    	
-    	Create review table
+	
+	Create review table
 
     ```
     <copy>
     create table camera_reviews(review_id number primary key, review_text varchar2(2000))
     </copy>
     ```
-    	
-    	![create review table](./images/review-tab.png " ")
+	
+	![create review table](./images/review-tab.png " ")
 
-    	Insert review data. You'll need to select all the lines before running this, or else use the "Run SQL Script" button 
+	Insert review data. You'll need to select all the lines before running this, or else use the "Run SQL Script" button 
 
     ```
     <copy>
     insert into camera_reviews values (1, 'this camera is OK');
-    	insert into camera_reviews values (2, 'the camera is absolutely fantastic');
-    	insert into camera_reviews values (3, 'the camera is terrible');
-    	insert into camera_reviews values (4, 'another fantastic camera from Nikon');
-    	insert into camera_reviews values (5, 'What a terrible camera from Canon');
-    	insert into camera_reviews values (6, 'camera is not too bad, but ok for the price');
-    	insert into camera_reviews values (7, 'lens is not too bad, love the looks of this camera');
-    	insert into camera_reviews values (8, 'the Sony camera has a lot of new features, although a bit pricey');
+	insert into camera_reviews values (2, 'the camera is absolutely fantastic');
+	insert into camera_reviews values (3, 'the camera is terrible');
+	insert into camera_reviews values (4, 'another fantastic camera from Nikon');
+	insert into camera_reviews values (5, 'What a terrible camera from Canon');
+	insert into camera_reviews values (6, 'camera is not too bad, but ok for the price');
+	insert into camera_reviews values (7, 'lens is not too bad, love the looks of this camera');
+	insert into camera_reviews values (8, 'the Sony camera has a lot of new features, although a bit pricey');
     </copy>
     ```
-    	
-    	![insert review data](./images/review-data.png " ")
+	
+	![insert review data](./images/review-data.png " ")
 
     Check that all rows have loaded. You should see 8 rows.
 
@@ -116,10 +116,10 @@ In this lab, you will:
     exec ctx_ddl.create_preference('review_lexer', 'AUTO_LEXER')
     </copy>
     ```
-    	
-    	![create preference](./images/lexer-pref.png " ")
+	
+	![create preference](./images/lexer-pref.png " ")
 
-    	Create the index on review data using the preference we just created and the NOPOPULATE keyword
+	Create the index on review data using the preference we just created and the NOPOPULATE keyword
 
     ```
     <copy>
@@ -129,7 +129,7 @@ In this lab, you will:
     </copy>
     ```
 
-    	![create index](./images/create-index.png " ")
+	![create index](./images/create-index.png " ")
 
 3. Run sentiment analysis
 
@@ -175,15 +175,15 @@ The more training documents you can provide, the better the classifier will be. 
     ```
     <copy>
     insert into training_camera values( 1,'this camera is OK');
-    	insert into training_camera values( 2,'the camera is absolutely fantastic');
-    	insert into training_camera values( 3,'the camera is terrible');
-    	insert into training_camera values( 4,'i love the lens, but overall ok camera');
-    	insert into training_camera values( 5,'the camera has mediocre lens, but a lot of nice features');
+	insert into training_camera values( 2,'the camera is absolutely fantastic');
+	insert into training_camera values( 3,'the camera is terrible');
+	insert into training_camera values( 4,'i love the lens, but overall ok camera');
+	insert into training_camera values( 5,'the camera has mediocre lens, but a lot of nice features');
     </copy>
     ```
     ![insert training data](./images/train-data.png " ")
 
-2. Label the training data with sentiments
+2.  Label the training data with sentiments
 
     We use a separate table to hold the sentiments associated with each row in the ‘training\_camera’ table:
 
@@ -194,7 +194,7 @@ The more training documents you can provide, the better the classifier will be. 
     ```
 
     ![create category table](./images/cat-tab.png " ")
-    	
+	
     For each row in the training data table, we must insert a row which indicates the category for that row. A category is an integer value representing neutral, positive or negative as listed in the following table. The 'categoy_desc' column is included here as a human readible comment, and is neither necessary, nor used in the classification process.
 
     | Integer  |  Meaning |
@@ -205,21 +205,21 @@ The more training documents you can provide, the better the classifier will be. 
 
     |  2       | negative |
 
-    	Given that, we can create category rows as follows (you may wish to refer back to the training table to check the text involved for each line)
+	Given that, we can create category rows as follows (you may wish to refer back to the training table to check the text involved for each line)
 
     ```
     <copy>
     insert into training_category values( 1, 0, 'neutral');
-    	insert into training_category values( 2, 1, 'positive');
-    	insert into training_category values( 3, 2, 'negative');
+	insert into training_category values( 2, 1, 'positive');
+	insert into training_category values( 3, 2, 'negative');
     insert into training_category values( 4, 0, 'neutral');
     insert into training_category values( 5, 0, 'neutral');
     </copy>
     ```
     ![insert category data](./images/cat-data.png " ")	
-    	
+	
 
-3. Create an SVM sentiment classifier.
+3.  Create an SVM sentiment classifier.
 
     The first step is to create a SENTIMENT\_CLASSIFIER preference called "classifier\_camera".
 
@@ -236,40 +236,40 @@ The more training documents you can provide, the better the classifier will be. 
     ```
     <copy>
     exec ctx_ddl.set_attribute('classifier_camera','MAX_FEATURES','1000');
-    	exec ctx_ddl.set_attribute('classifier_camera','NUM_ITERATIONS','600');
+	exec ctx_ddl.set_attribute('classifier_camera','NUM_ITERATIONS','600');
     </copy>
     ```
 
     ![create classifier](./images/classifier-attr.png " ")
 
-4. Index the training set
+4.  Index the training set
 
     Create an index on the training table. This index is only used for its associated metadata and therefore can be created using the "nopopulate" option and is very fast. For a trained classifier, you do <not> need to use AUTO\_LEXER, we will allow it to use the default English lexer (BASIC\_LEXER).
 
     ```
     <copy>
     create index training_idx on training_camera(train_text) 
-    	indextype is ctxsys.context parameters ('nopopulate');
+	indextype is ctxsys.context parameters ('nopopulate');
     </copy>
     ```
 
     ![create training index](./images/train-idx.png " ")
 
-5. Train the classifier
+5.  Train the classifier
 
     The procedure SA\_TRAIN\_MODEL (SA for Sentiment Analysis) takes information about the training and category tables (and their various columns), plus the names of the index and classifier preference we just created. This will then generate a *model* with the name given in the first argument - in this case, 'my_clsfier'
  
     ```
     <copy>
     begin
-    	  ctx_cls.sa_train_model (
+	  ctx_cls.sa_train_model (
         clsfier_name => 'my_clsfier',
-    		index_name   => 'training_idx',
-    		docid        => 'train_id',
+		index_name   => 'training_idx',
+		docid        => 'train_id',
         cattab       => 'training_category',
-    		catdocid     => 'doc_id',
+		catdocid     => 'doc_id',
         catid        => 'category', 
-    		pref_name    => 'classifier_camera'
+		pref_name    => 'classifier_camera'
         );
     end;
     </copy>
@@ -294,17 +294,17 @@ The more training documents you can provide, the better the classifier will be. 
     </copy>
     ```
 
-    	![run sentiment analysis using default classifier](./images/sentiment-trained-clas.png " ")
+	![run sentiment analysis using default classifier](./images/sentiment-trained-clas.png " ")
 
-7. Compare Classifier Accuracy against Dictionary Approach
+7.  Compare Classifier Accuracy against Dictionary Approach
 
     We can also run both the trained and untrained classifiers in the same query, to compare the efficiency of the two. Of course, this is a contrived example with carefully chosen training words, but in the real world, you should see significantly better performance from the trained classifier, assuming a reasonably-sized training set. 
 
     ```
     <copy>
     select review_text,
-    	  ctx_doc.sentiment_aggregate('camera_revidx', review_id) as default_sentiment,
-    	  ctx_doc.sentiment_aggregate('camera_revidx', review_id, clsfier_name => 'my_clsfier') as trained_sentiment
+	  ctx_doc.sentiment_aggregate('camera_revidx', review_id) as default_sentiment,
+	  ctx_doc.sentiment_aggregate('camera_revidx', review_id, clsfier_name => 'my_clsfier') as trained_sentiment
     from camera_reviews order by trained_sentiment;
     </copy>
     ```

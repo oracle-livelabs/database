@@ -34,7 +34,7 @@ In this lab, you will be guided through the following tasks:
     ```
     <copy>mysqlsh -uadmin -p -h 10.0.1... --sql </copy>
     ```
-3. Change to the airport database   
+3.	Change to the airport database   
 
     Enter the following command at the prompt
     ```
@@ -48,81 +48,81 @@ In this lab, you will be guided through the following tasks:
     <copy>SET SESSION use_secondary_engine=ON;</copy>
     ```
 
-5. Run the following four queries and record the runtime:
+5.	Run the following four queries and record the runtime:
 
-    **Query 1)** Find per-company average age of passengers from Switzerland, Italy and France
+ **Query 1)** Find per-company average age of passengers from Switzerland, Italy and France
 
     ```
-    <copy>SELECT
+<copy>SELECT
     airline.airlinename,
     AVG(DATEDIFF(departure, birthdate) / 365.25) AS avg_age,
     COUNT(*) AS nb_people
-    FROM
+FROM
     booking,
     flight,
     airline,
     passengerdetails
-    WHERE
+WHERE
     booking.flight_id = flight.flight_id
         AND airline.airline_id = flight.airline_id
         AND booking.passenger_id = passengerdetails.passenger_id
         AND country IN ('SWITZERLAND' , 'FRANCE', 'ITALY')
-    GROUP BY airline.airlinename
-    ORDER BY airline.airlinename , avg_age
-    LIMIT 10;
-    </copy>
+GROUP BY airline.airlinename
+ORDER BY airline.airlinename , avg_age
+LIMIT 10;
+</copy>
     ```
-    **Query 2)** Find top 10 companies selling the biggest amount of tickets for planes taking off from US airports
+**Query 2)** Find top 10 companies selling the biggest amount of tickets for planes taking off from US airports
     ```
-    <copy>SELECT
+<copy>SELECT
     airline.airlinename,
     SUM(booking.price) AS price_tickets,
     COUNT(*) AS nb_tickets
-    FROM
+FROM
     booking,
     flight,
     airline,
     airport_geo
-    WHERE
+WHERE
     booking.flight_id = flight.flight_id
         AND airline.airline_id = flight.airline_id
         AND flight.from = airport_geo.airport_id
         AND airport_geo.country = 'UNITED STATES'
-    GROUP BY airline.airlinename
-    ORDER BY nb_tickets DESC , airline.airlinename
-    LIMIT 10;
-    </copy>
+GROUP BY airline.airlinename
+ORDER BY nb_tickets DESC , airline.airlinename
+LIMIT 10;
+</copy>
     ```
-    **Query 3)** Ticket price greater than 500, grouped by price
+**Query 3)** Ticket price greater than 500, grouped by price
     ```
     <copy> -- Query c) Ticket price greater than 500, grouped by price
-    SELECT
+SELECT
     booking.price, COUNT(*)
-    FROM
+FROM
     booking
-    WHERE
+WHERE
     booking.price > 500
-    GROUP BY booking.price
-    ORDER BY booking.price
-    LIMIT 10; </copy>
+GROUP BY booking.price
+ORDER BY booking.price
+LIMIT 10; </copy>
     ```
-    **Query 4)** Ticket price greater than 400, grouped by firstname , lastname
+**Query 4)** Ticket price greater than 400, grouped by firstname , lastname
     ```
-    <copy>SELECT
+<copy>SELECT
     firstname,
     lastname,
     COUNT(booking.passenger_id) AS count_bookings
-    FROM
+FROM
     passenger,
     booking
-    WHERE
+WHERE
     booking.passenger_id = passenger.passenger_id
         AND passenger.lastname = 'Aldrin'
         OR (passenger.firstname = 'Neil'
         AND passenger.lastname = 'Armstrong')
         AND booking.price > 400.00
-    GROUP BY firstname , lastname;
-    </copy>
+GROUP BY firstname , lastname;
+</copy>
     ```
 
 6. Run Auto Encoding advisor to see if there are any recommendations for string column encodings
@@ -130,7 +130,7 @@ In this lab, you will be guided through the following tasks:
     ```
     <copy>call sys.heatwave_advisor(json_object('target_schema', JSON_ARRAY('airportdb'), 'auto_enc', json_object('mode', 'recommend') ));</copy>
     ```
-7. To apply the suggestion, access the auto-generated script
+7.	To apply the suggestion, access the auto-generated script
 
     ```
     <copy>SET SESSION group_concat_max_len = 1000000;</copy>
@@ -138,8 +138,8 @@ In this lab, you will be guided through the following tasks:
     ```
     <copy>SELECT GROUP_CONCAT(log->>"$.sql" SEPARATOR '\n') AS "SQL Script" FROM sys.heatwave_advisor_report WHERE type = "sql" ORDER BY id;</copy>
     ```
-8. Copy and paste auto-generated script to apply AutoEncoding changes
-9. Run the same queries in step 1 and record the time. You can see that total query runtime has improved.
+8.	Copy and paste auto-generated script to apply AutoEncoding changes
+9.	Run the same queries in step 1 and record the time. You can see that total query runtime has improved.
 
     **Your results should look like this:**
     ![INTRO](./images/pilot01.png " ")
@@ -149,21 +149,21 @@ In this lab, you will be guided through the following tasks:
 1. Run MySQL Autopilot Auto Data Placement advisor to get suggestions on data placement keys.
 
     ```
-    <copy>call sys.heatwave_advisor(json_object('target_schema', JSON_ARRAY('airportdb'), 'auto_dp', json_object('benefit_threshold',0) ));</copy>
+<copy>call sys.heatwave_advisor(json_object('target_schema', JSON_ARRAY('airportdb'), 'auto_dp', json_object('benefit_threshold',0) ));</copy>
     ```
-    ![INTRO](./images/pilot02.png " ")
+![INTRO](./images/pilot02.png " ")
 
 2. To apply the suggestion, access the auto-generated script
 
     ```
-    <copy>SET SESSION group_concat_max_len = 1000000;
-    SELECT GROUP_CONCAT(log->>"$.sql" SEPARATOR '\n') AS "SQL Script" FROM sys.heatwave_advisor_report WHERE type = "sql" ORDER BY id;
-    </copy>
+<copy>SET SESSION group_concat_max_len = 1000000;
+SELECT GROUP_CONCAT(log->>"$.sql" SEPARATOR '\n') AS "SQL Script" FROM sys.heatwave_advisor_report WHERE type = "sql" ORDER BY id;
+</copy>
     ```
 
 3. Copy and paste auto-generated script to apply data placement changes
 
-4. Run the query in Task 1 step 1 again. You can see that total query runtime has improved.
+4.	Run the query in Task 1 step 1 again. You can see that total query runtime has improved.
 
     ![INTRO](./images/pilot03.png " ")
 

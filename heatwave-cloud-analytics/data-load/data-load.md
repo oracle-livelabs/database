@@ -31,10 +31,10 @@ This lab assumes you have:
     ![Compute ip](images/compute-ip.png)
 
 3. Launch OCI Cloud Shell to connect to the **oke-operator** compute instance
-    Click on the icon on the top right corner of OCI Console to launch the Cloud Shell.
+   Click on the icon on the top right corner of OCI Console to launch the Cloud Shell.
     ![Cloud Shell](images/cloud-shell.png)
 
-    OCI Cloud Shell is a web browser-based terminal accessible from the Oracle Cloud Console to access various OCI services including OCI Compute instances.
+   OCI Cloud Shell is a web browser-based terminal accessible from the Oracle Cloud Console to access various OCI services including OCI Compute instances.
 
     ![Launch Cloud Shell](images/cloud-shell-launch.png)
 

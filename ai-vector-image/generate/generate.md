@@ -32,7 +32,7 @@ This task will have you login to the Jupyter Notebook environment and run the sp
     ![Image alt text](images/lab4_1a.png)
 
 3. Paste the Jupyter Notebook Password you copied in the previous step into the Notebook
-    ![Image alt text](images/lab1_3.png)
+  ![Image alt text](images/lab1_3.png)
 
 4. You should now be on the Jupyter Notebook landing screen. Open the folder named `vector lab` on the left hand side of the screen located in the file explorer
     ![Image alt text](images/lab1_4.png)

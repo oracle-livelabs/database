@@ -40,7 +40,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
     ![Compartment2](./images/compartment-page.png "In Compartments page ")
 
-    > **Note:** Two Compartments, _Oracle Account Name_ (root) and a compartment for PaaS, were automatically created by the Oracle Cloud.
+   > **Note:** Two Compartments, _Oracle Account Name_ (root) and a compartment for PaaS, were automatically created by the Oracle Cloud.
 
 3. In the Create Compartment dialog box, in the **NAME** field, enter **HeatWave_Sandbox**, and then enter a Description, select the **Parent Compartment**, and click **Create Compartment**.
 
@@ -94,7 +94,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Networking**, and select **Virtual Cloud Networks**.
 
-    ![Virtual Cloud Networks](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png "Virtual Cloud Networks")
+   ![Virtual Cloud Networks](https://oracle-livelabs.github.io/common/images/console/networking-vcn.png "Virtual Cloud Networks")
 
 2. Click **Start VCN Wizard**.
 
@@ -147,7 +147,7 @@ You must have an OCI tenancy subscribed to your home region and enough limits co
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **Database Systems**.
 
-    ![Database Systems](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png "Database Systems")
+   ![Database Systems](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png "Database Systems")
 
 2. Click **Create MySQL HeatWave Database System**.
 
@@ -276,11 +276,11 @@ The installation procedure involves downloading the airportdb database to cloud 
     <copy>unzip airport-db.zip </copy>
     ```
 
-    **Connect to MySQL HeatWave Database Service**
+   **Connect to MySQL HeatWave Database Service**
 
 2. From your cloud shell, connect to HEATWAVE-DB  using the MySQL Shell client tool.
 
-    The endpoint (IP Address) can be found in your notepad or  the HEATWAVE-DB  System Details page, under the "Endpoint" "Private IP Address". 
+   The endpoint (IP Address) can be found in your notepad or  the HEATWAVE-DB  System Details page, under the "Endpoint" "Private IP Address". 
 
     ![mysql endpoint private ip](./images/mysql-endpoint-private-ip.png "mysql endpoint private ip")
 
@@ -334,7 +334,7 @@ The installation procedure involves downloading the airportdb database to cloud 
 
 1. You need a client machine to connect to your brand new MySQL database. Click the **Navigation Menu** in the upper-left corner, navigate to **Compute**, and select **Instances**.
 
-    ![Compute Menu](https://oracle-livelabs.github.io/common/images/console/compute-instances.png "Compute Menu")
+   ![Compute Menu](https://oracle-livelabs.github.io/common/images/console/compute-instances.png "Compute Menu")
 
 2. In the **Instances in HeatWave_Sandbox Compartment** section, click **Create Instance**.
 
@@ -348,14 +348,14 @@ The installation procedure involves downloading the airportdb database to cloud 
 
 6. In the **Configure placement and hardware** section, keep the default **Availability Domain** and keep the default **Shape**.
 
-    ![Configure placement and hardware](./images/compute-create-info.png "Configure placement and hardware")
+   ![Configure placement and hardware](./images/compute-create-info.png "Configure placement and hardware")
 
     > **Note:** For the **Security** section, click Next
     ![Configure security](./images/compute-create-security.png "Configure security")
     
     > **Note:** **Virtual cloud network**, make sure **HeatWave_VCN** is selected and **Assign a public IPv4 address** is **selected**
 
-    ![Assign a public IPv4 address](./images/compute-create-vnic.png "Assign a public IPv4 address")
+   ![Assign a public IPv4 address](./images/compute-create-vnic.png "Assign a public IPv4 address")
 
 7. If you have not already created your SSH key, complete the **Create Local SSH Key** lab. When you are done, continue on to the next step.
 
@@ -484,7 +484,7 @@ Do the following to view the metrics for your DB system:
 
 1. Click the **Navigation Menu** in the upper-left corner, navigate to **Databases**, and select **DB Systems**.
 
-    ![Select DB Systems](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png "Select DB Systems")
+   ![Select DB Systems](https://oracle-livelabs.github.io/common/images/console/database-dbsys.png "Select DB Systems")
 
 2. List Database Systems.
 

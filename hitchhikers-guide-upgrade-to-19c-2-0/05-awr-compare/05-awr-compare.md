@@ -29,12 +29,12 @@ Use HammerDB to create a workload.
 
 1. Use the yellow terminal. Set the environment to the upgraded UPGR database. Now, since you upgraded the database, the environment needs to be set to an Oracle Database 19c home.
 
-    	```
-    	<copy>
+	```
+	<copy>
     . upgr19
     sqlplus / as sysdba
-    	</copy>
-    	```
+	</copy>
+	```
 
     <details>
     <summary>*click to see the output*</summary>
@@ -56,11 +56,11 @@ Use HammerDB to create a workload.
 
 2. Create an AWR snapshot. Take note of the snapshot ID (e.g., 130). You need it later on. 
 
-    	```
+	```
     <copy>
     @/home/oracle/scripts/snap-lab-05-before.sql
     </copy>
-    	```
+	```
 
     <details>
     <summary>*click to see the output*</summary>
@@ -127,12 +127,12 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 
 1. Call the AWR Diff script awrddrpt.sql:
 
-    	```
-    	<copy>
-    	@?/rdbms/admin/awrddrpt.sql
-    	</copy>
-    	```
-    When prompted for:
+	```
+	<copy>
+	@?/rdbms/admin/awrddrpt.sql
+	</copy>
+	```
+   When prompted for:
     * *report_type*, hit RETURN.
     * *num_days*, type *2*, hit RETURN.
     * *begin_snap* (first pair), type the first *Snap Id* from lab 2, hit RETURN. If you can't remember, check the file `/home/oracle/scripts/snap-lab-02-before.log`.
@@ -144,20 +144,20 @@ In the AWR Diff Report, you will compare a snapshot period **before** upgrade to
 
 2. Wait until the HTML output has been generated, then exit SQL*Plus.
 
-    	```
-    	<copy>
-    	exit
-    	</copy>
-    	```
+	```
+	<copy>
+	exit
+	</copy>
+	```
 
 9. Open the AWR diff report in Firefox.
 
-    	```
-    	<copy>
-    	firefox awrdiff*.html &
-    	</copy>
-    	```
-    	![AWR Diff Report](./images/05-awr-compare-diff-report.png " ")
+	```
+	<copy>
+	firefox awrdiff*.html &
+	</copy>
+	```
+	![AWR Diff Report](./images/05-awr-compare-diff-report.png " ")
 
 10. Examine the AWR diff report. 
    * Compare items such as Wait Events etc. Watch out for significant divergence between the two runs, for instance, the different redo sizes per run. 

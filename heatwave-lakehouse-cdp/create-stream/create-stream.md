@@ -17,22 +17,18 @@ _Estimated Lab Time_: 30 minutes
 * Completed ***Lab 2B - Task 3: Create Compute instance*** .Once the copute instance has been created , the below tasks can be executed.
 
 ##  
-## Introduction
-
-TODO: Add introduction text here.
-
 ## Task 1: Create an OCI Stream
 
 1. Open the navigation menu and click ***Analytics & AI***. Under ***Messaging***, click ***Streaming***. A list of existing streams is displayed.
-    ![OCI Stream console](./images/stream-console.png)
+![OCI Stream console](./images/stream-console.png)
 
 2. Click ***Create Stream*** at the top of the screen.Make sure to create the stream in the same demo compartment.
-    ![OCI Stream console](./images/strem-select.png)
+![OCI Stream console](./images/strem-select.png)
 
 3. ***Stream Name:*** Specify a friendly name for the stream and create the streaming app using default pool option "Auto-Create a default stream pool" .
 
     Streaming application name example - "e2e-stream-mysqlhw".
-    ![OCI Stream console](./images/streaming-pool.png)
+![OCI Stream console](./images/streaming-pool.png)
 
 
 4. Click ***Create***.
@@ -47,17 +43,17 @@ TODO: Add introduction text here.
    
 2. Download the Labfiles and navigate to the below folder location to collect the codepump.zip file.
 
-    Download file [`MYSQLLakehouse_labfiles.zip`](https://objectstorage.us-ashburn-1.oraclecloud.com/p/RPka_orWclfWJmKN3gTHfEiv-uPckBJTZ3FV0sESZ3mm3PDCQcVDCT-uM2dsJNGf/n/orasenatdctocloudcorp01/b/MYSQLLakehouse_labfiles/o/MYSQLLakehouse_labfiles.zip)
+   Download file [`MYSQLLakehouse_labfiles.zip`](https://objectstorage.us-ashburn-1.oraclecloud.com/p/RPka_orWclfWJmKN3gTHfEiv-uPckBJTZ3FV0sESZ3mm3PDCQcVDCT-uM2dsJNGf/n/orasenatdctocloudcorp01/b/MYSQLLakehouse_labfiles/o/MYSQLLakehouse_labfiles.zip)
 
-    *** Python Framework Location in the Zip file - \_MYSQLLakehouse_labfiles\_Lab4b\_ProducerCodebase
-    ![Python Generator code loc](images/generator-zip.png" ")
+  *** Python Framework Location in the Zip file - \_MYSQLLakehouse_labfiles\_Lab4b\_ProducerCodebase
+  ![Python Generator code loc](images/generator-zip.png" ")
 
 3. Upload the codepump.zip to the compute VM in /home/opc
 
 4. Ensure python 3.8 and OCI library is installed in the compute VM 
 
 
-    Run the below commands to get the packages installed.
+  Run the below commands to get the packages installed.
 
     ``` 
         <copy>    
@@ -67,28 +63,28 @@ TODO: Add introduction text here.
     ```
 5. unzip the zip file 
 
-    ![Python Generator code loc](images/unzip-file.png " ")
+  ![Python Generator code loc](images/unzip-file.png " ")
   
 6. Naviagte to the below location 
-    ![Python Generator code loc](images/navigate-gen.png " ")
+  ![Python Generator code loc](images/navigate-gen.png " ")
 
 7. Navigate to Keys directory and paste your OCI keys in the below directory 
-    *** Flollow the below link ,which shows the steps to configure your private and public keys.
+  *** Flollow the below link ,which shows the steps to configure your private and public keys.
  
-    **[Click here for key generation ]( https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm)**
+  **[Click here for key generation ]( https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm)**
   
-    ![Python Generator code loc](images/key-gen.png" ")
+  ![Python Generator code loc](images/key-gen.png" ")
 
-    ![Python Generator code loc](images/key-file-content.png" ")
+  ![Python Generator code loc](images/key-file-content.png" ")
 
 8. Navigate to the ***Code*** directory. 
-    Change the contents of the code - ProducerCodeLoop_ETC.py (in VI editor)
-    ![Python Generator code loc](images/code-script.png" ")
+   Change the contents of the code - ProducerCodeLoop_ETC.py (in VI editor)
+   ![Python Generator code loc](images/code-script.png" ")
 
-    ![OCI streaming application connection details from Producer code](images/streaming-connection-check.png " ")
+  ![OCI streaming application connection details from Producer code](images/streaming-connection-check.png " ")
   
-    *** Pick the parameters (ociMessageEndpoint and ociStreamOcid) from the OCI streaming instance created and parameters shown in the above snapshot .
-    *** Pick the parameters  (device_file_path and ociConfigFilePath) from the configured Compute server.
+  *** Pick the parameters (ociMessageEndpoint and ociStreamOcid) from the OCI streaming instance created and parameters shown in the above snapshot .
+  *** Pick the parameters  (device_file_path and ociConfigFilePath) from the configured Compute server.
 
     ```
       <copy>

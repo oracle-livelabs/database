@@ -58,7 +58,7 @@ In this lab, you will be guided through the following tasks:
 
     ```bash
     <copy>MySQL Database Service HeatWave Instance</copy>
-    ```
+   ```
 
     ![MDS](./images/mysql-heatwave-basic.png "HeatWave Basic")
 

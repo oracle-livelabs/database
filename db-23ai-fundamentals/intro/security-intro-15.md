@@ -1,14 +1,5 @@
 # Introduction
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
-
-Estimated Time: TODO - x minutes
-
-
 In this workshop, we introduce you to a newly released feature of Oracle Database 23ai--_Schema-Level Privileges_. Previously, developers had to either give users full-access to the database or manually grant user privileges to each database object in a schema. With Oracle Database 23ai, developers can now grant privileges at the schema-level--making it easier to secure your database.
 
 ## About this Workshop

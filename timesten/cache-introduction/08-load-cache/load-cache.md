@@ -29,81 +29,81 @@ Load the CG\_VPN\_USERS cache group (1 million rows) and then examine the cache 
 
 1. Connect to the cache as the user **ttcacheadm**:
 
-    ```
-    <copy>
-    ttIsql "dsn=sampledb;uid=ttcacheadm;pwd=ttcacheadm;OraclePWD=ttcacheadm"
-    </copy>
-    ```
+```
+<copy>
+ttIsql "dsn=sampledb;uid=ttcacheadm;pwd=ttcacheadm;OraclePWD=ttcacheadm"
+</copy>
+```
 
-    ```
-    Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
-    Type ? or "help" for help, type "exit" to quit ttIsql.
+```
+Copyright (c) 1996, 2023, Oracle and/or its affiliates. All rights reserved.
+Type ? or "help" for help, type "exit" to quit ttIsql.
 
-    connect "dsn=sampledb;uid=ttcacheadm;pwd=********;OraclePWD=********";
-    Connection successful: DSN=sampledb;UID=ttcacheadm;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
-    (Default setting AutoCommit=1)
-    Command>
-    ```
+connect "dsn=sampledb;uid=ttcacheadm;pwd=********;OraclePWD=********";
+Connection successful: DSN=sampledb;UID=ttcacheadm;DataStore=/tt/db/sampledb;DatabaseCharacterSet=AL32UTF8;ConnectionCharacterSet=AL32UTF8;LogFileSize=256;LogBufMB=256;PermSize=1024;TempSize=256;OracleNetServiceName=ORCLPDB1;
+(Default setting AutoCommit=1)
+Command>
+```
 
 2. Load the cache group:
 
-    ```
-    <copy>
-    LOAD CACHE GROUP cg_vpn_users COMMIT EVERY 1024 ROWS;
-    </copy>
-    ```
+```
+<copy>
+LOAD CACHE GROUP cg_vpn_users COMMIT EVERY 1024 ROWS;
+</copy>
+```
 
-    ```
-    1000000 cache instances affected.
-    ```
+```
+1000000 cache instances affected.
+```
 
 3. Display the cache group details:
 
-    ```
-    <copy>
-    cachegroups cg_vpn_users;
-    </copy>
-    ```
+```
+<copy>
+cachegroups cg_vpn_users;
+</copy>
+```
 
-    ```
-    Cache Group TTCACHEADM.CG_VPN_USERS:
+```
+Cache Group TTCACHEADM.CG_VPN_USERS:
 
-    Cache Group Type: Read Only
-    Autorefresh: Yes
-    Autorefresh Mode: Incremental
-    Autorefresh State: On
-    Autorefresh Interval: 2 Seconds
-    Autorefresh Status: ok
-    Aging: No aging defined
+  Cache Group Type: Read Only
+  Autorefresh: Yes
+  Autorefresh Mode: Incremental
+  Autorefresh State: On
+  Autorefresh Interval: 2 Seconds
+  Autorefresh Status: ok
+  Aging: No aging defined
 
-    Root Table: APPUSER.VPN_USERS
-    Table Type: Read Only
+  Root Table: APPUSER.VPN_USERS
+  Table Type: Read Only
 
-    1 cache group found.
-    ```
+1 cache group found.
+```
 
-    Note that the state of autorefresh has now changed to  **On**.
+Note that the state of autorefresh has now changed to  **On**.
 
 4. Check the row count of the cache table:
 
-    ```
-    <copy>
-    select count(*) from appuser.vpn_users;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from appuser.vpn_users;
+</copy>
+```
 
-    ```
-    < 1000000 >
-    1 row found.
-    ```
+```
+< 1000000 >
+1 row found.
+```
 
 5. Update optimizer statistics on appuser.vpn_users table:
 
-    ```
-    <copy>
-    statsupdate appuser.vpn_users;
-    </copy>
-    ```
+```
+<copy>
+statsupdate appuser.vpn_users;
+</copy>
+```
 
 
 ## Task 2: Load the OE cache groups
@@ -112,157 +112,157 @@ Now do the same for the cache groups on the OE cache tables.
 
 1. Load the CG\_PROMOTIONS cache group:
 
-    ```
-    <copy>
-    LOAD CACHE GROUP cg_promotions COMMIT EVERY 1024 ROWS;
-    </copy>
-    ```
+```
+<copy>
+LOAD CACHE GROUP cg_promotions COMMIT EVERY 1024 ROWS;
+</copy>
+```
 
-    ```
-    2 cache instances affected.
-    ```
+```
+2 cache instances affected.
+```
 
 2. Load the CG\_PROD\_INVENTORY cache group:
 
-    ```
-    <copy>
-    LOAD CACHE GROUP cg_prod_inventory COMMIT EVERY 1024 ROWS;
-    </copy>
-    ```
+```
+<copy>
+LOAD CACHE GROUP cg_prod_inventory COMMIT EVERY 1024 ROWS;
+</copy>
+```
 
-    ```
-    288 cache instances affected.
-    ```
+```
+288 cache instances affected.
+```
 
 3. Load the CG\_CUST\_ORDERS cache group:
 
-    ```
-    <copy>
-    LOAD CACHE GROUP cg_cust_orders COMMIT EVERY 1024 ROWS;
-    </copy>
-    ```
+```
+<copy>
+LOAD CACHE GROUP cg_cust_orders COMMIT EVERY 1024 ROWS;
+</copy>
+```
 
-    ```
-    319 cache instances affected.
-    ```
+```
+319 cache instances affected.
+```
 
 5. Update optimizer statistics for all the tables in the OE schema:
 
-    ```
-    <copy>
-    statsupdate oe.customers;
-    statsupdate oe.inventories;
-    statsupdate oe.orders;
-    statsupdate oe.order_items;
-    statsupdate oe.product_descriptions;
-    statsupdate oe.product_information;
-    statsupdate oe.promotions;
-    </copy>
-    ```
+```
+<copy>
+statsupdate oe.customers;
+statsupdate oe.inventories;
+statsupdate oe.orders;
+statsupdate oe.order_items;
+statsupdate oe.product_descriptions;
+statsupdate oe.product_information;
+statsupdate oe.promotions;
+</copy>
+```
 
 6. Check the row count for oe.CUSTOMERS table:
 
-    ```
-    <copy>
-    select count(*) from oe.customers;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from oe.customers;
+</copy>
+```
 
-    ```
-    < 319 >
-    1 row found.
-    ```
+```
+< 319 >
+1 row found.
+```
 
 7. Check the row count for oe.INVENTORIES table:
 
-    ```
-    <copy>
-    select count(*) from oe.inventories;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from oe.inventories;
+</copy>
+```
 
-    ```
-    < 1112 >
-    1 row found.
-    ```
+```
+< 1112 >
+1 row found.
+```
 
 8. Check the row count for oe.ORDERS table:
 
-    ```
-    <copy>
-    select count(*) from oe.orders;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from oe.orders;
+</copy>
+```
 
-    ```
-    < 105 >
-    1 row found.
-    ```
+```
+< 105 >
+1 row found.
+```
 
 9. Check the row count for oe.ORDER\_ITEMS table:
 
-    ```
-    <copy>
-    select count(*) from oe.order_items;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from oe.order_items;
+</copy>
+```
 
-    ```
-    < 665 >
-    1 row found.
-    ```
+```
+< 665 >
+1 row found.
+```
 
 10. Check the row count for oe.PRODUCT\_DESCRIPTIONS table:
 
-    ```
-    <copy>
-    select count(*) from oe.product_descriptions;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from oe.product_descriptions;
+</copy>
+```
 
-    ```
-    < 8639 >
-    1 row found.
-    ```
+```
+< 8639 >
+1 row found.
+```
 
 11. Check the row count for oe.PRODUCT\_INFORMATION table:
 
-    ```
-    <copy>
-    select count(*) from oe.product_information;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from oe.product_information;
+</copy>
+```
 
-    ```
-    < 288 >
-    1 row found.
-    ```
+```
+< 288 >
+1 row found.
+```
 
 12. Check the row count for oe.PROMOTIONS table:
 
-    ```
-    <copy>
-    select count(*) from oe.promotions;
-    </copy>
-    ```
+```
+<copy>
+select count(*) from oe.promotions;
+</copy>
+```
 
-    ```
-    < 2 >
-    1 row found.
-    ```
+```
+< 2 >
+1 row found.
+```
 
 13. Exit from ttIsql:
 
-    ```
-    <copy>
-    quit
-    </copy>
-    ```
+```
+<copy>
+quit
+</copy>
+```
 
-    ```
-    Disconnecting...
-    Done.
-    ```
+```
+Disconnecting...
+Done.
+```
 
 You can now **proceed to the next lab**. 
 

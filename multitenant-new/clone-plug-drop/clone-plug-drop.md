@@ -20,11 +20,6 @@ This lab assumes you have:
 
 **NOTE:** *When doing Copy/Paste using the convenient* **Copy** *function used throughout the guide, you must hit the* **ENTER** *key after pasting. Otherwise the last line will remain in the buffer until you hit* **ENTER!**
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Log in and create PDB
 In the following labs, instead of SQL\*Plus you will use Oracle SQL Developer Command Line (SQLcl).  Oracle **SQLcl** is the modern, command line interface to the database. **SQLcl** has many key features that add to the value of the utility, including command history, in-line editing, auto-complete using the TAB key and more. You can learn more about **SQLcl** [at the Oracle SQLcl website](https://www.oracle.com/database/technologies/appdev/sqlcl.html).
 
@@ -38,7 +33,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-2. Set your oracle environment and connect to **CDB1** using SQLcl.
+2.  Set your oracle environment and connect to **CDB1** using SQLcl.
 
     ```
     <copy>. ~/.set-env-db.sh CDB1</copy>
@@ -91,7 +86,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-    ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
+   ![Screenshot of terminal output](./images/task1.3-whoisconnected.png " ")
 
 
 4. Create a pluggable database **PDB2**.
@@ -134,7 +129,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ````
 
-    ![Screenshot of terminal output](./images/task1.6-grantpdbadminprivs.png " ")
+   ![Screenshot of terminal output](./images/task1.6-grantpdbadminprivs.png " ")
 
 7. Connect as **PDB_ADMIN** to **PDB2**.
 
@@ -152,7 +147,7 @@ In this first task, you will create and explore a new pluggable database **PDB2*
     </copy>
     ```
 
-    ![Screenshot of terminal output](./images/task1.8-createtable_pdbadmin.png " ")
+   ![Screenshot of terminal output](./images/task1.8-createtable_pdbadmin.png " ")
 
 9. Change back to **SYS** in the container database **CDB1** and show the tablespaces and datafiles created.
 
@@ -211,7 +206,7 @@ The task you will do in this step is:
     show pdbs</copy>
     ```
 
-    ![Screenshot of terminal output](./images/task2.2-alterpdbreadonly.png " ")
+   ![Screenshot of terminal output](./images/task2.2-alterpdbreadonly.png " ")
 
 
 3. Create a pluggable database **PDB3** from the read only database **PDB2**.
@@ -224,7 +219,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![Screenshot of terminal output](./images/task2.3-clonepdb2topdb3.png " ")
+   ![Screenshot of terminal output](./images/task2.3-clonepdb2topdb3.png " ")
 
 4. Change **PDB2** back to read write.
 
@@ -234,7 +229,7 @@ The task you will do in this step is:
     ```
 
 
-    ![Screenshot of terminal output](./images/task2.4-pdb2readwrite.png " ")
+   ![Screenshot of terminal output](./images/task2.4-pdb2readwrite.png " ")
 
 5. Connect to **PDB2** and show the table **MY_TAB**, then run the same SQL against **PDB3** to demonstrate that this is an exact copy of the source PDB.
 
@@ -296,7 +291,7 @@ The task you will do in this step is:
     ```
 
 
-    ![Screenshot of terminal output](./images/task3.2-unplugpdb3.png " ")
+   ![Screenshot of terminal output](./images/task3.2-unplugpdb3.png " ")
 
 3. Remove **PDB3** from **CDB1** but keep the PDB datafiles for future use.
 
@@ -306,7 +301,7 @@ The task you will do in this step is:
     </copy>
     ```
 
-    ![Screenshot of terminal output](./images/task3.3-droppdb3.png " ")
+   ![Screenshot of terminal output](./images/task3.3-droppdb3.png " ")
 
 4. Show the datafiles in **CDB1** and note that files for PDB3 are no longer part of the container.
     ```
@@ -736,7 +731,7 @@ What you will do in this task:
 
     ![Screenshot of terminal output](./images/task7.3-soetable.png " ")
 
-    4. Open a new terminal window or tab within your remote desktop session, then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
+ 4. Open a new terminal window or tab within your remote desktop session, then navigate to */home/oracle/labs/multitenant* and execute *write-load.sh*. Keep this window open and running throughout for the rest of this lab.
 
     ```
     <copy>cd /home/oracle/labs/multitenant</copy>
@@ -1083,7 +1078,7 @@ The tasks you will do in this step are:
 
     ![Screenshot of terminal output](./images/task10.4-checkcdb1.png " ")
 
-4. Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).  
+4.  Check the other terminal window where the load program is running. After a timeout, the load program will resume on its own. If you don't want to wait, enter CTRL-C to break out of the connection timeout and the load program should continue. Note that the output now shows it is connected to the database in container **CDB2**. In real-world scenarios, Oracle customers may be able to leverage **Application Continuity**. Oracle **Application Continuity** masks outages from end users and applications by recovering the in-flight work for impacted database sessions following outages. You can learn more about **Application Continuity** [at the Oracle Application Continuity web page](https://www.oracle.com/database/technologies/high-availability/app-continuity.html).  
 
     The load program isn't needed anymore, so CTRL-C out of that program and exit from the second terminal window.
 

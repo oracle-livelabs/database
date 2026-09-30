@@ -96,7 +96,7 @@ In this lab, you will be guided through the following tasks:
 
     f. If credentials and URL correct, a new window will prompt to confirm the Default Database
 
-    ![Test REST Enabled Service](./images/test-rest-enabled-service.png "test-REST-enabled-service ")
+    ![Test REST Enabled Service](./images/test-REST-enabled-service.png "test-REST-enabled-service ")
 
     g. Select again the 'movies' database as default and click 'close'
 

@@ -26,7 +26,7 @@ This task you will log into APEX with the ADMIN user and create a workspace for 
 
 1. Open the "View Login Info" section of your workshop.
 
-    	![Image alt text](images/lab4_1ba.png)
+	![Image alt text](images/lab4_1ba.png)
 
 2. You will use the APEX URL to open APEX
 
@@ -60,7 +60,7 @@ This task you will log into APEX with the ADMIN user and create a workspace for 
 
     ![Image alt text](images/lab4_7.png)
 
-9. For the Identify Administrator section fill in:
+9.  For the Identify Administrator section fill in:
     - Administrator Username: vectoruser (This will be the user we will log into APEX with)
     - Administrator Password: Welcome_1 (or any password you want just make sure to remember it as we will use this to log into APEX with)
     - Email: test@test.com (Any email address will work.)
@@ -140,13 +140,13 @@ In this task you will create the Image Gallery page. This page will display the 
 
     ![Image alt text](images/lab4_23a.png)
     
-6. If you click on the newly created Item on the left side of the page, look to the right side of the screen under **Page Item**. You will make the following changes in the Page Item Panel:
+6.  If you click on the newly created Item on the left side of the page, look to the right side of the screen under **Page Item**. You will make the following changes in the Page Item Panel:
     - Change the name of the item you just created to P4\_SEARCH\_ITEM.
     - Change Submit when Enter pressed to On
 
      ![Image alt text](images/lab4_25a.png)
  
-7. In the panel on the left, Drag the P4\_SEARCH\_ITEM up above the Image Gallery page item. This will make it so your search box will be at the top of the page.
+7.  In the panel on the left, Drag the P4\_SEARCH\_ITEM up above the Image Gallery page item. This will make it so your search box will be at the top of the page.
 
     ![Image alt text](images/lab4_26.png)
 
@@ -229,16 +229,16 @@ In this task you will create the Image Detail Page that will display information
 1. If you are not at the application builder home page click on the Application Breadcrumb at the top corner of the page
     ![Image alt text](images/lab4_task4_1.png) 
 
-2. You should be on a page that looks like the image below
+2.  You should be on a page that looks like the image below
     ![Image alt text](images/lab4_44_.png) 
 
-3. Click on Create Page
+3.  Click on Create Page
     ![Image alt text](images/lab4_44.png)
 
-4. Choose Interactive Report
+4.  Choose Interactive Report
     ![Image alt text](images/lab4_45a.png)
 
-5. On this page:
+5.  On this page:
     - Name: Image Detail
     - Table/View Name: VECTOR_IMAGE
     - Click Create Page
@@ -259,11 +259,11 @@ In this task you will create the Image Detail Page that will display information
       - SQL Query: "select min(url) from vector_image" (without the double quotes)
       ![Image alt text](images/lab4_51.png)
 
-8. In the panel on the left, Drag the P2_URL up above the Image Detail page item
+8.  In the panel on the left, Drag the P2_URL up above the Image Detail page item
 
     ![Image alt text](images/lab4_52a.png)
 
-9. Click on the Image Detail in the left panel to pull up its details and change the where clause section paste "URL = :P2_URL" (without the double quotes)
+9.  Click on the Image Detail in the left panel to pull up its details and change the where clause section paste "URL = :P2_URL" (without the double quotes)
 
     ![Image alt text](images/lab4_53a.png)
 
@@ -326,20 +326,20 @@ In this task you will create the Image Detail Page that will display information
 ## Task 5: Linking Image Gallery to the Image Details
 In this task you will link the Image Gallery page to the Image Detail Pages so when you click on an image you will get the details for it.
 
-1. If you are not at the application builder home page click on the Application Breadcrumb at the top of the page
+1.  If you are not at the application builder home page click on the Application Breadcrumb at the top of the page
 
     ![Image alt text](images/lab4_task5_1.png)
 
-2. You should be on a page that looks like the image below
+2.  You should be on a page that looks like the image below
     ![Image alt text](images/lab4_task5_2.png)
 
-3. Click on your Image Gallery page
+3.  Click on your Image Gallery page
     ![Image alt text](images/lab4_74.png)
 
-4. In the left panel Under Image Gallery right click on Actions and Choose create action
+4.  In the left panel Under Image Gallery right click on Actions and Choose create action
     ![Image alt text](images/lab4_76a.png)
 
-5. In the Action Panel on the right make the following changes
+5.  In the Action Panel on the right make the following changes
     - Identification -> Type: Media
      ![Image alt text](images/lab4_77.png)
     - Under link Change
@@ -374,7 +374,7 @@ In this task you will link the Image Gallery page to the Image Detail Pages so w
 
      ![Image alt text](images/lab4_86a.png)
 
-6. Click Save on the page
+6.  Click Save on the page
     ![Image alt text](images/lab4_87.png)
 
 ## Task 6: Running the Application
@@ -388,7 +388,7 @@ In this task you will link the Image Gallery page to the Image Detail Pages so w
      ![Image alt text](images/lab4_89.png)
      ![Image alt text](images/lab4_90.png)
     
-2. If you need to login use:
+2.  If you need to login use:
     - Username: vectoruser
     - Password: Welcome_1 (or whatever password you set for vectorimage)
 

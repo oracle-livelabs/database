@@ -1,33 +1,25 @@
 # Setup - LiveLabs#
 
 ## Introduction
-
-Estimated Time: TODO - x minutes
-
 This lab will show you how to setup a GI cluster and RAC database on your Cloud instance using **libvrt** to virtualize your instance. You will use a pre-built vagrantfile stored on GitHub that will configure and build a 2-node cluster and a RAC database.
 
 **PLEASE READ:**  *If you already have a cluster and RAC database (running the 19c Image) configured, bypass this step.*
-
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
 
 ## Task 1: Build a Compute Instance using the KVM Marketplace image
 
 1. Log in to the Oracle Cloud Console
 
 2. Select the **Oracle Linux KVM Image** from Oracle Marketplace. Ensure you have chosen the appropriate **Compartment** and click **Launch Instance**
-    ![Image](./images/libvrt-kvm-1.png " ")
+    ![](./images/libvrt-kvm-1.png " ")
 
 3. Click **Show Shape, Network and Storage Options** and choose an **Availability Domain**
-    ![Image](./images/libvrt-kvm-2.png " ")
+    ![](./images/libvrt-kvm-2.png " ")
 
 4. Do not choose a **Bare Metal** configuration. Select **Change Shape** to choose a VM Standard 2.x configuration:
-    ![Image](./images/libvrt-kvm-2a.png " ")
+    ![](./images/libvrt-kvm-2a.png " ")
 
 5. In the section **Add SSH Keys**: Paste a **Public Key**     
-    ![Image](./images/libvrt-kvm-3.png " ")
+    ![](./images/libvrt-kvm-3.png " ")
 
 6. Click **Create**
 
@@ -36,60 +28,60 @@ In this lab, you will:
 The Grid Infrastructure cluster and RAC database you create later will require approximately 80 GB of shared disk. We will create a block device and attach it to the compute instance.
 
 1. Open the **Block Storage** - **Boot Volume** menu
-    ![Image](./images/libvrt-block-volume-1.png " ")
+    ![](./images/libvrt-block-volume-1.png " ")
 
 2. Click **Create Block Volume**
-    ![Image](./images/libvrt-block-volume-2.png " ")   
+    ![](./images/libvrt-block-volume-2.png " ")   
 
 3. Add a **Name** (for example *Vagrant_KVM_Storage*) and select your **Compartment**
 
 4. Ensure you select the same **Availability Domain** as the Compute Instance you have just created. Select **Custom** for **Size and Performance** and create a **90 GB** Volume
-    ![Image](./images/libvrt-block-volume-3.png " ")   
+    ![](./images/libvrt-block-volume-3.png " ")   
 
 ## Task 3: Attach Block Volume to Compute Instance   
 
 1. Navigate to the Compute Instance you created in **Step 1**
 
-    ![Image](./images/libvrt-block-volume-3a.png " ")
+    ![](./images/libvrt-block-volume-3a.png " ")
 
 2. Select your instance by clicking on its name
 
 3. Under **Resources** (at bottom of screen), select **Attached Block Volumes** and then press **Attach Block Volume**
-    ![Image](./images/libvrt-block-volume-4.png " ")
+    ![](./images/libvrt-block-volume-4.png " ")
 
 4. Choose **Let Oracle Cloud Infrastructure Choose the Best Attachment Type**. Select the **Select Volume** radio button and then choose the Block Volume you have just created.
-    ![Image](./images/libvrt-block-volume-5.png " ")    
+    ![](./images/libvrt-block-volume-5.png " ")    
 
 5. Ensure **READWRITE** is selected and press **Attach**
 
 6. If the volume is attached **Paravirtualised** device **go to Step 4 Configure Disk**
 
-    If the Block Volume has been attached via an ISCSI interface you need to run ISCSI commands in a terminal window on your compute instance. The commands are described in the additional menu of the Block Volume:
-    ![Image](./images/libvrt-block-volume-6.png " ")  
+If the Block Volume has been attached via an ISCSI interface you need to run ISCSI commands in a terminal window on your compute instance. The commands are described in the additional menu of the Block Volume:
+    ![](./images/libvrt-block-volume-6.png " ")  
 
 ### Connecting via MAC or Windows CYGWIN Emulator
-1. Go to Compute -> Instance and select the instance you created (make sure you choose the correct compartment)
-2. On the instance homepage, find the Public IP addresss for your instance.
+1.  Go to Compute -> Instance and select the instance you created (make sure you choose the correct compartment)
+2.  On the instance homepage, find the Public IP addresss for your instance.
 
-3. Open up a terminal (MAC) or cygwin emulator as the opc user.  Enter yes when prompted.
+3.  Open up a terminal (MAC) or cygwin emulator as the opc user.  Enter yes when prompted.
 
-    ````
-    ssh -i ~/.ssh/optionskey opc@<Your Compute Instance Public IP Address>
 ````
-      ![Image](./images/ssh-first-time.png " ")
+ssh -i ~/.ssh/optionskey opc@<Your Compute Instance Public IP Address>
+````
+      ![](./images/ssh-first-time.png " ")
 
 ### Connecting via Windows
 
-1. Open up putty and create a new connection.
+1.  Open up putty and create a new connection.
 
-    ````
-    ssh -i ~/.ssh/optionskey opc@<Your Compute Instance Public IP Address>
 ````
-      ![Image](./images/ssh-first-time.png " ")
+ssh -i ~/.ssh/optionskey opc@<Your Compute Instance Public IP Address>
+````
+      ![](./images/ssh-first-time.png " ")
 
-2. Enter a name for the session and click **Save**.
+2.  Enter a name for the session and click **Save**.
 
-    ![Image](./images/putty-setup.png " ")
+    ![](./images/putty-setup.png " ")
 
 3. Click **Connection** > **Data** in the left navigation pane and set the Auto-login username to root.
 
@@ -97,7 +89,7 @@ The Grid Infrastructure cluster and RAC database you create later will require a
 
 5. Navigate to the location where you saved your SSH private key file, select the file, and click Open.  NOTE:  You cannot connect while on VPN or in the Oracle office on clear-corporate (choose clear-internet).
 
-      ![Image](./images/putty-auth.png " ")
+      ![](./images/putty-auth.png " ")
 
 6. The file path for the SSH private key file now displays in the Private key file for authentication field.
 
@@ -112,7 +104,7 @@ sudo iscsiadm -m node -o new -T <Volume IQN> -p <Volume IP>:<Volume Port>
 sudo iscsiadm -m node -o update -T <Volume IQN> -n node.startup -v automatic
 sudo iscsiadm -m node -T <Volume IQN> -p <Volume IP>:<Volume Port>
 ````
-    ![Image](./images/libvrt-block-volume-7.png " ")
+    ![](./images/libvrt-block-volume-7.png " ")
 
 The **iscsiadm -m node -o new** command will return similar to:
 ````
@@ -126,71 +118,71 @@ Ensure you have a terminal open on your Compute Instance (see commands in previo
 1. If your volume attached as a paravitualised device you can run these steps immediately. If your volume has an ISCSI interface you must connect to the device first as shown in **Step 3**
 
 2. To get a list of all attached ISCSI devices run the command:
-    ````
-    sudo fdisk -l
 ````
-    Your device will have the name (if all defaults chosen):
-    ISCSI - /dev/sdb
-    Paravirtualised - /dev/oracleoci/oraclevdb
+sudo fdisk -l
+````
+Your device will have the name (if all defaults chosen):
+ISCSI - /dev/sdb
+Paravirtualised - /dev/oracleoci/oraclevdb
 
 3. Partition the disk:
-    ````
-    sudo fdisk /dev/oracleoci/oraclevdb
 ````
-    This will open the disk partitioning utility
-    Type **n** for new partition, **p** for primary partition, **Enter** for default partition number (10, **Enter** to accept default start sector [2048], and **Enter** to accept end sector (whole disk). Type **w** to write the new partition table and quit.
+sudo fdisk /dev/oracleoci/oraclevdb
+````
+This will open the disk partitioning utility
+Type **n** for new partition, **p** for primary partition, **Enter** for default partition number (10, **Enter** to accept default start sector [2048], and **Enter** to accept end sector (whole disk). Type **w** to write the new partition table and quit.
 
-    ````
-    Command (m for help): n
-    Partition type:
-    p   primary (0 primary, 0 extended, 4 free)
-    e   extended
-    Select (default p): p
-    Partition number (1-4, default 1):
-    First sector (2048-188743679, default 2048):
-    Using default value 2048
-    Last sector, +sectors or +size{K,M,G} (2048-188743679, default 188743679):
-    Using default value 188743679
-    Partition 1 of type Linux and of size 90 GiB is set
+````
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1):
+First sector (2048-188743679, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-188743679, default 188743679):
+Using default value 188743679
+Partition 1 of type Linux and of size 90 GiB is set
 
-    Command (m for help): p
+Command (m for help): p
 
-    Disk /dev/oracleoci/oraclevdb: 96.6 GB, 96636764160 bytes, 188743680 sectors
-    Units = sectors of 1 * 512 = 512 bytes
-    Sector size (logical/physical): 512 bytes / 4096 bytes
-    I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
-    Disk label type: dos
-    Disk identifier: 0xa971558f
+Disk /dev/oracleoci/oraclevdb: 96.6 GB, 96636764160 bytes, 188743680 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
+Disk label type: dos
+Disk identifier: 0xa971558f
 
                    Device Boot      Start         End      Blocks   Id  System
-    /dev/oracleoci/oraclevdb1            2048   188743679    94370816   83  Linux
+/dev/oracleoci/oraclevdb1            2048   188743679    94370816   83  Linux
 
-    Command (m for help): w
-    The partition table has been altered!
+Command (m for help): w
+The partition table has been altered!
 
-    Calling ioctl() to re-read partition table.
-    Syncing disks.
+Calling ioctl() to re-read partition table.
+Syncing disks.
 ````
 4. Create a mount point.
-    ````
-    sudo mkdir /oradiskvdb1
+````
+sudo mkdir /oradiskvdb1
 ````
 5. Update **/etc/fstab**
 
-    Add the following line to the /etc/fstab file (use **sudo vi /etc/fstab**)
-    ````
-    /dev/oracleoci/oraclevdb1   /oradiskvdb1    ext3    defaults,_netdev,noatime  0
+Add the following line to the /etc/fstab file (use **sudo vi /etc/fstab**)
+````
+/dev/oracleoci/oraclevdb1   /oradiskvdb1    ext3    defaults,_netdev,noatime  0
 ````
 6. Mount the device
-    ````
-    sudo mount /dev/oracleoci/oraclevdb1 /oradiskvdb1
+````
+sudo mount /dev/oracleoci/oraclevdb1 /oradiskvdb1
 ````
 7. Verify the device is mounted under the mount point
-    ````
-    <copy>
-    ls -al /oradiskvdb1
-    df -k /oradiskvdb1
-    </copy>
+````
+<copy>
+ls -al /oradiskvdb1
+df -k /oradiskvdb1
+</copy>
 ````
 which will show similar to:
 
@@ -207,35 +199,35 @@ Filesystem     1K-blocks  Used Available Use% Mounted on
 ````
 ## Task 5: Install libvrt
 
-1. On Oracle Linux 7 enable the *ol7_kvm_utils* channel to get the recent version of the packages:
+1.  On Oracle Linux 7 enable the *ol7_kvm_utils* channel to get the recent version of the packages:
 
-    ````
-    <copy>
-    sudo yum-config-manager --enable ol7_kvm_utils
-    </copy>
+````
+<copy>
+sudo yum-config-manager --enable ol7_kvm_utils
+</copy>
 ````  
-    ![Image](./images/libvrt-1.png " ")
+    ![](./images/libvrt-1.png " ")
 
 2. Install the **Virtualization Host** packages:
 
-    ````
-    <copy>
-    sudo yum group install "Virtualization Host"
-    </copy>
+````
+<copy>
+sudo yum group install "Virtualization Host"
+</copy>
 ````  
-    ![Image](./images/libvrt-2a.png " ")
+    ![](./images/libvrt-2a.png " ")
 
 3. After installing the packages restart the **libvirt** service and add the **opc** user to the **libvirt group**
-    ````
-    <copy>
-    sudo systemctl enable --now libvirtd
-    sudo usermod -a -G libvirt opc
-    </copy>
+````
+<copy>
+sudo systemctl enable --now libvirtd
+sudo usermod -a -G libvirt opc
+</copy>
 ````  
 4. Log out and login to enable the group change for the opc user!
-    ![Image](./images/libvrt-3a.png " ")
+    ![](./images/libvrt-3a.png " ")
 
-    ![Image](./images/libvrt-3b.png " ")
+    ![](./images/libvrt-3b.png " ")
 
 ## Task 6: Install **Hashicorp Vagrant**
 
@@ -243,52 +235,52 @@ The current version of Vagrant is 2.2.9
 
 1. Install **Hashicorp Vagrant**
 
-    ````
-    <copy>
-    sudo yum install https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.rpm
-    </copy>
+````
+<copy>
+sudo yum install https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.rpm
+</copy>
 ````     
-    ![Image](./images/libvrt-4.png " ")
+    ![](./images/libvrt-4.png " ")
 
 2. Install libraries needed by the plugin
 
-    ````
-    <copy>
-    sudo yum install libxslt-devel libxml2-devel libvirt-devel libguestfs-tools-c ruby-devel gcc make
-    </copy>
+````
+<copy>
+sudo yum install libxslt-devel libxml2-devel libvirt-devel libguestfs-tools-c ruby-devel gcc make
+</copy>
 ````     
-    ![Image](./images/libvrt-5.png " ")
+    ![](./images/libvrt-5.png " ")
 
-3. As **opc** user (non-root user) install the **Vagrant plugin**
+3.  As **opc** user (non-root user) install the **Vagrant plugin**
 
-    ````
-    <copy>
-    vagrant plugin install vagrant-libvirt
-    </copy>
+````
+<copy>
+vagrant plugin install vagrant-libvirt
+</copy>
 ````     
-    ![Image](./images/libvrt-6.png " ")
+    ![](./images/libvrt-6.png " ")
 
 ## Task 7: Install Git and clone the pre-built repository
 
 1. Install Git
 
-    ````
-    <copy>
-    sudo yum install git
-    </copy>
+````
+<copy>
+sudo yum install git
+</copy>
 ````     
-    ![Image](./images/libvrt-7.png " ")
+    ![](./images/libvrt-7.png " ")
 
 2. Make sure you are in the **opc home directory** (\/home\/opc)
 
 3. Clone the repository at  "oracle\/vagrant-projects"
 
-    ````
-    <copy>
-    git clone https://github.com/oracle/vagrant-projects.git
-    </copy>
+````
+<copy>
+git clone https://github.com/oracle/vagrant-projects.git
+</copy>
 ````     
-    ![Image](./images/libvrt-8.png " ")  
+    ![](./images/libvrt-8.png " ")  
 
 This will create a directory named **vagrant-projects\/OracleRAC**
 
@@ -296,56 +288,56 @@ This will create a directory named **vagrant-projects\/OracleRAC**
 [opc@af-troy ~]$ ls -ald vagrant-projects/OracleRAC
 drwxrwxr-x. 7 opc opc 4096 Jul 27 06:21 vagrant-projects/OracleRAC
 ````
-    ![Image](./images/libvrt-9.png " ")  
+    ![](./images/libvrt-9.png " ")  
 
 ## Task 8: Install the Oracle Grid Infrastructure and Database software and configure the cluster and database through Vagrant
 
 1. Download the oracle software into the directory \/home\/opc\/vagrant-projects\/OracleRAC\/ORCL_software:
 
-    ````
-    cd /home/opc/vagrant-projects/OracleRAC/OCL_software
+````
+cd /home/opc/vagrant-projects/OracleRAC/OCL_software
 ````
 
 2. Download Database and Grid Infrastructure software from OTN (the 19.3 RU versions are named **LINUX.X64_193000_grid_home.zip**  and **LINUX.X64_193000_db_home.zip** )
 
-    Oracle software is available at https://www.oracle.com/database/technologies/oracle19c-linux-downloads.html
+Oracle software is available at https://www.oracle.com/database/technologies/oracle19c-linux-downloads.html
 
-    ![Image](./images/libvrt-10a.png " ")  
-    ![Image](./images/libvrt-10b.png " ")  
+    ![](./images/libvrt-10a.png " ")  
+    ![](./images/libvrt-10b.png " ")  
 
-    **Note:** to use **wget** to install Oracle software, start a download of the appropriate file, accept the click-through license conditions and then pause the download and copy the URL containing your authentication token:
+**Note:** to use **wget** to install Oracle software, start a download of the appropriate file, accept the click-through license conditions and then pause the download and copy the URL containing your authentication token:
 
 3. Accept the license conditions and click **Download**
 
-    ![Image](./images/libvrt-11.png " ")  
+    ![](./images/libvrt-11.png " ")  
 
 4. Satisfy any login requirements and then select **Save File**
 
-    ![Image](./images/libvrt-12.png " ")  
+    ![](./images/libvrt-12.png " ")  
 
 5. Open the Download Manager (example shown using Firefox) and **copy** the download link containing your **AuthParam** token:
 
-    ![Image](./images/libvrt-13.png " ")  
+    ![](./images/libvrt-13.png " ")  
 
-    **Note:** Pause the download unless you want this file elsewhere (it will not be used in the remainder of this lab)
+**Note:** Pause the download unless you want this file elsewhere (it will not be used in the remainder of this lab)
 
 6. Return to your Linux terminal (from **1.** above) and enter the **Download Link** you just copied into a **wget** command:
 
-    For example:
-    ````
-    wget https://download.oracle.com/otn/linux/oracle19c/190000/LINUX.X64_193000_db_home.zip?AuthParam=1595832212_009089128610f6c
+For example:
 ````
-    ![Image](./images/libvrt-14.png " ")
+wget https://download.oracle.com/otn/linux/oracle19c/190000/LINUX.X64_193000_db_home.zip?AuthParam=1595832212_009089128610f6c
+````
+    ![](./images/libvrt-14.png " ")
 
 7. Repeat steps 2-6 for the Grid Infrastructure file (LINUX.X64_193000_gi_home.zip)
 
-    ![Image](./images/libvrt-15.png " ")
+    ![](./images/libvrt-15.png " ")
 
 8. Rename the files to **LINUX.X64_193000_grid_home.zip** and **LINUX.X64_193000_grid_home.zip** if the names still contain the AuthParam designation
 
-    For example:
-    ````
-    mv 'LINUX.X64_193000_grid_home.zip?AuthParam=1595833382_b4705' LINUX.X64_193000_grid_home.zip
+For example:
+````
+mv 'LINUX.X64_193000_grid_home.zip?AuthParam=1595833382_b4705' LINUX.X64_193000_grid_home.zip
 ````
 9. Verify the parameter settings in the file **.\OracleRAC\config\vagrant.yml**
 
@@ -433,14 +425,14 @@ The following values can be changed:
 **virsh** is a command line interface tool for managing guests and the hypervisor. The virsh tool is built on the libvirt management API.
 
 1. Connect to virsh
-    ````
-    virsh -c qemu:///system
+````
+virsh -c qemu:///system
 ````
 2. Enter the following commands at the **virsh #** prompt
-    ````
-    pool-define-as Vagrant_KVM_Storage dir --target /oradiskvdb1
-    pool-start Vagrant_KVM_Storage
-    pool-autostart Vagrant_KVM_Storage
+````
+pool-define-as Vagrant_KVM_Storage dir --target /oradiskvdb1
+pool-start Vagrant_KVM_Storage
+pool-autostart Vagrant_KVM_Storage
 ````
 The *target* is the mount point defined for the disk
 The name, *Vagrant_KVM_Storage* corresponds to the name **storage_pool_name** defined in the **vagrant.yml** file
@@ -493,10 +485,10 @@ node1: -----------------------------------------------------------------
 From your compute instance you can connect to either of the GI nodes (node1 or node2)
 
 1. Use SSH to connect to a GI node
-    ````
-    ssh oracle@
 ````
-    ![Image](./images/libvrt-login-node1.png " ")
+ssh oracle@
+````
+    ![](./images/libvrt-login-node1.png " ")
 
 ## Acknowledgements
 

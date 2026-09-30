@@ -14,11 +14,6 @@ In this lab, you will:
 * View a demonstration of Ask DBExpert
 * Ask DBExpert questions
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Navigate to the homepage
 
 1. Navigate to [https://www.oracle.com/dbexpert](https://apexadb.oracle.com/ords/r/dbexpert/dbsn/home) and click on the red button on the bottom right 
@@ -35,19 +30,19 @@ In this lab, you will:
 
 1. Above we can see once Ask DBExpert is opened, it is easy to get started with the provided prompts
 
-    ![DBExpert VC](./images/ai_prompts_sm.png "The 'Ask DBExpert' built in prompts.")
+  ![DBExpert VC](./images/ai_prompts_sm.png "The 'Ask DBExpert' built in prompts.")
 
 2. In the demo, the user selects `4. Which services have an SLA and support Oracle E-Business Suite?` and Ask DBExpert provides the answer (as of July 2024)
 
-    ![DBExpert VC](./images/ai_a1_sm.png "The answer to an 'Ask DBExpert' prompt")
+  ![DBExpert VC](./images/ai_a1_sm.png "The answer to an 'Ask DBExpert' prompt")
 
 3. The user then selects a thumbs up because they believed the answer was satisfactory, this feedback helps improve the service
 
-    ![DBExpert VC](./images/ai_f1_sm.png "Feedback to an 'Ask DBExpert' answer")
+  ![DBExpert VC](./images/ai_f1_sm.png "Feedback to an 'Ask DBExpert' answer")
 
 4. Ask DBExpert supports freeform natural language Q&A as well
 
-    ![DBExpert VC](./images/ai_ff1_sm.png "Freeform question and response from 'Ask DBExpert'")
+  ![DBExpert VC](./images/ai_ff1_sm.png "Freeform question and response from 'Ask DBExpert'")
 
 5. The answers provides by Ask DBExpert link to more details
 
@@ -64,8 +59,3 @@ You may now **proceed to the next lab**.
 ## Learn More
 ### Blogs
 * [How DBExpert Quickly Learned to Talk using AI (and your app can too)](https://blogs.oracle.com/datawarehousing/post/how-dbexpert-quickly-learned-to-talk-using-ai-and-your-app-can-too)
-
-## Acknowledgements
-
-* **Author** - TODO: Your Name, Your Title, Your Organization
-* **Last Updated By/Date** - TODO: Your Name, Month Year

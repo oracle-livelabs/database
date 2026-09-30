@@ -31,30 +31,30 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
 1. The first step is to enable REST for our Duality Views. For this, we'll Use the Oracle Database Actions Navigator on the left of the screen. Click the drop-down arrow for the box showing **"Tables**", and select **Views**. Refer to the picture below.
 
-    ![showing the views drop-down](./images/lab050101a.png)
+  ![showing the views drop-down](./images/lab050101a.png)
 
-    After switching the Navigator to display Views you should see-
+   After switching the Navigator to display Views you should see-
 
-    ![showing the views drop-down](./images/lab050101b.png)
+  ![showing the views drop-down](./images/lab050101b.png)
 
 2. Right click on the `STUDENT_SCHEDULE`, hover the mouse over **REST** and click **Enable** if it isn't already enabled.
 
-    If it is already enabled, it will say Disable... instead.
+   If it is already enabled, it will say Disable... instead.
 
-    If you see Disable... you don't have to do anything and can Skip ahead to Step number 5.
+   If you see Disable... you don't have to do anything and can Skip ahead to Step number 5.
 
     **NOTE**: If you are running macOS, you may need to press the *control-key* while clicking the name of the view for the side panel to appear.
 
-    ![showing the REST pop-up menu](./images/lab050102.png)
+  ![showing the REST pop-up menu](./images/lab050102.png)
 
 
 3. The REST Enable Object side panel will appear. Select **Enable** to continue.
 
-    ![showing the rest side panel](./images/lab050103a.png)
+   ![showing the rest side panel](./images/lab050103a.png)
 
-    After clicking **Enable** at the bottom of the pane, a "Confirmation" will pop-up temporarily at the bottom of the screen. Also a "plug-icon" will be displayed beside the `student_schedule` Duality View to indicate that is now REST-Enabled.
+   After clicking **Enable** at the bottom of the pane, a "Confirmation" will pop-up temporarily at the bottom of the screen. Also a "plug-icon" will be displayed beside the `student_schedule` Duality View to indicate that is now REST-Enabled.
 
-    ![showing the Navigator pane](./images/lab050103b.png)
+   ![showing the Navigator pane](./images/lab050103b.png)
 
 4. Lets do the same thing for the `STUDENT_DUALITY` duality view, but this time using PL/SQL. Copy the following code and Select **Run Script**.
 
@@ -77,26 +77,26 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
 
     After the script completes running, click the **refresh-ICON** and you should see the following icon appear alongside the `STUDENT_DUALITY` view.
 
-    ![showing the refresh ICON to update the REST setting](./images/lab050104b.png " ")
+   ![showing the refresh ICON to update the REST setting](./images/lab050104b.png " ")
 
 
 5. Click on the pancake menu in the upper left-hand corner of the Database Actions page to display the  the *Development* menu, then click on **REST**.
 
-    Click the Pancake Menu.
+   Click the Pancake Menu.
 
-    ![Click on menu](./images/lab050105a.png " ")
+   ![Click on menu](./images/lab050105a.png " ")
 
-    Click the **REST** menu selection.
+   Click the **REST** menu selection.
 
-    ![Click on REST](./images/lab050105b.png " ")
+   ![Click on REST](./images/lab050105b.png " ")
 
-    Click the **AUTOREST** tile.
+   Click the **AUTOREST** tile.
 
-    ![Click on AutoREST](./images/lab050105c.png " ")
+   ![Click on AutoREST](./images/lab050105c.png " ")
 
 6. Next, for the `student_schedule` view, click the three dots on the right and select **OpenAPI View**.
 
-    ![Click on OpenAPI View](./images/lab050106.png " ")
+   ![Click on OpenAPI View](./images/lab050106.png " ")
 
 7. Here, you can see the automatically configured REST calls that were enabled on the view.
 
@@ -116,7 +116,7 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
     <copy>{ "student.studentName": "Jane" }</copy>
     ```
 
-    Click **Execute** to run the REST call with the given parameters.
+   Click **Execute** to run the REST call with the given parameters.
 
 
     ![Execute the query](./images/lab050109.png " ")
@@ -157,42 +157,42 @@ The Oracle Autonomous Database Actions | SQL tool makes it very easy to REST-ena
             }
     </copy>
     ```
-    After pasting the code in the request body pane, click **Execute** -
+   After pasting the code in the request body pane, click **Execute** -
 
-    ![Add a student schedule entry ](./images/lab050203.png " ")
+   ![Add a student schedule entry ](./images/lab050203.png " ")
 
 4. After executing the POST request, you will receive a response indicating that the entry was successfully added to the `student_schedule` Duality View.
 
 
-    ![Examine the REST results](./images/lab050204.png " ")
+   ![Examine the REST results](./images/lab050204.png " ")
 
 5. We can now return to the database to see the new entry in the `student_schedule`.
 
-    Click the "pancake-menu" in the top lefthand corner of the screen and click **SQL** from the drop-down menu to return to the SQLDeveloper Web console.
+   Click the "pancake-menu" in the top lefthand corner of the screen and click **SQL** from the drop-down menu to return to the SQLDeveloper Web console.
 
-    ![Navigate back to the SQLDeveloper Web console](./images/lab050205.png " ")
+   ![Navigate back to the SQLDeveloper Web console](./images/lab050205.png " ")
 
 6. For the first query,  view the `student_schedule` Duality View by running the following query-
 
-    ```
-    <copy>
-    SELECT * FROM student_schedule ORDER BY 1
-    </copy>
-    ```
+   ```
+   <copy>
+   SELECT * FROM student_schedule ORDER BY 1
+   </copy>
+   ```
 
-    You should see the newly inserted row in the `student_schedule` Duality View.
+   You should see the newly inserted row in the `student_schedule` Duality View.
 
-    ![Examine the results in SQL](./images/lab050206.png " ")
+   ![Examine the results in SQL](./images/lab050206.png " ")
 
-    **NOTE:** Feel free to try this query using the PRETTY format to see the entry in the JSON document format.
+   **NOTE:** Feel free to try this query using the PRETTY format to see the entry in the JSON document format.
 
 7. We can also view the underlying `student_courses` table to see the newly inserted row by running the following query-
 
-    ```
-    <copy>
-    SELECT * FROM student_courses ORDER BY 1
-    </copy>
-    ```
+   ```
+   <copy>
+   SELECT * FROM student_courses ORDER BY 1
+   </copy>
+   ```
 
    You should see the newly inserted row in the `student_courses` table.
 

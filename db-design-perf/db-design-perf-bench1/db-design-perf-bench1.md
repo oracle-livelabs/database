@@ -11,11 +11,6 @@ Estimated lab time: 15 minutes
 
 -   This lab requires completing the preceding labs in the Contents menu on the left.
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Task 1: Understand and Run the Benchmark via Cloud Shell
 
 1. Using Cloud Shell, run the benchmark1 shell script. If you are already in the home directory, you can skip the initial CD command.

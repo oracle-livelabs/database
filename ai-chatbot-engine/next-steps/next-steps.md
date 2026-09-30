@@ -17,11 +17,6 @@ Moreover, this approach can be expanded to *handle more complex data sources*, s
 
 Estimated Time: 10 minutes
 
-### Objectives
-
-In this lab, you will:
-* TODO: Add objectives
-
 ## Next steps
 This tutorial merely showcased the very basic code and concepts used to build a RAG chatbot. There is more work needed to build a production-ready system, with many data sources, guardrails, and security in place.
 

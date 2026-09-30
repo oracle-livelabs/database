@@ -20,22 +20,22 @@ For more information about Terraform and Resource Manager, please see the append
 
 If you already have a VCN setup, proceed to *Step 1B*.
 
-1. Click on the link below to download the Resource Manager zip file you need to build your environment.  
-    - [dbsystemrac.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/dbsystemrac.zip)
+1.  Click on the link below to download the Resource Manager zip file you need to build your environment.  
+- [dbsystemrac.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/dbsystemrac.zip)
 
-2. Save in your downloads folder.
-3. Login to Oracle Cloud
-4. Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Under the **Solutions and Platform** submenu, choose **Resource Manager > Stacks**.  
+2.  Save in your downloads folder.
+3.  Login to Oracle Cloud
+4.  Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Under the **Solutions and Platform** submenu, choose **Resource Manager > Stacks**.  
 
-    ![Image](./images/em-oci-landing.png " ")
+  ![](./images/em-oci-landing.png " ")
 
-    ![Image](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
-    ![Image](./images/em-create-stack.png " ")
+  ![](./images/em-create-stack.png " ")
 
-4. Select **My Configuration**, choose the **.ZIP FILE** button, click the **Browse** link and select the zip file (db\_system\_rac.zip) that you downloaded. Click **Select**.
+4.  Select **My Configuration**, choose the **.ZIP FILE** button, click the **Browse** link and select the zip file (db\_system\_rac.zip) that you downloaded. Click **Select**.
 
-    ![Image](./images/zip-file.png " ")
+  ![](./images/zip-file.png " ")
 
 5. Enter the following information:
 
@@ -45,9 +45,9 @@ If you already have a VCN setup, proceed to *Step 1B*.
 
      *Note: If this is a newly provisioned tenant such as freetier with no user created compartment, stop here and first create it before proceeding.*
 
-6. Click **Next**.
+6.  Click **Next**.
 
-    ![Image](./images/em-create-stack-2x.png " ")
+  ![](./images/em-create-stack-2x.png " ")
 
 7. Enter or select the following:
     - **Compartment:** Accept the default you entered initially
@@ -63,7 +63,7 @@ If you already have a VCN setup, proceed to *Step 1B*.
 8. Depending on the quota you have in your tenancy you can choose from standard Compute shapes or Flex shapes.  We recommend standard shapes unless you have run out of quota (Please visit the Appendix: Troubleshooting Tips for instructions on checking your quota)
     - **Use Flexible Instance Shape with Adjustable OCPU Count?:** Leave unchecked (unless you plan on using a Flex shape)
     - **Instance Shape:** Select VM.Standard.E2.4 (this compute instance requires at least 30 GB of memory to run, make sure to choose accordingly)
-    ![Image](./images/standardshape.png " ")
+  ![](./images/standardshape.png " ")
 9. If you choose to use flex shapes, follow the instructions below.  Otherwise skip to the next step.
     - **Instance OCPUS:** Accept the default (**4**) This will provision the ***VM.Standard.E3.Flex*** shape with 4 OCPUs and 64GB of memory.
 
@@ -74,11 +74,11 @@ If you already have a VCN setup, proceed to *Step 1B*.
 
 10. Review and click **Create**.
 
-    ![Image](./images/em-create-stack-3.png " ")
+  ![](./images/em-create-stack-3.png " ")
 
 7. Your stack has now been created!  
 
-  ![Image](./images/em-stack-details.png " ")
+  ![](./images/em-stack-details.png " ")
 
 You may now proceed to [Step 2](#STEP2:TerraformPlan(OPTIONAL)) (skip Step 1B).
 
@@ -89,31 +89,31 @@ If you just completed Step 1A, please proceed to [Step 2](#STEP2:TerraformPlan(O
 If you do not know how to add egress rules, skip to the Appendix to add rules to your VCN.  *Note:  We recommend using our stack for ease of deployment and to reduce the potential for error.*
 
 1. Click on the link below to download the Resource Manager zip file you need to build your environment.  
-    -[db_system_rac.zip] (https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/dbsystemrac.zip)
+-[db_system_rac.zip] (https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/dbsystemrac.zip)
 
 2. Save in your downloads folder.
 3. Open up the hamburger menu in the left hand corner.  Choose the compartment in which you would like to install.  Choose **Resource Manager > Stacks**.  
 
-    ![Image](./images/em-oci-landing.png " ")
+  ![](./images/em-oci-landing.png " ")
 
-    ![Image](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/developer-resmgr-stacks.png " ")
 
-    ![Image](./images/em-create-stack.png " ")
+  ![](./images/em-create-stack.png " ")
 
 4. Select **My Configuration**, click the **Browse** link and select the zip file (converged-db-mkplc-freetier.zip) that you downloaded. Click **Select**.
 
-    ![Image](./images/em-create-stack-1.png " ")
+  ![](./images/em-create-stack-1.png " ")
 
-    Enter the following information:
+  Enter the following information:
     - **Name**:  Enter a name  or keep the prefilled default (*DO NOT ENTER ANY SPECIAL CHARACTERS HERE*, including periods, underscores, exclamation etc, it will mess up the configuration and you will get an error during the apply process)
     - **Description**:  Same as above
     - **Create in compartment**:  Select the correct compartment if not already selected
 
-    *Note: If this is a newly provisioned tenant such as freetier with no user created compartment, stop here and first create it before proceeding.*
+  *Note: If this is a newly provisioned tenant such as freetier with no user created compartment, stop here and first create it before proceeding.*
 
 5. Click **Next**.
 
-    ![Image](./images/em-create-stack-2x.png " ")
+  ![](./images/em-create-stack-2x.png " ")
 
     Enter or select the following:
     - **Compartment:** Accept the default you entered initially
@@ -133,11 +133,11 @@ If you do not know how to add egress rules, skip to the Appendix to add rules to
 
      - **Use Existing VCN?:** Check to select.
 
-     ![Image](./images/em-create-stack-2c.png " ")
+     ![](./images/em-create-stack-2c.png " ")
 
      - **Select Existing VCN?:** Select existing VCN with regional public subnet and required security list.
 
-     ![Image](./images/em-create-stack-2d.png " ")
+     ![](./images/em-create-stack-2d.png " ")
 
      - **Select Public Subnet:** Select existing public subnet from above VCN.
 
@@ -145,77 +145,77 @@ If you do not know how to add egress rules, skip to the Appendix to add rules to
 
 6. Review and click **Create**.
 
-    ![Image](./images/em-create-stack-3b.png " ")
+  ![](./images/em-create-stack-3b.png " ")
 
 7. Your stack has now been created!  
 
-  ![Image](./images/em-stack-details-b.png " ")
+  ![](./images/em-stack-details-b.png " ")
 
 ## Task 2: Terraform Plan (OPTIONAL)
 This is optional, you may skip directly to [Step 3](#STEP3:TerraformApply).
 
 When using Resource Manager to deploy an environment, execute a terraform **plan** to verify the configuration. 
 
-1. **[OPTIONAL]** Click **Terraform Actions** -> **Plan** to validate your configuration.  This takes about a minute, please be patient.
+1.  **[OPTIONAL]** Click **Terraform Actions** -> **Plan** to validate your configuration.  This takes about a minute, please be patient.
 
-  ![Image](./images/em-stack-plan-1.png " ")
+  ![](./images/em-stack-plan-1.png " ")
 
-  ![Image](./images/em-stack-plan-2.png " ")
+  ![](./images/em-stack-plan-2.png " ")
 
-  ![Image](./images/em-stack-plan-results-1.png " ")
+  ![](./images/em-stack-plan-results-1.png " ")
 
-  ![Image](./images/em-stack-plan-results-2.png " ")
+  ![](./images/em-stack-plan-results-2.png " ")
 
-  ![Image](./images/em-stack-plan-results-3.png " ")
+  ![](./images/em-stack-plan-results-3.png " ")
 
-  ![Image](./images/em-stack-plan-results-4.png " ")
+  ![](./images/em-stack-plan-results-4.png " ")
 
 ## Task 3: Terraform Apply
 When using Resource Manager to deploy an environment, execute a terraform **apply** to actually create the configuration.  Let's do that now.
 
-1. At the top of your page, click on **Stack Details**.  click the button, **Terraform Actions** -> **Apply**.  This will create your network (unless you opted to use and existing VCN) and the compute instance.
+1.  At the top of your page, click on **Stack Details**.  click the button, **Terraform Actions** -> **Apply**.  This will create your network (unless you opted to use and existing VCN) and the compute instance.
 
-    ![Image](./images/em-stack-details-post-plan.png " ")
+  ![](./images/em-stack-details-post-plan.png " ")
 
-    ![Image](./images/em-stack-apply-1.png " ")
+  ![](./images/em-stack-apply-1.png " ")
 
-    ![Image](./images/em-stack-apply-2.png " ")
+  ![](./images/em-stack-apply-2.png " ")
 
-2. Once this job succeeds, you will get an apply complete notification from Terraform.  Examine it closely, 8 resources have been added (3 only if using an existing VCN).  *If you encounter any issues running the terraform stack, visit the Appendix: Troubleshooting Tips section below.*
+2.  Once this job succeeds, you will get an apply complete notification from Terraform.  Examine it closely, 8 resources have been added (3 only if using an existing VCN).  *If you encounter any issues running the terraform stack, visit the Appendix: Troubleshooting Tips section below.*
 
-    ![Image](./images/em-stack-apply-results-0.png " ")
+  ![](./images/em-stack-apply-results-0.png " ")
 
-    ![Image](./images/em-stack-apply-results-1.png " ")
+  ![](./images/em-stack-apply-results-1.png " ")
 
-    ![Image](./images/em-stack-apply-results-2.png " ")
+  ![](./images/em-stack-apply-results-2.png " ")
 
-    ![Image](./images/em-stack-apply-results-3.png " ")
+  ![](./images/em-stack-apply-results-3.png " ")
 
-3. Congratulations, your environment is created!  Click on the Application Information tab to get additional information about what you have just done.
+3.  Congratulations, your environment is created!  Click on the Application Information tab to get additional information about what you have just done.
 
-    ![Image](./images/app-info.png " ")
+  ![](./images/app-info.png " ")
 
-4. Your public IP address and instance name will be displayed.  Note the public IP address, you will need it for the next step.
+4.  Your public IP address and instance name will be displayed.  Note the public IP address, you will need it for the next step.
 
 ## Task 4: Find your IP Addresses
 
 Before logging in, first note down your IP addresses.
 
-1. From the hamburger menu, select Bare Metal, VM, Exadata in the Oracle Database category. 
+1.  From the hamburger menu, select Bare Metal, VM, Exadata in the Oracle Database category. 
 
-    ![Image](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
+  ![](https://oracle-livelabs.github.io/common/images/console/database-dbcs.png " ")
 
-2. Identify your database system and click it.  (Note:  Remember to choose the compartment that you were assigned if running on LiveLabs)
+2.  Identify your database system and click it.  (Note:  Remember to choose the compartment that you were assigned if running on LiveLabs)
 
-    ![Image](./images/setup-compute-2.png " ")
+  ![](./images/setup-compute-2.png " ")
 
 3. Explore the DB Systems home page.  On the left hand side, scroll down to view the Resources section.  Click Nodes.
 
-    ![Image](./images/setup-compute-3.png " ")
+  ![](./images/setup-compute-3.png " ")
 
 4. Locate your two nodes and jot down their public IP addresses.
 
-    ![Image](./images/setup-compute-4.png " ")
+  ![](./images/setup-compute-4.png " ")
 
 5. Now that you have your IP address select the method of connecting. Choose the environment where you created your ssh-key in the previous lab (Generate SSH Keys) and select one of the following steps.  We recommend you choose Oracle Cloud Shell for this series of workshops.
 - [Step 5: Oracle Cloud Shell (RECOMMENDED)](#STEP5:OracleCloudShell)
@@ -224,37 +224,37 @@ Before logging in, first note down your IP addresses.
 
 ## Task 5: Oracle Cloud Shell
 
-1. To re-start the Oracle Cloud shell, go to your Cloud console and click the Cloud Shell icon to the right of the region.  *Note: Make sure you are in the region you were assigned*
+1.  To re-start the Oracle Cloud shell, go to your Cloud console and click the Cloud Shell icon to the right of the region.  *Note: Make sure you are in the region you were assigned*
 
-    ![Image](../clusterware/images/start-cloudshell.png " ")
+    ![](../clusterware/images/start-cloudshell.png " ")
 
-2. Using one of the Public IP addresses in Step 4, enter the command below to login as the *opc* user and verify connection to your nodes.    
+2.  Using one of the Public IP addresses in Step 4, enter the command below to login as the *opc* user and verify connection to your nodes.    
 
     ````
     ssh -i ~/.ssh/<sshkeyname> opc@<Your Public IP Address>
     ````
-    ![Image](./images/em-cloudshell-ssh.png " ")
+    ![](./images/em-cloudshell-ssh.png " ")
 
-3. When prompted, answer **yes** to continue connecting.
-4. Repeat step 2 for your 2nd node.
-5. You may now *proceed to the next lab*.  
+3.  When prompted, answer **yes** to continue connecting.
+4.  Repeat step 2 for your 2nd node.
+5.  You may now *proceed to the next lab*.  
 
 
 ## Task 6: MAC or Windows CYGWIN Emulator
 *NOTE:  If you have trouble connecting and are using your work laptop to connect, your corporate VPN may prevent you from logging in. Log out of your VPN before conneting. *
-1. Using one of the Public IP addresses in Step 4, open up a terminal (MAC) or cygwin emulator as the opc user.  Enter yes when prompted.
+1.  Using one of the Public IP addresses in Step 4, open up a terminal (MAC) or cygwin emulator as the opc user.  Enter yes when prompted.
 
     ````
     ssh -i ~/.ssh/<sshkeyname> opc@<Your Public IP Address - node1>
     ````
-    ![Image](./images/em-mac-linux-ssh-login.png " ")
+    ![](./images/em-mac-linux-ssh-login.png " ")
 
 2. You can also log in to the **Public IP Address of node2**
 
     ````
     ssh -i ~/.ssh/<sshkeyname> opc@<Your Public IP Address - node2>
     ````
-    ![Image](./images/em-mac-linux-ssh-login.png " ")
+    ![](./images/em-mac-linux-ssh-login.png " ")
 
 3. After successfully logging in, you may *proceed to the next lab*
 
@@ -263,44 +263,44 @@ Before logging in, first note down your IP addresses.
 
 On Windows, you can use PuTTY as an SSH client. PuTTY enables Windows users to connect to remote systems over the internet using SSH and Telnet. SSH is supported in PuTTY, provides for a secure shell, and encrypts information before it's transferred.
 
-1. Download and install PuTTY. [http://www.putty.org](http://www.putty.org)
-2. Run the PuTTY program. On your computer, go to **All Programs > PuTTY > PuTTY**
-3. Select or enter the following information:
+1.  Download and install PuTTY. [http://www.putty.org](http://www.putty.org)
+2.  Run the PuTTY program. On your computer, go to **All Programs > PuTTY > PuTTY**
+3.  Select or enter the following information:
     - Category: _Session_
     - IP address: _Your service instance’s (node1) public IP address_
     - Port: _22_
     - Connection type: _SSH_
 
-    ![Image](images/7c9e4d803ae849daa227b6684705964c.jpg " ")
+  ![](images/7c9e4d803ae849daa227b6684705964c.jpg " ")
 
 ### **Configuring Automatic Login**
 
-1. In the category section, **Click** Connection and then **Select** Data.
+1.  In the category section, **Click** Connection and then **Select** Data.
 
-2. Enter your auto-login username. Enter **opc**.
+2.  Enter your auto-login username. Enter **opc**.
 
-    ![Image](images/36164be0029033be6d65f883bbf31713.jpg " ")
+  ![](images/36164be0029033be6d65f883bbf31713.jpg " ")
 
 ### **Adding Your Private Key**
 
-1. In the category section, **Click** Auth.
-2. **Click** browse and find the private key file that matches your VM’s public key. This private key should have a .ppk extension for PuTTy to work.
+1.  In the category section, **Click** Auth.
+2.  **Click** browse and find the private key file that matches your VM’s public key. This private key should have a .ppk extension for PuTTy to work.
 
-    ![Image](images/df56bc989ad85f9bfad17ddb6ed6038e.jpg " ")
+  ![](images/df56bc989ad85f9bfad17ddb6ed6038e.jpg " ")
 
-3. To save all your settings, in the category section, **Click** session.
-4. In the saved sessions section, name your session, for example ( EM13C-ABC ) and **Click** Save.
+3.  To save all your settings, in the category section, **Click** session.
+4.  In the saved sessions section, name your session, for example ( EM13C-ABC ) and **Click** Save.
 
 ### **Repeat Putty setup for the second node**
 
 1. Repeat the steps upbove to create a login window for the second node - use the Public IP address of node2
-3. Select or enter the following information:
+3.  Select or enter the following information:
     - Category: _Session_
     - IP address: _Your service instance’s (node2) public IP address_
     - Port: _22_
     - Connection type: _SSH_
 
-  ![Image](images/7c9e4d803ae849daa227b6684705964c.jpg " ")
+  ![](images/7c9e4d803ae849daa227b6684705964c.jpg " ")
 
 You may now *proceed to the next lab*.  
 
@@ -325,21 +325,21 @@ If you encountered any issues during this lab, follow the steps below to resolve
 - Flex Shape Not Found
 
 ### Issue 1: Availability Domain Mismatch
-![Image](images/error-ad-mismatch.png  " ")
+![](images/error-ad-mismatch.png  " ")
 
 #### Issue #1 Description
 When creating a stack and using an existing VCN, the availability domain and the subnet must match otherwise the stack errors.  
 
 #### Fix for Issue #1
-1. Click on **Stack**-> **Edit Stack** -> **Configure Variables**.
-2. Scroll down to the network definition.
-3. Make sure the Availability Domain number matches the subnet number.  E.g. If you choose AD-1, you must also choose subnet #1.
-4. Click **Next**
-5. Click **Save Changes**
-6. Click **Terraform Actions** -> **Apply**
+1.  Click on **Stack**-> **Edit Stack** -> **Configure Variables**.
+2.  Scroll down to the network definition.
+3.  Make sure the Availability Domain number matches the subnet number.  E.g. If you choose AD-1, you must also choose subnet #1.
+4.  Click **Next**
+5.  Click **Save Changes**
+6.  Click **Terraform Actions** -> **Apply**
 
 ### Issue 2: Invalid public key
-![Image](images/invalid-ssh-key.png  " ")
+![](images/invalid-ssh-key.png  " ")
 
 #### Issue #2 Description
 When creating your SSH Key, if the key is invalid the compute instance stack creation will throw an error.
@@ -348,14 +348,14 @@ When creating your SSH Key, if the key is invalid the compute instance stack cre
 - Go back to the instructions and ensure you create and **copy/paste** your key into the stack correctly.
 - Copying keys from Cloud Shell may put the key string on two lines.  Make sure you remove the hard return and ensure the key is all one line.
 - Ensure you pasted the *.pub file into the window.
-1. Click on **Stack**-> **Edit Stack** -> **Configure Variables**.
-2. Repaste the correctly formatted key
-3. Click **Next**
-4. Click **Save Changes**
-5. Click **Terraform Actions** -> **Apply**
+1.  Click on **Stack**-> **Edit Stack** -> **Configure Variables**.
+2.  Repaste the correctly formatted key
+3.  Click **Next**
+4.  Click **Save Changes**
+5.  Click **Terraform Actions** -> **Apply**
 
 ### Issue 3: Flex Shape Not Found
-![Image](images/flex-shape-error.png  " ")
+![](images/flex-shape-error.png  " ")
 
 #### Issue #3 Description
 When creating a stack your ability to create an instance is based on the capacity you have available for your tenancy.
@@ -366,17 +366,17 @@ If you have other compute instances you are not using, you can go to those insta
 2. Select **Compute**
 3. These labs use the following compute types.  Check your limit, your usage and the amount you have available in each availability domain (click Scope to change Availability Domain)
 4. Look for Standard.E2, Standard.E3.Flex and Standard2
-4. Click on the hamburger menu -> **Resource Manager** -> **Stacks**
-5. Click on the stack you created previously
-6. Click **Edit Stack** -> **Configure Variables**.
-7. Scroll down to Options
-8. Change the shape based on the availability you have in your system
-9. Click **Next**
+4.  Click on the hamburger menu -> **Resource Manager** -> **Stacks**
+5.  Click on the stack you created previously
+6.  Click **Edit Stack** -> **Configure Variables**.
+7.  Scroll down to Options
+8.  Change the shape based on the availability you have in your system
+9.  Click **Next**
 10. Click **Save Changes**
 11. Click **Terraform Actions** -> **Apply**
 
 ### Issue 4: Limits Exceeded
-![Image](images/no-quota.png  " ")
+![](images/no-quota.png  " ")
 
 #### Issue #4 Description
 When creating a stack your ability to create an instance is based on the capacity you have available for your tenancy.
@@ -389,10 +389,10 @@ If you have other compute instances you are not using, you can go to those insta
 3. These labs use the following compute types.  Check your limit, your usage and the amount you have available in each availability domain (click Scope to change Availability Domain)
 4. Look for Standard.E2, Standard.E3.Flex and Standard2
 5. This workshop requires at least 4 OCPU and a minimum of 30GB of memory.  If you do not have that available you may request a service limit increase at the top of this screen.  If you have located capacity, please continue to the next step.
-6. Click on the Hamburger menu -> **Resource Manager** -> **Stacks**
-7. Click on the stack you created previously
-8. Click **Edit Stack** -> **Configure Variables**.
-9. Scroll down to Options
+6.  Click on the Hamburger menu -> **Resource Manager** -> **Stacks**
+7.  Click on the stack you created previously
+8.  Click **Edit Stack** -> **Configure Variables**.
+9.  Scroll down to Options
 10. Change the shape based on the availability you have in your system
 11. Click **Next**
 12. Click **Save Changes**

@@ -27,7 +27,7 @@ Estimated Time: 15 minutes
 
 1. Select database actions and login using admin.
    
-    ![log in screen](./images/log-in-admin.png " ")
+   ![log in screen](./images/log-in-admin.png " ")
 
 2. Select Database Users.
 
@@ -43,9 +43,9 @@ Estimated Time: 15 minutes
     ![hamburger menu options](./images/hamburger-menu.png " ")
    
 5. Copy and paste the following code in the worksheet and click run script to create the HR tables.
-    ```
-    <copy>
-    CREATE TABLE regions
+   ```
+   <copy>
+   CREATE TABLE regions
     ( region_id      NUMBER 
        CONSTRAINT  region_id_nn NOT NULL 
     , region_name    VARCHAR2(25) 
@@ -2751,7 +2751,7 @@ Estimated Time: 15 minutes
     </copy>
     ```
 
-9. Copy and paste the following code in the worksheet, and click run script to add comments to the HR tables.
+9.  Copy and paste the following code in the worksheet, and click run script to add comments to the HR tables.
 
     ```
     <copy>
@@ -3052,7 +3052,7 @@ Estimated Time: 15 minutes
 
 4. Find the auditor_admin user, click the ellipses next to the name, and enable Rest User.
 
-    ![Enable Rest for auditor_admin](./images/audit-admin-rest.png " ")
+   ![Enable Rest for auditor_admin](./images/audit-admin-rest.png " ")
 
 5. Sign out of sql developer and sign in as auditor_admin using the password you inserted in step 2.
 
