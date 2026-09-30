@@ -1,12 +1,12 @@
 # Investigate an Activation Fraud Network
 
-![Bob Green, graph specialist, introduces activation-fraud investigation.](images/bob.png)
-
 ## Introduction
 
 Bob Green, SEER Telecomms’ graph specialist, is investigating service order `ORD-8841`. Shared devices, payment tokens, phone numbers, or IP addresses may connect it to other orders.
 
 Help Bob follow these connections with SQL/PGQ, then open Graph Studio, Oracle Database’s visual workspace for property graphs, to compare the results as an interactive network.
+
+![Bob Green, graph specialist, introduces activation-fraud investigation.](images/bob.png)
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>

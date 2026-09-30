@@ -1,12 +1,12 @@
 # Build a Quality Review Watchlist with Oracle Machine Learning
 
-![Otto: manufacturing lab banner](images/otto.png)
-
 ## Introduction
 
 Otto Spencer, SEER MANUFACTURING’s data scientist, is building a quality-review watchlist. The team needs to see which components may need attention and the inspection measurements behind each score.
 
 You will train a model to classify components as `REVIEW` or `STABLE`, then join its predictions to component, production-order, and inspection data for the dashboard.
+
+![Otto: manufacturing lab banner](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
