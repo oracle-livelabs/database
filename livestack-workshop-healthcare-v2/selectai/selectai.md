@@ -63,6 +63,9 @@ Before Nina asks a healthcare question, Jessica shows her the control point behi
     </copy>
     ```
 
+      ![startml](images/list-profiles.png)
+
+
     **Expected output:** Find the `GENAI` profile and confirm that its status is `ENABLED`. Nina will use this profile for the questions in this lab.
 
 2. Review how the profiles are configured:
@@ -78,6 +81,8 @@ Before Nina asks a healthcare question, Jessica shows her the control point behi
     ```
 
     The attributes identify the provider, model, region, and database objects associated with each profile. Do not copy credential values. In the next task, Jessica changes only the `object_list` that controls the schema context for Nina's questions.
+
+    ![startml](images/configure-profiles.png)
 
     **Expected output:** Review the rows for `GENAI`. You should see the configured provider, model, region, and other profile attributes. The exact provider values depend on the workshop environment.
 
@@ -140,6 +145,8 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     ```
 2. Review the generated SQL before running it.
 
+    ![task3](images/ask-a-question-and-inspect-the-sql.png)
+
     **Expected result:** The statement should query `CARE_DEMAND_FORECASTS_V`, rank the records by demand risk, and limit the result to five rows. The exact SQL can vary by model.
 
     Nina checks the selected columns, sort order, and row limit. This review lets her catch a plausible SQL statement that does not match the business question before it runs.
@@ -160,6 +167,8 @@ The proposed SQL matches Nina's question, so she asks Select AI to run it agains
     </copy>
       ```
 2. Compare the returned rows with the SQL you inspected in Task 3.
+
+    ![task4](images/run-the-question-in-the-database.png)
 
     **Expected result:** The answer returns five service and region combinations. `mRNA LNP Clinical Batch` in the `Northeast Corridor` should appear first, with predicted demand `2578` and a demand risk factor of `2.06`.
 
@@ -182,6 +191,9 @@ The first answer identifies the highest-risk services, but Nina needs enough con
            ) AS generated_sql;
     </copy>
     ```
+
+    ![task4](images/show-the-business-question.png)
+
 2. Review the generated SQL, then run the revised question with `runsql`:
 
     ```sql
@@ -193,6 +205,9 @@ The first answer identifies the highest-risk services, but Nina needs enough con
            ) AS answer;
     </copy>
     ```
+
+    ![task5](images/run-the-business-question.png)
+
 3. Compare the first and refined questions.
 
     **Expected result:** The refined answer keeps the five-row ranking and adds the details Nina needs to compare demand pressure across services and regions.
@@ -215,6 +230,8 @@ Nina has the detailed rows. She now asks for a short explanation that she can us
     </copy>
     ```
 2. Compare the explanation with the SQL result from Task 5.
+
+    ![task6](images/explain-the-result.png)
 
     **Expected result:** The explanation should identify the highest-demand-risk service and summarize the service and region combinations that need attention. Its wording can vary by model.
 

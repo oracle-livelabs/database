@@ -82,6 +82,8 @@ In this lab, a **hop** means one relationship step. Moving from the patient jour
 
     The query joins `HC_CARE_NODES` twice: once for the patient journey and once for the connected care fact. `HC_CARE_EDGES` supplies the relationship between them.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/direct-care-connections.png " ")
+
     **Expected output: Direct care connections**
 
     | Journey ID | Connected Node ID | Connected Care Fact | Type | Relationship | Evidence Score | Risk Score |
@@ -144,6 +146,8 @@ In this lab, a **hop** means one relationship step. Moving from the patient jour
     ```
 
     Jessica now needs a separate query branch for each path length. The first branch follows one relationship; the second adds another relationship and another node join. `UNION ALL` preserves both recorded paths when different clinical contexts reach the same quality signal.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/one-hop-and-two-hop-paths.png " ")
 
     **Expected output: One-hop and two-hop paths**
 
@@ -211,6 +215,8 @@ In graph terms, the journey and connected care facts are **vertices**. Each row 
 
     The result has the same shape as Jessica's query. The difference is the way Bob describes the investigation: start at one vertex, follow one edge, and return the connected vertex.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/direct-connections-with-SQL-PGQs.png " ")
+
     **Expected output: Direct connections with SQL/PGQ**
 
     | Journey ID | Connected Node ID | Connected Care Fact | Type | Relationship | Evidence Score | Risk Score |
@@ -260,6 +266,8 @@ Bob now follows every care fact within one or two hops of the patient journey. T
     ```
 
     `DISTINCT` returns each connected care fact once even when more than one path reaches it. The result therefore contains eight nodes, while the relational path query returned nine rows because it preserved both paths into the quality signal.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/connected-care-facts.png " ")
 
     **Expected output: Connected care facts**
 
@@ -321,6 +329,8 @@ Bob narrows the pathway to one question: **which recorded paths connect the pati
     The pattern starts at the patient journey, follows one edge to a clinical-context vertex, and follows a second edge to a quality-signal vertex. The node-type filters keep the start and end of the pattern explicit.
 
 2. Review the business result.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/quality-signal-evidence-paths.png " ")
 
     **Expected output: Quality-signal evidence paths**
 

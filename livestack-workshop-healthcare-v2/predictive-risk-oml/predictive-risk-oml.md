@@ -79,6 +79,8 @@ Each row records the current request workload, the number of connected signals, 
 
     `CURRENT_REQUESTS`, `SIGNAL_COUNT`, `CAPACITY_RATIO`, and `CRITICAL_ALERTS` are the model inputs. `RISK_FLAG` is the answer the model learns to predict. `TRAINING_ID` identifies the scenario, but it is not an operating condition that should influence the prediction.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/care-demand-training-scenarios.png " ")
+
     **Expected output: Care-demand training scenarios**
 
     | Training ID | Current Requests | Signal Count | Capacity Ratio | Critical Alerts | Risk Flag |
@@ -129,10 +131,14 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     | Predict         | `RISK_FLAG`              |
     | Prediction type | `Classification`         |
     | Case ID         | `TRAINING_ID`            |
-  
-    Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
 
-    ![startml](images/startml.png)
+      ![startml](images/startml.png)
+
+  **Note:** To enter the Data source, select the magnifying glass icon next to the **Data Source** field, select *LLUSER* as the **Schema**, and search and select *HC_DEMAND_TRAINING* as the table.
+
+      ![startml](images/data-source.png)
+
+    Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
 
 4. Review the leaderboard and model details.
 
@@ -210,6 +216,8 @@ If you skipped the optional AutoML task, continue with this tested workshop conf
     </copy>
     ```
 
+    ![Open Graph Studio from the Database Actions launchpad](images/ottos-care-demand-model.png " ")
+
     **Expected output: Otto's care-demand model**
 
     | Model Name | Mining Function | Algorithm |
@@ -248,6 +256,8 @@ Otto now receives an operating scenario for the next planning period. The model 
 
     The scenario contains 17 current requests, six connected signals, a capacity ratio of `1.06`, and two critical alerts. A capacity ratio of `1.00` means capacity and expected demand are equal, so `1.06` represents a small six-percent cushion.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/operating-scenario-risk.png " ")
+
     **Expected output: Operating-scenario risk**
 
     | Predicted Risk | Model Confidence |
@@ -278,6 +288,8 @@ Otto now receives an operating scenario for the next planning period. The model 
 
     `CARE_DEMAND_FORECASTS_V` contains the planning forecast. The query puts the services and regions with the largest predicted demand first.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/highest-demand-forecasts.png " ")
+
     **Expected output: Highest demand forecasts**
 
     | Service | Region | Predicted Demand | Risk Factor |
@@ -293,8 +305,6 @@ Otto now receives an operating scenario for the next planning period. The model 
     Otto now has two complementary results. The classification model describes the risk in one operating scenario. The forecast view shows which services and regions have the highest stored demand forecasts. The forecast rows were not produced by `OTTO_CARE_DEMAND_RISK_MODEL`, so Otto does not present them as one combined model result.
 
     This is the value of in-database machine learning. Otto can train and score a model where the governed operating data already lives, then review its output beside related planning evidence. The capacity-planning team receives a traceable reason to investigate without treating the model as an automatic decision.
-
-    ![SQL Worksheet showing a HIGH care-demand risk result with 0.5046 model confidence](images/result.png)
 
 ## Conclusion: Put the Prediction Beside the Planning Evidence
 

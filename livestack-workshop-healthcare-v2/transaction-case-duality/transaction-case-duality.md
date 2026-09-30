@@ -194,6 +194,8 @@ Thomas now compares the JSON column with an application-owned collection. The co
 
     Oracle creates `THOMAS_CARE_REQUEST_DOCS`, inserts one document for request `170104`, and commits the transaction.
 
+    ![Healthcare service-request page](images/collection-document-created.png " ")
+
 2. Query the application-owned document.
 
     ```sql
@@ -319,6 +321,7 @@ The provided duality view starts with a controlled contract: applications can up
     WHERE view_name = 'CARE_SERVICE_REQUESTS_DV';
     </copy>
     ```
+    ![Healthcare service-request page](images/exercise-state-reset.png " ")
 
     **Expected output: Current document capabilities**
 
@@ -374,6 +377,7 @@ The provided duality view starts with a controlled contract: applications can up
     WHERE view_name = 'CARE_SERVICE_REQUESTS_DV';
     </copy>
     ```
+    ![Healthcare service-request page](images/enabled-document-capabilities.png " ")
 
     **Expected output: Enabled document capabilities**
 

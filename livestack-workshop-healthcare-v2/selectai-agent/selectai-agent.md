@@ -58,6 +58,7 @@ In Lab 7, Nina used the `GENAI` profile to ask and review one question at a time
     WHERE profile_name = 'GENAI';
     </copy>
     ```
+    ![task1](images/confirm-profile.png)
 
     **Expected output:** `GENAI` appears with the status `ENABLED`. This is the same profile Nina used in Lab 7.
 
@@ -73,6 +74,7 @@ In Lab 7, Nina used the `GENAI` profile to ask and review one question at a time
       AND attribute_name = 'object_list';
     </copy>
     ```
+ ![task1](images/check-healthcare-views.png)
 
     **Expected output:** The list contains `CARE_DEMAND_FORECASTS_V`, `CARE_SERVICES_V`, `QUALITY_CAPACITY_SIGNALS_V`, and `CARE_SERVICE_REQUESTS_V`.
 
@@ -88,6 +90,7 @@ In Lab 7, Nina used the `GENAI` profile to ask and review one question at a time
     ORDER BY agent_name;
     </copy>
     ```
+ ![task1](images/check-agent-objects.png)
 
     **Expected output:** The query returns any agents already defined in the schema. If no rows appear, continue. If a `NINA_HEALTHCARE_` object exists, use the reset block before recreating the lab objects.
 
@@ -127,6 +130,7 @@ Jessica gives the assistant one approved database capability: a read-only SQL to
     WHERE tool_name = 'NINA_HEALTHCARE_SQL_TOOL';
     </copy>
     ```
+ ![task2](images/confirm-tool-definition.png)
 
     **Expected output:** `NINA_HEALTHCARE_SQL_TOOL` appears with the status `ENABLED` and a description of its read-only healthcare access.
   
@@ -212,6 +216,8 @@ Database Actions does not support the `SELECT AI AGENT` command directly. In SQL
 
 2. Review the agent's answer.
 
+ ![task4](images/run-healthcare-demand-question.png)
+
     **Expected result:** The answer identifies five care service and region combinations and includes service name, category, predicted demand, and demand risk factor. `mRNA LNP Clinical Batch` in the `Northeast Corridor` should lead the result. The wording can vary by model, but the values should match the healthcare data available through `GENAI`.
   
     > **Note:** This team has a read-only SQL tool. It can query the data, but the task instructions do not give it a tool for inserting, updating, or deleting records.
@@ -236,6 +242,7 @@ Nina has an answer, but Jessica also needs an execution trail. Together they ins
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+ ![task4](images/review-latest-team-run.png)
 
     **Expected output:** The latest row identifies `NINA_HEALTHCARE_TEAM`, its execution state, and its start and end times.
 
@@ -254,6 +261,7 @@ Nina has an answer, but Jessica also needs an execution trail. Together they ins
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
+ ![task4](images/review-latest-tool-calls.png)
 
     **Expected output:** The latest tool history includes `NINA_HEALTHCARE_SQL_TOOL`, `NINA_HEALTHCARE_AGENT`, and `NINA_HEALTHCARE_TASK`.
 
