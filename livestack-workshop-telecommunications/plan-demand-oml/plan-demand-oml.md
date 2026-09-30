@@ -1,12 +1,12 @@
 # Build a Service Plan Demand Watchlist with Oracle Machine Learning
 
-![Otto Spencer, data scientist, introduces the plan-demand watchlist.](images/otto.png)
-
 ## Introduction
 
 Otto Spencer, SEER Telecomms’ data scientist, needs a watchlist for the plan team. Analysts want to see which plans deserve attention and the activity behind each score.
 
 Train a model inside Oracle AI Database to classify the September sample as `SURGE` or `STABLE`. Then join its scores to plan details, activations, and network diagnostics for review.
+
+![Otto Spencer, data scientist, introduces the plan-demand watchlist.](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
@@ -83,7 +83,7 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
     Sign in with the credentials from **View Login Info**.
 
-![Machine Learning on the Database Actions launchpad.](images/oml-launch.png)
+    ![Machine Learning on the Database Actions launchpad.](images/oml-launch.png)
 
 2. Click **AutoML**.
 
@@ -107,19 +107,19 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
     ![AutoML leaderboard showing the models and their measured scores.](images/oml-leaderboard.png)
 
-  The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
+    The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
 
-  ![Comparison of the AutoML models and their metrics.](images/oml-model-comparison.png)
+    ![Comparison of the AutoML models and their metrics.](images/oml-model-comparison.png)
 
-  **Balanced accuracy** averages the proportion of correct predictions for each class. A **confusion matrix** counts correct and incorrect predictions for each class. Inspect that matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
+    **Balanced accuracy** averages the proportion of correct predictions for each class. A **confusion matrix** counts correct and incorrect predictions for each class. Inspect that matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
 
-  Record the measured balanced accuracy and confusion matrix from your run. The label is derived from connections and utilization from the same month, so even a high score shows how to train and call the model, not how accurately it predicts future demand. The next task creates a separate GLM using SQL.
+    Record the measured balanced accuracy and confusion matrix from your run. The label is derived from connections and utilization from the same month, so even a high score shows how to train and call the model, not how accurately it predicts future demand. The next task creates a separate GLM using SQL.
 
-  ![Confusion matrix for the selected AutoML model.](images/oml-confusion-matrix.png)
+    ![Confusion matrix for the selected AutoML model.](images/oml-confusion-matrix.png)
 
-  Review prediction impact for the selected model. Check which features your model used. A feature’s influence on a prediction does not prove that it causes the outcome.
+    Review prediction impact for the selected model. Check which features your model used. A feature’s influence on a prediction does not prove that it causes the outcome.
 
-  ![Input features and their prediction impact for the selected model.](images/oml-prediction-impact.png)
+    ![Input features and their prediction impact for the selected model.](images/oml-prediction-impact.png)
 
 ## Task 3: Create a Generalized Linear Model in SQL Worksheet
 

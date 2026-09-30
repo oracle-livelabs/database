@@ -1,12 +1,12 @@
 # Search Service Plans by Meaning
 
-![Gilly Bourne, AI engineer, introduces service-plan search.](images/gilly.png)
-
 ## Introduction
 
 Gilly Bourne, an AI engineer at SEER Telecomms, wants support analysts to find plans even when callers use different words. An indoor-coverage complaint should lead to relevant plans and the subscribers who ordered them.
 
 Create plan embeddings in Oracle AI Database, rank matches by meaning, then join the results to service orders and subscriber contact details.
+
+![Gilly Bourne, AI engineer, introduces service-plan search.](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>

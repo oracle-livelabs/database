@@ -81,6 +81,7 @@ Jessica has made the `ALL_MINILM_L12_V2` ONNX model available in Oracle AI Datab
     ORDER BY owner, model_name;
     </copy>
     ```
+    ![Healthcare semantic search](images/available-embedding-model.png " ")
 
     **Expected output: Available embedding model**
 
@@ -117,6 +118,8 @@ The care-service descriptions and quality-signal text already have stored vector
     </copy>
     ```
 
+    ![Healthcare semantic search](images/service-descriptions.png " ")
+
     **Expected output: Service descriptions**
 
     | Service ID | Service | Category | Provider network | Embedding text |
@@ -145,6 +148,8 @@ The care-service descriptions and quality-signal text already have stored vector
     </copy>
     ```
 
+    ![Healthcare semantic search](images/vector-columns.png " ")
+
     **Expected output: Vector columns**
 
     | Table | Column | Data type |
@@ -170,6 +175,8 @@ The care-service descriptions and quality-signal text already have stored vector
     </copy>
     ```
 
+    ![Healthcare semantic search](images/vector-coverage.png " ")
+
     **Expected output: Vector coverage**
 
     | Vector source | Total rows | Embedded rows |
@@ -192,6 +199,8 @@ The care-service descriptions and quality-signal text already have stored vector
     FETCH FIRST 3 ROWS ONLY;
     </copy>
     ```
+
+    ![Healthcare semantic search](images/vector-characteristics.png " ")
 
     **Expected output: Vector characteristics**
 
@@ -248,6 +257,8 @@ Gilly tests the service vectors with the phrase `more appointment room for cance
     </copy>
     ```
 
+    ![Healthcare semantic search](images/care-services-ranked-by-distance.png " ")
+
     **Expected output: Care services ranked by distance**
 
     | Service | Category | Provider network | Distance |
@@ -291,6 +302,8 @@ Gilly tests the service vectors with the phrase `more appointment room for cance
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+
+    ![Healthcare semantic search](images/care-services-ranked-by-similarity.png " ")
 
     **Expected output: Care services ranked by similarity**
 
@@ -342,6 +355,8 @@ Gilly now applies the same question to quality and capacity signals. The final r
     </copy>
     ```
 
+    ![Healthcare semantic search](images/related-quality-and-capacity-signals.png " ")
+
     **Expected output: Related quality and capacity signals**
 
     | Signal | Priority | Type | Source | Service | Impact | Next step | Similarity |
@@ -363,6 +378,8 @@ Gilly now applies the same question to quality and capacity signals. The final r
     ```
 
     Run the revised query and compare the ranking with the first result.
+
+    ![Healthcare semantic search](images/diagnostic-capacity-signal-matches.png " ")
 
     **Expected output: Diagnostic-capacity signal matches**
 

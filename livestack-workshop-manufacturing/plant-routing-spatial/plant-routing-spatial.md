@@ -1,12 +1,12 @@
 # Find the Closest Manufacturing Plant
 
-![Moon: manufacturing lab banner](images/moon.png)
-
 ## Introduction
 
 Moon Kai, SEER MANUFACTURING’s spatial specialist, helps planners find alternative plants for customer sites in a high-demand region. **Which sites are inside the region, and which plant is closest to each?**
 
 You will use points for plant and customer-site locations, polygons for demand regions, and spatial queries to measure distances and identify nearby plants.
+
+![Moon: manufacturing lab banner](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>

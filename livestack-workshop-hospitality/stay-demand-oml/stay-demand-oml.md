@@ -1,12 +1,12 @@
 # Build a Stay Offer Demand Watchlist with Oracle Machine Learning
 
-![Otto — hospitality lab banner](images/otto.png)
-
 ## Introduction
 
 Otto Spencer, Seer Hotels’ data scientist, is building a demand watchlist. Guest-service staff need to see which stay offers may face a surge and the booking activity behind each prediction.
 
 Train a model to classify offers as `SURGE` or `STABLE`, then combine its scores with stay offer details in SQL. You can also compare candidate models in the optional AutoML task.
+
+![Otto — hospitality lab banner](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
@@ -77,7 +77,7 @@ AutoML may take several minutes. Skip to Task 3 to train the example model direc
 
     Sign in using the credentials in **View Login Info**.
 
-![Machine Learning launch from Database Actions](images/oml-launch.jpg)
+    ![Machine Learning launch from Database Actions](images/oml-launch.jpg)
 
 2. Click **AutoML**.
 
@@ -101,19 +101,19 @@ AutoML may take several minutes. Skip to Task 3 to train the example model direc
 
     ![Completed Stay Offer Demand Surge leaderboard](images/oml-leaderboard.jpg)
 
-  The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
+    The leaderboard may show several models with a higher balanced-accuracy value than the Generalized Linear Model. Otto does not choose from that number alone. Open the different model details and inspect the confusion matrix.
 
-  ![AutoML model comparison](images/oml-model-comparison.jpg)
+    ![AutoML model comparison](images/oml-model-comparison.jpg)
 
-  Inspect the confusion matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
+    Inspect the confusion matrix for both `STABLE` and `SURGE`. A model that predicts only `STABLE` cannot identify demand surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a model.
 
-  Scores on this small synthetic dataset do not establish accuracy on future bookings. Inspect errors for both classes; the next task trains a separate GLM in SQL.
+    Scores on this small synthetic dataset do not establish accuracy on future bookings. Inspect errors for both classes; the next task trains a separate GLM in SQL.
 
-  ![GLM confusion matrix](images/oml-confusion-matrix.jpg)
+    ![GLM confusion matrix](images/oml-confusion-matrix.jpg)
 
-  Review which features have the greatest prediction impact. Influence on a prediction does not prove that a feature causes the outcome.
+    Review which features have the greatest prediction impact. Influence on a prediction does not prove that a feature causes the outcome.
 
-  ![GLM prediction impact](images/oml-prediction-impact.jpg)
+    ![GLM prediction impact](images/oml-prediction-impact.jpg)
 
 ## Task 3: Create the selected model in SQL Developer Web
 

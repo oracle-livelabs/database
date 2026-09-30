@@ -1,12 +1,12 @@
 # Investigate Booking Connections
 
-![Bob — hospitality lab banner](images/bob.png)
-
 ## Introduction
 
 Bob Green, Seer Hotels’ graph specialist, investigates reservation `RSV-8841`. Shared devices, payment tokens, or contact details may connect it to other suspicious bookings.
 
 Compare ordinary SQL joins with SQL Property Graph Queries (SQL/PGQ), then explore the connections visually in Graph Studio.
+
+![Bob — hospitality lab banner](images/bob.png)
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>

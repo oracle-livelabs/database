@@ -1,12 +1,12 @@
 # Find the Closest Manufacturing Plant
 
-![Moon: HighTech lab banner](images/moon.png)
-
 ## Introduction
 
 Moon Kai, Seer HighTech’s spatial specialist, helps planners find alternative plants for customer sites in a high-demand region. **Which sites are inside the region, and which plant is closest to each?**
 
 Help Moon route customer sites using points, region polygons, and distance queries.
+
+![Moon: HighTech lab banner](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>

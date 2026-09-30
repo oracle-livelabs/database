@@ -1,12 +1,12 @@
 # Find Nearby Network Sites
 
-![Moon Kai, spatial specialist, introduces nearby network sites.](images/moon.png)
-
 ## Introduction
 
 Moon Kai, SEER Telecomms’ spatial specialist, is helping support staff investigate poor connectivity in a busy region. **Which subscribers are in that region, and which active network site is nearest to each address?**
 
 Use points and polygons to locate subscribers, calculate distances, and combine nearby-site details with service records.
+
+![Moon Kai, spatial specialist, introduces nearby network sites.](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>

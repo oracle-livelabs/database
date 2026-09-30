@@ -79,6 +79,8 @@ Each row records the current request workload, the number of connected signals, 
 
     `CURRENT_REQUESTS`, `SIGNAL_COUNT`, `CAPACITY_RATIO`, and `CRITICAL_ALERTS` are the model inputs. `RISK_FLAG` is the answer the model learns to predict. `TRAINING_ID` identifies the scenario, but it is not an operating condition that should influence the prediction.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/care-demand-training-scenarios.png " ")
+
     **Expected output: Care-demand training scenarios**
 
     | Training ID | Current Requests | Signal Count | Capacity Ratio | Critical Alerts | Risk Flag |
@@ -158,6 +160,8 @@ Stay in SQL Worksheet for model creation and scoring. The optional AutoML compar
     </copy>
     ```
 
+    ![Open Graph Studio from the Database Actions launchpad](images/ottos-care-demand-model.png " ")
+
     **Expected output: Otto's care-demand model**
 
     | Model Name | Mining Function | Algorithm |
@@ -198,6 +202,8 @@ Otto now receives an operating scenario for the next planning period. The model 
 
     The scenario contains 17 current requests, six connected signals, a capacity ratio of `1.06`, and two critical alerts. A capacity ratio of `1.00` means capacity and expected demand are equal, so `1.06` represents a small six-percent cushion.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/operating-scenario-risk.png " ")
+
     **Expected output: Operating-scenario risk**
 
     | Predicted Risk | Model Confidence |
@@ -227,6 +233,8 @@ Otto now receives an operating scenario for the next planning period. The model 
     ```
 
     `CARE_DEMAND_FORECASTS_V` contains the planning forecast. The query puts the services and regions with the largest predicted demand first.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/highest-demand-forecasts.png " ")
 
     **Expected output: Highest demand forecasts**
 
