@@ -45,14 +45,16 @@ Seer Hotels is a fictional hotel group. This diagram shows how guests, hotels, r
 
 Estimated Workshop Time: **90 minutes**
 
+## Application example
+
+Explore the [LiveStack Demo Hospitality](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4525).
+
+![LiveStack Demo Hospitality: Welcome](images/demo-welcome.jpg)
+
+*LiveStack Demo Hospitality: Welcome*
+
 ## Acknowledgements
 
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
-
-## Running hospitality demo
-
-This local Hospitality LiveStack demo uses a separate dataset from the Seer Hotels workshop.
-
-![Hospitality LiveStack welcome page](images/demo-welcome.jpg)
