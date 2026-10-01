@@ -12,7 +12,7 @@ Jessica sees an opportunity in Oracle AI Database’s converged architecture. A 
 
 In this lab, you take Jessica’s role as the DBA developing an operational review query. You connect service-request urgency, related reliability evidence, assigned field-logistics sites, and available capacity in one relational SQL result. This query does not execute JSON, vector, graph, or spatial operations. Later labs use those capabilities on the same database foundation.
 
-![Jessica persona graphic with a dashboard-query scenario](images/jessica.png)
+![Jessica, DBA, introduces connecting requests, reliability signals, and capacity evidence with SQL](images/jessica.png)
 
 <details>
 <summary><strong>Key terms: views, reliability evidence, and response capacity</strong></summary>
@@ -32,13 +32,15 @@ In this lab, you take Jessica’s role as the DBA developing an operational revi
 Estimated Time: **10 minutes**
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F01-Finance%20Workshop_LAB-1_with-CC.mp4">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F01-Finance%20Workshop_LAB-1_with-CC.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
+*The video uses a Finance example. Follow the E&U tasks below for this lab’s approved profile, views, and operational questions.*
+
 ### Hands-on Scenario
 
-Jessica first verifies the command-center totals, then drills into the sites where high-priority requests and low capacity require review.
+Jessica first reviews the field-logistics totals, then ranks open service requests by urgency and examines their related capacity evidence.
 
 | Step | Energy & Utilities focus |
 | --- | --- |
@@ -61,8 +63,8 @@ The dashboard is a starting point for the decision, not the decision itself. A k
 
 2. Run the query below to return the current command-center KPI summary.
 
-    <copy>
     ```sql
+    <copy>
     SELECT active_field_logistics_site_count,
            available_capacity_supply_units,
            pending_logistics_request_count,
@@ -70,8 +72,8 @@ The dashboard is a starting point for the decision, not the decision itself. A k
            high_priority_alert_count,
            high_load_site_count
     FROM eu_field_logistics_kpis_v;
-    ```
     </copy>
+    ```
 
 3. Review the result as the command-center summary behind Jessica’s dashboard. Compare the measures below; supply units and request counts measure different things and should not be subtracted from one another.
 
@@ -96,8 +98,8 @@ Read its two named query blocks first: `request_services` avoids counting the sa
 
 1. Run the detailed query and identify the first request Jessica should review under this urgency-first ordering.
 
-    <copy>
     ```sql
+    <copy>
     WITH request_services AS (
       SELECT DISTINCT i.service_request_id,
              i.service_supply_id,
@@ -146,8 +148,8 @@ Read its two named query blocks first: `request_services` avoids counting the sa
              signal_criticality DESC NULLS LAST,
              r.service_request_id
     FETCH FIRST 15 ROWS ONLY;
-    ```
     </copy>
+    ```
 
 2. Select one row and explain the evidence chain: request, service point, signal, assigned site, and available capacity.
 
@@ -177,6 +179,7 @@ Read its two named query blocks first: `request_services` avoids counting the sa
 Use the complete alternate query below. The original ordering prioritizes request urgency; this version prioritizes the most constrained capacity evidence and uses the request identifier as a deterministic tie-breaker.
 
     ```sql
+    <copy>
     WITH request_services AS (
       SELECT DISTINCT i.service_request_id,
              i.service_supply_id,
@@ -225,6 +228,7 @@ Use the complete alternate query below. The original ordering prioritizes reques
              r.urgency_score DESC NULLS LAST,
              r.service_request_id
     FETCH FIRST 15 ROWS ONLY;
+    </copy>
     ```
 
 </details>

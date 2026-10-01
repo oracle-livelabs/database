@@ -10,7 +10,7 @@ Jessica, the DBA, needs the same information available as relational rows for re
 
 Thomas and Jessica use a JSON Relational Duality View to provide a document representation of the existing relational data. In this lab, you read a prepared service-request document, select fields from it using SQL, and compare those values with the underlying request and line-item rows. You will see how application developers and database teams can work with different representations of the same stored records.
 
-![Thomas persona graphic with a web and mobile application scenario](images/thomas.png)
+![Thomas, Developer, introduces reading service requests as JSON backed by the same relational data](images/thomas.png)
 
 <details>
 <summary><strong>Key terms: JSON Relational Duality View, JSON document, and projection</strong></summary>
@@ -58,9 +58,11 @@ The application reads this information as a JSON document, while the database ke
 Estimated Time: **10 minutes**
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F02-Finance%20Workshop_LAB-2_with-CC.mp4">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F02-Finance%20Workshop_LAB-2_with-CC.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+*The video uses a Finance example. Follow the E&U tasks below for this lab’s approved profile, views, and operational questions.*
 
 ### Hands-on Scenario
 
@@ -97,14 +99,14 @@ The query below uses `JSON_SERIALIZE` to display the document as readable text. 
 
 1. Return one document from the duality view.
 
-    <copy>
     ```sql
+    <copy>
     SELECT JSON_SERIALIZE(d.data RETURNING CLOB PRETTY) AS service_request_document
     FROM eu_utility_service_requests_dv d
     ORDER BY JSON_VALUE(d.data, '$._id' RETURNING NUMBER)
     FETCH FIRST 1 ROW ONLY;
-    ```
     </copy>
+    ```
 
 2. Open or expand the document cell and locate `_id`, `requestingServicePointId`, `requestStatus`, `requestValue`, and `lineItems`.
 
@@ -130,6 +132,7 @@ Thomas does not always need the full document. For a request-summary screen, he 
 1. Run the following query.
 
     ```sql
+    <copy>
     SELECT JSON_VALUE(d.data, '$._id' RETURNING NUMBER) AS service_request_id,
            JSON_VALUE(d.data, '$.requestStatus') AS request_status,
            JSON_VALUE(d.data, '$.requestValue' RETURNING NUMBER) AS request_value,
@@ -137,6 +140,7 @@ Thomas does not always need the full document. For a request-summary screen, he 
     FROM eu_utility_service_requests_dv d
     ORDER BY service_request_id
     FETCH FIRST 10 ROWS ONLY;
+    </copy>
     ```
 
 2. Review the first ten requests. `LINE_ITEMS` remains a JSON array; this query selects fields but does not turn each line item into a separate result row.
@@ -155,8 +159,8 @@ The query joins each request to its items and groups the results into one row pe
 
 1. Run the matching relational query.
 
-    <copy>
     ```sql
+    <copy>
     SELECT r.service_request_id,
            r.request_status,
            r.request_value,
@@ -168,8 +172,8 @@ The query joins each request to its items and groups the results into one row pe
     GROUP BY r.service_request_id, r.request_status, r.request_value
     ORDER BY r.service_request_id
     FETCH FIRST 10 ROWS ONLY;
-    ```
     </copy>
+    ```
 
 2. Compare the results with the JSON document from Task 1 and the selected fields from Task 2.
 

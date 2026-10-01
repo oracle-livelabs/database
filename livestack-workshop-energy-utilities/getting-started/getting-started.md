@@ -26,8 +26,8 @@ Estimated Time: **5 minutes**
 1. On the Database Actions launchpad, open **Development** and select **SQL**. If SQL Worksheet opens directly, continue there.
 2. Locate the editor, **Run Statement** button, and **Query Result** panel. Paste the code below into the editor. Select and run the first statement to identify the connected user and current schema, then select and run the second statement to count service requests.
 
-    <copy>
     ```sql
+    <copy>
     SELECT USER AS "User",
            SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "Schema",
            SYSTIMESTAMP AS "Checked At"
@@ -35,8 +35,8 @@ Estimated Time: **5 minutes**
 
     SELECT COUNT(*) AS eu_utility_service_requests
     FROM eu_utility_service_requests;
-    ```
     </copy>
+    ```
 
 3. Confirm that `User` and `Schema` are both `LLUSER`. The timestamp describes your run and will differ from the illustration. If either account value differs, stop and contact the facilitator before querying workshop data.
 

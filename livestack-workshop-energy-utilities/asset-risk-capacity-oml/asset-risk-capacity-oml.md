@@ -2,54 +2,75 @@
 
 ## Introduction
 
-Jessica has reviewed requests, relationships, and nearby sites. She now asks Otto Spencer, the data scientist, whether a model can help prioritize services whose demand signals coincide with capacity constraints.
+Otto Spencer is the data scientist helping Jessica’s operations team review demand alongside field-logistics capacity. Jessica has examined service requests, operational relationships, and nearby sites. She now asks: **which utility services deserve closer review when model-predicted demand pressure coincides with constrained support capacity?**
 
-Otto does not ask Jessica to trust a score on its own. You inspect the prepared model, evaluate it against labeled cases withheld from training, and then join predictions to current site-capacity evidence. The result is a watchlist for human review.
+A prediction alone cannot answer that question. Before using the model’s output, Otto wants Jessica to understand what the model learned, how it performs on cases excluded from training, and where it makes mistakes. He then connects its predictions to current site-capacity evidence so the team can review both together.
 
-This lab evaluates and uses an existing Oracle Machine Learning model. You do not train a model, run AutoML, or forecast equipment failure. The synthetic demand labels demonstrate a classification workflow, not a validated forecast of future utility demand.
+In this lab, you inspect a prepared Oracle Machine Learning classification model, evaluate its predictions against known labels in a held-out test set, and build a demand and capacity watchlist. Oracle AI Database lets you query the model’s predictions alongside operational records using SQL.
 
-Estimated Time: **10 minutes**
+You evaluate and use an existing model; you do not train one, run AutoML, or forecast equipment failure. The synthetic demand labels demonstrate a classification workflow, not a validated forecast of future utility demand. The watchlist supports human review rather than automatically assigning work or resources.
 
-### Objectives
-
-- Inspect the demand-surge training view.
-- Inspect the persisted classification model, settings, and fitted inputs.
-- Evaluate predictions on a separate labeled test set.
-- Combine model probability with site-capacity evidence.
-
-### Hands-on Scenario
-
-| Step | Energy & Utilities focus |
-| --- | --- |
-| Business problem | Operations needs a review list where possible demand pressure meets constrained support capacity. |
-| Technical challenge | Jessica needs to understand model errors before using a prediction. |
-| Persona focus | You follow Otto's evaluation and explain the resulting watchlist to Jessica. |
-| What you will see | Held-out predictions, a confusion matrix, and service/site capacity rows. |
-| Database capability | `PREDICTION` and `PREDICTION_PROBABILITY` use the prepared in-database model. |
-| Outcome | A human reviewer can examine the model score beside concrete capacity evidence. |
+![Otto, Data Scientist, introduces reviewing demand predictions alongside capacity constraints](images/otto.png " ")
 
 <details>
-<summary><strong>Key terms: feature, target, held-out test, and probability</strong></summary>
+<summary><strong>Key terms: feature, target, held-out test set, confusion matrix, and probability</strong></summary>
 
-> - A **feature** is an input to the model. A **target** is the label it learns to predict: `SURGE` or `STABLE` here.
-> - A **held-out test set** contains labeled cases excluded from training. Comparing predicted and known labels exposes errors.
-> - A **confusion matrix** counts each known-label/predicted-label combination, including mistakes.
-> - A **probability** is the model's class-probability estimate, used here as a confidence signal. It is neither certainty nor a separately calibrated operational-risk estimate.
+- A **feature** is an input the model uses to make a prediction. Reviewing the inputs helps Jessica understand what information the prediction is based on.
+
+- A **target** is the label the model learns to predict. In this lab, the target classes are `SURGE` and `STABLE`.
+
+- A **held-out test set** contains labeled cases excluded from training. Comparing predicted labels with known labels helps reveal how the model performs on those cases.
+
+- A **confusion matrix** counts the combinations of known and predicted labels. It shows both correct classifications and mistakes, such as predicting `STABLE` for a case labeled `SURGE`.
+
+- A **class probability** is the model’s estimated probability for a particular class. It is not certainty, a guarantee of model accuracy, or a separately validated estimate of operational risk.
 
 </details>
 
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet) if you need the launch and execution steps.
+### Objectives
+
+- Inspect the prepared training data and identify the target and model inputs.
+- Review the stored classification model, its settings, and input attributes.
+- Compare predictions with known labels in a separate held-out test set.
+- Interpret a confusion matrix and explain the limits of the evaluation.
+- Combine model predictions and probabilities with site-capacity evidence to build a watchlist for human review.
+
+Estimated Time: **10 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F06-Finance%20Workshop_LAB-6_with-CC.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+*The video uses a Finance example. Follow the E&U tasks below for this lab’s approved profile, views, and operational questions.*
+
+### Hands-on Scenario
+
+Otto helps Jessica assess the model’s limitations before combining its predictions with the capacity constraints that operations must review.
+
+| Step | Energy & Utilities focus |
+| --- | --- |
+| Business Problem | Operations needs to identify services where predicted demand pressure coincides with constrained support capacity. |
+| Technical Challenge | Evaluate model errors and connect predictions to operational evidence before using them to prioritize review. |
+| Persona Focus | You follow Otto’s evaluation and explain the resulting watchlist to Jessica. |
+| What You Will Do | Inspect a prepared model, evaluate held-out predictions, interpret a confusion matrix, and review a demand and capacity watchlist. |
+| Database Capability | `PREDICTION` and `PREDICTION_PROBABILITY` apply the prepared in-database model through SQL. |
+| Outcome | A human reviewer can examine predictions alongside capacity evidence while understanding the model’s limitations. |
+
+> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
 
 ## Task 1: Read the training data
 
-Otto first checks what the prepared model learned from. The training view contains 25 service cases; this query displays the 15 with the most requested units. It reads existing data and does not train or change the model.
+Before reviewing predictions, Jessica asks Otto what the model learned from. Otto starts with the prepared training view, which contains 25 service cases. This query displays the 15 with the most requested units.
 
-1. Run the feature query.
+You inspect existing training data in this task. You do not train or change the model.
 
-    `DEMAND_CLASS` is a synthetic label derived from historical request urgency, not an observed future demand outcome. The prepared view supplies service category, value, and request-volume measures as candidate predictors, but it does not supply urgency as a predictor.
+1. Run the training-data query.
 
-    <copy>
+    `DEMAND_CLASS` is the target: a synthetic label derived from historical request urgency, not an observed future demand outcome. The view supplies service category, value, and request-volume measures as candidate predictors. It does not include urgency as a predictor.
+
     ```sql
+    <copy>
     SELECT product_id AS utility_service_id,
            category AS utility_category,
            unit_price AS service_value,
@@ -59,31 +80,47 @@ Otto first checks what the prepared model learned from. The training view contai
     FROM eu_oml_demand_surge_training_v
     ORDER BY units_requested DESC, product_id
     FETCH FIRST 15 ROWS ONLY;
-    ```
     </copy>
+    ```
 
-    **Checkpoint:** Identify the target column and two candidate predictors. A service identifier connects the prediction back to business data; it is not itself evidence of demand pressure.
+    **Expected output: Fifteen training cases**
+
+    ![Training-data query results showing utility-service identifiers, candidate predictors, and demand-class labels](images/demand-training-data.png " ")
+
+    *Review the service category, value, and request-volume measures alongside each case’s `DEMAND_CLASS`. The query returns a sample of the training cases, not model predictions. Scroll through the result grid to inspect rows or columns outside the screenshot.*
+
+2. Identify `DEMAND_CLASS` and two candidate predictors, such as `UNITS_REQUESTED` and `UTILITY_CATEGORY`. In the next task, inspect the model metadata to check which attributes the prepared model uses.
+
+> **Checkpoint:** The target is what the model learns to predict; predictors are the inputs used to make that prediction. `UTILITY_SERVICE_ID` links a case back to business data—it is not, by itself, evidence of demand pressure.
 
 ## Task 2: Verify the model
 
-The workshop environment already contains `EU_DEMAND_SURGE_MODEL`. Jessica checks its identity before relying on a dashboard that uses it.
+The workshop environment already contains `EU_DEMAND_SURGE_MODEL`. Before Jessica uses its predictions, Otto checks the model’s identity, configuration, and recorded input attributes.
 
-1. Confirm the model is present. The result should identify a classification model using the Random Forest algorithm.
+These queries inspect the existing model. They do not train, rebuild, or change it.
 
-    <copy>
+1. Confirm that the model is present.
+
     ```sql
+    <copy>
     SELECT model_name,
            mining_function,
            algorithm
     FROM user_mining_models
     WHERE model_name = 'EU_DEMAND_SURGE_MODEL';
-    ```
     </copy>
+    ```
 
-2. Inspect the model settings that matter for this small deterministic dataset.
+    **Expected output: The prepared classification model**
 
-    <copy>
+    ![Model metadata identifying EU_DEMAND_SURGE_MODEL and its mining function and algorithm](images/demand-model-identity.png " ")
+
+    Confirm that the result identifies `EU_DEMAND_SURGE_MODEL` as a classification model using the Random Forest algorithm. If no row is returned, stop and ask the workshop administrator to check the environment.
+
+2. Inspect the selected model settings.
+
     ```sql
+    <copy>
     SELECT setting_name,
            setting_value,
            setting_type
@@ -99,15 +136,19 @@ The workshop environment already contains `EU_DEMAND_SURGE_MODEL`. Jessica check
         'TREE_TERM_MINREC_SPLIT'
       )
     ORDER BY setting_name;
-    ```
     </copy>
+    ```
 
-    The `ODMS_DEEPTREE` setting uses `ODMS_DEEPTREE_ENABLE` so the Random Forest can split this intentionally small training set. The fixed random seed supports a reproducible workshop build; it does not establish production model quality.
+    **Expected output: Selected configuration settings**
 
-3. Inspect the fitted model signature.
+    ![Selected settings for the prepared demand-surge model](images/demand-model-settings.png " ")
 
-    <copy>
+    In the prepared model, `ODMS_DEEPTREE` is set to `ODMS_DEEPTREE_ENABLE`. The configuration supports the workshop’s intentionally small training dataset. The fixed random seed supports reproducibility; it does not establish model accuracy or suitability for production.
+
+3. Inspect the model signature to identify its target and recorded input attributes.
+
     ```sql
+    <copy>
     SELECT attribute_name,
            attribute_type,
            data_type,
@@ -115,19 +156,32 @@ The workshop environment already contains `EU_DEMAND_SURGE_MODEL`. Jessica check
     FROM user_mining_model_attributes
     WHERE model_name = 'EU_DEMAND_SURGE_MODEL'
     ORDER BY target DESC, attribute_name;
-    ```
     </copy>
+    ```
 
-    `DEMAND_CLASS` is the target. This fitted model retained `UNIT_PRICE`, `UNITS_REQUESTED`, and `REQUEST_VALUE` as active predictors. Oracle may omit a candidate column during model preparation when it does not contribute to the fitted model.
+    **Expected output: Model attributes and target**
+
+
+    ![Model signature showing attribute names, types, and target indicators](images/demand-model-attributes.png " ")
+
+    Identify `DEMAND_CLASS` as the target. In the validated workshop model, the recorded predictor attributes are `UNIT_PRICE`, `UNITS_REQUESTED`, and `REQUEST_VALUE`.
+
+    Compare these names with Task 1. `UNIT_PRICE` appeared there under the learner-facing alias `SERVICE_VALUE`. The training query also displayed `CATEGORY` as `UTILITY_CATEGORY`; displaying a candidate column in the training view does not establish that it appears in the model signature.
+
+> **Checkpoint:** Model metadata confirms what is present and how it is configured—not how well it predicts. Otto next compares predictions with known labels in the held-out test set.
 
 ## Task 3: Evaluate held-out service demand
 
-The test view contains six labeled service cases excluded from the 25 training cases. Otto uses their known labels only to evaluate predictions, not as model inputs.
+Jessica knows which model is available and what inputs it uses. Before relying on its predictions, she asks Otto: **how often does it match the known labels, and what kinds of mistakes does it make?**
 
-1. Run the classification query. `PREDICTION` selects a class; `PREDICTION_PROBABILITY` returns the estimate for `SURGE`, even when the selected class is `STABLE`.
+The test view contains six labeled service cases excluded from the 25 training cases. Otto uses their known labels to evaluate predictions, not as model inputs.
 
-    <copy>
+1. Run the classification query.
+
+    `PREDICTION` returns the predicted class. `PREDICTION_PROBABILITY` returns the model’s probability estimate for `SURGE`, even when the predicted class is `STABLE`.
+
     ```sql
+    <copy>
     WITH scored_test AS (
       SELECT product_id,
              demand_class,
@@ -150,23 +204,31 @@ The test view contains six labeled service cases excluded from the 25 training c
     JOIN eu_utility_services_v s
       ON s.utility_service_id = x.product_id
     ORDER BY surge_probability DESC, x.product_id;
-    ```
     </copy>
+    ```
 
-2. Compare `KNOWN_CLASS` with `PREDICTED_CLASS`. These rows were withheld from model training, so the comparison is a small held-out evaluation rather than an in-sample check. Probability is the class-probability estimate produced by the model. It supports prioritization, not certainty, and it is not a calibrated operational-risk probability unless calibration is tested separately.
+    **Expected output: Predictions for six held-out service cases**
 
-    **Expected output pattern**
+    ![Held-out service predictions showing known classes, predicted classes, and surge probabilities](images/held-out-demand-predictions.png " ")
 
-    | Column | Stable check |
+    *Compare the known and predicted class for each service. `SURGE_PROBABILITY` estimates the likelihood of the `SURGE` class according to the model; it is not the probability of whichever class appears in `PREDICTED_CLASS`.*
+
+2. Identify the cases where `KNOWN_CLASS` and `PREDICTED_CLASS` differ.
+
+    These cases were withheld from training, so this is a held-out evaluation rather than a check against the model’s training data.
+
+    | Column | What to review |
     | --- | --- |
-    | `KNOWN_CLASS` | The label used to evaluate the model. |
-    | `PREDICTED_CLASS` | `SURGE` or `STABLE`. |
-    | `SURGE_PROBABILITY` | A value from 0 through 1; exact values can change after retraining. |
+    | `KNOWN_CLASS` | The synthetic label used to evaluate the prediction. |
+    | `PREDICTED_CLASS` | The model’s predicted label: `SURGE` or `STABLE`. |
+    | `SURGE_PROBABILITY` | The model’s probability estimate for `SURGE`, from 0 through 1. |
 
-3. Summarize the held-out predictions as a confusion matrix with overall accuracy.
+    A probability estimate is not certainty. It is also not a validated probability of an operational incident or capacity shortage. Exact values may change after a model rebuild.
 
-    <copy>
+3. Summarize the predictions as a confusion matrix with overall accuracy.
+
     ```sql
+    <copy>
     WITH scored_test AS (
       SELECT demand_class AS known_class,
              PREDICTION(
@@ -197,25 +259,44 @@ The test view contains six labeled service cases excluded from the 25 training c
            ) AS accuracy
     FROM confusion_matrix
     ORDER BY known_class, predicted_class;
-    ```
     </copy>
+    ```
 
-    Each row is one populated cell in the confusion matrix. Accuracy is the share of held-out cases whose predicted and known classes match. With the prepared model, four of six predictions are correct: one `STABLE` case and all three `SURGE` cases. Two `STABLE` cases are predicted as `SURGE`, giving accuracy `0.6667` after rounding.
+    **Expected output: Populated confusion-matrix cells and overall accuracy**
 
-    ![LLUSER held-out test query excerpt and populated confusion-matrix cells](images/held-out-confusion-matrix.png " ")
 
-    *The query excerpt scores `EU_OML_DEMAND_SURGE_TEST_V`. The three populated cells account for six test cases, four correct predictions, and accuracy `0.6667`.*
+    ![Held-out evaluation showing populated confusion-matrix cells, test-case count, correct predictions, and accuracy](images/held-out-confusion-matrix.png " ")
 
-    Those two false positives matter: a reviewer may spend time on cases that do not carry the known surge label. This six-row synthetic test set demonstrates the evaluation pattern; it is too small to establish production performance. Exact probability decimals are not fixed expected answers and may change after a model rebuild.
+
+
+    *In the captured run, the three populated cells account for six test cases, four correct predictions, and an overall accuracy of `0.6667`.*
+
+    Each row represents one known-class/predicted-class combination that occurred. Combinations with zero cases are not displayed. The overall totals and accuracy repeat on each row; do not add those repeated totals together.
+
+    With the prepared model, the results are:
+
+    | Known class | Predicted class | Case count | Interpretation |
+    | --- | --- | --- | --- |
+    | `STABLE` | `STABLE` | 1 | Correct classification. |
+    | `STABLE` | `SURGE` | 2 | False positives for `SURGE`. |
+    | `SURGE` | `SURGE` | 3 | Correct classifications. |
+
+    The two false positives matter: a reviewer may spend time investigating cases whose known label is `STABLE`. Accuracy summarizes the matches, while the confusion matrix shows the kinds of errors behind that number.
+
+> **Checkpoint:** Four correct predictions out of six demonstrate the evaluation workflow—not production readiness. This small synthetic test set is insufficient to establish how reliably the model would perform on real utility demand.
 
 ## Task 4: Apply the model and build the capacity watchlist
 
-Otto now translates predictions into something Jessica can review with field operations. The scoring view contains the same six held-out service cases without their labels. It is not a third independent dataset or a newly observed reporting period.
+Otto now turns the predictions into a watchlist Jessica can review with field operations: **which services are predicted as `SURGE` at sites that also report capacity constraints?**
 
-1. Join predictions for those label-free scoring cases to current capacity evidence. The query keeps predicted `SURGE` services only where a site reports `AT_RISK` or `OUT_OF_STOCK` capacity.
+The scoring view contains the same six held-out service cases from Task 3, but without their labels. It is not a third independent dataset or a newly observed reporting period.
 
-    <copy>
+1. Run the watchlist query.
+
+    The query joins model predictions to capacity evidence and keeps predicted `SURGE` services only where a site reports `AT_RISK` or `OUT_OF_STOCK` capacity.
+
     ```sql
+    <copy>
     WITH scored_unseen AS (
       SELECT product_id AS utility_service_id,
              PREDICTION(
@@ -244,43 +325,68 @@ Otto now translates predictions into something Jessica can review with field ope
              c.quantity_on_hand - c.quantity_reserved,
              c.utility_service_id,
              c.field_logistics_site_id;
-    ```
     </copy>
+    ```
 
-    ![LLUSER SQL Worksheet showing the OML capacity-risk watchlist](images/service-demand-risk.png " ")
+    **Expected output: A service-and-site capacity watchlist**
 
-    *The query's capacity filter and ordering appear above all five `AT_RISK` service/site rows. Supporting quantities, reorder points, and surge probabilities are visible. These probabilities are model scores from this run, not promises of a surge or fixed expected decimals.*
+    ![LLUSER SQL Worksheet showing demand predictions alongside service-and-site capacity evidence](images/service-demand-risk.png " ")
 
-    The prepared result contains five service/site rows, all `AT_RISK`. A service can appear for more than one site, so this is not a count of distinct predicted services. The query sorts by the unrounded probability, then net quantity and service/site identifiers. A displayed tie in rounded probability does not necessarily mean the underlying scores are equal.
+    *In the captured run, the watchlist contains five service/site rows, all marked `AT_RISK`. Review the quantities, reorder points, and surge probabilities together. The probabilities are model estimates, not guarantees of a demand surge.*
 
-> **Checkpoint:** Use the held-out rows in Task 3 to examine errors before changing a threshold. This small synthetic test split demonstrates the workflow; it is not sufficient evidence for production performance. A narrower review queue can miss emerging operational risk.
+2. Review why each service/site combination appears in the watchlist.
 
-> **🎯 Interactive challenge:** Add a surge-probability threshold to the watchlist. Compare the row count with the original result. Can that count alone tell you whether the shorter queue misses true surge cases?
+    | Column | What to review |
+    | --- | --- |
+    | `UTILITY_SERVICE_NAME` | The service predicted as `SURGE`. |
+    | `FIELD_LOGISTICS_SITE_NAME` | The site associated with the capacity evidence. |
+    | `CAPACITY_STATUS` | The recorded constraint: `AT_RISK` or `OUT_OF_STOCK`. |
+    | `QUANTITY_ON_HAND` and `QUANTITY_RESERVED` | The recorded quantities available for examining supply constraints. |
+    | `REORDER_POINT` | A reference level to consider alongside the quantities. |
+    | `SURGE_PROBABILITY` | The model’s probability estimate for the `SURGE` class. |
+
+    A service can appear at more than one site, so five rows do not necessarily represent five distinct services.
+
+    The query sorts by unrounded surge probability, then by quantity on hand minus quantity reserved, followed by service and site identifiers. Equal displayed probabilities do not necessarily mean the underlying scores are identical.
+
+> **Checkpoint:** Review the held-out errors from Task 3 before deciding how to use the watchlist. A shorter queue is not automatically a better queue: it may remove useful review candidates as well as false positives.
+
+**🎯 Interactive challenge:** Add a surge-probability threshold to the watchlist. Compare the row count with the original result. Can that count alone tell you whether the shorter queue excludes cases whose known label is `SURGE`?
 
 <details>
 <summary><strong>Challenge answer</strong></summary>
 
 Add the threshold to the outer `WHERE` clause:
 
-    ```sql
-    WHERE s.predicted_class = 'SURGE'
-      AND c.capacity_status IN ('AT_RISK', 'OUT_OF_STOCK')
-      AND s.surge_probability >= 0.55
-    ```
+```sql
+<copy>
+WHERE s.predicted_class = 'SURGE'
+  AND c.capacity_status IN ('AT_RISK', 'OUT_OF_STOCK')
+  AND s.surge_probability >= 0.55
+</copy>
+```
 
-Rerun the complete Task 4 query. With the prepared model, this threshold reduces five rows to four. The smaller queue does not measure recall: the watchlist result has no known labels to count missed true surge cases. A higher threshold can exclude cases worth reviewing, so evaluate thresholds against labeled data before choosing an operational policy.
+Rerun the complete Task 4 query. With the prepared model, this threshold reduces the result from five service/site rows to four.
+
+The smaller row count does not measure recall—the share of known `SURGE` cases retained. This watchlist omits known labels, can contain multiple rows per service, and already filters by capacity status.
+
+To evaluate what the threshold excludes, compare the predictions with the labeled cases from Task 3 at the service level. Do not treat this six-case synthetic evaluation as enough evidence to establish an operational policy.
 
 </details>
 
 ## Conclusion: Put prediction beside business evidence
 
-Otto and Jessica inspected an existing model, measured its held-out errors, and placed predictions beside capacity evidence. You used in-database scoring without exporting rows or training a replacement model. Human reviewers still decide whether and how to respond.
+Otto and Jessica inspected an existing model, evaluated its held-out errors, and combined its predictions with capacity evidence. The resulting watchlist combines services predicted as SURGE with site-level capacity constraints that deserve attention.
+
+You used in-database scoring alongside operational records without exporting the data or training a replacement model. The watchlist supports human review; it does not establish that a surge will occur or decide how operations should respond.
 
 ## Next Steps
 
-Jessica now has several repeatable SQL evidence paths. In Lab 7, Nina explores how Select AI can help ask site, service, and capacity questions in ordinary language. That lab's live execution remains pending until the platform provides the approved `EU_GENAI` profile.
+Jessica now has several repeatable SQL queries for operational review. In Lab 7, Nina explores how Select AI can help ask site, service, and capacity questions in ordinary language.
+
+Live execution of Lab 7 remains environment-validation pending and requires the platform-provided, approved `EU_GENAI` profile and its supporting configuration.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Zileyah Onafowora
+* **Last Updated By/Date** - Zileyah Onafowora, September 2026

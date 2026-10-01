@@ -12,7 +12,7 @@ In this lab, you review Gilly’s prepared search. You check the embedding model
 
 The search helps operators identify services worth reviewing. It does not confirm a gas leak, identify affected customers, or automatically choose an operational response.
 
-![Gilly persona graphic describing a mortgage pre-approval concern](images/gilly.png)
+![Gilly, AI Engineer, introduces finding utility services relevant to an operational concern](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, embedding model, and semantic search</strong></summary>
@@ -41,9 +41,11 @@ Gilly has prepared a semantic search over the utility-service catalog. In this l
 Estimated Time: **10 minutes**
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F03-Finance%20Workshop_LAB-3_with-CC.mp4">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F03-Finance%20Workshop_LAB-3_with-CC.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+*The video uses a Finance example. Follow the E&U tasks below for this lab’s approved profile, views, and operational questions.*
 
 ### Hands-on Scenario
 
@@ -80,8 +82,8 @@ Although the table and index names contain `PRODUCT`, they support the utility-s
 
 1. Run the readiness query.
 
-    <copy>
     ```sql
+    <copy>
     SELECT (SELECT COUNT(*)
             FROM all_mining_models
             WHERE owner = 'ADMIN'
@@ -100,8 +102,8 @@ Although the table and index names contain `PRODUCT`, they support the utility-s
               AND index_type = 'VECTOR'
               AND status = 'VALID') AS vector_index_count
     FROM dual;
-    ```
     </copy>
+    ```
 
 2. Compare the single result row with the expected values for the prepared dataset.
 
@@ -134,8 +136,8 @@ The query has three parts:
 
 1. Run the following search.
 
-    <copy>
     ```sql
+    <copy>
     WITH query_vector AS (
       SELECT /*+ NO_MERGE */
              VECTOR_EMBEDDING(
@@ -164,8 +166,8 @@ The query has three parts:
            ROUND(1 - distance_value, 4) AS similarity_score
     FROM ranked_services
     ORDER BY distance_value, utility_service_id;
-    ```
     </copy>
+    ```
 
     **Expected output: Five services relevant to the gas concern**
 
@@ -218,7 +220,10 @@ The operations team now asks Gilly about wastewater compliance instead of gas pr
 
 > **Checkpoint:** Changing the phrase changes the meaning being compared with the stored service vectors. Compare the relevance of the returned services rather than expecting fixed scores or an identical ranking on every run.
 
-> **🎯 Interactive challenge:** Return to the gas concern from Task 2 and express it in your own words. Change only the search phrase, then compare the top three service names, categories, and operators with the original results. Would you select the same services for further review? Explain your reasoning.
+
+
+
+**🎯 Interactive challenge:** Return to the gas concern from Task 2 and express it in your own words. Change only the search phrase, then compare the top three service names, categories, and operators with the original results. Would you select the same services for further review? Explain your reasoning.
 
 <details>
 <summary><strong>Challenge answer</strong></summary>
