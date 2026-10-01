@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/livestack-hightech-badge.svg
+badge: images/livestack-badge.png
 ```
 
 ## Introduction

@@ -2,17 +2,15 @@
 
 ## Introduction
 
-> **Screenshots:** These examples show live Media results. Screenshots show excerpts; open the CLOB value in SQL Worksheet to inspect the full SQL, JSON result, or explanation. Model responses can vary between runs.
+Nina Patel is an audience insights analyst at Seer Media. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
-Nina Patel is an audience insights analyst at Seer Media. She wants to ask business questions without first finding the right tables, columns, joins, and filters.
+Jessica, the DBA, has configured a Select AI profile for the media schema before this lab. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
 
-Jessica, the DBA, configures a Select AI profile for the media schema before this lab. The handoff loader creates the data and semantic views; it does not create provider credentials or an AI profile. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
+Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the business user needs.
 
-Nina reviews the generated SQL because the model can misunderstand a question or choose the wrong columns. She checks the statement before running it and refines her question when the result lacks useful details.
+In this lab, you check the available Select AI profile, ask a media question, inspect the SQL behind the answer, and improve the question for a more useful business result.
 
-In this lab, you check the Select AI profile, ask a media question, inspect the generated SQL, and refine the question.
-
-![Jessica and Nina introduce Media questions and an AI agent](images/media-nina.png)
+![Jessica and Nina introduce Media questions and an AI agent](images/nina.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -49,11 +47,13 @@ Estimated Time: **10 minutes**
 | Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
 | Outcome             | Nina gets a repeatable way to ask media questions while keeping SQL review in the process. |
 
-> **SQL Worksheet reminder:** [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) shows where to paste and run SQL statements.
+> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements. Use **Run Statement** for each query. For the PL/SQL setup block in Task 2, copy the entire block, including the final `/`, and choose **Run Script**.
 
 ## Task 1: Check the Select AI profile
 
-An AI profile identifies the provider and the database objects available for questions. Before starting, confirm that the administrator has enabled provider access, granted `EXECUTE` on `DBMS_CLOUD_AI` to `LLUSER`, and created an enabled profile. The [Media platform preparation guide](../media-platform-preparation.md) configures `SEER_MEDIA_PROFILE` with an OCI resource principal. It uses the database identity and existing OCI authorization.
+Select AI uses an AI profile to identify the AI provider and the database objects available for natural-language questions. The workshop database should already contain an enabled profile for the `LLUSER` schema.
+
+The handoff loader creates the data and semantic views; it does not create provider credentials or an AI profile. Before starting, confirm that the administrator has enabled provider access, granted `EXECUTE` on `DBMS_CLOUD_AI` to `LLUSER`, and created the `SEER_MEDIA_PROFILE` profile. Ask the facilitator to complete this setup before continuing.
 
 1. Run this query:
 
@@ -81,7 +81,7 @@ An AI profile identifies the provider and the database objects available for que
     </copy>
     ```
 
-    The attributes show the provider configuration and available database objects. Task 2 updates the object list, enforcement setting, and metadata comments setting.
+    The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will update the object list, enforcement setting, and metadata comments setting.
 
     If `credential_name` is `OCI$RESOURCE_PRINCIPAL`, check the grant below. The credential belongs to `ADMIN`, so an empty `USER_CREDENTIALS` result does not mean it is missing.
 
@@ -106,7 +106,7 @@ An AI profile identifies the provider and the database objects available for que
 
 The loader keeps physical names such as `PRODUCTS`, `ORDERS`, and `CUSTOMERS` for application compatibility. Its five `MEDIA_*` views expose content assets, campaign orders, audience signals, distribution capacity, and creator relationships using Media business terms. Jessica adds these views to `SEER_MEDIA_PROFILE`.
 
-1. Add the Media semantic views and enable object-list enforcement:
+1. Add the Media semantic views and enable object-list enforcement. Copy the entire block, including the final `/`, and choose **Run Script**:
 
     ```sql
     <copy>
@@ -174,6 +174,8 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
   
     ![Generated SQL for the content asset ranking](images/media-generated-ranking.jpg)
 
+    Screenshots show excerpts of live Media results. Open the CLOB value in SQL Worksheet to inspect the full SQL, JSON result, or explanation. Model responses can vary between runs.
+
 2. Read the generated SQL before running it.
 
     Check whether the statement uses `MEDIA_CONTENT_ASSETS_V`, filters `IS_ACTIVE = 1`, and returns five rows. The expected ordering is `CAMPAIGN_VALUE_PROXY DESC, PRODUCT_ID ASC`. A statement can be valid SQL and still answer the wrong question.
@@ -199,7 +201,7 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
-    Compare the response with this direct SQL check:
+    Run this direct SQL check with **Run Statement** and compare it with the response:
 
     ```sql
     <copy>
@@ -221,7 +223,7 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
 ## Task 5: Improve the business question
 
-Nina adds audience signal count, total capacity units, and reserved capacity units to the ranking. These fields help her review each asset. The value proxy still represents unit price, not actual revenue.
+Nina's first question gives her a content asset ranking, but she also needs enough detail to decide what to review. She changes the question to request audience signal count, total capacity units, and reserved capacity units. The value proxy still represents unit price, not actual revenue.
 
 1. Use `showsql` to inspect this revised prompt:
 
@@ -253,9 +255,30 @@ Nina adds audience signal count, total capacity units, and reserved capacity uni
   
     ![Content asset results with audience signals and capacity](images/media-capacity-result.jpg)
 
-3. Compare the first and second questions.
+3. Compare the first and second questions, then check the revised answer against the database.
 
-    Check that the second result includes the audience and capacity fields. Nina uses view and column names to make her request precise, then checks whether the generated SQL includes them.
+    The second prompt gives Nina more detail for a review meeting. Check that the result includes the audience and capacity fields. Nina uses view and column names to make her request precise, then checks whether the generated SQL includes them.
+
+    Run this direct SQL check with **Run Statement**. Compare all eight columns and the row order with the revised `runsql` answer:
+
+    ```sql
+    <copy>
+    SELECT product_id,
+           content_asset,
+           content_category,
+           studio_or_label,
+           campaign_value_proxy,
+           audience_signal_count,
+           total_capacity_units,
+           reserved_capacity_units
+    FROM media_content_assets_v
+    WHERE is_active = 1
+    ORDER BY campaign_value_proxy DESC, product_id ASC
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    The view aggregates inventory capacity and distinct audience signals separately for each content asset. This query reads those prepared totals directly. Use this eight-column result to check the agent's answer in Lab 8.
 
 ## Task 6: Explain the result
 
@@ -278,6 +301,8 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 2. Review the explanation against the SQL result.
 
+    The explanation is a convenience for a business user. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+
     The captured response describes the columns but omits the five asset names and their values. It also says "highest campaign value," although the question ranks `campaign_value_proxy`. That proxy is an asset's unit price, not actual campaign order value. Nina cannot use this response as a complete business answer.
 
     Compare your explanation with the `runsql` output from Task 5. Check the asset names, row order, proxy values, audience signal counts, and both capacity columns. In the captured result, Championship Highlights Rights ranks first. Its proxy is 175000, with 19 audience signals, 3032 total capacity units, and 209 reserved capacity units. Check that any explanation of this row preserves those values and meanings.
@@ -288,9 +313,11 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina generated SQL from a media question, checked it, ran it, and added audience and capacity fields. She also found an explanation that omitted the requested values.
+Nina used Select AI to turn a media question into SQL, reviewed the generated statement, ran it in Oracle AI Database, and refined the question when the first result lacked the details she needed. Select AI reduces the amount of SQL a business user has to write, while SQL review keeps the database operation visible.
 
-Use the same review process for other questions: inspect the SQL, check its source and filters, and compare the returned rows with the answer. Database privileges apply throughout.
+The question, generated SQL, and result stay connected to the governed media schema. Nina can ask in ordinary language while keeping database access controls and the ability to inspect the query behind the answer.
+
+Select AI does not replace judgment. A good workflow is to show the SQL, check the views and filters, run the statement, and compare the answer with the business question. Nina's narration example also shows why she must check that an explanation preserves the returned values and their meaning.
 
 ## Next Steps
 
