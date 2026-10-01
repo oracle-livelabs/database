@@ -1,4 +1,4 @@
-# Understand Models, Records, and Vector Tables
+# Lab 4: Understand Models, Records, and Vector Tables
 
 ## Introduction
 

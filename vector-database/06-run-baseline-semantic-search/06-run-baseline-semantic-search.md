@@ -1,4 +1,4 @@
-# Run Baseline Semantic Search
+# Lab 6: Run Baseline Semantic Search
 
 ## Introduction
 
