@@ -1,5 +1,14 @@
 # HighTech capture checklist
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 These are outstanding authentic captures. No HighTech database or application execution is claimed. Source images are preserved under `validation/source-captures/`; do not relabel them.
 
 After database access and phase authorization are supplied, run the loader on a fresh schema, execute the labs in sequence, verify the results, and replace each image beside its matching instruction. The six separate application views also require a HighTech application, which is not included in the source stack.
@@ -59,3 +68,8 @@ After database access and phase authorization are supplied, run the loader on a 
 - AutoML, SQL GLM creation/scoring, Select AI generated SQL/results, agent execution history and model restoration.
 - Actual LiveLabs green-button provisioning and reservation/login flow, including the deployed quiz.
 - HighTech application source/environment and six application captures. No app server was present in the supplied source.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

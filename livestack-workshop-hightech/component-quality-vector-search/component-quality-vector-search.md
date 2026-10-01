@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Gilly Bourne, Seer HighTech’s AI engineer, needs to answer **which customer sites may be affected by a power-module leakage-current concern?** The inspection wording may differ from the component descriptions.
+Gilly Bourne, Seer High-Tech’s AI engineer, needs to answer **which customer sites may be affected by a power-module leakage-current concern?** The inspection wording may differ from the component descriptions.
 
 Help Gilly turn matches by meaning into a customer follow-up list.
 
-![Gilly: HighTech lab banner](images/gilly.png)
+![Gilly: High-Tech lab banner](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
@@ -29,7 +29,7 @@ Help Gilly turn matches by meaning into a customer follow-up list.
 - Create a vector from component data inside the database.
 - Search for components that match a production-quality concern.
 - Turn component matches into a customer follow-up list.
-- Explain why vector search belongs beside HighTech data and access controls.
+- Explain why vector search belongs beside High-Tech data and access controls.
 
 Estimated Time: **10 minutes**
 
@@ -61,7 +61,7 @@ Jessica has loaded an embedding model. Check that Gilly can use it.
 
 ## Task 2: Create a component vector
 
-Each component is short enough for one vector. Gilly combines its name, category, and subcategory.
+Each component description is short enough for one vector. Gilly combines its name, category and subcategory.
 
 1. Review the text Gilly will embed:
 
@@ -118,7 +118,7 @@ Each component is short enough for one vector. Gilly combines its name, category
 
     ![Component rows populated with vector embeddings](images/sql-vector-values.png)
 
-    > **Note:** Longer documents may need **chunking**: splitting sections into separate vectors so each can match a different question. These short component rows do not need it.
+    > **Note:** Longer documents may need **chunking**: splitting the text into sections and creating a vector for each section so it can match a different question. These short component rows do not need it.
 
 ## Task 3: Test the component vector
 

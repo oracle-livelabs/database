@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Otto Spencer, Seer HighTech’s data scientist, is building a quality-review watchlist. The team needs to see which components may need attention and the electrical-test measurements behind each score.
+Otto Spencer, Seer High-Tech’s data scientist, is building a quality-review watchlist. The team needs to see which components may need attention and the electrical-test measurements behind each score.
 
 You will train a model to classify components as `REVIEW` or `STABLE`, then join its predictions to component, production-order, and inspection data for the dashboard.
 
-![Otto: HighTech lab banner](images/otto.png)
+![Otto: High-Tech lab banner](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
@@ -93,11 +93,24 @@ AutoML compares and tunes candidate classifiers. Allow several minutes, or skip 
     | Prediction type | `Classification`        |
     | Case ID         | `COMPONENT_ID`            |
 
-    ![Component quality classification experiment settings](images/oml-settings.png)
+    **Note:** The Predict, Prediction Type, and Case ID fields become available after a data source has been entered. Select `SURGE_LABEL`, `Classification`, and `OFFER_ID`, respectively.
 
-    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on the service and available resources.
+     To enter the **Data Source** value:
+    1. Enter *Care Demand Risk Test* in the Name field.
+    2. Select the magnifying-glass icon next to **Data Source**.
 
-4. Review the leaderboard and model details.
+    ![Hospitality classification experiment settings](images/data-source-one.png)
+
+    3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
+    4. Select `OML_QUALITY_TRAINING_V` from the **Table** list.
+
+    ![Hospitality classification experiment settings](images/data-source-two.png)
+
+    5. Select **OK**.
+
+4. Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on the service and available resources.
+
+5. Review the leaderboard and model details.
 
     ![Completed Component Quality Review leaderboard](images/oml-leaderboard.png)
 
@@ -119,7 +132,7 @@ AutoML compares and tunes candidate classifiers. Allow several minutes, or skip 
 
 Create `OTTO_QUALITY_REVIEW_MODEL` in SQL Developer Web. If you ran AutoML, compare the two models’ results.
 
-The settings table tells Oracle to use the **Generalized Linear Model** used in this exercise. `PREP_AUTO` lets the database handle standard preparation of the input columns.
+The settings table selects the **Generalized Linear Model** algorithm for this exercise. `PREP_AUTO` enables automatic preparation of the input columns.
 
 1. Create the settings table and train the model:
 
@@ -190,7 +203,7 @@ The settings table tells Oracle to use the **Generalized Linear Model** used in 
 
 ## Task 4: Score sample component measurements in SQL
 
-Otto changes several measurements from the training view and scores them without a target label. These sample rows are not independent test data, so their scores do not measure future accuracy.
+Otto changes several measurements from the training view, then scores the modified rows without a target label. These rows are not independent test data, so their scores do not measure future accuracy.
 
 1. Create the scoring table and add the sample inspection measurements:
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This workshop runs in a **LiveLabs Sandbox**, which prepares the database, HighTech data, workshop user, and services automatically.
+This workshop runs in a **LiveLabs Sandbox**, which prepares the database, High-Tech data, workshop user, and services automatically.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -11,7 +11,7 @@ This workshop runs in a **LiveLabs Sandbox**, which prepares the database, HighT
 >
 > - **SQL Worksheet** runs SQL and displays results, script output, and errors.
 >
-> - `LLUSER` owns the workshop’s HighTech tables, views, and other hands-on objects.
+> - `LLUSER` owns the workshop’s High-Tech tables, views, and other hands-on objects.
 
 </details>
 
@@ -55,7 +55,7 @@ Estimated Time: **5 minutes**
 
     ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
 
-6. Use the same SQL Worksheet pattern throughout the workshop.
+6. Follow these steps whenever you use SQL Worksheet during the workshop.
 
     - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
     - Paste each workshop SQL block into the editor.

@@ -1,5 +1,14 @@
 # HighTech workshop editorial sweep — second pass
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Reviewed all 11 lessons, both Graph Studio notebooks, and the workshop/supporting READMEs. Edited ten lessons. The quiz, notebooks, and READMEs remain unchanged because their current text is concise or necessary for execution.
 
 This pass reduced lesson prose from **8,873 to 6,817 words (23.2%)**, removing 2,056 words from the current workshop. Counts exclude fenced code, image markup, HTML tags, and link destinations; they include headings and instructions. This is a text reduction, not a measured reduction in completion time.
@@ -46,3 +55,8 @@ Compared against a fresh snapshot taken immediately before this pass:
 The first editorial pass reduced prose from 11,863 to 8,819 words. Subsequent runtime guidance and focused AI instructions brought the starting point for this pass to 8,873 words. The figures above compare only this new pass against that current baseline.
 
 The previously captured 48 database/Graph Studio/AutoML placements remain unchanged. See [the screenshot update](SEER-HighTech-screenshot-update.md) for the latest live retest and remaining limits; this editorial pass does not establish new database or provisioning results.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

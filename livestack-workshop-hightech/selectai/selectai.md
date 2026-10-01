@@ -1,17 +1,17 @@
-# Ask HighTech Questions with Select AI
+# Ask High-Tech Questions with Select AI
 
 ## Introduction
 
-Nina Patel, Seer HighTech’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the HighTech schema.
+Nina Patel, Seer High-Tech’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the High-Tech schema.
 
 You will help Nina ask a question, inspect the generated SQL, run it, and refine the result. The model can choose the wrong columns or misunderstand a question, so SQL review remains part of her work.
 
-![Nina: HighTech lab banner](images/nina-hightech.png)
+![Nina: High-Tech lab banner](images/nina-hightech.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-> - **Select AI** lets a user work with database information through a natural-language question.
+> - **Select AI** lets you ask questions about database information in ordinary language.
 >
 > - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
 >
@@ -24,8 +24,8 @@ You will help Nina ask a question, inspect the generated SQL, run it, and refine
 ### Objectives
 
 - Check which Select AI profile is available in the schema.
-- Add the HighTech tables that Select AI may use to the profile.
-- Generate SQL from a HighTech question and inspect it.
+- Add the High-Tech tables that Select AI may use to the profile.
+- Generate SQL from a High-Tech question and inspect it.
 - Run a natural-language question through `DBMS_CLOUD_AI.GENERATE`.
 - Refine a question to include the component, order, and cost details Nina needs.
 - Explain why generated SQL still requires review.
@@ -64,11 +64,11 @@ Estimated Time: **10 minutes**
 
     Review the configuration without copying credentials. Task 2 changes only `object_list`.
 
-## Task 2: Add the HighTech tables to the profile
+## Task 2: Add the High-Tech tables to the profile
 
 Jessica adds the four tables Nina needs: components, production orders, order lines, and customer sites.
 
-1. Add the HighTech tables to the profile:
+1. Add the High-Tech tables to the profile:
 
     ```sql
     <copy>
@@ -96,7 +96,7 @@ Jessica adds the four tables Nina needs: components, production orders, order li
     </copy>
     ```
 
-    ![Select AI profile object list for the HighTech tables](images/sql-ai-object-list.png)
+    ![Select AI profile object list for the High-Tech tables](images/sql-ai-object-list.png)
 
     Confirm `COMPONENTS`, `PRODUCTION_ORDERS`, `PRODUCTION_ORDER_LINES`, and `CUSTOMER_SITES`.
 
@@ -124,7 +124,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
 2. Read the generated SQL before running it.
 
-    Check the joins between `COMPONENTS`, `PRODUCTION_ORDER_LINES`, and `PRODUCTION_ORDERS`, grouping by component, five-row limit, and `SUM(LINE_TOTAL)`. Material value must exclude `SETUP_COST`.
+    Check the joins between `COMPONENTS`, `PRODUCTION_ORDER_LINES`, and `PRODUCTION_ORDERS`. Confirm that the query groups by component, returns five rows, and calculates material value with `SUM(LINE_TOTAL)`, excluding `SETUP_COST`.
 
     Check that the generated `WHERE` clause uses the stored status values: `released`, `in_production`, and `completed`. String comparisons are case-sensitive, so uppercase values can return no rows. If the SQL does not match Nina’s question, clarify the question and inspect the new SQL before continuing.
 
@@ -148,7 +148,7 @@ Nina now runs the question and compares the answer with the SQL she inspected.
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
-    The SQL runs under the current database user’s privileges against the HighTech tables.
+    The SQL runs under the current database user’s privileges against the High-Tech tables.
 
 ## Task 5: Improve the business question
 
@@ -200,11 +200,11 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     </copy>
     ```
 
-    ![Select AI narrative for the refined HighTech result](images/sql-ai-narration.png)
+    ![Select AI narrative for the refined High-Tech result](images/sql-ai-narration.png)
 
 2. Review the explanation against the SQL result.
 
-    Nina checks all five rows against the SQL result: names, categories, ranking and all ten numeric totals. If any value is missing or differs, use the verified SQL result for her decision.
+    Nina compares all five rows with the SQL result, checking names, categories, ranking and all ten numeric totals. If any value is missing or differs, use the verified SQL result for her decision.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 

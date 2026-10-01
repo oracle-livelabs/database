@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Thomas Brune, Seer HighTech’s application developer, needs production-order JSON documents for web and mobile screens, including order lines and optional app fields.
+Thomas Brune, Seer High-Tech’s application developer, needs JSON documents for production orders in web and mobile screens. The documents must include order lines and optional application fields.
 
-Jessica, the DBA, helps him compare JSON columns, JSON collections, and JSON Relational Duality Views while retaining SQL access, transactions, and database controls.
+Jessica, the DBA, helps him compare JSON columns, JSON collections and JSON Relational Duality Views while keeping SQL access, transactions and database controls in place.
 
 ![Thomas introduces the JSON production-order application lab](images/thomas.png)
 
@@ -175,7 +175,7 @@ Thomas now reads a document assembled from the existing relational production or
 
 ## Task 4: Enable document inserts and updates
 
-The existing `PRODUCTION_ORDERS_DV` lets an application update production order documents. Here, you also allow inserts. Oracle still enforces the table keys and constraints. An application granted access only to the view can use only the fields and write operations that the view allows.
+The existing `PRODUCTION_ORDERS_DV` allows applications to update production-order documents. In this task, you also enable inserts. Oracle continues to enforce table keys and constraints. An application with access only to the view can use only the fields and write operations allowed by that view.
 
 1. Check the current document-write capabilities.
 

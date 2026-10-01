@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Bob Green, Seer HighTech’s graph specialist, is investigating production order `PO-8841`. Shared material lots, inspection records, machines, and suppliers may connect it to other orders.
+Bob Green, Seer High-Tech’s graph specialist, is investigating production order `PO-8841`. Shared material lots, inspection records, machines, and suppliers may connect it to other orders.
 
 You will follow those connections with SQL/PGQ, then explore the same relationships in Graph Studio. SQL returns tables to compare; Graph Studio displays nodes, edges, and paths.
 
-![Bob: HighTech lab banner](images/bob.png)
+![Bob: High-Tech lab banner](images/bob.png)
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
@@ -29,8 +29,8 @@ You will follow those connections with SQL/PGQ, then explore the same relationsh
 - Follow connections from a flagged production order.
 - Find production order pairs that share traceability records.
 - Open Graph Studio from Database Actions.
-- Import and run the HighTech production-quality-network notebook.
-- Explain the result in terms a production analyst can act on.
+- Import and run the High-Tech production-quality-network notebook.
+- Explain the results so a production analyst can decide what to investigate next.
 
 Estimated Time: **10 minutes**
 
@@ -280,7 +280,7 @@ Bob widens the investigation: **which order pairs share a material lot, supplier
 
 2. Find an order pair linked by a shared traceability record.
 
-    Check its relationship types and `COMBINED_RISK`. Bob can investigate the pair together, but a shared record does not prove both orders are defective.
+    Check the relationship types and `COMBINED_RISK`. Bob can investigate the two orders together, but a shared record does not prove that both orders are defective.
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
@@ -292,19 +292,19 @@ Bob opens Graph Studio to follow the `PO-8841` paths and shared material lots in
 
 2. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
 
-3. If prompted, sign in with the `LLUSER` and the workshop password supplied.
+3. If prompted, sign in as `LLUSER` using the supplied workshop password.
 
 4. Confirm that the Graph Studio home page opens. The landing page provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
 
     ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.png)
 
-## Task 6: Download and import the HighTech notebook
+## Task 6: Download and import the High-Tech notebook
 
 1. Download [hightech-production-quality-graph-studio.dsnb](files/hightech-production-quality-graph-studio.dsnb).
 
     If the notebook opens in your browser instead of downloading, right-click the link and select **Save Link As**.
 
-2. In Graph Studio, click **Notebooks** in the landing page.
+2. In Graph Studio, click **Notebooks** on the landing page.
 
     ![Graph Studio Notebooks page for LLUSER](images/graph-notebooks.png)
 
@@ -314,7 +314,7 @@ Bob opens Graph Studio to follow the `PO-8841` paths and shared material lots in
 
 4. Drag the downloaded notebook into the import window or browse to it. Confirm the filename, select **Import**, then open **Production Quality Network**.
 
-    ![HighTech notebook selected for import](images/graph-import-file.png)
+    ![High-Tech notebook selected for import](images/graph-import-file.png)
 
 ## Task 7: Run and interpret the Graph Studio notebook
 
@@ -409,15 +409,15 @@ CREATE PROPERTY GRAPH production_quality_network
 
 ## Application example
 
-The [HighTech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows a two-hop graph and a SQL/PGQ query result.
+The [High-Tech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows a two-hop graph and a SQL/PGQ query result.
 
-![LiveStack HighTech Demo: Product Signal Graph](images/demo-network-overview.jpg)
+![LiveStack High-Tech Demo: Product Signal Graph](images/demo-network-overview.jpg)
 
-*LiveStack HighTech Demo: Product Signal Graph*
+*LiveStack High-Tech Demo: Product Signal Graph*
 
-![LiveStack HighTech Demo: Product Signal Graph](images/demo-network-query.jpg)
+![LiveStack High-Tech Demo: Product Signal Graph](images/demo-network-query.jpg)
 
-*LiveStack HighTech Demo: Product Signal Graph*
+*LiveStack High-Tech Demo: Product Signal Graph*
 
 ## Acknowledgements
 

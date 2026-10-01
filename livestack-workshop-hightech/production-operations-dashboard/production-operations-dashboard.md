@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica Chan, Seer HighTech’s DBA, starts with the quality team’s morning question: **which component needs attention first, and which production orders and customer sites may be affected?**
+Jessica Chan, Seer High-Tech’s DBA, starts with the quality team’s morning question: **which component needs attention first, and which production orders and customer sites may be affected?**
 
 Build Jessica’s dashboard query from relational alerts, JSON orders, component vectors, and plant locations.
 
@@ -24,9 +24,9 @@ Run the query to find components with severe quality alerts.
 
 The query combines four data types:
 
-- **Relational:** Quality alerts and observation-to-component links calculate quality impact.
+- **Relational:** Calculate quality impact from alerts and the links between observations and components.
 - **Vector:** `VECTOR_DISTANCE` ranks component embeddings against the investigation phrase.
-- **JSON:** `JSON_TABLE` projects line items from `PRODUCTION_ORDERS_DV` into rows to count order activity.
+- **JSON:** `JSON_TABLE` reads line items from `PRODUCTION_ORDERS_DV` as rows so the query can count order activity.
 - **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest plant to New York Electronics Region.
 
 1. Open SQL Worksheet as `LLUSER`. 
@@ -176,7 +176,7 @@ electronics assembly capacity and semiconductor availability
 Run the query again and compare the top rows.
 
 1. Which components moved into or out of the top ten?
-2. Which components still have high relational quality impact but a lower semantic similarity to the new question?
+2. Which components still have high quality impact in the relational data but match the new question less closely?
 3. Which components have the most active production orders or units that may need review?
 
 Which component would Jessica investigate first now?
@@ -189,15 +189,15 @@ Next, use JSON Relational Duality to expose the same production order data as JS
 
 ## Application example
 
-The [HighTech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows these signals in a product and commitment control tower.
+The [High-Tech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows these signals in a product and commitment control tower.
 
-![LiveStack HighTech Demo: Product & Commitment Control Tower](images/demo-dashboard.jpg)
+![LiveStack High-Tech Demo: Product & Commitment Control Tower](images/demo-dashboard.jpg)
 
-*LiveStack HighTech Demo: Product & Commitment Control Tower*
+*LiveStack High-Tech Demo: Product & Commitment Control Tower*
 
-![LiveStack HighTech Demo: Product & Commitment Control Tower](images/demo-dashboard-charts.jpg)
+![LiveStack High-Tech Demo: Product & Commitment Control Tower](images/demo-dashboard-charts.jpg)
 
-*LiveStack HighTech Demo: Product & Commitment Control Tower*
+*LiveStack High-Tech Demo: Product & Commitment Control Tower*
 
 ## Acknowledgements
 

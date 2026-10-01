@@ -1,4 +1,4 @@
-# Seer HighTech: Oracle LiveLabs
+# Seer High-Tech: Oracle LiveLabs
 
 Use Oracle AI Database to investigate component quality, trace affected production orders, and plan a response across manufacturing plants. The workshop combines relational SQL, JSON Relational Duality, vector search, property graphs, spatial analysis, Oracle Machine Learning, Select AI, and Select AI Agent.
 

@@ -1,5 +1,14 @@
 # SEER HIGHTECH conversion evidence
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 The authorized static conversion and package are prepared. Live release readiness remains open: **44 authentic captures and all HighTech database/green-button checks are outstanding**. No resources were provisioned and nothing was published or uploaded.
 
 ## Scenario and model
@@ -64,3 +73,8 @@ Maintainer evidence stays in `/Users/mkowalik/Documents/GitHub/oracle-livelabs/d
 ## Editorial sweep
 
 See editorial-report.md for the full-workshop prose reduction and byte-preservation checks. This pass changes learner prose only, including Markdown paragraphs in the two notebooks.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year
