@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Open your LiveLabs reservation, sign in to **Autonomous Database 26ai**, and prepare SQL Worksheet. Run the telecommunications exercises as `LLUSER`, the workshop database user.
+This workshop runs in a **LiveLabs sandbox**. The green button provisions the database and loads the workshop data automatically.
+
+Once your environment is ready, use **View Login Info** in your reservation to sign in as `LLUSER` and open SQL Worksheet. No instructor setup or manual database provisioning is needed.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -15,16 +17,6 @@ Open your LiveLabs reservation, sign in to **Autonomous Database 26ai**, and pre
 
 </details>
 
-The sign-in illustrations show where to find the controls used below.
-
-### Environment prerequisites
-
-The LiveLabs sandbox loads the telecommunications dataset into `LLUSER` before you begin. The [telecommunications tables and sample data](../reference/tables-and-sample-data.md) describe what the labs expect. For a manually provisioned database, the instructor must prepare a fresh schema using the [stack runbook](../stack/README.md); do not run the loader over an occupied schema.
-
-Required capabilities are Database Actions SQL Worksheet, Graph Studio, native JSON and duality views, Oracle Spatial, Oracle Machine Learning, access to `ADMIN.ALL_MINILM_L12_V2`, and an enabled `GENAI` profile with an approved provider. Labs 1 and 4 require preloaded embeddings and a precreated activation graph. Lab 3 creates a separate teaching vector column. Lab 8 depends on Lab 7. AutoML and the supplemental PGX notebook also need their respective services and privileges.
-
-Follow the sandbox launch steps below. If you use a manually provisioned database, open the Database Actions URL supplied by your instructor and sign in as `LLUSER`.
-
 Estimated Time: **5 minutes**
 
 ### Objectives
@@ -33,8 +25,7 @@ In this lab, you will:
 
 - Launch the LiveLabs workshop environment.
 - Use the reservation login information to open Database Actions.
-- Confirm that SQL Worksheet is ready for the telecommunications schema.
-- Confirm that SQL Worksheet is connected as the workshop schema user.
+- Confirm that SQL Worksheet is connected as `LLUSER`.
 
 ## Task 1: Launch the LiveLabs environment
 
@@ -44,7 +35,7 @@ Open the LiveLabs reservation for this workshop. It contains the database link a
 
 2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
 
-3. In **My Reservations**, select **Launch Workshop** for this reservation.
+3. Wait for your sandbox environment to be ready. In **My Reservations**, select **Launch Workshop** for this reservation.
 
 4. Select **View Login Info** and keep the database credentials available for the next task.
 
@@ -84,7 +75,7 @@ Open SQL Worksheet as `LLUSER`. Run each query there and review the returned tab
 
 6. Use the same SQL Worksheet pattern throughout the workshop.
 
-    - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
+    - Confirm the user dropdown shows `LLUSER`.
     - Replace the editor contents with the next workshop SQL block.
     - For one SQL statement, select **Run Statement** or press **Ctrl+Enter** (**Command+Enter** on macOS).
     - For a block containing multiple statements or PL/SQL ending with `/`, select **Run Script (F5)**. This runs the whole block, including any `COMMIT` statements.

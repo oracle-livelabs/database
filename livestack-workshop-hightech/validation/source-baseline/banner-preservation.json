@@ -1,0 +1,169 @@
+[
+  {
+    "changed_channels_in_text_masks" : 756476,
+    "changed_pixels_outside_text_masks" : 0,
+    "file" : "production-operations-dashboard\/images\/jessica.png",
+    "height" : 616,
+    "method" : "Built-in ImageGen text localization; composite only the text regions onto original artwork. Original pixels retained outside masks.",
+    "name" : "jessica",
+    "text_masks" : [
+      [
+        0,
+        0,
+        1280,
+        90
+      ],
+      [
+        300,
+        235,
+        1280,
+        425
+      ]
+    ],
+    "width" : 1280
+  },
+  {
+    "changed_channels_in_text_masks" : 899297,
+    "changed_pixels_outside_text_masks" : 0,
+    "file" : "production-order-duality\/images\/thomas.png",
+    "height" : 693,
+    "method" : "Built-in ImageGen text localization; composite only the text regions onto original artwork. Original pixels retained outside masks.",
+    "name" : "thomas",
+    "text_masks" : [
+      [
+        0,
+        0,
+        1280,
+        90
+      ],
+      [
+        310,
+        270,
+        1280,
+        465
+      ]
+    ],
+    "width" : 1280
+  },
+  {
+    "changed_channels_in_text_masks" : 1499427,
+    "changed_pixels_outside_text_masks" : 0,
+    "file" : "component-quality-vector-search\/images\/gilly.png",
+    "height" : 888,
+    "method" : "Built-in ImageGen text localization; composite only the text regions onto original artwork. Original pixels retained outside masks.",
+    "name" : "gilly",
+    "text_masks" : [
+      [
+        0,
+        0,
+        1770,
+        125
+      ],
+      [
+        373,
+        345,
+        1770,
+        568
+      ]
+    ],
+    "width" : 1770
+  },
+  {
+    "changed_channels_in_text_masks" : 1533156,
+    "changed_pixels_outside_text_masks" : 0,
+    "file" : "production-quality-network\/images\/bob.png",
+    "height" : 962,
+    "method" : "Built-in ImageGen text localization; composite only the text regions onto original artwork. Original pixels retained outside masks.",
+    "name" : "bob",
+    "text_masks" : [
+      [
+        0,
+        0,
+        1635,
+        128
+      ],
+      [
+        395,
+        370,
+        1635,
+        620
+      ]
+    ],
+    "width" : 1635
+  },
+  {
+    "changed_channels_in_text_masks" : 1508044,
+    "changed_pixels_outside_text_masks" : 0,
+    "file" : "plant-routing-spatial\/images\/moon.png",
+    "height" : 901,
+    "method" : "Built-in ImageGen text localization; composite only the text regions onto original artwork. Original pixels retained outside masks.",
+    "name" : "moon",
+    "text_masks" : [
+      [
+        0,
+        0,
+        1746,
+        130
+      ],
+      [
+        368,
+        361,
+        1746,
+        600
+      ]
+    ],
+    "width" : 1746
+  },
+  {
+    "changed_channels_in_text_masks" : 1601071,
+    "changed_pixels_outside_text_masks" : 0,
+    "file" : "quality-review-oml\/images\/otto.png",
+    "height" : 893,
+    "method" : "Built-in ImageGen text localization; composite only the text regions onto original artwork. Original pixels retained outside masks.",
+    "name" : "otto",
+    "text_masks" : [
+      [
+        0,
+        0,
+        1761,
+        124
+      ],
+      [
+        343,
+        357,
+        1761,
+        592
+      ]
+    ],
+    "width" : 1761
+  },
+  {
+    "changed_channels_in_text_masks" : 1776863,
+    "changed_pixels_outside_text_masks" : 0,
+    "file" : "selectai\/images\/nina.png",
+    "height" : 923,
+    "method" : "Built-in ImageGen text localization; composite only the text regions onto original artwork. Original pixels retained outside masks.",
+    "name" : "nina",
+    "text_masks" : [
+      [
+        0,
+        0,
+        1704,
+        127
+      ],
+      [
+        326,
+        306,
+        1385,
+        666
+      ],
+      [
+        1371,
+        819,
+        1704,
+        866
+      ]
+    ],
+    "width" : 1704
+  }
+]

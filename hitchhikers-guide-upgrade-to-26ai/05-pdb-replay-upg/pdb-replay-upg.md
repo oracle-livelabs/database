@@ -6,6 +6,8 @@ In this lab, you will upgrade a single PDB using *Replay Upgrade*. You unplug th
 
 Estimated Time: 10 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:LzFq-fLtLRE)
+
 ### Objectives
 
 In this lab, you will:

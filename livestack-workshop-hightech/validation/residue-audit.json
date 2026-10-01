@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "unwanted_text": [],
+  "unwanted_images": [],
+  "legitimate_manufacturing_uses": [
+    {
+      "file": "README.md",
+      "line": 3,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "final-quiz/final-quiz.md",
+      "line": 35,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "final-quiz/final-quiz.md",
+      "line": 67,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "introduction/introduction.md",
+      "line": 44,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "plant-routing-spatial/plant-routing-spatial.md",
+      "line": 1,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "plant-routing-spatial/plant-routing-spatial.md",
+      "line": 100,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "plant-routing-spatial/plant-routing-spatial.md",
+      "line": 150,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "stack/load_data/hightech-platform-handoff-loader.sql",
+      "line": 357,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "workshops/tenancy/index.html",
+      "line": 16,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "workshops/tenancy/index.html",
+      "line": 26,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "workshops/tenancy/manifest.json",
+      "line": 36,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "workshops/sandbox/index.html",
+      "line": 16,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "workshops/sandbox/index.html",
+      "line": 26,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    },
+    {
+      "file": "workshops/sandbox/manifest.json",
+      "line": 36,
+      "reason": "Legitimate electronics manufacturing terminology or preserved generic plant lesson title."
+    }
+  ],
+  "ocr_images": 64
+}
