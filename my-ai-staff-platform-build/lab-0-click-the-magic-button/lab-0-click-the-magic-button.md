@@ -173,10 +173,20 @@ In this lab, you will:
     </copy>
     ```
 
-    Select **Sign in with ChatGPT**. If the instance cannot open a browser,
-    copy the URL or device code shown by Codex, complete the sign-in in your
-    local browser, and return to the instance. Do not paste tokens or API keys
+    Select **Sign in with Device Code**. 
+    ![Connect to chatgpt](images/device-code.png)
+    Then copy the URL and then enter the device code shown, complete the sign-in in your local browser, and return to the instance. Do not paste tokens or API keys
     into the workshop repository, screenshots, or shared validation evidence.
+
+    ![Get the link code](images/link-code.png)
+    Choose the account you want to authenticate with and after you enter the code, you should get this screen.
+    ![Sign in](images/signed.png)
+
+    Inside the terminal, you should press enter and you are done.
+    ![Autenticated view](images/auth.png)
+    ![Test hi](images/hi.png)
+
+    Press Ctrl + D to exit and return to the terminal.
 
 5. Run the final Lab 2 handoff helper after authentication:
 
