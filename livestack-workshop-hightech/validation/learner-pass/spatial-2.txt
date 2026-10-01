@@ -1,0 +1,101 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 638
++								638 toolbar
++									639 button Clear Output
++										640 text 
++										641 text Clear Output
++									642 button Show info
++										643 text 
++										644 text Show info
++									645 button Open in new tab
++										646 text 
++										647 text Open in new tab
++									648 button Share Query Results
++										649 text 
++										650 text Share Query Results
++									651 pop up button Download
++										652 text Download
++										653 text 
++									654 text Execution time: 0.022 seconds
++								655 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									656 container dbt-sql-worksheet__query-output-grid
++										657 text This is a data grid with 9 rows and 6 columns.
++										658 container
++											659 text PLANT_NAME
++											660 text CITY
++											661 text STATE_PROVINCE
++											662 text BOUNDARY_DISTANCE_KM
++											663 text REGION_NAME
++											664 text DEMAND_INDEX
++										665 container
++											666 text 1
++											667 text 2
++											668 text 3
++											669 text 4
++											670 text 5
++											671 text 6
++											672 text 7
++											673 text 8
++											674 text 9
++										675 container
++											676 text SEER Edison Plant
++											677 text Edison
++											678 text New Jersey
++											679 text 0
++											680 text New York Electronics Region
++											681 text 91
++											682 text SEER Newark Plant
++											683 text Newark
++											684 text New Jersey
++											685 text 0
++											686 text New York Electronics Region
++											687 text 91
++											688 text SEER Brooklyn Plant
++											689 text Brooklyn
++											690 text New York
++											691 text 0
++											692 text New York Electronics Region
++											693 text 91
++											694 text SEER Jersey City Plant
++											695 text Jersey City
++											696 text New Jersey
++											697 text 0
++											698 text New York Electronics Region
++											699 text 91
++											700 text SEER Stamford Plant
++											701 text Stamford
++											702 text Connecticut
++											703 text 0
++											704 text New York Electronics Region
++											705 text 91
++											706 text SEER Philadelphia Plant
++											707 text Philadelphia
++											708 text Pennsylvania
++											709 text 61.66
++											710 text New York Electronics Region
++											711 text 91
++											712 text SEER Baltimore Plant
++											713 text Baltimore
++											714 text Maryland
++											715 text 205.31
++											716 text New York Electronics Region
++											717 text 91
++											718 text SEER Boston Plant
++											719 text Boston
++											720 text Massachusetts
++											721 text 240.01
++											722 text New York Electronics Region
++											723 text 91
++											724 text SEER Pittsburgh Plant
++											725 text Pittsburgh
++											726 text Pennsylvania
++											727 text 456.36
++											728 text New York Electronics Region
++											729 text 91
+~			60 link Description:    1, Help: Processes
++				730 text 
+~				62 text 1
+~			64 link 7:13:40 PM - 10 rows total
+~				65 text 7:13:40 PM - 10 rows total
+The focused UI element is 99 button Run Statement (Ctrl+⏎, ⌘+⏎)

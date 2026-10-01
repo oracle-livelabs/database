@@ -1,0 +1,48 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 1903
++								1903 toolbar
++									1904 button Clear Output
++										1905 text 
++										1906 text Clear Output
++									1907 button Show info
++										1908 text 
++										1909 text Show info
++									1910 button Open in new tab
++										1911 text 
++										1912 text Open in new tab
++									1913 button Share Query Results
++										1914 text 
++										1915 text Share Query Results
++									1916 pop up button Download
++										1917 text Download
++										1918 text 
++									1919 text Execution time: 0.013 seconds
++								1920 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									1921 container dbt-sql-worksheet__query-output-grid
++										1922 text This is a data grid with 1 rows and 8 columns.
++										1923 container
++											1924 text TOOL_NAME
++											1925 text INVOCATION_ID
++											1926 text AGENT_NAME
++											1927 text TASK_NAME
++											1928 text START_DATE
++											1929 text END_DATE
++											1930 text INPUT
++											1931 text OUTPUT
++										1932 text 1
++										1933 container
++											1934 text NINA_HIGHTECH_SQL_TOOL
++											1935 text 3
++											1936 text NINA_HIGHTECH_AGENT
++											1937 text NINA_HIGHTECH_TASK
++											1938 text 09/29/2026, 07:29:07 PM
++											1939 text 09/29/2026, 07:29:13 PM
++											1940 text {"TOOL_NAME":"NINA_HIGHTECH_SQL_TOOL","QUERY":"SELECT component.name, component.category, SUM(production_order_lines.line_total) AS total_material_value, production_order.planned_units FROM production_order_lines JOIN production_order ON production_order_lines.order_id = production_order.id JOIN component ON production_order_lines.component_id = component.id WHERE production_order.order_status IN ('released', 'in_production', 'completed') GROUP BY component.name, component.category, production_order.planned_units ORDER BY total_material_value DESC LIMIT 5","ACTION":"RUNSQL"}
++											1941 text {"status":"success","result":"[\n {\n \"COMPONENT_NAME\" : \"Pressure interface module P07 Rev A\",\n \"COMPONENT_CATEGORY\" : \"Sensing\",\n \"TOTAL_MATERIAL_VALUE\" : 45310,\n \"PLANNED_UNITS\" : 45805\n },\n {\n \"COMPONENT_NAME\" : \"Pressure interface module P08 Rev A\",\n \"COMPONENT_CATEGORY\" : \"Sensing\",\n \"TOTAL_MATERIAL_VALUE\" : 45080,\n \"PLANNED_UNITS\" : 45080\n },\n {\n \"COMPONENT_NAME\" : \"Pressure interface module P09 Rev A\",\n \"COMPONENT_CATEGORY\" : \"Sensing\",\n \"TOTAL_MATERIAL_VALUE\" : 44850,\n \"PLANNED_UNITS\" : 44850\n },\n {\n \"COMPONENT_NAME\" : \"Pressure interface module P07 Rev A\",\n \"COMPONENT_CATEGORY\" : \"Sensing\",\n \"TOTAL_MATERIAL_VALUE\" : 43930,\n \"PLANNED_UNITS\" : 45775\n },\n {\n \"COMPONENT_NAME\" : \"Pressure interface module P08 Rev A\",\n \"COMPONENT_CATEGORY\" : \"Sensing\",\n \"TOTAL_MATERIAL_VALUE\" : 43700,\n \"PLANNED_UNITS\" : 43700\n }\n]"}
+~			60 link Description:    1, Help: Processes
++				1942 text 
+~				62 text 1
+~			64 link 7:30:28 PM - 1 rows total
+~				65 text 7:30:28 PM - 1 rows total
+The focused UI element is 813 button Run Statement (Ctrl+⏎, ⌘+⏎)

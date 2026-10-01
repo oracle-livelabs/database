@@ -6,6 +6,8 @@ In this lab, you will upgrade a single PDB using an unplug-plug upgrade. You unp
 
 Estimated Time: 10 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:VtWId6GsbZY)
+
 ### Objectives
 
 In this lab, you will:

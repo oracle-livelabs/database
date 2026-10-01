@@ -2,15 +2,9 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator responsible for keeping SEER Telecomms’ telecommunications data reliable and useful. Every morning, the subscriber support operations team asks her a familiar question: **which service plan needs attention first, and which subscribers may need assistance or service review?**
+Jessica Chan, SEER Telecomms’ DBA, needs to answer the support team's morning question: **which plans need attention first, and which subscribers may need help?**
 
-Jessica needs four kinds of data for the Subscriber Support and Operations Dashboard. Tables hold service alerts and their impact. JSON documents hold service order activity. Vectors represent service plan descriptions for searches by meaning. Spatial data records network site and demand-region locations. Her query must combine all four.
-
-Keeping these data types in separate systems would require Jessica to combine exports and keep them current. Instead, she wants a dashboard answer that the subscriber support team can check against the source records.
-
-Oracle AI Database can query these data types together. Jessica can join relational rows, JSON documents, vectors, and location data in one SQL statement.
-
-In this lab, you build Jessica’s dashboard query. It combines service alerts, vector search, JSON service order data, and network site locations in one result.
+Build her dashboard query by combining service alerts, plan-description vectors, JSON order activity, and network-site locations. Then change the search phrase and compare which plans move to the top.
 
 ![Jessica Chan, telecom DBA, introduces the dashboard query.](images/jessica.png)
 
@@ -24,16 +18,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Telecommunications focus                                                                                                  |
-| ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Problem    | Support staff need to identify affected plans, assess reported problems, and check recent orders and nearby network sites. |
-| Database task | The query combines service alerts, plan descriptions, order documents, and network-site locations.                         |
-| Your role       | Jessica Chan, the DBA, builds the query that gives support analysts this dashboard view.                         |
-| What You Will Do    | Use a single SQL statement that combines several data types.                                                   |
-| Oracle features | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
-| Result             | You can explain how the query combines alerts, plan matches, orders, and nearby sites.               |
-
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one shared query that gives support analysts a connected view of reported service problems and order activity.
+You are Jessica. Use the first dashboard row to explain which plan the support team should review first.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -45,10 +30,8 @@ The query combines four data types:
 
 - **Relational:** `SERVICE_ALERTS_V`, service plan mentions, and telecommunications views summarize reported service problems and their impact.
 - **Vector:** `PLAN_EMBEDDINGS` and `VECTOR_DISTANCE` find service plans related by meaning to the investigation phrase.
-- **JSON:** `SERVICE_ORDERS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so service order activity can be counted.
-- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest network site to the high-demand New York Network Region using latitude and longitude information stored as spatial geometries that can be converted to GeoJSON.
-
-    These are four operations in one investigation. Every row combines reported service problems with service order activity, match to the search phrase, and nearby-site details.
+- **JSON:** `JSON_TABLE` reads nested line items from `SERVICE_ORDERS_DV` as rows so the query can count service-order activity.
+- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest network site to New York Network Region. The stored location can also be converted to GeoJSON for a map.
 
 1. Open SQL Worksheet as `LLUSER`. 
 
@@ -182,19 +165,13 @@ The query combines four data types:
 
     ![Run a converged service investigation](images/sql-dashboard.png)
 
-3. Review the result as the service plan-level data behind Jessica's dashboard. Each row combines service-alert severity, semantic match, service order activity, and network site location. This gives the dashboard a ranked service plan table and the details a support analyst needs when deciding what to review.
+3. Review the ranked plans. Compare each plan’s alert severity, match to the search phrase, order activity and regional network-site information.
 
     Each row should include alert impact, semantic similarity, order activity, and regional site context. The query returns up to ten plans. Inspect the actual ranking after the embeddings are created; a missing embedding or an empty regional site set can make the result incomplete.
 
 Use the first row to explain why a plan needs attention. Check its alert severity, service order counts, match to the search phrase, and nearby network site. These values help the service team decide where to start.
 
-Jessica can use this SQL result for the dashboard table and detail view. Other dashboard components, such as summary cards, can query the same database.
-
 > **Interpretation:** The nearest-site result is regional context shared by every plan row. It does not identify a subscriber's serving cell or verify radio coverage. Affected-subscriber counts are per-report totals and can overlap. Order activity counts pending and confirmed activation orders; it is not the installed subscriber base.
-
-To see how combined data can be presented, open **Service Assurance Dashboard** in the running demo and compare the incident indicators with the signal-velocity and service-line charts. These application metrics use the demo dataset; they are not expected values from the query above.
-
-![Live service-assurance dashboard with incident indicators and charts.](images/app-dashboard.png)
 
 ## Task 2: Change the investigation question
 
@@ -210,13 +187,21 @@ Run the query again and compare the top rows.
 
 1. Which service plans moved into or out of the top ten?
 2. Which service plans still have high service-alert severity but a lower similarity to the new question?
-3. Does the service order activity make you more or less concerned about the operational impact?
+3. Which plans have the most pending or confirmed activation orders that may need review?
 
 The query sorts by similarity first, so changing the question changes the review order. Service impact breaks ties. Jessica can ask a different question using the same query and service plan data.
 
 ## Next Steps
 
 Next, use JSON Relational Duality to expose the same service order data as JSON for an application while keeping SQL access for the database team.
+
+## Application Demo
+
+Open **Service Assurance Dashboard** and compare the incident indicators with the signal-velocity and service-line charts.
+
+![LiveStack Telecomm Demo: Service Assurance Dashboard](images/app-dashboard.png)
+
+*LiveStack Telecomm Demo: Service Assurance Dashboard*
 
 ## Acknowledgements
 

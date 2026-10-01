@@ -6,6 +6,8 @@ In this lab, you will become familiar with the tools used to patch Oracle AI Dat
 
 Estimated Time: 15 Minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:yS0IuZoshew)
+
 ### Objectives
 
 In this lab, you will:

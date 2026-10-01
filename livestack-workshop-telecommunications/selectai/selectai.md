@@ -1,23 +1,19 @@
 # Ask Telecom Questions with Select AI
 
-![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
-
 ## Introduction
 
-Nina Patel is a subscriber experience analyst at SEER Telecomms. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
+Nina Patel, a subscriber experience analyst at SEER Telecomms, wants to compare monthly charges without writing every query herself. Jessica has prepared a Select AI profile for the workshop tables.
 
-Jessica, the DBA, has already configured a Select AI profile for the telecommunications schema. Nina can ask a question in ordinary language. Select AI uses the profile and table and column definitions to generate SQL, run it, or explain the result.
+Help Nina ask a question, inspect the generated SQL, run it, and refine the answer. Check the joins and filters: an AI-generated query can run successfully and still answer the wrong question.
 
-Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the analyst needs.
-
-In this lab, you check the available Select AI profile, ask a telecommunications question, inspect the SQL behind the answer, and improve the question for an answer Nina can use.
+![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-> - **Select AI** lets a user work with database information through a natural-language question.
+> - **Select AI** turns a question written in ordinary language into SQL that you can inspect and run.
 >
-> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
+> - An **AI profile** specifies the AI provider and the database objects used to guide SQL generation. Database privileges determine which data the current user can access.
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
@@ -38,14 +34,7 @@ Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Telecommunications focus                                                                                |
-| ---------------------| ----------------------------------------------------------------------------------------------|
-| Problem    | Nina needs answers from telecommunications data without writing every query from scratch.               |
-| Database task | The question must be translated into SQL against the shared telecommunications schema.                |
-| Your role       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
-| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
-| Oracle features | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
-| Result             | Nina gets a repeatable way to ask telecommunications questions while keeping SQL review in the process. |
+Help Nina identify the plans with the highest monthly charges, checking the SQL behind each answer.
 
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
@@ -141,13 +130,9 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
     Check that the statement joins SERVICE_PLANS, SERVICE_ORDER_LINES, and SERVICE_ORDERS, groups by plan, returns five rows, sums LINE_TOTAL, and filters the stated service order statuses. Exclude ACTIVATION_FEE from monthly recurring charges. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
 
-The demo's **Ask Telecom Operations Data** screen illustrates the distinction between **Narrate**, **Chat**, **Show SQL** and **Run SQL**. At capture time its selected runtime was local `llama3.2` through Ollama. This interface example does not establish that the demo uses the `GENAI` profile or executes the Select AI commands in this lab.
-
-![Live question interface showing its local runtime and available modes; no answer was submitted for this capture.](images/app-ask-data.png)
-
 ## Task 4: Run the question in the database
 
-Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
+Nina submits the question with `runsql`, which generates and executes SQL again. Compare the answer with the SQL reviewed in Task 3; the new call may generate a different statement.
 
 1. Run the same question with the `runsql` action:
 
@@ -165,13 +150,11 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
-    Select AI has generated and run SQL against the telecommunications schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the telecommunications data.
-
-    > **Note:** Select AI can generate incorrect SQL or misunderstand a question. Use `showsql` when the exact query matters, and treat the generated answer as a starting point for review.
+    The query reads the workshop tables using the privileges of your current database account, `LLUSER`.
 
 ## Task 5: Improve the business question
 
-Nina's first question gives her a service plan ranking, but she also needs enough detail to decide what to review. She changes the question to request the service plan category, total monthly charges, and connections ordered.
+Nina adds the plan category, total monthly charges and connections ordered so she can compare the plans before deciding what to review.
 
 1. Use `showsql` to inspect this revised prompt:
 
@@ -225,21 +208,25 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 2. Review the explanation against the SQL result.
 
-  The explanation is a convenience for an analyst. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+  Compare the explanation with the query result. Check the plan names, ranking, monthly charges and connection totals before using the answer.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina asked a telecommunications question, inspected the generated SQL, ran it, and refined the prompt. Select AI reduced the SQL she needed to write. Reviewing the query helped her check that it answered her question.
-
-Nina can ask questions in ordinary language and inspect the queries behind the answers. The queries use the shared telecommunications schema and run with the database user’s access rights.
-
-Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
+Nina compared monthly charges by asking, inspecting, running, and refining a question. She checked the joins, filters, and totals before using the answer.
 
 ## Next Steps
 
 For the full list of Select AI actions, profile attributes, and supported providers, see the [Oracle AI Database 26ai Select AI documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
+
+## Application Demo
+
+Open **Ask Telecom Operations Data** to explore **Narrate**, **Chat**, **Show SQL**, and **Run SQL**.
+
+![LiveStack Telecomm Demo: Ask Telecom Operations Data](images/app-ask-data.png)
+
+*LiveStack Telecomm Demo: Ask Telecom Operations Data*
 
 ## Acknowledgements
 

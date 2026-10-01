@@ -1,0 +1,24 @@
+{
+  "checks": [
+    {
+      "file": "production-order-duality/production-order-duality.md",
+      "remaining_code_identical": true,
+      "removed_reset_blocks": 0,
+      "tasks_and_images_preserved": true
+    },
+    {
+      "file": "component-quality-vector-search/component-quality-vector-search.md",
+      "remaining_code_identical": true,
+      "removed_reset_blocks": 0,
+      "tasks_and_images_preserved": true
+    },
+    {
+      "file": "selectai-agent/selectai-agent.md",
+      "remaining_code_identical": true,
+      "removed_reset_blocks": 1,
+      "tasks_and_images_preserved": true
+    }
+  ],
+  "loader_change": "Only missing SPATIAL_AUTHOR diagnostic text changed; single-entry loader ZIP matches SQL.",
+  "model_restoration": "Unchanged: required within the single learner exercise."
+}

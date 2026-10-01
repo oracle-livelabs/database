@@ -50,16 +50,10 @@
       "filename": "../../06-run-baseline-semantic-search/06-run-baseline-semantic-search.md"
     },
     {
-      "title": "Lab 7: Create a Query Memory Module",
-      "description": "Save prior queries and use them to produce memory-aware park searches.",
+      "title": "Lab 7: Build an Agent Context Tool",
+      "description": "Package semantic search and metadata filtering as a read-only tool for agent context.",
       "type": "tenancy",
-      "filename": "../../07-create-query-memory-module/07-create-query-memory-module.md"
-    },
-    {
-      "title": "Lab 8: Create Indexes for Approximate Search",
-      "description": "Create indexes and compare search settings.",
-      "type": "tenancy",
-      "filename": "../../08-create-indexes-for-approximate-search/08-create-indexes-for-approximate-search.md"
+      "filename": "../../07-build-agent-context-tool/07-build-agent-context-tool.md"
     },
     {
       "title": "Need Help?",
