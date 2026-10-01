@@ -1,0 +1,141 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 638
++								638 toolbar
++									639 button Clear Output
++										640 text 
++										641 text Clear Output
++									642 button Show info
++										643 text 
++										644 text Show info
++									645 button Open in new tab
++										646 text 
++										647 text Open in new tab
++									648 button Share Query Results
++										649 text 
++										650 text Share Query Results
++									651 pop up button Download
++										652 text Download
++										653 text 
++									654 text Execution time: 0.54 seconds
++								655 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									656 container dbt-sql-worksheet__query-output-grid
++										657 text This is a data grid with 9 rows and 10 columns.
++										658 container
++											659 text REGION_NAME
++											660 text DEMAND_INDEX
++											661 text CUSTOMER_SITE_ID
++											662 text SITE_NAME
++											663 text CONTACT_NAME
++											664 text EMAIL
++											665 text PRIORITY_CLASS
++											666 text PLANT_NAME
++											667 text PLANT_CITY
++											668 text DAILY_CAPACITY_UNITS
++										669 container
++											670 text 1
++											671 text 2
++											672 text 3
++											673 text 4
++											674 text 5
++											675 text 6
++											676 text 7
++											677 text 8
++											678 text 9
++										679 container
++											680 text Chicago Electronics Region
++											681 text 78
++											682 text 682
++											683 text Electronics Customer Site 0682
++											684 text Contact0682 Example
++											685 text production0682@example.com
++											686 text priority
++											687 text SEER Aurora Plant
++											688 text Aurora
++											689 text 3550
++											690 text Chicago Electronics Region
++											691 text 78
++											692 text 716
++											693 text Electronics Customer Site 0716
++											694 text Contact0716 Example
++											695 text production0716@example.com
++											696 text critical
++											697 text SEER Chicago Plant
++											698 text Chicago
++											699 text 3800
++											700 text Chicago Electronics Region
++											701 text 78
++											702 text 614
++											703 text Electronics Customer Site 0614
++											704 text Contact0614 Example
++											705 text production0614@example.com
++											706 text critical
++											707 text SEER Joliet Plant
++											708 text Joliet
++											709 text 3675
++											710 text Chicago Electronics Region
++											711 text 78
++											712 text 294
++											713 text Electronics Customer Site 0294
++											714 text Contact0294 Example
++											715 text production0294@example.com
++											716 text standard
++											717 text SEER Joliet Plant
++											718 text Joliet
++											719 text 3675
++											720 text Chicago Electronics Region
++											721 text 78
++											722 text 362
++											723 text Electronics Customer Site 0362
++											724 text Contact0362 Example
++											725 text production0362@example.com
++											726 text critical
++											727 text SEER Aurora Plant
++											728 text Aurora
++											729 text 3550
++											730 text Chicago Electronics Region
++											731 text 78
++											732 text 78
++											733 text Electronics Customer Site 0078
++											734 text Contact0078 Example
++											735 text production0078@example.com
++											736 text standard
++											737 text SEER Chicago Plant
++											738 text Chicago
++											739 text 3800
++											740 text Chicago Electronics Region
++											741 text 78
++											742 text 396
++											743 text Electronics Customer Site 0396
++											744 text Contact0396 Example
++											745 text production0396@example.com
++											746 text standard
++											747 text SEER Chicago Plant
++											748 text Chicago
++											749 text 3800
++											750 text Chicago Electronics Region
++											751 text 78
++											752 text 1002
++											753 text Electronics Customer Site 1002
++											754 text Contact1002 Example
++											755 text production1002@example.com
++											756 text standard
++											757 text SEER Aurora Plant
++											758 text Aurora
++											759 text 3550
++											760 text Chicago Electronics Region
++											761 text 78
++											762 text 160
++											763 text Electronics Customer Site 0160
++											764 text Contact0160 Example
++											765 text production0160@example.com
++											766 text priority
++											767 text SEER Aurora Plant
++											768 text Aurora
++											769 text 3550
+~			60 link Description:    1, Help: Processes
++				770 text 
+~				62 text 1
+~			64 link 7:14:05 PM - 25 rows total
+~				65 text 7:14:05 PM - 25 rows total
+The focused UI element is 99 button Run Statement (Ctrl+⏎, ⌘+⏎)

@@ -30,8 +30,8 @@ The query combines four data types:
 
 - **Relational:** `SERVICE_ALERTS_V`, service plan mentions, and telecommunications views summarize reported service problems and their impact.
 - **Vector:** `PLAN_EMBEDDINGS` and `VECTOR_DISTANCE` find service plans related by meaning to the investigation phrase.
-- **JSON:** `SERVICE_ORDERS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so service order activity can be counted.
-- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest network site to the high-demand New York Network Region using latitude and longitude information stored as spatial geometries that can be converted to GeoJSON.
+- **JSON:** `JSON_TABLE` reads nested line items from `SERVICE_ORDERS_DV` as rows so the query can count service-order activity.
+- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest network site to New York Network Region. The stored location can also be converted to GeoJSON for a map.
 
 1. Open SQL Worksheet as `LLUSER`. 
 
@@ -165,17 +165,13 @@ The query combines four data types:
 
     ![Run a converged service investigation](images/sql-dashboard.png)
 
-3. Review the result as the service plan-level data behind Jessica's dashboard. Each row combines service-alert severity, semantic match, service order activity, and network site location. This gives the dashboard a ranked service plan table and the details a support analyst needs when deciding what to review.
+3. Review the ranked plans. Compare each plan’s alert severity, match to the search phrase, order activity and regional network-site information.
 
     Each row should include alert impact, semantic similarity, order activity, and regional site context. The query returns up to ten plans. Inspect the actual ranking after the embeddings are created; a missing embedding or an empty regional site set can make the result incomplete.
 
 Use the first row to explain why a plan needs attention. Check its alert severity, service order counts, match to the search phrase, and nearby network site. These values help the service team decide where to start.
 
 > **Interpretation:** The nearest-site result is regional context shared by every plan row. It does not identify a subscriber's serving cell or verify radio coverage. Affected-subscriber counts are per-report totals and can overlap. Order activity counts pending and confirmed activation orders; it is not the installed subscriber base.
-
-To see how combined data can be presented, open **Service Assurance Dashboard** in the running demo and compare the incident indicators with the signal-velocity and service-line charts. These application metrics use the demo dataset; they are not expected values from the query above.
-
-![Live service-assurance dashboard with incident indicators and charts.](images/app-dashboard.png)
 
 ## Task 2: Change the investigation question
 
@@ -191,13 +187,21 @@ Run the query again and compare the top rows.
 
 1. Which service plans moved into or out of the top ten?
 2. Which service plans still have high service-alert severity but a lower similarity to the new question?
-3. Does the service order activity make you more or less concerned about the operational impact?
+3. Which plans have the most pending or confirmed activation orders that may need review?
 
 The query sorts by similarity first, so changing the question changes the review order. Service impact breaks ties. Jessica can ask a different question using the same query and service plan data.
 
 ## Next Steps
 
 Next, use JSON Relational Duality to expose the same service order data as JSON for an application while keeping SQL access for the database team.
+
+## Application Demo
+
+Open **Service Assurance Dashboard** and compare the incident indicators with the signal-velocity and service-line charts.
+
+![LiveStack Telecomm Demo: Service Assurance Dashboard](images/app-dashboard.png)
+
+*LiveStack Telecomm Demo: Service Assurance Dashboard*
 
 ## Acknowledgements
 

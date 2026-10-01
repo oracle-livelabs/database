@@ -1,12 +1,12 @@
 # Build a Telecom Agent with Select AI Agent
 
-![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
-
 ## Introduction
 
 Nina Patel now needs an assistant for her subscriber-review screen. Jessica gives it one SQL tool using the `GENAI` profile from the previous lab.
 
 Create the agent, task, and team, then check its answer and tool history. Instructions request read-only answers; database privileges enforce access. `LLUSER` owns the workshop tables, so it is not a production example of restricted access.
+
+![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
@@ -185,7 +185,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
     ![Run a telecommunications question](images/sql-agent-answer.png)
 
-    Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
+    Each execution creates a new conversation ID and passes it to `RUN_TEAM` to record the prompt and response. Repeat the relevant names and details in a new question; this example does not reuse the previous conversation.
 
 2. Review the answer.
 
@@ -194,10 +194,6 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     > **Note:** This team is instructed to answer without changing records. Instructions and descriptions are not a security boundary: LLUSER owns the tables. A production version needs a separate database user that can only read the required tables and rows.
 
 3. Optional challenge: ask a follow-up question that connects the plan with the highest monthly charges to its subscribers and service orders. A more detailed request may take longer because the agent has to interpret more steps.
-
-Open **AI-Assisted Service Assurance** to see the demo's agent question interface. The selected runtime at capture time was local `llama3.2`. This interface example does not show `DBMS_CLOUD_AI_AGENT` running. No agent question, intervention or data-changing action was submitted while taking the capture.
-
-![Live agent console with runtime selection and suggested telecom questions.](images/app-agent-console.png)
 
 ## Task 5: Inspect what the agent did
 
@@ -271,6 +267,14 @@ END;
 ## Next Steps
 
 Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
+
+## Application Demo
+
+Open **AI-Assisted Service Assurance** to explore the agent question interface.
+
+![LiveStack Telecomm Demo: AI-Assisted Service Assurance](images/app-agent-console.png)
+
+*LiveStack Telecomm Demo: AI-Assisted Service Assurance*
 
 ## Acknowledgements
 

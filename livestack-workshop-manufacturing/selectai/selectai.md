@@ -1,23 +1,23 @@
 # Ask Manufacturing Questions with Select AI
 
-![Nina: manufacturing lab banner](images/nina.png)
-
 ## Introduction
 
 Nina Patel, SEER MANUFACTURING’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the manufacturing schema.
 
 You will help Nina ask a question, inspect the generated SQL, run it, and refine the result. The model can choose the wrong columns or misunderstand a question, so SQL review remains part of her work.
 
+![Nina: manufacturing lab banner](images/nina.png)
+
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-> - **Select AI** lets a user work with database information through a natural-language question.
+> - **Select AI** turns a question written in ordinary language into SQL that you can inspect and run.
 >
-> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
+> - An **AI profile** specifies the AI provider and the database objects used to guide SQL generation. Database privileges determine which data the current user can access.
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
-> - A **natural-language prompt** is the question sent to Select AI, such as `Which five components have the highest scheduled material value? Sum production_order_lines.line_total only for released, in_production, or completed production_orders.`
+> - A **natural-language prompt** is the question sent to Select AI, such as “Which five components have the highest total material value?”
 
 </details>
 
@@ -32,15 +32,11 @@ You will help Nina ask a question, inspect the generated SQL, run it, and refine
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-Help Nina rank components by scheduled material value. Inspect the generated SQL, run it, then refine the question and compare the answer.
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Check the Select AI profile
 
-Select AI uses an AI profile to identify the AI provider and the database objects available for natural-language questions. The workshop database should already contain a profile for the `LLUSER` schema.
+Check the existing `GENAI` profile in the workshop schema.
 
 1. Run this query:
 
@@ -72,7 +68,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
 
 ## Task 2: Add the manufacturing tables to the profile
 
-The profile needs a list of tables that Select AI may use. Nina's questions require component, production order, production-order-line, and customer site data, so Jessica adds those four tables to the `GENAI` profile.
+Give the profile the four tables needed for Nina’s questions.
 
 1. Add the manufacturing tables to the profile:
 
@@ -108,18 +104,16 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
 
 ## Task 3: Ask a question and inspect the SQL
 
-Order statuses are stored in lowercase. Keep the exact-value instruction in each prompt and check the generated predicate before running it. Uppercase literals can return no rows because string comparisons are case-sensitive.
-
 Nina starts with a simple question: which components have the highest scheduled material value? She first asks Select AI to show the SQL without running it.
 
-Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use `DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
+In SQL Worksheet, submit the question through `DBMS_CLOUD_AI.GENERATE`. The surrounding SQL calls Select AI; the text after `prompt =>` is Nina’s question. She describes what she needs in everyday language and lets Select AI work out the joins, columns, and calculations.
 
 1. Run the question with the `GENAI` profile:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five components have the highest scheduled material value? Sum production_order_lines.line_total only for released, in_production, or completed production_orders. Status values are case-sensitive lowercase strings: use order_status IN (''released'', ''in_production'', ''completed'') exactly; do not uppercase them.',
+             prompt       => 'Which five components have the highest total material value across production orders that are released, in production, or completed? Exclude setup costs.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -130,18 +124,18 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
 2. Read the generated SQL before running it.
 
-    Check that the statement joins `COMPONENTS`, `PRODUCTION_ORDER_LINES`, and `PRODUCTION_ORDERS`, groups by component, returns five rows, sums LINE_TOTAL, and filters the stated production order statuses. Exclude SETUP_COST from material value. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
+    Check that the statement joins `COMPONENTS`, `PRODUCTION_ORDER_LINES`, and `PRODUCTION_ORDERS`, groups by component, returns five rows, sums LINE_TOTAL, and filters the stated production order statuses. Exclude `SETUP_COST` from material value. Status values in this dataset are case-sensitive: the filter should use `released`, `in_production`, and `completed`. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
 
 ## Task 4: Run the question in the database
 
-Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
+Nina now submits the same question with `runsql` to return the database result. This generates SQL again; it does not execute the exact statement shown in Task 3.
 
 1. Run the same question with the `runsql` action:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five components have the highest scheduled material value? Sum production_order_lines.line_total only for released, in_production, or completed production_orders. Status values are case-sensitive lowercase strings: use order_status IN (''released'', ''in_production'', ''completed'') exactly; do not uppercase them.',
+             prompt       => 'Which five components have the highest total material value across production orders that are released, in production, or completed? Exclude setup costs.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -152,18 +146,18 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
-    Select AI has generated and run SQL against the manufacturing schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the manufacturing data.
+    The query runs with your database privileges. Check the ranking against the SQL from Task 3.
 
 ## Task 5: Improve the business question
 
-Nina's first question gives her a component ranking, but she also needs enough detail to decide what to review. She changes the question to request the component category, total material value, and planned units.
+Nina adds the component category, total material value and planned units to the ranking so she can compare the components before deciding what to review.
 
 1. Use `showsql` to inspect this revised prompt:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five components with the highest scheduled material value. Include component name, category, summed line_total, and summed quantity. Include only released, in_production, or completed production_orders; exclude setup costs. Status values are case-sensitive lowercase strings: use order_status IN (''released'', ''in_production'', ''completed'') exactly; do not uppercase them.',
+             prompt       => 'Which five components have the highest total material value across production orders that are released, in production, or completed? For each component, show its name, category, total material value, and total planned units. Exclude setup costs.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -177,7 +171,7 @@ Nina's first question gives her a component ranking, but she also needs enough d
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five components with the highest scheduled material value. Include component name, category, summed line_total, and summed quantity. Include only released, in_production, or completed production_orders; exclude setup costs. Status values are case-sensitive lowercase strings: use order_status IN (''released'', ''in_production'', ''completed'') exactly; do not uppercase them.',
+             prompt       => 'Which five components have the highest total material value across production orders that are released, in production, or completed? For each component, show its name, category, total material value, and total planned units. Exclude setup costs.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -199,7 +193,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five components with the highest scheduled material value. Include component name, category, summed line_total, and summed quantity. Include only released, in_production, or completed production_orders; exclude setup costs. Status values are case-sensitive lowercase strings: use order_status IN (''released'', ''in_production'', ''completed'') exactly; do not uppercase them.',
+             prompt       => 'Which five components have the highest total material value across production orders that are released, in production, or completed? For each component, show its name, category, total material value, and total planned units. Exclude setup costs.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
@@ -210,13 +204,13 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 2. Review the explanation against the SQL result.
 
-  The explanation is a convenience for a production analyst. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+  Check that the explanation agrees with the returned components, totals, and ranking.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina now has a component ranking she can check against its SQL. Keep the same routine for new questions: inspect the query, run it, and compare the answer with the manufacturing decision.
+Nina now has a component ranking she can check against the SQL result. For new questions, inspect the query, run it and verify the returned components and totals before making a production decision.
 
 ## Next Steps
 
