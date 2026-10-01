@@ -1,4 +1,4 @@
-# Create Embeddings and Load Text
+# Lab 5: Create Embeddings and Load Text
 
 ## Introduction
 
@@ -21,7 +21,7 @@ Estimated Time: X
 
 ## Task 1: Explore National Parks Data
 
-The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. The workshop PAR URL is provided in the code below. Do not commit a PAR URL to source control. Anyone with it can access the object during the PAR lifetime.
+The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. The workshop PAR URL is provided in the code below. For security purposes, you should not commit a PAR URL to source control. Anyone with it can access the object during the PAR lifetime.
 
 1. Add a new Python paragraph and run the following code to load the National Parks JSON file.
 
@@ -98,7 +98,7 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
 
 1. Add a new Python paragraph and run the following code.
 
-    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes about one minute to complete.
+    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes a few minutes to complete.
 
     ```python
     %python
@@ -131,7 +131,7 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
     print(upsert_result)
     ```
 
-2. Review the output. The embedding step typically takes about one minute. The paragraph prints the number of prepared direction vectors, and the final upsert result confirms that the vectors and metadata were loaded into `directions`.
+2. Review the output. The embedding step typically takes a few minutes. The paragraph prints the number of prepared direction vectors, and the final upsert result confirms that the vectors and metadata were loaded into `directions`.
 
     This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
 
@@ -148,4 +148,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, August 27, 2026
+* **Last Updated By/Date** - August 27, 2026
