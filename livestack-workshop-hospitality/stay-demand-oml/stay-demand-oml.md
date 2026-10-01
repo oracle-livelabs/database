@@ -99,12 +99,12 @@ AutoML may take several minutes. Skip to Task 3 to train the example model direc
     1. Enter *Care Demand Risk Test* in the Name field.
     2. Select the magnifying-glass icon next to **Data Source**.
 
-  ![Hospitality classification experiment settings](images/data-source-one.png)
+    ![Hospitality classification experiment settings](images/data-source-one.png)
 
     3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
     4. Select `OML_STAY_DEMAND_TRAINING_V` from the **Table** list.
 
-  ![Hospitality classification experiment settings](images/data-source-two.png)
+    ![Hospitality classification experiment settings](images/data-source-two.png)
 
     5. Select **OK**.
 
