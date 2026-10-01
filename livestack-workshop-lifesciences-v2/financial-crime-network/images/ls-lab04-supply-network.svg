@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">One order, two product branches, a shared stocking depot</title>
+  <desc id="desc">Conceptual graph mapping, not an execution screenshot. Fall River depot 10 points to Order 50. Order 50 contains two order lines, each requiring one unit of a different product. Product 53 is Autoinjector Assembly Lot and product 77 is Peptide Intermediate Batch. Both products have an inventory connection to candidate depot 12, Troutdale Pacific Micro Site. Depot to order to line to product to stocking depot is four directed relationship hops.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#52665e"/></marker>
+    <style>
+      text {font-family:Arial,Helvetica,sans-serif;fill:#213b31}
+      .heading {font-size:27px;font-weight:700}
+      .sub {font-size:16px;fill:#50605a}
+      .name {font-size:18px;font-weight:700}
+      .detail {font-size:16px}
+      .type {font-size:14px;font-weight:700;letter-spacing:.6px;fill:#52665e}
+      .edge {stroke:#52665e;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .label {font-size:13px;fill:#3c5147}
+      .box {stroke:#668476;stroke-width:1.5;rx:12}
+      .hop {font-size:15px;font-weight:700;fill:#455c51}
+    </style>
+  </defs>
+  <rect width="1200" height="630" fill="#ffffff" rx="14"/>
+  <text x="40" y="47" class="heading">One order, two product branches, a shared stocking depot</text>
+  <text x="40" y="78" class="sub">Conceptual graph mapping • Existing order and inventory relationships • Not an execution result</text>
+  <text x="40" y="111" class="sub">1 assigned_order → 2 contains_line → 3 requires_product → 4 stocked_at</text>
+
+  <text x="219" y="146" text-anchor="middle" class="hop">Hop 1</text>
+  <text x="442" y="146" text-anchor="middle" class="hop">Hop 2</text>
+  <text x="688" y="146" text-anchor="middle" class="hop">Hop 3</text>
+  <text x="935" y="146" text-anchor="middle" class="hop">Hop 4</text>
+
+  <path class="edge" d="M202 319 H263"/>
+  <path class="edge" d="M417 303 C458 303 449 225 495 225"/>
+  <path class="edge" d="M417 335 C458 335 449 414 495 414"/>
+  <path class="edge" d="M660 225 H725"/>
+  <path class="edge" d="M660 414 H725"/>
+  <path class="edge" d="M901 225 C962 225 928 300 990 300"/>
+  <path class="edge" d="M901 414 C962 414 928 338 990 338"/>
+
+  <rect x="30" y="261" width="172" height="116" class="box" fill="#e7f0ea"/>
+  <text x="116" y="286" text-anchor="middle" class="type">DEPOT 10</text>
+  <text x="116" y="315" text-anchor="middle" class="name">Fall River</text>
+  <text x="116" y="340" text-anchor="middle" class="detail">Assigned depot</text>
+
+  <rect x="263" y="261" width="154" height="116" class="box" fill="#eef3fa"/>
+  <text x="340" y="286" text-anchor="middle" class="type">SUPPLY ORDER</text>
+  <text x="340" y="315" text-anchor="middle" class="name">Order 50</text>
+  <text x="340" y="340" text-anchor="middle" class="detail">Processing</text>
+
+  <rect x="495" y="170" width="165" height="110" class="box" fill="#f4f0e7"/>
+  <text x="577" y="195" text-anchor="middle" class="type">ORDER LINE</text>
+  <text x="577" y="225" text-anchor="middle" class="name">Product 53 line</text>
+  <text x="577" y="251" text-anchor="middle" class="detail">Required: 1 unit</text>
+
+  <rect x="495" y="359" width="165" height="110" class="box" fill="#f4f0e7"/>
+  <text x="577" y="384" text-anchor="middle" class="type">ORDER LINE</text>
+  <text x="577" y="414" text-anchor="middle" class="name">Product 77 line</text>
+  <text x="577" y="440" text-anchor="middle" class="detail">Required: 1 unit</text>
+
+  <rect x="725" y="161" width="176" height="128" class="box" fill="#f3edf6"/>
+  <text x="813" y="187" text-anchor="middle" class="type">PRODUCT 53</text>
+  <text x="813" y="220" text-anchor="middle" class="name">Autoinjector</text>
+  <text x="813" y="246" text-anchor="middle" class="name">Assembly Lot</text>
+
+  <rect x="725" y="350" width="176" height="128" class="box" fill="#f3edf6"/>
+  <text x="813" y="377" text-anchor="middle" class="type">PRODUCT 77</text>
+  <text x="813" y="409" text-anchor="middle" class="name">Peptide</text>
+  <text x="813" y="435" text-anchor="middle" class="detail">Intermediate Batch</text>
+
+  <rect x="990" y="246" width="182" height="147" class="box" fill="#e7f0ea"/>
+  <text x="1081" y="273" text-anchor="middle" class="type">DEPOT 12</text>
+  <text x="1081" y="305" text-anchor="middle" class="name">Troutdale Pacific</text>
+  <text x="1081" y="330" text-anchor="middle" class="name">Micro Site</text>
+  <text x="1081" y="365" text-anchor="middle" class="detail">One shared candidate</text>
+
+  <rect x="30" y="523" width="1142" height="76" rx="10" fill="#f6f7f6"/>
+  <text x="49" y="552" class="detail">A candidate must cover every product: required units ≤ quantity on hand − quantity reserved.</text>
+  <text x="49" y="579" class="sub">An inventory connection alone is not sufficient. Stock availability is not rerouting approval or proof of cold-chain suitability.</text>
+</svg>
