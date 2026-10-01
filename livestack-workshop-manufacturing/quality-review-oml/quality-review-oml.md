@@ -17,7 +17,7 @@ You will train a model to classify components as `REVIEW` or `STABLE`, then join
 >
 > - **Classification** predicts a label. Otto's model predicts either `REVIEW` or `STABLE`.
 >
-> - A **probability** is the model's value for a class. In this lab, the value is displayed as a `REVIEW_SCORE` to rank components for review. It is not a guarantee.
+> - A **probability** is the model’s estimated value for a particular class. `REVIEW_SCORE` is the probability assigned to `REVIEW`, from 0 to 1. `REVIEW_PCT` shows the same value as a percentage. Use the score to rank components for review, not as a guarantee of a future outcome.
 >
 > - **In-database machine learning** means the model is trained or scored where the source data already lives. The SQL result can include the prediction and the data used to explain it.
 
@@ -27,7 +27,7 @@ You will train a model to classify components as `REVIEW` or `STABLE`, then join
 
 - Read the prepared training data and identify the model target.
 - Optionally use AutoML to compare classification models and inspect their predictions.
-- Create the selected Generalized Linear Model inside Oracle AI Database.
+- Create the example Generalized Linear Model inside Oracle AI Database.
 - Score components with `PREDICTION` and `PREDICTION_PROBABILITY`.
 - Combine model output with component, production-order, and inspection data for a dashboard result.
 
@@ -39,7 +39,11 @@ Estimated Time: **10 minutes**
 
 Before Otto creates a model, he checks the data that will teach it. The workshop already provides `OML_QUALITY_TRAINING_V`, a view that combines component, inspection, and production-order data into one row per active component.
 
-The view also contains `REVIEW_LABEL`. This is the known label used during training. The fixture assigns `REVIEW` when mean defect rate is at least 3 percent and at least two observations record 60 or more minutes of downtime. Other components are `STABLE`. This same-window rule creates 96 rows of each class; it teaches classification and does not establish how well the model predicts future defects. Quality observations and order lines are aggregated separately before joining to avoid counting either set more than once.
+`REVIEW_LABEL` is the label used for training. A component is marked `REVIEW` when its mean defect rate is at least 3% and at least two observations record 60 minutes or more of downtime. Other components are marked `STABLE`.
+
+This rule produces 96 rows in each class from measurements in the same analysis window. It teaches classification; it does not establish how well the model predicts future defects.
+
+The view aggregates quality observations and order lines separately before joining them. This prevents the join from counting either set more than once.
 
 1. Run the training-data query:
 
@@ -117,9 +121,9 @@ AutoML can take several minutes. Skip to Task 3 if you want to focus on SQL.
 
 ## Task 3: Create the selected model in SQL Developer Web
 
-If you ran AutoML, compare its results with the SQL model. Now create `OTTO_QUALITY_REVIEW_MODEL` in SQL Developer Web so you can call it from a query.
+In Database Actions, open SQL Worksheet, called SQL Developer Web in this heading. Create `OTTO_QUALITY_REVIEW_MODEL` using the supplied script. It trains a separate Generalized Linear Model; it does not import an AutoML model. If you completed Task 2, compare the results.
 
-The settings table tells Oracle to use the **Generalized Linear Model** used in this exercise. `PREP_AUTO` lets the database handle standard preparation of the input columns.
+The settings table selects the **Generalized Linear Model** algorithm. `PREP_AUTO` enables automatic preparation of the input columns.
 
 1. Create the settings table and train the model:
 
@@ -323,7 +327,7 @@ Otto creates sample scoring data by changing values from the training view. This
 
 3. Read the result as a dashboard user.
 
-  `PREDICTED_REVIEW` tells the dashboard which label the model selected. `REVIEW_SCORE` is the model value between 0 and 1, while `REVIEW_PCT` presents the same value as a percentage for a dashboard user. The production-order and inspection columns give the business user something to review alongside the prediction.
+  `PREDICTED_REVIEW` is the class selected by the model. `REVIEW_SCORE` is the probability assigned to `REVIEW`, and `REVIEW_PCT` shows that probability as a percentage. Compare the score with the activity values in the same row before deciding what to review.
 
 ## Conclusion: Put the Prediction Beside the Business Data
 
