@@ -1,0 +1,111 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 638
++								638 toolbar
++									639 button Clear Output
++										640 text 
++										641 text Clear Output
++									642 button Show info
++										643 text 
++										644 text Show info
++									645 button Open in new tab
++										646 text 
++										647 text Open in new tab
++									648 button Share Query Results
++										649 text 
++										650 text Share Query Results
++									651 pop up button Download
++										652 text Download
++										653 text 
++									654 text Execution time: 0.018 seconds
++								655 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									656 container dbt-sql-worksheet__query-output-grid
++										657 text This is a data grid with 9 rows and 7 columns.
++										658 container
++											659 text PLANT_NAME
++											660 text CITY
++											661 text STATE_PROVINCE
++											662 text BOUNDARY_DISTANCE_KM
++											663 text BOUNDARY_DISTANCE_MILES
++											664 text REGION_NAME
++											665 text DEMAND_INDEX
++										666 container
++											667 text 1
++											668 text 2
++											669 text 3
++											670 text 4
++											671 text 5
++											672 text 6
++											673 text 7
++											674 text 8
++											675 text 9
++										676 container
++											677 text SEER Aurora Plant
++											678 text Aurora
++											679 text Illinois
++											680 text 0
++											681 text 0
++											682 text Chicago Electronics Region
++											683 text 78
++											684 text SEER Chicago Plant
++											685 text Chicago
++											686 text Illinois
++											687 text 0
++											688 text 0
++											689 text Chicago Electronics Region
++											690 text 78
++											691 text SEER Joliet Plant
++											692 text Joliet
++											693 text Illinois
++											694 text 0
++											695 text 0
++											696 text Chicago Electronics Region
++											697 text 78
++											698 text SEER Milwaukee Plant
++											699 text Milwaukee
++											700 text Wisconsin
++											701 text 82.02
++											702 text 50.96
++											703 text Chicago Electronics Region
++											704 text 78
++											705 text SEER Indianapolis Plant
++											706 text Indianapolis
++											707 text Indiana
++											708 text 200.04
++											709 text 124.3
++											710 text Chicago Electronics Region
++											711 text 78
++											712 text SEER Detroit Plant
++											713 text Detroit
++											714 text Michigan
++											715 text 357.99
++											716 text 222.45
++											717 text Chicago Electronics Region
++											718 text 78
++											719 text SEER Cleveland Plant
++											720 text Cleveland
++											721 text Ohio
++											722 text 474.82
++											723 text 295.04
++											724 text Chicago Electronics Region
++											725 text 78
++											726 text SEER Pittsburgh Plant
++											727 text Pittsburgh
++											728 text Pennsylvania
++											729 text 629.66
++											730 text 391.25
++											731 text Chicago Electronics Region
++											732 text 78
++											733 text SEER Baltimore Plant
++											734 text Baltimore
++											735 text Maryland
++											736 text 941.12
++											737 text 584.79
++											738 text Chicago Electronics Region
++											739 text 78
+~			60 link Description:    1, Help: Processes
++				740 text 
+~				62 text 1
+~			64 link 7:13:48 PM - 10 rows total
+~				65 text 7:13:48 PM - 10 rows total
+The focused UI element is 99 button Run Statement (Ctrl+⏎, ⌘+⏎)

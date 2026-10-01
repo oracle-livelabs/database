@@ -1,0 +1,12 @@
+{
+  "observation": "Four scalar result paragraphs were configured as table but Graph Studio displayed graphs after execution.",
+  "correction": "Added concise Table selection guidance in three preceding prose paragraphs. Existing table defaults retained.",
+  "paragraphs": [
+    9,
+    30,
+    40,
+    41
+  ],
+  "code_unchanged": true,
+  "live_table_selection_verified": true
+}

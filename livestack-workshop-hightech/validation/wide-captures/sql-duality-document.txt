@@ -1,0 +1,12 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 884-885, 899-1080
+~			9 button Search Database (⌘+K)
+~				10 text Search Database (⌘+K)
++										899 text 
+~			661 link Description:    1, Help: Processes
++				900 text 
+~				663 text 1
+~			665 link 7:51:14 PM - Resolving REST call...
+~				666 text 7:51:14 PM - Resolving REST call...
+The focused UI element is 569 button Run Statement (Ctrl+⏎, ⌘+⏎)

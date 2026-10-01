@@ -1,0 +1,38 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 1552
++								1552 toolbar
++									1553 button Clear Output
++										1554 text 
++										1555 text Clear Output
++									1556 button Show info
++										1557 text 
++										1558 text Show info
++									1559 button Open in new tab
++										1560 text 
++										1561 text Open in new tab
++									1562 button Share Query Results
++										1563 text 
++										1564 text Share Query Results
++									1565 pop up button Download
++										1566 text Download
++										1567 text 
++									1568 text Execution time: 0.016 seconds
++								1569 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									1570 container dbt-sql-worksheet__query-output-grid
++										1571 text This is a data grid with 1 rows and 3 columns.
++										1572 container
++											1573 text TOOL_NAME
++											1574 text STATUS
++											1575 text DESCRIPTION
++										1576 text 1
++										1577 container
++											1578 text NINA_HIGHTECH_SQL_TOOL
++											1579 text ENABLED
++											1580 text SQL query access to the workshop HighTech tables; task requests read-only answers
+~			60 link Description:    1, Help: Processes
++				1581 text 
+~				62 text 1
+~			64 link 7:27:31 PM - 1 rows total
+~				65 text 7:27:31 PM - 1 rows total
+The focused UI element is 813 button Run Statement (Ctrl+⏎, ⌘+⏎)

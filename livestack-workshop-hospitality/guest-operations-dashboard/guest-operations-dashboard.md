@@ -10,7 +10,7 @@ Build her dashboard query by combining service alerts from relational tables, re
 
 ### Objectives
 
-- Explain what Oracle AI Database convergence means in a hospitality decision workflow.
+- Explain how one database query combines the information needed for a guest-service decision.
 - Run one query that combines relational, vector, JSON, and spatial database capabilities.
 - Modify the query to investigate a different guest-service question and explain the change in results.
 
@@ -24,9 +24,9 @@ Run the query below to list stay offers with severe service alerts. Use the resu
 
 The query combines four data types:
 
-- **Relational:** `SERVICE_ALERTS_V`, stay offer mentions, and hospitality views calculate stay offer service needs and service impact.
+- **Relational:** Use `SERVICE_ALERTS_V` and links to stay offers to summarize service alerts and their impact.
 - **Vector:** `OFFER_EMBEDDINGS` and `VECTOR_DISTANCE` find stay offers related by meaning to the investigation phrase.
-- **JSON:** `RESERVATIONS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so reservation activity can be counted.
+- **JSON:** `JSON_TABLE` reads nested line items from `RESERVATIONS_DV` as rows so the query can count reservation activity.
 - **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest hotel property to the high-demand New York Visitor Region using spatial geometries.
 
 1. Open SQL Worksheet as `LLUSER`. 
@@ -181,7 +181,7 @@ Run the query again and compare the top rows.
 
 1. Which stay offers moved into or out of the top ten?
 2. Which stay offers still have high relational service impact but a lower semantic similarity to the new question?
-3. Does the reservation activity make you more or less concerned about the operational impact?
+3. Which offers have the most pending, confirmed or checked-in reservations that may need review?
 
 The query sorts by similarity first, so changing the question changes the review order. Service impact breaks ties. Jessica can ask a different question using the same query and stay offer data.
 
@@ -189,16 +189,20 @@ The query sorts by similarity first, so changing the question changes the review
 
 Next, use JSON Relational Duality to expose the same reservation data as JSON for an application while keeping SQL access for the database team.
 
+## Application example
+
+Explore the [LiveStack Demo Hospitality](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4525).
+
+![LiveStack Demo Hospitality: Property Performance Command Center](images/demo-dashboard.jpg)
+
+*LiveStack Demo Hospitality: Property Performance Command Center*
+
+![LiveStack Demo Hospitality: Property Performance Command Center](images/demo-dashboard-charts.jpg)
+
+*LiveStack Demo Hospitality: Property Performance Command Center*
+
 ## Acknowledgements
 
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
-
-## Application example
-
-The running Hospitality LiveStack application presents portfolio indicators and charts. This application uses a separate demo dataset; these values are not the expected output of the workshop SQL query.
-
-![Live hospitality portfolio dashboard](images/demo-dashboard.jpg)
-
-![Live hospitality portfolio charts](images/demo-dashboard-charts.jpg)

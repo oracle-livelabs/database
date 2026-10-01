@@ -1,17 +1,17 @@
 # Review a Semantic Guest Concern Search
 
-![Gilly — hospitality lab banner](images/gilly.png)
-
 ## Introduction
 
 Gilly Bourne, Seer Hotels’ AI engineer, is building a guest-concern search. A question such as **“Which guests may be affected by an accessible-room concern?”** must lead to relevant stay offers and the guests who booked them.
 
 Create stay offer vectors, rank matches by meaning, then join the results to reservations and guest contact details.
 
+![Gilly — hospitality lab banner](images/gilly.png)
+
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
-> - An **embedding** is a numerical profile of what text means. In this lab, stay offer data is embedded so similar hospitality ideas sit near each other mathematically, even when the wording is different.
+> - An **embedding** represents text as a list of numbers. This lab embeds each stay offer’s name, category and subcategory so the query can rank descriptions with similar meanings.
 >
 > - An **ONNX embedding model** is a portable machine-learning model saved in the Open Neural Network Exchange (ONNX) format. It turns text into a vector of numbers that captures meaning. Oracle AI Database can load and run this model inside the database, close to the stay offer rows.
 >
@@ -61,7 +61,7 @@ Gilly uses an ONNX embedding model loaded by Jessica to turn stay offer text and
 
 ## Task 2: Create a stay offer vector
 
-Gilly decides that one vector per stay offer is enough. Each stay offer record is short and describes one stay offer, so she combines its name, category, and subcategory into one text value before creating the vector.
+Each stay offer has a short description, so Gilly creates one vector from its name, category and subcategory.
 
 1. Review the text Gilly will embed:
 
@@ -124,7 +124,7 @@ Gilly decides that one vector per stay offer is enough. Each stay offer record i
 
 ## Task 3: Test the stay offer vector
 
-Now Gilly tests the new column with a simple vector query. She asks for stay offers related to accessible room with step-free access and lets the database rank them by meaning.
+Search for `accessible room with step-free access` and review how the database ranks the offers by meaning.
 
 1. Run the following query:
 
@@ -217,7 +217,7 @@ Gilly now connects the matched offers to guests. The query includes pending, con
 
     **Expected output: Guest Follow-up List**
 
-    Use the similarity score to review each match before contacting the guest.
+    Use the similarity score to review each offer match. The list identifies guests to consider for follow-up; it does not confirm an accessibility problem. Check the property, room requirements and reservation details before contacting a guest.
 
 2. Review the business result.
 

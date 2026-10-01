@@ -2,11 +2,9 @@
 
 ## Introduction
 
-Thomas Brune develops production applications at SEER MANUFACTURING. His team needs production order documents that match its web and mobile screens and reduce calls to the database.
+Thomas Brune needs production-order JSON documents for SEER MANUFACTURING’s web and mobile application. Jessica must keep the relational data available for analysis.
 
-Thomas wants each JSON document to group customer site and plant IDs, scheduled dates, status, material costs, and optional app fields. He needs to change the document as the application grows while keeping relational keys, SQL access, transactions, and database controls.
-
-Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of customer site data.
+Compare three options: a JSON column, a JSON Collection Table, and a duality view over existing rows.
 
 ![Thomas introduces the JSON production-order application lab](images/thomas.png)
 
@@ -38,7 +36,6 @@ Thomas's application needs a document with the production order and its producti
 }
 ```
 
-The application uses this document structure, while the database keeps the production order and production-order lines in relational form. In this lab, you build and read this type of document in three ways.
 
 ### Objectives
 
@@ -49,19 +46,11 @@ The application uses this document structure, while the database keeps the produ
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-Help Thomas choose how to store and serve production-order documents. Compare three JSON approaches, then insert and update an order through a duality view.
-
-### Thomas's three JSON choices
-
-Thomas does not need one JSON pattern for every feature. A JSON column holds optional application attributes in a relational table. A JSON Collection Table holds documents owned by the application. A duality view assembles a document from existing relational tables. Thomas uses the document structure in the application, while Jessica works with the underlying rows using SQL.
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Store flexible application data as JSON
 
-Thomas starts with data that belongs to the application but does not need its own relational columns. The workshop database already contains the production order rows. He adds a small application-data table with a native `JSON` column for optional screen and production-tracking settings.
+Thomas starts with optional screen and production-tracking settings stored in a native `JSON` column.
 
 1. Create the application-data table and add one sample document.
 
@@ -107,7 +96,7 @@ Thomas starts with data that belongs to the application but does not need its ow
 
 ## Task 2: Create a JSON Collection Table
 
-Thomas now needs a collection of application documents. Unlike the JSON column in Task 1, this object is a JSON Collection Table: each row is a document, the document is stored in `DATA`, and `_id` identifies the document.
+Next, store application-owned documents in a JSON Collection Table. Each row’s `DATA` column holds a document identified by `_id`.
 
 1. Create the collection and add the sample production order document.
 
@@ -146,7 +135,7 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
     </copy>
     ```
 
-    `WITH ETAG` adds an `_metadata.etag` value to each document. Oracle changes the tag whenever the document changes. Thomas's application can send the tag it last read when it updates a document. If the tag no longer matches, the application knows that someone else changed the document first and can avoid overwriting the newer version. This protects customer site data when web and mobile requests try updating the same document at the same time.
+    `WITH ETAG` adds `_metadata.etag`, which changes with the document. An application can use the tag it last read to detect concurrent changes and avoid overwriting a newer version.
 
 2. Query the collection as documents.
 
@@ -159,23 +148,13 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
     </copy>
     ```
 
-    Thomas now has a document collection that a document API can access, and SQL can query the same `DATA` column. The collection stores the documents; it is separate from the relational `PRODUCTION_ORDERS` and `PRODUCTION_ORDER_LINES` tables.
+    The collection stores its own documents, separately from `PRODUCTION_ORDERS` and `PRODUCTION_ORDER_LINES`.
 
 ## Task 3: Read a customer site document from relational data
 
-Thomas now tests the document structure his application can consume directly.
+Now read a document assembled from the existing relational orders.
 
 1. Run this query:
-
-    This query selects the JSON `DATA` column from `PRODUCTION_ORDERS_DV` so Thomas can inspect the document structure in SQL Worksheet.
-
-    <details>
-    <summary><strong>Why this matters to Thomas</strong></summary>
-
-    > Thomas can use a JSON Collection Table when the application owns the document. But the production order already has relational tables that Jessica and other teams rely on.
-    > The duality view gives Thomas a document over those existing rows. He can choose the document structure without copying the production order into another store.
-
-    </details>
 
     ```sql
     <copy>
@@ -187,16 +166,12 @@ Thomas now tests the document structure his application can consume directly.
 
     ![JSON production-order document returned from the duality view](images/sql-duality-document.png)
 
-    **Expected output:**
+    **Expected output:** One production-order JSON document containing the order identifier, customer-site identifier, status and nested order lines.
 
 2. Expand the document in SQL Worksheet.
-    The query reads the duality view as a document source. Oracle constructs the JSON structure from relational data, so the application gets a production order document without a second copy of the production order record.
+    Inspect `customerSiteId`, `status`, totals, timestamps, and nested order lines. They come from the relational rows.
 
-    The \_id value appears in the JSON document while the source data remains relational. The document includes `customerSiteId`, `status`, totals, timestamps, and production-order lines. 
-
-    The same production order now has two useful forms: API-ready JSON for the application and relational rows for analysis.
-
-    > **Note:** Look for `_metadata.etag` in the document. The ETAG changes when the document changes, so Thomas's application can detect a newer version before updating the production order and avoid overwriting another request.
+    > **Note:** The duality document also has `_metadata.etag` for detecting concurrent changes.
 
 ## Task 4: Enable document inserts and updates
 
@@ -219,11 +194,9 @@ The existing `PRODUCTION_ORDERS_DV` lets an application update production order 
 
     `PRODUCTION_ORDERS_DV` should report update enabled and insert disabled in the initial loader definition.
 
-    The view currently allows updates but not new top-level documents. The root `PRODUCTION_ORDERS` table controls document insertion. The nested `PRODUCTION_ORDER_LINES` rows must also allow inserts so the document can include production-order lines.
+    Enable inserts in both the root `PRODUCTION_ORDERS` mapping and the nested `PRODUCTION_ORDER_LINES` mapping. The `WITH INSERT UPDATE` annotations allow writes through the duality view; they do not grant privileges to another database user.
 
 2. Enable insert and update for the document and its production-order lines.
-
-    You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses allow developers to create and update the JSON document. Oracle still enforces the relational keys and data types.
 
     ```sql
     <copy>
@@ -254,11 +227,9 @@ The existing `PRODUCTION_ORDERS_DV` lets an application update production order 
     </copy>
     ```
 
-    This duality view uses two relational tables. `PRODUCTION_ORDERS` provides the document root. Related `PRODUCTION_ORDER_LINES` rows become the nested `items` collection. The `WITH INSERT UPDATE` clauses let Thomas write the complete JSON document while Oracle maintains the rows and relationships.
+    `PRODUCTION_ORDERS` supplies the root; `PRODUCTION_ORDER_LINES` supplies `items`. Both `WITH INSERT UPDATE` clauses allow document writes while table constraints remain enforced.
 
     **Expected output: View Definition Updated**
-
-    Oracle created or replaced the duality view. Verify the new capabilities in the next step.
 
 3. Run the capability query again.
 
@@ -279,17 +250,15 @@ The existing `PRODUCTION_ORDERS_DV` lets an application update production order 
 
     `PRODUCTION_ORDERS_DV` should report insert and update enabled; delete remains disabled.
 
-    The view can now receive a new JSON production order document and apply a document update. Thomas has a document API over the existing relational production order data. He can use it for a customer site feature such as submitting a new production order. The application sends one document, and the database writes the production order and its production-order lines to the relational tables.
-
 ## Task 5: Create and update a JSON production order
 
-Thomas now tests a complete customer site production order. He creates it as one nested JSON document, then confirms that Jessica can immediately see the same data as structured relational rows.
+Thomas inserts an order as JSON, then checks the relational rows with Jessica.
 
 1. Insert the supplied workshop production order document.
 
-    The `INSERT` writes through `PRODUCTION_ORDERS_DV`; Oracle uses the view definition to update the relational tables. The sample uses production order `900001`, customer site `1`, plant `1`, component `1`, and order-line `990001`. Its two-unit order costs USD 125.00 per unit, for a total of 250.00 in the workshop currency.
+    The document uses order `900001` and line `990001`, reserved for this exercise, with customer site `1`, plant `1`, and component `1`.
 
-    The loader must supply customer site 1 and component 1 at plant 1. The production order and order-line IDs are reserved for this exercise. Quantity is independent of the scheduled date range. The fixed dates make the exercise repeatable and put the due date after the scheduled start. On the first run, the production order has status `planned`. Running the insert again adds no rows and preserves the existing record.
+    The sandbox supplies those referenced records. Fixed dates keep the exercise repeatable; quantity is independent of the date range. Rerunning the insert preserves the existing order.
 
     ```sql
     <copy>
@@ -397,15 +366,11 @@ Thomas now tests a complete customer site production order. He creates it as one
 
 ## Task 6: Project JSON fields with SQL
 
-Thomas has checked that the application can display and update a document. Jessica now queries `PRODUCTION_ORDERS_DV` to check the fields the application receives. She extracts selected JSON values as SQL columns, a step called **projection**. She can use those columns for production-quality searches and status filters.
+Jessica now extracts JSON fields as SQL columns—a **projection**—and compares them with the relational data.
 
 1. Run this SQL/JSON projection query:
 
-    Thomas's document is still available for SQL analysis. The same production order document can be queried, filtered, and joined to relational customer site data.
-
-    The SQL uses `JSON_VALUE` to extract production order fields from the duality document. That is the projection step. It returns the production order ID and status, reads the embedded customer site identifier, joins that identifier to `CUSTOMER_SITES`, and orders the result for review.
-
-    Thomas does not need to hand-build this document in the application or copy the production order to a separate document store. The application gets JSON, while Jessica still has SQL access to the same production order rows.
+    `JSON_VALUE` extracts the order ID, status, and customer-site ID. The query joins `CUSTOMER_SITES` to add the email address.
 
     ```sql
     <copy>
@@ -441,19 +406,19 @@ Thomas has checked that the application can display and update a document. Jessi
 
     ![Matching production-order fields read from the relational tables](images/sql-duality-relational.png)
 
-    Compare the result with the previous query. The production order ID, status, and customer site email should match. Thomas's application is reading the JSON document, while Jessica's relational query reads the underlying rows.
+    The order ID, status, and customer-site email should match the preceding JSON projection.
 
 ## Conclusion: Choose the right JSON approach
 
-Thomas does not have to choose one JSON model for the whole application. He can choose based on who owns the data and whether the application needs a document over existing relational rows.
+Choose the JSON approach according to who owns the data:
 
-| Approach                          | Use it when                                                                                 | Example in Thomas's application                                                                            | Where the data lives                                                                                           |
-| -----------------------------------| ---------------------------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------|
-| JSON column in a relational table | A relational record needs optional or changing attributes.                                  | Store screen settings or production planning options alongside a production order key.                          | A normal relational table with a native `JSON` column.                                                         |
-| JSON Collection Table             | The application owns a set of JSON documents and needs document-style access.               | Store saved production order drafts as customer sites revise scheduled dates and delivery requirements.                              | A JSON Collection Table with one document in each `DATA` row.                                                  |
-| JSON Relational Duality View      | The data already belongs in relational tables, but the application needs one JSON document. | Return a customer site production order with its status and production-order lines, or accept a new production order document from the app. | Relational tables such as `PRODUCTION_ORDERS` and `PRODUCTION_ORDER_LINES`; the duality view defines the JSON structure for Thomas' app. |
+| Approach | Use it for |
+| --- | --- |
+| JSON column | Optional attributes alongside a relational key. |
+| JSON Collection Table | Application-owned documents, such as order drafts. |
+| JSON Relational Duality View | Documents over shared relational orders and order lines. |
 
-For Thomas, `PRODUCTION_ORDERS_DV` is the right choice for the production order feature because `PRODUCTION_ORDERS` and `PRODUCTION_ORDER_LINES` already hold shared manufacturing data. The application gets the JSON document it needs, while Jessica keeps SQL, relational constraints, and controlled access to the same data.
+Thomas chooses a duality view for shared production orders: the application gets JSON while Jessica queries the same rows with SQL.
 
 ## Acknowledgements
 

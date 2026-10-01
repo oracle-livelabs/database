@@ -14,13 +14,9 @@ SEER Telecomms is a fictional communications provider. All people, sites, orders
 
 ![SEER Telecomms model: subscribers and network sites connect to service orders; sites have service plans; orders have lines linked to plans.](images/seer-telecomms-erd.png)
 
-*A service order covers one initial monthly period. Each line selects a plan offered for that site’s service area and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) and read the [complete table and sample-data reference](../reference/tables-and-sample-data.md).
+*A service order covers one initial monthly period. Each line selects a plan offered for that site’s service area and a number of simultaneous connections. Monthly charges equal connections multiplied by the agreed monthly fee. The one-time activation fee is separate.* [Open the full-size diagram](images/seer-telecomms-erd.png) or use the [text-based SVG diagram](images/seer-telecomms-erd.svg) to visualise the data model.
 
 Plans cover mobile voice and data, fixed wireless, fiber, and IoT. Each plan includes access technology, advertised download speed, and a data allowance; a null allowance means unlimited. The workshop links each plan to a site to represent a service area. Commercial mobile plans are not tied to a single radio tower. Subscriber locations are service addresses, not live handset tracking.
-
-The [running telecom application](http://141.144.192.27:8505/) follows a game-day 5G congestion incident. Open **Welcome** to see how its screens connect. Its demo dataset and current user, Jessica Chen, differ from the workshop sample data and teaching personas. Use the lab queries and sample data for the database exercises.
-
-![Welcome page of the supplied telecom operations demo.](images/app-welcome.png)
 
 ### What the team builds
 
@@ -52,6 +48,14 @@ The [running telecom application](http://141.144.192.27:8505/) follows a game-da
 - Review each result against its source data and the limits of the sample data.
 
 Estimated Workshop Time: **90 minutes**
+
+## Application Demo
+
+For the application walkthrough, open the [telecommunications application demo on LiveLabs](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4421). Follow the game-day 5G congestion incident from the **Welcome** screen.
+
+![LiveStack Telecomm Demo: Welcome](images/app-welcome.png)
+
+*LiveStack Telecomm Demo: Welcome*
 
 ## Acknowledgements
 
