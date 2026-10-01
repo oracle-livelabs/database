@@ -58,34 +58,14 @@ In this lab, you will:
 
 ## Task 2: Import the Role-Specific Slack Manifests
 
-1. At [Slack API: Your Apps](https://api.slack.com/apps), select **Create New App**, then **From an app manifest**. Select the workshop workspace and paste the matching JSON manifest from the blocks below.
+1. At [Slack API: Your Apps](https://api.slack.com/apps), select **Create New App**, then **From an app manifest**. Select the workshop workspace.
 
     ![Create a New App](./images/08_create_new_app.png)
 
-2. Import each manifest once. The manifests below are templates. You can change `display_information.name` and `features.bot_user.display_name` before importing each app if your deployment uses customer-specific bot names. Keep the scopes and events aligned with the role unless you intentionally change the runtime behavior.
+2. Import each manifest once. Expand the matching agent manifest below, click the **Copy** button, and paste its JSON into the Slack manifest editor. The JSON stays collapsed until you open an agent name. These are templates; you can change `display_information.name` and `features.bot_user.display_name` before importing each app if your deployment uses customer-specific bot names. Keep the scopes and events aligned with the role unless you intentionally change the runtime behavior.
 
-    | Runtime directory | Manifest | Agent name | Required channel membership |
-    | --- | --- | --- | --- |
-    | `agents/assistant` | Assistant manifest below | Assistant Agent | `#personal`, `#ideas`, `#content-start`, `#publishing`, `#errors`, `#inbox`, `#briefing`, and direct messages |
-    | `agents/pipeline` | Content manifest below | Content Agent | `#content-start`, `#content-runs`, `#content-internal`, `#publishing`, `#errors` |
-    | `agents/pipeline` | Creative manifest below | Creative Agent | `#creative-studio`, `#content-runs`, `#content-internal`, `#errors` |
-    | `agents/brand-agent` | Brand manifest below | Brand Agent | `#content-runs`, `#errors`, and direct messages |
-    | `agents/data` | Data manifest below | Data Agent | `#data`, `#errors` |
-    | `agents/ops` | Ops manifest below | Ops Agent | `#ops`, `#errors` |
-    | `agents/publish` | Publish manifest below | Publish Agent | `#publishing`, `#content-runs`, `#errors` |
-
-
-    ![Import from Manifest](./images/09_app_from_manifest.png)
-
-    ![Where to Add your Manifest](./images/10_where_manifest.png)
-
-    ![Change the Display Name of the Bot](./images/11_app_display_name.png)
-
-    ![Select Workspace for App](./images/12_select_workspace.png)
-
-    ![Create App](./images/13_create_app.png)
-
-3. Paste this Assistant Agent manifest.
+    <details>
+    <summary>Assistant Agent manifest — open to copy</summary>
 
     ```json
     <copy>
@@ -136,7 +116,10 @@ In this lab, you will:
     </copy>
     ```
 
-4. Paste this Content Agent manifest.
+    </details>
+
+    <details>
+    <summary>Content Agent manifest — open to copy</summary>
 
     ```json
     <copy>
@@ -182,7 +165,10 @@ In this lab, you will:
     </copy>
     ```
 
-5. Paste this Creative Agent manifest.
+    </details>
+
+    <details>
+    <summary>Creative Agent manifest — open to copy</summary>
 
     ```json
     <copy>
@@ -226,13 +212,17 @@ In this lab, you will:
     </copy>
     ```
 
-6. Paste this Brand Agent manifest.
+    </details>
+
+    <details>
+    <summary>Brand Agent manifest — open to copy</summary>
 
     ```json
     <copy>
     {
       "display_information": {
-        "name": "Brand Agent"
+        "name": "Brand Agent",
+        "description": "Learns who you are, your voice, audience, and goals, then shapes your brand strategy and creates content that sounds like you."
       },
       "features": {
         "bot_user": {
@@ -276,7 +266,10 @@ In this lab, you will:
     </copy>
     ```
 
-7. Paste this Data Agent manifest.
+    </details>
+
+    <details>
+    <summary>Data Agent manifest — open to copy</summary>
 
     ```json
     <copy>
@@ -320,7 +313,10 @@ In this lab, you will:
     </copy>
     ```
 
-8. Paste this Ops Agent manifest.
+    </details>
+
+    <details>
+    <summary>Ops Agent manifest — open to copy</summary>
 
     ```json
     <copy>
@@ -364,7 +360,10 @@ In this lab, you will:
     </copy>
     ```
 
-9. Paste this Publish Agent manifest.
+    </details>
+
+    <details>
+    <summary>Publish Agent manifest — open to copy</summary>
 
     ```json
     <copy>
@@ -408,35 +407,69 @@ In this lab, you will:
     </copy>
     ```
 
-10. Assistant Agent and Brand Agent are the only apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app before installing it.
+    </details>
+
+
+    ![Import from Manifest](./images/09_app_from_manifest.png)
+
+    ![Where to Add your Manifest](./images/10_where_manifest.png)
+
+    ![Change the Display Name of the Bot](./images/11_app_display_name.png)
+
+    ![Select Workspace for App](./images/12_select_workspace.png)
+
+    ![Create App](./images/13_create_app.png)
+
+3. Assistant Agent and Brand Agent are the only apps that need Direct Message access. Their manifests include `im:history`, `im:read`, `im:write`, and the `message.im` event. After importing those two manifests, verify that direct messages are enabled for each app before installing it.
 
     ![Where to Activate DM](./images/14_direct_messages.png)
 
     ![Agents with Access to direct messages](./images/03_agent_permission.png)
 
-11. For each app, create an app-level token with `connections:write`, install or reinstall it, and record its `xoxb-...` bot token and `xapp-...` app token. Socket Mode needs both tokens.
+4. For each app, create an app-level token with `connections:write`, record its `xapp-...` app token. 
 
     ![Where to get App Tokens](./images/15_where_app_tokens.png)
 
     ![Slack Agents Tokens for Application](./images/04_agent_token.png)
 
-12. Invite each bot to the channels listed in the following Table. A manifest grants scopes but does not grant channel membership; without membership, Slack does not deliver channel messages and file uploads can fail with `not_in_channel`.
+    ![Token fill fields](./images/05_fill_fields.png)
 
-    | Agent name | Required channel membership |
+    ![Green button generate](./images/generate.png)
+
+    ![Save xapp- token](./images/token.png)
+
+    Also install or reinstall it, and record its `xoxb-...` bot token. Socket Mode needs both tokens.
+
+    ![Slack Agents install](./images/install_app.png)
+
+    ![Slack Agents allow](./images/allow_button.png)
+
+    ![Save xoxb- token](./images/save_bot_token.png)
+
+5. Invite the listed agents to each channel. Open a Slack channel, click **Invite Teammates**, enter the agent name shown in the table, select the matching app, and invite it. Repeat for every agent listed for that channel. Creating an app does not add it to a channel; without membership, Slack does not deliver channel messages and file uploads can fail with `not_in_channel`.
+
+    | Slack channel | Invite these agents |
     | --- | --- |
-    | Assistant Agent | `#personal`, `#ideas`, `#content-start`, `#publishing`, `#errors`, `#inbox`, `#briefing`, and direct messages |
-    | Content Agent | `#content-start`, `#content-runs`, `#content-internal`, `#publishing`, `#errors` |
-    | Creative Agent | `#creative-studio`, `#content-runs`, `#content-internal`, `#errors` |
-    | Brand Agent | `#content-runs`, `#errors`, and direct messages |
-    | Data Agent | `#data`, `#errors` |
-    | Ops Agent | `#ops`, `#errors` |
-    | Publish Agent | `#publishing`, `#content-runs`, `#errors` |
+    | `#content-start` | Assistant Agent, Content Agent |
+    | `#content-runs` | Content Agent, Creative Agent, Brand Agent, Publish Agent |
+    | `#content-internal` | Content Agent, Creative Agent |
+    | `#creative-studio` | Creative Agent |
+    | `#publishing` | Assistant Agent, Content Agent, Publish Agent |
+    | `#data` | Data Agent |
+    | `#ops` | Ops Agent |
+    | `#errors` | Assistant Agent, Content Agent, Creative Agent, Brand Agent, Data Agent, Ops Agent, Publish Agent |
+    | `#personal` | Assistant Agent |
+    | `#ideas` | Assistant Agent |
+    | `#inbox` | Assistant Agent |
+    | `#briefing` | Assistant Agent |
 
-13. In your shell, export the Assistant Agent bot token temporarily, then run `auth.test`. Record `team_id` as `SLACK_WORKSPACE_ID` and `bot_id` as `ASSISTANT_BOT_ID`. The Assistant Agent is the only bot allowlisted to issue specialist-agent commands.
+    ![Add app into channel](./images/add_app.png)
+    ![Add app button](./images/add_button.png)
+
+6. Before running the command, replace `<assistant-agent-token>` with the actual `xoxb-...` bot token for your Assistant Agent app. Export the token temporarily, then run `auth.test`. Record `team_id` as `SLACK_WORKSPACE_ID` and `bot_id` as `ASSISTANT_BOT_ID`. The Assistant Agent is the only bot allowlisted to issue specialist-agent commands.
 
     ```
     <copy>
-    export ASSISTANT_BOT_TOKEN='xoxb-<assistant-agent-token>'
     curl -s -H "Authorization: Bearer $ASSISTANT_BOT_TOKEN" \
       https://slack.com/api/auth.test | python3 -m json.tool
     unset ASSISTANT_BOT_TOKEN
@@ -448,7 +481,10 @@ In this lab, you will:
     - `team_id`: save as `SLACK_WORKSPACE_ID`.
     - `bot_id`: save as `ASSISTANT_BOT_ID`.
 
-14. Record the deployment owner's member ID as `SLACK_ASSISTANT_USER_ID`; the Assistant Agent uses it for reminders and privileged routing.
+
+    ![Example of right command](./images/step_6_command.png)
+
+7. Record the deployment owner's member ID as `SLACK_ASSISTANT_USER_ID`; the Assistant Agent uses it for reminders and privileged routing.
 
 ## Task 3: Configure and Protect Environment Files
 
@@ -472,11 +508,22 @@ In this lab, you will:
     </copy>
     ```
 
-    Replace the template placeholders with the database values from Lab 1 and the Slack values collected in Tasks 1 and 2. Keep the API defaults already present in the template.
+    Keep the API defaults already present in the template. Use the column for the deployment path you completed to fill the database values:
+
+    | `.env.shared` setting | Fast Path | Manual Path |
+    | --- | --- | --- |
+    | `ADB_DSN` | Copy `autonomous_database_service_name` from the Resource Manager stack's **Outputs**. Use the whole value; it ends in `_low`. | In Lab 1, Task 2, open `/home/opc/oracle/wallet/tnsnames.ora` and copy the exact alias ending in `_low` from the left side of `=`. |
+    | `ADB_USER` | `ADMIN` | `ADMIN` |
+    | `ADB_PASSWORD` | The `ADMIN` password you entered when creating the stack. It is not shown in the outputs. | The `ADMIN` password you set in Lab 1. It is also the wallet passphrase. |
+    | `ADB_WALLET_DIR` | `/home/opc/oracle/wallet` | The wallet directory created in Lab 1, normally `/home/opc/oracle/wallet`. Use the actual path if you extracted the wallet elsewhere. |
+
+    `tnsnames.ora` is a text file inside the wallet. It maps short connection aliases to the database network settings; set `ADB_DSN` to the alias only, not the full descriptor or the path to this file. For the manual path, Lab 1, Task 2, steps 5–7, creates and verifies the wallet files in `~/oracle/wallet`.
+
+    The other Fast Path outputs are not `.env.shared` values: `autonomous_database_name`, `db_name`, and `configuration_summary.database_name` identify the database but are not the `_low` connection alias; `instance_public_ip` and `ssh_command` are for SSH; and `bootstrap_log` and `bootstrap_status` are paths used to monitor bootstrap. The remaining `configuration_summary` entries describe region, workload, and capacity. Get Slack IDs from Slack in Tasks 1 and 2.
 
     ```
     <copy>
-    ADB_DSN=<adb-low-service-name-from-tnsnames.ora>
+    ADB_DSN=<exact-adb-low-alias>
     ADB_USER=ADMIN
     ADB_PASSWORD=<admin-database-password>
     ADB_WALLET_DIR=/home/opc/oracle/wallet
