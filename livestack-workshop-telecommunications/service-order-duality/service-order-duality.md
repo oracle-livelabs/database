@@ -183,7 +183,7 @@ Thomas now tests the document shape his application can consume directly.
 
     ![Read a subscriber document from relational data](images/sql-duality-document.png)
 
-    **Expected output:**
+    **Expected output:** One service-order JSON document containing the order identifier, subscriber identifier, status and nested order lines.
 
 2. Expand the document in SQL Worksheet.
     Oracle builds this document from the existing service order and line rows. Check `_id`, `subscriberId`, `status`, totals, timestamps, and `items` in the returned JSON.
