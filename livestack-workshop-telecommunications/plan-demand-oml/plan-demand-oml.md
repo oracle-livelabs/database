@@ -99,9 +99,22 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     | Prediction type | `Classification`        |
     | Case ID         | `PLAN_ID`            |
 
-    ![AutoML settings: training view, target label, classification, and plan ID.](images/oml-settings.png)
+     **Note:** The Predict, Prediction Type, and Case ID fields become available after a data source has been entered. Select `SURGE_LABEL`, `Classification`, and `OFFER_ID`, respectively.
 
-    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on database resources and model settings.
+     To enter the **Data Source** value:
+    1. Enter *Care Demand Risk Test* in the Name field.
+    2. Select the magnifying-glass icon next to **Data Source**.
+
+  ![Hospitality classification experiment settings](images/data-source-two.png)
+
+    3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
+    4. Select `OML_PLAN_DEMAND_TRAINING_V` from the **Table** list.
+
+  ![Hospitality classification experiment settings](images/data-source-one.png)
+
+    5. Select **OK**.
+
+5. Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on database resources and model settings.
 
 4. Review the leaderboard and model details.
 

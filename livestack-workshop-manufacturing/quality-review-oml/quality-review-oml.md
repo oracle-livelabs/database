@@ -97,11 +97,24 @@ AutoML can take several minutes. Skip to Task 3 if you want to focus on SQL.
     | Prediction type | `Classification`        |
     | Case ID         | `COMPONENT_ID`            |
   
-    ![Manufacturing classification experiment settings](images/oml-settings.png)
+    **Note:** The Predict, Prediction Type, and Case ID fields become available after a data source has been entered. Select `SURGE_LABEL`, `Classification`, and `OFFER_ID`, respectively.
 
-    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on the service and available resources.
+     To enter the **Data Source** value:
+    1. Enter *Care Demand Risk Test* in the Name field.
+    2. Select the magnifying-glass icon next to **Data Source**.
 
-4. Review the leaderboard and model details.
+  ![Hospitality classification experiment settings](images/data-source-one.png)
+
+    3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
+    4. Select `OML_QUALITY_TRAINING_V` from the **Table** list.
+
+  ![Hospitality classification experiment settings](images/data-source-two.png)
+
+    5. Select **OK**.
+
+4. Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on the service and available resources.
+
+5. Review the leaderboard and model details.
 
     ![Completed Component Quality Review leaderboard](images/oml-leaderboard.png)
 
