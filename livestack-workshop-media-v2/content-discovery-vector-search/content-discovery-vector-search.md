@@ -1,16 +1,16 @@
-# Discover Related Midnight Harbor Content with Vector Search
+# Review a Semantic Content Search
 
 ## Introduction
 
-Gilly Bourne builds search features for Seer Media's launch operations application. Users ask: **which campaign orders include content related to the Midnight Harbor premiere?** The search must find relevant assets and the audience accounts linked to their campaign orders.
+Gilly Bourne is an AI engineer at Seer Media. Her team has built a search feature for the launch operations application. A business user can enter a question such as **which campaign orders include content related to the Midnight Harbor premiere?** The application should find the relevant content assets first, then show the campaign orders and audience accounts linked to them.
 
-Gilly connects a plain-language question to existing database rows. She compares vectors to rank content assets, then joins the matches to campaign orders and audience accounts. The result gives the campaign team a follow-up list with asset names, order details, and contact information.
+Gilly already has the content-asset, campaign-order, and audience-account data in the database. Her design problem is connecting a plain-language question to those existing rows. She needs to rank content assets by meaning and join those matches to campaign orders and audience accounts. A useful result must show more than a similarity score. It must give the campaign team a follow-up list with asset names, order details, and contact information.
 
-The content text and vectors stay in Oracle AI Database. One SQL statement compares meaning and joins the matching assets to their campaign records.
+Gilly wants the search to run where the underlying rows already live. Oracle AI Database stores the content text and vectors together, so one SQL statement can compare meaning, join the matching assets to campaign orders and audience accounts, and return a result for the application.
 
-In this lab, you inspect the embedding model and stored vectors, test semantic search, and build the campaign follow-up query.
+In this lab, you review Gilly's implementation from the embedding model to the final campaign follow-up list. Vector search finds the relevant content assets, and SQL joins connect them to exact campaign-order and audience-account data in the same database.
 
-![Gilly introduces semantic search for Media content assets](images/media-gilly.png)
+![Gilly introduces semantic search for Media content assets](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
@@ -27,12 +27,12 @@ In this lab, you inspect the embedding model and stored vectors, test semantic s
 
 </details>
 
-The application's search field accepts a plain-language question and returns content assets ranked by meaning.
+In this lab, you review how Gilly built the content search. The search area lets a business user enter a question in ordinary language and receive content assets ranked by meaning.
 
 ### Objectives
 
 - Check the embedding model Gilly needs for semantic search.
-- Create a query vector and inspect stored content vectors inside the database.
+- Inspect stored content vectors and create a query vector inside the database.
 - Review a semantic content discovery search for a business question.
 - Turn content asset matches into a campaign follow-up list.
 - Explain why vector search belongs beside media data and access controls.
@@ -53,14 +53,14 @@ Estimated Time: **10 minutes**
 Persona focus: You are reviewing the search tool Gilly built for launch operations.
 
 
-> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for setup and query instructions.
+> **SQL Worksheet reminder:** Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the guide showing where to paste and run SQL statements. Each runnable block in this lab is one SQL statement; paste the complete block into an empty worksheet and click **Run Statement**.
 
 
 ## Task 1: Check the embedding model
 
-Similarity search needs stored vectors and an embedding model that converts the query text into a comparable vector.
+Start with Gilly's first design question: **what does similarity search need?** It needs vectors for the text being searched and an embedding model that converts a question into a comparable vector.
 
-Jessica makes the ONNX model available in Oracle AI Database. The handoff loader requires `ADMIN.ALL_MINILM_L12_V2` and grants `LLUSER` access. This model generates query embeddings inside the database.
+Gilly asks Jessica to make an ONNX embedding model available in Oracle AI Database. The handoff loader requires `ADMIN.ALL_MINILM_L12_V2` and grants `LLUSER` access. Oracle AI Database runs the model inside the database, so it creates the question embedding where the content data already live.
 
 1. Run the following query to see which embedding models are available:
 
@@ -92,7 +92,9 @@ Jessica makes the ONNX model available in Oracle AI Database. The handoff loader
 
 ## Task 2: Review the content asset vectors
 
-Gilly decides that one vector per content asset is enough. The media loader has already created vectors in `PRODUCT_EMBEDDINGS`, keyed by `PRODUCT_ID` to the content asset catalog. It embeds each active asset's name, category, up to 1,000 characters of description, and studio or label. The physical names `PRODUCTS`, `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS` represent media content assets, campaign orders, asset line items, and audience accounts.
+Gilly decides that one vector per content asset is enough. Each catalog entry is short and describes one asset. The media loader combines each active asset's name, category, up to 1,000 characters of description, and studio or label before creating its vector.
+
+The vectors are already stored in `PRODUCT_EMBEDDINGS`, keyed by `PRODUCT_ID` to the content asset catalog. The physical names `PRODUCTS`, `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS` represent media content assets, campaign orders, asset line items, and audience accounts.
 
 1. Review the text the loader embedded:
 
@@ -136,7 +138,7 @@ Gilly decides that one vector per content asset is enough. The media loader has 
 
 ## Task 3: Test the content asset vector
 
-Gilly tests the stored embeddings with the phrase `Midnight Harbor premiere campaign`.
+Now Gilly tests the stored embeddings with a simple vector query. She asks for content assets related to `Midnight Harbor premiere campaign` and lets the database rank them by meaning.
 
 1. Run the following query:
 
@@ -145,7 +147,7 @@ Gilly tests the stored embeddings with the phrase `Midnight Harbor premiere camp
     <details>
     <summary><strong>Why this matters to Gilly</strong></summary>
 
-    > The query uses the catalog's stored vectors and relational keys. Gilly can inspect the ranking and join it to campaign data in the next task.
+    > Oracle AI Vector Search keeps the content catalog, vectors, SQL query, and vector distance in the same database. Gilly can check the ranking and join it to campaign data in the next task without maintaining another data store.
 
     </details>
 
@@ -176,7 +178,7 @@ Gilly tests the stored embeddings with the phrase `Midnight Harbor premiere camp
 
 3. Show the result as a similarity score:
 
-    Gilly displays similarity as `1 - distance`, rounded to four decimal places. A higher score means a closer match.
+    Vector distance is useful for checking the search, but business users may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
 
     ```sql
     <copy>
@@ -200,9 +202,9 @@ Gilly tests the stored embeddings with the phrase `Midnight Harbor premiere camp
 
 ## Task 4: Find campaign orders for related content assets
 
-Gilly joins the ranked assets to campaign orders and audience accounts. The follow-up list includes each asset match, campaign status, creation date, and account contact details.
+Gilly now has the business requirement for the application. A business user should be able to enter a question and find campaign orders for related content assets. The result gives the campaign team a short list for follow-up, with the asset match, campaign status, creation date, and audience-account contact details.
 
-1. Run the following query for the concern `Midnight Harbor premiere campaign`:
+1. Run the following query for `Midnight Harbor premiere campaign`:
 
     ```sql
     <copy>
@@ -247,18 +249,18 @@ Gilly joins the ranked assets to campaign orders and audience accounts. The foll
 
     **Expected output: Campaign Follow-up List**
 
-    Similarity explains why each asset matched. The campaign and account columns identify the records the team can review next.
+    The result shows campaign orders for content assets related to the question. The similarity score explains why each asset was included, while the campaign and account columns give the team enough information to decide what to review next.
 
 
     ![Campaign orders for semantically related Media content assets](images/media-campaigns.jpg)
 
 2. Review the business result.
 
-    The query reuses content embeddings and retrieves campaign details through relational keys. It needs no separate vectors for orders or accounts.
+    Gilly vectorizes the content catalog once, then combines vector search with SQL joins for exact campaign and contact details. The query reuses the stored content embeddings; it needs no separate vectors for campaign orders or audience accounts.
 
 ## Conclusion
 
-The search turns a plain-language question into ranked content assets. Relational joins connect those matches to campaign orders and account contacts for follow-up.
+Gilly has connected the application's search to a business action. A plain-language question produces ranked content assets and a campaign follow-up list using vectors, relational joins, and SQL in Oracle AI Database.
 
 ## Acknowledgements
 

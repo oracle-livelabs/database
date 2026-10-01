@@ -7,7 +7,7 @@ badge: images/livestack-media-badge.svg
 
 ## Introduction
 
-Use this scored quiz to review the Seer Media labs. Connect each campaign and content result to its database evidence.
+Use this scored quiz to check whether you can connect the Seer Media campaign and content outcomes to the database evidence you inspected in the labs.
 
 ### Objectives
 

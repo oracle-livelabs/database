@@ -186,25 +186,25 @@ Nina adds each component’s category and total planned units to make the rankin
 
 ## Task 6: Explain the result
 
-Nina wants a short explanation of the revised result. Select AI can run the SQL and ask the AI provider to describe the returned rows.
+Nina keeps the `runsql` result from Task 5 as her five-row table. She then asks Select AI to explain the highest-ranked component in prose and checks the explanation against that table.
 
 1. Run the revised question with the `narrate` action:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'For released, in-production, or completed orders, which five components have the highest total scheduled material value? Exclude setup costs. Answer with a table containing exactly five rows and columns for component name, category, total material value, and total planned units, followed by one explanatory sentence. Include both numeric totals for every component exactly as returned by the query, without rounding or abbreviation. If a requested value is missing, say that the answer is incomplete rather than inventing it. In this database, the exact stored order status labels are lowercase released, in_production, and completed; use those labels.',
+             prompt       => 'Among released, in-production, or completed orders, which component has the highest total scheduled material value, excluding setup costs? Give only one or two prose sentences: name the component and explain how its material-value and planned-unit totals help Nina review the production commitment. Do not enumerate components or use a list or table. The stored order status labels are lowercase released, in_production, and completed.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
     </copy>
     ```
 
-    ![Select AI narrative for the refined High-Tech result](images/sql-ai-narration.png)
+    ![Select AI explanation of the highest-value component](images/sql-ai-narration.png)
 
 2. Review the explanation against the SQL result.
 
-    Nina compares all five rows with the SQL result, checking names, categories, ranking and all ten numeric totals. If any value is missing or differs, use the verified SQL result for her decision.
+    Use the Task 5 `runsql` answer for the exact five rows and numeric totals. Check that the explanation identifies the highest-ranked component correctly and does not contradict the SQL result. Generated wording can vary.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
