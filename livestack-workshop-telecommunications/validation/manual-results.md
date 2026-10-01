@@ -1,5 +1,14 @@
 # Manual database validation — SEER Telecomms
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Validated on 23 September 2026 as LLUSER in the manually provisioned LIVESTACKTELCO Autonomous Database, version 23.26.3.3.0. Work stopped before LiveLabs green-button and Terraform provisioning validation.
 
 ## Loader and model
@@ -38,3 +47,8 @@ The database was provisioned manually. This run does not validate Terraform, gen
 Authentic application captures use the separate supplied demo dataset and local llama3.2 runtime. Authentic workshop captures use this LLUSER database and are placed next to their matching instructions. Tables with more columns or rows than fit in a viewport show excerpts; the SQL and expected results remain alongside them. Graph Studio's built-in template tag moviestream and LiveLabs Reservation Information/My Reservations are platform text, not telecom fixture content.
 
 See manual-results.json, database-captures.json, screenshot-inventory.json, and the selected live transcripts in manual-evidence/. Earlier errors are retained in transcripts where relevant; the result table above records the corrected outcome.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year
