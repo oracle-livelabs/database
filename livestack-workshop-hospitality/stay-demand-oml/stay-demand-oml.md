@@ -79,7 +79,7 @@ AutoML may take several minutes. Skip to Task 3 to train the example model direc
 
     ![Machine Learning launch from Database Actions](images/oml-launch.jpg)
 
-2. Click **AutoML**.
+2. Select **AutoML**.
 
     ![automl](images/oml-home.jpg) 
 
@@ -92,12 +92,25 @@ AutoML may take several minutes. Skip to Task 3 to train the example model direc
     | Predict         | `SURGE_LABEL`           |
     | Prediction type | `Classification`        |
     | Case ID         | `OFFER_ID`            |
-  
-    ![Hospitality classification experiment settings](images/oml-settings.jpg)
 
-    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime varies; the leaderboard may take several minutes.
+     **Note:** The Predict, Prediction Type, and Case ID fields become available after a data source has been entered. Select `SURGE_LABEL`, `Classification`, and `OFFER_ID`, respectively.
 
-4. Review the leaderboard and model details.
+     To enter the **Data Source** value:
+    1. Enter *Care Demand Risk Test* in the Name field.
+    2. Select the magnifying-glass icon next to **Data Source**.
+
+  ![Hospitality classification experiment settings](images/data-source-one.png)
+
+    3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
+    4. Select `OML_STAY_DEMAND_TRAINING_V` from the **Table** list.
+
+  ![Hospitality classification experiment settings](images/data-source-two.png)
+
+    5. Select **OK**.
+
+4. Choose **Start → Faster Results** and wait for the model leaderboard. Runtime varies; the leaderboard may take several minutes.
+
+5. Review the leaderboard and model details.
 
     ![Completed Stay Offer Demand Surge leaderboard](images/oml-leaderboard.jpg)
 
