@@ -1,44 +1,71 @@
 # Trace a Production Quality Network
 
+<!-- markdownlint-configure-file
+{
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
+
 ## Introduction
 
-Bob Green, Seer High-Tech’s graph specialist, is investigating production order `PO-8841`. Shared material lots, inspection records, machines, and suppliers may connect it to other orders.
+Bob Green, Seer High-Tech’s graph specialist, is investigating production order
+`PO-8841`. Shared material lots, inspection records, machines, and suppliers may
+connect it to other orders.
 
-You will follow those connections with SQL/PGQ, then explore the same relationships in Graph Studio. SQL returns tables to compare; Graph Studio displays nodes, edges, and paths.
+You will follow those connections with SQL/PGQ, then explore the same
+relationships in Graph Studio. SQL returns tables to compare; Graph Studio
+displays nodes, edges, and paths.
 
 ![Bob: High-Tech lab banner](images/bob.png)
 
 <details>
+<!-- markdownlint-disable-next-line MD013 -->
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
 
-> - A **property graph** represents entities and their connections, with properties attached to both.
+> * A **property graph** represents entities and their connections, with
+>   properties attached to both.
 >
-> - A **vertex** is an entity such as an order, lot, or supplier. Here, vertices have the `entity` label and properties such as risk score and material value.
+> * A **vertex** is an entity such as an order, lot, or supplier. Here, vertices
+>   have the `entity` label and properties such as risk score and material
+>   value.
 >
-> - An **edge** connects two vertices. Here, edges have the `related_to` label and a relationship-type property.
+> * An **edge** connects two vertices. Here, edges have the `related_to` label
+>   and a relationship-type property.
 >
-> - A **hop** crosses one edge: order to lot is one hop; order to lot to another order is two. Hops measure graph steps, not physical distance or elapsed time.
+> * A **hop** crosses one edge: order to lot is one hop; order to lot to another
+>   order is two. Hops measure graph steps, not physical distance or elapsed
+>   time.
 >
-> - **SQL Property Graph Queries (SQL/PGQ)** express connection patterns in SQL over the existing relational data.
+> * **SQL Property Graph Queries (SQL/PGQ)** express connection patterns in SQL
+>   over the existing relational data.
 
 </details>
 
 ### Objectives
 
-- Identify vertices and edges in a property graph.
-- Follow connections from a flagged production order.
-- Find production order pairs that share traceability records.
-- Open Graph Studio from Database Actions.
-- Import and run the High-Tech production-quality-network notebook.
-- Explain the results so a production analyst can decide what to investigate next.
+* Identify vertices and edges in a property graph.
+* Follow connections from a flagged production order.
+* Find production order pairs that share traceability records.
+* Open Graph Studio from Database Actions.
+* Import and run the High-Tech production-quality-network notebook.
+* Explain the results so a production analyst can decide what to investigate next.
 
 Estimated Time: **10 minutes**
 
-> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
+> **SQL Worksheet reminder:** See
+> [Getting Started Task 2: Open SQL Worksheet][link-1] for the steps to paste
+> and run SQL.
 
 ## Task 1: Follow a flagged production order with SQL
 
-Jessica’s query finds entities directly connected to `PO-8841`. Bob needs to follow connections several steps further.
+Jessica’s query finds entities directly connected to `PO-8841`. Bob needs to
+follow connections several steps further.
 
 1. Run Jessica's ordinary SQL query:
 
@@ -59,11 +86,16 @@ Jessica’s query finds entities directly connected to `PO-8841`. Bob needs to f
     </copy>
     ```
 
-    The query joins `TRACE_ENTITIES` twice: once for the production order and once for the connected entity. `TRACE_RELATIONSHIPS` supplies the edge between them.
+    The query joins `TRACE_ENTITIES` twice: once for the production order and
+    once for the connected entity. `TRACE_RELATIONSHIPS` supplies the edge
+    between them.
 
-    The result lists the material lot, machine, inspection record, and plant directly connected to `PO-8841`. The supplier is reached through the material lot in the later multi-hop query.
+    The result lists the material lot, machine, inspection record, and plant
+    directly connected to `PO-8841`. The supplier is reached through the
+    material lot in the later multi-hop query.
 
-2. Extend Jessica's query to follow one through four hops without using a graph query:
+2. Extend Jessica's query to follow one through four hops without using a graph
+    query:
 
     ```sql
     <copy>
@@ -157,15 +189,21 @@ Jessica’s query finds entities directly connected to `PO-8841`. Bob needs to f
     </copy>
     ```
 
-    The four `SELECT` branches follow one through four hops. Each additional hop adds a relationship join and an entity join; `UNION` combines the results and removes duplicate rows.
+    The four `SELECT` branches follow one through four hops. Each additional hop
+    adds a relationship join and an entity join; `UNION` combines the results
+    and removes duplicate rows.
 
 3. Review how the SQL grows more complex when it does not use a graph query.
 
-    Count the joins in the four-hop branch: four relationship joins and five instances of the entity table. Bob will express that path directly with a graph pattern.
+    Count the joins in the four-hop branch: four relationship joins and five
+    instances of the entity table. Bob will express that path directly with a
+    graph pattern.
 
 ## Task 2: Read the same connections as a graph
 
-The workshop already contains `PRODUCTION_QUALITY_NETWORK`, mapped over the existing relational tables. Run the queries directly; the appendix shows its definition.
+The workshop already contains `PRODUCTION_QUALITY_NETWORK`, mapped over the
+existing relational tables. Run the queries directly; the appendix shows its
+definition.
 
 1. Run Bob's SQL/PGQ query:
 
@@ -193,19 +231,27 @@ The workshop already contains `PRODUCTION_QUALITY_NETWORK`, mapped over the exis
 
     ![Direct entities connected to production order PO-8841](images/sql-graph-direct.png)
 
-    In the `MATCH` pattern, `production_order` and `connected` are vertices. `edge` is the edge between them, so this pattern follows one hop. `IS entity` and `IS related_to` refer to the labels defined in `PRODUCTION_QUALITY_NETWORK`.
+    In the `MATCH` pattern, `production_order` and `connected` are vertices.
+    `edge` is the edge between them, so this pattern follows one hop.
+    `IS entity` and `IS related_to` refer to the labels defined in
+    `PRODUCTION_QUALITY_NETWORK`.
 
-    Compare these rows with Jessica’s direct-connections query. The columns should match.
+    Compare these rows with Jessica’s direct-connections query. The columns
+    should match.
 
 ## Task 3: Trace four-hop quality traceability
 
-Start from flagged production order `PO-8841` and trace the connected entities within four relationship hops.
+Start from flagged production order `PO-8841` and trace the connected entities
+within four relationship hops.
 
 1. Run the SQL/PGQ traversal from `PO-8841`.
 
-    `(seed IS entity)` is the starting order; `-[e IS related_to]->{1,4}` follows one through four edges to `(reached IS entity)`. `COUNT(e.relationship_type)` counts those edges as `relationship_hops`.
+    `(seed IS entity)` is the starting order; `-[e IS related_to]->{1,4}`
+    follows one through four edges to `(reached IS entity)`.
+    `COUNT(e.relationship_type)` counts those edges as `relationship_hops`.
 
-    The `WHERE` clause anchors the search on `PO-8841`, and the `COLUMNS` clause returns graph properties in a normal SQL result table.
+    The `WHERE` clause anchors the search on `PO-8841`, and the `COLUMNS` clause
+    returns graph properties in a normal SQL result table.
 
     ```sql
     <copy>
@@ -235,11 +281,15 @@ Start from flagged production order `PO-8841` and trace the connected entities w
 
 2. Find the highest-risk entities connected to `PO-8841`.
 
-    Find lot `LOT-SEMI-91A7`, test station `MACHINE-ATE-017`, supplier `SUPPLIER-044`, and inspection `INSPECTION-0199`. Which connection would Bob investigate first? Risk and material value help him prioritize; they do not establish the cause of a defect.
+    Find lot `LOT-SEMI-91A7`, test station `MACHINE-ATE-017`, supplier
+    `SUPPLIER-044`, and inspection `INSPECTION-0199`. Which connection would Bob
+    investigate first? Risk and material value help him prioritize; they do not
+    establish the cause of a defect.
 
 ## Task 4: Find production orders that share traceability records
 
-Bob widens the investigation: **which order pairs share a material lot, supplier, inspection record, or lot certificate?**
+Bob widens the investigation: **which order pairs share a material lot,
+supplier, inspection record, or lot certificate?**
 
 1. Run Bob's production order-pair query:
 
@@ -276,25 +326,33 @@ Bob widens the investigation: **which order pairs share a material lot, supplier
 
     ![Production orders connected through shared traceability entities](images/sql-graph-shared.png)
 
-    The pattern connects orders `a` and `b` through a shared entity. `a.entity_id < b.entity_id` prevents returning the same pair in reverse order.
+    The pattern connects orders `a` and `b` through a shared entity.
+    `a.entity_id < b.entity_id` prevents returning the same pair in reverse
+    order.
 
 2. Find an order pair linked by a shared traceability record.
 
-    Check the relationship types and `COMBINED_RISK`. Bob can investigate the two orders together, but a shared record does not prove that both orders are defective.
+    Check the relationship types and `COMBINED_RISK`. Bob can investigate the
+    two orders together, but a shared record does not prove that both orders are
+    defective.
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
-Bob opens Graph Studio to follow the `PO-8841` paths and shared material lots in an interactive network.
+Bob opens Graph Studio to follow the `PO-8841` paths and shared material lots in
+an interactive network.
 
-1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
+1. Start from the Database Actions Launchpad. Confirm that the upper-right
+    corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
 
     ![Database Actions Launchpad for the LLUSER workshop user](images/graph-launch.jpg " ")
 
-2. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
+2. On the **Development** tab, select **Graph Studio** from the left-side tool
+    list and click **Open**.
 
 3. If prompted, sign in as `LLUSER` using the supplied workshop password.
 
-4. Confirm that the Graph Studio home page opens. The landing page provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
+4. Confirm that the Graph Studio home page opens. The landing page provides
+    **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
 
     ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.png)
 
@@ -302,7 +360,8 @@ Bob opens Graph Studio to follow the `PO-8841` paths and shared material lots in
 
 1. Download [hightech-production-quality-graph-studio.dsnb](files/hightech-production-quality-graph-studio.dsnb).
 
-    If the notebook opens in your browser instead of downloading, right-click the link and select **Save Link As**.
+    If the notebook opens in your browser instead of downloading, right-click
+    the link and select **Save Link As**.
 
 2. In Graph Studio, click **Notebooks** on the landing page.
 
@@ -312,7 +371,8 @@ Bob opens Graph Studio to follow the `PO-8841` paths and shared material lots in
 
     ![Graph Studio notebook import dialog](images/graph-import-dialog.png)
 
-4. Drag the downloaded notebook into the import window or browse to it. Confirm the filename, select **Import**, then open **Production Quality Network**.
+4. Drag the downloaded notebook into the import window or browse to it. Confirm
+    the filename, select **Import**, then open **Production Quality Network**.
 
     ![High-Tech notebook selected for import](images/graph-import-file.png)
 
@@ -320,35 +380,50 @@ Bob opens Graph Studio to follow the `PO-8841` paths and shared material lots in
 
 Compare the SQL results with Graph Studio views of `PO-8841` and shared lot `LOT-SEMI-91A7`.
 
-1. Start at the top of the **Production Quality Network** notebook. Read the explanation for the `PO-8841` traversal, then run the first SQL paragraph.
+1. Start at the top of the **Production Quality Network** notebook. Read the
+    explanation for the `PO-8841` traversal, then run the first SQL paragraph.
 
     ![Production Quality Network notebook introduction](images/graph-notebook-top.png)
 
-2. Review the ranked entities in **Table** format. This traversal uses one or two hops, compared with four in Task 3.
+2. Review the ranked entities in **Table** format. This traversal uses one or
+    two hops, compared with four in Task 3.
 
     ![Ranked production order results in Graph Studio](images/live-09-graph-notebook-table.png)
 
-3. Under **Graph Visualization of previous query**, run the `SELECT *` paragraph anchored on `PO-8841` to draw its one-hop and two-hop paths.
+3. Under **Graph Visualization of previous query**, run the `SELECT *` paragraph
+    anchored on `PO-8841` to draw its one-hop and two-hop paths.
 
     ![Production order graph from PO-8841](images/live-10-graph-production-network.png)
 
-4. Under **Shared Entity Connections**, run the final SQL paragraph to draw orders connected to `LOT-SEMI-91A7`.
+4. Under **Shared Entity Connections**, run the final SQL paragraph to draw
+    orders connected to `LOT-SEMI-91A7`.
 
     ![Production orders linked to the shared material lot](images/live-11-graph-shared-lot.png)
 
-    Review the displayed vertex and edge counts. Remove display filters when checking the full query result.
+    Review the displayed vertex and edge counts. Remove display filters when
+    checking the full query result.
 
-Find the paths from `LOT-SEMI-91A7` to `PO-8841`, `PO-5077`, and `PO-1190`. Use the entity keys and edges to confirm the links; node positions on the screen can vary.
+Find the paths from `LOT-SEMI-91A7` to `PO-8841`, `PO-5077`, and `PO-1190`. Use
+the entity keys and edges to confirm the links; node positions on the screen can
+vary.
 
 ### Optional graph-algorithms extension
 
-The companion [material flow graph notebook](https://github.com/oracle-livelabs/database/blob/main/livestack-workshop-hightech/production-quality-network/files/getting-started-material-flow-graph.dsnb) lets you practice PGX algorithms: paths, degree counts, PageRank, shortest paths, personalized PageRank, and hop distance. It uses `MATERIAL_FLOW_GRAPH` to connect work centers through material transfers, separately from the `PRODUCTION_QUALITY_NETWORK` used in this lab. A connection shows where material can move; it does not establish the cause of a quality issue.
+The companion [material flow graph notebook][link-2] lets you practice PGX
+algorithms: paths, degree counts, PageRank, shortest paths, personalized
+PageRank, and hop distance. It uses `MATERIAL_FLOW_GRAPH` to connect work
+centers through material transfers, separately from the
+`PRODUCTION_QUALITY_NETWORK` used in this lab. A connection shows where material
+can move; it does not establish the cause of a quality issue.
 
 ## Appendix: Create the Property Graph
 
-`TRACE_ENTITIES` supplies vertices labeled `entity`; `TRACE_RELATIONSHIPS` supplies edges labeled `related_to`, with foreign keys identifying their source and destination.
+`TRACE_ENTITIES` supplies vertices labeled `entity`; `TRACE_RELATIONSHIPS`
+supplies edges labeled `related_to`, with foreign keys identifying their source
+and destination.
 
-This statement is provided for reference. The `PRODUCTION_QUALITY_NETWORK` graph has already been created in the workshop database.
+This statement is provided for reference. The `PRODUCTION_QUALITY_NETWORK` graph
+has already been created in the workshop database.
 
 ```sql
 <copy>
@@ -409,14 +484,17 @@ CREATE PROPERTY GRAPH production_quality_network
 
 ## Application example
 
-The [High-Tech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows a two-hop graph and a SQL/PGQ query result.
+The [High-Tech LiveStack demo][link-3] shows a two-hop graph and a SQL/PGQ query
+result.
 
 ![LiveStack High-Tech Demo: Product Signal Graph](images/demo-network-overview.jpg)
 
+<!-- markdownlint-disable-next-line MD036 -->
 *LiveStack High-Tech Demo: Product Signal Graph*
 
 ![LiveStack High-Tech Demo: Product Signal Graph](images/demo-network-query.jpg)
 
+<!-- markdownlint-disable-next-line MD036 -->
 *LiveStack High-Tech Demo: Product Signal Graph*
 
 ## Acknowledgements
@@ -424,3 +502,7 @@ The [High-Tech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
+
+[link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet
+[link-2]: https://github.com/oracle-livelabs/database/blob/main/livestack-workshop-hightech/production-quality-network/files/getting-started-material-flow-graph.dsnb
+[link-3]: https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461

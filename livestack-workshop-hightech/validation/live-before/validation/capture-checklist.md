@@ -1,17 +1,30 @@
 # HighTech capture checklist
 
-### Objectives
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
+
+## Objectives
 
 In this lab, you will:
-* TODO: Add objectives
 
+* TODO: Add objectives
 
 Estimated Time: TODO - x minutes
 
+These are outstanding authentic captures. No HighTech database or application
+execution is claimed. Source images are preserved under
+`validation/source-captures/`; do not relabel them.
 
-These are outstanding authentic captures. No HighTech database or application execution is claimed. Source images are preserved under `validation/source-captures/`; do not relabel them.
-
-After database access and phase authorization are supplied, run the loader on a fresh schema, execute the labs in sequence, verify the results, and replace each image beside its matching instruction. The six separate application views also require a HighTech application, which is not included in the source stack.
+After database access and phase authorization are supplied, run the loader on a
+fresh schema, execute the labs in sequence, verify the results, and replace each
+image beside its matching instruction. The six separate application views also
+require a HighTech application, which is not included in the source stack.
 
 | Lesson | Instruction | Required capture |
 | --- | --- | --- |
@@ -62,12 +75,17 @@ After database access and phase authorization are supplied, run the loader on a 
 
 ## Live validation still required
 
-- Fresh SQLcl loader invocation, prerequisites, model loading, vectors, geometry and graph assertions.
-- All nine labs and Getting Started in sequence, including reruns and cleanup.
-- Graph Studio import, all three primary notebook SQL paragraphs, and optional PGX setup and algorithms.
-- AutoML, SQL GLM creation/scoring, Select AI generated SQL/results, agent execution history and model restoration.
-- Actual LiveLabs green-button provisioning and reservation/login flow, including the deployed quiz.
-- HighTech application source/environment and six application captures. No app server was present in the supplied source.
+* Fresh SQLcl loader invocation, prerequisites, model loading, vectors, geometry
+  and graph assertions.
+* All nine labs and Getting Started in sequence, including reruns and cleanup.
+* Graph Studio import, all three primary notebook SQL paragraphs, and optional
+  PGX setup and algorithms.
+* AutoML, SQL GLM creation/scoring, Select AI generated SQL/results, agent
+  execution history and model restoration.
+* Actual LiveLabs green-button provisioning and reservation/login flow,
+  including the deployed quiz.
+* HighTech application source/environment and six application captures. No app
+  server was present in the supplied source.
 
 ## Acknowledgements
 

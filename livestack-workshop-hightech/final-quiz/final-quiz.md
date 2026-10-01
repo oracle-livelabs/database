@@ -1,5 +1,14 @@
 # Final Quiz
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
+
 ```quiz-config
 passing: 75
 badge: images/livestack-badge-high-tech.png
@@ -7,12 +16,13 @@ badge: images/livestack-badge-high-tech.png
 
 ## Introduction
 
-Use this quiz to check how the database results support the Seer High-Tech tasks you completed.
+Use this quiz to check how the database results support the Seer High-Tech tasks
+you completed.
 
 ### Objectives
 
-- Review the main database capabilities used in the workshop.
-- Earn the workshop badge by answering the scored questions.
+* Review the main database capabilities used in the workshop.
+* Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
 
@@ -78,4 +88,3 @@ Estimated Time: **3 minutes**
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
-

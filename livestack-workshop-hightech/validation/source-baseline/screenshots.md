@@ -1,15 +1,27 @@
 # Screenshot Coverage
 
-### Objectives
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
+
+## Objectives
 
 In this lab, you will:
-* TODO: Add objectives
 
+* TODO: Add objectives
 
 Estimated Time: TODO - x minutes
 
-
-The workshop contains 43 live LLUSER database captures and six captures from the live SEER MANUFACTURING application. Every capture is placed beside the instruction or explanation it supports. The application uses a separate AX-400 demo dataset, so its identifiers and totals are not expected results for the workshop SQL fixture.
+The workshop contains 43 live LLUSER database captures and six captures from the
+live SEER MANUFACTURING application. Every capture is placed beside the
+instruction or explanation it supports. The application uses a separate AX-400
+demo dataset, so its identifiers and totals are not expected results for the
+workshop SQL fixture.
 
 | ID | Lesson | Position | Image | Evidence |
 | --- | --- | --- | --- | --- |
