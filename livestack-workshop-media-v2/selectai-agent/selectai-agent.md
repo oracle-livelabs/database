@@ -1,14 +1,12 @@
-# Build a Media Operations Agent with Select AI Agent
+# Build a Media Agent with Select AI Agent
 
 ## Introduction
 
-> **Screenshots:** These examples show live Media results. Model responses and execution times can vary; compare your returned values with the direct SQL baseline from Lab 7.
+Nina Patel has used Select AI to ask one media question at a time. That works for a quick answer, but her new campaign-review screen needs a repeatable media assistant that can answer a question and support follow-up requests.
 
-Nina Patel used Select AI to ask one media question at a time. Her campaign review screen now needs an assistant that can answer questions and handle follow-up requests.
+Jessica, the DBA, gives Nina's agent one approved tool: a SQL tool that uses the `SEER_MEDIA_PROFILE` profile and the Media semantic views configured in the previous lab.
 
-Jessica, the DBA, gives the agent one approved SQL tool. It uses `SEER_MEDIA_PROFILE` and the Media semantic views from the previous lab.
-
-In this lab, you create an agent, task, and team, then run a question through the SQL tool. You check the answer and the tool history. SQL runs with the database user's privileges; `LLUSER` owns the workshop data and can modify it.
+In this lab, you create the agent objects, connect the agent to the SQL tool, and run a question through the team. The agent uses the approved tool and returns an answer. You check that answer and the tool history. SQL still runs with the database user's privileges; `LLUSER` owns the workshop data and can modify it.
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
@@ -40,16 +38,18 @@ Estimated Time: **15 minutes**
 | ------------------- | ---------------------------------------------------------------------------------------------- |
 | Business Problem    | Nina needs a media answer that can feed a campaign-review screen.                            |
 | Technical Challenge | The agent must use database data through an approved capability, not unrestricted access.      |
-| Persona Focus       | You follow Nina as she turns a Select AI question into a small media operations assistant.              |
+| Persona Focus       | You follow Nina as she turns a Select AI question into a small media assistant.              |
 | What You Will See   | An agent receives a request, calls its SQL tool, and returns a media answer.                 |
 | Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
 | Outcome             | Nina has a controlled agent that can answer questions from the media schema.                |
 
 > **Prerequisite:** Complete [Lab 7: Ask Media Questions with Select AI](?lab=selectai). This lab uses the enabled `SEER_MEDIA_PROFILE` profile and its enforced `object_list`. If the administrator supplied another profile name, use it throughout. The administrator must also grant `EXECUTE` on `DBMS_CLOUD_AI_AGENT` to `LLUSER`; the handoff loader does not include that grant.
 
+> **SQL Worksheet reminder:** Use **Run Statement** for each query. For each PL/SQL block that creates or resets agent objects, copy the entire block, including the final `/`, and choose **Run Script**.
+
 ## Task 1: Check the profile and view access
 
-`SEER_MEDIA_PROFILE` lists five Media semantic views and enables `enforce_object_list`. Database privileges determine what the current user can access. A prompt or tool description does not change those privileges.
+The agent's SQL tool uses the existing `SEER_MEDIA_PROFILE` profile. Its `object_list` lists five Media semantic views, and `enforce_object_list` limits the objects Select AI may use when it generates SQL. Database privileges provide the second control: the SQL still runs as the current database user and cannot read objects that user cannot access. A prompt or tool description does not change those privileges.
 
 1. Check the profile:
 
@@ -97,7 +97,7 @@ Estimated Time: **15 minutes**
 
 The SQL tool is the agent's only database capability in this lab. It uses the `SEER_MEDIA_PROFILE` profile, so its enforced object list limits the objects used by generated SQL.
 
-1. Register the tool:
+1. Register the tool. Copy the entire block, including the final `/`, and choose **Run Script**:
 
     ```sql
     <copy>
@@ -112,7 +112,7 @@ The SQL tool is the agent's only database capability in this lab. It uses the `S
     </copy>
     ```
 
-    The [built-in SQL tool](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html) uses actions such as `runsql` and `showsql` to query the Media views. The profile's object list and the database user's privileges apply when it runs SQL.
+    The tool gives the agent a named, controlled way to ask Select AI to generate and run SQL against the existing Media views. The [built-in SQL tool](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html) uses actions such as `runsql` and `showsql`. The profile's enforced object list and the database user's privileges still apply when the SQL runs.
 
     The instructions tell the agent to pass the complete question to `QUERY` and choose `RUNSQL` for data requests. This preserves the requested columns, filter, ordering, and row limit. Check the returned answer to confirm that the agent followed those instructions.
   
@@ -130,7 +130,7 @@ The SQL tool is the agent's only database capability in this lab. It uses the `S
   
 ## Task 3: Create Nina's agent, task, and team
 
-Define the agent's role and task instructions, then connect them in a team.
+The tool by itself does nothing. Nina's agent needs a role, a task needs instructions, and a team connects the two. Run each complete PL/SQL block below with **Run Script**.
 
 1. Create the agent:
 
@@ -140,7 +140,7 @@ Define the agent's role and task instructions, then connect them in a team.
       DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
         agent_name  => 'NINA_MEDIA_AGENT',
         attributes  => '{"profile_name": "SEER_MEDIA_PROFILE", "role": "You are Nina Patel''s Seer Media data assistant. Use NINA_MEDIA_SQL_TOOL to obtain database evidence. The tool accepts a natural-language QUERY, not SQL text. For data questions choose ACTION RUNSQL. Preserve all returned values and row order; do not calculate a different ranking or replace rows. Distinguish campaign_value_proxy, an asset unit-price proxy, from actual campaign_value. Do not invent values."}',
-        description => 'Media & Entertainment assistant for Nina Patel'
+        description => 'Media and Entertainment assistant for Nina Patel'
       );
     END;
     /
@@ -196,7 +196,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     </copy>
     ```
   
-    The query creates a conversation ID and passes it to `RUN_TEAM`. Oracle uses the ID to record the prompt and response in conversation history.
+    Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
 
     ![Media agent answer with the five ranked content assets and all eight requested columns](images/media-agent-answer.jpg)
 
@@ -225,7 +225,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
 2. Review the answer.
 
-    Check the five assets and all eight requested columns against the Lab 7 result. The model may use different wording, but the values and row order should match.
+    Look for the content asset ranking and all eight requested columns. The screenshots show live Media results. Model wording and execution times can vary, but the values and row order should match the eight-column direct SQL check in Lab 7, Task 5.
   
     > **Note:** `LLUSER` retains write privileges for other workshop labs. For an application, use a separate account with `SELECT` grants on only the approved views to enforce read-only access. Prompt instructions alone do not enforce it.
 
@@ -233,7 +233,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
 ## Task 5: Inspect what the agent did
 
-Nina checks which tool the agent called and whether the request finished.
+Nina needs more than a final answer. She also wants to know whether the agent called the approved tool and how the request was processed.
 
 1. Review the latest team runs:
 
@@ -274,7 +274,7 @@ Nina checks which tool the agent called and whether the request finished.
 
     ![Nina Media SQL tool invocation history](images/media-tool-history.jpg)
 
-    Look for `NINA_MEDIA_SQL_TOOL`. The [history views](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-views-history.html) also expose the team execution ID, tool input, and tool output.
+    The history should show `NINA_MEDIA_SQL_TOOL`. This gives Nina and Jessica a database record of the agent activity instead of treating the answer as an unexplained chat response. The [history views](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-views-history.html) also expose the team execution ID, tool input, and tool output.
 
     The history includes an earlier run with two tool calls, despite an instruction to call the tool once. That instruction guides the model; it does not enforce a call limit. Match each call to its team execution in the next step.
 
@@ -302,17 +302,21 @@ Nina checks which tool the agent called and whether the request finished.
     </copy>
     ```
 
-    Check for a successful team and matching `NINA_MEDIA_SQL_TOOL` calls. Empty tool columns mean this query found no matching invocation. Compare the answer with the Lab 7 baseline to check its accuracy.
+    Check for a successful team and matching `NINA_MEDIA_SQL_TOOL` calls. Empty tool columns mean this query found no matching invocation. Compare the answer with the eight-column direct SQL check in Lab 7, Task 5, to check its accuracy.
 
 ## Conclusion: Give the agent a controlled way to work
 
-Nina created an agent with a role, a task, and one SQL tool. She checked its answer against database results and linked its tool call to a successful team execution.
+In Lab 7, Nina used Select AI to turn a question into SQL. In this lab, she gave an agent a role, a task, and one approved SQL tool. The agent handles a request through that tool, while the database still controls the profile, object list, privileges, and tool history. Nina checked the answer against database results and linked the tool call to a successful team execution.
 
-The enforced `object_list` limits generated SQL, while database grants and row-level policies control data access. Jessica can disable the tool or team when it is no longer needed. An application that allows data changes would need suitable privileges and a tool designed for that operation.
+That is the next step from Select AI to Select AI Agent: the application can call a defined media assistant instead of assembling every question and database call itself. Jessica can review the tools available to the agent and remove access by disabling the tool or team.
+
+The access controls have two parts. The enforced `object_list` limits generated SQL to the approved views, while database grants and row-level policies control data access. Both should be kept narrow when an agent is used by an application.
+
+The example asks the agent to query data. A separate account with only the required `SELECT` grants would enforce read-only access. Before an agent is allowed to change data, the team should add a narrowly defined function tool, suitable privileges, clear instructions, and a confirmation step for the user.
 
 ## Appendix: Reset the workshop objects
 
-1. Run this block only if you want to recreate the objects used in this lab. It removes only the four names created here.
+1. Run this block only if you want to recreate the objects used in this lab. It removes only the four names created here. Copy the entire block, including the final `/`, and choose **Run Script**.
 
     ```sql
     <copy>

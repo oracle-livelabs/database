@@ -1,0 +1,673 @@
+{
+  "path": "/Users/mkowalik/Documents/GitHub/oracle-livelabs/database/livestack-workshop-hightech/SEER-HighTech-LiveLabs-production.zip",
+  "sha256": "c5f711af98853cfbdd5869b37116a6bc6ca4675640b83c310decc7ef68dc34ee",
+  "entries": 56,
+  "integrity": "passed",
+  "entry_names": "passed",
+  "byte_for_byte_target_agreement": "passed",
+  "included": [
+    {
+      "path": "README.md",
+      "sha256": "9117eaa8e8b8823f28e612e3924d57f77b0d0e52bdbf70c30f936a9a9cd23053"
+    },
+    {
+      "path": "component-quality-vector-search/component-quality-vector-search.md",
+      "sha256": "4905e099e78ebdc9960ff00ac44e234fe9d7ed055a834c6859ec86e9cdccbdf2"
+    },
+    {
+      "path": "component-quality-vector-search/images/gilly.png",
+      "sha256": "53b83d7c33551af7e7798bcecd5f74d40d3004b1b998678b049e2393af6c5fe4"
+    },
+    {
+      "path": "component-quality-vector-search/images/sql-embedding-model.jpg",
+      "sha256": "fd7885c20592dc86b2d8f5f453c4a46b6f1fd17d82a4fe37dcdcb9697dba9ca9"
+    },
+    {
+      "path": "final-quiz/final-quiz.md",
+      "sha256": "df033664846a4d4b0a57ce38e1d3b5b56abebe93bba933ff05a2a78dbe0aa2db"
+    },
+    {
+      "path": "final-quiz/images/livestack-hightech-badge.svg",
+      "sha256": "4f55d49f6e488f1cf2593658f14a34ca98ef6f08a433c56b4b5c1d435b57b5ce"
+    },
+    {
+      "path": "getting-started/getting-started.md",
+      "sha256": "57179c4b094a9e4c2920cc949dec20fcfabd887e3e78367644fbc1ca07dc97af"
+    },
+    {
+      "path": "getting-started/images/database-actions-development-sql.svg",
+      "sha256": "ac9de83e4b6cfdce78eebe802eb16cb33e8ecb682fc2ce7ce6ad88cf40fdd587"
+    },
+    {
+      "path": "getting-started/images/database-actions-login-main-user.svg",
+      "sha256": "6181fc30fe466e3586f6e365ecdbddbca542c2c543c49ee05e53018895a0206a"
+    },
+    {
+      "path": "getting-started/images/reservation-login-copy-password.svg",
+      "sha256": "91f6e6a47a54065d90e4c1426ce0ff6c7c975501182e724bc5c84ab47702058b"
+    },
+    {
+      "path": "getting-started/images/reservation-login-info.svg",
+      "sha256": "3131fd69e4dc8a55bcfa221d92fe2e38619be93e0c583894f525f78b32e79036"
+    },
+    {
+      "path": "getting-started/images/reservation-login-open-link.svg",
+      "sha256": "76f4136ca2488c5fca96c390e25fdec50f94259d9746897f0510eac421d5a56d"
+    },
+    {
+      "path": "getting-started/images/sql-connection.jpg",
+      "sha256": "ca924d773ec01fe1695c61ab50c5796c9a10c78db0dd1cf67645c52b65141294"
+    },
+    {
+      "path": "introduction/images/seer-hightech-erd-illustrated.png",
+      "sha256": "bc5bfa659a482686ba9f38c259d7988d50a352f45373719f16cc2710d9d04945"
+    },
+    {
+      "path": "introduction/images/seer-hightech-erd.svg",
+      "sha256": "d3c41607cf0bc47e41d4d1d9eba2280d1b4c3a9f67364cf38d4f09411eab54eb"
+    },
+    {
+      "path": "introduction/images/seer-hightech-introduction.png",
+      "sha256": "bbe308d8f695a590037dd98215e9d8b7ccac8fb803be2bd49dfd0488cea94e38"
+    },
+    {
+      "path": "introduction/introduction.md",
+      "sha256": "7c2b7d9bfa6b82b78375bf6550bf0644ff982d82c4a3a307e7c1e39d9fcca031"
+    },
+    {
+      "path": "plant-routing-spatial/images/moon.png",
+      "sha256": "c6481a2c7a3a0716596643524b76d235b75a30d36ae9de4dc74636f4ccf75758"
+    },
+    {
+      "path": "plant-routing-spatial/plant-routing-spatial.md",
+      "sha256": "609578167a1ceac350bc1d7c202149291a393fb9c34d888f046a36cfcf6c0b47"
+    },
+    {
+      "path": "production-operations-dashboard/images/jessica.png",
+      "sha256": "a9f3e9b0d657100d82b4765dc9950dd834f635318cae287bf5549b70c88d86ab"
+    },
+    {
+      "path": "production-operations-dashboard/production-operations-dashboard.md",
+      "sha256": "57112ec2c6118f6ba87017a8e10485a98edc6c08e45de732bb4898d7d30d01e5"
+    },
+    {
+      "path": "production-order-duality/images/sql-duality-contract.png",
+      "sha256": "a755a1c18917763df9955d037e140f52d76318c523c30735b559abbe76555f07"
+    },
+    {
+      "path": "production-order-duality/images/thomas.png",
+      "sha256": "3a1efe0b7f5ee743cbac8e3742fc05310b5939b90d944baaedd512dc7698b2ee"
+    },
+    {
+      "path": "production-order-duality/production-order-duality.md",
+      "sha256": "f1defd37be3c4ca36cf4a6ce73d6316ddd82c9faee474b631330316884b4f4ea"
+    },
+    {
+      "path": "production-quality-network/files/getting-started-material-flow-graph.dsnb",
+      "sha256": "3276a72280be51f4a94e90a7172a8b60ae7af0809b1d05907b0597d0885a60da"
+    },
+    {
+      "path": "production-quality-network/files/hightech-production-quality-graph-studio.dsnb",
+      "sha256": "22306d7987c557d272717ba1c1859479166bf3c1d86793c0559d99f63a4ff5e7"
+    },
+    {
+      "path": "production-quality-network/images/bob.png",
+      "sha256": "204471ce231761b351be8cfc1f5cfb59cd99246f9115c57d5b0a8120151b74d5"
+    },
+    {
+      "path": "production-quality-network/images/graph-import-dialog.png",
+      "sha256": "d8ea6813b3f67c825d062b14667f78c2adc490796a681f638581156815020f25"
+    },
+    {
+      "path": "production-quality-network/images/graph-launch.jpg",
+      "sha256": "a2d15ef15d98cbd30ad8edb3d540de36ffb697f23b8fd694586f0e5349a492a4"
+    },
+    {
+      "path": "production-quality-network/images/graph-studio-overview.png",
+      "sha256": "856189bc2b43bb4be84097e54f0d0e90802d3c13444728188dc4682d527bfddf"
+    },
+    {
+      "path": "production-quality-network/production-quality-network.md",
+      "sha256": "3fd9339524c586d2719175c5153205794467b4e86410700c2c753a0339e655e9"
+    },
+    {
+      "path": "quality-review-oml/images/oml-home.jpg",
+      "sha256": "9c596f44c3815c34f1fd6c769488d53376f89feb9e76b478e41b205296d7ff6b"
+    },
+    {
+      "path": "quality-review-oml/images/oml-launch.jpg",
+      "sha256": "97da2370b9d5aa46cccfcd5bb20d3b31c6760117fcc09ac7b17516ad28b211b1"
+    },
+    {
+      "path": "quality-review-oml/images/otto.png",
+      "sha256": "3de1df85e0bc2a7c23018eb41e24438825009d2d70975c6e40728f4c366d7e12"
+    },
+    {
+      "path": "quality-review-oml/images/sql-oml-model.png",
+      "sha256": "d1ebc30ecb86cd6c3a492cc4a2a1c90cce0749d6693a449037e102f0b8e08110"
+    },
+    {
+      "path": "quality-review-oml/quality-review-oml.md",
+      "sha256": "01673b20d77eeb809e76f374a021b9ad9e55a527d4324f8c0024a8209f64a5e0"
+    },
+    {
+      "path": "selectai/images/nina-hightech.png",
+      "sha256": "37d37d2ff46bcf1ac208654df0b6a0f1dfb76dee2d6eb16bacfbbe99d8ac9782"
+    },
+    {
+      "path": "selectai/images/sql-ai-object-list.png",
+      "sha256": "e185c72cf114d1e19715a402483486d89ef8d31135909a65e96398adfeb4c4bf"
+    },
+    {
+      "path": "selectai/selectai.md",
+      "sha256": "a46f3685b9f89cd5c12a93c47645f17157dd7b5ad3b6bee518838f232b75666a"
+    },
+    {
+      "path": "selectai-agent/images/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "selectai-agent/images/nina-hightech.png",
+      "sha256": "37d37d2ff46bcf1ac208654df0b6a0f1dfb76dee2d6eb16bacfbbe99d8ac9782"
+    },
+    {
+      "path": "selectai-agent/selectai-agent.md",
+      "sha256": "4eec6d9b4432ff425e63ea202d29513f82ffb8914a43e628de891cee5f14fcb0"
+    },
+    {
+      "path": "stack/README.md",
+      "sha256": "491d6def16c6dbc690f980c506957d8c0ba7362a36eba7e45f71cc20d0e00fc7"
+    },
+    {
+      "path": "stack/adb.tf",
+      "sha256": "04ea74abb01f9a40fd812daa4ee75f0e05ae58782c124de6c32a588b7b78c825"
+    },
+    {
+      "path": "stack/create_user.sql.tmpl",
+      "sha256": "13f27bd5175f9f5cf33da7ab1f6c03dfca21b1003bf85c7238f2e9eedadd4ff9"
+    },
+    {
+      "path": "stack/genai.tf",
+      "sha256": "727653d8cca20796f4cfc890ed03872746a4a10c973da4a3d60c5461df618952"
+    },
+    {
+      "path": "stack/genai_connection.sql.tmpl",
+      "sha256": "a6f9f186e2367a491f14574d1b20bee1da09f4729386d548a80044fb1f04c276"
+    },
+    {
+      "path": "stack/load_data/hightech-platform-handoff-loader.sql",
+      "sha256": "bb239f4fd7c0494d5eb58c49bdbd0641317d21d1f13fc124efc168791a56d612"
+    },
+    {
+      "path": "stack/load_data/hightech-platform-handoff-loader.zip",
+      "sha256": "1e996d3b740d4105368be2fe617acfa27a10d197de8d651cb5894132c090937b"
+    },
+    {
+      "path": "stack/main.tf",
+      "sha256": "bf43e3631e651edebd487de6c264e4bbdd0b87fdccdbc1eed2c4604ac25cf46e"
+    },
+    {
+      "path": "stack/output.tf",
+      "sha256": "d1e0b56e555cb13fbd85f696b76340ef46a0a83ca3a8089a06426afe70b1a327"
+    },
+    {
+      "path": "stack/variables.tf",
+      "sha256": "d3c97e35c1164365d7b5f784537e7cfe63ac20d0c760dfa783edc203cd23a287"
+    },
+    {
+      "path": "workshops/sandbox/index.html",
+      "sha256": "17918591891da0f477bb8980c673e1604ffac5595c54b1f6c67892bca19d3735"
+    },
+    {
+      "path": "workshops/sandbox/manifest.json",
+      "sha256": "50fadfca20fbad61c687c51c780386edcc3a6c1849e53079085118f54dd47572"
+    },
+    {
+      "path": "workshops/tenancy/index.html",
+      "sha256": "17918591891da0f477bb8980c673e1604ffac5595c54b1f6c67892bca19d3735"
+    },
+    {
+      "path": "workshops/tenancy/manifest.json",
+      "sha256": "50fadfca20fbad61c687c51c780386edcc3a6c1849e53079085118f54dd47572"
+    }
+  ],
+  "excluded": [
+    {
+      "path": ".DS_Store",
+      "reason": "macOS metadata"
+    },
+    {
+      "path": "introduction/.DS_Store",
+      "reason": "macOS metadata"
+    },
+    {
+      "path": "stack/.DS_Store",
+      "reason": "macOS metadata"
+    },
+    {
+      "path": "stack/load_data/.DS_Store",
+      "reason": "macOS metadata"
+    },
+    {
+      "path": "validation/README.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/audit-summary.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/audit_hightech.py",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/browser-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/capture-checklist.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/convert_hightech.py",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/diagram-contract.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/domain-map.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/finalize.py",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/fixture-data.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/fixture-parity.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/illustration-edits.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/image-ocr.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/json-and-length-checks.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/ocr.swift",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/persona-preservation.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/residue-audit.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/schema-contract.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/screenshot-coverage.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-after.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/.DS_Store",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/banner-preservation.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/browser-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/copy-review-image-changes.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/copy-review-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/copy-review.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/current-image-ocr.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/domain-audit.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/external-links.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/file-inventory.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/fixture-data.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/green-button-checklist.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/green-button-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/image-review.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/introduction-image-prompts.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/introduction-refresh.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/live-sql-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/live-validation.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/manual-database-checklist.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/model-restoration.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/pgx-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/rendered-pages.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/schema-contract.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/schema-contract.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/screenshot-coverage.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/screenshots.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/source-preservation.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/stack-parity.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/static-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/structure-comparison.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/validate.py",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/validation-report.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-baseline/workshop-map.md",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-before.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/component-quality-vector-search/images/sql-vector-customer-sites.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/component-quality-vector-search/images/sql-vector-distance.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/component-quality-vector-search/images/sql-vector-similarity.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/component-quality-vector-search/images/sql-vector-values.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/introduction/images/demo-welcome.jpg",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/plant-routing-spatial/images/demo-spatial-map.jpg",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/plant-routing-spatial/images/sql-spatial-chicago.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/plant-routing-spatial/images/sql-spatial-new-york.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/plant-routing-spatial/images/sql-spatial-points.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/plant-routing-spatial/images/sql-spatial-routing.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-operations-dashboard/images/demo-dashboard-charts.jpg",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-operations-dashboard/images/demo-dashboard.jpg",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-operations-dashboard/images/sql-dashboard-followup.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-operations-dashboard/images/sql-dashboard.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-order-duality/images/sql-duality-document.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-order-duality/images/sql-duality-projection.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-order-duality/images/sql-duality-relational.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-order-duality/images/sql-duality-released.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/demo-network-overview.jpg",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/demo-network-query.jpg",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/graph-import-file.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/graph-notebook-top.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/graph-notebooks.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/live-09-graph-notebook-table.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/live-10-graph-production-network.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/live-11-graph-shared-lot.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/sql-graph-direct.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/sql-graph-four-hop.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/production-quality-network/images/sql-graph-shared.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/quality-review-oml/images/oml-confusion-matrix.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/quality-review-oml/images/oml-leaderboard.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/quality-review-oml/images/oml-model-comparison.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/quality-review-oml/images/oml-prediction-impact.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/quality-review-oml/images/oml-settings.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/quality-review-oml/images/sql-oml-scoring.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/quality-review-oml/images/sql-oml-training.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai/images/sql-ai-answer.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai/images/sql-ai-generated.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai/images/sql-ai-narration.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai/images/sql-ai-refined-answer.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai/images/sql-ai-refined-generated.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai-agent/images/sql-agent-answer.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai-agent/images/sql-agent-history.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-captures/selectai-agent/images/sql-agent-tools.png",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-image-inventory.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-integrity.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/source-loader.sql",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/stack-parity.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/static-results.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/structure-comparison.json",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    },
+    {
+      "path": "validation/validate.py",
+      "reason": "maintainer evidence, scripts, historical reports, or obsolete source captures"
+    }
+  ],
+  "release_readiness": "Awaiting 44 authentic captures and live database/green-button validation."
+}

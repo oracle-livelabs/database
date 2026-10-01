@@ -1,0 +1,559 @@
+{
+  "scope": "Local LiveLabs preview after live changes; native Chrome used separately for actual Oracle execution",
+  "lessons": [
+    {
+      "copies": 1,
+      "images": [
+        {
+          "alt": "Jessica introduces the converged production-quality dashboard lab",
+          "loaded": true,
+          "src": "../../production-operations-dashboard/images/jessica.png"
+        },
+        {
+          "alt": "Converged production-quality query result",
+          "loaded": false,
+          "src": "../../production-operations-dashboard/images/sql-dashboard.png"
+        },
+        {
+          "alt": "Result after changing the investigation phrase",
+          "loaded": true,
+          "src": "../../production-operations-dashboard/images/sql-dashboard-followup.png"
+        }
+      ],
+      "steps": [
+        3,
+        3
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=production-operations-dashboard"
+    },
+    {
+      "copies": 16,
+      "images": [
+        {
+          "alt": "Nina: HighTech lab banner",
+          "loaded": true,
+          "src": "../../selectai-agent/images/nina-hightech.png"
+        },
+        {
+          "alt": "HighTech agent answer with ranked component material values",
+          "loaded": false,
+          "src": "../../selectai-agent/images/sql-agent-answer.png"
+        },
+        {
+          "alt": "Select AI Agent team execution history",
+          "loaded": false,
+          "src": "../../selectai-agent/images/sql-agent-history.png"
+        },
+        {
+          "alt": "Select AI Agent SQL tool invocation history",
+          "loaded": false,
+          "src": "../../selectai-agent/images/sql-agent-tools.png"
+        }
+      ],
+      "steps": [
+        4,
+        2,
+        3,
+        3,
+        3
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=selectai-agent"
+    },
+    {
+      "copies": 14,
+      "images": [
+        {
+          "alt": "Thomas introduces the JSON production-order application lab",
+          "loaded": true,
+          "src": "../../production-order-duality/images/thomas.png"
+        },
+        {
+          "alt": "JSON production-order document returned from the duality view",
+          "loaded": false,
+          "src": "../../production-order-duality/images/sql-duality-document.png"
+        },
+        {
+          "alt": "Duality-view insert and update settings in SQL Worksheet",
+          "loaded": false,
+          "src": "../../production-order-duality/images/sql-duality-contract.png"
+        },
+        {
+          "alt": "Released production order created and updated through the duality view",
+          "loaded": false,
+          "src": "../../production-order-duality/images/sql-duality-released.png"
+        },
+        {
+          "alt": "Production-order fields projected from the JSON document",
+          "loaded": false,
+          "src": "../../production-order-duality/images/sql-duality-projection.png"
+        },
+        {
+          "alt": "Matching production-order fields read from the relational tables",
+          "loaded": false,
+          "src": "../../production-order-duality/images/sql-duality-relational.png"
+        }
+      ],
+      "steps": [
+        2,
+        2,
+        2,
+        3,
+        4,
+        2
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=production-order-duality"
+    },
+    {
+      "copies": 8,
+      "images": [
+        {
+          "alt": "Gilly: HighTech lab banner",
+          "loaded": true,
+          "src": "../../component-quality-vector-search/images/gilly.png"
+        },
+        {
+          "alt": "Available ADMIN embedding model in SQL Worksheet",
+          "loaded": true,
+          "src": "../../component-quality-vector-search/images/sql-embedding-model.jpg"
+        },
+        {
+          "alt": "Component rows populated with vector embeddings",
+          "loaded": false,
+          "src": "../../component-quality-vector-search/images/sql-vector-values.png"
+        },
+        {
+          "alt": "Components ranked by vector distance",
+          "loaded": false,
+          "src": "../../component-quality-vector-search/images/sql-vector-distance.png"
+        },
+        {
+          "alt": "Components ranked by semantic similarity",
+          "loaded": false,
+          "src": "../../component-quality-vector-search/images/sql-vector-similarity.png"
+        },
+        {
+          "alt": "component customer follow-up",
+          "loaded": false,
+          "src": "../../component-quality-vector-search/images/sql-vector-customer-sites.png"
+        }
+      ],
+      "steps": [
+        2,
+        4,
+        3,
+        2
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=component-quality-vector-search"
+    },
+    {
+      "copies": 6,
+      "images": [
+        {
+          "alt": "Bob: HighTech lab banner",
+          "loaded": true,
+          "src": "../../production-quality-network/images/bob.png"
+        },
+        {
+          "alt": "Direct entities connected to production order PO-8841",
+          "loaded": false,
+          "src": "../../production-quality-network/images/sql-graph-direct.png"
+        },
+        {
+          "alt": "Entities reached within four graph hops of production order PO-8841",
+          "loaded": false,
+          "src": "../../production-quality-network/images/sql-graph-four-hop.png"
+        },
+        {
+          "alt": "Production orders connected through shared traceability entities",
+          "loaded": false,
+          "src": "../../production-quality-network/images/sql-graph-shared.png"
+        },
+        {
+          "alt": "Database Actions Launchpad for the LLUSER workshop user",
+          "loaded": true,
+          "src": "../../production-quality-network/images/graph-launch.jpg"
+        },
+        {
+          "alt": "Graph Studio overview page signed in as LLUSER",
+          "loaded": false,
+          "src": "../../production-quality-network/images/graph-studio-overview.png"
+        },
+        {
+          "alt": "Graph Studio Notebooks page for LLUSER",
+          "loaded": false,
+          "src": "../../production-quality-network/images/graph-notebooks.png"
+        },
+        {
+          "alt": "Graph Studio notebook import dialog",
+          "loaded": false,
+          "src": "../../production-quality-network/images/graph-import-dialog.png"
+        },
+        {
+          "alt": "HighTech notebook selected for import",
+          "loaded": false,
+          "src": "../../production-quality-network/images/graph-import-file.png"
+        },
+        {
+          "alt": "Production Quality Network notebook introduction",
+          "loaded": false,
+          "src": "../../production-quality-network/images/graph-notebook-top.png"
+        },
+        {
+          "alt": "Ranked production order results in Graph Studio",
+          "loaded": false,
+          "src": "../../production-quality-network/images/live-09-graph-notebook-table.png"
+        },
+        {
+          "alt": "Production order graph from PO-8841",
+          "loaded": false,
+          "src": "../../production-quality-network/images/live-10-graph-production-network.png"
+        },
+        {
+          "alt": "Production orders linked to the shared material lot",
+          "loaded": false,
+          "src": "../../production-quality-network/images/live-11-graph-shared-lot.png"
+        }
+      ],
+      "steps": [
+        3,
+        1,
+        2,
+        2,
+        4,
+        4,
+        4
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=production-quality-network"
+    },
+    {
+      "copies": 4,
+      "images": [
+        {
+          "alt": "Moon: HighTech lab banner",
+          "loaded": true,
+          "src": "../../plant-routing-spatial/images/moon.png"
+        },
+        {
+          "alt": "Plant point geometry and GeoJSON results",
+          "loaded": true,
+          "src": "../../plant-routing-spatial/images/sql-spatial-points.png"
+        },
+        {
+          "alt": "Plants ranked by distance to the New York manufacturing region",
+          "loaded": true,
+          "src": "../../plant-routing-spatial/images/sql-spatial-new-york.png"
+        },
+        {
+          "alt": "Plants ranked by distance to the Chicago manufacturing region",
+          "loaded": false,
+          "src": "../../plant-routing-spatial/images/sql-spatial-chicago.png"
+        },
+        {
+          "alt": "Customer sites matched to their closest active plant",
+          "loaded": false,
+          "src": "../../plant-routing-spatial/images/sql-spatial-routing.png"
+        }
+      ],
+      "steps": [
+        2,
+        2,
+        3
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=plant-routing-spatial"
+    },
+    {
+      "copies": 5,
+      "images": [
+        {
+          "alt": "Otto: HighTech lab banner",
+          "loaded": true,
+          "src": "../../quality-review-oml/images/otto.png"
+        },
+        {
+          "alt": "Component quality inspection training rows",
+          "loaded": true,
+          "src": "../../quality-review-oml/images/sql-oml-training.png"
+        },
+        {
+          "alt": "Machine Learning launch from Database Actions",
+          "loaded": true,
+          "src": "../../quality-review-oml/images/oml-launch.jpg"
+        },
+        {
+          "alt": "Oracle Machine Learning home page with AutoML available",
+          "loaded": true,
+          "src": "../../quality-review-oml/images/oml-home.jpg"
+        },
+        {
+          "alt": "Component quality classification experiment settings",
+          "loaded": true,
+          "src": "../../quality-review-oml/images/oml-settings.png"
+        },
+        {
+          "alt": "Completed Component Quality Review leaderboard",
+          "loaded": true,
+          "src": "../../quality-review-oml/images/oml-leaderboard.png"
+        },
+        {
+          "alt": "AutoML model comparison",
+          "loaded": true,
+          "src": "../../quality-review-oml/images/oml-model-comparison.png"
+        },
+        {
+          "alt": "GLM confusion matrix for component quality classifications",
+          "loaded": false,
+          "src": "../../quality-review-oml/images/oml-confusion-matrix.png"
+        },
+        {
+          "alt": "GLM prediction impact for inspection features",
+          "loaded": false,
+          "src": "../../quality-review-oml/images/oml-prediction-impact.png"
+        },
+        {
+          "alt": "Created quality model in SQL Worksheet",
+          "loaded": false,
+          "src": "../../quality-review-oml/images/sql-oml-model.png"
+        },
+        {
+          "alt": "Component quality-review predictions and probabilities",
+          "loaded": false,
+          "src": "../../quality-review-oml/images/sql-oml-scoring.png"
+        }
+      ],
+      "steps": [
+        2,
+        4,
+        2,
+        3
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=quality-review-oml"
+    },
+    {
+      "copies": 9,
+      "images": [
+        {
+          "alt": "Nina: HighTech lab banner",
+          "loaded": true,
+          "src": "../../selectai/images/nina-hightech.png"
+        },
+        {
+          "alt": "Select AI profile object list for the HighTech tables",
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-object-list.png"
+        },
+        {
+          "alt": "SQL generated for the scheduled material-value question",
+          "loaded": true,
+          "src": "../../selectai/images/sql-ai-generated.png"
+        },
+        {
+          "alt": "Select AI result for the scheduled material-value question",
+          "loaded": false,
+          "src": "../../selectai/images/sql-ai-answer.png"
+        },
+        {
+          "alt": "SQL generated for the refined component-ranking question",
+          "loaded": false,
+          "src": "../../selectai/images/sql-ai-refined-generated.png"
+        },
+        {
+          "alt": "Select AI result for the refined component-ranking question",
+          "loaded": false,
+          "src": "../../selectai/images/sql-ai-refined-answer.png"
+        },
+        {
+          "alt": "Select AI narrative for the refined HighTech result",
+          "loaded": false,
+          "src": "../../selectai/images/sql-ai-narration.png"
+        }
+      ],
+      "steps": [
+        2,
+        2,
+        2,
+        2,
+        3,
+        2
+      ],
+      "url": "http://127.0.0.1:8765/workshops/sandbox/?lab=selectai"
+    }
+  ],
+  "assetChecks": [
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-operations-dashboard/images/sql-dashboard.png",
+      "width": 2404
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/selectai-agent/images/sql-agent-answer.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/selectai-agent/images/sql-agent-history.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/selectai-agent/images/sql-agent-tools.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-order-duality/images/sql-duality-document.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-order-duality/images/sql-duality-contract.png",
+      "width": 736
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-order-duality/images/sql-duality-released.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-order-duality/images/sql-duality-projection.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-order-duality/images/sql-duality-relational.png",
+      "width": 2404
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/component-quality-vector-search/images/sql-vector-values.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/component-quality-vector-search/images/sql-vector-distance.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/component-quality-vector-search/images/sql-vector-similarity.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/component-quality-vector-search/images/sql-vector-customer-sites.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/sql-graph-direct.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/sql-graph-four-hop.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/sql-graph-shared.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/graph-studio-overview.png",
+      "width": 736
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/graph-notebooks.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/graph-import-dialog.png",
+      "width": 736
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/graph-import-file.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/graph-notebook-top.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/live-09-graph-notebook-table.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/live-10-graph-production-network.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/production-quality-network/images/live-11-graph-shared-lot.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/plant-routing-spatial/images/sql-spatial-chicago.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/plant-routing-spatial/images/sql-spatial-routing.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/quality-review-oml/images/oml-confusion-matrix.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/quality-review-oml/images/oml-prediction-impact.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/quality-review-oml/images/sql-oml-model.png",
+      "width": 736
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/quality-review-oml/images/sql-oml-scoring.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/selectai/images/sql-ai-answer.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/selectai/images/sql-ai-refined-generated.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/selectai/images/sql-ai-refined-answer.png",
+      "width": 2602
+    },
+    {
+      "loaded": true,
+      "url": "http://127.0.0.1:8765/selectai/images/sql-ai-narration.png",
+      "width": 2602
+    }
+  ],
+  "notes": "Lazy images opened directly in a temporary browser tab. Original full eleven-lesson and quiz checks remain in browser-results.json.",
+  "agent_final_check": {
+    "sql_copy_buttons": 16,
+    "comparison_query_visible": true,
+    "succeeded_accuracy_caveat_visible": true
+  }
+}

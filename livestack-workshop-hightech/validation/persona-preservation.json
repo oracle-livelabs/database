@@ -1,0 +1,42 @@
+[
+  {
+    "file": "component-quality-vector-search/images/gilly.png",
+    "byte_identical": true,
+    "reason": "Existing generic caption and persona preserved."
+  },
+  {
+    "file": "production-quality-network/images/bob.png",
+    "byte_identical": true,
+    "reason": "Existing generic caption and persona preserved."
+  },
+  {
+    "file": "selectai/images/nina.png",
+    "byte_identical": false,
+    "reason": "Nina shared banner title changed with imagegen; identities and poses reviewed visually."
+  },
+  {
+    "file": "selectai-agent/images/nina.png",
+    "byte_identical": false,
+    "reason": "Nina shared banner title changed with imagegen; identities and poses reviewed visually."
+  },
+  {
+    "file": "plant-routing-spatial/images/moon.png",
+    "byte_identical": true,
+    "reason": "Existing generic caption and persona preserved."
+  },
+  {
+    "file": "production-order-duality/images/thomas.png",
+    "byte_identical": true,
+    "reason": "Existing generic caption and persona preserved."
+  },
+  {
+    "file": "quality-review-oml/images/otto.png",
+    "byte_identical": true,
+    "reason": "Existing generic caption and persona preserved."
+  },
+  {
+    "file": "production-operations-dashboard/images/jessica.png",
+    "byte_identical": true,
+    "reason": "Existing generic caption and persona preserved."
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "http://www.w3.org/2000/svg": [
+    "final-quiz/images/livestack-hightech-badge.svg",
+    "getting-started/images/database-actions-development-sql.svg",
+    "getting-started/images/database-actions-login-main-user.svg",
+    "getting-started/images/reservation-login-copy-password.svg",
+    "getting-started/images/reservation-login-info.svg",
+    "getting-started/images/reservation-login-open-link.svg",
+    "introduction/images/seer-hightech-erd.svg"
+  ],
+  "https://livelabs.oracle.com": [
+    "getting-started/getting-started.md",
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://DOC": [
+    "getting-started/images/reservation-login-copy-password.svg",
+    "getting-started/images/reservation-login-info.svg",
+    "getting-started/images/reservation-login-open-link.svg"
+  ],
+  "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800": [
+    "plant-routing-spatial/plant-routing-spatial.md"
+  ],
+  "https://pgql-lang.org/": [
+    "production-quality-network/files/getting-started-material-flow-graph.dsnb"
+  ],
+  "https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm": [
+    "selectai/selectai.md",
+    "stack/README.md"
+  ],
+  "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/": [
+    "selectai/selectai.md",
+    "selectai-agent/selectai-agent.md"
+  ],
+  "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-1.11.0.min.js": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-ui-1.10.4.custom.js": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://livelabs.oracle.com/cdn/common/redwood-hol/js/main.min.js": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://livelabs.oracle.com/cdn/common/redwood-hol/img/favicon.ico": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://docs.oracle.com/pls/topic/lookup?ctx=en/legal&id=cpyr": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://www.oracle.com/corporate/index.html": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://www.oracle.com/corporate/contact/": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://docs.oracle.com/en/browseall.html": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://www.oracle.com/legal/privacy/": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://www.oracle.com/legal/privacy/privacy-policy.html#11": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html#adchoices": [
+    "workshops/sandbox/index.html",
+    "workshops/tenancy/index.html"
+  ],
+  "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md": [
+    "workshops/sandbox/manifest.json",
+    "workshops/tenancy/manifest.json"
+  ]
+}

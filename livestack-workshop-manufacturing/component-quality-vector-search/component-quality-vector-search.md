@@ -1,24 +1,17 @@
 # Search Components by Meaning
 
-![Gilly: manufacturing lab banner](images/gilly.png)
-
 ## Introduction
 
-> **Validation status:** The manual LLUSER walkthrough and authentic manufacturing captures are recorded in the [validation report](../validation/validation-report.md). Green-button and Terraform provisioning remain untested.
+Gilly Bourne, SEER MANUFACTURING’s AI engineer, needs to answer **which customer sites may be affected by a bearing dimensional-tolerance concern?** The inspection wording may differ from the component descriptions.
 
-Gilly Bourne is an AI engineer at SEER MANUFACTURING. Her team has built a search feature for the production quality operations application. A production analyst can enter a question such as **which customer sites may be affected by a bearing dimensional-tolerance concern?** The application should find the relevant components first, then show the customer sites with orders for them.
+You will create component vectors, search by meaning, and join the matches to production orders and customer sites. Gilly can return a follow-up list directly from Oracle AI Database.
 
-Gilly has the component, production order, and customer site data in Oracle AI Database. She needs to match a plain-language question to components, then find the customer sites with orders for them. The result must give the production team names and production orders to follow up.
-
-Gilly runs the search in the database. One SQL statement compares the question with component vectors, joins the matches to production orders and customer sites, and returns the follow-up list. This avoids copying text and vectors to a separate search service.
-
-In this lab, you check the embedding model, create component vectors, and use a search result to find matching production orders and customer sites.
-
+![Gilly: manufacturing lab banner](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
-> - An **embedding** is a numerical profile of what text means. In this lab, component data is embedded so similar manufacturing ideas sit near each other mathematically, even when the wording is different.
+> - An **embedding** represents text as a list of numbers. This lab embeds each component’s name, category and subcategory so the query can rank descriptions with similar meanings.
 >
 > - An **ONNX embedding model** is a portable machine-learning model saved in the Open Neural Network Exchange (ONNX) format. It turns text into a vector of numbers that captures meaning. Oracle AI Database can load and run this model inside the database, close to the component rows.
 >
@@ -30,8 +23,6 @@ In this lab, you check the embedding model, create component vectors, and use a 
 
 </details>
 
-A production-quality search page can let a user enter a concern and receive components ranked by meaning. The following tasks explain the SQL behind that search.
-
 ### Objectives
 
 - Check the embedding model Gilly needs for semantic search.
@@ -42,28 +33,11 @@ A production-quality search page can let a user enter a concern and receive comp
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-| Step                | Manufacturing focus                                                                                                                               |
-| ---------------------| ---------------------------------------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Production analysts need to find relevant components without knowing the exact terms used in the component data.                                     |
-| Technical Challenge | Gilly must search by meaning while keeping component data, vectors, production orders, customer sites, and access controls together.                          |
-| Persona Focus       | You review Gilly's implementation as she explains how the search connects a business question to components, production orders, and customer sites.           |
-| What You Will See   | Vector search ranks components by meaning, then SQL adds production order and customer site details.                                                          |
-| Database Capability | `VECTOR_EMBEDDING`, vector columns, and `VECTOR_DISTANCE` run beside relational manufacturing data.                                               |
-| Outcome             | The application can turn a plain-language concern into a customer follow-up list without a separate vector database or copied manufacturing text. |
-
-Persona focus: You are reviewing the search tool Gilly built for production quality operations.
-
-
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
-
 
 ## Task 1: Check the embedding model
 
-Start with Gilly's first design question: **what does similarity search need?** It needs vectors for the text being searched and an embedding model that converts a question into a vector.
-
-Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Oracle AI Database can store and run the ONNX model inside the database, so it creates the question embedding where the component data already live. The application does not have to send manufacturing text to a separate service and bring the vector back.
+The search needs an embedding model and component vectors. Jessica has loaded the model into the database; check that it is available to Gilly.
 
 1. Run this query to list the available embedding models:
 
@@ -81,19 +55,17 @@ Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Orac
 
     **Expected output: Available Embedding Models**
 
-    ![model](images/sql-embedding-model.jpg)
+    ![Available ADMIN embedding model in SQL Worksheet](images/sql-embedding-model.jpg)
 
     The result should include an embedding model owned by `ADMIN`, such as `ALL_MINILM_L12_V2`. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
 
 2. Review what this means for Gilly's application.
 
-    Gilly can call the model from SQL with `VECTOR_EMBEDDING(...)`. Jessica manages the model inside the database, while Gilly uses it in her search query. The component data, vectors, and access controls remain in the same database.
-
-    > **Note:** The embedding model runs inside Oracle AI Database. Gilly can create vectors without sending manufacturing text to another service.
+    Call the model from SQL with `VECTOR_EMBEDDING(...)`; component text stays in the database.
 
 ## Task 2: Create a component vector
 
-Gilly decides that one vector per component is enough. Each component record is short and describes one component, so she combines its name, category, and subcategory into one text value before creating the vector.
+Each component has a short description, so Gilly creates one vector from its name, category and subcategory.
 
 1. Review the text Gilly will embed:
 
@@ -137,7 +109,7 @@ Gilly decides that one vector per component is enough. Each component record is 
     </copy>
     ```
 
-    The model reads the text in each row and writes the vector back to that same row. No component text leaves the database.
+    Each row’s text becomes its vector.
 
 4. Verify the new column and its data:
 
@@ -150,32 +122,17 @@ Gilly decides that one vector per component is enough. Each component record is 
     </copy>
     ```
 
-    ![vector values](images/sql-vector-values.png)
+    ![Component rows populated with vector embeddings](images/sql-vector-values.png)
 
-    
-
-    
-
-    Each component now has its own 384-dimensional vector. Gilly can use this column directly when the application searches for components by meaning.
-
-    > **Note:** Chunking is not relevant for this data. Each row describes one short component, so splitting it would create several vectors for one component without adding useful detail. Chunking becomes useful for long documents, such as policies or plant quality notices, where each section may answer a different question.
+    > **Note:** Each description is short enough for one vector. Longer documents, such as policies or plant quality notices, may need separate vectors for sections that answer different questions.
 
 ## Task 3: Test the component vector
 
-Now Gilly tests the new column with a simple vector query. She asks for components related to precision bearing with low vibration and tight dimensional tolerance and lets the database rank them by meaning.
+Search for `precision bearing with low vibration and tight dimensional tolerance` and review how the database ranks the components by meaning.
 
 1. Run the following query:
 
     The SQL creates an embedding for the phrase `precision bearing with low vibration and tight dimensional tolerance`, compares it with the vectors in `COMPONENTS.COMPONENT_EMBEDDING`, and returns the cosine distance. A smaller distance means the two vectors are closer in meaning, so the query orders the smallest distance first.
-
-    <details>
-    <summary><strong>Why this matters to Gilly</strong></summary>
-
-    > Gilly could export the text to an external embedding pipeline or search service. That would create extra copies of sensitive manufacturing text and make it harder to show which data the application searched.
-    >
-    > Oracle AI Vector Search keeps the component data, vectors, SQL query, and vector distance with the manufacturing data. Gilly can check the search and use the result in the application without adding another data store.
-
-    </details>
 
     ```sql
     <copy>
@@ -191,22 +148,18 @@ Now Gilly tests the new column with a simple vector query. She asks for componen
     </copy>
     ```
 
-    ![vector distance](images/sql-vector-distance.png)
-
-    
+    ![Components ranked by vector distance](images/sql-vector-distance.png)
 
     **Expected output: Relevant Component Matches**
 
-    
-
 2. Review the ranked components.
-    The query embeds the analyst phrase at runtime and compares it to the `COMPONENTS.COMPONENT_EMBEDDING` column. `VECTOR_DISTANCE` calculates the distance between the two vectors using the `COSINE` metric. A lower value means a closer match.
+    Lower cosine distance means a closer match. Inspect whether the top components fit the quality concern.
 
     Use the ranked components to focus the dashboard review on the component quality concern.
 
 3. Show the result as a similarity score:
 
-    Vector distance is useful for checking the search, but production analysts may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
+    Display `1 - distance`, rounded to four decimal places, as a similarity score. Higher scores indicate closer matches; the ranking stays the same.
 
     ```sql
     <copy>
@@ -222,17 +175,13 @@ Now Gilly tests the new column with a simple vector query. She asks for componen
     </copy>
     ```
 
-    ![vector similarity](images/sql-vector-similarity.png)
+    ![Components ranked by semantic similarity](images/sql-vector-similarity.png)
 
-    
-
-    The query uses the same vectors and the same cosine calculation. It only changes how the result is shown to the person using the application.
-
-    
+    The ranking is unchanged; only its display changes.
 
 ## Task 4: Find customer sites affected by a component concern
 
-Gilly now connects the component search to customer orders. A production analyst should be able to enter a concern and find customer sites with orders for related components. The status filter limits the follow-up to planned, released, and in-production orders. The result gives the production-quality team a short list for follow-up, with the component match, production order status, production order date, and customer contact details.
+Join the matching components to customer orders. Limit follow-up to planned, released, and in-production orders.
 
 1. Run the following query for the concern `precision bearing with low vibration and tight dimensional tolerance`:
 
@@ -274,16 +223,11 @@ Gilly now connects the component search to customer orders. A production analyst
 
     ![component customer follow-up](images/sql-vector-customer-sites.png)
 
-    
-
     The first part ranks components by meaning. The remaining joins use ordinary relational keys to find the matching order lines, production orders, and customer sites.
 
     **Expected output: Customer Follow-up List**
 
-    The result shows customer sites with orders for components related to the concern. The similarity score explains why the component was included, while the production order and customer site columns give the production team enough information to decide what to do next.
-
-
-    
+    Use the component match, order details, and customer contacts to plan follow-up.
 
 2. Review the business result.
 
@@ -291,7 +235,7 @@ Gilly now connects the component search to customer orders. A production analyst
 
 ## Conclusion
 
-Gilly has built a component search that helps the quality team decide which customers to contact. A plain-language concern can produce ranked components and a customer follow-up list using vectors, relational joins, and SQL in Oracle AI Database. 
+Gilly can now turn a quality concern into ranked components and a customer follow-up list. The team can inspect the matching orders before deciding whom to contact.
 
 ## Acknowledgements
 

@@ -28,9 +28,9 @@
       "filename": "../../guest-concern-vector-search/guest-concern-vector-search.md"
     },
     {
-      "title": "Lab 4: Investigate a Booking Abuse Network",
+      "title": "Lab 4: Investigate Booking Connections",
       "description": "Review Bob's graph approach to finding reservations linked by shared booking details with Oracle Property Graph and SQL/PGQ.",
-      "filename": "../../booking-abuse-network/booking-abuse-network.md"
+      "filename": "../../booking-connections/booking-connections.md"
     },
     {
       "title": "Lab 5: Route Guests to the Closest Hotel Property",
