@@ -32,6 +32,12 @@ In this lab, you will:
 
     ![Slack Workspace Creation](./images/05_create_slack_workspace.png)
 
+2. Give name to your workspace, your self and skip team members.
+
+    ![Slack Workspace Name](./images/06_name_workspace.png)
+    ![Slack Workspace Name](./images/07_name.png)
+    ![Slack Workspace Name](./images/08_not-add-team.png)
+
 2. Confirm that your Slack user can create channels and install internal apps.
 
     In most workspaces, members can create channels from the plus sign in the Slack sidebar. Some company workspaces restrict channel creation or app installation. If you cannot create channels, ask a Workspace Owner for help before continuing. If app approval is enabled, ask the Workspace Owner or app manager to approve the internal apps after you import their manifests in Task 2.
