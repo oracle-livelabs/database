@@ -1,10 +1,10 @@
 {
-  "workshoptitle": "Build Connected HighTech Solutions with Oracle AI Database",
+  "workshoptitle": "Build Connected High-Tech Solutions with Oracle AI Database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
-      "title": "Build Connected HighTech Solutions with Oracle AI Database",
-      "description": "The Seer HighTech intelligence story and workshop goals.",
+      "title": "Build Connected High-Tech Solutions with Oracle AI Database",
+      "description": "The Seer High-Tech intelligence story and workshop goals.",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -43,13 +43,13 @@
       "filename": "../../quality-review-oml/quality-review-oml.md"
     },
     {
-      "title": "Lab 7: Ask HighTech Questions with Select AI",
-      "description": "Use Select AI to turn natural-language HighTech questions into SQL you can inspect and run.",
+      "title": "Lab 7: Ask High-Tech Questions with Select AI",
+      "description": "Use Select AI to turn natural-language High-Tech questions into SQL you can inspect and run.",
       "filename": "../../selectai/selectai.md"
     },
     {
-      "title": "Lab 8: Build a HighTech Agent with Select AI Agent",
-      "description": "Create a HighTech agent instructed to use an approved SQL tool for read-only questions.",
+      "title": "Lab 8: Build a High-Tech Agent with Select AI Agent",
+      "description": "Create a High-Tech agent instructed to use an approved SQL tool for read-only questions.",
       "filename": "../../selectai-agent/selectai-agent.md"
     },
     {

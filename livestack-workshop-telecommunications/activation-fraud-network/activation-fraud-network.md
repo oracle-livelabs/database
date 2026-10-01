@@ -245,7 +245,7 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
 
     ![Trace activation evidence across four hops](images/sql-graph-four-hop.png)
 
-    RELATIONSHIP_HOPS shows the entity's level in the search. A value of `1` means the entity is directly connected to `ORD-8841`; a value of `2` means the query reached it after one intermediate vertex; values `3` and `4` show deeper connections.
+    `RELATIONSHIP_HOPS` is the number of relationships in the path from `ORD-8841` to the returned entity. One hop is a direct connection; two hops include one intermediate vertex. The same entity may appear at more than one hop count.
 
     **Expected output: High Risk Activation Fraud Entities**
 

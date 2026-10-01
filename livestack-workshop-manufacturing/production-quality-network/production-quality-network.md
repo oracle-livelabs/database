@@ -237,7 +237,7 @@ Start from flagged production order `PO-8841` and trace the connected entities w
 
     ![Entities reached within four graph hops of production order PO-8841](images/sql-graph-four-hop.png)
 
-    RELATIONSHIP_HOPS shows the entity's level in the search. A value of `1` means the entity is directly connected to `PO-8841`; a value of `2` means the query reached it after one intermediate vertex; values `3` and `4` show deeper connections.
+    `RELATIONSHIP_HOPS` is the number of relationships in the path from `PO-8841` to the returned entity. One hop is a direct connection; two hops include one intermediate vertex. The same entity may appear at more than one hop count.
 
     **Expected output: High Risk Production quality Entities**
 
@@ -351,12 +351,12 @@ Run the notebook’s `PO-8841` traversal and shared-lot view, then compare them 
     | Paragraph | Result | Investigation purpose |
     | --- | --- | --- |
     | `SELECT DISTINCT ... WHERE seed.entity_key = 'PO-8841'` | Table | Ranks entities reached within one or two hops of `PO-8841`. |
-    | `Graph Visualization of previous query` | Markdown label | Introduces the visual version of the first traversal. |
+    | `Visualize the previous query result` | Markdown label | Introduces the visual version of the first traversal. |
     | `SELECT * ... WHERE src.entity_key = 'PO-8841'` | Graph visualization | Draws the one-hop and two-hop path from the flagged production order. |
     | `Shared Entity Connections` | Markdown label and explanation | Introduces the material lot-centered relationship view. |
     | `SELECT * ... WHERE material_lot.entity_key = 'LOT-ST-91A7'` | Graph visualization | Centers on `LOT-ST-91A7` and draws its directly connected production orders. |
 
-3. Under **Graph Visualization of previous query**, run the SQL paragraph that starts with `SELECT *` and anchors on `PO-8841`. Review the graph visualization that appears below the paragraph.
+3. Under **Visualize the previous query result**, run the SQL paragraph that starts with `SELECT *` and anchors on `PO-8841`. Review the graph below it.
 
     ![Production order graph from PO-8841](images/live-10-graph-production-network.png)
 

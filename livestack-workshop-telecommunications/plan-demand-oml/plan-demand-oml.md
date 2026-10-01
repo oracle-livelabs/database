@@ -17,7 +17,7 @@ Train a model inside Oracle AI Database to classify the September sample as `SUR
 >
 > - **Classification** predicts a label. Otto's model predicts either `SURGE` or `STABLE`.
 >
-> - A **probability** is the model's value for a class. In this lab, the value is displayed as a `SURGE_SCORE` to rank service plans for review. It is not a guarantee.
+> - A **probability** is the model’s estimated value for a particular class. `SURGE_SCORE` is the probability assigned to `SURGE`, from 0 to 1. `SURGE_PCT` shows the same value as a percentage. Use the score to rank service plans for review, not as a guarantee of a future outcome.
 >
 > - **In-database machine learning** means the model is trained or scored where the source data already lives. The SQL result can include the prediction and the data used to explain it.
 
@@ -41,7 +41,7 @@ Help Otto build a plan-demand watchlist and explain the activity behind each sco
 
 ## Task 1: Read the training data
 
-Before Otto creates a model, he checks the data that will teach it. The workshop already provides `OML_PLAN_DEMAND_TRAINING_V`, a view that combines service plan, support reports and network diagnostics, and activations data into one row per active service plan.
+The prepared view, `OML_PLAN_DEMAND_TRAINING_V`, contains one row per active service plan. It combines plan details, support and network-diagnostic observations, and activation data.
 
 The view also contains `SURGE_LABEL`. This is the known label used during training. The sample data assigns `SURGE` when at least 45 connections were ordered and at least two observation intervals had utilization of 60% or more; other plans are `STABLE`. Both aggregations use September 2026. The 192 plans split into 96 examples per class.
 
@@ -99,9 +99,22 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     | Prediction type | `Classification`        |
     | Case ID         | `PLAN_ID`            |
 
-    ![AutoML settings: training view, target label, classification, and plan ID.](images/oml-settings.png)
+     **Note:** The Predict, Prediction Type, and Case ID fields become available after a data source has been entered. Select `SURGE_LABEL`, `Classification`, and `OFFER_ID`, respectively.
 
-    Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on database resources and model settings.
+     To enter the **Data Source** value:
+    1. Enter *Care Demand Risk Test* in the Name field.
+    2. Select the magnifying-glass icon next to **Data Source**.
+
+    ![Hospitality classification experiment settings](images/data-source-two.png)
+
+    3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
+    4. Select `OML_PLAN_DEMAND_TRAINING_V` from the **Table** list.
+
+    ![Hospitality classification experiment settings](images/data-source-one.png)
+
+    5. Select **OK**.
+
+5. Choose **Start → Faster Results** and wait for the model leaderboard. Runtime depends on database resources and model settings.
 
 4. Review the leaderboard and model details.
 
@@ -125,7 +138,7 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
 Create the workshop's Generalized Linear Model, `OTTO_PLAN_DEMAND_SURGE_MODEL`, in SQL Worksheet. If you ran AutoML, compare its results with this SQL model.
 
-The settings table tells Oracle to use the **Generalized Linear Model** used in this exercise. `PREP_AUTO` lets the database handle standard preparation of the input columns.
+The settings table selects the **Generalized Linear Model** algorithm. `PREP_AUTO` enables automatic preparation of the input columns.
 
 1. Create the settings table and train the model:
 
@@ -329,7 +342,7 @@ Otto creates sample scoring data by changing values from the training view. This
 
 3. Read the result as a dashboard user.
 
-  `PREDICTED_SURGE` tells the dashboard which label the model selected. `SURGE_SCORE` is the model value between 0 and 1, while `SURGE_PCT` presents the same value as a percentage for a dashboard user. The activations and activity columns give the plan analyst something to review alongside the prediction.
+  `PREDICTED_SURGE` is the class selected by the model. `SURGE_SCORE` is the probability assigned to `SURGE`, and `SURGE_PCT` shows that probability as a percentage. Compare the score with the activity values in the same row before deciding what to review.
 
   One SQL result returns the prediction, service plan name, activations, and support reports and network diagnostics. Otto can use the model without moving the data to an external machine learning platform.
 

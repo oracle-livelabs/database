@@ -2,16 +2,16 @@
 
 ## Introduction
 
-Open your LiveLabs reservation and its **Autonomous Database 26ai** instance. Then prepare SQL Worksheet to run the Media exercises as the workshop user.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on media and entertainment exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each media and entertainment query runs as the workshop user against the prepared media and entertainment schema.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
 
-> - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. Use it to run SQL, browse objects, load data, and develop applications without a desktop database client.
+> - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
 >
-> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. Its query results, script output, and errors help you check each exercise against database evidence.
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
 >
-> - `LLUSER` is the workshop database user and schema owner for the hands-on media objects. The loader creates the workshop tables, views, models, graph, and functions in this schema.
+> - `LLUSER` is the workshop database user and schema owner for the hands-on media objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
 
 </details>
 
@@ -74,14 +74,15 @@ Open SQL Worksheet as the workshop user before running the media queries. SQL Wo
 
 6. Use the same SQL Worksheet pattern throughout the workshop.
 
-    ![Annotated SQL Worksheet showing the LLUSER Media schema, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation.svg " ")
+    ![Annotated SQL Worksheet showing the LLUSER Media schema, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation-media.svg " ")
 
-    *Figure 6: Annotated schematic with loader object names. Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
+    *Figure 6: SQL Worksheet orientation graphic reused from the finance workshop. Use it to locate the user selector, editor, run controls, and output panels. Run the Media SQL supplied in each lab.*
 
     - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
-    - Paste each workshop SQL block into the editor.
-    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
-    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Replace the editor contents with the complete SQL block for the current step.
+    - For a single SQL statement, select **Run Statement** or press **Ctrl+Enter**. Review its rows in **Query Result**.
+    - For blocks with several statements, including an insert or update followed by `COMMIT`, select **Run Script**. Clear any text selection first so the complete block runs, then check **Script Output** for errors.
+    - Follow each lab's execution instructions. **Run Statement** runs only the current statement; it does not run every statement in the editor.
     - Use **Navigator** only when you want to inspect tables, views, or other objects.
 
 7. Run this check.
@@ -106,32 +107,6 @@ Open SQL Worksheet as the workshop user before running the media queries. SQL Wo
 
 
 8. Repeat this check whenever you need to confirm the active user.
-
-## Task 3: Verify the Media loader is ready
-
-1. Confirm that your facilitator has prepared this reservation with the Media handoff loader. The script creates the shared LiveStack tables and the five Media semantic views used throughout this workshop. Physical names such as `PRODUCTS`, `ORDERS`, and `INFLUENCERS` are intentional; the lab results use content-asset, campaign-order, and creator labels.
-
-2. Run the following query before any lab inserts new rows.
-
-    ```sql
-    <copy>
-    SELECT 'Content assets' AS media_entity, COUNT(*) AS row_count FROM media_content_assets_v
-    UNION ALL SELECT 'Campaign orders', COUNT(*) FROM media_campaign_orders_v
-    UNION ALL SELECT 'Audience signals', COUNT(*) FROM media_audience_signals_v
-    UNION ALL SELECT 'Audience accounts', COUNT(*) FROM customers
-    UNION ALL SELECT 'Studios and labels', COUNT(*) FROM brands
-    UNION ALL SELECT 'Distribution hubs', COUNT(*) FROM fulfillment_centers
-    UNION ALL SELECT 'Creators', COUNT(*) FROM influencers;
-    </copy>
-    ```
-
-    **Expected initial counts:** 187 content assets, 3,000 campaign orders, 5,000 audience signals, 2,000 audience accounts, 50 studios and labels, 30 distribution hubs, and 483 creators. Lab 2 adds a campaign order, so its count can increase after that exercise.
-
-3. Download [media-readiness-check.sql](files/media-readiness-check.sql), paste it into SQL Worksheet, and select **Run Script**. Review the required objects, prepared model, vector rows, and Media anchor record. A missing object or an invalid status means the environment needs facilitator attention before the corresponding lab.
-
-4. Labs 7 and 8 require an enabled Select AI profile with provider access. Confirm access to `DBMS_CLOUD_AI` and `DBMS_CLOUD_AI_AGENT` with your facilitator. The data loader does not configure those services. The preparation guide includes OCI resource principal setup for `SEER_MEDIA_PROFILE` and the five Media views. Lab 7 checks the profile and granted credential access before testing the provider.
-
-The facilitator can use the [Media platform preparation guide](../media-platform-preparation.md). Participants should not rerun the handoff loader: it resets the workshop schema and its data.
 
 You can now continue to the media labs.
 
