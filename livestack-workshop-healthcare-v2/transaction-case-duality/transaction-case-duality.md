@@ -133,6 +133,8 @@ Thomas starts with settings that belong to the application but do not need dedic
 
     **Checkpoint:** The query should return one row for request `170104`. If you receive `ORA-00942`, return to this task's setup block and inspect its Script Output. If the query returns no rows, check that the insert completed successfully.
 
+  ![Lab 2 Task 1](images/application-settings.png " ")
+
     **Expected output: Application settings**
 
     | Request ID | Screen | Show Logistics Cost | Features |
@@ -204,8 +206,6 @@ Thomas now compares the JSON column with an application-owned collection. The co
 
     Oracle creates `THOMAS_CARE_REQUEST_DOCS`, inserts one document for request `170104`, and commits the transaction.
 
-    ![Healthcare service-request page](images/collection-document-created.png " ")
-
 2. Query the application-owned document.
 
     ```sql
@@ -217,6 +217,8 @@ Thomas now compares the JSON column with an application-owned collection. The co
     ```
 
     **Checkpoint:** The query should return one document for request `170104`. If you receive `ORA-00942`, return to this task's setup block and inspect its Script Output. If the query returns no rows, check that the insert completed successfully.
+
+  ![Lab 2 Task 2](images/collection-document.png " ")
 
     **Expected output: Collection document**
 
@@ -259,6 +261,8 @@ The collection stores its own document. It is useful when the application owns t
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 170104;
     </copy>
     ```
+
+  ![Lab 2 Task 3](images/duality-requested-document.png " ")
 
     **Expected output: Duality-view request document**
 
@@ -401,7 +405,7 @@ The provided duality view starts with a controlled contract: applications can up
 
 Thomas now submits a complete request document with two line items. Oracle applies the write to the normalized request and item tables.
 
-1. Insert request `990001` through the duality view.
+1. Copy the entire setup block into SQL Worksheet and click **Run Script (F5)** to insert request `990001` through the duality view.
 
     The supplied care-site, logistics-site, and service identifiers already exist in the provided healthcare data. The two line values total `495.00`. Task 4 removes the reserved exercise request before this insert, while the `NOT EXISTS` condition provides an additional duplicate check.
 
@@ -476,6 +480,8 @@ Thomas now submits a complete request document with two line items. Oracle appli
     </copy>
     ```
 
+    ![Lab 2 Task 5](images/relational-request-rows.png " ")
+
     **Expected output: Relational request rows**
 
     | Request ID | Status | Care Site | Logistics Site | Item ID | Service | Quantity | Unit Cost | Line Value |
@@ -524,6 +530,7 @@ Thomas now submits a complete request document with two line items. Oracle appli
     ORDER BY i.item_id;
     </copy>
     ```
+  ![Lab 2 Task 5](images/request-status-updated.png " ")
 
     **Expected output: Updated root with unchanged line items**
 
@@ -561,6 +568,8 @@ Thomas has confirmed that the application can display and update the document. J
     </copy>
     ```
 
+    ![Lab 2 Task 6](images/json-field-projection.png " ")
+
     **Expected output: JSON field projection**
 
     | Request ID | Status | Care Site | Logistics Site |
@@ -583,6 +592,7 @@ Thomas has confirmed that the application can display and update the document. J
     WHERE r.request_id = 990001;
     </copy>
     ```
+  ![Lab 2 Task 6](images/relational-field-projection.png " ")
 
     **Expected output: Relational field projection**
 

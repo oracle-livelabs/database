@@ -13,17 +13,17 @@
       "filename": "../../getting-started/getting-started.md"
     },
     {
-      "title": "Lab 1: Build a Converged Launch Operations Dashboard",
+      "title": "Lab 1: Build a Midnight Harbor Launch Operations Dashboard",
       "description": "Connect audience signals, content similarity, campaign orders, and distribution geography.",
       "filename": "../../launch-operations-dashboard/launch-operations-dashboard.md"
     },
     {
-      "title": "Lab 2: Build a Campaign-Order JSON Application Model",
+      "title": "Lab 2: Build a JSON Campaign Application Model",
       "description": "Help Thomas serve campaign orders with JSON Relational Duality.",
       "filename": "../../viewing-session-duality/viewing-session-duality.md"
     },
     {
-      "title": "Lab 3: Review Semantic Content Discovery",
+      "title": "Lab 3: Review a Semantic Content Search",
       "description": "Search prepared content-asset embeddings by meaning.",
       "filename": "../../content-discovery-vector-search/content-discovery-vector-search.md"
     },
@@ -33,12 +33,12 @@
       "filename": "../../creator-community-network/creator-community-network.md"
     },
     {
-      "title": "Lab 5: Plan Media Distribution Coverage with Oracle Spatial",
+      "title": "Lab 5: Route Audience Accounts to the Closest Distribution Hub",
       "description": "Compare distribution hubs, audience accounts, and seeded demand regions.",
       "filename": "../../live-event-capacity-spatial/live-event-capacity-spatial.md"
     },
     {
-      "title": "Lab 6: Predict Content Demand Surges with Oracle Machine Learning",
+      "title": "Lab 6: Build a Content Demand Watchlist with Oracle Machine Learning",
       "description": "Train a content-demand model with the loader settings and score a simulated activity snapshot.",
       "filename": "../../predictive-audience-oml/predictive-audience-oml.md"
     },
@@ -48,7 +48,7 @@
       "filename": "../../selectai/selectai.md"
     },
     {
-      "title": "Lab 8: Build a Media Operations Agent with Select AI Agent",
+      "title": "Lab 8: Build a Media Agent with Select AI Agent",
       "description": "Use a SQL-only Media operations agent and review its execution history.",
       "filename": "../../selectai-agent/selectai-agent.md"
     },

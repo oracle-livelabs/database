@@ -1,16 +1,18 @@
-# Build a Media Demand Watchlist with Oracle Machine Learning
+# Build a Content Demand Watchlist with Oracle Machine Learning
 
 ## Introduction
 
 Otto Spencer is Seer Media's data scientist. His team supplies the predictions used in analytics charts and dashboards.
 
-The content team wants a demand watchlist that ranks assets for review and shows their campaign orders and audience activity.
+The content team wants a demand watchlist. A business user should be able to see which content assets may need more attention, which inputs influenced the model, and which assets already show strong campaign-order or audience activity.
 
-Otto trains and scores the model in Oracle AI Database, where the content, campaign, and social activity data reside. The model classifies content assets as `SURGE` or `STABLE`. SQL joins those predictions to content names, campaign revenue, and engagement values for the dashboard.
+Otto already has the content, campaign, and social activity data in Oracle AI Database. He trains and scores the model there, keeping the model beside its source data and the dashboard query.
 
-Build Otto's demand model and use its scores to rank a review list.
+The model uses content activity to classify assets as `SURGE` or `STABLE`. SQL then joins the prediction to the content name, campaign revenue, and engagement values that a dashboard needs.
 
-![Otto introduces a Media demand model and simulated content scoring](images/media-otto.png)
+In this lab, you build Otto's demand-surge model and turn its output into a review list for a business user.
+
+![Otto introduces a Media demand model and simulated content scoring](images/otto.png)
 
 <details>
 <summary><strong>Key terms: model, feature, classification, probability, and in-database machine learning</strong></summary>
@@ -49,11 +51,11 @@ Estimated Time: **10 minutes**
 | Database Capability | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside the database. |
 | Outcome             | A watchlist for a dashboard combines the model result with the content-asset and activity data behind it.                  |
 
-> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for setup and query instructions.
+> **SQL Worksheet reminder:** Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the guide showing where to paste and run SQL. Use **Run Statement** for a single query. The setup blocks in Tasks 3 and 4 contain multiple statements and require **Run Script**.
 
 ## Task 1: Read the training data
 
-Otto first checks `OML_DEMAND_TRAINING_V`. This prepared view combines content-asset, audience-signal, and campaign-order data into one row per active content asset.
+Before Otto creates a model, he checks the data that will teach it. The workshop already provides `OML_DEMAND_TRAINING_V`, a view that combines content-asset, audience-signal, and campaign-order data into one row per active content asset.
 
 `SURGE_LABEL` is the training target. The loader ranks a weighted activity score and labels the highest quartile `SURGE`; the remaining rows receive `STABLE`. These are synthetic labels derived from current features, so model performance here does not establish future forecasting accuracy. The physical `PRODUCT_ID`, `UNIT_PRICE`, `UNITS_SOLD`, and `REVENUE` columns represent a content asset, its campaign value proxy, requested units, and campaign-order revenue in this dataset.
 
@@ -83,13 +85,15 @@ Otto first checks `OML_DEMAND_TRAINING_V`. This prepared view combines content-a
 
     ![Media training rows with content categories, activity features, and SURGE_LABEL](images/media-training.jpg)
 
-    Check that each training row contains the category and activity values used by the model.
+    Otto checks that each training row brings together the category and activity values the model needs. The view supplies content, audience-signal, and campaign-order data directly to the training process.
 
 ## Task 2: Compare models with AutoML (optional)
 
-AutoML selects and tunes candidate algorithms. Use its leaderboard and model details to compare how they distinguish `SURGE` from `STABLE`.
+Otto first uses the Oracle Machine Learning AutoML interface to compare candidate models. AutoML can select algorithms, tune them, and show how well each model distinguishes `SURGE` from `STABLE`.
 
-This optional task can take several minutes. Continue to Task 3 to build and score a model directly in SQL Developer Web.
+The leaderboard is a starting point. Otto also checks whether the model identifies the class he needs for the watchlist.
+
+This task is optional. AutoML can take several minutes to complete, so continue to Task 3 if you want to focus on creating and using the model in SQL Developer Web.
 
 1. Open **Machine Learning** from Database Actions.
 
@@ -135,11 +139,13 @@ This optional task can take several minutes. Continue to Task 3 to build and sco
 
 ## Task 3: Create the media demand model in SQL Developer Web
 
-The loader creates `DEMAND_SURGE_MODEL` from `OML_DEMAND_TRAINING_V`. This task trains a separate model, `OTTO_MEDIA_DEMAND_MODEL`, for the workshop scoring query.
+Otto now moves to SQL Developer Web to create a named model that a SQL query can call repeatedly. The loader already creates `DEMAND_SURGE_MODEL` from `OML_DEMAND_TRAINING_V`. This task trains a separate model, `OTTO_MEDIA_DEMAND_MODEL`, for the workshop scoring query.
 
-The settings table uses the loader's **Random Forest** algorithm, 50 trees, and random seed. `PREP_AUTO` lets the database prepare the input columns. You can run this task even if you skipped AutoML.
+The settings table tells Oracle to use the loader's **Random Forest** algorithm, 50 trees, and random seed. `PREP_AUTO` lets the database prepare the input columns.
 
-1. Create the settings table and train the model:
+If you skipped the optional AutoML task, use these settings as the model configuration for the workshop.
+
+1. Create the settings table and train the model. Paste the complete block into an empty worksheet and click **Run Script**. The script contains SQL statements and PL/SQL blocks; keep each `/` terminator on its own line.
 
     ```sql
     <copy>
@@ -193,9 +199,9 @@ The settings table uses the loader's **Random Forest** algorithm, 50 trees, and 
     </copy>
     ```
 
-    Training reads the features and `SURGE_LABEL` from the view, then stores the learned model in Oracle Database.
+    The model reads the training view, learns the relationship between the features and `SURGE_LABEL`, and stores the trained model in the database. Training uses the content and activity data where they already reside.
 
-2. Confirm that Oracle created the model:
+2. Confirm that Oracle created the model. Replace the worksheet contents with this query and click **Run Statement**:
 
     ```sql
     <copy>
@@ -211,9 +217,9 @@ The settings table uses the loader's **Random Forest** algorithm, 50 trees, and 
 
 ## Task 4: Score a simulated media activity snapshot in SQL
 
-Create a scoring table by adjusting twelve feature rows from `OML_DEMAND_TRAINING_V`. These simulated scenarios are not independent holdout data or measured future activity.
+Otto now needs to score an activity snapshot for the watchlist. Create a separate scoring table by adjusting twelve feature rows from `OML_DEMAND_TRAINING_V`. These simulated scenarios demonstrate the scoring workflow; they are not independent holdout data or measured future activity.
 
-1. Create the scoring table and add the simulated activity snapshot:
+1. Create the scoring table and add the simulated activity snapshot. Paste the complete block into an empty worksheet and click **Run Script** so the table creation, insert, and commit all execute:
 
     ```sql
     <copy>
@@ -290,7 +296,7 @@ Create a scoring table by adjusting twelve feature rows from `OML_DEMAND_TRAININ
     This creates a small simulated snapshot from the workshop data.
     > **Note:** The table has the model inputs, but it does not contain `SURGE_LABEL`. That label is the training target and is excluded from the scoring inputs.
 
-2. Run the scoring query:
+2. Replace the worksheet contents with the scoring query and click **Run Statement**:
 
     ```sql
     <copy>
@@ -340,15 +346,17 @@ Create a scoring table by adjusting twelve feature rows from `OML_DEMAND_TRAININ
 
 3. Read the result as a dashboard user.
 
-    `PREDICTED_SURGE` is the selected label. `SURGE_SCORE` is the model score for `SURGE`, between 0 and 1; `SURGE_PCT` expresses it as a percentage. Review the campaign-order and activity values alongside that score. One SQL query returns the prediction and its business context.
+    `PREDICTED_SURGE` tells the dashboard which label the model selected. `SURGE_SCORE` is the model score for `SURGE`, between 0 and 1, while `SURGE_PCT` presents the same value as a percentage. The campaign-order and activity columns give the business user supporting values to review alongside the prediction.
+
+    Otto can return a prediction, the content name, campaign-order values, and audience activity in one SQL result. The model and the data used by the dashboard remain in the same database.
 
     ![Content assets ranked by SURGE probability from the OTTO media demand model](images/media-demand-scoring.jpg)
 
 ## Conclusion: Put the Prediction Beside the Business Data
 
-You built a Random Forest using the loader's configuration and scored a simulated activity snapshot. The optional AutoML task compared candidate models. Read exact probabilities from your model run and review them alongside each asset's activity.
+Otto used the loader's Random Forest configuration to train a model in SQL Developer Web and score a simulated activity snapshot. The optional AutoML task compared candidate models. The scoring query returns a watchlist that a dashboard can show alongside the content activity behind each score.
 
-The dashboard query combines model scores with content details under the database's access controls. Users can inspect the supporting values and rerun the watchlist as the input data changes.
+The model, training data, predictions, and content details stay together in Oracle AI Database. A business user can read the watchlist, inspect the supporting values, and repeat the query under the database's access controls. Read exact probabilities from your model run and interpret them as scores for the synthetic workshop labels.
 
 ## Acknowledgements
 

@@ -1,14 +1,14 @@
-# Explore a Media Creator and Studio Network
+# Investigate a Creator and Studio Network
 
 ## Introduction
 
-Bob Green is a graph specialist at Seer Media. When community teams need to understand how creators connect and which studios or labels they promote, Bob recommends a property graph.
+Bob Green is a graph specialist at Seer Media. When the community team needs to understand how creators connect and which studios or labels they promote, Bob recommends a property graph.
 
-Bob starts with the creator connections and studio relationships loaded in Oracle AI Database. The focal creator is `@premiere_001`, whose display name is `Film Discovery 001`.
+Bob's starting point is simple: a creator profile does not show the whole community. Following creator connections and shared studio relationships can reveal groups the content team should review together. The focal creator is `@premiere_001`, whose display name is `Film Discovery 001`.
 
-Start with relational joins, then use SQL/PGQ to follow creator connections. Open Graph Studio to explore the same paths visually.
+In this lab, you use Bob's approach to explore the creator network in two views. Start with relational joins, then use SQL/PGQ to follow creator connections. Open Graph Studio to explore those paths visually and explain the relationships to the content team.
 
-Graph Studio displays database vertices, edges, and paths as an interactive network. Bob selects nodes and follows relationships to explain creator communities to the content team.
+Graph Studio is Oracle Database's visual workspace for property graphs. It displays vertices, edges, and paths as an interactive network backed by the database data. Bob uses SQL/PGQ for a precise, repeatable result, such as a ranked list of connected creators. He uses Graph Studio to select nodes, follow adjacent relationships, and inspect the paths behind that list.
 
 ![Bob, the media graph specialist](images/image-graph.png)
 
@@ -49,15 +49,17 @@ Estimated Time: **10 minutes**
 | Database Capability | `INFLUENCER_NETWORK` and `GRAPH_TABLE` support SQL/PGQ traversal. |
 | Outcome | A business user can identify creator communities and inspect the relationships behind them. |
 
+Persona focus: You are reviewing Bob's graph solution with a creator-community analyst.
+
 The loader retains physical names such as `INFLUENCERS`, `BRANDS`, and `BRAND_INFLUENCER_LINKS`. In this media dataset, they represent creators, studios or labels, and their relationships.
 
-> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for setup and query instructions.
+> **SQL Worksheet reminder:** Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the guide showing where to paste and run SQL statements. Each query in Tasks 1–4 is one SQL statement; paste the complete block into an empty worksheet and click **Run Statement**.
 
 ## Task 1: Follow a creator with SQL
 
-Jessica's query lists the creators directly connected to `@premiere_001`. Following more relationship steps requires more joins.
+Jessica has already written a query for Bob. It lists the creators directly connected to `@premiere_001`. The query works, but Jessica is concerned about what happens when analysts need to follow relationships several steps away.
 
-A four-hop search extends beyond creators connected directly to the starting profile.
+In this lab, a **hop** means one relationship step. From `@premiere_001` to `@streaming_002` is one hop; continuing to `@fandom_003` is two hops. A four-hop search extends beyond creators connected directly to the starting profile.
 
 1. Run Jessica's ordinary SQL query:
 
@@ -178,7 +180,7 @@ A four-hop search extends beyond creators connected directly to the starting pro
     </copy>
     ```
 
-    Jessica now needs four query branches. They follow one, two, three, and four relationship steps. Each additional hop adds another connection join and another creator join. `UNION` combines the path lengths and removes duplicate result rows.
+    Jessica now needs four query branches. They follow one, two, three, and four relationship steps. Each additional hop adds another connection join and another creator join. `UNION` combines the path lengths and removes duplicate result rows. This covers the same one-through-four-hop range as Bob's graph query, but it is longer and harder to change.
 
 3. Review how the SQL grows more complex.
 
@@ -186,7 +188,7 @@ A four-hop search extends beyond creators connected directly to the starting pro
 
 ## Task 2: Read the same connections as a graph
 
-The loader created `INFLUENCER_NETWORK` over the existing relational tables. The appendix shows how it maps rows to vertices and edges.
+The loader has already created the `INFLUENCER_NETWORK` property graph for this lab. You do not need to create it before running the queries. Its definition uses the existing relational tables as the source. The appendix shows how it maps rows to vertices and edges.
 
 Creator rows become `influencer` vertices, and rows in `INFLUENCER_CONNECTIONS` become `connects_to` edges. `GRAPH_TABLE` returns the graph result as ordinary SQL columns.
 
@@ -211,7 +213,9 @@ Creator rows become `influencer` vertices, and rows in `INFLUENCER_CONNECTIONS` 
     </copy>
     ```
 
-    In `MATCH`, `creator` and `connected` are vertices, and `edge` is the connection between them. `IS influencer` and `IS connects_to` refer to labels defined in the graph. This one-hop result has the same columns and rows as Jessica's first query.
+    In `MATCH`, `creator` and `connected` are vertices, and `edge` is the connection between them. This pattern follows one hop. `IS influencer` and `IS connects_to` refer to labels defined in the graph.
+
+    The result has the same columns and rows as Jessica's first query. Bob describes the search as a graph pattern: start at one creator, follow one connection, and return the connected creator.
 
 ## Task 3: Trace four-hop creator-community reach
 
@@ -219,7 +223,9 @@ Start from `@premiere_001` and trace creators within four directed relationship 
 
 1. Run the SQL/PGQ traversal.
 
-    `(seed IS influencer)` identifies the starting creator. `-[e IS connects_to]->{1,4}` follows one through four connections. `COUNT(e.connection_type)` counts the edges in each matched path. The `WHERE` clause anchors the search, and `COLUMNS` returns the graph properties in a SQL table.
+    In the `MATCH` pattern, `(seed IS influencer)` identifies the starting creator, `-[e IS connects_to]->{1,4}` follows one through four connections, and `(reached IS influencer)` is each creator reached. `COUNT(e.connection_type)` counts the edges in each matched path.
+
+    The `WHERE` clause anchors the search on `@premiere_001`, and `COLUMNS` returns the graph properties in an ordinary SQL result table. Bob can change the path length without adding another branch of joins.
 
     ```sql
     <copy>
@@ -251,7 +257,9 @@ Start from `@premiere_001` and trace creators within four directed relationship 
 
 2. Review the connected creators.
 
-    The query returns a table ordered by the stored influence score. Each row includes a creator handle, platform, follower count, niche, and path length. The seeded chain includes `@premiere_001` to `@streaming_002`, then `@fandom_003`, `@trailer_004`, and `@rights_005`. Other seeded connections create additional paths.
+    The query returns connected creators as a table ordered by the stored influence score. This makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and campaign-order lab.
+
+    Each row includes a creator handle, platform, follower count, niche, and path length. The seeded chain includes `@premiere_001` to `@streaming_002`, then `@fandom_003`, `@trailer_004`, and `@rights_005`. Other seeded connections create additional paths.
 
     Use this result to explore creator reach and possible collaborations. A connection alone does not prove campaign reach or demand.
 
@@ -288,7 +296,7 @@ Bob now asks a broader community question: **which creator pairs have relationsh
     </copy>
     ```
 
-    `a.influencer_id < b.influencer_id` prevents duplicate pairs in reverse order. The `promotes` label includes organic and competitor mentions. Check the relationship columns before interpreting a row as a paid partnership.
+    The pattern starts at creator `a`, follows a `promotes` edge to a studio or label, and follows another edge back to creator `b`. `a.influencer_id < b.influencer_id` prevents duplicate pairs in reverse order. The `promotes` label includes organic and competitor mentions. Check the relationship columns before interpreting a row as a paid partnership.
 
 2. Review the business result.
 
@@ -298,7 +306,9 @@ Bob now asks a broader community question: **which creator pairs have relationsh
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
-Use Graph Studio to explore creator communities and shared studios as an interactive network, starting from `@premiere_001`.
+The SQL queries show which creators and studios are connected. Graph Studio displays those relationships as an interactive network, where Bob can inspect creator communities and shared studio links.
+
+In the following tasks, use Graph Studio to turn the query results for `@premiere_001` into a visual community map.
 
 1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
 
@@ -310,13 +320,15 @@ Use Graph Studio to explore creator communities and shared studios as an interac
 
 3. If prompted, sign in as `LLUSER` with the supplied workshop password.
 
+    If Graph Studio reports **Missing Privileges** and names the Graph proxy connection grant, ask the facilitator to run `ALTER USER LLUSER GRANT CONNECT THROUGH GRAPH$PROXY_USER;` as `ADMIN` on the workshop database. `GRAPH_DEVELOPER` and successful SQL graph queries do not establish that proxy access. After the repair, sign out and sign in again before continuing.
+
 4. Confirm that the Graph Studio home page opens. The **Overview** page shows Quickstart cards, jobs, recent notebooks, and graphs. Open the navigation menu to reach **Notebooks**.
 
     ![Graph Studio overview page signed in as LLUSER](images/media-graph-overview.jpg " ")
 
 ## Task 6: Download and import the media notebook
 
-The supplied `.dsnb` notebook combines SQL/PGQ paragraphs and graph visualizations.
+The supplied `.dsnb` file is a native Graph Studio notebook: a reusable guide that combines runnable SQL/PGQ paragraphs and graph visualizations.
 
 1. Download [media-community-network-graph-studio.dsnb](files/media-community-network-graph-studio.dsnb).
 
@@ -337,7 +349,9 @@ The supplied `.dsnb` notebook combines SQL/PGQ paragraphs and graph visualizatio
 
 ## Task 7: Run and interpret the Graph Studio notebook
 
-You already ran the SQL/PGQ patterns in SQL Worksheet. Now compare a table with visual paths in **Media Creator and Studio Network**. The notebook uses `@premiere_001` for creator traversal and `Aurora Studios` for the studio-centered view.
+You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of the same analysis in **Media Creator and Studio Network** and compare the table with visual paths. The notebook uses `@premiere_001` for creator traversal and `Aurora Studios` for the studio-centered view.
+
+The table ranks connected creators, while the visual graph shows the intermediate paths and shared studio relationships that explain how they connect.
 
 1. Start at the top of the notebook. Read the traversal explanation, then run the first SQL paragraph.
 
@@ -373,13 +387,13 @@ You already ran the SQL/PGQ patterns in SQL Worksheet. Now compare a table with 
 
     > **Generated result note:** Graph layouts and node positions can vary between runs. Compare handles, studio names, edge labels, and relationship properties. The supplied notebook contains runnable paragraphs without cached query results.
 
-You used SQL/PGQ to rank creators and find shared studios, then explored those relationships visually.
+You used SQL/PGQ for a repeatable result set, including ranked creators and pairs with shared studio relationships. Graph Studio then showed the paths behind those results as an interactive network.
 
 ## Conclusion: Make Relationships Easy to Review
 
-Bob's queries follow directed creator relationships and find pairs linked to a shared studio or label. SQL/PGQ expresses these paths without adding a join for each hop.
+Bob's graph queries show why a property graph fits creator-community analysis. He can start with one creator, follow directed relationships, limit the search to a chosen number of hops, and find creator pairs linked to a shared studio or label. SQL/PGQ expresses these paths without adding a join for each hop.
 
-Use the table to rank and compare creators. Use Graph Studio to inspect intermediate paths and shared studio relationships.
+The same relationships can be explored visually in Graph Studio. Use the SQL table to rank and compare creators, then inspect intermediate paths and shared studio relationships in the graph. Together, the two views help a community analyst explain which creators connect and what they share.
 
 ## Appendix: Create the Property Graph
 

@@ -1,18 +1,21 @@
-# Build a Midnight Harbor Launch Command Center
+# Build a Midnight Harbor Launch Operations Dashboard
 
 ## Introduction
 
 Jessica Chan is Seer Media's database administrator. The launch operations team asks her: **which content asset needs attention first, and where can the team respond?**
 
-The answer needs several kinds of data. Relational rows hold audience signals and content-asset reach. JSON documents expose campaign orders. Prepared vectors represent content descriptions, and `SDO_GEOMETRY` stores distribution-hub and audience-region locations.
 
-Jessica needs a query that joins these records and lets the launch team trace each result to its source. Maintaining separate reporting extracts, search indexes, document stores, and maps would add data copies and synchronization work.
+Jessica can see the answer taking shape in the Launch Operations Dashboard, but the supporting data is spread across different forms. Audience signals and content-asset reach are relational rows. Campaign orders are available as JSON documents. The AI engineering team has also prepared vector representations of content descriptions. Location information for distribution hubs and audience regions is stored as `SDO_GEOMETRY`, which the database can also return as GeoJSON. The data is connected by business meaning, but that does not automatically make the investigation easy to query.
 
-Oracle AI Database supports these data models together. Jessica can query relational tables alongside JSON, vectors, and spatial geometry with the same SQL statement.
+Jessica needs a query that joins these records and lets the launch team trace each result to its source. Maintaining separate reporting extracts, search indexes, document stores, and maps would add more copies of sensitive data, more security boundaries, and more opportunities for the data to drift.
 
-In this lab, you run the SQL behind the Midnight Harbor Launch Command Center. You then change the investigation phrase and compare the results.
+Jessica sees an opportunity in Oracle AI Database's converged architecture. A converged database lets one governed database support different data models and workloads together. Relational tables and views remain the foundation, while JSON documents, vectors, spatial geometry, graphs, and machine learning results can be queried alongside them. This means Jessica can answer a question that crosses those data types without complex and expensive integration across separate systems.
 
-![Jessica introduces a Media launch dashboard combining signals, campaign orders, and location data](images/media-jessica.png)
+In this lab, you take Jessica's role as the DBA. You will write the converged SQL query behind the Launch Operations Dashboard. It combines relational data, vector search, JSON campaign data, and distribution geography in one Oracle AI Database, without separate systems or data copies.
+
+
+![jessica](images/jessica.png)
+
 
 ### Objectives
 
@@ -33,9 +36,9 @@ Estimated Time: **10 minutes**
 | Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
 | Outcome             | The learner can explain convergence through a useful business result rather than a feature list.               |
 
-Persona focus: As Jessica, connect launch signals, campaign activity, and distribution geography in one query.
+Persona focus: You are Jessica Chan, the DBA. Your job is to build one governed query that gives business users a connected view of launch signals, campaign activity, and distribution geography.
 
-> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for setup and query instructions.
+> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
 
 ## Task 1: Run a converged launch investigation
 
@@ -164,13 +167,13 @@ The query intentionally crosses four data models:
 
 3. Review the ranked content assets. Each row combines audience signals, semantic similarity, campaign activity, and distribution-hub location.
 
-    ![Live Media dashboard results for the Midnight Harbor premiere campaign](images/media-dashboard-baseline.jpg)
+    ![SQL Worksheet showing the ranked content assets behind Jessica's dashboard](images/media-dashboard-baseline.jpg)
 
-    The seeded region is `Northeast Streaming Corridor`. Each row includes audience signals, a semantic score, campaign activity, and distribution context. Social views measure post reach, not content watch time; requested units measure campaign demand, not viewing minutes. The nearest hub is a geographic candidate; this query does not test asset capacity or rights eligibility.
+    Your numbers may be different if the demo data has changed. Each row should include all four types of data.
 
-Use the first row to explain the result. Audience momentum and campaign demand show why the asset may need attention. Similarity connects it to the question, and the hub location suggests where distribution follow-up could begin.
+Use the first row to explain the business takeaway: Audience momentum and campaign demand show why the asset may need attention, the semantic match explains why it fits the question, and the hub location suggests where distribution follow-up could begin. Jessica now has the query behind the dashboard's table and detail views, combining relational data, vector search, JSON campaign data, and spatial distance in one result that a business user can inspect.
 
-This query supplies the dashboard's ranked table. Other dashboard components can query the same records for summary metrics or campaign details.
+With separate systems, Jessica would need complex and expensive integration across an audience analytics system, search service, document store, and mapping system before the dashboard could show this view. Oracle AI Database keeps these data types together, so she can build the dashboard with SQL. KPI cards and other dashboard components can use additional SQL over the same database.
 
 ## Task 2: Change the investigation question
 

@@ -15,7 +15,7 @@ Use points and polygons to locate subscribers, calculate distances, and combine 
 >
 > - A **polygon** is an area made from connected points. Demand regions are stored as polygons.
 >
-> - **Distance** measures how far two spatial objects are from each other. Here, it shows how far a network site is from a demand-region boundary. A distance of zero means the site is inside or touching the region.
+> - **Distance** measures the shortest separation between two spatial objects. Here, the query compares a network-site point with a demand-region polygon. A point inside or touching the polygon has distance zero.
 >
 > - A **spatial relationship** describes how two shapes relate to each other. `SDO_GEOM.RELATE` can test whether a subscriber point is inside or touches a demand region.
 >
@@ -80,7 +80,7 @@ An `SDO_GEOMETRY` point specifies a point type, coordinate system, and coordinat
 
 ## Task 2: Find the closest sites to a demand region
 
-The sample data gives New York Network Region a demand index of `91` for the first routing review. Moon now measures the distance from each network-site point to the region boundary.
+The sample demand index for New York Network Region is `91`. Measure the distance from each network-site point to the region polygon.
 
 1. Run the distance query:
 
