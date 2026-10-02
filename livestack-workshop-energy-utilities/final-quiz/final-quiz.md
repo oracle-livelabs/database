@@ -2,17 +2,20 @@
 
 ```quiz-config
 passing: 75
-badge: images/energy-utilities-badge.svg
+badge: images/energy-utilities-badge.png
 ```
 
 ## Introduction
 
-Use this scored quiz to connect Seer Utility Network outcomes to the database evidence from the labs.
+Review how Jessica and her colleagues use database evidence to support operational decisions at Seer Utility Network.
+
+The questions cover the workshop’s demonstrated capabilities and the approval boundaries for Labs 7–8. Completing the quiz does not establish that the pending Select AI workflows have been validated.
 
 ### Objectives
 
-- Review the main database capabilities used in the workshop.
-- Earn the workshop badge by answering the scored questions.
+- Connect each database capability to its operational use case.
+- Distinguish supporting evidence from an automatic decision or a proven outcome.
+- Earn the workshop badge by answering at least six of the eight questions correctly.
 
 Estimated Time: **5 minutes**
 
@@ -21,12 +24,12 @@ Estimated Time: **5 minutes**
 1. Complete the scored quiz. A score of **75%** or higher earns the badge.
 
     ```quiz score
-    Q: Why does Jessica build the command-center query from governed views?
+    Q: Why does Jessica build the energy operations review query from governed views?
     - To replace source tables with dashboard screenshots.
     * To connect requests, signals, logistics, and capacity evidence without separate operational data copies.
     - To let every user bypass database privileges.
     - To turn every row into JSON before analysis.
-    > The command center connects evidence from one governed database foundation. Each conclusion can lead back to its source rows.
+    > Lab 1 uses relational SQL to connect evidence from one database foundation. JSON, vector, graph, and spatial operations appear in later labs, not in this query.
 
     Q: What does JSON Relational Duality give Thomas?
     - A second document database that Thomas must synchronize manually.
@@ -37,50 +40,50 @@ Estimated Time: **5 minutes**
 
     Q: What does a high vector similarity score mean in Gilly's search?
     - The service caused the operational event.
-    * The stored service description is semantically close to the question and deserves review.
+    * The embedded service text is semantically close to the question, making the service a candidate for review.
     - The utility confirmed a compliance breach.
     - The result is approved automatically for dispatch.
-    > Similarity ranks related meanings. It supports investigation, but it does not prove causality or authorize an operational action.
+    > Similarity ranks related meanings. It supports investigation, but it does not prove a service problem, establish causality, or authorize an operational action.
 
-    Q: What is the main advantage of Bob's property graph?
-    - It removes the need for source rows and keys.
-    - It proves that every connected node caused the event.
-    - It grants unrestricted write access.
-    * It makes multi-hop relationships among events, assets, crews, and evidence easier to express and inspect.
-    > SQL/PGQ describes relationship patterns while the governed entity and relationship tables remain the source.
+    Q: What does Bob inspect with the lab's directed, one-hop graph query?
+    - Every incoming and outgoing path of any length.
+    - Proof that each connected asset caused the event.
+    - A road route between the event and a field site.
+    * The entities reached by an outgoing relationship from a selected operational event.
+    > The SQL/PGQ query follows one directed edge from the starting event. The separate prepared findings view summarizes broader evidence; a connection does not prove causality.
 
     Q: Why does Moon include operational status and capacity with distance?
     * The nearest active site may still be constrained, so dispatch requires more than proximity.
     - Spatial distance includes crew qualifications and safety approval automatically.
     - Capacity is needed only to draw the map.
     - The database cannot calculate distance without an AI provider.
-    > Distance identifies candidates. Dispatchers still review workload, supply, safety, skills, and territory constraints.
+    > Geographic distance identifies nearby candidates, not road routes or travel times. Dispatchers still review workload, supplies, safety, skills, and service-territory constraints.
 
     Q: How should Otto use a demand-surge probability?
     - As certainty that a surge will occur.
     - As permission to dispatch a crew automatically.
-    * As decision-support evidence for a human review queue, checked against known outcomes and capacity data.
+    * As a model estimate for human review, evaluated against held-out labels and considered alongside capacity evidence.
     - As a substitute for validation data.
-    > A model probability helps prioritize review. It is not certainty and must remain connected to business evidence.
+    > Otto evaluates the prepared model against synthetic labels on cases excluded from training, then combines predictions with capacity evidence. The class-probability estimate is not certainty or a validated forecast of future demand. A six-case synthetic test set does not establish production performance.
 
-    Q: Why does Nina use SHOWSQL before RUNSQL?
+    Q: Why does Nina use SHOWSQL before making a separate execution request?
     - To reveal the AI provider credential.
-    * To inspect selected objects, filters, ordering, and row limits before generated SQL executes.
+    * To inspect the proposed query's objects, filters, ordering, and row limits and refine the question if needed.
     - To grant Select AI access to every schema.
-    - To prevent the database from enforcing privileges.
-    > SHOWSQL keeps the database operation visible. Nina can refine the prompt before the generated statement runs.
+    - To guarantee that RUNSQL executes exactly the displayed statement.
+    > SHOWSQL exposes a proposed query for review. A later RUNSQL call may generate different SQL; the review does not bind that call to the displayed statement. To execute precisely the reviewed SQL, run that statement directly in SQL Worksheet within the authorized scope.
 
     Q: What evidence makes the Select AI Agent workflow reviewable?
     - The agent's confident wording alone.
     - A screenshot without SQL or history.
-    - A broad write-capable tool with no confirmation step.
-    * A narrow context list, an approved read-only tool, database privileges, and team and tool execution history.
-    > The object list supplies model context; it does not authorize access. Tool configuration and database security enforce access, while the history views support review. Write actions would require separate narrow tools, explicit approval, and audit controls.
+    - A broad write-capable tool with no verified restrictions.
+    * Verified tool permissions, database access controls, and history tied to the specific team execution.
+    > Read-only wording in a prompt expresses an intention, not enforcement. The object list supplies context; verified tool restrictions and effective database permissions enforce access. History supports review but does not prove that an answer is correct or that read-only access was enforced. Labs 7–8 live behavior remains pending validation.
     ```
 
-2. When you achieve the passing score, the quiz displays your Energy and Utilities completion badge.
+2. Review the explanations for any incorrect answers. When you achieve the passing score, the quiz displays your Energy and Utilities completion badge.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Zileyah Onafowora
+* **Last Updated By/Date** - Zileyah Onafowora, September 2026

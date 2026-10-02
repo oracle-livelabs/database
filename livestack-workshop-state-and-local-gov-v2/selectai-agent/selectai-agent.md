@@ -1,53 +1,83 @@
 # Build a Governed Public-Service AI Agent
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  },
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
+
 ## Introduction
 
-Nina Patel has used Select AI to ask one public-service question at a time. That works for a quick answer, but her operations review needs a repeatable assistant that can answer a service-demand question through an approved tool.
+Nina Patel has used Select AI to ask one public-service question at a time. That
+works for a quick answer, but her operations review needs a repeatable assistant
+that can answer a service-demand question through an approved tool.
 
-Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a read-only SQL tool that uses the `GENAI` profile and the two service views prepared in the previous lab.
+Jessica, the DBA, does not want to give an AI system unrestricted access to the
+database. She gives Nina's agent one approved tool: a read-only SQL tool that
+uses the `GENAI` profile and the two service views prepared in the previous lab.
 
-In this lab, you create the agent objects, connect the agent to the SQL tool, and run a question through the team. The agent uses the approved tool and returns an answer. The tool remains read-only, and the SQL still runs with the database user's privileges.
+Create the agent, task, and team, connect them to the SQL tool, and submit a
+public-service question. Review the answer and tool history. SQL runs with the
+database user’s privileges.
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
 
-> - An **agent** is a configured role that follows instructions when it handles a request.
+> * An **agent** is a configured role that follows instructions when it handles
+>   a request.
 >
-> - A **tool** is a capability the agent is allowed to call. In this lab, the tool runs SQL through the `GENAI` profile.
+> * A **tool** is a capability the agent is allowed to call. In this lab, the
+>   tool runs SQL through the `GENAI` profile.
 >
-> - A **task** tells the agent what to do and which tools it may use.
+> * A **task** tells the agent what to do and which tools it may use.
 >
-> - A **team** connects the agent and task so an application or SQL session can run them together.
+> * A **team** connects the agent and task so an application or SQL session can
+>   run them together.
 
 </details>
 
 ### Objectives
 
-- Confirm that the `GENAI` profile from the previous lab is available.
-- Verify which approved public-service views the SQL tool may use.
-- Register a read-only SQL tool for the governed public-service schema.
-- Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
-- Run a public-service demand question through the team.
-- Review the agent's tool history and explain why the tool boundary matters.
+* Confirm that the `GENAI` profile from the previous lab is available.
+* Verify which approved public-service views the SQL tool may use.
+* Register a read-only SQL tool for the governed public-service schema.
+* Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
+* Run a public-service demand question through the team.
+* Review the agent's tool history and explain why the tool boundary matters.
 
 Estimated Time: **15 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Public-service focus                                                                          |
+| Step | Public-service focus |
 | ------------------- | ---------------------------------------------------------------------------------------------- |
-| Business Problem    | Nina needs a service-demand answer that can support an operations review.                      |
-| Technical Challenge | The agent must use database data through one approved, read-only capability.                   |
-| Persona Focus       | You follow Nina as she turns a Select AI question into a controlled public-service assistant. |
-| What You Will See   | An agent receives a request, calls its SQL tool, and returns a public-service answer.           |
-| Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
-| Outcome             | Nina has a controlled agent that can answer service questions from the governed schema.        |
+| Business Problem | Nina needs a service-demand answer that can support an operations review. |
+| Technical Challenge | The agent must use database data through one approved, read-only capability. |
+| Persona Focus | You follow Nina as she turns a Select AI question into a controlled public-service assistant. |
+| What You Will See | An agent receives a request, calls its SQL tool, and returns a public-service answer. |
+| Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool. |
+| Outcome | Nina has a controlled agent that can answer service questions from the governed schema. |
 
-> **Prerequisite:** Complete [Lab 7: Ask Public-Service Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
+> **Prerequisite:** Complete
+> [Lab 7: Ask Public-Service Questions with Select AI](?lab=selectai). This lab
+> uses the `GENAI` profile and its `object_list`.
 
 ## Task 1: Check the profile and approved view access
 
-The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_list` limits the service views Select AI may use when it generates SQL. Database privileges provide the second control: the SQL still runs as the current database user and cannot read objects that user cannot access.
+The agent's SQL tool uses the existing `GENAI` profile. The profile's
+`object_list` limits the service views Select AI may use when it generates SQL.
+Database privileges provide the second control: the SQL still runs as the
+current database user and cannot read objects that user cannot access.
 
 1. Check the profile:
 
@@ -60,7 +90,8 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-    The profile should be enabled. If it is not present, complete Lab 7 first or ask the DBA which profile to use.
+    The profile should be enabled. If it is not present, complete Lab 7 first or
+    ask the DBA which profile to use.
 
 2. Check the approved views listed in the profile:
 
@@ -75,7 +106,10 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-    The list should contain only the approved views from Lab 7: `SELECT_AI_SERVICE_REGION_V` and `SELECT_AI_SERVICE_DEMAND_V`. The `object_list` guides SQL generation; it is not a replacement for database grants.
+    The list should contain only the approved views from Lab 7:
+    `SELECT_AI_SERVICE_REGION_V` and `SELECT_AI_SERVICE_DEMAND_V`. The
+    `object_list` guides SQL generation; it is not a replacement for database
+    grants.
 
 3. Check the agent objects already in your schema:
 
@@ -88,11 +122,15 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-    The workshop objects use names beginning with `NINA_SERVICE_`. If you already ran this lab, you can reuse the existing objects or run the reset block in the appendix before starting again.
+    The workshop objects use names beginning with `NINA_SERVICE_`. If you
+    already ran this lab, you can reuse the existing objects or run the reset
+    block in the appendix before starting again.
 
 ## Task 2: Register the SQL tool
 
-The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile's object list limits the schema metadata available for generated SQL.
+The SQL tool is the agent's only database capability in this lab. It uses the
+`GENAI` profile, so the profile's object list limits the schema metadata
+available for generated SQL.
 
 1. Register the tool:
 
@@ -109,7 +147,10 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     </copy>
     ```
 
-    The tool does not create a second data store. It gives the agent a named, controlled way to ask Select AI to generate and run SQL against the approved service views. The tool uses the profile's view list, and the database user's privileges still apply when the SQL runs.
+    The tool does not create a second data store. It gives the agent a named,
+    controlled way to ask Select AI to generate and run SQL against the approved
+    service views. The tool uses the profile's view list, and the database
+    user's privileges still apply when the SQL runs.
   
 2. Confirm the tool definition:
 
@@ -125,7 +166,7 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
   
 ## Task 3: Create Nina's agent, task, and team
 
-The tool by itself does nothing. Nina's agent needs a role, a task needs instructions, and a team connects the two.
+Define the agent’s role and the task’s instructions, then connect them in a team.
 
 1. Create the agent:
 
@@ -172,11 +213,14 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
     </copy>
     ```
 
-    The team is the runnable unit. It connects Nina's role, the task instructions, and the SQL tool.
+    The team is the runnable unit. It connects Nina's role, the task
+    instructions, and the SQL tool.
   
 ## Task 4: Run a public-service question
 
-Database Actions does not support the `SELECT AI AGENT` command directly. Use `DBMS_CLOUD_AI_AGENT.RUN_TEAM` in SQL Worksheet and provide the team name in the function call.
+Database Actions does not support the `SELECT AI AGENT` command directly. Use
+`DBMS_CLOUD_AI_AGENT.RUN_TEAM` in SQL Worksheet and provide the team name in the
+function call.
 
 1. Ask the agent:
 
@@ -190,19 +234,27 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     </copy>
     ```
   
-    Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
+    Database Actions does not keep an agent conversation ID for this call, so
+    the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record
+    the prompt and response in the agent conversation history.
 
     ![Task 4 Step 1: Run the public-service agent question](images/task4.png)
 
 2. Review the answer.
 
-    Look for a service region, request status, average urgency score, and service request count. The exact wording may vary because an AI provider generates the response, but the answer should be based on the approved service views available through `GENAI`.
+    Look for a service region, request status, average urgency score, and
+    service request count. The exact wording may vary because an AI provider
+    generates the response, but the answer should be based on the approved
+    service views available through `GENAI`.
   
-    > **Note:** This team has a read-only SQL tool. It can query the data, but the task instructions do not give it a tool for inserting, updating, or deleting records.
+    > **Note:** This team has a read-only SQL tool. It can query the data, but
+    > the task instructions do not give it a tool for inserting, updating, or
+    > deleting records.
 
 ## Task 5: Inspect what the agent did
 
-Nina needs more than a final answer. She also wants to know whether the agent called the approved tool and how the request was processed.
+Nina needs more than a final answer. She also wants to know whether the agent
+called the approved tool and how the request was processed.
 
 1. Review the latest team runs:
 
@@ -238,21 +290,36 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
 
     ![Task 5 Step 2: Review the latest tool calls](images/task52.png)
 
-    The history should show `NINA_SERVICE_SQL_TOOL` and `NINA_SERVICE_TEAM`. This gives Nina and Jessica a database record of the agent activity instead of treating the answer as an unexplained response.
+    Confirm that the history lists `NINA_SERVICE_SQL_TOOL` and
+    `NINA_SERVICE_TEAM`. Use these records to check which tool the agent called
+    and whether the run completed.
 
 ## Conclusion: Give the agent a controlled way to work
 
-In Lab 7, Nina used Select AI to turn a public-service question into SQL. In this lab, she gives an agent a role, a task, and one approved SQL tool. The agent can handle a broader service question, while the database still controls the profile, object list, privileges, and tool history.
+In Lab 7, Nina used Select AI to turn a public-service question into SQL. In
+this lab, she gives an agent a role, a task, and one approved SQL tool. The
+agent can handle a broader service question, while the database still controls
+the profile, object list, privileges, and tool history.
 
-That is the next step from Select AI to Select AI Agent: an application can call a defined public-service assistant instead of assembling every question and database call itself. Jessica can review the tool available to the agent and remove access by disabling the tool or team.
+That is the next step from Select AI to Select AI Agent: an application can call
+a defined public-service assistant instead of assembling every question and
+database call itself. Jessica can review the tool available to the agent and
+remove access by disabling the tool or team.
 
-The data boundary has two parts. The profile's `object_list` tells the SQL tool which approved views to consider, while database grants decide which objects and rows the session can actually read. Both should be kept narrow when an agent is used by an application.
+The data boundary has two parts. The profile's `object_list` tells the SQL tool
+which approved views to consider, while database grants decide which objects and
+rows the session can actually read. Both should be kept narrow when an agent is
+used by an application.
 
-The example remains read-only on purpose. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
+The example remains read-only on purpose. Before an agent is allowed to change
+data, the team should add a narrowly defined function tool, clear instructions,
+and a confirmation step for the user.
 
 ## Appendix: Reset the workshop objects
 
-Run this block only if you want to recreate the objects used in this lab. It removes the four State and Local agent objects created here. It does not remove the existing `GENAI` profile or its approved view list.
+Run this block only if you want to recreate the objects used in this lab. It
+removes the four State and Local agent objects created here. It does not remove
+the existing `GENAI` profile or its approved view list.
 
 ```sql
 <copy>
