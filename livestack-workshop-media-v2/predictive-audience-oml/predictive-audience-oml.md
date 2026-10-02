@@ -114,10 +114,24 @@ This task is optional. AutoML can take several minutes to complete, so continue 
     | Predict         | `SURGE_LABEL`           |
     | Prediction type | `Classification`        |
     | Case ID         | `PRODUCT_ID`            |
-  
+
+    **Note:** The Predict, Prediction Type, and Case ID fields become available after a data source has been entered. Select `SURGE_LABEL`, `Classification`, and `PRODUCT_ID`, respectively.
+
+     To enter the **Data Source** value:
+    1. Enter *Media Content Demand* in the Name field.
+    2. Select the magnifying-glass icon next to **Data Source**.
+
+    ![Hospitality classification experiment settings](images/data-source-one.png)
+
+    3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
+    4. Select `OML_DEMAND_TRAINING_V` from the **Table** list.
+
+    ![Hospitality classification experiment settings](images/data-source-two.png)
+
+    5. Select **OK**.
+
     Start the experiment and wait for the leaderboard. Runtime depends on service capacity.
 
-    ![Media Content Demand AutoML experiment settings using OML_DEMAND_TRAINING_V](images/media-automl-settings.jpg)
 
     > **Environment note:** AutoML requires available service capacity. If the experiment cannot start, record the returned message and continue to Task 3. The loader does not include saved AutoML experiment results.
 
