@@ -11,7 +11,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/livestack-finance-badge.svg
+badge: images/livestack-badge-state and-local-government.png
 ```
 
 ## Introduction
