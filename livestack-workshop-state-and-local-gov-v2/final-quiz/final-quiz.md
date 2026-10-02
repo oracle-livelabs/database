@@ -1,18 +1,28 @@
 # Final Quiz
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
+
 ```quiz-config
 passing: 75
-badge: images/badge.png
+badge: images/livestack-finance-badge.svg
 ```
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect State and Local Government service decisions to the database evidence you inspected in the labs.
+Use this quiz to check how well you can interpret the queries and results from
+the public-service labs.
 
 ### Objectives
 
-- Review the main database capabilities used in the workshop.
-- Earn the workshop badge by answering the scored questions.
+* Review the main database capabilities used in the workshop.
+* Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
 
@@ -49,17 +59,17 @@ Estimated Time: **3 minutes**
     - To avoid using customer and service-center data together.
     > Spatial functions calculate distance and location relationships. SQL combines those results with residential-customer, service-center, capacity, and demand data to support routing decisions.
 
-    Q: In the Oracle Machine Learning lab, what does model confidence mean?
-    - It guarantees that the prediction will happen.
-    * It is the model probability for a prediction and should still be reviewed.
-    - It is the number of rows in the model catalog.
-    - It means the model no longer needs operational context.
-    > Confidence helps compare stronger and weaker demand predictions, but it is not certainty. The lab also uses an agreement check to compare predicted labels with the known labels in the training data.
+    Q: In the Oracle Machine Learning lab, what does DEMAND_SCORE represent?
+    - A guarantee that demand will surge.
+    * The model probability assigned to SURGE, which still needs review.
+    - The number of rows in the model catalog.
+    - Proof that the model will perform well on future data.
+    > DEMAND_SCORE is the probability assigned to SURGE. The agreement check uses known training labels; it does not measure performance on unseen data.
 
     Q: What makes a Select AI answer governed and reviewable?
     - The model can query every object in the database automatically.
     - The narrative wording is guaranteed to be identical every time.
-    * The profile restricts approved objects and the generated SQL remains visible.
+    * The profile guides SQL generation toward approved objects, database privileges control access, and the generated SQL can be inspected.
     - The answer bypasses the database and uses only general model knowledge.
     > The Select AI profile has a narrow object list. SHOWSQL exposes the generated query, and direct SQL lets reviewers compare the response with the database result.
 
