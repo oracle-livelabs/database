@@ -1,40 +1,80 @@
 # Investigate a Creator and Studio Network
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  },
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
+
 ## Introduction
 
-Bob Green is a graph specialist at Seer Media. When the community team needs to understand how creators connect and which studios or labels they promote, Bob recommends a property graph.
+Bob Green is a graph specialist at Seer Media. When the community team needs to
+understand how creators connect and which studios or labels they promote, Bob
+recommends a property graph.
 
-Bob's starting point is simple: a creator profile does not show the whole community. Following creator connections and shared studio relationships can reveal groups the content team should review together. The focal creator is `@premiere_001`, whose display name is `Film Discovery 001`.
+Bob's starting point is simple: a creator profile does not show the whole
+community. Following creator connections and shared studio relationships can
+reveal groups the content team should review together. The focal creator is
+`@premiere_001`, whose display name is `Film Discovery 001`.
 
-In this lab, you use Bob's approach to explore the creator network in two views. Start with relational joins, then use SQL/PGQ to follow creator connections. Open Graph Studio to explore those paths visually and explain the relationships to the content team.
+In this lab, you use Bob's approach to explore the creator network in two views.
+Start with relational joins, then use SQL/PGQ to follow creator connections.
+Open Graph Studio to explore those paths visually and explain the relationships
+to the content team.
 
-Graph Studio is Oracle Database's visual workspace for property graphs. It displays vertices, edges, and paths as an interactive network backed by the database data. Bob uses SQL/PGQ for a precise, repeatable result, such as a ranked list of connected creators. He uses Graph Studio to select nodes, follow adjacent relationships, and inspect the paths behind that list.
+Graph Studio is Oracle Database's visual workspace for property graphs. It
+displays vertices, edges, and paths as an interactive network backed by the
+database data. Bob uses SQL/PGQ for a precise, repeatable result, such as a
+ranked list of connected creators. He uses Graph Studio to select nodes, follow
+adjacent relationships, and inspect the paths behind that list.
 
 ![Bob, the media graph specialist](images/image-graph.png)
 
 <details>
+<!-- markdownlint-disable-next-line MD013 -->
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
 
-> - A **property graph** represents things and their relationships. The loader's `INFLUENCER_NETWORK` contains creators, studios or labels, content assets, and audience-signal posts.
+> * A **property graph** represents things and their relationships. The loader's
+>   `INFLUENCER_NETWORK` contains creators, studios or labels, content assets,
+>   and audience-signal posts.
 >
-> - A **vertex** is a graph node. Creator vertices have the `influencer` label and properties such as `handle`, `platform`, `follower_count`, and `influence_score`. Studios and labels have the `brand` label.
+> * A **vertex** is a graph node. Creator vertices have the `influencer` label
+>   and properties such as `handle`, `platform`, `follower_count`, and
+>   `influence_score`. Studios and labels have the `brand` label.
 >
-> - An **edge** connects vertices. `connects_to` links creators and exposes `connection_type`, `strength`, and `interaction_count`. `promotes` links a creator to a studio or label and exposes `relationship_type`, `post_count`, and `revenue_attributed`.
+> * An **edge** connects vertices. `connects_to` links creators and exposes
+>   `connection_type`, `strength`, and `interaction_count`. `promotes` links a
+>   creator to a studio or label and exposes `relationship_type`, `post_count`,
+>   and `revenue_attributed`.
 >
-> - A **hop** is one edge traversal. From `@premiere_001` to `@streaming_002` is one hop; continuing to `@fandom_003` is two hops. Hops describe relationships, not physical distance or viewing time.
+> * A **hop** is one edge traversal. From `@premiere_001` to `@streaming_002` is
+>   one hop; continuing to `@fandom_003` is two hops. Hops describe
+>   relationships, not physical distance or viewing time.
 >
-> - **SQL Property Graph Queries (SQL/PGQ)** describe graph patterns in SQL. An analyst can follow creator relationships without copying the data into another database.
+> * **SQL Property Graph Queries (SQL/PGQ)** describe graph patterns in SQL. An
+>   analyst can follow creator relationships without copying the data into
+>   another database.
 
 </details>
 
 ### Objectives
 
-- Identify vertices and edges in the loader's property graph.
-- Follow creator connections from `@premiere_001`.
-- Find creator pairs that share a studio or label relationship.
-- Open Graph Studio from Database Actions.
-- Import and run the media creator-network notebook.
-- Explain the results to a community or content-partnerships team.
+* Identify vertices and edges in the loader's property graph.
+* Follow creator connections from `@premiere_001`.
+* Find creator pairs that share a studio or label relationship.
+* Open Graph Studio from Database Actions.
+* Import and run the media creator-network notebook.
+* Explain the results to a community or content-partnerships team.
 
 Estimated Time: **10 minutes**
 
@@ -51,15 +91,24 @@ Estimated Time: **10 minutes**
 
 Persona focus: You are reviewing Bob's graph solution with a creator-community analyst.
 
-The loader retains physical names such as `INFLUENCERS`, `BRANDS`, and `BRAND_INFLUENCER_LINKS`. In this media dataset, they represent creators, studios or labels, and their relationships.
+The loader retains physical names such as `INFLUENCERS`, `BRANDS`, and
+`BRAND_INFLUENCER_LINKS`. In this media dataset, they represent creators,
+studios or labels, and their relationships.
 
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the guide showing where to paste and run SQL statements. Each query in Tasks 1–4 is one SQL statement; paste the complete block into an empty worksheet and click **Run Statement**.
+> **SQL Worksheet reminder:** See [Getting Started, Task 2][link-1] for the
+> steps to open SQL Worksheet and run SQL. Each query in Tasks 1–4 is one SQL
+> statement; paste the complete block into an empty worksheet and select **Run
+> Statement**.
 
 ## Task 1: Follow a creator with SQL
 
-Jessica has already written a query for Bob. It lists the creators directly connected to `@premiere_001`. The query works, but Jessica is concerned about what happens when analysts need to follow relationships several steps away.
+Jessica has already written a query for Bob. It lists the creators directly
+connected to `@premiere_001`. The query works, but Jessica is concerned about
+what happens when analysts need to follow relationships several steps away.
 
-In this lab, a **hop** means one relationship step. From `@premiere_001` to `@streaming_002` is one hop; continuing to `@fandom_003` is two hops. A four-hop search extends beyond creators connected directly to the starting profile.
+In this lab, a **hop** means one relationship step. From `@premiere_001` to
+`@streaming_002` is one hop; continuing to `@fandom_003` is two hops. A four-hop
+search extends beyond creators connected directly to the starting profile.
 
 1. Run Jessica's ordinary SQL query:
 
@@ -80,11 +129,17 @@ In this lab, a **hop** means one relationship step. From `@premiere_001` to `@st
     </copy>
     ```
 
-    The query joins `INFLUENCERS` twice: once for the starting creator and once for the connected creator. `INFLUENCER_CONNECTIONS` supplies the directed edge between them.
+    The query joins `INFLUENCERS` twice: once for the starting creator and once
+    for the connected creator. `INFLUENCER_CONNECTIONS` supplies the directed
+    edge between them.
+
+    ![SQL result showing creators directly connected to @premiere_001](images/direct-creator-connections.png)
 
     **Expected output: Direct Creator Connections**
 
-    The result contains seven outgoing `follows` connections from `@premiere_001`, including `@streaming_002`. `INFLUENCE_SCORE` is the stored creator score.
+    The result contains seven outgoing `follows` connections from
+    `@premiere_001`, including `@streaming_002`. `INFLUENCE_SCORE` is the stored
+    creator score.
 
 2. Extend Jessica's query to follow one through four hops without a graph query:
 
@@ -180,17 +235,29 @@ In this lab, a **hop** means one relationship step. From `@premiere_001` to `@st
     </copy>
     ```
 
-    Jessica now needs four query branches. They follow one, two, three, and four relationship steps. Each additional hop adds another connection join and another creator join. `UNION` combines the path lengths and removes duplicate result rows. This covers the same one-through-four-hop range as Bob's graph query, but it is longer and harder to change.
+    Jessica now needs four query branches. They follow one, two, three, and four
+    relationship steps. Each additional hop adds another connection join and
+    another creator join. `UNION` combines the path lengths and removes
+    duplicate result rows. This covers the same one-through-four-hop range as
+    Bob's graph query, but it is longer and harder to change.
 
 3. Review how the SQL grows more complex.
 
-    Four hops require four relationship joins and five instances of the creator table. Supporting several path lengths also adds unions and duplicate handling. The relationships already exist in relational tables; Bob's graph query expresses the path directly.
+    Four hops require four relationship joins and five instances of the creator
+    table. Supporting several path lengths also adds unions and duplicate
+    handling. The relationships already exist in relational tables; Bob's graph
+    query expresses the path directly.
 
 ## Task 2: Read the same connections as a graph
 
-The loader has already created the `INFLUENCER_NETWORK` property graph for this lab. You do not need to create it before running the queries. Its definition uses the existing relational tables as the source. The appendix shows how it maps rows to vertices and edges.
+The loader has already created the `INFLUENCER_NETWORK` property graph for this
+lab. You do not need to create it before running the queries. Its definition
+uses the existing relational tables as the source. The appendix shows how it
+maps rows to vertices and edges.
 
-Creator rows become `influencer` vertices, and rows in `INFLUENCER_CONNECTIONS` become `connects_to` edges. `GRAPH_TABLE` returns the graph result as ordinary SQL columns.
+Creator rows become `influencer` vertices, and rows in `INFLUENCER_CONNECTIONS`
+become `connects_to` edges. `GRAPH_TABLE` returns the graph result as ordinary
+SQL columns.
 
 1. Run Bob's SQL/PGQ query:
 
@@ -213,19 +280,31 @@ Creator rows become `influencer` vertices, and rows in `INFLUENCER_CONNECTIONS` 
     </copy>
     ```
 
-    In `MATCH`, `creator` and `connected` are vertices, and `edge` is the connection between them. This pattern follows one hop. `IS influencer` and `IS connects_to` refer to labels defined in the graph.
+    ![One-hop SQL/PGQ result showing creators connected to @premiere_001](images/connected-handle.png)
 
-    The result has the same columns and rows as Jessica's first query. Bob describes the search as a graph pattern: start at one creator, follow one connection, and return the connected creator.
+    In `MATCH`, `creator` and `connected` are vertices, and `edge` is the
+    connection between them. This pattern follows one hop. `IS influencer` and
+    `IS connects_to` refer to labels defined in the graph.
+
+    The result has the same columns and rows as Jessica's first query. Bob
+    describes the search as a graph pattern: start at one creator, follow one
+    connection, and return the connected creator.
 
 ## Task 3: Trace four-hop creator-community reach
 
-Start from `@premiere_001` and trace creators within four directed relationship hops.
+Start from `@premiere_001` and trace creators within four directed relationship
+hops.
 
 1. Run the SQL/PGQ traversal.
 
-    In the `MATCH` pattern, `(seed IS influencer)` identifies the starting creator, `-[e IS connects_to]->{1,4}` follows one through four connections, and `(reached IS influencer)` is each creator reached. `COUNT(e.connection_type)` counts the edges in each matched path.
+    In the `MATCH` pattern, `(seed IS influencer)` identifies the starting
+    creator, `-[e IS connects_to]->{1,4}` follows one through four connections,
+    and `(reached IS influencer)` is each creator reached.
+    `COUNT(e.connection_type)` counts the edges in each matched path.
 
-    The `WHERE` clause anchors the search on `@premiere_001`, and `COLUMNS` returns the graph properties in an ordinary SQL result table. Bob can change the path length without adding another branch of joins.
+    The `WHERE` clause anchors the search on `@premiere_001`, and `COLUMNS`
+    returns the graph properties in an ordinary SQL result table. Bob can change
+    the path length without adding another branch of joins.
 
     ```sql
     <copy>
@@ -249,7 +328,9 @@ Start from `@premiere_001` and trace creators within four directed relationship 
     </copy>
     ```
 
-    `RELATIONSHIP_HOPS` describes the matched path. A creator can appear at more than one hop count when several paths reach them. The value is not necessarily the shortest path from the seed.
+    `RELATIONSHIP_HOPS` describes the matched path. A creator can appear at more
+    than one hop count when several paths reach them. The value is not
+    necessarily the shortest path from the seed.
 
     **Expected output: Connected Media Creators**
 
@@ -257,15 +338,23 @@ Start from `@premiere_001` and trace creators within four directed relationship 
 
 2. Review the connected creators.
 
-    The query returns connected creators as a table ordered by the stored influence score. This makes the graph result usable in the same SQL review workflow as the dashboard, vector search, and campaign-order lab.
+    The query returns connected creators as a table ordered by the stored
+    influence score. This makes the graph result usable in the same SQL review
+    workflow as the dashboard, vector search, and campaign-order lab.
 
-    Each row includes a creator handle, platform, follower count, niche, and path length. The seeded chain includes `@premiere_001` to `@streaming_002`, then `@fandom_003`, `@trailer_004`, and `@rights_005`. Other seeded connections create additional paths.
+    Each row includes a creator handle, platform, follower count, niche, and
+    path length. The seeded chain includes `@premiere_001` to `@streaming_002`,
+    then `@fandom_003`, `@trailer_004`, and `@rights_005`. Other seeded
+    connections create additional paths.
 
-    Use this result to explore creator reach and possible collaborations. A connection alone does not prove campaign reach or demand.
+    Use this result to explore creator reach and possible collaborations. A
+    connection alone does not prove campaign reach or demand.
 
 ## Task 4: Find creators that share a studio or label
 
-Bob now asks a broader community question: **which creator pairs have relationships with the same studio or label?** The graph expresses this as two creator vertices pointing to one shared `brand` vertex.
+Bob now asks a broader community question: **which creator pairs have
+relationships with the same studio or label?** The graph expresses this as two
+creator vertices pointing to one shared `brand` vertex.
 
 1. Run Bob's creator-pair query:
 
@@ -296,43 +385,64 @@ Bob now asks a broader community question: **which creator pairs have relationsh
     </copy>
     ```
 
-    The pattern starts at creator `a`, follows a `promotes` edge to a studio or label, and follows another edge back to creator `b`. `a.influencer_id < b.influencer_id` prevents duplicate pairs in reverse order. The `promotes` label includes organic and competitor mentions. Check the relationship columns before interpreting a row as a paid partnership.
+    The pattern matches two creators, `a` and `b`, whose `promotes` edges point
+    to the same studio or label. `a.influencer_id < b.influencer_id` prevents
+    duplicate pairs in reverse order. The `promotes` label includes organic and
+    competitor mentions. Check the relationship columns before interpreting a
+    row as a paid partnership.
 
 2. Review the business result.
 
-    Each row identifies the two creators, their shared studio or label, their stored influence scores, and the relationship on each side. `COMBINED_INFLUENCE` averages the two scores for ranking. Sharing a studio does not prove that the creators collaborated with one another.
+    Each row identifies the two creators, their shared studio or label, their
+    stored influence scores, and the relationship on each side.
+    `COMBINED_INFLUENCE` averages the two scores for ranking. Sharing a studio
+    does not prove that the creators collaborated with one another.
 
     ![Creator pairs with a shared studio or label relationship](images/media-shared-studios.jpg)
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
-The SQL queries show which creators and studios are connected. Graph Studio displays those relationships as an interactive network, where Bob can inspect creator communities and shared studio links.
+The SQL queries show which creators and studios are connected. Graph Studio
+displays those relationships as an interactive network, where Bob can inspect
+creator communities and shared studio links.
 
-In the following tasks, use Graph Studio to turn the query results for `@premiere_001` into a visual community map.
+In the following tasks, use Graph Studio to display creator paths from
+`@premiere_001` and relationships with `Aurora Studios`.
 
-1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
+1. Start from the Database Actions Launchpad. Confirm that the upper-right
+    corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
 
     ![Database Actions Launchpad for the LLUSER workshop user](images/media-launchpad.jpg " ")
 
-2. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
+2. On the **Development** tab, select **Graph Studio** from the left-side tool
+    list and click **Open**.
 
     ![Open Graph Studio from the Database Actions launchpad](images/media-open-graph.jpg " ")
 
 3. If prompted, sign in as `LLUSER` with the supplied workshop password.
 
-    If Graph Studio reports **Missing Privileges** and names the Graph proxy connection grant, ask the facilitator to run `ALTER USER LLUSER GRANT CONNECT THROUGH GRAPH$PROXY_USER;` as `ADMIN` on the workshop database. `GRAPH_DEVELOPER` and successful SQL graph queries do not establish that proxy access. After the repair, sign out and sign in again before continuing.
+    If Graph Studio reports **Missing Privileges** and names the Graph proxy
+    connection grant, ask the facilitator to run
+    `ALTER USER LLUSER GRANT CONNECT THROUGH GRAPH$PROXY_USER;` as `ADMIN` on
+    the workshop database. `GRAPH_DEVELOPER` and successful SQL graph queries do
+    not establish that proxy access. After the repair, sign out and sign in
+    again before continuing.
 
-4. Confirm that the Graph Studio home page opens. The **Overview** page shows Quickstart cards, jobs, recent notebooks, and graphs. Open the navigation menu to reach **Notebooks**.
+4. Confirm that the Graph Studio home page opens. The **Overview** page shows
+    Quickstart cards, jobs, recent notebooks, and graphs. Open the navigation
+    menu to reach **Notebooks**.
 
     ![Graph Studio overview page signed in as LLUSER](images/media-graph-overview.jpg " ")
 
 ## Task 6: Download and import the media notebook
 
-The supplied `.dsnb` file is a native Graph Studio notebook: a reusable guide that combines runnable SQL/PGQ paragraphs and graph visualizations.
+The supplied `.dsnb` file is a native Graph Studio notebook: a reusable guide
+that combines runnable SQL/PGQ paragraphs and graph visualizations.
 
 1. Download [media-community-network-graph-studio.dsnb](files/media-community-network-graph-studio.dsnb).
 
-    If the notebook opens in your browser instead of downloading, right-click the link and select **Save Link As**.
+    If the notebook opens in your browser instead of downloading, right-click
+    the link and select **Save Link As**.
 
 2. In Graph Studio, open the navigation menu and select **Notebooks**.
 
@@ -342,24 +452,33 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable guide th
 
     ![Graph Studio Notebooks page for LLUSER with the Import button](images/media-notebooks.jpg " ")
 
-4. Drag `media-community-network-graph-studio.dsnb` into the import dialog, or browse to the file. Check the filename and click **Import**. Then open **Media Creator and Studio Network**.
+4. Drag `media-community-network-graph-studio.dsnb` into the import dialog, or
+    browse to the file. Check the filename and click **Import**. Then open
+    **Media Creator and Studio Network**.
 
     ![Import the Media Creator and Studio Network notebook file into Graph Studio](images/media-import-notebook.jpg " ")
 
-
 ## Task 7: Run and interpret the Graph Studio notebook
 
-You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of the same analysis in **Media Creator and Studio Network** and compare the table with visual paths. The notebook uses `@premiere_001` for creator traversal and `Aurora Studios` for the studio-centered view.
+You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of
+the same analysis in **Media Creator and Studio Network** and compare the table
+with visual paths. The notebook uses `@premiere_001` for creator traversal and
+`Aurora Studios` for the studio-centered view.
 
-The table ranks connected creators, while the visual graph shows the intermediate paths and shared studio relationships that explain how they connect.
+The table ranks connected creators, while the visual graph shows the
+intermediate paths and shared studio relationships that explain how they
+connect.
 
-1. Start at the top of the notebook. Read the traversal explanation, then run the first SQL paragraph.
+1. Start at the top of the notebook. Read the traversal explanation, then run
+    the first SQL paragraph.
 
     ![Media Creator and Studio Network notebook open in Graph Studio](images/media-notebook-top.jpg " ")
 
 2. Review the results in table format.
 
-    This is a shorter version of Task 3: start from `@premiere_001`, follow one or two relationship hops, and return connected creators ordered by influence score.
+    This is a shorter version of Task 3: start from `@premiere_001`, follow one
+    or two relationship hops, and return connected creators ordered by influence
+    score.
 
     | Paragraph | Result | Analysis purpose |
     | --- | --- | --- |
@@ -369,57 +488,88 @@ The table ranks connected creators, while the visual graph shows the intermediat
     | `Shared Studio Connections` | Markdown explanation | Introduces the studio-centered view. |
     | `SELECT * ... WHERE studio.brand_name = 'Aurora Studios'` | Graph visualization | Shows creator relationships with Aurora Studios. |
 
-3. Under **Graph Visualization of Creator Reach**, run the SQL paragraph anchored on `@premiere_001`.
+3. Under **Graph Visualization of Creator Reach**, run the SQL paragraph
+    anchored on `@premiere_001`.
 
-    The query uses `ONE ROW PER STEP` and returns `VERTEX_ID` and `EDGE_ID` values. Graph Studio uses those identifiers to render the vertices and edges, including intermediate creators. If the table tab opens first, select the graph visualization tab.
+    The query uses `ONE ROW PER STEP` and returns `VERTEX_ID` and `EDGE_ID`
+    values. Graph Studio uses those identifiers to render the vertices and
+    edges, including intermediate creators. If the table tab opens first, select
+    the graph visualization tab.
 
-    To show creator handles, open the graph **Settings**, then **General → Vertex Captions**, and select **INFLUENCER / HANDLE**. Optionally turn off **Show caption on hover** to keep captions visible and set the caption length to `20`. Use the paragraph **Expand** control for a larger view. The captured seeded result contains **33 vertices and 56 edges**.
+    To show creator handles, open the graph **Settings**, then **General →
+    Vertex Captions**, and select **INFLUENCER / HANDLE**. Optionally turn off
+    **Show caption on hover** to keep captions visible and set the caption
+    length to `20`. Use the paragraph **Expand** control for a larger view. The
+    captured seeded result contains **33 vertices and 56 edges**.
 
     ![Graph Studio visualization of creator reach from @premiere_001](images/media-creator-reach-graph.jpg " ")
 
-4. Under **Shared Studio Connections**, run the final SQL paragraph anchored on `Aurora Studios`.
+4. Under **Shared Studio Connections**, run the final SQL paragraph anchored on
+    `Aurora Studios`.
 
-    In **Settings → General → Vertex Captions**, select **BRAND / BRAND_NAME** to label the studio. The captured result contains **36 vertices and 35 edges**: Aurora Studios and its 35 creator relationships.
+    In **Settings → General → Vertex Captions**, select **BRAND / BRAND_NAME**
+    to label the studio. The captured result contains **36 vertices and 35
+    edges**: Aurora Studios and its 35 creator relationships.
 
     ![Graph Studio visualization of creators connected to Aurora Studios](images/media-studio-graph.jpg " ")
 
-    Select a `promotes` edge and inspect `RELATIONSHIP_TYPE`, `POST_COUNT`, and `REVENUE_ATTRIBUTED`. These properties describe each creator's recorded relationship with the studio.
+    Select a `promotes` edge and inspect `RELATIONSHIP_TYPE`, `POST_COUNT`, and
+    `REVENUE_ATTRIBUTED`. These properties describe each creator's recorded
+    relationship with the studio.
 
-    > **Generated result note:** Graph layouts and node positions can vary between runs. Compare handles, studio names, edge labels, and relationship properties. The supplied notebook contains runnable paragraphs without cached query results.
+    > **Display note:** Graph layouts and node positions can vary between runs.
+    > Compare handles, studio names, edge labels, and relationship properties.
+    > The supplied notebook contains runnable paragraphs without cached query
+    > results.
 
-You used SQL/PGQ for a repeatable result set, including ranked creators and pairs with shared studio relationships. Graph Studio then showed the paths behind those results as an interactive network.
+You used SQL/PGQ for a repeatable result set, including ranked creators and
+pairs with shared studio relationships. Graph Studio then showed the paths
+behind those results as an interactive network.
 
 ## Conclusion: Make Relationships Easy to Review
 
-Bob's graph queries show why a property graph fits creator-community analysis. He can start with one creator, follow directed relationships, limit the search to a chosen number of hops, and find creator pairs linked to a shared studio or label. SQL/PGQ expresses these paths without adding a join for each hop.
+Bob's graph queries show why a property graph fits creator-community analysis.
+He can start with one creator, follow directed relationships, limit the search
+to a chosen number of hops, and find creator pairs linked to a shared studio or
+label. SQL/PGQ expresses these paths without adding a join for each hop.
 
-The same relationships can be explored visually in Graph Studio. Use the SQL table to rank and compare creators, then inspect intermediate paths and shared studio relationships in the graph. Together, the two views help a community analyst explain which creators connect and what they share.
+The same relationships can be explored visually in Graph Studio. Use the SQL
+table to rank and compare creators, then inspect intermediate paths and shared
+studio relationships in the graph. Together, the two views help a community
+analyst explain which creators connect and what they share.
 
 ## Appendix: Create the Property Graph
 
-The loader maps `INFLUENCERS`, `BRANDS`, `PRODUCTS`, and `SOCIAL_POSTS` to vertices. Three edge tables define creator connections, creator-to-studio relationships, and post-to-content mentions. The exact labels and properties below are the ones available to this lab.
+The loader maps `INFLUENCERS`, `BRANDS`, `PRODUCTS`, and `SOCIAL_POSTS` to
+vertices. Three edge tables define creator connections, creator-to-studio
+relationships, and post-to-content mentions. The exact labels and properties
+below are the ones available to this lab.
 
-This statement is for reference. The loader already created `INFLUENCER_NETWORK`; do not run it again against the prepared schema.
+This statement is for reference. The loader already created
+`INFLUENCER_NETWORK`; do not run it again against the prepared schema.
 
-    ```sql
-    CREATE PROPERTY GRAPH influencer_network
-        VERTEX TABLES (
-            influencers KEY (influencer_id) LABEL influencer PROPERTIES (influencer_id, handle, display_name, platform, follower_count, engagement_rate, influence_score, niche, city, region, is_verified),
-            brands KEY (brand_id) LABEL brand PROPERTIES (brand_id, brand_name, brand_category, social_tier),
-            products KEY (product_id) LABEL product PROPERTIES (product_id, product_name, category, unit_price),
-            social_posts KEY (post_id) LABEL social_post PROPERTIES (post_id, platform, posted_at, virality_score, momentum_flag)
-        )
-        EDGE TABLES (
-            influencer_connections KEY (connection_id) SOURCE KEY (from_influencer) REFERENCES influencers (influencer_id) DESTINATION KEY (to_influencer) REFERENCES influencers (influencer_id) LABEL connects_to PROPERTIES (connection_type, strength, interaction_count),
-            brand_influencer_links KEY (link_id) SOURCE KEY (influencer_id) REFERENCES influencers (influencer_id) DESTINATION KEY (brand_id) REFERENCES brands (brand_id) LABEL promotes PROPERTIES (relationship_type, post_count, avg_engagement, revenue_attributed),
-            post_product_mentions KEY (mention_id) SOURCE KEY (post_id) REFERENCES social_posts (post_id) DESTINATION KEY (product_id) REFERENCES products (product_id) LABEL mentions_product PROPERTIES (confidence_score, mention_type)
-        );
-    ```
+```sql
+CREATE PROPERTY GRAPH influencer_network
+    VERTEX TABLES (
+        influencers KEY (influencer_id) LABEL influencer PROPERTIES (influencer_id, handle, display_name, platform, follower_count, engagement_rate, influence_score, niche, city, region, is_verified),
+        brands KEY (brand_id) LABEL brand PROPERTIES (brand_id, brand_name, brand_category, social_tier),
+        products KEY (product_id) LABEL product PROPERTIES (product_id, product_name, category, unit_price),
+        social_posts KEY (post_id) LABEL social_post PROPERTIES (post_id, platform, posted_at, virality_score, momentum_flag)
+    )
+    EDGE TABLES (
+        influencer_connections KEY (connection_id) SOURCE KEY (from_influencer) REFERENCES influencers (influencer_id) DESTINATION KEY (to_influencer) REFERENCES influencers (influencer_id) LABEL connects_to PROPERTIES (connection_type, strength, interaction_count),
+        brand_influencer_links KEY (link_id) SOURCE KEY (influencer_id) REFERENCES influencers (influencer_id) DESTINATION KEY (brand_id) REFERENCES brands (brand_id) LABEL promotes PROPERTIES (relationship_type, post_count, avg_engagement, revenue_attributed),
+        post_product_mentions KEY (mention_id) SOURCE KEY (post_id) REFERENCES social_posts (post_id) DESTINATION KEY (product_id) REFERENCES products (product_id) LABEL mentions_product PROPERTIES (confidence_score, mention_type)
+    );
+```
 
-The statement defines a property graph over the relational tables. `GRAPH_TABLE` queries this graph while the relational rows remain the source of the data.
+The statement defines a property graph over the relational tables. `GRAPH_TABLE`
+queries this graph while the relational rows remain the source of the data.
 
 ## Acknowledgements
 
 * **Author** - Kevin Lazarz, Linda Foinding
 * **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
 * **Last Updated By/Date** - Vahn Kessler, September 2026
+
+[link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet
