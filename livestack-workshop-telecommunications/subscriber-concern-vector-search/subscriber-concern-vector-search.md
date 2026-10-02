@@ -1,17 +1,17 @@
 # Search Service Plans by Meaning
 
-![Gilly Bourne, AI engineer, introduces service-plan search.](images/gilly.png)
-
 ## Introduction
 
 Gilly Bourne, an AI engineer at SEER Telecomms, wants support analysts to find plans even when callers use different words. An indoor-coverage complaint should lead to relevant plans and the subscribers who ordered them.
 
 Create plan embeddings in Oracle AI Database, rank matches by meaning, then join the results to service orders and subscriber contact details.
 
+![Gilly Bourne, AI engineer, introduces service-plan search.](images/gilly.png)
+
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
-> - An **embedding** is a numerical profile of what text means. In this lab, service plan data is embedded so similar telecommunications ideas sit near each other mathematically, even when the wording is different.
+> - An **embedding** represents text as a list of numbers. This lab embeds each service plan’s name, category and subcategory so the query can rank descriptions with similar meanings.
 >
 > - An **ONNX embedding model** is a portable machine-learning model saved in the Open Neural Network Exchange (ONNX) format. It turns text into a vector of numbers that captures meaning. Oracle AI Database can load and run this model inside the database, close to the service plan rows.
 >
@@ -71,7 +71,7 @@ Jessica has loaded an ONNX embedding model into Oracle AI Database. Check that G
 
 ## Task 2: Create a service plan vector
 
-Gilly decides that one vector per service plan is enough. Each service plan record is short and describes one service plan, so she combines its name, category, and subcategory into one text value before creating the vector.
+Each service plan has a short description, so Gilly creates one vector from its name, category and subcategory.
 
 1. Review the text Gilly will embed:
 
@@ -130,11 +130,11 @@ Gilly decides that one vector per service plan is enough. Each service plan reco
 
     ![Create a service plan vector](images/sql-vector-values.png)
 
-    > **Note:** Chunking is not relevant for this data. Each row describes one short service plan, so splitting it would create several vectors for one service plan without adding useful detail. Chunking becomes useful for long documents, such as policies or network service notices, where each section may answer a different question.
+    > **Note:** Each description is short enough for one vector. Longer documents, such as policies or network service notices, may need separate vectors for sections that answer different questions.
 
 ## Task 3: Test the service plan vector
 
-Now Gilly tests the new column with a simple vector query. She asks for service plans related to weak indoor mobile coverage with Wi-Fi calling and lets the database rank them by meaning.
+Search for `weak indoor mobile coverage with Wi-Fi calling` and review how the database ranks the plans by meaning.
 
 1. Run the following query:
 
@@ -167,7 +167,7 @@ Now Gilly tests the new column with a simple vector query. She asks for service 
 
 3. Show the result as a similarity score:
 
-    Vector distance is useful for checking the search, but support analysts may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
+    Display `1 - distance`, rounded to four decimal places, as a similarity score. Higher scores indicate closer matches; the ranking stays the same.
 
     ```sql
     <copy>
@@ -232,7 +232,7 @@ Help the support analyst find subscribers who ordered matching plans. Keep pendi
 
     **Expected output: Subscriber Follow-up List**
 
-    The result shows subscribers who ordered service plans related to the concern. The similarity score explains why the service plan was included, while the service order and subscriber columns give the service team enough information to decide what to do next.
+    The similarity score indicates how closely each plan description matches the search phrase. The joined subscribers are candidates for follow-up, not confirmed cases of poor coverage. Check complaint details, service addresses and measured conditions before recommending a change.
 
 2. Review the business result.
 

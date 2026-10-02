@@ -1,12 +1,12 @@
 # Route Guests to the Closest Hotel Property
 
-![Moon — hospitality lab banner](images/moon.png)
-
 ## Introduction
 
 Moon Kai, Seer Hotels’ spatial specialist, helps guest services find nearby hotels: **which guests are in a high-demand region, and which active property is closest to each one?**
 
 Follow Moon from hotel points and demand-region polygons to a guest routing query that returns distances and property details.
+
+![Moon — hospitality lab banner](images/moon.png)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
@@ -15,7 +15,7 @@ Follow Moon from hotel points and demand-region polygons to a guest routing quer
 >
 > - A **polygon** is an area made from connected points. Demand regions are stored as polygons.
 >
-> - **Distance** measures how far two spatial objects are from each other. Here, it shows how far a hotel property is from a demand-region boundary. A distance of zero means the property is inside or touching the region.
+> - **Distance** measures the shortest separation between two spatial objects. Here, the query compares a hotel point with a demand-region polygon. A point inside or touching the polygon has distance zero.
 >
 > - A **spatial relationship** describes how two shapes relate to each other. `SDO_GEOM.RELATE` can test whether a guest point is inside or touches a demand region.
 >

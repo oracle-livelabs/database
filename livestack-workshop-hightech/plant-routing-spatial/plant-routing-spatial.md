@@ -1,43 +1,64 @@
 # Find the Closest Manufacturing Plant
 
-![Moon: HighTech lab banner](images/moon.png)
+<!-- markdownlint-configure-file
+{
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
 
 ## Introduction
 
-Moon Kai, Seer HighTech’s spatial specialist, helps planners find alternative plants for customer sites in a high-demand region. **Which sites are inside the region, and which plant is closest to each?**
+Moon Kai, Seer High-Tech’s spatial specialist, helps planners find alternative
+plants for customer sites in a high-demand region. **Which sites are inside the
+region, and which plant is closest to each?**
 
-Help Moon route customer sites using points, region polygons, and distance queries.
+Help Moon find nearby plants for customer sites using points, region polygons
+and distance queries.
+
+![Moon: High-Tech lab banner](images/moon.png)
 
 <details>
+<!-- markdownlint-disable-next-line MD013 -->
 <summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
 
-> - A **point** is a longitude/latitude location, stored here as `SDO_GEOMETRY`.
+> * A **point** is a longitude/latitude location, stored here as `SDO_GEOMETRY`.
 >
-> - A **polygon** is an area bounded by connected points, such as a demand region.
+> * A **polygon** is an area bounded by connected points, such as a demand region.
 >
-> - **Distance** measures the shortest separation between shapes. A point inside or touching a polygon has distance zero.
+> * **Distance** measures the shortest separation between shapes. A point inside
+>   or touching a polygon has distance zero.
 >
-> - A **spatial relationship** describes how shapes relate. `SDO_GEOM.RELATE` tests whether a site is inside or touches a region.
+> * A **spatial relationship** describes how shapes relate. `SDO_GEOM.RELATE`
+>   tests whether a site is inside or touches a region.
 >
-> - **GeoJSON** represents locations and shapes as JSON for map display.
+> * **GeoJSON** represents locations and shapes as JSON for map display.
 >
 </details>
 
 ### Objectives
 
-- Identify spatial points and polygons in the HighTech data.
-- Convert a database point to GeoJSON for an application map.
-- Measure which plants are closest to a demand region.
-- Find customer sites inside a demand region.
-- Match each customer site to the closest active plant.
+* Identify spatial points and polygons in the High-Tech data.
+* Convert a database point to GeoJSON for an application map.
+* Measure which plants are closest to a demand region.
+* Find customer sites inside a demand region.
+* Match each customer site to the closest active plant.
 
 Estimated Time: **10 minutes**
 
-> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
+> **SQL Worksheet reminder:** See
+> [Getting Started Task 2: Open SQL Worksheet][link-1] for the steps to paste
+> and run SQL.
 
 ## Task 1: Look at the locations as points
 
-Moon starts with **where are the plants?** Compare each stored point with its map-ready GeoJSON.
+Moon starts by asking **where are the plants?** Compare each stored point with
+its GeoJSON representation for a map.
 
 An `SDO_GEOMETRY` point stores its type, coordinate system, and coordinates.
 
@@ -62,15 +83,19 @@ An `SDO_GEOMETRY` point stores its type, coordinate system, and coordinates.
 
     ![Plant point geometry and GeoJSON results](images/sql-spatial-points.png)
 
-    `LOCATION` is the database point; `LOCATION_GEOJSON` is its map representation. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters without changing the geometry.
+    `LOCATION` is the database point; `LOCATION_GEOJSON` is its map
+    representation. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR`
+    limits the displayed text to 120 characters without changing the geometry.
 
 2. Review the point data.
 
-    Compare the point, latitude/longitude columns, and GeoJSON. Notice that GeoJSON places longitude first.
+    Compare the point, the latitude and longitude columns, and the GeoJSON.
+    Notice that GeoJSON lists longitude first.
 
 ## Task 2: Find the closest plants to a demand region
 
-The sample data gives New York Electronics Region a demand index of `91`. Moon measures the distance between each plant point and the region polygon.
+The sample data gives New York Electronics Region a demand index of `91`. Moon
+measures the distance between each plant point and the region polygon.
 
 1. Run the distance query:
 
@@ -99,22 +124,25 @@ The sample data gives New York Electronics Region a demand index of `91`. Moon m
 
     ![Plants ranked by distance to the New York manufacturing region](images/sql-spatial-new-york.png)
 
-    `SDO_GEOM.SDO_DISTANCE` returns the shortest plant-to-region distance. Zero means the plant is inside or touching the region.
+    `SDO_GEOM.SDO_DISTANCE` returns the shortest plant-to-region distance. Zero
+    means the plant is inside or touching the region.
 
     The arguments are:
 
-    - `hp.location`: plant point.
-    - `dr.boundary`: region polygon.
-    - `0.005`: tolerance for small coordinate differences.
-    - `'unit=KM'`: distance in kilometers; use `'unit=MILE'` for miles.
+    * `hp.location`: plant point.
+    * `dr.boundary`: region polygon.
+    * `0.005`: tolerance for small coordinate differences.
+    * `'unit=KM'`: distance in kilometers; use `'unit=MILE'` for miles.
 
     `ROUND(..., 2)` formats the answer to two decimal places.
 
-    Which plant is closest to the New York region? Note its distance and the region’s `DEMAND_INDEX` before checking capacity.
+    Which plant is closest to the New York region? Note its distance and the
+    region’s `DEMAND_INDEX` before checking capacity.
 
 2. Try another region.
 
-    Change the region name to `Chicago Electronics Region`, add a miles calculation, and run the modified query:
+    Change the region name to `Chicago Electronics Region`, add a miles
+    calculation, and run the modified query:
 
     ```sql
     <copy>
@@ -149,11 +177,13 @@ The sample data gives New York Electronics Region a demand index of `91`. Moon m
 
     ![Plants ranked by distance to the Chicago manufacturing region](images/sql-spatial-chicago.png)
 
-    Chicago’s synthetic demand index is 78. Compare the kilometer and mile values, and check whether any plant has distance zero.
+    Chicago’s synthetic demand index is 78. Compare the kilometer and mile
+    values, and check whether any plant has distance zero.
 
 ## Task 3: Route customer sites to the closest plant
 
-Moon combines two checks: which customer sites lie inside New York Electronics Region, and which active plant is nearest to each?
+Moon combines two checks: which customer sites lie inside New York Electronics
+Region, and which active plant is nearest to each?
 
 1. Run the customer-site routing query:
 
@@ -231,17 +261,25 @@ Moon combines two checks: which customer sites lie inside New York Electronics R
 
     ![Customer sites matched to their closest active plant](images/sql-spatial-routing.png)
 
-    `SDO_GEOM.RELATE` keeps customer sites whose point falls inside or touches the New York Electronics Region polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching customer site to every active plant. `ROW_NUMBER` keeps the nearest plant for each customer site.
+    `SDO_GEOM.RELATE` keeps customer sites whose point falls inside or touches
+    the New York Electronics Region polygon. `SDO_GEOM.SDO_DISTANCE` then
+    measures the distance from each matching customer site to every active
+    plant. `ROW_NUMBER` keeps the nearest plant for each customer site.
 
 2. Find the closest active plant for each customer site.
 
-    Check the site contact, distance, `DAILY_CAPACITY_UNITS`, and `CAPACITY_UTILIZATION_PCT`. Which site would Moon investigate first for a possible reassignment?
+    Check the site contact, distance, `DAILY_CAPACITY_UNITS`, and
+    `CAPACITY_UTILIZATION_PCT`. Which site would Moon investigate first for a
+    possible reassignment?
 
 3. Change the query to `Chicago Electronics Region`.
 
-    Compare the customer sites and candidate plants with New York. The predicates stay the same; only the region changes.
+    Compare the customer sites and candidate plants with New York. The
+    predicates stay the same; only the region changes.
 
-Distance and a capacity snapshot are only a first pass. Before moving an order, Moon also needs to check whether the plant can build that component, has material and machine time, and can meet the delivery date.
+Distance and current capacity provide an initial shortlist. Before moving an
+order, Moon must also check that the plant can build the component, has the
+required material and machine time, and can meet the delivery date.
 
 ## Next Steps
 
@@ -249,14 +287,19 @@ Explore further in the [Oracle Spatial LiveLabs workshop](https://livelabs.oracl
 
 ## Application example
 
-The [HighTech LiveStack demo](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461) shows supply sites, customer commitments, and order routes on a map.
+The [High-Tech LiveStack demo][link-2] shows supply sites, customer commitments,
+and order routes on a map.
 
-![LiveStack HighTech Demo: Supply & Commitment Map](images/demo-spatial-map.jpg)
+![LiveStack High-Tech Demo: Supply & Commitment Map](images/demo-spatial-map.jpg)
 
-*LiveStack HighTech Demo: Supply & Commitment Map*
+<!-- markdownlint-disable-next-line MD036 -->
+*LiveStack High-Tech Demo: Supply & Commitment Map*
 
 ## Acknowledgements
 
 * **Author** - Matt Kowalik
 * **Contributor** - Kevin Lazarz
 * **Last Updated By/Date** - Matt Kowalik, September 2026
+
+[link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet
+[link-2]: https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4461

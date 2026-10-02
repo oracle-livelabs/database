@@ -79,6 +79,8 @@ Each row records the current request workload, the number of connected signals, 
 
     `CURRENT_REQUESTS`, `SIGNAL_COUNT`, `CAPACITY_RATIO`, and `CRITICAL_ALERTS` are the model inputs. `RISK_FLAG` is the answer the model learns to predict. `TRAINING_ID` identifies the scenario, but it is not an operating condition that should influence the prediction.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/care-demand-training-scenarios.png " ")
+
     **Expected output: Care-demand training scenarios**
 
     | Training ID | Current Requests | Signal Count | Capacity Ratio | Critical Alerts | Risk Flag |
@@ -158,6 +160,8 @@ Stay in SQL Worksheet for model creation and scoring. The optional AutoML compar
     </copy>
     ```
 
+    ![Open Graph Studio from the Database Actions launchpad](images/ottos-care-demand-model.png " ")
+
     **Expected output: Otto's care-demand model**
 
     | Model Name | Mining Function | Algorithm |
@@ -198,6 +202,8 @@ Otto now receives an operating scenario for the next planning period. The model 
 
     The scenario contains 17 current requests, six connected signals, a capacity ratio of `1.06`, and two critical alerts. A capacity ratio of `1.00` means capacity and expected demand are equal, so `1.06` represents a small six-percent cushion.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/operating-scenario-risk.png " ")
+
     **Expected output: Operating-scenario risk**
 
     | Predicted Risk | Model Confidence |
@@ -227,6 +233,8 @@ Otto now receives an operating scenario for the next planning period. The model 
     ```
 
     `CARE_DEMAND_FORECASTS_V` contains the planning forecast. The query puts the services and regions with the largest predicted demand first.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/highest-demand-forecasts.png " ")
 
     **Expected output: Highest demand forecasts**
 
@@ -274,11 +282,30 @@ This task is optional. You have completed the required SQL workflow in Tasks 1-3
     | Prediction type | `Classification`         |
     | Case ID         | `TRAINING_ID`            |
 
-    Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
+
+    **Note:** The Predict, Prediction Type, and Case ID fields become available
+    after a data source has been entered. Select `SURGE_LABEL`,
+    `Classification`, and `TRAINING_ID`, respectively.
+
+    To enter the **Data Source** value:
+
+    1. Enter *Care Demand Risk Test* in the Name field.
+    2. Select the magnifying-glass icon next to **Data Source**.
+
+        ![Hospitality classification experiment settings](images/data-source-one.png)
+
+    3. In the **Select Table** window, select *LLUSER* from the **Schema** list.
+    4. Select `HC_DEMAND_TRAINING` from the **Table** list.
+
+        ![Hospitality classification experiment settings](images/data-source-two.png)
+
+    5. Select **OK**.
+
+4. Start the experiment and wait for the model leaderboard (this can take between 5-10 minutes).
 
     ![startml](images/startml.png)
 
-4. Review the leaderboard and model details.
+5. Review the leaderboard and model details.
 
     ![AutoML leaderboard for the completed care-demand experiment](images/leaderboard.png)
 

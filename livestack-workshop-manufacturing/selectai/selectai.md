@@ -1,19 +1,19 @@
 # Ask Manufacturing Questions with Select AI
 
-![Nina: manufacturing lab banner](images/nina.png)
-
 ## Introduction
 
 Nina Patel, SEER MANUFACTURING’s production analyst, wants answers about components and production orders without writing every join and filter. Jessica has configured a Select AI profile for the manufacturing schema.
 
 You will help Nina ask a question, inspect the generated SQL, run it, and refine the result. The model can choose the wrong columns or misunderstand a question, so SQL review remains part of her work.
 
+![Nina: manufacturing lab banner](images/nina.png)
+
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-> - **Select AI** lets a user work with database information through a natural-language question.
+> - **Select AI** turns a question written in ordinary language into SQL that you can inspect and run.
 >
-> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
+> - An **AI profile** specifies the AI provider and the database objects used to guide SQL generation. Database privileges determine which data the current user can access.
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
@@ -150,7 +150,7 @@ Nina now submits the same question with `runsql` to return the database result. 
 
 ## Task 5: Improve the business question
 
-Nina's first question gives her a component ranking, but she also needs enough detail to decide what to review. She changes the question to request the component category, total material value, and planned units.
+Nina adds the component category, total material value and planned units to the ranking so she can compare the components before deciding what to review.
 
 1. Use `showsql` to inspect this revised prompt:
 
@@ -210,7 +210,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina now has a component ranking she can check against its SQL. Keep the same routine for new questions: inspect the query, run it, and compare the answer with the manufacturing decision.
+Nina now has a component ranking she can check against the SQL result. For new questions, inspect the query, run it and verify the returned components and totals before making a production decision.
 
 ## Next Steps
 

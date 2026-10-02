@@ -1,12 +1,12 @@
 # Investigate an Activation Fraud Network
 
-![Bob Green, graph specialist, introduces activation-fraud investigation.](images/bob.png)
-
 ## Introduction
 
 Bob Green, SEER Telecomms’ graph specialist, is investigating service order `ORD-8841`. Shared devices, payment tokens, phone numbers, or IP addresses may connect it to other orders.
 
 Help Bob follow these connections with SQL/PGQ, then open Graph Studio, Oracle Database’s visual workspace for property graphs, to compare the results as an interactive network.
+
+![Bob Green, graph specialist, introduces activation-fraud investigation.](images/bob.png)
 
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
@@ -245,7 +245,7 @@ Start from suspicious service order `ORD-8841` and trace the connected entities 
 
     ![Trace activation evidence across four hops](images/sql-graph-four-hop.png)
 
-    RELATIONSHIP_HOPS shows the entity's level in the search. A value of `1` means the entity is directly connected to `ORD-8841`; a value of `2` means the query reached it after one intermediate vertex; values `3` and `4` show deeper connections.
+    `RELATIONSHIP_HOPS` is the number of relationships in the path from `ORD-8841` to the returned entity. One hop is a direct connection; two hops include one intermediate vertex. The same entity may appear at more than one hop count.
 
     **Expected output: High Risk Activation Fraud Entities**
 

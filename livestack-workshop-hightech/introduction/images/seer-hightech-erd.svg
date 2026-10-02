@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
-<title id="title">SEER HIGHTECH core data model</title>
+<title id="title">SEER HIGH-TECH core data model</title>
 <desc id="desc">Five tables and five one-to-many foreign keys. Scheduled dates and production quantities are independent.</desc>
 <rect width="1200" height="680" fill="#faf9f6"/>
-<text x="40" y="52" font-family="Arial" font-size="28" font-weight="bold" fill="#27312f">SEER HIGHTECH / core data model</text>
+<text x="40" y="52" font-family="Arial" font-size="28" font-weight="bold" fill="#27312f">SEER HIGH-TECH / core data model</text>
 <rect x="40" y="100" width="300" height="165" rx="6" fill="white" stroke="#4c665b" stroke-width="2"/>
 <text x="56" y="130" font-family="Arial" font-size="17" font-weight="bold" fill="#27312f">CUSTOMER_SITES</text>
 <text x="56" y="163" font-family="Arial" font-size="14" fill="#27312f">PK customer_site_id</text>

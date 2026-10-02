@@ -1,19 +1,19 @@
 # Ask Telecom Questions with Select AI
 
-![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
-
 ## Introduction
 
 Nina Patel, a subscriber experience analyst at SEER Telecomms, wants to compare monthly charges without writing every query herself. Jessica has prepared a Select AI profile for the workshop tables.
 
 Help Nina ask a question, inspect the generated SQL, run it, and refine the answer. Check the joins and filters: an AI-generated query can run successfully and still answer the wrong question.
 
+![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
+
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-> - **Select AI** lets a user work with database information through a natural-language question.
+> - **Select AI** turns a question written in ordinary language into SQL that you can inspect and run.
 >
-> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
+> - An **AI profile** specifies the AI provider and the database objects used to guide SQL generation. Database privileges determine which data the current user can access.
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
@@ -132,7 +132,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
 ## Task 4: Run the question in the database
 
-Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
+Nina submits the question with `runsql`, which generates and executes SQL again. Compare the answer with the SQL reviewed in Task 3; the new call may generate a different statement.
 
 1. Run the same question with the `runsql` action:
 
@@ -150,11 +150,11 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
-    Select AI has generated and run SQL against the telecommunications schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the telecommunications data.
+    The query reads the workshop tables using the privileges of your current database account, `LLUSER`.
 
 ## Task 5: Improve the business question
 
-Nina's first question gives her a service plan ranking, but she also needs enough detail to decide what to review. She changes the question to request the service plan category, total monthly charges, and connections ordered.
+Nina adds the plan category, total monthly charges and connections ordered so she can compare the plans before deciding what to review.
 
 1. Use `showsql` to inspect this revised prompt:
 
@@ -208,7 +208,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 2. Review the explanation against the SQL result.
 
-  The explanation is a convenience for an analyst. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+  Compare the explanation with the query result. Check the plan names, ranking, monthly charges and connection totals before using the answer.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 

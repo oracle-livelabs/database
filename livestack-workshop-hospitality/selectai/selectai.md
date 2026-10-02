@@ -1,19 +1,19 @@
 # Ask Hospitality Questions with Select AI
 
-![Nina — hospitality lab banner](images/nina.png)
-
 ## Introduction
 
 Nina Patel, Seer Hotels’ guest experience analyst, wants to know which stay offers earn the most room revenue. Jessica has configured a Select AI profile so Nina can ask in ordinary language.
 
 Help Nina inspect the generated SQL, run the question, and refine it. Review the joins and filters carefully: a model can produce valid SQL that answers the wrong question.
 
+![Nina — hospitality lab banner](images/nina.png)
+
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-> - **Select AI** lets a user work with database information through a natural-language question.
+> - **Select AI** turns a question written in ordinary language into SQL that you can inspect and run.
 >
-> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
+> - An **AI profile** specifies the AI provider and the database objects used to guide SQL generation. Database privileges determine which data the current user can access.
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
@@ -206,13 +206,13 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 2. Review the explanation against the SQL result.
 
-  The explanation is a convenience for a business user. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
+  Compare the explanation with the query result. Check the offer names, ranking, revenue totals and room-night totals before using the answer.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
 ## Conclusion: Ask, Inspect, and Refine
 
-Nina now has a review workflow: ask, inspect the SQL, run, and refine. Describe the business question clearly, refine it in ordinary language, and check the generated SQL and explanation against the returned rows.
+For each new question, inspect the generated SQL, run the query and compare the explanation with the returned rows. Refine the question if the joins, filters or totals do not match what you need.
 
 ## Next Steps
 

@@ -1,7 +1,5 @@
 # Build a Manufacturing Agent with Select AI Agent
 
-![Nina: manufacturing lab banner](images/nina.png)
-
 ## Introduction
 
 Nina Patel has used Select AI for individual questions. Her production-review screen now needs an assistant that can handle a request and follow-up questions.
@@ -9,6 +7,8 @@ Nina Patel has used Select AI for individual questions. Her production-review sc
 Jessica gives Nina’s agent one SQL tool using the `GENAI` profile from Lab 7.
 
 In this lab, you create an agent, give it the built-in SQL query tool, and run a question through its team. The instructions ask for read-only answers. SQL still runs with the database user’s privileges. `LLUSER` owns the workshop objects, so it is not an example of a production account with restricted access.
+
+![Nina: manufacturing lab banner](images/nina.png)
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
@@ -38,7 +38,7 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Check the profile and table access
 
-The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_list` limits the tables Select AI may use when it generates SQL. Database privileges provide the second control: the SQL still runs as the current database user and cannot read tables that user cannot access.
+The SQL tool uses the `GENAI` profile. Its `object_list` supplies schema information to guide SQL generation. Database privileges determine which objects the current user can access.
 
 1. Check the profile:
 
@@ -207,7 +207,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
     ![Manufacturing agent answer with ranked component material values](images/sql-agent-answer.png)
 
-    Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
+    Each execution creates a new conversation ID and passes it to `RUN_TEAM` to record the prompt and response. Repeat the relevant names and details in a new question; this example does not reuse the previous conversation.
 
 2. Review the answer.
 
