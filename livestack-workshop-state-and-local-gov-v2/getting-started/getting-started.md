@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each finance query runs as the workshop user against the prepared finance schema.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the state and local government exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each query runs as the workshop user against the prepared state and local government schema.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -11,7 +11,7 @@ Use this lab to open the LiveLabs reservation, access the provisioned **Autonomo
 >
 > - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
 >
-> - `LLUSER` is the workshop database user and schema owner for the hands-on finance objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
+> - `LLUSER` is the workshop database user and schema owner for the hands-on public service database objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
 
 </details>
 
@@ -23,7 +23,7 @@ In this lab, you will:
 
 - Launch the LiveLabs workshop environment.
 - Use the reservation login information to open Database Actions.
-- Confirm that SQL Worksheet is ready for the finance schema.
+- Confirm that SQL Worksheet is ready for the state and local government schema.
 - Confirm that SQL Worksheet is connected as the workshop schema user.
 
 ## Task 1: Launch the LiveLabs environment
@@ -44,7 +44,7 @@ Start from the LiveLabs reservation so Database Actions opens with the correct w
 
 ## Task 2: Open SQL Worksheet
 
-Open SQL Worksheet as the workshop user before running the finance queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
+Open SQL Worksheet as the workshop user before running the public-service queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -86,7 +86,7 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
 
 7. Run this check.
 
-    This check makes sure SQL Worksheet is connected as the right user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The finance labs use `LLUSER`, so both values should point to the workshop schema.
+    This check makes sure SQL Worksheet is connected as the right user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The state and local government labs use `LLUSER`, so both values should point to the workshop schema.
 
     ```sql
     <copy>
@@ -107,7 +107,7 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
 
 8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
 
-You can now continue to the finance labs.
+You can now continue to the public-service labs.
 
 ## Acknowledgements
 
