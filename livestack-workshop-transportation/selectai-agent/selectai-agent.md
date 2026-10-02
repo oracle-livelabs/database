@@ -1,167 +1,101 @@
-# Build a Transportation Operations Agent with Select AI Agent
+# Build a Transportation Agent with Select AI Agent
 
 ## Introduction
 
-Nina can inspect Select AI SQL for one transportation question at a time. Her operations workspace also needs a repeatable assistant that answers a freight-value review through a defined database capability and leaves execution evidence for Nina and Jessica to inspect.
+Nina Patel has used Select AI to ask one transportation question at a time. That works for a quick answer, but her new passenger-review screen needs a repeatable transportation assistant that can answer a question and support follow-up requests.
 
-Jessica creates four database objects: a SQL tool, an agent, a task, and a team. The agent's role is an attribute of the agent; it is not a fifth object. The SQL tool uses the `GENAI` profile configured in Lab 7, where `SELECTAI_SERVICE_FREIGHT_V` is the business-friendly transportation view in the generation metadata. That metadata guides NL2SQL. Current-user privileges, VPD, and other database controls still govern generated SQL execution.
+![Jessica Chan and Nina Patel: Labs 7 & 8: Select AI and Transportation Agent](images/nina-transport.png " ")
 
-The team receives task guidance to use the SQL tool once when one call is enough. That is an instruction for the model, not a hard enforcement control. Nina verifies actual tool use from the history views after each run. No custom data-changing, notification, or external tool is registered in this lab.
+Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the transportation tables configured in the previous lab.
 
-The image below shows the Operations Agent Console used by operations analysts and database administrators. This SQL-first lab creates the same governed pattern in the Green Button sandbox so you can inspect the database objects, execution history, and conversation trace.
-
-![Operations Agent Console with profile, prompt, and action summary](images/operations-agent-console-overview.png " ")
-
-![Jessica and Nina introduce a governed transportation operations agent](images/nina-transportation.svg " ")
-
-### Objectives
-
-- Confirm the Lab 7 `GENAI` transportation metadata configuration.
-- Inventory and safely reset the four named workshop objects before a rerun.
-- Register one SQL tool, then create its agent, task, and team.
-- Correlate the team, task, tool, prompt, and response records for one run.
-
-Estimated Time: **15 minutes**
-
-### Hands-on Scenario
-
-| Step | Transportation focus |
-| --- | --- |
-| Business Problem | Nina needs a repeatable assistant for freight-value reviews |
-| Technical Challenge | The agent must use a defined SQL capability and leave execution evidence |
-| Persona Focus | Nina and Jessica define a bounded operations assistant |
-| What You Will See | An agent receives a request, calls a SQL tool, and returns database-backed evidence |
-| Database Capability | Select AI Agent and `DBMS_CLOUD_AI_AGENT` |
-| Outcome | Operations assistance remains reviewable, with its run and conversation trace connected |
+In this lab, you create the agent objects, connect the agent to the SQL tool, and run a question through the team. The agent uses the approved tool and returns an answer. The tool remains read-only, and the SQL still runs with the database user's privileges.
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
 
-> - An **agent** is a database object with attributes such as a role and AI profile.
+> - An **agent** is a configured role that follows instructions when it handles a request.
 >
-> - A **tool** is a capability the agent may call. This lab registers one built-in SQL tool backed by `GENAI`.
+> - A **tool** is a capability the agent is allowed to call. In this lab, the tool runs SQL through the `GENAI` profile.
 >
-> - A **task** supplies instructions and the permitted tools for the agent.
+> - A **task** tells the agent what to do and which tools it may use.
 >
-> - A **team** connects agent-task pairs into a runnable workflow.
+> - A **team** connects the agent and task so an application or SQL session can run them together.
 
 </details>
 
-> **Prerequisite:** Complete [Lab 7: Ask Transportation Questions with Select AI](?lab=selectai). This lab relies on its `GENAI` metadata configuration and the `SELECTAI_SERVICE_FREIGHT_V` view loaded by the workshop loader.
+### Objectives
 
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) if you need the SQL Worksheet steps.
+- Confirm that the `GENAI` profile from the previous lab is available.
+- Verify which transportation tables the SQL tool may use.
+- Register a read-only SQL tool for the transportation schema.
+- Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
+- Run a transportation question through the team.
+- Review the agent's tool history and explain why the tool boundary matters.
 
-## Task 1: Check the profile and inventory the workshop objects
+Estimated Time: **15 minutes**
+### Hands-on Scenario
 
-The SQL tool uses the `GENAI` profile from Lab 7. Its metadata scope should contain the freight-value view, but that setting is not itself an access-control boundary. First, confirm the profile and inspect all four workshop object types. The inventory makes partial reruns visible before any object is created or dropped.
+| Step                | Transportation focus                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| Business Problem    | Nina needs a transportation answer that can feed a passenger-review screen.                            |
+| Technical Challenge | The agent must use database data through an approved capability, not unrestricted access.      |
+| Persona Focus       | You follow Nina as she turns a Select AI question into a small transportation assistant.              |
+| What You Will See   | An agent receives a request, calls its SQL tool, and returns a transportation answer.                 |
+| Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
+| Outcome             | Nina has a controlled agent that can answer questions from the transportation schema.                |
 
-1. Check the profile and its relevant metadata attributes.
+> **Prerequisite:** Complete [Lab 7: Ask Transportation Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
+
+## Task 1: Check the profile and table access
+
+The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_list` limits the tables Select AI may use when it generates SQL. Database privileges provide the second control: the SQL still runs as the current database user and cannot read tables that user cannot access.
+
+1. Check the profile:
 
     ```sql
     <copy>
-    SELECT profile_name, status
+    SELECT profile_name,
+           status
     FROM user_cloud_ai_profiles
     WHERE profile_name = 'GENAI';
+    </copy>
+    ```
 
-    SELECT attribute_name, attribute_value
+    The profile should be enabled. If it is not present, complete Lab 7 first or ask the DBA which profile to use.
+
+2. Check the tables listed in the profile:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
     FROM user_cloud_ai_profile_attributes
     WHERE profile_name = 'GENAI'
-      AND attribute_name IN ('comments', 'constraints', 'object_list')
-    ORDER BY attribute_name;
+      AND attribute_name = 'object_list';
     </copy>
     ```
 
-    **Expected output: Transportation Agent Profile**
+    The list should contain only the workshop tables needed for this lab: `TRANSPORT_SERVICES`, `BOOKINGS`, `BOOKING_LEGS`, and `PASSENGERS`. The `object_list` guides SQL generation; it is not a replacement for database grants.
 
-    | Attribute | Expected Value |
-    | --- | --- |
-    | Profile status | `ENABLED` |
-    | comments | `true` |
-    | constraints | `true` |
-    | object_list | `SELECTAI_SERVICE_FREIGHT_V` |
-
-2. Inventory the four named workshop objects. An empty result is expected on a first run. Any returned row means the named object exists; a partial set is possible after an interrupted run.
+3. Check the agent objects already in your schema:
 
     ```sql
     <copy>
-    SELECT 'TOOL' AS object_type, tool_name AS object_name, status
-    FROM user_ai_agent_tools
-    WHERE tool_name = 'NINA_TRANSPORT_SQL_TOOL'
-    UNION ALL
-    SELECT 'AGENT', agent_name, status
+    SELECT agent_name,
+           status
     FROM user_ai_agents
-    WHERE agent_name = 'NINA_TRANSPORT_AGENT'
-    UNION ALL
-    SELECT 'TASK', task_name, status
-    FROM user_ai_agent_tasks
-    WHERE task_name = 'NINA_TRANSPORT_TASK'
-    UNION ALL
-    SELECT 'TEAM', agent_team_name, status
-    FROM user_ai_agent_teams
-    WHERE agent_team_name = 'NINA_TRANSPORT_TEAM'
-    ORDER BY object_type;
+    ORDER BY agent_name;
     </copy>
     ```
 
-    **Expected output: Workshop Object Inventory**
+  The workshop objects use names beginning with `NINA_TRANSPORT_`. If you already ran this lab, you can reuse the existing objects or run the reset block in the appendix before starting again.
 
-    | First run | Rerun |
-    | --- | --- |
-    | No rows selected | One or more named objects and their statuses |
+## Task 2: Register the SQL tool
 
-If the inventory returns any row, use the reset block in Task 2 before creating objects. It checks each catalog view and removes only the four exact workshop names in reverse dependency order.
+The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile's object list limits the schema metadata available for generated SQL.
 
-## Task 2: Reset safely, then register the SQL tool
-
-The reset is safe to run before every setup attempt. It first checks whether each object exists, then removes team, task, agent, and tool in reverse dependency order. This handles a first run, a complete previous run, and partial object sets without attempting to drop a missing object.
-
-1. Reset any existing workshop objects.
-
-    ```sql
-    <copy>
-    DECLARE
-      l_exists PLS_INTEGER;
-
-      PROCEDURE object_exists(p_sql VARCHAR2) IS
-      BEGIN
-        EXECUTE IMMEDIATE p_sql INTO l_exists;
-      END;
-    BEGIN
-      object_exists(q'[SELECT COUNT(*) FROM user_ai_agent_teams
-                       WHERE agent_team_name = 'NINA_TRANSPORT_TEAM']');
-      IF l_exists > 0 THEN
-        DBMS_CLOUD_AI_AGENT.DROP_TEAM('NINA_TRANSPORT_TEAM', TRUE);
-      END IF;
-
-      object_exists(q'[SELECT COUNT(*) FROM user_ai_agent_tasks
-                       WHERE task_name = 'NINA_TRANSPORT_TASK']');
-      IF l_exists > 0 THEN
-        DBMS_CLOUD_AI_AGENT.DROP_TASK('NINA_TRANSPORT_TASK', TRUE);
-      END IF;
-
-      object_exists(q'[SELECT COUNT(*) FROM user_ai_agents
-                       WHERE agent_name = 'NINA_TRANSPORT_AGENT']');
-      IF l_exists > 0 THEN
-        DBMS_CLOUD_AI_AGENT.DROP_AGENT('NINA_TRANSPORT_AGENT', TRUE);
-      END IF;
-
-      object_exists(q'[SELECT COUNT(*) FROM user_ai_agent_tools
-                       WHERE tool_name = 'NINA_TRANSPORT_SQL_TOOL']');
-      IF l_exists > 0 THEN
-        DBMS_CLOUD_AI_AGENT.DROP_TOOL('NINA_TRANSPORT_SQL_TOOL', TRUE);
-      END IF;
-    END;
-    /
-    </copy>
-    ```
-
-    **Expected output: Reset Workshop Objects**
-
-    | Script Output |
-    | --- |
-    | PL/SQL procedure successfully completed |
-
-2. Register the tool. `CREATE_TOOL` registers a built-in SQL tool that points to `GENAI`. It adds no data-changing tool and grants no new database privilege.
+1. Register the tool:
 
     ```sql
     <copy>
@@ -169,64 +103,62 @@ The reset is safe to run before every setup attempt. It first checks whether eac
       DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'NINA_TRANSPORT_SQL_TOOL',
         attributes  => '{"tool_type": "SQL", "tool_params": {"profile_name": "genai"}}',
-        description => 'SQL access to the Lab 7 transportation freight-value view'
+        description => 'Read-only SQL access to the workshop transportation tables'
       );
     END;
     /
     </copy>
     ```
 
-3. Confirm the tool.
+    The tool does not create a second data store. It gives the agent a named, controlled way to ask Select AI to generate and run SQL against the existing transportation tables. The tool uses the profile's table list, and the database user's privileges still apply when the SQL runs.
+  
+2. Confirm the tool definition:
 
     ```sql
     <copy>
-    SELECT tool_name, status, description
+    SELECT tool_name,
+           status,
+           description
     FROM user_ai_agent_tools
     WHERE tool_name = 'NINA_TRANSPORT_SQL_TOOL';
     </copy>
     ```
+  
+## Task 3: Create Nina's agent, task, and team
 
-    **Expected output: Transportation SQL Tool**
+The tool by itself does nothing. Nina's agent needs a role, a task needs instructions, and a team connects the two.
 
-    | Tool Name | Status |
-    | --- | --- |
-    | NINA_TRANSPORT_SQL_TOOL | ENABLED |
-
-## Task 3: Create the agent, task, and team
-
-The agent has a role attribute that tells it whose questions it serves. The task provides read-only guidance and names the one permitted tool. The team connects that agent-task pair into a sequential workflow.
-
-1. Create Nina's agent.
+1. Create the agent:
 
     ```sql
     <copy>
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
         agent_name  => 'NINA_TRANSPORT_AGENT',
-        attributes  => '{"profile_name": "genai", "role": "You are Nina Patel''s transportation data assistant. Answer freight-value questions using the configured SQL tool and database results. Use transportation service and category terms. Do not invent values or claim to change orders, capacity, or routing."}',
-        description => 'Transportation freight-value assistant for Nina Patel'
+        attributes  => '{"profile_name": "genai", "role": "You are Nina Patel''s transportation data assistant. Answer questions using the approved SQL tool. Use database results for transport service, booking, booking leg, and passenger facts. Do not invent values."}',
+        description => 'Transportation assistant for Nina Patel'
       );
     END;
     /
     </copy>
     ```
 
-2. Create the task. “Use once” is task guidance: it requests one SQL-tool call when sufficient to answer, but it is not an enforced call limit. You will verify the actual count from tool history.
+2. Create the task:
 
     ```sql
     <copy>
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_TASK(
         task_name  => 'NINA_TRANSPORT_TASK',
-        attributes => '{"instruction": "Answer Nina''s transportation question: {query}. Use NINA_TRANSPORT_SQL_TOOL once when one call is sufficient to retrieve the required data. Return a concise answer based on database results. Do not make changes to database records.", "tools": ["NINA_TRANSPORT_SQL_TOOL"], "enable_human_tool": "false"}',
-        description => 'Answer read-only transportation freight-value questions'
+        attributes => '{"instruction": "Answer Nina''s transportation question: {query}. Use NINA_TRANSPORT_SQL_TOOL once to retrieve the required data. Return a concise answer based on the database result. Do not repeat the same tool call and do not make changes to database records.", "tools": ["NINA_TRANSPORT_SQL_TOOL"], "enable_human_tool": "false"}',
+        description => 'Answer read-only service and passenger questions'
       );
     END;
     /
     </copy>
     ```
-
-3. Create the team.
+  
+3. Create the team:
 
     ```sql
     <copy>
@@ -234,195 +166,109 @@ The agent has a role attribute that tells it whose questions it serves. The task
       DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
         team_name  => 'NINA_TRANSPORT_TEAM',
         attributes => '{"agents": [{"name": "NINA_TRANSPORT_AGENT", "task": "NINA_TRANSPORT_TASK"}], "process": "sequential"}',
-        description => 'Transportation freight-value review team'
+        description => 'Read-only transportation question team'
       );
     END;
     /
     </copy>
     ```
 
-    **Expected output: Created Agent Objects**
+    The team is the runnable unit. It connects Nina's role, the task instructions, and the SQL tool.
+  
+## Task 4: Run a transportation question
 
-    | Object | Expected Status |
-    | --- | --- |
-    | NINA_TRANSPORT_AGENT | ENABLED |
-    | NINA_TRANSPORT_TASK | ENABLED |
-    | NINA_TRANSPORT_TEAM | ENABLED |
+Database Actions does not support the `SELECT AI AGENT` command directly. Use `DBMS_CLOUD_AI_AGENT.RUN_TEAM` in SQL Worksheet and provide the team name in the function call.
 
-## Task 4: Run a transportation request
-
-`DBMS_CLOUD_AI.CREATE_CONVERSATION()` creates a conversation identifier for this run. `RUN_TEAM` passes it to the team in `params`. The history queries in the next task use the team execution ID and task conversation parameters to connect the team run, task result, tool call, prompt, and response.
-
-1. Run the team.
+1. Ask the agent:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(
              team_name   => 'NINA_TRANSPORT_TEAM',
-             user_prompt => 'Show the five transportation services with the highest freight value. Include the transportation service, service category, total freight value, and service units. Order the result by total freight value from highest to lowest. Do not infer demand or operational cause.',
+             user_prompt => 'Which five transport services have the highest fare revenue? Include the service name, category, total fare revenue, and seats booked.',
              params      => '{"conversation_id": "' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '"}'
            ) AS agent_answer;
     </copy>
     ```
+  
+    Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
 
-    **Expected output: Transportation Agent Answer**
+2. Review the answer.
 
-    | Transportation Service | Category | Total Freight Value | Service Units |
-    | --- | --- | ---: | ---: |
-    | Heavy Equipment Recovery Bundle | Heavy Haul | 410,280.00 | 526 |
-    | High-Value Load Monitoring Kit | Fleet Monitoring | 354,280.00 | 521 |
-    | Empty Container Return Slot | Port Drayage | 316,160.00 | 494 |
-    | Priority Recovery Dispatch | Disruption Response | 253,240.00 | 487 |
-    | Railcar Spotting Request | Rail Freight | 226,200.00 | 435 |
+    Look for the transport service ranking, category, fare revenue, and seats booked. The exact wording may vary because an AI provider generates the response, but the answer should be based on the transportation tables available through `GENAI`.
+  
+    > **Note:** This team has a read-only SQL tool. It can query the data, but the task instructions do not give it a tool for inserting, updating, or deleting records.
 
-The prose can vary. Compare named services, categories, freight values, and units with Lab 7's deterministic view baseline. The single configured tool and task guidance do not authorize operational changes.
+3. Optional challenge: ask a follow-up question that connects the highest-revenue transport service to its passengers and bookings. A more detailed request may take longer because the agent has to interpret more steps.
 
-## Task 5: Inspect the correlated execution trace
+## Task 5: Inspect what the agent did
 
-The history views use `TEAM_EXEC_ID` to identify one team run. Do not query globally recent rows and infer a match. The queries below first select the newest run for the exact workshop team, then join its tool and task records on the exact execution ID.
+Nina needs more than a final answer. She also wants to know whether the agent called the approved tool and how the request was processed.
 
-The documented states are `RUNNING`, `WAITING_FOR_HUMAN`, `RESUMING`, `SUCCEEDED`, and `FAILED`. A completed successful run should show `SUCCEEDED`; inspect a `FAILED` state and its task or tool records rather than treating it as an answer.
-
-1. Inspect the exact team run and correlated SQL-tool count.
+1. Review the latest team runs:
 
     ```sql
     <copy>
-    WITH latest_team AS (
-      SELECT team_exec_id, team_name, state, start_date, end_date
-      FROM user_ai_agent_team_history
-      WHERE team_name = 'NINA_TRANSPORT_TEAM'
-      ORDER BY start_date DESC
-      FETCH FIRST 1 ROW ONLY
-    )
-    SELECT t.team_exec_id,
-           t.team_name,
-           t.state,
-           t.start_date,
-           t.end_date,
-           COUNT(h.invocation_id) AS sql_tool_call_count,
-           MIN(h.start_date) AS first_tool_start,
-           MAX(h.end_date) AS last_tool_end
-    FROM latest_team t
-    LEFT JOIN user_ai_agent_tool_history h
-      ON h.team_exec_id = t.team_exec_id
-     AND h.tool_name = 'NINA_TRANSPORT_SQL_TOOL'
-     AND h.agent_name = 'NINA_TRANSPORT_AGENT'
-     AND h.task_name = 'NINA_TRANSPORT_TASK'
-    GROUP BY t.team_exec_id, t.team_name, t.state, t.start_date, t.end_date;
+    SELECT team_name,
+         team_exec_id,
+         state,
+         start_date,
+         end_date
+    FROM user_ai_agent_team_history
+    ORDER BY start_date DESC
+    FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-    **Expected output: Correlated Team and Tool Evidence**
-
-    | Team Name | State | SQL Tool Call Count |
-    | --- | --- | ---: |
-    | NINA_TRANSPORT_TEAM | SUCCEEDED | 1 |
-
-    `sql_tool_call_count = 1` verifies that this observed run followed the task guidance. A different count indicates observed behavior, not a failed database enforcement rule.
-
-2. Inspect the task result, prompt, and response for the same team execution. The task history supplies the conversation identifier; the left join preserves the task row if conversation prompt retention or timing leaves no prompt row visible.
+2. Review the latest tool calls:
 
     ```sql
     <copy>
-    WITH latest_team AS (
-      SELECT team_exec_id, team_name
-      FROM user_ai_agent_team_history
-      WHERE team_name = 'NINA_TRANSPORT_TEAM'
-      ORDER BY start_date DESC
-      FETCH FIRST 1 ROW ONLY
-    ),
-    team_tasks AS (
-      SELECT h.team_exec_id,
-             h.team_name,
-             h.task_name,
-             h.agent_name,
-             h.task_order,
-             h.state,
-             h.conversation_params,
-             h.result,
-             h.start_date,
-             ROW_NUMBER() OVER (
-               PARTITION BY h.team_exec_id, h.task_name, h.agent_name
-               ORDER BY h.start_date DESC
-             ) AS run_order
-      FROM user_ai_agent_task_history h
-      JOIN latest_team t ON t.team_exec_id = h.team_exec_id
-      WHERE h.task_name = 'NINA_TRANSPORT_TASK'
-        AND h.agent_name = 'NINA_TRANSPORT_AGENT'
-    )
-    SELECT tt.team_exec_id,
-           tt.team_name,
-           tt.task_name,
-           tt.agent_name,
-           tt.task_order,
-           tt.state AS task_state,
-           p.prompt,
-           p.prompt_response,
-           tt.result AS task_result
-    FROM team_tasks tt
-    LEFT JOIN user_cloud_ai_conversation_prompts p
-      ON p.conversation_id = JSON_VALUE(tt.conversation_params, '$.conversation_id')
-    WHERE tt.run_order = 1
-    ORDER BY p.created DESC NULLS LAST;
+    SELECT tool_name,
+         invocation_id,
+         agent_name,
+         task_name,
+         start_date,
+         end_date
+    FROM user_ai_agent_tool_history
+    ORDER BY start_date DESC
+    FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
-    **Expected output: Prompt and Response Trace**
+  The history should show `NINA_TRANSPORT_SQL_TOOL`. This gives Nina and Jessica a database record of the agent activity instead of treating the answer as an unexplained chat response.
 
-    | Evidence | Expected Pattern |
-    | --- | --- |
-    | Team/task | `NINA_TRANSPORT_TEAM` and `NINA_TRANSPORT_TASK` |
-    | Task state | `SUCCEEDED` for the completed run |
-    | Prompt and response | Request and generated response associated with the task conversation |
+## Conclusion: Give the agent a controlled way to work
 
-    The image below is an application illustration. The SQL results above are the authoritative database evidence for the exact workshop run.
+In Lab 7, Nina used Select AI to turn a question into SQL. In this lab, she gave an agent a role, a task, and one approved SQL tool. The agent can handle a broader request and decide when it needs database information, while the database still controls the profile, object list, privileges, and tool history.
 
-    ![Operations Agent action audit trail](images/agent-action-audit-trail.png " ")
+That is the next step from Select AI to Select AI Agent: the application can call a defined transportation assistant instead of assembling every question and database call itself. Jessica can review the tools available to the agent and remove access by disabling the tool or team.
 
-3. 🎯 **Interactive challenge: Request a bounded freight-value review.**
+The table boundary has two parts. The profile's `object_list` tells the SQL tool which tables to consider, while database grants decide which rows the session can actually read. Both should be kept narrow when an agent is used by an application.
 
-    Change only `user_prompt` in Task 4. Ask for the three transportation services with the highest freight value. For each row, require the transportation-service name, category, exact freight value, and exact service units; ask for the first-ranked service by name to be identified for human review, without claiming a change to an order, capacity, or routing. Then rerun both trace queries. Which evidence connects the response to the defined SQL tool?
-
-    **Expected output: Review recommendation with execution evidence**
-
-    The response should cite the three validated database rows and make a bounded review recommendation. For the new execution ID, team history should show `SUCCEEDED`, the correlated tool count should be one if the task guidance was followed, and task/conversation history should show the prompt and response.
-
-    | Transportation Service | Category | Total Freight Value | Service Units |
-    | --- | --- | ---: | ---: |
-    | Heavy Equipment Recovery Bundle | Heavy Haul | 410,280.00 | 526 |
-    | High-Value Load Monitoring Kit | Fleet Monitoring | 354,280.00 | 521 |
-    | Empty Container Return Slot | Port Drayage | 316,160.00 | 494 |
-
-    <details>
-    <summary><strong>Challenge answer: Confirm the exact run, tool call, and conversation trace</strong></summary>
-
-    > First, compare the returned rows with the Lab 7 baseline. Then use the exact `TEAM_EXEC_ID` to connect the team history record to its `NINA_TRANSPORT_SQL_TOOL` call. Finally, join task history to conversation prompts to review the request and response. These records support human review without implying an operational change.
-
-    ```sql
-    <copy>
-    SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(
-             team_name   => 'NINA_TRANSPORT_TEAM',
-             user_prompt => 'Show the three transportation services with the highest freight value. For each row, state the transportation service name, service category, exact total freight value, and exact service units. Identify the first-ranked transportation service by name for human review only; do not claim a change to an order, capacity, or routing.',
-             params      => '{"conversation_id": "' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '"}'
-           ) AS agent_answer;
-    </copy>
-    ```
-
-    </details>
-
-## Conclusion
-
-Nina created four inspectable Select AI Agent objects: a SQL tool, agent, task, and team. She then connected one run to its task, SQL-tool activity, prompt, and response using `TEAM_EXEC_ID` and the task conversation identifier. Task guidance shaped the model's intended behavior; the database history recorded what actually happened.
+The example remains read-only on purpose. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
 
 ## Appendix: Reset the workshop objects
 
-Use the Task 2 reset block before any rerun. It is idempotent for the four exact workshop names and removes them in team, task, agent, and tool order. It does not remove histories or conversations; those remain as audit records subject to database retention policy.
+Run this block only if you want to recreate the objects used in this lab. It removes only the four names created here.
+
+```sql
+<copy>
+BEGIN
+  DBMS_CLOUD_AI_AGENT.DROP_TEAM('NINA_TRANSPORT_TEAM', TRUE);
+  DBMS_CLOUD_AI_AGENT.DROP_TASK('NINA_TRANSPORT_TASK', TRUE);
+  DBMS_CLOUD_AI_AGENT.DROP_AGENT('NINA_TRANSPORT_AGENT', TRUE);
+  DBMS_CLOUD_AI_AGENT.DROP_TOOL('NINA_TRANSPORT_SQL_TOOL', TRUE);
+END;
+/
+</copy>
+```
 
 ## Next Steps
 
-Read the [Oracle Autonomous AI Database Select AI Agent documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
+Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, October 2026

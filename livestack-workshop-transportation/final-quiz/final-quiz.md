@@ -2,17 +2,16 @@
 
 ```quiz-config
 passing: 75
-badge: images/badge-transportation.svg
+badge: images/badge.png
 ```
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect Seer Transport business decisions to database evidence. The questions span fleet operations, shipment documents, and governed AI assistance across all eight labs.
+Use this scored quiz to check how Seer Transport connects passenger service decisions to database evidence.
 
 ### Objectives
 
-- Review the converged transportation decision flow and the role each persona played.
-- Explain why scores, generated SQL, and agent recommendations remain evidence for human review.
+- Review the main Oracle AI Database capabilities used in the workshop.
 - Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
@@ -22,66 +21,59 @@ Estimated Time: **3 minutes**
 1. Complete the scored quiz.
 
     ```quiz score
-    Q: Why does Jessica use one converged fleet operations query?
-    - To hide the source evidence behind dashboard totals.
-    * To connect service pressure, semantic relevance, shipment activity, and terminal geography in one reviewable result.
-    - To copy each data type into a separate specialist database.
-    - To replace operational judgment with a dashboard score.
-    > The converged query keeps several data models connected to the same governed transportation records and makes drill-through possible.
+    Q: What does JSON Relational Duality help Seer Transport do in the booking lab?
+    - Copy booking documents into a separate document database.
+    * Use the same booking data as JSON documents and relational rows without maintaining duplicate records.
+    - Remove relational tables from the booking workflow.
+    - Require analysts to read raw JSON for every review.
+    > A duality view presents relational booking rows as a JSON document while SQL, keys, joins, and database controls continue to use the same source.
 
-    Q: What does a JSON-Relational Duality View help Thomas do?
-    - Maintain a separate document copy of every shipment order.
-    - Remove relational keys from the application model.
-    * Serve shipment orders as JSON while analysts query the same underlying relational rows.
-    - Require every application to assemble JSON outside the database.
-    > `ORDERS_DV` presents order headers and items as one document without abandoning relational SQL or duplicating the source records.
+    Q: What does a vector similarity score help Gilly do?
+    - Confirm that a disruption has already occurred.
+    - Replace the service and booking tables with embeddings.
+    * Rank transport services by how closely their descriptions match a search phrase.
+    - Count rows in every transportation table.
+    > The query turns vector distance into a similarity score, then joins matching services to precise booking and passenger records.
 
-    Q: What does a higher semantic similarity score indicate in the disruption lab?
-    * The stored service or signal text is closer in meaning to the search phrase.
-    - The disruption is proven to be the root cause.
-    - The signal row bypassed database security.
-    - The embedding replaced the source text.
-    > Similarity ranks evidence for review. It does not establish certainty or remove the need to inspect urgency and source text.
+    Q: What question does Bob answer with a property graph?
+    - Which service has the highest fare revenue?
+    * Which trips are connected through routes, stations, vehicles, and disruption cases?
+    - Which station is closest to a passenger home address?
+    - Which model predicts a demand surge?
+    > SQL/PGQ follows relationship paths without a separate chain of joins for each hop.
 
-    Q: Why does Bob start a graph investigation with a bounded hop count?
-    - Property graphs cannot represent more than two relationships.
-    - The graph automatically changes transportation records at each hop.
-    - A larger graph always returns fewer entities.
-    * A small depth keeps direct evidence readable before expanding to wider propagation paths.
-    > One hop shows direct dependencies; two hops can reveal propagation through an intermediary while expanding the review queue.
+    Q: Why does Moon use Oracle Spatial in the station access lab?
+    - To choose a station from its name alone.
+    - To move location data to a separate map system.
+    * To find passengers in a service region and compare nearby active stations with capacity information.
+    - To replace geographic calculations with static labels.
+    > Spatial functions test where passenger points fall and measure distance to station points. SQL adds station capacity and occupancy.
 
-    Q: Why does Moon combine spatial distance with terminal capacity when ranking candidates?
-    - The nearest terminal is always the correct operational choice.
-    * It provides candidate-terminal evidence for human review when a nearby terminal is active and has enough unreserved service capacity.
-    - Capacity rows replace the need for geographic data.
-    - Spatial calculations require a separate mapping database.
-    > Oracle Spatial lets distance join directly to the same terminal and capacity records used by operations. It does not calculate a road route or make a routing decision.
+    Q: How should an operations analyst use the OML surge probability?
+    - Treat it as a guaranteed future event.
+    * Use it to rank services for review alongside demand and booking evidence.
+    - Ignore the model inputs after scoring.
+    - Interpret every score as a confirmed disruption.
+    > A probability supports prioritization, but the team still checks the service activity behind the score.
 
-    Q: Which statement correctly describes the Oracle Machine Learning for SQL result and its evaluation?
-    - `PREDICTION_PROBABILITY` guarantees that the service will surge in the outcome week.
-    - Training-set agreement is sufficient evidence for an operational capacity watchlist.
-    * `PREDICTION_PROBABILITY(..., 'SURGE')` is the estimated class probability for `SURGE`, not a confidence guarantee, and Otto checks predictions on held-out labeled rows.
-    - `DBMS_DATA_MINING` is a SQL scoring function that replaces held-out evaluation.
-    > `PREDICTION` and `PREDICTION_PROBABILITY` score rows in SQL. Held-out evaluation checks those results on rows excluded from training; the estimated class probability is not certainty or calibrated confidence.
+    Q: What keeps a Select AI answer reviewable?
+    - The AI model can query every table automatically.
+    - The explanation is guaranteed to be identical each time.
+    * The profile limits approved objects and Nina can inspect the generated SQL.
+    - The answer comes only from general model knowledge.
+    > Nina uses SHOWSQL before RUNSQL and compares the result with her business question.
 
-    Q: What makes the Select AI workflow used by Nina reviewable?
-    - The provider can use every database object automatically.
-    - The narrative response is identical on every run.
-    * The profile narrows approved objects and Nina can inspect generated SQL before running it.
-    - The answer bypasses Oracle Database.
-    > The object list, database privileges, and visible SQL keep natural-language access connected to governed execution.
-
-    Q: What approved capability does the agent have in Lab 8?
-    - Unrestricted insert, update, and delete access.
-    - Direct control of transportation equipment.
-    - A hidden copy of the operational schema.
-    * One read-only SQL tool backed by the approved Select AI profile.
-    > The agent, task, and team use a narrow tool boundary, and Oracle records team and tool execution history.
+    Q: What is the advantage of a converged database in this workshop?
+    - Each capability needs a separate specialist database.
+    * Relational, JSON, vector, graph, spatial, machine learning, and AI work with connected governed data.
+    - Screenshots replace the need for database evidence.
+    - Operations must reconcile copied data before every decision.
+    > The labs use different capabilities over connected transportation records in Oracle AI Database.
     ```
 
 2. When you achieve the passing score, the quiz displays your completion badge.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, October 2026

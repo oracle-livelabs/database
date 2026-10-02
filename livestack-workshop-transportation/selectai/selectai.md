@@ -2,331 +2,235 @@
 
 ## Introduction
 
-Nina Patel is an operations analyst at Seer Transport. During a freight-value review, she needs a quick answer without first finding every table, column, join, and filter. Jessica, the database administrator, has configured a Select AI profile for the workshop schema. Nina can ask a transportation question in ordinary language, inspect generated SQL, and then decide how to execute it.
+Nina Patel is a service operations analyst at Seer Transport. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
-The production pattern is to expose a narrow, business-friendly view with useful comments rather than ask an AI service to infer meaning from a broad collection of inherited tables. This lab uses `SELECTAI_SERVICE_FREIGHT_V`: a read-only freight-value fact view whose rows already exclude cancelled and returned shipment orders. The profile's `object_list`, comments, and constraints guide NL2SQL generation. They are metadata inputs, not an access-control boundary; the current user's database privileges, VPD policies, and other database controls still govern execution.
+![Jessica Chan and Nina Patel: Labs 7 & 8: Select AI and Transportation Agent](images/nina-transport.png " ")
 
-The useful pattern is ask, inspect, run, and refine. `showsql` and `runsql` are separate generation requests. If a particular generated statement requires approval before execution, copy the SQL returned by `showsql` into the worksheet and execute that statement yourself. Do not assume a later `runsql` call executes identical SQL.
+Jessica, the DBA, has already configured a Select AI profile for the transportation schema. Nina can ask a question in ordinary language. Select AI uses the profile and the database metadata to generate SQL, run it, or explain the result.
 
-The image below shows the Ask Seer Transport Data workspace used by transportation analysts. In the Green Button environment, you will reproduce that governed rhythm with `DBMS_CLOUD_AI.GENERATE` in SQL Worksheet.
+Nina still needs to review the generated SQL. The model can misunderstand a question or choose the wrong columns. The useful pattern is simple: ask a question, inspect the SQL, run it only when it makes sense, and refine the question when the result is not what the business user needs.
 
-![Ask Seer Transport Data workspace](images/ask-seer-transport-data-overview.png " ")
+In this lab, you check the available Select AI profile, ask a transportation question, inspect the SQL behind the answer, and improve the question for a more useful business result.
 
-![Jessica and Nina introduce transportation questions and governed AI](images/nina-transportation.svg " ")
-
-### Objectives
-
-- Check the Select AI profile available to `LLUSER` without exposing configuration secrets.
-- Configure and verify a narrow transportation metadata scope with comments and constraints enabled.
-- Generate, inspect, run, and narrate a transportation question.
-- Explain why generated SQL still requires human review and database authorization.
-
-Estimated Time: **10 minutes**
-
-### Hands-on Scenario
-
-| Step | Transportation focus |
-| --- | --- |
-| Business Problem | Nina needs a fast, reviewable freight-value ranking |
-| Technical Challenge | Natural language must become SQL against understandable transportation metadata |
-| Persona Focus | Nina asks, inspects, and refines the question |
-| What You Will See | A transportation question becomes visible SQL and database rows |
-| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, comments, and constraints |
-| Outcome | Natural-language access stays tied to inspectable SQL and normal database enforcement |
 
 <details>
-<summary><strong>Key terms: Select AI, AI profile, and generated SQL</strong></summary>
+<summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-> - **Select AI** lets a user ask a natural-language question over database metadata and data.
+> - **Select AI** lets a user work with database information through a natural-language question.
 >
-> - An **AI profile** identifies provider configuration and generation metadata. `object_list` guides NL2SQL; it does not grant, revoke, or enforce data access.
+> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
 >
-> - **Generated SQL** is a proposed statement. Check its objects, filters, aggregations, ordering, and row limit before relying on it.
+> - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
+>
+> - A **natural-language prompt** is the question sent to Select AI, such as `Which five transport services have the highest fare revenue?`
 
 </details>
 
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet) if you need the SQL Worksheet steps.
+### Objectives
 
-## Task 1: Check the Select AI profile safely
+- Check which Select AI profile is available in the schema.
+- Add the transportation tables that Select AI may use to the profile.
+- Generate SQL from a transportation question and inspect it.
+- Run a natural-language question through `DBMS_CLOUD_AI.GENERATE`.
+- Improve a question so the result contains the business details Nina needs.
+- Explain why generated SQL still requires review.
 
-Select AI uses an AI profile to identify a configured provider and generation settings. The Green Button schema provides the workshop-reserved `GENAI` profile. First, confirm that it is enabled.
+Estimated Time: **10 minutes**
+### Hands-on Scenario
 
-1. List the available profiles.
+| Step                | Transportation focus                                                                                |
+| ---------------------| ----------------------------------------------------------------------------------------------|
+| Business Problem    | Nina needs answers from transportation data without writing every query from scratch.               |
+| Technical Challenge | The question must be translated into SQL against the governed transportation schema.                |
+| Persona Focus       | You follow Nina as she checks, reviews, and improves a Select AI question.                   |
+| What You Will See   | A natural-language question becomes SQL that can be inspected and run in the database.       |
+| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation.             |
+| Outcome             | Nina gets a repeatable way to ask transportation questions while keeping SQL review in the process. |
+
+> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+
+## Task 1: Check the Select AI profile
+
+Select AI uses an AI profile to identify the AI provider and the database objects available for natural-language questions. The workshop database should already contain a profile for the `LLUSER` schema.
+
+1. Run this query:
 
     ```sql
     <copy>
-    SELECT profile_name, status, description
+    SELECT profile_name,
+           status,
+           description
     FROM user_cloud_ai_profiles
     ORDER BY profile_name;
     </copy>
     ```
 
-    **Expected output: Select AI Profiles**
+    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If the query shows a different profile name, use that name in the following tasks.
 
-    | Profile Name | Status |
-    | --- | --- |
-    | GENAI | ENABLED |
-
-2. Review only the learner-relevant attributes. This intentionally omits credential, compartment, endpoint, region, and other provider configuration values.
-
+2. Review the profile attributes:
+  
     ```sql
     <copy>
-    SELECT attribute_name, attribute_value
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
     FROM user_cloud_ai_profile_attributes
-    WHERE profile_name = 'GENAI'
-      AND attribute_name IN ('provider', 'comments', 'constraints', 'object_list')
-    ORDER BY attribute_name;
+    ORDER BY profile_name, attribute_name;
     </copy>
     ```
 
-    **Expected output: Safe Profile Settings**
+    The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will change only the profile's `object_list`.
 
-    | Attribute Name | Expected Pattern |
-    | --- | --- |
-    | comments | `true` after Task 2 |
-    | constraints | `true` after Task 2 |
-    | object_list | Transportation workshop view after Task 2 |
-    | provider | Green Button configured provider |
+## Task 2: Add the transportation tables to the profile
 
-The profile properties shown here are generation settings. They do not disclose credentials and do not replace database authorization.
+The profile needs a list of tables that Select AI may use. Nina's questions require transport service, booking, booking-line, and passenger data, so Jessica adds those four tables to the `GENAI` profile.
 
-## Task 2: Configure the transportation metadata scope
-
-The workshop loader provides `SELECTAI_SERVICE_FREIGHT_V`, a narrow read-only view for this freight-value question. It exposes only transportation service, category, freight value, and service units, and excludes cancelled and returned orders at the view definition. Its comment describes the grain and aggregation rule. Enable comments and constraints so Select AI can use the semantic guidance available in the data dictionary, then point its generation metadata at this one view.
-
-> **Workshop environment assumption:** `GENAI` is reserved to the single Green Button workshop schema and to Labs 7 and 8. This lab changes its `object_list`, `comments`, and `constraints` attributes and leaves that transportation configuration in place for the next lab. Do not use this procedure for a shared production profile; create a dedicated profile or save and restore its previous attributes.
-
-1. Set the generation metadata attributes.
+1. Add the transportation tables to the profile:
 
     ```sql
     <copy>
     BEGIN
       DBMS_CLOUD_AI.SET_ATTRIBUTE(
         profile_name    => 'genai',
-        attribute_name  => 'comments',
-        attribute_value => 'true'
-      );
-
-      DBMS_CLOUD_AI.SET_ATTRIBUTE(
-        profile_name    => 'genai',
-        attribute_name  => 'constraints',
-        attribute_value => 'true'
-      );
-
-      DBMS_CLOUD_AI.SET_ATTRIBUTE(
-        profile_name    => 'genai',
         attribute_name  => 'object_list',
-        attribute_value => '[{"owner": "' || USER || '", "name": "SELECTAI_SERVICE_FREIGHT_V"}]'
+        attribute_value => '[{"owner": "' || USER || '", "name": "TRANSPORT_SERVICES"}, {"owner": "' || USER || '", "name": "BOOKINGS"}, {"owner": "' || USER || '", "name": "BOOKING_LEGS"}, {"owner": "' || USER || '", "name": "PASSENGERS"}]'
       );
     END;
     /
     </copy>
     ```
 
-    **Expected output: Updated Profile Attributes**
-
-    | Script Output |
-    | --- |
-    | PL/SQL procedure successfully completed |
-
-2. Confirm the three attributes used by this lab.
+2. Confirm the object list:
 
     ```sql
     <copy>
-    SELECT attribute_name, attribute_value
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
     FROM user_cloud_ai_profile_attributes
     WHERE profile_name = 'GENAI'
-      AND attribute_name IN ('comments', 'constraints', 'object_list')
-    ORDER BY attribute_name;
+      AND attribute_name = 'object_list';
     </copy>
     ```
 
-    **Expected output: Transportation Generation Metadata**
-
-    | Attribute | Expected Value |
-    | --- | --- |
-    | comments | `true` |
-    | constraints | `true` |
-    | object_list | `SELECTAI_SERVICE_FREIGHT_V` |
-
-`object_list` tells the model which metadata it may use when generating SQL. It is not an "approved objects" access boundary: grants, roles, VPD, Database Vault, and other database controls remain responsible for enforcement.
+    The result should list `TRANSPORT_SERVICES`, `BOOKINGS`, `BOOKING_LEGS`, and `PASSENGERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
+  
 
 ## Task 3: Ask a question and inspect the SQL
 
-Use `showsql` to generate a proposed statement without executing it. The business-friendly view means the prompt can use transportation terms directly; Nina does not have to translate a transportation service into an inherited product-table name. Look for `SELECTAI_SERVICE_FREIGHT_V`, aggregation of freight value and service units, descending freight-value order, and a five-row limit.
+Nina starts with a simple question: which transport services have the highest revenue? She first asks Select AI to show the SQL without running it.
 
-1. Generate the SQL.
+Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use `DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
+
+1. Run the question with the `GENAI` profile:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five transportation services with the highest freight value. Include transportation service, service category, total freight value, and service units. Order the result by total freight value from highest to lowest.',
+             prompt       => 'Which five transport services have the highest fare revenue?',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
+  
 
-    **Expected output: Generated Transportation SQL**
+2. Read the generated SQL before running it.
 
-    | Review Point | Expected Pattern |
-    | --- | --- |
-    | Object | `SELECTAI_SERVICE_FREIGHT_V` |
-    | Measures | Transportation service, category, freight value, and service units |
-    | Aggregation | Sums freight value and service units by service and category |
-    | Order and limit | Freight value descending; five rows |
+    Check whether the statement uses the expected transport service and fare activity data, returns five rows, and calculates revenue in a sensible way. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
 
-Read the statement. The view's definition applies the cancelled/returned exclusion; the generated query should not need to reconstruct that inherited-table logic. If the SQL is the exact statement you must approve before execution, copy it into the worksheet and run it manually.
+## Task 4: Run the question in the database
 
-## Task 4: Run a separately generated answer
+Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
 
-`runsql` asks the provider to generate and execute SQL as a new request. It can return a statement that is semantically equivalent to, formatted differently from, or materially different from the earlier `showsql` result. This task demonstrates that distinction; it does not claim that `runsql` executes the exact SQL inspected in Task 3.
-
-1. Run the question.
+1. Run the same question with the `runsql` action:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five transportation services with the highest freight value. Include transportation service, service category, total freight value, and service units. Order the result by total freight value from highest to lowest.',
+             prompt       => 'Which five transport services have the highest fare revenue?',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
     </copy>
     ```
 
-    **Expected output: Freight-Value Ranking**
+2. Compare the answer with the SQL you inspected in Task 3.
 
-    | Review Point | Expected Pattern |
-    | --- | --- |
-    | Result size | Five transportation services |
-    | Order | Highest total freight value first |
-    | Source | Only the configured freight-value view |
+    Select AI has generated and run SQL against the transportation schema. The query still runs under Nina's database privileges, and the result comes from the database tables rather than from a separate copy of the transportation data.
 
-    The generated SQL executes as `LLUSER`; ordinary database privileges and policies apply. When exact pre-execution review is required, run the reviewed `showsql` text yourself rather than calling `runsql`.
+    > **Note:** Select AI can generate incorrect SQL or misunderstand a question. Use `showsql` when the exact query matters, and treat the generated answer as a starting point for review.
 
-2. Compare the generated answer with the deterministic view baseline.
+## Task 5: Improve the business question
 
-    ```sql
-    <copy>
-    SELECT transportation_service,
-           service_category,
-           SUM(freight_value) AS total_freight_value,
-           SUM(service_units) AS service_units
-    FROM selectai_service_freight_v
-    GROUP BY transportation_service, service_category
-    ORDER BY total_freight_value DESC, transportation_service
-    FETCH FIRST 5 ROWS ONLY;
-    </copy>
-    ```
+Nina's first question gives her a transport service ranking, but she also needs enough detail to decide what to review. She changes the question to request the transport service category, total fare revenue, and seats booked.
 
-    **Expected output: Validated Freight-Value Baseline**
-
-    | Transportation Service | Category | Total Freight Value | Service Units |
-    | --- | --- | ---: | ---: |
-    | Heavy Equipment Recovery Bundle | Heavy Haul | 410,280.00 | 526 |
-    | High-Value Load Monitoring Kit | Fleet Monitoring | 354,280.00 | 521 |
-    | Empty Container Return Slot | Port Drayage | 316,160.00 | 494 |
-    | Priority Recovery Dispatch | Disruption Response | 253,240.00 | 487 |
-    | Railcar Spotting Request | Rail Freight | 226,200.00 | 435 |
-
-Use this ordinary SQL result as the evidence baseline. If the answer from `runsql` differs, inspect a fresh `showsql` result and correct the prompt or execute reviewed SQL manually.
-
-## Task 5: Refine the business question
-
-Nina now wants a smaller review. Use transportation language, inspect the new SQL, and make the same checks: view, aggregation, order, and row limit.
-
-1. Show the SQL for the top-three question.
+1. Use `showsql` to inspect this revised prompt:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the three transportation services with the highest freight value. Include transportation service, service category, total freight value, and service units. Order the result by total freight value from highest to lowest.',
+             prompt       => 'Show the five transport services with the highest fare revenue. Include the service name, category, total fare revenue, and seats booked.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
     </copy>
     ```
+  
 
-    **Expected output: Detailed Freight-Value SQL**
-
-    | Review Point | Expected Pattern |
-    | --- | --- |
-    | Object | `SELECTAI_SERVICE_FREIGHT_V` |
-    | Measures | Transportation service, category, freight value, and units |
-    | Order and limit | Freight value descending; three rows |
-
-2. Run the new question only if separately generated execution is acceptable for your review process.
+2. Review the generated SQL, then run the revised question with `runsql`:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the three transportation services with the highest freight value. Include transportation service, service category, total freight value, and service units. Order the result by total freight value from highest to lowest.',
+             prompt       => 'Show the five transport services with the highest fare revenue. Include the service name, category, total fare revenue, and seats booked.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
     </copy>
     ```
+  
 
-    **Expected output: Top-Three Freight-Value Review**
+3. Compare the first and second questions.
 
-    | Transportation Service | Category | Total Freight Value | Service Units |
-    | --- | --- | ---: | ---: |
-    | Heavy Equipment Recovery Bundle | Heavy Haul | 410,280.00 | 526 |
-    | High-Value Load Monitoring Kit | Fleet Monitoring | 354,280.00 | 521 |
-    | Empty Container Return Slot | Port Drayage | 316,160.00 | 494 |
+  The second prompt gives Nina a result she can take into a review meeting. The business user did not need to know the table names or write the joins, but Nina still checked the SQL and made the requested columns explicit.
 
 ## Task 6: Explain the result
 
-Ask for a narrative only after checking database rows. The `narrate` action runs the question and sends its result data to the provider configured by the profile. Use it only for data approved for that provider. The database rows, not the narrative, remain Nina's evidence.
+Nina wants a short explanation of the revised result. Select AI can run the SQL and ask the AI provider to describe the returned rows.
 
-1. Narrate the top-three question.
+1. Run the revised question with the `narrate` action:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'For the three transportation services with the highest freight value, write exactly three bullets. Each bullet must state the service name, service category, exact numeric total freight value, and exact numeric service units returned by the query. Do not omit a number. Do not infer demand, operational cause, or an action.',
+             prompt       => 'Show the five transport services with the highest fare revenue. Include the service name, category, total fare revenue, and seats booked.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
     </copy>
     ```
+  
 
-    **Expected output: Provider-Generated Explanation**
+2. Review the explanation against the SQL result.
 
-    | Review Point | Expected Pattern |
-    | --- | --- |
-    | Explanation | Describes the same three services and reported values without unsupported demand, cause, or action claims |
+  The explanation is a convenience for a business user. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate.
 
-2. 🎯 **Interactive challenge: Keep the review governed.**
+  > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
-    Ask for the top two transportation services by freight value, including category and service units. Inspect the generated SQL. Does it use `SELECTAI_SERVICE_FREIGHT_V`, aggregate the two measures, sort freight value descending, and limit the result to two rows? If exact review matters, run the inspected SQL manually.
+## Conclusion: Ask, Inspect, and Refine
 
-    <details>
-    <summary><strong>Challenge answer: Inspect the proposed SQL before execution</strong></summary>
+Nina used Select AI to turn a transportation question into SQL, reviewed the generated statement, ran it in Oracle AI Database, and refined the question when the first result lacked the details she needed. Select AI reduces the amount of SQL a business user has to write, while SQL review keeps the database operation visible.
 
-    > The generated SQL should use `SELECTAI_SERVICE_FREIGHT_V`, aggregate freight value and service units by transportation service and category, order by freight value from highest to lowest, and limit the result to two rows. The result supports a review; it does not authorize a shipment, capacity, or routing change.
+This is the practical value of Select AI in Oracle AI Database. The question, generated SQL, and result stay connected to the governed transportation schema. Nina can ask in ordinary language, but she does not have to give up database access controls or the ability to inspect the query behind the answer.
 
-    ```sql
-    <copy>
-    SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the two transportation services with the highest freight value. Include transportation service, service category, total freight value, and service units. Order the result by total freight value from highest to lowest.',
-             profile_name => 'genai',
-             action       => 'showsql'
-           ) AS generated_sql;
-    </copy>
-    ```
-
-    </details>
-
-## Conclusion
-
-Nina used a narrow transportation view, enabled semantic guidance, inspected generated SQL, and checked database rows before relying on an answer or narrative. `object_list`, comments, and constraints help generation; they do not replace privileges or other Oracle Autonomous AI Database security controls. `showsql` supports review, while `runsql` is a new generation-and-execution request.
+Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
 
 ## Next Steps
 
-Continue with Select AI Agent to give Nina a defined role, task, and SQL tool. This workshop's `GENAI` profile retains the transportation metadata configuration for that next lab. For profile attributes and supported actions, see the [Oracle Autonomous AI Database 26ai Select AI documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
+For the full list of Select AI actions, profile attributes, and supported providers, see the [Oracle AI Database 26ai Select AI documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Linda Foinding, Principal Database Product Manager
+* **Last Updated By/Date** - Oracle Database Product Management, October 2026
