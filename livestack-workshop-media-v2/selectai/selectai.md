@@ -81,6 +81,8 @@ The handoff loader creates the data and semantic views; it does not create provi
     </copy>
     ```
 
+    ![Lab 7 Task 1](images/attribute-name.png)
+
     The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will update the object list, enforcement setting, and metadata comments setting.
 
     If `credential_name` is `OCI$RESOURCE_PRINCIPAL`, check the grant below. The credential belongs to `ADMIN`, so an empty `USER_CREDENTIALS` result does not mean it is missing.
@@ -99,6 +101,8 @@ The handoff loader creates the data and semantic views; it does not create provi
       AND privilege = 'EXECUTE';
     </copy>
     ```
+
+    ![Lab 7 Task 1](images/l7t1s2-2.png)
 
     Expect an `EXECUTE` grant for `LLUSER`. Profile and grant metadata establish configuration; Task 3 tests whether the selected model can answer a request. For another provider, retain the facilitator's approved credential and network configuration.
 

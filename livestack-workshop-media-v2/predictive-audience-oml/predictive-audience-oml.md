@@ -229,6 +229,8 @@ If you skipped the optional AutoML task, use these settings as the model configu
 
     The result should show `CLASSIFICATION` and `RANDOM_FOREST`. Otto now has a database model that SQL can call.
 
+    ![Lab 6 Task 3](images/otto-media-demand-model.png)
+
 ## Task 4: Score a simulated media activity snapshot in SQL
 
 Otto now needs to score an activity snapshot for the watchlist. Create a separate scoring table by adjusting twelve feature rows from `OML_DEMAND_TRAINING_V`. These simulated scenarios demonstrate the scoring workflow; they are not independent holdout data or measured future activity.

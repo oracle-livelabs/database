@@ -82,6 +82,8 @@ In this lab, a **hop** means one relationship step. From `@premiere_001` to `@st
 
     The query joins `INFLUENCERS` twice: once for the starting creator and once for the connected creator. `INFLUENCER_CONNECTIONS` supplies the directed edge between them.
 
+    ![T4](images/direct-creator-connections.png)
+
     **Expected output: Direct Creator Connections**
 
     The result contains seven outgoing `follows` connections from `@premiere_001`, including `@streaming_002`. `INFLUENCE_SCORE` is the stored creator score.
@@ -212,6 +214,8 @@ Creator rows become `influencer` vertices, and rows in `INFLUENCER_CONNECTIONS` 
     ORDER BY influence_score DESC, connected_handle;
     </copy>
     ```
+
+    ![Lab 4 Task 2](images/media-four-hop.png)
 
     In `MATCH`, `creator` and `connected` are vertices, and `edge` is the connection between them. This pattern follows one hop. `IS influencer` and `IS connects_to` refer to labels defined in the graph.
 

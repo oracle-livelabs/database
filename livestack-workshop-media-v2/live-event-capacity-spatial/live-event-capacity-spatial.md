@@ -271,13 +271,13 @@ Moon now needs a result that an operations application can use: audience account
 
     A dashboard can present these details when a user selects a region. The query recommends a nearby hub; it does not reserve capacity or assign campaign orders. Operations can review capacity and load before making that decision.
 
-    ![Northeast audience accounts matched to their closest active media hub](images/media-northeast-routing.jpg)
+    ![Northeast audience accounts matched to their closest active media hub](images/media-northeast-routing.png)
 
 3. Change the query to `Florida Family Watch Zone`.
 
     Compare the audience accounts and recommended hubs with the Northeast result. The spatial predicates stay the same; only the region changes. An operations dashboard can run this query when a user selects a different audience region.
 
-    ![Florida audience accounts routed to their closest media distribution hub](images/media-florida-routing.jpg)
+    ![Florida audience accounts routed to their closest media distribution hub](images/media-florida-routing.png)
 
 ## Conclusion: Turn Location into a Distribution Decision
 
