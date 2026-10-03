@@ -6,6 +6,8 @@ In previous labs, you started two PDB upgrades: one unplug-plug upgrade using Au
 
 Estimated Time: 15 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:SpQY5CfpRyA)
+
 ### Objectives
 
 In this lab, you will:
@@ -74,7 +76,7 @@ You have completed:
     <summary>*click to see the output*</summary>
 
     ``` text
-        VALUE
+    VALUE
     _________
     23.0.0
     ```

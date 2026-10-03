@@ -2,21 +2,16 @@
 
 ## Introduction
 
-> **Image status:** Hospitality captures for this lab are pending a deployed environment. The SQL and written checks below define what to inspect. Retained generic images are reference material, not evidence of a hospitality run. See the [image inventory](../validation/screenshots.md).
+Gilly Bourne, Seer Hotels’ AI engineer, is building a guest-concern search. A question such as **“Which guests may be affected by an accessible-room concern?”** must lead to relevant stay offers and the guests who booked them.
 
-Gilly Bourne is an AI engineer at Seer Hotels. Her team has built a search feature for the guest service operations application. A business user can enter a question such as **which guests may be affected by an accessible-room availability concern?** The application should find the relevant stay offers first, then show the guests who booked them.
+Create stay offer vectors, rank matches by meaning, then join the results to reservations and guest contact details.
 
-Gilly already has the stay offer, reservation, and guest data in the database. Her design problem is connecting a plain-language question to those existing rows. She needs to turn stay offer data into vectors, rank the closest stay offers, and join those matches to reservations and guests. A useful result must show more than a similarity score. It must give the service team a guest and reservation list they can act on.
-
-She could export the text and embeddings to a separate vector service. That would add a second copy of sensitive hospitality language, another index to refresh, and another set of access rules to manage. Gilly wants the search to run where the underlying rows already live, so one SQL statement can compare meaning, join stay offer data to reservations and guests, and return a result for the application.
-
-In this lab, you review Gilly's implementation from the embedding model to the final guest list. You see why Oracle AI Database fits the job: vector search finds the relevant stay offers, and SQL joins connect them to exact reservation and guest data in the same database.
-
+![Gilly — hospitality lab banner](images/gilly.png)
 
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
-> - An **embedding** is a numerical profile of what text means. In this lab, stay offer data is embedded so similar hospitality ideas sit near each other mathematically, even when the wording is different.
+> - An **embedding** represents text as a list of numbers. This lab embeds each stay offer’s name, category and subcategory so the query can rank descriptions with similar meanings.
 >
 > - An **ONNX embedding model** is a portable machine-learning model saved in the Open Neural Network Exchange (ONNX) format. It turns text into a vector of numbers that captures meaning. Oracle AI Database can load and run this model inside the database, close to the stay offer rows.
 >
@@ -28,8 +23,6 @@ In this lab, you review Gilly's implementation from the embedding model to the f
 
 </details>
 
-Gilly has already built the Guest Concern Search page. In this lab, you review how she built the stay offer search. The search area lets a business user enter a concern in ordinary language and receive ranked stay offers by meaning.
-
 ### Objectives
 
 - Check the embedding model Gilly needs for semantic search.
@@ -40,28 +33,11 @@ Gilly has already built the Guest Concern Search page. In this lab, you review h
 
 Estimated Time: **10 minutes**
 
-### Hands-on Scenario
-
-| Step                | Hospitality focus                                                                                                                               |
-| ---------------------| ---------------------------------------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Business users need to find relevant stay offers without knowing the exact terms used in the stay offer data.                                     |
-| Technical Challenge | Gilly must search by meaning while keeping stay offer data, vectors, reservations, guests, and access controls together.                          |
-| Persona Focus       | You review Gilly's implementation as she explains how the search connects a business question to stay offers, reservations, and guests.           |
-| What You Will See   | Vector search ranks stay offers by meaning, then SQL adds reservation and guest details.                                                          |
-| Database Capability | `VECTOR_EMBEDDING`, vector columns, and `VECTOR_DISTANCE` run beside relational hospitality data.                                               |
-| Outcome             | The application can turn a plain-language concern into a guest follow-up list without a separate vector database or copied hospitality text. |
-
-Persona focus: You are reviewing the search tool Gilly built for guest service operations.
-
-
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
-
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Check the embedding model
 
-Start with Gilly's first design question: **what does similarity search need?** It needs vectors for the text being searched and an embedding model that converts a question into a vector.
-
-Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Oracle AI Database can store and run the ONNX model inside the database, so it creates the question embedding where the stay offer data already live. The application does not have to send hospitality text to a separate service and bring the vector back.
+Gilly uses an ONNX embedding model loaded by Jessica to turn stay offer text and search questions into comparable vectors inside the database.
 
 1. Run the following query to see which embedding models are available:
 
@@ -79,19 +55,13 @@ Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Orac
 
     **Expected output: Available Embedding Models**
 
-    ![model](images/model.png)
+    ![model](images/sql-embedding-model.jpg)
 
     The result should include an embedding model owned by `ADMIN`, such as `ALL_MINILM_L12_V2`. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
 
-2. Review what this means for Gilly's application.
-
-    Gilly can call the model from SQL with `VECTOR_EMBEDDING(...)`. Jessica manages the model inside the database, while Gilly uses it in her search query. The stay offer data, vectors, and access controls stay in the same database.
-
-    > **Note:** This is the key Oracle AI Database differentiator in this lab. The embedding model runs inside the database, so Gilly does not need a separate embedding service or a data pipeline to move hospitality text between systems.
-
 ## Task 2: Create a stay offer vector
 
-Gilly decides that one vector per stay offer is enough. Each stay offer record is short and describes one stay offer, so she combines its name, category, and subcategory into one text value before creating the vector.
+Each stay offer has a short description, so Gilly creates one vector from its name, category and subcategory.
 
 1. Review the text Gilly will embed:
 
@@ -135,7 +105,7 @@ Gilly decides that one vector per stay offer is enough. Each stay offer record i
     </copy>
     ```
 
-    The model reads the text in each row and writes the vector back to that same row. No stay offer text leaves the database.
+    The model writes each offer’s vector back to its row.
 
 4. Verify the new column and its data:
 
@@ -148,28 +118,17 @@ Gilly decides that one vector per stay offer is enough. Each stay offer record i
     </copy>
     ```
 
-    
+    ![SQL Worksheet result — vector values](images/sql-vector-values.jpg)
 
-    Each stay offer now has its own 384-dimensional vector. Gilly can use this column directly when the application searches for stay offers by meaning.
-
-    > **Note:** Chunking is not relevant for this data. Each row describes one short stay offer, so splitting it would create several vectors for one stay offer without adding useful detail. Chunking becomes useful for long documents, such as policies or property service notices, where each section may answer a different question.
+    > **Note:** Each offer is short enough for one vector. Long documents, such as property policies, may need separate vectors for sections that answer different questions.
 
 ## Task 3: Test the stay offer vector
 
-Now Gilly tests the new column with a simple vector query. She asks for stay offers related to accessible room with step-free access and lets the database rank them by meaning.
+Search for `accessible room with step-free access` and review how the database ranks the offers by meaning.
 
 1. Run the following query:
 
     The SQL creates an embedding for the phrase `accessible room with step-free access`, compares it with the vectors in `STAY_OFFERS.OFFER_EMBEDDING`, and returns the cosine distance. A smaller distance means the two vectors are closer in meaning, so the query orders the smallest distance first.
-
-    <details>
-    <summary><strong>Why this matters to Gilly</strong></summary>
-
-    > Gilly could export the text to an external embedding pipeline or search service. That would create extra copies of sensitive hospitality text and make it harder to show which data the application searched.
-    >
-    > Oracle AI Vector Search keeps the stay offer data, vectors, SQL query, and vector distance with the hospitality data. Gilly can check the search and use the result in the application without adding another data store.
-
-    </details>
 
     ```sql
     <copy>
@@ -185,18 +144,15 @@ Now Gilly tests the new column with a simple vector query. She asks for stay off
     </copy>
     ```
 
+    ![SQL Worksheet result — vector distance](images/sql-vector-distance.jpg)
+
     **Expected output: Accessible Stay Offer Matches**
 
-    
-
-2. Review the ranked stay offers.
-    The query embeds the analyst phrase at runtime and compares it to the `STAY_OFFERS.OFFER_EMBEDDING` column. `VECTOR_DISTANCE` calculates the distance between the two vectors using the `COSINE` metric. A lower value means a closer match.
-
-    In the broader workflow, these ranked stay offers can become the next filter for dashboard review and stay offer service impact analysis.
+2. Review the ranked offers. Lower cosine distance means a closer match to the concern.
 
 3. Show the result as a similarity score:
 
-    Vector distance is useful for checking the search, but business users may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
+    Display `1 - distance`, rounded to four decimal places, so higher scores mean closer matches.
 
     ```sql
     <copy>
@@ -212,13 +168,11 @@ Now Gilly tests the new column with a simple vector query. She asks for stay off
     </copy>
     ```
 
-    The query uses the same vectors and the same cosine calculation. It only changes how the result is shown to the person using the application.
-
-    
+    ![SQL Worksheet result — vector similarity](images/sql-vector-similarity.jpg)
 
 ## Task 4: Find guests affected by a stay offer concern
 
-Gilly now has the business requirement for the application. A business user should be able to enter a concern and find guests who booked related stay offers. The status filter limits the follow-up to pending, confirmed, and checked-in reservations. The result gives the guest-service team a short list for follow-up, with the stay offer match, reservation status, booking date, and guest contact details.
+Gilly now connects the matched offers to guests. The query includes pending, confirmed, and checked-in reservations and returns contact details for follow-up.
 
 1. Run the following query for the concern `accessible room with step-free access`:
 
@@ -257,18 +211,17 @@ Gilly now has the business requirement for the application. A business user shou
     </copy>
     ```
 
+    ![SQL Worksheet result — vector guests](images/sql-vector-guests.jpg)
+
     The first part ranks stay offers by meaning. The remaining joins use ordinary relational keys to find the matching nightly charges, reservations, and guests.
 
     **Expected output: Guest Follow-up List**
 
-    The result shows guests who booked stay offers related to the concern. The similarity score explains why the stay offer was included, while the reservation and guest columns give the service team enough information to decide what to do next.
-
-
-    
+    Use the similarity score to review each offer match. The list identifies guests to consider for follow-up; it does not confirm an accessibility problem. Check the property, room requirements and reservation details before contacting a guest.
 
 2. Review the business result.
 
-    Gilly does not vectorize every reservation or guest. She vectorizes the stay offer data once, then builds a converged query that combines vector search with SQL joins for exact reservation and contact details. This keeps the search flexible while the final guest list remains precise and easy to act on.
+    Gilly creates vectors for stay offers, then uses SQL joins to find reservation and contact details. She does not need a vector for each reservation or guest.
 
 ## Conclusion
 
@@ -276,6 +229,6 @@ Gilly has built the search behind the application and connected it to a business
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

@@ -6,6 +6,8 @@ In this lab, you will become familiar with the tools used to patch Oracle AI Dat
 
 Estimated Time: 15 Minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:yS0IuZoshew)
+
 ### Objectives
 
 In this lab, you will:
@@ -819,7 +821,7 @@ Here are a few useful queries that provide information about the database.
     <summary>*click to see the output*</summary>
 
     ``` text
-       VERSION_FULL
+    VERSION_FULL
     _______________
     19.31.0.0.0
     ```

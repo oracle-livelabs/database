@@ -1,0 +1,1304 @@
+{
+  "passed": true,
+  "local_references": [
+    {
+      "source": "README.md",
+      "url": "introduction/introduction.md",
+      "kind": "link",
+      "target": "introduction/introduction.md",
+      "exists": true
+    },
+    {
+      "source": "README.md",
+      "url": "getting-started/getting-started.md",
+      "kind": "link",
+      "target": "getting-started/getting-started.md",
+      "exists": true
+    },
+    {
+      "source": "README.md",
+      "url": "stack/README.md",
+      "kind": "link",
+      "target": "stack/README.md",
+      "exists": true
+    },
+    {
+      "source": "component-quality-vector-search/component-quality-vector-search.md",
+      "url": "images/gilly.png",
+      "kind": "image",
+      "target": "component-quality-vector-search/images/gilly.png",
+      "exists": true
+    },
+    {
+      "source": "component-quality-vector-search/component-quality-vector-search.md",
+      "url": "images/sql-embedding-model.jpg",
+      "kind": "image",
+      "target": "component-quality-vector-search/images/sql-embedding-model.jpg",
+      "exists": true
+    },
+    {
+      "source": "component-quality-vector-search/component-quality-vector-search.md",
+      "url": "images/sql-vector-values.png",
+      "kind": "image",
+      "target": "component-quality-vector-search/images/sql-vector-values.png",
+      "exists": true
+    },
+    {
+      "source": "component-quality-vector-search/component-quality-vector-search.md",
+      "url": "images/sql-vector-distance.png",
+      "kind": "image",
+      "target": "component-quality-vector-search/images/sql-vector-distance.png",
+      "exists": true
+    },
+    {
+      "source": "component-quality-vector-search/component-quality-vector-search.md",
+      "url": "images/sql-vector-similarity.png",
+      "kind": "image",
+      "target": "component-quality-vector-search/images/sql-vector-similarity.png",
+      "exists": true
+    },
+    {
+      "source": "component-quality-vector-search/component-quality-vector-search.md",
+      "url": "images/sql-vector-customer-sites.png",
+      "kind": "image",
+      "target": "component-quality-vector-search/images/sql-vector-customer-sites.png",
+      "exists": true
+    },
+    {
+      "source": "final-quiz/final-quiz.md",
+      "url": "images/livestack-hightech-badge.svg",
+      "kind": "badge",
+      "target": "final-quiz/images/livestack-hightech-badge.svg",
+      "exists": true
+    },
+    {
+      "source": "getting-started/getting-started.md",
+      "url": "images/reservation-login-info.svg",
+      "kind": "image",
+      "target": "getting-started/images/reservation-login-info.svg",
+      "exists": true
+    },
+    {
+      "source": "getting-started/getting-started.md",
+      "url": "images/reservation-login-copy-password.svg",
+      "kind": "image",
+      "target": "getting-started/images/reservation-login-copy-password.svg",
+      "exists": true
+    },
+    {
+      "source": "getting-started/getting-started.md",
+      "url": "images/reservation-login-open-link.svg",
+      "kind": "image",
+      "target": "getting-started/images/reservation-login-open-link.svg",
+      "exists": true
+    },
+    {
+      "source": "getting-started/getting-started.md",
+      "url": "images/database-actions-login-main-user.svg",
+      "kind": "image",
+      "target": "getting-started/images/database-actions-login-main-user.svg",
+      "exists": true
+    },
+    {
+      "source": "getting-started/getting-started.md",
+      "url": "images/database-actions-development-sql.svg",
+      "kind": "image",
+      "target": "getting-started/images/database-actions-development-sql.svg",
+      "exists": true
+    },
+    {
+      "source": "getting-started/getting-started.md",
+      "url": "images/sql-connection.jpg",
+      "kind": "image",
+      "target": "getting-started/images/sql-connection.jpg",
+      "exists": true
+    },
+    {
+      "source": "introduction/introduction.md",
+      "url": "images/seer-hightech-introduction.png",
+      "kind": "image",
+      "target": "introduction/images/seer-hightech-introduction.png",
+      "exists": true
+    },
+    {
+      "source": "introduction/introduction.md",
+      "url": "images/seer-hightech-erd-illustrated.png",
+      "kind": "image",
+      "target": "introduction/images/seer-hightech-erd-illustrated.png",
+      "exists": true
+    },
+    {
+      "source": "introduction/introduction.md",
+      "url": "images/seer-hightech-erd-illustrated.png",
+      "kind": "link",
+      "target": "introduction/images/seer-hightech-erd-illustrated.png",
+      "exists": true
+    },
+    {
+      "source": "introduction/introduction.md",
+      "url": "images/seer-hightech-erd.svg",
+      "kind": "link",
+      "target": "introduction/images/seer-hightech-erd.svg",
+      "exists": true
+    },
+    {
+      "source": "plant-routing-spatial/plant-routing-spatial.md",
+      "url": "images/moon.png",
+      "kind": "image",
+      "target": "plant-routing-spatial/images/moon.png",
+      "exists": true
+    },
+    {
+      "source": "plant-routing-spatial/plant-routing-spatial.md",
+      "url": "images/sql-spatial-points.png",
+      "kind": "image",
+      "target": "plant-routing-spatial/images/sql-spatial-points.png",
+      "exists": true
+    },
+    {
+      "source": "plant-routing-spatial/plant-routing-spatial.md",
+      "url": "images/sql-spatial-new-york.png",
+      "kind": "image",
+      "target": "plant-routing-spatial/images/sql-spatial-new-york.png",
+      "exists": true
+    },
+    {
+      "source": "plant-routing-spatial/plant-routing-spatial.md",
+      "url": "images/sql-spatial-chicago.png",
+      "kind": "image",
+      "target": "plant-routing-spatial/images/sql-spatial-chicago.png",
+      "exists": true
+    },
+    {
+      "source": "plant-routing-spatial/plant-routing-spatial.md",
+      "url": "images/sql-spatial-routing.png",
+      "kind": "image",
+      "target": "plant-routing-spatial/images/sql-spatial-routing.png",
+      "exists": true
+    },
+    {
+      "source": "production-operations-dashboard/production-operations-dashboard.md",
+      "url": "images/jessica.png",
+      "kind": "image",
+      "target": "production-operations-dashboard/images/jessica.png",
+      "exists": true
+    },
+    {
+      "source": "production-operations-dashboard/production-operations-dashboard.md",
+      "url": "images/sql-dashboard.png",
+      "kind": "image",
+      "target": "production-operations-dashboard/images/sql-dashboard.png",
+      "exists": true
+    },
+    {
+      "source": "production-operations-dashboard/production-operations-dashboard.md",
+      "url": "images/sql-dashboard-followup.png",
+      "kind": "image",
+      "target": "production-operations-dashboard/images/sql-dashboard-followup.png",
+      "exists": true
+    },
+    {
+      "source": "production-order-duality/production-order-duality.md",
+      "url": "images/thomas.png",
+      "kind": "image",
+      "target": "production-order-duality/images/thomas.png",
+      "exists": true
+    },
+    {
+      "source": "production-order-duality/production-order-duality.md",
+      "url": "images/sql-duality-document.png",
+      "kind": "image",
+      "target": "production-order-duality/images/sql-duality-document.png",
+      "exists": true
+    },
+    {
+      "source": "production-order-duality/production-order-duality.md",
+      "url": "images/sql-duality-contract.png",
+      "kind": "image",
+      "target": "production-order-duality/images/sql-duality-contract.png",
+      "exists": true
+    },
+    {
+      "source": "production-order-duality/production-order-duality.md",
+      "url": "images/sql-duality-released.png",
+      "kind": "image",
+      "target": "production-order-duality/images/sql-duality-released.png",
+      "exists": true
+    },
+    {
+      "source": "production-order-duality/production-order-duality.md",
+      "url": "images/sql-duality-projection.png",
+      "kind": "image",
+      "target": "production-order-duality/images/sql-duality-projection.png",
+      "exists": true
+    },
+    {
+      "source": "production-order-duality/production-order-duality.md",
+      "url": "images/sql-duality-relational.png",
+      "kind": "image",
+      "target": "production-order-duality/images/sql-duality-relational.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/bob.png",
+      "kind": "image",
+      "target": "production-quality-network/images/bob.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/sql-graph-direct.png",
+      "kind": "image",
+      "target": "production-quality-network/images/sql-graph-direct.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/sql-graph-four-hop.png",
+      "kind": "image",
+      "target": "production-quality-network/images/sql-graph-four-hop.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/sql-graph-shared.png",
+      "kind": "image",
+      "target": "production-quality-network/images/sql-graph-shared.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/graph-launch.jpg",
+      "kind": "image",
+      "target": "production-quality-network/images/graph-launch.jpg",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/graph-studio-overview.png",
+      "kind": "image",
+      "target": "production-quality-network/images/graph-studio-overview.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "files/hightech-production-quality-graph-studio.dsnb",
+      "kind": "link",
+      "target": "production-quality-network/files/hightech-production-quality-graph-studio.dsnb",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/graph-notebooks.png",
+      "kind": "image",
+      "target": "production-quality-network/images/graph-notebooks.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/graph-import-dialog.png",
+      "kind": "image",
+      "target": "production-quality-network/images/graph-import-dialog.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/graph-import-file.png",
+      "kind": "image",
+      "target": "production-quality-network/images/graph-import-file.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/graph-notebook-top.png",
+      "kind": "image",
+      "target": "production-quality-network/images/graph-notebook-top.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/live-09-graph-notebook-table.png",
+      "kind": "image",
+      "target": "production-quality-network/images/live-09-graph-notebook-table.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/live-10-graph-production-network.png",
+      "kind": "image",
+      "target": "production-quality-network/images/live-10-graph-production-network.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "images/live-11-graph-shared-lot.png",
+      "kind": "image",
+      "target": "production-quality-network/images/live-11-graph-shared-lot.png",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "files/getting-started-material-flow-graph.dsnb",
+      "kind": "link",
+      "target": "production-quality-network/files/getting-started-material-flow-graph.dsnb",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "../stack/load_data/hightech-platform-handoff-loader.sql",
+      "kind": "link",
+      "target": "stack/load_data/hightech-platform-handoff-loader.sql",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/otto.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/otto.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/sql-oml-training.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/sql-oml-training.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/oml-launch.jpg",
+      "kind": "image",
+      "target": "quality-review-oml/images/oml-launch.jpg",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/oml-home.jpg",
+      "kind": "image",
+      "target": "quality-review-oml/images/oml-home.jpg",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/oml-settings.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/oml-settings.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/oml-leaderboard.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/oml-leaderboard.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/oml-model-comparison.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/oml-model-comparison.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/oml-confusion-matrix.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/oml-confusion-matrix.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/oml-prediction-impact.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/oml-prediction-impact.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/sql-oml-model.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/sql-oml-model.png",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "images/sql-oml-scoring.png",
+      "kind": "image",
+      "target": "quality-review-oml/images/sql-oml-scoring.png",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "images/nina-hightech.png",
+      "kind": "image",
+      "target": "selectai/images/nina-hightech.png",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "images/sql-ai-object-list.png",
+      "kind": "image",
+      "target": "selectai/images/sql-ai-object-list.png",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "images/sql-ai-generated.png",
+      "kind": "image",
+      "target": "selectai/images/sql-ai-generated.png",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "images/sql-ai-answer.png",
+      "kind": "image",
+      "target": "selectai/images/sql-ai-answer.png",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "images/sql-ai-refined-generated.png",
+      "kind": "image",
+      "target": "selectai/images/sql-ai-refined-generated.png",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "images/sql-ai-refined-answer.png",
+      "kind": "image",
+      "target": "selectai/images/sql-ai-refined-answer.png",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "images/sql-ai-narration.png",
+      "kind": "image",
+      "target": "selectai/images/sql-ai-narration.png",
+      "exists": true
+    },
+    {
+      "source": "selectai-agent/selectai-agent.md",
+      "url": "images/nina-hightech.png",
+      "kind": "image",
+      "target": "selectai-agent/images/nina-hightech.png",
+      "exists": true
+    },
+    {
+      "source": "selectai-agent/selectai-agent.md",
+      "url": "images/sql-agent-answer.png",
+      "kind": "image",
+      "target": "selectai-agent/images/sql-agent-answer.png",
+      "exists": true
+    },
+    {
+      "source": "selectai-agent/selectai-agent.md",
+      "url": "images/sql-agent-history.png",
+      "kind": "image",
+      "target": "selectai-agent/images/sql-agent-history.png",
+      "exists": true
+    },
+    {
+      "source": "selectai-agent/selectai-agent.md",
+      "url": "images/sql-agent-tools.png",
+      "kind": "image",
+      "target": "selectai-agent/images/sql-agent-tools.png",
+      "exists": true
+    },
+    {
+      "source": "stack/README.md",
+      "url": "load_data/hightech-platform-handoff-loader.zip",
+      "kind": "link",
+      "target": "stack/load_data/hightech-platform-handoff-loader.zip",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../introduction/introduction.md",
+      "kind": "manifest",
+      "target": "introduction/introduction.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../getting-started/getting-started.md",
+      "kind": "manifest",
+      "target": "getting-started/getting-started.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../production-operations-dashboard/production-operations-dashboard.md",
+      "kind": "manifest",
+      "target": "production-operations-dashboard/production-operations-dashboard.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../production-order-duality/production-order-duality.md",
+      "kind": "manifest",
+      "target": "production-order-duality/production-order-duality.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../component-quality-vector-search/component-quality-vector-search.md",
+      "kind": "manifest",
+      "target": "component-quality-vector-search/component-quality-vector-search.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../production-quality-network/production-quality-network.md",
+      "kind": "manifest",
+      "target": "production-quality-network/production-quality-network.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../plant-routing-spatial/plant-routing-spatial.md",
+      "kind": "manifest",
+      "target": "plant-routing-spatial/plant-routing-spatial.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../quality-review-oml/quality-review-oml.md",
+      "kind": "manifest",
+      "target": "quality-review-oml/quality-review-oml.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../selectai/selectai.md",
+      "kind": "manifest",
+      "target": "selectai/selectai.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../selectai-agent/selectai-agent.md",
+      "kind": "manifest",
+      "target": "selectai-agent/selectai-agent.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "../../final-quiz/final-quiz.md",
+      "kind": "manifest",
+      "target": "final-quiz/final-quiz.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../introduction/introduction.md",
+      "kind": "manifest",
+      "target": "introduction/introduction.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../getting-started/getting-started.md",
+      "kind": "manifest",
+      "target": "getting-started/getting-started.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../production-operations-dashboard/production-operations-dashboard.md",
+      "kind": "manifest",
+      "target": "production-operations-dashboard/production-operations-dashboard.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../production-order-duality/production-order-duality.md",
+      "kind": "manifest",
+      "target": "production-order-duality/production-order-duality.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../component-quality-vector-search/component-quality-vector-search.md",
+      "kind": "manifest",
+      "target": "component-quality-vector-search/component-quality-vector-search.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../production-quality-network/production-quality-network.md",
+      "kind": "manifest",
+      "target": "production-quality-network/production-quality-network.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../plant-routing-spatial/plant-routing-spatial.md",
+      "kind": "manifest",
+      "target": "plant-routing-spatial/plant-routing-spatial.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../quality-review-oml/quality-review-oml.md",
+      "kind": "manifest",
+      "target": "quality-review-oml/quality-review-oml.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../selectai/selectai.md",
+      "kind": "manifest",
+      "target": "selectai/selectai.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../selectai-agent/selectai-agent.md",
+      "kind": "manifest",
+      "target": "selectai-agent/selectai-agent.md",
+      "exists": true
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "../../final-quiz/final-quiz.md",
+      "kind": "manifest",
+      "target": "final-quiz/final-quiz.md",
+      "exists": true
+    }
+  ],
+  "internal_lesson_links": [
+    {
+      "source": "component-quality-vector-search/component-quality-vector-search.md",
+      "url": "?lab=getting-started#Task2:OpenSQLWorksheet",
+      "kind": "link",
+      "exists": true
+    },
+    {
+      "source": "plant-routing-spatial/plant-routing-spatial.md",
+      "url": "?lab=getting-started#Task2:OpenSQLWorksheet",
+      "kind": "link",
+      "exists": true
+    },
+    {
+      "source": "production-operations-dashboard/production-operations-dashboard.md",
+      "url": "?lab=getting-started#Task2:OpenSQLWorksheet",
+      "kind": "link",
+      "exists": true
+    },
+    {
+      "source": "production-order-duality/production-order-duality.md",
+      "url": "?lab=getting-started#Task2:OpenSQLWorksheet",
+      "kind": "link",
+      "exists": true
+    },
+    {
+      "source": "production-quality-network/production-quality-network.md",
+      "url": "?lab=getting-started#Task2:OpenSQLWorksheet",
+      "kind": "link",
+      "exists": true
+    },
+    {
+      "source": "quality-review-oml/quality-review-oml.md",
+      "url": "?lab=getting-started#Task2:OpenSQLWorksheet",
+      "kind": "link",
+      "exists": true
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "?lab=getting-started#Task2:OpenSQLWorksheet",
+      "kind": "link",
+      "exists": true
+    },
+    {
+      "source": "selectai-agent/selectai-agent.md",
+      "url": "?lab=selectai",
+      "kind": "link",
+      "exists": true
+    }
+  ],
+  "local_http": [
+    {
+      "path": "component-quality-vector-search/component-quality-vector-search.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "component-quality-vector-search/images/gilly.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "component-quality-vector-search/images/sql-embedding-model.jpg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "component-quality-vector-search/images/sql-vector-customer-sites.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "component-quality-vector-search/images/sql-vector-distance.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "component-quality-vector-search/images/sql-vector-similarity.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "component-quality-vector-search/images/sql-vector-values.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "final-quiz/final-quiz.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "final-quiz/images/livestack-hightech-badge.svg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "getting-started/getting-started.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "getting-started/images/database-actions-development-sql.svg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "getting-started/images/database-actions-login-main-user.svg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "getting-started/images/reservation-login-copy-password.svg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "getting-started/images/reservation-login-info.svg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "getting-started/images/reservation-login-open-link.svg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "getting-started/images/sql-connection.jpg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "introduction/images/seer-hightech-erd-illustrated.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "introduction/images/seer-hightech-erd.svg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "introduction/images/seer-hightech-introduction.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "introduction/introduction.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "plant-routing-spatial/images/moon.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "plant-routing-spatial/images/sql-spatial-chicago.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "plant-routing-spatial/images/sql-spatial-new-york.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "plant-routing-spatial/images/sql-spatial-points.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "plant-routing-spatial/images/sql-spatial-routing.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "plant-routing-spatial/plant-routing-spatial.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-operations-dashboard/images/jessica.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-operations-dashboard/images/sql-dashboard-followup.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-operations-dashboard/images/sql-dashboard.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-operations-dashboard/production-operations-dashboard.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-order-duality/images/sql-duality-contract.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-order-duality/images/sql-duality-document.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-order-duality/images/sql-duality-projection.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-order-duality/images/sql-duality-relational.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-order-duality/images/sql-duality-released.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-order-duality/images/thomas.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-order-duality/production-order-duality.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/files/getting-started-material-flow-graph.dsnb",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/files/hightech-production-quality-graph-studio.dsnb",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/bob.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/graph-import-dialog.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/graph-import-file.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/graph-launch.jpg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/graph-notebook-top.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/graph-notebooks.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/graph-studio-overview.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/live-09-graph-notebook-table.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/live-10-graph-production-network.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/live-11-graph-shared-lot.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/sql-graph-direct.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/sql-graph-four-hop.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/images/sql-graph-shared.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "production-quality-network/production-quality-network.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/oml-confusion-matrix.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/oml-home.jpg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/oml-launch.jpg",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/oml-leaderboard.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/oml-model-comparison.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/oml-prediction-impact.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/oml-settings.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/otto.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/sql-oml-model.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/sql-oml-scoring.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/images/sql-oml-training.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "quality-review-oml/quality-review-oml.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai-agent/images/nina-hightech.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai-agent/images/sql-agent-answer.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai-agent/images/sql-agent-history.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai-agent/images/sql-agent-tools.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai-agent/selectai-agent.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/images/nina-hightech.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/images/sql-ai-answer.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/images/sql-ai-generated.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/images/sql-ai-narration.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/images/sql-ai-object-list.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/images/sql-ai-refined-answer.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/images/sql-ai-refined-generated.png",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "selectai/selectai.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "stack/README.md",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "stack/load_data/hightech-platform-handoff-loader.sql",
+      "status": 200,
+      "bytes_match_disk": true
+    },
+    {
+      "path": "stack/load_data/hightech-platform-handoff-loader.zip",
+      "status": 200,
+      "bytes_match_disk": true
+    }
+  ],
+  "external_references": [
+    {
+      "source": "getting-started/getting-started.md",
+      "url": "https://livelabs.oracle.com",
+      "kind": "link"
+    },
+    {
+      "source": "plant-routing-spatial/plant-routing-spatial.md",
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800",
+      "kind": "link"
+    },
+    {
+      "source": "production-quality-network/files/getting-started-material-flow-graph.dsnb",
+      "url": "https://pgql-lang.org/",
+      "kind": "link"
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm",
+      "kind": "link"
+    },
+    {
+      "source": "selectai/selectai.md",
+      "url": "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
+      "kind": "link"
+    },
+    {
+      "source": "selectai-agent/selectai-agent.md",
+      "url": "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
+      "kind": "link"
+    },
+    {
+      "source": "stack/README.md",
+      "url": "https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm",
+      "kind": "link"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-1.11.0.min.js",
+      "kind": "script"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-ui-1.10.4.custom.js",
+      "kind": "script"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/main.min.js",
+      "kind": "script"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css",
+      "kind": "link"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/img/favicon.ico",
+      "kind": "link"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://livelabs.oracle.com",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://docs.oracle.com/pls/topic/lookup?ctx=en/legal&id=cpyr",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://www.oracle.com/corporate/index.html",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://www.oracle.com/corporate/contact/",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://docs.oracle.com/en/browseall.html",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://www.oracle.com/legal/privacy/",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://www.oracle.com/legal/privacy/privacy-policy.html#11",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/index.html",
+      "url": "https://www.oracle.com/legal/privacy/privacy-policy/#11",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/sandbox/manifest.json",
+      "url": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md",
+      "kind": "manifest"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-1.11.0.min.js",
+      "kind": "script"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/jquery-ui-1.10.4.custom.js",
+      "kind": "script"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/main.min.js",
+      "kind": "script"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css",
+      "kind": "link"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/img/favicon.ico",
+      "kind": "link"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://livelabs.oracle.com",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://docs.oracle.com/pls/topic/lookup?ctx=en/legal&id=cpyr",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://www.oracle.com/corporate/index.html",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://www.oracle.com/corporate/contact/",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://docs.oracle.com/en/browseall.html",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://www.oracle.com/legal/privacy/",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://www.oracle.com/legal/privacy/privacy-policy.html#11",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/index.html",
+      "url": "https://www.oracle.com/legal/privacy/privacy-policy/#11",
+      "kind": "a"
+    },
+    {
+      "source": "workshops/tenancy/manifest.json",
+      "url": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md",
+      "kind": "manifest"
+    }
+  ]
+}

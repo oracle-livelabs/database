@@ -454,52 +454,52 @@ You determined that the database is ready to upgrade. Start AutoUpgrade in *depl
     <summary>*click to see the output*</summary>
 
     ``` text
-     exit                                    To close and exit
-     help                                    Displays help
-     lsj [<option>] [-a <number>]            Lists jobs by status up to n elements
-         -f                                  - Filter by finished jobs
-         -r                                  - Filter by running jobs
-         -e                                  - Filter by jobs with errors
-         -p                                  - Filter by jobs being prepared
-         -n <number>                         - Display up to n jobs
-         -a <number>                         - Repeats the command (in <number>
-                                               seconds)
-     lsr                                     Displays the restoration queue
-     lsa                                     Displays the stop queue
-     tasks                                   Displays the tasks running
-     clear                                   Clears the terminal
-     resume -job <number> [-ignore_errors=<ORA-#####,ORA-#####>]
-                                             Restarts a job with option to ignore
-                                             errors
-     status [<option>] [-a <number>]         Summary of current execution
-         -config                             - Show Config Information
-         -job <number>                       - Summary of a given job
-         -job <number> -c <dbname>           - Show details of container
-         -a [<number>]                       - Repeats the command (in <number>
-                                               seconds)
-     restore -job <number>                   Restores the database to its state
-                                             prior to the upgrade
-     restore all_failed                      Restores all failed jobs to their
-                                             previous states prior to the upgrade
-     logs                                    Displays all log locations
-     stop -job <number>                      Stops the specified job
-     h[ist]                                  Displays the command line history
-     /[<number>]                             Executes the command specified from
-                                             the history. The default is the last
-                                             command
-     meta                                    Displays Internal latch count
-     hwinfo                                  Displays hardware information along
-                                             with tools uptime
-     fxlist -job <number> [<option>]         Fixup summary
-         -c <dbname>                         - Container specific FixUps
-         -c <dbname> alter <check> run <yes|no|skip>
-                                             - Update Run Configuration
-     proceed -job <number>                   Alter predefined start time on
-                                             scheduled jobs. Starts 1 minute
-                                             from when the command was executed
-         -newStartTime [dd/mm/yyyy hh:mm:ss, +<#>h<#>m]
-                                             - Starts on an specific date or
-                                               given time from command execution
+    exit                                    To close and exit
+    help                                    Displays help
+    lsj [<option>] [-a <number>]            Lists jobs by status up to n elements
+        -f                                  - Filter by finished jobs
+        -r                                  - Filter by running jobs
+        -e                                  - Filter by jobs with errors
+        -p                                  - Filter by jobs being prepared
+        -n <number>                         - Display up to n jobs
+        -a <number>                         - Repeats the command (in <number>
+                                              seconds)
+    lsr                                     Displays the restoration queue
+    lsa                                     Displays the stop queue
+    tasks                                   Displays the tasks running
+    clear                                   Clears the terminal
+    resume -job <number> [-ignore_errors=<ORA-#####,ORA-#####>]
+                                            Restarts a job with option to ignore
+                                            errors
+    status [<option>] [-a <number>]         Summary of current execution
+        -config                             - Show Config Information
+        -job <number>                       - Summary of a given job
+        -job <number> -c <dbname>           - Show details of container
+        -a [<number>]                       - Repeats the command (in <number>
+                                              seconds)
+    restore -job <number>                   Restores the database to its state
+                                            prior to the upgrade
+    restore all_failed                      Restores all failed jobs to their
+                                            previous states prior to the upgrade
+    logs                                    Displays all log locations
+    stop -job <number>                      Stops the specified job
+    h[ist]                                  Displays the command line history
+    /[<number>]                             Executes the command specified from
+                                            the history. The default is the last
+                                            command
+    meta                                    Displays Internal latch count
+    hwinfo                                  Displays hardware information along
+                                            with tools uptime
+    fxlist -job <number> [<option>]         Fixup summary
+        -c <dbname>                         - Container specific FixUps
+        -c <dbname> alter <check> run <yes|no|skip>
+                                            - Update Run Configuration
+    proceed -job <number>                   Alter predefined start time on
+                                            scheduled jobs. Starts 1 minute
+                                            from when the command was executed
+        -newStartTime [dd/mm/yyyy hh:mm:ss, +<#>h<#>m]
+                                            - Starts on an specific date or
+                                              given time from command execution
     ```
 
     </details>

@@ -6,6 +6,8 @@ In this lab, you will explore AI Vector Search using a simple example. You will 
 
 Estimated Time: 15 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:oYGUxWfZiCg)
+
 ### Objectives
 
 In this lab, you will:
@@ -149,7 +151,7 @@ Now that you have successfully migrated the PDB to Oracle AI Database 26ai, you 
     <summary>*click to see the output*</summary>
 
     ``` text
-        PK FACTS
+    PK     FACTS
     ______ __________________________________________________________________
          1 Atlanta is located in Georgia.
          2 Boston is located in Massachusetts.

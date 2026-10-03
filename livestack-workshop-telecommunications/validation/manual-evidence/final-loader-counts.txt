@@ -1,0 +1,38 @@
+Clear output
+Download script output
+TABLE_NAME               ACTUAL_ROWS EXPECTED_ROWS 
+------------------------ ----------- ------------- 
+NETWORK_SITES                     16            16 
+SERVICE_PLANS                    192           192 
+SUBSCRIBERS                     1024          1024 
+SERVICE_ORDERS                  3843          3843 
+SERVICE_ORDER_LINES             3843          3843 
+SUBSCRIBER_REPORTS              1152          1152 
+REPORT_PLAN_MENTIONS            1152          1152 
+NETWORK_REGIONS                    2             2 
+ACTIVATION_ENTITIES               12            12 
+ACTIVATION_RELATIONSHIPS          24            24 
+ACTIVATION_CASES                   2             2 
+ACTIVATION_CASE_ENTITIES          10            10 
+PREPAID_ACCOUNTS                 105           105 
+AIRTIME_TRANSFERS                114           114 
+PLAN_EMBEDDINGS                  192           192 
+
+
+Elapsed: 00:00:00.041
+15 rows selected.
+
+Copy to clipboard
+No data found
+
+Copy to clipboard
+SURGE_LABEL PLANS 
+----------- ----- 
+SURGE          96 
+STABLE         96 
+
+
+Elapsed: 00:00:00.049
+2 rows selected.
+
+Copy to clipboard

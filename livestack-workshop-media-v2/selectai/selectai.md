@@ -1,0 +1,444 @@
+# Ask Media Questions with Select AI
+
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  },
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
+
+## Introduction
+
+Nina Patel is an audience insights analyst at Seer Media. She wants to ask media
+questions without writing each SQL query from scratch.
+
+Jessica, the DBA, has configured a Select AI profile for the media schema before
+this lab. Nina can ask a question in ordinary language. Select AI uses the
+profile and the database metadata to generate SQL, run it, or explain the
+result.
+
+Nina still needs to review the generated SQL. The model can misunderstand a
+question or choose the wrong columns. The useful pattern is simple: ask a
+question, inspect the SQL, run it only when it makes sense, and refine the
+question when the result is not what the business user needs.
+
+In this lab, you check the available Select AI profile, ask a media question,
+inspect the SQL behind the answer, and improve the question for a more useful
+business result.
+
+![Jessica and Nina introduce media questions and an AI agent](images/media-nina.png)
+
+<details>
+<!-- markdownlint-disable-next-line MD013 -->
+<summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
+
+> * **Select AI** lets a user work with database information through a
+>   natural-language question.
+>
+> * An **AI profile** connects Select AI to an AI provider and identifies the
+>   database objects that may be used for the question.
+>
+> * **Generated SQL** is the SQL statement created from the question. Nina
+>   should inspect it before relying on the result.
+>
+> * A **natural-language prompt** is the question sent to Select AI, such as
+>   `Which five content assets have the highest campaign value proxy?`
+
+</details>
+
+### Objectives
+
+* Check which Select AI profile is available in the schema.
+* Add the five Media semantic views to the profile and enforce its object list.
+* Generate SQL from a media question and inspect it.
+* Run a natural-language question through `DBMS_CLOUD_AI.GENERATE`.
+* Improve a question so the result contains the business details Nina needs.
+* Explain why generated SQL still requires review.
+
+Estimated Time: **10 minutes**
+
+### Hands-on Scenario
+
+| Step | Media & Entertainment focus |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| Business Problem | Nina needs answers from media data without writing every query from scratch. |
+| Technical Challenge | The question must be translated into SQL against the governed media schema. |
+| Persona Focus | You follow Nina as she checks, reviews, and improves a Select AI question. |
+| What You Will See | A natural-language question becomes SQL that can be inspected and run in the database. |
+| Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation. |
+| Outcome | Nina gets a repeatable way to ask media questions while keeping SQL review in the process. |
+
+> **SQL Worksheet reminder:** See [Getting Started, Task 2][link-1] for the
+> steps to open SQL Worksheet and run SQL. Use **Run Statement** for queries.
+> For the Task 2 PL/SQL block, include the final `/` and select **Run Script**.
+
+## Task 1: Check the Select AI profile
+
+Select AI uses an AI profile to identify the AI provider and the database
+objects available for natural-language questions. The workshop database should
+already contain an enabled profile for the `LLUSER` schema.
+
+The handoff loader creates the data and semantic views; it does not create
+provider credentials or an AI profile. Before starting, confirm that the
+administrator has enabled provider access, granted `EXECUTE` on `DBMS_CLOUD_AI`
+to `LLUSER`, and created the `SEER_MEDIA_PROFILE` profile. Ask the facilitator
+to complete this setup before continuing.
+
+1. Run this query:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           status,
+           description
+    FROM user_cloud_ai_profiles
+    ORDER BY profile_name;
+    </copy>
+    ```
+
+    This workshop uses the enabled `SEER_MEDIA_PROFILE` profile. Confirm that it
+    is enabled before continuing. If it is not present, complete the provider
+    setup with the administrator before continuing.
+
+2. Review the profile attributes:
+  
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    ORDER BY profile_name, attribute_name;
+    </copy>
+    ```
+
+    ![AI profile attributes before configuring the Media object list](images/attribute-name.png)
+
+    The attributes show how the profile is configured and which database objects
+    are available to Select AI. Do not copy credentials. In Task 2, you will
+    update the object list, enforcement setting, and metadata comments setting.
+
+    If `credential_name` is `OCI$RESOURCE_PRINCIPAL`, check the grant below. The
+    credential belongs to `ADMIN`, so an empty `USER_CREDENTIALS` result does
+    not mean it is missing.
+
+    ```sql
+    <copy>
+    SELECT table_schema,
+           table_name,
+           grantee,
+           privilege,
+           grantable
+    FROM all_tab_privs
+    WHERE table_schema = 'ADMIN'
+      AND table_name = 'OCI$RESOURCE_PRINCIPAL'
+      AND grantee = USER
+      AND privilege = 'EXECUTE';
+    </copy>
+    ```
+
+    ![EXECUTE grant on ADMIN.OCI$RESOURCE_PRINCIPAL for LLUSER](images/l7t1s2-2.png)
+
+    Expect an `EXECUTE` grant for `LLUSER`. Profile and grant metadata establish
+    configuration; Task 3 tests whether the selected model can answer a request.
+    For another provider, retain the facilitator's approved credential and
+    network configuration.
+
+## Task 2: Add the Media semantic views to the profile
+
+The loader keeps physical names such as `PRODUCTS`, `ORDERS`, and `CUSTOMERS`
+for application compatibility. Its five `MEDIA_*` views expose content assets,
+campaign orders, audience signals, distribution capacity, and creator
+relationships using Media business terms. Jessica adds these views to
+`SEER_MEDIA_PROFILE`.
+
+1. Add the Media semantic views and enable object-list enforcement. Copy the
+    entire block, including the final `/`, and choose **Run Script**:
+
+    ```sql
+    <copy>
+    BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'SEER_MEDIA_PROFILE',
+        attribute_name  => 'object_list',
+        attribute_value => '[{"owner":"' || USER || '","name":"MEDIA_CONTENT_ASSETS_V"},' ||
+                           '{"owner":"' || USER || '","name":"MEDIA_CAMPAIGN_ORDERS_V"},' ||
+                           '{"owner":"' || USER || '","name":"MEDIA_AUDIENCE_SIGNALS_V"},' ||
+                           '{"owner":"' || USER || '","name":"MEDIA_DISTRIBUTION_CAPACITY_V"},' ||
+                           '{"owner":"' || USER || '","name":"MEDIA_CREATOR_RELATIONSHIPS_V"}]'
+      );
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'SEER_MEDIA_PROFILE',
+        attribute_name  => 'enforce_object_list',
+        attribute_value => 'true'
+      );
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'SEER_MEDIA_PROFILE',
+        attribute_name  => 'comments',
+        attribute_value => 'true'
+      );
+    END;
+    /
+    </copy>
+    ```
+
+2. Confirm the object list:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    WHERE profile_name = 'SEER_MEDIA_PROFILE'
+      AND attribute_name IN ('object_list', 'enforce_object_list', 'comments')
+    ORDER BY attribute_name;
+    </copy>
+    ```
+
+    The result should list the five `MEDIA_*` views and show `true` for
+    `enforce_object_list` and `comments`. The loader supplies descriptions for
+    those views. Object-list enforcement restricts generated SQL to listed
+    objects; database privileges still apply. See
+    <!-- markdownlint-disable-next-line MD013 -->
+    [Oracle profile attributes](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-package.html).
+  
+    ![Media profile enforcement, comments, and object list](images/media-profile.jpg)
+
+## Task 3: Ask a question and inspect the SQL
+
+Nina starts with a simple question: which active content assets have the highest
+campaign value proxy? She first asks Select AI to show the SQL without running
+it. The proxy is the loader's `PRODUCTS.UNIT_PRICE` exposed as
+`CAMPAIGN_VALUE_PROXY`; it is not measured campaign revenue.
+
+Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
+`DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
+
+1. Run the question with the `SEER_MEDIA_PROFILE` profile:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, and campaign_value_proxy. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
+             profile_name => 'SEER_MEDIA_PROFILE',
+             action       => 'showsql'
+           ) AS generated_sql
+    FROM dual;
+    </copy>
+    ```
+  
+    ![Generated SQL for the content asset ranking](images/media-generated-ranking.jpg)
+
+    Screenshots show excerpts of live Media results. Open the CLOB value in SQL
+    Worksheet to inspect the full SQL, JSON result, or explanation. Model
+    responses can vary between runs.
+
+2. Read the generated SQL before running it.
+
+    Check whether the statement uses `MEDIA_CONTENT_ASSETS_V`, filters
+    `IS_ACTIVE = 1`, and returns five rows. The expected ordering is
+    `CAMPAIGN_VALUE_PROXY DESC, PRODUCT_ID ASC`. A statement can be valid SQL
+    and still answer the wrong question.
+
+## Task 4: Run the question in the database
+
+Nina has inspected the SQL from `showsql`. She now submits the same question
+with `runsql`, which may generate a different statement. Compare its result with
+the direct SQL check below.
+
+1. Run the same question with the `runsql` action:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, and campaign_value_proxy. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
+             profile_name => 'SEER_MEDIA_PROFILE',
+             action       => 'runsql'
+           ) AS answer
+    FROM dual;
+    </copy>
+    ```
+  
+    ![Content asset campaign value proxy results](images/media-ranking-result.jpg)
+
+2. Compare the answer with the SQL you inspected in Task 3.
+
+    Run this direct SQL check with **Run Statement** and compare it with the response:
+
+    ```sql
+    <copy>
+    SELECT product_id,
+           content_asset,
+           content_category,
+           studio_or_label,
+           campaign_value_proxy
+    FROM media_content_assets_v
+    WHERE is_active = 1
+    ORDER BY campaign_value_proxy DESC, product_id ASC
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    Select AI runs the generated SQL against the media schema using Nina's
+    database privileges.
+
+    > **Note:** Separate `showsql` and `runsql` calls may generate different
+    > SQL. To execute the exact statement you inspected, copy that SQL into the
+    > worksheet and run it directly. Compare the `runsql` response with the
+    > direct check above.
+
+## Task 5: Improve the business question
+
+Nina's first question gives her a content asset ranking, but she also needs
+enough detail to decide what to review. She changes the question to request
+audience signal count, total capacity units, and reserved capacity units. The
+value proxy still represents unit price, not actual revenue.
+
+1. Use `showsql` to inspect this revised prompt:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, campaign_value_proxy, audience_signal_count, total_capacity_units, and reserved_capacity_units. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
+             profile_name => 'SEER_MEDIA_PROFILE',
+             action       => 'showsql'
+           ) AS generated_sql
+    FROM dual;
+    </copy>
+    ```
+  
+    ![Generated SQL including audience signals and capacity](images/media-generated-capacity.jpg)
+
+2. Review the generated SQL, then run the revised question with `runsql`:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, campaign_value_proxy, audience_signal_count, total_capacity_units, and reserved_capacity_units. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
+             profile_name => 'SEER_MEDIA_PROFILE',
+             action       => 'runsql'
+           ) AS answer
+    FROM dual;
+    </copy>
+    ```
+  
+    ![Content asset results with audience signals and capacity](images/media-capacity-result.jpg)
+
+3. Compare the first and second questions, then check the revised answer against
+    the database.
+
+    The second prompt gives Nina more detail for a review meeting. Check that
+    the result includes the audience and capacity fields. Nina uses view and
+    column names to make her request precise, then checks whether the generated
+    SQL includes them.
+
+    Run this direct SQL check with **Run Statement**. Compare all eight columns
+    and the row order with the revised `runsql` answer:
+
+    ```sql
+    <copy>
+    SELECT product_id,
+           content_asset,
+           content_category,
+           studio_or_label,
+           campaign_value_proxy,
+           audience_signal_count,
+           total_capacity_units,
+           reserved_capacity_units
+    FROM media_content_assets_v
+    WHERE is_active = 1
+    ORDER BY campaign_value_proxy DESC, product_id ASC
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
+
+    The view aggregates inventory capacity and distinct audience signals
+    separately for each content asset. This query reads those prepared totals
+    directly. Use this eight-column result to check the agent's answer in Lab 8.
+
+## Task 6: Explain the result
+
+Nina wants a short explanation of the revised result. Select AI can run the SQL
+and ask the AI provider to describe the returned rows.
+
+1. Run the revised question with the `narrate` action:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, campaign_value_proxy, audience_signal_count, total_capacity_units, and reserved_capacity_units. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
+             profile_name => 'SEER_MEDIA_PROFILE',
+             action       => 'narrate'
+           ) AS explanation
+    FROM dual;
+    </copy>
+    ```
+  
+    ![Generated explanation describes the columns but omits asset values](images/media-narration.jpg)
+
+2. Review the explanation against the SQL result.
+
+    The explanation is a convenience for a business user. The SQL result remains
+    the record Nina can inspect, repeat, and use to check whether the
+    explanation is accurate.
+
+    The captured response describes the columns but omits the five asset names
+    and their values. It also says "highest campaign value," although the
+    question ranks `campaign_value_proxy`. That proxy is an asset's unit price,
+    not actual campaign order value. Nina cannot use this response as a complete
+    business answer.
+
+    Compare your explanation with the `runsql` output from Task 5. Check the
+    asset names, row order, proxy values, audience signal counts, and both
+    capacity columns. In the captured result, Championship Highlights Rights
+    ranks first. Its proxy is 175000, with 19 audience signals, 3032 total
+    capacity units, and 209 reserved capacity units. Check that any explanation
+    of this row preserves those values and meanings.
+
+    Use your returned rows to evaluate the explanation. Model wording can vary,
+    and missing values must be checked in the SQL result.
+
+    > **Note:** The `narrate` action sends the query result to the AI provider
+    > configured in the profile. Use it only for data approved for that
+    > provider.
+
+## Conclusion: Ask, Inspect, and Refine
+
+Nina used Select AI to turn a media question into SQL, reviewed the generated
+statement, ran it in Oracle AI Database, and refined the question when the first
+result lacked the details she needed. Select AI reduces the amount of SQL a
+business user has to write, while SQL review keeps the database operation
+visible.
+
+Nina can review the generated query and check its result against the media
+views. The database applies her access privileges when the SQL runs.
+
+Select AI does not replace judgment. A good workflow is to show the SQL, check
+the views and filters, run the statement, and compare the answer with the
+business question. Nina's narration example also shows why she must check that
+an explanation preserves the returned values and their meaning.
+
+## Next Steps
+
+For the full list of Select AI actions, profile attributes, and supported
+providers, see the
+<!-- markdownlint-disable-next-line MD013 -->
+[Oracle AI Database 26ai Select AI documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
+
+## Acknowledgements
+
+* **Author** - Teodor Constantin Nechita
+* **Contributor** - Vahn Kessler
+* **Last Updated By/Date** - Vahn Kessler, September 2026
+
+[link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet

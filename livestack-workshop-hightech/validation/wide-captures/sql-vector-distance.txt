@@ -1,0 +1,226 @@
+- generic "Selector":
+  - button "Selector":
+    - generic: 
+    - generic: Selector
+- link "Database Actions, Go to Launchpad":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+  - generic: Database Actions
+- generic: "| SQL"
+- search:
+  - button "Search Database (⌘+K)":
+    - generic: Search Database (⌘+K)
+    - generic: 
+- text:                      
+- generic "Need Help?":
+  - button "Need Help?":
+    - generic: 
+    - generic: Need Help?
+- button "LLUSER User Menu":
+  - generic: 
+  - generic "LLUSER"
+  - generic: 
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - text:                                                                                                                                                                                                                                                                                                                             
+  - generic "Resize":
+    - button "Expand"
+  - toolbar "Editing Toolbar":
+    - button "BROWSER[Worksheet ]*":
+      - generic "[Worksheet ]*":
+        - generic "BROWSER"
+        - generic: "[Worksheet ]*"
+      - generic: 
+    - generic "New file":
+      - button "":
+        - generic: 
+        - generic: New file
+        - generic: 
+        - text:  
+    - generic "Open... (Ctrl+O, ⌘+O)":
+      - button "Open... (Ctrl+O, ⌘+O)":
+        - generic: 
+        - generic: Open... (Ctrl+O, ⌘+O)
+    - generic "Save (Ctrl+S, ⌘+S)":
+      - button "Save (Ctrl+S, ⌘+S)":
+        - generic: 
+        - generic: Save (Ctrl+S, ⌘+S)
+    - generic "Run Statement (Ctrl+⏎, ⌘+⏎)":
+      - button "Run Statement (Ctrl+⏎, ⌘+⏎)" [active]:
+        - generic: 
+        - generic: Run Statement (Ctrl+⏎, ⌘+⏎)
+    - button "Run Statement Options":
+      - generic: 
+      - text:  
+    - generic "Run Script (F5)":
+      - button "Run Script (F5)":
+        - generic:  
+        - generic: Run Script (F5)
+    - generic "Create Chart (Ctrl+F11, ⌘+F11)":
+      - button "Create Chart (Ctrl+F11, ⌘+F11)":
+        - generic:  
+        - generic: Create Chart (Ctrl+F11, ⌘+F11)
+    - generic "Explain Plan (F10)":
+      - button "Explain Plan (F10)":
+        - generic: 
+        - generic: Explain Plan (F10)
+    - generic "Autotrace (F6)":
+      - button "Autotrace (F6)":
+        - generic: 
+        - generic: Autotrace (F6)
+    - generic "Download Editor Content (Ctrl+I, ⌘+I)":
+      - button "Download Editor Content (Ctrl+I, ⌘+I)":
+        - generic: 
+        - generic: Download Editor Content (Ctrl+I, ⌘+I)
+    - generic "Format (Ctrl+F7, ⌘+F7)":
+      - button "Format (Ctrl+F7, ⌘+F7)":
+        - generic: 
+        - generic: Format (Ctrl+F7, ⌘+F7)
+    - generic "Convert Case (Ctrl+B, ⌘+B)":
+      - button "":
+        - generic: 
+        - generic: Convert Case (Ctrl+B, ⌘+B)
+        - generic: 
+    - generic "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+      - button "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+        - generic: 
+        - generic: Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+  - toolbar "Editing Toolbar":
+    - text: .
+    - paragraph:
+      - generic: "Consumer group:"
+    - generic "Consumer group":
+      - button "LOW":
+        - generic: LOW
+        - generic: 
+    - generic "Data Load":
+      - button "Data Load":
+        - generic: Data Load
+    - generic "Open In Fullscreen":
+      - button "Open In Fullscreen":
+        - generic: 
+        - generic: Open In Fullscreen
+    - generic "Tour":
+      - button "Tour":
+        - generic: 
+        - generic: Tour
+    - generic "Help (F1)":
+      - button "Help (F1)":
+        - generic: 
+        - generic: Help (F1)
+  - tabpanel:
+    - code:
+      - textbox "Editor content"
+      - textbox
+      - generic: 
+      - generic: "1"
+      - generic: "2"
+      - generic: 
+      - generic: "3"
+      - generic: "4"
+      - generic: "5"
+      - generic: "6"
+      - generic: "7"
+      - generic: "8"
+      - generic: "9"
+      - generic: SELECT so.component_name,
+      - generic: so.category,
+      - generic: VECTOR_DISTANCE(
+      - generic: so.component_embedding,
+      - generic: VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'power control module with stable MOSFET switching and low leakage current' AS DATA),
+      - generic: COSINE) AS vector_distance
+      - generic: FROM components so
+      - generic: ORDER BY vector_distance
+      - generic: FETCH FIRST 5 ROWS ONLY;
+  - generic "Resize":
+    - button "Collapse" [expanded]
+  - tablist:
+    - tab "Query Result" [selected]:
+      - generic: Query Result
+    - tab "Script Output":
+      - generic: Script Output
+    - tab "DBMS Output":
+      - generic: DBMS Output
+    - tab "Explain Plan":
+      - generic: Explain Plan
+    - tab "Autotrace":
+      - generic: Autotrace
+    - tab "SQL History":
+      - generic: SQL History
+    - text: 
+  - generic "Help":
+    - button "Help":
+      - generic: 
+      - generic: Help
+  - tabpanel "Query Result":
+    - toolbar:
+      - generic "Clear Output":
+        - button "Clear Output":
+          - generic: 
+          - generic: Clear Output
+      - generic "Show info":
+        - button "Show info":
+          - generic: 
+          - generic: Show info
+      - generic "Open in new tab":
+        - button "Open in new tab":
+          - generic: 
+          - generic: Open in new tab
+      - generic "Share Query Results":
+        - button "Share Query Results":
+          - generic: 
+          - generic: Share Query Results
+      - button "Download":
+        - generic: Download
+        - generic: 
+        - text:    
+      - generic: "Execution time: 0.226 seconds"
+    - generic "Worksheet Query Result":
+      - application:
+        - generic: This is a data grid with 5 rows and 3 columns.
+        - generic: component_name
+        - generic: category
+        - generic: vector_distance
+        - generic: "1"
+        - generic: "2"
+        - generic: "3"
+        - generic: "4"
+        - generic: "5"
+        - generic "Power control module P09 Rev A": Power control module P09 Rev A 
+        - generic "Power electronics": Power electronics 
+        - generic "0.23647225446585085"
+        - generic "Power control module P03 Rev A": Power control module P03 Rev A 
+        - generic "Power electronics": Power electronics 
+        - generic "0.23700517536799004"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "Power electronics": Power electronics 
+        - generic "0.2398397809243169"
+        - generic "Power control module P07 Rev A": Power control module P07 Rev A 
+        - generic "Power electronics": Power electronics 
+        - generic "0.2436553832087146"
+        - generic "Power control module P12 Rev A": Power control module P12 Rev A 
+        - generic "Power electronics": Power electronics 
+        - generic "0.24937534711319387"
+        - status
+      - text: 
+  - text:            
+- generic "Errors":
+  - generic: 
+  - generic: "0"
+- generic "Warnings":
+  - generic: 
+  - generic: "0"
+- generic "Processes":
+  - generic: 
+  - generic: "1"
+- generic: "|"
+- generic: 7:56:21 PM - 5 rows total
+- generic: 
+- link "Powered by ORDS":
+  - /url: https://oracle.com/rest
+  - generic: Powered by ORDS
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert

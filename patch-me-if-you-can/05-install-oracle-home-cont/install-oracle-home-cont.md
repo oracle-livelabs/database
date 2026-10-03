@@ -1,10 +1,12 @@
 # Install Oracle Home - Continued
 
-In this lab, you will use a gold image to install an Oracle home.
-
 ## Introduction
 
+In this lab, you will use a gold image to install an Oracle home.
+
 Estimated Time: 10 Minutes
+
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:1zpbQPN0H3w)
 
 ### Objectives
 
@@ -203,6 +205,7 @@ Gold images are a convenient way of installing Oracle homes on many different se
 3. Monitor the progress
 
     ``` bash
+    <copy>
     lsj -a 10
     </copy>
     ```

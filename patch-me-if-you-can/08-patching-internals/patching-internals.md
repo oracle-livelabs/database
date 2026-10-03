@@ -6,6 +6,8 @@ In this lab, you will examine how parts of Datapatch work. This will give you in
 
 Estimated Time: 15 Minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:B6SiOHggaS4)
+
 ### Objectives
 
 In this lab, you will:
@@ -105,7 +107,7 @@ Datapatch stores patching information inside the database. Understanding these t
     <summary>*click to see the output*</summary>
 
     ``` text
-       PATCH_ID      ACTION     STATUS                        ACTION_TIME                                              DESCRIPTION
+    PATCH_ID         ACTION     STATUS                        ACTION_TIME                                              DESCRIPTION
     ___________ ___________ __________ __________________________________ ________________________________________________________
        38194382 APPLY       SUCCESS    01-SEP-26 01.09.16.786413000 PM    OJVM RELEASE UPDATE: 19.29.0.0.251021 (38194382)
        38291812 APPLY       SUCCESS    01-SEP-26 01.10.51.564986000 PM    Database Release Update : 19.29.0.0.251021 (38291812)
@@ -730,7 +732,7 @@ Every time you patch your database, Datapatch stores the rollback scripts inside
     <summary>*click to see the output*</summary>
 
     ``` text
-                                                               DESCRIPTION    SIZE_MB
+    DESCRIPTION                                                               SIZE_MB
     ______________________________________________________________________ __________
     19.30 OJVM PATCH APPLY IS FAILING ON SECOND NODE IN RAC ENVIRONMENT
     DATAPUMP BUNDLE PATCH 19.29.0.0.0

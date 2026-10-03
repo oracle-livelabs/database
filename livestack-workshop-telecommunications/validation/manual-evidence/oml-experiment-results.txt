@@ -1,0 +1,243 @@
+- paragraph: Experiment - OML
+- text:               
+- banner:
+  - generic "OML Navigation":
+    - button "":
+      - generic: 
+  - img "Oracle Logo": 
+  - heading "Machine Learning" [level=1]
+  - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"':
+    - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"':
+      - button:
+        - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"': 
+        - generic: LLUSER Project
+        - generic: LLUSER Workspace
+  - button "":
+    - generic: 
+    - text: 
+  - separator
+  - button "LLUSER":
+    - generic: 
+    - generic: LLUSER
+  - generic "Help for current page":
+    - button "Help for current page":
+      - generic: 
+      - generic: Help for current page
+  - generic:      
+  - generic:          
+  - generic:  
+- main:
+  - link "Back to Experiments":
+    - /url: "#"
+    - text: <- Experiments
+  - heading "Service Plan Demand Surge" [level=1]
+  - generic:           
+  - text: 
+  - generic "Completed":
+    - button "Completed":
+      - generic: 
+      - generic: Completed
+  - generic "Edit":
+    - button "Edit":
+      - generic: 
+      - generic: Edit
+  - button "Start":
+    - generic: 
+    - generic: Start
+    - generic: 
+  - generic: 
+  - button "Settings": 
+  - heading "Settings" [level=1]
+  - heading "Balanced Accuracy" [level=1]
+  - 'application "Data Visualization: Chart"':
+  - heading "Leader Board" [level=1]
+  - toolbar "Leaderboard Actions":
+    - generic "Deploy":
+      - button "Deploy":
+        - generic: Deploy
+    - generic "Rename":
+      - button "Rename":
+        - generic: Rename
+    - generic "Create Notebook":
+      - button "Create Notebook":
+        - generic: Create Notebook
+    - generic "Metrics":
+      - button "Metrics" [active]:
+        - generic: Metrics
+  - text:               
+  - generic "Leaderboard Table":
+    - application:
+      - rowgroup:
+        - row "Algorithm Model Name Balanced Accuracy Accuracy":
+          - columnheader "Algorithm":
+            - generic: Algorithm
+            - generic: 
+          - columnheader "Model Name":
+            - generic: Model Name
+            - generic: 
+          - columnheader "Balanced Accuracy":
+            - generic: Balanced Accuracy
+            - generic: 
+          - columnheader "Accuracy":
+            - generic: Accuracy
+            - generic: 
+      - rowgroup:
+        - row "Decision Tree DT_D7BB71404A 1.0000 1.0000":
+          - cell "Decision Tree"
+          - cell "DT_D7BB71404A":
+            - link "DT_D7BB71404A":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+        - row "Generalized Linear Model GLM_FA9D96710A 1.0000 1.0000":
+          - cell "Generalized Linear Model"
+          - cell "GLM_FA9D96710A":
+            - link "GLM_FA9D96710A":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+        - row "Generalized Linear Model (Ridge Regression) GLMR_B5BE5C9CD7 1.0000 1.0000":
+          - cell "Generalized Linear Model (Ridge Regression)"
+          - cell "GLMR_B5BE5C9CD7":
+            - link "GLMR_B5BE5C9CD7":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+        - row "Neural Network NN_383797CF9C 1.0000 1.0000":
+          - cell "Neural Network"
+          - cell "NN_383797CF9C":
+            - link "NN_383797CF9C":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+        - row "Random Forest RF_6C29EF0600 1.0000 1.0000":
+          - cell "Random Forest"
+          - cell "RF_6C29EF0600":
+            - link "RF_6C29EF0600":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+    - status
+    - generic: Table with 3 columns and more than 5 rows
+    - generic: Row 2
+    - generic: Column 1
+    - generic: Select Row
+    - generic: selected
+    - generic: unselected Contains Controls
+  - generic:  
+  - generic:  
+  - generic: 
+  - generic:  
+  - button "Features" [expanded]: 
+  - heading "Features" [level=1]
+  - toolbar:
+    - button "Refresh":
+      - generic: 
+      - generic: Refresh
+    - generic:   
+    - textbox "Filter"
+  - generic "Features":
+    - application " Refresh":
+      - rowgroup:
+        - row "Name Importance Type":
+          - columnheader
+          - columnheader "Name":
+            - generic: Name
+            - generic: 
+          - columnheader "Importance":
+            - generic: Importance
+            - generic: 
+          - columnheader "Type":
+            - generic: Type
+            - generic: 
+      - rowgroup:
+        - 'row "AVG_UTILIZATION_PCT Feature importance: 0.566 NUMBER"':
+          - cell
+          - cell "AVG_UTILIZATION_PCT"
+          - 'cell "Feature importance: 0.566"':
+            - 'img "Feature importance: 0.566"':
+          - cell "NUMBER"
+        - 'row "BUSY_INTERVALS Feature importance: 0.199 NUMBER"':
+          - cell
+          - cell "BUSY_INTERVALS"
+          - 'cell "Feature importance: 0.199"':
+            - 'img "Feature importance: 0.199"':
+          - cell "NUMBER"
+        - 'row "CONNECTIONS_ORDERED Feature importance: 0.132 NUMBER"':
+          - cell
+          - cell "CONNECTIONS_ORDERED"
+          - 'cell "Feature importance: 0.132"':
+            - 'img "Feature importance: 0.132"':
+          - cell "NUMBER"
+        - 'row "CONGESTED_INTERVALS Feature importance: 0.099 NUMBER"':
+          - cell
+          - cell "CONGESTED_INTERVALS"
+          - 'cell "Feature importance: 0.099"':
+            - 'img "Feature importance: 0.099"':
+          - cell "NUMBER"
+        - 'row "CATEGORY Feature importance: 0.003 VARCHAR2"':
+          - cell
+          - cell "CATEGORY"
+          - 'cell "Feature importance: 0.003"':
+            - 'img "Feature importance: 0.003"':
+          - cell "VARCHAR2"
+        - 'row "MONTHLY_FEE Feature importance: 0.001 NUMBER"':
+          - cell
+          - cell "MONTHLY_FEE"
+          - 'cell "Feature importance: 0.001"':
+            - 'img "Feature importance: 0.001"':
+          - cell "NUMBER"
+        - 'row "AVG_SENTIMENT Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "AVG_SENTIMENT"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "DATA_VOLUME_GB Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "DATA_VOLUME_GB"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "DROPPED_SESSIONS Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "DROPPED_SESSIONS"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "MONTHLY_CHARGES Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "MONTHLY_CHARGES"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "OUTAGE_MINUTES Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "OUTAGE_MINUTES"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "TOTAL_REPORTS Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "TOTAL_REPORTS"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+    - status
+    - generic: Select Row
+- contentinfo

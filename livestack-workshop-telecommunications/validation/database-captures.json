@@ -1,0 +1,482 @@
+[
+  {
+    "id": "CAP-01",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "file": "subscriber-concern-vector-search/images/sql-embedding-model.png",
+    "sha256": "38e163e1ce13e8cb7b52d27d9b70c7c1519f26dc896be818d519c7b0939431f3",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-02",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "file": "subscriber-concern-vector-search/images/sql-vector-values.png",
+    "sha256": "73e85324ec24fef6bc8b1b165ef3a8ba9bf2d2ba57a3adf4d8feb367fc175ea0",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-03",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "file": "subscriber-concern-vector-search/images/sql-vector-distance.png",
+    "sha256": "4c1325cb09790288b68abd71aba82496bc8c2efe73f573e493c36615893ce880",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-04",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "file": "subscriber-concern-vector-search/images/sql-vector-similarity.png",
+    "sha256": "17faacfbea9a5303ba37f01a9a19aa02d42d8716458ecc8fe37be1dfb1ca3efe",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-05",
+    "lesson": "subscriber-concern-vector-search/subscriber-concern-vector-search.md",
+    "file": "subscriber-concern-vector-search/images/sql-vector-subscribers.png",
+    "sha256": "5f6a07715ceb00744d3dad96f7e54be67250b7fdc4ead29756bfc2d68804b949",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-08",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/sql-graph-direct.png",
+    "sha256": "229ec7d265cebe97a69a826e71510c70de062de96272f8bb0e61fcba3af07d94",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-09",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/sql-graph-four-hop.png",
+    "sha256": "e75ffa10b7c20fa535e9a08f1b21ded2e56b0b0bd4c030e6ad7fa8c0fa0df692",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-10",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/sql-graph-shared.png",
+    "sha256": "0ce4012c161a2b3a3541464766fe0cdfa0ecb42ab2a4d7d155a3555cc95ae503",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-11",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/graph-launch.png",
+    "sha256": "40d42c8b85b03720f96f0fce28f838fdcc572cf9b23262f7cb81204d6ef73696",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-12",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/graph-studio-overview.png",
+    "sha256": "7398663adc74d76f7a920b75a6a90685b1c6d7be3dd7f75723c0b44c67459245",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-13",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/graph-notebooks.png",
+    "sha256": "24a0f6a1a56e9ab311a9fe9b76c2b5c8893610cc7d70a5fa290730cd15080d78",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-14",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/graph-import-dialog.png",
+    "sha256": "4170bd796feb8964736f26f78d96c6e7d39b16f62792b43be4ea287a48ec9bf8",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-15",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/graph-import-file.png",
+    "sha256": "234a89b3d41281fc9518f5163f3a7a8d1c320692e36ddf0bb2e1e4231136d105",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-16",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/graph-notebook-top.png",
+    "sha256": "c2a02b0b626d1f4eef8ee1de646bd35b55603041fa0276933de1dcaff5a5261b",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-17",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/live-09-graph-notebook-table.png",
+    "sha256": "5a88b109b64add7215ceef9fa2ab569401f12a5bff588261e7c5eed72bf9f681",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-18",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/live-10-graph-order-network.png",
+    "sha256": "cebe795472b0b8e101246c3f81bab2e0d31a432b0459b4d3316cb2f5a587b377",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-19",
+    "lesson": "activation-fraud-network/activation-fraud-network.md",
+    "file": "activation-fraud-network/images/live-11-graph-shared-device.png",
+    "sha256": "4de5518697239c5009fd0b58b0d968e538a93c58876787c6bb001320563d62e4",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-21",
+    "lesson": "selectai-agent/selectai-agent.md",
+    "file": "selectai-agent/images/sql-agent-answer.png",
+    "sha256": "f8e2a545b5e90e789c745d71359ef45df0d29718c6ffcd95767fc5bf42f6672f",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-22",
+    "lesson": "selectai-agent/selectai-agent.md",
+    "file": "selectai-agent/images/sql-agent-history.png",
+    "sha256": "db8481eee238ade4b136e8527b84c525f387e4d25b6658a744fabacca5afb73e",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-23",
+    "lesson": "selectai-agent/selectai-agent.md",
+    "file": "selectai-agent/images/sql-agent-tools.png",
+    "sha256": "d6d3a17b6aba25666eeb76a30056c9d07f4325ae11239aa820cd4a437d8c3dde",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-24",
+    "lesson": "selectai/selectai.md",
+    "file": "selectai/images/sql-ai-object-list.png",
+    "sha256": "7301e5feb6ea4da2b43d8cec8dd3dd500d779b332a42fc56e022ae55b7200a9e",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-25",
+    "lesson": "selectai/selectai.md",
+    "file": "selectai/images/sql-ai-generated.png",
+    "sha256": "0090172f4e52a199039836f3bab69e010c8a80d25b62497159bf6deaeeb7f5aa",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-26",
+    "lesson": "selectai/selectai.md",
+    "file": "selectai/images/sql-ai-answer.png",
+    "sha256": "d3ee316b389bd84df13377f289e142bcefb12314f5b16dfeeea5f274df38acae",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-27",
+    "lesson": "selectai/selectai.md",
+    "file": "selectai/images/sql-ai-refined-generated.png",
+    "sha256": "f4a411da9abd3b93dcb32b6a4b3968dd8a7c9c51426e28b8a2cedf0e1c8e1d4c",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-28",
+    "lesson": "selectai/selectai.md",
+    "file": "selectai/images/sql-ai-refined-answer.png",
+    "sha256": "c8e5d2e09637fcbee11258f779a13df67906624d5c049ef05d4d8f16ce1e890b",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-29",
+    "lesson": "selectai/selectai.md",
+    "file": "selectai/images/sql-ai-narration.png",
+    "sha256": "359f10826598b69bf01e3f1822ea6bff35d017b0b0ff2224073d9a9dcc4a99e6",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-30",
+    "lesson": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+    "file": "subscriber-operations-dashboard/images/sql-dashboard.png",
+    "sha256": "f425faef1b711ad193138df6ecfc03d9f9b0c7fd6bfa31b5d18ee6ebbe6a3570",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-31",
+    "lesson": "subscriber-operations-dashboard/subscriber-operations-dashboard.md",
+    "file": "subscriber-operations-dashboard/images/sql-dashboard-followup.png",
+    "sha256": "daff71ca836475bc8de7c9422aa82c85da67c9851e7ba005fb24acb8455da666",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-34",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/sql-oml-training.png",
+    "sha256": "7dacd410859ed2693033857e39510544e1599b90ce12964b370f0a14c26ddd2c",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-35",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/oml-launch.png",
+    "sha256": "97c4d5f24cc004c2805766737f3cc09fff974cfa7ab3b3826e5e4e75ed5e82ec",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-36",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/oml-home.png",
+    "sha256": "d496a40424245b4fdf7a82ac37c790692a236b268306552853b61c4be4ba29f0",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-37",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/oml-settings.png",
+    "sha256": "377475c5a2b9774c081550037ee899af82a3cb118737586094621023b2beb286",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-38",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/oml-leaderboard.png",
+    "sha256": "35e8586f02530109f87e7be7169c91c1d497dd5eededf5b3fc35696d2e98da08",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-39",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/oml-model-comparison.png",
+    "sha256": "28566f48107d8412f046f15bd3de0c987dba80d6f493a67a5f3639b6deb61c3a",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-40",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/oml-confusion-matrix.png",
+    "sha256": "ce18205d82cfc38920c2b4be553bbb583b12e795d0f9e4bc81b52b52a2ff7258",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-41",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/oml-prediction-impact.png",
+    "sha256": "68106f1dcca750699da52fb45ad019ea4612fabb9a1dd553572c2d972b45fe0c",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-42",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/sql-oml-model.png",
+    "sha256": "7c703803eaf7620cf9e60a12273322cd8385af0ecfe97cef4a0a3810d9de8a0c",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-43",
+    "lesson": "plan-demand-oml/plan-demand-oml.md",
+    "file": "plan-demand-oml/images/sql-oml-scoring.png",
+    "sha256": "501ca9ae352db57bc004a6549d67ce0ded285ed6cd268b1b34ce35e68bcc960a",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-47",
+    "lesson": "getting-started/getting-started.md",
+    "file": "getting-started/images/sql-connection.png",
+    "sha256": "504c1fac32b22f4eabfeab418cbb1c50d3aeed1501530c8a3d8fb0716a763d58",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-49",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "file": "network-site-spatial/images/sql-spatial-points.png",
+    "sha256": "8ccab42af4abe5b23667c66804d7acae575ef90f1089dc5ca41c3181c7addf28",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-50",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "file": "network-site-spatial/images/sql-spatial-new-york.png",
+    "sha256": "3ba7ea6ce292f733d495487e07d2ad1a9db3323932b326c55582e507ebb35de7",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-51",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "file": "network-site-spatial/images/sql-spatial-chicago.png",
+    "sha256": "070419c06d10e6a54c677bda76a28036bb93b93d233c7269299229c7f1de106c",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-52",
+    "lesson": "network-site-spatial/network-site-spatial.md",
+    "file": "network-site-spatial/images/sql-spatial-routing.png",
+    "sha256": "682689deaa481105f031181cb9bca5a84de8591ab6d189ff4a866d8219d4de31",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-53",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "file": "service-order-duality/images/sql-duality-document.png",
+    "sha256": "eea11d0a34acac3ecccddf5a6a9cdedfad71f45077946b4027ef9503191a8cec",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-54",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "file": "service-order-duality/images/sql-duality-contract.png",
+    "sha256": "7c02f288d572c27874c2d371e9cc106bfd86c71a700b48eaf07c9099fe741d6c",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-55",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "file": "service-order-duality/images/sql-duality-confirmed.png",
+    "sha256": "be924cc9bb6253ff0c16ef725ea69aa7545d25f45178e9cbbd6657b09b63be61",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-56",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "file": "service-order-duality/images/sql-duality-projection.png",
+    "sha256": "3210c73b78d27789d46fc60fe909e6294157e54068d50c20eaf5323523eeb949",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  },
+  {
+    "id": "CAP-57",
+    "lesson": "service-order-duality/service-order-duality.md",
+    "file": "service-order-duality/images/sql-duality-relational.png",
+    "sha256": "90a31e9699f0eacebe4b87bfe592ff9723dd93089ef749da893b072ffe153381",
+    "date": "2026-09-23",
+    "actor": "LLUSER",
+    "source": "Manual LIVESTACKTELCO database; shared browser",
+    "status": "captured and visually reviewed"
+  }
+]

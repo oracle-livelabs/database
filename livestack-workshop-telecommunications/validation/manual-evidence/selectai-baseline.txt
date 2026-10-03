@@ -1,0 +1,36 @@
+Clear Output
+Show info
+Open in new tab
+Share Query Results
+Download
+Execution time: 0.035 seconds
+This is a data grid with 5 rows and 4 columns.
+PLAN_NAME
+CATEGORY
+MONTHLY_CHARGES
+CONNECTIONS
+1
+2
+3
+4
+5
+Oak Park Fiber Connect - 12-month contract
+Fiber
+4560
+48
+Queens Fiber Connect - 12-month contract
+Fiber
+4560
+48
+White Plains Fiber Connect - 12-month contract
+Fiber
+4560
+48
+Newark Fiber Connect - 12-month contract
+Fiber
+4560
+48
+Rosemont Fiber Connect - 12-month contract
+Fiber
+4560
+48

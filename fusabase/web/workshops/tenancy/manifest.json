@@ -46,6 +46,16 @@
       "title": "Lab 7: Security Rules",
       "filename": "../../security-rules/security-rules.md",
       "description": "Replace the permissive starter rule with auth-based access controls."
+    },
+    {
+      "title": "Lab 8: Google Social Sign-In",
+      "filename": "../../social-sign-in/social-sign-in.md",
+      "description": "Configure Google OAuth and add Google popup sign-in to Recipe Share."
+    },
+    {
+      "title": "Lab 9: GitHub Social Sign-In",
+      "filename": "../../github-social-sign-in/github-social-sign-in.md",
+      "description": "Configure GitHub OAuth and add GitHub popup sign-in to Recipe Share."
     }
   ]
 }

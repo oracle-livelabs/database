@@ -8,6 +8,8 @@ The PDB, *YELLOW*, has already been upgraded to the new release of Oracle AI Dat
 
 Estimated Time: 30 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:B9rI7owT6aU)
+
 ### Objectives
 
 In this lab, you will:
@@ -166,7 +168,7 @@ You start the downgrade process while the PDB is still running the new release o
 
 Now that the PDB is open in downgrade mode, you can start the process.
 
-1. Use the `dbdowngrade` cript to start the downgrade process. The script completes in only a few minutes.
+1. Use the `dbdowngrade` script to start the downgrade process. The script completes in only a few minutes.
 
     ``` bash
     <copy>
@@ -209,7 +211,7 @@ Now that the PDB is open in downgrade mode, you can start the process.
 
     ``` sql
     <copy>
-    alter pluggable database YELLOW close;
+    alter pluggable database YELLOW close immediate;
     alter pluggable database YELLOW unplug into '/home/oracle/scripts/upg-yellow.xml';
     </copy>
     ```
@@ -367,7 +369,7 @@ You need to plug the PDB into a CDB running Oracle Database 19c and complete the
     ``` sql
     <copy>
     alter session set container=cdb$root;
-    alter pluggable database YELLOW close;
+    alter pluggable database YELLOW close immediate;
     alter pluggable database YELLOW open;
     </copy>
     ```
@@ -472,7 +474,7 @@ You need to plug the PDB into a CDB running Oracle Database 19c and complete the
 
 9. Gather dictionary and fixed objects statistics.
 
-    **(In the interest of time, skip this step in this lab.)**
+    **(In the interest of time, you skip it in this lab.)**
 
     ``` sql
     exec dbms_stats.gather_dictionary_stats;

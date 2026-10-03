@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="720" viewBox="0 0 1240 720" role="img" aria-labelledby="title desc">
+<title id="title">SEER Telecomms core service-order model</title>
+<desc id="desc">Subscribers and network sites each have many service orders. Network sites have service plans. Orders have many service-order lines and each line references one plan. Lines count simultaneous connections at a monthly fee.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="4" orient="auto"><path d="M0 0L9 4L0 8" fill="none" stroke="#526761" stroke-width="1.5"/></marker></defs>
+<rect width="1240" height="720" fill="#faf9f7"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#26332f">
+<text x="40" y="52" font-size="30" font-weight="bold">SEER Telecomms</text>
+<text x="40" y="83" font-size="18">One initial monthly period per order · USD · synthetic workshop data</text>
+<g fill="white" stroke="#71877d" stroke-width="2">
+<rect x="40" y="135" width="340" height="165" rx="6"/><rect x="40" y="410" width="340" height="190" rx="6"/>
+<rect x="460" y="135" width="340" height="205" rx="6"/><rect x="460" y="410" width="340" height="220" rx="6"/>
+<rect x="870" y="240" width="330" height="200" rx="6"/>
+</g>
+<g font-size="22" font-weight="bold"><text x="60" y="169">SUBSCRIBERS</text><text x="60" y="444">NETWORK_SITES</text><text x="480" y="169">SERVICE_ORDERS</text><text x="480" y="444">SERVICE_PLANS</text><text x="890" y="274">SERVICE_ORDER_LINES</text></g>
+<g font-size="18">
+<text x="60" y="205">PK subscriber_id</text><text x="60" y="237">Contact · customer segment</text><text x="60" y="269">Service address · preferences</text>
+<text x="60" y="480">PK site_id</text><text x="60" y="512">Location · capacity_mbps</text><text x="60" y="544">utilization_pct · is_active</text><text x="60" y="576">Access-site inventory</text>
+<text x="480" y="205">PK order_id</text><text x="480" y="237">FK subscriber_id · FK site_id</text><text x="480" y="269">period_start · period_end</text><text x="480" y="301">order_status · order_total · activation_fee</text>
+<text x="480" y="480">PK plan_id · FK site_id</text><text x="480" y="512">Mobile · fixed wireless · fiber · IoT</text><text x="480" y="544">Technology · speed · allowance</text><text x="480" y="576">Billing model · monthly_fee</text><text x="480" y="608">Site-scoped plan variant</text>
+<text x="890" y="310">PK order_line_id</text><text x="890" y="342">FK order_id · FK plan_id</text><text x="890" y="374">connection_count · monthly_fee</text><text x="890" y="406">line_total = count × fee</text>
+</g>
+<g stroke="#526761" stroke-width="2" fill="none" marker-end="url(#arrow)"><path d="M380 215H452"/><path d="M380 495H452"/><path d="M210 410V365H410V315H452"/><path d="M800 250H862"/><path d="M800 480H835V410H862"/></g>
+<g font-size="15"><text x="391" y="202">1 : many</text><text x="391" y="482">1 : many</text><text x="220" y="355">1 : many</text><text x="805" y="236">1 : many</text><text x="836" y="463">1 : many</text></g>
+<text x="40" y="680" font-size="17">Order total = sum of monthly line charges + activation fee. Nearby sites do not establish measured coverage.</text>
+</g></svg>

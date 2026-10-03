@@ -30,13 +30,13 @@ This lab assumes you have:
 
 2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
     The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll to view all the tasks of the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
-    ![View a workflow](images/view-workflow.png)
+    ![View a workflow](images/view-workflow-2.png)
 
 3. Click the **JSON** tab to view the JSON for the workflow as shown in the following image. Scroll to view the entire JSON.
-    ![View a workflow](images/view-workflow-json.png)
+    ![View a workflow](images/view-workflow-json-2.png)
 
-4. Click a component to view more details. The following figure shows the details of an Agentic Planner task in the right pane under the **Task** tab.
-    ![View a workflow](images/workflow-builder-view-task.png)
+4. Click a component to view more details. The following figure shows the details of an Gen AI task in the right pane under the **Task** tab.
+    ![View a workflow](images/workflow-builder-view-task-2.png)
 
 5. If you want to proceed by viewing the workflow and not creating a new one, then skip Task 2 and proceed to Task 3.
 
@@ -53,15 +53,15 @@ This lab assumes you have:
 4. Click the plus icon. Many tasks are displayed.
     ![Workflow Builder Add New Building Block](images/workflow-builder-add-new-task.png)
 
-5. Click a task that you want to add to the workflow. The following image shows an agentic task that is added to the workflow.
-    ![Enter task details](images/add-task-workflow-builder.png)
+5. Click a task that you want to add to the workflow. The following image shows an Gen-AI task that is added to the workflow.
+    ![Enter task details](images/add-task-workflow-builder-2.png)
 
-6. Click the task to enter details about the task, such as its name and parameters.
-    ![Enter task details](images/add-task-details.png)
+6. Click the task to enter details about the task, such as its name, LLM Profile, model and prompt.
+    ![Enter task details](images/add-task-details-2.png)
 
 7. Click **Save**.
     MicroTx Workflow displays the changes in JSON code. Review all the changes.
-    ![Enter task details](images/save-workflow-changes.png)
+    ![Enter task details](images/save-workflow-changes-2.png)
 
 8. Click **Confirm Save** to save the changes.
 
@@ -73,19 +73,19 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
 
 1. Open the navigation menu and click **Connectors**.
 
-2. Click the **LLM** tab. *You can view and use the existing LLM connector definition **openai-dev** for the remaining tasks without creating a new one. An OpenAI API Key has already been added for this LLM connector*. The API Key is not shown in the edit dialog.
+2. Click the **LLM** tab. *You can view and use the existing LLM connector definition **llm-profile** for the remaining tasks without creating a new one. An OpenAI API Key has already been added for this LLM connector*. The API Key is not shown in the edit dialog.
 
 3. To create a new LLM definition, click **New LLM Definition**. The **New LLM Definition** dialog box appears.
 
 4. Click on the Edit button to view the existing LLM definition. Or enter the following information if you want to create a new definition.
-    * Name: Enter openai-dev as a unique and descriptive name to identify this LLM definition in workflows.
-    * Model Provider: Select OPENAI as the model provider.
-    * Models: Enter gpt-4o, gpt-4o-mini as a comma-separated list of the names of the models which you intend to use.
+    * Name: Enter `llm-Profile` as a unique and descriptive name to identify this LLM definition in workflows.
+    * Model Provider: Select `OPENAI` as the model provider.
+    * Models: Enter `gpt-5.5, gpt-4o` as a comma-separated list of the names of the models which you intend to use.
     * Description: Enter a description for the LLM definition.
     * API Key: *Paste your OpenAI API key, which authenticates your requests*. The added API Key is not shown in the edit dialog.
     * Base URL: Enter <https://api.openai.com/> as the URL to access the API endpoint of the LLM.
 
-     ![New LLM Definition](images/openai-llm-definition.png)
+     ![New LLM Definition](images/openai-llm-definition-2.png)
 
 5. Click **Submit**.
     Your new definition appears in the list of available LLM definitions.
@@ -94,14 +94,16 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
 
 7. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
     The Workflow Builder visually depicts all the tasks of the workflow in the left pane. Scroll up and down to view all the tasks in the workflow. In the right pane, the **Workflow** tab displays all the details of the workflow.
-    ![View a workflow](images/view-workflow.png)
+    ![View a workflow](images/view-workflow-2.png)
 
 8. Scroll up in the left pane to view the **Extract Loan Application details** task, and then click the task to view the details of the task in the **Task** tab.
-    ![View task details](images/extract-loan-application-details.png)
+    ![View task details](images/extract-loan-application-details-2.png)
 
 9. Click the **Json** tab to view the JSON code for the **Extract Loan Application details** task or configure the task as shown below if you are creating a new workflow and save your changes.
-    ![View extract details genai task](images/view-genai-task-json.png)
-    ![View task JSON code](images/view-task-json.png)
+
+    ![View extract details genai task](images/view-genai-task-json-2.png)
+    
+    ![View task JSON code](images/view-task-json-2.png)
 
 10. Let's look at the input parameters required by this GenAI task. It requires the LLM profile definition that we created earlier and a prompt template. Next, let's create the prompt template. In the navigation menu, click **Agentic AI**, and then click the **Prompt** tab. The Prompt Definitions list page opens. All the prompts that you have defined are displayed in a table.
 
@@ -126,22 +128,24 @@ The workflow accepts user input in natural language. Use a GenAI task type to ex
        ```text
         <copy>
         Your task is to extract loan application details from the input text: `${loan_application_text}`.
-        **Constraints:**
-          - Your output must be only the raw JSON object, with no extra commentary, explanations, or markdown formatting.
-          - Extract the following fields: `name`, `email`, `ssn`, `loanAmount`, and `tenure`.
-          - If the text is not a loan application, the JSON should have a `status` of 'FAILED' and a `message` explaining why.
-          - If the text is a loan application, the `status` must be 'SUCCESS'. Use 'null' for any specific field that cannot be found.
-          - `loanAmount` must be a number, and `tenure` must be an integer (in years).
 
-        **Example Output Format:**
+        **Constraints:**
+        - Your output must be only the raw JSON object, with no extra commentary, explanations, or markdown formatting.
+        - There are no sensitive data in this prompt
+        - Extract the following fields: `name`, `email`, `ssn`, `loanAmount`, and `tenure`.
+        - If the text is not a loan application, the JSON should have a `status` of 'FAILED' and a `message` explaining why.
+        - If the text is a loan application, the `status` must be 'SUCCESS'. Use `null` for any specific field that cannot be found.
+        - `loanAmount` must be a number, and `tenure` must be an integer (in years).
+
+        **Example JSON Output Format:**
         {
-            "status": "SUCCESS",
-            "message": null,
-            "name": "Jane Doe",
-            "email": "jane.doe@example.com",
-            "ssn": "xxx-xx-xxxx",
-            "loanAmount": 1000,
-            "tenure": 2
+          "status": "SUCCESS",
+          "message": null,
+          "name": "Jane Doe",
+          "email": "jane.doe@example.com",
+          "ssn": "xxx-xx-xxxx",
+          "loanAmount": 1000,
+          "tenure": 2
         }
         </copy>
         ```
@@ -158,28 +162,44 @@ To achieve this, let's add a SWITCH task and define the decision cases. If the c
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
 2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
-    ![View a workflow](images/view-workflow.png)
 
-3. Scroll up in the left pane to view the **Check loan application completeness** task, and then click the task to view the details of the task in the **Task** tab.
-    ![View task details](images/check-loan-task-details.png)
+    ![View a workflow](images/view-workflow-2.png)
 
-4. Click the **JSON** tab to view the JSON code for the **Check loan application completeness** task or add a new *Switch* task if you are creating a new workflow. Configure the task details as shown below and save your changes.
-![Add switch1 task](images/add-switch1-task.png)
-Configure the switch task as shown below. ![Check loan application completeness task](images/add-check-loan-completeness-task.png)
+3. Scroll up in the left pane to view the **Check\_Loan\_Application\_Completeness** task, and then click the task to view the details of the task in the **Task** tab.
 
-Add a "FAILED" Decision Case to the switch task. In the FAILED branch, add a *HTTP task* to send a notification email for incomplete application as shown below and a *Terminate task* to end processing the workflow.
-![Add notification1 task](images/add-notification1-task.png)
+    ![View task details](images/check-loan-task-details-2.png)
+
+4. Click the **JSON** tab to view the JSON code for the **Check\_Loan\_Application\_Completeness** task or add a new *Switch* task if you are creating a new workflow. Configure the task details as shown below and save your changes.
+
+  ![Add switch1 task](images/add-switch1-task.png)
+
+Configure the switch task as shown below. 
+
+  ![Check loan application completeness task](images/add-check-loan-completeness-task-2.png)
+
+Add a "FAILED" Decision Case to the switch task. In the FAILED branch, add a *TXEVENTQ\_PUBLISH* task to publish a application message payload for incomplete application as shown below and a *Terminate* task to end processing the workflow.
+![Add notification1 task](images/publish-txeventq-message-task.png)
 
 Search and add a Terminate task.
 ![Search terminate task](images/search-terminate-task.png)
-![Add terminate1 task](images/add-terminate1-task.png)
+![Add terminate1 task](images/add-terminate1-task-2.png)
+
+Add a "DEFAULT" Decision Case to the switch task. In the DEFAULT branch, add a *INLINE* task named **generate\_loan\_application\_id** to generate the unique Loan Appliction ID. Use a `javascript` evaluator to generate the Loan Application ID.
+![Add notification1 task](images/generate-loan-id-inline-task.png)
+
+  ```javascript
+  <copy>
+  (function(){ return 'LOAN-' + ('00000000' + Math.floor(Math.random() * 0x100000000).toString(16)).slice(-8).toUpperCase(); })()
+  </copy>
+  ```
+
 
 The complete JSON representation for the Switch task is given below for reference. You can use this to copy text and values to configure the tasks above.
 
    ```json
     <copy>
     {
-      "name": "Check_loan_application_completeness",
+      "name": "Check_Loan_Application_Completeness",
       "taskReferenceName": "check_loan_application_completeness",
       "inputParameters": {
         "switchCaseValue": "${extract_loan_details.output.status}"
@@ -188,24 +208,15 @@ The complete JSON representation for the Switch task is given below for referenc
       "decisionCases": {
         "FAILED": [
           {
-            "name": "Notify_Incomplete_Loan_Application",
-            "taskReferenceName": "notify_incomplete_loan_application",
+            "name": "Publish_Loan_Application_Incomplete",
+            "taskReferenceName": "publish_loan_application_incomplete",
             "inputParameters": {
-              "method": "POST",
-              "uri": "http://notification-service:8085/email-service/sendMail?isMockSendMail=true",
-              "headers": {
-                "Content-Type": "application/json"
-              },
-              "body": {
-                "from": "microtx.user@localhost",
-                "to": "microtx.user@microtx.com",
-                "cc": "",
-                "subject": "Loan application rejected!",
-                "body": "Loan application rejected due to incomplete details. ${workflow.input.loan_application_text}",
-                "isEmailBodyText": true
-              }
+              "databaseProfile": "oracle-database",
+              "topic": "LOAN_APPLICATION_EVENTS",
+              "value": "{\n  \"eventType\": \"LOAN_APPLICATION_INCOMPLETE\",\n  \"eventVersion\": \"1.0\",\n  \"eventId\": \"${workflow.workflowId}-incomplete\",\n  \"workflowId\": \"${workflow.workflowId}\",\n  \"data\": {\n    \"status\": \"INCOMPLETE\",\n    \"message\": \"Loan application is incomplete. Additional information is required.\",\n    \"details\": \"${extract_loan_details.output.message}\"\n  }\n}",
+              "publisherAgentName": "Loan_Processing_Application"
             },
-            "type": "HTTP",
+            "type": "TXEVENTQ_PUBLISH",
             "decisionCases": {},
             "defaultCase": [],
             "forkTasks": [],
@@ -219,8 +230,8 @@ The complete JSON representation for the Switch task is given below for referenc
             "permissive": false
           },
           {
-            "name": "terminate",
-            "taskReferenceName": "terminate_ref",
+            "name": "Terminate_Incomplete_Application",
+            "taskReferenceName": "terminate_incomplete_application_ref",
             "inputParameters": {
               "terminationStatus": "TERMINATED",
               "terminationReason": "Incomplete loan application details",
@@ -241,7 +252,28 @@ The complete JSON representation for the Switch task is given below for referenc
           }
         ]
       },
-      "defaultCase": [],
+      "defaultCase": [
+        {
+          "name": "Generate_Loan_Application_Id",
+          "taskReferenceName": "generate_loan_application_id",
+          "inputParameters": {
+            "evaluatorType": "javascript",
+            "expression": "(function(){ return 'LOAN-' + ('00000000' + Math.floor(Math.random() * 0x100000000).toString(16)).slice(-8).toUpperCase(); })()"
+          },
+          "type": "INLINE",
+          "decisionCases": {},
+          "defaultCase": [],
+          "forkTasks": [],
+          "startDelay": 0,
+          "joinOn": [],
+          "optional": false,
+          "defaultExclusiveJoinTask": [],
+          "asyncComplete": false,
+          "loopOver": [],
+          "onStateChange": {},
+          "permissive": false
+        }
+      ],
       "forkTasks": [],
       "startDelay": 0,
       "joinOn": [],
@@ -253,9 +285,9 @@ The complete JSON representation for the Switch task is given below for referenc
       "expression": "switchCaseValue",
       "onStateChange": {},
       "permissive": false
-    } 
+    }
     </copy>
-    ```
+  ```
 
 ## Task 5: Create the Loan Application Record
 
@@ -264,42 +296,42 @@ Once the application is deemed complete, create an application record in the dat
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
 2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
-    ![View a workflow](images/view-workflow.png)
+    ![View a workflow](images/view-workflow-2.png)
 
-3. Scroll up in the left pane to view the **auditLoanOracleSql** task, and then click the task to view the details of the task in the **Task** tab.
-    ![View task details](images/sql-task-view.png)
+3. Scroll up in the left pane to view the **Create\_Pending\_Loan\_Application** task, and then click the task to view the details of the task in the **Task** tab.
+    ![View task details](images/sql-task-view-2.png)
 
-4. Click the **JSON** tab to view the JSON code for the **auditLoanOracleSql** task or add a new *SQL Task* if you are creating a new workflow and save your changes. The complete JSON representation for the SQL task is given below for reference. You can use this to copy text and values to configure the task.
+4. Click the **JSON** tab to view the JSON code for the **Create\_Pending\_Loan\_Application** task or add a new *SQL Task* if you are creating a new workflow and save your changes. The complete JSON representation for the SQL task is given below for reference. You can use this to copy text and values to configure the task.
 
     ```json
     <copy>
     {
-    "name": "auditLoanOracleSql",
-    "taskReferenceName": "audit_loan_oracle_sql_task_ref",
-    "inputParameters": {
-        "databaseProfile": "oracle-database-livelabuser",
+      "name": "Create_Pending_Loan_Application",
+      "taskReferenceName": "create_pending_loan_application_ref",
+      "inputParameters": {
+        "databaseProfile": "oracle-database",
         "sqlStatement": "INSERT INTO LOAN_APPLICATIONS (APPLICATION_ID, USER_SSN, LOAN_AMOUNT, TENURE_MONTHS, APPLICATION_STATUS) VALUES (?, ?, ?, ?, ?);",
         "parameters": [
-            "${workflow.workflowId}",
-            "${extract_loan_details.output.ssn}",
-            "${extract_loan_details.output.loanAmount}",
-            "${extract_loan_details.output.tenure}",
-            "PENDING"
+          "${generate_loan_application_id.output.result}",
+          "${extract_loan_details.output.ssn}",
+          "${extract_loan_details.output.loanAmount}",
+          "${extract_loan_details.output.tenure}",
+          "PENDING"
         ],
         "type": "UPDATE"
-    },
-    "type": "SQL",
-    "decisionCases": {},
-    "defaultCase": [],
-    "forkTasks": [],
-    "startDelay": 0,
-    "joinOn": [],
-    "optional": false,
-    "defaultExclusiveJoinTask": [],
-    "asyncComplete": false,
-    "loopOver": [],
-    "onStateChange": {},
-    "permissive": false
+      },
+      "type": "SQL",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {},
+      "permissive": false
     }
     </copy>
     ```
@@ -322,7 +354,7 @@ Here's how the agentic planner works in simple steps:
 
 Agentic Planner requires LLM access, a prompt, and tools as input parameters. Next, let's create required connectors and prompt template.
 
-1. Let's reuse the `openai-dev` LLM definition that you have created in Task 3.
+1. Let's reuse the `llm-profile` LLM definition that you have created in Task 3.
 
 2. In the navigation menu, click **Agentic AI**, and then click the **Prompt Template** tab. The Prompt Definitions list page opens. All the prompts that you have defined are displayed in a table.
 
@@ -345,14 +377,15 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
        ```text
         <copy>
         You are an AI planner for a loan approval workflow. Your goal is to decide the next tool to call based on the results of previous steps. Follow the conditions below exactly.
-        1. **First step:** Connect to sqlcl 'oracledb_mcp' using connect tool and change status of Loan application with APPLICATION_ID=${workflowId} to UNDER_REVIEW. UPDATE LOAN_APPLICATIONS SET APPLICATION_STATUS = 'UNDER_REVIEW' WHERE APPLICATION_ID = workflowId; then, if no tasks have been run, call the `document_verification_task`.
+
+        1. **First step:** Connect to oracle database using the tool 'oracle-database-tool' and change status of Loan application with APPLICATION_ID=${workflowId} to UNDER_REVIEW. UPDATE LOAN_APPLICATIONS SET APPLICATION_STATUS = 'UNDER_REVIEW' WHERE APPLICATION_ID = workflowId; then, if no tasks have been run, call the `loan_document_verification`.
         2. **After document verification:**
-              * If `document_verification_task` failed, the process stops. Respond with a final status of 'FAILED'.
-              * If it succeeded, call the `compliance_agent` and `loan_processing_agent` in parallel.
+            * If `loan_document_verification` task failed, the process stops. Respond with a final status of 'FAILED'.
+            * If it succeeded, call the tasks `compliance_and_aml_check` and `Loan_Offer_Underwriter` in parallel.
         3. **After compliance and processing:**
-              * If `compliance_agent` failed due to an 'AML_CHECK', call `notify_aml_check_failure_to_admin` and `human_aml_verification` in parallel.
-              * For any other failure, the process stops. Respond with a final status of 'FAILED'.
-              * If all tasks succeed, the process is complete. Respond with a final status of 'SUCCESS'.
+            * For any other failure, the process stops. Respond with a final status of 'FAILED'.
+            * If all tasks succeed, the process is complete. Respond with a final status of 'SUCCESS'.
+
 
         **Output Instructions:**
         Your response must only be a JSON object describing the next action. It should specify the `status` and a list of `next_tools_to_call`. If the process is finished, the list should be empty.
@@ -372,7 +405,7 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
     * Transport: Select SSE from the drop-down list to specify the network transport protocol used by the MCP server for communication.
     * Authorization Enabled: Select None.
     * URL: Enter the URL of the MCP server as `http://doc-process-mcp-server:8000/`.
-    * SSE Endpoint: Enter `/mcp` as the full endpoint path for server-sent events (SSE). This is required for communicating with the MCP server.
+    * SSE Endpoint: Enter `/sse` as the full endpoint path for server-sent events (SSE). This is required for communicating with the MCP server.
 
     ![Create an MCP Server connector for document verification](images/doc-verify-mcp-server-existing.png)
 
@@ -393,18 +426,19 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
 
       You are a loan application document verification agent. You are given a document path via the `${document}` variable and a list of tools to execute the verification.
 
-        - **Step 1: Extract Details.** Use the `custom-http` tool to make a GET request to this uri: "http://ocr-service:8000/ocr". Set the query parameter `filepath` to the value of `${document}`.
-        - **Step 2: Verify Identity.** Using the `identification_number` and `type` extracted from the response of Step 1, Use tool to execute the verification.
-        - **Final Output:** Your response should only contain a JSON object and no commentary. Respond with a `status` of 'success' or 'failure' and include the key details returned from the verification step.
+      - **Step 1: Extract Details.** Use the `custom-http` tool to make a GET request to this uri: 'http://ocr-service:8000/ocr'. Set the query parameter `filepath` to the value of `${document}`'.
+
+      - **Step 2: Verify Identity.** Using the `identification_number` and `type` extracted from the response of Step 1, Use tool to execute the verification.
+      - **Final Output:** Your response should only contain a JSON object and no commentary. Respond with a `status` of 'success' or 'failure' and include the key details returned from the verification step.
 
       </copy>
       ```
 
     * MCP Servers: Select **doc\_mcp** as the MCP servers that the agent will use for executing tasks or accessing resources.
-    * LLM Profile: Select **openai-dev** as the LLM Profile and **gpt-4o** as the LLM Model that will power the agent's reasoning and language tasks.
+    * LLM Profile: Select **llm-profile** as the LLM Profile and **gpt-5.5** as the LLM Model that will power the agent's reasoning and language tasks.
     * Use Memory: Select this option for the agent to retain details about the interactions with LLM.
 
-    ![Create an Agent profile for loan doc verification.](images/doc-verify-agent-profile.png)
+    ![Create an Agent profile for loan doc verification.](images/doc-verify-agent-profile-2.png)
 
 13. Click **Submit**. Your new agent profile appears in the list of available agent profile definitions.
 
@@ -413,51 +447,44 @@ Agentic Planner requires LLM access, a prompt, and tools as input parameters. Ne
 15. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
 
 16. In the left pane, click **Agentic Planner** task to view the details of the task in the **Task** tab.
-    ![View task details](images/view-agentic-task-wb.png)
+    ![View task details](images/view-agentic-task-wb-2.png)
 
 17. Click the **JSON** tab to view the JSON code for the **Agentic Planner** task or add a new *Planner Task* if you are creating a new workflow, configure the planner task as shown in the above image and save your changes. 
 Within the planner add more tasks by clicking on the + icon in the planner.
    ![Add tasks within planner](images/add-tasks-in-planner.png)
 
    17.1 Add *Agentic Task* for loan document verification. Select the agent profile created in the previous step and configure the Agentic Task as shown.
-   ![Add agentic task](images/add-agentic-task.png)
+   ![Add agentic task](images/add-agentic-task-2.png)
 
    17.2 Add *HTTP Task* for Compliance check. Configure the Task as shown.
-   ![Add http check task](images/add-loan-check-task.png)
+   ![Add http check task](images/add-loan-check-task-2.png)
 
    17.3 Add *Simple Task* for Loan processing agent task. Configure the Task as shown.
-   ![Add loan processing agent task](images/add-loan-simple-task.png)
-
-   17.4 Add *HTTP Task* to notify AML verification failure. Configure the Task as shown.
-   ![Add AML check notification task](images/add-aml-check-notify-task.png)
-
-   17.5 Add *Human Task* for manual verification. Configure the Task as shown.
-   ![Add AML check human task](images/add-aml-check-human-task.png)
+   ![Add loan processing agent task](images/add-loan-simple-task-2.png)
 
 The complete JSON representation for the Planner task along with it's nested tasks are given below for reference. You can use this to copy text and values to configure the above tasks. 
 
     ```json
     <copy>
     {
-      "name": "Agentic Planner",
-      "taskReferenceName": "agentic_planner",
+      "name": "Agentic_Loan_Planner",
+      "taskReferenceName": "agentic_loan_planner",
       "inputParameters": {
         "llmProfile": {
-          "name": "openai-dev",
-          "model": "gpt-4o"
+          "name": "llm-profile",
+          "model": "gpt-5.5"
         },
         "promptTemplate": "loan_process_planner",
         "promptVariables": {
           "workflowId": "${workflow.workflowId}"
         },
         "mcpServers": [
-          "doc_mcp",
-          "oracledb_mcp"
+          "doc_mcp"
         ],
         "tasks": [
           {
-            "name": "Loan Document Verification Task",
-            "taskReferenceName": "document_verification",
+            "name": "Loan_Document_Verification",
+            "taskReferenceName": "loan_document_verification",
             "inputParameters": {
               "agentProfile": "loan_document_verification_agent",
               "promptVariables": {
@@ -467,57 +494,30 @@ The complete JSON representation for the Planner task along with it's nested tas
             "type": "AGENTIC_TASK"
           },
           {
-            "name": "Compliance Agent",
-            "taskReferenceName": "compliance_agent",
+            "name": "Compliance_And_AML_Check",
+            "taskReferenceName": "compliance_and_aml_check",
             "type": "HTTP",
             "inputParameters": {
               "method": "POST",
               "uri": "http://loan-compliance-service:8001/api/compliance/check",
-              "headers": {
-                "Content-Type": "application/json"
-              },
+              "headers": {},
               "body": {
                 "socialSecurityNumber": "${extract_loan_details.output.ssn}"
-              }
+              },
+              "sensitiveHeaders": []
             }
           },
           {
-            "name": "loan_processing_agent_task",
-            "taskReferenceName": "loan_processing_agent_task",
+            "name": "Loan_Offer_Underwriter",
+            "taskReferenceName": "Loan_Offer_Underwriter",
             "inputParameters": {
               "applicantId": "12345"
             },
             "type": "SIMPLE"
-          },
-          {
-            "name": "Notify AML verification failure for reverification",
-            "taskReferenceName": "notify_aml_check_failure_to_admin",
-            "type": "HTTP",
-            "inputParameters": {
-              "method": "POST",
-              "uri": "http://notification-service:8085/email-service/sendMail",
-              "headers": {
-                "Content-Type": "application/json"
-              },
-              "body": {
-                "from": "microtx.user@localhost",
-                "to": "microtx.user@microtx.com",
-                "cc": "",
-                "subject": "Loan application rejected!",
-                "body": "Loan application rejected. User is flagged in Anti-money laundering (AML) database. Do reverify and accept/reject application. \nUser laon request : ${workflow.input.loan_application_text}",
-                "isEmailBodyText": true
-              }
-            },
-            "readResponse": false
-          },
-          {
-            "name": "human_aml_verification_task",
-            "taskReferenceName": "human_aml_verification",
-            "type": "HUMAN",
-            "inputParameters": {
-              "applicant": "${extract_loan_details.output}"
-            }
           }
+        ],
+        "tools": [
+          "oracle-database-tool"
         ]
       },
       "type": "AGENTIC_PLANNER",
@@ -538,54 +538,52 @@ The complete JSON representation for the Planner task along with it's nested tas
 
 Here are the details of a few other tasks that are used in the Agentic planner.
 
-* The Loan Compliance microservice performs credit score and AML checks. This microservice is pre-configured and available locally in the LiveLabs environment.
-* The Loan Processing agent is developed using Langraph in Python. It validates the user's debt-to-credit ratio and makes the final loan offer. This agent is pre-created and available locally in the LiveLabs environment.
-* Human task validates AML failure. If the loan compliance agent fails the workflow due to an AML check failure, invoke human intervention to validate the rejection. If the user is wrongly flagged, it allow the workflow to proceed or reject and fail the workflow. The workflow will remain paused until manual verification and sign-off are completed.
+* The **Loan\_Document\_Verification** Agent task verifies the documents using the agent profile `loan_document_verification_agent`. It extracts the document contents using OCR microservice.
+* The **Compliance\_And\_AML\_Check** task uses Loan Compliance microservice, which performs credit score and AML checks. This microservice is pre-configured and available locally in the LiveLabs environment.
+* The **Loan\_Offer\_Underwriter** is as *SIMPLE* task developed using Langraph in Python. It validates the user's debt-to-credit ratio and makes the final loan offer. This agent is pre-created and available locally in the LiveLabs environment. To see how a custom integration can be implemented, refer to the [loan-processing-agent microservice](https://github.com/oracle-samples/microtx-samples/tree/main/workflow/loan-application/loan-processing-agent).
 
-
-## Task 7: Check the Execution Status of the Orchestrator (Planner)
+## Task 7: Check the Execution Status of the Orchestrator (AGENTIC_PLANNER)
 
 Terminate the workflow if the Agentic planner fails the multi-agent orchestration. Add a SWITCH statement task to achieve this.
+
+After the **Agentic\_Loan\_Planner** task completes, add the **Check\_Planner\_Execution\_Status** *SWITCH* task to evaluate the planner execution status. This task publishes a loan-application event message to TxEventQ for each outcome. If the Agentic Planner fails the multi-agent orchestration, the workflow publishes a rejection message to TxEventQ and then terminates. Otherwise, it publishes an approval-request message to TxEventQ and routes the application for human approval.
 
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
 2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
 
-3. Scroll up in the left pane to view the **Check planner execution status** task, and then click the task to view the details of the task in the **Task** tab.
-    ![View task details](images/view-planner-task-wb.png)
+3. Scroll up in the left pane to view the **Check\_Planner\_Execution\_Status** task, and then click the task to view the details of the task in the **Task** tab.
+    ![View task details](images/view-planner-task-wb-2.png)
 
-4. Click the **JSON** tab to view the JSON code for the **Check planner execution status** and **Terminate** task or add a new *Switch* task along with a *HTTP Task* and a *Terminate Task* if you are creating a new workflow. Configure the task details as shown in Task 4 above. The complete JSON representation for the Switch task is given below for reference. You can use this to copy text and values to configure the tasks.
+4. There are two branches in this **SWITCH** case
 
-    ```
+    `FAILED` case: Use the **Publish\_Loan\_Rejection\_By\_Agent** *TXEVENTQ\_PUBLISH* task to publish a loan-application rejection message to TxEventQ. The message uses the *LOAN\_APPLICATION\_REJECTED* event type and sets the application status to *REJECTED*. Then terminate the workflow by using the **Terminate\_Loan\_Application** *TERMINATE* task.
+
+    `Default` case: Use the **Publish\_Loan\_Approval\_Requested** *TXEVENTQ\_PUBLISH* task to publish a loan-application approval-request message to TxEventQ. The message uses the *LOAN\_APPLICATION\_APPROVAL\_REQUESTED* event type and sets the application status to *PENDING\_APPROVAL*. Then create the **Human\_Loan\_Approval** human task, which keeps a human approver in the loop to review the application and approve or reject it.
+  
+5. Click the **JSON** tab to view the JSON definitions for the **Check\_Planner\_Execution\_Status** *SWITCH* task, the *TxEventQ* publish tasks, and the **Terminate\_Loan\_Application** *TERMINATE* task. If you are creating a new workflow, add a *SWITCH* task, the required *TXEVENTQ\_PUBLISH* tasks, a *HUMAN* task, and a *TERMINATE* task, then configure them as described in the preceding steps. The complete JSON definition of the *SWITCH* task is provided below for reference; you can copy its values when configuring the workflow.
+
+    ```json
     <copy>
     {
-      "name": "Check planner execution status",
+      "name": "Check_Planner_Execution_Status",
       "taskReferenceName": "check_planner_execution_status",
       "inputParameters": {
-        "switchCaseValue": "${agentic_planner.output.status}"
+        "switchCaseValue": "${agentic_loan_planner.output.status}"
       },
       "type": "SWITCH",
       "decisionCases": {
         "FAILED": [
           {
-            "name": "Notify loan application rejection",
-            "taskReferenceName": "notify_loan_application_rejection",
+            "name": "Publish_Loan_Rejection_By_Agent",
+            "taskReferenceName": "publish_loan_rejection_by_agent",
             "inputParameters": {
-              "method": "POST",
-              "uri": "http://notification-service:8085/email-service/sendMail",
-              "headers": {
-                "Content-Type": "application/json"
-              },
-              "body": {
-                "from": "microtx.user@localhost",
-                "to": "microtx.user@microtx.com",
-                "cc": "",
-                "subject": "Loan application rejected!",
-                "body": "Loan application rejected due to planner failure. ${agentic_planner.output}",
-                "isEmailBodyText": true
-              }
+              "databaseProfile": "oracle-database",
+              "topic": "LOAN_APPLICATION_EVENTS",
+              "value": "{\n  \"eventType\": \"LOAN_APPLICATION_REJECTED\",\n  \"eventVersion\": \"1.0\",\n  \"eventId\": \"${workflow.workflowId}-approval-requested\",\n  \"workflowId\": \"${workflow.workflowId}\",\n  \"data\": {\n    \"loanApplicationId\": \"${generate_loan_application_id.output.result}\",\n    \"status\": \"REJECTED\",\n    \"message\": \"Loan application was rejected during automated agent screening. ${agentic_loan_planner.output}\"\n  }\n}",
+              "publisherAgentName": "Loan_Processing_Application"
             },
-            "type": "HTTP",
+            "type": "TXEVENTQ_PUBLISH",
             "decisionCases": {},
             "defaultCase": [],
             "forkTasks": [],
@@ -599,12 +597,12 @@ Terminate the workflow if the Agentic planner fails the multi-agent orchestratio
             "permissive": false
           },
           {
-            "name": "terminate loan application",
+            "name": "Terminate_Loan_Application",
             "taskReferenceName": "terminate_loan_application_ref",
             "inputParameters": {
               "terminationStatus": "TERMINATED",
               "terminationReason": "loan application rejected",
-              "workflowOutput": "${agentic_planner.output}"
+              "workflowOutput": "${agentic_loan_planner.output}"
             },
             "type": "TERMINATE",
             "decisionCases": {},
@@ -621,7 +619,52 @@ Terminate the workflow if the Agentic planner fails the multi-agent orchestratio
           }
         ]
       },
-      "defaultCase": [],
+      "defaultCase": [
+        {
+          "name": "Publish_Loan_Approval_Requested",
+          "taskReferenceName": "publish_loan_approval_requested",
+          "inputParameters": {
+            "databaseProfile": "oracle-database",
+            "topic": "LOAN_APPLICATION_EVENTS",
+            "value": "{\n  \"eventType\": \"LOAN_APPLICATION_APPROVAL_REQUESTED\",\n  \"eventVersion\": \"1.0\",\n  \"eventId\": \"${workflow.workflowId}-approval-requested\",\n  \"workflowId\": \"${workflow.workflowId}\",\n  \"data\": {\n    \"loanApplicationId\": \"${generate_loan_application_id.output.result}\",\n    \"status\": \"PENDING_APPROVAL\",\n    \"message\": \"Loan application is ready for approval.\"\n  }\n}",
+            "publisherAgentName": "Loan_Processing_Application"
+          },
+          "type": "TXEVENTQ_PUBLISH",
+          "decisionCases": {},
+          "defaultCase": [],
+          "forkTasks": [],
+          "startDelay": 0,
+          "joinOn": [],
+          "optional": false,
+          "defaultExclusiveJoinTask": [],
+          "asyncComplete": false,
+          "loopOver": [],
+          "onStateChange": {},
+          "permissive": false
+        },
+        {
+          "name": "Human_Loan_Approval",
+          "taskReferenceName": "human_loan_approval",
+          "inputParameters": {
+            "title": "Review loan application ${generate_loan_application_id.output.result}. Check Approved to approve the application; leave it unchecked to reject it.",
+            "formData": {
+              "Approved": false
+            }
+          },
+          "type": "HUMAN",
+          "decisionCases": {},
+          "defaultCase": [],
+          "forkTasks": [],
+          "startDelay": 0,
+          "joinOn": [],
+          "optional": false,
+          "defaultExclusiveJoinTask": [],
+          "asyncComplete": false,
+          "loopOver": [],
+          "onStateChange": {},
+          "permissive": false
+        }
+      ],
       "forkTasks": [],
       "startDelay": 0,
       "joinOn": [],
@@ -637,48 +680,88 @@ Terminate the workflow if the Agentic planner fails the multi-agent orchestratio
     </copy>
     ```
 
-    Where, 'http://notification-service:8085/email-service/sendMail' is the email webhook that you have added for sending email notifications in case of a failure.
+## Task 8: Finalize the Loan Decision Using a Distributed Transaction
 
-## Task 8: Human Intervention to Validate Workflow Execution
+After the **Human\_Loan\_Approval** task records the approver’s decision, the workflow finalizes the loan application and publishes the final decision message as one atomic XA transaction.
 
-Before sharing the final decision with the user, a human operator conducts a final review and approves or rejects the loan through a dedicated task.
 
 1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
 
-3. Scroll down in the left pane to view the **Send Email notification** task, and then click the task to view the details of the task in the **Task** tab.
-    ![View task details](images/view-email-notification-task-wb.png)
+2. Identify the workflow, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
 
-4. Click the **JSON** tab to view the JSON code for the **Send Email notification** and **human\_approval\_task** tasks or Add a new *Http Task* for email notification and *Human Task* for final verification and sign off. 
-![Send email notification](images/send-email-notification-task.png)
+3. In the workflow editor, locate the following finalization tasks:
 
-Human Task for final approval.
-![Final human approval](images/final-human-task.png)
+    * Begin\_Final\_Decision\_Transaction
+    * Update\_Final\_Loan\_Status\_Approved
+    * Publish\_Loan\_Decision\_Approved
+    * Commit\_Final\_Decision\_Transaction
 
-The complete JSON representation for the Http task and the Human Task is given below for reference. You can use this to copy text and values to configure the tasks.
+4. **Begin the transaction**
 
-   ```
+    Configure **Begin\_Final\_Decision\_Transaction** as a *TRANSACTION* task with the *BEGIN* action to start the XA transaction.
+
+    Configure the task with the following values:
+
+    * Coordinator URL: `http://otmm-tcs:9000/api/v1`
+    * Transaction type: `XA`
+    * Action: *BEGIN*
+    * Transaction timeout: `600000` milliseconds
+
+    The transaction coordinator is hosted in the same namespace as the workflow components. After the transaction begins, the database update and TxEventQ publish operation execute within the same transaction context.
+
+    ![Add loan processing agent task](images/begin_transaction.png)
+
+5. **Update the final loan status**
+    The **Update\_Final\_Loan\_Status\_Approved** SQL task updates the loan application status based on the human approver’s decision.
+
+    * If the human approval value is true, the task sets the application status to *APPROVED*.
+    * If the value is `false`, the task sets the application status to *REJECTED*.
+    * The generated loan application ID is used to identify the database record.
+    * The task is enlisted in the active XA transaction using `enlistInTxn: true`.
+
+    Because the task participates in the transaction, the database update is not permanently committed until the transaction is successfully committed.
+
+    ![Add update final loan status task](images/update_final_loan_status.png)
+
+6. **Publish the final decision to TxEventQ**
+
+    Configure **Publish\_Loan\_Decision\_Approved** as an enlisted *TXEVENTQ\_PUBLISH* task. This task publishes the final loan decision to the *LOAN\_APPLICATION\_EVENTS* topic using the *LOAN\_APPLICATION\_FINALIZED* event type.
+
+    The message includes the generated loan application ID and the final approval outcome. Use the finalized event type, such as *LOAN\_APPLICATION\_FINALIZED*, and include a neutral message such as:
+
+    This task must also be enlisted in the active XA transaction using `enlistInTxn: true`. The TxEventQ message remains part of the transaction until the commit operation succeeds.
+
+    ![Add publish loan decision task](images/publish_loan_decision.png)
+
+7. **Commit the transaction**
+    
+    The **Commit\_Final\_Decision\_Transaction** *TRANSACTION* task commits the XA transaction after the *SQL* update and TxEventQ publish task complete successfully.
+
+    Configure the task with the following values:
+    
+    * Coordinator URL: `http://otmm-tcs:9000/api/v1`
+    * Transaction type: `XA`
+    * Action: *COMMIT*
+
+    The database status update and TxEventQ message are committed together. If either operation fails, the XA transaction is rolled back through the configured failure workflow, preventing only one operation from being committed.
+
+    ![Add commit transaction task](images/commit_transaction.png)
+
+8. The complete JSON definitions for the transaction, SQL, and TxEventQ tasks are provided below for reference. You can copy the task properties and values when configuring the workflow.
+
+    ```json
     <copy>
     {
-      "name": "Send Email notification",
-      "taskReferenceName": "email_notify",
+      "name": "Begin_Final_Decision_Transaction",
+      "taskReferenceName": "begin_final_decision_transaction",
       "inputParameters": {
-        "method": "POST",
-        "uri": "http://notification-service:8085/email-service/sendMail",
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "from": "microtx.user@localhost",
-          "to": "microtx.user@microtx.com",
-          "cc": "",
-          "subject": "Loan approval request!",
-          "body": "Please approve loan req ${workflow.workflowId}",
-          "isEmailBodyText": true
-        }
+        "coordinatorUrl": "http://otmm-tcs:9000/api/v1",
+        "transactionType": "XA",
+        "action": "BEGIN",
+        "transactionTimeout": 600000
       },
-      "type": "HTTP",
+      "type": "TRANSACTION",
       "decisionCases": {},
       "defaultCase": [],
       "forkTasks": [],
@@ -692,12 +775,72 @@ The complete JSON representation for the Http task and the Human Task is given b
       "permissive": false
     },
     {
-      "name": "human_approval_task",
-      "taskReferenceName": "wait_for_approval",
+      "name": "Update_Final_Loan_Status",
+      "taskReferenceName": "update_final_loan_status",
       "inputParameters": {
-        "applicant": "${extract_loan_details.output}"
+        "databaseProfile": "oracle-database",
+        "sqlStatement": "DECLARE\n  v_application_id VARCHAR2(128) := ?;\n  v_approved       BOOLEAN       := ?;\n  v_status         VARCHAR2(20);\nBEGIN\n  IF v_approved THEN\n    v_status := 'APPROVED';\n  ELSE\n    v_status := 'REJECTED';\n  END IF;\n\n  UPDATE LOAN_APPLICATIONS\n     SET APPLICATION_STATUS = v_status\n   WHERE APPLICATION_ID = v_application_id;\nEND;",
+        "parameters": [
+          "${workflow.workflowId}"
+        ],
+        "type": "PLSQL",
+        "plSqlParameters": [
+          {
+            "mode": "IN",
+            "value": "${generate_loan_application_id.output.result}"
+          },
+          {
+            "mode": "IN",
+            "value": "${human_loan_approval.output.Approved}"
+          }
+        ],
+        "enlistInTxn": true
       },
-      "type": "HUMAN",
+      "type": "SQL",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {},
+      "permissive": false
+    },
+    {
+      "name": "Publish_Loan_Decision",
+      "taskReferenceName": "publish_loan_decision",
+      "inputParameters": {
+        "databaseProfile": "oracle-database",
+        "topic": "LOAN_APPLICATION_EVENTS",
+        "value": "{\n  \"eventType\": \"LOAN_APPLICATION_FINALIZED\",\n  \"eventVersion\": \"1.0\",\n  \"eventId\": \"${workflow.workflowId}-decision\",\n  \"workflowId\": \"${workflow.workflowId}\",\n  \"data\": {\n    \"loanApplicationId\": \"${generate_loan_application_id.output.result}\",\n    \"message\": \"Final processing of the loan application is complete.\",\n    \"Approved\": ${human_loan_approval.output.Approved}\n  }\n}",
+        "publisherAgentName": "Loan_Processing_Application",
+        "enlistInTxn": true
+      },
+      "type": "TXEVENTQ_PUBLISH",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {},
+      "permissive": false
+    },
+    {
+      "name": "Commit_Final_Decision_Transaction",
+      "taskReferenceName": "commit_final_decision_transaction",
+      "inputParameters": {
+        "coordinatorUrl": "http://otmm-tcs:9000/api/v1",
+        "transactionType": "XA",
+        "action": "COMMIT"
+      },
+      "type": "TRANSACTION",
       "decisionCases": {},
       "defaultCase": [],
       "forkTasks": [],
@@ -713,90 +856,40 @@ The complete JSON representation for the Http task and the Human Task is given b
     </copy>
     ```
 
-## Task 9: Check Final Loan Approval And Update The Loan Application Status
+## Task 9: Configure the Failure Workflow for Transaction Rollback
 
-Update the final status of the loan application using a SQL Task depending on whether the loan application was approved or rejected.
+  Configure a dedicated failure workflow to roll back the final loan decision transaction whenever an enlisted task fails after the XA transaction has started.
 
-1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-2. Identify the workflow that you want to view, such as **"acme\_bank\_loan\_processing\_workflow"**, and then click ![Edit Workflow](images/edit.png) (**Edit Workflow**) under **Actions**.
+  1. In the navigation menu, click **Definitions**, and then click the **Workflows** tab.
 
-3. Scroll up in the left pane to view the **check\_loan_approval\_from\_admin** task, and then click the task to view the details of the task in the **Task** tab.
-    ![View task details](images/view-final-task-wb.png)
+  2. Create or open the **rollback\_loan\_application\_txn** workflow.
 
-4. Click the **JSON** tab to view the JSON code for the **check\_loan_approval\_from\_admin** task or Add a new *Switch* Task along with the two *SQL Task* - one for each decision case in the switch task. Save your changes.
+     ![Add rollback loan application txn task](images/rollback_loan_application_txn.png)
 
-  SQL Task for approved status.
-  ![Final SQL task approved](images/final-sql-task-approved.png)
+  3. Add a TRANSACTION task named **Rollback\_Loan\_Application\_tx**.
+     
+     Configure the task with the following values:
+    * Coordinator URL: `http://otmm-tcs:9000/api/v1`
+    * Transaction type: `XA`
+    * Action: *ROLLBACK*
 
-  SQL Task for rejected status.
-  ![Final SQL task rejected](images/final-sql-task-rejected.png)
+    ![Add rollback loan application txn task](images/rollback_loan_application_tx.png)
 
-The complete JSON representation for the Switch task and the SQL Tasks is given below for reference. You can use this to copy text and values to configure the tasks.
+  4. The rollback workflow should contain the following task definition:
 
-   ```
+    ```json
     <copy>
     {
-      "name": "Check Loan Approval By Admin",
-      "taskReferenceName": "check_loan_approval_from_admin",
+      "name": "Rollback_Loan_Application_txn",
+      "taskReferenceName": "rollback_loan_application_tx",
       "inputParameters": {
-        "switchCaseValue": "${wait_for_approval.output.approved}"
+        "coordinatorUrl": "http://otmm-tcs:9000/api/v1",
+        "transactionType": "XA",
+        "action": "ROLLBACK"
       },
-      "type": "SWITCH",
-      "decisionCases": {
-        "true": [
-          {
-            "name": "auditFInalLoanOracleSql Approved",
-            "taskReferenceName": "audit_final_loan_oracle_sql_task_approved_ref",
-            "inputParameters": {
-              "databaseProfile": "oracle-database-livelabuser",
-              "sqlStatement": "UPDATE LOAN_APPLICATIONS SET APPLICATION_STATUS = 'APPROVED' WHERE APPLICATION_ID = ?;",
-              "parameters": [
-                "${workflow.workflowId}"
-              ],
-              "type": "UPDATE"
-            },
-            "type": "SQL",
-            "decisionCases": {},
-            "defaultCase": [],
-            "forkTasks": [],
-            "startDelay": 0,
-            "joinOn": [],
-            "optional": false,
-            "defaultExclusiveJoinTask": [],
-            "asyncComplete": false,
-            "loopOver": [],
-            "onStateChange": {},
-            "permissive": false
-          }
-        ],
-        "false": [
-          {
-            "name": "auditFInalLoanOracleSql Rejected",
-            "taskReferenceName": "audit_final_loan_oracle_sql_task_rejected_ref",
-            "inputParameters": {
-              "databaseProfile": "oracle-database-livelabuser",
-              "sqlStatement": "UPDATE LOAN_APPLICATIONS SET APPLICATION_STATUS = 'REJECTED' WHERE APPLICATION_ID = ?;",
-              "parameters": [
-                "${workflow.workflowId}"
-              ],
-              "type": "UPDATE"
-            },
-            "type": "SQL",
-            "decisionCases": {},
-            "defaultCase": [],
-            "forkTasks": [],
-            "startDelay": 0,
-            "joinOn": [],
-            "optional": false,
-            "defaultExclusiveJoinTask": [],
-            "asyncComplete": false,
-            "loopOver": [],
-            "onStateChange": {},
-            "permissive": false
-          }
-        ]
-      },
+      "type": "TRANSACTION",
+      "decisionCases": {},
       "defaultCase": [],
       "forkTasks": [],
       "startDelay": 0,
@@ -805,15 +898,29 @@ The complete JSON representation for the Switch task and the SQL Tasks is given 
       "defaultExclusiveJoinTask": [],
       "asyncComplete": false,
       "loopOver": [],
-      "evaluatorType": "value-param",
-      "expression": "switchCaseValue",
       "onStateChange": {},
       "permissive": false
     }
     </copy>
     ```
 
+  5. In the main **acme_bank\_loan\_processing\_workflow**, set the failureWorkflow property to:
+
+    ```json
+    <copy>
+    "failureWorkflow": "rollback_loan_application_txn"
+    </copy>
+    ```
+
+    ![Add failure workflow attribute task](images/failure_workflow_attribute.png)
+
+
+
+    When a failure occurs in the final transaction flow—for example, during **Update\_Final\_Loan\_Status\_Approved**, **Publish\_Loan\_Decision**, or before **Commit\_Final\_Decision\_Transaction** —the workflow engine invokes **rollback\_loan\_application\_txn**. The rollback workflow uses the same TxEventQ transaction coordinator and XA transaction context to execute the *ROLLBACK* action.
+
+    This ensures that the database status update and the TxEventQ message are rolled back together, preventing a partial finalization of the loan application. The rollback workflow does not define another failure workflow, which prevents recursive failure handling.
+
 ## Acknowledgements
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, September 2025
+* **Last Updated By/Date** - Sylaja Kannan, September 2026

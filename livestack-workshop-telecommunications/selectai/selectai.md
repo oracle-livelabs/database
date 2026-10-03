@@ -1,0 +1,235 @@
+# Ask Telecom Questions with Select AI
+
+## Introduction
+
+Nina Patel, a subscriber experience analyst at SEER Telecomms, wants to compare monthly charges without writing every query herself. Jessica has prepared a Select AI profile for the workshop tables.
+
+Help Nina ask a question, inspect the generated SQL, run it, and refine the answer. Check the joins and filters: an AI-generated query can run successfully and still answer the wrong question.
+
+![Nina Patel, subscriber experience analyst, introduces telecom questions and an AI agent.](images/nina.png)
+
+<details>
+<summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
+
+> - **Select AI** turns a question written in ordinary language into SQL that you can inspect and run.
+>
+> - An **AI profile** specifies the AI provider and the database objects used to guide SQL generation. Database privileges determine which data the current user can access.
+>
+> - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
+>
+> - A **natural-language prompt** is the question sent to Select AI, such as `Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for confirmed, active, or completed service_orders.`
+
+</details>
+
+### Objectives
+
+- Check which Select AI profile is available in the schema.
+- Add the telecommunications tables that Select AI may use to the profile.
+- Generate SQL from a telecommunications question and inspect it.
+- Run a natural-language question through `DBMS_CLOUD_AI.GENERATE`.
+- Improve a question so the result contains the details Nina needs.
+- Explain why generated SQL still requires review.
+
+Estimated Time: **10 minutes**
+
+### Hands-on Scenario
+
+Help Nina identify the plans with the highest monthly charges, checking the SQL behind each answer.
+
+> **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
+
+## Task 1: Check the Select AI profile
+
+Select AI uses an AI profile to identify the AI provider and the database objects available for natural-language questions. The workshop database should already contain a profile for the `LLUSER` schema.
+
+1. Run this query:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           status,
+           description
+    FROM user_cloud_ai_profiles
+    ORDER BY profile_name;
+    </copy>
+    ```
+
+    The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. The AI model must also accept on-demand requests in the profile’s region. The instructor configures the model and region before the lab. Check [Oracle’s regional model availability](https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm) before deployment; a model appearing in the catalog does not necessarily support on-demand calls in that region. If the query shows a different profile name, use that name in the following tasks.
+
+2. Review the profile attributes:
+  
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    ORDER BY profile_name, attribute_name;
+    </copy>
+    ```
+
+    The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will change only the profile's `object_list`.
+
+## Task 2: Add the telecommunications tables to the profile
+
+The profile needs a list of tables that Select AI may use. Nina's questions require service plans, service orders, order lines, and subscribers, so Jessica adds those four tables to the `GENAI` profile.
+
+1. Add the telecommunications tables to the profile:
+
+    ```sql
+    <copy>
+    BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'genai',
+        attribute_name  => 'object_list',
+        attribute_value => '[{"owner": "' || USER || '", "name": "SERVICE_PLANS"}, {"owner": "' || USER || '", "name": "SERVICE_ORDERS"}, {"owner": "' || USER || '", "name": "SERVICE_ORDER_LINES"}, {"owner": "' || USER || '", "name": "SUBSCRIBERS"}]'
+      );
+    END;
+    /
+    </copy>
+    ```
+
+2. Confirm the object list:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    WHERE profile_name = 'GENAI'
+      AND attribute_name = 'object_list';
+    </copy>
+    ```
+
+    ![Add the telecommunications tables to the profile](images/sql-ai-object-list.png)
+
+    The result should list `SERVICE_PLANS`, `SERVICE_ORDERS`, `SERVICE_ORDER_LINES`, and `SUBSCRIBERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
+
+## Task 3: Ask a question and inspect the SQL
+
+Nina starts with a simple question: which service plans have the highest contracted monthly charges? She first asks Select AI to show the SQL without running it.
+
+Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use `DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
+
+1. Run the question with the `GENAI` profile:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase).',
+             profile_name => 'genai',
+             action       => 'showsql'
+           ) AS generated_sql;
+    </copy>
+    ```
+
+    ![Ask a question and inspect the SQL](images/sql-ai-generated.png)
+
+2. Read the generated SQL before running it.
+
+    Check that the statement joins SERVICE_PLANS, SERVICE_ORDER_LINES, and SERVICE_ORDERS, groups by plan, returns five rows, sums LINE_TOTAL, and filters the stated service order statuses. Exclude ACTIVATION_FEE from monthly recurring charges. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
+
+## Task 4: Run the question in the database
+
+Nina submits the question with `runsql`, which generates and executes SQL again. Compare the answer with the SQL reviewed in Task 3; the new call may generate a different statement.
+
+1. Run the same question with the `runsql` action:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Which five service plans have the highest contracted monthly charges? Sum service_order_lines.line_total only for service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase).',
+             profile_name => 'genai',
+             action       => 'runsql'
+           ) AS answer;
+    </copy>
+      ```
+
+    ![Run the question in the database](images/sql-ai-answer.png)
+
+2. Compare the answer with the SQL you inspected in Task 3.
+
+    The query reads the workshop tables using the privileges of your current database account, `LLUSER`.
+
+## Task 5: Improve the business question
+
+Nina adds the plan category, total monthly charges and connections ordered so she can compare the plans before deciding what to review.
+
+1. Use `showsql` to inspect this revised prompt:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',
+             profile_name => 'genai',
+             action       => 'showsql'
+           ) AS generated_sql;
+    </copy>
+    ```
+
+    ![Improve the business question](images/sql-ai-refined-generated.png)
+
+2. Review the generated SQL, then run the revised question with `runsql`:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',
+             profile_name => 'genai',
+             action       => 'runsql'
+           ) AS answer;
+    </copy>
+    ```
+
+    ![Improve the business question](images/sql-ai-refined-answer.png)
+
+3. Compare the first and second questions.
+
+  The revised prompt asks for the columns Nina needs in her review. She still checks that the SQL uses the right joins, totals, and service order statuses.
+
+## Task 6: Explain the result
+
+Nina wants a short explanation of the revised result. Select AI can run the SQL and ask the AI provider to describe the returned rows.
+
+1. Run the revised question with the `narrate` action:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five service plans with the highest contracted monthly charges. Include plan name, category, summed line_total, and summed connection_count. Include only service_orders whose order_status is exactly ''confirmed'', ''active'', or ''completed'' (stored lowercase); exclude activation fees.',
+             profile_name => 'genai',
+             action       => 'narrate'
+           ) AS explanation;
+    </copy>
+    ```
+
+    ![Explain the result](images/sql-ai-narration.png)
+
+2. Review the explanation against the SQL result.
+
+  Compare the explanation with the query result. Check the plan names, ranking, monthly charges and connection totals before using the answer.
+
+  > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
+
+## Conclusion: Ask, Inspect, and Refine
+
+Nina compared monthly charges by asking, inspecting, running, and refining a question. She checked the joins, filters, and totals before using the answer.
+
+## Next Steps
+
+For the full list of Select AI actions, profile attributes, and supported providers, see the [Oracle AI Database 26ai Select AI documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
+
+## Application Demo
+
+Open **Ask Telecom Operations Data** to explore **Narrate**, **Chat**, **Show SQL**, and **Run SQL**.
+
+![LiveStack Telecomm Demo: Ask Telecom Operations Data](images/app-ask-data.png)
+
+*LiveStack Telecomm Demo: Ask Telecom Operations Data*
+
+## Acknowledgements
+
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026
