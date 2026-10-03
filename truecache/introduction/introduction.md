@@ -42,6 +42,8 @@ The DBW26 workshop provides two ways to learn the same True Cache workflow:
 - **FastLab:** use the visual command center for a quick guided demonstration.
 - **Full LiveLab:** use the terminal to run the database, Java, and Podman commands directly.
 
+Choose either FastLab or the Full LiveLab for one workshop run. You can complete both, but the routing, warmup, performance, availability, and vector-search demonstrations overlap, so some work will repeat. If you are resuming a workshop, continue with the next incomplete section.
+
 Both paths use the same LiveLabs remote desktop. For **FastLab**, open Google Chrome inside the remote desktop and navigate to `http://127.0.0.1:8080/`; this opens the local command center. For the **Full LiveLab**, keep this workshop guide open and select **Activities**, then **Terminal**, when the lab asks you to run commands. The detailed labs do not require the FastLab command center.
 
 The outline is:

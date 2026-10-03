@@ -154,7 +154,7 @@ True Cache is a read-only replica. While the True Cache container and read servi
     - **Similar amount profile** finds payments with a similar amount and vector profile.
 3. Read the explanation below the investigation selector. It describes the filter and the vector query used for the selected payment.
 4. Expand **Behind this step** to see the actual SQL and the True Cache route for the request.
-5. Review the result table. FastLab returns the five closest matching payments.
+5. Review the result table. FastLab returns up to five closest matching payments. A filtered investigation can return fewer when fewer than five payments match its criteria.
 6. Read **Vector distance** as a similarity score: a smaller cosine distance means the payment profiles point in a more similar direction. The distance is not a currency amount or a percentage.
 7. Try another reference payment or investigation and compare how the candidate filter changes the results.
 
@@ -173,7 +173,7 @@ The FastLab is complete when:
 - Primary and True Cache read latency has been reviewed, with supporting TPS values.
 - Replication lag, cache hit ratios, and fetch latency have been reviewed.
 - True Cache remains available while Primary is stopped, and Primary is restored afterward.
-- At least one vector investigation returns five ranked payment results and its SQL is visible in **Behind this step**.
+- At least one vector investigation returns one or more ranked payment results (up to five), and its SQL is visible in **Behind this step**.
 
 ## Learn More
 

@@ -17,7 +17,7 @@ Open the remote-desktop link supplied with your workshop. For a sandbox reservat
 
 ## Task 1: Check the Containers
 
-1. In the remote desktop, select **Activities**, then **Terminal**. This is the host terminal. You can maximize the window by double-clicking its title bar.
+1. In the remote desktop, select **Activities**, then **Terminal**. This is the host terminal. You can maximize the window by double-clicking its title bar. If **Activities** is hidden because Chrome is full-screen, press **Alt+F2**, enter `gnome-terminal`, and press Enter.
 
     ![Open Terminal from Activities](images/activities_terminal_icon.png)
 
