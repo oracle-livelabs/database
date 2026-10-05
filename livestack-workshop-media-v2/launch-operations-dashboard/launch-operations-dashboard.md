@@ -245,8 +245,8 @@ for an application while keeping SQL access for the database team.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Vahn Kessler, September 2026
+* **Author** - Teodor Constantin Nechita
+* **Contributor** - Vahn Kessler
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
 
 [link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet
