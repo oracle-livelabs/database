@@ -90,7 +90,7 @@ already contain an enabled profile for the `LLUSER` schema.
 The handoff loader creates the data and semantic views; it does not create
 provider credentials or an AI profile. Before starting, confirm that the
 administrator has enabled provider access, granted `EXECUTE` on `DBMS_CLOUD_AI`
-to `LLUSER`, and created the `SEER_MEDIA_PROFILE` profile. Ask the facilitator
+to `LLUSER`, and created the `GENAI` profile. Ask the facilitator
 to complete this setup before continuing.
 
 1. Run this query:
@@ -105,7 +105,7 @@ to complete this setup before continuing.
     </copy>
     ```
 
-    This workshop uses the enabled `SEER_MEDIA_PROFILE` profile. Confirm that it
+    This workshop uses the enabled `GENAI` profile. Confirm that it
     is enabled before continuing. If it is not present, complete the provider
     setup with the administrator before continuing.
 
@@ -159,7 +159,7 @@ The loader keeps physical names such as `PRODUCTS`, `ORDERS`, and `CUSTOMERS`
 for application compatibility. Its five `MEDIA_*` views expose content assets,
 campaign orders, audience signals, distribution capacity, and creator
 relationships using Media business terms. Jessica adds these views to
-`SEER_MEDIA_PROFILE`.
+`GENAI`.
 
 1. Add the Media semantic views and enable object-list enforcement. Copy the
     entire block, including the final `/`, and choose **Run Script**:
@@ -168,7 +168,7 @@ relationships using Media business terms. Jessica adds these views to
     <copy>
     BEGIN
       DBMS_CLOUD_AI.SET_ATTRIBUTE(
-        profile_name    => 'SEER_MEDIA_PROFILE',
+        profile_name    => 'GENAI',
         attribute_name  => 'object_list',
         attribute_value => '[{"owner":"' || USER || '","name":"MEDIA_CONTENT_ASSETS_V"},' ||
                            '{"owner":"' || USER || '","name":"MEDIA_CAMPAIGN_ORDERS_V"},' ||
@@ -177,12 +177,12 @@ relationships using Media business terms. Jessica adds these views to
                            '{"owner":"' || USER || '","name":"MEDIA_CREATOR_RELATIONSHIPS_V"}]'
       );
       DBMS_CLOUD_AI.SET_ATTRIBUTE(
-        profile_name    => 'SEER_MEDIA_PROFILE',
+        profile_name    => 'GENAI',
         attribute_name  => 'enforce_object_list',
         attribute_value => 'true'
       );
       DBMS_CLOUD_AI.SET_ATTRIBUTE(
-        profile_name    => 'SEER_MEDIA_PROFILE',
+        profile_name    => 'GENAI',
         attribute_name  => 'comments',
         attribute_value => 'true'
       );
@@ -199,7 +199,7 @@ relationships using Media business terms. Jessica adds these views to
            attribute_name,
            attribute_value
     FROM user_cloud_ai_profile_attributes
-    WHERE profile_name = 'SEER_MEDIA_PROFILE'
+    WHERE profile_name = 'GENAI'
       AND attribute_name IN ('object_list', 'enforce_object_list', 'comments')
     ORDER BY attribute_name;
     </copy>
@@ -224,13 +224,13 @@ it. The proxy is the loader's `PRODUCTS.UNIT_PRICE` exposed as
 Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 `DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
 
-1. Run the question with the `SEER_MEDIA_PROFILE` profile:
+1. Run the question with the `GENAI` profile:
 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, and campaign_value_proxy. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
-             profile_name => 'SEER_MEDIA_PROFILE',
+             profile_name => 'GENAI',
              action       => 'showsql'
            ) AS generated_sql
     FROM dual;
@@ -262,7 +262,7 @@ the direct SQL check below.
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, and campaign_value_proxy. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
-             profile_name => 'SEER_MEDIA_PROFILE',
+             profile_name => 'GENAI',
              action       => 'runsql'
            ) AS answer
     FROM dual;
@@ -310,7 +310,7 @@ value proxy still represents unit price, not actual revenue.
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, campaign_value_proxy, audience_signal_count, total_capacity_units, and reserved_capacity_units. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
-             profile_name => 'SEER_MEDIA_PROFILE',
+             profile_name => 'GENAI',
              action       => 'showsql'
            ) AS generated_sql
     FROM dual;
@@ -325,7 +325,7 @@ value proxy still represents unit price, not actual revenue.
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, campaign_value_proxy, audience_signal_count, total_capacity_units, and reserved_capacity_units. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
-             profile_name => 'SEER_MEDIA_PROFILE',
+             profile_name => 'GENAI',
              action       => 'runsql'
            ) AS answer
     FROM dual;
@@ -377,7 +377,7 @@ and ask the AI provider to describe the returned rows.
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'From MEDIA_CONTENT_ASSETS_V, show the five active content assets with the highest campaign_value_proxy. Include product_id, content_asset, content_category, studio_or_label, campaign_value_proxy, audience_signal_count, total_capacity_units, and reserved_capacity_units. Filter is_active = 1. Order by campaign_value_proxy descending and product_id ascending.',
-             profile_name => 'SEER_MEDIA_PROFILE',
+             profile_name => 'GENAI',
              action       => 'narrate'
            ) AS explanation
     FROM dual;

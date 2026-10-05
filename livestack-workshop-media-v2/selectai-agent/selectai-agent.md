@@ -23,7 +23,7 @@ for a quick answer, but her new campaign-review screen needs a repeatable media
 assistant that can answer a question and support follow-up requests.
 
 Jessica, the DBA, gives Nina's agent one approved tool: a SQL tool that uses the
-`SEER_MEDIA_PROFILE` profile and the Media semantic views configured in the
+`GENAI` profile and the Media semantic views configured in the
 previous lab.
 
 In this lab, you create the agent objects, connect the agent to the SQL tool,
@@ -39,7 +39,7 @@ modify it.
 >   a request.
 >
 > * A **tool** is a capability the agent is allowed to call. In this lab, the
->   tool runs SQL through the `SEER_MEDIA_PROFILE` profile.
+>   tool runs SQL through the `GENAI` profile.
 >
 > * A **task** tells the agent what to do and which tools it may use.
 >
@@ -50,7 +50,7 @@ modify it.
 
 ### Objectives
 
-* Confirm that the `SEER_MEDIA_PROFILE` profile from the previous lab is available.
+* Confirm that the `GENAI` profile from the previous lab is available.
 * Verify which Media semantic views the SQL tool may use.
 * Register a SQL tool for querying the Media semantic views.
 * Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
@@ -72,7 +72,7 @@ Estimated Time: **15 minutes**
 
 > **Prerequisite:** Complete
 > [Lab 7: Ask Media Questions with Select AI](?lab=selectai). This lab uses the
-> enabled `SEER_MEDIA_PROFILE` profile and its enforced `object_list`. The
+> enabled `GENAI` profile and its enforced `object_list`. The
 > administrator must also grant `EXECUTE` on `DBMS_CLOUD_AI_AGENT` to `LLUSER`;
 > the handoff loader does not include that grant.
 >
@@ -82,7 +82,7 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Check the profile and view access
 
-The agent's SQL tool uses the existing `SEER_MEDIA_PROFILE` profile. Its
+The agent's SQL tool uses the existing `GENAI` profile. Its
 `object_list` lists five Media semantic views, and `enforce_object_list` limits
 the objects Select AI may use when it generates SQL. Database privileges provide
 the second control: the SQL still runs as the current database user and cannot
@@ -96,7 +96,7 @@ change those privileges.
     SELECT profile_name,
            status
     FROM user_cloud_ai_profiles
-    WHERE profile_name = 'SEER_MEDIA_PROFILE';
+    WHERE profile_name = 'GENAI';
     </copy>
     ```
 
@@ -111,7 +111,7 @@ change those privileges.
            attribute_name,
            attribute_value
     FROM user_cloud_ai_profile_attributes
-    WHERE profile_name = 'SEER_MEDIA_PROFILE'
+    WHERE profile_name = 'GENAI'
       AND attribute_name IN ('object_list', 'enforce_object_list')
     ORDER BY attribute_name;
     </copy>
@@ -141,7 +141,7 @@ change those privileges.
 ## Task 2: Register the SQL tool
 
 The SQL tool is the agent's only database capability in this lab. It uses the
-`SEER_MEDIA_PROFILE` profile, so its enforced object list limits the objects
+`GENAI` profile, so its enforced object list limits the objects
 used by generated SQL.
 
 1. Register the tool. Copy the entire block, including the final `/`, and choose
@@ -152,7 +152,7 @@ used by generated SQL.
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'NINA_MEDIA_SQL_TOOL',
-        attributes  => '{"tool_type": "SQL", "tool_params": {"profile_name": "SEER_MEDIA_PROFILE"}, "instruction": "Use this built-in SQL tool to translate a natural-language question into a database query. Set ACTION to RUNSQL when asked for data. QUERY must contain the original natural-language question unchanged, including every requested column, filter, ordering rule and row limit. Do not write a SQL SELECT statement in QUERY. Use only the five Media views configured in SEER_MEDIA_PROFILE. Do not request data changes."}',
+        attributes  => '{"tool_type": "SQL", "tool_params": {"profile_name": "GENAI"}, "instruction": "Use this built-in SQL tool to translate a natural-language question into a database query. Set ACTION to RUNSQL when asked for data. QUERY must contain the original natural-language question unchanged, including every requested column, filter, ordering rule and row limit. Do not write a SQL SELECT statement in QUERY. Use only the five Media views configured in GENAI. Do not request data changes."}',
         description => 'Query Media semantic views through Select AI'
       );
     END;
@@ -196,7 +196,7 @@ with **Run Script**.
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
         agent_name  => 'NINA_MEDIA_AGENT',
-        attributes  => '{"profile_name": "SEER_MEDIA_PROFILE", "role": "You are Nina Patel''s Seer Media data assistant. Use NINA_MEDIA_SQL_TOOL to obtain database evidence. The tool accepts a natural-language QUERY, not SQL text. For data questions choose ACTION RUNSQL. Preserve all returned values and row order; do not calculate a different ranking or replace rows. Distinguish campaign_value_proxy, an asset unit-price proxy, from actual campaign_value. Do not invent values."}',
+        attributes  => '{"profile_name": "GENAI", "role": "You are Nina Patel''s Seer Media data assistant. Use NINA_MEDIA_SQL_TOOL to obtain database evidence. The tool accepts a natural-language QUERY, not SQL text. For data questions choose ACTION RUNSQL. Preserve all returned values and row order; do not calculate a different ranking or replace rows. Distinguish campaign_value_proxy, an asset unit-price proxy, from actual campaign_value. Do not invent values."}',
         description => 'Media and Entertainment assistant for Nina Patel'
       );
     END;
