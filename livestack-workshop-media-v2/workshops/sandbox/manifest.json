@@ -19,7 +19,7 @@
     },
     {
       "title": "Lab 2: Build a JSON Campaign Application Model",
-      "description": "Help Thomas serve campaign orders with JSON Relational Duality.",
+      "description": "Compare JSON columns, JSON collections, and duality views for campaign-order data.",
       "filename": "../../viewing-session-duality/viewing-session-duality.md"
     },
     {
@@ -29,12 +29,12 @@
     },
     {
       "title": "Lab 4: Investigate a Creator and Studio Network",
-      "description": "Follow creator connections and shared studio partnerships with Oracle Property Graph.",
+      "description": "Follow creator connections and relationships with shared studios or labels using SQL/PGQ and Graph Studio.",
       "filename": "../../creator-community-network/creator-community-network.md"
     },
     {
       "title": "Lab 5: Route Audience Accounts to the Closest Distribution Hub",
-      "description": "Compare distribution hubs, audience accounts, and seeded demand regions.",
+      "description": "Find audience accounts in a region and identify the closest active distribution hub for each account.",
       "filename": "../../live-event-capacity-spatial/live-event-capacity-spatial.md"
     },
     {
@@ -44,12 +44,12 @@
     },
     {
       "title": "Lab 7: Ask Media Questions with Select AI",
-      "description": "Turn natural-language media questions into inspectable SQL.",
+      "description": "Generate SQL from media questions, inspect it, and compare the answers with database results.",
       "filename": "../../selectai/selectai.md"
     },
     {
       "title": "Lab 8: Build a Media Agent with Select AI Agent",
-      "description": "Use a SQL-only Media operations agent and review its execution history.",
+      "description": "Create a media assistant with one SQL tool, check its answer, and review its execution history.",
       "filename": "../../selectai-agent/selectai-agent.md"
     },
     {
