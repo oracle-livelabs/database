@@ -182,7 +182,8 @@ used by generated SQL.
     WHERE tool_name = 'NINA_MEDIA_SQL_TOOL';
     </copy>
     ```
-  
+    ![Nina Media SQL tool invocation history](images/l8t2s2.png)
+
 ## Task 3: Create Nina's agent, task, and team
 
 The tool by itself does nothing. Nina's agent needs a role, a task needs
@@ -295,7 +296,10 @@ function call.
     screenshots show live Media results. Model wording and execution times can
     vary, but the values and row order should match the eight-column direct SQL
     check in Lab 7, Task 5.
-  
+
+    ![Nina Media SQL tool invocation history](images/l8t4s2.png)
+
+
     > **Note:** `LLUSER` retains write privileges for other workshop labs. For
     > an application, use a separate account with `SELECT` grants on only the
     > approved views to enforce read-only access. Prompt instructions alone do
@@ -385,6 +389,7 @@ called the approved tool and how the request was processed.
     ORDER BY t.start_date;
     </copy>
     ```
+    ![Nina Media SQL tool invocation history](images/l8t5s3.png)
 
     Check for a successful team and matching `NINA_MEDIA_SQL_TOOL` calls. Empty
     tool columns mean this query found no matching invocation. Compare the
@@ -437,9 +442,9 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Vahn Kessler, September 2026
+* **Author** - Teodor Constantin Nechita
+* **Contributor** - Vahn Kessler
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
 
 [link-1]: https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html
 [link-2]: https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-views-history.html

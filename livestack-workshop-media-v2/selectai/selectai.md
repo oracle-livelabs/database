@@ -292,6 +292,9 @@ the direct SQL check below.
     Select AI runs the generated SQL against the media schema using Nina's
     database privileges.
 
+    ![Content asset campaign value proxy results](images/l7t4s2.png)
+
+
     > **Note:** Separate `showsql` and `runsql` calls may generate different
     > SQL. To execute the exact statement you inspected, copy that SQL into the
     > worksheet and run it directly. Compare the `runsql` response with the
@@ -331,7 +334,7 @@ value proxy still represents unit price, not actual revenue.
     FROM dual;
     </copy>
     ```
-  
+
     ![Content asset results with audience signals and capacity](images/media-capacity-result.jpg)
 
 3. Compare the first and second questions, then check the revised answer against
@@ -361,6 +364,7 @@ value proxy still represents unit price, not actual revenue.
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+    ![Content asset results with audience signals and capacity](images/l7t5s3.png)
 
     The view aggregates inventory capacity and distinct audience signals
     separately for each content asset. This query reads those prepared totals
@@ -439,6 +443,6 @@ providers, see the
 
 * **Author** - Teodor Constantin Nechita
 * **Contributor** - Vahn Kessler
-* **Last Updated By/Date** - Vahn Kessler, September 2026
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
 
 [link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet
