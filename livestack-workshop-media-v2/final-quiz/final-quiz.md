@@ -1,18 +1,28 @@
 # Final Quiz
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
+
 ```quiz-config
 passing: 75
-badge: images/livestack-media-badge.svg
+badge: images/livestack-badge-media-entertainment.png
 ```
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect the Seer Media campaign and content outcomes to the database evidence you inspected in the labs.
+Use this quiz to check how well you can interpret the queries and results from
+the Seer Media labs.
 
 ### Objectives
 
-- Review the main database capabilities used in the workshop.
-- Earn the workshop badge by answering the scored questions.
+* Review the main database capabilities used in the workshop.
+* Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
 
@@ -31,20 +41,20 @@ Estimated Time: **3 minutes**
     Q: In the vector lab, what does the similarity score help an analyst do?
     - Confirm that a launch signal requires community-operations review.
     - Replace the content and signal tables with embeddings only.
-    * Rank content assets or audience signals by how closely they match the search phrase.
+    * Rank content assets by how closely their descriptions match the search phrase.
     - Count how many rows exist in each Media view.
-    > The query turns vector distance into a similarity score, where a higher score means the stored content description or audience signal text is closer in meaning to the search phrase.
+    > The query subtracts cosine distance from 1 to produce a similarity score. A higher score means the stored content description is closer in meaning to the search phrase.
 
     Q: What business problem does the property graph lab solve for Seer Media community analysts?
     - It predicts future campaign value from operational features.
-    * It explains connections among creators, audience signals, content assets, and studios or labels.
+    * It shows creator connections and relationships with shared studios or labels.
     - It stores service coverage regions for operations teams.
-    - It replaces relationship evidence with flat content totals.
-    > The graph lab focuses on relationship evidence. A community analyst follows creator connections and creator-to-studio relationships. The graph also represents audience-signal mentions of content assets.
+    - It replaces creator relationships with content totals.
+    > A community analyst follows creator connections and relationships with studios or labels. The graph definition also includes audience-signal mentions of content assets, although the exercises focus on creator and studio relationships.
 
     Q: Why does Seer Media use spatial data in the distribution capacity lab?
     - To make coverage decisions outside the governed database.
-    - To hide capacity evidence from distribution operations leaders.
+    - To hide capacity data from distribution operations leaders.
     * To find nearby distribution hubs for an audience account or demand region and compare capacity and current workload.
     - To replace spatial queries with static labels.
     > Spatial functions calculate distance and location relationships. SQL combines those results with audience account, distribution hub, capacity, and demand data to support routing decisions.
@@ -66,7 +76,7 @@ Estimated Time: **3 minutes**
     Q: What is the main advantage of using Oracle AI Database as the converged foundation for this workshop?
     - Each media capability must use a separate specialized data store.
     * One Oracle AI Database connects relational, JSON, vector, graph, spatial, machine-learning, and AI capabilities to the same governed data.
-    - Application screenshots replace the need for database evidence.
+    - Application screenshots replace the need to inspect database results.
     - Community operations teams must reconcile copied data before every investigation.
     > Each lab uses a different capability, but the teams work from connected data in one database. This reduces duplicate copies and separate integration paths while preserving database controls.
     ```
