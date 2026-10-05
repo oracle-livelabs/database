@@ -517,9 +517,30 @@ In this lab, you will:
     | `ADB_PASSWORD` | The `ADMIN` password you entered when creating the stack. It is not shown in the outputs. | The `ADMIN` password you set in Lab 1. It is also the wallet passphrase. |
     | `ADB_WALLET_DIR` | `/home/opc/oracle/wallet` | The wallet directory created in Lab 1, normally `/home/opc/oracle/wallet`. Use the actual path if you extracted the wallet elsewhere. |
 
-    `tnsnames.ora` is a text file inside the wallet. It maps short connection aliases to the database network settings; set `ADB_DSN` to the alias only, not the full descriptor or the path to this file. For the manual path, Lab 1, Task 2, steps 5–7, creates and verifies the wallet files in `~/oracle/wallet`.
+    The wallet is the directory that contains the database connection configuration and credentials downloaded from Autonomous Database. For the manual path, Lab 1, Task 2, steps 5–7, extracts and verifies these files in `/home/opc/oracle/wallet`. One of those files is `tnsnames.ora`, a text file that maps short connection aliases to the complete database network settings. You do not need to edit `tnsnames.ora`.
 
-    The other Fast Path outputs are not `.env.shared` values: `autonomous_database_name`, `db_name`, and `configuration_summary.database_name` identify the database but are not the `_low` connection alias; `instance_public_ip` and `ssh_command` are for SSH; and `bootstrap_log` and `bootstrap_status` are paths used to monitor bootstrap. The remaining `configuration_summary` entries describe region, workload, and capacity. Get Slack IDs from Slack in Tasks 1 and 2.
+    For the manual path, go to the wallet directory and display the entry whose alias ends in `_low`:
+
+    ```bash
+    <copy>
+    cd /home/opc/oracle/wallet
+    ls -1
+    grep -Ei '^[[:space:]]*[[:alnum:]_.-]+_low[[:space:]]*=' tnsnames.ora
+    </copy>
+    ```
+
+    The output starts with an alias similar to `mydatabase_low = (...)`. Copy only `mydatabase_low`, the value on the left side of `=`, and use it as `ADB_DSN` in `.env.shared`. Do not copy the full connection descriptor, the path to `tnsnames.ora`, or the wallet directory into `ADB_DSN`. Set the directory separately as `ADB_WALLET_DIR=/home/opc/oracle/wallet`.
+
+    The other Fast Path outputs are not `.env.shared` values: `autonomous_database_name`, `db_name`, and `configuration_summary.database_name` identify the database but are not the `_low` connection alias; `instance_public_ip` and `ssh_command` are for SSH; and `bootstrap_log` and `bootstrap_status` are paths used to monitor bootstrap. The remaining `configuration_summary` entries describe region, workload, and capacity.
+
+    Get `SLACK_WORKSPACE_ID` from the `auth.test` output generated in **Task 2, step 6**. Copy the value of `team_id`, which starts with `T`, into `.env.shared`. The same output provides `bot_id` for `ASSISTANT_BOT_ID`. Do not use the workspace name or its human-readable URL in place of `team_id`.
+
+    If you did not save the `team_id` from `auth.test`, find the workspace ID in Slack as a second option:
+
+    - Open Slack in a web browser instead of the desktop application and sign in to the workspace.
+    - Open any channel and inspect the browser address. It follows a structure similar to `https://app.slack.com/client/T01234567/C01234567`.
+    - Copy the value that starts with `T` immediately after `/client/`. In this example, use `T01234567` as `SLACK_WORKSPACE_ID`.
+    - For additional navigation guidance, see [Locate your Slack URL or ID](https://slack.com/help/articles/221769328-Locate-your-Slack-URL-or-ID#find-your-workspace-or-org-id) in the Slack Help Center.
 
     ```
     <copy>
@@ -702,8 +723,6 @@ The Content Kit configuration stores machine-specific paths and feature flags on
     - `paths.content_strategy`: the active deployment's content strategy.
     - `headshot`: the deployment's actual headshot file.
 
-    The `notebooklm-venv` directory name is historical. In this workshop, it is the Python 3.12 runtime used by Content Kit scripts. The Brand Agent creates the user strategy files in Lab 5. Add the deployment headshot before running a workflow that generates personalized images.
-
 3. Verify the Content Kit configuration
 
     First confirm that the file is strict JSON:
@@ -733,9 +752,9 @@ The Content Kit configuration stores machine-specific paths and feature flags on
     </copy>
     ```
 
-The Content Kit configuration is now prepared for Lab 5, when the services are activated after Google OAuth and the external integrations are complete. Historical references to `~/.claude` or `~/.claude/skills` should not be used in a fresh deployment.
+The Content Kit configuration is now prepared for Lab 5, when the services are activated after Google OAuth and the external integrations are complete.
 
 ## Acknowledgements
 
 - Authors: Cyrce Salinas Rojas and Ilan Gómez guerrero
-- Last Updated: Ilan Gómez guerrero, September 2026
+- Last Updated: Ilan Gómez guerrero, October 2026
