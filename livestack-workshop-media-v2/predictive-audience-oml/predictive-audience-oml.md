@@ -480,8 +480,8 @@ the synthetic workshop labels.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Vahn Kessler, September 2026
+* **Author** - Teodor Constantin Nechita
+* **Contributor** - Vahn Kessler
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
 
 [link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet

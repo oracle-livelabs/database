@@ -568,8 +568,8 @@ queries this graph while the relational rows remain the source of the data.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
-* **Last Updated By/Date** - Vahn Kessler, September 2026
+* **Author** - Teodor Constantin Nechita
+* **Contributor** - Vahn Kessler
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
 
 [link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet
