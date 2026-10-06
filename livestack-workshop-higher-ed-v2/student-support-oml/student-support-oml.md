@@ -1,0 +1,254 @@
+# Forecast Student-Support Demand with Oracle Machine Learning
+
+## Introduction
+
+![Otto Spencer introduces this Higher Education lab](images/otto.png)
+
+Otto Spencer is a data scientist at Seer Higher Education. Student-support leaders need to plan staffing for upcoming terms. Otto builds a model that flags program-and-campus cohorts whose service workload may surge.
+
+The model predicts an operational workload label from aggregated, synthetic term data. It does not score individual students or make admissions, advising, or academic decisions. Training, scoring, and the supporting data stay in Oracle AI Database.
+
+![Train and score an operational support-demand model](images/support-demand-model.svg)
+
+<details>
+<summary><strong>Key terms: model, feature, classification, and probability</strong></summary>
+
+> - A **model** learns patterns from examples and uses them to produce a prediction.
+> - A **feature** is an input column used by the model, such as open request counts or average wait days.
+> - **Classification** predicts a label. This lab predicts `SURGE` or `STABLE` for an aggregated program-and-campus term.
+> - A **probability** is the model's value for a possible label. It helps rank results; it is not a guarantee.
+> - **In-database machine learning** trains or scores data where it already lives.
+
+</details>
+
+### Objectives
+
+- Read the prepared support-demand training view.
+- Optionally compare classifiers with Oracle Machine Learning AutoML.
+- Create a Generalized Linear Model in Oracle AI Database.
+- Score a separate next-term snapshot with `PREDICTION` and `PREDICTION_PROBABILITY`.
+- Interpret the output as an operations-planning signal, not an individual student decision.
+
+Estimated Time: **15 minutes**
+
+### Hands-on Scenario
+
+| Step | Higher Education focus |
+| --- | --- |
+| Business Problem | Operations needs an early view of programs that may need more support capacity. |
+| Technical Challenge | Otto needs to train and score without exporting the aggregated workload data. |
+| Persona Focus | You follow Otto as he checks the training data and tests a model. |
+| What You Will See | AutoML can compare candidates; SQL creates and scores the selected model. |
+| Database Capability | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY`. |
+| Outcome | A workload watchlist combines a model label with the operational data behind it. |
+
+> **SQL Worksheet reminder:** Run the SQL blocks as `LLUSER`. The optional AutoML task uses Database Actions.
+
+## Task 1: Read the training data
+
+The prepared `STUDENT_SUPPORT_DEMAND_TRAINING_V` view contains one row per program, campus, and term. The input columns describe aggregated service workload. `DEMAND_SURGE_LABEL` is the known training label.
+
+```sql
+<copy>
+SELECT cohort_term_id,
+       campus_name,
+       program_name,
+       term_code,
+       enrolled_students,
+       open_requests,
+       prior_term_requests,
+       avg_priority_score,
+       median_wait_days,
+       demand_surge_label
+FROM student_support_demand_training_v
+ORDER BY cohort_term_id
+FETCH FIRST 10 ROWS ONLY;
+</copy>
+```
+
+![SQL Worksheet showing aggregated support-demand training rows](images/training-query-result.jpg)
+
+The numeric and category values are model features. `DEMAND_SURGE_LABEL` is the outcome the model learns to predict. The rows are aggregated by cohort; they do not represent individual students.
+
+## Task 2: Compare models with AutoML (optional)
+
+AutoML can compare algorithms and show how each performs against the two workload labels. It can take several minutes, so continue to Task 3 if you want to focus on creating and using the model in SQL.
+
+1. Open **Machine Learning** from Database Actions, then select **AutoML**.
+2. Create an experiment with these settings:
+
+    | Setting | Value |
+    | --- | --- |
+    | Experiment name | `Student Support Demand` |
+    | Data source | `STUDENT_SUPPORT_DEMAND_TRAINING_V` |
+    | Predict | `DEMAND_SURGE_LABEL` |
+    | Prediction type | `Classification` |
+    | Case ID | `COHORT_TERM_ID` |
+
+3. Start the experiment and review the leaderboard and confusion matrix. Choose a candidate that recognizes both `SURGE` and `STABLE` rows; a single overall score does not show whether both labels are being identified.
+4. Review feature impact as a diagnostic. Feature impact shows which values influenced the model; it does not prove that a feature causes a change in demand.
+
+This task is optional. The SQL steps use the Generalized Linear Model selected for the workshop.
+
+## Task 3: Create the model in SQL
+
+Create a settings table and train a database model from the prepared view.
+
+```sql
+<copy>
+CREATE TABLE student_support_model_settings (
+    setting_name  VARCHAR2(30),
+    setting_value VARCHAR2(4000)
+);
+
+INSERT INTO student_support_model_settings (setting_name, setting_value)
+VALUES ('ALGO_NAME', 'ALGO_GENERALIZED_LINEAR_MODEL');
+
+INSERT INTO student_support_model_settings (setting_name, setting_value)
+VALUES ('PREP_AUTO', 'ON');
+
+INSERT INTO student_support_model_settings (setting_name, setting_value)
+VALUES ('ODMS_RANDOM_SEED', '20261005');
+
+COMMIT;
+
+BEGIN
+  DBMS_DATA_MINING.CREATE_MODEL(
+    model_name           => 'STUDENT_SUPPORT_DEMAND_MODEL',
+    mining_function      => DBMS_DATA_MINING.CLASSIFICATION,
+    data_table_name      => 'STUDENT_SUPPORT_DEMAND_TRAINING_V',
+    case_id_column_name  => 'COHORT_TERM_ID',
+    target_column_name   => 'DEMAND_SURGE_LABEL',
+    settings_table_name  => 'STUDENT_SUPPORT_MODEL_SETTINGS'
+  );
+END;
+/
+</copy>
+```
+
+Confirm that Oracle created the model:
+
+```sql
+<copy>
+SELECT model_name,
+       mining_function,
+       algorithm
+FROM user_mining_models
+WHERE model_name = 'STUDENT_SUPPORT_DEMAND_MODEL';
+</copy>
+```
+
+![SQL Worksheet showing the trained classification model and algorithm](images/model-created-result.jpg)
+
+The expected mining function is `CLASSIFICATION`, and the algorithm is `GENERALIZED_LINEAR_MODEL`.
+
+## Task 4: Score a next-term workload snapshot
+
+The separate scoring table contains the model inputs for a future term and does not contain the training label.
+
+1. Create a scoring table and seed it from the prepared aggregated data:
+
+    ```sql
+    <copy>
+    CREATE TABLE student_support_scoring_data (
+        cohort_term_id       VARCHAR2(60),
+        campus_name          VARCHAR2(100),
+        program_name         VARCHAR2(150),
+        term_code            VARCHAR2(30),
+        enrolled_students    NUMBER,
+        open_requests        NUMBER,
+        prior_term_requests  NUMBER,
+        avg_priority_score   NUMBER,
+        median_wait_days     NUMBER
+    );
+
+    INSERT INTO student_support_scoring_data (
+        cohort_term_id,
+        campus_name,
+        program_name,
+        term_code,
+        enrolled_students,
+        open_requests,
+        prior_term_requests,
+        avg_priority_score,
+        median_wait_days
+    )
+    SELECT 'NEXT-' || cohort_term_id,
+           campus_name,
+           program_name,
+           '2027SP',
+           enrolled_students + 20,
+           open_requests + 4,
+           prior_term_requests,
+           avg_priority_score,
+           median_wait_days + 1
+    FROM (
+        SELECT cohort_term_id,
+               campus_name,
+               program_name,
+               enrolled_students,
+               open_requests,
+               prior_term_requests,
+               avg_priority_score,
+               median_wait_days,
+               ROW_NUMBER() OVER (ORDER BY cohort_term_id) AS row_num
+        FROM student_support_demand_training_v
+    )
+    WHERE row_num <= 12;
+
+    COMMIT;
+    </copy>
+    ```
+
+2. Score the rows and order the potential surges first:
+
+    ```sql
+    <copy>
+    SELECT cohort_term_id,
+           campus_name,
+           program_name,
+           term_code,
+           PREDICTION(
+             STUDENT_SUPPORT_DEMAND_MODEL USING
+             campus_name,
+             program_name,
+             term_code,
+             enrolled_students,
+             open_requests,
+             prior_term_requests,
+             avg_priority_score,
+             median_wait_days
+           ) AS predicted_demand,
+           ROUND(
+             PREDICTION_PROBABILITY(
+               STUDENT_SUPPORT_DEMAND_MODEL,
+               'SURGE' USING
+               campus_name,
+               program_name,
+               term_code,
+               enrolled_students,
+               open_requests,
+               prior_term_requests,
+               avg_priority_score,
+               median_wait_days
+             ), 4
+           ) AS surge_probability,
+           open_requests,
+           median_wait_days
+    FROM student_support_scoring_data
+    ORDER BY surge_probability DESC, cohort_term_id;
+    </copy>
+    ```
+
+    ![SQL Worksheet showing next-term demand predictions and surge probabilities](images/scored-demand-result.jpg)
+
+`PREDICTED_DEMAND` is the selected label. `SURGE_PROBABILITY` helps operations rank cohorts for review, but it does not guarantee a future workload change. Staff should check the counts and local context before adjusting capacity.
+
+## Conclusion: Keep the prediction beside the workload data
+
+Otto reviewed aggregated training rows, optionally compared candidates with AutoML, created a Generalized Linear Model, and scored a separate next-term snapshot. The result combines a workload signal with the inputs a planner can review, all inside Oracle AI Database.
+
+## Acknowledgements
+
+* **Author** - Linda Foinding
+* **Last Updated** - October 2026
