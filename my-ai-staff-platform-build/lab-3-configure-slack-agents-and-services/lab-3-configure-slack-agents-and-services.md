@@ -188,7 +188,7 @@ In this lab, you will:
 
     If the command stops, run `python3 scripts/setup_slack.py setup` again. It reuses the apps and channels recorded in `~/.config/livelabs-ai-staff/slack-setup.json`.
 
-## Task 4: Install the Bootstrap Requirements
+## Task 4: Install the Requirements and Run the Token Bootstrap
 
 1. Install the official Python hooks used by Slack CLI.
 
@@ -201,19 +201,7 @@ In this lab, you will:
 
     A message that says `Requirement already satisfied` means the dependency is ready.
 
-2. Preview the bootstrap operation.
-
-    ```bash
-    <copy>
-    python3 scripts/setup_slack.py bootstrap-tokens --dry-run
-    </copy>
-    ```
-
-    The preview reads the saved app IDs. It does not call Slack or modify an environment file.
-
-## Task 5: Run the Token Bootstrap
-
-1. Run the bootstrap for all seven apps.
+2. Run the bootstrap for all seven apps.
 
     ```bash
     <copy>
@@ -225,13 +213,13 @@ In this lab, you will:
 
     ![Slack CLI token bootstrap progress](./images/23_bootstrap_progress.png)
 
-2. Confirm that the command reports seven apps and 14 runtime credentials.
+3. Confirm that the command reports seven apps and 14 runtime credentials.
 
     ![Successful token bootstrap summary](./images/24_bootstrap_complete.png)
 
     If any app fails, correct the reported problem and run the same command again. The command preserves the existing environment files until all selected apps succeed.
 
-3. Check the token status.
+4. Check the token status.
 
     ```bash
     <copy>
@@ -245,7 +233,7 @@ In this lab, you will:
 
     The command reports token status without printing token values.
 
-## Task 6: Write the Shared Slack Environment
+## Task 5: Write the Shared Slack Environment
 
 1. Write the saved Slack IDs to `.env.shared`.
 
@@ -267,7 +255,7 @@ In this lab, you will:
 
     The command preserves database values, personal values, and other existing settings. It does not write `xoxb` or `xapp` tokens to `.env.shared`.
 
-## Task 7: Add Personal Data and Validate the Configuration
+## Task 6: Add Personal Data and Validate the Configuration
 
 1. Open the shared environment file.
 
@@ -289,7 +277,15 @@ In this lab, you will:
 
 3. Copy the Slack member ID for the deployment owner.
 
-    In Slack, open the member profile, select **More**, and select **Copy member ID**. Add the `U...` value to:
+    In Slack, select your name to open the member card. Then select **View full profile**.
+
+    ![Open the full Slack member profile](./images/33_open_slack_member_profile.png)
+
+    In the full profile, select the three-dot menu and select **Copy member ID**.
+
+    ![Copy the Slack member ID](./images/34_copy_slack_member_id.png)
+
+    Add the copied `U...` value to both variables:
 
     ```text
     SLACK_ASSISTANT_USER_ID=U...
@@ -356,7 +352,7 @@ In this lab, you will:
     Configuration validation passed; no values displayed.
     ```
 
-## Task 8: Customize the Slack Apps
+## Task 7: Customize the Slack Apps
 
 This task is optional. Slack App Settings remains the source of truth for the identity of each app.
 
