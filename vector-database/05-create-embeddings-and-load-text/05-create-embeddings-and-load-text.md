@@ -152,7 +152,7 @@ The `weather` table created in Lab 4 uses bring-your-own vector embeddings. Unli
 
 2. Review the output. The paragraph prints the number of prepared weather vectors, and the final upsert result confirms that the vectors and metadata were loaded into `weather`.
 
-    With `batch_size=32`, each embedding call processes up to 32 weather descriptions. This reduces REST requests and should complete faster than making one request per park, while avoiding a single large embedding request. Runtime varies with the available database resources and the amount of text processed.
+    With `batch_size=32`, each embedding call processes up to 32 weather descriptions. This reduces REST requests and should complete faster than making one request per park, while avoiding a single large embedding request. Even with batching, this step can take a few minutes, depending on the available database resources and the amount of text processed.
 
 You may now **proceed to the next lab.**
 
