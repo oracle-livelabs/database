@@ -123,9 +123,11 @@ The `weather` table stores vectors generated in Lab 5 and does not have an integ
 
 1. Add a new Python paragraph and run the following code.
 
+    The metadata filter limits the weather search to parks in California or Arizona.
+
     ```python
     %python
-    weather_query = "parks with cold winters and mild summers"
+    weather_query = "parks with snowfall"
 
     weather_embedding = vecdb.generate_embedding(
         model_name="all_MiniLM_L12_v2",
@@ -135,13 +137,14 @@ The `weather` table stores vectors generated in Lab 5 and does not have an integ
     weather_result = vecdb.query(
         table_name="weather",
         query_by={"vector": weather_embedding.data[0].embedding},
+        filters={"states": {"$in": ["CA", "AZ"]}},
         top_k=5,
     )
 
     print(format_parks(weather_result, include_weather=True))
     ```
 
-2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `weather` is a bring-your-own-vector table. The output includes the original `weather_info` text, along with the other park metadata.
+2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `weather` is a bring-your-own-vector table. Every returned park must have `states` set to `CA` or `AZ` and be semantically relevant to snowfall. The output includes the original `weather_info` text, along with the other park metadata.
 
 You now have a baseline semantic-search pattern for both integrated-embedding and bring-your-own-vector tables. Lab 7 reuses the integrated `parks` pattern and packages it as a read-only context-retrieval tool that an agent can call.
 
