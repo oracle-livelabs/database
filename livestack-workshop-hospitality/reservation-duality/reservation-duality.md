@@ -151,7 +151,7 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
 
 ## Task 3: Read a guest document from relational data
 
-Thomas now tests the document shape his application can consume directly.
+Thomas inspects a reservation document for the guest application. The reservation is the document root; the guest identifier and nightly-charge lines come from the related relational rows.
 
 1. Run this query:
 

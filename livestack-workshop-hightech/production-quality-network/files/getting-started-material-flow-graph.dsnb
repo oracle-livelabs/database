@@ -1,7 +1,7 @@
 [
   {
     "name": "Getting Started/MATERIAL_FLOW_GRAPH",
-    "description": "HighTech graph exercises. Run the queries against the supplied sample data to see the results.",
+    "description": "High-Tech graph exercises. Run the queries against the supplied sample data to see the results.",
     "tags": null,
     "version": "7",
     "layout": "zeppelin",
@@ -22,7 +22,7 @@
         "message": [
           "%md",
           "# Material Flow Investigation",
-          "This optional notebook accompanies the HighTech workshop's production-quality graph lab. It teaches PGX algorithms using physical component movements between work centers. It is not the SQL/PGQ production-quality graph.",
+          "This optional notebook accompanies the High-Tech workshop's production-quality graph lab. It teaches PGX algorithms using physical component movements between work centers. It is not the SQL/PGQ production-quality graph.",
           "Prerequisites: a PGQL property graph named MATERIAL_FLOW_GRAPH over WORK_CENTERS and MATERIAL_TRANSFERS, the TRANSFERS edge label, the CENTER_ID vertex property, and access to the in-memory PGX server. Before using this notebook, ask the workshop administrator to create the optional graph and enable PGX.",
           "Centers 534, 597, 934, 387, and 406 are sample dataset IDs. Outputs have been cleared. Run every paragraph in sequence to produce results; rankings, paths, and counts depend on the loaded graph."
         ],

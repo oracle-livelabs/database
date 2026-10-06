@@ -1,4 +1,4 @@
-# Create Embeddings and Load Text
+# Lab 5: Create Embeddings and Load Text
 
 ## Introduction
 
