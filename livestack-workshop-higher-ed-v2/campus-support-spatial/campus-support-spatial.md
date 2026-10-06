@@ -29,7 +29,7 @@ locations represent campus service locations chosen for the demonstration; they
 are not student home addresses. Oracle Spatial can compare these shapes directly
 while SQL adds center capacity and workload.
 
-![Campus service areas, support centers, and request locations](images/campus-support-coverage.svg)
+![North Quad and Harbor Commons service-area polygons with labeled synthetic request locations and active support centers](images/campus-support-coverage.svg)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, and GeoJSON</strong></summary>
@@ -237,4 +237,5 @@ capacity, and current load for an initial service-coverage review.
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
