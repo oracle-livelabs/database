@@ -18,7 +18,7 @@ Estimated Time: X
 
 - Complete Lab 5: Create Embeddings and Load Text.
 - Keep the `vecdb` client initialized in your OML Notebook.
-- Load the National Parks records into the `parks` table, load the weather vectors into the `weather` table, and complete the `weather` vector index.
+- Load the National Parks records into the `parks` table and the weather vectors into the `weather` table.
 
 ## Task 1: Search by Text
 
@@ -119,7 +119,7 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
 
 ## Task 4: Search the Bring-Your-Own-Vector Table
 
-The `weather` table stores vectors generated and indexed in Lab 5 and does not have an integrated embedding configuration. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
+The `weather` table stores vectors generated in Lab 5 and does not have an integrated embedding configuration. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
 
 1. Add a new Python paragraph and run the following code.
 
