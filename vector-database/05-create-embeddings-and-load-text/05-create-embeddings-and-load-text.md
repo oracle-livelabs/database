@@ -98,28 +98,47 @@ The `weather` table created in Lab 4 uses bring-your-own vector embeddings. Unli
 
 1. Add a new Python paragraph and run the following code.
 
-    The loop uses `park_code` as a stable ID, skips records with missing or blank weather information, generates an embedding from each usable `weather_info` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes a few minutes to complete.
+    The first loop uses `park_code` as a stable ID, skips records with missing or blank weather information, and collects the eligible records. The second loop sends up to 32 `weather_info` values in each embedding request and pairs the returned vectors with their source records in the same order. The full park object remains searchable metadata.
 
     ```python
     %python
-    weather_vectors = []
+    weather_records = []
 
     for park in park_data_json:
         park_id = park.get("park_code")
         weather_text = park.get("weather_info")
-        if not park_id or not isinstance(weather_text, str) or not weather_text.strip():
+        if (
+            not park_id
+            or not isinstance(weather_text, str)
+            or not weather_text.strip()
+        ):
             continue
+        weather_records.append((park_id, weather_text, park))
+
+    batch_size = 32
+    weather_vectors = []
+
+    for start in range(0, len(weather_records), batch_size):
+        batch = weather_records[start:start + batch_size]
         embedding_response = vecdb.generate_embedding(
             model_name="all_MiniLM_L12_v2",
-            inputs=[weather_text],
+            inputs=[weather_text for _, weather_text, _ in batch],
         )
-        weather_vectors.append(
-            {
-                "id": park_id,
-                "dense_vector": embedding_response.data[0].embedding,
-                "metadata": park,
-            }
-        )
+        if len(embedding_response.data) != len(batch):
+            raise RuntimeError(
+                "Embedding response count did not match the input batch."
+            )
+
+        for (park_id, _, park), embedding_item in zip(
+            batch, embedding_response.data
+        ):
+            weather_vectors.append(
+                {
+                    "id": park_id,
+                    "dense_vector": embedding_item.embedding,
+                    "metadata": park,
+                }
+            )
 
     print(f"Prepared {len(weather_vectors)} weather vectors.")
 
@@ -131,9 +150,9 @@ The `weather` table created in Lab 4 uses bring-your-own vector embeddings. Unli
     print(upsert_result)
     ```
 
-2. Review the output. The embedding step typically takes a few minutes. The paragraph prints the number of prepared weather vectors, and the final upsert result confirms that the vectors and metadata were loaded into `weather`.
+2. Review the output. The paragraph prints the number of prepared weather vectors, and the final upsert result confirms that the vectors and metadata were loaded into `weather`.
 
-    This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
+    With `batch_size=32`, each embedding call processes up to 32 weather descriptions. This reduces REST requests and should complete faster than making one request per park, while avoiding a single large embedding request. Runtime varies with the available database resources and the amount of text processed.
 
 You may now **proceed to the next lab.**
 
