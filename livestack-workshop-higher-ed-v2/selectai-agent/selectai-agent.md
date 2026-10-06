@@ -69,7 +69,7 @@ Estimated Time: **15 minutes**
     </copy>
     ```
 
-The list should contain only `PROGRAM_SUPPORT_OVERVIEW_V`, `CAMPUS_SUPPORT_CAPACITY_V`, and `COURSE_SECTION_CAPACITY_V` for the workshop schema.
+    The list should contain only `PROGRAM_SUPPORT_OVERVIEW_V`, `CAMPUS_SUPPORT_CAPACITY_V`, and `COURSE_SECTION_CAPACITY_V` for the workshop schema.
 
 3. Check existing agent definitions:
 
