@@ -1,6 +1,83 @@
--- Seer Transport passenger workshop seed. Run once in a fresh, dedicated schema.
-WHENEVER SQLERROR EXIT SQL.SQLCODE
+/*
+  Seer Transport workshop loader for a fresh LLUSER schema.
+  Run as ADMIN with: @load_seer_transport.sql <lluser-password> <service-alias>
+  The platform setup must create LLUSER and load ADMIN.ALL_MINILM_L12_V2 first.
+  This file preserves existing data and refuses an occupied workshop schema.
+*/
+SET DEFINE ON
+SET VERIFY OFF
+SET ECHO OFF
+SET SERVEROUTPUT ON
+SET SQLBLANKLINES ON
+WHENEVER OSERROR EXIT FAILURE ROLLBACK
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
+DEFINE lluser_password = '&1'
+DEFINE service_alias = '&2'
+
+BEGIN
+  IF USER <> 'ADMIN' THEN
+    RAISE_APPLICATION_ERROR(-20001, 'Start the Seer Transport loader as ADMIN.');
+  END IF;
+END;
+/
+DECLARE
+  l_count PLS_INTEGER;
+BEGIN
+  SELECT COUNT(*) INTO l_count FROM dba_users WHERE username = 'LLUSER';
+  IF l_count <> 1 THEN
+    RAISE_APPLICATION_ERROR(-20002, 'Create LLUSER before running the loader.');
+  END IF;
+  SELECT COUNT(*) INTO l_count FROM dba_objects
+   WHERE owner = 'ADMIN' AND object_name = 'ALL_MINILM_L12_V2'
+     AND object_type = 'MINING MODEL' AND status = 'VALID';
+  IF l_count <> 1 THEN
+    RAISE_APPLICATION_ERROR(-20003, 'The ADMIN embedding model is missing or invalid.');
+  END IF;
+END;
+/
+GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE PROCEDURE,
+      CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE MINING MODEL,
+      CREATE SYNONYM, CREATE JOB, CREATE PROPERTY GRAPH TO LLUSER;
+GRANT RESOURCE, OML_DEVELOPER, GRAPH_DEVELOPER TO LLUSER;
+GRANT EXECUTE ON DBMS_CLOUD TO LLUSER;
+GRANT EXECUTE ON DBMS_CLOUD_AI TO LLUSER;
+GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO LLUSER;
+GRANT EXECUTE ON DBMS_DATA_MINING TO LLUSER;
+GRANT EXECUTE ON DBMS_VECTOR TO LLUSER;
+GRANT EXECUTE ON MDSYS.SDO_GEOM TO LLUSER;
+GRANT EXECUTE ON MDSYS.SDO_UTIL TO LLUSER;
+GRANT EXECUTE ON MDSYS.SDO_CS TO LLUSER;
+GRANT SELECT ON MINING MODEL ADMIN.ALL_MINILM_L12_V2 TO LLUSER;
+ALTER USER LLUSER GRANT CONNECT THROUGH "GRAPH$PROXY_USER";
+ALTER USER LLUSER GRANT CONNECT THROUGH "SPATIAL$PROXY_USER";
+
+CONNECT LLUSER/"&&lluser_password"@&&service_alias
+UNDEFINE lluser_password
+UNDEFINE service_alias
+WHENEVER OSERROR EXIT FAILURE ROLLBACK
+WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
 SET DEFINE OFF
+DECLARE
+  l_count PLS_INTEGER;
+BEGIN
+  IF USER <> 'LLUSER' THEN
+    RAISE_APPLICATION_ERROR(-20004, 'Transportation objects must be owned by LLUSER.');
+  END IF;
+  SELECT COUNT(*) INTO l_count FROM user_tables
+   WHERE nested = 'NO' AND secondary = 'N'
+     AND table_name NOT LIKE 'DM$%' AND table_name NOT LIKE 'SYS_%'
+     AND table_name NOT LIKE 'RUPD$%'
+     AND table_name <> 'DBTOOLS$EXECUTION_HISTORY';
+  IF l_count > 0 THEN
+    RAISE_APPLICATION_ERROR(-20005, 'Use a fresh workshop schema. Existing tables are preserved.');
+  END IF;
+  SELECT COUNT(*) INTO l_count FROM user_cloud_ai_profiles
+   WHERE UPPER(profile_name) = 'GENAI' AND UPPER(status) = 'ENABLED';
+  IF l_count <> 1 THEN
+    RAISE_APPLICATION_ERROR(-20009, 'An enabled GENAI profile is required before loading.');
+  END IF;
+END;
+/
 CREATE TABLE service_lines (
   line_id NUMBER PRIMARY KEY,
   line_name VARCHAR2(100) NOT NULL
@@ -219,3 +296,111 @@ SELECT service_id,
          service_name || '. Category: ' || category || '. Subcategory: ' || subcategory AS DATA)
 FROM transport_services;
 COMMIT;
+
+PROMPT Registering transportation spatial layers
+INSERT INTO user_sdo_geom_metadata (table_name, column_name, diminfo, srid)
+VALUES ('STATIONS', 'LOCATION',
+  MDSYS.SDO_DIM_ARRAY(MDSYS.SDO_DIM_ELEMENT('Longitude', -180, 180, 0.005),
+                      MDSYS.SDO_DIM_ELEMENT('Latitude', -90, 90, 0.005)), 4326);
+INSERT INTO user_sdo_geom_metadata (table_name, column_name, diminfo, srid)
+VALUES ('PASSENGERS', 'LOCATION',
+  MDSYS.SDO_DIM_ARRAY(MDSYS.SDO_DIM_ELEMENT('Longitude', -180, 180, 0.005),
+                      MDSYS.SDO_DIM_ELEMENT('Latitude', -90, 90, 0.005)), 4326);
+INSERT INTO user_sdo_geom_metadata (table_name, column_name, diminfo, srid)
+VALUES ('SERVICE_REGIONS', 'BOUNDARY',
+  MDSYS.SDO_DIM_ARRAY(MDSYS.SDO_DIM_ELEMENT('Longitude', -180, 180, 0.005),
+                      MDSYS.SDO_DIM_ELEMENT('Latitude', -90, 90, 0.005)), 4326);
+COMMIT;
+CREATE INDEX stations_location_sidx ON stations(location)
+  INDEXTYPE IS MDSYS.SPATIAL_INDEX_V2;
+CREATE INDEX passengers_location_sidx ON passengers(location)
+  INDEXTYPE IS MDSYS.SPATIAL_INDEX_V2;
+CREATE INDEX service_regions_boundary_sidx ON service_regions(boundary)
+  INDEXTYPE IS MDSYS.SPATIAL_INDEX_V2;
+
+PROMPT Checking transportation lab prerequisites
+DECLARE
+  l_count PLS_INTEGER;
+  PROCEDURE require_count(p_actual PLS_INTEGER, p_expected PLS_INTEGER,
+                          p_message VARCHAR2) IS
+  BEGIN
+    IF p_actual <> p_expected THEN
+      RAISE_APPLICATION_ERROR(-20010,
+        p_message || ' Expected ' || p_expected || ', found ' || p_actual || '.');
+    END IF;
+  END;
+BEGIN
+  SELECT COUNT(*) INTO l_count FROM transport_services;
+  require_count(l_count, 60, 'Transport service count differs from the workshop seed.');
+  SELECT COUNT(*) INTO l_count FROM passengers;
+  require_count(l_count, 80, 'Passenger count differs from the workshop seed.');
+  SELECT COUNT(*) INTO l_count FROM bookings;
+  require_count(l_count, 180, 'Booking count differs from the workshop seed.');
+  SELECT COUNT(*) INTO l_count FROM booking_legs;
+  require_count(l_count, 180, 'Booking-leg count differs from the workshop seed.');
+  SELECT COUNT(*) INTO l_count FROM bookings_dv;
+  require_count(l_count, 180, 'The duality view must expose every seeded booking.');
+  SELECT COUNT(*) INTO l_count FROM bookings WHERE booking_id = 900001;
+  require_count(l_count, 0, 'Leave booking 900001 for the Lab 2 learner insert.');
+  SELECT COUNT(*) INTO l_count FROM booking_legs WHERE leg_id = 990001;
+  require_count(l_count, 0, 'Leave booking leg 990001 for the Lab 2 learner insert.');
+  SELECT COUNT(*) INTO l_count FROM bookings b
+   JOIN booking_legs l ON l.booking_id = b.booking_id
+   WHERE b.booking_total <> l.leg_total + b.service_fee;
+  require_count(l_count, 0, 'A seeded booking total differs from its leg and fee.');
+  SELECT COUNT(*) INTO l_count FROM service_embeddings;
+  require_count(l_count, 60, 'Expected one embedding per transport service.');
+  SELECT COUNT(*) INTO l_count FROM service_embeddings
+   WHERE embedding IS NULL OR VECTOR_DIMENSION_COUNT(embedding) <> 384;
+  require_count(l_count, 0, 'Service embeddings must contain 384 dimensions.');
+  SELECT COUNT(*) INTO l_count FROM user_tab_columns
+   WHERE table_name = 'TRANSPORT_SERVICES' AND column_name = 'SERVICE_EMBEDDING';
+  require_count(l_count, 0, 'Leave SERVICE_EMBEDDING for the Lab 3 learner step.');
+  SELECT COUNT(*) INTO l_count FROM oml_service_demand_training_v;
+  require_count(l_count, 60, 'OML training needs one row per transport service.');
+  SELECT COUNT(*) INTO l_count FROM oml_service_demand_training_v
+   WHERE surge_label = 'SURGE';
+  require_count(l_count, 39, 'OML SURGE training count differs from the seed.');
+  SELECT COUNT(*) INTO l_count FROM oml_service_demand_training_v
+   WHERE surge_label = 'STABLE';
+  require_count(l_count, 21, 'OML STABLE training count differs from the seed.');
+  SELECT COUNT(*) INTO l_count FROM GRAPH_TABLE (
+    service_disruption_network
+    MATCH (trip IS entity)-[edge IS related_to]->(connected IS entity)
+    WHERE trip.entity_key = 'TRIP-8841'
+    COLUMNS (connected.entity_key AS connected_key)
+  );
+  require_count(l_count, 3, 'The Lab 4 trip must have three direct graph links.');
+  SELECT COUNT(*) INTO l_count FROM (
+    SELECT SDO_GEOM.VALIDATE_GEOMETRY_WITH_CONTEXT(location, 0.005) AS valid
+      FROM stations
+    UNION ALL
+    SELECT SDO_GEOM.VALIDATE_GEOMETRY_WITH_CONTEXT(location, 0.005)
+      FROM passengers
+    UNION ALL
+    SELECT SDO_GEOM.VALIDATE_GEOMETRY_WITH_CONTEXT(boundary, 0.005)
+      FROM service_regions
+  ) WHERE valid <> 'TRUE' OR valid IS NULL;
+  require_count(l_count, 0, 'A station, passenger, or service-region geometry is invalid.');
+  SELECT COUNT(*) INTO l_count FROM user_sdo_geom_metadata
+   WHERE (table_name, column_name) IN
+     (('STATIONS', 'LOCATION'), ('PASSENGERS', 'LOCATION'),
+      ('SERVICE_REGIONS', 'BOUNDARY')) AND srid = 4326;
+  require_count(l_count, 3, 'All three transportation spatial layers need SRID 4326 metadata.');
+  SELECT COUNT(*) INTO l_count FROM user_indexes
+   WHERE index_name IN ('STATIONS_LOCATION_SIDX', 'PASSENGERS_LOCATION_SIDX',
+                        'SERVICE_REGIONS_BOUNDARY_SIDX') AND status = 'VALID';
+  require_count(l_count, 3, 'All three transportation spatial indexes must be valid.');
+  SELECT COUNT(*) INTO l_count FROM user_tables
+   WHERE table_name IN ('TRANSPORT_SERVICES', 'BOOKINGS', 'BOOKING_LEGS', 'PASSENGERS');
+  require_count(l_count, 4, 'Lab 7 requires four transportation tables for its GENAI object list.');
+  SELECT COUNT(*) INTO l_count FROM user_objects
+   WHERE status = 'INVALID' AND object_name IN
+     ('SERVICE_LINES_V', 'TRANSPORT_SERVICES_V', 'DISRUPTION_SIGNALS_V',
+      'STATIONS_V', 'OML_SERVICE_DEMAND_TRAINING_V', 'BOOKINGS_DV',
+      'SERVICE_DISRUPTION_NETWORK');
+  require_count(l_count, 0, 'A transportation view or graph is invalid.');
+  DBMS_OUTPUT.PUT_LINE('Seer Transport data, vector, duality, graph, spatial and OML checks passed.');
+END;
+/
+PROMPT SEER_TRANSPORT_HANDOFF_LOADER_COMPLETE
