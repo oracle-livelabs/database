@@ -346,6 +346,10 @@ In this lab, you will:
 
     Optional integrations scheduled for later labs may remain blank. Resolve every reported error for a value created in Labs 1 through 3.
 
+    The following example shows errors for missing database values and invalid local paths. Correct each applicable value in `.env.shared`, and run the command again.
+
+    ![Review configuration validation errors](./images/32_config_validation_errors.png)
+
 9. Confirm that the validator displays:
 
     ```text
@@ -370,12 +374,6 @@ This task is optional. Slack App Settings remains the source of truth for the id
 
 The Slack apps, channels, and environment files are ready for the next lab.
 
-## Learn More
-
-- [Slack CLI](https://docs.slack.dev/tools/slack-cli/)
-- [Use environment variables with Slack CLI](https://docs.slack.dev/tools/slack-cli/guides/using-environment-variables-with-the-slack-cli/)
-- [Slack CLI hooks](https://docs.slack.dev/tools/slack-cli/reference/hooks/)
-- [Configure apps with app manifests](https://docs.slack.dev/app-manifests/configuring-apps-with-app-manifests)
 
 ## Acknowledgements
 
