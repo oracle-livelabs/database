@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Explore the National Parks data set, load it into the `parks` table, and manually embed park directions for the `directions` table.
+Explore the National Parks data set, load it into the `parks` table, and manually embed park weather information for the `weather` table.
 
 Estimated Time: X
 
@@ -10,7 +10,7 @@ Estimated Time: X
 
 - Explore the National Parks JSON data set from Oracle Object Storage.
 - Load National Parks records into the `parks` integrated embedding table.
-- Generate direction embeddings and load them into the bring-your-own-vector `directions` table.
+- Generate weather-information embeddings and load them into the bring-your-own-vector `weather` table.
 
 ### Prerequisites
 
@@ -56,13 +56,13 @@ The National Parks data set is in Oracle Object Storage. A pre-authenticated req
     print(list(park_data_json[0].keys()))
     ```
 
-    These keys define how later tasks use the data: `description` supplies text for automatic embedding in `parks`, `DIRECTIONS_INFO` supplies text for manually generated vectors, and `park_code` becomes the stable ID for `directions`.
+    These keys define how later tasks use the data: `description` supplies text for automatic embedding in `parks`, `weather_info` supplies text for manually generated vectors, and `park_code` becomes the stable ID for `weather`.
 
-4. Review the output. The `parks` table embeds records from `description`. Task 3 uses `DIRECTIONS_INFO` to generate bring-your-own vectors for `directions`.
+4. Review the output. The `parks` table embeds records from `description`. Task 3 uses `weather_info` to generate bring-your-own vectors for `weather`.
 
 ## Task 2: Load National Parks Records into `parks`
 
-This task loads National Parks records into the `parks` integrated embedding table that you created in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends metadata only; you do not specify the embedding field again. In Task 3, the bring-your-own-vector `directions` table requires an ID, dense vector, and metadata because it has no integrated embedding configuration.
+This task loads National Parks records into the `parks` integrated embedding table that you created in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends metadata only; you do not specify the embedding field again. In Task 3, the bring-your-own-vector `weather` table requires an ID, dense vector, and metadata because it has no integrated embedding configuration.
 
 1. Add a new Python paragraph and run the following code to prepare the vector records.
 
@@ -92,28 +92,28 @@ This task loads National Parks records into the `parks` integrated embedding tab
 
     The `parks` table automatically generates IDs. Run the upsert paragraph once; running it again creates additional records because the submitted records do not have fixed IDs.
 
-## Task 3: Create Direction Embeddings and Load the Directions Table
+## Task 3: Create Weather Embeddings and Load the Weather Table
 
-The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike the `parks` table, it does not create embeddings automatically. This task follows a different data flow: read `DIRECTIONS_INFO`, generate an embedding, create a record with an ID, dense vector, and metadata, then upsert that record into `directions`.
+The `weather` table is a bring-your-own-vector table created in Lab 4. Unlike the `parks` table, it does not create embeddings automatically. This task follows a different data flow: read `weather_info`, generate an embedding, create a record with an ID, dense vector, and metadata, then upsert that record into `weather`.
 
 1. Add a new Python paragraph and run the following code.
 
-    The loop uses `park_code` as a stable ID, skips records with missing or blank directions, generates an embedding from each usable `DIRECTIONS_INFO` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes a few minutes to complete.
+    The loop uses `park_code` as a stable ID, skips records with missing or blank weather information, generates an embedding from each usable `weather_info` value, and retains the full park object as searchable metadata. This example makes one embedding call for each eligible park record and typically takes a few minutes to complete.
 
     ```python
     %python
-    direction_vectors = []
+    weather_vectors = []
 
     for park in park_data_json:
         park_id = park.get("park_code")
-        directions_text = park.get("DIRECTIONS_INFO")
-        if not park_id or not isinstance(directions_text, str) or not directions_text.strip():
+        weather_text = park.get("weather_info")
+        if not park_id or not isinstance(weather_text, str) or not weather_text.strip():
             continue
         embedding_response = vecdb.generate_embedding(
             model_name="all_MiniLM_L12_v2",
-            inputs=[directions_text],
+            inputs=[weather_text],
         )
-        direction_vectors.append(
+        weather_vectors.append(
             {
                 "id": park_id,
                 "dense_vector": embedding_response.data[0].embedding,
@@ -121,17 +121,17 @@ The `directions` table is a bring-your-own-vector table created in Lab 4. Unlike
             }
         )
 
-    print(f"Prepared {len(direction_vectors)} direction vectors.")
+    print(f"Prepared {len(weather_vectors)} weather vectors.")
 
     upsert_result = vecdb.upsert_vectors(
-        table_name="directions",
-        vectors=direction_vectors,
+        table_name="weather",
+        vectors=weather_vectors,
     )
 
     print(upsert_result)
     ```
 
-2. Review the output. The embedding step typically takes a few minutes. The paragraph prints the number of prepared direction vectors, and the final upsert result confirms that the vectors and metadata were loaded into `directions`.
+2. Review the output. The embedding step typically takes a few minutes. The paragraph prints the number of prepared weather vectors, and the final upsert result confirms that the vectors and metadata were loaded into `weather`.
 
     This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
 

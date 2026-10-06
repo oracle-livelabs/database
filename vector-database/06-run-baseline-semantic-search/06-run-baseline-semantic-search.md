@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you run semantic searches against the National Parks `parks` table and the bring-your-own-vector `directions` table. Text queries use the embedding model configured on `parks`; the `directions` search generates its query vector explicitly.
+In this lab, you run semantic searches against the National Parks `parks` table and the bring-your-own-vector `weather` table. Text queries use the embedding model configured on `parks`; the `weather` search generates its query vector explicitly.
 
 Estimated Time: X
 
@@ -18,7 +18,7 @@ Estimated Time: X
 
 - Complete Lab 5: Create Embeddings and Load Text.
 - Keep the `vecdb` client initialized in your OML Notebook.
-- Load the National Parks records into the `parks` table and the direction vectors into the `directions` table.
+- Load the National Parks records into the `parks` table and the weather vectors into the `weather` table.
 
 ## Task 1: Search by Text
 
@@ -26,11 +26,11 @@ This task establishes the reusable query-and-display pattern used throughout the
 
 1. Add a new Python paragraph and run the following code.
 
-    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. Set `include_directions=True` when displaying results from the BYO `directions` table to include the original direction text.
+    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. Set `include_weather=True` when displaying results from the BYO `weather` table to include the original weather information.
 
     ```python
     %python
-    def format_parks(result, include_directions=False):
+    def format_parks(result, include_weather=False):
         formatted_items = []
         for i, r in enumerate(result.items or [], 1):
             metadata = r.metadata
@@ -40,8 +40,8 @@ This task establishes the reusable query-and-display pattern used throughout the
                 f"states: {metadata['states']}",
                 f"description: {metadata['description']}",
             ]
-            if include_directions:
-                fields.append(f"directions: {metadata['DIRECTIONS_INFO']}")
+            if include_weather:
+                fields.append(f"weather_info: {metadata['weather_info']}")
             formatted_items.append("\n".join(fields))
         return "\n\n".join(formatted_items)
     ```
@@ -119,29 +119,29 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
 
 ## Task 4: Search the Bring-Your-Own-Vector Table
 
-The `directions` table stores vectors generated in Lab 5 and does not have an integrated embedding configuration. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
+The `weather` table stores vectors generated in Lab 5 and does not have an integrated embedding configuration. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
 
 1. Add a new Python paragraph and run the following code.
 
     ```python
     %python
-    direction_query = "driving directions from Washington, DC to a national park entrance"
+    weather_query = "parks with cold winters and mild summers"
 
-    direction_embedding = vecdb.generate_embedding(
+    weather_embedding = vecdb.generate_embedding(
         model_name="all_MiniLM_L12_v2",
-        inputs=[direction_query],
+        inputs=[weather_query],
     )
 
-    direction_result = vecdb.query(
-        table_name="directions",
-        query_by={"vector": direction_embedding.data[0].embedding},
+    weather_result = vecdb.query(
+        table_name="weather",
+        query_by={"vector": weather_embedding.data[0].embedding},
         top_k=5,
     )
 
-    print(format_parks(direction_result, include_directions=True))
+    print(format_parks(weather_result, include_weather=True))
     ```
 
-2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `directions` is a bring-your-own-vector table. The output includes the original `DIRECTIONS_INFO` text as `directions`, along with the other park metadata.
+2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `weather` is a bring-your-own-vector table. The output includes the original `weather_info` text, along with the other park metadata.
 
 You now have a baseline semantic-search pattern for both integrated-embedding and bring-your-own-vector tables. Lab 7 reuses the integrated `parks` pattern and packages it as a read-only context-retrieval tool that an agent can call.
 
