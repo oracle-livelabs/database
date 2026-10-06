@@ -6,7 +6,7 @@ AI applications are only as useful as the information they can retrieve. Autonom
 
 Using the Oracle VecDB Python SDK, you can create vector tables, generate embeddings, store metadata, and search by meaning through a REST-based API. Because the service is built on Oracle Autonomous AI Database, your application benefits from managed operations, security, scalability, and the ability to keep vector data alongside the enterprise data it helps users find.
 
-In this workshop, you build a National Parks semantic-search application step by step. You will load data from Oracle Object Storage, use integrated embedding to create vectors automatically, bring your own vectors for park weather information, combine semantic search with metadata filters, and package retrieval as an agent context tool. The tool supplies current-request context without taking responsibility for conversation history or long-term agent memory.
+In this workshop, you build a National Parks semantic-search application step by step. You will load data from Oracle Object Storage, use integrated embedding to create vectors automatically, bring your own vectors for park weather information, combine semantic search with metadata filters, and package retrieval as an agent context tool.
 
 By the end of the workshop, you will have a practical Python pattern you can adapt for document search, product discovery, support knowledge bases, RAG retrieval, or agent tools. You will understand when to use integrated embedding, when to supply vectors yourself, and how to evolve a working prototype into a more scalable search experience.
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Explore the National Parks data set, load it into the `parks` table, and manually embed park weather information for the `weather` table.
+Explore the National Parks data set, load it into the `parks` table, manually embed park weather information for the `weather` table, and create its vector index after loading.
 
 Estimated Time: X
 
@@ -10,7 +10,7 @@ Estimated Time: X
 
 - Explore the National Parks JSON data set from Oracle Object Storage.
 - Load National Parks records into the `parks` integrated embedding table.
-- Generate weather-information embeddings and load them into the bring-your-own-vector `weather` table.
+- Generate weather-information embeddings, load them into the bring-your-own-vector `weather` table, and create its vector index.
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ Estimated Time: X
 
 ## Task 1: Explore National Parks Data
 
-The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. The workshop PAR URL is provided in the code below. Do not commit a PAR URL to source control. Anyone with it can access the object during the PAR lifetime.
+The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. This workshop intentionally provides a read-only PAR URL for public sample data. Do not commit private or production PAR URLs to source control because anyone with a PAR URL can access its object during the PAR lifetime.
 
 1. Add a new Python paragraph and run the following code to load the National Parks JSON file.
 
@@ -94,7 +94,7 @@ This task loads National Parks records into the `parks` integrated embedding tab
 
 ## Task 3: Create Weather Embeddings and Load the Weather Table
 
-The `weather` table is a bring-your-own-vector table created in Lab 4. Unlike the `parks` table, it does not create embeddings automatically. This task follows a different data flow: read `weather_info`, generate an embedding, create a record with an ID, dense vector, and metadata, then upsert that record into `weather`.
+The `weather` table is a bring-your-own-vector table created in Lab 4. Unlike the `parks` table, it does not create embeddings automatically. This task follows a different data flow: read `weather_info`, generate an embedding, create a record with an ID, dense vector, and metadata, upsert that record into `weather`, then create the vector index that Lab 4 delayed.
 
 1. Add a new Python paragraph and run the following code.
 
@@ -135,6 +135,26 @@ The `weather` table is a bring-your-own-vector table created in Lab 4. Unlike th
 
     This example makes one embedding request per eligible park record so that the flow is easy to follow. For larger data sets, batch inputs when your application and service limits allow it.
 
+3. Add a new Python paragraph and run the following code to create the vector index after loading the data.
+
+    `create_index()` starts an asynchronous index job and uses the server's default IVF settings.
+
+    ```python
+    %python
+    weather_index_job = vecdb.create_index(table_name="weather")
+    print(weather_index_job)
+    ```
+
+4. Add a new Python paragraph and run the following code to check the index status.
+
+    ```python
+    %python
+    weather_index_status = vecdb.describe_index(table_name="weather")
+    print(weather_index_status.index_status)
+    ```
+
+    Index creation runs asynchronously. Confirm that the status is `COMPLETE`. If it is not complete yet, wait a few seconds and run the status paragraph again.
+
 
 You may now **proceed to the next lab.**
 
@@ -142,6 +162,7 @@ You may now **proceed to the next lab.**
 
 - [List loaded models](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/list-models.html)
 - [Create a vector table](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/create-vector-table.html)
+- [Create a vector index](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/create-index.html)
 - [Integrated embedding and bring-your-own-vector tables](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/how-oracle-vecdb-works/vector-table.html)
 - [Oracle VecDB Python SDK API reference](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/python-api-reference.html)
 

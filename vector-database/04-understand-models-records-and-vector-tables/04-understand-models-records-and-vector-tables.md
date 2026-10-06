@@ -60,7 +60,7 @@ By default, the SDK's purpose-built vector-table schema creates an IVF vector in
 
 A bring-your-own-vector table does not create embeddings automatically. In Lab 5, you will use `vecdb.generate_embedding()` to create vectors from `weather_info`, then load those vectors into this table.
 
-Unlike `parks`, `weather` has no `embed_params` setting and does not use `auto_generate_id`. Each upsert must therefore provide an ID, a dense vector, and metadata. The `comment` is optional. Although the SDK's purpose-built schema normally creates an IVF vector index automatically, `auto_index=False` intentionally delays vector-index creation to demonstrate how an application can load data before creating an index.
+Unlike `parks`, `weather` has no `embed_params` setting and does not use `auto_generate_id`. Each upsert must therefore provide an ID, a dense vector, and metadata. The `comment` is optional. Although the SDK's purpose-built schema normally creates an IVF vector index automatically, `auto_index=False` intentionally delays vector-index creation. In Lab 5, you will load the data first and then create the vector index.
 
 1. Add a new Python paragraph and run the following code to create the `weather` table.
 
