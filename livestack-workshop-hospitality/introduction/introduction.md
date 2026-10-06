@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Jessica Chan, the DBA at Seer Hotels, starts the morning with a question from guest services. A hotel has reported an accessible-room availability concern. Which guests have booked the affected stay offers, and what should the team check before arranging assistance?
+Jessica Chan, the DBA at Seer Hotels, starts the morning with a question from guest services. A hotel has reported a problem with accessible-room availability. Which guests have booked the affected stay offers, and what should the team check before arranging assistance?
 
 ![Jessica and Thomas review an accessible-room concern and affected reservations in the Seer Hotels lobby.](images/seer-hotels-introduction.png)
 
@@ -10,7 +10,7 @@ Jessica brings the team together around the records in Oracle AI Database. Follo
 
 ### Seer Hotels data model
 
-Seer Hotels is a fictional hotel group. This diagram shows how guests, hotels, room offers, reservations, and nightly charges connect.
+Seer Hotels is a fictional hotel group. This diagram shows how guests, hotel properties, stay offers, reservations and nightly charges connect.
 
 ![Seer Hotels core ERD: guests and hotel properties each have many reservations; hotel properties have many stay offers; reservations and stay offers each connect to many reservation-night lines.](images/seer-hotels-erd.png)
 
@@ -41,7 +41,7 @@ Seer Hotels is a fictional hotel group. This diagram shows how guests, hotels, r
 
 - Run queries across relational, JSON, vector, graph, and spatial data.
 - Train a demand model and use AI to query the hospitality schema.
-- Interpret results and apply database access controls to the team's work.
+- Interpret query results and distinguish AI instructions from database access controls.
 
 Estimated Workshop Time: **90 minutes**
 

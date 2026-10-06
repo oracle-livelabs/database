@@ -1,4 +1,4 @@
-# Create Embeddings and Load Text
+# Lab 5: Create Embeddings and Load Text
 
 ## Introduction
 
@@ -21,7 +21,7 @@ Estimated Time: X
 
 ## Task 1: Explore National Parks Data
 
-The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. The workshop PAR URL is provided in the code below. Do not commit a PAR URL to source control. Anyone with it can access the object during the PAR lifetime.
+The National Parks data set is in Oracle Object Storage. A pre-authenticated request (PAR) URL lets the notebook read the shared JSON file. The workshop PAR URL is provided in the code below. For security purposes, you should not commit a PAR URL to source control. Anyone with it can access the object during the PAR lifetime.
 
 1. Add a new Python paragraph and run the following code to load the National Parks JSON file.
 

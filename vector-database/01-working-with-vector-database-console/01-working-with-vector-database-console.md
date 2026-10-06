@@ -29,7 +29,7 @@ Database Actions is the web interface for working with your Autonomous AI Vector
 3. Select **Open Link** next to **ADB Database Actions URL**.
 
     ![Login information with the ADB Database Actions URL, username, and password.](images/reservation_url_name_pwd.png " ")
-    Database Actions login page opens in a new browser tab or window.
+    The Database Actions sign-in page opens in a new browser tab or window.
 
 4. Enter the ADB username and password you recorded, then select **Sign In**.
 
