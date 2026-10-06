@@ -2,14 +2,14 @@
 
 ## Introduction
 
-In this lab, you run semantic searches against the National Parks `parks` table and the bring-your-own-vector `weather` table. Text queries use the embedding model configured on `parks`; the `weather` search generates its query vector explicitly.
+In this lab, you run semantic searches against the National Parks `parks` table, which uses auto-generated vector embeddings, and the `weather` table, which uses bring-your-own vector embeddings. Text queries use the embedding model configured on `parks`; the `weather` search generates its query vector explicitly.
 
 Estimated Time: X
 
 ### Objectives
 
 - Run semantic searches with natural-language text.
-- Search a bring-your-own-vector table with a precomputed query vector.
+- Search a table containing bring-your-own vector embeddings with a precomputed query vector.
 - Review formatted National Parks results.
 - Understand how query text, `top_k`, and metadata filters affect results.
 - Combine semantic search with metadata filters.
@@ -26,7 +26,7 @@ This task establishes the reusable query-and-display pattern used throughout the
 
 1. Add a new Python paragraph and run the following code.
 
-    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. Set `include_weather=True` when displaying results from the BYO `weather` table to include the original weather information.
+    `format_parks()` does not query the database. It formats `result.items` as a readable, numbered list of key-value fields used throughout this lab: `name`, `park_code`, `states`, and `description`. Set `include_weather=True` when displaying results from the `weather` table with bring-your-own vector embeddings to include the original weather information.
 
     ```python
     %python
@@ -117,9 +117,9 @@ Semantic relevance alone is often insufficient in a real application. Metadata f
 
 2. Review the results. Every returned record must satisfy the metadata conditions and be semantically relevant to the request. An empty result is also valid if no records meet both requirements.
 
-## Task 4: Search the Bring-Your-Own-Vector Table
+## Task 4: Search Bring-Your-Own Vector Embeddings
 
-The `weather` table stores vectors generated in Lab 5 and does not have an integrated embedding configuration. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
+The `weather` table stores bring-your-own vector embeddings generated in Lab 5 and is not configured for auto-generated vector embeddings. To search it, generate an embedding for the query text with the same model, then pass that vector with `query_by={"vector": ...}`.
 
 1. Add a new Python paragraph and run the following code.
 
@@ -144,9 +144,9 @@ The `weather` table stores vectors generated in Lab 5 and does not have an integ
     print(format_parks(weather_result, include_weather=True))
     ```
 
-2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `weather` is a bring-your-own-vector table. Every returned park must have `states` set to `CA` or `AZ` and be semantically relevant to snowfall. The output includes the original `weather_info` text, along with the other park metadata.
+2. Review the results. This query uses the same `format_parks()` helper, but the query vector is generated explicitly because `weather` uses bring-your-own vector embeddings. Every returned park must have `states` set to `CA` or `AZ` and be semantically relevant to snowfall. The output includes the original `weather_info` text, along with the other park metadata.
 
-You now have a baseline semantic-search pattern for both integrated-embedding and bring-your-own-vector tables. Lab 7 reuses the integrated `parks` pattern and packages it as a read-only context-retrieval tool that an agent can call.
+You now have a baseline semantic-search pattern for both auto-generated vector embeddings and bring-your-own vector embeddings. Lab 7 reuses the `parks` search pattern and packages it as a read-only context-retrieval tool that an agent can call.
 
 
 You may now **proceed to the next lab.**

@@ -2,15 +2,15 @@
 
 ## Introduction
 
-Explore the National Parks data set, load it into the `parks` table, and manually embed park weather information for the `weather` table.
+Explore the National Parks data set, load it into the `parks` table with auto-generated vector embeddings, and create bring-your-own vector embeddings from park weather information for the `weather` table.
 
 Estimated Time: X
 
 ### Objectives
 
 - Explore the National Parks JSON data set from Oracle Object Storage.
-- Load National Parks records into the `parks` integrated embedding table.
-- Generate weather-information embeddings and load them into the bring-your-own-vector `weather` table.
+- Load National Parks records into the `parks` table with auto-generated vector embeddings.
+- Generate bring-your-own vector embeddings from weather information and load them into the `weather` table.
 
 ### Prerequisites
 
@@ -56,17 +56,17 @@ The National Parks data set is in Oracle Object Storage. A pre-authenticated req
     print(list(park_data_json[0].keys()))
     ```
 
-    These keys define how later tasks use the data: `description` supplies text for automatic embedding in `parks`, `weather_info` supplies text for manually generated vectors, and `park_code` becomes the stable ID for `weather`.
+    These keys define how later tasks use the data: `description` supplies text for auto-generated vector embeddings in `parks`, `weather_info` supplies text for bring-your-own vector embeddings in `weather`, and `park_code` becomes the stable ID for `weather`.
 
-4. Review the output. The `parks` table embeds records from `description`. Task 3 uses `weather_info` to generate bring-your-own vectors for `weather`.
+4. Review the output. The `parks` table auto-generates vector embeddings from `description`. Task 3 uses `weather_info` to generate bring-your-own vector embeddings for `weather`.
 
 ## Task 2: Load National Parks Records into `parks`
 
-This task loads National Parks records into the `parks` integrated embedding table that you created in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends metadata only; you do not specify the embedding field again. In Task 3, the bring-your-own-vector `weather` table requires an ID, dense vector, and metadata because it has no integrated embedding configuration.
+This task loads National Parks records into the `parks` table configured for auto-generated vector embeddings in Lab 4. The table definition identifies `description` as the text field to embed. Therefore, the upsert sends metadata only; you do not specify the embedding field again. In Task 3, the `weather` table uses bring-your-own vector embeddings and requires an ID, dense vector, and metadata because it is not configured for auto-generated vector embeddings.
 
 1. Add a new Python paragraph and run the following code to prepare the vector records.
 
-    Each item has the upsert shape required for an integrated embedding table: a dictionary containing `metadata`. The filter excludes records without a `description`, because that is the field configured for automatic embedding. No ID is provided because `parks` uses `auto_generate_id=True`.
+    Each item has the upsert shape required for a table with auto-generated vector embeddings: a dictionary containing `metadata`. The filter excludes records without a `description`, because that is the field configured for embedding. No ID is provided because `parks` uses `auto_generate_id=True`.
 
     ```python
     %python
@@ -94,7 +94,7 @@ This task loads National Parks records into the `parks` integrated embedding tab
 
 ## Task 3: Create Weather Embeddings and Load the Weather Table
 
-The `weather` table is a bring-your-own-vector table created in Lab 4. Unlike the `parks` table, it does not create embeddings automatically. This task follows a different data flow: read `weather_info`, generate an embedding, create a record with an ID, dense vector, and metadata, then upsert that record into `weather`.
+The `weather` table created in Lab 4 uses bring-your-own vector embeddings. Unlike the `parks` table, it does not auto-generate embeddings. This task follows a different data flow: read `weather_info`, generate an embedding, create a record with an ID, dense vector, and metadata, then upsert that record into `weather`.
 
 1. Add a new Python paragraph and run the following code.
 
@@ -141,7 +141,7 @@ You may now **proceed to the next lab.**
 
 - [List loaded models](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/list-models.html)
 - [Create a vector table](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/api-guide/create-vector-table.html)
-- [Integrated embedding and bring-your-own-vector tables](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/how-oracle-vecdb-works/vector-table.html)
+- [Auto-generated and bring-your-own vector embeddings](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/how-oracle-vecdb-works/vector-table.html)
 - [Oracle VecDB Python SDK API reference](https://docs.oracle.com/en/cloud/paas/autonomous-database/vcapi/python-api-reference.html)
 
 ## Acknowledgements
