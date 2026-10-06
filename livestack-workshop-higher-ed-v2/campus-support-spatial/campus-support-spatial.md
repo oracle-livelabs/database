@@ -1,32 +1,56 @@
 # Plan Campus Support with Oracle Spatial
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  },
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
+
 ## Introduction
 
 ![Moon Kai introduces this Higher Education lab](images/moon.png)
 
-Moon Kai is a spatial analyst at Seer Higher Education. Campus planners need to understand which support centers are near high-demand areas and which center is closest to a student's selected campus service location.
+Moon Kai is a spatial analyst at Seer Higher Education. Campus planners need to
+understand which support centers are near high-demand areas and which center is
+closest to a student's selected campus service location.
 
-The workshop uses synthetic campus points and service-area polygons. Request locations represent campus service locations chosen for the demonstration; they are not student home addresses. Oracle Spatial can compare these shapes directly while SQL adds center capacity and workload.
+The workshop uses synthetic campus points and service-area polygons. Request
+locations represent campus service locations chosen for the demonstration; they
+are not student home addresses. Oracle Spatial can compare these shapes directly
+while SQL adds center capacity and workload.
 
 ![Campus service areas, support centers, and request locations](images/campus-support-coverage.svg)
 
 <details>
 <summary><strong>Key terms: point, polygon, distance, and GeoJSON</strong></summary>
 
-> - A **point** represents one location, such as a campus support center.
-> - A **polygon** represents an area, such as a campus service zone.
-> - **Distance** measures the separation between two spatial objects. A zero distance means a point is inside or touching a region.
-> - A **spatial relationship** tests how two geometries relate. Oracle Spatial functions can test whether a point interacts with a polygon.
-> - **GeoJSON** is a JSON format for map locations. `SDO_UTIL.TO_GEOJSON` converts a database geometry to a map-friendly value.
+> * A **point** represents one location, such as a campus support center.
+> * A **polygon** represents an area, such as a campus service zone.
+> * **Distance** measures the separation between two spatial objects. A zero
+>   distance means a point is inside or touching a region.
+> * A **spatial relationship** tests how two geometries relate. Oracle Spatial
+>   functions can test whether a point interacts with a polygon.
+> * **GeoJSON** is a JSON format for map locations. `SDO_UTIL.TO_GEOJSON`
+>   converts a database geometry to a map-friendly value.
 
 </details>
 
 ### Objectives
 
-- Inspect campus locations stored as `SDO_GEOMETRY` points.
-- Convert a point to GeoJSON.
-- Find support centers nearest to a campus service area.
-- Match open requests in an area to the closest active center.
+* Inspect campus locations stored as `SDO_GEOMETRY` points.
+* Convert a point to GeoJSON.
+* Find support centers nearest to a campus service area.
+* Match open requests in an area to the closest active center.
 
 Estimated Time: **10 minutes**
 
@@ -45,7 +69,8 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Inspect campus support-center points
 
-Each active center has a location stored as an `SDO_GEOMETRY` point. The same value can be converted to GeoJSON for a campus map.
+Each active center has a location stored as an `SDO_GEOMETRY` point. The same
+value can be converted to GeoJSON for a campus map.
 
 ```sql
 <copy>
@@ -64,8 +89,11 @@ ORDER BY center_id
 FETCH FIRST 5 ROWS ONLY;
 </copy>
 ```
+  ![Lab 5 Task 1](images/l5-t1.png)
 
-The coordinate system and geometry are stored together. Spatial functions can use the geometry for distance and relationship tests; the application can use the GeoJSON for display.
+The coordinate system and geometry are stored together. Spatial functions can
+use the geometry for distance and relationship tests; the application can use
+the GeoJSON for display.
 
 ## Task 2: Find centers near a service area
 
@@ -100,13 +128,18 @@ The coordinate system and geometry are stored together. Spatial functions can us
 
     ![SQL Worksheet showing support-center distance and service-area demand](images/service-area-distance-result.jpg)
 
-2. Review the distance and demand together. A distance of zero means the center is inside or touching the area. `0.005` is the comparison tolerance, and `'unit=KM'` requests kilometers.
+2. Review the distance and demand together. A distance of zero means the center
+    is inside or touching the area. `0.005` is the comparison tolerance, and
+    `'unit=KM'` requests kilometers.
 
-3. Change the area name to `Harbor Commons` and run the query again. Compare the closest centers and current loads.
+3. Change the area name to `Harbor Commons` and run the query again. Compare the
+    closest centers and current loads.
 
 ## Task 3: Match requests in an area to the closest center
 
-This query finds open requests whose synthetic campus-service point is inside North Quad. It then ranks active centers on the same campus for each request.
+This query finds open requests whose synthetic campus-service points are inside
+or touch North Quad. It ranks active centers on the same campus by distance from
+each request location.
 
 ```sql
 <copy>
@@ -183,14 +216,23 @@ ORDER BY request_center_distance_km, request_id
 FETCH FIRST 25 ROWS ONLY;
 </copy>
 ```
+  ![Lab 5 Task 3](images/l5-t3.png)
 
-`SDO_GEOM.RELATE` filters requests to the area. `SDO_GEOM.SDO_DISTANCE` measures distance to each active center, and `ROW_NUMBER` keeps the nearest center for each request. The output uses a synthetic student key rather than a name or home address.
+`SDO_GEOM.RELATE` filters requests to the area. `SDO_GEOM.SDO_DISTANCE` measures
+distance to each active center, and `ROW_NUMBER` keeps the nearest center for
+each request. The output uses a synthetic student key rather than a name or home
+address.
 
-Change `North Quad` to `Harbor Commons` and compare the assignments. A planner should review the center's current load before routing work.
+Change `North Quad` to `Harbor Commons` and compare the nearest-center results.
+The query selects by distance, not service type or available appointments. Check
+service fit, current load, opening hours, accessibility, and travel options
+before routing a request.
 
 ## Conclusion: Use location as one part of the service decision
 
-Moon's queries move from points, to area distance, to request routing. The result connects campus location with center capacity and workload in SQL, so planners can use one view to decide where to review service coverage.
+Moon’s queries inspect campus points, compare centers with service areas, and
+find the nearest active center for each request. The result combines distance,
+capacity, and current load for an initial service-coverage review.
 
 ## Acknowledgements
 

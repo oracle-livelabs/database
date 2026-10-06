@@ -1,31 +1,55 @@
 # Ask Student-Success Questions with Select AI
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  },
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
+
 ## Introduction
 
 ![Nina Patel introduces this Higher Education lab](images/nina.png)
 
-Nina Patel is a student-success operations analyst at Seer Higher Education. She needs clear answers about program and campus service capacity, but she does not want every question to start with finding table names and writing joins.
+Nina Patel is a student-success operations analyst at Seer Higher Education. She
+needs clear answers about program and campus service capacity, but she does not
+want every question to start with finding table names and writing joins.
 
-Jessica has prepared the `GENAI` Select AI profile for a small set of aggregate Higher Education views. Nina can ask a question in ordinary language, inspect the SQL Select AI generates, and run it after checking that it matches the question.
+Jessica has prepared the `GENAI` Select AI profile for a small set of aggregate
+Higher Education views. Nina can ask a question in ordinary language, inspect
+the SQL Select AI generates, and run it after checking that it matches the
+question.
 
 ![Ask, inspect, run, and review a Select AI query](images/select-ai-review.svg)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, and generated SQL</strong></summary>
 
-> - **Select AI** lets a database user ask natural-language questions about approved database objects.
-> - An **AI profile** identifies the provider and the schema objects available for those questions.
-> - **Generated SQL** is the statement Select AI creates from a question. Review it before relying on its result.
+> * **Select AI** lets a database user ask natural-language questions about
+>   approved database objects.
+> * An **AI profile** identifies the provider and the schema objects available
+>   for those questions.
+> * **Generated SQL** is the statement Select AI creates from a question. Review
+>   it before relying on its result.
 
 </details>
 
 ### Objectives
 
-- Check the Select AI profile available to the workshop schema.
-- Limit the profile to approved aggregate views.
-- Generate SQL from a Higher Education operations question and inspect it.
-- Run and refine a question with `DBMS_CLOUD_AI.GENERATE`.
-- Explain why a generated answer still needs review.
+* Check the Select AI profile available to the workshop schema.
+* Limit the profile to approved aggregate views.
+* Generate SQL from a Higher Education operations question and inspect it.
+* Run and refine a question with `DBMS_CLOUD_AI.GENERATE`.
+* Explain why a generated answer still needs review.
 
 Estimated Time: **10 minutes**
 
@@ -40,7 +64,8 @@ Estimated Time: **10 minutes**
 | Database Capability | Select AI, `DBMS_CLOUD_AI`, AI profiles, and natural-language-to-SQL generation. |
 | Outcome | Nina can ask operational questions while keeping the generated SQL visible. |
 
-> **SQL Worksheet reminder:** Run the statements as `LLUSER`. The workshop setup provides an enabled `GENAI` profile.
+> **SQL Worksheet reminder:** Run the statements as `LLUSER`. The workshop setup
+> provides an enabled `GENAI` profile.
 
 ## Task 1: Check the Select AI profile
 
@@ -68,11 +93,15 @@ Estimated Time: **10 minutes**
     </copy>
     ```
 
-The profile should be enabled. The workshop setup restricts its `object_list` to approved summary views. In the next task, reapply and inspect that boundary.
+The profile should be enabled. The workshop setup restricts its `object_list` to
+approved summary views. In the next task, reapply and inspect that boundary.
 
 ## Task 2: Limit the profile to approved views
 
-Nina's questions are about aggregate support workload and campus capacity. The profile uses three summary views rather than student-level records. Reapplying the same list lets you verify which objects Select AI can use.
+Nina's questions are about aggregate support workload and campus capacity. The
+profile uses three summary views rather than student-level records. Reapply the
+list to confirm which objects supply metadata for SQL generation. The list does
+not replace database access privileges.
 
 1. Set the profile's object list:
 
@@ -104,11 +133,13 @@ Nina's questions are about aggregate support workload and campus capacity. The p
     </copy>
     ```
 
-The profile helps Select AI choose relevant metadata. Database privileges remain the control over which objects the session can read.
+The profile helps Select AI choose relevant metadata. Database privileges remain
+the control over which objects the session can read.
 
 ## Task 3: Ask a question and inspect the SQL
 
-Nina asks which programs have the most open tutoring requests. She starts with `showsql` so she can review the generated statement before it runs.
+Nina asks which programs have the most open tutoring requests. She starts with
+`showsql` so she can review the generated statement before it runs.
 
 ```sql
 <copy>
@@ -119,12 +150,18 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS generated_sql;
 </copy>
 ```
+![Lab 7 Task 3](images/l7-t3.png)
 
-Check that the SQL uses the approved aggregate view, filters open tutoring requests for the intended term, and returns the requested columns. A valid-looking query can still misread the question.
+Check that the SQL uses the approved aggregate view, filters open tutoring
+requests for the intended term, and returns the requested columns. A
+valid-looking query can still misread the question.
 
 ## Task 4: Run the reviewed question
 
-After reviewing the generated SQL, Nina asks Select AI to run the same question:
+To execute the exact statement you reviewed, copy the `showsql` output into SQL
+Worksheet and run that statement. The `runsql` example below submits the
+question again for SQL generation and execution; do not assume it executes the
+identical statement you inspected.
 
 ```sql
 <copy>
@@ -135,8 +172,13 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS answer;
 </copy>
 ```
+![Lab 7 Task 4](images/l7-t4.png)
 
-Compare the answer with a direct SQL result from the approved view:
+Compare the answer with the direct SQL below. This check lists up to five
+program–campus–term groups and does not filter by term. In the prepared
+requests, the populated term is `2026FA`; confirm the intended term before
+interpreting “this term.” Completing the JSON insert also creates a request with
+no term value, which can add a separate summary row.
 
 ```sql
 <copy>
@@ -149,8 +191,10 @@ ORDER BY open_tutoring_requests DESC, program_name
 FETCH FIRST 5 ROWS ONLY;
 </copy>
 ```
+![Lab 7 Task 4](images/l7-t4-s2.png)
 
-The database result is the evidence Nina can inspect. The generated response is useful only when it answers the question and matches the view data.
+Compare the returned campus, program, term, and request counts with the view
+data. Check both the numbers and whether the SQL answers Nina’s question.
 
 ## Task 5: Refine the question
 
@@ -165,8 +209,11 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS generated_sql;
 </copy>
 ```
+![Lab 7 Task 5](images/l7-t5-s1.png)
 
-Review the generated SQL, then run the question with `runsql`:
+Review the generated SQL. Run that exact statement in SQL Worksheet if you need
+to preserve the reviewed query. The following `runsql` call submits the question
+again for generation and execution:
 
 ```sql
 <copy>
@@ -177,12 +224,15 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS answer;
 </copy>
 ```
+![Lab 7 Task 5](images/l7-t5-s2.png)
 
-A more specific question names the campus, threshold, and fields Nina needs. She still checks the SQL and compares the result with `CAMPUS_SUPPORT_CAPACITY_V`.
+A more specific question names the campus, threshold, and fields Nina needs. She
+still checks the SQL and compares the result with `CAMPUS_SUPPORT_CAPACITY_V`.
 
 ## Task 6: Explain the result
 
-Select AI can ask the configured provider to summarize a query result. Use this only for data approved for that provider.
+Select AI can ask the configured provider to summarize a query result. Use this
+only for data approved for that provider.
 
 ```sql
 <copy>
@@ -193,12 +243,17 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS explanation;
 </copy>
 ```
+![Lab 7 Task 6](images/l7-t6.png)
 
-Check the explanation against the SQL result. The narrative is a convenience; the database rows and reviewed SQL remain the evidence.
+Compare the narrative’s counts, campuses, programs, and term with the query
+results. Correct or discard any statement that the returned rows do not support.
 
 ## Conclusion: Ask, inspect, and refine
 
-Nina used Select AI to turn an operations question into SQL, inspect the statement, run it, and refine the requested details. The profile limits the metadata available to the generation step, and the SQL remains visible for review.
+Nina used Select AI to turn an operations question into SQL, inspect the
+statement, run it, and refine the requested details. The profile limits the
+metadata available to the generation step, and the SQL remains visible for
+review.
 
 ## Acknowledgements
 

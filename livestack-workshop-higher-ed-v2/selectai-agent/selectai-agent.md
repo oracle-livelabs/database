@@ -1,32 +1,55 @@
 # Build a Student-Support Agent with Select AI Agent
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  },
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong"
+    ]
+  }
+}
+-->
+
 ## Introduction
 
 ![Nina Patel and Jessica Chan introduce the student-support agent lab](images/nina.png)
 
-Nina Patel has used Select AI to ask one student-support operations question at a time. She now wants a repeatable assistant for questions about aggregate campus workload and service capacity.
+Nina Patel has used Select AI to ask one student-support operations question at
+a time. She now wants a repeatable assistant for questions about aggregate
+campus workload and service capacity.
 
-Jessica gives the agent one approved tool: a SQL tool that uses the `GENAI` profile and its allow-list of summary views. The tool is read-only. The agent cannot update requests, make admissions decisions, or determine what an individual student should receive.
+Jessica gives the agent one approved tool: a SQL tool that uses the `GENAI`
+profile and its allow-list of summary views. The tool is read-only. The agent
+cannot update requests, make admissions decisions, or determine what an
+individual student should receive.
 
 ![A read-only agent uses one approved SQL tool and leaves an execution history](images/agent-boundary.svg)
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
 
-> - An **agent** follows a configured role when it handles a request.
-> - A **tool** is a capability the agent is allowed to call. This lab uses one SQL tool.
-> - A **task** tells the agent what to do and which tools it may use.
-> - A **team** connects an agent and task so a SQL session or application can run them together.
+> * An **agent** follows a configured role when it handles a request.
+> * A **tool** is a capability the agent is allowed to call. This lab uses one
+>   SQL tool.
+> * A **task** tells the agent what to do and which tools it may use.
+> * A **team** connects an agent and task so a SQL session or application can
+>   run them together.
 
 </details>
 
 ### Objectives
 
-- Confirm that the `GENAI` profile and its view allow-list are available.
-- Register a read-only SQL tool.
-- Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
-- Run an aggregate Higher Education operations question.
-- Review team and tool history.
+* Confirm that the `GENAI` profile and its view allow-list are available.
+* Register a read-only SQL tool.
+* Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
+* Run an aggregate Higher Education operations question.
+* Review team and tool history.
 
 Estimated Time: **15 minutes**
 
@@ -41,7 +64,9 @@ Estimated Time: **15 minutes**
 | Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, profiles, and a built-in SQL tool. |
 | Outcome | Nina has a controlled assistant for aggregate service-planning questions. |
 
-> **Prerequisite:** Complete [Lab 7: Ask Student-Success Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
+> **Prerequisite:** Complete
+> [Lab 7: Ask Student-Success Questions with Select AI](?lab=selectai). This lab
+> uses the `GENAI` profile and its `object_list`.
 
 ## Task 1: Check the profile and approved views
 
@@ -56,7 +81,7 @@ Estimated Time: **15 minutes**
     </copy>
     ```
 
-2. Review its object list:
+2. Review its object list by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -69,7 +94,9 @@ Estimated Time: **15 minutes**
     </copy>
     ```
 
-    The list should contain only `PROGRAM_SUPPORT_OVERVIEW_V`, `CAMPUS_SUPPORT_CAPACITY_V`, and `COURSE_SECTION_CAPACITY_V` for the workshop schema.
+    The list should contain only `PROGRAM_SUPPORT_OVERVIEW_V`,
+    `CAMPUS_SUPPORT_CAPACITY_V`, and `COURSE_SECTION_CAPACITY_V` for the
+    workshop schema.
 
 3. Check existing agent definitions:
 
@@ -81,7 +108,8 @@ Estimated Time: **15 minutes**
     </copy>
     ```
 
-The lab objects begin with `NINA_STUDENT_SUPPORT_`. If you already created them, use the optional reset appendix before recreating them.
+The lab objects begin with `NINA_STUDENT_SUPPORT_`. If you already created them,
+use the optional reset appendix before recreating them.
 
 ## Task 2: Register the approved SQL tool
 
@@ -112,11 +140,14 @@ The lab objects begin with `NINA_STUDENT_SUPPORT_`. If you already created them,
     </copy>
     ```
 
-The tool provides a named query capability. The profile's object list guides SQL generation, and the database user's privileges still control the objects the SQL can read.
+The tool provides a named query capability. The profile's object list guides SQL
+generation, and the database user's privileges still control the objects the SQL
+can read.
 
 ## Task 3: Create Nina's agent, task, and team
 
-1. Create the agent with a role that limits it to operational summaries:
+1. Create the agent with a role that instructs it to answer operational-summary
+    questions:
 
     ```sql
     <copy>
@@ -131,7 +162,8 @@ The tool provides a named query capability. The profile's object list guides SQL
     </copy>
     ```
 
-2. Create a task that invokes the approved tool once:
+2. Create a task that instructs the agent to invoke the approved tool once.
+    Check the tool history after the run to confirm what it did:
 
     ```sql
     <copy>
@@ -161,7 +193,8 @@ The tool provides a named query capability. The profile's object list guides SQL
     </copy>
     ```
 
-The team is the runnable unit. It connects Nina's assistant, task instructions, and approved SQL tool.
+The team is the runnable unit. It connects Nina's assistant, task instructions,
+and approved SQL tool.
 
 ## Task 4: Run an operations question
 
@@ -177,9 +210,12 @@ SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(
 </copy>
 ```
 
-Review whether the answer is based on the approved views and contains the requested aggregate fields. Wording may vary by provider; the database results remain the evidence.
+Review whether the answer is based on the approved views and contains the
+requested aggregate fields. Wording may vary by provider. Compare the answer’s
+counts and capacity figures with the database results.
 
-The SQL tool is read-only. The task gives the agent no tool for inserting, updating, or deleting records.
+The SQL tool is read-only. The task gives the agent no tool for inserting,
+updating, or deleting records.
 
 ## Task 5: Inspect the agent history
 
@@ -214,15 +250,22 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     </copy>
     ```
 
-The history should show `NINA_STUDENT_SUPPORT_SQL_TOOL`. This lets Nina and Jessica review which tool the agent used instead of treating its answer as an unexplained chat response.
+The tool history should include `NINA_STUDENT_SUPPORT_SQL_TOOL`. Match the
+agent, task, and timestamps to the run you just started; these queries return
+recent activity without filtering to this team. Check the team’s `STATE` before
+treating the run as successful.
 
 ## Conclusion: Give the agent one controlled way to work
 
-Nina's team combines a defined role, a narrow task, an approved SQL tool, and execution history. The profile, object list, and database privileges help keep the data boundary clear. The example stays read-only and focused on service planning.
+Nina's team combines a defined role, a narrow task, an approved SQL tool, and
+execution history. The profile, object list, and database privileges help keep
+the data boundary clear. The example stays read-only and focused on service
+planning.
 
 ## Appendix: Reset the workshop agent objects
 
-Run this block only if you want to remove the four objects created by this lab before recreating them. It does not remove workshop data or profile settings.
+Run this block only if you want to remove the four objects created by this lab
+before recreating them. It does not remove workshop data or profile settings.
 
 ```sql
 <copy>

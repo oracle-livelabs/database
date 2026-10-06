@@ -1,21 +1,36 @@
 # Model Student-Support Requests as JSON
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
+
 ## Introduction
 
 ![Thomas Brune introduces this Higher Education lab](images/thomas.png)
 
-Thomas Brune builds a web application for Seer Higher Education's advising and support teams. The application needs request details in a document shape, while the database team needs keys, constraints, SQL, and transaction controls.
+Thomas Brune builds a web application for Seer Higher Education's advising and
+support teams. The application needs request details as JSON documents, while
+the database team needs keys, constraints, SQL, and transaction controls.
 
-Thomas and Jessica compare three patterns: a JSON column for optional application settings, a JSON Collection Table for independently managed documents, and a JSON Relational Duality View over normalized request rows. The application can work with JSON without keeping a second copy of the student-support records.
+Thomas and Jessica compare three patterns: a JSON column for application
+settings, a JSON Collection Table for independently stored advising notes, and a
+JSON Relational Duality View over existing request rows. The collection stores a
+separate sample document; the duality view exposes the relational request
+without copying it.
 
 ![Three ways to use JSON with student-support records](images/request-json-model.svg)
 
 ### Objectives
 
-- Store flexible application settings in a JSON column.
-- Create and query a JSON Collection Table.
-- Read and update relational request data through a JSON Relational Duality View.
-- Choose a JSON pattern based on what the application needs to own.
+* Store flexible application settings in a JSON column.
+* Create and query a JSON Collection Table.
+* Read, insert, and update request data through a JSON Relational Duality View.
+* Choose a JSON pattern based on what the application needs to own.
 
 Estimated Time: **10 minutes**
 
@@ -26,17 +41,20 @@ Estimated Time: **10 minutes**
 | Business Problem | Thomas needs an application-friendly request document for advising and support workflows. |
 | Technical Challenge | The app needs flexible attributes while the database retains relational keys and controls. |
 | Persona Focus | You work with Thomas and Jessica to compare JSON approaches. |
-| What You Will See | JSON values, collections, and a duality view over the same request data. |
+| What You Will See | Application settings in a JSON column, separately stored advising notes, and a duality view over request rows. |
 | Database Capability | Native JSON, SQL/JSON functions, and JSON Relational Duality. |
-| Outcome | The application uses documents without a separate copy of request records. |
+| Outcome | The application can choose its JSON storage pattern; the duality view provides document access to existing request rows. |
 
-> **SQL Worksheet reminder:** Run these statements as `LLUSER`. Several tasks create objects or sample rows in the workshop schema.
+> **SQL Worksheet reminder:** Run these statements as `LLUSER`. Several tasks
+> create objects or sample rows in the workshop schema.
 
 ## Task 1: Store flexible application settings as JSON
 
-Thomas begins with settings that belong to the application rather than the core request record.
+Thomas begins with settings that belong to the application rather than the core
+request record.
 
-1. Create a table with a native JSON column and add preferences for one existing student:
+1. Create a table with a native JSON column and add preferences for one existing
+    student by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -72,13 +90,16 @@ Thomas begins with settings that belong to the application rather than the core 
     </copy>
     ```
 
-`STUDENT_ID` remains a relational key. The optional settings can evolve with the application without adding a column for every preference.
+`STUDENT_ID` remains a relational key. The optional settings can evolve with the
+application without adding a column for every preference.
 
 ## Task 2: Create a JSON Collection Table
 
-Thomas has a separate collection of short advising notes. These documents belong to the application and are not relational request records.
+Thomas has a separate collection of short advising notes. These documents belong
+to the application and are not relational request records.
 
-1. Create the collection and seed one document from an existing request:
+1. Create the collection and seed one document from an existing request by using
+    **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -111,11 +132,13 @@ Thomas has a separate collection of short advising notes. These documents belong
     </copy>
     ```
 
-A collection is useful when the application owns a set of documents. It is not a replacement for the normalized request tables.
+A collection is useful when the application owns a set of documents. It is not a
+replacement for the normalized request tables.
 
 ## Task 3: Read a request as a JSON document
 
-The workshop provides `STUDENT_SUPPORT_REQUESTS_DV`, a duality view over request rows and request updates. Read one document:
+The workshop provides `STUDENT_SUPPORT_REQUESTS_DV`, a duality view over request
+rows and request updates. Read one document:
 
 ```sql
 <copy>
@@ -127,11 +150,13 @@ FETCH FIRST 1 ROW ONLY;
 
 ![SQL Worksheet showing the request duality document and its JSON answer](images/duality-document-result.jpg)
 
-Thomas sees request fields and nested updates together. Jessica can still query the underlying tables with ordinary SQL.
+Thomas sees request fields and nested updates together. Jessica can still query
+the underlying tables with ordinary SQL.
 
 ## Task 4: Check the duality view's write contract
 
-The view definition determines which document changes can be written back to relational rows.
+The view definition determines which document changes can be written back to
+relational rows.
 
 1. Inspect the view's capabilities:
 
@@ -148,11 +173,15 @@ The view definition determines which document changes can be written back to rel
 
     ![SQL Worksheet showing the duality view write permissions](images/duality-write-contract.jpg)
 
-2. Review the definition in the appendix. It allows request and update inserts or updates. The application can use the document interface while the database writes the corresponding normalized rows.
+2. Review the definition in the appendix. It allows inserts and updates to
+    request rows and their nested request-update rows. The application can use
+    the document interface while the database writes the corresponding
+    normalized rows.
 
 ## Task 5: Create and update a support request through JSON
 
-1. Insert a synthetic request document if request `990101` is not already present:
+1. Insert a synthetic request document if request `990101` is not already
+    present by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -192,7 +221,7 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
-3. Update the request status through the duality view:
+3. Update the request status through the duality view by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -204,7 +233,8 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
-4. Check the updated document and relational row:
+4. Run both queries with **Run Script (F5)**. Confirm that the document and
+    relational row both show `IN_PROGRESS`:
 
     ```sql
     <copy>
@@ -218,7 +248,8 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
-The document update is reflected in the relational table because both representations refer to the same data.
+Both results show `IN_PROGRESS` because the document and relational query use
+the same request row.
 
 ## Task 6: Project JSON fields with SQL
 
@@ -238,11 +269,15 @@ WHERE JSON_VALUE(d.data, '$._id' RETURNING NUMBER) = 990101;
 
 ## Conclusion: Choose the JSON pattern that fits
 
-A JSON column is useful for optional application settings. A JSON Collection Table stores documents the application owns. A JSON Relational Duality View presents normalized request data as JSON while preserving relational storage and controls.
+A JSON column is useful for optional application settings. A JSON Collection
+Table stores documents the application owns. A JSON Relational Duality View
+presents normalized request data as JSON while preserving relational storage and
+controls.
 
 ## Appendix: Student-support request duality view
 
-The workshop setup creates the view below. The nested `updates` array is backed by `STUDENT_SUPPORT_UPDATES` rows.
+The workshop setup creates the view below. The nested `updates` array is backed
+by `STUDENT_SUPPORT_UPDATES` rows.
 
 ```sql
 <copy>
