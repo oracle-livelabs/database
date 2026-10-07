@@ -211,7 +211,7 @@ Now Gilly tests the stored embeddings with a simple vector query. She asks for
 content assets related to `Midnight Harbor premiere campaign` and lets the
 database rank them by meaning.
 
-1. Run the following query:
+1. Run the following query by using **Run Script (F5)**:
 
     The SQL embeds the phrase and compares it with
     `PRODUCT_EMBEDDINGS.EMBEDDING` using cosine distance. Smaller distances
