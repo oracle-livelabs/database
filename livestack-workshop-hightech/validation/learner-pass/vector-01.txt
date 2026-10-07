@@ -1,0 +1,167 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+1 AXWebArea SQL | Oracle Database Actions, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet
+	2 container
+		3 container
+			4 button Selector
+				1576 text 
+				6 text Selector
+			7 link Description: Database Actions, Go to Launchpad, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+			8 text  |  SQL
+			9 button Search Database (⌘+K)
+				10 text Search Database (⌘+K)
+				1577 text 
+			12 button Need Help?
+				1578 text 
+				14 text Need Help?
+			15 pop up button LLUSER User Menu
+				1579 text 
+				17 text LLUSER
+				1580 text 
+		19 container Description: Main Drawer, ID: mainDrawer
+			20 container navigator_worksheet__layout
+				473 button (collapsed) Expand
+				474 container code-playground-7184793285291993
+					475 container
+						476 toolbar Editing Toolbar
+							477 container
+								478 pop up button BROWSER [Worksheet ]*
+									479 container worksheet-dropdown
+										480 text [Worksheet ]*
+									1581 text 
+								482 pop up button 
+									1582 text 
+									484 text New file
+									1583 text 
+								486 button Open... (Ctrl+O, ⌘+O)
+									1584 text 
+									488 text Open... (Ctrl+O, ⌘+O)
+								489 button Save (Ctrl+S, ⌘+S)
+									1585 text 
+									491 text Save (Ctrl+S, ⌘+S)
+							492 container
+								493 container code-editor-run-statement-container
+									494 button Run Statement (Ctrl+⏎, ⌘+⏎)
+										1611 text 
+										496 text Run Statement (Ctrl+⏎, ⌘+⏎)
+									497 pop up button Run Statement Options
+										1587 text 
+								499 button Run Script (F5)
+									1588 text 
+									1589 text 
+									502 text Run Script (F5)
+								503 button Create Chart (Ctrl+F11, ⌘+F11)
+									1590 text 
+									1591 text 
+									506 text Create Chart (Ctrl+F11, ⌘+F11)
+								507 button Explain Plan (F10)
+									1592 text 
+									509 text Explain Plan (F10)
+								510 button Autotrace (F6)
+									1593 text 
+									512 text Autotrace (F6)
+							513 container
+								514 button Download Editor Content (Ctrl+I, ⌘+I)
+									1594 text 
+									516 text Download Editor Content (Ctrl+I, ⌘+I)
+								517 button Format (Ctrl+F7, ⌘+F7)
+									1595 text 
+									519 text Format (Ctrl+F7, ⌘+F7)
+								520 pop up button 
+									1596 text 
+									522 text Convert Case (Ctrl+B, ⌘+B)
+									1597 text 
+								524 button Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+									1598 text 
+									526 text Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+						527 toolbar Editing Toolbar
+							528 container consumer-groups-selector
+								529 text Consumer group:
+								530 container Consumer group
+									531 pop up button LOW
+										532 text LOW
+										1599 text 
+							534 container
+								535 button Data Load
+									536 text Data Load
+								537 button Open In Fullscreen
+									1600 text 
+									539 text Open In Fullscreen
+								540 button Tour
+									1601 text 
+									542 text Tour
+								543 button Help (F1)
+									1602 text 
+									545 text Help (F1)
+					546 container
+						547 container code-editor-panel
+							548 container
+								549 editor (settable) Editor content
+								1380 container
+									1612 text 1 
+									1382 content list
+										1613 container
+											1614 text SELECT
+											1615 text owner
+											1616 text ,
+						550 button (expanded) Collapse
+						551 container output-panel
+							552 tab group dbt-panel-tabbar
+								553 tab (selected, settable, boolean) Query Result, Value: 1, ID: query_result-tab-label
+								554 tab (selectable, settable, boolean) Script Output, Value: 0, ID: script_output-tab-label
+								634 tab (selectable, settable, boolean) DBMS Output, Value: 0, ID: dbms_output-tab-label
+								635 tab (selectable, settable, boolean) Explain Plan, Value: 0, ID: explain_plan-tab-label
+								555 tab (selectable, settable, boolean) More Tabs, Value: 0
+							556 container slot__afterControls
+								557 button Help
+									1603 text 
+									559 text Help
+							1389 container Description: Query Result, ID: query_result-tab-panel
+								1617 toolbar
+									1618 button Clear Output
+										1619 text 
+										1620 text Clear Output
+									1621 button Show info
+										1622 text 
+										1623 text Show info
+									1624 button Open in new tab
+										1625 text 
+										1626 text Open in new tab
+									1627 button Share Query Results
+										1628 text 
+										1629 text Share Query Results
+									1630 pop up button Download
+										1631 text Download
+										1632 text 
+									1633 text Execution time: 0.095 seconds
+								1634 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
+									1635 container dbt-sql-worksheet__query-output-grid
+										1636 text This is a data grid with 1 rows and 4 columns.
+										1637 container
+											1638 text OWNER
+											1639 text MODEL_NAME
+											1640 text ALGORITHM
+											1641 text MINING_FUNCTION
+										1642 text 1
+										1643 container
+											1644 text ADMIN
+											1645 text ALL_MINILM_L12_V2
+											1646 text ONNX
+											1647 text EMBEDDING
+		577 container
+			578 link Description:    1, Help: Errors
+				1609 text 
+				580 text 1
+			581 link Description:    0, Help: Warnings
+				1610 text 
+				583 text 0
+			584 link Description:    0, Help: Processes
+				1648 text 
+				586 text 0
+			587 text   |  
+			588 link 6:59:28 PM - 1 rows total
+				589 text 6:59:28 PM - 1 rows total
+			590 link Description: Powered by ORDS, Value: oracle.com/rest
+		591 text entry area (settable) Clipboard
+		592 button Copy
+
+The focused UI element is 494 button Run Statement (Ctrl+⏎, ⌘+⏎)

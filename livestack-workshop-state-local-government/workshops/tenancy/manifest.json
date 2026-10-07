@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Build Connected State and Local Government Service Operations with Oracle AI Database 26ai",
+  "workshoptitle": "Build Connected State and Local Government Service Operations with Oracle AI Database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
@@ -13,7 +13,7 @@
       "filename": "../../getting-started/getting-started.md"
     },
     {
-      "title": "Lab 1: Data Foundation",
+      "title": "(optional) Lab 1: Data Foundation",
       "description": "Inspect the governed service-operation object families used by later labs.",
       "filename": "../../state-local-government-data-foundation/state-local-government-data-foundation.md"
     },
@@ -48,12 +48,22 @@
       "filename": "../../demand-capacity-oml/demand-capacity-oml.md"
     },
     {
-      "title": "Lab 8: Conclusion",
+      "title": "Lab 8: Ask Governed Service Questions with Select AI",
+      "description": "Ask reviewable natural-language questions over approved State and Local Government service views.",
+      "filename": "../../select-ai-service-questions/select-ai-service-questions.md"
+    },
+    {
+      "title": "Lab 9: Triage Service Requests with Select AI Agents",
+      "description": "Use a constrained agent to retrieve evidence and record one simulated planning review.",
+      "filename": "../../select-ai-agent-service-triage/select-ai-agent-service-triage.md"
+    },
+    {
+      "title": "Lab 10: Conclusion",
       "description": "Turn the lab evidence into a practical converged database takeaway.",
       "filename": "../../conclusion-business-outcomes/conclusion-business-outcomes.md"
     },
     {
-      "title": "Lab 9: Final Quiz",
+      "title": "Lab 11: Final Quiz",
       "description": "Check your understanding with scored questions.",
       "filename": "../../final-quiz/final-quiz.md"
     },

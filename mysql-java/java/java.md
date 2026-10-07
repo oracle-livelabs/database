@@ -96,4 +96,4 @@ exit</copy>
 * Stuart Davey - MySQL EMEA
 * Mario Beck - MySQL EMEA
 * Olivier Dasini - MySQL EMEA
-* Last Updated <Feb 2022>
+* Last Updated - Sep 2026

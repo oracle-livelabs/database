@@ -15,11 +15,13 @@ In this workshop, you will:
 - Build a web app
 - Read and Write Data Using the Fusabase JavaScript SDK
 - Add Sign-Up and Sign-In with Fusabase Authentication
+- Configure Google social sign-in with OAuth
+- Configure GitHub social sign-in with OAuth
 - Upload Photos with Fusabase File Storage
 - Secure Your App Data with Fusabase Security Rules
 
 
-Estimated Workshop Time: 75 minutes
+Estimated Workshop Time: 110 minutes
 
 ## Task 1: Review the workshop overview
 
@@ -42,6 +44,8 @@ Estimated Workshop Time: 75 minutes
     - In Lab 5, you will learn how to write data.
     - In Lab 6, you will learn how to use file storage.
     - In Lab 7, you will update security rules to protect your data.
+    - In Lab 8, you will configure Google social sign-in for your app.
+    - In Lab 9, you will configure GitHub social sign-in for your app.
 
 ## Acknowledgements
 

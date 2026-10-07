@@ -1,4 +1,4 @@
-# Predictive Student Success Analytics with Oracle Machine Learning
+# Predictive Student-Service Demand with Oracle Machine Learning
 
 ## Introduction
 
@@ -36,7 +36,10 @@ Estimated Time: **12 minutes**
 | --- | --- |
 | Business Problem | Teams need to anticipate support demand without exporting governed operating data. |
 | Technical Challenge | Model scores must remain explainable alongside the service and signal evidence that supports them. |
-| Persona Focus | Database developer, ML engineer, and student-success planner. |
+| Decision Owner | Student-success service-capacity planner, supported by a database developer and ML engineer. |
+| Decision | Which service-demand predictions or disagreements should staff investigate first? |
+| Information Needed | Service, demand score, observed label, predicted label, surge probability, request history, and capacity context. |
+| Next Action | Review the highest-priority disagreement, then decide whether to monitor demand, investigate the inputs, or prepare capacity. |
 | What You Will Do | Inspect model metadata and score the demand training view. |
 | Database Capability | Oracle Machine Learning. |
 | Outcome | Planners can prioritize review using in-database predictive evidence. |
@@ -72,38 +75,46 @@ Estimated Time: **12 minutes**
 
     Read this query in three parts.
 
-    1. The inner query starts with `OML_DEMAND_TRAINING_V`, the repeatable feature set used by the model.
+    1. `scored_demand` starts with `OML_DEMAND_TRAINING_V`, the repeatable feature set used by the model.
     2. `PREDICTION` returns a class label, while `PREDICTION_PROBABILITY` returns the probability assigned specifically to `SURGE`; neither is a guarantee.
-    3. The outer join adds the service name, and `ORDER BY` makes the review sequence stable when scores tie.
+    3. The final query adds the service name, and `ORDER BY` makes the review sequence stable when scores tie.
 
     ~~~sql
     <copy>
-    SELECT s.service_name,
-           scored.predicted_demand,
-           scored.surge_probability
-    FROM (
-      SELECT product_id,
+    WITH scored_demand AS (
+      SELECT service_id,
              PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_demand,
              ROUND(
-               PREDICTION_PROBABILITY(DEMAND_SURGE_MODEL, 'SURGE' USING *),
+               PREDICTION_PROBABILITY(
+                 DEMAND_SURGE_MODEL,
+                 'SURGE' USING *
+               ),
                3
              ) AS surge_probability
       FROM oml_demand_training_v
-    ) scored
-    JOIN student_services_v s ON s.service_id = scored.product_id
-    ORDER BY scored.surge_probability DESC, s.service_name;
+    )
+    SELECT s.service_name,
+           scored.predicted_demand,
+           scored.surge_probability
+    FROM scored_demand scored
+    JOIN student_services_v s
+      ON s.service_id = scored.service_id
+    ORDER BY scored.surge_probability DESC,
+             s.service_name;
     </copy>
     ~~~
 
-    Expected output: Demand Priorities
+    **Expected output: Demand Priorities**
 
-    | Result Pattern | Expected Evidence |
-    | --- | --- |
-    | Service rows | Five rows, one for each seeded student service |
-    | Predicted demand | The model-returned class label for each service |
-    | Surge probability | A decimal from 0 to 1, sorted from highest to lowest |
+    | Service Name | Predicted Demand | Surge Probability |
+    | --- | --- | ---: |
+    | Academic Planning Appointment | STABLE | 0.428 |
+    | Engineering Learning Lab | STABLE | 0.428 |
+    | Financial Aid Navigation | STABLE | 0.428 |
+    | First-Year Advising | STABLE | 0.428 |
+    | Tutoring Appointment | STABLE | 0.428 |
 
-    The predicted label and `SURGE` probability help a planner decide where to investigate. The probability is not necessarily confidence in the returned label. If you completed the write task in the JSON Relational Duality lab, Tutoring Appointment now has a second request in `OML_DEMAND_TRAINING_V`; its model result can differ from a fresh workshop. The final response should still consider capacity, student context, and the service evidence from earlier labs.
+    This is a representative fresh-run result set. The model-returned labels and `SURGE` probabilities can differ when the model is rebuilt or the feature values differ. If you completed the write task in the JSON Relational Duality lab, Tutoring Appointment has a second request in `OML_DEMAND_TRAINING_V`, so its probability or position can differ from this example. The predicted label and `SURGE` probability help a planner decide where to investigate; probability is not necessarily confidence in the returned label. The final response should still consider capacity, student context, and service evidence from earlier labs.
 
 2. 🎯 **Interactive challenge: surface model disagreements.**
 
@@ -124,13 +135,8 @@ Estimated Time: **12 minutes**
 
     ~~~sql
     <copy>
-    SELECT s.service_name,
-           scored.demand_score,
-           scored.observed_demand,
-           scored.predicted_demand,
-           scored.surge_probability
-    FROM (
-      SELECT product_id,
+    WITH scored_demand AS (
+      SELECT service_id,
              demand_score,
              surge_flag AS observed_demand,
              PREDICTION(DEMAND_SURGE_MODEL USING *) AS predicted_demand,
@@ -142,9 +148,15 @@ Estimated Time: **12 minutes**
                3
              ) AS surge_probability
       FROM oml_demand_training_v
-    ) scored
+    )
+    SELECT s.service_name,
+           scored.demand_score,
+           scored.observed_demand,
+           scored.predicted_demand,
+           scored.surge_probability
+    FROM scored_demand scored
     JOIN student_services_v s
-      ON s.service_id = scored.product_id
+      ON s.service_id = scored.service_id
     WHERE scored.observed_demand <> scored.predicted_demand
     ORDER BY scored.demand_score DESC,
              s.service_name;
@@ -152,6 +164,17 @@ Estimated Time: **12 minutes**
     ~~~
 
     </details>
+
+## Business outcome checkpoint
+
+The scoring query ranks predicted service demand, while the challenge isolates places where the model and observed label disagree. The model predicts demand for student services; it does not predict an individual student's success or determine an intervention.
+
+- **Demonstrates:** Oracle Machine Learning can score service-demand records and expose model disagreements beside operational service information.
+- **Supports:** Earlier review of potential demand changes and capacity needs without exporting governed inputs.
+- **Candidate indicators:** Forecast error, reviewed disagreements, planner override rate, capacity shortfalls, and model drift.
+- **Requires validation:** Holdout performance, feature suitability, calibration, drift thresholds, retraining cadence, fairness, access controls, and human ownership of planning decisions.
+
+The conclusion brings the complete route together so you can explain how connected information changes the student-support operating workflow.
 
 ## Acknowledgements
 

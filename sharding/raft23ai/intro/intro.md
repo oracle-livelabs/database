@@ -15,7 +15,7 @@ Raft replication is integrated with transaction execution and is completely tran
 <if type="nonsandbox">
 Watch the video for a quick walk through of the Introduction and verify Lab environment.
 
-[Introduction and verify Lab environment](videohub:1_z6opisia)
+[Introduction and verify Lab environment](videohub:1_sbnvc6ip)
 </if>
 
 ### Objectives
@@ -40,4 +40,4 @@ You may now proceed to the next lab.
 ## Acknowledgements
 * **Authors** - Deeksha Sehgal, Ajay Joshi, Oracle Globally Distributed Database, Product Management
 * **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Param Saini, Jyoti Verma
-* **Last Updated By/Date** - Ajay Joshi, Oracle Globally Distributed Database, Product Management, March 2026
+* **Last Updated By/Date** - Ajay Joshi, Lead Principal Data Systems Engineer, Oracle Globally Distributed Database, September 2026

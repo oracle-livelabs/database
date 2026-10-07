@@ -1,0 +1,45 @@
+SET TERMOUT ON
+SET ECHO ON
+WHENEVER OSERROR EXIT FAILURE
+WHENEVER SQLERROR EXIT SQL.SQLCODE
+
+-- 1) Create native OCI-signing credential
+DECLARE
+  v_priv_key CLOB := q'~${private_key_pem}~';
+BEGIN
+  DBMS_CLOUD.CREATE_CREDENTIAL (
+    credential_name => 'AI_CREDENTIAL',
+    user_ocid       => '${ociUserOcid}',
+    tenancy_ocid    => '${ociTenancyOcid}',
+    private_key     => v_priv_key,
+    fingerprint     => '${fingerprint}'
+  );
+END;
+/
+PROMPT Created DBMS_CLOUD credential AI_CREDENTIAL
+
+-- 2) Drop + create DBMS_CLOUD_AI profile
+BEGIN
+  DBMS_CLOUD_AI.drop_profile(profile_name => 'genai', force => true);
+END;
+/
+PROMPT Dropped profile genai (if existed)
+
+BEGIN
+  DBMS_CLOUD_AI.create_profile(
+    profile_name => 'genai',
+    attributes   =>
+      '{
+        "provider": "oci",
+        "credential_name": "AI_CREDENTIAL",
+        "comments":"true",
+        "oci_compartment_id": "${ociCompartmentOcid}",
+        "region":"${ociRegionIdentifier}",
+        "model":"${ociGenAiModel}"
+      }'
+  );
+END;
+/
+PROMPT Created DBMS_CLOUD_AI profile genai
+
+EXIT

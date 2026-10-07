@@ -9,6 +9,8 @@ badge: images/badge.png
 
 Use this scored quiz to check whether you can connect each Seer Bank finance outcome to the database evidence you inspected in the labs.
 
+Use the quiz to check that you can follow the same evidence path as Jessica, Jordan, Sam, Priya, and Maya, from a risk signal through investigation, planning, and controlled action.
+
 ### Objectives
 
 - Review the main database capabilities used in the workshop.
@@ -22,7 +24,7 @@ Estimated Time: **5 minutes**
 1. Complete the scored quiz.
 
     ```quiz score
-    Q: Why does the workshop begin with the finance data foundation?
+    Q: Why might you begin with the optional finance data foundation?
     - To manually install every finance table.
     * To map the shared data used by each later finance workflow.
     - To replace the application dashboard with catalog reports.
@@ -99,7 +101,7 @@ Estimated Time: **5 minutes**
     - It can approve or deny customer transactions.
     > The agent has only a lookup tool and a controlled escalation tool. The escalation function rechecks the threshold and writes an AGENT_ACTIONS audit row; it cannot change protected financial data.
 
-    Q: What is the main advantage of using Oracle Database as the converged foundation for this workshop?
+    Q: What is the main advantage of using Oracle AI Database as the converged foundation for this workshop?
     - Each finance capability must use a separate specialized data store.
     * SQL, JSON, vector, graph, spatial, OML, Select AI, and agent evidence stay connected.
     - Application screenshots replace the need for database evidence.
@@ -107,12 +109,10 @@ Estimated Time: **5 minutes**
     > The workshop uses different database capabilities for different finance questions, but the value is that they operate from connected governed data. That reduces copying, reconciliation, and fragmented explanations.
     ```
 
-2. Review the completion badge.
-
-    ![Finance LiveStack badge](images/livestack-finance-badge.png " ")
+2. When you achieve the passing score, the quiz displays your completion badge.
 
 ## Acknowledgements
 
 * **Authors** - Pat Shepherd, Linda Foinding
 * **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

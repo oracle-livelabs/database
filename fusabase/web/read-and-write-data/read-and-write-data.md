@@ -34,7 +34,7 @@ This lab assumes you have:
 
 3. Fusabase data is organized into collections, documents, fields, and subcollections. We will store each recipe as a document in a top-level collection called `recipes`. Later, we will store each rating in a subcollection called `ratings` under each recipe.
 
-    ![Recipe Share data model showing the recipes collection, recipe document fields, ratings subcollection, and rating document.](images/recipe-share-data-model.svg =45%x*)
+    ![Recipe Share data model showing the recipes collection, recipe document fields, ratings subcollection, and rating document.](images/recipe-share-data-model.png =45%x*)
 
     This collection/document shape is the data model your SDK calls will read and write through the rest of the workshop.
 

@@ -1,0 +1,66 @@
+{
+  "workshoptitle": "Build Connected Healthcare Solutions with Oracle AI Database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Seer Health Network care operations story and workshop goals.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Launch the environment and open Database Actions SQL Worksheet.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Build a Converged Dashboard Query",
+      "description": "Use a converged query to connect care-service pressure, request activity, semantic relevance, and logistics distance.",
+      "filename": "../../risk-operations-dashboard/risk-operations-dashboard.md"
+    },
+    {
+      "title": "Lab 2: Build a JSON Care Service Request Model",
+      "description": "Help Thomas compare JSON columns, JSON collections, and JSON Relational Duality for a healthcare operations application.",
+      "filename": "../../transaction-case-duality/transaction-case-duality.md"
+    },
+    {
+      "title": "Lab 3: Review a Semantic Care Operations Search",
+      "description": "Review how Gilly uses an in-database embedding model to find related care services and quality and capacity signals.",
+      "filename": "../../risk-signal-vector-search/risk-signal-vector-search.md"
+    },
+    {
+      "title": "Lab 4: Investigate Connected Care Pathways",
+      "description": "Review how Bob uses Oracle Property Graph, SQL/PGQ, and Graph Studio to trace connected care facts and quality-signal evidence.",
+      "filename": "../../financial-crime-network/financial-crime-network.md"
+    },
+    {
+      "title": "Lab 5: Route Care Requests to the Closest Qualified Logistics Site",
+      "description": "Review how Moon combines Oracle Spatial distance with service, status, load, and capacity evidence to route a care request.",
+      "filename": "../../service-sla-spatial/service-sla-spatial.md"
+    },
+    {
+      "title": "Lab 6: Build a Care Demand Risk Model with Oracle Machine Learning",
+      "description": "Train and score a care-demand risk model inside Oracle AI Database.",
+      "filename": "../../predictive-risk-oml/predictive-risk-oml.md"
+    },
+    {
+      "title": "Lab 7: Ask Healthcare Questions with Select AI",
+      "description": "Use Select AI to turn natural-language healthcare questions into SQL you can inspect and run.",
+      "filename": "../../selectai/selectai.md"
+    },
+    {
+      "title": "Lab 8: Build a Healthcare Agent with Select AI Agent",
+      "description": "Create a read-only healthcare agent that uses an approved SQL tool.",
+      "filename": "../../selectai-agent/selectai-agent.md"
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding with scored questions.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

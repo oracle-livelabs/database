@@ -1,0 +1,8 @@
+{
+  "model": "cohere.command-a-03-2025",
+  "verified": true,
+  "agent_test_model": "meta.llama-3.3-70b-instruct",
+  "agent_test_state": "SUCCEEDED",
+  "agent_elapsed_seconds": 32.019,
+  "original_cohere_attempt": "Browser request failed after 300 seconds; six repeated successful SQL tool calls; history retains RUNNING with null end_date."
+}

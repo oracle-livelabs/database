@@ -1,0 +1,162 @@
+Clear output
+Download script output
+
+View SERVICE_ORDERS_DV created.
+
+Elapsed: 00:00:00.131
+
+
+Copy to clipboard
+
+Property GRAPH created.
+
+Elapsed: 00:00:00.067
+
+
+Copy to clipboard
+Creating telecommunications reporting and demand-training views
+
+
+Copy to clipboard
+
+View SERVICE_PLANS_V created.
+
+Elapsed: 00:00:00.010
+
+
+Copy to clipboard
+
+View NETWORK_SITES_V created.
+
+Elapsed: 00:00:00.012
+
+
+Copy to clipboard
+
+View SERVICE_ALERTS_V created.
+
+Elapsed: 00:00:00.006
+
+
+Copy to clipboard
+
+View OML_PLAN_DEMAND_TRAINING_V created.
+
+Elapsed: 00:00:00.018
+
+
+Copy to clipboard
+Embedding SEER Telecomms plans with the shared 384-dimension model
+
+
+Copy to clipboard
+
+192 rows inserted.
+
+Elapsed: 00:00:04.986
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.003
+
+
+Copy to clipboard
+Registering network site, subscriber and network-region spatial layers
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.685
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.019
+
+
+Copy to clipboard
+
+1 row inserted.
+
+Elapsed: 00:00:00.013
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.002
+
+
+Copy to clipboard
+
+Index NETWORK_SITES_LOCATION_SIDX created.
+
+Elapsed: 00:00:01.947
+
+
+Copy to clipboard
+
+Index SUBSCRIBERS_LOCATION_SIDX created.
+
+Elapsed: 00:00:00.309
+
+
+Copy to clipboard
+
+Index NETWORK_REGIONS_BOUNDARY_SIDX created.
+
+Elapsed: 00:00:00.282
+
+
+Copy to clipboard
+Configuring the existing GENAI profile for telecommunications
+
+
+Copy to clipboard
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.113
+
+
+Copy to clipboard
+Checking loaded telecommunications data and lab prerequisites
+
+
+Copy to clipboard
+Telecommunications data, vector, spatial, duality and SQL graph assertions passed.
+
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.991
+
+
+Copy to clipboard
+
+Commit complete.
+
+Elapsed: 00:00:00.007
+
+
+Copy to clipboard
+SEER_TELECOMMS_HANDOFF_LOADER_COMPLETE
+
+
+Copy to clipboard
+Main workshop objects loaded. Run the nine labs to validate their live behavior.
+
+
+Copy to clipboard
+Optional airtime notebook: complete the PGQL setup block above first.
+
+
+Copy to clipboard

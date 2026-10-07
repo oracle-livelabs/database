@@ -1,0 +1,315 @@
+- generic "Selector":
+  - button "Selector":
+    - generic: 
+    - generic: Selector
+- link "Database Actions, Go to Launchpad":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+  - generic: Database Actions
+- generic: "| SQL"
+- search:
+  - button "Search Database (⌘+K)":
+    - generic: Search Database (⌘+K)
+    - generic: 
+- text:                      
+- generic "Need Help?":
+  - button "Need Help?":
+    - generic: 
+    - generic: Need Help?
+- button "LLUSER User Menu":
+  - generic: 
+  - generic "LLUSER"
+  - generic: 
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - text:                                                                                                                                                                                                                                                                                                                             
+  - generic "Resize":
+    - button "Expand"
+  - toolbar "Editing Toolbar":
+    - button "BROWSER[Worksheet ]*":
+      - generic "[Worksheet ]*":
+        - generic "BROWSER"
+        - generic: "[Worksheet ]*"
+      - generic: 
+    - generic "New file":
+      - button "":
+        - generic: 
+        - generic: New file
+        - generic: 
+        - text:  
+    - generic "Open... (Ctrl+O, ⌘+O)":
+      - button "Open... (Ctrl+O, ⌘+O)":
+        - generic: 
+        - generic: Open... (Ctrl+O, ⌘+O)
+    - generic "Save (Ctrl+S, ⌘+S)":
+      - button "Save (Ctrl+S, ⌘+S)":
+        - generic: 
+        - generic: Save (Ctrl+S, ⌘+S)
+    - generic "Run Statement (Ctrl+⏎, ⌘+⏎)":
+      - button "Run Statement (Ctrl+⏎, ⌘+⏎)" [active]:
+        - generic: 
+        - generic: Run Statement (Ctrl+⏎, ⌘+⏎)
+    - button "Run Statement Options":
+      - generic: 
+      - text:  
+    - generic "Run Script (F5)":
+      - button "Run Script (F5)":
+        - generic:  
+        - generic: Run Script (F5)
+    - generic "Create Chart (Ctrl+F11, ⌘+F11)":
+      - button "Create Chart (Ctrl+F11, ⌘+F11)":
+        - generic:  
+        - generic: Create Chart (Ctrl+F11, ⌘+F11)
+    - generic "Explain Plan (F10)":
+      - button "Explain Plan (F10)":
+        - generic: 
+        - generic: Explain Plan (F10)
+    - generic "Autotrace (F6)":
+      - button "Autotrace (F6)":
+        - generic: 
+        - generic: Autotrace (F6)
+    - generic "Download Editor Content (Ctrl+I, ⌘+I)":
+      - button "Download Editor Content (Ctrl+I, ⌘+I)":
+        - generic: 
+        - generic: Download Editor Content (Ctrl+I, ⌘+I)
+    - generic "Format (Ctrl+F7, ⌘+F7)":
+      - button "Format (Ctrl+F7, ⌘+F7)":
+        - generic: 
+        - generic: Format (Ctrl+F7, ⌘+F7)
+    - generic "Convert Case (Ctrl+B, ⌘+B)":
+      - button "":
+        - generic: 
+        - generic: Convert Case (Ctrl+B, ⌘+B)
+        - generic: 
+    - generic "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+      - button "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+        - generic: 
+        - generic: Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+  - toolbar "Editing Toolbar":
+    - text: .
+    - paragraph:
+      - generic: "Consumer group:"
+    - generic "Consumer group":
+      - button "LOW":
+        - generic: LOW
+        - generic: 
+    - generic "Data Load":
+      - button "Data Load":
+        - generic: Data Load
+    - generic "Open In Fullscreen":
+      - button "Open In Fullscreen":
+        - generic: 
+        - generic: Open In Fullscreen
+    - generic "Tour":
+      - button "Tour":
+        - generic: 
+        - generic: Tour
+    - generic "Help (F1)":
+      - button "Help (F1)":
+        - generic: 
+        - generic: Help (F1)
+  - tabpanel:
+    - code:
+      - textbox "Editor content"
+      - textbox
+      - generic: "21"
+      - generic: "22"
+      - generic: "23"
+      - generic: "24"
+      - generic: "25"
+      - generic: "26"
+      - generic: "27"
+      - generic: "28"
+      - generic: "29"
+      - generic: 
+      - generic: "30"
+      - generic: "31"
+      - generic: r.order_status,
+      - generic: r.created_at,
+      - generic: rn.quantity,
+      - generic: rn.line_total
+      - generic: FROM matched_components matched_component
+      - generic: JOIN production_order_lines rn ON rn.component_id = matched_component.component_id
+      - generic: JOIN production_orders r ON r.production_order_id = rn.production_order_id
+      - generic: JOIN customer_sites g ON g.customer_site_id = r.customer_site_id
+      - generic: WHERE r.order_status IN ('planned', 'released', 'in_production')
+      - generic: ORDER BY matched_component.similarity DESC,
+      - generic: r.created_at DESC;
+  - generic "Resize":
+    - button "Collapse" [expanded]
+  - tablist:
+    - tab "Query Result" [selected]:
+      - generic: Query Result
+    - tab "Script Output":
+      - generic: Script Output
+    - tab "DBMS Output":
+      - generic: DBMS Output
+    - tab "Explain Plan":
+      - generic: Explain Plan
+    - tab "Autotrace":
+      - generic: Autotrace
+    - tab "SQL History":
+      - generic: SQL History
+    - text: 
+  - generic "Help":
+    - button "Help":
+      - generic: 
+      - generic: Help
+  - tabpanel "Query Result":
+    - toolbar:
+      - generic "Clear Output":
+        - button "Clear Output":
+          - generic: 
+          - generic: Clear Output
+      - generic "Show info":
+        - button "Show info":
+          - generic: 
+          - generic: Show info
+      - generic "Open in new tab":
+        - button "Open in new tab":
+          - generic: 
+          - generic: Open in new tab
+      - generic "Share Query Results":
+        - button "Share Query Results":
+          - generic: 
+          - generic: Share Query Results
+      - button "Download":
+        - generic: Download
+        - generic: 
+        - text:    
+      - generic: "Execution time: 0.266 seconds"
+    - generic "Worksheet Query Result":
+      - application:
+        - generic: This is a data grid with 9 rows and 10 columns.
+        - generic: component_name
+        - generic: similarity
+        - generic: site_name
+        - generic: contact_name
+        - generic: email
+        - generic: production_order_id
+        - generic: order_status
+        - generic: created_at
+        - generic: quantity
+        - generic: line_total
+        - generic: "1"
+        - generic: "2"
+        - generic: "3"
+        - generic: "4"
+        - generic: "5"
+        - generic: "6"
+        - generic: "7"
+        - generic: "8"
+        - generic: "9"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0114": Electronics Customer Site 0114 
+        - generic "Contact0114 Example": Contact0114 Example 
+        - generic "production0114@example.com": production0114@example.com 
+        - generic "11135"
+        - generic "planned": planned 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "37"
+        - generic "4625"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 1010": Electronics Customer Site 1010 
+        - generic "Contact1010 Example": Contact1010 Example 
+        - generic "production1010@example.com": production1010@example.com 
+        - generic "13055"
+        - generic "planned": planned 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "33"
+        - generic "4125"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0130": Electronics Customer Site 0130 
+        - generic "Contact0130 Example": Contact0130 Example 
+        - generic "production0130@example.com": production0130@example.com 
+        - generic "11151"
+        - generic "in_production": in_production 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "73"
+        - generic "9125"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0946": Electronics Customer Site 0946 
+        - generic "Contact0946 Example": Contact0946 Example 
+        - generic "production0946@example.com": production0946@example.com 
+        - generic "10943"
+        - generic "planned": planned 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "30"
+        - generic "3750"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0898": Electronics Customer Site 0898 
+        - generic "Contact0898 Example": Contact0898 Example 
+        - generic "production0898@example.com": production0898@example.com 
+        - generic "11919"
+        - generic "in_production": in_production 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "97"
+        - generic "12125"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0882": Electronics Customer Site 0882 
+        - generic "Contact0882 Example": Contact0882 Example 
+        - generic "production0882@example.com": production0882@example.com 
+        - generic "11903"
+        - generic "planned": planned 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "28"
+        - generic "3500"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0962": Electronics Customer Site 0962 
+        - generic "Contact0962 Example": Contact0962 Example 
+        - generic "production0962@example.com": production0962@example.com 
+        - generic "10959"
+        - generic "in_production": in_production 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "67"
+        - generic "8375"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0834": Electronics Customer Site 0834 
+        - generic "Contact0834 Example": Contact0834 Example 
+        - generic "production0834@example.com": production0834@example.com 
+        - generic "12879"
+        - generic "in_production": in_production 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "127"
+        - generic "15875"
+        - generic "Power control module P02 Rev A": Power control module P02 Rev A 
+        - generic "0.7602"
+        - generic "Electronics Customer Site 0818": Electronics Customer Site 0818 
+        - generic "Contact0818 Example": Contact0818 Example 
+        - generic "production0818@example.com": production0818@example.com 
+        - generic "12863"
+        - generic "planned": planned 
+        - generic "08/20/2026, 10:00:00 AM": 08/20/2026, 10:00:00 AM 
+        - generic "26"
+        - generic "3250"
+        - status
+      - text: 
+  - text:            
+- generic "Errors":
+  - generic: 
+  - generic: "0"
+- generic "Warnings":
+  - generic: 
+  - generic: "0"
+- generic "Processes":
+  - generic: 
+  - generic: "1"
+- generic: "|"
+- generic: 7:56:25 PM - 58 rows total
+- generic: 
+- link "Powered by ORDS":
+  - /url: https://oracle.com/rest
+  - generic: Powered by ORDS
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert

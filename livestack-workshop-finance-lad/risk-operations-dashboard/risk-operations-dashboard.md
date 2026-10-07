@@ -43,10 +43,10 @@ The dashboard is a starting point, not the whole decision. Run the query below t
 
 The query intentionally crosses four data models:
 
-1. **Relational:** `RISK_SIGNALS_V`, product mentions, and finance views calculate product risk and exposure.
-2. **Vector:** `PRODUCT_EMBEDDINGS` and `VECTOR_DISTANCE` find products related by meaning to the investigation phrase.
-3. **JSON:** `ORDERS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so transaction activity can be counted.
-4. **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest service center to the high-demand New York Metro region using latitude and longitude information stored as GeoJSON.
+- **Relational:** `RISK_SIGNALS_V`, product mentions, and finance views calculate product risk and exposure.
+- **Vector:** `PRODUCT_EMBEDDINGS` and `VECTOR_DISTANCE` find products related by meaning to the investigation phrase.
+- **JSON:** `ORDERS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so transaction activity can be counted.
+- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest service center to the high-demand New York Metro region using latitude and longitude information stored as GeoJSON.
 
     These are four operations in one investigation. Every row combines product risk with transaction activity, semantic relevance, and service-routing context.
 

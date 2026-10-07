@@ -1,0 +1,58 @@
+{
+  "exact_text_substitutions": [
+    {
+      "path": "README.md",
+      "occurrences": 1
+    },
+    {
+      "path": "component-quality-vector-search/component-quality-vector-search.md",
+      "occurrences": 1
+    },
+    {
+      "path": "final-quiz/final-quiz.md",
+      "occurrences": 3
+    },
+    {
+      "path": "introduction/introduction.md",
+      "occurrences": 5
+    },
+    {
+      "path": "plant-routing-spatial/plant-routing-spatial.md",
+      "occurrences": 1
+    },
+    {
+      "path": "production-operations-dashboard/production-operations-dashboard.md",
+      "occurrences": 1
+    },
+    {
+      "path": "production-order-duality/production-order-duality.md",
+      "occurrences": 1
+    },
+    {
+      "path": "production-quality-network/production-quality-network.md",
+      "occurrences": 1
+    },
+    {
+      "path": "quality-review-oml/quality-review-oml.md",
+      "occurrences": 1
+    },
+    {
+      "path": "selectai/selectai.md",
+      "occurrences": 1
+    },
+    {
+      "path": "stack/load_data/hightech-platform-handoff-loader.sql",
+      "occurrences": 4
+    },
+    {
+      "path": "workshops/sandbox/manifest.json",
+      "occurrences": 1
+    },
+    {
+      "path": "workshops/tenancy/manifest.json",
+      "occurrences": 1
+    }
+  ],
+  "image_files_edited": 0,
+  "sql_archive_synchronized": true
+}

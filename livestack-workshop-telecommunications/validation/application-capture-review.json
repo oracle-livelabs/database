@@ -1,0 +1,100 @@
+{
+  "capture_count": 9,
+  "date": "2026-09-23",
+  "method": "Unedited browser screenshots of the user-supplied live demo; visual inspection and macOS Vision OCR.",
+  "all_images_readable": true,
+  "all_image_hashes_match": true,
+  "all_inline_placements_match": true,
+  "legacy_domain_terms_in_selected_captures": 0,
+  "application_search_result": "Eight services returned for weak indoor mobile coverage and dropped calls.",
+  "graph": "Two-step incident graph loaded.",
+  "map": "Network Sites and Demand Pressure Regions enabled and rendered; attribution retained.",
+  "query_agent_runtime": "Local llama3.2; interface captures only, no questions or actions submitted.",
+  "excluded_view": "The application document payload uses a different contract from the workshop; only the telecom order list is included.",
+  "sql_result_captures_still_pending": 48,
+  "workshop_loader_executed": false,
+  "application_modified": false,
+  "workshop_browser_render_checks": [
+    {
+      "heading": "Build Connected Telecommunications Solutions with Oracle AI Database",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../introduction/images/app-welcome.png"
+        }
+      ]
+    },
+    {
+      "heading": "Build a Converged Dashboard Query",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../subscriber-operations-dashboard/images/app-dashboard.png"
+        }
+      ]
+    },
+    {
+      "heading": "Build a JSON Application Model",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../service-order-duality/images/app-service-orders.png"
+        }
+      ]
+    },
+    {
+      "heading": "Search Service Plans by Meaning",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../subscriber-concern-vector-search/images/app-vector-search.png"
+        }
+      ]
+    },
+    {
+      "heading": "Investigate an Activation Fraud Network",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../activation-fraud-network/images/app-impact-graph.png"
+        }
+      ]
+    },
+    {
+      "heading": "Find Nearby Network Sites",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../network-site-spatial/images/app-spatial-map.png"
+        }
+      ]
+    },
+    {
+      "heading": "Build a Service Plan Demand Watchlist with Oracle Machine Learning",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../plan-demand-oml/images/app-predictive-assurance.png"
+        }
+      ]
+    },
+    {
+      "heading": "Ask Telecom Questions with Select AI",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../selectai/images/app-ask-data.png"
+        }
+      ]
+    },
+    {
+      "heading": "Build a Telecom Agent with Select AI Agent",
+      "images": [
+        {
+          "loaded": true,
+          "src": "../../selectai-agent/images/app-agent-console.png"
+        }
+      ]
+    }
+  ]
+}

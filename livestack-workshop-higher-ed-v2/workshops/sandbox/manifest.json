@@ -1,0 +1,66 @@
+{
+  "workshoptitle": "Connected Student Support with Oracle AI Database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Meet Seer Higher Education and the teams coordinating student-support operations.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Launch the environment and open Database Actions SQL Worksheet.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Build a Converged Student-Support Query",
+      "description": "Combine request records, semantic search, JSON details, and campus-service locations in one query.",
+      "filename": "../../student-success-dashboard/student-success-dashboard.md"
+    },
+    {
+      "title": "Lab 2: Model Student-Support Requests as JSON",
+      "description": "Compare JSON columns, JSON collections, and JSON Relational Duality for an application workflow.",
+      "filename": "../../student-request-duality/student-request-duality.md"
+    },
+    {
+      "title": "Lab 3: Find Support Resources with AI Vector Search",
+      "description": "Rank support resources by meaning and join them to linked open requests.",
+      "filename": "../../student-support-vector-search/student-support-vector-search.md"
+    },
+    {
+      "title": "Lab 4: Explore the Student-Support Network",
+      "description": "Use Oracle Property Graph and SQL/PGQ to examine student, course, advisor, and service relationships.",
+      "filename": "../../student-support-network/student-support-network.md"
+    },
+    {
+      "title": "Lab 5: Plan Campus Support with Oracle Spatial",
+      "description": "Use Oracle Spatial to find support sites near campus demand areas and request locations.",
+      "filename": "../../campus-support-spatial/campus-support-spatial.md"
+    },
+    {
+      "title": "Lab 6: Forecast Student-Support Demand with Oracle Machine Learning",
+      "description": "Train a classifier on synthetic workload examples and score an illustrative next-term scenario.",
+      "filename": "../../student-support-oml/student-support-oml.md"
+    },
+    {
+      "title": "Lab 7: Ask Student-Success Questions with Select AI",
+      "description": "Generate SQL from natural-language questions over approved Higher Education views.",
+      "filename": "../../selectai/selectai.md"
+    },
+    {
+      "title": "Lab 8: Build a Student-Support Agent with Select AI Agent",
+      "description": "Create a read-only agent that uses an approved SQL tool and records its activity.",
+      "filename": "../../selectai-agent/selectai-agent.md"
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding of the workshop's Oracle Database capabilities.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

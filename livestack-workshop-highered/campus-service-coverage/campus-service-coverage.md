@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Students need support where they are. Campus teams need the nearest service site and its current capacity before they route a request.
+Students need support where they are. Campus teams need an initial view of nearby service sites and current capacity before they investigate service fit and route a request.
 
 In this lab, you act as a campus operations planner. You will use Oracle Spatial to connect a student location to nearby campus-service sites.
 
@@ -34,10 +34,13 @@ Estimated Time: **12 minutes**
 | --- | --- |
 | Business Problem | Students need a timely route to an appropriate nearby service. |
 | Technical Challenge | Location and capacity evidence should be queryable with the operational request data. |
-| Persona Focus | Campus operations planner. |
+| Decision Owner | Campus operations planner. |
+| Decision | Which sites remain candidates after an initial proximity-and-capacity screen? |
+| Information Needed | Active status, distance, capacity, and current load, followed by service fit and accessibility information. |
+| Next Action | Confirm service eligibility, availability, hours, accessibility, and urgency before recommending a site. |
 | What You Will Do | Inspect current load and calculate distance from a student to service sites. |
 | Database Capability | Oracle Spatial, points, and spatial distance. |
-| Outcome | Routing decisions can use governed location and capacity evidence. |
+| Outcome | Routing review can begin with governed location and capacity information before staff confirm the remaining service requirements. |
 
 **Persona focus:** You balance proximity with service capacity; the nearest site is not automatically the best option if it is overloaded.
 
@@ -148,6 +151,17 @@ Estimated Time: **12 minutes**
     ~~~
 
     </details>
+
+## Business outcome checkpoint
+
+The spatial query identifies nearby active sites, and the capacity condition removes a currently overloaded option. This is an initial planning screen rather than a complete routing decision because the query does not verify service eligibility, appointment availability, operating hours, accessibility, or urgency.
+
+- **Demonstrates:** Oracle Spatial can combine calculated distance with current site-load information in one review query.
+- **Supports:** Faster narrowing of service-site candidates before detailed routing checks.
+- **Candidate indicators:** Routing time, capacity exceptions, service-site reassignments, travel-distance exceptions, and accessibility exceptions.
+- **Requires validation:** Location accuracy, load freshness, service fit, operating hours, accessibility, eligibility, urgency rules, and the institution's routing policy.
+
+After reviewing current service-site choices, Lab 7 looks ahead to services whose predicted demand or model disagreement may require planning attention.
 
 ## Acknowledgements
 

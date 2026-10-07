@@ -2,14 +2,16 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on finance exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each finance query runs as the workshop user against the prepared finance schema.
+Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database** instance, and prepare SQL Worksheet for the hands-on finance exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each finance query runs as the workshop user against the prepared finance schema.
+
+Jordan, Seer Bank's database administrator, has prepared this shared environment for the team. You start here so every later question uses the same shared finance records and database tools.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
 
-> - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
+> - **Database Actions** is the browser-based Oracle AI Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
 >
-> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect application screens in this workshop to the rows returned by SQL.
 >
 > - `LLUSER` is the workshop database user and schema owner for the hands-on finance objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
 
@@ -25,6 +27,8 @@ In this lab, you will:
 - Use the reservation login information to open Database Actions.
 - Confirm that SQL Worksheet is ready for the finance schema.
 - Confirm that SQL Worksheet is connected as the workshop schema user.
+
+Before you begin, use a browser that allows downloads and pop-up windows for the LiveLabs environment. Later labs use downloaded notebooks and open Graph Studio, Spatial Studio, and Oracle Machine Learning from Database Actions.
 
 ## Task 1: Launch the LiveLabs environment
 
@@ -74,7 +78,7 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
 
 6. Use the same SQL Worksheet pattern throughout the workshop.
 
-    ![Annotated SQL Worksheet showing the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation-retail.svg " ")
+    ![Annotated SQL Worksheet showing finance objects, the LLUSER dropdown, SQL editor, Run button, Navigator, and Query Result panel](images/sql-worksheet-orientation-finance.svg " ")
 
     *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
 
@@ -111,4 +115,4 @@ You can now continue to the finance labs.
 
 * **Author** - Pat Shepherd, Senior Principal Database Product Manager
 * **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, May 2026
+* **Last Updated By/Date** - Oracle Database Product Management, September 2026

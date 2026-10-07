@@ -1,0 +1,64 @@
+e":
+          - generic: Hide Code
+          - generic: 
+      - generic "Visibility":
+        - button "Visibility":
+          - generic: Visibility
+          - generic: 
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+          - generic: 
+          - text:          
+      - text: 
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: CREATE PROPERTY GRAPH airtime_graph
+        - generic: VERTEX TABLES (
+        - generic: prepaid_accounts KEY (account_id)
+        - generic: LABEL account PROPERTIES (account_id, subscriber_id, name)
+        - generic: )
+        - generic: EDGE TABLES (
+        - generic: airtime_transfers KEY (transfer_id)
+        - generic: SOURCE KEY (from_account_id) REFERENCES prepaid_accounts (account_id)
+        - generic: DESTINATION KEY (to_account_id) REFERENCES prepaid_accounts (account_id)
+        - generic: LABEL TRANSFERS
+        - generic: PROPERTIES (transfer_id, from_account_id, to_account_id, minutes, description)
+        - generic: ) OPTIONS (PG_PGQL);
+        - generic: "%pgql-rdbms"
+      - text: 
+      - tablist "Visualization selection":
+        - tab "Text" [selected]:
+          - img "Text": 
+      - text: 
+      - separator
+      - generic "Settings":
+        - button "Settings":
+          - generic: 
+          - generic: Settings
+      - generic "Download As":
+        - button "Download As":
+          - generic: 
+          - generic: Download As
+          - generic: 
+          - text: 
+      - generic: Graph successfully created
+      - generic: 1s 591ms @ a few seconds ago
+    - generic "Paragraph container"
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "%pgql-pgx"
+        - generic: /* Query and visualize 100 elements (nodes and edges) of AIRTIME_GRAPH */
+        - generic: SELECT *
+        - generic: FROM MATCH (s)-[t]->(d) ON airtime_graph
+        - generic: LIMIT 100
+    - generic "Paragraph container"
+    - generic "Paragraph container":
+      - code:
+        - textbox "Editor content"
+        - textbox
+        - generic: "
