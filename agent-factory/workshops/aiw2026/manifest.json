@@ -3,10 +3,10 @@
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
     {
-      "title": "Lab 1: Introduction to Oracle AI Database Private Agent Factory",
-      "description": "Review the path to agentic AI and the principles that guide Agent Factory.",
+      "title": "Lab 1: Overview of Oracle AI Database Private Agent Factory",
+      "description": "Explore pre-built agents, templates, Agent Builder, utilities, and shared product resources.",
       "type": "livelabs",
-      "filename": "../../introduction/introduction.md"
+      "filename": "../../paf-overview/paf-overview.md"
     },
     {
       "title": "Lab 2: Create Knowledge Agent (KA) and Data Analysis (DA) Agents",
