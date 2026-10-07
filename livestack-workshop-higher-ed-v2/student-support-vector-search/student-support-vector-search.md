@@ -1,21 +1,35 @@
 # Find Support Resources with AI Vector Search
 
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
+
 ## Introduction
 
 ![Gilly Bourne introduces this Higher Education lab](images/gilly.png)
 
-Gilly Bourne is an AI engineer at Seer Higher Education. The advising team wants to find useful campus services from a student's request, even when the request uses different wording from the resource catalog.
+Gilly Bourne is an AI engineer at Seer Higher Education. The advising team wants
+to find useful campus services from a student's request, even when the request
+uses different wording from the resource catalog.
 
-Gilly uses an embedding model to turn support-resource descriptions into vectors. Oracle AI Database can compare the meaning of a request with those vectors, then use SQL to connect the best matches to open requests and program details.
+Gilly uses an embedding model to turn support-resource descriptions into
+vectors. Oracle AI Database can compare the meaning of a request with those
+vectors, then use SQL to connect the best matches to open requests and program
+details.
 
 ![How a plain-language request is matched to campus support resources](images/support-vector-search.svg)
 
 ### Objectives
 
-- Check for an in-database embedding model.
-- Create vectors from support-resource text.
-- Rank resources by semantic similarity to a support question.
-- Join the matches to open request and program details.
+* Check for an in-database embedding model.
+* Create vectors from support-resource text.
+* Rank resources by semantic similarity to a support question.
+* Join the matches to open request and program details.
 
 Estimated Time: **10 minutes**
 
@@ -34,7 +48,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Check the embedding model
 
-1. List the embedding models available to the database:
+1. List the embedding models accessible to the workshop account:
 
     ```sql
     <copy>
@@ -50,11 +64,14 @@ Estimated Time: **10 minutes**
 
     ![SQL Worksheet showing the available embedding model](images/embedding-model-result.jpg)
 
-The prepared workshop environment should include `ADMIN.ALL_MINILM_L12_V2`, an ONNX embedding model that returns 384-dimensional vectors.
+The prepared workshop environment should include `ADMIN.ALL_MINILM_L12_V2`, an
+ONNX embedding model that returns 384-dimensional vectors.
 
 ## Task 2: Choose text for the embedding
 
-Gilly embeds each resource's name, category, and description. These fields describe the service; operational values such as appointment counts are better left as relational columns.
+Gilly embeds each resource's name, category, and description. These fields
+describe the service; operational values such as appointment counts are better
+left as relational columns.
 
 ```sql
 <copy>
@@ -69,6 +86,8 @@ FETCH FIRST 5 ROWS ONLY;
 </copy>
 ```
 
+  ![Lab 3 Task 2](images/l3-t2.png)
+
 ## Task 3: Create resource vectors in the database
 
 1. Add a vector column for the 384-dimensional model output:
@@ -80,7 +99,8 @@ FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-2. Create a vector for each active resource:
+2. Create a vector for each active resource and commit the update by using **Run
+    Script (F5)**:
 
     ```sql
     <copy>
@@ -109,12 +129,16 @@ FETCH FIRST 5 ROWS ONLY;
     ORDER BY resource_id;
     </copy>
     ```
+  ![Lab 3 Task 3](images/l3-t3.png)
 
-Each vector stays beside the resource record it describes. The resource text does not need to be copied to a separate vector database.
+Each vector stays beside the resource record it describes. The resource text
+does not need to be copied to a separate vector database.
 
 ## Task 4: Rank resources for a plain-language question
 
-Gilly asks for help finding tutoring and quiet study space near the science buildings. The database embeds the question at run time and compares it with the stored resource vectors.
+Gilly asks for help finding tutoring and quiet study space near the science
+buildings. The database embeds the question at run time and compares it with the
+stored resource vectors.
 
 ```sql
 <copy>
@@ -138,11 +162,17 @@ FETCH FIRST 5 ROWS ONLY;
 
 ![SQL Worksheet showing ranked campus support resources and similarity scores](images/vector-similarity-result.jpg)
 
-A higher similarity score means the resource text is closer in meaning to the question. It does not establish that a student is eligible for a service.
+A higher similarity score means the resource text is closer in meaning to the
+question. This query does not filter by campus or calculate distance to the
+science buildings. Check the resource’s location, availability, and eligibility
+requirements before recommending it.
 
 ## Task 5: Connect the matches to open requests
 
-The service team needs request context as well as a ranked resource. `STUDENT_SUPPORT_CASES_V` includes a recommended resource identifier and uses a pseudonymous student key.
+The service team also needs the open requests already linked to each resource.
+`STUDENT_SUPPORT_CASES_V` supplies the stored recommended-resource identifier
+and a synthetic student key. The join uses that existing recommendation; it does
+not choose a new resource for each request.
 
 ```sql
 <copy>
@@ -179,12 +209,16 @@ ORDER BY rr.similarity DESC,
 FETCH FIRST 15 ROWS ONLY;
 </copy>
 ```
+  ![Lab 3 Task 5](images/l3-t3.png)
 
 ## Conclusion: Search by meaning, then review the records
 
-Gilly used an in-database model to find resources by meaning. SQL then connected the ranked service matches to open requests and program context. Staff can review the result and decide what follow-up is appropriate.
+Gilly used an in-database model to find resources by meaning. SQL then connected
+the ranked service matches to open requests and program context. Staff can
+review the result and decide what follow-up is appropriate.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
