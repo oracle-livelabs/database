@@ -24,7 +24,7 @@
     },
     {
       "title": "Lab 3: Find Support Resources with AI Vector Search",
-      "description": "Use in-database embeddings to find requests and services by meaning.",
+      "description": "Rank support resources by meaning and join them to linked open requests.",
       "filename": "../../student-support-vector-search/student-support-vector-search.md"
     },
     {
@@ -39,7 +39,7 @@
     },
     {
       "title": "Lab 6: Forecast Student-Support Demand with Oracle Machine Learning",
-      "description": "Train and score an in-database model that flags potential service-demand surges.",
+      "description": "Train a classifier on synthetic workload examples and score an illustrative next-term scenario.",
       "filename": "../../student-support-oml/student-support-oml.md"
     },
     {
