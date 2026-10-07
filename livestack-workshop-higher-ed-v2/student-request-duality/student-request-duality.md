@@ -6,8 +6,7 @@
 
 Thomas Brune builds a web application for Seer Higher Education's advising and support teams. The application needs request details in a document shape, while the database team needs keys, constraints, SQL, and transaction controls.
 
-Thomas and Jessica compare three patterns: a JSON column for optional application settings, a JSON Collection Table for independently managed documents, and a JSON Relational Duality View over normalized request rows. The application can work with JSON without keeping a second copy of the student-support records.
-
+Thomas and Jessica compare three patterns: a JSON column for application settings, a JSON Collection Table for independently stored advising notes, and a JSON Relational Duality View over existing request rows. The collection stores a separate sample document; the duality view exposes the relational request without copying it.
 ![Three ways to use JSON with student-support records](images/request-json-model.svg)
 
 ### Objectives
@@ -148,11 +147,11 @@ The view definition determines which document changes can be written back to rel
 
     ![SQL Worksheet showing the duality view write permissions](images/duality-write-contract.jpg)
 
-2. Review the definition in the appendix. It allows request and update inserts or updates. The application can use the document interface while the database writes the corresponding normalized rows.
+2. Review the definition in the appendix. It allows inserts and updates to request rows and their nested request-update rows. The application can use the document interface while the database writes the corresponding normalized rows.
 
 ## Task 5: Create and update a support request through JSON
 
-1. Insert a synthetic request document if request `990101` is not already present:
+1. Insert a synthetic request document if request `990101` is not already present by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -192,7 +191,7 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
-3. Update the request status through the duality view:
+3. Update the request status through the duality view by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -204,7 +203,7 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
-4. Check the updated document and relational row:
+4. Run both queries with **Run Script (F5)**. Confirm that the document and relational row both show `IN_PROGRESS`:
 
     ```sql
     <copy>
@@ -218,7 +217,7 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
-The document update is reflected in the relational table because both representations refer to the same data.
+Both results show `IN_PROGRESS` because the document and relational query use the same request row.
 
 ## Task 6: Project JSON fields with SQL
 
@@ -275,4 +274,5 @@ FROM student_support_requests r WITH INSERT UPDATE;
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

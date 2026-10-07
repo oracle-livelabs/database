@@ -72,10 +72,21 @@ The numeric and category values are model features. `DEMAND_SURGE_LABEL` is the 
 
 ## Task 2: Compare models with AutoML (optional)
 
-AutoML can compare algorithms and show how each performs against the two workload labels. It can take several minutes, so continue to Task 3 if you want to focus on creating and using the model in SQL.
+Otto uses Oracle Machine Learning AutoML to compare candidate models and see how well they identify the two support-demand labels.
 
-1. Open **Machine Learning** from Database Actions, then select **AutoML**.
-2. Create an experiment with these settings:
+AutoML may take several minutes. Skip to Task 3 to create the workshop’s example model directly in SQL Worksheet.
+
+1. Open **Machine Learning** from Database Actions.
+
+    Sign in with the credentials in **View Login Info**.
+
+    ![Lab 6 Task 2](images/oml.png)
+
+2. Select **AutoML**.
+
+    ![Lab 6 Task 2](images/automl.png)
+
+3. Create a new experiment with these settings:
 
     | Setting | Value |
     | --- | --- |
@@ -85,14 +96,38 @@ AutoML can compare algorithms and show how each performs against the two workloa
     | Prediction type | `Classification` |
     | Case ID | `COHORT_TERM_ID` |
 
-3. Start the experiment and review the leaderboard and confusion matrix. Choose a candidate that recognizes both `SURGE` and `STABLE` rows; a single overall score does not show whether both labels are being identified.
-4. Review feature impact as a diagnostic. Feature impact shows which values influenced the model; it does not prove that a feature causes a change in demand.
+    ![Lab 6 Task 2](images/data-source-one.png)
 
-This task is optional. The SQL steps use the Generalized Linear Model selected for the workshop.
+    **Note:** The **Predict**, **Prediction Type**, and **Case ID** fields become available after you enter a data source.
 
+    To select the data source:
+
+1. Enter `Student Support Demand` in the **Name** field.
+2. Select the magnifying-glass icon beside **Data Source**.
+3. In the **Select Table** window, select `LLUSER` from the **Schema** list.
+4. Select `STUDENT_SUPPORT_DEMAND_TRAINING_V` from the **Table** list.
+5. Select **OK**.
+
+    Select `DEMAND_SURGE_LABEL` for **Predict**, `Classification` for **Prediction Type**, and `COHORT_TERM_ID` for **Case ID**.
+
+    ![Lab 6 Task 2](images/data-source-two.png)
+
+4. Choose **Start → Faster Results** and wait for the leaderboard. Runtime varies; the leaderboard may take several minutes.
+
+5. Review the leaderboard and model details.
+
+![Lab 6 Task 2](images/leaderboard.png)
+
+Open candidate model details and inspect the confusion matrix. Check whether the model identifies both `SURGE` and `STABLE` rows. A model that predicts only `STABLE` cannot identify potential workload surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a candidate.
+
+The training rows are synthetic and aggregated by program, campus, and term. Scores on this data do not establish accuracy on future terms, and the rows do not represent individual students.
+
+Review feature impact as a diagnostic. It shows which values influenced predictions; it does not prove that a feature causes a change in demand.
+
+Task 3 trains the workshop’s Generalized Linear Model separately in SQL; it does not import an AutoML model.
 ## Task 3: Create the model in SQL
 
-Create a settings table and train a database model from the prepared view.
+Create a settings table and train a database model from the prepared view by using **Run Script (F5)**:
 
 ```sql
 <copy>
@@ -146,7 +181,7 @@ The expected mining function is `CLASSIFICATION`, and the algorithm is `GENERALI
 
 The separate scoring table contains the model inputs for a future term and does not contain the training label.
 
-1. Create a scoring table and seed it from the prepared aggregated data:
+1. Create a scoring table and seed it from the prepared aggregated data by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -251,4 +286,5 @@ Otto reviewed aggregated training rows, optionally compared candidates with Auto
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

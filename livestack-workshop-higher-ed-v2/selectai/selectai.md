@@ -13,19 +13,19 @@ Jessica has prepared the `GENAI` Select AI profile for a small set of aggregate 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, and generated SQL</strong></summary>
 
-> - **Select AI** lets a database user ask natural-language questions about approved database objects.
-> - An **AI profile** identifies the provider and the schema objects available for those questions.
-> - **Generated SQL** is the statement Select AI creates from a question. Review it before relying on its result.
+> * **Select AI** lets a database user ask natural-language questions about approved database objects.
+> * An **AI profile** identifies the provider and the schema objects available for those questions.
+> * **Generated SQL** is the statement Select AI creates from a question. Review it before relying on its result.
 
 </details>
 
 ### Objectives
 
-- Check the Select AI profile available to the workshop schema.
-- Limit the profile to approved aggregate views.
-- Generate SQL from a Higher Education operations question and inspect it.
-- Run and refine a question with `DBMS_CLOUD_AI.GENERATE`.
-- Explain why a generated answer still needs review.
+* Check the Select AI profile available to the workshop schema.
+* Limit the profile to approved aggregate views.
+* Generate SQL from a Higher Education operations question and inspect it.
+* Run and refine a question with `DBMS_CLOUD_AI.GENERATE`.
+* Explain why a generated answer still needs review.
 
 Estimated Time: **10 minutes**
 
@@ -119,12 +119,13 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS generated_sql;
 </copy>
 ```
+![Lab 7 Task 3](images/l7-t3.png)
 
 Check that the SQL uses the approved aggregate view, filters open tutoring requests for the intended term, and returns the requested columns. A valid-looking query can still misread the question.
 
 ## Task 4: Run the reviewed question
 
-After reviewing the generated SQL, Nina asks Select AI to run the same question:
+To execute the exact statement you reviewed, copy the `showsql` output into SQL Worksheet and run that statement. The `runsql` example below submits the question again for SQL generation and execution; do not assume it executes the identical statement you inspected.
 
 ```sql
 <copy>
@@ -135,8 +136,9 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS answer;
 </copy>
 ```
+![Lab 7 Task 4](images/l7-t4.png)
 
-Compare the answer with a direct SQL result from the approved view:
+Compare the answer with the direct SQL below. This check lists up to five program–campus–term groups and does not filter by term. In the prepared requests, the populated term is `2026FA`; confirm the intended term before interpreting “this term.” Completing the JSON insert also creates a request with no term value, which can add a separate summary row.
 
 ```sql
 <copy>
@@ -149,8 +151,9 @@ ORDER BY open_tutoring_requests DESC, program_name
 FETCH FIRST 5 ROWS ONLY;
 </copy>
 ```
+![Lab 7 Task 4](images/l7-t4-s2.png)
 
-The database result is the evidence Nina can inspect. The generated response is useful only when it answers the question and matches the view data.
+Compare the returned campus, program, term, and request counts with the view data. Check both the numbers and whether the SQL answers Nina’s question.
 
 ## Task 5: Refine the question
 
@@ -165,8 +168,9 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS generated_sql;
 </copy>
 ```
+![Lab 7 Task 5](images/l7-t5-s1.png)
 
-Review the generated SQL, then run the question with `runsql`:
+Review the generated SQL. Run that exact statement in SQL Worksheet if you need to preserve the reviewed query. The following `runsql` call submits the question again for generation and execution:
 
 ```sql
 <copy>
@@ -177,12 +181,14 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS answer;
 </copy>
 ```
+![Lab 7 Task 5](images/l7-t5-s2.png)
 
 A more specific question names the campus, threshold, and fields Nina needs. She still checks the SQL and compares the result with `CAMPUS_SUPPORT_CAPACITY_V`.
 
 ## Task 6: Explain the result
 
-Select AI can ask the configured provider to summarize a query result. Use this only for data approved for that provider.
+Select AI can ask the configured provider to summarize a query result. Use this
+only for data approved for that provider.
 
 ```sql
 <copy>
@@ -193,8 +199,9 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS explanation;
 </copy>
 ```
+![Lab 7 Task 6](images/l7-t6.png)
 
-Check the explanation against the SQL result. The narrative is a convenience; the database rows and reviewed SQL remain the evidence.
+Compare the narrative’s counts, campuses, programs, and term with the query results. Correct or discard any statement that the returned rows do not support.
 
 ## Conclusion: Ask, inspect, and refine
 
@@ -203,4 +210,5 @@ Nina used Select AI to turn an operations question into SQL, inspect the stateme
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

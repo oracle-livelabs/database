@@ -14,9 +14,9 @@ In this lab, you build the query behind a student-support operations view. It co
 
 ### Objectives
 
-- Explain convergence through a student-support operations question.
-- Run one query that combines relational, vector, JSON, and spatial data.
-- Change the search phrase and compare the requests and resources that rank highest.
+* Explain convergence through a student-support operations question.
+* Run one query that combines relational, vector, JSON, and spatial data.
+* Change the search phrase and compare the requests that rank highest.
 
 Estimated Time: **10 minutes**
 
@@ -35,7 +35,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Run a converged support query
 
-The query ranks open requests against a plain-language support need. It adds the request's preferred contact details from JSON and finds the nearest active support center to the North Quad service area.
+The query ranks open requests against a plain-language support need. It adds the request's preferred contact details from JSON and finds the nearest active support center to the North Quad service area. The center is selected for the area, not separately for each request.
 
 1. Run the query:
 
@@ -161,13 +161,14 @@ The query ranks open requests against a plain-language support need. It adds the
 
     ![SQL Worksheet showing the converged student-support query and two matching requests](images/converged-query-result.jpg)
 
-2. Review the result. Each row combines the request's relational fields, the meaning match, application preferences from JSON, and the closest support center for the campus area. Similarity helps sort the queue; it does not decide how a student should be treated.
+2. Review the result. Each row combines request fields, text similarity, JSON contact preferences, and a center selected for North Quad. The query does not match a center’s service type to the request. In the prepared data, both Harbor centers are inside North Quad, so their distance is zero and the center identifier breaks the tie. Review service fit and capacity before recommending a center.
 
 The source records remain in Oracle AI Database. The team can inspect the request and supporting context without reconciling a separate search index, document store, and campus map.
 
 ## Task 2: Change the support question
 
-The first query searches for general tutoring and advising help. Change the text passed to `VECTOR_EMBEDDING` to:
+The first query searches for general tutoring and advising help. Change the text
+passed to `VECTOR_EMBEDDING` to:
 
 ```text
 quiet study space and peer tutoring near the science buildings
@@ -177,7 +178,7 @@ Run the query again and compare the top results.
 
 1. Which requests move up the list?
 2. Which requests remain high priority even when their descriptions are less similar to the new phrase?
-3. Does the nearest center have enough available capacity for the area?
+3. What does the selected center’s current load tell you, and what additional demand and availability information would you need before routing a request?
 
 Only the semantic question changed. The relational, JSON, and spatial parts continue to use the same governed records.
 
@@ -192,4 +193,5 @@ Next, Thomas compares JSON columns, JSON collections, and JSON Relational Dualit
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

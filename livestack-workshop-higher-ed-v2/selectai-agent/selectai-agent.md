@@ -13,20 +13,22 @@ Jessica gives the agent one approved tool: a SQL tool that uses the `GENAI` prof
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
 
-> - An **agent** follows a configured role when it handles a request.
-> - A **tool** is a capability the agent is allowed to call. This lab uses one SQL tool.
-> - A **task** tells the agent what to do and which tools it may use.
-> - A **team** connects an agent and task so a SQL session or application can run them together.
+> * An **agent** follows a configured role when it handles a request.
+> * A **tool** is a capability the agent is allowed to call. This lab uses one
+>   SQL tool.
+> * A **task** tells the agent what to do and which tools it may use.
+> * A **team** connects an agent and task so a SQL session or application can
+>   run them together.
 
 </details>
 
 ### Objectives
 
-- Confirm that the `GENAI` profile and its view allow-list are available.
-- Register a read-only SQL tool.
-- Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
-- Run an aggregate Higher Education operations question.
-- Review team and tool history.
+* Confirm that the `GENAI` profile and its view allow-list are available.
+* Register a read-only SQL tool.
+* Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
+* Run an aggregate Higher Education operations question.
+* Review team and tool history.
 
 Estimated Time: **15 minutes**
 
@@ -56,7 +58,7 @@ Estimated Time: **15 minutes**
     </copy>
     ```
 
-2. Review its object list:
+2. Review its object list by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -131,7 +133,7 @@ The tool provides a named query capability. The profile's object list guides SQL
     </copy>
     ```
 
-2. Create a task that invokes the approved tool once:
+2. Create a task that instructs the agent to invoke the approved tool once. Check the tool history after the run to confirm what it did:
 
     ```sql
     <copy>
@@ -214,15 +216,19 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     </copy>
     ```
 
-The history should show `NINA_STUDENT_SUPPORT_SQL_TOOL`. This lets Nina and Jessica review which tool the agent used instead of treating its answer as an unexplained chat response.
+The tool history should include `NINA_STUDENT_SUPPORT_SQL_TOOL`. Match the agent, task, and timestamps to the run you just started; these queries return recent activity without filtering to this team. Check the team’s `STATE` before treating the run as successful.
 
 ## Conclusion: Give the agent one controlled way to work
 
-Nina's team combines a defined role, a narrow task, an approved SQL tool, and execution history. The profile, object list, and database privileges help keep the data boundary clear. The example stays read-only and focused on service planning.
+Nina's team combines a defined role, a narrow task, an approved SQL tool, and
+execution history. The profile, object list, and database privileges help keep
+the data boundary clear. The example stays read-only and focused on service
+planning.
 
 ## Appendix: Reset the workshop agent objects
 
-Run this block only if you want to remove the four objects created by this lab before recreating them. It does not remove workshop data or profile settings.
+Run this block only if you want to remove the four objects created by this lab
+before recreating them. It does not remove workshop data or profile settings.
 
 ```sql
 <copy>
@@ -239,4 +245,5 @@ END;
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

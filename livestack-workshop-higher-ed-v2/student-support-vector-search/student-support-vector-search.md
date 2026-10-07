@@ -12,10 +12,10 @@ Gilly uses an embedding model to turn support-resource descriptions into vectors
 
 ### Objectives
 
-- Check for an in-database embedding model.
-- Create vectors from support-resource text.
-- Rank resources by semantic similarity to a support question.
-- Join the matches to open request and program details.
+* Check for an in-database embedding model.
+* Create vectors from support-resource text.
+* Rank resources by semantic similarity to a support question.
+* Join the matches to open request and program details.
 
 Estimated Time: **10 minutes**
 
@@ -69,6 +69,8 @@ FETCH FIRST 5 ROWS ONLY;
 </copy>
 ```
 
+  ![Lab 3 Task 2](images/l3-t2.png)
+
 ## Task 3: Create resource vectors in the database
 
 1. Add a vector column for the 384-dimensional model output:
@@ -80,7 +82,7 @@ FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
 
-2. Create a vector for each active resource:
+2. Create a vector for each active resource and commit the update by using **Run Script (F5)**:
 
     ```sql
     <copy>
@@ -109,6 +111,7 @@ FETCH FIRST 5 ROWS ONLY;
     ORDER BY resource_id;
     </copy>
     ```
+  ![Lab 3 Task 3](images/l3-t3.png)
 
 Each vector stays beside the resource record it describes. The resource text does not need to be copied to a separate vector database.
 
@@ -138,11 +141,11 @@ FETCH FIRST 5 ROWS ONLY;
 
 ![SQL Worksheet showing ranked campus support resources and similarity scores](images/vector-similarity-result.jpg)
 
-A higher similarity score means the resource text is closer in meaning to the question. It does not establish that a student is eligible for a service.
+A higher similarity score means the resource text is closer in meaning to the question. This query does not filter by campus or calculate distance to the science buildings. Check the resource’s location, availability, and eligibility requirements before recommending it.
 
 ## Task 5: Connect the matches to open requests
 
-The service team needs request context as well as a ranked resource. `STUDENT_SUPPORT_CASES_V` includes a recommended resource identifier and uses a pseudonymous student key.
+The service team also needs the open requests already linked to each resource. `STUDENT_SUPPORT_CASES_V` supplies the stored recommended-resource identifier and a synthetic student key. The join uses that existing recommendation; it does not choose a new resource for each request.
 
 ```sql
 <copy>
@@ -179,6 +182,7 @@ ORDER BY rr.similarity DESC,
 FETCH FIRST 15 ROWS ONLY;
 </copy>
 ```
+  ![Lab 3 Task 5](images/l3-t3.png)
 
 ## Conclusion: Search by meaning, then review the records
 
@@ -187,4 +191,5 @@ Gilly used an in-database model to find resources by meaning. SQL then connected
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

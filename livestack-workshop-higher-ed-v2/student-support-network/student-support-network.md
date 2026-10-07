@@ -13,21 +13,24 @@ The graph is a projection of synthetic student, course, advisor, and support-ser
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL/PGQ</strong></summary>
 
-> - A **property graph** represents entities and the relationships between them.
-> - A **vertex** is a graph node, such as a student, course section, advisor, or campus service.
-> - An **edge** connects two vertices and can carry properties such as relationship type, academic term, or evidence score.
-> - A **hop** is one step across an edge. A multi-hop path follows a chain of relationships.
-> - **SQL Property Graph Queries (SQL/PGQ)** describe graph patterns in SQL and return ordinary SQL result columns.
+> * A **property graph** represents entities and the relationships between them.
+> * A **vertex** is a graph node, such as a student, course section, advisor, or
+>   campus service.
+> * An **edge** connects two vertices and can carry properties such as
+>   relationship type, academic term, or evidence score.
+> * A **hop** is one step across an edge. A multi-hop path follows a chain of relationships.
+> * **SQL Property Graph Queries (SQL/PGQ)** describe graph patterns in SQL and
+>   return ordinary SQL result columns.
 
 </details>
 
 ### Objectives
 
-- Identify vertices and edges in a student-support property graph.
-- Compare a relational join with a SQL/PGQ pattern.
-- Follow relationships for up to four hops.
-- Find students connected through a course section or support service.
-- Import and run a Graph Studio notebook.
+* Identify vertices and edges in a student-support property graph.
+* Compare a relational join with a SQL/PGQ pattern.
+* Follow relationships for up to four hops.
+* Find students connected through a course section or support service.
+* Import and run a Graph Studio notebook.
 
 Estimated Time: **15 minutes**
 
@@ -66,6 +69,7 @@ WHERE seed.entity_key = 'STU-1001'
 ORDER BY reached.entity_type, reached.entity_key;
 </copy>
 ```
+  ![Lab 4 Task 1](images/l4-t1.png)
 
 This join is clear for one step. Following a path through a course section, another student, and a service requires more joins and aliases. Each additional step makes the query longer.
 
@@ -125,12 +129,13 @@ ORDER BY relationship_hops, path_entity_keys
 FETCH FIRST 25 ROWS ONLY;
 </copy>
 ```
+  ![Lab 4 Task 3](images/l4-t3.png)
 
 A value of `1` means the path contains one relationship. Larger values show additional steps. The path lists the connected entity keys in order. The graph is an operational map of connections; it should not be used to infer a student's academic standing.
 
 ## Task 4: Find students connected through a shared resource
 
-Bob now asks which students connect to the same course section or support service. The pattern begins at one student, follows an edge to a shared entity, and follows another edge back to a second student.
+Bob asks which students have outgoing relationships to the same course section or support service. The pattern matches two student vertices whose edges point to one shared entity.
 
 ```sql
 <copy>
@@ -164,6 +169,7 @@ ORDER BY shared_type, shared_entity, student_a
 FETCH FIRST 25 ROWS ONLY;
 </copy>
 ```
+  ![Lab 4 Task 4](images/l4-t4.png)
 
 A shared course or service can help an advisor plan group support. It does not prove that two students know each other or need the same intervention.
 
@@ -171,8 +177,13 @@ A shared course or service can help an advisor plan group support. It does not p
 
 1. Open **Database Actions** and confirm that the signed-in account is `LLUSER`.
 2. Select **Development**, then **Graph Studio**.
+
+    ![Lab 4 Task 5](images/graph-studio.png)
+
 3. If prompted, sign in with the workshop user and reservation password.
 4. Open **Notebooks**. The landing page also includes graph, template, and job tools.
+
+  ![Lab 4 Task 5](images/notebooks.png)
 
 ## Task 6: Import and run the student-support notebook
 
@@ -180,19 +191,32 @@ The supplied `.dsnb` file contains SQL/PGQ paragraphs and graph visualizations f
 
 1. Download [seer-student-support-network.dsnb](files/seer-student-support-network.dsnb).
 2. In Graph Studio, select **Notebooks**, then **Import**.
+
+    ![Lab 4 Task 6](images/import-notebook.png)
+
 3. Choose the downloaded file and select **Import**.
 4. Open **Student Support Network** and run the first SQL paragraph.
-5. Run the graph visualization paragraph anchored on `STU-1001`, then the service-centered paragraph anchored on `SERVICE-TUTORING-01`.
+5. Run the graph visualization paragraph anchored on `STU-1001`, then the
+    service-centered paragraph anchored on `SERVICE-TUTORING-01`.
 
-Compare the table result with the visualization. Node placement can change between runs; the entity keys and relationship evidence are the details to review.
+  ![Lab 4 Task 6](images/graph-studio-notebook-exercise-three.png)
+
+  ![Lab 4 Task 6](images/graph-studio-notebook-exercise-one.png)
+
+  ![Lab 4 Task 6](images/graph-studio-notebook-exercise-two.png)
+
+
+Compare the table result with the visualization. Node placement can change between runs; compare the entity keys and relationship types.
 
 ## Conclusion: Use graph paths to explore service connections
 
-The relational query reads a direct relationship. SQL/PGQ expresses the multi-step path more directly, and Graph Studio provides a visual view of selected connections. Both approaches use the graph projection backed by the workshop's relational records.
+The relational query reads a direct relationship. SQL/PGQ expresses the multi-step path more directly, and Graph Studio displays selected connections. Both approaches use the graph projection backed by the workshop's relational records.
 
 ## Appendix: Property graph definition
 
-The workshop setup creates this graph over its relational projection. The graph definition maps the entity table to vertices and the link table to directed edges.
+The workshop setup creates this graph over its relational projection. The graph
+definition maps the entity table to vertices and the link table to directed
+edges.
 
 ```sql
 <copy>
@@ -230,4 +254,5 @@ CREATE PROPERTY GRAPH student_support_network
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
