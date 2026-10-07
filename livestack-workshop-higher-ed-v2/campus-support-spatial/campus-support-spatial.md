@@ -102,7 +102,7 @@ The coordinate system and geometry are stored together. Spatial functions can us
 
 2. Review the distance and demand together. A distance of zero means the center is inside or touching the area. `0.005` is the comparison tolerance, and `'unit=KM'` requests kilometers.
 
-3. Change the area name to `Harbor Commons` and run the query again. Compare the closest centers and current loads.
+3. Change the area name to `Harbor Commons` and run the query again. Compare the area demand index as well as center distance and load. In the prepared data, the same two Harbor centers fall inside both areas, so their distance remains zero and their loads do not change.
 
 ## Task 3: Match requests in an area to the closest center
 

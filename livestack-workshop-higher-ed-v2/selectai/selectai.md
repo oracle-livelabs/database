@@ -108,18 +108,17 @@ The profile helps Select AI choose relevant metadata. Database privileges remain
 
 ## Task 3: Ask a question and inspect the SQL
 
-Nina asks which programs have the most open tutoring requests. She starts with `showsql` so she can review the generated statement before it runs.
+Nina asks which programs have open tutoring requests in the workshop's `2026FA` term. She starts with `showsql` so she can review the generated statement before it runs.
 
 ```sql
 <copy>
 SELECT DBMS_CLOUD_AI.GENERATE(
-         prompt       => 'Which five programs have the most open tutoring requests this term? Include the campus, program, term, and request count.',
+         prompt       => 'For term 2026FA, list up to five programs with open tutoring requests using PROGRAM_SUPPORT_OVERVIEW_V. Filter TERM_CODE = ''2026FA'' and OPEN_TUTORING_REQUESTS > 0. Return CAMPUS_NAME, PROGRAM_NAME, TERM_CODE, and OPEN_TUTORING_REQUESTS, ordered by the request count descending.',
          profile_name => 'GENAI',
          action       => 'showsql'
        ) AS generated_sql;
 </copy>
 ```
-![Lab 7 Task 3](images/l7-t3.png)
 
 Check that the SQL uses the approved aggregate view, filters open tutoring requests for the intended term, and returns the requested columns. A valid-looking query can still misread the question.
 
@@ -130,15 +129,14 @@ To execute the exact statement you reviewed, copy the `showsql` output into SQL 
 ```sql
 <copy>
 SELECT DBMS_CLOUD_AI.GENERATE(
-         prompt       => 'Which five programs have the most open tutoring requests this term? Include the campus, program, term, and request count.',
+         prompt       => 'For term 2026FA, list up to five programs with open tutoring requests using PROGRAM_SUPPORT_OVERVIEW_V. Filter TERM_CODE = ''2026FA'' and OPEN_TUTORING_REQUESTS > 0. Return CAMPUS_NAME, PROGRAM_NAME, TERM_CODE, and OPEN_TUTORING_REQUESTS, ordered by the request count descending.',
          profile_name => 'GENAI',
          action       => 'runsql'
        ) AS answer;
 </copy>
 ```
-![Lab 7 Task 4](images/l7-t4.png)
 
-Compare the answer with the direct SQL below. This check lists up to five program–campus–term groups and does not filter by term. In the prepared requests, the populated term is `2026FA`; confirm the intended term before interpreting “this term.” Completing the JSON insert also creates a request with no term value, which can add a separate summary row.
+Compare the answer with the direct SQL below. It applies the same term and positive-request filters as Nina's question. If the prepared data changes, the query may return fewer than five rows.
 
 ```sql
 <copy>
@@ -147,11 +145,14 @@ SELECT campus_name,
        term_code,
        open_tutoring_requests
 FROM program_support_overview_v
+WHERE term_code = '2026FA'
+  AND open_tutoring_requests > 0
 ORDER BY open_tutoring_requests DESC, program_name
 FETCH FIRST 5 ROWS ONLY;
 </copy>
 ```
-![Lab 7 Task 4](images/l7-t4-s2.png)
+
+With the supplied data, the direct query returns two rows: Applied Mathematics at Harbor Campus and Public Policy at Riverside Campus, each with one open tutoring request. Select AI may format those rows differently.
 
 Compare the returned campus, program, term, and request counts with the view data. Check both the numbers and whether the SQL answers Nina’s question.
 
@@ -193,13 +194,12 @@ only for data approved for that provider.
 ```sql
 <copy>
 SELECT DBMS_CLOUD_AI.GENERATE(
-         prompt       => 'Summarize the five programs with the most open tutoring requests this term. State the request count and campus for each program.',
+         prompt       => 'For term 2026FA, summarize up to five programs with at least one open tutoring request using PROGRAM_SUPPORT_OVERVIEW_V. Filter TERM_CODE = ''2026FA'' and OPEN_TUTORING_REQUESTS > 0. State only the program name, campus, and actual open tutoring request count returned by the query; do not mention programs with zero requests.',
          profile_name => 'GENAI',
          action       => 'narrate'
        ) AS explanation;
 </copy>
 ```
-![Lab 7 Task 6](images/l7-t6.png)
 
 Compare the narrative’s counts, campuses, programs, and term with the query results. Correct or discard any statement that the returned rows do not support.
 

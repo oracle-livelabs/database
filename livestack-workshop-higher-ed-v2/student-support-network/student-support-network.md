@@ -131,7 +131,7 @@ FETCH FIRST 25 ROWS ONLY;
 ```
   ![Lab 4 Task 3](images/l4-t3.png)
 
-A value of `1` means the path contains one relationship. Larger values show additional steps. The path lists the connected entity keys in order. The graph is an operational map of connections; it should not be used to infer a student's academic standing.
+A value of `1` means the path contains one relationship. Larger values show additional steps. The path lists the connected entity keys in order. These are walks, so a path can revisit the starting student or another entity. The graph is an operational map of connections; it should not be used to infer a student's academic standing.
 
 ## Task 4: Find students connected through a shared resource
 

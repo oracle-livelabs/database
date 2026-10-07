@@ -68,6 +68,21 @@ Select AI uses an AI profile to identify the AI provider and the database object
     The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If the query shows a different profile name, use that name in the following tasks.
 
 2. Review the profile attributes:
+
+    Set the AI model before asking transportation questions:
+
+    ```sql
+    <copy>
+    BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'GENAI',
+        attribute_name  => 'model',
+        attribute_value => 'xai.grok-4.3'
+      );
+    END;
+    /
+    </copy>
+    ```
   
     ```sql
     <copy>

@@ -176,6 +176,8 @@ quiet study space and peer tutoring near the science buildings
 
 Run the query again and compare the top results.
 
+In the prepared data, requests `9001` and `9002` remain in the same order. Their similarity scores change; the fixed priority and open-day fields do not. A different phrase or dataset may change the order.
+
 1. Which requests move up the list?
 2. Which requests remain high priority even when their descriptions are less similar to the new phrase?
 3. What does the selected center’s current load tell you, and what additional demand and availability information would you need before routing a request?

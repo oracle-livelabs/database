@@ -105,7 +105,21 @@ Gilly decides that one vector per transport service is enough. Each transport se
 
     The combined text gives the model the transport service name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the transport service is.
 
-2. Add a vector column to `TRANSPORT_SERVICES`:
+2. Run the embedding expression as `LLUSER` to confirm the model can read the transport service text:
+
+    ```sql
+    <copy>
+    SELECT service_id,
+           VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING
+             service_name || '. Category: ' || category || '. Subcategory: ' || subcategory AS DATA)
+    FROM transport_services;
+    COMMIT;
+    </copy>
+    ```
+
+    The query should return one vector for each transport service. The `COMMIT` does not change this read-only result.
+
+3. Add a vector column to `TRANSPORT_SERVICES`:
 
     ```sql
     <copy>
@@ -115,7 +129,7 @@ Gilly decides that one vector per transport service is enough. Each transport se
 
     The column has 384 dimensions because `ALL_MINILM_L12_V2` produces 384-dimensional vectors.
 
-3. Create the transport service vectors inside Oracle Database:
+4. Create the transport service vectors inside Oracle Database:
 
     ```sql
     <copy>
@@ -132,7 +146,7 @@ Gilly decides that one vector per transport service is enough. Each transport se
 
     The model reads the text in each row and writes the vector back to that same row. No transport service text leaves the database.
 
-4. Verify the new column and its data:
+5. Verify the new column and its data:
 
     ```sql
     <copy>

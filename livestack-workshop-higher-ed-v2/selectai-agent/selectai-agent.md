@@ -79,22 +79,29 @@ Estimated Time: **15 minutes**
     <copy>
     SELECT agent_name, status
     FROM user_ai_agents
+    WHERE agent_name LIKE 'NINA_STUDENT_SUPPORT_%'
     ORDER BY agent_name;
     </copy>
     ```
 
-The lab objects begin with `NINA_STUDENT_SUPPORT_`. If you already created them, use the optional reset appendix before recreating them.
+On your first pass through this lab, **No data found** is expected because you create Nina’s agent in Task 3. If `NINA_STUDENT_SUPPORT_AGENT` already exists, use the optional reset appendix before recreating the lab objects.
 
 ## Task 2: Register the approved SQL tool
 
-1. Create a SQL tool that uses the `GENAI` profile:
+1. Set the model used by Nina’s agent before registering the SQL tool. Then create the tool against the existing `GENAI` profile:
 
     ```sql
     <copy>
     BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'GENAI',
+        attribute_name  => 'model',
+        attribute_value => 'xai.grok-4.3'
+      );
+
       DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'NINA_STUDENT_SUPPORT_SQL_TOOL',
-        attributes  => '{"tool_type":"SQL","tool_params":{"profile_name":"GENAI"}}',
+        attributes  => '{"tool_type":"SQL","tool_params":{"profile_name":"GENAI"},"instruction":"Use the runsql action to execute a read-only query against the approved summary views. Return the actual rows. If SQL fails or returns no rows, report that result; never supply example or invented values."}',
         description => 'Read-only SQL access to approved student-support summary views'
       );
     END;
@@ -102,7 +109,22 @@ The lab objects begin with `NINA_STUDENT_SUPPORT_`. If you already created them,
     </copy>
     ```
 
-2. Confirm the tool definition:
+2. Confirm the model:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    WHERE profile_name = 'GENAI'
+      AND attribute_name = 'model';
+    </copy>
+    ```
+
+    The model value should be `xai.grok-4.3` before you run the team.
+
+3. Confirm the tool definition:
 
     ```sql
     <copy>
@@ -125,7 +147,7 @@ The tool provides a named query capability. The profile's object list guides SQL
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
         agent_name  => 'NINA_STUDENT_SUPPORT_AGENT',
-        attributes  => '{"profile_name":"GENAI","role":"You are Nina Patel''s read-only student-support operations assistant at Seer Higher Education. Use only the approved SQL tool and database results. Answer questions about aggregate campus service demand, program workload, and course-section capacity. Do not make admissions, disciplinary, eligibility, or individual academic outcome decisions. Do not invent values or change database records."}',
+        attributes  => '{"profile_name":"GENAI","role":"You are Nina Patel''s read-only student-support operations assistant at Seer Higher Education. Use only the approved SQL tool and actual database rows. Answer questions about aggregate campus service demand, program workload, and course-section capacity. If the tool fails or returns no rows, say so. Do not make admissions, disciplinary, eligibility, or individual academic outcome decisions. Do not invent values or change database records."}',
         description => 'Read-only student-support operations assistant'
       );
     END;
@@ -140,7 +162,7 @@ The tool provides a named query capability. The profile's object list guides SQL
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_TASK(
         task_name  => 'NINA_STUDENT_SUPPORT_TASK',
-        attributes => '{"instruction":"Answer this student-support operations question: {query}. Use NINA_STUDENT_SUPPORT_SQL_TOOL once to retrieve aggregate data. Return a concise answer grounded in the tool result. Do not repeat the same tool call. Do not make changes to database records or decisions about individual students.","tools":["NINA_STUDENT_SUPPORT_SQL_TOOL"],"enable_human_tool":"false"}',
+        attributes => '{"instruction":"Answer this student-support operations question: {query}. Use NINA_STUDENT_SUPPORT_SQL_TOOL with runsql once to retrieve aggregate rows. Return only values present in the tool output. If the tool fails or provides no rows, state that no verified answer is available. Do not repeat the tool call, invent values, change records, or decide outcomes for individual students.","tools":["NINA_STUDENT_SUPPORT_SQL_TOOL"],"enable_human_tool":"false"}',
         description => 'Answer read-only program and campus capacity questions'
       );
     END;
@@ -167,19 +189,39 @@ The team is the runnable unit. It connects Nina's assistant, task instructions, 
 
 ## Task 4: Run an operations question
 
-Ask the team for an aggregate service-planning result:
+1. Run this SQL first to see the database answer. The workshop seed data has fewer than five programs with open tutoring requests; return only the rows that exist.
 
-```sql
-<copy>
-SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(
-         team_name   => 'NINA_STUDENT_SUPPORT_TEAM',
-         user_prompt => 'Which five programs have the most open tutoring requests this term? Include the campus, request count, and relevant support-center capacity. Do not include student names.',
-         params      => '{"conversation_id":"' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '"}'
-       ) AS agent_answer;
-</copy>
-```
+    ```sql
+    <copy>
+    SELECT p.program_name,
+           p.campus_name,
+           p.open_tutoring_requests,
+           c.center_name,
+           c.capacity_visits_per_week
+    FROM program_support_overview_v p
+    JOIN campus_support_capacity_v c
+      ON c.campus_name = p.campus_name
+     AND c.center_type = 'TUTORING'
+    WHERE p.term_code = '2026FA'
+      AND p.open_tutoring_requests > 0
+    ORDER BY p.open_tutoring_requests DESC, p.program_name
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
 
-Review whether the answer is based on the approved views and contains the requested aggregate fields. Wording may vary by provider; the database results remain the evidence.
+2. Ask the team for the same aggregate service-planning result:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(
+             team_name   => 'NINA_STUDENT_SUPPORT_TEAM',
+             user_prompt => 'For term 2026FA, use runsql on PROGRAM_SUPPORT_OVERVIEW_V p joined to CAMPUS_SUPPORT_CAPACITY_V c by campus_name. Return up to five programs where p.open_tutoring_requests > 0. Include only tutoring centers: filter c.center_type = ''TUTORING''. Include program, campus, open tutoring request count, tutoring center, and weekly capacity. Return only actual SQL tool rows, even if fewer than five exist. If the tool fails or returns no rows, say no verified answer is available. Do not include student names or example values.',
+             params      => '{"conversation_id":"' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '"}'
+           ) AS agent_answer;
+    </copy>
+    ```
+
+Compare the response with the SQL rows from step 1. If the agent reports no tool data, or gives values that do not match the SQL, do not treat its answer as a result. Inspect the tool output in Task 5 and rerun after the model or profile issue is resolved. Wording may vary by provider; the SQL rows remain the evidence.
 
 The SQL tool is read-only. The task gives the agent no tool for inserting, updating, or deleting records.
 
@@ -216,7 +258,24 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     </copy>
     ```
 
-The tool history should include `NINA_STUDENT_SUPPORT_SQL_TOOL`. Match the agent, task, and timestamps to the run you just started; these queries return recent activity without filtering to this team. Check the team’s `STATE` before treating the run as successful.
+    The tool history should include `NINA_STUDENT_SUPPORT_SQL_TOOL`. Match the agent, task, and timestamps to the run you just started; these queries return recent activity without filtering to this team. Check the team’s `STATE` before treating the run as successful.
+
+3. Inspect what the SQL tool actually returned:
+
+    ```sql
+    <copy>
+    SELECT tool_name,
+           DBMS_LOB.SUBSTR(input, 1000, 1) AS tool_input,
+           DBMS_LOB.SUBSTR(output, 2000, 1) AS tool_result,
+           DBMS_LOB.SUBSTR(tool_output, 2000, 1) AS diagnostic
+    FROM user_ai_agent_tool_history
+    WHERE tool_name = 'NINA_STUDENT_SUPPORT_SQL_TOOL'
+    ORDER BY start_date DESC
+    FETCH FIRST 1 ROW ONLY;
+    </copy>
+    ```
+
+    If this returns no row, the team did not call the SQL tool. If `TOOL_RESULT` has no database rows or `DIAGNOSTIC` reports an error, the agent answer is not verified.
 
 ## Conclusion: Give the agent one controlled way to work
 
