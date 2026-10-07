@@ -191,7 +191,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     <copy>
     SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(
              team_name   => 'NINA_TRANSPORT_TEAM',
-             user_prompt => 'Which five transport services have the highest fare revenue? Include the service name, category, total fare revenue, and seats booked.',
+             user_prompt => 'Rank the five transport services by total fare revenue, calculated as SUM(BOOKING_LEGS.LEG_TOTAL), not SUM(BOOKING_LEGS.FARE). Include service name, category, SUM(BOOKING_LEGS.LEG_TOTAL) as total fare revenue, and SUM(BOOKING_LEGS.SEATS) as seats booked.',
              params      => '{"conversation_id": "' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '"}'
            ) AS agent_answer;
     </copy>

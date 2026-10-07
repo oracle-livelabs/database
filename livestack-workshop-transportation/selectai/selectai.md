@@ -142,7 +142,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five transport services have the highest fare revenue?',
+             prompt       => 'Which five transport services have the highest fare revenue? Calculate total fare revenue as SUM(BOOKING_LEGS.LEG_TOTAL).',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -163,7 +163,7 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five transport services have the highest fare revenue?',
+             prompt       => 'Which five transport services have the highest fare revenue? Calculate total fare revenue as SUM(BOOKING_LEGS.LEG_TOTAL).',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -185,7 +185,7 @@ Nina's first question gives her a transport service ranking, but she also needs 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five transport services with the highest fare revenue. Include the service name, category, total fare revenue, and seats booked.',
+             prompt       => 'Show the five transport services with the highest fare revenue. Calculate total fare revenue as SUM(BOOKING_LEGS.LEG_TOTAL) and seats booked as SUM(BOOKING_LEGS.SEATS). Include service name and category.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
@@ -198,7 +198,7 @@ Nina's first question gives her a transport service ranking, but she also needs 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five transport services with the highest fare revenue. Include the service name, category, total fare revenue, and seats booked.',
+             prompt       => 'Show the five transport services with the highest fare revenue. Calculate total fare revenue as SUM(BOOKING_LEGS.LEG_TOTAL) and seats booked as SUM(BOOKING_LEGS.SEATS). Include service name and category.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
@@ -219,7 +219,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
     ```sql
     <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show the five transport services with the highest fare revenue. Include the service name, category, total fare revenue, and seats booked.',
+             prompt       => 'Show the five transport services with the highest fare revenue. Calculate total fare revenue as SUM(BOOKING_LEGS.LEG_TOTAL) and seats booked as SUM(BOOKING_LEGS.SEATS). Include service name and category.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
