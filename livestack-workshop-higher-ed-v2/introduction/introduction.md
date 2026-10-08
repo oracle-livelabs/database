@@ -24,8 +24,6 @@ Jessica's team uses Oracle AI Database as a shared foundation. The labs show how
 
 The workshop follows one operational journey: coordinate requests, match them to services, understand connections and locations, plan capacity, and ask governed questions about the results.
 
-![Higher Education support-operations learning path](images/seer-higher-education-journey.svg)
-
 <details>
 <summary><strong>Learn more: What does a converged database mean?</strong></summary>
 

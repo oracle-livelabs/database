@@ -8,8 +8,6 @@ Nina Patel is a student-success operations analyst at Seer Higher Education. She
 
 Jessica has prepared the `GENAI` Select AI profile for a small set of aggregate Higher Education views. Nina can ask a question in ordinary language, inspect the SQL Select AI generates, and run it after checking that it matches the question.
 
-![Ask, inspect, run, and review a Select AI query](images/select-ai-review.svg)
-
 <details>
 <summary><strong>Key terms: Select AI, AI profile, and generated SQL</strong></summary>
 
@@ -67,6 +65,8 @@ Estimated Time: **10 minutes**
     ORDER BY attribute_name;
     </copy>
     ```
+
+![Lab 7 Task 1 Step 2](images/l7-t1-s2.png)
 
 The profile should be enabled. The workshop setup restricts its `object_list` to approved summary views. In the next task, reapply and inspect that boundary.
 
@@ -188,8 +188,7 @@ A more specific question names the campus, threshold, and fields Nina needs. She
 
 ## Task 6: Explain the result
 
-Select AI can ask the configured provider to summarize a query result. Use this
-only for data approved for that provider.
+Select AI can ask the configured provider to summarize a query result. Use this only for data approved for that provider.
 
 ```sql
 <copy>
