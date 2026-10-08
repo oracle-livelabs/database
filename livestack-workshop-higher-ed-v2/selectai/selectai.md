@@ -8,24 +8,22 @@ Nina Patel is a student-success operations analyst at Seer Higher Education. She
 
 Jessica has prepared the `GENAI` Select AI profile for a small set of aggregate Higher Education views. Nina can ask a question in ordinary language, inspect the SQL Select AI generates, and run it after checking that it matches the question.
 
-![Ask, inspect, run, and review a Select AI query](images/select-ai-review.svg)
-
 <details>
 <summary><strong>Key terms: Select AI, AI profile, and generated SQL</strong></summary>
 
-> - **Select AI** lets a database user ask natural-language questions about approved database objects.
-> - An **AI profile** identifies the provider and the schema objects available for those questions.
-> - **Generated SQL** is the statement Select AI creates from a question. Review it before relying on its result.
+> * **Select AI** lets a database user ask natural-language questions about approved database objects.
+> * An **AI profile** identifies the provider and the schema objects available for those questions.
+> * **Generated SQL** is the statement Select AI creates from a question. Review it before relying on its result.
 
 </details>
 
 ### Objectives
 
-- Check the Select AI profile available to the workshop schema.
-- Limit the profile to approved aggregate views.
-- Generate SQL from a Higher Education operations question and inspect it.
-- Run and refine a question with `DBMS_CLOUD_AI.GENERATE`.
-- Explain why a generated answer still needs review.
+* Check the Select AI profile available to the workshop schema.
+* Limit the profile to approved aggregate views.
+* Generate SQL from a Higher Education operations question and inspect it.
+* Run and refine a question with `DBMS_CLOUD_AI.GENERATE`.
+* Explain why a generated answer still needs review.
 
 Estimated Time: **10 minutes**
 
@@ -68,6 +66,8 @@ Estimated Time: **10 minutes**
     </copy>
     ```
 
+![Lab 7 Task 1 Step 2](images/l7-t1-s2.png)
+
 The profile should be enabled. The workshop setup restricts its `object_list` to approved summary views. In the next task, reapply and inspect that boundary.
 
 ## Task 2: Limit the profile to approved views
@@ -108,12 +108,12 @@ The profile helps Select AI choose relevant metadata. Database privileges remain
 
 ## Task 3: Ask a question and inspect the SQL
 
-Nina asks which programs have the most open tutoring requests. She starts with `showsql` so she can review the generated statement before it runs.
+Nina asks which programs have open tutoring requests in the workshop's `2026FA` term. She starts with `showsql` so she can review the generated statement before it runs.
 
 ```sql
 <copy>
 SELECT DBMS_CLOUD_AI.GENERATE(
-         prompt       => 'Which five programs have the most open tutoring requests this term? Include the campus, program, term, and request count.',
+         prompt       => 'For term 2026FA, list up to five programs with open tutoring requests using PROGRAM_SUPPORT_OVERVIEW_V. Filter TERM_CODE = ''2026FA'' and OPEN_TUTORING_REQUESTS > 0. Return CAMPUS_NAME, PROGRAM_NAME, TERM_CODE, and OPEN_TUTORING_REQUESTS, ordered by the request count descending.',
          profile_name => 'GENAI',
          action       => 'showsql'
        ) AS generated_sql;
@@ -124,19 +124,19 @@ Check that the SQL uses the approved aggregate view, filters open tutoring reque
 
 ## Task 4: Run the reviewed question
 
-After reviewing the generated SQL, Nina asks Select AI to run the same question:
+To execute the exact statement you reviewed, copy the `showsql` output into SQL Worksheet and run that statement. The `runsql` example below submits the question again for SQL generation and execution; do not assume it executes the identical statement you inspected.
 
 ```sql
 <copy>
 SELECT DBMS_CLOUD_AI.GENERATE(
-         prompt       => 'Which five programs have the most open tutoring requests this term? Include the campus, program, term, and request count.',
+         prompt       => 'For term 2026FA, list up to five programs with open tutoring requests using PROGRAM_SUPPORT_OVERVIEW_V. Filter TERM_CODE = ''2026FA'' and OPEN_TUTORING_REQUESTS > 0. Return CAMPUS_NAME, PROGRAM_NAME, TERM_CODE, and OPEN_TUTORING_REQUESTS, ordered by the request count descending.',
          profile_name => 'GENAI',
          action       => 'runsql'
        ) AS answer;
 </copy>
 ```
 
-Compare the answer with a direct SQL result from the approved view:
+Compare the answer with the direct SQL below. It applies the same term and positive-request filters as Nina's question. If the prepared data changes, the query may return fewer than five rows.
 
 ```sql
 <copy>
@@ -145,12 +145,16 @@ SELECT campus_name,
        term_code,
        open_tutoring_requests
 FROM program_support_overview_v
+WHERE term_code = '2026FA'
+  AND open_tutoring_requests > 0
 ORDER BY open_tutoring_requests DESC, program_name
 FETCH FIRST 5 ROWS ONLY;
 </copy>
 ```
 
-The database result is the evidence Nina can inspect. The generated response is useful only when it answers the question and matches the view data.
+With the supplied data, the direct query returns two rows: Applied Mathematics at Harbor Campus and Public Policy at Riverside Campus, each with one open tutoring request. Select AI may format those rows differently.
+
+Compare the returned campus, program, term, and request counts with the view data. Check both the numbers and whether the SQL answers Nina’s question.
 
 ## Task 5: Refine the question
 
@@ -165,8 +169,9 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS generated_sql;
 </copy>
 ```
+![Lab 7 Task 5](images/l7-t5-s1.png)
 
-Review the generated SQL, then run the question with `runsql`:
+Review the generated SQL. Run that exact statement in SQL Worksheet if you need to preserve the reviewed query. The following `runsql` call submits the question again for generation and execution:
 
 ```sql
 <copy>
@@ -177,6 +182,7 @@ SELECT DBMS_CLOUD_AI.GENERATE(
        ) AS answer;
 </copy>
 ```
+![Lab 7 Task 5](images/l7-t5-s2.png)
 
 A more specific question names the campus, threshold, and fields Nina needs. She still checks the SQL and compares the result with `CAMPUS_SUPPORT_CAPACITY_V`.
 
@@ -187,14 +193,14 @@ Select AI can ask the configured provider to summarize a query result. Use this 
 ```sql
 <copy>
 SELECT DBMS_CLOUD_AI.GENERATE(
-         prompt       => 'Summarize the five programs with the most open tutoring requests this term. State the request count and campus for each program.',
+         prompt       => 'For term 2026FA, summarize up to five programs with at least one open tutoring request using PROGRAM_SUPPORT_OVERVIEW_V. Filter TERM_CODE = ''2026FA'' and OPEN_TUTORING_REQUESTS > 0. State only the program name, campus, and actual open tutoring request count returned by the query; do not mention programs with zero requests.',
          profile_name => 'GENAI',
          action       => 'narrate'
        ) AS explanation;
 </copy>
 ```
 
-Check the explanation against the SQL result. The narrative is a convenience; the database rows and reviewed SQL remain the evidence.
+Compare the narrative’s counts, campuses, programs, and term with the query results. Correct or discard any statement that the returned rows do not support.
 
 ## Conclusion: Ask, inspect, and refine
 
@@ -203,4 +209,5 @@ Nina used Select AI to turn an operations question into SQL, inspect the stateme
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

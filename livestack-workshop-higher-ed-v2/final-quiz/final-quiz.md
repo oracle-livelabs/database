@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/higher-ed-badge.svg
+badge: images/livestack-badge-higher-ed.png
 ```
 
 ## Introduction
@@ -51,10 +51,10 @@ Estimated Time: **3 minutes**
 
     Q: What does the OML probability mean in the support-demand lab?
     - It guarantees a future service surge.
-    * It is the model's probability for a workload label and should be reviewed with the underlying aggregate counts.
+    * It is the model's probability for SURGE and should be reviewed with the synthetic workload inputs.
     - It is the number of models in the database catalog.
     - It replaces operations planning.
-    > A probability can help rank program-and-campus workload for review. It is not a guarantee and the model does not score individual students.
+    > The lab returns the probability assigned to SURGE. The synthetic data demonstrates scoring; it does not establish forecast accuracy, and the model does not score individual students.
 
     Q: What makes Select AI questions reviewable?
     - The model can query every database object automatically.
@@ -76,4 +76,5 @@ Estimated Time: **3 minutes**
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

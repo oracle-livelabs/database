@@ -15,16 +15,14 @@ Jessica's team uses Oracle AI Database as a shared foundation. The labs show how
 | Team member | Requirement | What you will see |
 | --- | --- | --- |
 | Jessica Chan, DBA | Give the student-support team one operational view. | A converged SQL query combines relational requests, semantic matches, JSON details, and campus location. |
-| Thomas Brune, application developer | Build a request experience that can evolve. | JSON columns, JSON collections, and JSON Relational Duality expose different application patterns over database records. |
-| Gilly Bourne, AI engineer | Match a request to useful support resources. | An in-database embedding model and vector search rank requests by meaning. |
+| Thomas Brune, application developer | Support changing application requirements for student requests. | JSON columns, JSON collections, and JSON Relational Duality expose different application patterns over database records. |
+| Gilly Bourne, AI engineer | Match a request to useful support resources. | An in-database embedding model ranks support resources by meaning; SQL links them to open requests. |
 | Bob Green, graph specialist | Explore how students, courses, advisors, and services connect. | A property graph and SQL/PGQ show paths and shared support relationships. |
 | Moon Kai, spatial analyst | Help planners understand campus service coverage. | Oracle Spatial finds support sites near campus demand areas and request locations. |
 | Otto Spencer, data scientist | Anticipate changes in service workload. | Oracle Machine Learning trains and scores a support-demand model inside the database. |
 | Nina Patel, student-success operations analyst | Ask questions about program and campus capacity. | Select AI generates SQL that can be inspected; a read-only agent adds a controlled tool and activity history. |
 
 The workshop follows one operational journey: coordinate requests, match them to services, understand connections and locations, plan capacity, and ask governed questions about the results.
-
-![Higher Education support-operations learning path](images/seer-higher-education-journey.svg)
 
 <details>
 <summary><strong>Learn more: What does a converged database mean?</strong></summary>
@@ -37,15 +35,20 @@ The workshop follows one operational journey: coordinate requests, match them to
 
 ### Objectives
 
-- Follow Seer Higher Education teams as they coordinate student-support operations.
-- Use relational SQL, JSON, AI Vector Search, property graphs, Oracle Spatial, Oracle Machine Learning, Select AI, and Select AI Agent.
-- Explain how one Oracle AI Database can support these workloads without disconnected copies of the same records.
-- Review generated SQL, database privileges, approved tools, and execution history.
-- Keep operational planning separate from decisions about an individual student's academic outcome.
+* Follow Seer Higher Education teams as they coordinate student-support operations.
+* Use relational SQL, JSON, AI Vector Search, property graphs, Oracle Spatial,
+  Oracle Machine Learning, Select AI, and Select AI Agent.
+* Explain how one Oracle AI Database can support these workloads without
+  disconnected copies of the same records.
+* Review generated SQL, database privileges, approved tools, and execution history.
+* Keep operational planning separate from decisions about an individual
+  student's academic outcome.
 
-Estimated Workshop Time: **90 minutes**
+Estimated Workshop Time: **103 minutes**, based on the individual setup, lab,
+and quiz estimates. The optional AutoML run may take additional time.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding
-* **Last Updated** - October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

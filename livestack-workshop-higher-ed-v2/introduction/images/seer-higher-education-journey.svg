@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="215" viewBox="0 0 1200 215" role="img" aria-labelledby="title desc">
-<title id="title">Student-support operations learning path</title><desc id="desc">Eight steps move from connected request data to governed student-support questions.</desc>
+<title id="title">Student-support operations learning path</title><desc id="desc">Eight steps connect request data, services, locations, demand predictions, and student-support questions.</desc>
 <rect width="1200" height="215" rx="20" fill="#f6f8fa"/><text x="35" y="42" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#222">One support-operations journey</text>
 <g font-family="Arial,sans-serif" text-anchor="middle" font-size="15" fill="#263746">
 <g><rect x="28" y="75" width="128" height="98" rx="12" fill="#e6f0f6"/><text x="92" y="108" font-weight="700">1 · Connect</text><text x="92" y="135">requests + context</text></g>
