@@ -131,11 +131,11 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     *Figure 5: Inspect both classes in the confusion matrix before using the model.*
 
   
-  Scores can vary between runs. Otto does not choose from balanced accuracy alone. Open model details and inspect the confusion matrix.
+    Scores can vary between runs. Otto does not choose from balanced accuracy alone. Open model details and inspect the confusion matrix.
 
-  Check the confusion matrix for both `SURGE` and `STABLE`. A model that predicts only one class cannot help Otto prioritize a demand watchlist. Review prediction impact to see which inputs influenced the result; impact does not prove that one input causes demand.
+    Check the confusion matrix for both `SURGE` and `STABLE`. A model that predicts only one class cannot help Otto prioritize a demand watchlist. Review prediction impact to see which inputs influenced the result; impact does not prove that one input causes demand.
 
-  Select the Generalized Linear Model for the SQL exercise in Task 3. Compare its behavior with the AutoML candidates before using any model for an operational decision.
+    Select the Generalized Linear Model for the SQL exercise in Task 3. Compare its behavior with the AutoML candidates before using any model for an operational decision.
 
 5. Return to the SQL Worksheet tab to continue. The AutoML experiment is an optional comparison; Task 3 recreates the selected Generalized Linear Model in SQL.
 
