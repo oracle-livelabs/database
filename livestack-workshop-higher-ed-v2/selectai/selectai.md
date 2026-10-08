@@ -68,6 +68,8 @@ Estimated Time: **10 minutes**
     </copy>
     ```
 
+![Lab 7 Task 1 Step 2](images/l7-t1-s2.png)
+
 The profile should be enabled. The workshop setup restricts its `object_list` to approved summary views. In the next task, reapply and inspect that boundary.
 
 ## Task 2: Limit the profile to approved views
@@ -188,8 +190,7 @@ A more specific question names the campus, threshold, and fields Nina needs. She
 
 ## Task 6: Explain the result
 
-Select AI can ask the configured provider to summarize a query result. Use this
-only for data approved for that provider.
+Select AI can ask the configured provider to summarize a query result. Use this only for data approved for that provider.
 
 ```sql
 <copy>

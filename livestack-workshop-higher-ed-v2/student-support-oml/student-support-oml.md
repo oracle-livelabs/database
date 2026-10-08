@@ -96,15 +96,15 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
 
 1. Open **Machine Learning** from Database Actions.
 
-    Sign in with the credentials in **View Login Info**.
+2. Sign in with the credentials in **View Login Info**.
 
     ![Lab 6 Task 2](images/oml.png)
 
-2. Select **AutoML**.
+3. Select **AutoML**.
 
     ![Lab 6 Task 2](images/automl.png)
 
-3. Create a new experiment with these settings:
+4. Create a new experiment with these settings:
 
     | Setting | Value |
     | --- | --- |
@@ -116,13 +116,17 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
 
     **Note:** The **Predict**, **Prediction Type**, and **Case ID** fields become available after you enter a data source.
 
-    Enter `Student Support Demand` in the **Name** field. Select the magnifying-glass icon beside **Data Source**. In **Select Table**, choose schema `LLUSER`, table `STUDENT_SUPPORT_DEMAND_FEATURES_V`, and then **OK**.
+    ![Lab 6 Task 2](images/data-source-one.png)
 
-    Select `DEMAND_SURGE_LABEL` for **Predict**, `Classification` for **Prediction Type**, and `COHORT_TERM_ID` for **Case ID**.
+5. Enter `Student Support Demand` in the **Name** field. Select the magnifying-glass icon beside **Data Source**. In **Select Table**, choose schema `LLUSER`, table `STUDENT_SUPPORT_DEMAND_FEATURES_V`, and then **OK**.
 
-4. Choose **Start → Faster Results** and wait for the leaderboard. Runtime varies; the leaderboard may take several minutes.
+    ![Lab 6 Task 2](images/data-source-two.png)
 
-5. Review the leaderboard and model details.
+6. Select `DEMAND_SURGE_LABEL` for **Predict**, `Classification` for **Prediction Type**, and `COHORT_TERM_ID` for **Case ID**.
+
+7. Choose **Start → Faster Results** and wait for the leaderboard. Runtime varies; the leaderboard may take several minutes.
+
+8. Review the leaderboard and model details.
 
 With the supplied data, AutoML can produce a leaderboard with Decision Tree and Support Vector Machine (Gaussian) among the leading candidates. Model names and scores may vary between runs. Open candidate model details and inspect the confusion matrix. Check whether the model identifies both `SURGE` and `STABLE` rows. A model that predicts only `STABLE` cannot identify potential workload surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a candidate.
 

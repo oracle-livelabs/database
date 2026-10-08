@@ -217,6 +217,8 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
+![Lab 2 Task 5 Step 4](images/l2-t5-s4.png)
+
 Both results show `IN_PROGRESS` because the document and relational query use the same request row.
 
 ## Task 6: Project JSON fields with SQL
@@ -234,6 +236,8 @@ FROM student_support_requests_dv d
 WHERE JSON_VALUE(d.data, '$._id' RETURNING NUMBER) = 990101;
 </copy>
 ```
+
+![Lab 2 Task 6](images/l2-t6.png)
 
 ## Conclusion: Choose the JSON pattern that fits
 
