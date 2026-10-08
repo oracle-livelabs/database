@@ -108,6 +108,8 @@ New York Metro is the first region for this routing review. Moon now measures th
     SELECT fc.station_name,
            fc.city,
            fc.state_province,
+           fc.daily_capacity,
+           fc.occupancy_pct,
            ROUND(
              SDO_GEOM.SDO_DISTANCE(
                fc.location,
@@ -141,7 +143,7 @@ New York Metro is the first region for this routing review. Moon now measures th
 
     **Expected output: New York Service Coverage**
 
-    The first row is the station nearest the New York Metro boundary; compare its distance and capacity with the following rows.
+    New York Central and Queens Transit Hub both have a distance of `0` because they are inside the New York Metro boundary. Compare their daily capacity and occupancy before deciding which station can take more passengers.
 
 2. Try another region.
 
@@ -152,6 +154,8 @@ New York Metro is the first region for this routing review. Moon now measures th
     SELECT fc.station_name,
            fc.city,
            fc.state_province,
+           fc.daily_capacity,
+           fc.occupancy_pct,
            ROUND(
              SDO_GEOM.SDO_DISTANCE(
                fc.location,
@@ -178,7 +182,7 @@ New York Metro is the first region for this routing review. Moon now measures th
     </copy>
     ```
 
-    The `unit` parameter controls the measurement unit. `Joliet Rail Station` should be the closest station, with a distance of `0` km and `0` miles because it falls inside the Chicago Metro boundary. Chicago has a demand index of `78`.
+    The `unit` parameter controls the measurement unit. Joliet Rail Station and Chicago Union Station both have a distance of `0` km and `0` miles because they are inside the Chicago Metro boundary. Compare their daily capacity and occupancy; Chicago has a demand index of `78`.
 
     This is a useful regional result, but distance to the region boundary does not identify the passengers who need service. Moon now uses the region polygon to find those passengers and then assigns each one to the closest active station.
 
