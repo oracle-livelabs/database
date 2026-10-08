@@ -148,7 +148,7 @@ In this lab, you will:
     python3.12 -m venv agents/data/venv
     agents/data/venv/bin/pip install --upgrade pip
     agents/data/venv/bin/pip install -r agents/data/requirements.txt
-    agents/data/venv/bin/pip install -r agents/ shared/requirements.txt
+    agents/data/venv/bin/pip install -r agents/shared/requirements.txt
     sudo chcon -R -t bin_t agents/data/venv/bin/
     sudo chcon -h -t bin_t agents/data/venv/bin/python*
     sudo semanage fcontext -a -t bin_t '/home/opc/livelabs-ai-staff/agents/data/venv/bin(/.*)?' || \
@@ -180,7 +180,7 @@ In this lab, you will:
     python3 -m venv agents/aistaff/venv
     agents/aistaff/venv/bin/pip install --upgrade pip
     agents/aistaff/venv/bin/pip install -r agents/aistaff/requirements.txt
-    agents/aistaff/venv/bin/pip install -r agents/shared/requirements-common.txt
+    agents/aistaff/venv/bin/pip install -r agents/shared/requirements.txt
     sudo chcon -R -t bin_t agents/aistaff/venv/bin/
     sudo chcon -h -t bin_t agents/aistaff/venv/bin/python*
     sudo semanage fcontext -a -t bin_t '/home/opc/livelabs-ai-staff/agents/aistaff/venv/bin(/.*)?' || \
