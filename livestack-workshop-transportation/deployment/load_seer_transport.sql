@@ -1,62 +1,20 @@
 /*
-  Seer Transport workshop loader for a fresh LLUSER schema.
-  Run as ADMIN with: @load_seer_transport.sql <lluser-password> <service-alias>
-  The platform setup must create LLUSER and load ADMIN.ALL_MINILM_L12_V2 first.
-  This file preserves existing data and refuses an occupied workshop schema.
+  Seer Transport data loader. Run as LLUSER after create_user.sql.tmpl setup.
+  Requires a fresh LLUSER workshop schema, the LLUSER-owned ONNX embedding
+  model, and an enabled GENAI profile. Stop before creating tables if any
+  prerequisite is missing.
+
+  Keep the learner exercises for learners: Lab 2 creates THOMAS_APP_DATA and
+  THOMAS_BOOKING_DOCS, then enables inserts on BOOKINGS_DV; Lab 3 adds and
+  populates TRANSPORT_SERVICES.SERVICE_EMBEDDING; Lab 6 trains the named OML
+  model; Lab 7 sets the GENAI attributes; and Lab 8 creates the agent objects.
 */
-SET DEFINE ON
-SET VERIFY OFF
+SET DEFINE OFF
 SET ECHO OFF
 SET SERVEROUTPUT ON
 SET SQLBLANKLINES ON
 WHENEVER OSERROR EXIT FAILURE ROLLBACK
 WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
-DEFINE lluser_password = '&1'
-DEFINE service_alias = '&2'
-
-BEGIN
-  IF USER <> 'ADMIN' THEN
-    RAISE_APPLICATION_ERROR(-20001, 'Start the Seer Transport loader as ADMIN.');
-  END IF;
-END;
-/
-DECLARE
-  l_count PLS_INTEGER;
-BEGIN
-  SELECT COUNT(*) INTO l_count FROM dba_users WHERE username = 'LLUSER';
-  IF l_count <> 1 THEN
-    RAISE_APPLICATION_ERROR(-20002, 'Create LLUSER before running the loader.');
-  END IF;
-  SELECT COUNT(*) INTO l_count FROM dba_objects
-   WHERE owner = 'ADMIN' AND object_name = 'ALL_MINILM_L12_V2'
-     AND object_type = 'MINING MODEL' AND status = 'VALID';
-  IF l_count <> 1 THEN
-    RAISE_APPLICATION_ERROR(-20003, 'The ADMIN embedding model is missing or invalid.');
-  END IF;
-END;
-/
-GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE PROCEDURE,
-      CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE MINING MODEL,
-      CREATE SYNONYM, CREATE JOB, CREATE PROPERTY GRAPH TO LLUSER;
-GRANT RESOURCE, OML_DEVELOPER, GRAPH_DEVELOPER TO LLUSER;
-GRANT EXECUTE ON DBMS_CLOUD TO LLUSER;
-GRANT EXECUTE ON DBMS_CLOUD_AI TO LLUSER;
-GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO LLUSER;
-GRANT EXECUTE ON DBMS_DATA_MINING TO LLUSER;
-GRANT EXECUTE ON DBMS_VECTOR TO LLUSER;
-GRANT EXECUTE ON MDSYS.SDO_GEOM TO LLUSER;
-GRANT EXECUTE ON MDSYS.SDO_UTIL TO LLUSER;
-GRANT EXECUTE ON MDSYS.SDO_CS TO LLUSER;
-GRANT SELECT ON MINING MODEL ADMIN.ALL_MINILM_L12_V2 TO LLUSER;
-ALTER USER LLUSER GRANT CONNECT THROUGH "GRAPH$PROXY_USER";
-ALTER USER LLUSER GRANT CONNECT THROUGH "SPATIAL$PROXY_USER";
-
-CONNECT LLUSER/"&&lluser_password"@&&service_alias
-UNDEFINE lluser_password
-UNDEFINE service_alias
-WHENEVER OSERROR EXIT FAILURE ROLLBACK
-WHENEVER SQLERROR EXIT SQL.SQLCODE ROLLBACK
-SET DEFINE OFF
 DECLARE
   l_count PLS_INTEGER;
 BEGIN
@@ -70,6 +28,14 @@ BEGIN
      AND table_name <> 'DBTOOLS$EXECUTION_HISTORY';
   IF l_count > 0 THEN
     RAISE_APPLICATION_ERROR(-20005, 'Use a fresh workshop schema. Existing tables are preserved.');
+  END IF;
+  SELECT COUNT(*) INTO l_count FROM user_mining_models
+   WHERE model_name = 'ALL_MINILM_L12_V2'
+     AND mining_function = 'EMBEDDING'
+     AND algorithm = 'ONNX';
+  IF l_count <> 1 THEN
+    RAISE_APPLICATION_ERROR(-20003,
+      'LLUSER.ALL_MINILM_L12_V2 must be loaded as an ONNX embedding model before loading.');
   END IF;
   SELECT COUNT(*) INTO l_count FROM user_cloud_ai_profiles
    WHERE UPPER(profile_name) = 'GENAI' AND UPPER(status) = 'ENABLED';
@@ -292,7 +258,7 @@ CREATE PROPERTY GRAPH service_disruption_network
     LABEL related_to PROPERTIES(relationship_type));
 INSERT INTO service_embeddings(service_id,embedding)
 SELECT service_id,
-       VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING
+       VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING
          service_name || '. Category: ' || category || '. Subcategory: ' || subcategory AS DATA)
 FROM transport_services;
 COMMIT;

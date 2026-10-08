@@ -8,7 +8,7 @@ Gilly Bourne is an AI engineer at Seer Transport. Her team has built a search fe
 
 Gilly already has the transport service, booking, and passenger data in the database. Her design problem is connecting a plain-language question to those existing rows. She needs to turn transport service data into vectors, rank the closest transport services, and join those matches to bookings and passengers. A useful result must show more than a similarity score. It must give the service team a passenger and booking list they can act on.
 
-She could export the text and embeddings to a separate vector service. That would add a second copy of sensitive transportation language, another index to refresh, and another set of access rules to manage. Gilly wants the search to run where the underlying rows already live, so one SQL statement can compare meaning, join transport service data to bookings and passengers, and return a result for the application.
+Gilly keeps the service descriptions and their vectors beside the booking and passenger records. Her search can rank services by meaning, then use exact SQL joins to identify the people affected by a disruption.
 
 In this lab, you review Gilly's implementation from the embedding model to the final passenger list. You see why Oracle AI Database fits the job: vector search finds the relevant transport services, and SQL joins connect them to exact booking and passenger data in the same database.
 
@@ -52,15 +52,15 @@ Estimated Time: **10 minutes**
 
 Persona focus: You are reviewing the search tool Gilly built for service operations.
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
+> **SQL Worksheet reminder:** For the difference between **Run Statement** and **Run Script**, return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
 ## Task 1: Check the embedding model
 
 Start with Gilly's first design question: **what does similarity search need?** It needs vectors for the text being searched and an embedding model that converts a question into a vector.
 
-Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Oracle AI Database can store and run the ONNX model inside the database, so it creates the question embedding where the transport service data already live. The application does not have to send transportation text to a separate service and bring the vector back.
+Jessica has made an ONNX embedding model available in Oracle AI Database. Gilly uses it to create question embeddings beside the transport service data, then connects the closest matches to bookings and passengers with SQL.
 
-1. Run the following query to see which embedding models are available:
+1. Run the following query with **Run Statement** to see which embedding models are available:
 
     ```sql
     <copy>
@@ -74,21 +74,25 @@ Gilly asks Jessica to load an ONNX embedding model into Oracle AI Database. Orac
     </copy>
     ```
 
+    ![SQL Worksheet showing the embedding model query and its result](images/lab3-model-owner-query-result.jpg " ")
+
+    *Figure 1: Check that the embedding model is available for Gilly's service search.*
+
     **Expected output: Available Embedding Models**
 
-    The result should include an embedding model owned by `ADMIN`, such as `ALL_MINILM_L12_V2`. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
+    Find `ALL_MINILM_L12_V2` in the result. Its `EMBEDDING` function confirms that Gilly can use it to turn service descriptions and questions into 384-number vectors for similarity search.
 
 2. Review what this means for Gilly's application.
 
     Gilly can call the model from SQL with `VECTOR_EMBEDDING(...)`. Jessica manages the model inside the database, while Gilly uses it in her search query. The transport service data, vectors, and access controls stay in the same database.
 
-    > **Note:** This is the key Oracle AI Database differentiator in this lab. The embedding model runs inside the database, so Gilly does not need a separate embedding service or a data pipeline to move transportation text between systems.
+    > **Note:** Gilly can create the question vector where the service and booking records already live, then join the ranked matches to the passengers who may need help.
 
 ## Task 2: Create a transport service vector
 
 Gilly decides that one vector per transport service is enough. Each transport service record is short and describes one transport service, so she combines its name, category, and subcategory into one text value before creating the vector.
 
-1. Review the text Gilly will embed:
+1. Review the text Gilly will embed with **Run Statement**:
 
     ```sql
     <copy>
@@ -105,21 +109,20 @@ Gilly decides that one vector per transport service is enough. Each transport se
 
     The combined text gives the model the transport service name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the transport service is.
 
-2. Run the embedding expression as `LLUSER` to confirm the model can read the transport service text:
+2. Run the embedding query as `LLUSER` with **Run Statement** to confirm the model can read the transport service text:
 
     ```sql
     <copy>
     SELECT service_id,
-           VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING
+           VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING
              service_name || '. Category: ' || category || '. Subcategory: ' || subcategory AS DATA)
     FROM transport_services;
-    COMMIT;
     </copy>
     ```
 
-    The query should return one vector for each transport service. The `COMMIT` does not change this read-only result.
+    The query should return one vector for each transport service. This is a read-only query, so it does not need a `COMMIT`.
 
-3. Add a vector column to `TRANSPORT_SERVICES`:
+3. Add a vector column to `TRANSPORT_SERVICES` with **Run Statement**:
 
     ```sql
     <copy>
@@ -129,13 +132,13 @@ Gilly decides that one vector per transport service is enough. Each transport se
 
     The column has 384 dimensions because `ALL_MINILM_L12_V2` produces 384-dimensional vectors.
 
-4. Create the transport service vectors inside Oracle Database:
+4. Create the transport service vectors inside Oracle Database. This code box contains an `UPDATE` and a `COMMIT`; choose **Run Script** to run both statements:
 
     ```sql
     <copy>
     UPDATE transport_services
     SET service_embedding = VECTOR_EMBEDDING(
-      ADMIN.ALL_MINILM_L12_V2 USING
+      LLUSER.ALL_MINILM_L12_V2 USING
         service_name || '. Category: ' || category ||
         '. Subcategory: ' || subcategory AS DATA)
     WHERE service_embedding IS NULL;
@@ -146,7 +149,7 @@ Gilly decides that one vector per transport service is enough. Each transport se
 
     The model reads the text in each row and writes the vector back to that same row. No transport service text leaves the database.
 
-5. Verify the new column and its data:
+5. Verify the new column and its data with **Run Statement**:
 
     ```sql
     <copy>
@@ -159,13 +162,29 @@ Gilly decides that one vector per transport service is enough. Each transport se
 
     Each transport service now has its own 384-dimensional vector. Gilly can use this column directly when the application searches for transport services by meaning.
 
+6. Check that every transport service has a 384-dimensional vector with **Run Statement**:
+
+    ```sql
+    <copy>
+    SELECT COUNT(*) AS service_count,
+           SUM(CASE WHEN service_embedding IS NOT NULL THEN 1 ELSE 0 END) AS embedded_services,
+           MIN(VECTOR_DIMENSION_COUNT(service_embedding)) AS min_dimensions,
+           MAX(VECTOR_DIMENSION_COUNT(service_embedding)) AS max_dimensions
+    FROM transport_services;
+    </copy>
+    ```
+
+    ![LLUSER SQL Worksheet showing vector coverage query and 60 populated 384-dimensional results](images/lab3-vector-coverage-query-result.jpg " ")
+
+    *Figure 2: All 60 transport services have embeddings, and each vector has 384 dimensions.*
+
     > **Note:** Chunking is not relevant for this data. Each row describes one short transport service, so splitting it would create several vectors for one transport service without adding useful detail. Chunking becomes useful for long documents, such as policies or regulatory bulletins, where each section may answer a different question.
 
 ## Task 3: Test the transport service vector
 
 Now Gilly tests the new column with a simple vector query. She asks for transport services related to route disruption affecting commuter service and lets the database rank them by meaning.
 
-1. Run the following query:
+1. Run the following query with **Run Statement**:
 
     The SQL creates an embedding for the phrase `route disruption affecting commuter service`, compares it with the vectors in `TRANSPORT_SERVICES.SERVICE_EMBEDDING`, and returns the cosine distance. A smaller distance means the two vectors are closer in meaning, so the query sorts the smallest distance first.
 
@@ -184,7 +203,7 @@ Now Gilly tests the new column with a simple vector query. She asks for transpor
            p.category,
            VECTOR_DISTANCE(
              p.service_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'route disruption affecting commuter service' AS DATA),
+             VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING 'route disruption affecting commuter service' AS DATA),
              COSINE) AS vector_distance
     FROM transport_services p
     ORDER BY vector_distance
@@ -199,7 +218,7 @@ Now Gilly tests the new column with a simple vector query. She asks for transpor
 
     In the broader workflow, these ranked transport services can become the next filter for dashboard review and transport service exposure analysis.
 
-3. Show the result as a similarity score:
+3. Show the result as a similarity score with **Run Statement**:
 
     Vector distance is useful for checking the search, but business users may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
 
@@ -209,7 +228,7 @@ Now Gilly tests the new column with a simple vector query. She asks for transpor
            p.category,
            ROUND(1 - VECTOR_DISTANCE(
              p.service_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'route disruption affecting commuter service' AS DATA),
+             VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING 'route disruption affecting commuter service' AS DATA),
              COSINE), 4) AS similarity
     FROM transport_services p
     ORDER BY similarity DESC
@@ -223,7 +242,7 @@ Now Gilly tests the new column with a simple vector query. She asks for transpor
 
 Gilly now has the business requirement for the application. A business user should be able to enter a concern and find passengers who booked related transport services. The result gives the passenger-service team a short list for follow-up, with the transport service match, booking status, booking date, and passenger contact details.
 
-1. Run the following query for the concern `route disruption affecting commuter service`:
+1. Run the following query with **Run Statement** for the concern `route disruption affecting commuter service`:
 
     ```sql
     <copy>
@@ -233,7 +252,7 @@ Gilly now has the business requirement for the application. A business user shou
                ROUND(1 - VECTOR_DISTANCE(
                  p.service_embedding,
                  VECTOR_EMBEDDING(
-                   ADMIN.ALL_MINILM_L12_V2
+                   LLUSER.ALL_MINILM_L12_V2
                    USING 'route disruption affecting commuter service' AS DATA
                  ),
                  COSINE), 4) AS similarity
@@ -259,6 +278,12 @@ Gilly now has the business requirement for the application. A business user shou
              o.created_at DESC;
     </copy>
     ```
+
+    ![SQL Worksheet showing the beginning of the passenger query and returned rows](images/lab3-passenger-query-result-top.jpg " ")
+
+    ![SQL Worksheet showing the end of the passenger query and returned rows](images/lab3-passenger-query-result-bottom.jpg " ")
+
+    *Figure 3: The two views show the long query and its passenger follow-up result.*
 
     The first part ranks transport services by meaning. The remaining joins use ordinary relational keys to find the matching booking legs, bookings, and passengers.
 

@@ -2,15 +2,15 @@
 
 ## Introduction
 
-Jessica Chan is the database administrator responsible for keeping Seer Transport's transportation data reliable and useful. Every morning, the service operations team asks her a familiar question: **which transport service needs attention first, and can the operator respond if the risk becomes operational work?**
+Jessica Chan is the database administrator responsible for Seer Transport's service data. When disruption signals rise, the operations team asks her which services need attention first, how many booked passengers may be affected, and which stations could support a response.
 
 ![Jessica Chan, DBA: Lab 1: Build a Converged Operations Query](images/jessica-transport.png " ")
 
-Jessica can see the answer taking shape in the Service and Operations Dashboard, but the supporting data is spread across different forms. Disruption signals and affected passenger counts are relational rows. Booking activity is available as JSON documents. The AI engineering team has prepared vectors of service descriptions. Station points and service-region boundaries are spatial data that applications can display as GeoJSON.
+Jessica can see the answer taking shape in the Service and Operations Dashboard, but its supporting records have different forms. Relational rows hold disruption signals and affected passenger counts, JSON documents describe booking activity, service vectors support semantic matching, and station and region geometry supplies location context.
 
-In the past, Jessica might have had to maintain reporting extracts, coordinate a search index, ask an application team for booking data, and reconcile a separate map or service-capacity system. That creates more copies of sensitive transportation data, more security boundaries, and more opportunities for the dashboard answer and the operational detail to disagree. Her challenge is not simply finding another database feature. It is giving the service operations team one answer they can trace back to the same governed data.
+Jessica needs a ranking that dispatchers can check against the underlying disruption, booking, and station records. If those records are copied into separate reporting and search systems, the ranking may lag behind the service conditions that dispatchers must act on.
 
-Jessica sees an opportunity in Oracle AI Database's converged architecture. A converged database lets one governed database support different data models and workloads together. Relational tables and views remain the foundation, while JSON documents, vectors, spatial geometry, graphs, machine-learning, and graph results can be queried alongside them. This means Jessica can answer a question that crosses those data types without complex and expensive integration across separate systems.
+Oracle AI Database lets Jessica query relational rows, JSON bookings, vectors, and station geometry together. She can give operations a ranked service list with the booking and location details needed to investigate each row.
 
 In this lab, you take Jessica's role as the DBA. You will write the converged SQL query behind the Service and Operations Dashboard. It combines relational disruption data, vector search, JSON booking data, and spatial service data in one Oracle AI Database, without separate systems or data copies.
 
@@ -31,11 +31,11 @@ Estimated Time: **10 minutes**
 | Persona Focus       | Jessica Chan, the DBA, builds the query that gives business users this dashboard view.                         |
 | What You Will Do    | Use a single SQL statement that combines several data types.                                                   |
 | Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
-| Outcome             | The learner can explain convergence through a useful business result rather than a feature list.               |
+| Outcome             | Dispatchers can review a ranked service list with the booking and station evidence behind each priority.               |
 
 Persona focus: You are Jessica Chan, the DBA. Your job is to build one governed query that gives business users a connected view of transport service risk and operations.
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
+> **SQL Worksheet reminder:** For the difference between **Run Statement** and **Run Script**, return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
 ## Task 1: Run a converged risk investigation
 
@@ -50,9 +50,9 @@ The query intentionally crosses four data models:
 
     These are four operations in one investigation. Every row combines transport service risk with booking activity, semantic relevance, and service-routing context.
 
-1. Open SQL Worksheet as `LLUSER`. 
+1. Open SQL Worksheet as `LLUSER`.
 
-2. Run the query (note the comments that help to locate the specific use of different data types):
+2. Run the query with **Run Statement** (note the comments that help to locate the specific use of different data types):
 
     ```sql
     <copy>
@@ -89,7 +89,7 @@ The query intentionally crosses four data models:
                ROUND(1 - VECTOR_DISTANCE(
                pe.embedding,
                    VECTOR_EMBEDDING(
-                       ADMIN.ALL_MINILM_L12_V2
+                       LLUSER.ALL_MINILM_L12_V2
                        USING 'service disruption affecting high-demand routes' AS DATA
                    ),
                    COSINE
@@ -172,13 +172,15 @@ The query intentionally crosses four data models:
     </copy>
     ```
 
-3. Review the result as the service-level data behind Jessica's dashboard. Each row combines risk, semantic match, booking activity, and service location. This gives the dashboard a ranked transport service table and the details a business user needs when deciding what to review.
+    ![LLUSER SQL Worksheet showing the converged SQL query and ranked service results](images/lab1-converged-query-result.jpg " ")
+
+    *Figure 1: The converged query returns ten ranked services with disruption, booking, and semantic-match values. Scroll right in the result grid to inspect the station columns.*
+
+3. Review the ranked services as Jessica would with dispatch. Each row brings together disruption risk, semantic relevance, booking activity, and nearby station context so the team can decide which service needs investigation first.
 
     Your numbers may be different if the demo data has changed. Each row should include all four types of data.
 
-Use the first row to explain the business takeaway: the risk and booking values show why the transport service needs attention, the semantic match explains why it fits the question, and the service location shows where follow-up could begin. Jessica now has the query behind the dashboard's ranked transport service table and detail view, combining relational disruption data, vector search, JSON booking data, and spatial distance in one result that a business user can inspect.
-
-With separate systems, Jessica would need complex and expensive integration across a risk system, search service, document store, and mapping system before the dashboard could show this view. Oracle AI Database keeps these data types together, so she can build the dashboard with SQL. KPI cards and other dashboard components can use additional SQL over the same database.
+Use the first row to explain why it merits attention: disruption and booking values indicate potential impact, the semantic match ties it to the investigation question, and station context suggests where dispatch can begin its review. Jessica can use this result behind the dashboard's ranked service table and let the team inspect the records supporting each priority.
 
 ## Task 2: Change the investigation question
 
@@ -188,7 +190,7 @@ Jessica meets with a service operations analyst to review the results at the dat
 station crowding and trip capacity
 ```
 
-Run the query again and compare the top rows.
+Run the query again with **Run Statement** and compare the top rows. Change only the investigation phrase in the `VECTOR_EMBEDDING` call.
 
 1. Which transport services moved into or out of the top ten?
 2. Which transport services still have high relational exposure but a lower semantic similarity to the new question?
