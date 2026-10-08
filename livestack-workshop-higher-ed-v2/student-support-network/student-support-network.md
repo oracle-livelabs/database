@@ -1,34 +1,12 @@
 # Explore the Student-Support Network
 
-<!-- markdownlint-configure-file
-{
-  "MD013": {
-    "code_blocks": false,
-    "tables": false
-  },
-  "MD033": {
-    "allowed_elements": [
-      "details",
-      "summary",
-      "strong"
-    ]
-  }
-}
--->
-
 ## Introduction
 
 ![Bob Green introduces this Higher Education lab](images/bob.png)
 
-Bob Green is a graph specialist at Seer Higher Education. Advisors already work
-with students, course sections, and campus services, but those relationships are
-spread across relational records. Bob uses a property graph to make useful paths
-easier to query and explore.
+Bob Green is a graph specialist at Seer Higher Education. Advisors already work with students, course sections, and campus services, but those relationships are spread across relational records. Bob uses a property graph to make useful paths easier to query and explore.
 
-The graph is a projection of synthetic student, course, advisor, and
-support-service records. A connection can help staff understand which services
-are used by a course community; it is not evidence that a student has a
-particular academic outcome or is eligible for a service.
+The graph is a projection of synthetic student, course, advisor, and support-service records. A connection can help staff understand which services are used by a course community; it is not evidence that a student has a particular academic outcome or is eligible for a service.
 
 ![A student connected to a course section, peers, and support services](images/student-support-network.svg)
 
@@ -71,9 +49,7 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Read direct relationships with relational SQL
 
-The graph's source data uses `STUDENT_SUPPORT_NETWORK_ENTITIES` for vertices and
-`STUDENT_SUPPORT_NETWORK_LINKS` for edges. Start with one synthetic student key
-and list the entities directly connected to it.
+The graph's source data uses `STUDENT_SUPPORT_NETWORK_ENTITIES` for vertices and `STUDENT_SUPPORT_NETWORK_LINKS` for edges. Start with one synthetic student key and list the entities directly connected to it.
 
 ```sql
 <copy>
@@ -95,14 +71,11 @@ ORDER BY reached.entity_type, reached.entity_key;
 ```
   ![Lab 4 Task 1](images/l4-t1.png)
 
-This join is clear for one step. Following a path through a course section,
-another student, and a service requires more joins and aliases. Each additional
-step makes the query longer.
+This join is clear for one step. Following a path through a course section, another student, and a service requires more joins and aliases. Each additional step makes the query longer.
 
 ## Task 2: Read the same relationship with SQL/PGQ
 
-The workshop setup provides the `STUDENT_SUPPORT_NETWORK` property graph over
-those relational tables.
+The workshop setup provides the `STUDENT_SUPPORT_NETWORK` property graph over those relational tables.
 
 ```sql
 <copy>
@@ -132,14 +105,11 @@ ORDER BY connected_type, connected_key;
 
 ![SQL Worksheet showing connected student-support entities returned by GRAPH_TABLE](images/graph-query-result.jpg)
 
-The result has the same shape as the relational query. The graph pattern states
-that the query starts at one student vertex, follows one edge, and returns the
-connected vertex.
+The result has the same shape as the relational query. The graph pattern states that the query starts at one student vertex, follows one edge, and returns the connected vertex.
 
 ## Task 3: Follow paths up to four hops
 
-A course section may connect a student to peers, advisors, and services. This
-query returns paths that reach entities in one to four relationships.
+A course section may connect a student to peers, advisors, and services. This query returns paths that reach entities in one to four relationships.
 
 ```sql
 <copy>
@@ -161,16 +131,11 @@ FETCH FIRST 25 ROWS ONLY;
 ```
   ![Lab 4 Task 3](images/l4-t3.png)
 
-A value of `1` means the path contains one relationship. Larger values show
-additional steps. The path lists the connected entity keys in order. The graph
-is an operational map of connections; it should not be used to infer a student's
-academic standing.
+A value of `1` means the path contains one relationship. Larger values show additional steps. The path lists the connected entity keys in order. These are walks, so a path can revisit the starting student or another entity. The graph is an operational map of connections; it should not be used to infer a student's academic standing.
 
 ## Task 4: Find students connected through a shared resource
 
-Bob asks which students have outgoing relationships to the same course section
-or support service. The pattern matches two student vertices whose edges point
-to one shared entity.
+Bob asks which students have outgoing relationships to the same course section or support service. The pattern matches two student vertices whose edges point to one shared entity.
 
 ```sql
 <copy>
@@ -206,8 +171,7 @@ FETCH FIRST 25 ROWS ONLY;
 ```
   ![Lab 4 Task 4](images/l4-t4.png)
 
-A shared course or service can help an advisor plan group support. It does not
-prove that two students know each other or need the same intervention.
+A shared course or service can help an advisor plan group support. It does not prove that two students know each other or need the same intervention.
 
 ## Task 5: Open Graph Studio
 
@@ -223,8 +187,7 @@ prove that two students know each other or need the same intervention.
 
 ## Task 6: Import and run the student-support notebook
 
-The supplied `.dsnb` file contains SQL/PGQ paragraphs and graph visualizations
-for the same synthetic network.
+The supplied `.dsnb` file contains SQL/PGQ paragraphs and graph visualizations for the same synthetic network.
 
 1. Download [seer-student-support-network.dsnb](files/seer-student-support-network.dsnb).
 2. In Graph Studio, select **Notebooks**, then **Import**.
@@ -243,15 +206,11 @@ for the same synthetic network.
   ![Lab 4 Task 6](images/graph-studio-notebook-exercise-two.png)
 
 
-Compare the table result with the visualization. Node placement can change
-between runs; compare the entity keys and relationship types.
+Compare the table result with the visualization. Node placement can change between runs; compare the entity keys and relationship types.
 
 ## Conclusion: Use graph paths to explore service connections
 
-The relational query reads a direct relationship. SQL/PGQ expresses the
-multi-step path more directly, and Graph Studio displays selected connections.
-Both approaches use the graph projection backed by the workshop's relational
-records.
+The relational query reads a direct relationship. SQL/PGQ expresses the multi-step path more directly, and Graph Studio displays selected connections. Both approaches use the graph projection backed by the workshop's relational records.
 
 ## Appendix: Property graph definition
 
