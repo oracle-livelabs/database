@@ -179,7 +179,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
     ![SQL Worksheet result — agent answer](images/sql-agent-answer.jpg)
 
-    Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
+    Each execution creates a new conversation ID and passes it to `RUN_TEAM` to record the prompt and response. Repeat the relevant names and details in a new question; this example does not reuse the previous conversation.
 
 2. Review the answer.
 

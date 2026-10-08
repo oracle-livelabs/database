@@ -7,7 +7,7 @@ In this lab, you will test the connection to True Cache using JDBC and run a tra
 Estimated Time: 10 minutes
 
 <if type="nonsandbox">
-Watch the video for a quick walk through of the Lab3.
+Watch the video for a quick walk-through of the Lab3.
 [Lab3](videohub:1_wx3n5ug3)
 </if>
 
@@ -30,7 +30,7 @@ This lab assumes you have:
 
 ## Task 1: Run the application
 
-1. Login to application podman container
+1. Log in to the application Podman container.
 
     ```
     <copy>
@@ -65,10 +65,10 @@ This lab assumes you have:
 
 ## Learn More
 
-[True Cache documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/using-oracle-true-cache-your-applications.html)
+[True Cache documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/using-oracle-true-cache-your-applications.html)
 
 
 ## Acknowledgements
-* **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
-* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025
+* **Authors** - Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Nithin Thekkupadam Narayanan, Sarvesh Gupta
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Sep 2026

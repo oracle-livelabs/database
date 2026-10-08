@@ -11,7 +11,7 @@ You will create component vectors, search by meaning, and join the matches to pr
 <details>
 <summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
-> - An **embedding** is a numerical profile of what text means. In this lab, component data is embedded so similar manufacturing ideas sit near each other mathematically, even when the wording is different.
+> - An **embedding** represents text as a list of numbers. This lab embeds each component’s name, category and subcategory so the query can rank descriptions with similar meanings.
 >
 > - An **ONNX embedding model** is a portable machine-learning model saved in the Open Neural Network Exchange (ONNX) format. It turns text into a vector of numbers that captures meaning. Oracle AI Database can load and run this model inside the database, close to the component rows.
 >
@@ -65,7 +65,7 @@ The search needs an embedding model and component vectors. Jessica has loaded th
 
 ## Task 2: Create a component vector
 
-Gilly decides that one vector per component is enough. Each component record is short and describes one component, so she combines its name, category, and subcategory into one text value before creating the vector.
+Each component has a short description, so Gilly creates one vector from its name, category and subcategory.
 
 1. Review the text Gilly will embed:
 
@@ -124,11 +124,11 @@ Gilly decides that one vector per component is enough. Each component record is 
 
     ![Component rows populated with vector embeddings](images/sql-vector-values.png)
 
-    > **Note:** Chunking is not relevant for this data. Each row describes one short component, so splitting it would create several vectors for one component without adding useful detail. Chunking becomes useful for long documents, such as policies or plant quality notices, where each section may answer a different question.
+    > **Note:** Each description is short enough for one vector. Longer documents, such as policies or plant quality notices, may need separate vectors for sections that answer different questions.
 
 ## Task 3: Test the component vector
 
-Now Gilly tests the new column with a simple vector query. She asks for components related to precision bearing with low vibration and tight dimensional tolerance and lets the database rank them by meaning.
+Search for `precision bearing with low vibration and tight dimensional tolerance` and review how the database ranks the components by meaning.
 
 1. Run the following query:
 
@@ -159,7 +159,7 @@ Now Gilly tests the new column with a simple vector query. She asks for componen
 
 3. Show the result as a similarity score:
 
-    Vector distance is useful for checking the search, but production analysts may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
+    Display `1 - distance`, rounded to four decimal places, as a similarity score. Higher scores indicate closer matches; the ranking stays the same.
 
     ```sql
     <copy>
