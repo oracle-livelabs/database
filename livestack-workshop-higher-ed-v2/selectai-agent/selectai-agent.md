@@ -58,7 +58,7 @@ Estimated Time: **15 minutes**
     </copy>
     ```
 
-  ![Lab 8 Task 1 Step 1](images/l8-t1-s1.png)
+    ![Lab 8 Task 1 Step 1](images/l8-t1-s1.png)
 
 2. Review its object list by using **Run Script (F5)**:
 
@@ -124,7 +124,7 @@ On your first pass through this lab, **No data found** is expected because you c
     </copy>
     ```
 
-  ![Lab 8 Task 2 Step 2](images/l8-t2-s2.png)
+    ![Lab 8 Task 2 Step 2](images/l8-t2-s2.png)
 
     The model value should be `xai.grok-4.3` before you run the team.
 
@@ -216,7 +216,7 @@ The team is the runnable unit. It connects Nina's assistant, task instructions, 
     </copy>
     ```
 
-  ![Lab 8 Task 4 Step 1](images/l8-t4-s1.png)
+    ![Lab 8 Task 4 Step 1](images/l8-t4-s1.png)
 
 2. Ask the team for the same aggregate service-planning result:
 
@@ -253,7 +253,7 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     </copy>
     ```
 
-  ![Lab 8 Task 5 Step 1](images/l8-t5-s1.png)
+    ![Lab 8 Task 5 Step 1](images/l8-t5-s1.png)
 
 2. Review the most recent tool calls:
 
@@ -270,7 +270,7 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
-  ![Lab 8 Task 5 Step 2](images/l8-t5-s2.png)
+    ![Lab 8 Task 5 Step 2](images/l8-t5-s2.png)
 
     The tool history should include `NINA_STUDENT_SUPPORT_SQL_TOOL`. Match the agent, task, and timestamps to the run you just started; these queries return recent activity without filtering to this team. Check the team’s `STATE` before treating the run as successful.
 
