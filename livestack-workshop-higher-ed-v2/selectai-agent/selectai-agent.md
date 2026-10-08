@@ -8,8 +8,6 @@ Nina Patel has used Select AI to ask one student-support operations question at 
 
 Jessica gives the agent one approved tool: a SQL tool that uses the `GENAI` profile and its allow-list of summary views. The tool is read-only. The agent cannot update requests, make admissions decisions, or determine what an individual student should receive.
 
-![A read-only agent uses one approved SQL tool and leaves an execution history](images/agent-boundary.svg)
-
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
 
@@ -57,6 +55,8 @@ Estimated Time: **15 minutes**
     WHERE profile_name = 'GENAI';
     </copy>
     ```
+
+    ![Lab 8 Task 1 Step 1](images/l8-t1-s1.png)
 
 2. Review its object list by using **Run Script (F5)**:
 
@@ -122,6 +122,8 @@ On your first pass through this lab, **No data found** is expected because you c
     </copy>
     ```
 
+    ![Lab 8 Task 2 Step 2](images/l8-t2-s2.png)
+
     The model value should be `xai.grok-4.3` before you run the team.
 
 3. Confirm the tool definition:
@@ -135,6 +137,7 @@ On your first pass through this lab, **No data found** is expected because you c
     WHERE tool_name = 'NINA_STUDENT_SUPPORT_SQL_TOOL';
     </copy>
     ```
+  ![Lab 8 Task 2 Step 3](images/l8-t2-s3.png)
 
 The tool provides a named query capability. The profile's object list guides SQL generation, and the database user's privileges still control the objects the SQL can read.
 
@@ -185,6 +188,8 @@ The tool provides a named query capability. The profile's object list guides SQL
     </copy>
     ```
 
+  ![Lab 8 Task 3 Step 3](images/l8-t3-s3.png)
+
 The team is the runnable unit. It connects Nina's assistant, task instructions, and approved SQL tool.
 
 ## Task 4: Run an operations question
@@ -209,6 +214,8 @@ The team is the runnable unit. It connects Nina's assistant, task instructions, 
     </copy>
     ```
 
+    ![Lab 8 Task 4 Step 1](images/l8-t4-s1.png)
+
 2. Ask the team for the same aggregate service-planning result:
 
     ```sql
@@ -220,6 +227,8 @@ The team is the runnable unit. It connects Nina's assistant, task instructions, 
            ) AS agent_answer;
     </copy>
     ```
+
+  ![Lab 8 Task 4 Step 2](images/l8-t4-s2.png)
 
 Compare the response with the SQL rows from step 1. If the agent reports no tool data, or gives values that do not match the SQL, do not treat its answer as a result. Inspect the tool output in Task 5 and rerun after the model or profile issue is resolved. Wording may vary by provider; the SQL rows remain the evidence.
 
@@ -242,6 +251,8 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     </copy>
     ```
 
+    ![Lab 8 Task 5 Step 1](images/l8-t5-s1.png)
+
 2. Review the most recent tool calls:
 
     ```sql
@@ -257,6 +268,7 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
+    ![Lab 8 Task 5 Step 2](images/l8-t5-s2.png)
 
     The tool history should include `NINA_STUDENT_SUPPORT_SQL_TOOL`. Match the agent, task, and timestamps to the run you just started; these queries return recent activity without filtering to this team. Check the team’s `STATE` before treating the run as successful.
 
@@ -274,6 +286,8 @@ The SQL tool is read-only. The task gives the agent no tool for inserting, updat
     FETCH FIRST 1 ROW ONLY;
     </copy>
     ```
+
+  ![Lab 8 Task 5 Step 3](images/l8-t5-s3.png)
 
     If this returns no row, the team did not call the SQL tool. If `TOOL_RESULT` has no database rows or `DIAGNOSTIC` reports an error, the agent answer is not verified.
 

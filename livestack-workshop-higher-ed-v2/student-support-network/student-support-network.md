@@ -8,8 +8,6 @@ Bob Green is a graph specialist at Seer Higher Education. Advisors already work 
 
 The graph is a projection of synthetic student, course, advisor, and support-service records. A connection can help staff understand which services are used by a course community; it is not evidence that a student has a particular academic outcome or is eligible for a service.
 
-![A student connected to a course section, peers, and support services](images/student-support-network.svg)
-
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL/PGQ</strong></summary>
 

@@ -8,8 +8,6 @@ Gilly Bourne is an AI engineer at Seer Higher Education. The advising team wants
 
 Gilly uses an embedding model to turn support-resource descriptions into vectors. Oracle AI Database can compare the meaning of a request with those vectors, then use SQL to connect the best matches to open requests and program details.
 
-![How a plain-language request is matched to campus support resources](images/support-vector-search.svg)
-
 ### Objectives
 
 * Check for an in-database embedding model.

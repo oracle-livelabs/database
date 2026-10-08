@@ -7,7 +7,6 @@
 Thomas Brune builds a web application for Seer Higher Education's advising and support teams. The application needs request details in a document shape, while the database team needs keys, constraints, SQL, and transaction controls.
 
 Thomas and Jessica compare three patterns: a JSON column for application settings, a JSON Collection Table for independently stored advising notes, and a JSON Relational Duality View over existing request rows. The collection stores a separate sample document; the duality view exposes the relational request without copying it.
-![Three ways to use JSON with student-support records](images/request-json-model.svg)
 
 ### Objectives
 
@@ -217,6 +216,8 @@ The view definition determines which document changes can be written back to rel
     </copy>
     ```
 
+![Lab 2 Task 5 Step 4](images/l2-t5-s4.png)
+
 Both results show `IN_PROGRESS` because the document and relational query use the same request row.
 
 ## Task 6: Project JSON fields with SQL
@@ -234,6 +235,8 @@ FROM student_support_requests_dv d
 WHERE JSON_VALUE(d.data, '$._id' RETURNING NUMBER) = 990101;
 </copy>
 ```
+
+![Lab 2 Task 6](images/l2-t6.png)
 
 ## Conclusion: Choose the JSON pattern that fits
 
