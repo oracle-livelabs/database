@@ -8,6 +8,10 @@ True Cache can serve eligible read-only retrievals and reduce repeated reads aga
 
 *Estimated Time:* 15 minutes.
 
+### Video Preview
+
+[Semantic Cache with Vector Search walkthrough](videohub:1_zusvk7do)
+
 ### Objectives
 
 - Check the prebuilt vector sample and index.

@@ -8,6 +8,10 @@ This exercise demonstrates availability of an already-read data set. It does not
 
 *Estimated Time:* 15 minutes.
 
+### Video Preview
+
+[Availability and Failover walkthrough](videohub:1_1oq8mc2k)
+
 ### Objectives
 
 - Observe an eligible cached read while Primary is stopped.

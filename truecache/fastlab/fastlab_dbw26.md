@@ -8,6 +8,10 @@ The environment contains the `TRANSACTIONS` schema with preloaded `ACCOUNTS`, `P
 
 Estimated Time: 25 minutes.
 
+### Video Preview
+
+[FastLab walkthrough](videohub:1_d5bniycw)
+
 ## Objectives
 
 - Confirm that the Primary database, True Cache, and application server are healthy.

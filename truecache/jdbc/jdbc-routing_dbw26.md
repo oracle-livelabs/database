@@ -6,6 +6,10 @@ Run the supplied BasicApp to see one logical JDBC connection use Primary for rea
 
 *Estimated Time:* 5 minutes.
 
+### Video Preview
+
+[Use True Cache through JDBC walkthrough](videohub:1_gja8um8t)
+
 ### Objectives
 
 - Run BasicApp and inspect its database-role output.

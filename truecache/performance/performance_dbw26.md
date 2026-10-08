@@ -8,6 +8,10 @@ This baseline does not start background write or read-pressure jobs. The optiona
 
 *Estimated Time:* 15 minutes.
 
+### Video Preview
+
+[Performance Comparison and Lag Observability walkthrough](videohub:1_1lzjnseg)
+
 ### Objectives
 
 - Compare read latency and throughput with consistent run settings.
