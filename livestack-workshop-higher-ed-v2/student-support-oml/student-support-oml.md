@@ -8,8 +8,6 @@ Otto Spencer is a data scientist at Seer Higher Education. Student-support leade
 
 The model predicts an operational workload label from aggregated, synthetic term data. It does not score individual students or make admissions, advising, or academic decisions. Training, scoring, and the supporting data stay in Oracle AI Database.
 
-![Train and score an operational support-demand model](images/support-demand-model.svg)
-
 <details>
 <summary><strong>Key terms: model, feature, classification, and probability</strong></summary>
 
@@ -68,7 +66,25 @@ FETCH FIRST 10 ROWS ONLY;
 
 ![SQL Worksheet showing aggregated support-demand training rows](images/training-query-result.jpg)
 
-The numeric and category values are model features. `DEMAND_SURGE_LABEL` is the outcome the model learns to predict. The rows are aggregated by cohort; they do not represent individual students.
+The rows are aggregated by cohort; they do not represent individual students. In this synthetic training data, the label follows the historical term exactly. Keep `TERM_CODE` for reporting, but exclude it from model inputs so an unseen future term does not drive every prediction to the same label.
+
+Create the feature view used by AutoML and the SQL model. It retains the known label and omits `TERM_CODE`:
+
+```sql
+<copy>
+CREATE OR REPLACE VIEW student_support_demand_features_v AS
+SELECT cohort_term_id,
+       campus_name,
+       program_name,
+       enrolled_students,
+       open_requests,
+       prior_term_requests,
+       avg_priority_score,
+       median_wait_days,
+       demand_surge_label
+FROM student_support_demand_training_v;
+</copy>
+```
 
 ## Task 2: Compare models with AutoML (optional)
 
@@ -78,53 +94,46 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
 
 1. Open **Machine Learning** from Database Actions.
 
-    Sign in with the credentials in **View Login Info**.
+2. Sign in with the credentials in **View Login Info**.
 
     ![Lab 6 Task 2](images/oml.png)
 
-2. Select **AutoML**.
+3. Select **AutoML**.
 
     ![Lab 6 Task 2](images/automl.png)
 
-3. Create a new experiment with these settings:
+4. Create a new experiment with these settings:
 
     | Setting | Value |
     | --- | --- |
     | Experiment name | `Student Support Demand` |
-    | Data source | `STUDENT_SUPPORT_DEMAND_TRAINING_V` |
+    | Data source | `STUDENT_SUPPORT_DEMAND_FEATURES_V` |
     | Predict | `DEMAND_SURGE_LABEL` |
     | Prediction type | `Classification` |
     | Case ID | `COHORT_TERM_ID` |
 
-    ![Lab 6 Task 2](images/data-source-one.png)
-
     **Note:** The **Predict**, **Prediction Type**, and **Case ID** fields become available after you enter a data source.
 
-    To select the data source:
+    ![Lab 6 Task 2](images/data-source-one.png)
 
-1. Enter `Student Support Demand` in the **Name** field.
-2. Select the magnifying-glass icon beside **Data Source**.
-3. In the **Select Table** window, select `LLUSER` from the **Schema** list.
-4. Select `STUDENT_SUPPORT_DEMAND_TRAINING_V` from the **Table** list.
-5. Select **OK**.
-
-    Select `DEMAND_SURGE_LABEL` for **Predict**, `Classification` for **Prediction Type**, and `COHORT_TERM_ID` for **Case ID**.
+5. Enter `Student Support Demand` in the **Name** field. Select the magnifying-glass icon beside **Data Source**. In **Select Table**, choose schema `LLUSER`, table `STUDENT_SUPPORT_DEMAND_FEATURES_V`, and then **OK**.
 
     ![Lab 6 Task 2](images/data-source-two.png)
 
-4. Choose **Start → Faster Results** and wait for the leaderboard. Runtime varies; the leaderboard may take several minutes.
+6. Select `DEMAND_SURGE_LABEL` for **Predict**, `Classification` for **Prediction Type**, and `COHORT_TERM_ID` for **Case ID**.
 
-5. Review the leaderboard and model details.
+7. Choose **Start → Faster Results** and wait for the leaderboard. Runtime varies; the leaderboard may take several minutes.
 
-![Lab 6 Task 2](images/leaderboard.png)
+8. Review the leaderboard and model details.
 
-Open candidate model details and inspect the confusion matrix. Check whether the model identifies both `SURGE` and `STABLE` rows. A model that predicts only `STABLE` cannot identify potential workload surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a candidate.
+With the supplied data, AutoML can produce a leaderboard with Decision Tree and Support Vector Machine (Gaussian) among the leading candidates. Model names and scores may vary between runs. Open candidate model details and inspect the confusion matrix. Check whether the model identifies both `SURGE` and `STABLE` rows. A model that predicts only `STABLE` cannot identify potential workload surges, even if its overall accuracy looks high. Check false positives and missed surges before choosing a candidate.
 
 The training rows are synthetic and aggregated by program, campus, and term. Scores on this data do not establish accuracy on future terms, and the rows do not represent individual students.
 
 Review feature impact as a diagnostic. It shows which values influenced predictions; it does not prove that a feature causes a change in demand.
 
-Task 3 trains the workshop’s Generalized Linear Model separately in SQL; it does not import an AutoML model.
+Task 3 trains a Generalized Linear Model separately in SQL.
+
 ## Task 3: Create the model in SQL
 
 Create a settings table and train a database model from the prepared view by using **Run Script (F5)**:
@@ -151,7 +160,7 @@ BEGIN
   DBMS_DATA_MINING.CREATE_MODEL(
     model_name           => 'STUDENT_SUPPORT_DEMAND_MODEL',
     mining_function      => DBMS_DATA_MINING.CLASSIFICATION,
-    data_table_name      => 'STUDENT_SUPPORT_DEMAND_TRAINING_V',
+    data_table_name      => 'STUDENT_SUPPORT_DEMAND_FEATURES_V',
     case_id_column_name  => 'COHORT_TERM_ID',
     target_column_name   => 'DEMAND_SURGE_LABEL',
     settings_table_name  => 'STUDENT_SUPPORT_MODEL_SETTINGS'
@@ -247,7 +256,6 @@ The separate scoring table contains the model inputs for a future term and does 
              STUDENT_SUPPORT_DEMAND_MODEL USING
              campus_name,
              program_name,
-             term_code,
              enrolled_students,
              open_requests,
              prior_term_requests,
@@ -260,7 +268,6 @@ The separate scoring table contains the model inputs for a future term and does 
                'SURGE' USING
                campus_name,
                program_name,
-               term_code,
                enrolled_students,
                open_requests,
                prior_term_requests,
@@ -275,7 +282,7 @@ The separate scoring table contains the model inputs for a future term and does 
     </copy>
     ```
 
-    ![SQL Worksheet showing next-term demand predictions and surge probabilities](images/scored-demand-result.jpg)
+With the supplied data, expect both labels in the scoring result: 9 `SURGE` cohorts and 3 `STABLE` cohorts. Compare the probabilities to rank cohorts within each label. Values may vary if the training or scoring data changes.
 
 `PREDICTED_DEMAND` is the selected label. `SURGE_PROBABILITY` helps operations rank cohorts for review, but it does not guarantee a future workload change. Staff should check the counts and local context before adjusting capacity.
 
