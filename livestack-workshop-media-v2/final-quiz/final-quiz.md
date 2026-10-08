@@ -11,7 +11,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/livestack-media-badge.svg
+badge: images/livestack-badge-media-entertainment.png
 ```
 
 ## Introduction

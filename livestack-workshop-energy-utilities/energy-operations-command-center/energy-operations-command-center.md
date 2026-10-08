@@ -171,7 +171,7 @@ Read its two named query blocks first: `request_services` avoids counting the sa
 
 > **Checkpoint:** The request identifier is the traceable key. The dashboard can summarize several capabilities, but every conclusion still leads back to governed rows in the same database.
 
-> **🎯 Interactive challenge:** Order capacity alerts before request urgency. Compare the first three rows with the original result and explain which operational question each ordering answers.
+**🎯 Interactive challenge:** Order capacity alerts before request urgency. Compare the first three rows with the original result and explain which operational question each ordering answers.
 
 <details>
 <summary><strong>Challenge answer</strong></summary>

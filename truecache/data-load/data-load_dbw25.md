@@ -7,9 +7,9 @@ In this lab, you will create the transaction processing schema and load data int
 *Estimated Time:* 20 minutes
 
 <if type="nonsandbox">
-Watch the video for a quick walk through of the Lab2.
-[Lab2](videohub:1_mz228rvo)
-[Lab2](videohub:1_yayzolzj)
+Watch the video for a quick walk-through of Lab 2: Prepare and Warm True Cache.
+[Lab 2](videohub:1_mz228rvo)
+[Lab 2](videohub:1_yayzolzj)
 </if>
 
 ### About Oracle True Cache
@@ -87,7 +87,7 @@ This lab assumes you have:
     hostname
     </copy>
     ```
-8. Login to SALES1 service as the transactions user using the password specified in step1.sql in the format hostname:1521/SALES1. To view the password open the file using cat command.
+8. Log in to the SALES1 service as the transactions user by using the password specified in `step1.sql`, in the format `hostname:1521/SALES1`. To view the password, open the file by using the `cat` command.
     ```
     <copy>
     cat step1.sql
@@ -158,7 +158,7 @@ This lab assumes you have:
         </copy>
         ```
 
-3. Login to truecache as a sysdba user
+3. Log in to True Cache as a SYSDBA user.
      ```
     <copy>
     sqlplus / as sysdba
@@ -201,7 +201,7 @@ This lab assumes you have:
     exit
     </copy>
     ```
-10. Login to the truecache using the transaction user using the format <truecache_hostname>:1521/SALES1_TC
+10. Log in to True Cache as the transactions user by using the format `<truecache_hostname>:1521/SALES1_TC`.
 
     sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
     ![dataload truecache login](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachelogin.png " ")
@@ -241,12 +241,12 @@ This lab assumes you have:
     </copy>
     ```
 
-You may now proceed to the next lab.
+Continue to the next lab.
 
 ## Learn More
-[True Cache documentation for internal purposes] (https://docs-uat.us.oracle.com/en/database/oracle/oracle-database/23/odbtc/oracle-true-cache.html#GUID-147CD53B-DEA7-438C-9639-EDC18DAB114B)
+[True Cache documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/overview-oracle-true-cache.html)
 
 ## Acknowledgements
-* **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
-* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management, August 2025
+* **Authors** - Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Nithin Thekkupadam Narayanan, Sarvesh Gupta
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Sep 2026
