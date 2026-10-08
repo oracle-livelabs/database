@@ -10,8 +10,6 @@ The information is stored in different forms. Request and program details are re
 
 In this lab, you build the query behind a student-support operations view. It combines relational request data, vector search, a JSON Relational Duality View, and Oracle Spatial in one SQL statement.
 
-![How the query combines request, JSON, vector, and campus-location data](images/converged-support-query.svg)
-
 ### Objectives
 
 * Explain convergence through a student-support operations question.

@@ -8,8 +8,6 @@ Nina Patel is a student-success operations analyst at Seer Higher Education. She
 
 Jessica has prepared the `GENAI` Select AI profile for a small set of aggregate Higher Education views. Nina can ask a question in ordinary language, inspect the SQL Select AI generates, and run it after checking that it matches the question.
 
-![Ask, inspect, run, and review a Select AI query](images/select-ai-review.svg)
-
 <details>
 <summary><strong>Key terms: Select AI, AI profile, and generated SQL</strong></summary>
 

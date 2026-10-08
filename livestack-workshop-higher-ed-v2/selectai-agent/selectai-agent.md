@@ -8,8 +8,6 @@ Nina Patel has used Select AI to ask one student-support operations question at 
 
 Jessica gives the agent one approved tool: a SQL tool that uses the `GENAI` profile and its allow-list of summary views. The tool is read-only. The agent cannot update requests, make admissions decisions, or determine what an individual student should receive.
 
-![A read-only agent uses one approved SQL tool and leaves an execution history](images/agent-boundary.svg)
-
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
 

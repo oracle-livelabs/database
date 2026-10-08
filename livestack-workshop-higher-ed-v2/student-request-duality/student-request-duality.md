@@ -7,7 +7,6 @@
 Thomas Brune builds a web application for Seer Higher Education's advising and support teams. The application needs request details in a document shape, while the database team needs keys, constraints, SQL, and transaction controls.
 
 Thomas and Jessica compare three patterns: a JSON column for application settings, a JSON Collection Table for independently stored advising notes, and a JSON Relational Duality View over existing request rows. The collection stores a separate sample document; the duality view exposes the relational request without copying it.
-![Three ways to use JSON with student-support records](images/request-json-model.svg)
 
 ### Objectives
 

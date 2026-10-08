@@ -8,8 +8,6 @@ Otto Spencer is a data scientist at Seer Higher Education. Student-support leade
 
 The model predicts an operational workload label from aggregated, synthetic term data. It does not score individual students or make admissions, advising, or academic decisions. Training, scoring, and the supporting data stay in Oracle AI Database.
 
-![Train and score an operational support-demand model](images/support-demand-model.svg)
-
 <details>
 <summary><strong>Key terms: model, feature, classification, and probability</strong></summary>
 
