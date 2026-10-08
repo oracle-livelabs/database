@@ -6,6 +6,10 @@ Review the preloaded transaction objects, apply KEEP, and warm True Cache using 
 
 *Estimated Time:* 15 minutes.
 
+### Video Preview
+
+[Prepare and Warm True Cache walkthrough](videohub:1_f95yjz2m)
+
 ### Objectives
 
 - Inspect the transaction objects visible through True Cache.

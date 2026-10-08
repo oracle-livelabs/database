@@ -6,6 +6,10 @@ Check the pre-provisioned containers and database services before starting the d
 
 *Estimated Time:* 10 minutes.
 
+### Video Preview
+
+[Initialize Environment walkthrough](videohub:1_n0xnpd76)
+
 ### Objectives
 
 - Check the three lab containers.
