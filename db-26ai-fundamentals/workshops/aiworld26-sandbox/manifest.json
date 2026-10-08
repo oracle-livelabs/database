@@ -1,0 +1,66 @@
+{
+    "workshoptitle": "Try What's New in Oracle AI Database 26ai: The Silverleaf Hustle",
+      "help": "livelabs-help-db_us@oracle.com",
+      "tutorials": [
+        {
+          "title": "Introduction",
+          "description": "Introduction to the Silverleaf Casino workshop on Oracle AI Database 26ai",
+          "type": "livelabs",
+          "filename": "../../intro/ai-world-2026-intro.md"
+      },
+      {
+        "title": "Get Started with LiveLabs",
+        "description": "Open your Autonomous AI Database and the SQL worksheet as ADMIN",
+        "type": "livelabs",
+        "filename": "../../ai-world-2026/get-started.md"
+    },
+      {
+        "title": "Lab 1: Build the Casino Floor with Domains, Annotations and Assertions",
+        "description": "Build the casino schema with data use case domains, mark sensitive columns with annotations, and enforce a floor rule with an assertion.",
+        "type": "livelabs",
+        "filename": "../../ai-world-2026/domains-annotations-assertions.md"
+    },
+      {
+        "title": "Lab 2: Serve the Casino App with JSON Relational Duality Views",
+        "description": "Read and write the casino app's JSON documents through duality views, with the same rules enforced.",
+        "type": "livelabs",
+        "filename": "../../ai-world-2026/duality-views.md"
+    },
+      {
+          "title": "Lab 3: Uncover the Collusion Ring with Property Graphs",
+          "description": "Find the collusion ring with SQL property graphs and graph algorithms, then record the case.",
+          "type": "livelabs",
+          "filename": "../../ai-world-2026/graph-collusion.md"
+      },
+      {
+          "title": "Lab 4: Search the Surveillance Log with AI Vector Search",
+          "description": "Load an embedding model into the database and search the floor staff's notes by meaning.",
+          "type": "livelabs",
+          "filename": "../../ai-world-2026/vector-search.md"
+      },
+      {
+          "title": "Lab 5: Protect the Evidence with Deep Data Security",
+          "description": "Create end users, data roles and data grants so each person sees only what they should.",
+          "type": "livelabs",
+          "filename": "../../ai-world-2026/deep-data-security.md"
+      },
+      {
+        "title": "Lab 6: (Bonus) New SQL Features",
+        "description": "Try JOIN TO ONE, aggregation filters, QUALIFY, DATEDIFF and DATEADD on the casino data.",
+        "type": "livelabs",
+        "filename": "../../ai-world-2026/sql-features.md"
+    },
+      {
+          "title": "Lab 7: (Bonus) Connect an AI Agent with the SQLcl MCP Server",
+          "description": "Connect an AI agent in VS Code to the casino database as Nina and as Vera, and watch the data grants decide what it sees.",
+          "type": "livelabs",
+          "filename": "../../ai-world-2026/mcp-server.md"
+      },
+
+        {
+          "title": "Need Help?",
+          "description": "Template to link to Need Help lab at the end of workshop. Change 'CHANGE-ME' in link below to need-help-livelabs.md or need-help-freetier.md",
+          "filename":"https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
