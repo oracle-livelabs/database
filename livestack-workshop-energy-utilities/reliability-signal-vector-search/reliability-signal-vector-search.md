@@ -2,125 +2,246 @@
 
 ## Introduction
 
-Gilly Bourne is the AI engineer behind the Reliability and Load Signals experience. Operators describe concerns in their own words; Gilly needs to find related utility services even when the stored descriptions use different terms. Oracle AI Vector Search keeps embeddings and source records together.
+Gilly Bourne, Seer Utility Network's AI engineer, is building a search for the concern **“Which service points may be affected by a gas pipeline pressure issue?”** She first finds related utility services, then identifies the service points that requested them.
 
-Estimated Time: **10 minutes**
+Review her implementation: create service embeddings, rank matches by meaning, and join them to request and contact details. The vectors and relational data stay in Oracle AI Database.
 
-### Objectives
-
-- Verify the in-database embedding model and vector data.
-- Rank utility services by semantic similarity.
-- Distinguish search evidence from an operational conclusion.
-
-### Hands-on Scenario
-
-Gilly begins with a gas pressure and leak-response concern, then changes only the question to test how meaning changes the ranking. The platform supplies the shared `ADMIN.ALL_MINILM_L12_V2` embedding model and grants LLUSER access to it.
-
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet) if you need the launch and execution steps.
-
-## Task 1: Verify vector readiness
-
-1. Run the readiness query.
-
-    <copy>
-    ```sql
-    SELECT (SELECT COUNT(*)
-            FROM all_mining_models
-            WHERE owner = 'ADMIN'
-              AND model_name = 'ALL_MINILM_L12_V2'
-              AND mining_function = 'EMBEDDING') AS embedding_model_count,
-           (SELECT COUNT(*)
-            FROM eu_product_embeddings
-            WHERE embedding IS NOT NULL) AS embedded_service_count,
-           (SELECT MIN(VECTOR_DIMENSION_COUNT(embedding))
-            FROM eu_product_embeddings) AS embedding_dimensions,
-           (SELECT MIN(VECTOR_DIMENSION_FORMAT(embedding))
-            FROM eu_product_embeddings) AS embedding_format,
-           (SELECT COUNT(*)
-            FROM user_indexes
-            WHERE index_name = 'EU_IDX_PRODUCT_VEC'
-              AND index_type = 'VECTOR'
-              AND status = 'VALID') AS vector_index_count
-    FROM dual;
-    ```
-    </copy>
-
-2. Confirm the model count and vector-index count are `1`, all 31 services have embeddings, the dimension count is `384`, and the format is `FLOAT32`. If the model count is `0`, the shared platform model or its LLUSER grant is missing; stop and ask the workshop administrator to correct the environment.
-
-## Task 2: Search utility services by meaning
-
-1. Run the same semantic query used by the LiveStack application. The `query_vector` common table expression contains the only call to `VECTOR_EMBEDDING`; `NO_MERGE` keeps that one-row query block separate so the ranked search can reuse the query vector.
-
-    <copy>
-    ```sql
-    WITH query_vector AS (
-      SELECT /*+ NO_MERGE */
-             VECTOR_EMBEDDING(
-               ADMIN.ALL_MINILM_L12_V2
-               USING 'gas pipeline pressure variance and leak response SLA' AS DATA
-             ) AS embedding
-      FROM dual
-    ),
-    ranked_services AS (
-      SELECT p.product_id AS utility_service_id,
-           p.product_name AS utility_service_name,
-           p.category AS utility_category,
-           b.brand_name AS utility_operator_or_partner,
-             VECTOR_DISTANCE(pe.embedding, q.embedding, COSINE) AS distance_value
-      FROM eu_product_embeddings pe
-      JOIN eu_products p ON p.product_id = pe.product_id
-      JOIN eu_brands b ON b.brand_id = p.brand_id
-      CROSS JOIN query_vector q
-      ORDER BY VECTOR_DISTANCE(pe.embedding, q.embedding, COSINE)
-      FETCH APPROXIMATE FIRST 5 ROWS ONLY
-    )
-    SELECT utility_service_id,
-           utility_service_name,
-           utility_category,
-           utility_operator_or_partner,
-           ROUND(1 - distance_value, 4) AS similarity_score
-    FROM ranked_services
-    ORDER BY distance_value, utility_service_id;
-    ```
-    </copy>
-
-    ![Semantic utility service search results in the demo](images/semantic-utility-service-results.png " ")
-
-2. Confirm the result includes readable service and operator context—not only a distance value.
-
-    **Expected output pattern**
-
-    | Column | Stable check |
-    | --- | --- |
-    | `UTILITY_SERVICE_NAME` | Identifies the matched operational service. |
-    | `UTILITY_OPERATOR_OR_PARTNER` | Provides business context. |
-    | `SIMILARITY_SCORE` | Is computed as `1 - cosine distance`; exact values and ordering can change with model or source-text changes. |
-
-## Task 3: Change the operational concern
-
-1. Replace the single search phrase in `query_vector` with `wastewater compliance threshold and discharge risk`, then run the query again.
-2. Identify which service moves up the result set.
-
-> **Checkpoint:** Similarity scores and ordering are dynamic. The lab reports `1 - cosine distance`, so a higher value means a closer match; it is not a probability or confidence score. A close semantic match is evidence for review, not proof of a failure, breach, or causal relationship. `FETCH APPROXIMATE` allows Oracle to use an approximate vector-index search. Its target accuracy is a recall target rather than a guarantee, so a rebuilt index or changed data can slightly change the top results. On a small table, the optimizer can still choose an exact scan.
-
-> **🎯 Interactive challenge:** Rewrite the concern using field-operator language. Review which services remain in the top three and which source descriptions support the matches.
+![gilly](images/gilly.png)
 
 <details>
-<summary><strong>Challenge answer</strong></summary>
+<summary><strong>Key terms: embedding, vector, vector distance, and semantic search</strong></summary>
 
-There is no fixed ranking. A useful result keeps related services near the top when wording changes; verify each match against its source description and score.
+> - An **embedding** is a numerical profile of what text means. In this lab, service data is embedded so similar utilities ideas sit near each other mathematically, even when the wording is different.
+>
+> - An **ONNX embedding model** is a portable machine-learning model saved in the Open Neural Network Exchange (ONNX) format. It turns text into a vector of numbers that captures meaning. Oracle AI Database can load and run this model inside the database, close to the service rows.
+>
+> - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the utilities rows they describe, so the search stays connected to service names, request counts, notice counts, and other business columns.
+>
+> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which utility services or risk notices best match a business user's question.
+>
+> - **Semantic search** means searching by meaning instead of exact words. A search for "gas pipeline pressure and leak response" can find related gas services even when the service names use different wording.
 
 </details>
 
+### Objectives
+
+- Check the embedding model Gilly needs for semantic search.
+- Create a vector from service data inside the database.
+- Review a semantic service search for a business question.
+- Turn service matches into a service-point follow-up list.
+- Explain why vector search belongs beside utilities data and access controls.
+
+Estimated Time: **10 minutes**
+
+> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
+
+> **Schema names:** `PRODUCTS` stores utility services and supplies; `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS` link them to requests and service points.
+
+> **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
+
+## Task 1: Check the embedding model
+
+Similarity search needs vectors for the service text and the question, produced by the same embedding model.
+
+1. Run the following query to see which embedding models are available:
+
+    <copy>
+    ```sql
+    SELECT owner,
+           model_name,
+           algorithm,
+           mining_function
+    FROM all_mining_models
+    WHERE mining_function = 'EMBEDDING'
+    ORDER BY owner, model_name;
+    ```
+    </copy>
+
+    **Expected output: Available Embedding Models**
+
+    ![LLUSER embedding model](images/cap-017.png)
+
+    Initialization loads `LLUSER.ALL_MINILM_L12_V2`, and the loader checks that it returns 384 dimensions. If it is absent, stop here. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
+
+2. Review what this means for Gilly's application.
+
+    Gilly calls the database model from SQL with `VECTOR_EMBEDDING(...)`.
+
+## Task 2: Create a service vector
+
+> **Learner-created column:** The loader leaves `PRODUCTS.PRODUCT_EMBEDDING` absent for this exercise. Its separate `PRODUCT_EMBEDDINGS` table supplies Lab 1. Both use the LLUSER-owned 384-dimensional model.
+
+Gilly decides that one vector per service is enough. Each service record is short and describes one service, so she combines its name, category, and subcategory into one text value before creating the vector.
+
+1. Review the text Gilly will embed:
+
+    <copy>
+    ```sql
+    SELECT product_id,
+           product_name,
+           category,
+           subcategory,
+           product_name || '. Category: ' || category ||
+             '. Subcategory: ' || subcategory AS embedding_text
+    FROM products
+    FETCH FIRST 5 ROWS ONLY;
+    ```
+    </copy>
+
+    The combined text gives the model the service name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the service is.
+
+2. Add a vector column to `PRODUCTS`:
+
+    <copy>
+    ```sql
+    ALTER TABLE products ADD (product_embedding VECTOR(384));
+    ```
+    </copy>
+
+    The column has 384 dimensions because `ALL_MINILM_L12_V2` produces 384-dimensional vectors.
+
+3. Create the service vectors inside Oracle Database:
+
+    <copy>
+    ```sql
+    UPDATE products
+    SET product_embedding = VECTOR_EMBEDDING(
+      LLUSER.ALL_MINILM_L12_V2 USING
+        product_name || '. Category: ' || category ||
+        '. Subcategory: ' || subcategory AS DATA)
+    WHERE product_embedding IS NULL;
+
+    COMMIT;
+    ```
+    </copy>
+
+    The model reads the text in each row and writes the vector back to that same row. No service text leaves the database.
+
+4. Verify the new column and its data:
+
+    <copy>
+    ```sql
+    SELECT product_id,
+           product_name,
+           product_embedding
+    FROM products;
+    ```
+    </copy>
+
+    ![Stored service embeddings](images/cap-018.png)
+
+    Confirm that every populated service row has a 384-dimensional vector.
+
+    > **Chunking:** Each service description is short enough for one vector. Long documents may need separate vectors for sections that answer different questions.
+
+## Task 3: Test the service vector
+
+Now Gilly tests the new column with a simple vector query. She asks for utility services related to gas pipeline pressure and leak response and lets the database rank them by meaning.
+
+1. Run the following query:
+
+    The SQL creates an embedding for the phrase `gas pipeline pressure and leak response`, compares it with the vectors in `PRODUCTS.PRODUCT_EMBEDDING`, and returns the cosine distance. A smaller distance means the two vectors are closer in meaning, so the query orders the smallest distance first.
+
+    <copy>
+    ```sql
+    SELECT p.product_name,
+           p.category,
+           VECTOR_DISTANCE(
+             p.product_embedding,
+             VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING 'gas pipeline pressure and leak response' AS DATA),
+             COSINE) AS vector_distance
+    FROM products p
+    ORDER BY vector_distance
+    FETCH FIRST 5 ROWS ONLY;
+    ```
+    </copy>
+
+    **Expected output: Utility Service Matches**
+
+    ![Vector distance results](images/cap-019.png)
+
+2. Review the ranked utility services.
+    Confirm that the closest matches appear first. `VECTOR_DISTANCE(..., COSINE)` returns smaller values for closer matches.
+
+3. Show the result as a similarity score:
+
+    Display `1 - distance` as similarity, rounded to four decimal places. Higher values now mean closer matches.
+
+    <copy>
+    ```sql
+    SELECT p.product_name,
+           p.category,
+           ROUND(1 - VECTOR_DISTANCE(
+             p.product_embedding,
+             VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING 'gas pipeline pressure and leak response' AS DATA),
+             COSINE), 4) AS similarity
+    FROM products p
+    ORDER BY similarity DESC
+    FETCH FIRST 5 ROWS ONLY;
+    ```
+    </copy>
+
+    This changes the display, not the matching calculation.
+
+    ![Semantic similarity results](images/cap-020.png)
+
+## Task 4: Find customers affected by a service concern
+
+Turn the service matches into a follow-up list with request status, date, and service-point contact details.
+
+1. Run the following query for the concern `gas pipeline pressure and leak response`:
+
+    <copy>
+    ```sql
+    WITH matched_products AS (
+        SELECT p.product_id,
+               p.product_name,
+               ROUND(1 - VECTOR_DISTANCE(
+                 p.product_embedding,
+                 VECTOR_EMBEDDING(
+                   LLUSER.ALL_MINILM_L12_V2
+                   USING 'gas pipeline pressure and leak response' AS DATA
+                 ),
+                 COSINE), 4) AS similarity
+        FROM products p
+        ORDER BY similarity DESC
+        FETCH FIRST 5 ROWS ONLY
+    )
+    SELECT mp.product_name,
+           mp.similarity,
+           c.first_name || ' ' || c.last_name AS customer_name,
+           c.email,
+           o.order_id,
+           o.order_status,
+           o.created_at,
+           oi.quantity,
+           oi.line_total
+    FROM matched_products mp
+    JOIN order_items oi ON oi.product_id = mp.product_id
+    JOIN orders o ON o.order_id = oi.order_id
+    JOIN customers c ON c.customer_id = o.customer_id
+    WHERE o.order_status NOT IN ('cancelled', 'returned')
+    ORDER BY mp.similarity DESC,
+             o.created_at DESC;
+    ```
+    </copy>
+
+    The first part ranks utility services by meaning. The remaining joins use ordinary relational keys to find the matching order items, orders, and customers.
+
+    **Expected output: Service-point Follow-up List**
+
+    ![Related service requests](images/cap-021.png)
+
+2. Review the business result.
+
+    Check that each contact is linked through a matching service request. Only service descriptions are vectorized; relational joins supply the exact request and contact details.
+
 ## Conclusion
 
-Gilly kept the model, vectors, relational service records, and SQL in Oracle AI Database. The application can change the question without moving sensitive operational descriptions to a separate vector store.
-
-## Next Steps
-
-Bob follows governed operational relationships with SQL/PGQ.
+Gilly can now turn an operational concern into a service-point follow-up list. Next, Bob investigates the relationships behind the event.
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Authors** - Matt Kowalik, Kevin Lazarz
+* **Contributor** - Eugenio Galiano, Pat Shepherd
+* **Last Updated By/Date** - Oracle Database Product Management, October 2026

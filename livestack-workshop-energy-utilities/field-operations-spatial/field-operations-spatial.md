@@ -1,133 +1,277 @@
-# Rank Nearby Operations Sites for Review
+# Route Customers to the Closest Field Logistics Site
 
 ## Introduction
 
-Moon Kai is the spatial expert. When an urgent service request arrives, proximity matters—but the nearest site must also be active and its capacity status must be visible. Oracle Spatial lets Moon calculate distance where service-point and logistics data already live.
+Moon Kai, Seer Utility Network's spatial specialist, needs to identify service points in a territory with growing demand and find the nearest active field logistics site for each one.
 
-Estimated Time: **10 minutes**
+Use stored points and territory polygons to measure distance, select service points, and build a list for operations to review.
+
+![moon](images/moon.png)
+
+<details>
+<summary><strong>Key terms: point, polygon, distance, spatial relationship, and GeoJSON</strong></summary>
+
+> - A **point** is one location, represented by longitude and latitude. In this lab, a field logistics site is stored as an `SDO_GEOMETRY` point.
+>
+> - A **polygon** is an area made from connected points. Service territories are stored as polygons.
+>
+> - **Distance** measures how far two spatial objects are from each other. Here, it shows how far a field logistics site is from a service-territory polygon. A distance of zero means the center is inside or touching the region.
+>
+> - A **spatial relationship** describes how two shapes relate to each other. `SDO_GEOM.RELATE` can test whether a service-point location is inside or touches a service territory.
+>
+> - **GeoJSON** is a JSON format for map locations and shapes. `SDO_UTIL.TO_GEOJSON` lets an application display the same database location on a map.
+>
+</details>
+
+The LiveStack Field Operations Logistics Map illustrates how an application presents locations and site details.
+
+![LiveStack field operations map with service points and field sites enabled.](images/cap-034.png)
+
+The application map uses its own demo dataset. The SQL exercises below use the smaller LLUSER workshop dataset.
 
 ### Objectives
 
-- Inspect service points and field sites as spatial points.
-- Calculate distances in kilometers.
-- Combine proximity with capacity and operational status.
+- Identify spatial points and polygons in the utilities data.
+- Convert a database point to GeoJSON for an application map.
+- Measure which field logistics sites are closest to a service territory.
+- Find service points inside a service territory.
+- Match each customer to the closest active field logistics site.
 
-### Hands-on Scenario
+Estimated Time: **10 minutes**
 
-Moon finds the nearest active candidate sites for the most urgent open request, then gives the dispatcher context for a human routing decision. The calculation ranks WGS84 point-to-point proximity; it does not calculate road travel, service-territory eligibility, or dispatch feasibility.
+> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
 
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet) if you need the launch and execution steps.
+> **Schema names:** `CUSTOMERS` represents service points; `FULFILLMENT_CENTERS` represents field logistics sites.
 
-## Task 1: Inspect stored locations
+> **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
-1. Run the service-point inventory.
+## Task 1: Look at the locations as points
+
+Moon starts with the field-site locations. Each `SDO_GEOMETRY` point includes a geometry type, coordinate reference system, longitude, and latitude.
+
+`SDO_UTIL.TO_GEOJSON` converts the stored geometry into a map-ready JSON object. SQL calculations and map display use the same location.
+
+1. Run this query:
 
     <copy>
     ```sql
-    SELECT 'SERVICE_POINT' AS location_type,
-           service_point_name AS location_name,
-           city,
-           state_province,
-           longitude,
-           latitude
-    FROM eu_service_points_v
-    WHERE location IS NOT NULL
-    ORDER BY service_point_id
-    FETCH FIRST 5 ROWS ONLY;
+    SELECT fc.center_id,
+           fc.center_name,
+           fc.city,
+           fc.state_province,
+           fc.latitude,
+           fc.longitude,
+           DBMS_LOB.SUBSTR(
+             SDO_UTIL.TO_GEOJSON(fc.location), 120, 1
+           ) AS location_geojson
+    FROM fulfillment_centers fc
+    WHERE fc.center_id IN (1, 3, 16)
+    ORDER BY fc.center_id;
     ```
     </copy>
 
-2. Run the field-site inventory as a separate statement.
+    `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
+
+    **Expected output: Field Logistics Site Points**
+
+    ![Field base coordinates](images/cap-035.png)
+
+2. Review the point data.
+
+    Check the coordinates and GeoJSON output for the same site.
+
+## Task 2: Find the closest centers to a service territory
+
+Moon uses the seeded Houston Metro demonstration territory and compares active field-site points with its polygon. These synthetic boundaries illustrate Spatial functions and are not official service territories.
+
+1. Run the distance query:
 
     <copy>
     ```sql
-    SELECT 'FIELD_SITE' AS location_type,
-           field_logistics_site_name AS location_name,
-           city,
-           state_province,
-           longitude,
-           latitude
-    FROM eu_field_logistics_sites_v
-    WHERE location IS NOT NULL
-    ORDER BY field_logistics_site_id
-    FETCH FIRST 5 ROWS ONLY;
+    SELECT fc.center_name,
+           fc.city,
+           fc.state_province,
+           ROUND(
+             SDO_GEOM.SDO_DISTANCE(
+               fc.location,
+               dr.boundary,
+               0.005,
+               'unit=KM'
+             ), 2
+           ) AS boundary_distance_km,
+           dr.region_name,
+           dr.demand_index
+    FROM fulfillment_centers fc
+    CROSS JOIN demand_regions dr
+    WHERE dr.region_name = 'Houston Metro'
+      AND fc.is_active = 1
+    ORDER BY boundary_distance_km, fc.center_id
+    FETCH FIRST 10 ROWS ONLY;
     ```
     </copy>
 
-## Task 2: Find the closest active sites
+    `SDO_GEOM.SDO_DISTANCE` compares the field-site point with the service-territory polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
-1. Run the route candidate query.
+    The four arguments in this query have simple roles:
+
+    - `fc.location` is the first geometry: the field-site point.
+    - `dr.boundary` is the second geometry: the service-territory polygon.
+    - `0.005` is the tolerance used when Oracle compares the geometries. It helps Oracle handle small differences in the stored coordinates.
+    - `'unit=KM'` tells Oracle to return the distance in kilometers. Change it to `'unit=MILE'` when the application needs miles.
+
+    The `ROUND(..., 2)` around the function result only formats the answer to two decimal places. It does not change the spatial calculation.
+
+    The query also returns `DEMAND_INDEX`, so Moon can read location and demand together. The center with the smallest distance is the first center operations should check for available capacity.
+
+    **Expected output: Houston Service Coverage**
+
+    Expect active sites ordered by nonnegative distance, nearest first.
+
+    ![Houston boundary distances](images/cap-036.png)
+
+2. Try another region.
+
+    Change the region name to `Dallas Metro`, add a miles calculation, and run the modified query:
 
     <copy>
     ```sql
-    WITH urgent_request AS (
-      SELECT service_request_id,
-             requesting_service_point_id,
-             requesting_service_point_name,
-             urgency_score
-      FROM eu_utility_service_requests
-      WHERE request_status IN ('pending', 'confirmed', 'processing')
-      ORDER BY urgency_score DESC NULLS LAST, service_request_id
-      FETCH FIRST 1 ROW ONLY
+    SELECT fc.center_name,
+           fc.city,
+           fc.state_province,
+           ROUND(
+             SDO_GEOM.SDO_DISTANCE(
+               fc.location,
+               dr.boundary,
+               0.005,
+               'unit=KM'
+             ), 2
+           ) AS boundary_distance_km,
+           ROUND(
+             SDO_GEOM.SDO_DISTANCE(
+               fc.location,
+               dr.boundary,
+               0.005,
+               'unit=MILE'
+             ), 2
+           ) AS boundary_distance_miles,
+           dr.region_name,
+           dr.demand_index
+    FROM fulfillment_centers fc
+    CROSS JOIN demand_regions dr
+    WHERE dr.region_name = 'Dallas Metro'
+      AND fc.is_active = 1
+    ORDER BY boundary_distance_km, fc.center_id
+    FETCH FIRST 10 ROWS ONLY;
+    ```
+    </copy>
+
+    ![Dallas boundary distances](images/cap-037.png)
+
+    Compare kilometers and miles. A zero distance means the site intersects the polygon. The seeded demand indexes are 86 for Houston and 78 for Dallas.
+
+    Distance to a territory does not locate individual service points. Next, find those points and compare their nearest sites.
+
+## Task 3: Match service points to the closest active field site
+
+Select service points inside Houston Metro, compare each with active field sites, and retain the closest site.
+
+1. Run the service-point routing query:
+
+    <copy>
+    ```sql
+    WITH regional_customers AS (
+      SELECT dr.region_name,
+             dr.demand_index,
+             c.customer_id,
+             c.first_name || ' ' || c.last_name AS customer_name,
+             c.email,
+             c.customer_tier,
+             c.location
+      FROM customers c
+      CROSS JOIN demand_regions dr
+      WHERE dr.region_name = 'Houston Metro'
+        AND SDO_GEOM.RELATE(
+              dr.boundary,
+              'ANYINTERACT',
+              c.location,
+              0.005
+            ) = 'TRUE'
+    ), ranked_centers AS (
+      SELECT rc.region_name,
+             rc.demand_index,
+             rc.customer_id,
+             rc.customer_name,
+             rc.email,
+             rc.customer_tier,
+             fc.center_name,
+             fc.city AS center_city,
+             fc.capacity_units,
+             fc.current_load_pct,
+             ROUND(
+               SDO_GEOM.SDO_DISTANCE(
+                 rc.location,
+                 fc.location,
+                 0.005,
+                 'unit=KM'
+               ), 2
+             ) AS customer_center_distance_km,
+             ROW_NUMBER() OVER (
+               PARTITION BY rc.customer_id
+               ORDER BY SDO_GEOM.SDO_DISTANCE(
+                          rc.location,
+                          fc.location,
+                          0.005,
+                          'unit=KM'
+                        ), fc.center_id
+             ) AS center_rank
+      FROM regional_customers rc
+      CROSS JOIN fulfillment_centers fc
+      WHERE fc.is_active = 1
     )
-    SELECT u.service_request_id,
-           u.requesting_service_point_name,
-           s.field_logistics_site_name,
-           s.operational_status,
-           s.capacity_supply_units,
-           s.pending_request_count,
-           ROUND(SDO_GEOM.SDO_DISTANCE(
-             p.location, s.location, 0.005, 'unit=KM'
-           ), 1) AS distance_km,
-           s.recommended_action
-    FROM urgent_request u
-    JOIN eu_service_points_v p
-      ON p.service_point_id = u.requesting_service_point_id
-    CROSS JOIN eu_field_logistics_sites_v s
-    WHERE p.location IS NOT NULL
-      AND s.location IS NOT NULL
-      AND s.is_active = 1
-    ORDER BY distance_km, s.field_logistics_site_id
-    FETCH FIRST 5 ROWS ONLY;
+    SELECT region_name,
+           demand_index,
+           customer_id,
+           customer_name,
+           email,
+           customer_tier,
+           center_name,
+           center_city,
+           capacity_units,
+           current_load_pct,
+           customer_center_distance_km
+    FROM ranked_centers
+    WHERE center_rank = 1
+    ORDER BY customer_center_distance_km, customer_id
+    FETCH FIRST 25 ROWS ONLY;
     ```
     </copy>
 
-2. Identify the nearest candidate site, then review its `OPERATIONAL_STATUS`, available capacity, pending work, and recommended action before considering a dispatch decision.
+    `SDO_GEOM.RELATE` keeps service points whose location falls inside or touches the Houston Metro polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching customer to every active center. `ROW_NUMBER` keeps the nearest center for each customer.
 
-    The cross join plus `SDO_GEOM.SDO_DISTANCE` keeps the calculation transparent for this small workshop dataset. It performs a straight-line geodetic proximity ranking—not road routing or travel-time calculation—and does not use the spatial index for nearest-neighbor retrieval. At production scale, use an indexed nearest-neighbor pattern such as `SDO_NN`, then apply operational eligibility rules.
+2. Review the result as an operations decision.
 
-    **Expected output pattern**
+    Review each service point alongside its nearest site, distance, capacity, current load, and territory demand score.
 
-    | Column | Stable check |
-    | --- | --- |
-    | `DISTANCE_KM` | Nonnegative and sorted from nearest to farthest. |
-    | `OPERATIONAL_STATUS` | Gives capacity or workload context. |
-    | `RECOMMENDED_ACTION` | Explains the constraint that Moon should review. |
+    ![Houston service point assignments](images/cap-038.png)
 
-## Task 3: Explain the proximity evidence
+3. Change the query to `Dallas Metro`.
 
-1. Review the five candidate sites and state which one you would investigate first.
+    Compare the service points and nearest sites with the Houston result. Only the territory filter changes.
 
-    > **Checkpoint:** Distance is one input, not an automatic dispatch command. A dispatcher also considers safety, crew skills, parts, service territory, workload, and current site constraints.
+    ![Dallas service point assignments](images/cap-039.png)
 
-> **🎯 Interactive challenge:** Compare the nearest site with the first site that has no capacity alert. State which one you would send to a dispatcher for review and cite the supporting evidence.
+> **Interpretation:** These queries measure geodetic proximity, not road travel time or dispatch feasibility. Check crew skills, safety, territory eligibility and capacity before a field assignment.
 
-<details>
-<summary><strong>Challenge answer</strong></summary>
+## Conclusion: Turn Location into a Service Decision
 
-Use distance, operational status, available capacity, and pending work together. The nearest site is not automatically best when it cannot safely accept more work.
-
-</details>
-
-## Conclusion: Add location evidence to a service decision
-
-Moon combined spatial distance with operational columns in one query. The map can visualize the result, while SQL preserves the calculation and supporting evidence.
+Moon has a territory-specific list of service points and nearby field sites. Operations can use it to review coverage alongside capacity and crew eligibility.
 
 ## Next Steps
 
-Otto combines an in-database prediction with current capacity evidence.
+For more spatial exercises, open the [Oracle Spatial LiveLabs workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800).
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Authors** - Matt Kowalik, Kevin Lazarz
+* **Contributor** - Eugenio Galiano, Linda Foinding
+* **Last Updated By/Date** - Oracle Database Product Management, October 2026
