@@ -4,7 +4,7 @@
 
 Moon Kai is Seer Sporting Goods' spatial specialist. Bob has shown the team which creator and brand relationships deserve review. Moon now looks at where the retail operation can respond: which fulfillment centers are close to a customer, and which of those centers have the product on hand?
 
-The required data already lives in Oracle AI Database. Customers and fulfillment centers have point locations. Demand regions have polygon boundaries. Products and inventory supply the business details that give those map locations meaning.
+Oracle AI Database already holds customer and fulfillment-center points, demand-region polygons, and the product and inventory records that give those locations business meaning.
 
 Moon wants a business-user dashboard to answer a practical question:
 
@@ -312,7 +312,7 @@ Moon moved from stored points to ranked centers, then added product stock to the
 
 Oracle Spatial keeps the calculation beside the customer, center, product, and inventory rows. SQL returns the geometry and operating details needed for review. The team can explain its options without reconciling a separate map database with an inventory report.
 
-Moon now hands the review to Otto. He will put a demand score beside product activity so the team can examine which products deserve attention.
+Moon hands the location and stock evidence to Otto, who will put a demand score beside product activity so the team can examine which products deserve attention.
 
 ## Next Steps
 
