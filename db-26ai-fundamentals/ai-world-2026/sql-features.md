@@ -2,9 +2,9 @@
 
 ## Introduction
 
-It's Monday morning at the Silverleaf Casino. Vera Lindqvist's case file is safe, and she's writing her report for the casino's managers. First, she has a few follow-up questions about the night of play.
+It's Monday morning at the Silverleaf Casino. Before Vera Lindqvist writes her report, she has a few more questions about Sunday night.
 
-Oracle AI Database 26ai adds new SQL in its release updates. In this bonus lab, you answer Vera's questions with five additions from release updates 23.26.0 to 23.26.3. Each one makes a familiar query shorter or safer. Every query only reads data, so the numbers from earlier labs stay the same. You work as ADMIN, so the **Lab 5** data grants don't filter anything here.
+Oracle AI Database 26ai keeps adding new SQL. In this bonus lab, you answer Vera's questions with five of the new additions. Each one makes a common query shorter or safer. These queries only read data, and you're signed in as ADMIN, so you see every row.
 
 Estimated Time: 10 minutes
 
@@ -12,10 +12,10 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-* Join tables through their foreign keys with `JOIN TO ONE`, and watch it stop a join that double counts
-* Split one total into two with aggregation filters
-* Find each floor host's top player with `QUALIFY`
-* Measure and shift times with `DATEDIFF` and `DATEADD`
+* Join tables without writing `ON` clauses, using `JOIN TO ONE`
+* Add up only some of the rows in a total, using `FILTER`
+* Keep only the top row in each group, using `QUALIFY`
+* Work with times using `DATEDIFF` and `DATEADD`
 
 ### Prerequisites
 
@@ -24,13 +24,13 @@ This lab assumes you have:
 * Completed **Get Started with LiveLabs** and opened the SQL worksheet as ADMIN
 * Completed **Lab 1**, **Lab 2** and **Lab 3**
 
-## Task 1: Write safer joins with JOIN TO ONE
+## Task 1: Join tables with JOIN TO ONE
 
-1. Vera starts with Victor Lang's night, one row per session. `play_sessions` stores only IDs, so the names come from three other tables. `JOIN TO ONE`, new in release update 23.26.2, joins them without a single `ON` clause. Clear the editor, paste the query, and click **Run Statement**.
+1. Vera wants a list of Victor Lang's sessions, with the table and dealer names. The `play_sessions` table stores only ID numbers for the player, the table and the dealer. The names live in three other tables, so the query has to join them. With `JOIN TO ONE`, you just list the tables. The database works out how to join them from the foreign keys you created in **Lab 1**, so you don't write any `ON` clauses. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
-    -- Victor Lang's night, one row per session, with no join conditions
+    -- Victor Lang's sessions, with table and dealer names, and no ON clauses
     SELECT TO_CHAR(s.started_at, 'HH24:MI') AS started,
            g.table_name,
            d.full_name AS dealer,
@@ -43,17 +43,13 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see five rows. Victor won three sessions at Elliot Shaw's tables, starting at 20:06. After 23:00, he lost twice at Roulette 1 with Tom Brennan. Across the five sessions, he's up $1,600.
+    You should see five rows, one for each session Victor played. He won his three sessions with Elliot Shaw dealing, then lost twice at Roulette 1. Overall, he's up $1,600.
 
-    How the join works:
-
-    * `play_sessions` comes first, so each result row is one session. Each table in the parentheses adds columns to that row.
-    * **Lab 1** declared a foreign key from `play_sessions` to each of the three tables. `JOIN TO ONE` follows those keys, so you don't write `ON` clauses.
-    * Before, you wrote out every join, such as `JOIN dealers d ON d.dealer_id = s.dealer_id`, once per table.
+    Before, you wrote one `ON` clause for each table, such as `JOIN dealers d ON d.dealer_id = s.dealer_id`. `JOIN TO ONE` reads those links from the foreign keys instead.
 
     ![Query Result lists Victor Lang's five sessions with table and dealer names, three of them at Elliot Shaw's tables.](images/sql-features-01.png " ")
 
-2. `JOIN TO ONE` also makes a promise: each table in the parentheses adds at most one row to each session. Now break that promise. Vera asks for the chips Victor sent next to each session, and he sent chips twice. This statement should fail. Clear the editor, paste the query, and click **Run Statement**. Use **Run Statement** here: this error happens while rows are fetched, and **Run Script** doesn't show it.
+2. `JOIN TO ONE` also checks your join. Each table you list may match at most one row for each session. If it matches more, the query stops with an error instead of repeating rows. Try it: Vera adds the chips Victor passed to other players. He passed chips twice, so each session matches two transfers. This statement should fail. Clear the editor, paste the query, and click **Run Statement**. Use **Run Statement**, not **Run Script**, or you won't see the error.
 
     ```sql
     <copy>
@@ -69,15 +65,15 @@ This lab assumes you have:
     </copy>
     ```
 
-    **Expected Result:** The query fails with `ORA-18640: JOIN TO ONE reached multiple rows joining to "T", resulting in a non-unique join`. `T` is the alias for `chip_transfers`.
+    **Expected Result:** The query fails with `ORA-18640: JOIN TO ONE reached multiple rows joining to "T", resulting in a non-unique join`. `T` is the query's short name for `chip_transfers`.
 
-    No foreign key leads from a session to a transfer, so this join needs an `ON` clause. Each of Victor's sessions matches both of his transfers. A plain `JOIN` would return 10 rows, every session twice, with no warning. Add up his net win from those rows, and $1,600 becomes $3,200. `JOIN TO ONE` stops the query instead of returning numbers that only look right.
+    No foreign key links a session to a chip transfer, so this join needs an `ON` clause. Each of Victor's five sessions matches both of his transfers. A plain `JOIN` would quietly return 10 rows, each session twice. Add up his winnings from those rows, and $1,600 turns into $3,200. `JOIN TO ONE` stops the query, so you never see the wrong total.
 
     ![Query Result shows error ORA-18640, saying JOIN TO ONE reached multiple rows joining to T.](images/sql-features-02.png " ")
 
 ## Task 2: Split totals with FILTER and pick winners with QUALIFY
 
-1. In **Lab 1**, Elliot Shaw earned the house $17,375, more than any other dealer. Vera wants that number split in two: the ring's sessions and everyone else's. An aggregation filter, new in release update 23.26.1, gives one aggregate its own `WHERE` clause. Clear the editor, paste the query, and click **Run Statement**.
+1. In **Lab 1**, Elliot Shaw looked like the casino's best dealer: the casino made $17,375 at his tables. Vera wants that number split in two: what the casino made from the four players in her case, and what it made from everyone else. `FILTER` lets each total in a query add up only the rows you choose. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -95,17 +91,13 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see eight dealers, with Elliot Shaw first. The house won $21,750 from his other players and lost $4,375 to the ring. Together, those made the $17,375 that hid the ring in **Lab 1**.
+    You should see eight dealers, with Elliot Shaw first. The casino made $21,750 from his other players (`HOUSE_VS_OTHERS`) and lost $4,375 to the four players in the case (`HOUSE_VS_RING`). Together, that's the $17,375 from **Lab 1**, which is why his total looked fine.
 
-    How the filters work:
-
-    * `COUNT(*) FILTER (WHERE s.cash_out > s.buy_in)` counts only winning sessions. **Lab 3** counted wins with `SUM(CASE WHEN cash_out > buy_in THEN 1 ELSE 0 END)`.
-    * `JOIN TO ONE` uses outer joins by default, so every session stays. Only the ring's sessions match `case_players`, so `cp.player_id` is NULL for everyone else.
-    * Each `SUM` adds up only the rows its filter keeps. The ring never sat with Aisha Bello, Kenji Mori, Lucia Ferraro or Omar Farouk, so their `HOUSE_VS_RING` is NULL.
+    Each `FILTER (WHERE ...)` works like a `WHERE` clause for one column. `HOUSE_VS_RING` adds up only the sessions of the four players in the case, and `HOUSE_VS_OTHERS` adds up the rest. Four dealers never dealt to those four players, so their `HOUSE_VS_RING` is empty. Before, you put a `CASE` expression inside each total, such as `SUM(CASE WHEN ... THEN ... END)`.
 
     ![Query Result splits each dealer's house result, with Elliot Shaw at 21750 from other players and -4375 to the ring.](images/sql-features-03.png " ")
 
-2. Floor hosts like to thank their biggest winner of the night. Find each host's top player by net win. `QUALIFY`, new in release update 23.26.0, filters on a window function the way `HAVING` filters on an aggregate. Look at Nina's row. Clear the editor, paste the query, and click **Run Statement**.
+2. Floor hosts like to thank their biggest winner of the night. This query finds each host's top player. `RANK()` numbers each host's players from the biggest winner down, and `QUALIFY` keeps only number 1. Look at Nina's row. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -123,15 +115,15 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see four rows, one per host. Ben Carter tops Priya's list at $19,000. Nina's top player is Victor Lang, her VIP, at $1,600. If Nina thanked her biggest winner, she'd be thanking a member of the ring. That's why **Lab 5** keeps the case file from her.
+    You should see four rows, one per host. Ben Carter tops Priya's list at $19,000. Nina's top player is Victor Lang, her VIP, at $1,600. If Nina thanked her biggest winner, she'd be thanking one of the four players in the case. That's why **Lab 5** keeps the case file from her.
 
-    Without `QUALIFY`, you'd rank the players in an inline view, then filter outside it. The old shape was `SELECT * FROM (SELECT ..., RANK() OVER (...) AS rnk ...) WHERE rnk = 1`.
+    Before `QUALIFY`, you ranked the players in a subquery, then kept rank 1 in an outer query.
 
     ![Query Result lists each floor host's top player, with Victor Lang, a VIP, on Nina's row.](images/sql-features-04.png " ")
 
 ## Task 3: Measure time with DATEDIFF and DATEADD
 
-1. Vera's report needs timing. How close together did the four sit down, and how long did all four play at once? `DATEDIFF`, new in release update 23.26.1, returns the difference between two datetimes in the unit you name. Clear the editor, paste the query, and click **Run Statement**.
+1. Vera's report needs timing. How quickly did the four players sit down together, and how long did they play side by side? `DATEDIFF` gives the time between two moments in the unit you ask for, such as minutes. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -149,17 +141,13 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see three rows: Blackjack 3 at 20:04 and 21:02, then Blackjack 4 at 22:05. Each time, all four sat down within 4 minutes. Then all four played together for 44 or 45 minutes.
+    You should see three rows: Blackjack 3 at 20:04 and 21:02, then Blackjack 4 at 22:05. Each time, all four sat down within 4 minutes, then played together for 44 or 45 minutes.
 
-    How the query reads:
-
-    * Each group is one table in one hour. `HAVING COUNT(*) = 4` keeps the groups where all four played.
-    * From the last arrival, `MAX(started_at)`, to the first departure, `MIN(ended_at)`, all four were at the table.
-    * Subtracting two timestamps gives an interval. Before `DATEDIFF`, turning it into minutes took `EXTRACT(HOUR FROM ...) * 60 + EXTRACT(MINUTE FROM ...)`.
+    The query groups the sessions by table and hour, and `HAVING COUNT(*) = 4` keeps the hours when all four played. `MINUTES_TO_SEAT_ALL` runs from the first player sitting down to the last. `MINUTES_ALL_FOUR_PLAYED` runs from the last player sitting down to the first one leaving. Before `DATEDIFF`, getting minutes between two times took `EXTRACT(HOUR FROM ...) * 60 + EXTRACT(MINUTE FROM ...)`.
 
     ![Query Result shows three sittings at Blackjack 3 and Blackjack 4, all four seated within 4 minutes each time.](images/sql-features-05.png " ")
 
-2. Last, Vera asks the camera room for footage of the chip loop from **Lab 3**. She wants each lap, from 5 minutes before its first transfer to 5 minutes after its last. `DATEADD`, new in release update 23.26.3, adds or subtracts a number of units from a datetime. Clear the editor, paste the query, and click **Run Statement**.
+2. Last, Vera asks the camera room for video of the chip loop from **Lab 3**. She wants each trip around the loop, plus 5 minutes before and after. `DATEADD` adds or subtracts time, such as 5 minutes, from a date or time. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -175,13 +163,13 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see two rows, one per lap. The footage runs from 23:00 to 23:31, then from 01:30 to 02:01. Both laps took 21 minutes. The first moved $6,000 in chips and the second $4,000.
+    You should see two rows, one for each trip around the loop. The video runs from 23:00 to 23:31, then from 01:30 to 02:01. Each trip took 21 minutes. The first moved $6,000 in chips and the second $4,000.
 
-    Each lap fits inside one clock hour, so grouping by the hour separates them. In **Lab 3**, the lap query wrote `t1.transferred_at + INTERVAL '1' HOUR`. `DATEADD(HOUR, 1, t1.transferred_at)` does the same, and it reads the same way for every unit, from years to nanoseconds.
+    Each trip happened within one hour, so the query groups the transfers by hour. In **Lab 3**, you added an hour with `+ INTERVAL '1' HOUR`. `DATEADD(HOUR, 1, ...)` does the same, and it works the same way for any unit.
 
 ## Conclusion
 
-You answered Vera's follow-up questions with five additions to SQL. `JOIN TO ONE` followed the foreign keys and refused a join that would double count. `FILTER`, `QUALIFY`, `DATEDIFF` and `DATEADD` replaced CASE expressions, nested queries and interval arithmetic.
+You answered Vera's questions with five new pieces of SQL. `JOIN TO ONE` joined tables without `ON` clauses and stopped a join that would have counted Victor's winnings twice. `FILTER`, `QUALIFY`, `DATEDIFF` and `DATEADD` made common queries shorter.
 
 That completes the workshop. You built the Silverleaf Casino floor, served it as JSON, uncovered the collusion ring and protected the evidence. Every step ran in one Oracle AI Database 26ai.
 
