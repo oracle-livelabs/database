@@ -1,91 +1,144 @@
-# Agents Built from Custom Templates
+# Build an Agent from a Custom Template
 
 ## Introduction
 
-The Agent Factory provides a number of templates to quickly create sophisticated AI Agents with minimal configuration. In this lab, you explore the **Template Gallery** and use the **Market Sync Agent** template to create your own agent. 
+Use the **Market sync agent** template to build a portfolio lookup agent in Oracle AI Database Private Agent Factory. You will inspect its flow, change its prompt, and test how it uses Alpha Vantage for stock prices and CoinGecko for cryptocurrency prices. Publish your flow after verifying its results, then explore how an external application can call it.
 
-**Estimated time:** 10 minutes.
+**Estimated Time:** 20 minutes
 
 ### Objectives
 
 By the end of this lab, you will be able to:
 
-- Import agents from the Template Gallery 
-- Customize the **Market Sync Agent** template from the visual Agent Builder
+- Import and name a flow from the Template Gallery.
+- Explain how the chat, prompt, agent, and MCP server nodes work together.
+- Customize the prompt and compare the results in Playground.
+- Verify tool results and calculations before publishing.
+- Locate the endpoint URL and explain API-key access for a published flow.
 
 ### Prerequisites
 
-* an LLM configuration (grok-4 through OCI Gen AI is recommended)
-* an internet connection open from your Agent Factory for MCP (either a NAT Gateway or Internet Gateway)
+- Access to the workshop Private Agent Factory instance using the credentials provided by your instructor.
+- Permission to create, edit, and publish your own custom flows.
+- An instructor-provided language model and working Alpha Vantage and CoinGecko MCP connections. The workshop administrator prepares network access and any required tool credentials.
 
-## Task 1: Explore templates in the Agent Factory Template Gallery
+## Task 1: Import and name the template
 
-Navigate to the **Template gallery** tab on the left-hand side.
+1. In the left navigation menu, open **Template Gallery**. Enter `Market sync` in **Search templates...**.
 
-## Task 2: Import Template
+    ![Template Gallery filtered to the Market sync agent template](images/template-ms.png)
 
-Find the template named **Market Sync Agent** and import it.
+2. On the **Market sync agent** card, click **Import flow**. Agent Builder opens with a copy of the template.
 
-![Market Sync Agent template from Template gallery page](images/template-ms.png)
+3. Click the **Edit** pencil beside the flow name. Enter a name such as `Portfolio Manager - <your-user-id>` and a short description. Click **Save changes**. Use your assigned user ID so your flow is easy to identify in a shared instance.
 
-## Task 3: Understand Agent Builder Interface 
+## Task 2: Inspect the flow and select the workshop model
 
-After clicking **Import flow**, you will be taken to the Agent Builder. Here you will see a pre-configured set of boxes and wires.
+1. Collapse the application sidebar and the **Components** sidebar to make room for the canvas. Click **fit view** in the canvas controls to see the flow.
 
-> Note: Collapse the left-hand menu and Components menu by clicking the icon at the top.
+    ![Imported Market sync flow with chat nodes, prompt, agent, and two MCP servers](images/template-ms-imported.png)
 
-![Market Sync Agent template from Agent Builder page](images/template-ms-imported.png)
+2. Follow the connections from **Chat input** to **Prompt**, then to **Agent** and **Chat output**. The two **MCP server** nodes connect to the agent's **Tools** input.
 
-## Task 4: Configure your Agent in Agent Builder
+    | Node | Role in this flow |
+    | --- | --- |
+    | Chat input | Receives the message entered in Playground. |
+    | Prompt | Combines instructions with the `{{user_input}}` variable. |
+    | Agent | Uses the selected language model and calls tools to answer the request. |
+    | MCP server: Alpha Vantage | Supplies tools for stock and other market data. |
+    | MCP server: CoinGecko | Supplies tools for cryptocurrency data. |
+    | Chat output | Returns the agent's response to the chat. |
+    | Sticky notes | Explain the template; they do not execute. |
 
-This task will walk through each box and explain how it's contributing to the agentic flow.
+3. In the **Agent** node, check **Select LLM to use**. Select the model specified by your instructor. The imported template may select `xai.grok-4.3 (oci)`; available names and models depend on the instance.
 
-**Chat input**: (far left) This box informs the agent that it needs to await a user query from a chat interface. The output of this cell will be whatever the user writes into the chat box.
+4. Inspect the MCP server nodes and their notes. Keep the instructor-provided connections and credentials. If a model or tool connection is missing, ask the instructor to check the shared resource. Click **Save** in the toolbar if your changes enable it.
 
-**Sticky Notes**: (top left, blue) These boxes are simply for reference, and do not contribute to the agentic flow in any way. Sticky Notes are used for agent builders to leave notes for each other.
+## Task 3: Establish a baseline and customize the prompt
 
-**MCP Servers**: (top left) These boxes are "tools" for agents to call. MCP Servers are a way for agent-compatible systems to interact with agents. In this example we have "alphavantage" and "coingecko" providing real-time pricing data through MCP. Agent nodes will know how to call these MCP Servers to get relevant information.
+1. Click **Playground** and try this stock question:
 
-**Prompt**: (bottom left) This box adds extra context to the user's query to provide better responses. In this case, the prompt is explaining to the agent that it is advising the user on their portfolio, and provides guidance on how it should format responses to the user.
+    ```text
+    <copy>
+    For a demo portfolio, I have 10 shares of NVDA. Use the stock pricing tool to report the price in USD, its source and timestamp, and the value of the holding.
+    </copy>
+    ```
 
-> Note: Prompts accept incoming text by adding a keyword in double brackets. As an example, the *`{{user_input}}`* text is given in this prompt which create the *user_input* node on the left of the prompt.
+2. Note the response format and whether the answer identifies a returned price or an estimate. Use the back arrow at the top of the chat to return to Agent Builder.
 
-**Agent** (middle) This box does a lot of the heavy lifting:
- * selects the LLM to use (grok-4 is recommended for this lab)
- * allows for 0 or more tools
- * allows for 0 or more sub-agents
- * receives custom instructions
- * receives the prompt
- * provides an output
+3. In the **Prompt** node's **Template** field, find the **EXCEPTION HANDLING** instructions. Replace the instruction that allows estimated values after a tool failure with:
 
-**Chat output**: (far right) Similar to chat input, the chat output node instructs the agentic flow to return a given text to the user through the chatbot.
+    ```text
+    <copy>
+    If a tool fails, report which price is unavailable. Do not estimate it or include it in the portfolio total.
+    </copy>
+    ```
 
+4. Add the following instructions to the template. Keep the existing `User Query: {{user_input}}` text and the `user_input` connection.
 
-## Task 5: Test Agent in Playground and Publish
+    ```text
+    <copy>
+    ### WORKSHOP RESPONSE FORMAT
+    Return a table with Asset, Quantity, Price (USD), Price source, Price timestamp, and Holding value (USD).
+    Use only prices returned by the tools. If a price lookup fails, mark the price and holding value as unavailable and exclude that asset from the total.
+    Label the total as partial when any lookup fails. Do not invent prices or timestamps.
+    Include one brief sentence naming the tools used.
+    </copy>
+    ```
 
-Before testing the agentic flow, rename it to something more memorable, for example "Portfolio Manager". Add a helpful description for later.
+5. Click **Save prompt** on the node, then **Save** in the toolbar. The prompt controls the response format and failure handling; the MCP connections still supply the pricing tools.
 
-Then click **Playground**.
+## Task 4: Test both tool paths and verify the results
 
-Now ask a question about your portfolio, for example: "I have 10 shares of NVDA, how much is my portfolio worth today?"
+1. Open **Playground** again and click **New chat**. Repeat the stock question from Task 3. Compare its response with your baseline: it should now use the requested columns and avoid estimated prices when a lookup fails.
 
-![Market Sync Agent template from Agent Builder page](images/template-ms-portfolio.png)
+2. Start another **New chat** and test the cryptocurrency path:
 
+    ```text
+    <copy>
+    For a demo portfolio, I have 0.01 BTC. Use the cryptocurrency pricing tool to report the price in USD, its source and timestamp, and the value of the holding.
+    </copy>
+    ```
 
-## Task 6: Talk to your production agent
+3. Review each answer against the returned tool data. Expand tool output or execution details when available; ask the instructor to show the execution trace if the chat does not expose it. An answer naming a tool is not proof that the tool ran successfully.
 
-Click **Go back to builder** in the top right. Then click **Publish** and **Confirm**.
+    - The stock lookup should use Alpha Vantage, and the cryptocurrency lookup should use CoinGecko.
+    - Check the asset, currency, returned price, and available price timestamp. A stock quote may reflect a previous market close. If the tool does not supply a timestamp, the answer should say it is unavailable.
+    - Verify `holding value = quantity × returned price`: multiply the NVDA price by 10 and the BTC price by 0.01.
+    - A failed lookup should show an unavailable price and holding value. If some lookups succeed, any total must be labeled partial.
 
-Now the Agent is published and is accessible via REST. To copy the REST endpoint, click **Playground** and then **Copy agent URL**.
+4. If a lookup fails or the service returns a rate limit, check the error with the instructor before retrying. Shared tool credentials can have request limits. Do not repeatedly submit the same question or treat an estimated answer as a successful lookup.
 
-You may now **proceed to the next lab**
+5. If Playground stays at **Loading chat** or has no usable message input, reopen your flow from **My Custom Flows** using **Run flow** once. If the problem continues, ask the instructor to check the environment. Resume testing after it is resolved; publish only after both tool paths and the calculations are verified.
+
+## Task 5: Publish the verified flow
+
+1. Use the back arrow to return to Agent Builder. If you opened the chat through **Run flow** and return to **My Custom Flows** instead, click **Edit** on your flow. Save any remaining changes.
+
+2. Click **Publish**, review the **Publish Workflow** dialog, and click **Confirm** after completing the verification in Task 4.
+
+3. Open **My Custom Flows**, locate your named flow, and use **Run flow** to open it. Check that the saved prompt changes are still reflected in its responses.
+
+## Task 6: Explore external access to the published flow
+
+1. In the chat window, open **Integration options** and select **Endpoint URL**. Use its copy button to copy the endpoint for your own published flow.
+
+    ![Playground Integration options showing Endpoint URL and the API-key requirement](images/template-ms-integration.png)
+
+2. Review the text below the endpoint. External requests use `POST` and require an API key in the `Authorization: Bearer` header. Publication and authentication are both required for external execution.
+
+3. Only administrators can create and manage API keys. Administrators see the **API Key** and **Sample Code** tabs; workshop participants may not see those tabs. For an optional external test, use a key provided by the instructor for your specific flow and the request example in **Sample Code**. Keep the key out of screenshots and workshop files.
+
+4. If no key is provided, finish this task by identifying the endpoint and explaining the publication and authentication requirements. See [Agent Builder: Publish and Chat With Your Agents Outside the Application](https://docs.oracle.com/en/database/oracle/agent-factory/26.7/paias/agent-builder.html) for details.
+
+    You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
-**Authors** 
+**Authors**
 
-* Database Applied AI Technical Staff
-* Allen Hosler, Principal Product Manager, Database Applied AI
-* Kumar Varun, Senior Principal Product Manager, Database Applied AI
+- Database Applied AI Technical Staff
+- Allen Hosler, Principal Product Manager, Database Applied AI
+- Kumar G. Varun, Lead PM, Oracle Database Applied AI
 
-**Last Updated Date** - February, 2026
+**Last Updated Date** - October 2026
