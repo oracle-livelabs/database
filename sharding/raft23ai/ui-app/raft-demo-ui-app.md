@@ -63,7 +63,7 @@ This lab assumes you have:
 
 5. Verify that "Selected RU Placement" section displays one leader and two followers for each RU. This environment uses a replication factor of 3 across three shards. The placement is based on gdsctl ru -sort, covered in detail in the next lab "Explore Raft Replication Topology". Continue with this UI lab for now. The Replication Factor (RF) in Oracle Raft replication for the Oracle Globally Distributed AI Database determines the total number of replicas—consisting of one leader and multiple followers—assigned to each Replication Unit (RU) or chunk set.
 
-    ![<selected_ru_placement.png>](./images/ui-app/images/selected_ru_placement.png " ")
+    ![<selected_ru_placement>](./images/selected_ru_placement.png " ")
 
 6. In next section "Database Operations" shows Total number of shards and Up/Down counts of the shards. You can Shutdown a Shard based on the "Shard Database Name" value displayed in "Select RU Placement" section with Role as "Leader". "Select RU Placement" shows results from gsm(Global Service Manager)'s "gdsctl status ru -sort" result. In this example since Shard2 is with "Leader" Role, click "Shutdown" from the  shard2's details.
 
