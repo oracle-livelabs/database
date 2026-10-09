@@ -2,14 +2,14 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on Life Sciences exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each Life Sciences query runs as the workshop user against the prepared Life Sciences schema.
+Open your LiveLabs reservation, sign in to the prepared **Autonomous Database 26ai** instance, and open SQL Worksheet. You will use the workshop account to query the life sciences data throughout the exercises.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
 
 > - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
 >
-> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. Use it to inspect query results, script output, and errors throughout the workshop.
 >
 > - `LLUSER` is the workshop database user and schema owner for the hands-on Life Sciences objects. Use this account for the exercises. Shared objects, such as the supplied embedding model, are referenced with their owner's name where required.
 
@@ -23,12 +23,12 @@ In this lab, you will:
 
 - Launch the LiveLabs workshop environment.
 - Use the reservation login information to open Database Actions.
-- Confirm that SQL Worksheet is ready for the Life Sciences schema.
+- Open SQL Worksheet for the exercises.
 - Confirm that SQL Worksheet is connected as the workshop schema user.
 
 ## Task 1: Launch the LiveLabs environment
 
-Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
+Open the prepared workshop resources from your LiveLabs reservation.
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -44,7 +44,7 @@ Start from the LiveLabs reservation so Database Actions opens with the correct w
 
 ## Task 2: Open SQL Worksheet
 
-Open SQL Worksheet as the workshop user before running the Life Sciences queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
+Open SQL Worksheet as `LLUSER` before running the exercises. Use it to run queries and inspect their results.
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -66,7 +66,7 @@ Open SQL Worksheet as the workshop user before running the Life Sciences queries
 
     *Figure 4: Sign in to Database Actions as `LLUSER` with the password from the reservation information.*
 
-5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
+5. In Database Actions, select **Development**, then select **SQL** from the tools menu.
 
     ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
 
@@ -80,7 +80,7 @@ Open SQL Worksheet as the workshop user before running the Life Sciences queries
 
     - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
     - Paste each workshop SQL block into the editor.
-    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
+    - Use **Run Statement** or **Ctrl+Enter** for one SQL statement. When a step specifies Run Script (F5), use it for the complete block.
     - Review the output in **Query Result** or **Script Output**, depending on the step.
     - Use **Navigator** only when you want to inspect tables, views, or other objects.
 
@@ -111,6 +111,6 @@ You can now continue to the Life Sciences labs.
 
 ## Acknowledgements
 
-* **Author** - Pat Shepherd, Senior Principal Database Product Manager
-* **Contributor** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026
