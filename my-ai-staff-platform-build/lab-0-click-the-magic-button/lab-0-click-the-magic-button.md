@@ -113,20 +113,13 @@ In this lab, you will:
     does not offer the configured 26ai database version, choose a supported
     region. The stack does not change the compute shape or database tier
     automatically.
-2. Copy the `instance_public_ip`, `ssh_command`, and
-    `autonomous_database_service_name` outputs
-    displayed as an output.
-3. Follow the bootstrap log until completion. It may take time while packages,
-    Python dependencies, the public model, and database initialization finish.
+2. In the succeeded apply job, open **Output** and copy the
+    `instance_public_ip`, `ssh_command`, and
+    `autonomous_database_service_name` values. You can also open **Logs** and
+    scroll to the end to find `instance_public_ip` and `ssh_command`, as shown
+    below. Use **Output** for the complete structured list.
 
-    ```bash
-    <copy>
-    sudo tail -f /var/log/my-ai-staff-bootstrap.log
-    </copy>
-    ```
-    A successful bootstrap creates `/var/lib/my-ai-staff-bootstrap.complete`.
-    
-    ![Sudo Tail Validation Terminal Example](images/sudo_tail_validation.png)
+    ![Find the instance public IP and SSH command in the Resource Manager job logs](images/resource-manager-job-outputs.png)
 
 ## Task 3: Connect, Validate Packages, and Authenticate Codex
 
@@ -139,7 +132,23 @@ In this lab, you will:
     </copy>
     ```
 
-2. Confirm that the non-interactive bootstrap completed before starting the
+2. From the connected instance, follow the bootstrap log until completion. It
+    may take time while packages, Python dependencies, the public model, and
+    database initialization finish.
+
+    ```bash
+    <copy>
+    sudo tail -f /var/log/my-ai-staff-bootstrap.log
+    </copy>
+    ```
+
+    When the log reports successful completion, press `Ctrl+C` to stop
+    following it. A successful bootstrap creates
+    `/var/lib/my-ai-staff-bootstrap.complete`.
+
+    ![Sudo Tail Validation Terminal Example](images/sudo_tail_validation.png)
+
+3. Confirm that the non-interactive bootstrap completed before starting the
     interactive handoff:
 
     ```bash
@@ -150,7 +159,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Run the quick package and runtime validation. Every command must return
+4. Run the quick package and runtime validation. Every command must return
     successfully; java -version may print its version to standard output or
     standard error depending on the installed JDK:
 
@@ -174,7 +183,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Start Codex and complete the interactive authentication:
+5. Start Codex and complete the interactive authentication:
 
     ```bash
     <copy>
@@ -197,7 +206,7 @@ In this lab, you will:
 
     Press Ctrl + D to exit and return to the terminal.
 
-5. Run the final Lab 2 handoff helper after authentication:
+6. Run the final Lab 2 handoff helper after authentication:
 
     ```bash
     <copy>
