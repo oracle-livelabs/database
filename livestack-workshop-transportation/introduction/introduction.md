@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Seer Transport operates regional passenger service across routes, stations, and scheduled trips. When a disruption affects a busy corridor, its team needs to see which services and passengers are affected, where capacity is available, and what to do next.
+Seer Transport operates regional passenger service across routes, stations, and scheduled trips. When a busy corridor is disrupted, dispatchers need to identify affected services and passengers, check available capacity, and decide where to respond first.
 
 Jessica Chan, the database administrator, helps the team answer those questions from connected data in Oracle AI Database. Each colleague has a different task:
 
@@ -13,20 +13,20 @@ Jessica Chan, the database administrator, helps the team answer those questions 
 - Otto Spencer, data scientist, needs to identify services likely to see a demand surge.
 - Nina Patel, operations analyst, needs to ask questions about ridership and fare revenue using approved data.
 
-These tasks share a business goal: restore reliable service and give passengers clear options. The workshop follows one governed database foundation through relational SQL, JSON, vectors, property graphs, spatial analysis, Oracle Machine Learning, Select AI, and Select AI Agent.
+Jessica's team shares one business goal: restore reliable service and give passengers clear options. Each specialist starts with a different operational question, then works with the same service, trip, booking, passenger, and station records in Oracle AI Database. The labs follow those decisions from the first risk review through passenger follow-up and a governed operations assistant.
 
 ### What the team builds
 
-| Lab | Transportation decision | Oracle capability |
+| Lab and team member | Transportation decision | Oracle capability |
 | --- | --- | --- |
-| 1. Operations dashboard | Rank disrupted services with booking activity, semantic matches, and nearby station context. | Converged SQL across relational, vector, JSON, and spatial data. |
-| 2. Booking application | Serve and update one booking document while keeping relational records. | Native JSON, JSON collections, and JSON Relational Duality. |
-| 3. Semantic search | Find services relevant to a disruption and identify affected passengers. | In-database embeddings and AI Vector Search. |
-| 4. Service network | Trace connected trips, routes, stations, vehicles, and disruption cases. | Property Graph and SQL/PGQ. |
-| 5. Station access | Identify passengers in a service region and the nearest active station. | Oracle Spatial and GeoJSON. |
-| 6. Demand watchlist | Rank services that may need more capacity. | Oracle Machine Learning classification and scoring. |
-| 7. Ask the data | Inspect generated SQL before using an answer about service and fare activity. | Select AI. |
-| 8. Govern an agent | Run a read-only transportation question through an approved SQL tool. | Select AI Agent and execution history. |
+| 1. Jessica, operations dashboard | Rank disrupted services with booking activity, semantic matches, and nearby station context. | Converged SQL across relational, vector, JSON, and spatial data. |
+| 2. Thomas, booking application | Serve and update a booking document while keeping relational records. | Native JSON, JSON collections, and JSON Relational Duality. |
+| 3. Gilly, semantic search | Find services relevant to a disruption and identify passengers who may need help. | In-database embeddings and AI Vector Search. |
+| 4. Bob, service network | Trace connected trips, routes, stations, vehicles, and disruption cases. | Property Graph and SQL/PGQ. |
+| 5. Moon, station access | Identify passengers in a service region and the nearest active station. | Oracle Spatial and GeoJSON. |
+| 6. Otto, demand watchlist | Rank services that may need more capacity and review the activity behind each score. | Oracle Machine Learning classification and scoring. |
+| 7. Nina, ask the data | Inspect generated SQL before using an answer about service and fare activity. | Select AI. |
+| 8. Nina and Jessica, govern an agent | Run an operations question through an approved SQL tool and review its history. | Select AI Agent and execution history. |
 
 <details>
 <summary><strong>What is a converged database?</strong></summary>
