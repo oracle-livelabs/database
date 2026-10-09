@@ -94,8 +94,6 @@ In this lab, you will:
       the site shows `203.0.113.10`, enter `203.0.113.10/32`. If your public IP changes or you connect from another
       network, update the security rule before connecting.
 
-
-
     - **Autonomous Database ADMIN password:** Create a strong password of at
      least 12 characters. This is the password for the database `ADMIN` user.
 
