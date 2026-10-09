@@ -44,49 +44,49 @@ Check `GENAI` and its object list. Generated SQL runs with the current database 
 
 1. Check the profile:
 
-    <copy>
     ```sql
+    <copy>
     SELECT profile_name,
            status
     FROM user_cloud_ai_profiles
     WHERE profile_name = 'GENAI';
-    ```
     </copy>
+    ```
 
     The profile should be enabled. If it is not present, complete Lab 7 first or ask the DBA which profile to use.
 
 2. Check the tables listed in the profile:
 
-    <copy>
     ```sql
+    <copy>
     SELECT profile_name,
            attribute_name,
            attribute_value
     FROM user_cloud_ai_profile_attributes
     WHERE profile_name = 'GENAI'
       AND attribute_name = 'object_list';
-    ```
     </copy>
+    ```
 
     The list should contain only the workshop tables needed for this lab: `UTILITY_SERVICES_V`, `UTILITY_SERVICE_REQUESTS`, `UTILITY_REQUEST_ITEMS`, and `SERVICE_POINTS_V`. The `object_list` guides SQL generation; it is not a replacement for database grants.
 
 3. Check the agent objects already in your schema:
 
-    <copy>
     ```sql
+    <copy>
     SELECT agent_name,
            status
     FROM user_ai_agents
     ORDER BY agent_name;
-    ```
     </copy>
+    ```
 
     The workshop objects use names beginning with `NINA_UTILITIES_`. If you already ran this lab, use the reset block in the appendix before recreating the objects.
 
 4. Create a separate profile for the agent's reasoning. The SQL tool continues to use `GENAI` and its approved object list. This profile reuses the existing OCI connection settings and credential; it does not create a new credential.
 
-    <copy>
     ```sql
+    <copy>
     DECLARE
       l_attributes CLOB;
     BEGIN
@@ -112,8 +112,8 @@ Check `GENAI` and its object list. Generated SQL runs with the current database 
       );
     END;
     /
-    ```
     </copy>
+    ```
 
     This reasoning model was tested in `us-chicago-1`. If unavailable in your region, ask the facilitator for a tested replacement. Keeping it separate from `GENAI` leaves the SQL tool configuration intact.
 
@@ -123,8 +123,8 @@ Register the SQL tool with `GENAI` so it uses the object list checked in Task 1.
 
 1. Register the tool:
 
-    <copy>
     ```sql
+    <copy>
     BEGIN
 
       DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
@@ -134,22 +134,22 @@ Register the SQL tool with `GENAI` so it uses the object list checked in Task 1.
       );
     END;
     /
-    ```
     </copy>
+    ```
 
     The object list guides SQL generation; it does not enforce read-only access. LLUSER owns the workshop tables, so check the actual SQL calls in Task 5.
 
 2. Confirm the tool definition:
 
-    <copy>
     ```sql
+    <copy>
     SELECT tool_name,
            status,
            description
     FROM user_ai_agent_tools
     WHERE tool_name = 'NINA_UTILITIES_SQL_TOOL';
-    ```
     </copy>
+    ```
 
 ## Task 3: Create Nina's agent, task, and team
 
@@ -157,23 +157,23 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
 
 1. Create the agent:
 
-    <copy>
     ```sql
+    <copy>
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
         agent_name  => 'NINA_UTILITIES_AGENT',
         attributes  => '{"profile_name": "NINA_UTILITIES_PROFILE", "role": "You answer utilities database questions using the SQL tool and report the returned data. Do not invent values or request changes to records.", "enable_human_tool": false}',
-        description => 'Energy & Utilities assistant for Nina Patel'
+        description => 'Energy and Utilities assistant for Nina Patel'
       );
     END;
     /
-    ```
     </copy>
+    ```
 
 2. Create the task:
 
-    <copy>
     ```sql
+    <copy>
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_TASK(
         task_name  => 'NINA_UTILITIES_TASK',
@@ -182,13 +182,13 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
       );
     END;
     /
-    ```
     </copy>
+    ```
 
 3. Create the team:
 
-    <copy>
     ```sql
+    <copy>
     BEGIN
       DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
         team_name  => 'NINA_UTILITIES_TEAM',
@@ -197,8 +197,8 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
       );
     END;
     /
-    ```
     </copy>
+    ```
 
     The team is the runnable unit. It connects Nina's role, the task instructions, and the SQL tool.
 
@@ -208,15 +208,15 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
 1. Ask the agent:
 
-    <copy>
     ```sql
+    <copy>
     SELECT DBMS_CLOUD_AI_AGENT.RUN_TEAM(
              team_name   => 'NINA_UTILITIES_TEAM',
              user_prompt => 'Which five utility services have the highest total request value? Include the service name, utility category, total request-item value, and units requested.',
              params      => '{"conversation_id": "' || DBMS_CLOUD_AI.CREATE_CONVERSATION() || '"}'
            ) AS agent_answer;
-    ```
     </copy>
+    ```
 
     Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
 
@@ -234,8 +234,8 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
 
 1. Review the latest team runs:
 
-    <copy>
     ```sql
+    <copy>
     SELECT team_name,
          team_exec_id,
          state,
@@ -244,15 +244,15 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     FROM user_ai_agent_team_history
     ORDER BY start_date DESC
     FETCH FIRST 5 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     ![Successful Utilities team history](images/cap-055.png)
 
 2. Review the latest tool calls:
 
-    <copy>
     ```sql
+    <copy>
     SELECT tool_name,
          invocation_id,
          agent_name,
@@ -262,8 +262,8 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     FROM user_ai_agent_tool_history
     ORDER BY start_date DESC
     FETCH FIRST 10 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     ![Utilities SQL tool audit history](images/cap-056.png)
 
@@ -277,8 +277,8 @@ Nina has a callable assistant with a defined task and one SQL tool. Jessica can 
 
 Run this block to recreate the lab setup. It removes the team, task, agent, SQL tool, and reasoning profile created here.
 
-<copy>
 ```sql
+<copy>
 BEGIN
   DBMS_CLOUD_AI_AGENT.DROP_TEAM('NINA_UTILITIES_TEAM', TRUE);
   DBMS_CLOUD_AI_AGENT.DROP_TASK('NINA_UTILITIES_TASK', TRUE);
@@ -287,8 +287,8 @@ BEGIN
   DBMS_CLOUD_AI.DROP_PROFILE('NINA_UTILITIES_PROFILE', TRUE);
 END;
 /
-```
 </copy>
+```
 
 ## Next Steps
 

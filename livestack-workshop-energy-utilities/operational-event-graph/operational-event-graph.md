@@ -40,8 +40,8 @@ Start with outgoing relationships from gas leak event `GLK-2208`, which connects
 
 1. Review Jessica's direct-connection query.
 
-<copy>
 ```sql
+<copy>
 SELECT event.entity_key AS event_key,
            connected.entity_key AS connected_key,
            connected.entity_type AS connected_type,
@@ -54,8 +54,8 @@ SELECT event.entity_key AS event_key,
       ON connected.entity_id = rel.to_entity_id
     WHERE event.entity_key = 'GLK-2208'
     ORDER BY connected_risk DESC;
-```
 </copy>
+```
 
 The first copy of `UTILITY_GRAPH_ENTITIES` identifies the event; the second identifies a connected entity. `UTILITY_GRAPH_RELATIONSHIPS` supplies the source and destination keys. Compare the result with the source rows before interpreting it.
 
@@ -63,8 +63,8 @@ The first copy of `UTILITY_GRAPH_ENTITIES` identifies the event; the second iden
 
 2. Compare the same approach across one through four hops.
 
-<copy>
 ```sql
+<copy>
 SELECT event_key, connected_key, connected_type,
            relationship_path, connected_risk
     FROM (
@@ -152,8 +152,8 @@ SELECT event_key, connected_key, connected_type,
       WHERE seed.entity_key = 'GLK-2208'
     ) paths
     ORDER BY connected_risk DESC;
-```
 </copy>
+```
 
 Each branch adds one relationship join and one entity join. `UNION` combines the path lengths and removes duplicate result rows. The output includes a path description, which can distinguish paths to the same entity. This query illustrates the cost of expressing each path length separately; it is not a claim that graph queries always run faster.
 
@@ -169,8 +169,8 @@ Initialization creates `SERVICE_RESTORATION_NETWORK` over the existing relationa
 
 1. Run the equivalent one-hop pattern.
 
-<copy>
 ```sql
+<copy>
 SELECT event_key,
            connected_key,
            connected_type,
@@ -188,8 +188,8 @@ SELECT event_key,
       )
     )
     ORDER BY connected_risk DESC;
-```
 </copy>
+```
 
 `MATCH` describes one outgoing relationship. `COLUMNS` projects graph properties into a normal SQL result. Compare the entity keys, relationship types and risk scores with Task 1, including direction. The two representations should describe the same direct relationships.
 
@@ -197,8 +197,8 @@ SELECT event_key,
 
 1. Expand the event investigation to paths of one through four hops.
 
-<copy>
 ```sql
+<copy>
 SELECT DISTINCT entity_key, display_name, entity_type,
        relationship_hops, risk_score, operations_domain, volume_count
 FROM GRAPH_TABLE ( service_restoration_network
@@ -217,8 +217,8 @@ FROM GRAPH_TABLE ( service_restoration_network
 )
 ORDER BY risk_score DESC, entity_key, relationship_hops
 FETCH FIRST 25 ROWS ONLY;
-```
 </copy>
+```
 
 `->{1,4}` expresses the path-length range. `COUNT(e.relationship_type)` exposes its hop count. `DISTINCT` removes duplicate projected rows; one entity may still appear at several depths. Review the seed, direction and bounds rather than treating every reachable vertex as equally relevant.
 
@@ -232,8 +232,8 @@ Bob now asks which entities share a pipeline segment, crew, or work order.
 
 1. Run the shared-connection query.
 
-<copy>
 ```sql
+<copy>
 SELECT entity_a, shared_entity, shared_type, entity_b,
        a_risk, b_risk, ROUND((a_risk + b_risk) / 2, 1) AS combined_risk,
        e1_type, e2_type
@@ -257,8 +257,8 @@ FROM GRAPH_TABLE ( service_restoration_network
 )
 ORDER BY combined_risk DESC, shared_entity, entity_a, entity_b
 FETCH FIRST 25 ROWS ONLY;
-```
 </copy>
+```
 
 These undirected pattern edges examine adjacency in either direction. This is deliberately different from Tasks 1-3. Read `E1_TYPE` and `E2_TYPE` against the stored edge direction when interpreting the result. `a.entity_id < b.entity_id` avoids returning the same pair in reverse order; the other predicates exclude the shared vertex itself.
 
@@ -332,8 +332,8 @@ Bob can explain the event through joins, graph patterns, and visual paths. Use b
 
 This reference SQL defines the workshop graph. It includes entity and restoration-case vertices, relationship edges, and case-membership edges. The loader establishes these tables and the graph before the lab. This appendix documents the definition; do not replace the graph during the exercise.
 
-<copy>
 ```sql
+<copy>
 CREATE OR REPLACE PROPERTY GRAPH service_restoration_network
       VERTEX TABLES (
         utility_graph_entities KEY (entity_id)
@@ -391,8 +391,8 @@ CREATE OR REPLACE PROPERTY GRAPH service_restoration_network
             note
           )
       );
-```
 </copy>
+```
 
 `UTILITY_GRAPH_ENTITIES` uses the `utility_entity` label. `UTILITY_GRAPH_RELATIONSHIPS` supplies directed source and destination keys for `restoration_link`. Case membership is retained because it supports the application even though the traversal tasks focus on entity-to-entity relationships.
 

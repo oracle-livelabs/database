@@ -25,9 +25,9 @@ Use stored points and territory polygons to measure distance, select service poi
 
 The LiveStack Field Operations Logistics Map illustrates how an application presents locations and site details.
 
-![LiveStack field operations map with service points and field sites enabled.](images/cap-034.png)
+![LiveStack Energy & Utilities Demo: Field Operations Logistics Map](images/cap-034.png)
 
-The application map uses its own demo dataset. The SQL exercises below use the smaller LLUSER workshop dataset.
+*LiveStack Energy & Utilities Demo: Field Operations Logistics Map*
 
 ### Objectives
 
@@ -53,8 +53,8 @@ Moon starts with the field-site locations. Each `SDO_GEOMETRY` point includes a 
 
 1. Run this query:
 
-    <copy>
     ```sql
+    <copy>
     SELECT fc.center_id,
            fc.center_name,
            fc.city,
@@ -67,8 +67,8 @@ Moon starts with the field-site locations. Each `SDO_GEOMETRY` point includes a 
     FROM fulfillment_centers fc
     WHERE fc.center_id IN (1, 3, 16)
     ORDER BY fc.center_id;
-    ```
     </copy>
+    ```
 
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
 
@@ -86,8 +86,8 @@ Moon uses the seeded Houston Metro demonstration territory and compares active f
 
 1. Run the distance query:
 
-    <copy>
     ```sql
+    <copy>
     SELECT fc.center_name,
            fc.city,
            fc.state_province,
@@ -107,8 +107,8 @@ Moon uses the seeded Houston Metro demonstration territory and compares active f
       AND fc.is_active = 1
     ORDER BY boundary_distance_km, fc.center_id
     FETCH FIRST 10 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     `SDO_GEOM.SDO_DISTANCE` compares the field-site point with the service-territory polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
@@ -133,8 +133,8 @@ Moon uses the seeded Houston Metro demonstration territory and compares active f
 
     Change the region name to `Dallas Metro`, add a miles calculation, and run the modified query:
 
-    <copy>
     ```sql
+    <copy>
     SELECT fc.center_name,
            fc.city,
            fc.state_province,
@@ -162,8 +162,8 @@ Moon uses the seeded Houston Metro demonstration territory and compares active f
       AND fc.is_active = 1
     ORDER BY boundary_distance_km, fc.center_id
     FETCH FIRST 10 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     ![Dallas boundary distances](images/cap-037.png)
 
@@ -177,8 +177,8 @@ Select service points inside Houston Metro, compare each with active field sites
 
 1. Run the service-point routing query:
 
-    <copy>
     ```sql
+    <copy>
     WITH regional_customers AS (
       SELECT dr.region_name,
              dr.demand_index,
@@ -243,8 +243,8 @@ Select service points inside Houston Metro, compare each with active field sites
     WHERE center_rank = 1
     ORDER BY customer_center_distance_km, customer_id
     FETCH FIRST 25 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     `SDO_GEOM.RELATE` keeps service points whose location falls inside or touches the Houston Metro polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching customer to every active center. `ROW_NUMBER` keeps the nearest center for each customer.
 

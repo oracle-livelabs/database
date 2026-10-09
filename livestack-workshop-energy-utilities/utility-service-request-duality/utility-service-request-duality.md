@@ -54,8 +54,8 @@ Thomas starts with optional screen settings. Add a table with a native `JSON` co
 
 1. Create the application-data table and add one sample payload.
 
-    <copy>
     ```sql
+    <copy>
     CREATE TABLE ll_request_app_data (
         order_id  NUMBER PRIMARY KEY,
         app_data  JSON NOT NULL
@@ -77,20 +77,20 @@ Thomas starts with optional screen settings. Add a table with a native `JSON` co
     );
 
     COMMIT;
-    ```
     </copy>
+    ```
 
 2. Read values from the JSON column.
 
-    <copy>
     ```sql
+    <copy>
     SELECT order_id,
            JSON_VALUE(app_data, '$.screen') AS screen_name,
            JSON_VALUE(app_data, '$.showTotal' RETURNING BOOLEAN) AS show_total,
            JSON_QUERY(app_data, '$.features') AS app_features
     FROM ll_request_app_data;
-    ```
     </copy>
+    ```
 
     `ORDER_ID` remains a relational key. `APP_DATA` can change as the application changes. Thomas can query both with SQL in one table.
 
@@ -100,8 +100,8 @@ Next, store application-owned documents in a JSON Collection Table. Each documen
 
 1. Create the collection and add the sample service-request document.
 
-    <copy>
     ```sql
+    <copy>
     CREATE JSON COLLECTION TABLE ll_service_request_docs
     WITH ETAG;
 
@@ -129,21 +129,21 @@ Next, store application-owned documents in a JSON Collection Table. Each documen
     JOIN ll_request_app_data t ON t.order_id = o.order_id;
 
     COMMIT;
-    ```
     </copy>
+    ```
 
     `WITH ETAG` adds `_metadata.etag`, a version tag that changes with the document. An application can use the tag it last read to detect a concurrent change before overwriting it.
 
 2. Query the collection as documents.
 
-    <copy>
     ```sql
+    <copy>
     SELECT JSON_SERIALIZE(data PRETTY) AS request_document
     FROM ll_service_request_docs
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) =
           (SELECT order_id FROM ll_request_app_data);
-    ```
     </copy>
+    ```
 
     SQL and document APIs can read this collection. Its documents are stored separately from `ORDERS` and `ORDER_ITEMS`.
 
@@ -153,13 +153,13 @@ Thomas now tests the document shape his application can consume directly.
 
 1. Run this query:
 
-    <copy>
     ```sql
+    <copy>
     SELECT data AS request_document
     FROM utility_service_requests_dv
     FETCH FIRST 1 ROW ONLY;
-    ```
     </copy>
+    ```
 
     **Expected output:**
 
@@ -178,16 +178,16 @@ The supplied `UTILITY_SERVICE_REQUESTS_DV` supports document updates. Create `LL
 
 1. Check the current document-write capabilities.
 
-    <copy>
     ```sql
+    <copy>
     SELECT view_name,
            allow_insert,
            allow_update,
            allow_delete
     FROM user_json_duality_views
     WHERE view_name = 'UTILITY_SERVICE_REQUESTS_DV';
-    ```
     </copy>
+    ```
 
     **Expected output: Current Document Capabilities**
 
@@ -199,8 +199,8 @@ The supplied `UTILITY_SERVICE_REQUESTS_DV` supports document updates. Create `LL
 
     Both the root request and its nested items need `WITH INSERT UPDATE`.
 
-    <copy>
     ```sql
+    <copy>
     CREATE JSON RELATIONAL DUALITY VIEW ll_service_requests_dv AS
     SELECT JSON {
         '_id'         : o.order_id,
@@ -222,8 +222,8 @@ The supplied `UTILITY_SERVICE_REQUESTS_DV` supports document updates. Create `LL
         ]
     }
     FROM orders o WITH INSERT UPDATE;
-    ```
     </copy>
+    ```
 
     `ORDERS` supplies the document root; related `ORDER_ITEMS` rows form `lineItems`.
 
@@ -233,16 +233,16 @@ The supplied `UTILITY_SERVICE_REQUESTS_DV` supports document updates. Create `LL
 
 3. Run the capability query again.
 
-    <copy>
     ```sql
+    <copy>
     SELECT view_name,
            allow_insert,
            allow_update,
            allow_delete
     FROM user_json_duality_views
     WHERE view_name = 'LL_SERVICE_REQUESTS_DV';
-    ```
     </copy>
+    ```
 
     **Expected output: Document Capabilities Enabled**
 
@@ -260,8 +260,8 @@ Thomas now tests a complete service request. He creates it as one nested JSON do
 
     Insert through `LL_SERVICE_REQUESTS_DV` to create request `900001` with one line item for service point `1` and service `1`. Its initial status is `pending`. Stop if either reserved identifier is already occupied: `NOT EXISTS` avoids a duplicate insert but does not establish ownership of an existing row.
 
-    <copy>
     ```sql
+    <copy>
     INSERT INTO ll_service_requests_dv (data)
     SELECT JSON(
       '{
@@ -287,8 +287,8 @@ Thomas now tests a complete service request. He creates it as one nested JSON do
     );
 
     COMMIT;
-    ```
     </copy>
+    ```
 
     **Expected output: Service Request Document Created**
 
@@ -298,8 +298,8 @@ Thomas now tests a complete service request. He creates it as one nested JSON do
 
     > **Note:** This query reads the relational `ORDERS` and `ORDER_ITEMS` tables.
 
-    <copy>
     ```sql
+    <copy>
     SELECT o.order_id AS service_request_id,
            o.order_status AS request_status,
            c.email AS service_point_email,
@@ -313,8 +313,8 @@ Thomas now tests a complete service request. He creates it as one nested JSON do
     JOIN order_items oi ON oi.order_id = o.order_id
     JOIN products p ON p.product_id = oi.product_id
     WHERE o.order_id = 900001;
-    ```
     </copy>
+    ```
 
     **Expected output: Created Service Request Rows**
 
@@ -324,15 +324,15 @@ Thomas now tests a complete service request. He creates it as one nested JSON do
 
     Change `requestStatus` through the duality view. Oracle maps it to `ORDERS.ORDER_STATUS`.
 
-    <copy>
     ```sql
+    <copy>
     UPDATE ll_service_requests_dv
     SET data = JSON_TRANSFORM(data, SET '$.requestStatus' = 'confirmed')
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
 
     COMMIT;
-    ```
     </copy>
+    ```
 
     **Expected output: Request Status Updated**
 
@@ -340,8 +340,8 @@ Thomas now tests a complete service request. He creates it as one nested JSON do
 
 4. Verify the updated relational status.
 
-    <copy>
     ```sql
+    <copy>
     SELECT o.order_id AS service_request_id,
            o.order_status AS request_status,
            oi.item_id,
@@ -352,8 +352,8 @@ Thomas now tests a complete service request. He creates it as one nested JSON do
     JOIN order_items oi ON oi.order_id = o.order_id
     JOIN products p ON p.product_id = oi.product_id
     WHERE o.order_id = 900001;
-    ```
     </copy>
+    ```
 
     **Expected output: Updated Service Request Rows**
 
@@ -367,8 +367,8 @@ Jessica now checks the JSON fields Thomas's application receives. Projecting fie
 
     `JSON_VALUE` extracts the request ID, status, and service-point identifier. The query joins that identifier to `CUSTOMERS` for the email address.
 
-    <copy>
     ```sql
+    <copy>
     SELECT JSON_VALUE(od.data, '$._id' RETURNING NUMBER) AS service_request_id,
            JSON_VALUE(od.data, '$.requestStatus') AS request_status,
            c.email AS service_point_email
@@ -376,8 +376,8 @@ Jessica now checks the JSON fields Thomas's application receives. Projecting fie
     JOIN customers c
       ON c.customer_id = JSON_VALUE(od.data, '$.requestingServicePointId' RETURNING NUMBER)
     WHERE JSON_VALUE(od.data, '$._id' RETURNING NUMBER) = 900001;
-    ```
     </copy>
+    ```
 
     **Expected output: JSON Field Projection**
 
@@ -385,8 +385,8 @@ Jessica now checks the JSON fields Thomas's application receives. Projecting fie
 
 2. Run the equivalent query against the relational tables.
 
-    <copy>
     ```sql
+    <copy>
     SELECT o.order_id AS service_request_id,
            o.order_status AS request_status,
            c.email AS service_point_email
@@ -394,8 +394,8 @@ Jessica now checks the JSON fields Thomas's application receives. Projecting fie
     JOIN customers c
       ON c.customer_id = o.customer_id
     WHERE o.order_id = 900001;
-    ```
     </copy>
+    ```
 
     ![Equivalent relational projection](images/cap-016.png)
 
