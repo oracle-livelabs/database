@@ -94,14 +94,6 @@ In this lab, you will:
       the site shows `203.0.113.10`, enter `203.0.113.10/32`. If your public IP changes or you connect from another
       network, update the security rule before connecting.
 
-    - **Compute instance shape:** Keep the default `VM.Standard.A1.Flex` to use
-      the Always Free-eligible shape. 
-      If OCI reports **Out of host capacity** for A1.Flex in the selected region, 
-      accounts on the **Pay As You Go** payment model can select `VM.Standard.A2.Flex` 
-      instead. A2.Flex is not an Always Free resource and can generate usage charges.
-
-    ![Select the A1 Flex or A2 Flex compute instance shape](images/compute-instance-shape.png)
-
 
 
     - **Autonomous Database ADMIN password:** Create a strong password of at
