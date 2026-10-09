@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Thomas Brune is an application developer at Seer Scientific. He and his team are building a new web and mobile application for clinical supply teams. The team wants a faster clinical supply experience, with fewer round trips and payloads that match the screens and services they are building.
+Thomas Brune is an application developer at Seer Scientific. His team is building a web and mobile application for clinical supply teams. They need order details and line items in one JSON response to reduce separate database requests.
 
-Thomas needs order data as a JSON payload that a web or mobile application can consume directly. One payload can group trial-site identifiers, order status, line items, and optional app-specific attributes. JSON lets him evolve that payload as the product changes. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, transactions, and database controls.
+Thomas needs order data as a JSON payload that a web or mobile application can consume directly. One payload can group trial-site identifiers, order status, line items, and optional app-specific attributes. JSON lets him adjust that payload as the application changes. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, transactions, and database controls.
 
 Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature. A collection stores its own documents; a duality view presents existing relational rows without a second document store.
 
-![thomas](images/thomas.png)
+![Thomas, application developer, compares JSON approaches for clinical supply orders](images/thomas.png)
 
 <details>
 <summary><strong>Key terms: JSON columns, JSON collections, and JSON Relational Duality</strong></summary>
@@ -63,7 +63,7 @@ Persona focus: You are Thomas, working with Jessica to decide how the new applic
 
 Thomas does not need one JSON pattern for every feature. A JSON column holds optional application attributes in a relational table. A JSON Collection Table holds documents owned by the application. A duality view assembles a document from existing relational tables. Thomas uses the document shape in the application, while Jessica works with the underlying rows using SQL.
 
-This keeps the order in one database and avoids complex, expensive integration between separate systems. Thomas gets the document shape his application needs, and Jessica keeps the relational rows, SQL access, and database controls.
+The duality view gives Thomas an order document and lets Jessica query the same underlying rows with SQL. Relational keys, constraints, and access controls still apply.
 
 > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide on how to run SQL statements.
 
@@ -110,6 +110,8 @@ Thomas starts with data that belongs to the application but does not need its ow
     </copy>
     ```
 
+    ![Lab 2 Task 1 Step 2](images/l2-t1-s2.png " ")
+
     Expect one row for order `1`, screen `clinical-supply-order-detail`, Boolean `true`, and features `live-status` and `saved-trial-site`.
 
     `ORDER_ID` remains a relational primary key; this small settings table does not declare a foreign key to `ORDERS`. `APP_DATA` can change as the application changes. Thomas can query both with SQL in one table.
@@ -152,7 +154,7 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
     </copy>
     ```
 
-    `WITH ETAG` adds an `_metadata.etag` value to each document. Oracle changes the tag whenever the document changes. Thomas's application can send the tag it last read when it updates a document. If the tag no longer matches, the application knows that someone else changed the document first and can avoid overwriting the newer version. This protects clinical supply data when web and mobile requests try updating the same document at the same time.
+    `WITH ETAG` adds an `_metadata.etag` value to each document. Oracle changes the tag whenever the document changes. Thomas's application can send the tag it last read when it updates a document. If the tag no longer matches, the application knows that someone else changed the document first and can avoid overwriting the newer version. Using the ETAG for conflict checking helps an application avoid overwriting another request’s changes.
 
 2. Query the collection as documents.
 
@@ -284,7 +286,7 @@ The existing `LS_JSON_ORDERS_DV` lets an application update an existing order do
 
     ![Insert and update enabled; delete remains disabled](images/jsondv-insert.png)
 
-    Both root and child now allow INSERT and UPDATE; DELETE remains disabled. Identifying keys cannot be updated through the view. The view can now receive a new JSON order document and apply a document update. Thomas has a document-shaped database interface over the existing relational order data. He can use it for a clinical supply feature such as submitting a new order. The application sends one document, and the database writes the order and its line items to the relational tables.
+    Both the order and its line items now allow INSERT and UPDATE; DELETE remains disabled. Identifying keys cannot be updated through the view. The view can now receive a new JSON order document and apply a document update. Thomas has a document-shaped database interface over the existing relational order data. He can use it for a clinical supply feature such as submitting a new order. The application sends one document, and the database writes the order and its line items to the relational tables.
 
 ## Task 5: Create and update a JSON order
 
@@ -292,7 +294,7 @@ Thomas now tests a complete clinical supply order. He creates it as one nested J
 
 1. Insert the supplied workshop order document using **Run Script (F5)**.
 
-    The `INSERT` targets `LS_JSON_ORDERS_DV`, the JSON Relational Duality View, rather than the underlying `LS_JSON_ORDERS` or `LS_JSON_ORDER_ITEMS` tables. The database uses the view definition to write the document to those relational tables. The document uses order ID `900001`, customer `660`, and product `46` (Sustainable Lab Plastics Kit). It includes one nested line item. For a sequential rerun, after the order exists, it inserts zero rows and preserves the existing record. On the first run, the new order has status `pending`.
+    The `INSERT` targets `LS_JSON_ORDERS_DV`, the JSON Relational Duality View, rather than the underlying `LS_JSON_ORDERS` or `LS_JSON_ORDER_ITEMS` tables. The database uses the view definition to write the document to those relational tables. The document uses order ID `900001`, customer `660`, and product `46` (Sustainable Lab Plastics Kit). It includes one nested line item. If you run the statement again after the order exists, it inserts zero rows and preserves the existing record. On the first run, the new order has status `pending`.
 
     ```sql
     <copy>
@@ -330,7 +332,7 @@ Thomas now tests a complete clinical supply order. He creates it as one nested J
 
 2. Confirm the JSON document became relational rows.
 
-    >**Note**: We are querying here the relational tables `LS_JSON_ORDERS` and `LS_JSON_ORDER_ITEMS`!
+    >**Note**: This query reads `LS_JSON_ORDERS` and `LS_JSON_ORDER_ITEMS` directly.
 
     ```sql
     <copy>
@@ -358,7 +360,7 @@ Thomas now tests a complete clinical supply order. He creates it as one nested J
 
 3. Update the document status through the duality view.
 
-    This update changes JSON data through `LS_JSON_ORDERS_DV`. This statement changes only `status`, which Oracle maps to `LS_JSON_ORDERS.ORDER_STATUS`. The table-level `WITH UPDATE` annotations permit other mapped non-key fields too; they are not a status-only permission. Keys, relationships and constraints still apply. He does not need application-side parsing or a second order store.
+    This update changes JSON data through `LS_JSON_ORDERS_DV`. This statement changes only `status`, which Oracle maps to `LS_JSON_ORDERS.ORDER_STATUS`. The table-level `WITH UPDATE` annotations permit other mapped non-key fields too; they are not a status-only permission. Keys, relationships and constraints still apply. Thomas can update the document without storing a separate copy of the order.
 
     ```sql
     <copy>
@@ -401,7 +403,7 @@ Thomas now tests a complete clinical supply order. He creates it as one nested J
 
 ## Task 6: Project JSON fields with SQL
 
-Thomas has confirmed that the application can display and update the document. Jessica now checks the same order with SQL before the feature goes live. She uses the relational tables for normal reporting and analysis. Here, she queries `LS_JSON_ORDERS_DV` to verify the exact JSON contract that Thomas's application receives. She can also project fields from the document to test clinical supply searches and status filters. In this context, "project" means pulling selected values out of the JSON document and displaying them as SQL result columns.
+Thomas has tested the document’s insert and update operations. Jessica now reads selected JSON fields as SQL result columns to check the document returned to the application. This operation is called projection. It also lets her filter orders by status or site.
 
 1. Run this SQL/JSON projection query:
 
@@ -455,10 +457,10 @@ Thomas does not have to choose one JSON model for the whole application. He can 
 | JSON Collection Table             | The application owns a set of JSON documents and needs document-style access.               | Store saved clinical supply drafts that may change as supply teams add or remove items.                              | A JSON Collection Table with one document in each `DATA` row.                                                  |
 | JSON Relational Duality View      | The data already belongs in relational tables, but the application needs one JSON document. | Return a clinical supply order with its status and line items, or accept a new order document from the app. | Relational tables such as `LS_JSON_ORDERS` and `LS_JSON_ORDER_ITEMS`; the duality view defines the JSON shape for Thomas' app. |
 
-For Thomas, `LS_JSON_ORDERS_DV` is the right choice for the order feature because `LS_JSON_ORDERS` and `LS_JSON_ORDER_ITEMS` hold practice relational rows modeled on the governed clinical supply data. The application gets the JSON payload it needs, while Jessica keeps SQL, relational constraints, and controlled access to the same data.
+`LS_JSON_ORDERS_DV` suits the order feature because it presents existing relational rows as an application document. In this exercise, those rows are in the practice tables `LS_JSON_ORDERS` and `LS_JSON_ORDER_ITEMS`. Jessica can query the same rows with SQL, and relational constraints continue to apply.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

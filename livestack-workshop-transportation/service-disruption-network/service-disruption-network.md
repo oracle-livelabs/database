@@ -38,13 +38,13 @@ Estimated Time: **10 minutes**
 | Database Capability | `SERVICE_DISRUPTION_NETWORK` and `GRAPH_TABLE` support SQL/PGQ traversal. |
 | Outcome | Operations can review connected trips, shared assets, and risk scores before choosing a recovery action. |
 
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet) if you need to reopen SQL Worksheet.
+> **SQL Worksheet reminder:** For the difference between **Run Statement** and **Run Script**, return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
 ## Task 1: Follow a disrupted trip with SQL
 
 Start with trip `TRIP-8841`. The relational query joins the entity table twice to find its direct neighbors.
 
-1. Run the query:
+1. Run the query with **Run Statement**:
 
     ```sql
     <copy>
@@ -63,7 +63,9 @@ Start with trip `TRIP-8841`. The relational query joins the entity table twice t
     </copy>
     ```
 
-2. Extend the relational query to follow one through four hops:
+    ![Lab 4 Task 1 Step 1](images/l4-t1-s1.png " ")
+
+2. Extend the relational query to follow one through four hops, then choose **Run Statement**:
 
     ```sql
     <copy>
@@ -155,7 +157,9 @@ Start with trip `TRIP-8841`. The relational query joins the entity table twice t
     ) paths
     ORDER BY connected_risk DESC;
     </copy>
-        ```
+    ```
+
+    ![Lab 4 Task 1 Step 2](images/l4-t1-s2.png " ")
 
 3. Compare the query branches. Each additional hop needs another relationship join and entity join. `UNION` combines the path lengths and removes duplicate rows. Bob will express the same range more directly with SQL/PGQ in Task 3.
 
@@ -163,7 +167,7 @@ Start with trip `TRIP-8841`. The relational query joins the entity table twice t
 
 Bob has already defined `SERVICE_DISRUPTION_NETWORK` over the relational entity and relationship tables. The graph labels are `entity` for vertices and `related_to` for edges.
 
-1. Run the equivalent SQL/PGQ query:
+1. Run the equivalent SQL/PGQ query with **Run Statement**:
 
     ```sql
     <copy>
@@ -187,13 +191,17 @@ Bob has already defined `SERVICE_DISRUPTION_NETWORK` over the relational entity 
     </copy>
     ```
 
+    ![SQL Worksheet showing the direct graph pattern and connected entities](images/lab4-graph-query-result.jpg " ")
+
+    *Figure 1: Run the graph pattern in SQL Worksheet and compare its rows with the relational query.*
+
 2. Compare the direct connections with Task 1. The result has the same business meaning. The graph pattern states which edge to follow without repeating the table joins.
 
 ## Task 3: Trace four-hop service impact
 
 A route or vehicle can connect the starting trip to other trips several steps away. Follow one to four directed edges from `TRIP-8841` and rank the reached entities by risk.
 
-1. Run the traversal:
+1. Run the traversal with **Run Statement**:
 
     ```sql
     <copy>
@@ -224,13 +232,15 @@ A route or vehicle can connect the starting trip to other trips several steps aw
     </copy>
     ```
 
-2. Use `RELATIONSHIP_HOPS` to distinguish a direct link from a wider network effect. A high risk score points to an entity worth checking; it does not, by itself, prove that another trip is delayed. Review the path and operational evidence before acting.
+    ![Lab 4 Task 3 Step 1](images/l4-t3-s1.png " ")
+
+2. Use `RELATIONSHIP_HOPS` to distinguish direct links from more distant connections. A high risk score identifies an entity to investigate; it does not prove that another trip is delayed. This table lists reached entities and hop counts. Use the Graph Studio view and current trip records to inspect the connections before acting.
 
 ## Task 4: Find trips that share an asset
 
-Two trips can be affected by the same station or vehicle even when neither directly links to the other. Bob looks for trip pairs that converge on one shared entity.
+Two trips can share a station or vehicle without a direct relationship between them. This query finds those pairs when at least one trip has a risk score of 70 or more. `COMBINED_RISK` is the arithmetic mean of the two trip scores, not a probability that both trips will be disrupted.
 
-1. Run the shared-asset query:
+1. Run the shared-asset query with **Run Statement**:
 
     ```sql
     <copy>
@@ -260,27 +270,51 @@ Two trips can be affected by the same station or vehicle even when neither direc
     </copy>
     ```
 
+    ![Lab 4 Task 4 Step 1](images/l4-t4-s1.png " ")
+
 2. Review the asset linking each pair. Dispatchers can check whether the shared vehicle needs reassignment or whether station capacity is constraining both trips.
 
 ## Task 5: Open Graph Studio and import the notebook
 
-1. In Database Actions, open **Graph Studio**. If it opens in another tab, keep your SQL Worksheet tab available for comparison.
+1. In Database Actions, select **Development**, select **Graph Studio**.
 
-    ![Database Actions launchpad with Graph Studio in the navigation](images/database-actions-launchpad.png)
+    ![Lab 4 Task 5 Step 1](images/graph-studio-location.png " ")
 
-    ![Graph Studio home page with the Notebooks option](images/graph-studio-overview.png)
+    *Figure 2: Select Graph Studio from the Database Actions Development launchpad.*
 
-2. Download [Seer Transport service network notebook](files/seer-transport-service-network.dsnb) to your computer.
+    **Note:** Keep your SQL Worksheet tab available for comparison. If a separate sign-in page appears, sign in as `LLUSER` with the reservation password from **View Login Info**.
 
-3. In Graph Studio, open **Notebooks**, choose **Import**, and select the downloaded `.dsnb` file. Open **Seer Transport Service Network** when the import finishes.
+2. On the Graph Studio **Overview** page, open the top-left navigation menu and select **Notebooks** under **Graph Tools**. The **New Notebook** tile creates a blank notebook; use **Notebooks** to import the supplied file.
+
+    ![Lab 4 Task 5 Step 1](images/notebooks-location.png " ")
+
+    *Figure 3: Open Notebooks from the Graph Studio Overview navigation menu.*
+
+3. Download [Seer Transport service network notebook](files/seer-transport-service-network.dsnb) to your computer.
+
+4. On the **Notebooks** page, select **Import** at the top right. In the **Import notebook(s)** dialog, select the drop area and choose the downloaded `.dsnb` file. Confirm that `seer-transport-service-network.dsnb` appears under **Selected files**, select **Import**, and wait for the notebook to appear in the list.
+
+    ![Lab 4 Task 5 Step 2](images/import-notebook-location.png " ")
+
+5. Select **Seer Transport Service Network** to open it. Confirm the notebook title in the breadcrumb at the top of the page.
 
 ## Task 6: Compare the visual network with SQL
 
-1. Run the notebook's SQL paragraphs in order. The first returns the entities reached from `TRIP-8841`; the second draws the direct connections as a graph; the third centers on a shared station or vehicle.
+1. Wait until the status at the top right changes from **DETACHED** or **ATTACHING** to **ATTACHED**. Then select **Run Paragraphs** (the triangle beside the notebook title) and **Confirm** to run the supplied paragraphs in order.
+
+    You can instead select the triangle **Run Paragraph** control on each SQL paragraph and wait for its result before proceeding. The first SQL result is a table of four reached entities; the second shows five vertices and four edges; the third table lists four trip pairs that share an asset. These controls are separate from **Run Statement** and **Run Script** in SQL Worksheet.
+
+    ![Lab 4 Task 5 Step 2](images/graph-studio-result-one.png " ")
+
+    ![Lab 4 Task 5 Step 2](images/graph-studio-result-three.png " ")
+
+    ![Lab 4 Task 5 Step 2](images/graph-studio-result-two.png " ")
+
+    *Figure 4: The graph paragraph returns five vertices and four edges from `TRIP-8841`; the vertex layout may change.*
 
 2. Select a connected vertex and inspect its type and risk score. Follow the edges back to the starting trip. Compare the keys and relationships with the SQL Worksheet results from Tasks 2 through 4.
 
-> **Generated result note:** Graph layout and node positions can change between runs. Use entity keys and relationship properties as the evidence.
+    > **Display note:** Graph layout and node positions can change between runs. Compare entity keys and relationship types.
 
 ## Conclusion: Turn Connections into a Recovery Decision
 
@@ -314,4 +348,5 @@ CREATE PROPERTY GRAPH service_disruption_network
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Nina Patel has used Select AI to ask one transportation question at a time. That works for a quick answer, but her new passenger-review screen needs a repeatable transportation assistant that can answer a question and support follow-up requests.
+Nina Patel has used Select AI to inspect SQL for individual transportation questions. For her service performance review, she wants a repeatable way to request a fare ranking, check the seats booked behind it, and trace how the answer was produced.
 
 ![Jessica Chan and Nina Patel: Labs 7 & 8: Select AI and Transportation Agent](images/nina-transport.png " ")
 
-Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the transportation tables configured in the previous lab.
+Jessica, the DBA, approves one SQL tool for Nina's agent. The tool uses the `GENAI` profile and the transportation tables configured in the previous lab, so Nina can review the result without giving the agent broader database capabilities.
 
 In this lab, you create the agent objects, connect the agent to the SQL tool, and run a question through the team. The agent uses the approved tool and returns an answer. The tool remains read-only, and the SQL still runs with the database user's privileges.
 
@@ -37,20 +37,22 @@ Estimated Time: **15 minutes**
 
 | Step                | Transportation focus                                                                                  |
 | ------------------- | ---------------------------------------------------------------------------------------------- |
-| Business Problem    | Nina needs a transportation answer that can feed a passenger-review screen.                            |
+| Business Problem    | Nina needs a repeatable fare and seats-booked ranking for a service performance review.                            |
 | Technical Challenge | The agent must use database data through an approved capability, not unrestricted access.      |
 | Persona Focus       | You follow Nina as she turns a Select AI question into a small transportation assistant.              |
 | What You Will See   | An agent receives a request, calls its SQL tool, and returns a transportation answer.                 |
 | Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
-| Outcome             | Nina has a controlled agent that can answer questions from the transportation schema.                |
+| Outcome             | Nina can review the ranked services and trace the approved SQL tool used to answer her question.                |
 
 > **Prerequisite:** Complete [Lab 7: Ask Transportation Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
+
+> **SQL Worksheet reminder:** For the difference between **Run Statement** and **Run Script**, return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
 ## Task 1: Check the profile and table access
 
 The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_list` limits the tables Select AI may use when it generates SQL. Database privileges provide the second control: the SQL still runs as the current database user and cannot read tables that user cannot access.
 
-1. Check the profile:
+1. Check the profile with **Run Statement**:
 
     ```sql
     <copy>
@@ -61,9 +63,11 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-    The profile should be enabled. If it is not present, complete Lab 7 first or ask the DBA which profile to use.
+    ![Lab 8 Task 1 Step 1](images/l8-t1-s1.png " ")
 
-2. Check the tables listed in the profile:
+    The `GENAI` profile should be enabled. If it is unavailable after Lab 7, ask the workshop administrator for help before continuing.
+
+2. Check the tables listed in the profile with **Run Statement**:
 
     ```sql
     <copy>
@@ -76,9 +80,11 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
+    ![Lab 8 Task 1 Step 2](images/l8-t1-s2.png " ")
+
     The list should contain only the workshop tables needed for this lab: `TRANSPORT_SERVICES`, `BOOKINGS`, `BOOKING_LEGS`, and `PASSENGERS`. The `object_list` guides SQL generation; it is not a replacement for database grants.
 
-3. Check the agent objects already in your schema:
+3. Check the agent objects already in your schema with **Run Statement**:
 
     ```sql
     <copy>
@@ -89,13 +95,13 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-  The workshop objects use names beginning with `NINA_TRANSPORT_`. If you already ran this lab, you can reuse the existing objects or run the reset block in the appendix before starting again.
+    The workshop objects use names beginning with `NINA_TRANSPORT_`. If you already ran this lab, you can reuse the existing objects or run the reset block in the appendix before starting again.
 
 ## Task 2: Register the SQL tool
 
 The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile's object list limits the schema metadata available for generated SQL.
 
-1. Register the tool:
+1. Register the tool. This is a PL/SQL block; choose **Run Script** and run the entire block, including the `/` line:
 
     ```sql
     <copy>
@@ -118,7 +124,7 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
 
     The tool does not create a second data store. It gives the agent a named, controlled way to ask Select AI to generate and run SQL against the existing transportation tables. The tool uses the profile's table list, and the database user's privileges still apply when the SQL runs.
   
-2. Confirm the tool definition:
+2. Confirm the tool definition with **Run Statement**:
 
     ```sql
     <copy>
@@ -129,12 +135,14 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     WHERE tool_name = 'NINA_TRANSPORT_SQL_TOOL';
     </copy>
     ```
-  
+
+    ![Lab 8 Task 2 Step 2](images/l8-t2-s2.png " ")
+
 ## Task 3: Create Nina's agent, task, and team
 
 The tool by itself does nothing. Nina's agent needs a role, a task needs instructions, and a team connects the two.
 
-1. Create the agent:
+1. Create the agent with **Run Script**, including the `/` line at the end of the PL/SQL block:
 
     ```sql
     <copy>
@@ -149,7 +157,7 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
     </copy>
     ```
 
-2. Create the task:
+2. Create the task with **Run Script**, including the `/` line at the end of the PL/SQL block:
 
     ```sql
     <copy>
@@ -164,7 +172,7 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
     </copy>
     ```
   
-3. Create the team:
+3. Create the team with **Run Script**, including the `/` line at the end of the PL/SQL block:
 
     ```sql
     <copy>
@@ -185,7 +193,7 @@ The tool by itself does nothing. Nina's agent needs a role, a task needs instruc
 
 Database Actions does not support the `SELECT AI AGENT` command directly. Use `DBMS_CLOUD_AI_AGENT.RUN_TEAM` in SQL Worksheet and provide the team name in the function call.
 
-1. Ask the agent:
+1. Ask the agent with **Run Statement**:
 
     ```sql
     <copy>
@@ -196,6 +204,10 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
            ) AS agent_answer;
     </copy>
     ```
+
+    ![LLUSER SQL Worksheet showing the RUN_TEAM query and transportation ranking returned by the agent](images/lab8-agent-query-result.jpg " ")
+
+    *Figure 1: The agent returns a five-service fare ranking from the approved SQL tool. Generated wording can vary.*
   
     Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
 
@@ -205,13 +217,13 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
   
     > **Note:** This team has a read-only SQL tool. It can query the data, but the task instructions do not give it a tool for inserting, updating, or deleting records.
 
-3. Optional challenge: ask a follow-up question that connects the highest-revenue transport service to its passengers and bookings. A more detailed request may take longer because the agent has to interpret more steps.
+3. Optional challenge: ask a question that links a named service to its passengers and bookings. Include the service name and the details you need. This example creates a new conversation ID for each call, so include the context instead of assuming the agent remembers the previous answer.
 
 ## Task 5: Inspect what the agent did
 
-Nina needs more than a final answer. She also wants to know whether the agent called the approved tool and how the request was processed.
+Before using the ranking in her performance review, Nina checks whether the agent completed the request and called Jessica's approved SQL tool.
 
-1. Review the latest team runs:
+1. Review the latest team runs with **Run Statement**:
 
     ```sql
     <copy>
@@ -226,7 +238,11 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-2. Review the latest tool calls:
+    ![LLUSER SQL Worksheet showing the team history query and SUCCEEDED execution](images/lab8-team-history-query-result.jpg " ")
+
+    *Figure 2: Confirm that the most recent `NINA_TRANSPORT_TEAM` run has state `SUCCEEDED`.*
+
+2. Review the latest tool calls with **Run Statement**:
 
     ```sql
     <copy>
@@ -242,21 +258,23 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-  The history should show `NINA_TRANSPORT_SQL_TOOL`. This gives Nina and Jessica a database record of the agent activity instead of treating the answer as an unexplained chat response.
+    ![LLUSER SQL Worksheet showing the tool history query and NINA_TRANSPORT_SQL_TOOL invocation](images/lab8-tool-history-query-result.jpg " ")
+
+    *Figure 3: The tool history records one invocation of `NINA_TRANSPORT_SQL_TOOL` for the agent run.*
+
+    Find the `NINA_TRANSPORT_SQL_TOOL` entry for this run. Match its task, timestamp, and status with the team history. The queries return recent history across runs, so confirm that you are inspecting the intended execution.
 
 ## Conclusion: Give the agent a controlled way to work
 
-In Lab 7, Nina used Select AI to turn a question into SQL. In this lab, she gave an agent a role, a task, and one approved SQL tool. The agent can handle a broader request and decide when it needs database information, while the database still controls the profile, object list, privileges, and tool history.
+Nina now has a fare and seats-booked ranking that she can compare with service activity, along with a record of the tool call behind the answer. Jessica can inspect the same history and manage which tool the agent may use when Nina asks a follow-up question.
 
-That is the next step from Select AI to Select AI Agent: the application can call a defined transportation assistant instead of assembling every question and database call itself. Jessica can review the tools available to the agent and remove access by disabling the tool or team.
-
-The table boundary has two parts. The profile's `object_list` tells the SQL tool which tables to consider, while database grants decide which rows the session can actually read. Both should be kept narrow when an agent is used by an application.
+The profile’s `object_list` specifies the tables used for SQL generation. Database privileges control which objects the executing account can access. Keep both scoped to the application’s needs.
 
 The example remains read-only on purpose. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
 
 ## Appendix: Reset the workshop objects
 
-Run this block only if you want to recreate the objects used in this lab. It removes only the four names created here.
+Run this block only if you want to recreate the objects used in this lab. It removes only the four names created here. Choose **Run Script** to execute the full PL/SQL block, including the `/` line.
 
 ```sql
 <copy>
@@ -277,4 +295,5 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

@@ -6,7 +6,7 @@ Moon Kai is Seer Scientific's spatial specialist. The clinical-supply team asks 
 
 The team already stores the required data in Oracle AI Database. Cold-chain depots and trial sites are stored as map points. Demand regions are stored as map areas, and each region has a demand score.
 
-Moon wants operations users to answer a simple question with SQL that can power a business-user dashboard and map:
+Moon wants a SQL query that supplies a dashboard and map with the answer to this question:
 
 > We are reviewing support for a high-demand region. **Which trial sites are in that region, and how far is each one from its closest active cold-chain depot?**
 
@@ -64,7 +64,7 @@ An `SDO_GEOMETRY` point is Oracle Spatial's structured representation of one loc
 
 `SDO_UTIL.TO_GEOJSON` converts that geometry into a standard JSON map object such as `{ "type": "Point", "coordinates": [-74.4121, 40.5187] }`. The application can send this object to a map without maintaining a second location format or a separate conversion service. Oracle uses the same stored geometry for SQL analysis and application display.
 
-That is the Oracle AI Database advantage in this lab: one location supports spatial calculations, relational joins, and JSON map output without copying the data between systems.
+The same stored location supports distance calculations, relational joins, and GeoJSON output for a map.
 
 1. Run this query:
 
@@ -92,17 +92,15 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
 
     The three rows are Edison Northeast Cold Chain Depot (ID 1), Joliet Midwest Regulatory Hub (ID 3), and Middletown Mid-Atlantic Cold Chain Hub (ID 16).
 
-    The companion panels show the same three rows: depot details first, then coordinates and GeoJSON.
+    The image below shows the three depot identifiers, names, and locations. Inspect the coordinates and GeoJSON columns in SQL Worksheet.
 
     ![Three cold-chain depot IDs, names and locations](images/ls-lab05-points.jpg)
 
-    ![The same depot IDs with latitude, longitude and complete GeoJSON points](images/ls-lab05-points-geojson.jpg)
-
 2. Review the point data.
 
-    Moon has not created a second map database. The point used by the application and the point used by SQL are the same value. The database can calculate with it, and the application can display it.
+    SQL uses the stored point for calculations, and the application receives its GeoJSON representation for display.
 
-    This is the converged-database advantage. Moon can keep the depot's location beside its name, capacity, operating status, and stored utilization. SQL can calculate distance and return those details, while `SDO_UTIL.TO_GEOJSON` gives the application the same location for a map.
+    SQL returns the depot’s location alongside its name, capacity, status, and stored utilization. `SDO_UTIL.TO_GEOJSON` converts the location for display on a map.
 
 ## Task 2: Find the closest cold-chain sites to a demand region
 
@@ -140,17 +138,15 @@ New York Metro has a demand index of `91`, making it a useful region for the fir
     - `0.005` is the tolerance used when Oracle compares the geometries. For this geographic coordinate system it is measured in meters, not degrees. It is a calculation tolerance, not a claim that the source coordinates are accurate to five millimeters.
     - `'unit=KM'` tells Oracle to return the distance in kilometers. Use `'unit=MILE'` when the application needs miles.
 
-    `ROUND(..., 2)` formats the displayed answer to two decimal places. The query orders by the unrounded distance, then depot ID, so rounding does not determine which depot comes first.
+    `ROUND(..., 2)` rounds the returned distance to two decimal places. The query orders by the unrounded distance, then depot ID, so rounding does not determine which depot comes first.
 
     The query also returns `DEMAND_INDEX`, so Moon can read location and demand together. This gives her a first view of how the depots sit around the selected region; it does not yet show how far individual trial sites are from them.
 
     **Expected output: New York Cold-Chain Proximity**
 
-    Edison is first at **9.48 km** from the New York Metro polygon. The two panels show the same ten rows in the same order.
+    Edison is first at **9.48 km** from the New York Metro polygon. The image below shows the query and its result in SQL Worksheet.
 
-    ![Ten cold-chain depots ordered by distance to New York Metro](images/ls-lab05-new-york-region.jpg)
-
-    ![New York depot distances in kilometers and demand index 91](images/ls-lab05-new-york-region-distances.jpg)
+    ![Depots ranked by distance to the New York Metro region](images/l5-t2-s1.png)
 
 2. Try another region.
 
@@ -180,9 +176,7 @@ New York Metro has a demand index of `91`, making it a useful region for the fir
     </copy>
     ```
 
-    ![Chicago Metro depot proximity in kilometers and miles](images/ls-lab05-chicago-region.jpg)
-
-    ![The same Chicago depot rows with kilometer and mile distances and demand index 78](images/ls-lab05-chicago-region-distances.jpg)
+    ![Depots ranked by distance to Chicago Metro, in kilometers and miles](images/l5-t2-s2.png)
 
     The `unit` parameter controls the measurement unit. Joliet Midwest Regulatory Hub falls inside the Chicago Metro polygon, so its region distance is zero kilometers and zero miles. Chicago has a demand index of `78`.
 
@@ -253,7 +247,9 @@ Moon now needs a result that an operations application can use to review the reg
     </copy>
     ```
 
-    `LS_TRIAL_SITES_V` presents `CUSTOMERS` as the trial-site business shape and already exposes its geometry. The supplied sample retains person-style names and contact addresses; use `TRIAL_SITE_ID` to identify each distinct record.
+    ![Trial sites in New York Metro matched to their nearest active depot](images/l5-t3-s1.png)
+
+    `LS_TRIAL_SITES_V` presents `CUSTOMERS` records as trial sites and already exposes its geometry. The supplied sample retains person-style names and contact addresses; use `TRIAL_SITE_ID` to identify each distinct record.
 
     `SDO_GEOM.RELATE` keeps trial sites whose point falls inside or touches the New York Metro polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching site to every active depot. `ROW_NUMBER` keeps one nearest depot per trial site, using depot ID to break equal-distance ties.
 
@@ -263,13 +259,7 @@ Moon now needs a result that an operations application can use to review the reg
 
     The fixed dataset stores `UTILIZATION_PCT` as zero for every depot. This is the stored sample value, not proof of empty storage or available product stock. The demo application's calculated inventory load is a different measure.
 
-    The query displays 25 of the 114 matching trial sites. These 25 rows all identify Edison Northeast Cold Chain Depot; the first site is ID `385` at **35.34 km** from Edison. The three panels show the same rows in the same order, with different columns visible to keep the text readable.
-
-    ![Twenty-five New York trial-site IDs and names](images/ls-lab05-new-york-sites.jpg)
-
-    ![Contacts, tiers and nearest depots for the same New York rows](images/ls-lab05-new-york-sites-depot.jpg)
-
-    ![Capacity, stored utilization and distances for the same New York rows](images/ls-lab05-new-york-sites-distances.jpg)
+    The query displays 25 of the 114 matching trial sites. These 25 rows all identify Edison Northeast Cold Chain Depot; the first site is ID `385` at **35.34 km** from Edison. Scroll across the SQL Worksheet result to inspect the site details, selected depot, capacity, utilization, and distance.
 
     A dashboard can let a user select a region and review these site-to-depot distances immediately. Geographic proximity alone does not establish temperature compliance, suitable product storage, available stock, an open road route or actual travel time. Operations must verify those conditions before making a cold-chain commitment. The query does not assign an order or reserve inventory.
 
@@ -279,17 +269,11 @@ Moon now needs a result that an operations application can use to review the reg
 
     The query displays 25 of the 58 matching trial sites. These rows identify Joliet Midwest Regulatory Hub; the first site is ID `1717` at **49.51 km** from Joliet. Although Joliet's distance to the Chicago region is zero, its distance to an individual trial-site point is not zero.
 
-    ![Twenty-five Chicago trial-site IDs and names](images/ls-lab05-chicago-sites.jpg)
-
-    ![Contacts, tiers and nearest depots for the same Chicago rows](images/ls-lab05-chicago-sites-depot.jpg)
-
-    ![Capacity, stored utilization and distances for the same Chicago rows](images/ls-lab05-chicago-sites-distances.jpg)
-
 ## Conclusion: Turn Location into a Service Decision
 
 Moon's analysis moves from a point, to regional distance, to a site-by-site view of the service footprint. New York Metro and Chicago Metro contain different trial sites, and the closest depots sit at different distances from those sites. A business user can select a region and review those distances before making service commitments. The result supports geographic planning rather than guaranteeing cold-chain service.
 
-This shows why Spatial in Oracle AI Database matters. One converged query can identify trial sites with spatial functions, join them to relational site and depot data, and include capacity and stored utilization in the same result. The dashboard can show map locations and business details from one database, without maintaining a separate copy of the geography.
+The query uses spatial functions to identify trial sites and joins their records to depot data, capacity, and stored utilization. A dashboard can retrieve map locations and business details from the same database.
 
 ## Next Steps
 
@@ -297,6 +281,6 @@ You used Oracle Spatial to turn points and polygons into a proximity-based plann
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

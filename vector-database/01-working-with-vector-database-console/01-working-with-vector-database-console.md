@@ -60,7 +60,7 @@ To connect to Autonomous AI Vector Database from Python, you need the REST URL, 
 
 ## Task 3: Load an Embedding Model
 
-A core Autonomous AI Vector Database capability is integrated embedding. When you upsert a record into an integrated embedding table, the database uses the configured model to generate a vector from the selected metadata field and stores that vector with the record.
+Auto-generated vector embeddings are a core Autonomous AI Vector Database capability. When you upsert a record into a table configured for auto-generated vector embeddings, the database uses the configured model to generate a vector from the selected metadata field and stores that vector with the record.
 
 Three embedding models are available when your database is created, but they are not loaded initially. In this workshop, you use `all_MiniLM_L12_v2`, so load it before you begin the Python exercises.
 

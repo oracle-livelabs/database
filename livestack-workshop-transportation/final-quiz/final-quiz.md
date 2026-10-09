@@ -2,12 +2,12 @@
 
 ```quiz-config
 passing: 75
-badge: images/badge.png
+badge: images/badge2.png
 ```
 
 ## Introduction
 
-Use this scored quiz to check how Seer Transport connects passenger service decisions to database evidence.
+Use this scored quiz to check how Seer Transport uses database queries to support passenger service decisions.
 
 ### Objectives
 
@@ -51,7 +51,7 @@ Estimated Time: **3 minutes**
 
     Q: How should an operations analyst use the OML surge probability?
     - Treat it as a guaranteed future event.
-    * Use it to rank services for review alongside demand and booking evidence.
+    * Use it to rank services for review alongside service activity and booking data.
     - Ignore the model inputs after scoring.
     - Interpret every score as a confirmed disruption.
     > A probability supports prioritization, but the team still checks the service activity behind the score.
@@ -59,9 +59,9 @@ Estimated Time: **3 minutes**
     Q: What keeps a Select AI answer reviewable?
     - The AI model can query every table automatically.
     - The explanation is guaranteed to be identical each time.
-    * The profile limits approved objects and Nina can inspect the generated SQL.
+    * Nina can inspect the generated SQL and check it against the requested calculation.
     - The answer comes only from general model knowledge.
-    > Nina uses SHOWSQL before RUNSQL and compares the result with her business question.
+    > Nina uses SHOWSQL to inspect generated SQL. To execute that exact statement, she runs it in SQL Worksheet; RUNSQL submits the question again for generation and execution.
 
     Q: What is the advantage of a converged database in this workshop?
     - Each capability needs a separate specialist database.
@@ -76,4 +76,5 @@ Estimated Time: **3 minutes**
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+**Contributor** - Teodor Constantin Nechita\
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
