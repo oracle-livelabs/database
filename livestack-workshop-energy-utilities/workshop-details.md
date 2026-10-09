@@ -1,45 +1,33 @@
-# Workshop Details
+# Seer Utility Network workshop details
 
-Estimated Time: **5 minutes**
+## Workshop
 
-## Objectives
+Build Connected Energy & Utilities Solutions with Oracle AI Database.
 
-- Build a relational energy operations review query that connects service requests, reliability evidence, and field-logistics capacity.
-- Inspect JSON Relational Duality documents, rank service descriptions with AI Vector Search, follow directed graph relationships, and compare site proximity.
-- Evaluate a prepared demand-surge model on held-out labeled cases and build a demand and capacity watchlist.
-- Review Select AI and operational review agent patterns, subject to platform prerequisites and pending live validation.
+The workshop follows service requests, reliability signals, restoration relationships, field logistics and service-demand analysis at the fictional Seer Utility Network. It contains Introduction, Getting Started, nine numbered labs and the common Need Help page.
 
-- **Title:** Build Connected Energy and Utilities Solutions with Oracle AI Database
-- **Audience:** Database developers, architects, data engineers, AI engineers, and utility operations technologists
-- **Duration:** 90 minutes
-- **Delivery:** Oracle LiveLabs sandbox or tenancy
-- **Database user:** LLUSER
-- **Primary interface:** Database Actions SQL Worksheet
+The introduction follows the approved Hospitality structure. Other lessons retain the reference task sequence and technical objectives. Graph tasks are numbered 1 through 7.
 
-## Lab flow
+## Live walkthrough status: 9 October 2026
 
-1. **Build an Energy Operations Review Query:** Jessica connects operational evidence using relational SQL.
-2. **Build a JSON Application Model:** Thomas reads prepared JSON Relational Duality documents and compares relational results; no document update is executed.
-3. **Review a Semantic Risk Search:** Gilly ranks service descriptions related to operational concerns.
-4. **Investigate an Operational Event Network:** Bob inspects directed, one-hop relationships and prepared findings.
-5. **Rank Nearby Operations Sites for Review:** Moon compares straight-line geodetic proximity and capacity constraints, not routes or travel times.
-6. **Build a Demand and Capacity Watchlist with Oracle Machine Learning:** Otto evaluates and uses a prepared model; learners do not train it.
-7. **Ask Energy and Utilities Questions with Select AI:** Nina reviews generated SQL for site, service, and capacity questions when the environment is available.
-8. **Build an Energy and Utilities Operational Review Agent:** Jessica configures learner-owned agent objects for an intended read-only workflow; enforcement and live behavior require validation.
-9. Learners complete the scored quiz.
+The data-only loader passed as LLUSER in the supplied 26ai database. The final walkthrough passed 63 executable SQL blocks, including the three notebook queries; the graph creation appendix is reference-only because initialization already creates that graph. Graph Studio import and all eight paragraphs ran successfully. The optional AutoML experiment completed. The final agent configuration returned the database ranking and recorded successful team and SQL-tool history.
 
-## Runtime requirements
+The agent uses a separate lab-owned reasoning profile with `meta.llama-3.3-70b-instruct`, while its SQL tool retains the existing Cohere `GENAI` profile. The reset step removes the agent objects and reasoning profile. The embedding model remains owned by LLUSER.
 
-- Oracle AI Database 26ai with JSON Relational Duality, AI Vector Search, SQL/PGQ, Spatial, OML, Select AI, and Select AI Agent enabled.
-- The deterministic Energy and Utilities loader completed in LLUSER.
-- Only for live Labs 7–8: an enabled, `LLUSER`-accessible, platform-owned `EU_GENAI` profile, an approved provider credential and model, provider connectivity, and governed context comprising `EU_FIELD_LOGISTICS_SITES_V`, `EU_ASSET_CAPACITY_V`, and `EU_UTILITY_SERVICES_V`.
-- Labs 7–8 live execution remains environment-validation pending. The loader must not create or configure the profile or pre-create learner tools, agents, tasks, or teams.
-- Prompts and applicable schema metadata/context may be sent to the configured provider; returned database values may also be sent for narration or agent processing. Learners must not include sensitive information.
-- `object_list` supplies model context, not authorization. Database privileges, VPD, row-level security, and tool configuration govern access.
+The workshop includes 53 of the 56 planned live screenshot slots, plus a relational graph comparison and the completed quiz. The three reservation-dialog screenshots remain pending because the walkthrough used a separately provisioned database.
 
-No credentials, wallet contents, or secrets belong in the workshop repository.
+Both local launch modes render with Oracle's LiveLabs renderer. The scored quiz passed with 7/7 answers and displayed its downloadable badge. This does not validate a hosted LiveLabs reservation, green-button SQLcl execution, or a Terraform deployment.
 
-## Acknowledgements
+## Application reference
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+[Seer Utility Network LiveStack Demo](http://134.98.142.113:8505/).
+
+The welcome-page image is an application-context capture from 9 October 2026, not proof of workshop SQL execution. The opening scene and ERD are generated educational illustrations.
+
+## Dataset and model boundaries
+
+The loader keeps selected application physical names and Utilities views. It is a synthetic workshop subset, with explicit numeric keys for learner inserts, not a production application migration.
+
+OML predictors use data through 31 August 2026. September labels are synthetic and assigned independently of the predictor formulas. Both classes have 30 rows. The lesson teaches service-demand classification; it makes no accuracy, electricity forecasting or autonomous-dispatch claim. What-if scoring rows are not an independent evaluation set.
+
+The graph notebook matches the loader's labels and properties, with no saved results. SQL/PGQ execution, Graph Studio import, and the two labeled graph visualizations were verified.
