@@ -4,11 +4,11 @@
 
 Jessica Chan is the database administrator responsible for keeping Seer Scientific's quality and clinical-supply data reliable and useful. Every morning, the quality operations team asks her a familiar question: **which regulated products deserve review first, what pending supply activity involves them, and which supply site is closest to the selected demand region?**
 
-Jessica can see the answer taking shape in the Quality and Supply Dashboard, but the supporting data is spread across different forms. Quality signals and product exposure are relational rows. Clinical supply activity is available as JSON order documents. The AI engineering team has also prepared vector representations of product text for another use case. Location information for supply sites and demand regions is stored as spatial geometry. The data is connected by business meaning, but that does not automatically make the investigation easy to query.
+The Quality and Supply Dashboard combines several types of data. Relational rows hold quality reports and illustrative exposure counts. JSON documents describe clinical supply orders, vectors represent product text, and spatial geometry locates supply sites and demand regions. Jessica needs to combine these records in one query.
 
-In the past, Jessica might have had to maintain reporting extracts, coordinate a search index, ask an application team for order data, and reconcile a separate map or supply-capacity system. That creates more copies of regulated operational data, more security boundaries, and more opportunities for the dashboard answer and the operational detail to disagree. Her challenge is not simply finding another database feature. It is giving the quality team one answer they can trace back to the same governed data.
+Separate reporting extracts, search indexes, order services, and mapping systems would require Jessica to reconcile their results. Her team needs a dashboard whose results they can trace to the source records.
 
-Jessica sees an opportunity in Oracle AI Database's converged architecture. A converged database lets one governed database support different data models and workloads together. Relational tables and views remain the foundation, while JSON documents, vectors, spatial geometry, graphs, and machine-learning results can be queried alongside them. Jessica can answer a question that crosses those data types without integrating separate databases.
+Oracle AI Database supports these data types in one database. Jessica can query relational records alongside JSON documents, vectors, and spatial geometry, and use the same database for graph and machine-learning tasks.
 
 In this lab, you take Jessica's role as the DBA. You will write the converged SQL query behind the Quality and Supply Dashboard. It combines relational quality data, vector search, JSON order data, and spatial site data in one Oracle AI Database, without separate systems or data copies. The existing `LS_` views give inherited physical tables such as `SOCIAL_POSTS`, `PRODUCTS`, and `BRANDS` Life Sciences names without copying their rows.
 
@@ -27,13 +27,13 @@ Estimated Time: **10 minutes**
 | Step | Life Sciences focus |
 | --- | --- |
 | Business Problem | Business users need a quick way to connect quality signals, product exposure, clinical supply activity, and site information. |
-| Technical Challenge | The answer crosses quality records, product meaning, orders, and supply geography. |
+| Technical Challenge | The query must combine quality records, product-text matches, order activity, and supply-site locations. |
 | Persona Focus | Jessica Chan, the DBA, builds the query that gives business users this dashboard view. |
 | What You Will Do | Use a single SQL statement that combines several data types. |
 | Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together. |
-| Outcome | The learner can explain convergence through a useful business result rather than a feature list. |
+| Outcome | The learner can trace each part of the dashboard result to its source data and SQL calculation. |
 
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one governed query that gives business users a connected view of product quality signals and supply operations.
+Persona focus: You are Jessica Chan, the DBA. Build a query that lets the quality team compare products using quality reports, clinical supply orders, text matches, and supply-site locations.
 
 > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
 
@@ -87,7 +87,7 @@ These are four operations in one investigation. Each named section after `WITH` 
                ROUND(1 - VECTOR_DISTANCE(
                pe.embedding,
                    VECTOR_EMBEDDING(
-                       ADMIN.ALL_MINILM_L12_V2
+                       ALL_MINILM_L12_V2
                        USING 'quality deviation and regulatory compliance requiring product review' AS DATA
                    ),
                    COSINE
@@ -186,23 +186,17 @@ These are four operations in one investigation. Each named section after `WITH` 
 
 3. Review the result as the product-level data behind Jessica's dashboard. Each row combines quality signals, semantic match, order activity, and supply-site location. This gives the dashboard a ranked product table and the details a business user needs when deciding what to review.
 
-    The following panels show the same ten result rows, in the same order, across all 16 columns.
+    The image below shows the product identifiers, names, manufacturers, and categories for the ten result rows. Inspect all 16 columns in SQL Worksheet.
 
     ![First query, rows 1–10: product IDs, names, manufacturers and categories, led by product 36](images/product-level-dashboard.png)
-
-    ![First query, rows 1–10: illustrative quality counters and semantic similarity](images/dashboard-metrics.png)
-
-    ![First query, rows 1–10: pending or confirmed order counts, units and the selected depot](images/dashboard-orders.png)
-
-    ![First query, rows 1–10: Edison location, New York Metro demand index 91 and distance 9.48 kilometers](images/dashboard-location.png)
 
     With the prepared dataset, expect **10 distinct products** selected from 50 products with qualifying signals. Scroll horizontally to inspect all columns. Every row has a semantic score and the same selected New York region/site context. Rankings and scores depend on the prepared model and data.
 
 The `exposure_count` and `cases_opened` columns retain the LS source views' illustrative counters. They originate from `views_count` and `comments_count`; they are not verified counts of patients, deviations, or an actual case ledger. A signal can mention more than one product, so adding product-level counters is not a distinct workshop-wide total.
 
-Use the first row to explain the business takeaway: the quality counters and pending/confirmed quantities show potential review workload, the semantic match explains why the product fits the question, and the site location adds a geographic starting point for follow-up. Jessica now has the query behind the dashboard's ranked product table and detail view. A supply specialist must still check inventory and handling requirements before selecting a site.
+Use the first row to explain the result. Quality counters and pending or confirmed quantities indicate potential review workload. Text similarity shows how closely the product matches the question, and the selected site provides geographic context. Check inventory and handling requirements before choosing a supply site.
 
-With separate systems, Jessica would need integration across a quality system, search service, document store, and mapping system before the dashboard could show this view. Oracle AI Database keeps these data types together, so she can build the dashboard with SQL. KPI cards and other dashboard components can use additional SQL over the same database.
+The query provides the ranked product table for Jessica’s dashboard. Additional SQL queries can supply KPI cards and other dashboard components from the same database.
 
 ## Task 2: Change the investigation question
 
@@ -214,21 +208,15 @@ clinical trial supplies and cold-chain distribution capacity
 
 Run the query again and compare the top rows.
 
-The panels below preserve the same row order across the alternate query's complete result.
+The image below shows product details from the alternate query. Compare its row order and the remaining result columns in SQL Worksheet.
 
 ![Alternate query, rows 1–10: product IDs, names, manufacturers and categories, led by product 7](images/2026-08-18-004703.png)
 
-![Alternate query, rows 1–10: quality counters and new semantic similarity scores](images/alternate-metrics.png)
-
-![Alternate query, rows 1–10: order counts, units and the selected depot](images/alternate-orders.png)
-
-![Alternate query, rows 1–10: unchanged Edison and New York Metro geographic context](images/alternate-location.png)
-
 1. Which products moved into or out of the top ten?
-2. Which products still have high relational exposure but a lower semantic similarity to the new question?
+2. Which products still have high illustrative exposure counts but lower text similarity to the new question?
 3. Does the pending or confirmed order activity make you more or less concerned about the supply workload?
 
-The result is ordered by semantic similarity first, so changing the question can change the review queue. Exposure breaks ties, followed by product ID for stable ordering. For products appearing in both results, the quality counters, order quantities, and location context remain unchanged. Only the question's semantic scores and resulting ranking can change. The same governed query can answer a different business question without rebuilding a search index or moving the product data.
+The result is ordered by semantic similarity first, so changing the question can change the review queue. Exposure breaks ties, followed by product ID for stable ordering. For products appearing in both results, the quality counters, order quantities, and location context remain unchanged. Only the question's semantic scores and resulting ranking can change. Changing the search phrase lets Jessica review a different concern with the same query and source records.
 
 ## Next Steps
 
@@ -236,6 +224,6 @@ Next, use JSON Relational Duality to expose clinical supply data as JSON for an 
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

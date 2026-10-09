@@ -205,5 +205,5 @@ Next, use JSON Relational Duality to expose the same booking data as JSON for an
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-**Contributor** - Teodor Constantin Nechita\
+* **Contributor** - Teodor Constantin Nechita
 * **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
