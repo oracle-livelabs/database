@@ -55,35 +55,44 @@ In this lab, you will:
     Select your home region if you want to use the Always Free
       shape and Autonomous Database 26ai.
 
-    - **SSH public key:** If you do not already have an SSH key pair, run these commands in a
-       terminal on your computer:
+    - **SSH public key:** If you do not already have an SSH key pair, create
+      one on your computer.
+
+       On macOS or Linux, open Terminal and run:
+
        ```bash
+       <copy>
        mkdir -p ~/.ssh
        chmod 700 ~/.ssh
        ssh-keygen -t ed25519 -f ~/.ssh/my-ai-staff-oci.key -C "my-ai-staff-oci"
+       cat ~/.ssh/my-ai-staff-oci.key.pub
+       </copy>
        ```
-       Accept the suggested file path if prompted. The command creates the
-       private key at `~/.ssh/my-ai-staff-oci.key` and the public key at
-       `~/.ssh/my-ai-staff-oci.key.pub`. Protect the private key and never
-       paste or upload it to Resource Manager.
 
-       Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
+       On Windows, open PowerShell or Windows Terminal and run:
+
+       ```powershell
+       <copy>
+       New-Item -ItemType Directory -Force "$env:USERPROFILE\.ssh" | Out-Null
+       ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\my-ai-staff-oci.key" -C "my-ai-staff-oci"
+       Get-Content "$env:USERPROFILE\.ssh\my-ai-staff-oci.key.pub"
+       </copy>
+       ```
+
+       When prompted, enter and confirm a passphrase for the private key, or
+       press `Enter` twice to continue without one. The command creates the
+       private key in your user `.ssh` directory and prints the public key.
+       Protect the private key and never paste or upload it to Resource
+       Manager.
+
+       Paste the printed line, which starts with `ssh-ed25519`, into **SSH
+       public key**.
 
     - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
       or network you will use to connect, followed by `/32`. To find it, open a
       browser and search for **what is my IP**. For example, if
       the site shows `203.0.113.10`, enter `203.0.113.10/32`. If your public IP changes or you connect from another
       network, update the security rule before connecting.
-
-    - **Compute instance shape:** Keep the default `VM.Standard.A1.Flex` to use
-      the Always Free-eligible shape. 
-      If OCI reports **Out of host capacity** for A1.Flex in the selected region, 
-      accounts on the **Pay As You Go** payment model can select `VM.Standard.A2.Flex` 
-      instead. A2.Flex is not an Always Free resource and can generate usage charges.
-
-    ![Select the A1 Flex or A2 Flex compute instance shape](images/compute-instance-shape.png)
-
-
 
     - **Autonomous Database ADMIN password:** Create a strong password of at
      least 12 characters. This is the password for the database `ADMIN` user.
@@ -113,25 +122,21 @@ In this lab, you will:
     does not offer the configured 26ai database version, choose a supported
     region. The stack does not change the compute shape or database tier
     automatically.
-2. Copy the `instance_public_ip`, `ssh_command`, and
-    `autonomous_database_service_name` outputs
-    displayed as an output.
-3. Follow the bootstrap log until completion. It may take time while packages,
-    Python dependencies, the public model, and database initialization finish.
+2. In the succeeded apply job, open **Output** and copy the
+    `instance_public_ip`, `ssh_command`, and
+    `autonomous_database_service_name` values. You can also open **Logs** and
+    scroll to the end to find `instance_public_ip` and `ssh_command`, as shown
+    below. Use **Output** for the complete structured list.
 
-    ```bash
-    <copy>
-    sudo tail -f /var/log/my-ai-staff-bootstrap.log
-    </copy>
-    ```
-    A successful bootstrap creates `/var/lib/my-ai-staff-bootstrap.complete`.
-    
-    ![Sudo Tail Validation Terminal Example](images/sudo_tail_validation.png)
+    ![Find the instance public IP and SSH command in the Resource Manager job logs](images/resource-manager-job-outputs.png)
 
 ## Task 3: Connect, Validate Packages, and Authenticate Codex
 
-1. Connect to the instance with the private key that matches the public key
-    supplied to Resource Manager:
+1. Connect to the instance using either a laptop terminal or VS Code Remote -
+    SSH. In both cases, use the private key that matches the public key supplied
+    to Resource Manager.
+
+    **Laptop terminal on macOS or Linux**
 
     ```bash
     <copy>
@@ -139,7 +144,66 @@ In this lab, you will:
     </copy>
     ```
 
-2. Confirm that the non-interactive bootstrap completed before starting the
+    **Laptop terminal on Windows**
+
+    Open PowerShell or Windows Terminal and run:
+
+    ```powershell
+    <copy>
+    ssh -i "$env:USERPROFILE\.ssh\my-ai-staff-oci.key" opc@<instance_public_ip>
+    </copy>
+    ```
+
+    On the first terminal connection, enter `yes` to accept the SSH host
+    fingerprint. A successful connection displays a remote prompt for the
+    `opc` user.
+
+    **VS Code Remote - SSH**
+
+    - Install the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+      from Microsoft if it is not already installed.
+
+      ![Install the Remote SSH extension from the Visual Studio Code Marketplace](images/08_remote_ssh_extension_install.png)
+
+    - Open the **Extensions** view, confirm that **Remote - SSH** appears under
+      **Installed**, and then select **Remote Explorer** in the Activity Bar.
+
+      ![Confirm the Remote SSH extension is installed and open Remote Explorer](images/09_remote_ssh_extension_installed.png)
+
+    - In **Remote Explorer**, select the plus icon labeled **New Remote**.
+
+      ![Add a new SSH remote from Remote Explorer](images/10_remote_explorer_add_host.png)
+
+    - Enter the complete SSH command for your operating system shown above.
+
+      ![Enter the OCI instance SSH connection command](images/11_remote_ssh_connection_command.png)
+
+    - Save the host in the suggested SSH configuration file, select the saved
+      host, and accept the SSH host fingerprint when prompted.
+
+      ![Select the saved OCI SSH host in Remote Explorer](images/12_remote_host_saved.png)
+
+    - Select **Linux** if VS Code asks for the remote platform. When the
+      connection finishes, select **Terminal > New Terminal** and confirm that
+      the prompt belongs to the remote `opc` user.
+
+2. From the connected instance, follow the bootstrap log until completion. It
+    may take time while packages, Python dependencies, the public model, and
+    database initialization finish.
+
+    ```bash
+    <copy>
+    sudo tail -f /var/log/my-ai-staff-bootstrap.log
+    </copy>
+    ```
+
+    When the log reports successful completion, press `Ctrl+C` to stop
+    following it. A successful bootstrap creates
+    `/var/lib/my-ai-staff-bootstrap.complete`.
+
+    ![Sudo Tail Validation Terminal Example](images/sudo_tail_validation.png)
+
+3. Confirm that the non-interactive bootstrap completed before starting the
     interactive handoff:
 
     ```bash
@@ -150,7 +214,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Run the quick package and runtime validation. Every command must return
+4. Run the quick package and runtime validation. Every command must return
     successfully; java -version may print its version to standard output or
     standard error depending on the installed JDK:
 
@@ -174,7 +238,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Start Codex and complete the interactive authentication:
+5. Start Codex and complete the interactive authentication:
 
     ```bash
     <copy>
@@ -197,7 +261,7 @@ In this lab, you will:
 
     Press Ctrl + D to exit and return to the terminal.
 
-5. Run the final Lab 2 handoff helper after authentication:
+6. Run the final Lab 2 handoff helper after authentication:
 
     ```bash
     <copy>
