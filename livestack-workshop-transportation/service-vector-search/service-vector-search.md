@@ -8,7 +8,7 @@ Gilly Bourne is an AI engineer at Seer Transport. Her team has built a search fe
 
 Gilly already has the transport service, booking, and passenger data in the database. Her design problem is connecting a plain-language question to those existing rows. She needs to turn transport service data into vectors, rank the closest transport services, and join those matches to bookings and passengers. A useful result must show more than a similarity score. It must give the service team a passenger and booking list they can act on.
 
-Gilly keeps the service descriptions and their vectors beside the booking and passenger records. Her search can rank services by meaning, then use exact SQL joins to identify the people affected by a disruption.
+Gilly stores service vectors beside the booking and passenger records. Her search ranks services by meaning, then joins those services to bookings to identify passengers for review. A text match alone does not establish that a passenger’s journey is disrupted.
 
 In this lab, you review Gilly's implementation from the embedding model to the final passenger list. You see why Oracle AI Database fits the job: vector search finds the relevant transport services, and SQL joins connect them to exact booking and passenger data in the same database.
 
@@ -22,9 +22,9 @@ In this lab, you review Gilly's implementation from the embedding model to the f
 >
 > - A **vector** is the stored numerical form of an embedding. Oracle Database can store vectors beside the transportation rows they describe, so the search stays connected to transport service names, exposure values, notice counts, and other business columns.
 >
-> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which transport services or disruption notices best match a business user's question.
+> - **Vector distance** measures how close two vectors are. A smaller distance means the meanings are more similar; a larger distance means they are farther apart. In this lab, distance helps rank which transport services best match a business user's question.
 >
-> - **Semantic search** means searching by meaning instead of exact words. A search for "route disruption affecting commuter service" can find related affected transport services even when the transport service names use different wording.
+> - **Semantic search** means searching by meaning instead of exact words. A search for "route disruption affecting commuter service" can find related transport services even when the transport service names use different wording.
 
 </details>
 
@@ -90,7 +90,7 @@ Jessica has made an ONNX embedding model available in Oracle AI Database. Gilly 
 
 ## Task 2: Create a transport service vector
 
-Gilly decides that one vector per transport service is enough. Each transport service record is short and describes one transport service, so she combines its name, category, and subcategory into one text value before creating the vector.
+Each service has a short description, so Gilly creates one vector from its name, category, and subcategory.
 
 1. Review the text Gilly will embed with **Run Statement**:
 
@@ -106,6 +106,7 @@ Gilly decides that one vector per transport service is enough. Each transport se
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+    ![Lab 3 Task 1 Step 1](images/l3-t2-s1.png " ")
 
     The combined text gives the model the transport service name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the transport service is.
 
@@ -119,6 +120,8 @@ Gilly decides that one vector per transport service is enough. Each transport se
     FROM transport_services;
     </copy>
     ```
+
+    ![Lab 3 Task 2 Step 1](images/l3-t2-s2.png " ")
 
     The query should return one vector for each transport service. This is a read-only query, so it does not need a `COMMIT`.
 
@@ -159,6 +162,8 @@ Gilly decides that one vector per transport service is enough. Each transport se
     FROM transport_services;
     </copy>
     ```
+
+    ![Lab 3 Task 2 Step 5](images/l3-t2-s5.png " ")
 
     Each transport service now has its own 384-dimensional vector. Gilly can use this column directly when the application searches for transport services by meaning.
 
@@ -211,12 +216,14 @@ Now Gilly tests the new column with a simple vector query. She asks for transpor
     </copy>
     ```
 
+    ![Lab 3 Task 3 Step 1](images/l3-t3-s1.png " ")
+
     **Expected output: Service Disruption Matches**
 
 2. Review the ranked transport services.
     The query embeds the analyst phrase at runtime and compares it to the `TRANSPORT_SERVICES.SERVICE_EMBEDDING` column. `VECTOR_DISTANCE` calculates the distance between the two vectors using the `COSINE` metric. A lower value means a closer match.
 
-    In the broader workflow, these ranked transport services can become the next filter for dashboard review and transport service exposure analysis.
+    Use the ranked services to narrow the dashboard review and find associated bookings.
 
 3. Show the result as a similarity score with **Run Statement**:
 
@@ -236,9 +243,11 @@ Now Gilly tests the new column with a simple vector query. She asks for transpor
     </copy>
     ```
 
+    ![Lab 3 Task 3 Step 3](images/l3-t3-s3.png " ")
+
     The query uses the same vectors and the same cosine calculation. It only changes how the result is shown to the person using the application.
 
-## Task 4: Find passengers affected by a transport service concern
+## Task 4: Find passengers booked on matching services
 
 Gilly now has the business requirement for the application. A business user should be able to enter a concern and find passengers who booked related transport services. The result gives the passenger-service team a short list for follow-up, with the transport service match, booking status, booking date, and passenger contact details.
 
@@ -281,15 +290,13 @@ Gilly now has the business requirement for the application. A business user shou
 
     ![SQL Worksheet showing the beginning of the passenger query and returned rows](images/lab3-passenger-query-result-top.jpg " ")
 
-    ![SQL Worksheet showing the end of the passenger query and returned rows](images/lab3-passenger-query-result-bottom.jpg " ")
-
     *Figure 3: The two views show the long query and its passenger follow-up result.*
 
     The first part ranks transport services by meaning. The remaining joins use ordinary relational keys to find the matching booking legs, bookings, and passengers.
 
     **Expected output: Passenger Follow-up List**
 
-    The result shows passengers who booked transport services related to the concern. The similarity score explains why the transport service was included, while the booking and passenger columns give the service team enough information to decide what to do next.
+    The result lists booking legs for services whose descriptions match the search phrase. The score measures text similarity, not the likelihood of disruption. A passenger can appear more than once. The query excludes cancelled and refunded bookings but does not filter by journey date or confirm a disruption. Check the relevant trip and booking before contacting a passenger.
 
 2. Review the business result.
 
@@ -297,9 +304,10 @@ Gilly now has the business requirement for the application. A business user shou
 
 ## Conclusion
 
-Gilly has built the search behind the application and connected it to a business action. A plain-language concern can produce ranked transport services and a passenger follow-up list using vectors, relational joins, and SQL in Oracle AI Database. 
+Gilly has built the search behind the application and connected it to a business action. A plain-language concern can produce ranked transport services and a passenger follow-up list using vectors, relational joins, and SQL in Oracle AI Database.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

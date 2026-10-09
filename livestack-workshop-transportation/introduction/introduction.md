@@ -7,19 +7,19 @@ Seer Transport operates regional passenger service across routes, stations, and 
 Jessica Chan, the database administrator, helps the team answer those questions from connected data in Oracle AI Database. Each colleague has a different task:
 
 - Thomas Brune, application developer, needs booking data as JSON for a passenger application.
-- Gilly Bourne, AI engineer, needs to find affected services from an ordinary language description of a disruption.
+- Gilly Bourne, AI engineer, needs to find services related to a plain-language description of a disruption.
 - Bob Green, graph specialist, needs to follow a disruption through connected trips, routes, stations, and vehicles.
 - Moon Kai, spatial specialist, needs to match passengers in a service region with nearby stations.
 - Otto Spencer, data scientist, needs to identify services likely to see a demand surge.
 - Nina Patel, operations analyst, needs to ask questions about ridership and fare revenue using approved data.
 
-Jessica's team shares one business goal: restore reliable service and give passengers clear options. Each specialist starts with a different operational question, then works with the same service, trip, booking, passenger, and station records in Oracle AI Database. The labs follow those decisions from the first risk review through passenger follow-up and a governed operations assistant.
+Jessica's team shares one business goal: restore reliable service and give passengers clear options. Each specialist starts with a different operational question, then works with the same service, trip, booking, passenger, and station records in Oracle AI Database. The labs cover the initial disruption review, booking and passenger analysis, and an assistant that answers questions through an approved SQL tool.
 
 ### What the team builds
 
 | Lab and team member | Transportation decision | Oracle capability |
 | --- | --- | --- |
-| 1. Jessica, operations dashboard | Rank disrupted services with booking activity, semantic matches, and nearby station context. | Converged SQL across relational, vector, JSON, and spatial data. |
+| 1. Jessica, operations dashboard | Rank services for disruption review using text similarity, booking activity, and nearby stations. | Converged SQL across relational, vector, JSON, and spatial data. |
 | 2. Thomas, booking application | Serve and update a booking document while keeping relational records. | Native JSON, JSON collections, and JSON Relational Duality. |
 | 3. Gilly, semantic search | Find services relevant to a disruption and identify passengers who may need help. | In-database embeddings and AI Vector Search. |
 | 4. Bob, service network | Trace connected trips, routes, stations, vehicles, and disruption cases. | Property Graph and SQL/PGQ. |
@@ -47,4 +47,5 @@ Estimated Workshop Time: **90 minutes**
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

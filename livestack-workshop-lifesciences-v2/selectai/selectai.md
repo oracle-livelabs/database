@@ -10,7 +10,7 @@ Nina still needs to review the generated SQL. The model can misunderstand a ques
 
 In this lab, you check the available Select AI profile, ask a Life Sciences question, inspect the SQL behind the answer, and improve the question for a more useful business result.
 
-![Jessica, DBA, and Nina, Clinical-Supply Analyst, build an AI agent that answers questions using product and order data](images/ls-nina.svg)
+![Jessica, DBA, and Nina, clinical-supply analyst, use Select AI and Select AI Agent with product and order data](images/ls-nina.svg)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -65,10 +65,12 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
+    ![GENAI profile status and description](images/l7-t1-s1.png)
+
     The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If it is missing or disabled, ask the workshop facilitator for help before continuing.
 
 2. Review the profile attributes:
-  
+
     ```sql
     <copy>
     SELECT profile_name,
@@ -82,13 +84,15 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
+  ![GENAI provider, model, region, and object-list settings](images/l7-t1-s2.png)
+
     The attributes show how the profile is configured and which database objects are available to Select AI. Tasks 3–6 explicitly select `xai.grok-4.3` for each request rather than relying on the profile's default model. The profile still supplies the provider, region, authentication, and object access settings. Do not copy credentials. In Task 2, you will configure the four-view object list, include its comments, and enable object-list enforcement.
 
 ## Task 2: Add the Life Sciences views to the profile
 
 The profile needs a list of database objects that Select AI may use. Nina's questions require product, order, order-line, and trial-site data, so Jessica adds those four supplied views to the `GENAI` profile.
 
-1. Add the Life Sciences views to the profile:
+1. Add the Life Sciences views to the profile. Select the complete block, including `/`, and use Run Script (F5):
 
     ```sql
     <copy>
@@ -118,8 +122,10 @@ The profile needs a list of database objects that Select AI may use. Nina's ques
     </copy>
     ```
 
+  ![GENAI object-list query and its returned attributes](images/l7-t2-s2.png)
+
     The result should list `LS_REGULATED_PRODUCTS_V`, `LS_CLINICAL_SUPPLY_ORDERS_V`, `LS_ORDER_LINES_V`, and `LS_TRIAL_SITES_V`. Comments describe the join keys and the difference between order headers and lines. Object-list enforcement restricts generated queries to this scope; it does not grant or revoke database privileges.
-  
+
     ![GENAI comments and object-list enforcement enabled](images/task2.png)
 
     ![Expanded object list showing the four LLUSER Life Sciences views](images/task2-objects.png)
@@ -210,7 +216,7 @@ Nina's first question gives her a product ranking, but she also needs enough det
 
 3. Compare the first and second questions.
 
-  The second prompt gives Nina a result she can take into a review meeting. The business user did not need to know the table names or write the joins, but Nina still checked the SQL and made the requested columns explicit.
+  The revised prompt requests category, total line value, and units ordered, and excludes shipping costs. Nina can compare these details with the initial ranking. Select AI generates the joins; she checks that they answer the question.
 
 ## Task 6: Explain the result
 
@@ -233,7 +239,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 2. Review the explanation against the SQL result.
 
-  The explanation is a convenience for a business user. The SQL result remains the record Nina can inspect, repeat, and use to check whether the explanation is accurate. Wording and detail can vary: this example includes the five products, categories, line values, and quantities. Compare those facts with Task 5's result rather than expecting identical wording.
+  Compare the narrative’s product names, categories, line values, and quantities with Task 5’s result. The wording may vary; each factual statement should agree with the returned data.
 
   > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
 
@@ -241,7 +247,7 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 Nina used Select AI to turn a Life Sciences question into SQL, reviewed the generated statement, ran it in Oracle AI Database, and refined the question when the first result lacked the details she needed. Select AI reduces the amount of SQL a business user has to write, while SQL review keeps the database operation visible.
 
-This is the practical value of Select AI in Oracle AI Database. The question, generated SQL, and result stay connected to the governed Life Sciences schema. Nina can ask in ordinary language, but she does not have to give up database access controls or the ability to inspect the query behind the answer.
+Nina can ask questions in plain language and inspect the generated SQL and database results. Database access controls continue to apply.
 
 Select AI does not replace judgment. A good workflow is to show the SQL, check the tables and filters, run the statement, and compare the answer with the business question.
 
@@ -251,6 +257,6 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

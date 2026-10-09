@@ -63,6 +63,8 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
+    ![Lab 8 Task 1 Step 1](images/l8-t1-s1.png " ")
+
     The `GENAI` profile should be enabled. If it is unavailable after Lab 7, ask the workshop administrator for help before continuing.
 
 2. Check the tables listed in the profile with **Run Statement**:
@@ -77,6 +79,8 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
       AND attribute_name = 'object_list';
     </copy>
     ```
+
+    ![Lab 8 Task 1 Step 2](images/l8-t1-s2.png " ")
 
     The list should contain only the workshop tables needed for this lab: `TRANSPORT_SERVICES`, `BOOKINGS`, `BOOKING_LEGS`, and `PASSENGERS`. The `object_list` guides SQL generation; it is not a replacement for database grants.
 
@@ -131,7 +135,9 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     WHERE tool_name = 'NINA_TRANSPORT_SQL_TOOL';
     </copy>
     ```
-  
+
+    ![Lab 8 Task 2 Step 2](images/l8-t2-s2.png " ")
+
 ## Task 3: Create Nina's agent, task, and team
 
 The tool by itself does nothing. Nina's agent needs a role, a task needs instructions, and a team connects the two.
@@ -211,7 +217,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
   
     > **Note:** This team has a read-only SQL tool. It can query the data, but the task instructions do not give it a tool for inserting, updating, or deleting records.
 
-3. Optional challenge: ask a follow-up question that connects the highest-revenue transport service to its passengers and bookings. A more detailed request may take longer because the agent has to interpret more steps.
+3. Optional challenge: ask a question that links a named service to its passengers and bookings. Include the service name and the details you need. This example creates a new conversation ID for each call, so include the context instead of assuming the agent remembers the previous answer.
 
 ## Task 5: Inspect what the agent did
 
@@ -256,13 +262,13 @@ Before using the ranking in her performance review, Nina checks whether the agen
 
     *Figure 3: The tool history records one invocation of `NINA_TRANSPORT_SQL_TOOL` for the agent run.*
 
-    The history should show `NINA_TRANSPORT_SQL_TOOL`. This gives Nina and Jessica a database record of the agent activity instead of treating the answer as an unexplained chat response.
+    Find the `NINA_TRANSPORT_SQL_TOOL` entry for this run. Match its task, timestamp, and status with the team history. The queries return recent history across runs, so confirm that you are inspecting the intended execution.
 
 ## Conclusion: Give the agent a controlled way to work
 
 Nina now has a fare and seats-booked ranking that she can compare with service activity, along with a record of the tool call behind the answer. Jessica can inspect the same history and manage which tool the agent may use when Nina asks a follow-up question.
 
-The table boundary has two parts. The profile's `object_list` tells the SQL tool which tables to consider, while database grants decide which rows the session can actually read. Both should be kept narrow when an agent is used by an application.
+The profile’s `object_list` specifies the tables used for SQL generation. Database privileges control which objects the executing account can access. Keep both scoped to the application’s needs.
 
 The example remains read-only on purpose. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
 
@@ -289,4 +295,5 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

@@ -7,7 +7,7 @@ badge: images/badge.png
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect Seer Scientific's clinical-supply questions to the database capabilities and evidence you explored in the labs.
+Use this scored quiz to check how Seer Scientific answers clinical supply questions with the database capabilities and query results covered in the labs.
 
 ### Objectives
 
@@ -75,19 +75,19 @@ Estimated Time: **5 minutes**
     - Registering a SQL tool makes the entire workshop account read-only.
     - The instruction “use the tool once” guarantees exactly one invocation.
     * The history records execution and tool activity, which she can review alongside the returned facts.
-    > History helps explain how the agent handled the request. Nina must still check the answer against database evidence; model instructions are not enforced call limits, and tool restrictions do not remove the account's other privileges.
+    > History helps explain how the agent handled the request. Nina must still check the answer against query results; model instructions are not enforced call limits, and tool restrictions do not remove the account's other privileges.
     ```
 
 2. When you achieve the passing score, the quiz displays your completion badge.
 
 ## Bring the evidence together
 
-Seer Scientific's teams ask different questions of connected data. Jessica brings the dashboard evidence together; Thomas gives applications an order document over relational rows; Gilly finds products by meaning; Bob explores shared inventory connections; Moon measures trial-site proximity; Otto builds a demand watchlist; and Nina asks questions through Select AI and a controlled agent.
+Seer Scientific’s teams use the same data for different tasks. Jessica combines records in a dashboard query; Thomas presents orders as JSON; Gilly finds products by meaning; Bob finds shared stocking depots; Moon measures trial-site proximity; Otto builds a demand watchlist; and Nina uses Select AI and an agent to answer questions.
 
 Oracle AI Database supports these different access patterns without requiring a separate operational data store for every capability. The business value is a clearer path from a question to records and calculations the team can inspect. Those results support human review; they do not by themselves approve product release, guarantee cold-chain service, or validate a demand forecast.
 
 ## Acknowledgements
 
-* **Authors** - Pat Shepherd, Linda Foinding
-* **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

@@ -2,88 +2,81 @@
 
 ```quiz-config
 passing: 75
-badge: images/energy-utilities-badge.png
+badge: images/energy-utilities-badge.svg
 ```
 
 ## Introduction
 
-Review how Jessica and her colleagues use database evidence to support operational decisions at Seer Utility Network.
-
-The questions cover the workshop’s demonstrated capabilities and the approval boundaries for Labs 7–8. Completing the quiz does not establish that the pending Select AI workflows have been validated.
+Use this scored quiz to check whether you can explain how the database results support Seer Utility Network's operations.
 
 ### Objectives
 
-- Connect each database capability to its operational use case.
-- Distinguish supporting evidence from an automatic decision or a proven outcome.
-- Earn the workshop badge by answering at least six of the eight questions correctly.
+- Review the main database capabilities used in the workshop.
+- Earn the workshop badge by answering the scored questions.
 
-Estimated Time: **5 minutes**
+Estimated Time: **3 minutes**
 
 ## Task 1: Answer the quiz questions
 
-1. Complete the scored quiz. A score of **75%** or higher earns the badge.
+1. Complete the scored quiz.
 
     ```quiz score
-    Q: Why does Jessica build the energy operations review query from governed views?
-    - To replace source tables with dashboard screenshots.
-    * To connect requests, signals, logistics, and capacity evidence without separate operational data copies.
-    - To let every user bypass database privileges.
-    - To turn every row into JSON before analysis.
-    > Lab 1 uses relational SQL to connect evidence from one database foundation. JSON, vector, graph, and spatial operations appear in later labs, not in this query.
+    Q: What does JSON Relational Duality help Seer Utility Network do in the service-request lab?
+    - Copy service-request documents into a separate document database.
+    * Use the same service-request data as JSON documents or relational tables without maintaining duplicate records.
+    - Remove relational tables from the service-request review process.
+    - Force analysts to manually read raw JSON for every review.
+    > A duality view presents relational rows as a JSON document. Applications get the payload they need, while analysts still use SQL, keys, joins, and database controls against the same source.
 
-    Q: What does JSON Relational Duality give Thomas?
-    - A second document database that Thomas must synchronize manually.
-    - A vector index for service-request text.
-    * An application-ready JSON document backed by the same relational request and line-item data.
-    - A replacement for relational constraints.
-    > The duality view presents relational rows as a document. Applications get JSON while operations teams retain SQL, keys, and database controls.
+    Q: In the vector lab, what does the similarity score help an analyst do?
+    - Prove that a warning sign is a confirmed asset fault.
+    - Replace the service and signal tables with embeddings only.
+    * Rank services or signals by how closely they match the search phrase.
+    - Count how many rows exist in each utilities table.
+    > The query turns vector distance into a similarity score, where a higher score means the stored service or signal text is closer in meaning to the search phrase.
 
-    Q: What does a high vector similarity score mean in Gilly's search?
-    - The service caused the operational event.
-    * The embedded service text is semantically close to the question, making the service a candidate for review.
-    - The utility confirmed a compliance breach.
-    - The result is approved automatically for dispatch.
-    > Similarity ranks related meanings. It supports investigation, but it does not prove a service problem, establish causality, or authorize an operational action.
+    Q: What business problem does the property graph lab solve for restoration investigators?
+    - It scores future electricity prices.
+    * It explains connections across events, assets and shared restoration records.
+    - It stores service coverage regions for operations teams.
+    - It replaces relationship records with flat service totals.
+    > The graph shows connected events, assets, crews, inspections, and work orders. Analysts can follow these paths without writing a separate series of joins for each path length.
 
-    Q: What does Bob inspect with the lab's directed, one-hop graph query?
-    - Every incoming and outgoing path of any length.
-    - Proof that each connected asset caused the event.
-    - A road route between the event and a field site.
-    * The entities reached by an outgoing relationship from a selected operational event.
-    > The SQL/PGQ query follows one directed edge from the starting event. The separate prepared findings view summarizes broader evidence; a connection does not prove causality.
+    Q: Why does Seer Utility Network use spatial data in the service coverage lab?
+    - To make coverage decisions outside the workshop database.
+    - To hide capacity data from service operations leaders.
+    * To find the closest field logistics site for a service point or high-demand region and combine that location with center capacity and current workload.
+    - To replace spatial queries with static labels.
+    > Spatial functions calculate distance and location relationships. SQL combines those results with service point, service-center, capacity, and demand data to support routing decisions.
 
-    Q: Why does Moon include operational status and capacity with distance?
-    * The nearest active site may still be constrained, so dispatch requires more than proximity.
-    - Spatial distance includes crew qualifications and safety approval automatically.
-    - Capacity is needed only to draw the map.
-    - The database cannot calculate distance without an AI provider.
-    > Geographic distance identifies nearby candidates, not road routes or travel times. Dispatchers still review workload, supplies, safety, skills, and service-territory constraints.
+    Q: In the OML lab, what does the surge probability mean?
+    - It guarantees that the prediction will happen.
+    * It is the model's estimated probability of a surge, which still needs review.
+    - It is the number of rows in the OML model catalog.
+    - It means the model no longer needs business context.
+    > The class probability supports ranking, not certainty. Evaluate accuracy with separate observations that were not used to train the model. The synthetic scoring rows only demonstrate how to call it.
 
-    Q: How should Otto use a demand-surge probability?
-    - As certainty that a surge will occur.
-    - As permission to dispatch a crew automatically.
-    * As a model estimate for human review, evaluated against held-out labels and considered alongside capacity evidence.
-    - As a substitute for validation data.
-    > Otto evaluates the prepared model against synthetic labels on cases excluded from training, then combines predictions with capacity evidence. The class-probability estimate is not certainty or a validated forecast of future demand. A six-case synthetic test set does not establish production performance.
+    Q: How can Nina check Select AI answers and control database access?
+    - The model can query every object in the database automatically.
+    - The narrative wording is guaranteed to be identical every time.
+    * The profile guides SQL generation, database privileges control access, and Nina can inspect the SQL.
+    - The answer bypasses the database and uses only general model knowledge.
+    > The utilities Select AI profile has a narrow object list. The showsql action returns the generated query. Database privileges control access, and Nina compares the explanation with the query result.
 
-    Q: Why does Nina use SHOWSQL before making a separate execution request?
-    - To reveal the AI provider credential.
-    * To inspect the proposed query's objects, filters, ordering, and row limits and refine the question if needed.
-    - To grant Select AI access to every schema.
-    - To guarantee that RUNSQL executes exactly the displayed statement.
-    > SHOWSQL exposes a proposed query for review. A later RUNSQL call may generate different SQL; the review does not bind that call to the displayed statement. To execute precisely the reviewed SQL, run that statement directly in SQL Worksheet within the authorized scope.
-
-    Q: What evidence makes the Select AI Agent workflow reviewable?
-    - The agent's confident wording alone.
-    - A screenshot without SQL or history.
-    - A broad write-capable tool with no verified restrictions.
-    * Verified tool permissions, database access controls, and history tied to the specific team execution.
-    > Read-only wording in a prompt expresses an intention, not enforcement. The object list supplies context; verified tool restrictions and effective database permissions enforce access. History supports review but does not prove that an answer is correct or that read-only access was enforced. Labs 7–8 live behavior remains pending validation.
+    Q: What is the main advantage of using Oracle AI Database as the converged foundation for this workshop?
+    - Each utilities capability must use a separate specialized data store.
+    * One Oracle AI Database connects relational, JSON, vector, graph, spatial, machine-learning, and AI capabilities to the same data and database permissions.
+    - Application screenshots replace the need to check query results.
+    - Operations teams must reconcile copied data before every investigation.
+    > Each lab uses a different capability, but the teams work from connected data in one database. This reduces duplicate copies and separate integration paths while preserving database controls.
     ```
 
-2. Review the explanations for any incorrect answers. When you achieve the passing score, the quiz displays your Energy and Utilities completion badge.
+2. When you achieve the passing score, the quiz displays your completion badge.
+
+    ![Completed Utilities quiz showing 100 percent and the downloadable badge.](images/quiz-complete.png)
 
 ## Acknowledgements
 
-* **Author** - Zileyah Onafowora
-* **Last Updated By/Date** - Zileyah Onafowora, September 2026
+* **Authors** - Matt Kowalik, Kevin Lazarz
+* **Contributors** - Teodor Nechita
+* **Last Updated By/Date** - Oracle Database Service Management, October 2026

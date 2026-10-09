@@ -18,7 +18,7 @@ In this lab, you check the available Select AI profile, ask a transportation que
 
 > - **Select AI** lets a user work with database information through a natural-language question.
 >
-> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
+> - An **AI profile** configures the AI provider and the database objects used for SQL generation.
 >
 > - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
 >
@@ -65,6 +65,8 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
+    ![Lab 7 Task 1 Setp 1](images/l7-t1-s1.png " ")
+
     Confirm that `GENAI` is present and enabled. If it is unavailable, ask the workshop administrator for help before continuing.
 
 2. Set the profile's AI model with **Run Script**:
@@ -83,7 +85,7 @@ Select AI uses an AI profile to identify the AI provider and the database object
     /
     </copy>
     ```
-  
+
     Confirm the profile attributes with **Run Statement**:
 
     ```sql
@@ -96,11 +98,13 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
+    ![Lab 7 Task 1 Setp 2](images/l7-t1-s2.png " ")
+
     The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will change only the profile's `object_list`.
 
 ## Task 2: Add the transportation tables to the profile
 
-The profile needs a list of tables that Select AI may use. Nina's questions require transport service, booking, booking-line, and passenger data, so Jessica adds those four tables to the `GENAI` profile.
+The profile needs a list of tables that Select AI may use. Nina's questions require transport service, booking, booking-leg, and passenger data, so Jessica adds those four tables to the `GENAI` profile.
 
 1. Add the transportation tables to the profile. This is a PL/SQL block; choose **Run Script** and run the entire block, including the `/` line:
 
@@ -130,8 +134,10 @@ The profile needs a list of tables that Select AI may use. Nina's questions requ
     </copy>
     ```
 
+    ![Lab 7 Task 2 Setp 2](images/l7-t2-s2.png " ")
+
     The result should list `TRANSPORT_SERVICES`, `BOOKINGS`, `BOOKING_LEGS`, and `PASSENGERS`. Select AI can now use these tables when it translates Nina's questions into SQL.
-  
+
 
 ## Task 3: Ask a question and inspect the SQL
 
@@ -162,7 +168,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
 ## Task 4: Run the question in the database
 
-Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
+To execute the exact SQL you reviewed, copy the `showsql` result into SQL Worksheet and run that statement. The `runsql` example below submits the question again for SQL generation and execution; it is not an instruction to execute the earlier `showsql` output.
 
 1. Run the same question with the `runsql` action using **Run Statement**:
 
@@ -175,6 +181,8 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
     ) AS answer;
     </copy>
     ```
+
+    ![Lab 7 Task 4 Step 1](images/l7-t4-s1.png " ")
 
 2. Compare the answer with the SQL you inspected in Task 3.
 
@@ -197,7 +205,7 @@ Nina's first question gives her a transport service ranking, but she also needs 
            ) AS generated_sql;
     </copy>
     ```
-  
+    ![Lab 7 Task 5 Step 1](images/l7-t5-s1.png " ")
 
 2. Review the generated SQL, then run the revised question with `runsql` using **Run Statement**:
 
@@ -218,7 +226,7 @@ Nina's first question gives her a transport service ranking, but she also needs 
 
 3. Compare the first and second questions.
 
-    The second prompt gives Nina a result she can take into a review meeting. The business user did not need to know the table names or write the joins, but Nina still checked the SQL and made the requested columns explicit.
+    The revised prompt specifies `BOOKING_LEGS.LEG_TOTAL`, the requested columns, and the seats-booked total. Select AI writes the SQL; Nina checks its joins and aggregation before using the answer. The prompt does not filter by booking date or status, so confirm that this scope matches the intended service review.
 
 ## Task 6: Explain the result
 
@@ -235,7 +243,8 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
            ) AS explanation;
     </copy>
     ```
-  
+    ![Lab 7 Task 6 Step 1](images/l7-t6-s1.png " ")
+
 
 2. Review the explanation against the SQL result.
 
@@ -256,4 +265,5 @@ For the full list of Select AI actions, profile attributes, and supported provid
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

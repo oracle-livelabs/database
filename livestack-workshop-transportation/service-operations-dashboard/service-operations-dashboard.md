@@ -6,7 +6,7 @@ Jessica Chan is the database administrator responsible for Seer Transport's serv
 
 ![Jessica Chan, DBA: Lab 1: Build a Converged Operations Query](images/jessica-transport.png " ")
 
-Jessica can see the answer taking shape in the Service and Operations Dashboard, but its supporting records have different forms. Relational rows hold disruption signals and affected passenger counts, JSON documents describe booking activity, service vectors support semantic matching, and station and region geometry supplies location context.
+The Service and Operations Dashboard combines several types of data. Relational rows hold disruption reports and affected-passenger counts. JSON documents describe bookings, vectors support text matching, and spatial geometry represents stations and service regions.
 
 Jessica needs a ranking that dispatchers can check against the underlying disruption, booking, and station records. If those records are copied into separate reporting and search systems, the ranking may lag behind the service conditions that dispatchers must act on.
 
@@ -33,7 +33,7 @@ Estimated Time: **10 minutes**
 | Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
 | Outcome             | Dispatchers can review a ranked service list with the booking and station evidence behind each priority.               |
 
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one governed query that gives business users a connected view of transport service risk and operations.
+Persona focus: You are Jessica Chan, the DBA. Build a query that lets dispatchers compare services using disruption reports, bookings, text matches, and station locations.
 
 > **SQL Worksheet reminder:** For the difference between **Run Statement** and **Run Script**, return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
@@ -43,12 +43,12 @@ The dashboard is a starting point for the decision, not the decision itself. Run
 
 The query intentionally crosses four data models:
 
-- **Relational:** `DISRUPTION_SIGNALS_V`, transport service mentions, and transportation views calculate transport service risk and exposure.
+- **Relational:** `DISRUPTION_SIGNALS_V` and the related service records supply criticality scores, affected-passenger counts, and incident counts.
 - **Vector:** `SERVICE_EMBEDDINGS` and `VECTOR_DISTANCE` find transport services related by meaning to the investigation phrase.
 - **JSON:** `BOOKINGS_DV` is read as a document, and `JSON_TABLE` projects its nested booking legs into rows so booking activity can be counted.
-- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest station to each service region using latitude and longitude information stored as GeoJSON.
+- **Spatial:** `SDO_GEOM.SDO_DISTANCE` compares station points with service-region polygons stored as `SDO_GEOMETRY`. The query selects the nearest active station for each region.
 
-    These are four operations in one investigation. Every row combines transport service risk with booking activity, semantic relevance, and service-routing context.
+    The query combines these operations in one result. Each row includes disruption totals, matching booking activity, text similarity, and station information.
 
 1. Open SQL Worksheet as `LLUSER`.
 
@@ -178,7 +178,7 @@ The query intentionally crosses four data models:
 
 3. Review the ranked services as Jessica would with dispatch. Each row brings together disruption risk, semantic relevance, booking activity, and nearby station context so the team can decide which service needs investigation first.
 
-    Your numbers may be different if the demo data has changed. Each row should include all four types of data.
+    Your numbers may differ if the demo data has changed. A missing embedding produces a null similarity score. A service without matching active bookings shows zero bookings and seats.
 
     Use the first row to explain why it merits attention: disruption and booking values indicate potential impact, the semantic match ties it to the investigation question, and station context suggests where dispatch can begin its review. Jessica can use this result behind the dashboard's ranked service table and let the team inspect the records supporting each priority.
 
@@ -196,7 +196,7 @@ Run the query again with **Run Statement** and compare the top rows. Change only
 - Which transport services still have high relational exposure but a lower semantic similarity to the new question?
 - Does the booking activity make you more or less concerned about the operational impact?
 
-The result is ordered by semantic similarity first, so changing the question changes the review queue. Exposure breaks ties and keeps larger business impact near the top. The same governed query can answer a different business question without rebuilding a search index or moving the transport service data.
+The query first limits the disruption reports to criticality scores of at least 80. It then sorts services by text similarity, using affected-passenger totals to break ties. Booking counts and station details provide context; they do not determine the order. Change the search phrase and compare the services that move up or down the list.
 
 ## Next Steps
 
@@ -205,4 +205,5 @@ Next, use JSON Relational Duality to expose the same booking data as JSON for an
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

@@ -9,7 +9,7 @@ Use this lab to open the LiveLabs reservation, sign in to the **Autonomous Datab
 
 > - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to tools such as SQL Worksheet, object browsing, data loading, and development utilities without installing a desktop database client.
 >
-> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. Use it to inspect query results, script output, and errors throughout the workshop.
 >
 > - `LLUSER` is the workshop database user and schema owner for the hands-on transportation objects. Using the right user matters because the tables, views, models, graph objects, and functions you query are created under this schema.
 
@@ -23,12 +23,12 @@ In this lab, you will:
 
 - Launch the LiveLabs workshop environment.
 - Use the reservation login information to open Database Actions.
-- Confirm that SQL Worksheet is ready for the transportation schema.
+- Open SQL Worksheet for the exercises.
 - Confirm that SQL Worksheet is connected as the workshop schema user.
 
 ## Task 1: Launch the LiveLabs environment
 
-Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
+Open the prepared workshop resources from your LiveLabs reservation.
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -108,4 +108,5 @@ Open SQL Worksheet as the workshop user before running the transportation querie
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
