@@ -6,7 +6,7 @@ Otto Spencer is Seer Sporting Goods' data scientist. His team supplies predictio
 
 A business user should be able to see which products the model flags, inspect their sales and social activity, and decide where further review is useful. Otto already has those values in Oracle AI Database. Training and scoring in the database lets SQL join a prediction directly to the product details the team recognizes.
 
-In this lab, you inspect the training data, optionally compare algorithms with AutoML, create a named Generalized Linear Model, and score a separate demonstration snapshot. The model predicts `SURGE` or `STABLE`. The snapshot is constructed from the workshop data so you can follow the complete SQL workflow in one session.
+In this lab, you inspect the training data, optionally compare algorithms with AutoML, create a named Generalized Linear Model, and score a separate demonstration snapshot. The model predicts `SURGE` or `STABLE` for a snapshot drawn from the workshop data, letting you follow the complete SQL workflow in one session.
 
 ![Otto Spencer, data scientist](images/otto.png)
 
