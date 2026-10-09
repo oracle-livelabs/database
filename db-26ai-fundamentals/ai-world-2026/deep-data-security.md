@@ -46,7 +46,7 @@ When a query runs, the database rewrites it to add the data grant's condition. T
 
 **The trust chain.** When an end user signs in, the database turns on their data role, and their data grants then apply to every query. The database enforces the boundary, not the application and not the agent.
 
-> **Note:** OCI IAM or Microsoft Entra ID can be set up as the identity provider, the service that checks who each person is. End users then sign in with OAuth 2.0 tokens from that service. This lab uses passwords for end users, so you can focus on Deep Data Security without setting up an identity provider. Deep Data Security behaves the same either way.
+> **Note:** In this lab, you create Nina and Vera in the database with passwords. A real casino wouldn't create every employee there. Its staff already have accounts in an **identity provider**, a service such as Microsoft Entra ID or OCI IAM that stores accounts, checks each sign-in and records which roles each person holds. When Nina signs in, the identity provider gives her a **token**, a block of data that says who she is and which roles she holds. The identity provider signs the token, so the database can check that it's real. The database reads Nina's name and roles from the token and turns on the matching data roles, without storing an account for her. This lab has no identity provider, so it stores Nina and Vera in the database instead. Data roles and data grants work the same either way.
 
 ## Task 1: Create the end users and their data roles
 
@@ -55,13 +55,13 @@ When a query runs, the database rewrites it to add the data grant's condition. T
     ```sql
     <copy>
     -- Create end users for Vera and Nina
-    CREATE END USER IF NOT EXISTS vera IDENTIFIED BY Silverleaf2026;
-    CREATE END USER IF NOT EXISTS nina IDENTIFIED BY Silverleaf2026;
+    CREATE END USER IF NOT EXISTS vera IDENTIFIED BY Silverleaf2026 SCHEMA admin;
+    CREATE END USER IF NOT EXISTS nina IDENTIFIED BY Silverleaf2026 SCHEMA admin;
     </copy>
     ```
 
 
-    > **Note:** In production, end users often sign in through OCI IAM or Microsoft Entra ID instead of a password. The data grants work the same with either kind of sign-in. Passwords keep this lab simple.
+    > **Note:** End users created with a password, like these two, are **local end users**: the database stores them. Oracle meant them for testing, demos and simple apps, and this lab uses them only because it has no identity provider. In production, Nina and Vera would exist only in the identity provider. 
 
 2. End users have their own place in the data dictionary. Look for Vera and Nina among end users, then among database users. Clear the editor, paste both queries, and click **Run Script**.
 
@@ -215,13 +215,15 @@ When a query runs, the database rewrites it to add the data grant's condition. T
     </copy>
     ```
 
-    You should see 11 rows: four for `FLOOR_HOST_ROLE` and seven for `SURVEILLANCE_ROLE`. Find `HOST_PLAYERS`. Its `COLUMNS` value lists `CREDIT_LIMIT`, `DATE_OF_BIRTH`, `FULL_NAME`, `HOST_USERNAME`, `LOYALTY_TIER` and `PLAYER_ID`, but not `GOVERNMENT_ID` or `HOME_ADDRESS`. A NULL `COLUMNS` value means every column, and a NULL `PREDICATE` means every row.
+    You should see 11 rows: four for `FLOOR_HOST_ROLE` and seven for `SURVEILLANCE_ROLE`. Find `HOST_PLAYERS`. Its `COLUMNS` value lists `CREDIT_LIMIT`, `DATE_OF_BIRTH`, `FULL_NAME`, `HOST_USERNAME`, `LOYALTY_TIER` and `PLAYER_ID`, but not `GOVERNMENT_ID` or `HOME_ADDRESS`. A NULL `COLUMNS` value means every column, and a `PREDICATE` of `1 = 1` means every row, because 1 always equals 1.
 
     ![Query Result lists 11 data grants, with HOST_PLAYERS limited to six columns and a row rule on the host's username.](images/deep-data-security-03.png " ")
 
 ## Task 3: Sign in as Nina and Vera
 
-1. This next code snippet is a setup step. To see the rules at work, you need to sign in as Nina and Vera. In production, Nina's AI assistant would pass her identity to the database. End users can't sign in to Database Actions, so this workshop uses a quick workaround: a **database link**, a connection from your database back to itself, that signs in as an end user. Clear the editor, paste the block, and click **Run Script**.
+So far, you've been signed in as ADMIN, and ADMIN sees everything. To prove the rules work, you have to ask the database a question as Nina. In the casino, that question comes from Nina's AI assistant, which connects to the database signed in as her. So in this task, we're going to mimic that with a database link, a connection that signs in as one person. Her AI assistant would sign in as Nina the same way, so the end user results are the same. You make one for Nina and one for Vera. From then on, any query ending in `@as_nina` is Nina asking.
+
+1. This block is setup, and you don't need to read the code. It creates a procedure, `connect_as`, that saves an end user's password and creates a database link that signs in as that end user. Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
@@ -263,6 +265,8 @@ When a query runs, the database rewrites it to add the data grant's condition. T
 
     Script Output shows that the database compiled the `connect_as` procedure.
 
+    > **Note:** In production, Nina has no database password. She signs in through the identity provider, and her AI assistant passes her token to the database with each request. The database checks the token and applies the same data grants. The link is the quickest way to get a real session signed in as Nina in a workshop.
+
 2. Now create a link for each person. Clear the editor, paste the two lines, and click **Run Script**.
 
     ```sql
@@ -273,7 +277,7 @@ When a query runs, the database rewrites it to add the data grant's condition. T
     </copy>
     ```
 
-    You now have two links, `AS_NINA` and `AS_VERA`. A query that ends in `@as_nina` runs in a session signed in as Nina, under her data role. End users have no schema of their own, so these queries name the owner: `admin.players@as_nina`.
+    You now have two links, `AS_NINA` and `AS_VERA`. A query that ends in `@as_nina` runs in a session signed in as Nina, under her data role. 
 
     > **Note:** A link signs in on its first query and stays open for the rest of your worksheet session. 
 
@@ -290,13 +294,13 @@ When a query runs, the database rewrites it to add the data grant's condition. T
     FROM dual
     UNION ALL
     SELECT 'nina',
-           (SELECT COUNT(*) FROM admin.players@as_nina),
-           (SELECT COUNT(*) FROM admin.play_sessions@as_nina)
+           (SELECT COUNT(*) FROM players@as_nina),
+           (SELECT COUNT(*) FROM play_sessions@as_nina)
     FROM dual
     UNION ALL
     SELECT 'vera',
-           (SELECT COUNT(*) FROM admin.players@as_vera),
-           (SELECT COUNT(*) FROM admin.play_sessions@as_vera)
+           (SELECT COUNT(*) FROM players@as_vera),
+           (SELECT COUNT(*) FROM play_sessions@as_vera)
     FROM dual
     ORDER BY signed_in_as;
     </copy>
@@ -408,6 +412,8 @@ When a query runs, the database rewrites it to add the data grant's condition. T
 You protected Vera's evidence, and Nina's AI assistant can go live. Nina sees her ten players and their sessions, without their government IDs or home addresses. She can't see other hosts' VIPs, and she can't open the case file. Vera sees everything her investigation needs.
 
 Before this lab, the casino's apps filtered rows in their own code while signed in with a shared account that could read every table. The AI assistant writes a new query for each question, so it would have skipped those filters, and Nina could have learned about the case without meaning to. Now the database knows who is asking, and the rules live in the database as data grants: plain SQL that you can read in one view. Every app, script and AI assistant gets the same answers, without a line of new code.
+
+The database could filter rows before 26ai, too. A Virtual Private Database policy adds a `WHERE` clause to every query on a table, whichever app sends it. Data grants improve on it in two ways. A Virtual Private Database rule is a PL/SQL function that builds its `WHERE` clause as text, so to learn what the rule allows, you read the function's code. A data grant is the rule itself, in SQL, and `DBA_DATA_GRANTS` shows its condition and columns. And with a shared account, a Virtual Private Database policy learns who is asking from a name the app sets in the session. The database can't check that name, so any program that uses the shared account could claim to be Vera and open the case file. With data grants, Nina signs in as herself, and the database checks her password or her identity provider's token. No app needs a shared account that can read every table.
 
 That's the thread through this workshop: the rules live in the database. Domains and an assertion checked every write, including JSON from the tablets at the gaming tables. The graph read the same rows as SQL. Data grants now decide what every end user can see. So every app, JSON document, graph query and AI agent gets the same answers from the same rules.
 

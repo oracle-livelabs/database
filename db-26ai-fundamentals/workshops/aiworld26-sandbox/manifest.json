@@ -45,17 +45,17 @@
           "filename": "../../ai-world-2026/deep-data-security.md"
       },
       {
-        "title": "Lab 6: (Bonus) New SQL Features",
+          "title": "Lab 6: (Bonus) Connect an AI Agent with the SQLcl MCP Server",
+          "description": "Connect an AI agent in VS Code to the casino database as Vera, and have it build a report on the case against Victor Lang.",
+          "type": "livelabs",
+          "filename": "../../ai-world-2026/mcp-server.md"
+      },
+      {
+        "title": "Lab 7: (Bonus) New SQL Features",
         "description": "Try JOIN TO ONE, aggregation filters, QUALIFY, DATEDIFF and DATEADD on the casino data.",
         "type": "livelabs",
         "filename": "../../ai-world-2026/sql-features.md"
     },
-      {
-          "title": "Lab 7: (Bonus) Connect an AI Agent with the SQLcl MCP Server",
-          "description": "Connect an AI agent in VS Code to the casino database as Nina and as Vera, and watch the data grants decide what it sees.",
-          "type": "livelabs",
-          "filename": "../../ai-world-2026/mcp-server.md"
-      },
 
         {
           "title": "Need Help?",
