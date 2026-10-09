@@ -20,7 +20,7 @@ In this lab, you build Otto's demand-surge model and turn its output into a revi
 
 > - A **model** is a set of learned rules that turns input data into a prediction.
 >
-> - A **feature** is an input value used by the model. In this lab, features include transport service category, price, social activity, and fare activity.
+> - A **feature** is an input value used by the model. In this lab, features include service category, fare, social activity, and booking activity.
 >
 > - **Classification** predicts a label. Otto's model predicts either `SURGE` or `STABLE`.
 >
@@ -34,7 +34,7 @@ In this lab, you build Otto's demand-surge model and turn its output into a revi
 
 - Read the prepared training data and identify the model target.
 - Optionally use AutoML to compare classification models and inspect their predictions.
-- Create the selected Generalized Linear Model inside Oracle AI Database.
+- Create a Generalized Linear Model inside Oracle AI Database.
 - Score transport services with `PREDICTION` and `PREDICTION_PROBABILITY`.
 - Combine model output with transport service, fare activity, and engagement data for a dashboard result.
 
@@ -46,7 +46,7 @@ Estimated Time: **10 minutes**
 | Business Problem    | Operations needs to review likely demand surges before adjusting staffing or capacity.                                           |
 | Technical Challenge | Otto needs to train and score a model without copying transport service activity to another machine learning system.           |
 | Persona Focus       | You follow Otto as he builds the model and checks the result before it reaches a dashboard.                          |
-| What You Will See   | Optionally compare models with AutoML, then use SQL Worksheet to create and score the selected model.                  |
+| What You Will See   | Optionally compare models with AutoML, then create and score a separate Generalized Linear Model in SQL Worksheet.                  |
 | Database Capability | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside the database. |
 | Outcome             | A watchlist for a dashboard combines the model result with the transport service and activity data behind it.                  |
 
@@ -54,7 +54,7 @@ Estimated Time: **10 minutes**
 
 ## Task 1: Read the training data
 
-Before Otto creates a model, he checks the data that will teach it. The workshop already provides `OML_SERVICE_DEMAND_TRAINING_V`, a view that combines transport service, social activity, and fare activity data into one row per active transport service.
+Before training, inspect `OML_SERVICE_DEMAND_TRAINING_V`. It generates one synthetic example per service, including social activity, seats booked, fare revenue, and a `SURGE_LABEL`. These values demonstrate the training process; they are not measured historical demand.
 
 The view also contains `SURGE_LABEL`. This is the known label used during training. The demo data assigns each transport service `SURGE` or `STABLE` from its activity values so the SQL pattern can be tested without waiting for new business outcomes.
 
@@ -78,9 +78,11 @@ The view also contains `SURGE_LABEL`. This is the known label used during traini
     </copy>
     ```
 
+    ![Lab 6 Task 1 Step 1](images/l6-t1-s1.png " ")
+
 2. Identify the parts of each row.
 
-    The numeric and category columns are the model inputs. `SURGE_LABEL` is the answer the model learns to predict. `SERVICE_ID` identifies the transport service but is not a business feature for this example.
+    The numeric and categorical columns are model inputs. `SERVICE_ID` identifies each example. The loader assigns `SURGE_LABEL` as `SURGE` when total mentions are at least 30 or high-interest mentions are at least 14; otherwise, it assigns `STABLE`. The model learns this synthetic labeling rule rather than a validated pattern of future demand.
 
     Otto is checking that the training data already brings together the values he needs. He does not have to export social activity, fare activity, and transport service data into separate files before training.
 
@@ -92,20 +94,20 @@ This shows how a data scientist chooses a model: the leaderboard is a starting p
 
 This task is optional. AutoML can take several minutes to complete, so you can continue with Task 3 if you want to focus on creating and using the model in SQL Worksheet.
 
-1. In Database Actions, open the main navigation menu and select **Machine Learning** under Development. If a sign-in page appears, use the workshop `LLUSER` login and password shown on the reservation's **View Login Info** screen.
+1. In Database Actions, open the main navigation menu and select **Machine Learning** under Development.
 
-    ![Database Actions Development launchpad with Machine Learning selected](images/lab6-oml-launchpad.jpg " ")
+    ![Lab 6 Task 1 Step 1](images/oml-location.png " ")
 
-    *Figure 1: Open Machine Learning from the Database Actions navigation menu.*
+    **Note:** If a sign-in page appears, use the workshop `LLUSER` login and password shown on the reservation's **View Login Info** screen.
 
 2. On the Oracle Machine Learning home page, select **AutoML** under **Quick Actions**.
 
-    ![Oracle Machine Learning home page with AutoML in Quick Actions](images/lab6-oml-home-automl.jpg " ")
+    ![Oracle Machine Learning home page with AutoML in Quick Actions](images/automl-location.png " ")
 
     *Figure 2: Select AutoML to open the experiment list.*
 
 3. On the **AutoML Experiments** page, select **Create**. Set up the experiment with these values:
-  
+
     | Setting         | Value                   |
     | -----------------| -------------------------|
     | Experiment name | `Service Demand Surge`  |
@@ -113,10 +115,14 @@ This task is optional. AutoML can take several minutes to complete, so you can c
     | Predict         | `SURGE_LABEL`           |
     | Prediction type | `Classification`        |
     | Case ID         | `SERVICE_ID`            |
-  
-    To choose the data source, select the search icon beside **Data Source**. In the **Select Table** dialog, select schema `LLUSER`; wait for its table list to load, select `OML_SERVICE_DEMAND_TRAINING_V`, and select **OK**. Select `SURGE_LABEL` in **Predict**; the interface fills **Prediction Type** as **Classification**. Select `SERVICE_ID` in **Case ID**. Confirm all values match the form below, select **Start**, then choose **Faster Results**. Allow several minutes and wait until the experiment status is **Completed**.
 
-    ![AutoML experiment form with LLUSER training view and classification settings](images/lab6-automl-experiment-settings.jpg " ")
+    **Note:** To choose the data source, select the search icon beside **Data Source**. In the **Select Table** dialog, select schema `LLUSER`; wait for its table list to load, select `OML_SERVICE_DEMAND_TRAINING_V`, and select **OK**.
+
+    ![Lab 6 Task 1 Step 3](images/data-source-two.png " ")
+
+    Select `SURGE_LABEL` in **Predict**; the interface fills **Prediction Type** as **Classification**. Select `SERVICE_ID` in **Case ID**. Confirm all values match the form below, select **Start**, then choose **Faster Results**. Allow several minutes and wait until the experiment status is **Completed**.
+  
+    ![Lab 6 Task 1 Step 4](images/data-source-one.png " ")
 
     *Figure 3: Choose the training view, prediction target, and case ID before starting AutoML.*
 
@@ -137,15 +143,15 @@ This task is optional. AutoML can take several minutes to complete, so you can c
 
     Select the Generalized Linear Model for the SQL exercise in Task 3. Compare its behavior with the AutoML candidates before using any model for an operational decision.
 
-5. Return to the SQL Worksheet tab to continue. The AutoML experiment is an optional comparison; Task 3 recreates the selected Generalized Linear Model in SQL.
+5. Return to the SQL Worksheet tab to continue. The AutoML experiment is an optional comparison; Task 3 trains a separate Generalized Linear Model in SQL; it does not import the AutoML model.
 
-## Task 3: Create the selected model in SQL Worksheet
+## Task 3: Create a model in SQL Worksheet
 
-AutoML helped Otto compare models. He now returns to SQL Worksheet to create a named model that a SQL query can call repeatedly. The model is stored in Oracle AI Database under the name `OTTO_SERVICE_DEMAND_MODEL`.
+The optional AutoML task compares candidate models. Now create `OTTO_SERVICE_DEMAND_MODEL` in SQL Worksheet so later queries can call it by name.
 
-The settings table tells Oracle to use the **Generalized Linear Model** that Otto selected in AutoML. `PREP_AUTO` lets the database handle standard preparation of the input columns.
+The settings table selects the **Generalized Linear Model** algorithm for this SQL exercise. `PREP_AUTO` enables automatic data preparation. These settings do not reproduce all settings from an AutoML candidate.
 
-If you skipped the optional AutoML task, use this setting as the model selected for the workshop.
+You can complete this task without running the optional AutoML experiment.
 
 1. Create the settings table and train the model. This code box contains multiple SQL and PL/SQL statements; choose **Run Script** to run the full block, including the `/` lines:
 
@@ -220,9 +226,9 @@ If you skipped the optional AutoML task, use this setting as the model selected 
 
 ## Task 4: Score new transport service activity in SQL
 
-Otto now receives a new activity snapshot for the next reporting period. He stores it in a separate scoring table. The model was trained with historical rows from `OML_SERVICE_DEMAND_TRAINING_V`; it will now score rows it did not see during training.
+Create an illustrative next-period snapshot by modifying the first 12 training examples and storing them in a separate scoring table. The inputs differ from the original rows, but they are derived from the training data. This demonstrates scoring; it is not a test on independently collected future observations.
 
-1. Create the scoring table and add the new activity snapshot. This code box contains several SQL statements; choose **Run Script** to run the full block.
+1. Create the scoring table and add the simulated activity snapshot. This code box contains several SQL statements; choose **Run Script** to run the full block.
 
     ```sql
     <copy>
@@ -297,7 +303,7 @@ Otto now receives a new activity snapshot for the next reporting period. He stor
     ```
 
     This creates a small next-period snapshot from the workshop data. 
-    >Note: The table has the model inputs, but it does not contain `SURGE_LABEL`. That label belongs to the historical training data and must not be passed to the model as an input.
+    >Note: The scoring table contains the model inputs without `SURGE_LABEL`, the target used during training.
 
 2. Run the scoring query with **Run Statement**:
 
@@ -347,19 +353,22 @@ Otto now receives a new activity snapshot for the next reporting period. He stor
     </copy>
     ```
 
+    ![Lab 6 Task 4 Step 2](images/l6-t4-s2.png " ")
+
 3. Read the result as a dashboard user.
 
-    `PREDICTED_SURGE` tells the dashboard which label the model selected. `SURGE_SCORE` is the model value between 0 and 1, while `SURGE_PCT` presents the same value as a percentage for a dashboard user. The fare activity and activity columns give the business user something to review alongside the prediction.
+    `PREDICTED_SURGE` is the predicted class. `SURGE_SCORE` is the probability assigned specifically to `SURGE`, even when the predicted class is `STABLE`. `SURGE_PCT` expresses that probability as a percentage. Review seats booked, fare revenue, and social activity alongside each score.
 
     Otto can give operations a review list that pairs each prediction with the service name, fare activity, and social activity used to assess it. The score helps prioritize attention; the supporting values help a person decide whether that priority makes sense.
 
 ## Conclusion: Put the Prediction Beside the Business Data
 
-Otto used AutoML to compare models, selected the Generalized Linear Model because it identifies both classes, recreated it in SQL Worksheet, and scored a new activity snapshot. The query returns a watchlist that a dashboard can show alongside the transport service activity behind each score.
+Otto trained a Generalized Linear Model in SQL and scored a simulated activity snapshot. If you completed the optional AutoML task, you also compared candidate models. The final query combines predictions with service and activity details for a watchlist.
 
-Because Otto trains and scores against the transportation data in Oracle AI Database, the watchlist can show service activity beside the model output in the dashboard query. Operations can review the evidence for a high score before changing staffing or capacity plans, and Otto can repeat the analysis against later activity snapshots.
+Training and scoring run in Oracle AI Database, so SQL can return model scores beside the input data. Before using a demand model for staffing or capacity decisions, evaluate it on separate, representative observations.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

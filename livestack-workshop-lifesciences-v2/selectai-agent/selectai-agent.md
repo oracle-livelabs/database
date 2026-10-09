@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Nina Patel has used Select AI to ask one Life Sciences question at a time. That works for a quick answer, but her new clinical-supply review screen needs a repeatable Life Sciences assistant that can answer a question and support follow-up requests.
+Nina Patel has used Select AI for individual questions. Her clinical supply review screen now needs an assistant that uses an approved SQL tool to answer requests about products and orders.
 
 Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the Life Sciences views configured in the previous lab.
 
@@ -47,7 +47,7 @@ Estimated Time: **15 minutes**
 
 > **Prerequisite:** Complete [Lab 7: Ask Life Sciences Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
 
-## Task 1: Check the profile and table access
+## Task 1: Check the profile and view access
 
 The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_list` identifies the four views, and `enforce_object_list=true` restricts generated SQL to that scope. Database privileges provide the second control: the SQL still runs as the current database user and cannot read tables that user cannot access.
 
@@ -64,9 +64,11 @@ The agent and its SQL tool both use the model configured in `GENAI`. Lab 7 selec
     </copy>
     ```
 
+    ![GENAI profile enabled for the agent exercise](images/l8-t1-s1.png)
+
     The supplied `GENAI` profile should be enabled. If it is absent or disabled, stop and report the missing workshop prerequisite. Lab 7 checks and uses this profile; it does not create a missing profile.
 
-2. Check the model and tables listed in the profile:
+2. Check the model and views listed in the profile:
 
     ```sql
     <copy>
@@ -78,6 +80,7 @@ The agent and its SQL tool both use the model configured in `GENAI`. Lab 7 selec
       AND attribute_name IN ('provider', 'model', 'region', 'object_list', 'comments', 'enforce_object_list');
     </copy>
     ```
+    ![GENAI model and object-list settings used by the agent](images/l8-t1-s2.png)
 
     The list should contain only the workshop views needed for this lab: `LS_REGULATED_PRODUCTS_V`, `LS_CLINICAL_SUPPLY_ORDERS_V`, `LS_ORDER_LINES_V`, and `LS_TRIAL_SITES_V`. Confirm that `comments` and `enforce_object_list` are `true`. These profile settings do not replace database grants or guarantee a correct answer.
 
@@ -137,7 +140,7 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     </copy>
     ```
 
-    The tool does not create a second data store. It gives the agent a named, controlled way to ask Select AI to generate and run SQL against the existing Life Sciences views. The tool uses the profile's table list, and the database user's privileges still apply when the SQL runs.
+    The named tool lets the agent ask Select AI to generate and run queries against the configured life sciences views. The profile’s enforced object list and the executing user’s database privileges apply.
   
 2. Confirm the tool definition:
 
@@ -150,10 +153,12 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     WHERE tool_name = 'NINA_LS_SQL_TOOL';
     </copy>
     ```
-  
+
+    ![Registered NINA_LS_SQL_TOOL and its status](images/l8-t2-s2.png)
+
 ## Task 3: Create Nina's agent, task, and team
 
-The tool by itself does nothing. Nina's agent needs a role, a task needs instructions, and a team connects the two.
+Create a role for Nina’s agent, instructions for its task, and a team that connects them to the SQL tool.
 
 1. Create the agent:
 
@@ -275,7 +280,7 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
 
     ![The tool history identifies the approved Life Sciences SQL tool and its invocation.](images/task52.png)
 
-  The history should show `NINA_LS_SQL_TOOL`. This gives Nina and Jessica a database record of the agent activity instead of treating the answer as an unexplained chat response.
+  Find `NINA_LS_SQL_TOOL` in the history and compare its agent, task, and timestamps with the team run you are reviewing. The result records tool activity; it does not establish that the answer is correct.
 
 ## Conclusion: Give the agent a controlled way to work
 
@@ -309,6 +314,6 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

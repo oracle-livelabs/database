@@ -6,11 +6,11 @@ Bob Green is a graph specialist at Seer Scientific. The clinical-supply team ask
 
 Bob's starting point is simple: finding stock for one product is not enough. Both products in Order 50 must be available in sufficient quantities at the same alternative depot. Bob follows the order through its lines, then traces each product to the depots that stock it. The useful connections are where those separate product branches meet. Fall River's dispatch interruption is hypothetical; the exercise does not change depot availability or move orders.
 
-In this lab, you will use Bob's approach to investigate the order's supply options in two views. You will start with the basic parts of a graph and use SQL/PGQ to follow connections from Fall River's open orders to their products and stocking depots. Then you will focus on Order 50 and open Graph Studio to run selected parts of the investigation as a visual graph, where the relationships become easier to explore and explain. Think of SQL as the evidence table and Graph Studio as the map of the order's product and depot connections.
+Use Bob’s approach to compare supply options in SQL Worksheet and Graph Studio. First, follow Fall River’s open orders to their products and stocking depots with SQL/PGQ. Then focus on Order 50 and inspect its product and depot connections in Graph Studio. The SQL results list the records; the graph displays their relationships.
 
 Graph Studio is Oracle Database's visual workspace for property graphs. It lets an investigator see nodes, edges, and paths as an interactive network while keeping the graph backed by the same database data. Bob uses SQL/PGQ when he needs a precise, repeatable result set, such as the orders assigned to a depot or a list of candidate depots. He uses Graph Studio to explore the network visually, select a node, follow adjacent relationships, and explain why several product branches lead to the same depot.
 
-![Bob, Graph Specialist, builds a clinical-supply investigation app using maintainable graph queries](images/ls-bob.svg)
+![Bob, graph specialist, finds alternative depots for a clinical supply order](images/ls-bob.svg)
 
 ![Conceptual four-hop supply graph: Fall River connects to Order 50, its two order lines, their products, and a shared stocking depot](images/ls-lab04-supply-network.svg)
 
@@ -76,6 +76,8 @@ In this lab, a **hop** means one relationship step. The assigned depot to an ord
     </copy>
     ```
 
+    ![Lab 4 Task 1 Step 1](images/l4-t1-s1.png)
+
     The query joins `FULFILLMENT_CENTERS` to `ORDERS` through the order's `FULFILLMENT_CENTER_ID`. It keeps only `confirmed` and `processing` orders assigned to Fall River.
 
     **Expected output: Open Orders Assigned to Fall River**
@@ -123,6 +125,8 @@ In this lab, a **hop** means one relationship step. The assigned depot to an ord
     </copy>
     ```
 
+    ![Lab 4 Task 1 Step 2](images/l4-t1-s2.png)
+
     Jessica now needs four query branches. The first follows assigned orders, the second follows their lines, the third reaches the products, and the fourth reaches depots with inventory records for those products. Each branch adds another relationship to the previous chain.
 
     The query summarizes the endpoints by hop count. The open orders contain **113 order lines** covering **57 distinct products**. Those products connect to **30 depots** with inventory records. A product can appear on several lines or orders, and a stocking depot can connect to several products. `COUNT(DISTINCT entity_id)` counts each endpoint once within its type and hop count, even when several paths reach it.
@@ -153,6 +157,8 @@ In graph terms, a depot and an assigned order are **vertices**. The order's reco
     ORDER BY order_id;
     </copy>
     ```
+
+    ![Lab 4 Task 2 Step 1](images/l4-t2-s1.png)
 
     The `MATCH` pattern starts at a `depot`, follows an `assigned_order` edge, and reaches a `supply_order`. This is one hop. Those names are labels defined in `LS_SUPPLY_NETWORK`.
 
@@ -186,13 +192,6 @@ Start from Fall River and trace the orders, order lines, products, and stocking 
     ```
 
     **Expected output: Orders, Products, and Stocking Depots Connected to Fall River**
-
-    | Relationship hops | Entity type | Distinct entities |
-    | ---: | --- | ---: |
-    | 1 | ORDER | 35 |
-    | 2 | ORDER_LINE | 113 |
-    | 3 | PRODUCT | 57 |
-    | 4 | DEPOT | 30 |
 
     ![SQL Worksheet returns 35 orders, 113 order lines, 57 products, and 30 stocking depots](images/ls-lab04-supply-four-hop-results.jpg)
 
@@ -259,9 +258,9 @@ Bob now moves from Fall River's wider network to the order the team asked about:
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
 
-Now, what if Bob wanted people to have pattern visualization at their disposal? The SQL above showed which four depots meet the order's product and quantity requirements; the same relationships can also be shown visually. Graph Studio turns them into an interactive network so Bob can show the clinical-supply team how both product branches lead to each qualifying depot.
+Graph Studio displays the relationships behind the four candidate depots as an interactive network. Use it to show how both products in the order connect to each qualifying depot.
 
-In the following tasks, you will turn the SQL evidence for Order `50` into a supply-network map. The notebook keeps the picture focused on this order so the two product branches are easy to follow.
+Use the supplied notebook to display Order `50` and its two product branches in Graph Studio.
 
 1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`.
 
@@ -301,7 +300,7 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
 
 You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of that investigation in Graph Studio. The notebook shows Order `50` and its products, then displays the alternative depots connected to all those products.
 
-The advantage of Graph Studio is relationship context: a table lists the candidate depots, while the visual graph shows the branches that converge on them.
+The table lists candidate depots; the graph shows the product connections that qualify each one.
 
 1. Start at the top of **LS V2 Lab 4 — Alternative Supply Depots**. Read the explanation, then run the first SQL paragraph.
 
@@ -332,9 +331,9 @@ The advantage of Graph Studio is relationship context: a table lists the candida
 
     The two product branches meet at each candidate depot: **two product vertices, four depot vertices, and eight inventory edges**. Select a depot or inventory edge to inspect its properties and compare its ID and stock values with the SQL results. The graph should explain the candidate table, not introduce extra candidates or new relationships.
 
-> **Generated result note:** Graph layouts and node positions can vary between runs. Compare order IDs, product IDs, depot IDs, relationship evidence, and query results rather than exact node positions.
+> **Generated result note:** Graph layouts and node positions can vary between runs. Compare order IDs, product IDs, depot IDs, relationship types, and query results rather than exact node positions.
 
-Congratulations, you have navigated Graph Studio. You used SQL/PGQ for precise, repeatable results, then explored the order's dependencies and shared stocking depots as an interactive network.
+You used SQL/PGQ to list the order’s requirements and candidate depots, then explored the same relationships in Graph Studio.
 
 ## Conclusion: Make Relationships Easy to Review
 
@@ -422,6 +421,6 @@ The definition stores the graph mapping; it does not move rows to a separate gra
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Ramu Murakami Gutierrez, Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

@@ -85,11 +85,7 @@ In this lab, you will:
 
     ![Enter the Slack CLI challenge code](./images/30_enter_slack_challenge_code.png)
 
-10. Confirm that the terminal reports successful authentication.
-
-    ![Slack CLI authentication completed](./images/31_slack_cli_authenticated.png)
-
-11. Verify that Slack CLI lists the workshop workspace.
+10. Verify that Slack CLI lists the workshop workspace.
 
     ```bash
     <copy>
@@ -97,9 +93,11 @@ In this lab, you will:
     </copy>
     ```
 
-    Slack CLI authentication does not replace the `xoxe` app configuration token requested by the setup.
+11. Confirm that the terminal reports successful authentication.
 
-## Task 2: Run the Slack Setup
+    ![Slack CLI authentication completed](./images/31_slack_cli_authenticated.png)
+
+## Task 2: Run the Slack Setup and Generate the Installation Links
 
 1. Open [Slack API: Your Apps](https://api.slack.com/apps).
 
@@ -132,24 +130,30 @@ In this lab, you will:
     | Ops Agent | `agents/ops` | Reports and operates platform services |
     | Publish Agent | `agents/publish` | Publishes approved deliverables |
 
-5. Wait until the terminal displays an **OAuth & Permissions** link for each app.
+5. Wait until the terminal displays seven numbered **OAuth & Permissions**
+    links, one for each app. Each direct link follows this structure:
+
+    ```text
+    https://api.slack.com/apps/<APP_ID>/oauth
+    ```
 
     ![Slack setup creates seven apps and prints their installation links](./images/17_setup_install_links.png)
 
-    Keep this terminal session open. The setup waits for you to install all seven apps.
+    Keep this terminal session open and do not press **Enter** yet. The setup
+    pauses here while you install all seven apps in Task 3.
 
-## Task 3: Install the Apps and Provide the Assistant Token
+## Task 3: Install the Apps from the Generated Links and Provide the Assistant Token
 
-1. Install each app with either of these methods:
+1. Return to the terminal left open at the end of Task 2 and open the first
+    **OAuth & Permissions** link. In the terminal copy the complete URL and
+    paste it into a browser on your local computer.
 
-    - Open each **OAuth & Permissions** link printed in the terminal.
-    - Open [Slack API: Your Apps](https://api.slack.com/apps), select an app, and select **OAuth & Permissions**.
+    Sign in to Slack with the account that administers the workshop
+    workspace if prompted.
 
-    The **Your Apps** page should list all seven apps created by the setup.
-
-    ![Seven AI Staff apps in Slack App Settings](./images/18_seven_apps_created.png)
-
-2. On the **OAuth & Permissions** page, select **Install to Workspace**.
+2. Confirm that the direct link opened the expected app's **OAuth &
+    Permissions** page and that you are installing it in the workshop
+    workspace. Select **Install to Workspace**.
 
     ![Install an AI Staff app to the workspace](./images/19_install_app_from_web.png)
 
@@ -157,25 +161,48 @@ In this lab, you will:
 
     ![Allow the Slack app permissions](./images/20_allow_app_permissions.png)
 
-4. Repeat the installation for all seven apps.
+4. Return to the terminal and repeat steps 1 through 3 for all seven links.
 
-    Return to the terminal only after every app displays **Reinstall to Workspace** on its OAuth page. If Slack requires administrator approval, obtain that approval before continuing.
+    Complete the links in the order shown. After installation, each app's
+    **OAuth & Permissions** page displays **Reinstall to Workspace**. If Slack
+    requires administrator approval, obtain that approval before continuing.
 
-5. Press **Enter** in the setup terminal.
+5. Use the Slack API app list only as an alternative when a terminal link is
+    missing, truncated, or does not open:
 
-6. Open **Assistant Agent**, select **OAuth & Permissions**, and copy its **Bot User OAuth Token**.
+    - Open [Slack API: Your Apps](https://api.slack.com/apps).
+    - Confirm that you are signed in with the account that administers the
+      workshop workspace.
+    - Select the app by name from **Your Apps**.
+    - In the app's left navigation, select **OAuth & Permissions**.
+    - Select **Install to Workspace**, review the permissions, and select
+      **Allow**.
+    - Repeat only for the apps whose direct terminal links did not work.
 
-    The token begins with `xoxb`.
+    The **Your Apps** page lists the seven apps created by the setup.
+
+    ![Seven AI Staff apps in Slack App Settings](./images/18_seven_apps_created.png)
+
+6. After all seven apps display **Reinstall to Workspace**, return to the setup
+    terminal and press **Enter**.
+
+7. Open **Assistant Agent**, select **OAuth & Permissions**, and copy its **Bot User OAuth Token**.
+
+    Under **Bot Token Scopes**, confirm that `users:read` appears in the list. If it is missing, add it and select **Reinstall to Workspace**. Slack must issue a new token after a scope changes.
+
+    Copy the current token. It begins with `xoxb`.
 
     ![Copy the Assistant Agent Bot User OAuth Token](./images/21_assistant_bot_token.png)
 
-7. Paste the Assistant Agent token at the hidden terminal prompt.
+8. Paste the Assistant Agent token at the hidden terminal prompt.
 
     ![Paste the Assistant Agent token at the setup prompt](./images/22_assistant_token_prompt.png)
 
     The setup uses this token during the current process. It does not print or save the token.
 
-8. Wait while the setup completes these actions:
+    If the setup reports `users.list failed: missing_scope`, reinstall Assistant Agent and paste the newly issued `xoxb` token when you rerun the setup.
+
+9. Wait while the setup completes these actions:
 
     - Validates the Assistant Agent token.
     - Discovers all seven installed bot users.
@@ -184,42 +211,32 @@ In this lab, you will:
     - Saves the workspace, app, bot user, and channel IDs.
     - Creates missing environment files from their templates.
 
-9. Confirm that the terminal displays `Slack setup is complete.`
+10. Confirm that the terminal displays `Slack setup is complete.`
 
     If the command stops, run `python3 scripts/setup_slack.py setup` again. It reuses the apps and channels recorded in `~/.config/livelabs-ai-staff/slack-setup.json`.
 
 ## Task 4: Install the Requirements and Run the Token Bootstrap
 
-1. Install the official Python hooks used by Slack CLI.
+1. Install the official Python hooks used by Slack CLI and Run the Bootstrap.
 
     ```bash
     <copy>
     cd ~/livelabs-ai-staff
-    python3 -m pip install --user -r scripts/requirements-slack-bootstrap.txt
+
+    agents/assistant/venv/bin/python \
+    -m pip install \
+    -r scripts/requirements-slack-bootstrap.txt
+
+    agents/assistant/venv/bin/python \
+    scripts/setup_slack.py bootstrap-tokens
     </copy>
     ```
 
-    A message that says `Requirement already satisfied` means the dependency is ready.
-
-2. Run the bootstrap for all seven apps.
-
-    ```bash
-    <copy>
-    python3 scripts/setup_slack.py bootstrap-tokens
-    </copy>
-    ```
-
-    The command creates a temporary Slack CLI project for each existing app. Slack CLI provides the `xoxb` and `xapp` values to a temporary hook. The command validates each bot before it changes the agent environment files.
-
-    ![Slack CLI token bootstrap progress](./images/23_bootstrap_progress.png)
-
-3. Confirm that the command reports seven apps and 14 runtime credentials.
-
-    ![Successful token bootstrap summary](./images/24_bootstrap_complete.png)
+2. Confirm that the command displays `Token setup complete for 7 app(s).`
 
     If any app fails, correct the reported problem and run the same command again. The command preserves the existing environment files until all selected apps succeed.
 
-4. Check the token status.
+3. Check the token status.
 
     ```bash
     <copy>
@@ -312,6 +329,21 @@ In this lab, you will:
     ADB_PASSWORD=<admin-password>
     ADB_WALLET_DIR=/home/opc/oracle/wallet
     ```
+
+    To find `ADB_DSN` quickly, search the wallet's `tnsnames.ora` file for the
+    connection alias that ends in `_low`:
+
+    ```bash
+    <copy>
+    grep -Ei '^[[:space:]]*[[:alnum:]_.-]+_low[[:space:]]*=' \
+      /home/opc/oracle/wallet/tnsnames.ora
+    </copy>
+    ```
+
+    The result starts with a value similar to `mydatabase_low = (...)`. Copy
+    only `mydatabase_low`, the value to the left of `=`, and set
+    `ADB_DSN=mydatabase_low`. Do not copy the full connection description or
+    the path to `tnsnames.ora`.
 
 6. Leave values for later integrations blank.
 

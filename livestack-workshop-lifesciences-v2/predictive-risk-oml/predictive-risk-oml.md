@@ -46,7 +46,7 @@ Estimated Time: **10 minutes** (optional AutoML comparison takes additional time
 | Business Problem | A clinical-supply user needs a short list of products that may require attention. |
 | Technical Challenge | Otto needs to train and score a model without copying product activity to another machine learning system. |
 | Persona Focus | You follow Otto as he builds the model and checks the result before it reaches a dashboard. |
-| What You Will See | Optionally compare models with AutoML, then use SQL Developer Web to create and score the workshop model. |
+| What You Will See | Optionally compare models with AutoML, then use SQL Worksheet to create and score the workshop model. |
 | Database Capability | AutoML, `DBMS_DATA_MINING`, `PREDICTION`, and `PREDICTION_PROBABILITY` support machine learning inside the database. |
 | Outcome | A watchlist for a dashboard combines the model result with the product and activity data behind it. |
 
@@ -80,27 +80,25 @@ These are rule-generated labels based on the same activity used as model inputs.
     </copy>
     ```
 
+    ![Training-data query returns ten products and their model inputs](images/l6-t1-s1.png)
+
 2. Identify the parts of each row.
 
     The numeric and category columns are the model inputs. `SURGE_FLAG` is the answer the model learns to predict. `PRODUCT_ID` identifies the product but is not a business feature for this example.
 
     The source retains names such as `SOCIAL_POSTS`, `VIRAL_POSTS`, and `REVENUE`. In this Life Sciences demo they carry the signal activity and order-value measures used by the application. `AVG_SENTIMENT` is an inherited synthetic activity feature, not a clinical assessment. Do not read a high signal score as proof of a quality failure.
 
-    The following panels show the same ten rows. Product 8 has the label `WATCH`; the other nine shown have `SURGE`.
+    The query returns ten rows. Product 8 has the label `WATCH`; the other nine have `SURGE`. Scroll across the SQL Worksheet result to inspect the input values and labels.
 
-    ![Training rows 1 through 10: category, price, and signal features](images/ls-lab06-training-a.png)
-
-    ![The same ten rows: activity, order quantities, order values, and training labels](images/ls-lab06-training-b.png)
-
-    Otto is checking that the training data already brings together the values he needs. He does not have to export signal activity, orders, and product data into separate files before training.
+    Check that the view contains the product, activity, and order values needed for training. The model can read the view directly.
 
 ## Task 2: Compare models with AutoML (optional)
 
 Otto can use the Oracle Machine Learning AutoML interface to compare candidate models. AutoML can select algorithms, tune them, and show how well each model identifies the labels.
 
-This shows how a data scientist chooses a model: the leaderboard is a starting point, but Otto also checks whether the model identifies the business outcome he cares about.
+Use the leaderboard to compare candidates, then inspect their results for each class. In this exercise, those results measure agreement with the supplied rule-generated labels.
 
-This task is optional and requires access to the Oracle Machine Learning interface. If that interface is unavailable for your workshop user, continue with Task 3. AutoML can take several minutes to complete; you can also skip it to focus on creating and using the model in SQL Developer Web.
+This task is optional and requires access to the Oracle Machine Learning interface. If that interface is unavailable for your workshop user, continue with Task 3. AutoML can take several minutes to complete; you can also skip it to focus on creating and using the model in SQL Worksheet.
 
 1. Open **Machine Learning** from Database Actions.
 
@@ -140,9 +138,9 @@ This task is optional and requires access to the Oracle Machine Learning interfa
 
     This is Otto's decision: **consider the class-level results as well as the leaderboard score**. Even a strong result here measures agreement with the demo's rule-generated labels, not reliable prediction of future supply demand.
 
-## Task 3: Create the selected model in SQL Developer Web
+## Task 3: Create the workshop model in SQL Worksheet
 
-AutoML provides an optional way to compare models. Otto now moves to SQL Developer Web to create a named model that a SQL query can call repeatedly. The model is stored in Oracle AI Database under the name `LS_OTTO_DEMAND_MODEL`.
+AutoML provides an optional way to compare models. Otto now moves to SQL Worksheet to create a named model that a SQL query can call repeatedly. The model is stored in Oracle AI Database under the name `LS_OTTO_DEMAND_MODEL`.
 
 The settings table tells Oracle to use a **Generalized Linear Model**, the algorithm selected for this workshop exercise. `PREP_AUTO` lets the database handle standard preparation of the input columns. This SQL model is not an export of an AutoML experiment and need not reproduce its tuned model.
 
@@ -292,6 +290,8 @@ Otto now prepares a small scoring table and uses the model to build a watchlist.
     </copy>
     ```
 
+    ![Demand watchlist query returns product predictions, scores, and activity](images/l6-t4-s2-2.png)
+
     The view stores the SQL definition, not another copy of the product facts. `PREDICTION` chooses the label. Specifying `'SURGE'` in `PREDICTION_PROBABILITY` asks for that class's probability, even when the predicted label is `WATCH`.
 
 3. Read the result as a dashboard user.
@@ -300,28 +300,22 @@ Otto now prepares a small scoring table and uses the model to build a watchlist.
 
     The tested run returned 12 rows: 11 `SURGE` predictions and `WATCH` for product 8, Randomization Label Pack. It ranked products **12, 2, 9, 4, 10, 7, 5, 3, 1, 11, 6, 8**. The query sorts by the unrounded probability before the product ID, so values displayed as `1` or `100` need not be tied. Scores, precision, and rankings can vary with data or model versions; inspect your actual output.
 
-    These panels show the same twelve rows in that order, with different columns visible so that product names, scores, and supporting activity remain readable.
-
-    ![All twelve watchlist products and predicted labels](images/ls-lab06-watchlist-a.png)
-
-    ![All twelve products: probabilities, quantities, and order values](images/ls-lab06-watchlist-b.png)
-
-    ![All twelve products: supporting signal activity](images/ls-lab06-watchlist-c.png)
+    The query returns twelve rows in the order described above. Inspect the product names, scores, and supporting activity in SQL Worksheet.
 
     Near-100% scores here are not proof of a reliable demand forecast. The model learned synthetic threshold labels from these same products, and this scoring set reuses their inputs. The watchlist helps explain the SQL workflow; it does not certify product release, quality compliance, or clinical suitability.
 
-    This is the value of in-database machine learning. Otto can return a prediction, the product name, order values, and signal activity in one SQL result. There is no need to move data to an external machine learning platform.
+    The final query returns each prediction with the product name, order values, and signal activity. Training and scoring use the data already in the database.
 
 ## Conclusion: Put the Prediction Beside the Business Data
 
-Otto inspected the training labels, created a Generalized Linear Model in SQL Developer Web, and scored a small set of product activity. The optional AutoML task offers a way to compare candidate models; the core SQL steps do not depend on completing it. The query returns a watchlist that a dashboard can show alongside the activity behind each score.
+Otto inspected the training labels, created a Generalized Linear Model in SQL Worksheet, and scored a small set of product activity. The optional AutoML task offers a way to compare candidate models; the core SQL steps do not depend on completing it. The query returns a watchlist that a dashboard can show alongside the activity behind each score.
 
-This is the business benefit of OML in the database. The model, the training data, the prediction, and the product details stay together. Otto does not have to copy Life Sciences data to a separate machine learning platform, and the dashboard does not have to combine scores from one system with business data from another.
+The model, training data, scores, and product details remain in Oracle AI Database. The dashboard can retrieve them together in SQL.
 
 Oracle AI Database makes the model part of the dashboard query. A business user can read the watchlist, inspect the supporting values, and repeat the query using the same access controls that protect the source data. For a production forecast, Otto would still need observed outcomes and independent evaluation data.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026
