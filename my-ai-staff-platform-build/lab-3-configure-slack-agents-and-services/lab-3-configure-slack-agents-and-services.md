@@ -321,7 +321,7 @@ In this lab, you will:
     PUBLISH_BOT_NAME=Publish Agent
     ```
 
-5. Confirm that `.env.shared` still contains the database values from Lab 1 or the Fast Path.
+5. Confirm that `.env.shared` still contains the database values from Lab 1 or the Fast Path output.
 
     ```text
     ADB_DSN=<database-service-name-ending-in-_low>
@@ -344,6 +344,12 @@ In this lab, you will:
     only `mydatabase_low`, the value to the left of `=`, and set
     `ADB_DSN=mydatabase_low`. Do not copy the full connection description or
     the path to `tnsnames.ora`.
+
+
+    ![Copy the low value](./images/adb_low.png)
+
+    ![Copy the low value](./images/env_example.png)
+
 
 6. Leave values for later integrations blank.
 
