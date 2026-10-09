@@ -67,11 +67,29 @@ In this lab, you will:
       that the terminal prompt belongs to the remote `opc` user. Run all
       remaining commands in this remote terminal.
 
-    **Laptop terminal**
+    **Laptop terminal on macOS or Linux**
 
     Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes
     to the remote `opc` shell, run the commands below. The `my-ai-staff-oci`
     alias and key are configured in Lab 1, Task 1.
+
+      ```bash
+      <copy>
+      ssh my-ai-staff-oci
+      </copy>
+      ```
+
+    **Laptop terminal on Windows**
+
+    Lab 1 configures the private key but does not create the
+    `my-ai-staff-oci` alias on Windows. Open PowerShell or Windows Terminal,
+    replace `<instance-public-ip>`, and run:
+
+      ```powershell
+      <copy>
+      ssh -i "$env:USERPROFILE\.ssh\my-ai-staff-oci.key" opc@<instance-public-ip>
+      </copy>
+      ```
 
     **Once connected, update system packages:**
 

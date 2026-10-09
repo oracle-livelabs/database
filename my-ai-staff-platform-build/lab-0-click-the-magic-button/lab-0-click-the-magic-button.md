@@ -55,19 +55,38 @@ In this lab, you will:
     Select your home region if you want to use the Always Free
       shape and Autonomous Database 26ai.
 
-    - **SSH public key:** If you do not already have an SSH key pair, run these commands in a
-       terminal on your computer:
+    - **SSH public key:** If you do not already have an SSH key pair, create
+      one on your computer.
+
+       On macOS or Linux, open Terminal and run:
+
        ```bash
+       <copy>
        mkdir -p ~/.ssh
        chmod 700 ~/.ssh
        ssh-keygen -t ed25519 -f ~/.ssh/my-ai-staff-oci.key -C "my-ai-staff-oci"
+       cat ~/.ssh/my-ai-staff-oci.key.pub
+       </copy>
        ```
-       Accept the suggested file path if prompted. The command creates the
-       private key at `~/.ssh/my-ai-staff-oci.key` and the public key at
-       `~/.ssh/my-ai-staff-oci.key.pub`. Protect the private key and never
-       paste or upload it to Resource Manager.
 
-       Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
+       On Windows, open PowerShell or Windows Terminal and run:
+
+       ```powershell
+       <copy>
+       New-Item -ItemType Directory -Force "$env:USERPROFILE\.ssh" | Out-Null
+       ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\my-ai-staff-oci.key" -C "my-ai-staff-oci"
+       Get-Content "$env:USERPROFILE\.ssh\my-ai-staff-oci.key.pub"
+       </copy>
+       ```
+
+       When prompted, enter and confirm a passphrase for the private key, or
+       press `Enter` twice to continue without one. The command creates the
+       private key in your user `.ssh` directory and prints the public key.
+       Protect the private key and never paste or upload it to Resource
+       Manager.
+
+       Paste the printed line, which starts with `ssh-ed25519`, into **SSH
+       public key**.
 
     - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
       or network you will use to connect, followed by `/32`. To find it, open a
@@ -123,14 +142,60 @@ In this lab, you will:
 
 ## Task 3: Connect, Validate Packages, and Authenticate Codex
 
-1. Connect to the instance with the private key that matches the public key
-    supplied to Resource Manager:
+1. Connect to the instance using either a laptop terminal or VS Code Remote -
+    SSH. In both cases, use the private key that matches the public key supplied
+    to Resource Manager.
+
+    **Laptop terminal on macOS or Linux**
 
     ```bash
     <copy>
     ssh -i ~/.ssh/my-ai-staff-oci.key opc@<instance_public_ip>
     </copy>
     ```
+
+    **Laptop terminal on Windows**
+
+    Open PowerShell or Windows Terminal and run:
+
+    ```powershell
+    <copy>
+    ssh -i "$env:USERPROFILE\.ssh\my-ai-staff-oci.key" opc@<instance_public_ip>
+    </copy>
+    ```
+
+    On the first terminal connection, enter `yes` to accept the SSH host
+    fingerprint. A successful connection displays a remote prompt for the
+    `opc` user.
+
+    **VS Code Remote - SSH**
+
+    - Install the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+      from Microsoft if it is not already installed.
+
+      ![Install the Remote SSH extension from the Visual Studio Code Marketplace](images/08_remote_ssh_extension_install.png)
+
+    - Open the **Extensions** view, confirm that **Remote - SSH** appears under
+      **Installed**, and then select **Remote Explorer** in the Activity Bar.
+
+      ![Confirm the Remote SSH extension is installed and open Remote Explorer](images/09_remote_ssh_extension_installed.png)
+
+    - In **Remote Explorer**, select the plus icon labeled **New Remote**.
+
+      ![Add a new SSH remote from Remote Explorer](images/10_remote_explorer_add_host.png)
+
+    - Enter the complete SSH command for your operating system shown above.
+
+      ![Enter the OCI instance SSH connection command](images/11_remote_ssh_connection_command.png)
+
+    - Save the host in the suggested SSH configuration file, select the saved
+      host, and accept the SSH host fingerprint when prompted.
+
+      ![Select the saved OCI SSH host in Remote Explorer](images/12_remote_host_saved.png)
+
+    - Select **Linux** if VS Code asks for the remote platform. When the
+      connection finishes, select **Terminal > New Terminal** and confirm that
+      the prompt belongs to the remote `opc` user.
 
 2. From the connected instance, follow the bootstrap log until completion. It
     may take time while packages, Python dependencies, the public model, and
