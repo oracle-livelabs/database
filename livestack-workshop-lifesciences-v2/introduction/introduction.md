@@ -2,13 +2,13 @@
 
 ## Introduction
 
-A quality alert lands before the clinical supply meeting starts. Seer Scientific needs to know which regulated products, trial sites, cold-chain locations, and supply-depot relationships deserve attention first, and every answer must be explainable.
+Before a clinical supply meeting, Seer Scientific receives a quality alert. The team needs to identify products and trial sites for review, check nearby cold-chain depots, and trace supply relationships. Each answer must show the records and calculations behind it.
 
 Jessica Chan is the database administrator at Seer Scientific. Her teams are building clinical supply applications, reviewing product concerns, evaluating service coverage, and adding AI to quality and supply dashboards.
 
 
 
-The requests look different, but they share one problem. The data is already in Oracle AI Database, and each team wants to use it in a different way:
+Each team uses the data in Oracle AI Database for a different task:
 
 - Thomas needs clinical supply orders as JSON for a web and mobile application.
 - Gilly needs semantic search that can find products by meaning, not only by matching words.
@@ -19,9 +19,9 @@ The requests look different, but they share one problem. The data is already in 
 
 ![The Seer Scientific team: Jessica, Thomas, Gilly, Bob, Moon, Otto, and Nina, Clinical-Supply Analyst](images/ls-team.svg)
 
-Jessica's job is to help each team meet its requirement without creating a new data copy or a separate security model for every feature. She uses Oracle AI Database as the shared foundation: relational tables remain the source for Life Sciences records, while JSON, vectors, graphs, spatial data, machine learning, and AI services work with those same records.
+Jessica helps the teams use the existing database for these features. Relational tables hold the life sciences records; JSON, vectors, graphs, spatial functions, machine learning, and AI services provide different ways to work with them.
 
-This workshop follows Jessica and her colleagues as they solve these problems and help Seer Scientific improve quality investigations and clinical-supply operations. Each lab focuses on one business requirement, but the database remains the common thread. You will see how the teams use different data types and database capabilities together, and how Jessica keeps access, SQL, and results visible.
+Follow Jessica and her colleagues as they investigate quality concerns and review clinical supply operations. Each lab addresses one business requirement and shows the SQL, source records, and results used to answer it.
 
 ### What the team builds
 
@@ -32,10 +32,10 @@ This workshop follows Jessica and her colleagues as they solve these problems an
 | Gilly, AI engineer | Find products related to a sterility concern. | With the supplied in-database embedding model, Gilly creates vectors where the product data already lives. |
 | Bob, graph specialist | Find alternative depots with enough recorded stock for every product in one supply order. | SQL/PGQ follows existing order and inventory relationships; Graph Studio shows the product branches and the candidate depots they share. |
 | Moon, spatial expert | Evaluate cold-chain coverage using trial-site, supply-center, and region locations. | The database calculates distance from geographic data that the application can also display. Proximity alone does not establish cold-chain suitability. |
-| Otto, data scientist | Identify regulated products that may face a supply-demand surge. | Oracle Machine Learning trains and scores a model inside the database, close to the product and activity data. The exercise demonstrates scoring, not unseen-data accuracy. |
+| Otto, data scientist | Identify regulated products that may face a supply-demand surge. | Oracle Machine Learning trains and scores a model inside the database, using the product and activity data. The exercise demonstrates scoring; it does not test accuracy on new data. |
 | Nina, clinical-supply analyst | Ask Life Sciences questions without writing every query from scratch. | Select AI generates SQL that Nina can inspect, run, and refine. Select AI Agent adds a restricted SQL question-answering tool and records the agent activity. |
 
-The point is not to use every capability in every query. The point is that Jessica does not have to move the data into a separate database whenever a requirement changes. The same Life Sciences records can support:
+Jessica can support these requirements in the same database. The life sciences records support:
 
 - An application payload.
 - A vector search.
@@ -68,6 +68,6 @@ Estimated Workshop Time: **90 minutes**
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd, Linda Foinding
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026

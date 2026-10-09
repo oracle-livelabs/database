@@ -8,7 +8,7 @@ Gilly already has the product, order, and site-contact data in the database. Her
 
 She could export the text and embeddings to a separate vector service. That would add a second copy of product information, another index to refresh, and another set of access rules to manage. Gilly wants the search to run where the underlying rows already live, so one SQL statement can compare meaning, join product data to orders and site contacts, and return a result for the application.
 
-In this lab, you review Gilly’s implementation from the embedding model to the final follow-up list. You compare keyword matching with semantic search and see why Oracle AI Database fits the job: vector search finds related products, and SQL joins connect them to exact order and contact data in the same database.
+Review Gilly’s implementation from the embedding model to the follow-up list. Compare keyword matching with semantic search, then use SQL joins to connect product matches to order and contact records.
 
 ![Gilly, AI Engineer, identifies clinical-supply orders potentially affected by a sterility concern](images/ls-gilly.svg)
 
@@ -27,7 +27,7 @@ In this lab, you review Gilly’s implementation from the embedding model to the
 
 </details>
 
-Gilly has already built the application’s product search. In this lab, you review how it lets a business user enter a concern in ordinary language and receive products ranked by similarity in meaning.
+The application lets a business user enter a concern in plain language and returns products ranked by text similarity. The following tasks show how the search works.
 
 ### Objectives
 
@@ -80,17 +80,17 @@ Jessica has already loaded the shared ONNX embedding model for Gilly. Oracle AI 
 
     ![Available ONNX embedding model ADMIN.ALL_MINILM_L12_V2](images/model.png)
 
-    The result should include `ADMIN.ALL_MINILM_L12_V2`, the model used throughout this lab. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
+    The result should include `ALL_MINILM_L12_V2`, the model used throughout this lab. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
 
 2. Review what this means for Gilly's application.
 
     Gilly can call the model from SQL with `VECTOR_EMBEDDING(...)`. Jessica manages the model inside the database, while Gilly uses it in her search query. The product data, vectors, and access controls stay in the same database.
 
-    > **Note:** This is the key Oracle AI Database differentiator in this lab. The embedding model runs inside the database, so Gilly does not need a separate embedding service or a data pipeline to move Life Sciences text between systems.
+    > **Note:** The embedding model runs inside the database. Gilly can create vectors from the product text without sending it to a separate embedding service.
 
 ## Task 2: Create a product vector
 
-Gilly decides that one vector per product is enough. Each product record is short and describes one product, so she combines its name, category, available description, and manufacturer name into one text value before creating the vector.
+Each product has a short catalog entry, so Gilly creates one vector from its name, category, available description, and manufacturer name.
 
 1. Review the text Gilly will embed:
 
@@ -109,6 +109,8 @@ Gilly decides that one vector per product is enough. Each product record is shor
     </copy>
     ```
 
+    ![Product names, categories, and manufacturers combined into embedding text](images/l3-t2-s1.png)
+
     The combined text gives the model the product name, business category, and manufacturer. All 79 descriptions in this dataset are empty, so this is short catalog text, not detailed product documentation. Gilly does not need to embed price, dates, or other values that do not describe what the product is.
 
 2. Add a vector column to `PRODUCTS`:
@@ -121,14 +123,14 @@ Gilly decides that one vector per product is enough. Each product record is shor
 
     The column has 384 dimensions because `ALL_MINILM_L12_V2` produces 384-dimensional vectors.
 
-3. Create the product vectors inside Oracle Database:
+3. Create the product vectors inside Oracle Database. Use Run Script (F5) to run the update and commit together:
 
     ```sql
     <copy>
     UPDATE products p
     SET product_embedding = (
       SELECT VECTOR_EMBEDDING(
-        ADMIN.ALL_MINILM_L12_V2 USING
+          ALL_MINILM_L12_V2 USING
           p.product_name || ' ' || NVL(p.category, '') || ' ' ||
           NVL(p.description, '') || ' ' || b.brand_name AS DATA)
       FROM brands b
@@ -178,6 +180,8 @@ Now Gilly tests the new column with a simple vector query. She asks for products
     </copy>
     ```
 
+    ![Keyword search returns Sterility Assurance Swab Pack](images/l3-t3.png)
+
     This finds product **64, Sterility Assurance Swab Pack**. It answers a precise question: which product text contains `sterility`? It does not look for related concepts such as bioburden.
 
 2. Run the following semantic query:
@@ -200,7 +204,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
            p.category,
            VECTOR_DISTANCE(
              p.product_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+             VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                USING 'sterility deviation affecting biologics lots' AS DATA),
              COSINE) AS vector_distance
     FROM products p
@@ -230,13 +234,13 @@ Now Gilly tests the new column with a simple vector query. She asks for products
            p.category,
            ROUND(1 - VECTOR_DISTANCE(
              p.product_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+             VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                USING 'sterility deviation affecting biologics lots' AS DATA),
              COSINE), 4) AS similarity
     FROM products p
     ORDER BY VECTOR_DISTANCE(
                p.product_embedding,
-               VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+               VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                  USING 'sterility deviation affecting biologics lots' AS DATA),
                COSINE),
              p.product_id
@@ -258,7 +262,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
            sp.post_text AS signal_text,
            ROUND(1 - VECTOR_DISTANCE(
              pe.embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+             VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                USING 'sterility deviation affecting biologics lots' AS DATA),
              COSINE), 4) AS similarity
     FROM post_embeddings pe
@@ -266,7 +270,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
     WHERE pe.embedding_model = 'all_MiniLM_L12_v2'
     ORDER BY VECTOR_DISTANCE(
                pe.embedding,
-               VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+               VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                  USING 'sterility deviation affecting biologics lots' AS DATA),
                COSINE),
              sp.post_id
@@ -278,13 +282,13 @@ Now Gilly tests the new column with a simple vector query. She asks for products
 
     The prepared dataset supplies these 5,000 post vectors. Each represents the first 500 characters of `POST_TEXT`; all current messages fit within that limit. You created the product vectors in Task 2, but you do not rebuild the supplied post vectors here. The query retains the output labels `SIGNAL_ID` and `SIGNAL_TEXT` for these source posts. Read the messages to decide whether they describe a related quality concern; a high score does not establish a confirmed deviation.
 
-    Posts 2448, 3018, and 4788 have identical source text and tie at 0.5827; these are separate source records, not duplicate rows introduced by the join. Their message concerns demand. Post 2100 describes an inspection and lot-genealogy review, so it may deserve more attention even though its similarity score is lower (0.5682). Ranking helps Gilly find candidates; reading the evidence determines the next action.
+    Posts 2448, 3018, and 4788 have identical source text and tie at 0.5827; these are separate source records, not duplicate rows introduced by the join. Their message concerns demand. Post 2100 describes an inspection and lot-genealogy review, so it may deserve more attention even though its similarity score is lower (0.5682). Ranking helps Gilly find candidates; reading the source messages helps her decide what to review next.
 
     The supplied embedding tables have vector indexes for approximate searches in the broader application. This lab explicitly uses exact search. Approximate searches can return different neighbors; changed text or a different model can also change rankings. The indexes do not apply to the new column you added to `PRODUCTS`.
 
 ## Task 4: Find clinical supply orders to review for a product concern
 
-Gilly now has the business requirement for the application. A business user should be able to enter a concern and find clinical supply orders containing related products. The result gives the supply team a list for follow-up, with the product match, order status, order date, and site-contact details.
+The application must connect product matches to clinical supply orders. The next query returns a follow-up list with each product’s match score, order status, order date, and site-contact details.
 
 1. Run the following query for the concern `sterility deviation affecting biologics lots`:
 
@@ -295,7 +299,7 @@ Gilly now has the business requirement for the application. A business user shou
                p.product_name,
                VECTOR_DISTANCE(
                  p.product_embedding,
-                 VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+                 VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                    USING 'sterility deviation affecting biologics lots' AS DATA),
                  COSINE) AS vector_distance
         FROM products p
@@ -340,10 +344,10 @@ Gilly now has the business requirement for the application. A business user shou
 
 ## Conclusion
 
-Gilly has built the search behind the application and connected it to a business action. A plain-language concern can produce ranked products, related posts to review, and a clinical supply follow-up list using vectors, relational joins, and SQL in Oracle AI Database.
+Gilly’s search turns a plain-language concern into ranked products, related posts, and clinical supply orders for review. It combines vectors with relational joins in Oracle AI Database.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd
-* **Last Updated By/Date** - Joshua Pasaribu, October 2026
+* **Author** - Joshua Pasaribu
+* **Contributor** - Nechita C. Teodor
+* **Last Updated By/Date** - Nechita C. Teodor, October 2026
