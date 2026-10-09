@@ -127,7 +127,7 @@ By the end of this lab, you will be able to:
 
 2. Review the text below the endpoint. External requests use `POST` and require an API key in the `Authorization: Bearer` header. Publication and authentication are both required for external execution.
 
-3. Only administrators can create and manage API keys. Administrators see the **API Key** and **Sample Code** tabs; workshop participants may not see those tabs. For an optional external test, use a key provided by the instructor for your specific flow and the request example in **Sample Code**. Keep the key out of screenshots and workshop files.
+3. Only administrators can create and manage API keys. Administrators see the **API Key** and **Sample Code** tabs; workshop participants may not see those tabs. For an optional external test, use the key and request example provided by your instructor for your specific flow. Keep the key out of screenshots and workshop files.
 
 4. If no key is provided, finish this task by identifying the endpoint and explaining the publication and authentication requirements. See [Agent Builder: Publish and Chat With Your Agents Outside the Application](https://docs.oracle.com/en/database/oracle/agent-factory/26.7/paias/agent-builder.html) for details.
 
