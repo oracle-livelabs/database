@@ -32,9 +32,7 @@ In this lab, you will:
     ```
     <copy>
     cd ~/livelabs-ai-staff
-    rg -n 'WorkingDirectory|EnvironmentFile|ExecStart' \
-      agents/{assistant,pipeline,brand-agent,data,ops,publish}/contentkit-*.service \
-      apps/file-editor/contentkit-file-editor.service
+    grep -nE 'WorkingDirectory|EnvironmentFile|ExecStart' agents/{assistant,pipeline,brand-agent,data,ops,publish}/contentkit-*.service apps/file-editor/contentkit-file-editor.service
     </copy>
     ```
 
