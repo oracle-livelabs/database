@@ -1,18 +1,66 @@
 {
-  "workshoptitle": "Build Connected Energy and Utilities Solutions with Oracle AI Database",
+  "workshoptitle": "Build Connected Energy & Utilities Solutions with Oracle AI Database",
   "help": "livelabs-help-db_us@oracle.com",
   "tutorials": [
-    {"title":"Introduction","description":"The Seer Utility Network operations story and workshop goals.","filename":"../../introduction/introduction.md"},
-    {"title":"Getting Started","description":"Launch the environment and open Database Actions SQL Worksheet.","filename":"../../getting-started/getting-started.md"},
-    {"title":"Lab 1: Build an Energy Operations Review Query","description":"Connect service requests, reliability evidence, and field-logistics capacity with relational SQL.","filename":"../../energy-operations-command-center/energy-operations-command-center.md"},
-    {"title":"Lab 2: Build a JSON Application Model","description":"Help Thomas use JSON Relational Duality for utility service requests.","filename":"../../utility-service-request-duality/utility-service-request-duality.md"},
-    {"title":"Lab 3: Review a Semantic Risk Search","description":"Rank service descriptions related to an operational concern using AI Vector Search.","filename":"../../reliability-signal-vector-search/reliability-signal-vector-search.md"},
-    {"title":"Lab 4: Investigate an Operational Event Network","description":"Review Bob's graph approach to connected restoration evidence with SQL/PGQ.","filename":"../../operational-event-graph/operational-event-graph.md"},
-    {"title":"Lab 5: Rank Nearby Operations Sites for Review","description":"Use Oracle Spatial to compare service-point and field-site proximity for human review.","filename":"../../field-operations-spatial/field-operations-spatial.md"},
-    {"title":"Lab 6: Build a Demand and Capacity Watchlist with Oracle Machine Learning","description":"Evaluate a prepared model on held-out labeled cases and combine scores with capacity evidence.","filename":"../../asset-risk-capacity-oml/asset-risk-capacity-oml.md"},
-    {"title":"Lab 7: Ask Energy and Utilities Questions with Select AI","description":"Review generated SQL for site, service, and capacity questions; live validation is environment-dependent.","filename":"../../ask-energy-utilities/ask-energy-utilities.md"},
-    {"title":"Lab 8: Build an Energy and Utilities Operational Review Agent","description":"Configure an intended read-only review workflow; live execution and enforcement validation remain pending.","filename":"../../energy-utilities-agent/energy-utilities-agent.md"},
-    {"title":"Lab 9: Final Quiz","description":"Check your understanding with scored questions.","filename":"../../final-quiz/final-quiz.md"},
-    {"title":"Need Help?","description":"Solutions to common problems and directions for receiving Live Help.","filename":"https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"}
+    {
+      "title": "Build Connected Energy & Utilities Solutions with Oracle AI Database",
+      "description": "Meet Seer Utility Network and follow its service-request story and data model.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Launch the environment and open Database Actions SQL Worksheet.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Build a Converged Dashboard Query",
+      "description": "Use a converged query to connect service risk, service requests, semantic matches, and service coverage.",
+      "filename": "../../energy-operations-command-center/energy-operations-command-center.md"
+    },
+    {
+      "title": "Lab 2: Build a JSON Application Model",
+      "description": "Help Thomas choose between JSON columns, JSON collections, and JSON Relational Duality for a customer application.",
+      "filename": "../../utility-service-request-duality/utility-service-request-duality.md"
+    },
+    {
+      "title": "Lab 3: Review a Semantic Risk Search",
+      "description": "Review how Gilly built semantic search with an in-database embedding model for utility services and risk notices.",
+      "filename": "../../reliability-signal-vector-search/reliability-signal-vector-search.md"
+    },
+    {
+      "title": "Lab 4: Investigate an Operational Event Network",
+      "description": "Follow restoration events, shared asset records, and multi-hop paths with SQL/PGQ and Graph Studio.",
+      "filename": "../../operational-event-graph/operational-event-graph.md"
+    },
+    {
+      "title": "Lab 5: Route Customers to the Closest Field Logistics Site",
+      "description": "Use Oracle Spatial to compare service points, territories, and field logistics sites.",
+      "filename": "../../field-operations-spatial/field-operations-spatial.md"
+    },
+    {
+      "title": "Lab 6: Build a Service Demand Watchlist with Oracle Machine Learning",
+      "description": "Train and score a service demand-surge model inside Oracle Database.",
+      "filename": "../../asset-risk-capacity-oml/asset-risk-capacity-oml.md"
+    },
+    {
+      "title": "Lab 7: Ask Energy & Utilities Questions with Select AI",
+      "description": "Use Select AI to turn natural-language utilities questions into SQL you can inspect and run.",
+      "filename": "../../ask-energy-utilities/ask-energy-utilities.md"
+    },
+    {
+      "title": "Lab 8: Build an Energy & Utilities Agent with Select AI Agent",
+      "description": "Create a utilities query agent with an approved SQL tool and inspect its calls.",
+      "filename": "../../energy-utilities-agent/energy-utilities-agent.md"
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding with scored questions.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
   ]
 }

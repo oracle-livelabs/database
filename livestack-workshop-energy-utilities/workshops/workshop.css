@@ -1,0 +1,48 @@
+/* Keep the Oracle LiveLabs layout readable and operable on small screens. */
+:is(a, button, summary, [tabindex]):focus-visible {
+  outline: 3px solid #8b4728;
+  outline-offset: 3px;
+}
+.hol-Header :is(a, button):focus-visible {
+  outline-color: #fff;
+}
+#module-content img { max-width: 100%; height: auto; }
+#module-content pre { max-width: 100%; overflow-x: auto; }
+#leftNav .toc-item.active { color: #8b4728; }
+.ll-quiz-option.correct .ll-quiz-feedback { color: #245832; }
+.ll-quiz-option.incorrect .ll-quiz-feedback { color: #842029; }
+#module-content .hljs-literal { color: #3b6b29; }
+#modalClose { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; cursor: pointer; }
+#modalClose:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+@media (max-width: 900px) {
+  body, #module-content { font-size: 16px; line-height: 1.6; }
+  body { padding-top: 64px; }
+  .hol-Header { height: 64px; }
+  .hol-Header-wrap { display: flex; align-items: center; padding: 0 4px; height: 64px; }
+  .hol-Header-actions { flex: 0 0 44px; margin: 0; }
+  .hol-Header-logo { flex: 1; min-width: 0; margin: 0; padding: 0 6px; font-size: 12px; line-height: 1.3; }
+  #tutorial-title { display: none; }
+  #openNav { width: 44px; height: 44px; margin: 0; }
+  #openNav::before { content: "\2630"; position: static; display: block; width: auto; height: auto; opacity: 1; transform: none; background: none; color: #fff; font: 24px/1 sans-serif; text-indent: 0; }
+  #openNav span { display: none; }
+  #openNav::after { display: none; }
+  .hol-Header :is(#livelabs, .header-icon) { box-sizing: border-box; flex: 0 0 44px; min-width: 44px; min-height: 44px; margin: 0; padding: 6px; }
+  #container { top: 0; padding-top: 0; }
+  #contentBox, #contentBox.open, #contentBox.close { width: 100%; margin-left: 0; min-width: 0; padding: 0; }
+  #module-content { box-sizing: border-box; width: 100%; padding: 20px; }
+  #module-content :is(p, li, td, th, blockquote, summary) { font-size: 16px; line-height: 1.6; }
+  #module-content h1 { font-size: 26px; line-height: 1.25; }
+  #module-content h2 { font-size: 21px; line-height: 1.4; }
+  #module-content h3 { font-size: 18px; }
+  #module-content pre { font-size: 13px; }
+  #module-content table { display: block; max-width: 100%; overflow-x: auto; }
+  #leftNav { position: fixed; top: 64px; bottom: 0; z-index: 20; background: #fff; width: min(320px, 85vw); overflow-y: auto; box-shadow: 3px 0 12px #0003; }
+  #leftNav.close { display: none; }
+  #leftNav.open { display: block; width: min(320px, 85vw); }
+  #leftNav-toc, #leftNav-toc.open { width: 100%; max-height: none !important; }
+  #leftNav, #leftNav a, #leftNav .toc-item { font-size: 14px; line-height: 1.5; }
+  #leftNav a, #leftNav .toc-item, #module-content summary, #module-content h2[tabindex], #module-content button, .footer-links a { box-sizing: border-box; min-height: 44px; }
+  #leftNav a, .footer-links a { display: inline-block; padding-top: 10px; padding-bottom: 10px; }
+  #module-content summary { padding: 8px 0; }
+  #module-content button { font-size: 16px; }
+}

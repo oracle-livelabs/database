@@ -2,233 +2,419 @@
 
 ## Introduction
 
-Thomas Brune is an application developer at Seer Utility Network. He and his team are building a service-request workspace for utility operators. After Jessica identifies requests that need attention, operators need to open a request and see its status, value, and requested services or supplies together.
+Thomas Brune is building a customer web and mobile application for Seer Utility Network. Each screen needs a JSON payload containing a service request, its status, and line items.
 
-Thomas wants this information in one nested JavaScript Object Notation (JSON) document that the application can consume directly. A document can group the request details and its line items into a payload that matches the workspace screen, reducing the need for the application to assemble separate query results.
+With Jessica, the DBA, compare three approaches: a JSON column for optional attributes, a collection for application-owned documents, and a duality view over existing relational rows.
 
-Jessica, the DBA, needs the same information available as relational rows for reporting, SQL queries, and database controls. Maintaining an independent document store would introduce another copy to keep synchronized whenever a request changes.
-
-Thomas and Jessica use a JSON Relational Duality View to provide a document representation of the existing relational data. In this lab, you read a prepared service-request document, select fields from it using SQL, and compare those values with the underlying request and line-item rows. You will see how application developers and database teams can work with different representations of the same stored records.
-
-![Thomas, Developer, introduces reading service requests as JSON backed by the same relational data](images/thomas.png)
+![thomas](images/thomas.png)
 
 <details>
-<summary><strong>Key terms: JSON Relational Duality View, JSON document, and projection</strong></summary>
+<summary><strong>Key terms: JSON columns, JSON collections, and JSON Relational Duality</strong></summary>
 
-> - A **JSON Relational Duality View** presents relational data as JSON documents. In this lab, it brings a service request and its line items together in one document, while the underlying data remains in relational tables.
-> - A **JSON document** groups related information into named fields and nested structures. Here, `_id` identifies the service request, and `lineItems` contains an array of its requested services or supplies.
-> - **Projection** means selecting particular fields from a document to display in a query result. `JSON_VALUE` extracts a single value, such as the request status. `JSON_QUERY` retrieves a JSON object or array, such as `lineItems`.
+> - A **JSON column** stores a JSON value in a relational table alongside normal typed columns, keys, and constraints. Thomas can use it for optional or changing application attributes without turning every new attribute into a schema change.
+>
+> - A **JSON collection** is a special table or view that provides a set of JSON documents through one `JSON`-typed `DATA` column. Each document can have a top-level `_id` used to identify it.
+>
+> - **JSON Relational Duality** lets Oracle Database expose relational data as JSON documents without copying it into a separate document database. The application gets the document shape Thomas wants for its API. The database keeps the relational rows and controls.
+>
 
 </details>
 
-
-Thomas’s application needs a document that brings a service request and its line items together, such as this shortened excerpt from request `50453`:
+Thomas's application needs a payload with the service request and its line items together, such as this:
 
 ```json
 {
-  "_id": 50453,
-  "serviceRequestId": 50453,
-  "requestingServicePointId": 9376,
+  "_id": 900001,
+  "requestingServicePointId": 1,
   "requestStatus": "confirmed",
-  "requestValue": 4870,
   "lineItems": [
-    {
-      "lineItemId": 62419,
-      "serviceSupplyId": 564,
-      "quantity": 2,
-      "unitCost": 780,
-      "lineValue": 1560
-    }
+    { "lineItemId": 990001, "serviceSupplyId": 1, "quantity": 2, "unitCost": 12.50 }
   ]
 }
 ```
 
-This excerpt shows selected fields and one of the request’s five line items. The complete document also includes metadata and additional request details. The `requestValue` represents the full request, not just the single item shown here.
-
-The application reads this information as a JSON document, while the database keeps the request and its line items in relational tables. In this lab, you read the prepared document, extract selected fields with SQL, and compare them with the underlying relational rows.
-
-
-
 ### Objectives
 
-- Read a utility service request as JSON.
-- Project JSON fields into SQL.
-- Compare the document with its relational source rows.
+- Store flexible application attributes as JSON in a relational table.
+- Create and query a JSON Collection Table of service-request documents.
+- Read `UTILITY_SERVICE_REQUESTS_DV`, then create and update documents through the lab view `LL_SERVICE_REQUESTS_DV`.
+- Compare the three JSON approaches and choose the right one for an application feature.
 
 Estimated Time: **10 minutes**
 
-<video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F02-Finance%20Workshop_LAB-2_with-CC.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
 
-*The video uses a Finance example. Follow the E&U tasks below for this lab’s approved profile, views, and operational questions.*
+> **Schema names:** `ORDERS` stores service requests, `ORDER_ITEMS` stores their items, and `CUSTOMERS` represents service points.
 
-### Hands-on Scenario
+> **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
-Thomas checks the service-request document his application can consume, then works with Jessica to compare its contents with the underlying relational rows.
+## Task 1: Store flexible application data as JSON
 
-| Step | Energy & Utilities focus |
-| --- | --- |
-| Business Problem | Operators need request details and line items together when reviewing an operational response. |
-| Technical Challenge | The application needs a nested JSON document while the database retains relational rows and controls. |
-| Persona Focus | Thomas reviews the application document; Jessica verifies that its contents match the relational data. |
-| What You Will Do | Read one JSON document, extract selected fields from ten request documents, and compare the results with relational rows. |
-| Database Capability | JSON Relational Duality and SQL/JSON functions provide document access to existing relational data. |
-| Outcome | Explain how the application and operational reports can use different representations of the same service-request data without maintaining a separate document copy. |
+Thomas starts with optional screen settings. Add a table with a native `JSON` column linked to an existing service request.
 
-Persona focus: You are Thomas, working with Jessica to understand how the service-request workspace can read JSON documents while operational reports use the same data as relational rows.
+1. Create the application-data table and add one sample payload.
 
-### One service request, two representations
-
-Thomas’s application needs the service request and its line items together in a nested JSON document. Jessica needs to query those records as relational rows for operational reporting. A JSON Relational Duality View connects these two representations by assembling the document from existing request and line-item tables.
-
-Thomas can read the document shape his application needs, while Jessica uses SQL to inspect the underlying records. They do not need to maintain a separate document copy or build a synchronization process between two data stores.
-
-In this lab, you inspect the prepared duality view and compare its JSON output with relational query results to verify that both representations describe the same service requests.
-
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide on how to run SQL statements.
-
-## Task 1: Read a service-request document
-
-Thomas is preparing the request-details screen for the utility service-request workspace. When an operator opens a request, the screen needs to show its status, value, and requested services or supplies together. Before connecting the application, Thomas checks whether the prepared JSON document contains the information the screen needs.
-
-Jessica points him to `EU_UTILITY_SERVICE_REQUESTS_DV`, a JSON Relational Duality View that assembles each request and its line items from the underlying relational tables. Thomas starts by reading one document and examining its fields and nested `lineItems` array.
-
-The query below uses `JSON_SERIALIZE` to display the document as readable text. Ordering by the numeric `_id` selects the request with the lowest identifier, giving Thomas and Jessica a consistent example to inspect and compare in the following tasks.
-
-1. Return one document from the duality view.
-
-    ```sql
     <copy>
-    SELECT JSON_SERIALIZE(d.data RETURNING CLOB PRETTY) AS service_request_document
-    FROM eu_utility_service_requests_dv d
-    ORDER BY JSON_VALUE(d.data, '$._id' RETURNING NUMBER)
+    ```sql
+    CREATE TABLE ll_request_app_data (
+        order_id  NUMBER PRIMARY KEY,
+        app_data  JSON NOT NULL
+    );
+
+    INSERT INTO ll_request_app_data (order_id, app_data)
+    SELECT order_id,
+           JSON_OBJECT(
+               'screen'    VALUE 'service-request-detail',
+               'showTotal' VALUE 'true' FORMAT JSON,
+               'features'  VALUE JSON_ARRAY('live-status', 'field-contact')
+               RETURNING JSON
+           )
+    FROM (
+        SELECT order_id
+        FROM orders
+        ORDER BY order_id
+        FETCH FIRST 1 ROW ONLY
+    );
+
+    COMMIT;
+    ```
+    </copy>
+
+2. Read values from the JSON column.
+
+    <copy>
+    ```sql
+    SELECT order_id,
+           JSON_VALUE(app_data, '$.screen') AS screen_name,
+           JSON_VALUE(app_data, '$.showTotal' RETURNING BOOLEAN) AS show_total,
+           JSON_QUERY(app_data, '$.features') AS app_features
+    FROM ll_request_app_data;
+    ```
+    </copy>
+
+    `ORDER_ID` remains a relational key. `APP_DATA` can change as the application changes. Thomas can query both with SQL in one table.
+
+## Task 2: Create a JSON Collection Table
+
+Next, store application-owned documents in a JSON Collection Table. Each document occupies the `DATA` column and has an `_id`.
+
+1. Create the collection and add the sample service-request document.
+
+    <copy>
+    ```sql
+    CREATE JSON COLLECTION TABLE ll_service_request_docs
+    WITH ETAG;
+
+    INSERT INTO ll_service_request_docs (data)
+    SELECT JSON_OBJECT(
+               '_id'        VALUE o.order_id,
+               'requestingServicePointId' VALUE o.customer_id,
+               'requestStatus'     VALUE o.order_status,
+               'lineItems'      VALUE (
+                   SELECT JSON_ARRAYAGG(
+                              JSON_OBJECT(
+                                  'lineItemId'    VALUE oi.item_id,
+                                  'serviceSupplyId' VALUE oi.product_id,
+                                  'quantity'  VALUE oi.quantity,
+                                  'unitCost' VALUE oi.unit_price
+                                  RETURNING JSON
+                              ) ORDER BY oi.item_id RETURNING JSON
+                          )
+                   FROM order_items oi
+                   WHERE oi.order_id = o.order_id
+               ) FORMAT JSON
+               RETURNING JSON
+           )
+    FROM orders o
+    JOIN ll_request_app_data t ON t.order_id = o.order_id;
+
+    COMMIT;
+    ```
+    </copy>
+
+    `WITH ETAG` adds `_metadata.etag`, a version tag that changes with the document. An application can use the tag it last read to detect a concurrent change before overwriting it.
+
+2. Query the collection as documents.
+
+    <copy>
+    ```sql
+    SELECT JSON_SERIALIZE(data PRETTY) AS request_document
+    FROM ll_service_request_docs
+    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) =
+          (SELECT order_id FROM ll_request_app_data);
+    ```
+    </copy>
+
+    SQL and document APIs can read this collection. Its documents are stored separately from `ORDERS` and `ORDER_ITEMS`.
+
+## Task 3: Read a customer document from relational data
+
+Thomas now tests the document shape his application can consume directly.
+
+1. Run this query:
+
+    <copy>
+    ```sql
+    SELECT data AS request_document
+    FROM utility_service_requests_dv
     FETCH FIRST 1 ROW ONLY;
-    </copy>
     ```
+    </copy>
 
-2. Open or expand the document cell and locate `_id`, `requestingServicePointId`, `requestStatus`, `requestValue`, and `lineItems`.
+    **Expected output:**
 
-    **Expected output: One service-request document**
+    ![SQL Worksheet showing the service-request document returned by the duality view.](images/cap-010.png)
 
-    The prepared dataset starts with request `50453`. Record its status and value, then count the elements in `lineItems` for comparison in Task 3. The screenshot shows the document header, request fields, and the beginning of the `lineItems` array. Open the result cell and scroll through the document to inspect all five items. This is a read-only result, not a demonstrated update.
+2. Expand the document in SQL Worksheet.
+    Inspect `_id`, `requestingServicePointId`, `requestStatus`, totals, timestamps, and `lineItems`. Oracle constructs this payload from the relational rows.
 
-    ![LLUSER SQL Worksheet result for a service-request document from the duality view](images/utility-request-json-duality.png " ")
+    > **Note:** Locate `_metadata.etag`; the application can use it to detect changes before updating the document.
 
-> **Checkpoint:** The document is assembled from the backing request and line-item tables. It is not a second, independently synchronized copy.
+## Task 4: Enable document inserts and updates
 
-<details>
-<summary><strong>Learn more: Supported updates are separate from this read-only exercise</strong></summary>
+> **Lab object:** `LL_SERVICE_REQUESTS_DV` is a separate learner-created view. Keep `UTILITY_SERVICE_REQUESTS_DV` unchanged. Run the first capability query against the supplied application-shaped view, then the second query against the lab view you create.
 
-> The view definition includes `WITH UPDATE` annotations for the request and line-item tables. Those annotations permit supported updates through the view; they do not grant unrestricted insert or delete behavior. This lab only reads the view and does not test update behavior. Applications that update duality documents must also handle concurrency checks, including document ETAG conflicts, rather than silently overwrite newer data.
+The supplied `UTILITY_SERVICE_REQUESTS_DV` supports document updates. Create `LL_SERVICE_REQUESTS_DV` to allow inserts as well. Its definition controls which fields and write operations the application can use; relational keys and constraints still apply.
 
-</details>
+1. Check the current document-write capabilities.
 
-## Task 2: Project document fields with SQL
-
-Thomas does not always need the full document. For a request-summary screen, he needs the request identifier, status, and value as separate columns, while keeping the line items together as JSON. The next query selects those fields and orders the first ten requests by identifier so you can compare them with the relational results in Task 3.
-
-1. Run the following query.
-
-    ```sql
     <copy>
-    SELECT JSON_VALUE(d.data, '$._id' RETURNING NUMBER) AS service_request_id,
-           JSON_VALUE(d.data, '$.requestStatus') AS request_status,
-           JSON_VALUE(d.data, '$.requestValue' RETURNING NUMBER) AS request_value,
-           JSON_QUERY(d.data, '$.lineItems') AS line_items
-    FROM eu_utility_service_requests_dv d
-    ORDER BY service_request_id
-    FETCH FIRST 10 ROWS ONLY;
-    </copy>
-    ```
-
-2. Review the first ten requests. `LINE_ITEMS` remains a JSON array; this query selects fields but does not turn each line item into a separate result row.
-
-    **Expected output: Ten service requests with selected document fields**
-
-    In the prepared dataset, the first identifier is `50453`, matching Task 1. Each row contains the request identifier, status, value, and its line-item array. This lets Thomas retrieve selected document fields directly through SQL without extracting them in application code.
-
-    ![SQL Worksheet showing service-request identifiers, statuses, values, and JSON line-item arrays.](images/service-request-json-projection.png " ")
-
-## Task 3: Compare the relational representation
-
-Thomas has checked the JSON document his application can read. Jessica now verifies the same request information using relational SQL. She wants to confirm that the application document and operational reports agree on the request’s identifier, status, value, and line items.
-
-The query joins each request to its items and groups the results into one row per request. `COUNT` returns the number of line items, while `SUM` adds their line values. Jessica can obtain this summary directly from the relational data without parsing JSON.
-
-1. Run the matching relational query.
-
     ```sql
-    <copy>
-    SELECT r.service_request_id,
-           r.request_status,
-           r.request_value,
-           COUNT(i.line_item_id) AS line_item_count,
-           SUM(i.line_value) AS line_value
-    FROM eu_utility_service_requests r
-    JOIN eu_utility_request_items i
-      ON i.service_request_id = r.service_request_id
-    GROUP BY r.service_request_id, r.request_status, r.request_value
-    ORDER BY r.service_request_id
-    FETCH FIRST 10 ROWS ONLY;
-    </copy>
+    SELECT view_name,
+           allow_insert,
+           allow_update,
+           allow_delete
+    FROM user_json_duality_views
+    WHERE view_name = 'UTILITY_SERVICE_REQUESTS_DV';
     ```
+    </copy>
 
-2. Compare the results with the JSON document from Task 1 and the selected fields from Task 2.
+    **Expected output: Current Document Capabilities**
 
-    **Expected output: Ten relational request summaries**
+    ![Duality view capabilities](images/cap-011.png)
 
-    | JSON evidence | Relational result to compare |
-    | --- | --- |
-    | `_id` | `SERVICE_REQUEST_ID` |
-    | `requestStatus` | `REQUEST_STATUS` |
-    | `requestValue` | `REQUEST_VALUE` |
-    | Number of elements in `lineItems` | `LINE_ITEM_COUNT` |
-    | Sum of the `lineValue` fields in `lineItems` | `LINE_VALUE` |
+    The reference application view declares updates; confirm the deployed capability flags rather than assuming them. The root `ORDERS` table controls document insertion. The nested `ORDER_ITEMS` rows must also allow inserts so the document can include line items.
 
-    ![LLUSER relational comparison query and leading service-request summaries](images/service-request-relational-comparison.png " ")
+2. Enable insert and update for the document and its line items.
 
-    *The screenshot shows nine of the ten returned rows. Request `50453` is `confirmed` and has five line items. Its request value and summed line value are both `4870`, matching the document inspected in Task 1.*
+    Both the root request and its nested items need `WITH INSERT UPDATE`.
 
-Thomas can use the JSON document in the application while Jessica uses relational SQL for operational reporting. Both access the same underlying request and item records.
+    <copy>
+    ```sql
+    CREATE JSON RELATIONAL DUALITY VIEW ll_service_requests_dv AS
+    SELECT JSON {
+        '_id'         : o.order_id,
+        'requestingServicePointId'  : o.customer_id,
+        'requestStatus'      : o.order_status,
+        'requestValue'       : o.order_total,
+        'logisticsCost': o.shipping_cost,
+        'demandScore' : o.demand_score,
+        'createdAt'   : o.created_at,
+        'lineItems' : [
+            SELECT JSON {
+                'lineItemId'    : oi.item_id,
+                'serviceSupplyId' : oi.product_id,
+                'quantity'  : oi.quantity,
+                'unitCost' : oi.unit_price
+            }
+            FROM order_items oi WITH INSERT UPDATE
+            WHERE oi.order_id = o.order_id
+        ]
+    }
+    FROM orders o WITH INSERT UPDATE;
+    ```
+    </copy>
 
-> **🎯 Interactive challenge:** Compare request `50453` across all three task results without changing the queries. Which fields establish that the document and relational results describe the same request? How can you verify its item count and summed line value?
+    `ORDERS` supplies the document root; related `ORDER_ITEMS` rows form `lineItems`.
 
-<details>
-<summary><strong>Challenge answer</strong></summary>
+    **Expected output: View Definition Updated**
 
-Match JSON `_id` to `SERVICE_REQUEST_ID`, `requestStatus` to `REQUEST_STATUS`, and `requestValue` to `REQUEST_VALUE`.
+    Verify the new view capabilities in the next step.
 
-Count the five elements in the complete `lineItems` array and compare that count with `LINE_ITEM_COUNT`. Then add their `lineValue` values:
+3. Run the capability query again.
 
-`1560 + 2040 + 310 + 620 + 340 = 4870`
+    <copy>
+    ```sql
+    SELECT view_name,
+           allow_insert,
+           allow_update,
+           allow_delete
+    FROM user_json_duality_views
+    WHERE view_name = 'LL_SERVICE_REQUESTS_DV';
+    ```
+    </copy>
 
-Compare that total with `LINE_VALUE`. The item count and summed value measure different things: one counts line items, while the other adds their values.
+    **Expected output: Document Capabilities Enabled**
 
-These checks show that the JSON and relational results agree for this request. This exercise reads and compares data; it does not demonstrate a document update.
+    ![Learner JSON insert statement](images/cap-012.png)
 
-</details>
+    Confirm that the lab view permits both document inserts and updates.
 
+## Task 5: Create and update a JSON service request
 
-## Conclusion: Read the same request as JSON and relational data
+> **Reserved practice IDs:** The workshop loader uses explicit numeric keys. It seeds service point 1 and service 1, and reserves request 900001 and item 990001 for this lesson. These IDs belong to the practice dataset; the running application uses its own data.
 
-Thomas needs a service-request document for the application, while Jessica needs relational rows for operational reporting. In this lab, you explored how a JSON Relational Duality View supports both needs using the same underlying data.
+Thomas now tests a complete service request. He creates it as one nested JSON document, then confirms that Jessica can immediately see the same data as structured relational rows.
 
-| Representation | What you inspected | How it helps the team |
+1. Insert the supplied workshop service-request document.
+
+    Insert through `LL_SERVICE_REQUESTS_DV` to create request `900001` with one line item for service point `1` and service `1`. Its initial status is `pending`. Stop if either reserved identifier is already occupied: `NOT EXISTS` avoids a duplicate insert but does not establish ownership of an existing row.
+
+    <copy>
+    ```sql
+    INSERT INTO ll_service_requests_dv (data)
+    SELECT JSON(
+      '{
+        "_id": 900001,
+        "requestingServicePointId": 1,
+        "requestStatus": "pending",
+        "requestValue": 25.00,
+        "logisticsCost": 0,
+        "lineItems": [
+          {
+            "lineItemId": 990001,
+            "serviceSupplyId": 1,
+            "quantity": 2,
+            "unitCost": 12.50
+          }
+        ]
+      }'
+    )
+    WHERE NOT EXISTS (
+      SELECT 1
+      FROM orders
+      WHERE order_id = 900001
+    );
+
+    COMMIT;
+    ```
+    </copy>
+
+    **Expected output: Service Request Document Created**
+
+    On the first run, you insert one document. On later runs, the `NOT EXISTS` check returns zero rows because the workshop service request is already present.
+
+2. Confirm the JSON document became relational rows.
+
+    > **Note:** This query reads the relational `ORDERS` and `ORDER_ITEMS` tables.
+
+    <copy>
+    ```sql
+    SELECT o.order_id AS service_request_id,
+           o.order_status AS request_status,
+           c.email AS service_point_email,
+           oi.item_id,
+           p.product_name,
+           oi.quantity,
+           oi.unit_price,
+           oi.line_total
+    FROM orders o
+    JOIN customers c ON c.customer_id = o.customer_id
+    JOIN order_items oi ON oi.order_id = o.order_id
+    JOIN products p ON p.product_id = oi.product_id
+    WHERE o.order_id = 900001;
+    ```
+    </copy>
+
+    **Expected output: Created Service Request Rows**
+
+    ![Relational rows created through the duality view](images/cap-013.png)
+
+3. Update the document status through the duality view.
+
+    Change `requestStatus` through the duality view. Oracle maps it to `ORDERS.ORDER_STATUS`.
+
+    <copy>
+    ```sql
+    UPDATE ll_service_requests_dv
+    SET data = JSON_TRANSFORM(data, SET '$.requestStatus' = 'confirmed')
+    WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
+
+    COMMIT;
+    ```
+    </copy>
+
+    **Expected output: Request Status Updated**
+
+    Oracle updates one document. The following query confirms that the relational order row now has status `confirmed`.
+
+4. Verify the updated relational status.
+
+    <copy>
+    ```sql
+    SELECT o.order_id AS service_request_id,
+           o.order_status AS request_status,
+           oi.item_id,
+           p.product_name,
+           oi.quantity,
+           oi.line_total
+    FROM orders o
+    JOIN order_items oi ON oi.order_id = o.order_id
+    JOIN products p ON p.product_id = oi.product_id
+    WHERE o.order_id = 900001;
+    ```
+    </copy>
+
+    **Expected output: Updated Service Request Rows**
+
+    ![Updated JSON request status](images/cap-014.png)
+
+## Task 6: Project JSON fields with SQL
+
+Jessica now checks the JSON fields Thomas's application receives. Projecting fields means extracting selected document values as SQL result columns.
+
+1. Run this SQL/JSON projection query:
+
+    `JSON_VALUE` extracts the request ID, status, and service-point identifier. The query joins that identifier to `CUSTOMERS` for the email address.
+
+    <copy>
+    ```sql
+    SELECT JSON_VALUE(od.data, '$._id' RETURNING NUMBER) AS service_request_id,
+           JSON_VALUE(od.data, '$.requestStatus') AS request_status,
+           c.email AS service_point_email
+    FROM ll_service_requests_dv od
+    JOIN customers c
+      ON c.customer_id = JSON_VALUE(od.data, '$.requestingServicePointId' RETURNING NUMBER)
+    WHERE JSON_VALUE(od.data, '$._id' RETURNING NUMBER) = 900001;
+    ```
+    </copy>
+
+    **Expected output: JSON Field Projection**
+
+    ![JSON document projected with SQL](images/cap-015.png)
+
+2. Run the equivalent query against the relational tables.
+
+    <copy>
+    ```sql
+    SELECT o.order_id AS service_request_id,
+           o.order_status AS request_status,
+           c.email AS service_point_email
+    FROM orders o
+    JOIN customers c
+      ON c.customer_id = o.customer_id
+    WHERE o.order_id = 900001;
+    ```
+    </copy>
+
+    ![Equivalent relational projection](images/cap-016.png)
+
+    Compare the result with the previous query. The request ID, status, and client email should match. Thomas's application is reading the JSON document, while Jessica's relational query reads the underlying rows.
+
+## Conclusion: Choose the right JSON approach
+
+Choose the JSON approach according to who owns the data:
+
+| Approach | Choose it for | Data location |
 | --- | --- | --- |
-| Complete JSON document | One request with its details and nested `lineItems` array. | Thomas can retrieve the information needed for a request-details screen together. |
-| Selected JSON fields | Request identifiers, statuses, and values as SQL columns, with line items retained as JSON. | Thomas can retrieve selected fields without extracting them in application code. |
-| Relational summary | Request rows joined to their items, with an item count and summed line value. | Jessica can use familiar SQL to report on requests and compare the results with the application document. |
+| JSON column | Optional request attributes, such as screen settings. | A relational table with a native `JSON` column. |
+| JSON Collection Table | Application-owned documents, such as saved request drafts. | One document per `DATA` row. |
+| JSON Relational Duality View | A request-and-items document over existing relational data. | `ORDERS` and `ORDER_ITEMS`; the view defines the JSON shape. |
 
-`EU_UTILITY_SERVICE_REQUESTS_DV` provides the document shape over the existing request and line-item data. Thomas can read that document while Jessica queries the underlying records, without maintaining a separate document copy.
+For this service-request feature, Thomas uses a duality view because `ORDERS` and `ORDER_ITEMS` already hold the data.
 
-By comparing identifiers, statuses, values, and line items, you verified that the JSON and relational results describe the same request. The lab demonstrated reading and comparing these representations; it did not change the request data.
-
-## Next Steps
-
-Thomas now understands how the application can read a complete service-request document from existing relational data. Gilly tackles a different problem next: helping operators find relevant utility services when they describe a concern using different words from the stored service names.
 ## Acknowledgements
 
-* **Author** - Zileyah Onafowora
-* **Last Updated By/Date** - Zileyah Onafowora, September 2026
+* **Authors** - Matt Kowalik, Kevin Lazarz
+* **Contributor** - Eugenio Galiano
+* **Last Updated By/Date** - Oracle Database Product Management, October 2026
