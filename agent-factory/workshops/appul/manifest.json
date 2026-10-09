@@ -1,0 +1,35 @@
+{
+  "workshoptitle": "Build Enterprise Application Agents with Oracle AI Database Private Agent Factory",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Compare specialized agents, data nodes, processing nodes, and governed tools in custom enterprise workflows.",
+      "type": "livelabs",
+      "filename": "../../enterprise-application-agents-introduction/introduction.md"
+    },
+    {
+      "title": "Lab 1: Build an EBS Payables Agent",
+      "description": "Embed a Data Analysis Agent in a custom EBS Payables workflow for invoice-hold analysis and targeted follow-up.",
+      "type": "livelabs",
+      "filename": "../../ebs-payables-agent/ebs-payables-agent.md"
+    },
+    {
+      "title": "Lab 2: Build a PeopleSoft Absence Agent",
+      "description": "Combine a Knowledge Agent, URL Crawler, and routing nodes for policy-aware absence eligibility.",
+      "type": "livelabs",
+      "filename": "../../peoplesoft-absence-agent/peoplesoft-absence-agent.md"
+    },
+    {
+      "title": "Lab 3: Build a JD Edwards Inventory Agent",
+      "description": "Combine image, CSV, and database inputs with processing nodes for an inventory replenishment workflow.",
+      "type": "livelabs",
+      "filename": "../../jde-inventory-agent/jde-inventory-agent.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving help.",
+      "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
