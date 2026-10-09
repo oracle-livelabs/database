@@ -96,8 +96,6 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
 
     ![Three cold-chain depot IDs, names and locations](images/ls-lab05-points.jpg)
 
-    ![The same depot IDs with latitude, longitude and complete GeoJSON points](images/ls-lab05-points-geojson.jpg)
-
 2. Review the point data.
 
     Moon has not created a second map database. The point used by the application and the point used by SQL are the same value. The database can calculate with it, and the application can display it.
@@ -148,9 +146,7 @@ New York Metro has a demand index of `91`, making it a useful region for the fir
 
     Edison is first at **9.48 km** from the New York Metro polygon. The two panels show the same ten rows in the same order.
 
-    ![Ten cold-chain depots ordered by distance to New York Metro](images/ls-lab05-new-york-region.jpg)
-
-    ![New York depot distances in kilometers and demand index 91](images/ls-lab05-new-york-region-distances.jpg)
+    ![Lab 5 Task 2 Step 1](images/l5-t2-s1.png)
 
 2. Try another region.
 
@@ -180,9 +176,7 @@ New York Metro has a demand index of `91`, making it a useful region for the fir
     </copy>
     ```
 
-    ![Chicago Metro depot proximity in kilometers and miles](images/ls-lab05-chicago-region.jpg)
-
-    ![The same Chicago depot rows with kilometer and mile distances and demand index 78](images/ls-lab05-chicago-region-distances.jpg)
+    ![Lab 5 Task 2 Step 2](images/l5-t2-s2.png)
 
     The `unit` parameter controls the measurement unit. Joliet Midwest Regulatory Hub falls inside the Chicago Metro polygon, so its region distance is zero kilometers and zero miles. Chicago has a demand index of `78`.
 
@@ -253,6 +247,8 @@ Moon now needs a result that an operations application can use to review the reg
     </copy>
     ```
 
+    ![Lab 5 Task 3 Step 1](images/l5-t3-s1.png)
+
     `LS_TRIAL_SITES_V` presents `CUSTOMERS` as the trial-site business shape and already exposes its geometry. The supplied sample retains person-style names and contact addresses; use `TRIAL_SITE_ID` to identify each distinct record.
 
     `SDO_GEOM.RELATE` keeps trial sites whose point falls inside or touches the New York Metro polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching site to every active depot. `ROW_NUMBER` keeps one nearest depot per trial site, using depot ID to break equal-distance ties.
@@ -265,12 +261,6 @@ Moon now needs a result that an operations application can use to review the reg
 
     The query displays 25 of the 114 matching trial sites. These 25 rows all identify Edison Northeast Cold Chain Depot; the first site is ID `385` at **35.34 km** from Edison. The three panels show the same rows in the same order, with different columns visible to keep the text readable.
 
-    ![Twenty-five New York trial-site IDs and names](images/ls-lab05-new-york-sites.jpg)
-
-    ![Contacts, tiers and nearest depots for the same New York rows](images/ls-lab05-new-york-sites-depot.jpg)
-
-    ![Capacity, stored utilization and distances for the same New York rows](images/ls-lab05-new-york-sites-distances.jpg)
-
     A dashboard can let a user select a region and review these site-to-depot distances immediately. Geographic proximity alone does not establish temperature compliance, suitable product storage, available stock, an open road route or actual travel time. Operations must verify those conditions before making a cold-chain commitment. The query does not assign an order or reserve inventory.
 
 3. Change the query to `Chicago Metro`.
@@ -278,12 +268,6 @@ Moon now needs a result that an operations application can use to review the reg
     Replace only the region name in the query above and run it again. Compare the trial sites and nearest depots with the New York result. The spatial predicates stay the same; only the region changes.
 
     The query displays 25 of the 58 matching trial sites. These rows identify Joliet Midwest Regulatory Hub; the first site is ID `1717` at **49.51 km** from Joliet. Although Joliet's distance to the Chicago region is zero, its distance to an individual trial-site point is not zero.
-
-    ![Twenty-five Chicago trial-site IDs and names](images/ls-lab05-chicago-sites.jpg)
-
-    ![Contacts, tiers and nearest depots for the same Chicago rows](images/ls-lab05-chicago-sites-depot.jpg)
-
-    ![Capacity, stored utilization and distances for the same Chicago rows](images/ls-lab05-chicago-sites-distances.jpg)
 
 ## Conclusion: Turn Location into a Service Decision
 

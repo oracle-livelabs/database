@@ -110,6 +110,8 @@ Thomas starts with data that belongs to the application but does not need its ow
     </copy>
     ```
 
+    ![Lab 2 Task 1 Step 2](images/l2-t1-s2.png " ")
+
     Expect one row for order `1`, screen `clinical-supply-order-detail`, Boolean `true`, and features `live-status` and `saved-trial-site`.
 
     `ORDER_ID` remains a relational primary key; this small settings table does not declare a foreign key to `ORDERS`. `APP_DATA` can change as the application changes. Thomas can query both with SQL in one table.

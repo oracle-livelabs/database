@@ -87,7 +87,7 @@ These are four operations in one investigation. Each named section after `WITH` 
                ROUND(1 - VECTOR_DISTANCE(
                pe.embedding,
                    VECTOR_EMBEDDING(
-                       ADMIN.ALL_MINILM_L12_V2
+                       ALL_MINILM_L12_V2
                        USING 'quality deviation and regulatory compliance requiring product review' AS DATA
                    ),
                    COSINE
@@ -190,12 +190,6 @@ These are four operations in one investigation. Each named section after `WITH` 
 
     ![First query, rows 1–10: product IDs, names, manufacturers and categories, led by product 36](images/product-level-dashboard.png)
 
-    ![First query, rows 1–10: illustrative quality counters and semantic similarity](images/dashboard-metrics.png)
-
-    ![First query, rows 1–10: pending or confirmed order counts, units and the selected depot](images/dashboard-orders.png)
-
-    ![First query, rows 1–10: Edison location, New York Metro demand index 91 and distance 9.48 kilometers](images/dashboard-location.png)
-
     With the prepared dataset, expect **10 distinct products** selected from 50 products with qualifying signals. Scroll horizontally to inspect all columns. Every row has a semantic score and the same selected New York region/site context. Rankings and scores depend on the prepared model and data.
 
 The `exposure_count` and `cases_opened` columns retain the LS source views' illustrative counters. They originate from `views_count` and `comments_count`; they are not verified counts of patients, deviations, or an actual case ledger. A signal can mention more than one product, so adding product-level counters is not a distinct workshop-wide total.
@@ -217,12 +211,6 @@ Run the query again and compare the top rows.
 The panels below preserve the same row order across the alternate query's complete result.
 
 ![Alternate query, rows 1–10: product IDs, names, manufacturers and categories, led by product 7](images/2026-08-18-004703.png)
-
-![Alternate query, rows 1–10: quality counters and new semantic similarity scores](images/alternate-metrics.png)
-
-![Alternate query, rows 1–10: order counts, units and the selected depot](images/alternate-orders.png)
-
-![Alternate query, rows 1–10: unchanged Edison and New York Metro geographic context](images/alternate-location.png)
 
 1. Which products moved into or out of the top ten?
 2. Which products still have high relational exposure but a lower semantic similarity to the new question?

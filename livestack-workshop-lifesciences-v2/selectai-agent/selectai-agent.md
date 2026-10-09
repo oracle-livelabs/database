@@ -64,6 +64,8 @@ The agent and its SQL tool both use the model configured in `GENAI`. Lab 7 selec
     </copy>
     ```
 
+    ![Lab 8 Task 1 Step 1](images/l8-t1-s1.png)
+
     The supplied `GENAI` profile should be enabled. If it is absent or disabled, stop and report the missing workshop prerequisite. Lab 7 checks and uses this profile; it does not create a missing profile.
 
 2. Check the model and tables listed in the profile:
@@ -78,6 +80,7 @@ The agent and its SQL tool both use the model configured in `GENAI`. Lab 7 selec
       AND attribute_name IN ('provider', 'model', 'region', 'object_list', 'comments', 'enforce_object_list');
     </copy>
     ```
+    ![Lab 8 Task 1 Step 2](images/l8-t1-s2.png)
 
     The list should contain only the workshop views needed for this lab: `LS_REGULATED_PRODUCTS_V`, `LS_CLINICAL_SUPPLY_ORDERS_V`, `LS_ORDER_LINES_V`, and `LS_TRIAL_SITES_V`. Confirm that `comments` and `enforce_object_list` are `true`. These profile settings do not replace database grants or guarantee a correct answer.
 
@@ -150,7 +153,9 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     WHERE tool_name = 'NINA_LS_SQL_TOOL';
     </copy>
     ```
-  
+
+    ![Lab 8 Task 2 Step 2](images/l8-t2-s2.png)
+
 ## Task 3: Create Nina's agent, task, and team
 
 The tool by itself does nothing. Nina's agent needs a role, a task needs instructions, and a team connects the two.

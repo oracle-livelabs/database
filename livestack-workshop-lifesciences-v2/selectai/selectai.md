@@ -65,10 +65,12 @@ Select AI uses an AI profile to identify the AI provider and the database object
     </copy>
     ```
 
+    ![Lab 7 Task 1 Step 1](images/l7-t1-s1.png)
+
     The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If it is missing or disabled, ask the workshop facilitator for help before continuing.
 
 2. Review the profile attributes:
-  
+
     ```sql
     <copy>
     SELECT profile_name,
@@ -81,6 +83,8 @@ Select AI uses an AI profile to identify the AI provider and the database object
     ORDER BY attribute_name;
     </copy>
     ```
+
+  ![Lab 7 Task 1 Step 2](images/l7-t1-s2.png)
 
     The attributes show how the profile is configured and which database objects are available to Select AI. Tasks 3–6 explicitly select `xai.grok-4.3` for each request rather than relying on the profile's default model. The profile still supplies the provider, region, authentication, and object access settings. Do not copy credentials. In Task 2, you will configure the four-view object list, include its comments, and enable object-list enforcement.
 
@@ -118,8 +122,10 @@ The profile needs a list of database objects that Select AI may use. Nina's ques
     </copy>
     ```
 
+  ![Lab 7 Task 2 Step 2](images/l7-t2-s2.png)
+
     The result should list `LS_REGULATED_PRODUCTS_V`, `LS_CLINICAL_SUPPLY_ORDERS_V`, `LS_ORDER_LINES_V`, and `LS_TRIAL_SITES_V`. Comments describe the join keys and the difference between order headers and lines. Object-list enforcement restricts generated queries to this scope; it does not grant or revoke database privileges.
-  
+
     ![GENAI comments and object-list enforcement enabled](images/task2.png)
 
     ![Expanded object list showing the four LLUSER Life Sciences views](images/task2-objects.png)

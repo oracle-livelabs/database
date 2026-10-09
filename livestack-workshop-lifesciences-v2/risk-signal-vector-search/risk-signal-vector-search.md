@@ -80,7 +80,7 @@ Jessica has already loaded the shared ONNX embedding model for Gilly. Oracle AI 
 
     ![Available ONNX embedding model ADMIN.ALL_MINILM_L12_V2](images/model.png)
 
-    The result should include `ADMIN.ALL_MINILM_L12_V2`, the model used throughout this lab. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
+    The result should include `ALL_MINILM_L12_V2`, the model used throughout this lab. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
 
 2. Review what this means for Gilly's application.
 
@@ -109,6 +109,8 @@ Gilly decides that one vector per product is enough. Each product record is shor
     </copy>
     ```
 
+    ![Lab 3 Task 2 Step 1](images/l3-t2-s1.png)
+
     The combined text gives the model the product name, business category, and manufacturer. All 79 descriptions in this dataset are empty, so this is short catalog text, not detailed product documentation. Gilly does not need to embed price, dates, or other values that do not describe what the product is.
 
 2. Add a vector column to `PRODUCTS`:
@@ -128,7 +130,7 @@ Gilly decides that one vector per product is enough. Each product record is shor
     UPDATE products p
     SET product_embedding = (
       SELECT VECTOR_EMBEDDING(
-        ADMIN.ALL_MINILM_L12_V2 USING
+          ALL_MINILM_L12_V2 USING
           p.product_name || ' ' || NVL(p.category, '') || ' ' ||
           NVL(p.description, '') || ' ' || b.brand_name AS DATA)
       FROM brands b
@@ -178,6 +180,8 @@ Now Gilly tests the new column with a simple vector query. She asks for products
     </copy>
     ```
 
+    ![Lab 3 Task 2 Step 1](images/l3-t3.png)
+
     This finds product **64, Sterility Assurance Swab Pack**. It answers a precise question: which product text contains `sterility`? It does not look for related concepts such as bioburden.
 
 2. Run the following semantic query:
@@ -200,7 +204,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
            p.category,
            VECTOR_DISTANCE(
              p.product_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+             VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                USING 'sterility deviation affecting biologics lots' AS DATA),
              COSINE) AS vector_distance
     FROM products p
@@ -230,13 +234,13 @@ Now Gilly tests the new column with a simple vector query. She asks for products
            p.category,
            ROUND(1 - VECTOR_DISTANCE(
              p.product_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+             VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                USING 'sterility deviation affecting biologics lots' AS DATA),
              COSINE), 4) AS similarity
     FROM products p
     ORDER BY VECTOR_DISTANCE(
                p.product_embedding,
-               VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+               VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                  USING 'sterility deviation affecting biologics lots' AS DATA),
                COSINE),
              p.product_id
@@ -258,7 +262,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
            sp.post_text AS signal_text,
            ROUND(1 - VECTOR_DISTANCE(
              pe.embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+             VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                USING 'sterility deviation affecting biologics lots' AS DATA),
              COSINE), 4) AS similarity
     FROM post_embeddings pe
@@ -266,7 +270,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
     WHERE pe.embedding_model = 'all_MiniLM_L12_v2'
     ORDER BY VECTOR_DISTANCE(
                pe.embedding,
-               VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+               VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                  USING 'sterility deviation affecting biologics lots' AS DATA),
                COSINE),
              sp.post_id
@@ -295,7 +299,7 @@ Gilly now has the business requirement for the application. A business user shou
                p.product_name,
                VECTOR_DISTANCE(
                  p.product_embedding,
-                 VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+                 VECTOR_EMBEDDING(ALL_MINILM_L12_V2
                    USING 'sterility deviation affecting biologics lots' AS DATA),
                  COSINE) AS vector_distance
         FROM products p

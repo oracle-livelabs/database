@@ -80,6 +80,8 @@ These are rule-generated labels based on the same activity used as model inputs.
     </copy>
     ```
 
+    ![Lab 6 Task 1 Step 1](images/l6-t1-s1.png)
+
 2. Identify the parts of each row.
 
     The numeric and category columns are the model inputs. `SURGE_FLAG` is the answer the model learns to predict. `PRODUCT_ID` identifies the product but is not a business feature for this example.
@@ -87,10 +89,6 @@ These are rule-generated labels based on the same activity used as model inputs.
     The source retains names such as `SOCIAL_POSTS`, `VIRAL_POSTS`, and `REVENUE`. In this Life Sciences demo they carry the signal activity and order-value measures used by the application. `AVG_SENTIMENT` is an inherited synthetic activity feature, not a clinical assessment. Do not read a high signal score as proof of a quality failure.
 
     The following panels show the same ten rows. Product 8 has the label `WATCH`; the other nine shown have `SURGE`.
-
-    ![Training rows 1 through 10: category, price, and signal features](images/ls-lab06-training-a.png)
-
-    ![The same ten rows: activity, order quantities, order values, and training labels](images/ls-lab06-training-b.png)
 
     Otto is checking that the training data already brings together the values he needs. He does not have to export signal activity, orders, and product data into separate files before training.
 
@@ -292,6 +290,8 @@ Otto now prepares a small scoring table and uses the model to build a watchlist.
     </copy>
     ```
 
+    ![Lab 6 Task 4 Step 2](images/l6-t4-s2-2.png)
+
     The view stores the SQL definition, not another copy of the product facts. `PREDICTION` chooses the label. Specifying `'SURGE'` in `PREDICTION_PROBABILITY` asks for that class's probability, even when the predicted label is `WATCH`.
 
 3. Read the result as a dashboard user.
@@ -301,12 +301,6 @@ Otto now prepares a small scoring table and uses the model to build a watchlist.
     The tested run returned 12 rows: 11 `SURGE` predictions and `WATCH` for product 8, Randomization Label Pack. It ranked products **12, 2, 9, 4, 10, 7, 5, 3, 1, 11, 6, 8**. The query sorts by the unrounded probability before the product ID, so values displayed as `1` or `100` need not be tied. Scores, precision, and rankings can vary with data or model versions; inspect your actual output.
 
     These panels show the same twelve rows in that order, with different columns visible so that product names, scores, and supporting activity remain readable.
-
-    ![All twelve watchlist products and predicted labels](images/ls-lab06-watchlist-a.png)
-
-    ![All twelve products: probabilities, quantities, and order values](images/ls-lab06-watchlist-b.png)
-
-    ![All twelve products: supporting signal activity](images/ls-lab06-watchlist-c.png)
 
     Near-100% scores here are not proof of a reliable demand forecast. The model learned synthetic threshold labels from these same products, and this scoring set reuses their inputs. The watchlist helps explain the SQL workflow; it does not certify product release, quality compliance, or clinical suitability.
 

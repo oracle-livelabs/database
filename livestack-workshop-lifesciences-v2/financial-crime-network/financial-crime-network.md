@@ -76,6 +76,8 @@ In this lab, a **hop** means one relationship step. The assigned depot to an ord
     </copy>
     ```
 
+    ![Lab 4 Task 1 Step 1](images/l4-t1-s1.png)
+
     The query joins `FULFILLMENT_CENTERS` to `ORDERS` through the order's `FULFILLMENT_CENTER_ID`. It keeps only `confirmed` and `processing` orders assigned to Fall River.
 
     **Expected output: Open Orders Assigned to Fall River**
@@ -123,6 +125,8 @@ In this lab, a **hop** means one relationship step. The assigned depot to an ord
     </copy>
     ```
 
+    ![Lab 4 Task 1 Step 2](images/l4-t1-s2.png)
+
     Jessica now needs four query branches. The first follows assigned orders, the second follows their lines, the third reaches the products, and the fourth reaches depots with inventory records for those products. Each branch adds another relationship to the previous chain.
 
     The query summarizes the endpoints by hop count. The open orders contain **113 order lines** covering **57 distinct products**. Those products connect to **30 depots** with inventory records. A product can appear on several lines or orders, and a stocking depot can connect to several products. `COUNT(DISTINCT entity_id)` counts each endpoint once within its type and hop count, even when several paths reach it.
@@ -153,6 +157,8 @@ In graph terms, a depot and an assigned order are **vertices**. The order's reco
     ORDER BY order_id;
     </copy>
     ```
+
+    ![Lab 4 Task 2 Step 1](images/l4-t2-s1.png)
 
     The `MATCH` pattern starts at a `depot`, follows an `assigned_order` edge, and reaches a `supply_order`. This is one hop. Those names are labels defined in `LS_SUPPLY_NETWORK`.
 
@@ -186,13 +192,6 @@ Start from Fall River and trace the orders, order lines, products, and stocking 
     ```
 
     **Expected output: Orders, Products, and Stocking Depots Connected to Fall River**
-
-    | Relationship hops | Entity type | Distinct entities |
-    | ---: | --- | ---: |
-    | 1 | ORDER | 35 |
-    | 2 | ORDER_LINE | 113 |
-    | 3 | PRODUCT | 57 |
-    | 4 | DEPOT | 30 |
 
     ![SQL Worksheet returns 35 orders, 113 order lines, 57 products, and 30 stocking depots](images/ls-lab04-supply-four-hop-results.jpg)
 
