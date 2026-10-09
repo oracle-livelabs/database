@@ -18,11 +18,11 @@ Review the preloaded transaction objects, apply KEEP, and warm True Cache using 
 
 ### Prerequisites
 
-Complete Initialize Environment. Start with a host terminal and keep FastLab workloads stopped.
+Complete Initialize Environment. Start from **Host Control** and keep FastLab workloads stopped. This lab uses **True Cache SQL** and **App Client** terminal roles; set each window title at its shell prompt using the method in Initialize Environment.
 
 ## Task 1: Inspect the Transaction Objects
 
-1. Enter True Cache from the host terminal.
+1. From **Host Control**, enter True Cache.
 
     ```bash
     <copy>
@@ -30,7 +30,15 @@ Complete Initialize Environment. Start with a host terminal and keep FastLab wor
     </copy>
     ```
 
-2. At the container prompt, open SQL*Plus.
+2. At the container prompt, label this terminal **True Cache SQL**:
+
+    ```bash
+    <copy>
+    printf '\033]0;True Cache SQL\007'
+    </copy>
+    ```
+
+3. Open SQL*Plus.
 
     ```bash
     <copy>
@@ -38,7 +46,7 @@ Complete Initialize Environment. Start with a host terminal and keep FastLab wor
     </copy>
     ```
 
-3. At `SQL>`, check the preloaded tables.
+4. At `SQL>`, check the preloaded tables.
 
     ```sql
     <copy>
@@ -81,9 +89,11 @@ Complete Initialize Environment. Start with a host terminal and keep FastLab wor
 
     **Expected:** the five objects named above. KEEP retains selected objects in True Cache; the warmup in Task 3 reads their data. The vector-search sample is handled in the later vector-search lab.
 
+    ![SQL*Plus output verifying the five KEEP objects](images/data-load-keep-list.png)
+
 ## Task 3: Warm True Cache
 
-1. Open a second desktop Terminal window. Load the lab's database credentials and enter the application container.
+1. Open a separate desktop Terminal window for the **App Client** role. Load the lab's database credentials and enter the application container.
 
     ```bash
     <copy>
@@ -94,10 +104,11 @@ Complete Initialize Environment. Start with a host terminal and keep FastLab wor
 
     The environment file supplies the database password. It is not the remote-desktop password. If the file is missing or the password is empty, stop and contact the lab administrator; do not substitute a sample password.
 
-2. At the application-container prompt, run warmup and wait for it to finish.
+2. At the application-container prompt, label the window **App Client**, then run warmup and wait for it to finish.
 
     ```bash
     <copy>
+    printf '\033]0;App Client\007'
     cd /stage/clientapp
     USE_TC_CONN=Y METRICS_PORT=9091 ./TransactionsApp.sh warmup
     </copy>
@@ -105,7 +116,7 @@ Complete Initialize Environment. Start with a host terminal and keep FastLab wor
 
     **Expected:** the warmup application completes without a connection or SQL error. Type `exit` to leave the application container.
 
-3. Return to the first window, which is still at the True Cache `SQL>` prompt. Review the cache statistics.
+3. Return to the **True Cache SQL** window, which is still at the `SQL>` prompt. Review the cache statistics.
 
     ```sql
     <copy>
@@ -113,7 +124,9 @@ Complete Initialize Environment. Start with a host terminal and keep FastLab wor
     </copy>
     ```
 
-    Look for prewarm progress, hit ratios, and fetch latency. Values depend on cache state and workload; they do not need to match a screenshot.
+    Look for prewarm progress, hit ratios, and fetch latency. Values depend on cache state and workload, so they can differ from the example output.
+
+    ![True Cache statistics after warmup completed](images/data-load-cache-statistics.png)
 
 4. Type `exit` to leave SQL*Plus, then `exit` to return to the host.
 

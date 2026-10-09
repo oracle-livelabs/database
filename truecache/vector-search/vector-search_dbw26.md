@@ -24,7 +24,7 @@ Complete the previous labs and restore Primary after the availability exercise. 
 
 ## Task 1: Verify the Prebuilt Sample on Primary
 
-1. Enter Primary from the host terminal.
+1. From **Host Control**, enter Primary.
 
     ```bash
     <copy>
@@ -32,7 +32,7 @@ Complete the previous labs and restore Primary after the availability exercise. 
     </copy>
     ```
 
-2. At the container prompt, open SQL*Plus.
+2. At the container prompt, label this window **Primary SQL** using the terminal-title command from Initialize Environment, then open SQL*Plus.
 
     ```bash
     <copy>
@@ -55,11 +55,13 @@ Complete the previous labs and restore Primary after the availability exercise. 
 
     **Expected:** 20,000 rows and `PAYMENT_VECTORS_IVF_IDX` with status `VALID`. If the objects are missing or invalid, stop this normal path and see [Vector Sample Recovery](../recovery/vector-sample-recovery.md). Do not run recovery on a healthy sample.
 
-4. Type `exit` to leave SQL*Plus, then `exit` to return to the host.
+    ![SQL*Plus output confirming the vector row count and valid IVF index](images/vector-index-verification.png)
+
+4. Type `exit` to leave SQL*Plus, then `exit` to return to the host. Relabel the window **Host Control** using the terminal-title command from Initialize Environment before continuing.
 
 ## Task 2: Select a Reference Payment on True Cache
 
-1. Enter True Cache from the host terminal.
+1. From **Host Control**, enter True Cache.
 
     ```bash
     <copy>
@@ -67,7 +69,7 @@ Complete the previous labs and restore Primary after the availability exercise. 
     </copy>
     ```
 
-2. At the container prompt, open SQL*Plus.
+2. At the container prompt, label this window **True Cache SQL** using the terminal-title command from Initialize Environment, then open SQL*Plus.
 
     ```bash
     <copy>
@@ -87,6 +89,8 @@ Complete the previous labs and restore Primary after the availability exercise. 
     fetch first 5 rows only;
     </copy>
     ```
+
+    ![Example reference payments returned by the sample query](images/vector-reference-payments.png)
 
 4. Set the reference once. Use `1` if it appeared in the result; otherwise replace it with a returned payment ID.
 
@@ -119,6 +123,8 @@ fetch first 5 rows only;
 ```
 
 **Expected:** five matching payments, excluding the reference, ordered by increasing distance. Ties may appear in a different order. A smaller cosine distance means greater similarity under the encoded features; it is not a currency amount, probability, or fraud score.
+
+![Example nearest-neighbor results with cosine distances](images/vector-search-results.png)
 
 This is an exact nearest-neighbor query. Checking that the IVF index exists does not prove that this query uses it. Approximate index-search performance is outside this exercise.
 
