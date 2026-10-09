@@ -88,13 +88,13 @@ Open SQL Worksheet as `LLUSER` before running the labs.
 
     `USER` identifies the signed-in user; `CURRENT_SCHEMA` identifies where unqualified table names resolve. Both should be `LLUSER`.
 
-    <copy>
     ```sql
+    <copy>
     SELECT USER AS "User",
            SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "Schema",
            SYSTIMESTAMP AS "Checked At";
-    ```
     </copy>
+    ```
 
     ![SQL Worksheet showing the LLUSER connection check results.](images/cap-007.png)
 

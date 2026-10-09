@@ -44,29 +44,29 @@ First, confirm that `GENAI` is available in `LLUSER`.
 
 1. Run this query:
 
-    <copy>
     ```sql
+    <copy>
     SELECT profile_name,
            status,
            description
     FROM user_cloud_ai_profiles
     ORDER BY profile_name;
-    ```
     </copy>
+    ```
 
     Confirm that `GENAI` is enabled. If it is missing or disabled, ask the facilitator to resolve setup before continuing.
 
 2. Review the profile attributes:
 
-    <copy>
     ```sql
+    <copy>
     SELECT profile_name,
            attribute_name,
            attribute_value
     FROM user_cloud_ai_profile_attributes
     ORDER BY profile_name, attribute_name;
-    ```
     </copy>
+    ```
 
     The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will change only the profile's `object_list`.
 
@@ -76,8 +76,8 @@ Add the four views that supply service, request, item, and service-point data.
 
 1. Add the utilities tables to the profile:
 
-    <copy>
     ```sql
+    <copy>
     BEGIN
       DBMS_CLOUD_AI.SET_ATTRIBUTE(
         profile_name    => 'genai',
@@ -86,21 +86,21 @@ Add the four views that supply service, request, item, and service-point data.
       );
     END;
     /
-    ```
     </copy>
+    ```
 
 2. Confirm the object list:
 
-    <copy>
     ```sql
+    <copy>
     SELECT profile_name,
            attribute_name,
            attribute_value
     FROM user_cloud_ai_profile_attributes
     WHERE profile_name = 'GENAI'
       AND attribute_name = 'object_list';
-    ```
     </copy>
+    ```
 
     The result should list `UTILITY_SERVICES_V`, `UTILITY_SERVICE_REQUESTS`, `UTILITY_REQUEST_ITEMS`, and `SERVICE_POINTS_V`. Select AI can now use these tables when it translates Nina's questions into SQL.
 
@@ -114,15 +114,15 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
 1. Run the question with the `GENAI` profile:
 
-    <copy>
     ```sql
+    <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Which five utility services have the highest total request value?',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
-    ```
     </copy>
+    ```
 
     ![Generated SQL for the first question](images/cap-049.png)
 
@@ -136,15 +136,15 @@ Nina has reviewed the SQL. She now asks Select AI to run the question and return
 
 1. Run the same question with the `runsql` action:
 
-    <copy>
     ```sql
+    <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Which five utility services have the highest total request value?',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
-    ```
     </copy>
+    ```
 
     ![Database result for the first question](images/cap-050.png)
 
@@ -160,29 +160,29 @@ Nina's first question gives her a service ranking, but she also needs enough det
 
 1. Use `showsql` to inspect this revised prompt:
 
-    <copy>
     ```sql
+    <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Show the five utility services with the highest total request-item value. Include the service name, utility category, total request-item value, and units requested.',
              profile_name => 'genai',
              action       => 'showsql'
            ) AS generated_sql;
-    ```
     </copy>
+    ```
 
     ![Generated SQL for the refined question](images/cap-051.png)
 
 2. Review the generated SQL, then run the revised question with `runsql`:
 
-    <copy>
     ```sql
+    <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Show the five utility services with the highest total request-item value. Include the service name, utility category, total request-item value, and units requested.',
              profile_name => 'genai',
              action       => 'runsql'
            ) AS answer;
-    ```
     </copy>
+    ```
 
     ![Refined database result](images/cap-052.png)
 
@@ -196,15 +196,15 @@ Nina wants a short explanation of the revised result. Select AI can run the SQL 
 
 1. Run the revised question with the `narrate` action:
 
-    <copy>
     ```sql
+    <copy>
     SELECT DBMS_CLOUD_AI.GENERATE(
              prompt       => 'Explain in two sentences which utility service has the highest total request-item value and why it should be reviewed. Use the database result; do not invent an operational cause.',
              profile_name => 'genai',
              action       => 'narrate'
            ) AS explanation;
-    ```
     </copy>
+    ```
 
     ![Compare the narration with the database result](images/cap-053.png)
 

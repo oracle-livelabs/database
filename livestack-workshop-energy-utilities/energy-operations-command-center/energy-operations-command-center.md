@@ -39,6 +39,7 @@ The query intentionally crosses four data models:
 
     <copy>
 ```sql
+<copy>
 WITH service_risk AS (
     SELECT us.utility_service_id, us.service_name,
            us.utility_operator_or_partner, us.utility_category,
@@ -103,6 +104,7 @@ CROSS JOIN nearest_field_site nfs
 ORDER BY sm.semantic_similarity DESC NULLS LAST,
          sr.high_criticality_signals DESC, sr.utility_service_id
 FETCH FIRST 10 ROWS ONLY;
+</copy>
 ```
 </copy>
 
