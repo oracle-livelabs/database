@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Nina Patel is a risk analyst at Seer Sporting Goods. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
+Nina Patel is a retail analyst at Seer Sporting Goods. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
 Jessica, the DBA, has configured a Select AI profile for the retail schema. Nina can ask a question in ordinary language. Select AI uses the profile and database metadata to generate SQL, run a question, or explain the returned rows.
 
-Nina still reviews the SQL. A model can choose an unsuitable revenue calculation or add a filter the question did not request. She asks, inspects, runs, and refines the question before using the answer in a business review.
+Nina reviews the generated SQL because a model can choose an unsuitable revenue calculation or add a filter the question did not request. She asks, inspects, runs, and refines the question before using the answer in a business review.
 
 In this lab, you connect the profile to the retail tables, inspect generated SQL, compare the answer with a direct revenue query, and improve the question for a more useful result.
 
@@ -47,7 +47,7 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Check the Select AI profile
 
-The workshop supplies the provider connection. You use the profile owned by your LLUSER schema.
+Use the existing `GENAI` profile in your `LLUSER` schema. You will inspect its settings without displaying credentials.
 
 1. Check that GENAI is enabled.
 
@@ -135,7 +135,7 @@ Nina's questions require products, orders, order items, and customers. Use the c
 
 ## Task 3: Ask a question and inspect the SQL
 
-Nina starts with product revenue. SHOWSQL asks for SQL text; it does not return the five product totals.
+Nina starts with product revenue by using `SHOWSQL` to inspect the generated statement before requesting the five product totals.
 
 1. Run this question exactly as shown.
 
@@ -212,7 +212,7 @@ Nina starts with product revenue. SHOWSQL asks for SQL text; it does not return 
 
 ## Task 5: Improve the business question
 
-Nina also wants category and units sold. She defines each product by its ID and specifies the revenue calculation so repeated names cannot merge distinct products.
+Nina refines the question to include category and units sold, defining each product by its ID and specifying the revenue calculation so repeated names cannot merge distinct products.
 
 1. Inspect SQL for the refined question.
 

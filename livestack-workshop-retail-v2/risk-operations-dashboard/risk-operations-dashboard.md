@@ -4,7 +4,7 @@
 
 Jessica Chan is the database administrator responsible for keeping Seer Sporting Goods' retail data reliable and useful. Every morning, the operations team asks her a familiar question: **which products deserve a closer look, and what order activity and fulfillment context should the team review?**
 
-Jessica can see the answer taking shape in the retail dashboard, but its supporting data comes in several forms. Products, brands and social signals are relational rows. Orders are also available as JSON documents. The AI engineering team has prepared vector representations of product descriptions. Fulfillment-center points and demand-region boundaries are stored as spatial geometry. The business question connects these records, but a useful dashboard needs a query that brings them together.
+Jessica can see the answer taking shape in the retail dashboard, but its supporting data comes in several forms. Products, brands, and social signals reside in relational tables; JSON documents expose order data; and the AI engineering team has prepared vector representations of product descriptions. Spatial geometry records fulfillment-center points and demand-region boundaries. The business question connects these records, but a useful dashboard needs a query that brings them together.
 
 With separate systems, Jessica would need to reconcile a catalog, search service, document store and mapping service before presenting the result. Keeping their copies synchronized would add work whenever an order, product description or location changed. Jessica wants each dashboard row to lead back to the data the application already uses.
 
@@ -74,7 +74,7 @@ The query crosses four data models:
         SELECT pe.product_id,
                ROUND(MAX(1 - VECTOR_DISTANCE(
                    pe.embedding,
-                   VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+                   VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2
                        USING 'viral customer demand for trail running footwear' AS DATA),
                    COSINE)), 4) AS semantic_similarity
         FROM product_embeddings pe
@@ -307,7 +307,7 @@ Jessica meets the operations team to review the data before adding it to the das
 
 ## Next Steps
 
-Jessica has connected the product evidence. Next, Thomas uses JSON Relational Duality to expose the same order data as an application payload while keeping relational SQL available to the database team.
+With the product evidence connected, Jessica turns to Thomas, who will expose the same order data as an application payload through JSON Relational Duality while keeping it available to relational SQL.
 
 ## Acknowledgements
 

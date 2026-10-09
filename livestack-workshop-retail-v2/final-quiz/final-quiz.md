@@ -79,7 +79,7 @@ Estimated Time: **5 minutes**
     > Match the captured conversation and team execution to its completed status and actual tool activity, then inspect the returned facts and invocation count. Instructions describe the intended behavior; execution history shows what happened. Select AI success alone does not prove that the agent ran its tool.
     ```
 
-2. Review the explanations. A score of **75% or higher**—at least **six of eight** correct—unlocks the Retail Workshop completion badge.
+2. Review the explanations. A score of **75% or higher**, meaning **at least six of eight** correct answers, unlocks the Retail Workshop completion badge.
 
 Jessica and the team have followed one connected investigation: product signals, order documents, semantic matches, creator relationships, fulfillment options, model scores, natural-language questions, and an assistant whose work can be inspected. Use the evidence behind each result when deciding what the retail operation should do next.
 
