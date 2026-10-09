@@ -164,7 +164,7 @@ The query combines four data types:
 
     If the result is empty or incomplete, check for missing embeddings or an empty regional plant set.
 
-> **Interpretation:** The nearest-plant result is regional context shared by every row. It is not a machine-capability or scheduling check, and it does not reassign an order. Affected-production order counts are alert totals and may include a production order in more than one alert; do not read their sum as unique customer sites.
+> **Interpretation:** The nearest plant is regional context shared by every row. The query does not check machine capability, schedule work or reassign orders. Affected-order figures are summed from alerts, and an order may appear in more than one alert. These totals are not counts of distinct production orders or customer sites.
 
 ## Task 2: Change the investigation question
 

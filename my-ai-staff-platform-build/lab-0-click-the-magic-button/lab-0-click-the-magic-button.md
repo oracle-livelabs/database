@@ -55,7 +55,6 @@ In this lab, you will:
     Select your home region if you want to use the Always Free
       shape and Autonomous Database 26ai.
 
-
     - **SSH public key:** If you do not already have an SSH key pair, run these commands in a
        terminal on your computer:
        ```bash
@@ -70,12 +69,20 @@ In this lab, you will:
 
        Paste that line, which starts with `ssh-ed25519`, into **SSH public key**.
 
-
     - **Administrator SSH CIDR:** Enter the public IPv4 address of the computer
       or network you will use to connect, followed by `/32`. To find it, open a
       browser and search for **what is my IP**. For example, if
       the site shows `203.0.113.10`, enter `203.0.113.10/32`. If your public IP changes or you connect from another
       network, update the security rule before connecting.
+
+    - **Compute instance shape:** Keep the default `VM.Standard.A1.Flex` to use
+      the Always Free-eligible shape. 
+      If OCI reports **Out of host capacity** for A1.Flex in the selected region, 
+      accounts on the **Pay As You Go** payment model can select `VM.Standard.A2.Flex` 
+      instead. A2.Flex is not an Always Free resource and can generate usage charges.
+
+    ![Select the A1 Flex or A2 Flex compute instance shape](images/compute-instance-shape.png)
+
 
 
     - **Autonomous Database ADMIN password:** Create a strong password of at
@@ -100,10 +107,12 @@ In this lab, you will:
 ## Task 2: Monitor Provisioning
 
 1. On the stack page, open the apply job and wait for it to reach **Succeeded**.
-    If the A1 shape has no capacity or the selected region does not offer the
-    configured 26ai database version, stop and choose a region/availability
-    domain with capacity; the stack deliberately does not fall back to another
-    shape or database tier.
+    If A1.Flex has no capacity, choose another region or availability domain
+    with A1.Flex capacity, or rerun the stack with A2.Flex if you have a Pay As
+    You Go account and accept the applicable charges. If the selected region
+    does not offer the configured 26ai database version, choose a supported
+    region. The stack does not change the compute shape or database tier
+    automatically.
 2. Copy the `instance_public_ip`, `ssh_command`, and
     `autonomous_database_service_name` outputs
     displayed as an output.
@@ -173,10 +182,20 @@ In this lab, you will:
     </copy>
     ```
 
-    Select **Sign in with ChatGPT**. If the instance cannot open a browser,
-    copy the URL or device code shown by Codex, complete the sign-in in your
-    local browser, and return to the instance. Do not paste tokens or API keys
+    Select **Sign in with Device Code**. 
+    ![Connect to chatgpt](images/device-code.png)
+    Then copy the URL and then enter the device code shown, complete the sign-in in your local browser, and return to the instance. Do not paste tokens or API keys
     into the workshop repository, screenshots, or shared validation evidence.
+
+    ![Get the link code](images/link-code.png)
+    Choose the account you want to authenticate with and after you enter the code, you should get this screen.
+    ![Sign in](images/signed.png)
+
+    Inside the terminal, you should press enter and you are done.
+    ![Autenticated view](images/auth.png)
+    ![Test hi](images/hi.png)
+
+    Press Ctrl + D to exit and return to the terminal.
 
 5. Run the final Lab 2 handoff helper after authentication:
 

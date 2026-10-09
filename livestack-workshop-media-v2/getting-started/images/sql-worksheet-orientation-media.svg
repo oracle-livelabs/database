@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="982" height="777" viewBox="0 0 982 777" role="img" aria-labelledby="title desc">
-  <title id="title">SQL Worksheet orientation for the retail workshop</title>
+  <title id="title">Shared SQL Worksheet orientation used in the Media workshop</title>
   <desc id="desc">Annotated SQL Worksheet screen showing the LLUSER dropdown, Navigator table list, SQL editor, Run Statement button, and Query Result panel.</desc>
   <defs>
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">

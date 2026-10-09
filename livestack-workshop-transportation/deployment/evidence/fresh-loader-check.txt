@@ -1,0 +1,48 @@
+
+
+   SERVICES 
+___________ 
+         60 
+
+
+   PASSENGERS 
+_____________ 
+           80 
+
+
+   BOOKINGS 
+___________ 
+        180 
+
+
+   VECTORS 
+__________ 
+        60 
+
+
+SURGE_LABEL       COUNT(*) 
+______________ ___________ 
+STABLE                  21 
+SURGE                   39 
+
+
+SERVICE_NAME                 LINE_NAME             SERVICE_CATEGORY       HIGH_RISK_SIGNALS    AVG_CRITICALITY    AFFECTED_PASSENGERS    CASES_OPENED    SEMANTIC_SIMILARITY    ACTIVE_BOOKINGS    ACTIVE_BOOKING_SEATS NEAREST_STATION        STATION_LOCATION    DEMAND_REGION        DEMAND_INDEX    DISTANCE_TO_SERVICE_REGION_KM 
+____________________________ _____________________ ___________________ ____________________ __________________ ______________________ _______________ ______________________ __________________ _______________________ ______________________ ___________________ _________________ _______________ ________________________________ 
+Joliet Regional Link         Midwest Connect       Rail                                   1                 88                    107               5                 0.3055                  3                       6 Joliet Rail Station    Joliet, IL          Chicago Metro                  78                                0 
+Newark Intercity Express     Northeast Regional    Rail                                   2                 87                    156               4                 0.2927                  3                       3 New York Central       New York, NY        New York Metro                 86                                0 
+Brooklyn Night Service       Metro Express         Bus                                    1                 96                     99               4                 0.2755                  3                       9 New York Central       New York, NY        New York Metro                 86                                0 
+Hudson Commuter Rail         Northeast Regional    Rail                                   2                 85                    160               2                 0.2739                  0                       0 New York Central       New York, NY        New York Metro                 86                                0 
+Midwest Airport Connector    Midwest Connect       Bus                                    1                 83                     82               5                 0.2705                  3                       3 Joliet Rail Station    Joliet, IL          Chicago Metro                  78                                0 
+New York Airport Express     Metro Express         Bus                                    2                 92                    206               4                 0.2299                  3                       6 New York Central       New York, NY        New York Metro                 86                                0 
+Chicago South Loop           Midwest Connect       Bus                                    2                 94                    202               6                 0.2236                  3                       6 Joliet Rail Station    Joliet, IL          Chicago Metro                  78                                0 
+Manhattan Crosstown          Metro Express         Bus                                    1                 81                     84               4                 0.2173                  3                       3 New York Central       New York, NY        New York Metro                 86                                0 
+Chicago Lakeshore Rail       Midwest Connect       Rail                                   1                 94                    101               3                 0.1893                  3                       9 Joliet Rail Station    Joliet, IL          Chicago Metro                  78                                0 
+Queens Station Shuttle       Metro Express         Bus                                    2                 90                    210               2                 0.1802                  3                       9 New York Central       New York, NY        New York Metro                 86                                0 
+
+10 rows selected. 
+
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:/Users/lindafoinding/sqlcl/lib/jansi.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+

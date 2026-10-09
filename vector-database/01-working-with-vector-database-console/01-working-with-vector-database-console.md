@@ -29,7 +29,7 @@ Database Actions is the web interface for working with your Autonomous AI Vector
 3. Select **Open Link** next to **ADB Database Actions URL**.
 
     ![Login information with the ADB Database Actions URL, username, and password.](images/reservation_url_name_pwd.png " ")
-    Database Actions login page opens in a new browser tab or window.
+    The Database Actions sign-in page opens in a new browser tab or window.
 
 4. Enter the ADB username and password you recorded, then select **Sign In**.
 
@@ -60,7 +60,7 @@ To connect to Autonomous AI Vector Database from Python, you need the REST URL, 
 
 ## Task 3: Load an Embedding Model
 
-A core Autonomous AI Vector Database capability is integrated embedding. When you upsert a record into an integrated embedding table, the database uses the configured model to generate a vector from the selected metadata field and stores that vector with the record.
+Auto-generated vector embeddings are a core Autonomous AI Vector Database capability. When you upsert a record into a table configured for auto-generated vector embeddings, the database uses the configured model to generate a vector from the selected metadata field and stores that vector with the record.
 
 Three embedding models are available when your database is created, but they are not loaded initially. In this workshop, you use `all_MiniLM_L12_v2`, so load it before you begin the Python exercises.
 
@@ -105,4 +105,4 @@ You may now **proceed to the next lab.**
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, August 28, 2026
+* **Last Updated By/Date** - August 28, 2026
