@@ -39,8 +39,6 @@ The LiveStack Field Operations Logistics Map illustrates how an application pres
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **Schema names:** `CUSTOMERS` represents service points; `FULFILLMENT_CENTERS` represents field logistics sites.
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.

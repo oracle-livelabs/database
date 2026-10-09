@@ -32,8 +32,6 @@ Generate SQL, inspect its tables and calculations, then request the result. Refi
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 > **AI setup:** Initialization creates the LLUSER-owned `GENAI` profile and credential. This lab configures its four Utilities views.
