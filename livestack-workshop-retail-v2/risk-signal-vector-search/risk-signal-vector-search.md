@@ -72,9 +72,9 @@ Similarity search needs a compatible representation for both the stored text and
 
     | OWNER | MODEL_NAME | ALGORITHM | MINING_FUNCTION |
     | --- | --- | --- | --- |
-    | ADMIN | ALL_MINILM_L12_V2 | ONNX | EMBEDDING |
+    | LLUSER | ALL_MINILM_L12_V2 | ONNX | EMBEDDING |
 
-    Other visible embedding models can also appear. This lab uses `ADMIN.ALL_MINILM_L12_V2`, which produces 384-dimensional vectors. Gilly will use the same model for the product text and the question.
+    Other visible embedding models can also appear. This lab uses `LLUSER.ALL_MINILM_L12_V2`, which produces 384-dimensional vectors. Gilly will use the same model for the product text and the question.
 
 2. Connect the model to the application's design.
 
@@ -121,7 +121,7 @@ Similarity search needs a compatible representation for both the stored text and
 
 ## Task 2: Create a product vector
 
-Gilly starts with one vector per product. A name, category and subcategory form a short description of what the product is. This is different from embedding a customer's post, which describes what that customer said about a product.
+Gilly creates one vector per product from its name, category, and subcategory, which together describe what the product is. This is different from embedding a customer's post, which describes what that customer said about a product.
 
 1. Review the text that will be embedded.
 
@@ -168,7 +168,7 @@ Gilly starts with one vector per product. A name, category and subcategory form 
     <copy>
     UPDATE products
     SET product_embedding = VECTOR_EMBEDDING(
-      ADMIN.ALL_MINILM_L12_V2 USING
+      LLUSER.ALL_MINILM_L12_V2 USING
         product_name || '. Category: ' || category ||
         '. Subcategory: ' || subcategory AS DATA)
     WHERE product_embedding IS NULL;
@@ -176,6 +176,8 @@ Gilly starts with one vector per product. A name, category and subcategory form 
     ```
 
     ![SQL Worksheet showing the query and result for Task 2: Create a product vector, SQL block 5](images/sql-lab-3-05.jpg)
+
+    The screenshot shows a later run in a reservation where the vectors already exist.
 
     **Expected output:** On the first run, the model generates a vector for each of the 187 products. A later run skips vectors already present because of the `IS NULL` condition.
 
@@ -218,7 +220,7 @@ Gilly starts with one vector per product. A name, category and subcategory form 
 
 ## Task 3: Test the product vector
 
-Gilly first tests the vector column directly. She uses the same trail-running phrase as Jessica's investigation, but here the search compares product name/category text created in Task 2. A different source text can produce a different ranking from the dashboard's existing product embeddings.
+Gilly first tests the vector column with the same trail-running phrase as Jessica’s investigation. Here, the search compares the product descriptions embedded in Task 2. A different source text can produce a different ranking from the dashboard's existing product embeddings.
 
 1. Rank the five closest products by cosine distance.
 
@@ -229,7 +231,7 @@ Gilly first tests the vector column directly. She uses the same trail-running ph
            p.category,
            VECTOR_DISTANCE(
              p.product_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'viral customer demand for trail running footwear' AS DATA),
+             VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING 'viral customer demand for trail running footwear' AS DATA),
              COSINE) AS vector_distance
     FROM products p
     ORDER BY vector_distance, p.product_id
@@ -271,7 +273,7 @@ Gilly first tests the vector column directly. She uses the same trail-running ph
            p.category,
            ROUND(1 - VECTOR_DISTANCE(
              p.product_embedding,
-             VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2 USING 'viral customer demand for trail running footwear' AS DATA),
+             VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2 USING 'viral customer demand for trail running footwear' AS DATA),
              COSINE), 4) AS similarity
     FROM products p
     ORDER BY similarity DESC, p.product_id
@@ -307,7 +309,7 @@ Gilly first tests the vector column directly. She uses the same trail-running ph
            ROUND(MIN(VECTOR_DISTANCE(
              pe.embedding,
              VECTOR_EMBEDDING(
-               ADMIN.ALL_MINILM_L12_V2
+               LLUSER.ALL_MINILM_L12_V2
                USING 'customer demand digital service product' AS DATA
              ),
              COSINE
@@ -344,7 +346,7 @@ Gilly first tests the vector column directly. She uses the same trail-running ph
            ROUND(MIN(VECTOR_DISTANCE(
              se.embedding,
              VECTOR_EMBEDDING(
-               ADMIN.ALL_MINILM_L12_V2
+               LLUSER.ALL_MINILM_L12_V2
                USING 'viral customer demand for trail running footwear' AS DATA
              ),
              COSINE
@@ -387,7 +389,7 @@ Gilly first tests the vector column directly. She uses the same trail-running ph
            ROUND(MIN(VECTOR_DISTANCE(
              se.embedding,
              VECTOR_EMBEDDING(
-               ADMIN.ALL_MINILM_L12_V2
+               LLUSER.ALL_MINILM_L12_V2
                USING 'AllTerrain Hiking Boots sizing and trail grip' AS DATA
              ),
              COSINE
@@ -435,7 +437,7 @@ Gilly can now turn a ranked product search into a review list. The application s
                ROUND(1 - VECTOR_DISTANCE(
                  p.product_embedding,
                  VECTOR_EMBEDDING(
-                   ADMIN.ALL_MINILM_L12_V2
+                   LLUSER.ALL_MINILM_L12_V2
                    USING 'viral customer demand for trail running footwear' AS DATA
                  ),
                  COSINE), 4) AS similarity
