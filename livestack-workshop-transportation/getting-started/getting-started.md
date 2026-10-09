@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use this lab to open the LiveLabs reservation, access the provisioned **Autonomous Database 26ai** instance, and prepare SQL Worksheet for the hands-on transportation exercises. Think of this as getting the right desk, badge, and notebook before the investigation starts: each transportation query runs as the workshop user against the prepared transportation schema.
+Use this lab to open the LiveLabs reservation, sign in to the **Autonomous Database 26ai** instance, and prepare SQL Worksheet. You will use the workshop account to investigate Seer Transport's service, booking, passenger, and station records throughout the labs.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -75,12 +75,13 @@ Open SQL Worksheet as the workshop user before running the transportation querie
 6. Use the same SQL Worksheet pattern throughout the workshop.
 
     - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
-    - Paste each workshop SQL block into the editor.
-    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
-    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Select the trash-can **Clear** button on the editor toolbar and confirm the editor is empty. Then paste only the code box for the current step. This prevents an earlier query from running again.
+    - By default, choose **Run Statement** (the green play button) for a code box with one SQL statement. You can also press **Ctrl+Enter** on Windows or **Command+Enter** on a Mac.
+    - When a step says **Run Script**, choose **Run Script** (the page-and-play button) for a code box with several SQL statements or a PL/SQL block ending in `/`. Run Script executes all statements currently in the editor.
+    - Review a single statement's output in **Query Result**. Review a script's output in **Script Output**.
     - Use **Navigator** only when you want to inspect tables, views, or other objects.
 
-7. Run this check.
+7. Run this check with **Run Statement**.
 
     This check makes sure SQL Worksheet is connected as the right user before you start. `USER` shows who signed in, while `SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')` shows where table names resolve. The transportation labs use `LLUSER`, so both values should point to the workshop schema.
 
@@ -102,7 +103,7 @@ Open SQL Worksheet as the workshop user before running the transportation querie
 
 8. You can use this same connection check whenever you want to confirm that SQL Worksheet is still running as `LLUSER`.
 
-You can now continue to the transportation labs.
+    You can now continue to the transportation labs.
 
 ## Acknowledgements
 
