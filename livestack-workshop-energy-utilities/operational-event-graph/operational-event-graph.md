@@ -30,8 +30,6 @@ Jessica can join the relational entity and relationship tables. As the investiga
 
 Estimated Time: **15 minutes**
 
-> **Video pending:** A Utilities walkthrough has not yet been recorded.
-
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 ## Task 1: Follow an operational event with SQL
