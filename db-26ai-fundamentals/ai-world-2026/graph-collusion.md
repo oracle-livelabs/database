@@ -405,9 +405,6 @@ This lab assumes you have:
     </copy>
     ```
 
-    Script Output shows one row inserted, then the commit.
-
-
 3. We can verify the case file is filled. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql

@@ -367,7 +367,7 @@ This lab assumes you have:
 
 The Silverleaf Casino's website and tablets now run on the tables you built in **Lab 1**. Pablo's profile came back as one JSON document built from five tables. His craps session went in as a JSON document and landed as one row. Neither app needed code to turn tables into documents or back, and there's no second copy of the night to keep in step.
 
-Because the data is stored once, every app sees the same night. The session the Craps 1 tablet logged showed up in Pablo's profile straight away. Each view also decides what its app may do. The website can change only a player's name and favorite game, and never sees the sensitive columns. The tablets can only add session records. The data dictionary lists those permissions, and every write that went past them failed. And every document carries an `etag`, so two people can't quietly overwrite each other's changes.
+Because the data is stored once, every app sees the same night. Each view also decides what its app may do. The website can change only a player's name and favorite game, and never sees the sensitive columns. The tablets can only add session records. The data dictionary lists those permissions, and every write that went past them failed. And every document carries an `etag`, so two people can't quietly overwrite each other's changes.
 
 The rules held, too. Pablo's pick of poker broke the **Lab 1** `game_type` domain, and Gemma Doyle's record broke the **Lab 1** assertion. The database rejected both, even though the website and the tablet only ever sent JSON. That finishes the build: every way into the casino's data follows the same rules. In **Lab 3**, Vera starts investigating.
 
