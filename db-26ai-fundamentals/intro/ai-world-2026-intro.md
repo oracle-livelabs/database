@@ -34,8 +34,8 @@ The session opens with a demo of the casino's website. In the labs, you build th
 
 The labs tell the story in three parts:
 
-* **Build** (Labs 1 and 2): create the casino's database, then connect the website and the tablets at the tables, so every way in follows the same rules.
-* **Investigate** (Labs 3 and 4): follow the connections between players and dealers, and search the staff's notes.
+* **Build** (Labs 1 and 2): create the casino's database, then connect the website, where players read their own night, and the tablets at the tables, which log every session under the same rules.
+* **Investigate** (Labs 3 and 4): run the usual reports, follow the connections between players and dealers, and search the staff's notes.
 * **Protect** (Lab 5): keep the evidence away from anyone who shouldn't see it.
 
 Labs 6 and 7 are bonus labs.
@@ -49,7 +49,7 @@ In Oracle AI Database 26ai, the same rows can be read as relational tables, JSON
 * An **assertion** stops a dealer from dealing at two tables at the same time.
 * **Data grants** decide which rows and columns each staff member can read.
 
-Because the rules live in the database, every way in gets the same rules. That covers SQL in the worksheet, JSON documents from the website, graph queries, vector search and AI agents. In the closing stage demo, an AI agent signs in as different casino staff through the SQLcl MCP server. It sees only what each person may see.
+Because the rules live in the database, every way in gets the same rules. That covers SQL in the worksheet, JSON documents from the tablets, graph queries, vector search and AI agents. In the closing stage demo, an AI agent signs in as different casino staff through the SQLcl MCP server. It sees only what each person may see.
 
 ![Diagram of SQL, JSON documents, graph queries, vector search and an AI agent reaching casino data through the same database rules.](images/ai-world-2026-intro-01.png " ")
 
