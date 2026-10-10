@@ -73,7 +73,7 @@ This lab assumes you have:
 
 ## Task 2: Split totals with FILTER and pick winners with QUALIFY
 
-1. In **Lab 1**, Elliot Shaw looked like the casino's best dealer: the casino made $17,375 at his tables. Vera wants that number split in two: what the casino made from the four players in her case, and what it made from everyone else. `FILTER` lets each total in a query add up only the rows you choose. Clear the editor, paste the query, and click **Run Statement**.
+1. In **Lab 3**, Elliot Shaw looked like the casino's best dealer: the casino made $17,375 at his tables. Vera wants that number split in two: what the casino made from the four players in her case, and what it made from everyone else. `FILTER` lets each total in a query add up only the rows you choose. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>

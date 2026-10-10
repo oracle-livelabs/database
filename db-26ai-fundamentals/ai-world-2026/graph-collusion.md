@@ -2,11 +2,9 @@
 
 ## Introduction
 
-It's Monday morning at the Silverleaf Casino, and Sunday night is over. You built the database that holds it in **Lab 1** and **Lab 2**. The usual reports say the night was ordinary, and Elliot Shaw even looks like the house's best dealer. But the tip said the cheater isn't working alone. A team leaves a trail that totals can't show: its members play together and pass chips to each other. Passing chips is a common way to fool a casino. When a team wins, its members hand the chips around, so no one player looks like a big winner and the chips are hard to trace back to the table that paid them. Surveillance logged every chip handoff the cameras caught, so Vera Lindqvist starts there, following the chips from player to player.
+It's Monday morning at the Silverleaf Casino, and Vera Lindqvist starts her investigation. The tip said the cheater isn't working alone, so a list of who won and who lost won't be enough. Vera needs to see how the night's players, dealers and tables connect to each other. She starts where any casino would, with the usual reports, and then looks at the night a different way.
 
-Following chips is hard in plain SQL. Finding who passed chips to whom takes one join. Following the chips one step further, to whoever got them next, joins the same table again, and every step after that adds another join. You also have to decide in advance how many steps to follow. The other option is to copy the data into a separate graph database, a second copy of the night to keep in step with the tables, much like the document database you avoided in **Lab 2**.
-
-Oracle AI Database 26ai lets you look at the tables you already have as a **property graph**. Here, a graph isn't a chart. It's data seen as entities, such as players and dealers, and the relationships between them. The entities are called **vertices**. The relationships are called **edges**, such as a chip handoff from one player to another. Both can carry **properties**, such as a name or an amount. A **SQL property graph** is defined over your tables, so no data is copied and the graph is never out of date. You query it in SQL with `GRAPH_TABLE`: you write the shape you're looking for, such as "a player sends chips to a player", and the database returns every match as rows. The database can also run **graph algorithms**, ready-made calculations that score every vertex by how it connects to the rest.
+Oracle AI Database 26ai lets you look at the tables you already have as a **property graph**. Here, a graph isn't a chart: it's the night seen as players, dealers and tables, and the connections between them. It's defined over your existing tables, so no data is copied. You can query it with SQL, and run graph analytics on it inside the database.
 
 Estimated Time: 15 minutes
 
@@ -14,11 +12,12 @@ Estimated Time: 15 minutes
 
 In this lab, you will:
 
+* Run the usual reports on the night
 * Create a SQL property graph over the casino tables, without copying any data
-* Follow chip transfers from player to player with `GRAPH_TABLE`, and find a loop
-* Tie the loop to a dealer through the play sessions
-* Rank players by how closely they connect to that dealer, with Personalized PageRank
-* Record the finding in a case file
+* Follow chip transfers from player to player with `GRAPH_TABLE`
+* Connect players to dealers through the play sessions
+* Rank players by how closely they connect to a dealer, with Personalized PageRank
+* Record what you find in a case file
 
 ### Prerequisites
 
@@ -27,15 +26,55 @@ This lab assumes you have:
 * Completed **Get Started with LiveLabs** and opened the SQL worksheet as ADMIN
 * Completed **Lab 1** and **Lab 2**
 
-## Task 1: Turn the casino floor into a graph
+## Task 1: Starting the investigation
 
-1. To create a graph, you tell the database which tables hold the entities and which hold the relationships. A **vertex table** is a table whose rows are entities: each player, dealer and gaming table becomes a vertex. An **edge table** is a table whose rows connect two entities. Each edge runs in one direction, from a **source** vertex to a **destination** vertex, and the foreign keys you built in **Lab 1** say which two. So each chip transfer becomes an edge from the player who gave the chips to the player who got them.
+1. Vera starts where any investigator would: who won big last night? Look for anyone who stands out. Clear the editor, paste the query, and click **Run Statement**.
 
-    A play session connects three entities: a dealer, a player and a gaming table. An edge connects only two, so each session becomes two edges: the dealer `dealt_to` the player, and the player `played_at` the table.
+    ```sql
+    <copy>
+    -- Find the night's biggest winners
+    SELECT p.full_name,
+           p.loyalty_tier,
+           COUNT(*) AS sessions,
+           SUM(s.cash_out - s.buy_in) AS net_win
+    FROM play_sessions s
+    JOIN players p ON p.player_id = s.player_id
+    GROUP BY p.full_name, p.loyalty_tier
+    ORDER BY net_win DESC
+    FETCH FIRST 5 ROWS ONLY;
+    </copy>
+    ```
 
-    Here is Pablo's craps session from **Lab 2** and one of Tara Novak's chip transfers, drawn as a graph. Each box is a vertex, with its label in green and its name below. Each arrow is an edge, with its label above it and a property below it:
+    You should see Ben Carter on top at $19,000, followed by Farid Rahman, Uma Desai, Gemma Doyle and Ava Brooks. Ben's big win came at baccarat. A few lucky players are normal on any night.
 
-    ![One play session and one chip transfer drawn as a graph. Dealer Aisha Bello dealt_to player Pablo Reyes, who played_at gaming table Craps 1, and both edges carry session_id 217. Player Tara Novak sent_chips to player Uma Desai, with amount 2500.](images/graph-collusion-session-and-handoff.png " ")
+2. Next, check how the casino did with each dealer. A dealer who lets players win would cost the house money. Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- Show the house result for each dealer
+    SELECT d.full_name AS dealer,
+           COUNT(*) AS sessions,
+           ROUND(100 * AVG(CASE WHEN s.cash_out > s.buy_in THEN 1 ELSE 0 END)) AS player_win_pct,
+           SUM(s.buy_in - s.cash_out) AS house_result
+    FROM play_sessions s
+    JOIN dealers d ON d.dealer_id = s.dealer_id
+    GROUP BY d.full_name
+    ORDER BY house_result;
+    </copy>
+    ```
+
+    You should see eight dealers. The house lost money with Kenji Mori and Omar Farouk, and won with the other six. Elliot Shaw earned the house the most, $17,375. With every dealer, players won between 30 and 50 percent of their sessions.
+
+    ![Query Result lists each dealer's sessions, player win percentage and house result, with Elliot Shaw last.](images/domains-annotations-assertions-05.png " ")
+
+    Nothing here looks like cheating. Totals and averages can't show who plays with whom, and that's where Vera needs to look next.
+
+## Task 2: Turn the casino floor into a graph
+
+1. To see who plays with whom, Vera needs the night as connections, not totals. A graph holds the players, dealers and gaming tables, and the links between them, such as a chip handoff or a seat at a table.
+
+    To create a graph, you tell the database which tables hold the entities and which hold the relationships. A **vertex table** is a table whose rows are entities: each player, dealer and gaming table becomes a vertex. An **edge table** is a table whose rows connect two entities. Each edge runs in one direction, from a **source** vertex to a **destination** vertex.
+
 
     Clear the editor, paste the block, and click **Run Script** (F5).
 
@@ -85,7 +124,7 @@ This lab assumes you have:
 
     The database stores only the graph's definition, not a copy of the rows. Every graph query reads the tables underneath, so the graph is always up to date. Like the duality views in **Lab 2**, it's one more way to look at the same tables.
 
-## Task 2: Follow the chips
+## Task 3: Follow the chips
 
 1. Start with the simplest shape: one player sends chips to another. `GRAPH_TABLE` takes the graph and a `MATCH` clause with a **path pattern**, the shape to look for, written with parentheses and arrows. It finds every match in the graph and returns each one as a row. Clear the editor, paste the query, and click **Run Statement**.
 
@@ -116,9 +155,9 @@ This lab assumes you have:
 
     For one hop, a join would have given you the same rows. The graph pays off when you follow the chips further.
 
-2. One handoff at a time, nothing stands out. Vera's hunch is that the team keeps passing the same chips along, so they come back to the player who started them. Look for players whose chips return to them.
+2. One handoff at a time, nothing stands out. Vera's hunch is that the team keeps passing the same chips along. Look for players whose chips return to them.
 
-    In plain SQL, a path of four transfers is four copies of `chip_transfers` joined end to end, and every other length needs its own query. In a path pattern, you add the number of hops to the edge. The block also wraps the query in a view, `chip_loop_players`, so later steps can use the list of players without repeating the pattern. Clear the editor, paste the block, and click **Run Script**.
+    In plain SQL, a path of four transfers is four copies of `chip_transfers` joined end to end, and every other length needs its own query. In a path pattern, you add the number of hops to the edge. The block wraps the query in a view, `chip_loop_players`, so later steps can use the list of players without repeating the pattern. Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
@@ -129,16 +168,23 @@ This lab assumes you have:
            MATCH (a IS player) -[t IS sent_chips]->{2,5} (z IS player)
            WHERE a.player_id = z.player_id
            COLUMNS (a.player_id, a.full_name AS player, COUNT(t.transfer_id) AS hops));
-
-    SELECT * FROM chip_loop_players ORDER BY player;
     </copy>
     ```
 
-    How the pattern reads:
+    Script Output confirms that the view was created. How the pattern reads:
 
     * `->{2,5}` repeats the `sent_chips` edge two to five times. One pattern covers paths of two, three, four and five transfers.
     * `(z IS player)` is the player at the end of the path. `WHERE a.player_id = z.player_id` keeps only paths that end with the player who started them. That's a loop.
     * Because the edge repeats, `t` stands for every transfer along the path, and `COUNT(t.transfer_id)` counts them.
+
+3. Now read the view. Each time you query it, the database runs the graph search again on the current data. Clear the editor, paste the query, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- List the players in the chip loop
+    SELECT * FROM chip_loop_players ORDER BY player;
+    </copy>
+    ```
 
     You should see four players: Daria Petrov, Felix Ortega, June Calloway and Victor Lang. Each one's chips come back in exactly four hops. Out of 36 transfers on the floor, this is the only loop.
 
@@ -190,7 +236,7 @@ This lab assumes you have:
 
     ![Script Output shows the chip_loop_players view: Daria Petrov, Felix Ortega, June Calloway and Victor Lang, each with 4 hops.](images/graph-collusion-02.png " ")
 
-3. Now follow the loop the way it happened, one lap at a time. This pattern writes out the four hops and names each transfer, `t1` to `t4`, so the `WHERE` clause can compare their times. The last vertex is `(a)` again. A name used twice in a pattern means the same vertex, so the path has to end where it started. That's a second way to write a loop. The time conditions keep each transfer after the one before it, and the whole lap within one hour. Clear the editor, paste the query, and click **Run Statement**.
+4. Now follow the loop the way it happened, one lap at a time. This pattern writes out the four hops and names each transfer, `t1` to `t4`, so the `WHERE` clause can compare their times. The last vertex is `(a)` again. A name used twice in a pattern means the same vertex, so the path has to end where it started. That's a second way to write a loop. The time conditions keep each transfer after the one before it, and the whole lap within one hour. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -227,7 +273,7 @@ This lab assumes you have:
 
     ![The chip loop drawn as a graph: Victor Lang to Daria Petrov to June Calloway to Felix Ortega, and back to Victor Lang. Each arrow shows both laps: $1,500 between 23:05 and 23:26, and $1,000 between 01:35 and 01:56.](images/graph-collusion-chip-loop.png " ")
 
-## Task 3: Tie the loop to a dealer
+## Task 4: Tie the loop to a dealer
 
 1. A team that only passes chips among its members can't take money from the casino. To win, they need help at the table, and the tip said someone on the floor is in on it. Find where the four played and who dealt to them.
 
@@ -256,7 +302,7 @@ This lab assumes you have:
 
     With every other dealer, the four won 1 session in 8. The other two Elliot rows are Felix Ortega after midnight, without the other three, and he lost both.
 
-    Twelve wins in twelve sessions isn't luck. In **Lab 1**, Elliot looked like the house's best dealer, earning it $17,375. His other players lost $21,750 at his tables, and that hid the ring's wins. A total for each dealer couldn't show it, but following the connections did.
+    Twelve wins in twelve sessions isn't luck. In **Task 1**, Elliot looked like the house's best dealer, earning it $17,375. His other players lost $21,750 at his tables, and that hid the ring's wins. A total for each dealer couldn't show it, but following the connections did.
 
     ![Query Result shows Elliot Shaw at Blackjack 3 and Blackjack 4 with four loop players and every session won.](images/graph-collusion-04.png " ")
 
@@ -264,7 +310,7 @@ This lab assumes you have:
 
     That's a job for a **graph algorithm**, a ready-made calculation that runs over the whole graph and gives each vertex a score. **Personalized PageRank** scores how closely each vertex connects to one starting vertex. It walks the graph from the start, one edge at a time. At each step, the walk either moves along an edge or jumps back to the start. The vertices it reaches most often score highest. So a player who sat with Elliot many times scores high, and so does a player who got chips from one of those players.
 
-    Before, you ran an algorithm like this outside the database. You loaded the graph into a separate graph server or tool, ran it there, and brought the scores back. Here, the `DBMS_OGA` package runs it inside a SQL query. Start from Elliot Shaw and see who scores highest. Clear the editor, paste the query, and click **Run Statement**.
+    Prior to 26ai if you wanted to work with graph algorithms, you ran them outside the database. You loaded the graph into a separate graph server or tool, ran it there, and brought the scores back. Here, the `DBMS_OGA` package runs it inside a SQL query. Start from Elliot Shaw and see who scores highest. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -293,17 +339,17 @@ This lab assumes you have:
     * `0.85d` is the damping factor: at each step, the walk moves along an edge 85 percent of the time and jumps back to Elliot the rest of the time. 0.85 is the usual value, and the `d` makes it the `BINARY_DOUBLE` number type this argument takes.
     * `FALSE` means the scores don't have to add up to 1. Only their order matters here.
 
-    You should see the same four players whose chips went around in a circle in **Task 2**: Felix Ortega, Victor Lang, Daria Petrov and June Calloway. They hold the top four places. Felix leads, and he sat with Elliot five times. Then the scores drop: the next players, starting with Aaron Blake, score 0.0077, half of June Calloway's 0.0154.
+    You should see the same four players whose chips went around in a circle in **Task 3**: Felix Ortega, Victor Lang, Daria Petrov and June Calloway. They hold the top four places. Felix leads, and he sat with Elliot five times. Then the scores drop: the next players, starting with Aaron Blake, score 0.0077, half of June Calloway's 0.0154.
 
     This time you didn't tell the database what shape to look for. You gave it only Elliot, and it followed his deals and the chips his players passed. It still found the same team. Two different methods, one starting from the chips and one starting from the dealer, point at the same four players. And because the algorithm follows every route, not one shape, a team member who never passed a chip but kept sitting at Elliot's table would score high too.
 
-    It also ran where the data lives. With a separate graph server, you'd export the tables, run the algorithm there and load the scores back, and that copy goes out of date as soon as the tables change. Here it was one SQL query on the casino's own tables, and the scores came back as rows you can sort, filter and join like any others. The `closeness` property exists only for this query, so the graph itself doesn't change. In **Task 4**, Vera puts Elliot and these four players on file.
+    It also ran where the data lives. With a separate graph server, you'd export the tables, run the algorithm there and load the scores back, and that copy goes out of date as soon as the tables change. Here it was one SQL query on the casino's own tables, and the scores came back as rows you can sort, filter and join like any others. The `closeness` property exists only for this query, so the graph itself doesn't change. In **Task 5**, Vera puts Elliot and these four players on file.
 
     ![Query Result lists Felix Ortega, Victor Lang, Daria Petrov and June Calloway as the top four players by closeness.](images/graph-collusion-05.png " ")
 
-## Task 4: Open the case file
+## Task 5: Open the case file
 
-1. Vera has her evidence: a loop of chips, the dealer it leads to, and an algorithm that agrees. She needs it on file, where she can control who reads it. Create a table for cases and a table for the players each case names. These are ordinary tables, and they reuse the domains and annotations from **Lab 1**. Clear the editor, paste the block, and click **Run Script**.
+1. Vera has her evidence: a loop of chips, the dealer it leads to, and an algorithm that agrees. She needs it on file, where she can control who reads it. Create a table for cases and a table for the players each case names.  Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
@@ -334,11 +380,11 @@ This lab assumes you have:
     * `visible_to_role` says which staff role may read the case. It uses the `staff_role` domain from **Lab 1**, so it shares one list with `casino_staff.staff_role`.
     * `case_players` lists the players a case names. Its foreign keys accept only real cases and real players.
 
-2. Open the case. The block looks up the dealer by name and takes the four players straight from the `chip_loop_players` view. Nobody types a player's name, so the case names exactly the players the graph found. Clear the editor, paste the block, and click **Run Script**.
+2. Add the data to the table. Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
-    -- Open Vera's case: the dealer by name, the players straight from the graph
+    -- Open Vera's case against the dealer, looked up by name
     INSERT INTO case_files (case_id, title, opened_by, opened_on, dealer_id, visible_to_role, finding)
     SELECT 1,
            'Chip loop at Elliot Shaw''s tables',
@@ -350,6 +396,7 @@ This lab assumes you have:
     FROM dealers
     WHERE full_name = 'Elliot Shaw';
 
+    -- Name the players in the case, straight from the graph
     INSERT INTO case_players (case_id, player_id)
     SELECT 1, player_id
     FROM chip_loop_players;
@@ -358,11 +405,10 @@ This lab assumes you have:
     </copy>
     ```
 
-    Script Output shows one row inserted into `case_files` and four rows into `case_players`, then the commit.
+    Script Output shows one row inserted, then the commit.
 
-    > **Note:** If you run this block a second time, both inserts fail because case 1 already exists. That's expected, and you can carry on.
 
-3. Read the case file the way Vera would, with each player's loyalty tier and floor host. Clear the editor, paste the query, and click **Run Statement**.
+3. We can verify the case file is filled. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -389,9 +435,7 @@ This lab assumes you have:
 
 ## Conclusion
 
-You turned the Silverleaf Casino's tables into a property graph and found what the reports in **Lab 1** couldn't show. A path pattern found four players passing chips in a loop. Their play sessions tied them to Elliot Shaw, and Personalized PageRank, starting from Elliot alone, ranked the same four players at the top. Vera's case file names all five.
-
-The graph copied no data. It's a definition over the **Lab 1** tables, so every query read the night straight from them, through the same keys and without the sensitive columns. One short pattern followed chips across two to five transfers, where plain SQL needs a join for every hop and a query for every length. The algorithm ran inside a SQL query, with no separate graph server to load. And every graph result came back as ordinary rows, so you grouped them, put them in a view and inserted them into the case file with plain SQL.
+You turned the Silverleaf Casino's tables into a property graph and found what the Simple stats couldn't show. A path pattern found four players passing chips in a loop and a dealer helping them. Their play sessions tied them to Elliot Shaw, and Personalized PageRank, starting from Elliot alone, ranked the same four players at the top. Vera's case file names all five.
 
 Now the file needs protecting. Victor Lang is Nina Alvarez's VIP, so Nina must never see this case. Each floor host should see only their own players. First, in **Lab 4**, Vera checks whether anyone on the floor noticed. Then, in **Lab 5**, you make the database enforce both rules.
 

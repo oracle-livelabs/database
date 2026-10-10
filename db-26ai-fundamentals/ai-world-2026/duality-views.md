@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In **Lab 1**, you built the Silverleaf Casino's database and loaded the night. But the casino's records don't arrive through a SQL worksheet. They come in through the casino's website, the tablets at the tables, surveillance cameras, and other devices. Vera can only trust the data if every way in follows the same rules. This lab goes back to Sunday night, while the website and the tablets are in use, and finishes the build before the investigation starts in **Lab 3**.
+In **Lab 1**, you built the Silverleaf Casino's database and loaded the night in one go. That load stood in for the records that came in all night from the tablets at the gaming tables and from the surveillance cameras. This lab connects two of the casino's apps to those tables, and they use the data in different ways. Players check their own night on the casino's website, and can change only their name and favorite game. Staff log every session on a tablet, so the tablets write. Vera can only trust the data if every record follows the same rules, however it arrives, so this lab also shows that the tablets' JSON gets the same checks as SQL. That finishes the build before the investigation starts in **Lab 3**.
 
 Imagine the casino has a website. Players use it to check their loyalty tier, their floor host and their night at the tables. 
 
@@ -16,9 +16,12 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-* Create a read-only duality view of player documents that leaves out the sensitive columns
-* Create a duality view that lets the tablets at the gaming tables insert session records
+* Create a duality view of player documents that leaves out the sensitive columns, and lets players change only their name and favorite game
+* Read a player's night as a JSON document and as rows
+* Update a document, and watch a **Lab 1** domain reject a bad value
+* Create a duality view that lets the tablets at the gaming tables insert session records, but not change them
 * Insert a JSON document and find it in the relational tables
+* Check what each view allows, and watch it block the changes it doesn't allow
 * Watch the **Lab 1** assertion reject a bad JSON write
 
 ### Prerequisites
@@ -34,17 +37,18 @@ This lab assumes you have:
 
     ![The Players Club page for Pablo Reyes, outlined by source table: his name and member card from players, his floor host from casino_staff, and his sessions from play_sessions, with the Table column from gaming_tables and the Dealer column from dealers.](images/duality-views-player-map.png " ")
 
-    This duality view builds that document from five tables. The website greets each player with their host's full name, so the view also reads the staff table, `casino_staff`. It uses GraphQL syntax. GraphQL is a language for describing the shape of nested data, and Oracle supports a version of it for duality views. The view follows the foreign keys from **Lab 1** to nest the data. Clear the editor, paste the block, and click **Run Script** (F5).
+    This duality view builds that document from five tables. Also notice this duality view uses GraphQL syntax. GraphQL is a language for describing the shape of nested data, and Oracle supports a version of it for duality views. Clear the editor, paste the block, and click **Run Script** (F5).
 
     ```sql
     <copy>
-    -- Player documents for the website: read-only, with no sensitive columns
+    -- Player documents for the website: no sensitive columns, and players can change only their name and favorite game
     CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW player_dv AS
     players
     {
-      _id      : player_id,
-      name     : full_name,
-      tier     : loyalty_tier,
+      _id          : player_id,
+      name         : full_name @update,
+      tier         : loyalty_tier,
+      favoriteGame : favorite_game @update,
       casino_staff @unnest
       {
         host     : username,
@@ -81,9 +85,10 @@ This lab assumes you have:
     * `casino_staff` adds the player's host from **Lab 1**. `@unnest` puts the host's fields, `host` and `hostName`, directly in Pablo's document next to his name and tier, instead of in a separate object. The website reads Nina's name the same way it reads Pablo's.
     * `sessions` is an array of the player's rows in `play_sessions`. Inside each session, `@unnest` brings the table and dealer fields up beside the session's own fields.
     * The four sensitive columns from **Lab 1** aren't listed, so they aren't in the document. The website can't read or write a column the view leaves out.
-    * No table carries `@insert`, `@update` or `@delete`, so the view is read-only. That's all the website needs to display a profile. A regular view that builds JSON with SQL functions could serve this much too, and for read-only documents it's still a fine choice. The tablets in Task 2 need to write, though, and a regular JSON view can't take writes back.
+    * `@update` appears on two fields: `name` and `favoriteGame`. Those are the only things the website can change. The view has no `@insert` or `@delete`, so the website can't add or remove a player, and the tier, the host and every session stay read-only. Putting `@update` on single fields is the safe way to do this. Putting it on the whole table, as in `players @update`, would also let a player switch their floor host.
+    * Without a duality view, the website's own code would decide which fields a player may change, and every other app would have to repeat that check. A regular view that builds JSON with SQL functions can show a profile, but it can't take a player's changes back.
 
-2. Now fetch one document, the way the website does when a player signs in. Pablo Reyes, whose session the database rejected in **Lab 1**, is checking his profile. Look at what the document holds, and at what it leaves out. Clear the editor, paste the query, and click **Run Script**.
+2. Now fetch one document, the way the website does when a player signs in. Pablo Reyes is checking his profile. Look at what the document holds, and at what it leaves out. Clear the editor, paste the query, and click **Run Script**.
 
     ```sql
     <copy>
@@ -94,19 +99,82 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see one document. Pablo is `_id` 16, tier `STANDARD`, and his floor host is `nina`, with `hostName` `Nina Alvarez`. He played five sessions, all at blackjack, and lost every one. Each session names its table, game and dealer, although `play_sessions` stores only their IDs.
-
-    Each session also carries `sessionId`, `tableId` and `dealerId`, which the website never shows. A duality view must include the key of every table it reads, so the database knows which row each part of the document came from. It needs that to write a change back to the right row and to compute the `etag` below. `host` does the same job for the staff table. Leave a key out, and the database refuses to create the view with error ORA-40607.
-
-    Notice what's missing: no government ID, date of birth, home address or credit limit. Leaving columns out of a view keeps them away from this app.
-
-    The database also adds a `_metadata` field. Its `etag` guards against a quiet mistake: imagine an app where two people open the same document, and the second one's save undoes the first one's change. The `etag` is a hash value, a short code the database computes from the document's content. An app sends back the `etag` it read when it saves. If the document changed in the meantime, the codes don't match, and the database rejects the save. Apps used to prevent this by locking the rows while someone edits, which makes everyone else wait, and Pablo's document alone spans five tables. Locking can still fit better when many people edit the same data at once.
+    You should see one document. Pablo is `_id` 16, tier `STANDARD`, and his floor host is `nina`, with `hostName` `Nina Alvarez`. `favoriteGame` is null, because he hasn't picked one yet. He played five sessions, all at blackjack, and lost every one. Each session names its table, game and dealer, although `play_sessions` stores only their IDs.
 
     ![Script Output shows the player document for Pablo Reyes, with five blackjack sessions and no sensitive fields.](images/duality-views-01.png " ")
 
+3. Because a duality view stores nothing and builds each JSON document from the relational tables, you can also query the same information in SQL directly from the tables. Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- Read Pablo Reyes's night as rows: one row per session, joined across five tables
+    SELECT p.full_name    AS player,
+           p.loyalty_tier AS tier,
+           h.full_name    AS host_name,
+           g.table_name,
+           d.full_name    AS dealer,
+           TO_CHAR(s.started_at, 'HH24:MI') AS started,
+           TO_CHAR(s.ended_at, 'HH24:MI')   AS ended,
+           s.buy_in,
+           s.cash_out
+    FROM players p
+    JOIN casino_staff h  ON h.username  = p.host_username
+    JOIN play_sessions s ON s.player_id = p.player_id
+    JOIN gaming_tables g ON g.table_id  = s.table_id
+    JOIN dealers d       ON d.dealer_id = s.dealer_id
+    WHERE p.full_name = 'Pablo Reyes'
+    ORDER BY s.started_at;
+    </copy>
+    ```
+
+    You should see five rows, the same five blackjack sessions as in his document, from 20:07 to 03:39. Pablo's name, tier and host repeat on every row, because a query result is a flat grid: one row per session, with every column filled in. To show his profile from these rows, the website's own code would have to fold them into one document, with his details once and his sessions in a list. To save a document, as the tablets do in Task 2, the code would have to split it back into rows for each table. The duality view does both inside the database.
+
+    Both results came from the same rows, and nothing was copied. The document and the rows are two ways to read one copy of the data, so SQL reports and the website always see the same night.
+
+4. Duality views enable applications to insert and update data using JSON operations. Pablo opens his profile settings and picks craps as his favorite game. The website saves the change by updating his document. Clear the editor, paste the block, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- Pablo sets his favorite game on the website
+    UPDATE player_dv
+    SET data = JSON_TRANSFORM(data, SET '$.favoriteGame' = 'Craps')
+    WHERE JSON_VALUE(data, '$._id') = 16;
+    COMMIT;
+    </copy>
+    ```
+
+    Script Output shows one row updated, then the commit. The website sent a change to a JSON document, and the database turned it into an ordinary update of one column, `favorite_game`, in one row of `players`. The website never had to know which table or column holds a player's favorite game. It only ever worked with the document.
+
+5. Look for the change in the `players` table. Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- Find Pablo's favorite game in the players table
+    SELECT full_name, favorite_game
+    FROM players
+    WHERE player_id = 16;
+    </copy>
+    ```
+
+    This is the heart of a duality view: it's a JSON view you can write through, not just read. The website saved a JSON document, and the change landed in the relational table, where every SQL report and every other app already sees it. There's only one copy of Pablo's data, so nothing has to be kept in sync.
+
+
+6. Now Pablo tries to pick poker, a game the Silverleaf doesn't run. This statement should fail. Clear the editor, paste the statement, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- Pablo tries to pick a game the casino doesn't run
+    UPDATE player_dv
+    SET data = JSON_TRANSFORM(data, SET '$.favoriteGame' = 'Poker')
+    WHERE JSON_VALUE(data, '$._id') = 16;
+    </copy>
+    ```
+
+    **Expected Result:** The update fails. Script Output shows `ORA-42692: Cannot update JSON Relational Duality View 'ADMIN'.'PLAYER_DV'`, and inside it `ORA-11534`, which names the `GAME_TYPE` domain. The website only sent JSON, but the rule from **Lab 1** still checked it. Pablo's favorite game is still craps.
+
 ## Task 2: Record a session as JSON
 
-1. The website shows players their night, but it doesn't record it. Another source of data is the staff at the gaming tables. They log every session on a tablet: the player, table, dealer, times and chips. The tablet app sends each session record as a JSON document, so it needs a duality view it can write through. You name this view `rating_slip_dv`, because casinos call one session's record a rating slip. This time you write the view in SQL instead of GraphQL. Both create the same kind of view. Clear the editor, paste the block, and click **Run Script**.
+1. Another source of data is the staff and their devices at the gaming tables. They log a number of things, players give them their status cards to earn rewards which allows the casinos to track the player, table, dealer, times and chips. The tablet app sends each session record as a JSON document, so it needs a duality view it can write through. You name this view `rating_slip_dv`, because casinos call one session's record a rating slip. This time you write the view in SQL instead of GraphQL. Both create the same kind of view. Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
@@ -139,9 +207,7 @@ This lab assumes you have:
     * `players`, `gaming_tables` and `dealers` have no `WITH` clause, so they're read-only here. A session record can name an existing player, table and dealer, but can't create or change one.
     * Each `UNNEST` puts the player, table or dealer fields at the top level of the document.
 
-    The tablets get one permission, to add session records, and the view states it in two words. Letting an app write through a JSON view used to take an INSTEAD OF trigger: code, written and tested by hand, that turns each change to the view into changes to the tables. Here the database does the writing.
-
-2. Remember Pablo Reyes from **Lab 1**? At 23:15, a tablet tried to seat him at Roulette 1 with a dealer who was busy at another table, and the database rejected the record. So Pablo played craps instead, at Craps 1 with dealer Aisha Bello. When he leaves at 23:45, the Craps 1 tablet sends his session as a JSON document, with `_id` 217, the next free session number. That's why his profile in Task 1 showed only blackjack: this session hadn't been logged yet. Clear the editor, paste the block, and click **Run Script**.
+2. Now insert a session the way a tablet does, as one JSON document. This one is Pablo Reyes at Craps 1 with dealer Aisha Bello, from 23:15 to 23:45. Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
@@ -165,33 +231,108 @@ This lab assumes you have:
 
     The insert succeeds. The tablet sent one JSON document, and the database wrote it as one new row in `play_sessions`. The IDs come from the tablet's menus. Pablo is player 16, and Craps 1 and Aisha Bello are both number 8.
 
-    > **Note:** If you run this block a second time, it fails because session 217 already exists. That's expected, and you can carry on.
 
-3. Now look for the new session from both sides: as a row in `play_sessions`, and inside Pablo's player document. Clear the editor, paste both queries, and click **Run Script**.
+3. The tablet sent a JSON document, but the data now lives in the relational tables, so you can read it from either side. First, read the new session the relational way, as a row in `play_sessions`. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
-    -- Find session 217 as a table row, then count the sessions in Pablo's player document
+    -- Read Pablo's craps session as a row in the play_sessions table
     SELECT session_id, player_id, table_id, dealer_id,
            TO_CHAR(started_at, 'HH24:MI') AS started,
            TO_CHAR(ended_at, 'HH24:MI')   AS ended,
            buy_in, cash_out
     FROM play_sessions
     WHERE session_id = 217;
-
-    SELECT JSON_VALUE(data, '$.sessions.size()') AS sessions_in_document
-    FROM player_dv
-    WHERE JSON_VALUE(data, '$.name') = 'Pablo Reyes';
     </copy>
     ```
 
-    The first result is an ordinary row: player 16 at table 8 with dealer 8, from 23:15 to 23:45. The second shows that Pablo's player document now has 6 sessions, up from 5.
+    You should see one ordinary row, with the times and chips the tablet sent, and the player, table and dealer stored as IDs.
 
-    You wrote one session record, and both the table and the other document show it. There's one copy of the data, with two document shapes over it.
+4. Now read the same session through the duality view, as a JSON document. Clear the editor, paste the query, and click **Run Script**.
 
-    ![Script Output shows session 217 as a play_sessions row, then six sessions in the player document for Pablo Reyes.](images/duality-views-02.png " ")
+    ```sql
+    <copy>
+    -- Read the same session as a JSON document through the tablets' view
+    SELECT JSON_SERIALIZE(data PRETTY) AS session_document
+    FROM rating_slip_dv
+    WHERE JSON_VALUE(data, '$._id') = 217;
+    </copy>
+    ```
 
-## Task 3: Catch a bad session record written as JSON
+    ![Script Output shows Pablo Reyes's craps session as a JSON document from rating_slip_dv.](images/duality-views-02.png " ")
+
+## Task 3: Check what each app is allowed to change
+
+1. Each duality view decides what its app may do, and the database checks every write against the view. The website may change a player's name and favorite game, and nothing else. The tablets may add session records, and nothing else. These permissions are part of each view's definition, so the data dictionary records them like any other part of the schema.  Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- What each app may do through its view, table by table
+    SELECT view_name, table_name, allow_insert, allow_update, allow_delete
+    FROM user_json_duality_view_tabs
+    ORDER BY view_name, root_table DESC, table_name;
+    </copy>
+    ```
+
+    You should see nine rows, one for each table that each view reads. `PLAYER_DV` allows updates on `PLAYERS` only, and `RATING_SLIP_DV` allows inserts on `PLAY_SESSIONS` only. Every other value is false, so neither app can delete anything.
+
+2. `PLAYERS` allows updates because two of its fields do. List the website's player fields one by one. Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- The fields the website may change in a player document
+    SELECT json_key_name AS field, column_name, allow_update
+    FROM user_json_duality_view_tab_cols
+    WHERE view_name = 'PLAYER_DV' AND table_name = 'PLAYERS'
+    ORDER BY json_key_name;
+    </copy>
+    ```
+
+    You should see five rows. `name` and `favoriteGame` can be updated, and `_id` and `tier` can't. The row with no field name is `HOST_USERNAME`, the link from a player to their floor host. It doesn't appear in the document, and it's locked too, so a player can't switch hosts.
+
+3. Now test the rules. Pablo tries to make himself a VIP through the website. This statement should fail. Clear the editor, paste the statement, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- Pablo tries to change his own loyalty tier
+    UPDATE player_dv
+    SET data = JSON_TRANSFORM(data, SET '$.tier' = 'VIP')
+    WHERE JSON_VALUE(data, '$._id') = 16;
+    </copy>
+    ```
+
+    **Expected Result:** The update fails with `ORA-40940: Cannot update field 'tier' corresponding to column 'LOYALTY_TIER' of table 'PLAYERS' in JSON Relational Duality View 'PLAYER_DV': Missing UPDATE annotation or NOUPDATE annotation specified.` The `tier` field has no `@update`, so the database refuses the change.
+
+    > **Note:** In a duality view, `@insert`, `@update` and `@delete` are also called annotations, which is the word the error uses. They're different from the schema annotations in **Lab 1**: these set what a view allows.
+
+4. The sessions inside Pablo's document are read-only too. Try to change the cash-out of his first session through his player document. This statement should fail. Clear the editor, paste the statement, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- Try to change a session's cash-out through the player document
+    UPDATE player_dv
+    SET data = JSON_TRANSFORM(data, SET '$.sessions[0].cashOut' = 5000)
+    WHERE JSON_VALUE(data, '$._id') = 16;
+    </copy>
+    ```
+
+    **Expected Result:** The update fails with `ORA-40939: Cannot update table 'PLAY_SESSIONS' in JSON Relational Duality View 'PLAYER_DV': Missing UPDATE annotation or NOUPDATE annotation specified.` The website can show a session, but it can never change one.
+
+5. The tablets' view allows inserts only, so the tablets can't remove a record. Try to delete Pablo's craps session through `rating_slip_dv`. This statement should fail. Clear the editor, paste the statement, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- Try to delete session 217 through the insert-only view
+    DELETE FROM rating_slip_dv
+    WHERE JSON_VALUE(data, '$._id') = 217;
+    </copy>
+    ```
+
+    **Expected Result:** The delete fails with `ORA-40938: Cannot delete from table 'PLAY_SESSIONS' in JSON Relational Duality View 'RATING_SLIP_DV': Missing DELETE annotation or NODELETE annotation specified.` Pablo's craps session is still there.
+
+    Each app got exactly the permissions its view states, and nothing more. Without them, each app's own code would decide what it may change, and a bug or a new app could skip that check. The permissions live in the database, so they hold for every app that writes through these views, including apps the casino builds later.
+
+## Task 4: Catch a bad session record written as JSON
 
 1. At 23:25, the tablet at Baccarat 1 logs a session record for Gemma Doyle. Its dealer list is out of date and still shows the first shift, so the record names Kenji Mori. Kenji moved to Baccarat 2 at 22:00 and is dealing there now. This statement should fail. Clear the editor, paste the statement, and click **Run Script**.
 
@@ -218,7 +359,7 @@ This lab assumes you have:
 
     Kenji has sessions at Baccarat 2 until 23:57, so this session would put him at two tables at once.
 
-    The website never wrote SQL against `play_sessions`, and it doesn't know the rule exists. The duality view turned the document into a row, and the **Lab 1** assertion checked it. The rule lives in the database, so JSON apps can't get around it either. Had the tablets saved their records to a separate document database, Gemma's record would have gone in, because the assertion only checks the casino's tables.
+    The tablet never wrote SQL against `play_sessions`, and it doesn't know the rule exists. The duality view turned the document into a row, and the **Lab 1** assertion checked it. The rule lives in the database, so JSON apps can't get around it either. Had the tablets saved their records to a separate document database, Gemma's record would have gone in, because the assertion only checks the casino's tables.
 
     ![Script Output shows error ORA-08601 for the JSON session record that names Kenji Mori at Baccarat 1.](images/duality-views-03.png " ")
 
@@ -226,9 +367,9 @@ This lab assumes you have:
 
 The Silverleaf Casino's website and tablets now run on the tables you built in **Lab 1**. Pablo's profile came back as one JSON document built from five tables. His craps session went in as a JSON document and landed as one row. Neither app needed code to turn tables into documents or back, and there's no second copy of the night to keep in step.
 
-Because the data is stored once, every app sees the same night. The session the Craps 1 tablet logged showed up in Pablo's profile straight away. Each view also decides what its app may do. The website can only read, and never sees the sensitive columns. The tablets can only add session records. And every document carries an `etag`, so two people can't quietly overwrite each other's changes.
+Because the data is stored once, every app sees the same night. The session the Craps 1 tablet logged showed up in Pablo's profile straight away. Each view also decides what its app may do. The website can change only a player's name and favorite game, and never sees the sensitive columns. The tablets can only add session records. The data dictionary lists those permissions, and every write that went past them failed. And every document carries an `etag`, so two people can't quietly overwrite each other's changes.
 
-The rules held, too. Gemma Doyle's record broke the **Lab 1** assertion, so the database rejected it, even though the tablet only ever sent JSON. That finishes the build: every way into the casino's data follows the same rules. In **Lab 3**, Vera starts investigating.
+The rules held, too. Pablo's pick of poker broke the **Lab 1** `game_type` domain, and Gemma Doyle's record broke the **Lab 1** assertion. The database rejected both, even though the website and the tablet only ever sent JSON. That finishes the build: every way into the casino's data follows the same rules. In **Lab 3**, Vera starts investigating.
 
 You may now **proceed to the next lab**.
 
