@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In Lab 4, Maya fixed one Wikimedia search query. That was useful, but her engineering lead asks a better question:
+In Lab 1, Maya fixed one Wikimedia search query. That was useful, but her engineering lead asks a better question:
 
 What if this is not just one bad query? What if the right answer is usually close, but not always first?
 
@@ -27,13 +27,13 @@ In this lab, you will:
 
 ### Prerequisites
 
-This lab assumes you completed Lab 4 and are signed in to the Trusted Answer Search Admin app.
+This lab assumes you completed Lab 1 and are signed in to the Trusted Answer Search Admin app.
 
 > **Learn more:** For the underlying product model, see the Oracle Database documentation for [Trusted Answer Search overview](https://docs.oracle.com/en/database/oracle/oracle-database/26/otasc/trusted-answer-search-overview.html). The sections on target actions, target inputs, target value sets, feedback-aware relevance, and change management are especially relevant to this lab.
 
 ## Task 1: See Portal Feedback in Admin
 
-In Lab 4, the user left feedback in the published portal. Maya now checks whether that signal reached the admin experience.
+In Lab 1, the user left feedback in the published portal. Maya now checks whether that signal reached the admin experience.
 
 1. In the Admin app, click **Dashboard**.
 2. Review the feedback regions.
@@ -70,7 +70,7 @@ Maya starts with evidence before making more changes.
 3. Select the search-space version you want to evaluate.
 
     * Use the **Published** version to see the current baseline.
-    * Use your **Draft** version to evaluate the draft you created in Lab 4.
+    * Use your **Draft** version to evaluate the draft you created in Lab 1.
 
 4. Click **Run Tests**.
 5. Keep the available query sources selected, such as:
@@ -132,7 +132,7 @@ That means the system often knows the right neighborhood, but users still have t
     * Expected target rank.
     * Target input mismatches, if any.
 
-For this LiveLab story, use the same near miss from Lab 4:
+For this LiveLab story, use the same near miss from Lab 1:
 
 ```text
 <copy>
@@ -190,7 +190,7 @@ This teaches the system that this exact analyst wording belongs to the total pag
 Now Maya adds language that helps future users who ask the same question differently.
 
 1. Stay on the `Total Page Views - All Projects` target.
-2. In the **Descriptions** region, click **Add Description** if you did not already add this in Lab 4.
+2. In the **Descriptions** region, click **Add Description** if you did not already add this in Lab 1.
 3. Enter:
 
     ```text
@@ -296,7 +296,7 @@ Trusted Answer Search returns the target action metadata. The application decide
 
 1. In the left navigation menu, click **Search History**.
 2. Review recent queries.
-3. Confirm that the query you used in Lab 4 appears with feedback indicators.
+3. Confirm that the query you used in Lab 1 appears with feedback indicators.
 4. In the left navigation menu, click **Additional Feedback**.
 5. Review any free-text feedback captured from users.
 

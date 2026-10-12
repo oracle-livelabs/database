@@ -6,12 +6,6 @@ Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless
 
 **Estimated time:** 5 minutes
 
-### Objectives
-
-* Choose the green button path or the manual walkthrough path.
-* Gather the values needed for manual installation.
-* Confirm where to start the hands-on labs.
-
 ### Prerequisites
 
 * The **Admin URL** from your LiveLabs reservation or Terraform `admin_url` output.
@@ -19,7 +13,7 @@ Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless
 * The `TASADMIN` username.
 * The `TASADMIN` password.
 
-## Task 1
+## Task 1: Checkup
 
 Confirm that you have these values:
 

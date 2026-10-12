@@ -181,7 +181,7 @@ Before Maya fixes anything as an administrator, she captures the user signal fro
 
 This does not require Maya to rebuild the app or retrain a model. The portal captured real user feedback that administrators can review.
 
-In Lab 5, you will see this same feedback show up in the Admin app.
+In Lab 2, you will see this same feedback show up in the Admin app.
 
 ## Task 6: Create a Governed Draft
 

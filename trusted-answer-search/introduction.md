@@ -6,13 +6,9 @@ Welcome to **Make Search Trusted, Faster, and Cheaper on your Application with T
 
 Most enterprise applications already know the right answers. The problem is that users do not always know the exact report name, filter value, URL pattern, or navigation path. Trusted Answer Search maps natural-language questions to trusted application targets and validated inputs, so users get the right action instead of a creative paragraph.
 
-This workshop supports two paths:
-
-* **Green button path:** your environment is already provisioned. Start at **Lab 4** and go straight to the product walkthrough.
-
 **Estimated Workshop Time:**
 
-* Green button path: 35 minutes.
+* 35 minutes.
 
 ### Objectives
 
