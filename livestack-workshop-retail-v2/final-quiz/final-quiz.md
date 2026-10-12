@@ -7,7 +7,7 @@ badge: images/badge.png
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect Seer Sporting Goods' retail decisions to the database evidence explored in Labs 1–8. Each question covers one part of the team's journey, from Jessica's connected query to Nina's inspectable assistant.
+Use this scored quiz to check how Seer Sporting Goods answers retail questions with the database capabilities and results covered in Labs 1–8. Each question covers one team member’s work, from Jessica’s dashboard query to Nina’s assistant.
 
 ### Objectives
 
@@ -81,7 +81,7 @@ Estimated Time: **5 minutes**
 
 2. Review the explanations. A score of **75% or higher**, meaning **at least six of eight** correct answers, unlocks the Retail Workshop completion badge.
 
-Jessica and the team have followed one connected investigation: product signals, order documents, semantic matches, creator relationships, fulfillment options, model scores, natural-language questions, and an assistant whose work can be inspected. Use the evidence behind each result when deciding what the retail operation should do next.
+Jessica and the team have followed one connected investigation: product signals, order documents, semantic matches, creator relationships, fulfillment options, model scores, natural-language questions, and an assistant whose work can be inspected. Check the source records, calculations, and limitations of each result before deciding what the retail operation should do next.
 
 ## Acknowledgements
 

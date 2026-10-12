@@ -6,7 +6,7 @@ Thomas Brune is an application developer at Seer Sporting Goods. He and his team
 
 Thomas needs an order and its items as one JSON payload. It should include the customer identifier, order status and item details, with room for changing application settings. The data already lives in Oracle AI Database. His question is how to give the application that document shape while retaining relational keys, SQL, transactions and database controls.
 
-Thomas asks Jessica, the DBA, to walk through three approaches. They start with a JSON value in a relational table, then a collection of application-owned documents, and finally a JSON Relational Duality View over the existing order rows. Each approach has a different ownership model; choosing one for a screen does not require choosing it for the whole application.
+Thomas asks Jessica, the DBA, to walk through three approaches. They start with a JSON value in a relational table, then a collection of application-owned documents, and finally a JSON Relational Duality View over the existing order rows. Each approach differs in where it stores data and how the application accesses it. Thomas can choose a different approach for each feature.
 
 ![Thomas Brune, application developer](images/thomas.png)
 
@@ -20,7 +20,7 @@ Thomas asks Jessica, the DBA, to walk through three approaches. They start with 
 
 </details>
 
-Thomas's order feature needs a shape such as this. The example is a document illustration; you will insert the complete workshop payload in Task 5.
+This example shows the JSON structure Thomas’s order feature needs. You will insert the complete workshop document in Task 5.
 
 ```json
 {
@@ -229,11 +229,11 @@ Thomas now tests the payload his order feature should consume. `ORDERS_DV` suppl
 
 2. Expand the JSON value in SQL Worksheet and compare its shape with the collection document.
 
-    The application sees the document contract defined by the view. Jessica still sees relational rows. The collection from Task 2 stores its own document; this duality view reads the current order and item records each time.
+    The application receives the JSON structure defined by the view. Jessica can query the same data as relational rows. The collection from Task 2 stores its own document; this duality view reads the current order and item records each time.
 
 ## Task 4: Enable document inserts and updates
 
-The existing duality view allows updates, but Thomas also needs to accept a new order with nested items. Jessica changes the view's write contract while the database continues to enforce the underlying relational keys and data types.
+The existing duality view allows updates, but Thomas also needs to accept a new order with nested items. Jessica enables inserts through the view while the database continues to enforce the underlying relational keys and data types.
 
 1. Inspect the current document capabilities.
 
@@ -488,7 +488,7 @@ Thomas does not need one JSON model for every application feature. He can choose
 | JSON Collection Table | The application owns a set of documents. | Saved shopping drafts whose structure can evolve. | One independent document per DATA row in the collection. |
 | JSON Relational Duality View | Existing relational rows need an application document shape. | Submit an order with items and update its status. | ORDERS and ORDER_ITEMS; the view defines the document contract. |
 
-For the order feature, `ORDERS_DV` gives Thomas the payload he needs while Jessica retains relational constraints, SQL and control of the write contract. The next question is which other products and customer orders relate to an emerging signal. Gilly will connect a plain-language search to those existing records.
+For the order feature, `ORDERS_DV` gives Thomas the payload he needs while Jessica retains relational constraints, SQL access and control over which writes the view permits. The next question is which other products and customer orders relate to an emerging signal. Gilly will connect a plain-language search to those existing records.
 
 ## Acknowledgements
 

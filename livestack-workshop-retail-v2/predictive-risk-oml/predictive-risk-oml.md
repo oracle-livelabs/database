@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Otto Spencer is Seer Sporting Goods' data scientist. His team supplies predictions for analytics charts and dashboards. The Monday review now has product, creator, and fulfillment evidence. Otto wants to add a demand watchlist that keeps the model's output beside the activity behind it.
+Otto Spencer is Seer Sporting Goods’ data scientist. His team builds models for analytics charts and dashboards. The Monday review already includes product activity, creator relationships, and fulfillment options. Otto wants to add a demand watchlist that shows each model score alongside the activity used to interpret it.
 
 A business user should be able to see which products the model flags, inspect their sales and social activity, and decide where further review is useful. Otto already has those values in Oracle AI Database. Training and scoring in the database lets SQL join a prediction directly to the product details the team recognizes.
 
@@ -17,7 +17,7 @@ In this lab, you inspect the training data, optionally compare algorithms with A
 >
 > - A **feature** is an input, such as category, price, social activity, or sales.
 >
-> - The **target** is the value learned during training. Here, `SURGE_LABEL` contains the derived labels `SURGE` and `STABLE`.
+> - The **target** is the outcome the model is trained to predict. Here, `SURGE_LABEL` contains the derived labels `SURGE` and `STABLE`.
 >
 > - **Classification** predicts a label. `PREDICTION` returns the selected label; `PREDICTION_PROBABILITY` returns a model probability for a specified class.
 >
@@ -141,15 +141,15 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
 
 1. Open **Machine Learning** from Database Actions. Sign in with the workshop username and password from **View Login Info** if requested.
 
-    ![Lab 6 Task 2 Step 1](images/oml-location.png)
+    ![Machine Learning in the Database Actions menu](images/oml-location.png)
 
 2. Select **AutoML**.
 
-    ![Lab 6 Task 2 Step 3](images/automl-location.png)
+    ![AutoML on the Oracle Machine Learning home page](images/automl-location.png)
 
 3. Create a new experiment with these settings:
 
-    ![Lab 6 Task 2 Step 3](images/create-oml.png)
+    ![Create button on the AutoML Experiments page](images/create-oml.png)
 
     | Setting | Value |
     | --- | --- |
@@ -159,7 +159,7 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
     | Prediction type | `Classification` |
     | Case ID | `PRODUCT_ID` |
 
-    ![Lab 6 Task 2 Step 3](images/data-source-one.png)
+    ![Retail Product Demand Surge experiment settings](images/data-source-one.png)
 
     **Note:** The **Predict**, **Prediction Type**, and **Case ID** fields become available after you enter a data source.
 
@@ -171,7 +171,7 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
     4. Select `OML_DEMAND_TRAINING_V` from the **Table** list.
     5. Select **OK**.
 
-    ![Lab 6 Task 2 Step 3](images/data-source-two.png)
+    ![LLUSER schema and OML_DEMAND_TRAINING_V selected as the data source](images/data-source-two.png)
 
     Select `SURGE_LABEL` for **Predict**, `Classification` for **Prediction Type**, and `PRODUCT_ID` for **Case ID**.
 
@@ -181,11 +181,11 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
 
 5. Review the leaderboard and model details.
 
-    ![Lab 6 Task 2 Step 3](images/oml-ranking.png)
+    ![AutoML leaderboard and model features](images/oml-ranking.png)
 
     Open a leading model’s details and inspect the confusion matrix. Compare its results for both `SURGE` and `STABLE`. The training set is imbalanced—Task 1 shows 174 `SURGE` examples and 13 `STABLE` examples—so a high overall accuracy could hide weak performance on the smaller `STABLE` class. Compare metrics such as balanced accuracy and F1.
 
-    Inspect another model, including a Generalized Linear Model if the experiment generated one. Compare its errors and predicted-class coverage. Review feature impact when available; it describes the fitted model, not a causal effect on demand.
+    Inspect another model, including a Generalized Linear Model if the experiment generated one. Compare its errors and whether it predicts examples from both classes. Review feature impact when available; it describes the fitted model, not a causal effect on demand.
 
     The workshop derives `SURGE_LABEL` from activity values. AutoML evaluates candidates against those labels; its results do not establish accuracy on future demand.
 
@@ -197,9 +197,9 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
     | Class-sensitive metrics | How does it perform on the smaller `STABLE` class? |
     | Feature impact | Which inputs influence this fitted model? |
 
-The AutoML experiment provides evidence for its own comparison. Task 3 uses a fixed Generalized Linear Model recipe so everyone can create the same named model; it does not assume that this algorithm won the AutoML experiment.
+Use the AutoML results to compare the models in your experiment. Task 3 creates a named Generalized Linear Model with fixed settings; it does not use the experiment’s winning model.
 
-## Task 3: Create the example model in SQL Developer Web
+## Task 3: Create the example model in SQL Worksheet
 
 Otto now creates `RETAIL_DEMAND_MODEL`, a model that a dashboard query can call repeatedly. The settings specify a Generalized Linear Model, automatic data preparation, and a fixed random seed.
 
@@ -221,7 +221,7 @@ Otto now creates `RETAIL_DEMAND_MODEL`, a model that a dashboard query can call 
 
     **Expected output: Existing Retail models**
 
-    ![SQL Worksheet showing the query and result for Task 3: Create the example model in SQL Developer Web, SQL block 4](images/sql-lab-6-04.jpg)
+    ![SQL Worksheet showing the query and result for Task 3: Create the example model in SQL Worksheet, SQL block 4](images/sql-lab-6-04.jpg)
 
     The existing `DEMAND_SURGE_MODEL` uses Random Forest. It remains available for the comparison in Task 4. The new `RETAIL_DEMAND_MODEL` is a separate example.
 
@@ -270,7 +270,7 @@ Otto now creates `RETAIL_DEMAND_MODEL`, a model that a dashboard query can call 
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Create the example model in SQL Developer Web, SQL block 5](images/sql-lab-6-05.jpg)
+    ![SQL Worksheet showing the query and result for Task 3: Create the example model in SQL Worksheet, SQL block 5](images/sql-lab-6-05.jpg)
 
     **Expected output: Settings created and model training completed**
 
@@ -290,7 +290,7 @@ Otto now creates `RETAIL_DEMAND_MODEL`, a model that a dashboard query can call 
 
     **Expected output: The named classification model**
 
-    ![SQL Worksheet showing the query and result for Task 3: Create the example model in SQL Developer Web, SQL block 6](images/sql-lab-6-06.jpg)
+    ![SQL Worksheet showing the query and result for Task 3: Create the example model in SQL Worksheet, SQL block 6](images/sql-lab-6-06.jpg)
 
     Otto now has a database model that SQL can score without exporting the source rows.
 
@@ -486,7 +486,7 @@ Otto creates a separate scoring table for twelve products. This is a synthetic d
 
     **Expected output: Zero to five disagreement rows**
 
-    An empty result means no disagreements were found in the rows and labels examined by this query. The model is being applied to training data with derived labels, so that does not establish its accuracy on new business outcomes. Otto would need independent evaluation data and a clear business target before deploying the score as a forecasting decision.
+    An empty result means no disagreements were found in the rows and labels examined by this query. The model is being applied to training data with derived labels, so that does not establish its accuracy on new business outcomes. Otto would need independent evaluation data and a clear business target before using the score to guide demand forecasts.
 
     </details>
 

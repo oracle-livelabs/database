@@ -4,13 +4,13 @@
 
 Nina Patel is a retail analyst at Seer Sporting Goods. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
-Jessica, the DBA, has configured a Select AI profile for the retail schema. Nina can ask a question in ordinary language. Select AI uses the profile and database metadata to generate SQL, run a question, or explain the returned rows.
+Jessica, the DBA, has configured a Select AI profile for the retail schema. Nina can ask a question in ordinary language. Select AI uses the profile and database metadata to generate SQL from a question, execute a generated query, or explain its results.
 
 Nina reviews the generated SQL because a model can choose an unsuitable revenue calculation or add a filter the question did not request. She asks, inspects, runs, and refines the question before using the answer in a business review.
 
 In this lab, you connect the profile to the retail tables, inspect generated SQL, compare the answer with a direct revenue query, and improve the question for a more useful result.
 
-![nina](images/nina.png)
+![Jessica, DBA, and Nina, retail analyst](images/nina.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -83,7 +83,7 @@ Use the existing `GENAI` profile in your `LLUSER` schema. You will inspect its s
 
 Nina's questions require products, orders, order items, and customers. Use the current schema name so the same block works in each learner reservation.
 
-1. Set the four-table list.
+1. Set the four-table list. Select the complete block, including /, and use Run Script.
 
     ```sql
     <copy>
@@ -102,7 +102,7 @@ Nina's questions require products, orders, order items, and customers. Use the c
 
     **Expected output:** PL/SQL procedure successfully completed.
 
-2. Supply all four tables as context and enforce the object list for generated SQL.
+2. Supply all four tables as context and enforce the object list for generated SQL. Select the complete block, including /, and use Run Script.
 
     ```sql
     <copy>
@@ -274,7 +274,7 @@ Nina turned a retail question into SQL, reviewed the statement, ran the question
 
 Select AI reduces the SQL a business user must write while keeping the query, database privileges, and business calculation visible. The model helps express a question; Nina still decides whether the SQL and answer address it.
 
-Jessica and Nina now have the ingredients for a defined assistant. In the next lab, they give an agent a role, a task, and one SQL tool, then inspect the execution history behind its answer.
+Jessica and Nina will now use the configured profile to build an assistant. In the next lab, they give an agent a role, a task, and one SQL tool, then inspect the execution history behind its answer.
 
 ## Next Steps
 

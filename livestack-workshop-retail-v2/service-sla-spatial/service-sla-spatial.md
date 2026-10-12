@@ -8,7 +8,7 @@ Oracle AI Database already holds customer and fulfillment-center points, demand-
 
 Moon wants a business-user dashboard to answer a practical question:
 
-> A customer needs a product. **Which nearby centers have stock worth reviewing for fulfillment?**
+> A customer needs a product. **Which nearby centers have the product on hand?**
 
 In this lab, you start with a stored point, compare distances, and join location to product inventory. You will also compare two demand regions using their stored geometry.
 
@@ -84,7 +84,7 @@ Moon starts with the simplest question: **where are the centers?** The same loca
 
 ## Task 2: Find nearby centers and compare demand regions
 
-Moon first ranks active centers for one customer. She then changes the question from a customer point to a regional polygon so the team can review both kinds of location evidence.
+Moon first ranks active centers for one customer. She then changes the question from a customer point to a regional polygon so the team can compare distances to a customer and to a region.
 
 1. Find the five nearest active centers to customer `1`:
 
@@ -230,7 +230,7 @@ Distance alone cannot tell a planner where to fulfill an order. Moon adds the pr
     <details>
     <summary><strong>Challenge answer: distance and on-hand stock are separate signals</strong></summary>
 
-    Minneapolis North Central ranks first for customer `2`, at 358.5 miles with 494 units of the selected product on hand. The location changes the ranking; the product stays the same. Review available-to-promise quantity, active status, workload, and the delivery promise before allocating stock.
+    Minneapolis North Central ranks first for customer `2`, at 358.5 miles with 494 units of the selected product on hand. The location changes the ranking; the product stays the same. Review the quantity available to promise to the customer, center active status, workload, and promised delivery date before allocating stock.
 
     Run this solution to compare:
 
@@ -272,7 +272,7 @@ Moon moved from stored points to ranked centers, then added product stock to the
 
 Oracle Spatial keeps the calculation beside the customer, center, product, and inventory rows. SQL returns the geometry and operating details needed for review. The team can explain its options without reconciling a separate map database with an inventory report.
 
-Moon hands the location and stock evidence to Otto, who will put a demand score beside product activity so the team can examine which products deserve attention.
+Otto will now add model scores to the product activity data to help the team review demand.
 
 ## Next Steps
 

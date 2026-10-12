@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Bob Green is a seasoned graph specialist at Seer Sporting Goods. The Monday demand review has already connected product searches with customer and order data. Bob now wants to understand the creator relationships behind the social signals.
+Bob Green is a graph specialist at Seer Sporting Goods. The Monday demand review has already connected product searches with customer and order data. Bob now wants to understand the creator relationships behind the social signals.
 
 His starting point is simple: one post does not show the whole network. A creator can promote a brand, connect to another creator, or share a brand relationship with someone the team already follows. Bob needs to make those recorded relationships easy to inspect before the team decides where to focus its attention.
 
-In this lab, you will use Bob's approach in two views. Start with ordinary SQL, then use SQL Property Graph Queries (SQL/PGQ) to express the same relationships as paths. Finally, open Graph Studio and explore the connections as an interactive network. SQL supplies a repeatable evidence table; Graph Studio helps a reviewer follow the relationships visually.
+Start with relational SQL, then use SQL Property Graph Queries (SQL/PGQ) to express the same creator and brand relationships as paths. Finally, explore them in Graph Studio. Compare the SQL results with the relationships shown in the interactive graph.
 
 ![Bob Green, graph specialist](images/image-graph.png)
 
@@ -119,11 +119,11 @@ Jessica has written a query that ranks direct creator connections by their store
 
     ![SQL Worksheet showing the query and result for Task 1: Follow creator connections with SQL, SQL block 2](images/sql-lab-4-02.jpg)
 
-    The first branch follows one creator link; the second follows two. `UNION` combines those alternatives. The outer joins attach the brand and promoter to each reached creator. The intermediate creator join keeps the path subject to the same row visibility as the graph query you will run later.
+    The first branch follows one creator link; the second follows two. `UNION` combines those alternatives. The joins in the outer query attach the brand and promoter to each reached creator. The intermediate creator join keeps the path subject to the same row visibility as the graph query you will run later.
 
 3. Review how the SQL changes with the path length.
 
-    Another hop requires another connection join. Bob can express the same variable path length directly in a graph pattern, while keeping these relational tables as the source of the evidence.
+    Another hop requires another connection join. Bob can express the same variable path length directly in a graph pattern, while querying the same relational tables.
 
 ## Task 2: Read the same connections as a graph
 
@@ -176,7 +176,7 @@ Bob has already defined the `INFLUENCER_NETWORK` property graph over the Retail 
     | From Creator and To Creator | The same creator handles in the same order |
     | Link and Strength | The same relationship type and stored strength |
 
-    The question and evidence stay the same. Bob changes how the query expresses the relationship.
+    Both queries return the same connections and properties. The graph version expresses each connection as a path.
 
 ## Task 3: Trace brand relationships through the network
 
@@ -330,15 +330,15 @@ After answering precise questions with SQL, Bob opens a visual map so the team c
 
 2. On **Development**, select **Graph Studio** and click **Open**. If prompted, sign in with the workshop username and password from **View Login Info**.
 
-    ![Lab 4 Task 5 Step 1](images/graph-studio-location.png)
+    ![Graph Studio in the Database Actions Development menu](images/graph-studio-location.png)
 
 3. Open **Notebooks**. Download [retail-creator-network-graph-studio.dsnb](files/retail-creator-network-graph-studio.dsnb). If your browser displays the file, use **Save Link As** to save it locally.
 
-    ![Lab 4 Task 5 Step 2](images/notebooks-location.png)
+    ![Notebooks in the Graph Studio navigation menu](images/notebooks-location.png)
 
 4. Click **Import**, select or drag the downloaded file into the import window, and click **Import**. Open **Retail Creator Network**.
 
-    ![Lab 4 Task 5 Step 3](images/import-location.png)
+    ![Import button on the Graph Studio Notebooks page](images/import-location.png)
 
 5. Read the opening paragraph. The main notebook uses `%sql` paragraphs against `LLUSER.INFLUENCER_NETWORK`, the same database graph used in SQL Worksheet. The optional final section explains the separate in-memory PGX workflow.
 
@@ -385,7 +385,7 @@ Bob followed direct creator connections, extended the search over several hops, 
 
 Graph Studio presents the same recorded relationships as an interactive network. A reviewer can inspect a creator, follow a connection, and explain why two creators appear in the same brand review. These paths add context to the product signals from the previous lab.
 
-Bob hands the relationship context to Moon, whose operational question is where Seer Sporting Goods can review fulfillment options for products receiving attention.
+Moon will now compare fulfillment-center locations and stock for the products the team is reviewing.
 
 ## Appendix: How the property graph maps the Retail tables
 

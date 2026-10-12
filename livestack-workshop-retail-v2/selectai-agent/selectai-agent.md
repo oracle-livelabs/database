@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Nina Patel is a retail analyst at Seer Sporting Goods. She has used Select AI to ask one retail question at a time. That works for a quick answer, but her customer-review screen needs a repeatable assistant that can answer a request through a defined database capability.
+Nina Patel is a retail analyst at Seer Sporting Goods. She has used Select AI for individual questions. Her review screen now needs an assistant that uses an approved SQL tool to answer questions about products and orders.
 
 Jessica, the DBA, gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the retail tables configured in the previous lab. The profile supplies the object scope, and the database user's privileges still apply when the generated SQL runs.
 
@@ -24,7 +24,7 @@ In this lab, you create the agent objects, connect the agent to that SQL tool, a
 - Confirm that the GENAI profile and Retail object list from Lab 7 are available.
 - Register the SQL tool and create Nina's agent, task, and team.
 - Run a retail question while retaining its conversation ID across worksheet requests.
-- Inspect the exact team's status and all recorded tool invocations.
+- Inspect the matching team execution’s status and all recorded tool calls.
 - Compare the answer with the direct revenue evidence from Lab 7.
 
 Estimated Time: **15 minutes**
@@ -33,10 +33,10 @@ Estimated Time: **15 minutes**
 
 | Step | Retail focus |
 | --- | --- |
-| Business Problem | Nina needs an assistant whose retail answers can support a customer-review screen. |
-| Technical Challenge | The request must use an approved database capability and leave inspectable execution evidence. |
+| Business Problem | Nina needs an assistant that answers product and order questions for a review screen. |
+| Technical Challenge | The assistant must use the approved SQL tool and record its activity for review. |
 | Persona Focus | You follow Nina and Jessica as they turn a Select AI question into a defined assistant. |
-| What You Will See | Agent setup, a team answer, and history correlated with the exact request. |
+| What You Will See | Agent setup, an answer, and execution history matched to the request. |
 | Database Capability | Select AI Agent, DBMS_CLOUD_AI_AGENT, AI profiles, and a built-in SQL tool. |
 | Outcome | The application can call a retail assistant whose result and tool activity Nina can review. |
 
@@ -44,7 +44,7 @@ Persona focus: You are Nina Patel, the retail analyst, working with Jessica to m
 
 > **Prerequisite:** Complete [Lab 7: Ask Retail Questions with Select AI](?lab=selectai). This lab uses its GENAI profile, enforced four-table object list, and direct revenue reference query.
 
-> **SQL Worksheet reminder:** Use [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet). Run each block separately. Open the full CLOB value when an answer is longer than the result cell.
+> **SQL Worksheet reminder:** Use [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet). Run each block separately. For PL/SQL blocks ending in /, select the complete block and use Run Script. Open the full CLOB value when an answer is longer than the result cell.
 
 ## Task 1: Check the profile and table access
 
@@ -390,7 +390,7 @@ In Lab 7, Nina used Select AI to turn individual questions into SQL. Here she de
 
 The database still supplies the product and order facts. The profile determines the tool's configured object scope, database privileges control access, and the history records the activity. Instructions guide the agent; the recorded run and the reference query give the team evidence to assess the result.
 
-The team’s retail investigation now connects Jessica’s data query, Thomas’s order document, Gilly’s product matches, Bob’s creator relationships, Moon’s fulfillment options, Otto’s model scores, and Nina’s reviewable questions and assistant activity.
+The team has reviewed products from several perspectives: Jessica combined the data, Thomas presented orders as JSON, Gilly found related products, Bob traced creator relationships, Moon compared fulfillment options, Otto added model scores, and Nina checked AI-assisted answers and tool activity.
 
 ## Appendix: Reset the workshop objects
 
