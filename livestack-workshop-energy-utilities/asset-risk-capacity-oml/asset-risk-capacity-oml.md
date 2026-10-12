@@ -33,8 +33,6 @@ Train a model in Oracle AI Database to classify services as `SURGE` or `STABLE`,
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 ## Task 1: Read the training data
@@ -97,7 +95,7 @@ AutoML takes several minutes. Skip to Task 3 to focus on training and scoring wi
     | Prediction type | `Classification`        |
     | Case ID         | `PRODUCT_ID`            |
 
-    Select **Start**, then **Faster Results**, and wait for the model leaderboard. Runtime varies; the validation run completed in about three minutes.
+    Select **Start**, then **Faster Results**, and wait for the model leaderboard. Runtime varies and can take several minutes.
 
     ![Utility Demand Surge experiment settings](images/cap-043.png)
 

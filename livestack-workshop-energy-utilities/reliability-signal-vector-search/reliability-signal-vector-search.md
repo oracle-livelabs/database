@@ -33,8 +33,6 @@ Review her implementation: create service embeddings, rank matches by meaning, a
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **Schema names:** `PRODUCTS` stores utility services and supplies; `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS` link them to requests and service points.
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.

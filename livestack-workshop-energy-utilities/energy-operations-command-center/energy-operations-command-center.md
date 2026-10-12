@@ -16,8 +16,6 @@ Build the SQL behind her Energy Operations Command Center. One query combines re
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 ## Task 1: Run a converged risk investigation
@@ -37,76 +35,74 @@ The query intentionally crosses four data models:
 
 2. Run the query:
 
+    ```sql
     <copy>
-```sql
-<copy>
-WITH service_risk AS (
-    SELECT us.utility_service_id, us.service_name,
-           us.utility_operator_or_partner, us.utility_category,
-           COUNT(DISTINCT rs.signal_id) AS high_criticality_signals,
-           ROUND(AVG(rs.criticality_score), 1) AS avg_criticality
-    FROM reliability_load_signals_v rs
-    JOIN post_product_mentions ppm ON ppm.post_id = rs.signal_id
-    JOIN utility_services_v us ON us.utility_service_id = ppm.product_id
-    WHERE rs.criticality_score >= 80
-    GROUP BY us.utility_service_id, us.service_name,
-             us.utility_operator_or_partner, us.utility_category
-), semantic_match AS (
-    SELECT pe.product_id,
-           ROUND(1 - VECTOR_DISTANCE(
-             pe.embedding,
-             VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2
-               USING 'gas pipeline pressure variance and leak response' AS DATA),
-             COSINE), 4) AS semantic_similarity
-    FROM product_embeddings pe
-), request_activity AS (
-    SELECT jt.service_supply_id,
-           COUNT(DISTINCT jt.request_id) AS active_requests,
-           SUM(jt.quantity) AS requested_units
-    FROM utility_service_requests_dv d
-    CROSS APPLY JSON_TABLE(d.data, '$' COLUMNS (
-        request_id NUMBER PATH '$._id',
-        request_status VARCHAR2(30) PATH '$.requestStatus',
-        NESTED PATH '$.lineItems[*]' COLUMNS (
-            service_supply_id NUMBER PATH '$.serviceSupplyId',
-            quantity NUMBER PATH '$.quantity'
-        )
-    )) jt
-    WHERE jt.request_status IN ('pending', 'confirmed', 'processing')
-    GROUP BY jt.service_supply_id
-), nearest_field_site AS (
-    SELECT fc.center_name, fc.city, fc.state_province,
-           dr.region_name, dr.demand_index,
-           ROUND(SDO_GEOM.SDO_DISTANCE(
-             fc.location, dr.boundary, 0.005, 'unit=KM'), 2) AS distance_km
-    FROM fulfillment_centers fc
-    CROSS JOIN demand_regions dr
-    WHERE dr.region_name = 'Houston Metro'
-      AND fc.is_active = 1
-      AND fc.location IS NOT NULL
-      AND dr.boundary IS NOT NULL
-    ORDER BY SDO_GEOM.SDO_DISTANCE(
-               fc.location, dr.boundary, 0.005, 'unit=KM'), fc.center_id
-    FETCH FIRST 1 ROW ONLY
-)
-SELECT sr.service_name, sr.utility_operator_or_partner,
-       sr.utility_category, sr.high_criticality_signals,
-       sr.avg_criticality, sm.semantic_similarity,
-       NVL(ra.active_requests, 0) AS active_requests,
-       NVL(ra.requested_units, 0) AS requested_units,
-       nfs.center_name AS nearest_field_site,
-       nfs.city || ', ' || nfs.state_province AS field_site_location,
-       nfs.region_name, nfs.demand_index, nfs.distance_km
-FROM service_risk sr
-LEFT JOIN semantic_match sm ON sm.product_id = sr.utility_service_id
-LEFT JOIN request_activity ra ON ra.service_supply_id = sr.utility_service_id
-CROSS JOIN nearest_field_site nfs
-ORDER BY sm.semantic_similarity DESC NULLS LAST,
-         sr.high_criticality_signals DESC, sr.utility_service_id
-FETCH FIRST 10 ROWS ONLY;
-</copy>
-```
-</copy>
+    WITH service_risk AS (
+        SELECT us.utility_service_id, us.service_name,
+               us.utility_operator_or_partner, us.utility_category,
+               COUNT(DISTINCT rs.signal_id) AS high_criticality_signals,
+               ROUND(AVG(rs.criticality_score), 1) AS avg_criticality
+        FROM reliability_load_signals_v rs
+        JOIN post_product_mentions ppm ON ppm.post_id = rs.signal_id
+        JOIN utility_services_v us ON us.utility_service_id = ppm.product_id
+        WHERE rs.criticality_score >= 80
+        GROUP BY us.utility_service_id, us.service_name,
+                 us.utility_operator_or_partner, us.utility_category
+    ), semantic_match AS (
+        SELECT pe.product_id,
+               ROUND(1 - VECTOR_DISTANCE(
+                 pe.embedding,
+                 VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2
+                   USING 'gas pipeline pressure variance and leak response' AS DATA),
+                 COSINE), 4) AS semantic_similarity
+        FROM product_embeddings pe
+    ), request_activity AS (
+        SELECT jt.service_supply_id,
+               COUNT(DISTINCT jt.request_id) AS active_requests,
+               SUM(jt.quantity) AS requested_units
+        FROM utility_service_requests_dv d
+        CROSS APPLY JSON_TABLE(d.data, '$' COLUMNS (
+            request_id NUMBER PATH '$._id',
+            request_status VARCHAR2(30) PATH '$.requestStatus',
+            NESTED PATH '$.lineItems[*]' COLUMNS (
+                service_supply_id NUMBER PATH '$.serviceSupplyId',
+                quantity NUMBER PATH '$.quantity'
+            )
+        )) jt
+        WHERE jt.request_status IN ('pending', 'confirmed', 'processing')
+        GROUP BY jt.service_supply_id
+    ), nearest_field_site AS (
+        SELECT fc.center_name, fc.city, fc.state_province,
+               dr.region_name, dr.demand_index,
+               ROUND(SDO_GEOM.SDO_DISTANCE(
+                 fc.location, dr.boundary, 0.005, 'unit=KM'), 2) AS distance_km
+        FROM fulfillment_centers fc
+        CROSS JOIN demand_regions dr
+        WHERE dr.region_name = 'Houston Metro'
+          AND fc.is_active = 1
+          AND fc.location IS NOT NULL
+          AND dr.boundary IS NOT NULL
+        ORDER BY SDO_GEOM.SDO_DISTANCE(
+                   fc.location, dr.boundary, 0.005, 'unit=KM'), fc.center_id
+        FETCH FIRST 1 ROW ONLY
+    )
+    SELECT sr.service_name, sr.utility_operator_or_partner,
+           sr.utility_category, sr.high_criticality_signals,
+           sr.avg_criticality, sm.semantic_similarity,
+           NVL(ra.active_requests, 0) AS active_requests,
+           NVL(ra.requested_units, 0) AS requested_units,
+           nfs.center_name AS nearest_field_site,
+           nfs.city || ', ' || nfs.state_province AS field_site_location,
+           nfs.region_name, nfs.demand_index, nfs.distance_km
+    FROM service_risk sr
+    LEFT JOIN semantic_match sm ON sm.product_id = sr.utility_service_id
+    LEFT JOIN request_activity ra ON ra.service_supply_id = sr.utility_service_id
+    CROSS JOIN nearest_field_site nfs
+    ORDER BY sm.semantic_similarity DESC NULLS LAST,
+             sr.high_criticality_signals DESC, sr.utility_service_id
+    FETCH FIRST 10 ROWS ONLY;
+    </copy>
+    ```
 
 3. Review the ranked services. Each row combines warning signs, semantic similarity, active requests, and field-site distance.
 
