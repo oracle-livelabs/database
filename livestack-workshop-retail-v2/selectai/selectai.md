@@ -151,7 +151,7 @@ Nina starts with product revenue by using `SHOWSQL` to inspect the generated sta
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Ask a question and inspect the SQL, SQL block 6](images/sql-lab-7-06.jpg)
+    ![SQL Worksheet showing the query and result for Task 3: Ask a question and inspect the SQL, SQL block 6](images/l7-t3-s1.png)
 
     **Expected output:** A SELECT statement that joins product and order-line data, aggregates revenue by product, orders descending, and returns five rows. Generated formatting and aliases may differ.
 
@@ -199,14 +199,6 @@ Nina starts with product revenue by using `SHOWSQL` to inspect the generated sta
     ![SQL Worksheet showing the query and result for Task 4: Run the question in the database, SQL block 8](images/sql-lab-7-08.jpg)
 
     **Expected output:** Five rows with product ID, name, category, revenue, and units sold. These values come directly from the retail order items.
-
-    | Product | Revenue | Units |
-    | --- | ---: | ---: |
-    | SummitPulse GPS Watch | 443,998.89 | 111 |
-    | FieldCoach Training Tablet | 254,998.98 | 102 |
-    | Carbon Road Bike | 217,499.25 | 75 |
-    | RouteGuide AR Sport Glasses | 169,498.87 | 113 |
-    | PowerRack Home Gym | 139,499.07 | 93 |
 
     These examples describe the sample retail data. If you change the orders, compare against your current reference result. Product IDs distinguish repeated product names.
 

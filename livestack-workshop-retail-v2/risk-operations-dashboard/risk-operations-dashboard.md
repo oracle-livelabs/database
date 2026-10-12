@@ -134,19 +134,13 @@ The query crosses four data models:
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Run a converged retail investigation, SQL block 1](images/sql-lab-1-01.jpg)
-
 3. Review the result as the product-level evidence behind Jessica's dashboard.
 
     **Expected output: Product review queue**
 
     The query returns up to ten products. These rows were observed with the supplied workshop data; the table shows selected columns from the wider result.
 
-    | Product | Brand | High-virality signals | Similarity | Active orders | Order units |
-    | --- | --- | ---: | ---: | ---: | ---: |
-    | AirGlide Runner | CloudStep | 4 | 0.5772 | 13 | 30 |
-    | TrailFlex Training Joggers | NeonNight | 3 | 0.4921 | 5 | 7 |
-    | TrailFlex Training Joggers | UrbanPulse | 1 | 0.4864 | 14 | 25 |
+    ![SQL Worksheet showing the query and result for Task 1: Run a converged retail investigation, SQL block 1](images/sql-lab-1-01.jpg)
 
     The same result supplies **NYC Metro Hub**, **Edison, New Jersey**, **New York Metro**, demand index **91**, and distance **9.48 km** as regional context. That distance is measured to the region geometry. The query does not inspect inventory at the center or calculate a delivery route.
 
@@ -169,11 +163,6 @@ Jessica meets the operations team to review the data before adding it to the das
     **Expected output: A different review order**
 
     With the supplied data, **AllTerrain Hiking Boots / TrailBlaze** moves to the first row, similarity **0.6816**, with **7** high-virality signals, **8** active orders and **14** active-order units. It was outside the original top ten. **WinterGrip Boot / CloudStep** moves from sixth to second.
-
-    | Question | First product | Similarity | Active orders |
-    | --- | --- | ---: | ---: |
-    | Trail-running demand | AirGlide Runner / CloudStep | 0.5772 | 13 |
-    | Hiking-boot sizing and grip | AllTerrain Hiking Boots / TrailBlaze | 0.6816 | 8 |
 
 3. Compare the two result sets.
 
@@ -312,4 +301,5 @@ With the product evidence connected, Jessica turns to Thomas, who will expose th
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* ** Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

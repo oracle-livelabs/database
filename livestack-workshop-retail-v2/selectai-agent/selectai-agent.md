@@ -168,7 +168,7 @@ Jessica registers one named SQL capability that uses `GENAI` and the four retail
 
     ![SQL Worksheet showing the query and result for Task 2: Register the SQL tool, SQL block 6](images/sql-lab-8-06.jpg)
 
-    **Expected output:** One enabled NINA_RETAIL_SQL_TOOL entry with the Retail description.
+    **Expected output:** One enabled NINA\_RETAIL\_SQL\_TOOL entry with the Retail description.
 
 ## Task 3: Create Nina's agent, task, and team
 
@@ -306,10 +306,10 @@ Nina needs to connect the answer to the work the team performed. Querying the mo
     | Column | Successful-run evidence |
     | --- | --- |
     | CONVERSATION_ID | Matches the single saved request row |
-    | TEAM_NAME | NINA_RETAIL_TEAM |
-    | TEAM_EXEC_ID | Identifies this recorded team run |
+    | TEAM_NAME | NINA\_RETAIL\_TEAM |
+    | TEAM\_EXEC\_ID | Identifies this recorded team run |
     | STATE | SUCCEEDED |
-    | START_DATE and END_DATE | Both populated for the completed run |
+    | START\_DATE and END\_DATE | Both populated for the completed run |
 
     A failed or incomplete run must be investigated before using its answer. No rows means this query has not found the matching team execution. The task's internal conversation can differ from the caller's ID; use the direct team-history match shown here.
 
