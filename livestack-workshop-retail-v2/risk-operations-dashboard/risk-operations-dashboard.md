@@ -296,7 +296,7 @@ Jessica meets the operations team to review the data before adding it to the das
 
 ## Next Steps
 
-Thomas will now present the order data as JSON for the shopping application while keeping the same records available to relational SQL.
+With the product evidence connected, Jessica turns to Thomas, who will expose the same order data as an application payload through JSON Relational Duality while keeping it available to relational SQL.
 
 ## Acknowledgements
 

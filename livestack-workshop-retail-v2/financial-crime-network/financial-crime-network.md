@@ -385,7 +385,7 @@ Bob followed direct creator connections, extended the search over several hops, 
 
 Graph Studio presents the same recorded relationships as an interactive network. A reviewer can inspect a creator, follow a connection, and explain why two creators appear in the same brand review. These paths add context to the product signals from the previous lab.
 
-Moon will now compare fulfillment-center locations and stock for the products the team is reviewing.
+Bob hands the relationship context to Moon, whose operational question is where Seer Sporting Goods can review fulfillment options for products receiving attention.
 
 ## Appendix: How the property graph maps the Retail tables
 
