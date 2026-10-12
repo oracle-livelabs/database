@@ -486,7 +486,7 @@ Thomas does not need one JSON model for every application feature. He can choose
 | --- | --- | --- | --- |
 | JSON column in a relational table | A relational record needs optional or changing attributes. | Screen settings beside an order key. | A normal table with a native JSON column. |
 | JSON Collection Table | The application owns a set of documents. | Saved shopping drafts whose structure can evolve. | One independent document per DATA row in the collection. |
-| JSON Relational Duality View | Existing relational rows need an application document shape. | Submit an order with items and update its status. | ORDERS and ORDER_ITEMS; the view defines the document contract. |
+| JSON Relational Duality View | Existing relational rows need an application document shape. | Submit an order with items and update its status. | ORDERS and ORDER\_ITEMS; the view defines the document contract. |
 
 For the order feature, `ORDERS_DV` gives Thomas the payload he needs while Jessica retains relational constraints, SQL access and control over which writes the view permits. The next question is which other products and customer orders relate to an emerging signal. Gilly will connect a plain-language search to those existing records.
 

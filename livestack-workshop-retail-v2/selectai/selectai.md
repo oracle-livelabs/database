@@ -131,7 +131,7 @@ Nina's questions require products, orders, order items, and customers. Use the c
 
     ![SQL Worksheet showing the query and result for Task 2: Add the retail tables to the profile, SQL block 5](images/sql-lab-7-05.jpg)
 
-    **Expected output:** PRODUCTS, ORDERS, ORDER_ITEMS, and CUSTOMERS owned by LLUSER.
+    **Expected output:** PRODUCTS, ORDERS, ORDER\_ITEMS, and CUSTOMERS owned by LLUSER.
 
 ## Task 3: Ask a question and inspect the SQL
 
@@ -155,7 +155,7 @@ Nina starts with product revenue by using `SHOWSQL` to inspect the generated sta
 
     **Expected output:** A SELECT statement that joins product and order-line data, aggregates revenue by product, orders descending, and returns five rows. Generated formatting and aliases may differ.
 
-2. Inspect the full statement. Check the product-to-item join, the aggregation, any status filters, and the five-row limit. Different product IDs can share a name, so grouping only by name can combine distinct products. Task 5 makes the product identity explicit. For this question, revenue means the historical sum of order-line quantity × line price, exposed by LINE_TOTAL. It is not the current catalog price and does not subtract refunds or cancelled orders unless the question explicitly asks for those rules.
+2. Inspect the full statement. Check the product-to-item join, the aggregation, any status filters, and the five-row limit. Different product IDs can share a name, so grouping only by name can combine distinct products. Task 5 makes the product identity explicit. For this question, revenue means the historical sum of order-line quantity × line price, exposed by LINE\_TOTAL. It is not the current catalog price and does not subtract refunds or cancelled orders unless the question explicitly asks for those rules.
 
 3. After reviewing the generated SELECT, copy it into a new worksheet and run that exact statement. Keep the result for comparison with Task 4. If the generated statement does not answer the question, refine the prompt before using its answer.
 

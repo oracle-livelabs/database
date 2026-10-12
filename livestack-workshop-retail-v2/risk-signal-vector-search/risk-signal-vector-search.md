@@ -41,7 +41,7 @@ Estimated Time: **15 minutes**
 | Technical Challenge | Gilly must keep product meaning, vectors, order keys and customer context connected. |
 | Persona Focus | You review Gilly's implementation from the model to a customer and order result. |
 | What You Will See | Vector search ranks products; SQL joins add exact order and customer details. |
-| Database Capability | VECTOR_EMBEDDING, vector columns and VECTOR_DISTANCE run beside relational data. |
+| Database Capability | VECTOR\_EMBEDDING, vector columns and VECTOR\_DISTANCE run beside relational data. |
 | Outcome | The application can turn a plain-language product question into a list of product matches and related orders the team can review. |
 
 Persona focus: You are reviewing the search tool Gilly built for retail operations.
@@ -195,9 +195,9 @@ Gilly creates one vector per product from its name, category, and subcategory, w
 
     | Column | What to inspect |
     | --- | --- |
-    | PRODUCT_ID | The stable relational identifier for each product |
-    | PRODUCT_NAME | The catalog label associated with the vector |
-    | PRODUCT_EMBEDDING | A populated vector containing 384 numbers |
+    | PRODUCT\_ID | The stable relational identifier for each product |
+    | PRODUCT\_NAME | The catalog label associated with the vector |
+    | PRODUCT\_EMBEDDING | A populated vector containing 384 numbers |
 
     SQL Worksheet can show a shortened vector preview. Expand a value to inspect its numbers. The same product key connects the vector to the rest of the retail data.
 

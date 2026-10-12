@@ -171,7 +171,7 @@ AutoML may take several minutes. Skip to Task 3 to create the workshop’s examp
     4. Select `OML_DEMAND_TRAINING_V` from the **Table** list.
     5. Select **OK**.
 
-    ![LLUSER schema and OML_DEMAND_TRAINING_V selected as the data source](images/data-source-two.png)
+    ![LLUSER schema and OML\_DEMAND\_TRAINING\_V selected as the data source](images/data-source-two.png)
 
     Select `SURGE_LABEL` for **Predict**, `Classification` for **Prediction Type**, and `PRODUCT_ID` for **Case ID**.
 
