@@ -1,0 +1,10 @@
+# Replace the existing sqlcl-load-data-atp4 resource in the platform's adb.tf.
+# The previous LLUSER/no-argument command bypassed the loader's ADMIN model grant.
+resource "null_resource" "sqlcl-load-data-atp4" {
+  provisioner "local-exec" {
+    working_dir = path.module
+    command     = "sql -cloudconfig atp_wallet.zip admin/${local.new_password}@ATP${var.resId}_high @./load_seer_transport.sql ${local.new_password} ATP${var.resId}_high"
+  }
+
+  depends_on = [null_resource.sqlcl-load-data-atp3]
+}

@@ -4,13 +4,13 @@
 
 Jessica Chan is the database administrator responsible for keeping Seer Sporting Goods' retail data reliable and useful. Every morning, the operations team asks her a familiar question: **which products deserve a closer look, and what order activity and fulfillment context should the team review?**
 
-Jessica can see the answer taking shape in the retail dashboard, but its supporting data comes in several forms. Products, brands and social signals are relational rows. Orders are also available as JSON documents. The AI engineering team has prepared vector representations of product descriptions. Fulfillment-center points and demand-region boundaries are stored as spatial geometry. The business question connects these records, but a useful dashboard needs a query that brings them together.
+The retail dashboard combines several types of data. Relational tables hold products, brands, and social posts; JSON documents present orders; vectors represent product descriptions; and spatial geometry records fulfillment-center locations and demand-region boundaries. Jessica needs a query that combines them.
 
 With separate systems, Jessica would need to reconcile a catalog, search service, document store and mapping service before presenting the result. Keeping their copies synchronized would add work whenever an order, product description or location changed. Jessica wants each dashboard row to lead back to the data the application already uses.
 
 Oracle AI Database's converged architecture supports these data models in one database. Relational SQL can work with JSON documents, vectors and spatial geometry in the same statement. Graph and machine-learning capabilities will extend the investigation in later labs.
 
-In this lab, you take Jessica's role as the DBA. You run the converged query behind a product review queue, then change the question to see how the same evidence supports a different investigation.
+In this lab, you take Jessica's role as the DBA. You run the converged query behind a product review queue, then change the search phrase to see how it changes the product ranking.
 
 ![Jessica Chan, database administrator](images/jessica.png)
 
@@ -27,11 +27,11 @@ Estimated Time: **10 minutes**
 | Step | Retail focus |
 | --- | --- |
 | Business Problem | The operations team needs a review queue connecting product attention with current order activity. |
-| Technical Challenge | The answer crosses product meaning, social records, order documents and regional geography. |
+| Technical Challenge | The query must combine product-text matches, social posts, order documents and regional geography. |
 | Persona Focus | Jessica Chan, the DBA, builds the query that supplies a connected dashboard result. |
 | What You Will See | One SQL statement returns product signals, semantic similarity, active orders and a nearby center. |
 | Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality and Oracle Spatial work together. |
-| Outcome | The team can inspect why a product fits the question and what operational evidence accompanies it. |
+| Outcome | The team can inspect each product’s text match, social activity, orders and regional location details. |
 
 Persona focus: You are Jessica Chan, the DBA. Your job is to give the operations team one query whose result they can inspect and explain.
 
@@ -74,7 +74,7 @@ The query crosses four data models:
         SELECT pe.product_id,
                ROUND(MAX(1 - VECTOR_DISTANCE(
                    pe.embedding,
-                   VECTOR_EMBEDDING(ADMIN.ALL_MINILM_L12_V2
+                   VECTOR_EMBEDDING(LLUSER.ALL_MINILM_L12_V2
                        USING 'viral customer demand for trail running footwear' AS DATA),
                    COSINE)), 4) AS semantic_similarity
         FROM product_embeddings pe
@@ -134,25 +134,19 @@ The query crosses four data models:
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Run a converged retail investigation, SQL block 1](images/sql-lab-1-01.jpg)
-
-3. Review the result as the product-level evidence behind Jessica's dashboard.
+3. Review the product details returned for Jessica’s dashboard.
 
     **Expected output: Product review queue**
 
-    The query returns up to ten products. These rows were observed with the supplied workshop data; the table shows selected columns from the wider result.
+    The query returns up to ten products. The screenshot shows results from the supplied workshop data. Scroll across the result in SQL Worksheet to inspect the remaining columns.
 
-    | Product | Brand | High-virality signals | Similarity | Active orders | Order units |
-    | --- | --- | ---: | ---: | ---: | ---: |
-    | AirGlide Runner | CloudStep | 4 | 0.5772 | 13 | 30 |
-    | TrailFlex Training Joggers | NeonNight | 3 | 0.4921 | 5 | 7 |
-    | TrailFlex Training Joggers | UrbanPulse | 1 | 0.4864 | 14 | 25 |
+    ![SQL Worksheet showing the query and result for Task 1: Run a converged retail investigation, SQL block 1](images/sql-lab-1-01.jpg)
 
     The same result supplies **NYC Metro Hub**, **Edison, New Jersey**, **New York Metro**, demand index **91**, and distance **9.48 km** as regional context. That distance is measured to the region geometry. The query does not inspect inventory at the center or calculate a delivery route.
 
 Use the first row to explain the result: the social metrics show recorded attention, the semantic score explains why the product fits the question, and the order counts show existing activity. The location adds a place to begin a fulfillment review. No single column makes the operational decision for the team.
 
-Jessica now has one query for the ranked table and its supporting details. The database evaluates each data model where the source data already lives, and SQL joins connect the results. Other dashboard cards can use additional queries over that same foundation.
+Jessica now has one query for the ranked product list and its supporting details. SQL combines the relational, JSON, vector, and spatial results in the database. Other dashboard cards can query the same source records.
 
 ## Task 2: Change the investigation question
 
@@ -169,11 +163,6 @@ Jessica meets the operations team to review the data before adding it to the das
     **Expected output: A different review order**
 
     With the supplied data, **AllTerrain Hiking Boots / TrailBlaze** moves to the first row, similarity **0.6816**, with **7** high-virality signals, **8** active orders and **14** active-order units. It was outside the original top ten. **WinterGrip Boot / CloudStep** moves from sixth to second.
-
-    | Question | First product | Similarity | Active orders |
-    | --- | --- | ---: | ---: |
-    | Trail-running demand | AirGlide Runner / CloudStep | 0.5772 | 13 |
-    | Hiking-boot sizing and grip | AllTerrain Hiking Boots / TrailBlaze | 0.6816 | 8 |
 
 3. Compare the two result sets.
 
@@ -307,9 +296,10 @@ Jessica meets the operations team to review the data before adding it to the das
 
 ## Next Steps
 
-Jessica has connected the product evidence. Next, Thomas uses JSON Relational Duality to expose the same order data as an application payload while keeping relational SQL available to the database team.
+Thomas will now present the order data as JSON for the shopping application while keeping the same records available to relational SQL.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

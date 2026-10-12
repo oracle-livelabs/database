@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Thomas Brune is an application developer at Seer Transport. He and his team are building a new web and mobile application for passengers. The team wants a faster passenger experience, with fewer round trips and payloads that match the screens and services they are building.
+Thomas Brune is an application developer at Seer Transport. His team is building a web and mobile passenger application that needs booking details and journey legs in one JSON response.
 
 ![Thomas Brune, application developer: Lab 2: Build a JSON Booking Model](images/thomas-transport.png " ")
 
 Thomas needs booking data as a JSON payload that a web or mobile application can consume directly. One payload can group the passenger identifier, booking status, journey legs, and optional app settings. JSON lets him evolve that payload as the application changes. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, and database controls.
 
-Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of passenger data.
+Thomas asks Jessica, the DBA, to compare three JSON patterns: a JSON column for application settings, a JSON Collection Table for separately stored documents, and a JSON Relational Duality View over existing booking rows. The collection stores a sample document independently; the duality view exposes relational data without copying it.
 
 
 <details>
@@ -36,7 +36,7 @@ Thomas's application needs a payload with the booking and its booking legs toget
 }
 ```
 
-The application uses this document shape, while the database keeps the booking and booking legs in relational form. In this lab, you build and read this type of payload in three ways.
+The application needs booking details and journey legs in one document. The following tasks compare separately stored JSON with a duality view that constructs this document from relational rows.
 
 ### Objectives
 
@@ -55,23 +55,21 @@ Estimated Time: **10 minutes**
 | Persona Focus | Thomas tests JSON storage, collections, and duality with Jessica's database guidance. |
 | What You Will See | One Oracle AI Database supports several JSON access patterns over the transportation data. |
 | Database Capability | Native JSON, SQL/JSON functions, and JSON Relational Duality work together. |
-| Outcome | Thomas can choose an application shape without creating a second passenger-data store. |
+| Outcome | Thomas can serve a booking document to the passenger application while Jessica verifies its underlying rows with SQL. |
 
 Persona focus: You are Thomas, working with Jessica to decide how the new application should store, assemble, and read passenger booking data.
 
 ### Thomas's three JSON choices
 
-Thomas does not need one JSON pattern for every feature. A JSON column holds optional application attributes in a relational table. A JSON Collection Table holds documents owned by the application. A duality view assembles a document from existing relational tables. Thomas uses the document shape in the application, while Jessica works with the underlying rows using SQL.
+Thomas chooses the JSON form according to the feature. A JSON column holds optional attributes beside a relational record, a JSON Collection Table holds documents owned by the application, and a duality view assembles a booking document from existing rows. The final option gives his passenger application a single booking payload while Jessica continues to manage the underlying records with SQL.
 
-This keeps the booking in one database and avoids complex, expensive integration between separate systems. Thomas gets the document shape his application needs, and Jessica keeps the relational rows, SQL access, and database controls.
-
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide on how to run SQL statements.
+> **SQL Worksheet reminder:** For the difference between **Run Statement** and **Run Script**, return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
 ## Task 1: Store flexible application data as JSON
 
 Thomas starts with data that belongs to the application but does not need its own relational columns. The workshop database already contains the booking rows. He adds a small application-data table with a native `JSON` column for optional screen and passenger-experience settings.
 
-1. Create the application-data table and add one sample payload.
+1. Create the application-data table and add one sample payload. This code box contains several SQL statements; choose **Run Script** to run the full block.
 
     ```sql
     <copy>
@@ -99,7 +97,7 @@ Thomas starts with data that belongs to the application but does not need its ow
     </copy>
     ```
 
-2. Read values from the JSON column.
+2. Read values from the JSON column with **Run Statement**.
 
     ```sql
     <copy>
@@ -111,19 +109,29 @@ Thomas starts with data that belongs to the application but does not need its ow
     </copy>
     ```
 
+    ![SQL Worksheet showing the JSON query and its returned booking values](images/lab2-json-query-result.jpg " ")
+
+    *Figure 1: The query reads the sample booking's JSON settings from a relational row.*
+
     `BOOKING_ID` remains a relational key. `APP_DATA` can change as the application changes. Thomas can query both with SQL in one table.
 
 ## Task 2: Create a JSON Collection Table
 
 Thomas now needs a collection of application documents. Unlike the JSON column in Task 1, this object is a JSON Collection Table: each row is a document, the document is stored in `DATA`, and `_id` identifies the document.
 
-1. Create the collection and add the sample booking document.
+1. Create the collection with **Run Script**. Check **Script Output** for the collection-creation confirmation before continuing.
 
     ```sql
     <copy>
     CREATE JSON COLLECTION TABLE thomas_booking_docs
     WITH ETAG;
+    </copy>
+    ```
 
+2. Add the sample booking document. This code box contains an `INSERT` and a `COMMIT`; choose **Run Script** and check **Script Output** for one inserted row and a successful commit.
+
+    ```sql
+    <copy>
     INSERT INTO thomas_booking_docs (data)
     SELECT JSON_OBJECT(
                '_id'        VALUE o.booking_id,
@@ -151,9 +159,9 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
     </copy>
     ```
 
-    `WITH ETAG` adds an `_metadata.etag` value to each document. Oracle changes the tag whenever the document changes. Thomas's application can send the tag it last read when it updates a document. If the tag no longer matches, the application knows that someone else changed the document first and can avoid overwriting the newer version. This protects passenger data when web and mobile requests try updating the same document at the same time.
+    `WITH ETAG` adds an `_metadata.etag` value to each document. Oracle changes the tag whenever the document changes. Thomas's application can send the tag it last read when it updates a document. If the tag no longer matches, the application knows that someone else changed the document first and can avoid overwriting the newer version. The application must check the ETAG during its update to detect a conflicting change. This exercise does not test concurrent requests.
 
-2. Query the collection as documents.
+3. Query the collection as documents with **Run Statement**.
 
     ```sql
     <copy>
@@ -163,14 +171,15 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
           (SELECT booking_id FROM thomas_app_data);
     </copy>
     ```
+    ![Lab 2 Task 2 Step 3](images/l2-t2-s3.png " ")
 
     Thomas now has a document collection that a document API can access, and SQL can query the same `DATA` column. The collection stores the documents; it is separate from the relational `BOOKINGS` and `BOOKING_LEGS` tables.
 
-## Task 3: Read a passenger document from relational data
+## Task 3: Read a booking document from relational data
 
 Thomas now tests the document shape his application can consume directly.
 
-1. Run this query:
+1. Run this query with **Run Statement**:
 
     This query selects the JSON `DATA` column from `BOOKINGS_DV` so Thomas can inspect the document shape in SQL Worksheet.
 
@@ -189,8 +198,9 @@ Thomas now tests the document shape his application can consume directly.
     FETCH FIRST 1 ROW ONLY;
     </copy>
     ```
+    ![Lab 2 Task 3 Step 1](images/l2-t3-s1.png " ")
 
-    **Expected output:**
+    **Expected output:** A booking document containing `_id`, `passengerId`, `status`, and a nested `legs` array. The query does not specify a row order, so the booking identifier can vary.
 
 2. Expand the document in SQL Worksheet.
     The query reads the duality view as a document source. Oracle constructs the JSON shape from relational data, so the application gets a booking payload without a second copy of the booking record.
@@ -203,9 +213,9 @@ Thomas now tests the document shape his application can consume directly.
 
 ## Task 4: Enable document inserts and updates
 
-The existing `BOOKINGS_DV` lets an application update an existing booking document. In this task, you extend that contract so the application can also create one. The database continues to control the relational tables, keys, and constraints. The duality view can also act as a security boundary. Thomas's application receives only the document fields and write operations exposed by the view, without direct access to the underlying tables.
+The existing `BOOKINGS_DV` allows updates to booking documents. You will extend its definition to allow inserts into both `BOOKINGS` and the nested `BOOKING_LEGS` rows. The view defines the document fields and permitted write operations, while relational keys and constraints still apply. This exercise runs as `LLUSER`, which owns the tables; it does not configure a separate application account with view-only access.
 
-1. Check the current document-write capabilities.
+1. Check the current document-write capabilities with **Run Statement**.
 
     ```sql
     <copy>
@@ -217,12 +227,13 @@ The existing `BOOKINGS_DV` lets an application update an existing booking docume
     WHERE view_name = 'BOOKINGS_DV';
     </copy>
     ```
+    ![Lab 2 Task 4 Step 1](images/l2-t4-s1.png " ")
 
     **Expected output: Current Document Capabilities**
 
     The view currently allows updates but not new top-level documents. The root `BOOKINGS` table controls document insertion. The nested `BOOKING_LEGS` rows must also allow inserts so the document can include booking legs.
 
-2. Enable insert and update for the document and its booking legs.
+2. Enable insert and update for the document and its booking legs with **Run Statement**.
 
     You are changing the duality-view definition, not creating a second API store. The two `WITH INSERT UPDATE` clauses allow developers to create and update the JSON document. Oracle still enforces the relational keys and data types.
 
@@ -258,7 +269,7 @@ The existing `BOOKINGS_DV` lets an application update an existing booking docume
 
     Oracle created or replaced the duality view. Verify the new capabilities in the next step.
 
-3. Run the capability query again.
+3. Run the capability query again with **Run Statement**.
 
     ```sql
     <copy>
@@ -270,6 +281,7 @@ The existing `BOOKINGS_DV` lets an application update an existing booking docume
     WHERE view_name = 'BOOKINGS_DV';
     </copy>
     ```
+    ![Lab 2 Task 4 Step 3](images/l2-t4-s3.png " ")
 
     **Expected output: Document Capabilities Enabled**
 
@@ -279,7 +291,7 @@ The existing `BOOKINGS_DV` lets an application update an existing booking docume
 
 Thomas now tests a complete passenger booking. He creates it as one nested JSON document, then confirms that Jessica can immediately see the same data as structured relational rows.
 
-1. Insert the supplied workshop booking document.
+1. Insert the supplied workshop booking document and commit the change with **Run Script**.
 
     The `INSERT` targets `BOOKINGS_DV`, the JSON Relational Duality View, rather than the underlying `BOOKINGS` or `BOOKING_LEGS` tables. The database uses the view definition to write the document to those relational tables. The document uses booking ID `900001`, passenger `1`, and transport service `1`. It includes one nested booking leg. The statement is safe to run again: after the booking exists, it inserts zero rows and preserves the existing record. On the first run, the new booking has status `pending`.
 
@@ -317,9 +329,9 @@ Thomas now tests a complete passenger booking. He creates it as one nested JSON 
 
     On the first run, you insert one document. On later runs, the `NOT EXISTS` check returns zero rows because the workshop booking is already present.
 
-2. Confirm the JSON document became relational rows.
+2. Confirm the JSON document became relational rows with **Run Statement**.
 
-    >**Note**: We are querying here the relational tables `BOOKINGS` and `BOOKING_LEGS`!
+    >**Note**: This query reads `BOOKINGS` and `BOOKING_LEGS` directly.
 
     ```sql
     <copy>
@@ -338,12 +350,13 @@ Thomas now tests a complete passenger booking. He creates it as one nested JSON 
     WHERE o.booking_id = 900001;
     </copy>
     ```
+    ![Lab 2 Task 5 Step 2](images/l2-t5-s2.png " ")
 
     **Expected output: Created Booking Rows**
 
-3. Update the document status through the duality view.
+3. Update the document status through the duality view. Choose **Run Script** to run the update and `COMMIT` together.
 
-    This update changes JSON data through `BOOKINGS_DV`. The allowed modification here is the document's `status` field, which Oracle maps to `BOOKINGS.BOOKING_STATUS`; Thomas's application is not given unrestricted updates to the underlying tables. He does not need application-side parsing or a second booking store.
+    This statement changes the document’s `status` through `BOOKINGS_DV`. Oracle maps the change to `BOOKINGS.BOOKING_STATUS`. The statement updates only that field; it does not establish a separate application privilege boundary.
 
     ```sql
     <copy>
@@ -359,7 +372,7 @@ Thomas now tests a complete passenger booking. He creates it as one nested JSON 
 
     Oracle updates one document. The following query confirms that the relational booking row now has status `confirmed`.
 
-4. Verify the updated relational status.
+4. Verify the updated relational status with **Run Statement**.
 
     ```sql
     <copy>
@@ -375,14 +388,15 @@ Thomas now tests a complete passenger booking. He creates it as one nested JSON 
     WHERE o.booking_id = 900001;
     </copy>
     ```
+    ![Lab 2 Task 5 Step 4](images/l2-t5-s4.png " ")
 
     **Expected output: Updated Booking Rows**
 
 ## Task 6: Project JSON fields with SQL
 
-Thomas has confirmed that the application can display and update the document. Jessica now checks the same booking with SQL before the feature goes live. She uses the relational tables for normal reporting and analysis. Here, she queries `BOOKINGS_DV` to verify the exact JSON contract that Thomas's application receives. She can also project fields from the document to test passenger-service searches and status filters. In this context, "project" means pulling selected values out of the JSON document and displaying them as SQL result columns.
+Thomas has tested the booking document’s insert and update operations. Jessica now reads selected JSON fields as SQL result columns to check the document returned to the application. This is called projection. She can use the same technique to filter bookings by passenger or status.
 
-1. Run this SQL/JSON projection query:
+1. Run this SQL/JSON projection query with **Run Statement**:
 
     Thomas's document is still available for SQL analysis. The same booking shape can be queried, filtered, and joined to relational passenger data.
 
@@ -401,10 +415,11 @@ Thomas has confirmed that the application can display and update the document. J
     WHERE JSON_VALUE(od.data, '$._id' RETURNING NUMBER) = 900001;
     </copy>
     ```
+    ![Lab 2 Task 6 Step 1](images/l2-t6-s1.png " ")
 
     **Expected output: JSON Field Projection**
 
-2. Run the equivalent query against the relational tables.
+2. Run the equivalent query against the relational tables with **Run Statement**.
 
     ```sql
     <copy>
@@ -417,6 +432,7 @@ Thomas has confirmed that the application can display and update the document. J
     WHERE o.booking_id = 900001;
     </copy>
     ```
+    ![Lab 2 Task 6 Step 2](images/l2-t6-s2.png " ")
 
     Compare the result with the previous query. The booking ID, status, and passenger email should match. Thomas's application is reading the JSON document, while Jessica's relational query reads the underlying rows.
 
@@ -435,4 +451,5 @@ For Thomas, `BOOKINGS_DV` is the right choice for the booking feature because `B
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

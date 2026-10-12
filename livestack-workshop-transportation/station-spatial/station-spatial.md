@@ -22,7 +22,7 @@ In this lab, you follow Moon's approach. You start with a single point, measure 
 >
 > - A **polygon** is an area made from connected points. Service regions are stored as polygons.
 >
-> - **Distance** measures how far two spatial objects are from each other. Here, it shows how far a station is from a service-region boundary. A distance of zero means the station is inside or touching the region.
+> - **Distance** measures how far two spatial objects are from each other. Here, it measures the distance from a station point to a service-region polygon. A distance of zero means the station is inside or touching the region.
 >
 > - A **spatial relationship** describes how two shapes relate to each other. `SDO_GEOM.RELATE` can test whether a passenger point is inside or touches a service region.
 >
@@ -52,7 +52,7 @@ Estimated Time: **10 minutes**
 | Database Capability | `SDO_GEOMETRY`, `SDO_GEOM.SDO_DISTANCE`, `SDO_GEOM.RELATE`, and GeoJSON conversion support the analysis. |
 | Outcome | An operations user can see which passengers need service in a region and which station is closest to each one. |
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step graphic showing where to paste and run SQL statements.
+> **SQL Worksheet reminder:** For the difference between **Run Statement** and **Run Script**, return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet).
 
 ## Task 1: Look at the locations as points
 
@@ -62,9 +62,9 @@ An `SDO_GEOMETRY` point is Oracle Spatial's structured representation of one loc
 
 `SDO_UTIL.TO_GEOJSON` converts that geometry into a standard JSON map object such as `{ "type": "Point", "coordinates": [longitude, latitude] }`. The application can send this object to a map without maintaining a second location format or a separate conversion service. Oracle uses the same stored geometry for SQL analysis and application display.
 
-That is the Oracle AI Database advantage in this lab: one location supports spatial calculations, relational joins, and JSON map output without copying the data between systems.
+Moon can calculate distances from the stored locations, join the results to station capacity, and send those same locations to the application map as GeoJSON.
 
-1. Run this query:
+1. Run this query with **Run Statement**:
 
     ```sql
     <copy>
@@ -83,6 +83,10 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
     </copy>
     ```
 
+    ![SQL Worksheet showing the station point query and three station rows](images/lab5-spatial-query-result.jpg " ")
+
+    *Figure 1: Station coordinates and GeoJSON come from the same stored geometry.*
+
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. GeoJSON lists longitude first and latitude second. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 120 characters; it does not change the stored geometry.
 
     **Expected output: Station Points**
@@ -91,19 +95,21 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
 
     Moon has not created a second map database. The point used by the application and the point used by SQL are the same value. The database can calculate with it, and the application can display it.
 
-    This is the converged-database advantage. Moon can keep the station's location beside its name, capacity, operating status, and current load. SQL can calculate distance and return those station details, while `SDO_UTIL.TO_GEOJSON` gives the application the same location for a map. The team does not have to copy coordinates into a separate mapping system and keep the copies synchronized.
+    SQL returns station locations alongside names, capacity, status, and occupancy. `SDO_UTIL.TO_GEOJSON` converts the same stored geometry for display on a map.
 
 ## Task 2: Find the closest stations to a service region
 
-New York Metro is the first region for this routing review. Moon now measures the distance from each station point to the region boundary.
+New York Metro is the first region for this routing review. Moon now measures the distance from each station point to the region polygon.
 
-1. Run the distance query:
+1. Run the distance query with **Run Statement**:
 
     ```sql
     <copy>
     SELECT fc.station_name,
            fc.city,
            fc.state_province,
+           fc.daily_capacity,
+           fc.occupancy_pct,
            ROUND(
              SDO_GEOM.SDO_DISTANCE(
                fc.location,
@@ -122,6 +128,8 @@ New York Metro is the first region for this routing review. Moon now measures th
     </copy>
     ```
 
+    ![Lab 5 Task 2 Step 1](images/l5-t2-s1.png " ")
+
     `SDO_GEOM.SDO_DISTANCE` compares the station point with the demand-region polygon. The function returns the shortest distance between the two shapes. A value of `0` means the point is inside or touching the region.
 
     The four arguments in this query have simple roles:
@@ -137,17 +145,19 @@ New York Metro is the first region for this routing review. Moon now measures th
 
     **Expected output: New York Service Coverage**
 
-    The first row is the station nearest the New York Metro boundary; compare its distance and capacity with the following rows.
+    New York Central and Queens Transit Hub both have a distance of `0` because they are inside the New York Metro boundary. Compare their daily capacity and occupancy before deciding which station can take more passengers.
 
 2. Try another region.
 
-    Change the region name to `Chicago Metro`, add a miles calculation, and run the modified query:
+    Change the region name to `Chicago Metro`, add a miles calculation, and run the modified query with **Run Statement**:
 
     ```sql
     <copy>
     SELECT fc.station_name,
            fc.city,
            fc.state_province,
+           fc.daily_capacity,
+           fc.occupancy_pct,
            ROUND(
              SDO_GEOM.SDO_DISTANCE(
                fc.location,
@@ -174,15 +184,17 @@ New York Metro is the first region for this routing review. Moon now measures th
     </copy>
     ```
 
-    The `unit` parameter controls the measurement unit. `Joliet Rail Station` should be the closest station, with a distance of `0` km and `0` miles because it falls inside the Chicago Metro boundary. Chicago has a demand index of `78`.
+    ![Lab 5 Task 2 Step 2](images/l5-t2-s2.png " ")
 
-    This is a useful regional result, but distance to the region boundary does not identify the passengers who need service. Moon now uses the region polygon to find those passengers and then assigns each one to the closest active station.
+    The `unit` parameter controls the measurement unit. Joliet Rail Station and Chicago Union Station both have a distance of `0` km and `0` miles because they are inside the Chicago Metro boundary. Compare their daily capacity and occupancy; Chicago has a demand index of `78`.
+
+    These results compare stations with the region as a whole. Next, Moon finds passenger locations inside or touching the region and identifies each passenger’s nearest active station. Location alone does not show whether a passenger needs assistance.
 
 ## Task 3: Route passengers to the closest station
 
 Moon now needs a result that an operations application can use: passengers inside New York Metro, their service region, and the closest active station. The query uses the passenger point (**`c.location`**) and demand-region polygon (**`dr.boundary`**) to find the passengers first. It then compares each passenger point with every active station and keeps the closest one.
 
-1. Run the passenger routing query:
+1. Run the passenger routing query with **Run Statement**:
 
     ```sql
     <copy>
@@ -253,13 +265,15 @@ Moon now needs a result that an operations application can use: passengers insid
     </copy>
     ```
 
+    ![Lab 5 Task 3 Step 1](images/l5-t3-s1.png " ")
+
     `SDO_GEOM.RELATE` keeps passengers whose point falls inside or touches the New York Metro polygon. `SDO_GEOM.SDO_DISTANCE` then measures the distance from each matching passenger to every active station. `ROW_NUMBER` keeps the nearest station for each passenger.
 
 2. Review the result as an operations decision.
 
-    Each row gives a business user a passenger to contact, the closest station, and the information needed to decide where the work should go. The result combines the region's demand score, passenger details, station capacity, current load, and spatial distance in one SQL result.
+    Each row shows a passenger in the selected region, the nearest active station, the region’s demand score, station capacity, occupancy, and geographic distance. Use this list to review station access; the query does not check the passenger’s booking or whether the service is disrupted.
 
-    This is the business outcome. A dashboard can let a user select a region and immediately show the passengers affected, the station that can support each request, and the distance involved. The user does not need to compare a map with a separate passenger list or operations report.
+    Before directing a passenger to a station, check the available services, opening hours, accessibility, and current capacity. The calculated distance is geographic distance, not a walking or driving route.
 
 3. Change the query to `Chicago Metro`.
 
@@ -267,9 +281,7 @@ Moon now needs a result that an operations application can use: passengers insid
 
 ## Conclusion: Turn Location into a Service Decision
 
-Moon's analysis moves from a point, to distance, to passenger routing. A business user can select a high-demand region and get a list of passengers, their closest station, and the distance to that station. That is a useful dashboard result because it tells the user what action to take, not just where the data is located.
-
-This shows why Spatial in Oracle AI Database matters. One converged query can identify passengers with spatial functions, join them to relational passenger and station data, and include capacity and current load in the same result. The dashboard can show the map and the business details from one database, without moving data between a mapping system, a passenger system, and an operations system.
+Moon's final query takes the team from a demand region to a passenger list with the nearest active station, capacity, current load, and distance for each person. Dispatchers can use that combined view to plan follow-up and review whether the closest station can support the work.
 
 ## Next Steps
 
@@ -278,4 +290,5 @@ You used Oracle Spatial to turn points and polygons into a routing decision. For
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor Constantin Nechita
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

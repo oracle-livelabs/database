@@ -18,7 +18,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get markdown files from PR
+      - name: Validate PAR URL tenancy
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          PR_SHA="${{ github.sha }}"
+          git fetch --no-tags --prune origin "$BASE_SHA:$BASE_SHA" || true
+
+          VALIDATOR=".github/scripts/validate-par-urls.py"
+          if [ "$GITHUB_REPOSITORY" != "oracle-livelabs/common" ] || [ ! -f "$VALIDATOR" ]; then
+            VALIDATOR="/tmp/validate-par-urls.py"
+            curl -sSfL https://raw.githubusercontent.com/oracle-livelabs/common/refs/heads/main/.github/scripts/validate-par-urls.py -o "$VALIDATOR"
+          fi
+          python3 "$VALIDATOR" --base "$BASE_SHA" --head "$PR_SHA"
+
+      - name: Get validation files from PR
         id: changed-files
         shell: bash
         run: |
@@ -29,18 +45,22 @@ jobs:
 
           git fetch --no-tags --prune origin "$BASE_SHA:$BASE_SHA" || true
 
-          # Get changed markdown files
-          MD_FILES=$(git diff --name-only --diff-filter=AM "$BASE_SHA" "$PR_SHA" -- '*.md' | grep -v '^\.github/' | grep -v '^node_modules/' || true)
+          # Get changed markdown files plus CDN-sensitive index.html / manifest.json files
+          VALIDATION_FILES=$(git diff --name-only --diff-filter=AM "$BASE_SHA" "$PR_SHA" | grep -E '\.md$|(^|/)(index\.html|manifest\.json)$' | grep -v '^\.github/' | grep -v '^node_modules/' | grep -v -E '(^|/)SKILL\.md$' || true)
+          MARKDOWN_FILES=$(printf '%s\n' "$VALIDATION_FILES" | grep '\.md$' || true)
 
-          if [ -z "$MD_FILES" ]; then
-            echo "No markdown files changed"
+          if [ -z "$VALIDATION_FILES" ]; then
+            echo "No markdown, index.html, or manifest.json files changed"
             echo "any_changed=false" >> $GITHUB_OUTPUT
           else
-            echo "Changed markdown files:"
-            echo "$MD_FILES"
+            echo "Changed validation files:"
+            echo "$VALIDATION_FILES"
             # Store as space-separated for later use
             echo "all_changed_files<<EOF" >> $GITHUB_OUTPUT
-            echo "$MD_FILES" >> $GITHUB_OUTPUT
+            echo "$VALIDATION_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            echo "markdown_files<<EOF" >> $GITHUB_OUTPUT
+            echo "$MARKDOWN_FILES" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
             echo "any_changed=true" >> $GITHUB_OUTPUT
           fi
@@ -58,8 +78,17 @@ jobs:
       - name: Run markdownlint
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          echo "Running markdownlint on PR files..."
-          echo "${{ steps.changed-files.outputs.all_changed_files }}" | xargs markdownlint --config .markdownlint.json || true
+          if [ -n "${{ steps.changed-files.outputs.markdown_files }}" ]; then
+            echo "Running markdownlint on PR markdown files..."
+            CONFIG=".markdownlint.json"
+            if [ ! -f "$CONFIG" ]; then
+              CONFIG="/tmp/.markdownlint.json"
+              curl -sSfL https://raw.githubusercontent.com/oracle-livelabs/common/refs/heads/main/.markdownlint.json -o "$CONFIG"
+            fi
+            echo "${{ steps.changed-files.outputs.markdown_files }}" | xargs markdownlint --config "$CONFIG" || true
+          else
+            echo "No markdown files to lint."
+          fi
 
       - name: Run LiveLabs format validation
         if: steps.changed-files.outputs.any_changed == 'true'
@@ -102,6 +131,9 @@ jobs:
             [ -z "$file" ] && continue
             filename=$(basename "$file")
             lowercase=$(echo "$filename" | tr '[:upper:]' '[:lower:]')
+            if [ "$lowercase" = "readme.md" ]; then
+              continue
+            fi
             if [ "$filename" != "$lowercase" ]; then
               echo "ERROR: Filename must be lowercase: $file"
               INVALID=1
@@ -127,6 +159,6 @@ jobs:
             echo "- $file" >> $GITHUB_STEP_SUMMARY
           done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
 
-      - name: No markdown files in PR
+      - name: No validation files in PR
         if: steps.changed-files.outputs.any_changed != 'true'
-        run: echo "No markdown files in this PR."
+        run: echo "No markdown, index.html, or manifest.json files in this PR."
