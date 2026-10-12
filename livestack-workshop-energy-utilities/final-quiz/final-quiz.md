@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/energy-utilities-badge.svg
+badge: images/livestack-badge-energy-utilities.png
 ```
 
 ## Introduction
@@ -73,10 +73,8 @@ Estimated Time: **3 minutes**
 
 2. When you achieve the passing score, the quiz displays your completion badge.
 
-    ![Completed Utilities quiz showing 100 percent and the downloadable badge.](images/quiz-complete.png)
-
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle Database Service Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
