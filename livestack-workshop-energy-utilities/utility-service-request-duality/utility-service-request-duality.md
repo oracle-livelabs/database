@@ -42,8 +42,6 @@ Thomas's application needs a payload with the service request and its line items
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **Schema names:** `ORDERS` stores service requests, `ORDER_ITEMS` stores their items, and `CUSTOMERS` represents service points.
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
@@ -52,7 +50,7 @@ Estimated Time: **10 minutes**
 
 Thomas starts with optional screen settings. Add a table with a native `JSON` column linked to an existing service request.
 
-1. Create the application-data table and add one sample payload.
+1. Create the application-data table and add one sample payload by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -92,13 +90,15 @@ Thomas starts with optional screen settings. Add a table with a native `JSON` co
     </copy>
     ```
 
+    ![Lab 2 Task 1 Step 2](images/l2-t1-s2.png)
+
     `ORDER_ID` remains a relational key. `APP_DATA` can change as the application changes. Thomas can query both with SQL in one table.
 
 ## Task 2: Create a JSON Collection Table
 
 Next, store application-owned documents in a JSON Collection Table. Each document occupies the `DATA` column and has an `_id`.
 
-1. Create the collection and add the sample service-request document.
+1. Create the collection and add the sample service-request document by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -131,6 +131,8 @@ Next, store application-owned documents in a JSON Collection Table. Each documen
     COMMIT;
     </copy>
     ```
+
+    ![Lab 2 Task 2 Step 2](images/l2-t2-s2.png)
 
     `WITH ETAG` adds `_metadata.etag`, a version tag that changes with the document. An application can use the tag it last read to detect a concurrent change before overwriting it.
 
@@ -415,6 +417,6 @@ For this service-request feature, Thomas uses a duality view because `ORDERS` an
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
