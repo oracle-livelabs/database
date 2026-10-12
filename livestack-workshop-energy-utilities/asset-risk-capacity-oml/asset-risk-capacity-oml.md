@@ -71,49 +71,73 @@ The outcome table records the predictor cutoff and later outcome window. Keep th
 
 ## Task 2: Compare models with AutoML (optional)
 
-Otto first uses the Oracle Machine Learning AutoML interface to compare candidate models. AutoML can select algorithms, tune them, and show how well each model identifies the two labels.
+Otto uses Oracle Machine Learning AutoML to compare candidate models and see how well they identify utility services labeled `SURGE` or `STABLE`.
 
-AutoML takes several minutes. Skip to Task 3 to focus on training and scoring with SQL.
+AutoML may take several minutes. Skip to Task 3 to train and score the named model with SQL.
 
 1. Open **Machine Learning** from Database Actions.
 
-    Sign in as `LLUSER` using your workshop credentials.
+    Sign in as `LLUSER` with your workshop credentials.
 
-    ![Launching Oracle Machine Learning](images/cap-041.png)
+    ![Lab 6 Task 2](images/cap-041.png)
 
-2. Click **AutoML**.
+2. Select **AutoML**.
 
-    ![AutoML experiments](images/cap-042.png)
+    ![Lab 6 Task 2](images/cap-042.png)
 
 3. Create a new experiment with these settings:
 
-    | Setting         | Value                   |
-    | -----------------| -------------------------|
-    | Experiment name | `Utility Demand Surge`  |
-    | Data source     | `LL_UTILITY_DEMAND_TRAINING_V` |
-    | Predict         | `DEMAND_CLASS`           |
-    | Prediction type | `Classification`        |
-    | Case ID         | `PRODUCT_ID`            |
+    | Setting | Value |
+    | --- | --- |
+    | Experiment name | `Utility Demand Surge` |
+    | Data source | `LL_UTILITY_DEMAND_TRAINING_V` |
+    | Predict | `DEMAND_CLASS` |
+    | Prediction type | `Classification` |
+    | Case ID | `PRODUCT_ID` |
 
-    Select **Start**, then **Faster Results**, and wait for the model leaderboard. Runtime varies and can take several minutes.
+    **Note:** The **Predict**, **Prediction Type**, and **Case ID** fields become available after you enter a data source.
 
-    ![Utility Demand Surge experiment settings](images/cap-043.png)
+    To select the data source:
 
-4. Review the leaderboard and model details.
+    1. Enter `Utility Demand Surge` in the **Name** field.
+    2. Select the magnifying-glass icon beside **Data Source**.
+    3. In the **Select Table** window, select `LLUSER` from the **Schema** list.
+    4. Select `LL_UTILITY_DEMAND_TRAINING_V` from the **Table** list.
+    5. Select **OK**.
 
-    ![Completed AutoML leaderboard](images/cap-044.png)
+    ![Lab 6 Task 2](images/data-source-two.png)
 
-    Open candidate model details and compare their confusion matrices.
+    Select `DEMAND_CLASS` for **Predict**, `Classification` for **Prediction Type**, and `PRODUCT_ID` for **Case ID**.
 
-    Compare false negatives and false positives for both classes. A model that always predicts `STABLE` will miss every surge case.
+    ![Lab 6 Task 2](images/cap-043.png)
 
-    Use a Generalized Linear Model for the SQL exercise so you can inspect a named model and score it with SQL. The captured AutoML run shows both GLM variants at 0.75 balanced accuracy. Your result may differ; this small synthetic dataset is for learning, not operational model selection.
+    Review the predictors. Keep the service category, price, operational-signal, and request-activity columns as inputs. `PRODUCT_ID` identifies each case, and `DEMAND_CLASS` is the target; neither should be an ordinary predictor.
 
-    ![Actual GLM confusion matrix from the Utilities experiment.](images/cap-045.png)
+4. Choose **Start → Faster Results** and wait for the leaderboard. Runtime varies and may take several minutes.
 
-    Inspect feature impact where available. Signal counts or request activity can help explain the model's behavior, but a feature's influence does not prove an operational cause.
+    ![Lab 6 Task 2](images/cap-044.png)
 
-    ![Actual feature-impact view, with no preselected ranking claimed.](images/cap-046.png)
+5. Review the leaderboard and model details.
+
+    Open candidate model details and compare their confusion matrices. Check false positives and false negatives for both classes. The training data has 30 `SURGE` and 30 `STABLE` rows, so compare how each class is identified. A model that always predicts `STABLE` misses every surge case.
+
+    The captured AutoML run shows both Generalized Linear Model variants at 0.75 balanced accuracy. Your result may differ. Use the metrics and confusion matrices from your experiment; this small synthetic dataset is for learning, not operational model selection.
+
+    ![Lab 6 Task 2](images/cap-045.png)
+
+    Review feature impact when available. Signal counts or request activity can help explain a model’s behavior, but feature influence does not prove an operational cause.
+
+    ![Lab 6 Task 2](images/cap-046.png)
+
+    **Expected output: An experiment leaderboard and model details**
+
+    | Review | Question for Otto |
+    | --- | --- |
+    | Confusion matrix | Does the model identify examples from both classes? |
+    | Balanced accuracy and class errors | How does it perform on `SURGE` and `STABLE` cases? |
+    | Feature impact | Which inputs influence this fitted model? |
+
+Task 3 uses a Generalized Linear Model so you can inspect a named model and score it with SQL. It uses that model whether or not you ran AutoML; it does not assume the GLM won the experiment.
 
 ## Task 3: Create the selected model in SQL Developer Web
 
@@ -123,7 +147,7 @@ Create `LL_UTILITY_DEMAND_GLM`, a named model that SQL can call. Use Generalized
 
 The settings table selects the algorithm. `PREP_AUTO` enables automatic preparation of input columns.
 
-1. Create the settings table and train the model:
+1. Create the settings table and train the model by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -188,13 +212,15 @@ The settings table selects the algorithm. `PREP_AUTO` enables automatic preparat
     </copy>
     ```
 
+    ![Lab 6 Task 3 Step 2](images/l6-t3-s2.png)
+
     The result should show `CLASSIFICATION` and `GENERALIZED_LINEAR_MODEL`. Otto now has a database model that SQL can call.
 
 ## Task 4: Score new service activity in SQL
 
 Create a what-if scoring table by changing selected training-row inputs. These synthetic rows demonstrate scoring; they are not independent observations for measuring accuracy.
 
-1. Create the scoring table and add the new activity snapshot:
+1. Create the scoring table and add the new activity snapshot by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -330,6 +356,6 @@ Otto has a query that returns predictions with their supporting service activity
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

@@ -86,6 +86,8 @@ Gilly decides that one vector per service is enough. Each service record is shor
     </copy>
     ```
 
+    ![Lab 3 Task 2 Step 1](images/l3-t2-s1.png)
+
     The combined text gives the model the service name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the service is.
 
 2. Add a vector column to `PRODUCTS`:
@@ -240,6 +242,6 @@ Gilly can now turn an operational concern into a service-point follow-up list. N
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

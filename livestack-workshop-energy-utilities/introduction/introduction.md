@@ -60,6 +60,6 @@ The application follows a Gulf Coast resilience event across electricity, gas, w
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Kevin Lazarz
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

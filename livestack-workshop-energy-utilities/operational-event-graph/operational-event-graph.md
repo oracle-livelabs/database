@@ -38,9 +38,9 @@ Start with outgoing relationships from gas leak event `GLK-2208`, which connects
 
 1. Review Jessica's direct-connection query.
 
-```sql
-<copy>
-SELECT event.entity_key AS event_key,
+    ```sql
+    <copy>
+    SELECT event.entity_key AS event_key,
            connected.entity_key AS connected_key,
            connected.entity_type AS connected_type,
            rel.relationship_type,
@@ -52,18 +52,20 @@ SELECT event.entity_key AS event_key,
       ON connected.entity_id = rel.to_entity_id
     WHERE event.entity_key = 'GLK-2208'
     ORDER BY connected_risk DESC;
-</copy>
-```
+    </copy>
+    ```
 
-The first copy of `UTILITY_GRAPH_ENTITIES` identifies the event; the second identifies a connected entity. `UTILITY_GRAPH_RELATIONSHIPS` supplies the source and destination keys. Compare the result with the source rows before interpreting it.
+    ![Lab 4 Task 1 Step 1](images/l4-t1-s1.png)
 
-**Expected result:** Review the connected entity key, type, relationship, and risk score, including the affected pipeline.
+    The first copy of `UTILITY_GRAPH_ENTITIES` identifies the event; the second identifies a connected entity. `UTILITY_GRAPH_RELATIONSHIPS` supplies the source and destination keys. Compare the result with the source rows before interpreting it.
+
+    **Expected result:** Review the connected entity key, type, relationship, and risk score, including the affected pipeline.
 
 2. Compare the same approach across one through four hops.
 
-```sql
-<copy>
-SELECT event_key, connected_key, connected_type,
+    ```sql
+    <copy>
+    SELECT event_key, connected_key, connected_type,
            relationship_path, connected_risk
     FROM (
       SELECT seed.entity_key AS event_key,
@@ -150,14 +152,12 @@ SELECT event_key, connected_key, connected_type,
       WHERE seed.entity_key = 'GLK-2208'
     ) paths
     ORDER BY connected_risk DESC;
-</copy>
-```
+    </copy>
+    ```
 
-Each branch adds one relationship join and one entity join. `UNION` combines the path lengths and removes duplicate result rows. The output includes a path description, which can distinguish paths to the same entity. This query illustrates the cost of expressing each path length separately; it is not a claim that graph queries always run faster.
+    Each branch adds one relationship join and one entity join. `UNION` combines the path lengths and removes duplicate result rows. The output includes a path description, which can distinguish paths to the same entity. This query illustrates the cost of expressing each path length separately; it is not a claim that graph queries always run faster.
 
 3. Explain how a fifth hop would change the SQL. Identify the additional joins and consider cycles and repeated paths.
-
-![Direct relational connections from GLK-2208.](images/cap-022.png)
 
 ![Relational traversal from one through four hops.](images/cap-022b.png)
 
@@ -167,9 +167,9 @@ Initialization creates `SERVICE_RESTORATION_NETWORK` over the existing relationa
 
 1. Run the equivalent one-hop pattern.
 
-```sql
-<copy>
-SELECT event_key,
+    ```sql
+    <copy>
+    SELECT event_key,
            connected_key,
            connected_type,
            relationship_type,
@@ -186,8 +186,8 @@ SELECT event_key,
       )
     )
     ORDER BY connected_risk DESC;
-</copy>
-```
+    </copy>
+    ```
 
 `MATCH` describes one outgoing relationship. `COLUMNS` projects graph properties into a normal SQL result. Compare the entity keys, relationship types and risk scores with Task 1, including direction. The two representations should describe the same direct relationships.
 
@@ -195,15 +195,15 @@ SELECT event_key,
 
 1. Expand the event investigation to paths of one through four hops.
 
-```sql
-<copy>
-SELECT DISTINCT entity_key, display_name, entity_type,
+    ```sql
+    <copy>
+    SELECT DISTINCT entity_key, display_name, entity_type,
        relationship_hops, risk_score, operations_domain, volume_count
-FROM GRAPH_TABLE ( service_restoration_network
-  MATCH (seed IS utility_entity)
+    FROM GRAPH_TABLE ( service_restoration_network
+    MATCH (seed IS utility_entity)
         -[e IS restoration_link]->{1,4} (reached IS utility_entity)
-  WHERE seed.entity_key = 'GLK-2208'
-  COLUMNS (
+    WHERE seed.entity_key = 'GLK-2208'
+    COLUMNS (
     reached.entity_key AS entity_key,
     reached.display_name AS display_name,
     reached.entity_type AS entity_type,
@@ -211,14 +211,14 @@ FROM GRAPH_TABLE ( service_restoration_network
     reached.risk_score AS risk_score,
     reached.operations_domain AS operations_domain,
     reached.volume_count AS volume_count
-  )
-)
-ORDER BY risk_score DESC, entity_key, relationship_hops
-FETCH FIRST 25 ROWS ONLY;
-</copy>
-```
+    )
+    )
+    ORDER BY risk_score DESC, entity_key, relationship_hops
+    FETCH FIRST 25 ROWS ONLY;
+    </copy>
+    ```
 
-`->{1,4}` expresses the path-length range. `COUNT(e.relationship_type)` exposes its hop count. `DISTINCT` removes duplicate projected rows; one entity may still appear at several depths. Review the seed, direction and bounds rather than treating every reachable vertex as equally relevant.
+    `->{1,4}` expresses the path-length range. `COUNT(e.relationship_type)` exposes its hop count. `DISTINCT` removes duplicate projected rows; one entity may still appear at several depths. Review the seed, direction and bounds rather than treating every reachable vertex as equally relevant.
 
 2. Review the reached entities and their hop counts. A relationship supports investigation; it does not prove causality or authorize dispatch.
 
@@ -230,35 +230,35 @@ Bob now asks which entities share a pipeline segment, crew, or work order.
 
 1. Run the shared-connection query.
 
-```sql
-<copy>
-SELECT entity_a, shared_entity, shared_type, entity_b,
+    ```sql
+    <copy>
+    SELECT entity_a, shared_entity, shared_type, entity_b,
        a_risk, b_risk, ROUND((a_risk + b_risk) / 2, 1) AS combined_risk,
        e1_type, e2_type
-FROM GRAPH_TABLE ( service_restoration_network
-  MATCH (a IS utility_entity)
+    FROM GRAPH_TABLE ( service_restoration_network
+    MATCH (a IS utility_entity)
         -[e1 IS restoration_link]- (shared IS utility_entity)
         -[e2 IS restoration_link]- (b IS utility_entity)
-  WHERE a.entity_id < b.entity_id
+    WHERE a.entity_id < b.entity_id
     AND a.entity_id <> shared.entity_id
     AND b.entity_id <> shared.entity_id
     AND shared.entity_type IN ('pipeline_segment', 'field_crew', 'work_order')
     AND (a.risk_score >= 70 OR b.risk_score >= 70)
-  COLUMNS (
+    COLUMNS (
     a.entity_key AS entity_a,
     shared.entity_key AS shared_entity,
     shared.entity_type AS shared_type,
     b.entity_key AS entity_b,
     a.risk_score AS a_risk, b.risk_score AS b_risk,
     e1.relationship_type AS e1_type, e2.relationship_type AS e2_type
-  )
-)
-ORDER BY combined_risk DESC, shared_entity, entity_a, entity_b
-FETCH FIRST 25 ROWS ONLY;
-</copy>
-```
+    )
+    )
+    ORDER BY combined_risk DESC, shared_entity, entity_a, entity_b
+    FETCH FIRST 25 ROWS ONLY;
+    </copy>
+    ```
 
-These undirected pattern edges examine adjacency in either direction. This is deliberately different from Tasks 1-3. Read `E1_TYPE` and `E2_TYPE` against the stored edge direction when interpreting the result. `a.entity_id < b.entity_id` avoids returning the same pair in reverse order; the other predicates exclude the shared vertex itself.
+    These undirected pattern edges examine adjacency in either direction. This is deliberately different from Tasks 1-3. Read `E1_TYPE` and `E2_TYPE` against the stored edge direction when interpreting the result. `a.entity_id < b.entity_id` avoids returning the same pair in reverse order; the other predicates exclude the shared vertex itself.
 
 2. Review the shared node and both relationship types. A crew linked to two events may indicate shared workload, but not necessarily a capacity conflict. Check schedules and operational records before drawing that conclusion. The combined risk is a review-order calculation, not a calibrated failure probability.
 
@@ -304,13 +304,13 @@ The notebook contains eight paragraphs: explanations, a table query, and two gra
 
 2. Compare the notebook paragraphs.
 
-| Paragraph | Result | Investigation purpose |
-| --- | --- | --- |
-| Bounded traversal from `GLK-2208` | Table | Rank reached entities and their operational context. |
-| Graph Visualization of previous query | Markdown | Introduce the visual version of the traversal. |
-| `SELECT *` with `ONE ROW PER STEP` | Graph | Show the vertices and edges on the one- and two-hop paths. |
-| Shared Entity Connections | Markdown | Introduce the asset-centered view. |
-| Adjacency around `PIPE-17A` | Graph | Show entities directly connected to the pipeline in either direction. |
+    | Paragraph | Result | Investigation purpose |
+    | --- | --- | --- |
+    | Bounded traversal from `GLK-2208` | Table | Rank reached entities and their operational context. |
+    | Graph Visualization of previous query | Markdown | Introduce the visual version of the traversal. |
+    | `SELECT *` with `ONE ROW PER STEP` | Graph | Show the vertices and edges on the one- and two-hop paths. |
+    | Shared Entity Connections | Markdown | Introduce the asset-centered view. |
+    | Adjacency around `PIPE-17A` | Graph | Show entities directly connected to the pipeline in either direction. |
 
 3. Run the path-visualization paragraph. Select vertices and follow the displayed relationships. Check the key and edge type against the table result.
 
@@ -396,6 +396,6 @@ CREATE OR REPLACE PROPERTY GRAPH service_restoration_network
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
