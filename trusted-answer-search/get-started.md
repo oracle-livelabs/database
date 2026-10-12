@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless (ADB-S)** or on-premises using Oracle Database 23ai or later. This workshop focuses on OCI ADB-S.
+Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless (ADB-S)** or on-premises using Oracle Database 26ai. This workshop focuses on OCI ADB-S.
 
 **Estimated time:** 5 minutes
 
