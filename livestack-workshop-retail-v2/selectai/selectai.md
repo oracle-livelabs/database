@@ -4,13 +4,13 @@
 
 Nina Patel is a retail analyst at Seer Sporting Goods. She knows the business questions she wants to ask, but she does not want every answer to depend on finding the right table, column, join, and filter first.
 
-Jessica, the DBA, has configured a Select AI profile for the retail schema. Nina can ask a question in ordinary language. Select AI uses the profile and database metadata to generate SQL, run a question, or explain the returned rows.
+Jessica, the DBA, has configured a Select AI profile for the retail schema. Nina can ask a question in ordinary language. Select AI uses the profile and database metadata to generate SQL from a question, execute a generated query, or explain its results.
 
 Nina reviews the generated SQL because a model can choose an unsuitable revenue calculation or add a filter the question did not request. She asks, inspects, runs, and refines the question before using the answer in a business review.
 
 In this lab, you connect the profile to the retail tables, inspect generated SQL, compare the answer with a direct revenue query, and improve the question for a more useful result.
 
-![nina](images/nina.png)
+![Jessica, DBA, and Nina, retail analyst](images/nina.png)
 
 <details>
 <summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
@@ -83,7 +83,7 @@ Use the existing `GENAI` profile in your `LLUSER` schema. You will inspect its s
 
 Nina's questions require products, orders, order items, and customers. Use the current schema name so the same block works in each learner reservation.
 
-1. Set the four-table list.
+1. Set the four-table list. Select the complete block, including /, and use Run Script.
 
     ```sql
     <copy>
@@ -102,7 +102,7 @@ Nina's questions require products, orders, order items, and customers. Use the c
 
     **Expected output:** PL/SQL procedure successfully completed.
 
-2. Supply all four tables as context and enforce the object list for generated SQL.
+2. Supply all four tables as context and enforce the object list for generated SQL. Select the complete block, including /, and use Run Script.
 
     ```sql
     <copy>
@@ -131,7 +131,7 @@ Nina's questions require products, orders, order items, and customers. Use the c
 
     ![SQL Worksheet showing the query and result for Task 2: Add the retail tables to the profile, SQL block 5](images/sql-lab-7-05.jpg)
 
-    **Expected output:** PRODUCTS, ORDERS, ORDER_ITEMS, and CUSTOMERS owned by LLUSER.
+    **Expected output:** PRODUCTS, ORDERS, ORDER\_ITEMS, and CUSTOMERS owned by LLUSER.
 
 ## Task 3: Ask a question and inspect the SQL
 
@@ -151,11 +151,11 @@ Nina starts with product revenue by using `SHOWSQL` to inspect the generated sta
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Ask a question and inspect the SQL, SQL block 6](images/sql-lab-7-06.jpg)
+    ![SQL Worksheet showing the query and result for Task 3: Ask a question and inspect the SQL, SQL block 6](images/l7-t3-s1.png)
 
     **Expected output:** A SELECT statement that joins product and order-line data, aggregates revenue by product, orders descending, and returns five rows. Generated formatting and aliases may differ.
 
-2. Inspect the full statement. Check the product-to-item join, the aggregation, any status filters, and the five-row limit. Different product IDs can share a name, so grouping only by name can combine distinct products. Task 5 makes the product identity explicit. For this question, revenue means the historical sum of order-line quantity × line price, exposed by LINE_TOTAL. It is not the current catalog price and does not subtract refunds or cancelled orders unless the question explicitly asks for those rules.
+2. Inspect the full statement. Check the product-to-item join, the aggregation, any status filters, and the five-row limit. Different product IDs can share a name, so grouping only by name can combine distinct products. Task 5 makes the product identity explicit. For this question, revenue means the historical sum of order-line quantity × line price, exposed by LINE\_TOTAL. It is not the current catalog price and does not subtract refunds or cancelled orders unless the question explicitly asks for those rules.
 
 3. After reviewing the generated SELECT, copy it into a new worksheet and run that exact statement. Keep the result for comparison with Task 4. If the generated statement does not answer the question, refine the prompt before using its answer.
 
@@ -199,14 +199,6 @@ Nina starts with product revenue by using `SHOWSQL` to inspect the generated sta
     ![SQL Worksheet showing the query and result for Task 4: Run the question in the database, SQL block 8](images/sql-lab-7-08.jpg)
 
     **Expected output:** Five rows with product ID, name, category, revenue, and units sold. These values come directly from the retail order items.
-
-    | Product | Revenue | Units |
-    | --- | ---: | ---: |
-    | SummitPulse GPS Watch | 443,998.89 | 111 |
-    | FieldCoach Training Tablet | 254,998.98 | 102 |
-    | Carbon Road Bike | 217,499.25 | 75 |
-    | RouteGuide AR Sport Glasses | 169,498.87 | 113 |
-    | PowerRack Home Gym | 139,499.07 | 93 |
 
     These examples describe the sample retail data. If you change the orders, compare against your current reference result. Product IDs distinguish repeated product names.
 
@@ -282,7 +274,7 @@ Nina turned a retail question into SQL, reviewed the statement, ran the question
 
 Select AI reduces the SQL a business user must write while keeping the query, database privileges, and business calculation visible. The model helps express a question; Nina still decides whether the SQL and answer address it.
 
-Jessica and Nina now have the ingredients for a defined assistant. In the next lab, they give an agent a role, a task, and one SQL tool, then inspect the execution history behind its answer.
+Jessica and Nina will now use the configured profile to build an assistant. In the next lab, they give an agent a role, a task, and one SQL tool, then inspect the execution history behind its answer.
 
 ## Next Steps
 
@@ -291,4 +283,5 @@ Continue to [Lab 8: Build a Retail Agent with Select AI Agent](?lab=selectai-age
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

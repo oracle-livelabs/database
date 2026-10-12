@@ -8,7 +8,7 @@ Gilly already has product, order and customer data in the database. Her design p
 
 A separate vector service would introduce another copy of product text and a pipeline to keep its search data synchronized. Gilly wants similarity search to run beside the source rows, so the same SQL statement can rank products and join them to customer details.
 
-In this lab, you review her implementation from the embedding model to the final customer list. Oracle AI Vector Search finds products by meaning; relational joins connect those matches to their existing orders. The search is evidence for a review, not a prediction of future sales or customer intent.
+In this lab, you review her implementation from the embedding model to the final customer list. Oracle AI Vector Search finds products by meaning; relational joins connect those matches to their existing orders. The results help the team review related products and existing orders; they do not predict future sales or customer intent.
 
 ![Gilly Bourne, AI engineer](images/gilly.png)
 
@@ -41,8 +41,8 @@ Estimated Time: **15 minutes**
 | Technical Challenge | Gilly must keep product meaning, vectors, order keys and customer context connected. |
 | Persona Focus | You review Gilly's implementation from the model to a customer and order result. |
 | What You Will See | Vector search ranks products; SQL joins add exact order and customer details. |
-| Database Capability | VECTOR_EMBEDDING, vector columns and VECTOR_DISTANCE run beside relational data. |
-| Outcome | The application can turn a plain-language product question into an inspectable review list. |
+| Database Capability | VECTOR\_EMBEDDING, vector columns and VECTOR\_DISTANCE run beside relational data. |
+| Outcome | The application can turn a plain-language product question into a list of product matches and related orders the team can review. |
 
 Persona focus: You are reviewing the search tool Gilly built for retail operations.
 
@@ -66,13 +66,9 @@ Similarity search needs a compatible representation for both the stored text and
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Check the embedding model, SQL block 1](images/sql-lab-3-01.jpg)
-
     **Expected output: Available embedding model**
 
-    | OWNER | MODEL_NAME | ALGORITHM | MINING_FUNCTION |
-    | --- | --- | --- | --- |
-    | LLUSER | ALL_MINILM_L12_V2 | ONNX | EMBEDDING |
+    ![SQL Worksheet showing the query and result for Task 1: Check the embedding model, SQL block 1](images/sql-lab-3-01.jpg)
 
     Other visible embedding models can also appear. This lab uses `LLUSER.ALL_MINILM_L12_V2`, which produces 384-dimensional vectors. Gilly will use the same model for the product text and the question.
 
@@ -83,7 +79,7 @@ Similarity search needs a compatible representation for both the stored text and
     <details>
     <summary><strong>Optional: inspect the existing retail search embeddings</strong></summary>
 
-    The existing application already has separate embedding tables for products and social posts. These support the dashboard and the signal searches later in this lab.
+    The existing application already has separate embedding tables for products and social posts. These support the dashboard and the social-post searches later in this lab.
 
     ```sql
     <copy>
@@ -106,14 +102,9 @@ Similarity search needs a compatible representation for both the stored text and
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Check the embedding model, SQL block 2](images/sql-lab-3-02.jpg)
-
     **Expected output: Existing embedding coverage**
 
-    | Vector Table | Embeddings | Source Rows | Coverage Pct |
-    | --- | ---: | ---: | ---: |
-    | POST_EMBEDDINGS | 5,000 | 5,000 | 100 |
-    | PRODUCT_EMBEDDINGS | 187 | 187 | 100 |
+    ![SQL Worksheet showing the query and result for Task 1: Check the embedding model, SQL block 2](images/sql-lab-3-02.jpg)
 
     Gilly will add a new demonstration column to `PRODUCTS` to make the text-to-vector step visible. The existing embedding tables continue to serve their current queries.
 
@@ -138,17 +129,11 @@ Gilly creates one vector per product from its name, category, and subcategory, w
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Create a product vector, SQL block 3](images/sql-lab-3-03.jpg)
-
     **Expected output: Product text**
 
-    The query returns five product rows. One observed example was:
+    ![SQL Worksheet showing the query and result for Task 2: Create a product vector, SQL block 3](images/sql-lab-3-03.jpg)
 
-    | PRODUCT_ID | PRODUCT_NAME | EMBEDDING_TEXT |
-    | ---: | --- | --- |
-    | 94 | Cyber Mesh Sneakers | Cyber Mesh Sneakers. Category: Footwear. Subcategory: Sneakers |
-
-    The query does not specify a display order, so your five rows can differ. Gilly embeds descriptive text; price and order dates do not explain the product's meaning in this example.
+    The query returns five product rows. The query does not specify a display order, so your five rows can differ. Gilly embeds descriptive text; price and order dates do not explain the product's meaning in this example.
 
 2. Add the vector column to `PRODUCTS`. Run this `ALTER TABLE` once; if you are revisiting the lab after creating the column, continue to the update step.
 
@@ -210,9 +195,9 @@ Gilly creates one vector per product from its name, category, and subcategory, w
 
     | Column | What to inspect |
     | --- | --- |
-    | PRODUCT_ID | The stable relational identifier for each product |
-    | PRODUCT_NAME | The catalog label associated with the vector |
-    | PRODUCT_EMBEDDING | A populated vector containing 384 numbers |
+    | PRODUCT\_ID | The stable relational identifier for each product |
+    | PRODUCT\_NAME | The catalog label associated with the vector |
+    | PRODUCT\_EMBEDDING | A populated vector containing 384 numbers |
 
     SQL Worksheet can show a shortened vector preview. Expand a value to inspect its numbers. The same product key connects the vector to the rest of the retail data.
 
@@ -239,19 +224,11 @@ Gilly first tests the vector column with the same trail-running phrase as Jessic
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 8](images/sql-lab-3-08.jpg)
-
     **Expected output: Closest product vectors**
 
-    | PRODUCT_ID | PRODUCT_NAME | VECTOR_DISTANCE, rounded here |
-    | ---: | --- | ---: |
-    | 132 | Marathon Elite Racer | 0.409041 |
-    | 46 | AirGlide Runner | 0.440360 |
-    | 48 | TrailGrip Hiker | 0.457246 |
-    | 3 | TrailFlex Training Joggers | 0.510181 |
-    | 43 | TrailFlex Training Joggers | 0.510181 |
+    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 8](images/sql-lab-3-08.jpg)
 
-    The SQL returns the full distance; this table rounds it for readability. Lower is closer. Product ID breaks equal-distance ties so a repeated product name does not obscure which record the query selected.
+    The query returns the unrounded cosine distance. Lower values indicate closer matches. Product ID breaks equal-distance ties so a repeated product name does not obscure which record the query selected.
 
 2. Review what the ranking means.
 
@@ -281,17 +258,9 @@ Gilly first tests the vector column with the same trail-running phrase as Jessic
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 9](images/sql-lab-3-09.jpg)
-
     **Expected output: Product similarities**
 
-    | PRODUCT_ID | PRODUCT_NAME | SIMILARITY |
-    | ---: | --- | ---: |
-    | 132 | Marathon Elite Racer | 0.5910 |
-    | 46 | AirGlide Runner | 0.5596 |
-    | 48 | TrailGrip Hiker | 0.5428 |
-    | 3 | TrailFlex Training Joggers | 0.4898 |
-    | 43 | TrailFlex Training Joggers | 0.4898 |
+    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 9](images/sql-lab-3-09.jpg)
 
     `1 - distance` changes the display so higher means closer. Rounding to four decimal places makes the score easier to read; it is not a probability that someone will buy the product. Both queries identify products explicitly, and the supplied results select the same five IDs. Rounded scores can introduce additional ties, so the customer query below uses the same similarity-and-ID ordering.
 
@@ -325,17 +294,11 @@ Gilly first tests the vector column with the same trail-running phrase as Jessic
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 10](images/sql-lab-3-10.jpg)
-
     **Expected output: Existing product search**
 
-    | Product | Best Distance |
-    | --- | ---: |
-    | CoachMic USB Microphone | 0.6852 |
-    | Expedition Power Bank | 0.7042 |
-    | CoachView Curved Display | 0.7327 |
+    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 10](images/sql-lab-3-10.jpg)
 
-    These are the first three observed rows. The broad phrase illustrates why wording matters: it does not ask specifically for footwear.
+    Compare the returned products with the search phrase. The broad phrase illustrates why wording matters: it does not ask specifically for footwear.
 
 2. Search social-post embeddings for the trail-running question, then connect matching posts to the products they mention.
 
@@ -366,17 +329,9 @@ Gilly first tests the vector column with the same trail-running phrase as Jessic
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 11](images/sql-lab-3-11.jpg)
-
     **Expected output: Products mentioned in relevant posts**
 
-    | Product | Best Distance |
-    | --- | ---: |
-    | Marathon Elite Racer | 0.3470 |
-    | Barefoot Minimalist Shoe | 0.3488 |
-    | Cyber Mesh Sneakers | 0.3696 |
-    | TrailFlex Training Joggers | 0.3861 |
-    | AllTerrain Hiking Boots | 0.3943 |
+    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 11](images/sql-lab-3-11.jpg)
 
     `MIN` keeps the closest matching post for each grouped product label. This is evidence about the meaning of the associated posts, not a count of new orders.
 
@@ -409,15 +364,9 @@ Gilly first tests the vector column with the same trail-running phrase as Jessic
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 12](images/sql-lab-3-12.jpg)
-
     **Expected output: A more specific signal search**
 
-    | Product | Best Distance |
-    | --- | ---: |
-    | AllTerrain Hiking Boots | 0.2186 |
-    | TrailGrip Hiker | 0.5050 |
-    | Summit 65L Backpack | 0.5189 |
+    ![SQL Worksheet showing the query and result for Task 3: Test the product vector, SQL block 12](images/sql-lab-3-12.jpg)
 
     AllTerrain moves from fifth to first in the observed result. Explain the change through the question and the text being searched. Product vectors describe the catalog; post vectors describe recorded customer or creator language. Neither result on its own establishes future demand.
 
@@ -468,17 +417,11 @@ Gilly can now turn a ranked product search into a review list. The application s
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 4: Add customer and order context, SQL block 13](images/sql-lab-3-13.jpg)
-
     **Expected output: Product matches with exact order context**
 
-    The first part uses the same similarity-and-ID ordering as Task 3. The remaining joins use product, order and customer keys. With the supplied data, the query returned **221 order-line rows** across product IDs **132, 46, 48, 3 and 43**. Selected columns from the first rows were:
+    ![SQL Worksheet showing the query and result for Task 4: Add customer and order context, SQL block 13](images/sql-lab-3-13.jpg)
 
-    | PRODUCT_ID | PRODUCT_NAME | SIMILARITY | ORDER_ID | ORDER_STATUS | QUANTITY | LINE_TOTAL |
-    | ---: | --- | ---: | ---: | --- | ---: | ---: |
-    | 132 | Marathon Elite Racer | 0.5910 | 2758 | delivered | 1 | 219.99 |
-    | 132 | Marathon Elite Racer | 0.5910 | 2828 | delivered | 3 | 659.97 |
-    | 132 | Marathon Elite Racer | 0.5910 | 526 | delivered | 3 | 659.97 |
+    The first part uses the same similarity-and-ID ordering as Task 3. The remaining joins use product, order and customer keys. With the supplied data, the query returned **221 order-line rows** across product IDs **132, 46, 48, 3 and 43**. Scroll across the SQL Worksheet result to inspect the returned columns.
 
     The full result also includes customer names, email addresses and order timestamps. It excludes `cancelled` and `returned` orders; delivered orders remain valid history. The 221 rows are order lines, not 221 distinct customers or a list of future purchases.
 
@@ -488,9 +431,10 @@ Gilly can now turn a ranked product search into a review list. The application s
 
 ## Conclusion
 
-Gilly has connected a plain-language product question to an inspectable customer and order result. Oracle AI Vector Search supplies the semantic matches, while SQL keys keep the follow-up evidence tied to the existing retail records. Next, Bob examines the creator relationships behind the signals to add network context to the investigation.
+Gilly connected a plain-language product question to related customer and order records. Oracle AI Vector Search finds product-text matches, and SQL joins connect them to existing orders. Next, Bob examines the creator relationships associated with the social posts.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

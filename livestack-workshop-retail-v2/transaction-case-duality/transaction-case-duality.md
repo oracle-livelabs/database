@@ -6,7 +6,7 @@ Thomas Brune is an application developer at Seer Sporting Goods. He and his team
 
 Thomas needs an order and its items as one JSON payload. It should include the customer identifier, order status and item details, with room for changing application settings. The data already lives in Oracle AI Database. His question is how to give the application that document shape while retaining relational keys, SQL, transactions and database controls.
 
-Thomas asks Jessica, the DBA, to walk through three approaches. They start with a JSON value in a relational table, then a collection of application-owned documents, and finally a JSON Relational Duality View over the existing order rows. Each approach has a different ownership model; choosing one for a screen does not require choosing it for the whole application.
+Thomas asks Jessica, the DBA, to walk through three approaches. They start with a JSON value in a relational table, then a collection of application-owned documents, and finally a JSON Relational Duality View over the existing order rows. Each approach differs in where it stores data and how the application accesses it. Thomas can choose a different approach for each feature.
 
 ![Thomas Brune, application developer](images/thomas.png)
 
@@ -20,7 +20,7 @@ Thomas asks Jessica, the DBA, to walk through three approaches. They start with 
 
 </details>
 
-Thomas's order feature needs a shape such as this. The example is a document illustration; you will insert the complete workshop payload in Task 5.
+This example shows the JSON structure Thomas’s order feature needs. You will insert the complete workshop document in Task 5.
 
 ```json
 {
@@ -122,13 +122,9 @@ Thomas starts with optional screen settings for an existing order, storing its k
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Store flexible application data as JSON, SQL block 4](images/sql-lab-2-04.jpg)
-
     **Expected output: Application settings**
 
-    | ORDER_ID | SCREEN_NAME | SHOW_TOTAL | APP_FEATURES |
-    | ---: | --- | --- | --- |
-    | 1 | order-detail | true | ["live-status","saved-delivery-address"] |
+    ![SQL Worksheet showing the query and result for Task 1: Store flexible application data as JSON, SQL block 4](images/sql-lab-2-04.jpg)
 
     `ORDER_ID` remains a relational key. `JSON_VALUE` returns scalar values, including a native Boolean, while `JSON_QUERY` returns the feature array. Thomas can change the settings document as the screen evolves.
 
@@ -197,17 +193,9 @@ Thomas next tries a document collection in which each row owns a document in `DA
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Create a JSON Collection Table, SQL block 8](images/sql-lab-2-08.jpg)
-
     **Expected output: Stored order document**
 
-    | Field | Observed value |
-    | --- | --- |
-    | `_id` | 1 |
-    | `customerId` | 1668 |
-    | `status` | confirmed |
-    | `items` | Four item objects, with IDs 1 through 4 |
-    | `_metadata.etag` | A generated document-version value |
+    ![SQL Worksheet showing the query and result for Task 2: Create a JSON Collection Table, SQL block 8](images/sql-lab-2-08.jpg)
 
     `RETURNING CLOB` allows the full document to be displayed without the default short character limit. Expand the document value in SQL Worksheet to inspect the item array. The ETag value depends on the document version; do not compare its text with another learner's result.
 
@@ -234,24 +222,18 @@ Thomas now tests the payload his order feature should consume. `ORDERS_DV` suppl
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Read a customer order document from relational data, SQL block 9](images/sql-lab-2-09.jpg)
-
     **Expected output: Relational order as JSON**
 
-    | Field | What to inspect |
-    | --- | --- |
-    | `_id`, `customerId`, `status` | Order 1, customer 1668 and confirmed status |
-    | `total`, `shippingCost`, `demandScore`, `createdAt` | Header fields defined by the view |
-    | `items` | The order's four related item rows |
-    | `_metadata.etag` | The document version used for concurrency checks |
+    ![SQL Worksheet showing the query and result for Task 3: Read a customer order document from relational data, SQL block 9](images/sql-lab-2-09.jpg)
+
 
 2. Expand the JSON value in SQL Worksheet and compare its shape with the collection document.
 
-    The application sees the document contract defined by the view. Jessica still sees relational rows. The collection from Task 2 stores its own document; this duality view reads the current order and item records each time.
+    The application receives the JSON structure defined by the view. Jessica can query the same data as relational rows. The collection from Task 2 stores its own document; this duality view reads the current order and item records each time.
 
 ## Task 4: Enable document inserts and updates
 
-The existing duality view allows updates, but Thomas also needs to accept a new order with nested items. Jessica changes the view's write contract while the database continues to enforce the underlying relational keys and data types.
+The existing duality view allows updates, but Thomas also needs to accept a new order with nested items. Jessica enables inserts through the view while the database continues to enforce the underlying relational keys and data types.
 
 1. Inspect the current document capabilities.
 
@@ -266,13 +248,9 @@ The existing duality view allows updates, but Thomas also needs to accept a new 
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 4: Enable document inserts and updates, SQL block 10](images/sql-lab-2-10.jpg)
-
     **Expected output: Current document capabilities**
 
-    | View Name | Allow Insert | Allow Update | Allow Delete |
-    | --- | --- | --- | --- |
-    | ORDERS_DV | false | true | false |
+    ![SQL Worksheet showing the query and result for Task 4: Enable document inserts and updates, SQL block 10](images/l2-t4-s1.png)
 
     If you already completed this task, insert will be enabled. The metadata reports the view's current definition.
 
@@ -323,13 +301,9 @@ The existing duality view allows updates, but Thomas also needs to accept a new 
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 4: Enable document inserts and updates, SQL block 12](images/sql-lab-2-12.jpg)
-
     **Expected output: Document capabilities enabled**
 
-    | View Name | Allow Insert | Allow Update | Allow Delete |
-    | --- | --- | --- | --- |
-    | ORDERS_DV | true | true | false |
+    ![SQL Worksheet showing the query and result for Task 4: Enable document inserts and updates, SQL block 12](images/sql-lab-2-12.jpg)
 
 Thomas can now submit an order document through the view. In an application, Jessica would also grant the intended access, because enabling an operation in the view definition does not itself grant access to another user.
 
@@ -409,13 +383,9 @@ Thomas tests a complete order by writing a JSON document, then Jessica checks th
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 15](images/sql-lab-2-15.jpg)
-
     **Expected output: Newly created relational rows**
 
-    | Order | Status | Customer Email | Item | Product | Quantity | Unit Price | Line Total |
-    | ---: | --- | --- | ---: | --- | ---: | ---: | ---: |
-    | 900001 | pending | `mary.smith1@example.com` | 990001 | StormRunner Trail Shell | 2 | 189.99 | 379.98 |
+    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 15](images/sql-lab-2-15.jpg)
 
     A repeated visit can show `confirmed` if the next update has already run. The line total is calculated from the relational quantity and unit price.
 
@@ -464,13 +434,9 @@ Thomas tests a complete order by writing a JSON document, then Jessica checks th
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 18](images/sql-lab-2-18.jpg)
-
     **Expected output: Updated order, unchanged item**
 
-    | Order | Status | Item | Product | Quantity | Line Total |
-    | ---: | --- | ---: | --- | ---: | ---: |
-    | 900001 | confirmed | 990001 | StormRunner Trail Shell | 2 | 379.98 |
+    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 18](images/sql-lab-2-18.jpg)
 
     `ORDERS.ORDER_STATUS` changed; the item values stayed the same. The document and SQL access paths address the same records, so there is no independent order copy to reconcile. This committed workshop order remains in the schema for the rest of the session.
 
@@ -492,13 +458,9 @@ Jessica still needs SQL for reporting and analysis. Here she projects selected f
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 6: Project document fields into SQL columns, SQL block 19](images/sql-lab-2-19.jpg)
-
     **Expected output: JSON field projection**
 
-    | Order | Status | Customer Email |
-    | ---: | --- | --- |
-    | 900001 | confirmed | `mary.smith1@example.com` |
+    ![SQL Worksheet showing the query and result for Task 6: Project document fields into SQL columns, SQL block 19](images/sql-lab-2-19.jpg)
 
 2. Read the same values directly from the relational tables.
 
@@ -510,13 +472,9 @@ Jessica still needs SQL for reporting and analysis. Here she projects selected f
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 6: Project document fields into SQL columns, SQL block 20](images/sql-lab-2-20.jpg)
-
     **Expected output: Equivalent relational projection**
 
-    | ORDER_ID | ORDER_STATUS | EMAIL |
-    | ---: | --- | --- |
-    | 900001 | confirmed | `mary.smith1@example.com` |
+    ![SQL Worksheet showing the query and result for Task 6: Project document fields into SQL columns, SQL block 20](images/sql-lab-2-20.jpg)
 
     Compare the values despite the different column headings. Thomas can use the document shape in the application while Jessica joins and analyzes the same order with SQL.
 
@@ -528,11 +486,12 @@ Thomas does not need one JSON model for every application feature. He can choose
 | --- | --- | --- | --- |
 | JSON column in a relational table | A relational record needs optional or changing attributes. | Screen settings beside an order key. | A normal table with a native JSON column. |
 | JSON Collection Table | The application owns a set of documents. | Saved shopping drafts whose structure can evolve. | One independent document per DATA row in the collection. |
-| JSON Relational Duality View | Existing relational rows need an application document shape. | Submit an order with items and update its status. | ORDERS and ORDER_ITEMS; the view defines the document contract. |
+| JSON Relational Duality View | Existing relational rows need an application document shape. | Submit an order with items and update its status. | ORDERS and ORDER\_ITEMS; the view defines the document contract. |
 
-For the order feature, `ORDERS_DV` gives Thomas the payload he needs while Jessica retains relational constraints, SQL and control of the write contract. The next question is which other products and customer orders relate to an emerging signal. Gilly will connect a plain-language search to those existing records.
+For the order feature, `ORDERS_DV` gives Thomas the payload he needs while Jessica retains relational constraints, SQL access and control over which writes the view permits. The next question is which other products and customer orders relate to an emerging signal. Gilly will connect a plain-language search to those existing records.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
