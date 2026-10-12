@@ -82,6 +82,6 @@ Open SQL Worksheet as `LLUSER`. Run each query there and review the returned tab
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Linda Foinding, Principal Database Service Manager
-* **Last Updated By/Date** - Oracle Database Service Management, May 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
