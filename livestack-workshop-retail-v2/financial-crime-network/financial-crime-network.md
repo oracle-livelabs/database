@@ -442,5 +442,5 @@ The notebook's optional memory load follows Oracle's [SQL property graph loading
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* ** Contributor** - Teodor C. Nechita
+* **Contributor** - Teodor C. Nechita
 * **Last Updated By/Date** - Teodor C. Nechita, October 2026

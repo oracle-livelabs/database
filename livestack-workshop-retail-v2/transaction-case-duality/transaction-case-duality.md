@@ -493,5 +493,5 @@ For the order feature, `ORDERS_DV` gives Thomas the payload he needs while Jessi
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* ** Contributor** - Teodor C. Nechita
+* **Contributor** - Teodor C. Nechita
 * **Last Updated By/Date** - Teodor C. Nechita, October 2026

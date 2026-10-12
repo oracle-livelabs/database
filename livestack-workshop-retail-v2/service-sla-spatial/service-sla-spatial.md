@@ -281,5 +281,5 @@ For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spati
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* ** Contributor** - Teodor C. Nechita
+* **Contributor** - Teodor C. Nechita
 * **Last Updated By/Date** - Teodor C. Nechita, October 2026

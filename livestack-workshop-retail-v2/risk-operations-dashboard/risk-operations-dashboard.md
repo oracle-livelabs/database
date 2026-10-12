@@ -301,5 +301,5 @@ Thomas will now present the order data as JSON for the shopping application whil
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* ** Contributor** - Teodor C. Nechita
+* **Contributor** - Teodor C. Nechita
 * **Last Updated By/Date** - Teodor C. Nechita, October 2026

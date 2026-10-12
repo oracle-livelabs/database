@@ -436,5 +436,5 @@ Gilly connected a plain-language product question to related customer and order 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* ** Contributor** - Teodor C. Nechita
+* **Contributor** - Teodor C. Nechita
 * **Last Updated By/Date** - Teodor C. Nechita, October 2026
