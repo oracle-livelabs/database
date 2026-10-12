@@ -1,4 +1,4 @@
-# Lab 5: Improve Top-1 Accuracy with Evidence
+# Lab 2: Improve Top-1 Accuracy with Evidence
 
 ## Introduction
 
@@ -385,6 +385,6 @@ You have now completed the Trusted Answer Search LiveLab.
 
 **Authors**
 
-* Allen Hosler, Principal Product Manager, Database Applied AI
+* Markus Kissling, Product Manager
 
-**Last Updated Date** - May, 2026
+**Last Updated Date** - October, 2026

@@ -9,12 +9,10 @@ Most enterprise applications already know the right answers. The problem is that
 This workshop supports two paths:
 
 * **Green button path:** your environment is already provisioned. Start at **Lab 4** and go straight to the product walkthrough.
-* **Manual walkthrough path:** you install the backend, APEX apps, and sample data yourself. Start at **Get Started**, then complete Labs 1-3 before the main demo.
 
 **Estimated Workshop Time:**
 
 * Green button path: 35 minutes.
-* Manual walkthrough path: 90 minutes.
 
 ### Objectives
 
@@ -59,18 +57,12 @@ Then you will act as the application expert:
 
 The point is simple: **human-guided search improvement without retraining or redeployment**.
 
-## Task 3: Choose Your Path
-
-If you are using a prebuilt LiveLabs reservation or green button stack, skip directly to **Lab 4: Trusted Continuous Improvement of Search**.
-
-If you are doing the manual walkthrough, continue to **Get Started** and complete Labs 1-3 first.
-
 You may now **proceed to the next lab**.
 
 ## Acknowledgements
 
 **Authors**
 
-* Allen Hosler, Principal Product Manager, Database Applied AI
+* Markus Kissling, Product Manager 
 
-**Last Updated Date** - May, 2026
+**Last Updated Date** - October, 2026

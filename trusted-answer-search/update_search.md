@@ -1,4 +1,4 @@
-# Lab 4: Make Wikimedia Search Trusted
+# Lab 1: Make Wikimedia Search Trusted
 
 ## Introduction
 
@@ -418,12 +418,12 @@ controls the targets, parameters, and production rollout.
 </copy>
 ```
 
-You may now **proceed to Lab 5**.
+You may now **proceed to Lab 2**.
 
 ## Acknowledgements
 
 **Authors**
 
-* Allen Hosler, Principal Product Manager, Database Applied AI
+* Markus Kissling, Product Manager
 
-**Last Updated Date** - May, 2026
+**Last Updated Date** - October, 2026
