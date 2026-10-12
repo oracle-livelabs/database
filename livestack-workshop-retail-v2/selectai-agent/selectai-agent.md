@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Nina Patel is a retail analyst at Seer Sporting Goods. She has used Select AI for individual questions. Her review screen now needs an assistant that uses an approved SQL tool to answer questions about products and orders.
+Nina Patel is a retail analyst at Seer Sporting Goods. She has used Select AI to ask one retail question at a time. That works for a quick answer, but her customer-review screen needs a repeatable assistant that can answer a request through a defined database capability.
 
 Jessica, the DBA, gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the retail tables configured in the previous lab. The profile supplies the object scope, and the database user's privileges still apply when the generated SQL runs.
 
