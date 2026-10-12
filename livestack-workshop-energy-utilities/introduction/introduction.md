@@ -14,7 +14,9 @@ Seer Utility Network is a fictional energy and utilities operator. This diagram 
 
 ![Seer Utility Network core ERD: service points and field logistics sites each connect to many service requests; service requests and utility services each connect to many request items.](images/seer-utility-network-erd.png)
 
-*The diagram shows selected physical relationships in the reference application. `CUSTOMERS` represents service points, `ORDERS` holds service requests, and `PRODUCTS` holds utility services and supplies. Utilities views give these records business-facing names. A request can be unassigned to a field site; the diagram summarizes relationship direction rather than optionality. The workshop loader retains the depicted names and relationships.* [Open the full-size diagram](images/seer-utility-network-erd.png).
+The diagram connects service points (`CUSTOMERS`), service requests (`ORDERS`), and utility services and supplies (`PRODUCTS`). The workshop keeps these table names and relationships; Utilities views give them names that match the business. A service request does not need an assigned field site, although the diagram does not show this optional link.
+
+[Open the full-size diagram](images/seer-utility-network-erd.png).
 
 ### What the team builds
 
@@ -48,7 +50,7 @@ Estimated Workshop Time: **90 minutes**, with additional time for the optional A
 
 ## Application example
 
-Explore the [Seer Utility Network LiveStack Demo](http://134.98.142.113:8505/).
+Follow the [Energy & Utilities LiveStack runbook workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4429) to explore the demo application.
 
 The application follows a Gulf Coast resilience event across electricity, gas, water and wastewater, and oil-and-gas operations. Its pages connect operational signals, restoration relationships, field logistics, service requests, analytics, and AI-assisted questions. The workshop begins with one pressure concern so you can follow the data and SQL step by step.
 
