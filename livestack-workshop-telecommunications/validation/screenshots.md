@@ -1,5 +1,14 @@
 # Image coverage and capture placement
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 Eight persona-banner files are present across Labs 1–8. Seven distinct banners were edited with the built-in image tool; the Nina banner is shared by Labs 7 and 8. The original illustrated characters, poses and composition are retained visually, with telecom titles, scenarios, names and roles. These are caption edits to raster artwork, not pixel-identical copies. The figures are teaching personas, not claimed employees or customers.
 
 The introduction includes a Powtoon/Redwood-style telecom opening scene and illustrated five-entity ERD. A native SVG companion supplies selectable text. These are teaching illustrations, not database-result captures. Generic sign-in SVGs retain the Oracle platform labels. Editable welcome, graph and completion-badge SVGs use telecom text. Illustrations and platform diagrams are distinct from authentic result screenshots.
@@ -78,3 +87,8 @@ Source: [running telecom demo](http://141.144.192.27:8505/), captured 23 Septemb
 | APP-09 | selectai-agent | `app-agent-console.png` |
 
 See [application-capture-review.json](application-capture-review.json) for scope and [application-captures.json](application-captures.json) for provenance and hashes.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

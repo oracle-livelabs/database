@@ -1,0 +1,15 @@
+{
+  "prompt_count": 5,
+  "plain_language_prompts": [
+    "Which five components have the highest total scheduled material value across released, in-production, or completed orders? Show each component name and its total material value, excluding setup costs.",
+    "Which five components have the highest total scheduled material value across released, in-production, or completed orders? Show each component name and its total material value, excluding setup costs.",
+    "For released, in-production, or completed orders, which five components have the highest total scheduled material value? Show each component name, category, total material value, and total planned units. Exclude setup costs.",
+    "For released, in-production, or completed orders, which five components have the highest total scheduled material value? Show each component name, category, total material value, and total planned units. Exclude setup costs.",
+    "For released, in-production, or completed orders, which five components have the highest total scheduled material value? Exclude setup costs. Answer with a table containing exactly five rows and columns for component name, category, total material value, and total planned units, followed by one explanatory sentence. Include both numeric totals for every component exactly as returned by the query, without rounding or abbreviation. If a requested value is missing, say that the answer is incomplete rather than inventing it."
+  ],
+  "matching_showsql_runsql_questions": true,
+  "function_calls_unchanged_except_prompt_text": true,
+  "headings_unchanged": true,
+  "image_references_unchanged": true,
+  "runtime_validation": "Deferred: test database returned HTTP 571; user confirmed database terminated and testing will resume tomorrow."
+}

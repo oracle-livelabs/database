@@ -1,0 +1,158 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+1 AXWebArea SQL | Oracle Database Actions, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet
+	2 container
+		3 container
+			4 button Selector
+				1126 text 
+				6 text Selector
+			7 link Description: Database Actions, Go to Launchpad, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+			8 text  |  SQL
+			9 button Search Database (⌘+K)
+				10 text Search Database (⌘+K)
+				1127 text 
+			12 button Need Help?
+				1128 text 
+				14 text Need Help?
+			15 pop up button LLUSER User Menu
+				1129 text 
+				17 text LLUSER
+				1130 text 
+		19 container Description: Main Drawer, ID: mainDrawer
+			20 container navigator_worksheet__layout
+				473 button (collapsed) Expand
+				474 container code-playground-7184793285291993
+					475 container
+						476 toolbar Editing Toolbar
+							477 container
+								478 pop up button BROWSER [Worksheet ]*
+									479 container worksheet-dropdown
+										480 text [Worksheet ]*
+									1131 text 
+								482 pop up button 
+									1132 text 
+									484 text New file
+									1133 text 
+								486 button Open... (Ctrl+O, ⌘+O)
+									1134 text 
+									488 text Open... (Ctrl+O, ⌘+O)
+								489 button Save (Ctrl+S, ⌘+S)
+									1135 text 
+									491 text Save (Ctrl+S, ⌘+S)
+							492 container
+								493 container code-editor-run-statement-container
+									494 button Run Statement (Ctrl+⏎, ⌘+⏎)
+										1161 text 
+										496 text Run Statement (Ctrl+⏎, ⌘+⏎)
+									497 pop up button Run Statement Options
+										1137 text 
+								499 button Run Script (F5)
+									1138 text 
+									1139 text 
+									502 text Run Script (F5)
+								503 button Create Chart (Ctrl+F11, ⌘+F11)
+									1140 text 
+									1141 text 
+									506 text Create Chart (Ctrl+F11, ⌘+F11)
+								507 button Explain Plan (F10)
+									1142 text 
+									509 text Explain Plan (F10)
+								510 button Autotrace (F6)
+									1143 text 
+									512 text Autotrace (F6)
+							513 container
+								514 button Download Editor Content (Ctrl+I, ⌘+I)
+									1144 text 
+									516 text Download Editor Content (Ctrl+I, ⌘+I)
+								517 button Format (Ctrl+F7, ⌘+F7)
+									1145 text 
+									519 text Format (Ctrl+F7, ⌘+F7)
+								520 pop up button 
+									1146 text 
+									522 text Convert Case (Ctrl+B, ⌘+B)
+									1147 text 
+								524 button Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+									1148 text 
+									526 text Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+						527 toolbar Editing Toolbar
+							528 container consumer-groups-selector
+								529 text Consumer group:
+								530 container Consumer group
+									531 pop up button LOW
+										532 text LOW
+										1149 text 
+							534 container
+								535 button Data Load
+									536 text Data Load
+								537 button Open In Fullscreen
+									1150 text 
+									539 text Open In Fullscreen
+								540 button Tour
+									1151 text 
+									542 text Tour
+								543 button Help (F1)
+									1152 text 
+									545 text Help (F1)
+					546 container
+						547 container code-editor-panel
+							548 container
+								549 editor (settable) Editor content
+								1162 container
+									1163 text 2  13 
+									1164 content list
+										1165 container
+											1166 text SELECT
+											1167 text JSON
+											1168 text {
+										1169 container
+											1170 text 'items'
+											1171 text  : 
+											1172 text [
+						550 button (expanded) Collapse
+						551 container output-panel
+							552 tab group dbt-panel-tabbar
+								553 tab (selectable, settable, boolean) Query Result, Value: 0, ID: query_result-tab-label
+								554 tab (selected, settable, boolean) Script Output, Value: 1, ID: script_output-tab-label
+								634 tab (selectable, settable, boolean) DBMS Output, Value: 0, ID: dbms_output-tab-label
+								635 tab (selectable, settable, boolean) Explain Plan, Value: 0, ID: explain_plan-tab-label
+								555 tab (selectable, settable, boolean) More Tabs, Value: 0
+							556 container slot__afterControls
+								557 button Help
+									1153 text 
+									559 text Help
+							1173 container Description: Script Output, ID: script_output-tab-panel
+								1174 toolbar oj.Translations.getTranslatedString( 'core.components.code_editor.menu.code_editor_menu_label' )
+									1175 button Clear output
+										1176 text 
+										1177 text Clear output
+									1178 button Download script output
+										1179 text 
+										1180 text Download script output
+								1181 container dbt-code-viewer-4672
+									1182 container
+										1183 text View PRODUCTION_ORDERS_DV created.
+										1184 text Elapsed: 00:00:00.027
+									1185 container dbt-code-viewer-4672-actions
+										1186 button Copy to clipboard
+											1187 text 
+											1188 text Copy to clipboard
+										1189 container ID: dbt-code-viewer-4672_button_0, Description: CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW production_orders_dv AS SELECT JSON { '_id' : r.production_order_id, 'customerSiteId' : r.customer_site_id, 'plantId' : r.plant_id, 'scheduledStart' : r.scheduled_start, 'dueDate' : r.due_date, 'status' : r.order_status, 'total' : r.order_total, 'setupCost': r.setup_cost, 'priorityScore' : r.priority_score, 'createdAt' : r.created_at, 'items' : [ SELECT JSON { 'orderLineId' : rn.order_line_id, 'componentId' : rn.component_id, 'quantity' : rn.quantity, 'unitCost' : rn.unit_cost } FROM production_order_lines rn WITH INSERT UPDATE WHERE rn.production_order_id = r.production_order_id ] } FROM production_orders r WITH INSERT UPDATE
+											1190 button 
+												1191 text 
+		577 container
+			578 link Description:    1, Help: Errors
+				1159 text 
+				580 text 1
+			581 link Description:    0, Help: Warnings
+				1160 text 
+				583 text 0
+			584 link Description:    0, Help: Processes
+				1192 text 
+				586 text 0
+			587 text   |  
+			588 link 6:57:55 PM - SQL executed by LLUSER
+				589 text 6:57:55 PM - SQL executed by LLUSER
+			590 link Description: Powered by ORDS, Value: oracle.com/rest
+		591 text entry area (settable) Clipboard
+		592 button Copy
+
+The focused UI element is 494 button Run Statement (Ctrl+⏎, ⌘+⏎)

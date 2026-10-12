@@ -18,7 +18,7 @@
         // Add reliable Copy buttons without using <copy> tags in Markdown.
         document.addEventListener("DOMContentLoaded", function () {
             const lab = new URLSearchParams(window.location.search).get("lab");
-            if (!["04-understand-models-records-and-vector-tables", "05-create-embeddings-and-load-text", "06-run-baseline-semantic-search", "07-create-query-memory-module", "08-create-indexes-for-approximate-search"].includes(lab)) return;
+            if (!["04-understand-models-records-and-vector-tables", "05-create-embeddings-and-load-text", "06-run-baseline-semantic-search", "07-build-agent-context-tool"].includes(lab)) return;
 
             function addCopyButtons() {
                 let codeBlocks = document.querySelectorAll("#module-content pre");

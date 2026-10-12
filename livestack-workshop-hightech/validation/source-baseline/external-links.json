@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://docs.oracle.com/en-us/iaas/Content/generative-ai/model-endpoint-regions.htm",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?clear=RR,180&wid=800",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/js/main.min.js",
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "url": "https://livelabs.oracle.com/cdn/common/redwood-hol/css/style.min.css",
+    "error": "<urlopen error timed out>"
+  }
+]

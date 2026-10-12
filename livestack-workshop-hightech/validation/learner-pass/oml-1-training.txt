@@ -1,0 +1,139 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 638
++								638 toolbar
++									639 button Clear Output
++										640 text 
++										641 text Clear Output
++									642 button Show info
++										643 text 
++										644 text Show info
++									645 button Open in new tab
++										646 text 
++										647 text Open in new tab
++									648 button Share Query Results
++										649 text 
++										650 text Share Query Results
++									651 pop up button Download
++										652 text Download
++										653 text 
++									654 text Execution time: 0.048 seconds
++								655 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									656 container dbt-sql-worksheet__query-output-grid
++										657 text This is a data grid with 9 rows and 10 columns.
++										658 container
++											659 text COMPONENT_ID
++											660 text CATEGORY
++											661 text UNIT_COST
++											662 text TOTAL_OBSERVATIONS
++											663 text AVG_DEFECT_RATE_PCT
++											664 text MAJOR_STOPPAGES
++											665 text MINOR_STOPPAGES
++											666 text PLANNED_UNITS
++											667 text MATERIAL_VALUE
++											668 text REVIEW_LABEL
++										669 container
++											670 text 1
++											671 text 2
++											672 text 3
++											673 text 4
++											674 text 5
++											675 text 6
++											676 text 7
++											677 text 8
++											678 text 9
++										679 container
++											680 text 1
++											681 text Power electronics
++											682 text 125
++											683 text 8
++											684 text 4.75
++											685 text 5
++											686 text 3
++											687 text 1528
++											688 text 191000
++											689 text REVIEW
++											690 text 2
++											691 text Power electronics
++											692 text 85
++											693 text 8
++											694 text 0.4375
++											695 text 0
++											696 text 0
++											697 text 521
++											698 text 44285
++											699 text STABLE
++											700 text 3
++											701 text Motor control
++											702 text 170
++											703 text 8
++											704 text 4.75
++											705 text 5
++											706 text 3
++											707 text 1560
++											708 text 265200
++											709 text REVIEW
++											710 text 4
++											711 text Motor control
++											712 text 210
++											713 text 8
++											714 text 0.4375
++											715 text 0
++											716 text 0
++											717 text 2475
++											718 text 519750
++											719 text STABLE
++											720 text 5
++											721 text Sensing
++											722 text 155
++											723 text 8
++											724 text 4.75
++											725 text 5
++											726 text 3
++											727 text 566
++											728 text 87730
++											729 text REVIEW
++											730 text 6
++											731 text Sensing
++											732 text 95
++											733 text 8
++											734 text 0.4375
++											735 text 0
++											736 text 0
++											737 text 2495
++											738 text 237025
++											739 text STABLE
++											740 text 7
++											741 text Sensing
++											742 text 230
++											743 text 8
++											744 text 4.75
++											745 text 5
++											746 text 3
++											747 text 1463
++											748 text 336490
++											749 text REVIEW
++											750 text 8
++											751 text Industrial I/O
++											752 text 45
++											753 text 8
++											754 text 0.4375
++											755 text 0
++											756 text 0
++											757 text 547
++											758 text 24615
++											759 text STABLE
++											760 text 9
++											761 text Communications
++											762 text 65
++											763 text 8
++											764 text 4.75
++											765 text 5
++											766 text 3
++											767 text 1482
++											768 text 96330
++											769 text REVIEW
++				770 text 
+~			64 link 7:14:44 PM - 10 rows total
+~				65 text 7:14:44 PM - 10 rows total
+The focused UI element is 99 button Run Statement (Ctrl+⏎, ⌘+⏎)

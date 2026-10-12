@@ -1,0 +1,162 @@
+Window: "Material Flow Prerequisite", App: Google Chrome.
+0 standard window Material Flow Prerequisite - Google Chrome, Secondary Actions: Raise, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsMaNrar
+	1 container Material Flow Prerequisite - Google Chrome, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsMaNrar
+		2 container
+			3 toolbar
+				4 button Back
+				5 button (disabled) Forward
+				6 button Reload
+				7 container
+					8 pop up button View site information
+					9 text field (settable) Address and search bar, Placeholder: Search Google or type a URL, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsMaNrar
+					10 button This page is allowed to edit files
+					11 button Bookmark this tab
+				12 container
+					13 pop up button Obsidian Web Clipper
+Has access to this site
+					14 pop up button Extensions
+				15 button You
+				16 pop up button Chrome
+			17 container
+				18 scroll area
+					19 HTML content Material Flow Prerequisite, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsMaNrar
+						20 container
+							21 container
+								22 button Navigation
+								23 link Graph Studio Graph Studio, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/.homepage
+								24 button Help
+								25 button ATTACHED
+								26 container Profile
+									27 pop up button LLUSER
+										28 text 
+										29 text LLUSER
+										30 text 
+							31 container
+								32 button Navigation
+								33 container Application navigation
+									34 container
+										35 heading Graph Tools, Value: 2
+											36 text Graph Tools
+										37 content list
+											38 button  Overview
+											39 button Graph Explorer
+											40 button Modeler
+											41 button  Graphs
+											42 button  Notebooks
+											43 button  Templates
+									44 container
+										45 heading Administrator Dashboard, Value: 2
+											46 text Administrator Dashboard
+										47 content list
+											48 button  Jobs
+							49 container notebook
+								50 container
+									51 text 
+									52 link Notebooks
+										53 text Notebooks
+									54 text 
+									55 text Material Flow Prerequisite
+									56 button Modify Notebook
+									57 container
+										58 button Run Paragraphs
+										59 button Restart Session
+										60 button Delete Notebook
+									61 container
+										62 button Hide Code
+										63 button Hide Result
+										64 button Update Notebook State
+										65 button Show Panel
+									66 toolbar Notebook Toolbar
+										67 container
+											68 pop up button Jump to paragraph
+												69 text Jump to paragraph
+												70 text 
+											71 pop up button Versioning
+												72 text Versioning
+												73 text 
+											74 button Attach Credentials
+										75 container
+											76 button Clear Result
+											77 button Clear Paragraph Dependencies
+											78 button Copy embedded notebook path to clipboard
+											79 button Share Notebook
+											80 button Clone Notebook
+											81 button Export Notebook
+											82 button Print Notebook
+										83 container
+											84 container Select the SELECT AI profile for this notebook
+												85 button SELECT AI
+											86 container Graph QuickView
+												87 button Quickview
+											88 container Default
+												89 container Update Notebook Type
+													90 pop up button Default
+														91 text 
+											92 container Zeppelin
+												93 container Update Notebook Layout
+													94 pop up button Zeppelin
+														95 text 
+											96 container Default Template
+												97 container Update Notebook Template
+													98 pop up button Default Template
+														99 text 
+									100 container
+										101 container Paragraph container
+											102 container
+												103 button Run Paragraph
+												104 button Enter Dependency Mode
+												105 container Comments (0)
+													106 button Comments
+												107 button Expand
+												108 button Show/Hide Line Numbers
+												109 button Hide Code
+												110 button Visibility
+												111 pop up button Settings
+													112 text 
+													113 text Settings
+													114 text 
+											115 container
+												116 editor (settable) Editor content
+											117 container
+												118 tab group Visualization selection
+													119 tab (selected) Text, Value: 1
+														120 image Text
+												121 splitter
+												122 button Settings
+												123 pop up button Download As
+													124 text 
+													125 text Download As
+													126 text 
+												127 text Graph successfully created
+											128 text 1s 277ms @ a few seconds ago
+							129 text Copyright © 2026 Oracle and/or its affiliates.
+			130 pop up button Tab search
+			131 container
+				132 tab group
+					133 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 430 MB, Value: off
+						134 button Close
+					135 tab (settable, boolean) New Tab - Memory usage - 175 MB, Value: off
+						136 button Close
+					137 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 458 MB, Value: off
+						138 button Close
+					139 tab (selected, settable, boolean) Material Flow Prerequisite - Memory usage - 245 MB, Value: on
+						140 button Close
+					141 tab (settable, boolean) Experiment - OML - Memory usage - 139 MB, Value: off
+						142 button Close
+			143 button New Tab
+	144 close button
+	145 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	146 minimize button
+147 menu bar
+	148 Chrome
+	149 File
+	150 Edit
+	151 View
+	152 History
+	153 Bookmarks
+	154 Profiles
+	155 Tab
+	156 Window
+	157 Help
+
+The focused UI element is 58 button Run Paragraphs

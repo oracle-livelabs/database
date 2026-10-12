@@ -1,0 +1,37 @@
+[
+  {
+    "file": "adb.tf",
+    "identical": false,
+    "domain_only_change": true
+  },
+  {
+    "file": "create_user.sql.tmpl",
+    "identical": true,
+    "domain_only_change": true
+  },
+  {
+    "file": "genai.tf",
+    "identical": true,
+    "domain_only_change": true
+  },
+  {
+    "file": "genai_connection.sql.tmpl",
+    "identical": true,
+    "domain_only_change": true
+  },
+  {
+    "file": "main.tf",
+    "identical": true,
+    "domain_only_change": true
+  },
+  {
+    "file": "output.tf",
+    "identical": true,
+    "domain_only_change": true
+  },
+  {
+    "file": "variables.tf",
+    "identical": true,
+    "domain_only_change": true
+  }
+]

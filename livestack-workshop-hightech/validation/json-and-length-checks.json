@@ -1,0 +1,10 @@
+{
+  "varchar_lengths_pass": true,
+  "customer_requirement_documents": 1024,
+  "required_keys": [
+    "lotCertificate",
+    "electricalTestReport",
+    "deliveryWindow"
+  ],
+  "passed": true
+}

@@ -1,0 +1,226 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+1 AXWebArea SQL | Oracle Database Actions, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet
+	2 container
+		3 container
+			4 button Selector
+				1648 text 
+				6 text Selector
+			7 link Description: Database Actions, Go to Launchpad, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+			8 text  |  SQL
+			9 button Search Database (⌘+K)
+				10 text Search Database (⌘+K)
+				1649 text 
+			12 button Need Help?
+				1650 text 
+				14 text Need Help?
+			15 pop up button LLUSER User Menu
+				1651 text 
+				17 text LLUSER
+				1652 text 
+		19 container Description: Main Drawer, ID: mainDrawer
+			20 container navigator_worksheet__layout
+				473 button (collapsed) Expand
+				474 container code-playground-7184793285291993
+					475 container
+						476 toolbar Editing Toolbar
+							477 container
+								478 pop up button BROWSER [Worksheet ]*
+									479 container worksheet-dropdown
+										480 text [Worksheet ]*
+									1653 text 
+								482 pop up button 
+									1654 text 
+									484 text New file
+									1655 text 
+								486 button Open... (Ctrl+O, ⌘+O)
+									1656 text 
+									488 text Open... (Ctrl+O, ⌘+O)
+								489 button Save (Ctrl+S, ⌘+S)
+									1657 text 
+									491 text Save (Ctrl+S, ⌘+S)
+							492 container
+								493 container code-editor-run-statement-container
+									494 button Run Statement (Ctrl+⏎, ⌘+⏎)
+										1747 text 
+										496 text Run Statement (Ctrl+⏎, ⌘+⏎)
+									497 pop up button Run Statement Options
+										1659 text 
+								499 button Run Script (F5)
+									1748 text 
+									1749 text 
+									502 text Run Script (F5)
+								503 button Create Chart (Ctrl+F11, ⌘+F11)
+									1662 text 
+									1663 text 
+									506 text Create Chart (Ctrl+F11, ⌘+F11)
+								507 button Explain Plan (F10)
+									1664 text 
+									509 text Explain Plan (F10)
+								510 button Autotrace (F6)
+									1665 text 
+									512 text Autotrace (F6)
+							513 container
+								514 button Download Editor Content (Ctrl+I, ⌘+I)
+									1666 text 
+									516 text Download Editor Content (Ctrl+I, ⌘+I)
+								517 button Format (Ctrl+F7, ⌘+F7)
+									1667 text 
+									519 text Format (Ctrl+F7, ⌘+F7)
+								520 pop up button 
+									1668 text 
+									522 text Convert Case (Ctrl+B, ⌘+B)
+									1669 text 
+								524 button Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+									1670 text 
+									526 text Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+						527 toolbar Editing Toolbar
+							528 container consumer-groups-selector
+								529 text Consumer group:
+								530 container Consumer group
+									531 pop up button LOW
+										532 text LOW
+										1671 text 
+							534 container
+								535 button Data Load
+									536 text Data Load
+								537 button Open In Fullscreen
+									1672 text 
+									539 text Open In Fullscreen
+								540 button Tour
+									1673 text 
+									542 text Tour
+								543 button Help (F1)
+									1674 text 
+									545 text Help (F1)
+					546 container
+						547 container code-editor-panel
+							548 container
+								549 editor (settable) Editor content
+								1380 container
+									1750 text 2  3 
+									1382 content list
+										1751 container
+											1752 text SET
+											1753 text  component_embedding 
+											1754 text =
+											1755 text  VECTOR_EMBEDDING
+											1756 text (
+										1757 container
+											1758 text   ADMIN.ALL_MINILM_L12_V2 
+											1759 text USING
+						550 button (expanded) Collapse
+						551 container output-panel
+							552 tab group dbt-panel-tabbar
+								553 tab (selectable, settable, boolean) Query Result, Value: 0, ID: query_result-tab-label
+								554 tab (selected, settable, boolean) Script Output, Value: 1, ID: script_output-tab-label
+								634 tab (selectable, settable, boolean) DBMS Output, Value: 0, ID: dbms_output-tab-label
+								635 tab (selectable, settable, boolean) Explain Plan, Value: 0, ID: explain_plan-tab-label
+								555 tab (selectable, settable, boolean) More Tabs, Value: 0
+							556 container slot__afterControls
+								557 button Help
+									1675 text 
+									559 text Help
+							1760 container Description: Script Output, ID: script_output-tab-panel
+								1761 toolbar oj.Translations.getTranslatedString( 'core.components.code_editor.menu.code_editor_menu_label' )
+									1762 button Clear output
+										1823 text 
+										1764 text Clear output
+									1765 button Download script output
+										1824 text 
+										1767 text Download script output
+								1768 container script-output__content-container
+									1769 container dbt-code-viewer-4672
+										1770 container
+											1771 text View PRODUCTION_ORDERS_DV created.
+											1772 text Elapsed: 00:00:00.027
+										1773 container dbt-code-viewer-4672-actions
+											1774 button Copy to clipboard
+												1825 text 
+												1776 text Copy to clipboard
+											1777 container ID: dbt-code-viewer-4672_button_0, Description: CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW production_orders_dv AS SELECT JSON { '_id' : r.production_order_id, 'customerSiteId' : r.customer_site_id, 'plantId' : r.plant_id, 'scheduledStart' : r.scheduled_start, 'dueDate' : r.due_date, 'status' : r.order_status, 'total' : r.order_total, 'setupCost': r.setup_cost, 'priorityScore' : r.priority_score, 'createdAt' : r.created_at, 'items' : [ SELECT JSON { 'orderLineId' : rn.order_line_id, 'componentId' : rn.component_id, 'quantity' : rn.quantity, 'unitCost' : rn.unit_cost } FROM production_order_lines rn WITH INSERT UPDATE WHERE rn.production_order_id = r.production_order_id ] } FROM production_orders r WITH INSERT UPDATE
+												1778 button 
+													1826 text 
+									1780 container dbt-code-viewer-5541
+										1781 container
+											1782 text 0 rows inserted.
+											1783 text Elapsed: 00:00:00.015
+										1784 container dbt-code-viewer-5541-actions
+											1785 button Copy to clipboard
+												1827 text 
+												1787 text Copy to clipboard
+											1788 container ID: dbt-code-viewer-5541_button_0, Description: INSERT INTO production_orders_dv (data) SELECT JSON( '{ "_id": 900001, "customerSiteId": 1, "plantId": 1, "scheduledStart": "2026-09-22", "dueDate": "2026-09-24", "status": "planned", "total": 250.00, "setupCost": 0, "items": [ { "orderLineId": 990001, "componentId": 1, "quantity": 2, "unitCost": 125.00 } ] }' ) WHERE NOT EXISTS ( SELECT 1 FROM production_orders WHERE production_order_id = 900001 )
+												1789 button 
+													1828 text 
+									1791 container dbt-code-viewer-3449
+										1792 container
+											1793 text Commit complete.
+											1794 text Elapsed: 00:00:00.003
+										1795 container dbt-code-viewer-3449-actions
+											1796 button Copy to clipboard
+												1829 text 
+												1798 text Copy to clipboard
+											1799 container Description: COMMIT, ID: dbt-code-viewer-3449_button_0
+												1800 button 
+													1830 text 
+									1802 container dbt-code-viewer-35291
+										1803 container
+											1804 text 1 row updated.
+											1805 text Elapsed: 00:00:00.020
+										1806 container dbt-code-viewer-35291-actions
+											1807 button Copy to clipboard
+												1831 text 
+												1809 text Copy to clipboard
+											1810 container ID: dbt-code-viewer-35291_button_0, Description: UPDATE production_orders_dv SET data = JSON_TRANSFORM(data, SET '$.status' = 'released') WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001
+												1811 button 
+													1832 text 
+									1813 container dbt-code-viewer-11058
+										1814 container
+											1815 text Commit complete.
+											1816 text Elapsed: 00:00:00.003
+										1817 container dbt-code-viewer-11058-actions
+											1818 button Copy to clipboard
+												1833 text 
+												1820 text Copy to clipboard
+											1821 container Description: COMMIT, ID: dbt-code-viewer-11058_button_0
+												1822 button 
+													1834 text 
+									1835 container dbt-code-viewer-43689
+										1836 container
+											1837 text 0 rows updated.
+											1838 text Elapsed: 00:00:00.013
+										1839 container dbt-code-viewer-43689-actions
+											1840 button Copy to clipboard
+												1841 text 
+												1842 text Copy to clipboard
+											1843 container ID: dbt-code-viewer-43689_button_0, Description: UPDATE components SET component_embedding = VECTOR_EMBEDDING( ADMIN.ALL_MINILM_L12_V2 USING component_name || '. Category: ' || category || '. Subcategory: ' || subcategory AS DATA) WHERE component_embedding IS NULL
+												1844 button 
+													1845 text 
+									1846 container dbt-code-viewer-87027
+										1847 container
+											1848 text Commit complete.
+											1849 text Elapsed: 00:00:00.003
+										1850 container dbt-code-viewer-87027-actions
+											1851 button Copy to clipboard
+												1852 text 
+												1853 text Copy to clipboard
+											1854 container Description: COMMIT, ID: dbt-code-viewer-87027_button_0
+												1855 button 
+													1856 text 
+		577 container
+			578 link Description:    1, Help: Errors
+				1681 text 
+				580 text 1
+			581 link Description:    0, Help: Warnings
+				1682 text 
+				583 text 0
+			584 link Description:    0, Help: Processes
+				1857 text 
+				586 text 0
+			587 text   |  
+			588 link 6:59:44 PM - SQL executed by LLUSER
+				589 text 6:59:44 PM - SQL executed by LLUSER
+			590 link Description: Powered by ORDS, Value: oracle.com/rest
+		591 text entry area (settable) Clipboard
+		592 button Copy
+
+The focused UI element is 499 button Run Script (F5)

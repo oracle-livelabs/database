@@ -1,0 +1,330 @@
+[
+  {
+    "copyControls": 15,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../selectai-agent/images/nina.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai-agent/images/sql-agent-answer.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai-agent/images/sql-agent-history.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai-agent/images/sql-agent-tools.png"
+      }
+    ],
+    "tasks": 5,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 8: Build a Manufacturing Agent with Select AI Agent"
+  },
+  {
+    "copyControls": 0,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../introduction/images/seer-manufacturing-introduction.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../introduction/images/seer-manufacturing-erd-illustrated.png"
+      }
+    ],
+    "tasks": 0,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Build Connected Manufacturing Solutions with Oracle AI Database"
+  },
+  {
+    "copyControls": 1,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../getting-started/images/reservation-login-info.svg"
+      },
+      {
+        "loaded": true,
+        "src": "../../getting-started/images/reservation-login-copy-password.svg"
+      },
+      {
+        "loaded": true,
+        "src": "../../getting-started/images/reservation-login-open-link.svg"
+      },
+      {
+        "loaded": true,
+        "src": "../../getting-started/images/database-actions-login-main-user.svg"
+      },
+      {
+        "loaded": true,
+        "src": "../../getting-started/images/database-actions-development-sql.svg"
+      },
+      {
+        "loaded": true,
+        "src": "../../getting-started/images/sql-connection.jpg"
+      }
+    ],
+    "tasks": 2,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Getting Started"
+  },
+  {
+    "copyControls": 1,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../production-operations-dashboard/images/jessica.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-operations-dashboard/images/sql-dashboard.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-operations-dashboard/images/sql-dashboard-followup.png"
+      }
+    ],
+    "tasks": 2,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 1: Build a Converged Dashboard Query"
+  },
+  {
+    "copyControls": 14,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../production-order-duality/images/thomas.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-order-duality/images/sql-duality-document.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-order-duality/images/sql-duality-contract.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-order-duality/images/sql-duality-released.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-order-duality/images/sql-duality-projection.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-order-duality/images/sql-duality-relational.png"
+      }
+    ],
+    "tasks": 6,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 2: Build a JSON Application Model"
+  },
+  {
+    "copyControls": 8,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../component-quality-vector-search/images/gilly.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../component-quality-vector-search/images/sql-embedding-model.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "../../component-quality-vector-search/images/sql-vector-values.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../component-quality-vector-search/images/sql-vector-distance.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../component-quality-vector-search/images/sql-vector-similarity.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../component-quality-vector-search/images/sql-vector-customer-sites.png"
+      }
+    ],
+    "tasks": 4,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 3: Search Components by Meaning"
+  },
+  {
+    "copyControls": 6,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/bob.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/sql-graph-direct.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/sql-graph-four-hop.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/sql-graph-shared.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/graph-launch.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/graph-studio-overview.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/graph-notebooks.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/graph-import-dialog.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/graph-import-file.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/graph-notebook-top.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/live-09-graph-notebook-table.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/live-10-graph-production-network.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../production-quality-network/images/live-11-graph-shared-lot.png"
+      }
+    ],
+    "tasks": 7,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 4: Trace a Production Quality Network"
+  },
+  {
+    "copyControls": 4,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../plant-routing-spatial/images/moon.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../plant-routing-spatial/images/sql-spatial-points.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../plant-routing-spatial/images/sql-spatial-new-york.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../plant-routing-spatial/images/sql-spatial-chicago.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../plant-routing-spatial/images/sql-spatial-routing.png"
+      }
+    ],
+    "tasks": 3,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 5: Find the Closest Manufacturing Plant"
+  },
+  {
+    "copyControls": 5,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/otto.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/sql-oml-training.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/oml-launch.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/oml-home.jpg"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/oml-settings.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/oml-leaderboard.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/oml-model-comparison.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/oml-confusion-matrix.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/oml-prediction-impact.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/sql-oml-model.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../quality-review-oml/images/sql-oml-scoring.png"
+      }
+    ],
+    "tasks": 4,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 6: Build a Quality Review Watchlist with Oracle Machine Learning"
+  },
+  {
+    "copyControls": 9,
+    "images": [
+      {
+        "loaded": true,
+        "src": "../../selectai/images/nina.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai/images/sql-ai-object-list.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai/images/sql-ai-generated.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai/images/sql-ai-answer.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai/images/sql-ai-refined-generated.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai/images/sql-ai-refined-answer.png"
+      },
+      {
+        "loaded": true,
+        "src": "../../selectai/images/sql-ai-narration.png"
+      }
+    ],
+    "tasks": 6,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 7: Ask Manufacturing Questions with Select AI"
+  },
+  {
+    "copyControls": 0,
+    "images": [],
+    "tasks": 1,
+    "title": "Build Connected Manufacturing Solutions with Oracle AI Database | Lab 9: Final Quiz"
+  }
+]

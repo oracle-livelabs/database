@@ -1,0 +1,63 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 641
++								641 toolbar
++									642 button Clear Output
++										643 text 
++										644 text Clear Output
++									645 button Show info
++										646 text 
++										647 text Show info
++									648 button Open in new tab
++										649 text 
++										650 text Open in new tab
++									651 button Share Query Results
++										652 text 
++										653 text Share Query Results
++									654 pop up button Download
++										655 text Download
++										656 text 
++									657 text Execution time: 0.024 seconds
++								658 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									659 container dbt-sql-worksheet__query-output-grid
++										660 text This is a data grid with 3 rows and 7 columns.
++										661 container
++											662 text PLANT_ID
++											663 text PLANT_NAME
++											664 text CITY
++											665 text STATE_PROVINCE
++											666 text LATITUDE
++											667 text LONGITUDE
++											668 text LOCATION_GEOJSON
++										669 container
++											670 text 1
++											671 text 2
++											672 text 3
++										673 container
++											674 text 1
++											675 text SEER Edison Plant
++											676 text Edison
++											677 text New Jersey
++											678 text 40.5187
++											679 text -74.4121
++											680 text { "type": "Point", "coordinates": [-74.4121, 40.5187] }
++											681 text 3
++											682 text SEER Brooklyn Plant
++											683 text Brooklyn
++											684 text New York
++											685 text 40.6782
++											686 text -73.9442
++											687 text { "type": "Point", "coordinates": [-73.9442, 40.6782] }
++											688 text 16
++											689 text SEER Chicago Plant
++											690 text Chicago
++											691 text Illinois
++											692 text 41.8781
++											693 text -87.6298
++											694 text { "type": "Point", "coordinates": [-87.6298, 41.8781] }
+~			60 link Description:    1, Help: Processes
++				695 text 
+~				62 text 1
+~			64 link 7:13:33 PM - 3 rows total
+~				65 text 7:13:33 PM - 3 rows total
+The focused UI element is 99 button Run Statement (Ctrl+⏎, ⌘+⏎)

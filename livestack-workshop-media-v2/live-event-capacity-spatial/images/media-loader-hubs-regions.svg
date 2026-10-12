@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
+<title id="title">Media distribution hubs and audience regions</title>
+<desc id="desc">A geographic illustration from SQL loader data showing all 30 distribution hubs, with detail panels for the Northeast Streaming Corridor and Florida Family Watch Zone. It is not an application screenshot.</desc>
+<rect width="1500" height="900" fill="#faf9f5"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#243f47}.title{font-size:30px;font-weight:700}.subtitle{font-size:17px;fill:#52636a}.ptitle{font-size:18px;font-weight:700}.tick{font-size:12px;fill:#52636a}.label{font-size:13px}.note{font-size:15px;fill:#52636a}</style>
+<text x="60.00" y="60.00" class="title" text-anchor="start">Media distribution hubs and audience regions</text>
+<text x="60.00" y="96.00" class="subtitle" text-anchor="start">Loader-data illustration  •  30 seeded hubs  •  2 selected regions  •  WGS84 coordinates</text>
+<text x="85.00" y="139.00" class="ptitle" text-anchor="start">Contiguous U.S. • 29 hub points</text>
+<defs><clipPath id="main"><rect x="85" y="160" width="890" height="455"/></clipPath></defs>
+<rect x="85" y="160" width="890" height="455" fill="#fffefa" stroke="#bdceca"/>
+<path d="M161.72413793103448 160v455" stroke="#d9e0de"/>
+<text x="161.72" y="635.00" class="tick" text-anchor="middle">-120°</text>
+<path d="M315.1724137931035 160v455" stroke="#d9e0de"/>
+<text x="315.17" y="635.00" class="tick" text-anchor="middle">-110°</text>
+<path d="M468.6206896551724 160v455" stroke="#d9e0de"/>
+<text x="468.62" y="635.00" class="tick" text-anchor="middle">-100°</text>
+<path d="M622.0689655172414 160v455" stroke="#d9e0de"/>
+<text x="622.07" y="635.00" class="tick" text-anchor="middle">-90°</text>
+<path d="M775.5172413793103 160v455" stroke="#d9e0de"/>
+<text x="775.52" y="635.00" class="tick" text-anchor="middle">-80°</text>
+<path d="M928.9655172413793 160v455" stroke="#d9e0de"/>
+<text x="928.97" y="635.00" class="tick" text-anchor="middle">-70°</text>
+<path d="M85 597.5h890" stroke="#d9e0de"/>
+<text x="75.00" y="601.50" class="tick" text-anchor="end">25°</text>
+<path d="M85 510.0h890" stroke="#d9e0de"/>
+<text x="75.00" y="514.00" class="tick" text-anchor="end">30°</text>
+<path d="M85 422.5h890" stroke="#d9e0de"/>
+<text x="75.00" y="426.50" class="tick" text-anchor="end">35°</text>
+<path d="M85 335.0h890" stroke="#d9e0de"/>
+<text x="75.00" y="339.00" class="tick" text-anchor="end">40°</text>
+<path d="M85 247.5h890" stroke="#d9e0de"/>
+<text x="75.00" y="251.50" class="tick" text-anchor="end">45°</text>
+<path d="M85 160.0h890" stroke="#d9e0de"/>
+<text x="75.00" y="164.00" class="tick" text-anchor="end">50°</text>
+<g clip-path="url(#main)">
+<polygon points="861.60,330.45 873.88,330.45 873.88,312.95 861.60,312.95 861.60,330.45" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<polygon points="740.22,550.25 758.64,550.25 758.64,532.75 740.22,532.75 740.22,550.25" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<circle cx="861.26" cy="325.92" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>NYC Content Operations Hub</title></circle>
+<circle cx="187.67" cy="436.84" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Los Angeles Studio Coverage Desk</title></circle>
+<circle cx="651.50" cy="308.31" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Chicago Midwest Ad Ops Hub</title></circle>
+<circle cx="517.77" cy="461.41" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Dallas Sports Rights Desk</title></circle>
+<circle cx="772.57" cy="584.17" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Miami International Audience Hub</title></circle>
+<circle cx="125.94" cy="201.89" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Seattle Live Event Operations Hub</title></circle>
+<circle cx="278.99" cy="449.88" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Phoenix FAST Channel Desk</title></circle>
+<circle cx="708.18" cy="444.39" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Atlanta Theatrical Launch Desk</title></circle>
+<circle cx="124.60" cy="373.94" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>San Francisco Creator Monetization Hub</title></circle>
+<circle cx="392.05" cy="339.56" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Denver Retention Forecast Desk</title></circle>
+<circle cx="912.72" cy="293.70" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Boston Premium Originals Hub</title></circle>
+<circle cx="820.99" cy="354.12" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Washington Trust and Safety Desk</title></circle>
+<circle cx="120.62" cy="238.48" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Portland Indie Festival Desk</title></circle>
+<circle cx="671.45" cy="402.15" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Nashville Music Livestream Hub</title></circle>
+<circle cx="503.25" cy="505.32" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Austin Creator Monetization Hub</title></circle>
+<circle cx="754.35" cy="535.58" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Orlando Family Media Desk</title></circle>
+<circle cx="236.30" cy="402.03" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Las Vegas Live Event Hub</title></circle>
+<circle cx="571.97" cy="247.89" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Minneapolis Sports Replay Desk</title></circle>
+<circle cx="762.58" cy="418.53" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Charlotte Matchday Operations Hub</title></circle>
+<circle cx="849.71" cy="335.83" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Philadelphia Documentary Forum Desk</title></circle>
+<circle cx="205.29" cy="462.48" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>San Diego Streaming Launch Desk</title></circle>
+<circle cx="796.41" cy="408.86" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Raleigh Sports Media Community Hub</title></circle>
+<circle cx="286.16" cy="321.69" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Salt Lake Streaming Coverage Desk</title></circle>
+<circle cx="491.74" cy="520.08" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>San Antonio Spanish-Language Desk</title></circle>
+<circle cx="728.78" cy="294.20" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Detroit Connected TV Hub</title></circle>
+<circle cx="551.81" cy="350.76" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Kansas City Rights Capacity Desk</title></circle>
+<circle cx="620.97" cy="510.86" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>New Orleans Culture Live Desk</title></circle>
+<circle cx="749.52" cy="308.76" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Cleveland Regional Sports Hub</title></circle>
+<circle cx="737.81" cy="545.86" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Tampa Subscriber Winback Desk</title></circle>
+</g>
+<text x="133.94" y="193.89" class="label" text-anchor="start">Seattle</text>
+<text x="128.62" y="257.48" class="label" text-anchor="start">Portland</text>
+<text x="132.60" y="365.94" class="label" text-anchor="start">San Francisco</text>
+<text x="131.67" y="428.84" class="label" text-anchor="start">Burbank</text>
+<text x="144.29" y="484.48" class="label" text-anchor="start">San Diego</text>
+<text x="286.99" y="469.88" class="label" text-anchor="start">Goodyear</text>
+<text x="244.30" y="394.03" class="label" text-anchor="start">Las Vegas</text>
+<text x="294.16" y="313.69" class="label" text-anchor="start">Salt Lake City</text>
+<text x="400.05" y="331.56" class="label" text-anchor="start">Denver</text>
+<text x="579.97" y="239.89" class="label" text-anchor="start">Minneapolis</text>
+<text x="659.50" y="300.31" class="label" text-anchor="start">Joliet</text>
+<text x="525.77" y="453.41" class="label" text-anchor="start">Dallas</text>
+<text x="459.25" y="497.32" class="label" text-anchor="start">Austin</text>
+<text x="423.74" y="539.08" class="label" text-anchor="start">San Antonio</text>
+<text x="628.97" y="530.86" class="label" text-anchor="start">New Orleans</text>
+<text x="611.45" y="394.15" class="label" text-anchor="start">Nashville</text>
+<text x="666.18" y="464.39" class="label" text-anchor="start">Atlanta</text>
+<text x="867.72" y="283.70" class="label" text-anchor="start">Boston</text>
+<text x="814.26" y="345.92" class="label" text-anchor="start">Edison</text>
+<text x="780.57" y="601.17" class="label" text-anchor="start">Miami</text>
+<text x="762.35" y="527.58" class="label" text-anchor="start">Orlando</text>
+<text x="1090.00" y="139.00" class="ptitle" text-anchor="start">Northeast • demand index 91</text>
+<defs><clipPath id="ne"><rect x="1090" y="160" width="335" height="260"/></clipPath></defs>
+<rect x="1090" y="160" width="335" height="260" fill="#fffefa" stroke="#bdceca"/>
+<path d="M1139.893617021276 160v260" stroke="#d9e0de"/>
+<text x="1139.89" y="440.00" class="tick" text-anchor="middle">-75°</text>
+<path d="M1282.446808510638 160v260" stroke="#d9e0de"/>
+<text x="1282.45" y="440.00" class="tick" text-anchor="middle">-74°</text>
+<path d="M1425.0 160v260" stroke="#d9e0de"/>
+<text x="1425.00" y="440.00" class="tick" text-anchor="middle">-73°</text>
+<path d="M1090 363.47826086956513h335" stroke="#d9e0de"/>
+<text x="1080.00" y="367.48" class="tick" text-anchor="end">40°</text>
+<path d="M1090 250.43478260869546h335" stroke="#d9e0de"/>
+<text x="1080.00" y="254.43" class="tick" text-anchor="end">41°</text>
+<g clip-path="url(#ne)">
+<polygon points="1226.85,334.09 1340.89,334.09 1340.89,221.04 1226.85,221.04 1226.85,334.09" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<polygon points="99.26,1753.91 270.32,1753.91 270.32,1640.87 99.26,1640.87 99.26,1753.91" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<circle cx="1223.70" cy="304.84" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>NYC Content Operations Hub</title></circle>
+<circle cx="1116.34" cy="368.84" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Philadelphia Documentary Forum Desk</title></circle>
+</g>
+<text x="1233.70" y="328.84" class="label" text-anchor="start">Edison hub</text>
+<text x="1124.34" y="360.84" class="label" text-anchor="start">Philadelphia</text>
+<text x="1283.87" y="277.57" class="label" text-anchor="middle" style="fill:#80551b">Audience region</text>
+<text x="1090.00" y="499.00" class="ptitle" text-anchor="start">Florida • demand index 78</text>
+<defs><clipPath id="fl"><rect x="1090" y="520" width="335" height="260"/></clipPath></defs>
+<rect x="1090" y="520" width="335" height="260" fill="#fffefa" stroke="#bdceca"/>
+<path d="M1090.0 520v260" stroke="#d9e0de"/>
+<text x="1090.00" y="800.00" class="tick" text-anchor="middle">-83°</text>
+<path d="M1193.076923076923 520v260" stroke="#d9e0de"/>
+<text x="1193.08" y="800.00" class="tick" text-anchor="middle">-82°</text>
+<path d="M1296.1538461538462 520v260" stroke="#d9e0de"/>
+<text x="1296.15" y="800.00" class="tick" text-anchor="middle">-81°</text>
+<path d="M1399.2307692307693 520v260" stroke="#d9e0de"/>
+<text x="1399.23" y="800.00" class="tick" text-anchor="middle">-80°</text>
+<path d="M1090 736.6666666666666h335" stroke="#d9e0de"/>
+<text x="1080.00" y="740.67" class="tick" text-anchor="end">26°</text>
+<path d="M1090 682.5h335" stroke="#d9e0de"/>
+<text x="1080.00" y="686.50" class="tick" text-anchor="end">27°</text>
+<path d="M1090 628.3333333333333h335" stroke="#d9e0de"/>
+<text x="1080.00" y="632.33" class="tick" text-anchor="end">28°</text>
+<path d="M1090 574.1666666666666h335" stroke="#d9e0de"/>
+<text x="1080.00" y="578.17" class="tick" text-anchor="end">29°</text>
+<path d="M1090 520.0h335" stroke="#d9e0de"/>
+<text x="1080.00" y="524.00" class="tick" text-anchor="end">30°</text>
+<g clip-path="url(#fl)">
+<polygon points="1977.49,-35.75 2059.95,-35.75 2059.95,-89.92 1977.49,-89.92 1977.49,-35.75" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<polygon points="1162.15,644.58 1285.85,644.58 1285.85,590.42 1162.15,590.42 1162.15,644.58" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<circle cx="1379.46" cy="749.57" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Miami International Audience Hub</title></circle>
+<circle cx="1257.07" cy="599.18" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Orlando Family Media Desk</title></circle>
+<circle cx="1145.95" cy="631.01" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Tampa Subscriber Winback Desk</title></circle>
+</g>
+<text x="1265.07" y="591.18" class="label" text-anchor="start">Orlando</text>
+<text x="1098.95" y="653.01" class="label" text-anchor="start">Tampa</text>
+<text x="1331.46" y="741.57" class="label" text-anchor="start">Miami</text>
+<text x="85.00" y="689.00" class="ptitle" text-anchor="start">Hawaii • 1 hub point</text>
+<defs><clipPath id="hi"><rect x="85" y="710" width="255" height="100"/></clipPath></defs>
+<rect x="85" y="710" width="255" height="100" fill="#fffefa" stroke="#bdceca"/>
+<path d="M174.24999999999855 710v100" stroke="#d9e0de"/>
+<text x="174.25" y="830.00" class="tick" text-anchor="middle">-158°</text>
+<path d="M301.7499999999985 710v100" stroke="#d9e0de"/>
+<text x="301.75" y="830.00" class="tick" text-anchor="middle">-157.5°</text>
+<path d="M85 803.3333333333333h255" stroke="#d9e0de"/>
+<text x="75.00" y="807.33" class="tick" text-anchor="end">21°</text>
+<path d="M85 736.6666666666665h255" stroke="#d9e0de"/>
+<text x="75.00" y="740.67" class="tick" text-anchor="end">21.5°</text>
+<g clip-path="url(#hi)">
+<polygon points="21494.80,-1764.67 21698.80,-1764.67 21698.80,-1898.00 21494.80,-1898.00 21494.80,-1764.67" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<polygon points="19477.75,-90.00 19783.75,-90.00 19783.75,-223.33 19477.75,-223.33 19477.75,-90.00" fill="#edaf58" fill-opacity=".65" stroke="#b87921" stroke-width="2"/>
+<circle cx="210.38" cy="762.41" r="5.5" fill="#126878" stroke="white" stroke-width="1.2"><title>Honolulu International Drama Desk</title></circle>
+</g>
+<text x="218.38" y="754.41" class="label" text-anchor="start">Honolulu</text>
+<circle cx="400" cy="700" r="6" fill="#126878"/>
+<text x="418.00" y="706.00" class="subtitle" text-anchor="start">Media distribution hub</text>
+<rect x="394" y="728" width="12" height="12" fill="#edaf58" stroke="#b87921"/>
+<text x="418.00" y="741.00" class="subtitle" text-anchor="start">Seeded audience-region polygon</text>
+<text x="400.00" y="778.00" class="note" text-anchor="start">Source: FULFILLMENT_CENTERS and DEMAND_REGIONS</text>
+<text x="400.00" y="801.00" class="note" text-anchor="start">in media-platform-handoff-loader.sql. Region names describe</text>
+<text x="400.00" y="824.00" class="note" text-anchor="start">synthetic workshop polygons, not state or market boundaries.</text>
+<text x="60.00" y="878.00" class="note" text-anchor="start">Geographic coordinate plot; panels use different scales. Oracle Spatial calculates the lab’s geodetic distances.</text>
+</svg>

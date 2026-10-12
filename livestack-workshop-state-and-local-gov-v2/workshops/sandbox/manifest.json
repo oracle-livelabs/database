@@ -4,7 +4,7 @@
   "tutorials": [
     {
       "title": "Introduction",
-      "description": "The Seer Bank finance intelligence story and workshop goals.",
+      "description": "Meet the Colorado public-service team and review the workshop goals.",
       "filename": "../../introduction/introduction.md"
     },
     {
@@ -14,17 +14,17 @@
     },
     {
       "title": "Lab 1: Build a Converged Dashboard Query",
-      "description": "Use a converged query to connect product risk, transactions, semantic matches, and service coverage.",
+      "description": "Combine service urgency, request activity, semantic matches, and service-center locations in one query.",
       "filename": "../../risk-operations-dashboard/risk-operations-dashboard.md"
     },
     {
       "title": "Lab 2: Build a JSON Application Model",
-      "description": "Help Thomas choose between JSON columns, JSON collections, and JSON Relational Duality for a customer application.",
+      "description": "Compare JSON columns, JSON collections, and JSON Relational Duality for a resident-service application.",
       "filename": "../../transaction-case-duality/transaction-case-duality.md"
     },
     {
-      "title": "Lab 3: Review a Semantic Risk Search",
-      "description": "Review how Gilly built semantic search with an in-database embedding model for products and risk notices.",
+      "title": "Lab 3: Search Public Services by Meaning",
+      "description": "Create service-description vectors and use semantic search to find related requests.",
       "filename": "../../risk-signal-vector-search/risk-signal-vector-search.md"
     },
     {
@@ -33,8 +33,8 @@
       "filename": "../../community-partner-network/community-partner-network.md"
     },
     {
-      "title": "Lab 5: Route Customers to the Closest Service Center",
-      "description": "Use Oracle Spatial for service center and SLA region analysis.",
+      "title": "Lab 5: Find the Closest Service Center for Residents",
+      "description": "Find residents in a demand region and compare their nearest active service centers.",
       "filename": "../../service-sla-spatial/service-sla-spatial.md"
     },
     {

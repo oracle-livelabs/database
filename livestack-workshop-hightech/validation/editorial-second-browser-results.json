@@ -1,0 +1,16 @@
+{
+  "scope": "Local LiveLabs rendering, not Oracle execution",
+  "pages": [
+    "introduction",
+    "production-order-duality",
+    "component-quality-vector-search",
+    "production-quality-network"
+  ],
+  "checks": [
+    "Updated introduction text",
+    "Expanded three-row JSON decision table",
+    "Expanded concise vector glossary",
+    "Expanded Graph Studio Task 7 with four instructions and existing screenshots"
+  ],
+  "passed": true
+}

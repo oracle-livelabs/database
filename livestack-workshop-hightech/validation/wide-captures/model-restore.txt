@@ -1,0 +1,257 @@
+- generic "Selector":
+  - button "Selector":
+    - generic: 
+    - generic: Selector
+- link "Database Actions, Go to Launchpad":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+  - generic: Database Actions
+- generic: "| SQL"
+- search:
+  - button "Search Database (⌘+K)":
+    - generic: Search Database (⌘+K)
+    - generic: 
+- text:                      
+- generic "Need Help?":
+  - button "Need Help?":
+    - generic: 
+    - generic: Need Help?
+- button "LLUSER User Menu":
+  - generic: 
+  - generic "LLUSER"
+  - generic: 
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - text:                                                                                                                                                                                                                                                                                                                             
+  - generic "Resize":
+    - button "Expand"
+  - toolbar "Editing Toolbar":
+    - button "BROWSER[Worksheet ]*":
+      - generic "[Worksheet ]*":
+        - generic "BROWSER"
+        - generic: "[Worksheet ]*"
+      - generic: 
+    - generic "New file":
+      - button "":
+        - generic: 
+        - generic: New file
+        - generic: 
+        - text:  
+    - generic "Open... (Ctrl+O, ⌘+O)":
+      - button "Open... (Ctrl+O, ⌘+O)":
+        - generic: 
+        - generic: Open... (Ctrl+O, ⌘+O)
+    - generic "Save (Ctrl+S, ⌘+S)":
+      - button "Save (Ctrl+S, ⌘+S)":
+        - generic: 
+        - generic: Save (Ctrl+S, ⌘+S)
+    - generic "Run Statement (Ctrl+⏎, ⌘+⏎)":
+      - button "Run Statement (Ctrl+⏎, ⌘+⏎)":
+        - generic: 
+        - generic: Run Statement (Ctrl+⏎, ⌘+⏎)
+    - button "Run Statement Options":
+      - generic: 
+      - text:  
+    - generic "Run Script (F5)":
+      - button "Run Script (F5)" [active]:
+        - generic:  
+        - generic: Run Script (F5)
+    - generic "Create Chart (Ctrl+F11, ⌘+F11)":
+      - button "Create Chart (Ctrl+F11, ⌘+F11)":
+        - generic:  
+        - generic: Create Chart (Ctrl+F11, ⌘+F11)
+    - generic "Explain Plan (F10)":
+      - button "Explain Plan (F10)":
+        - generic: 
+        - generic: Explain Plan (F10)
+    - generic "Autotrace (F6)":
+      - button "Autotrace (F6)":
+        - generic: 
+        - generic: Autotrace (F6)
+    - generic "Download Editor Content (Ctrl+I, ⌘+I)":
+      - button "Download Editor Content (Ctrl+I, ⌘+I)":
+        - generic: 
+        - generic: Download Editor Content (Ctrl+I, ⌘+I)
+    - generic "Format (Ctrl+F7, ⌘+F7)":
+      - button "Format (Ctrl+F7, ⌘+F7)":
+        - generic: 
+        - generic: Format (Ctrl+F7, ⌘+F7)
+    - generic "Convert Case (Ctrl+B, ⌘+B)":
+      - button "":
+        - generic: 
+        - generic: Convert Case (Ctrl+B, ⌘+B)
+        - generic: 
+    - generic "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+      - button "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+        - generic: 
+        - generic: Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+  - toolbar "Editing Toolbar":
+    - text: .
+    - paragraph:
+      - generic: "Consumer group:"
+    - generic "Consumer group":
+      - button "LOW":
+        - generic: LOW
+        - generic: 
+    - generic "Data Load":
+      - button "Data Load":
+        - generic: Data Load
+    - generic "Open In Fullscreen":
+      - button "Open In Fullscreen":
+        - generic: 
+        - generic: Open In Fullscreen
+    - generic "Tour":
+      - button "Tour":
+        - generic: 
+        - generic: Tour
+    - generic "Help (F1)":
+      - button "Help (F1)":
+        - generic: 
+        - generic: Help (F1)
+  - tabpanel:
+    - code:
+      - textbox "Editor content"
+      - textbox
+      - generic: "3"
+      - generic: "4"
+      - generic: "5"
+      - generic: "6"
+      - generic: "7"
+      - generic: "8"
+      - generic: "9"
+      - generic: "10"
+      - generic: profile_name => 'GENAI',
+      - generic: attribute_name => 'model',
+      - generic: attribute_value => 'cohere.command-a-03-2025');
+      - generic: END;
+      - generic: /
+      - generic: SELECT attribute_value AS restored_model
+      - generic: FROM user_cloud_ai_profile_attributes
+      - generic: WHERE profile_name = 'GENAI' AND attribute_name = 'model';
+  - generic "Resize":
+    - button "Collapse" [expanded]
+  - tablist:
+    - tab "Query Result":
+      - generic: Query Result
+    - tab "Script Output" [selected]:
+      - generic: Script Output
+    - tab "DBMS Output":
+      - generic: DBMS Output
+    - tab "Explain Plan":
+      - generic: Explain Plan
+    - tab "Autotrace":
+      - generic: Autotrace
+    - tab "SQL History":
+      - generic: SQL History
+    - text: 
+  - generic "Help":
+    - button "Help":
+      - generic: 
+      - generic: Help
+  - text:                 
+  - tabpanel "Script Output":
+    - toolbar "oj.Translations.getTranslatedString( 'core.components.code_editor.menu.code_editor_menu_label' )":
+      - generic "Clear output":
+        - button "Clear output":
+          - generic: 
+          - generic: Clear output
+      - generic "Download script output":
+        - button "Download script output":
+          - generic: 
+          - generic: Download script output
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.336"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "BEGIN DBMS_CLOUD_AI_AGENT.DROP_TEAM('NINA_HIGHTECH_TEAM', TRUE); DBMS_CLOUD_AI_AGENT.DROP_TASK('NINA_HIGHTECH_TASK', TRUE); DBMS_CLOUD_AI_AGENT.DROP_AGENT('NINA_HIGHTECH_AGENT', TRUE); DBMS_CLOUD_AI_AGENT.DROP_TOOL('NINA_HIGHTECH_SQL_TOOL', TRUE); END;":
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.021"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "BEGIN DBMS_CLOUD_AI.SET_ATTRIBUTE( profile_name => 'GENAI', attribute_name => 'model', attribute_value => 'meta.llama-3.3-70b-instruct'); END;":
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.018"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - 'generic "BEGIN DBMS_CLOUD_AI_AGENT.CREATE_TOOL( tool_name => ''NINA_HIGHTECH_SQL_TOOL'', attributes => ''{\"tool_type\": \"SQL\", \"tool_params\": {\"profile_name\": \"genai\"}, \"instruction\": \"For questions requesting database values, use runsql with the complete natural-language question, including its table names, joins, filters, grouping and measures. Let Select AI generate the SQL; do not replace the question with agent-written SQL.\"}'', description => ''SQL query access to the workshop HighTech tables; task requests read-only answers'' ); END;"':
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.022"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - 'generic "BEGIN DBMS_CLOUD_AI_AGENT.CREATE_AGENT( agent_name => ''NINA_HIGHTECH_AGENT'', attributes => ''{\"profile_name\": \"genai\", \"role\": \"You are Nina Patel''''s HighTech data assistant. Answer questions using the approved SQL tool. Use returned database rows for components, production_orders, production_order_lines and customer_sites facts. Preserve their values and ranking; do not invent, recalculate or combine values.\"}'', description => ''HighTech assistant for Nina Patel'' ); END;"':
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.022"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - 'generic "BEGIN DBMS_CLOUD_AI_AGENT.CREATE_TASK( task_name => ''NINA_HIGHTECH_TASK'', attributes => ''{\"instruction\": \"Answer Nina''''s HighTech question: {query}. Pass the complete question to NINA_HIGHTECH_SQL_TOOL once as natural language, preserving all calculations and table relationships. Return the requested columns in a table, copying each returned row and numeric value without recalculating or regrouping. If the tool fails or a requested field is missing, say the answer is incomplete; do not fill gaps. Do not repeat the same tool call or change database records.\", \"tools\": [\"NINA_HIGHTECH_SQL_TOOL\"], \"enable_human_tool\": \"false\"}'', description => ''Answer read-only component and customer site questions'' ); END;"':
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.897"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - 'generic "BEGIN DBMS_CLOUD_AI_AGENT.CREATE_TEAM( team_name => ''NINA_HIGHTECH_TEAM'', attributes => ''{\"agents\": [{\"name\": \"NINA_HIGHTECH_AGENT\", \"task\": \"NINA_HIGHTECH_TASK\"}], \"process\": \"sequential\"}'', description => ''Read-only HighTech question team'' ); END;"':
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.013"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "BEGIN DBMS_CLOUD_AI.SET_ATTRIBUTE( profile_name => 'GENAI', attribute_name => 'model', attribute_value => 'cohere.command-a-03-2025'); END;":
+      - button:
+        - generic: 
+    - generic: RESTORED_MODEL
+    - generic: "------------------------"
+    - generic: cohere.command-a-03-2025
+    - generic: "Elapsed: 00:00:00.017"
+    - generic: 1 rows selected.
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "SELECT attribute_value AS restored_model FROM user_cloud_ai_profile_attributes WHERE profile_name = 'GENAI' AND attribute_name = 'model'":
+      - button:
+        - generic: 
+  - text:          
+- generic "Errors":
+  - generic: 
+  - generic: "0"
+- generic "Warnings":
+  - generic: 
+  - generic: "0"
+- generic "Processes":
+  - generic: 
+  - generic: "0"
+- generic: "|"
+- generic: 8:06:01 PM - 1 rows total
+- generic: 
+- link "Powered by ORDS":
+  - /url: https://oracle.com/rest
+  - generic: Powered by ORDS
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert

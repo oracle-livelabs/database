@@ -1,0 +1,645 @@
+Window: "Production Quality Network", App: Google Chrome.
+0 standard window Production Quality Network - Google Chrome, Secondary Actions: Raise, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsD3eRBk/paragraph/dsD3eZ5B
+	1 container Production Quality Network - Google Chrome, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsD3eRBk/paragraph/dsD3eZ5B
+		2 container
+			3 toolbar
+				4 button Back
+				5 button (disabled) Forward
+				6 button Reload
+				7 container
+					8 pop up button View site information
+					9 text field (settable) Address and search bar, Placeholder: Search Google or type a URL, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsD3eRBk/paragraph/dsD3eZ5B
+					10 button This page is allowed to edit files
+					11 button Bookmark this tab
+				12 container
+					13 pop up button Obsidian Web Clipper
+Has access to this site
+					14 pop up button Extensions
+				15 button You
+				16 pop up button Chrome
+			17 container
+				18 scroll area
+					19 HTML content Production Quality Network, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#/notebook/dsD3eRBk/paragraph/dsD3eZ5B
+						20 container
+							21 container
+								22 container
+									23 button Navigation
+									24 link Graph Studio Graph Studio, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/.homepage
+									25 button Help
+									26 button ATTACHED
+									27 container Profile
+										28 pop up button LLUSER
+											29 text 
+											30 text LLUSER
+											31 text 
+								32 container
+									33 button Navigation
+									34 container Application navigation
+										35 container
+											36 heading Graph Tools, Value: 2
+												37 text Graph Tools
+											38 content list
+												39 button  Overview
+												40 button Graph Explorer
+												41 button Modeler
+												42 button  Graphs
+												43 button  Notebooks
+												44 button  Templates
+										45 container
+											46 heading Administrator Dashboard, Value: 2
+												47 text Administrator Dashboard
+											48 content list
+												49 button  Jobs
+								50 container notebook
+									51 container
+										52 text 
+										53 link Notebooks
+											54 text Notebooks
+										55 text 
+										56 text Production Quality Network
+										57 button Modify Notebook
+										58 container
+											59 button Run Paragraphs
+											60 button Restart Session
+											61 button Delete Notebook
+										62 container
+											63 button Hide Code
+											64 button Hide Result
+											65 button Update Notebook State
+											66 button Show Panel
+										67 toolbar Notebook Toolbar
+											68 container
+												69 pop up button Jump to paragraph
+													70 text Jump to paragraph
+													71 text 
+												72 pop up button Versioning
+													73 text Versioning
+													74 text 
+												75 button Attach Credentials
+											76 container
+												77 button Clear Result
+												78 button Clear Paragraph Dependencies
+												79 button Copy embedded notebook path to clipboard
+												80 button Share Notebook
+												81 button Clone Notebook
+												82 button Export Notebook
+												83 button Print Notebook
+											84 container
+												85 container Select the SELECT AI profile for this notebook
+													86 button SELECT AI
+												87 container Graph QuickView
+													88 button Quickview
+												89 container Default
+													90 container Update Notebook Type
+														91 pop up button Default
+															92 text 
+												93 container Zeppelin
+													94 container Update Notebook Layout
+														95 pop up button Zeppelin
+															96 text 
+												97 container Default Template
+													98 container Update Notebook Template
+														99 pop up button Default Template
+															100 text 
+										101 container
+											102 container Paragraph container
+												103 container
+													104 tab group Visualization selection
+														105 tab (selected) HTML, Value: 1
+															106 image HTML
+														107 tab (settable, integer) Text, Value: 0
+															108 image Text
+													109 splitter
+													110 button Settings
+													111 pop up button Download As
+														112 text 
+														113 text Download As
+														114 text 
+													115 text Production Quality Network with Property Graph
+											116 container Paragraph container
+												117 container
+													118 tab group Visualization selection
+														119 tab (selected) HTML, Value: 1
+															120 image HTML
+														121 tab (settable, integer) Text, Value: 0
+															122 image Text
+													123 splitter
+													124 button Settings
+													125 pop up button Download As
+														126 text 
+														127 text Download As
+														128 text 
+													129 text Start at production order 
+													130 text PO-8841
+													131 text  and follow one or two relationship hops. In 
+													132 text MATCH
+													133 text , 
+													134 text (seed IS entity)
+													135 text  is the starting order, 
+													136 text -[e IS related_to]->{1,2}
+													137 text  sets the path length, and 
+													138 text (reached IS entity)
+													139 text  identifies the connected entities.
+													140 text WHERE
+													141 text  selects the starting order; 
+													142 text COLUMNS
+													143 text  returns graph properties as a SQL table. Compare the reached entities and their risk scores.
+											144 container Paragraph container
+												145 container
+													146 editor (settable) Editor content
+												147 container
+													148 tab group Visualization selection
+														149 tab (selected) Table, Value: 1
+															150 image Table
+														151 tab (settable, integer) Area Chart, Value: 0
+															152 image Area Chart
+														153 tab (settable, integer) Bar Chart, Value: 0
+															154 image Bar Chart
+														155 tab (settable, integer) Funnel Chart, Value: 0
+															156 image Funnel Chart
+														157 tab (settable, integer) Line Chart, Value: 0
+															158 image Line Chart
+														159 tab (settable, integer) Pie Chart, Value: 0
+															160 image Pie Chart
+														161 tab (settable, integer) Pyramid Chart, Value: 0
+															162 image Pyramid Chart
+														163 tab (settable, integer) TreeMap, Value: 0
+															164 image TreeMap
+														165 tab (settable, integer) Sunburst, Value: 0
+															166 image Sunburst
+														167 tab (settable, integer) Tag Cloud, Value: 0
+															168 image Tag Cloud
+														169 tab (settable, integer) Box Plot, Value: 0
+															170 image Box Plot
+														171 tab (settable, integer) Scatter Plot, Value: 0
+															172 image Scatter Plot
+														173 tab (settable, integer) Maps, Value: 0
+															174 image Maps
+														175 tab (settable, integer) Text, Value: 0
+															176 image Text
+													177 splitter
+													178 button Settings
+													179 pop up button Download As
+														180 text 
+														181 text Download As
+														182 text 
+													183 container
+														184 text field (settable) Type to search
+													185 container Visualizer table
+														186 container Visualizer table
+															187 container
+																188 text ENTITY_KEY
+																189 text DISPLAY_NAME
+																190 text ENTITY_TYPE
+																191 text RISK_SCORE
+																192 text RISK_LEVEL
+																193 text MATERIAL_VALUE
+																194 text SOURCE_SYSTEM
+															195 text PO-8841
+															196 text Production order 8841
+															197 text production_order
+															198 text 96
+															199 text high
+															200 text 250
+															201 text MES
+															202 text LOT-SEMI-91A7
+															203 text Semiconductor lot SEMI-91A7
+															204 text material_lot
+															205 text 94
+															206 text high
+															207 text 0
+															208 text QMS
+															209 text PO-5077
+															210 text Production order 5077
+															211 text production_order
+															212 text 91
+															213 text high
+															214 text 250
+															215 text MES
+															216 text INSPECTION-0199
+															217 text Electrical inspection 0199
+															218 text inspection
+															219 text 89
+															220 text high
+															221 text 0
+															222 text QMS
+															223 text MACHINE-ATE-017
+															224 text Electrical test station 017
+															225 text machine
+															226 text 88
+															227 text high
+															228 text 0
+															229 text QMS
+														230 container
+															231 text Select Row
+													232 container
+														233 text Page 1 content loaded
+														234 text 4Pagination
+														235 container 4Pagination
+															236 text Page
+															237 container Go To Page
+																238 text field (settable) Page, Value: 1
+															239 text of 2 ( 1-5 of 9 items )
+															240 container
+																241 button (disabled) First Page, Help: First
+																242 button (disabled) Previous Page, Help: Previous
+																243 container
+																	244 container Go To Page 1
+																		245 text Page 1
+																	246 link Page 2, Help: Go To Page 2, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/graphstudio/#
+																247 button Next Page, Help: Next
+																248 button Last Page, Help: Last
+														249 button (disabled) Load More
+											250 container Paragraph container
+												251 container
+													252 tab group Visualization selection
+														253 tab (selected) HTML, Value: 1
+															254 image HTML
+														255 tab (settable, integer) Text, Value: 0
+															256 image Text
+													257 splitter
+													258 button Settings
+													259 pop up button Download As
+														260 text 
+														261 text Download As
+														262 text 
+													263 text Visualize the previous query result
+											264 container Paragraph container
+												265 container
+													266 editor (settable) Editor content
+												267 container
+													268 tab group Visualization selection
+														269 tab (selected) Graph, Value: 1
+															270 image Graph
+														271 tab (settable, integer) Table, Value: 0
+															272 image Table
+														273 tab (settable, integer) Text, Value: 0
+															274 image Text
+													275 splitter
+													276 button Settings
+													277 pop up button Download As
+														278 text 
+														279 text Download As
+														280 text 
+													281 container
+														282 toggle button Move / Zoom, Value: 0
+															283 text 
+														284 toggle button Fit to Screen, Value: 0
+															285 text 
+														286 toggle button Toggle Sticky Mode, Value: 0
+															287 text 
+														288 toggle button Activate Network Evolution, Value: 0
+															289 text 
+														290 button (disabled) Drop - Delete selected vertices and edges
+														291 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+														292 button Group - Group selected vertices
+														293 button Select Group Option
+														294 button (disabled) Ungroup - Ungroup selected vertices
+														295 button Undo - Undo last action
+														296 button (disabled) Redo - Redo last action
+														297 button Reset - Reset the visualization to its default state
+														298 container
+															299 text 
+															300 text field (settable) Search graph
+															301 toggle button Conditional search, Value: 0
+																302 text 
+															303 button (disabled) Clear search
+														304 container Graph Visualization
+															305 container
+																306 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":1}, connects PO-8841 to LOT-SEMI-91A7
+																	307 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":1}, connects PO-8841 to LOT-SEMI-91A7
+																	308 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTElN0Q=
+																309 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":4}, connects LOT-SEMI-91A7 to PO-8841
+																	310 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":4}, connects LOT-SEMI-91A7 to PO-8841
+																	311 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTQlN0Q=
+																312 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":5}, connects LOT-SEMI-91A7 to PO-5077
+																	313 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":5}, connects LOT-SEMI-91A7 to PO-5077
+																	314 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTUlN0Q=
+																315 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":6}, connects LOT-SEMI-91A7 to PO-1190
+																	316 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":6}, connects LOT-SEMI-91A7 to PO-1190
+																	317 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTYlN0Q=
+																318 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":7}, connects PO-8841 to MACHINE-ATE-017
+																	319 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":7}, connects PO-8841 to MACHINE-ATE-017
+																	320 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTclN0Q=
+																321 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":9}, connects MACHINE-ATE-017 to PO-8841
+																	322 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":9}, connects MACHINE-ATE-017 to PO-8841
+																	323 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTklN0Q=
+																324 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":10}, connects MACHINE-ATE-017 to PO-5077
+																	325 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":10}, connects MACHINE-ATE-017 to PO-5077
+																	326 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTEwJTdE
+																327 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":11}, connects LOT-SEMI-91A7 to SUPPLIER-044
+																	328 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":11}, connects LOT-SEMI-91A7 to SUPPLIER-044
+																	329 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTExJTdE
+																330 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":13}, connects PO-8841 to INSPECTION-0199
+																	331 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":13}, connects PO-8841 to INSPECTION-0199
+																	332 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTEzJTdE
+																333 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":14}, connects INSPECTION-0199 to PO-8841
+																	334 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":14}, connects INSPECTION-0199 to PO-8841
+																	335 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTE0JTdE
+																336 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":15}, connects PO-8841 to PLANT-001
+																	337 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":15}, connects PO-8841 to PLANT-001
+																	338 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTE1JTdE
+																339 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":18}, connects LOT-SEMI-91A7 to CERT-SEMI-91A7
+																	340 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":18}, connects LOT-SEMI-91A7 to CERT-SEMI-91A7
+																	341 image Edge with id MWZhbHNlJTJDVFJBQ0VfUkVMQVRJT05TSElQUyU3QiUyMlJFTEFUSU9OU0hJUF9JRCUyMiUzQTE4JTdE
+																342 image Vertex PO-8841
+																343 image Vertex LOT-SEMI-91A7
+																344 image Vertex PO-5077
+																345 image Vertex PO-1190
+																346 image Vertex MACHINE-ATE-017
+																347 image Vertex SUPPLIER-044
+																348 image Vertex INSPECTION-0199
+																349 image Vertex PLANT-001
+																350 image Vertex CERT-SEMI-91A7
+														351 text 9 of 9  vertices 12 of 12  edges
+														352 slider Value: 21, Secondary Actions: Increment, Decrement
+														353 stepper (settable, float) 21
+														354 text of  21  elements ,  100.00 %
+														355 button Hide Legend
+														356 container
+															357 container Graph Legend
+																358 container
+																	359 button , Help: Collapse Vertices
+																	360 text Vertices
+																361 button , Help: Hide all vertices
+																362 container
+																	363 button , Help: Disable all vertex styling
+																364 container ENTITY
+																	365 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	366 container
+																		367 container
+																			368 text 臭 ENTITY_KEY
+																		369 container Click to disable this style
+																			370 image Vertex legend with id 7dfb3494
+																		371 text ENTITY
+																372 container RISK_SCORE >= 90
+																	373 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	374 container
+																		375 container Click to disable this style
+																			376 image Vertex legend with id 1786028814207
+																		377 text RISK_SCORE >= 90
+																378 container RISK_SCORE < 90
+																	379 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	380 container
+																		381 container Click to disable this style
+																			382 image Vertex legend with id 1786028688458
+																		383 text RISK_SCORE < 90
+																384 container  RISK_SCORE <= 50
+																	385 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	386 container
+																		387 container Click to disable this style
+																			388 image Vertex legend with id 1786028459387
+																		389 text RISK_SCORE <= 50
+																390 container
+																	391 button , Help: Collapse Edges
+																	392 text Edges
+																393 button , Help: Hide all edges
+																394 container
+																	395 button , Help: Disable all edge styling
+																	396 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																		397 text 句
+																398 container Hidden Connection
+																	399 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																	400 container
+																		401 container The conditions of this legend item do not match any elements of the currently displayed graph
+																			402 container Edge legend
+																				403 graphics symbol Edge legend
+																				404 image Edge with id 1583324064459
+																		405 container The conditions of this legend item do not match any elements of the currently displayed graph
+																			406 text Hidden Connection
+																407 container RELATED_TO
+																	408 checkbox , Help: Click to hide the influenced edges, Value: 1
+																	409 container
+																		410 container Click to disable this style
+																			411 container Edge legend
+																				412 graphics symbol Edge legend
+																				413 image Edge with id -2c7d101f
+																		414 text RELATED_TO
+															415 image
+											416 container Paragraph container
+												417 container
+													418 tab group Visualization selection
+														419 tab (selected) HTML, Value: 1
+															420 image HTML
+														421 tab (settable, integer) Text, Value: 0
+															422 image Text
+													423 splitter
+													424 button Settings
+													425 pop up button Download As
+														426 text 
+														427 text Download As
+														428 text 
+													429 text Shared Entity Connections
+											430 container Paragraph container
+												431 container
+													432 button Run Paragraph
+													433 button Enter Dependency Mode
+													434 container Comments (0)
+														435 button Comments
+													436 button Expand
+													437 button (disabled) Show/Hide Line Numbers
+													438 button Show Code
+													439 button Visibility
+													440 pop up button Settings
+														441 text 
+														442 text Settings
+														443 text 
+												444 container
+													445 tab group Visualization selection
+														446 tab (selected) HTML, Value: 1
+															447 image HTML
+														448 tab (settable, integer) Text, Value: 0
+															449 image Text
+													450 splitter
+													451 button Settings
+													452 pop up button Download As
+														453 text 
+														454 text Download As
+														455 text 
+													456 text This visualization centers on material lot LOT-SEMI-91A7. The fixture links production orders PO-8841, PO-5077, and PO-1190 to that lot. Inspect the supplier and lot-certificate links as supporting records. A shared lot identifies orders to review; it does not establish that every associated order contains a defective component.
+												457 text 28ms @ 2 minutes ago
+											458 container Paragraph container
+												459 container
+													460 button Run Paragraph
+													461 button Enter Dependency Mode
+													462 container Comments (0)
+														463 button Comments
+													464 button Expand
+													465 button (disabled) Show/Hide Line Numbers
+													466 button Show Code
+													467 button Visibility
+													468 pop up button Settings
+														469 text 
+														470 text Settings
+														471 text 
+												472 container
+													473 tab group Visualization selection
+														474 tab (selected) Graph, Value: 1
+															475 image Graph
+														476 tab (settable, integer) Table, Value: 0
+															477 image Table
+														478 tab (settable, integer) Text, Value: 0
+															479 image Text
+													480 splitter
+													481 button Settings
+													482 pop up button Download As
+														483 text 
+														484 text Download As
+														485 text 
+													486 container
+														487 toggle button Move / Zoom, Value: 0
+															488 text 
+														489 toggle button Fit to Screen, Value: 1
+															490 text 
+														491 toggle button Toggle Sticky Mode, Value: 0
+															492 text 
+														493 toggle button Activate Network Evolution, Value: 0
+															494 text 
+														495 button (disabled) Drop - Delete selected vertices and edges
+														496 button (disabled) Focus - Drops everything and fetches n-hop neighbors of selected vertices
+														497 button Group - Group selected vertices
+														498 button Select Group Option
+														499 button (disabled) Ungroup - Ungroup selected vertices
+														500 button Undo - Undo last action
+														501 button (disabled) Redo - Redo last action
+														502 button Reset - Reset the visualization to its default state
+														503 container
+															504 text 
+															505 text field (settable) Search graph
+															506 toggle button Conditional search, Value: 0
+																507 text 
+															508 button (disabled) Clear search
+														509 container Graph Visualization
+															510 container
+																511 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":1}, connects PO-8841 to LOT-SEMI-91A7
+																	512 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":1}, connects PO-8841 to LOT-SEMI-91A7
+																	513 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0ExJTdE
+																514 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":4}, connects LOT-SEMI-91A7 to PO-8841
+																	515 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":4}, connects LOT-SEMI-91A7 to PO-8841
+																	516 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0E0JTdE
+																517 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":2}, connects PO-5077 to LOT-SEMI-91A7
+																	518 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":2}, connects PO-5077 to LOT-SEMI-91A7
+																	519 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0EyJTdE
+																520 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":5}, connects LOT-SEMI-91A7 to PO-5077
+																	521 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":5}, connects LOT-SEMI-91A7 to PO-5077
+																	522 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0E1JTdE
+																523 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":3}, connects PO-1190 to LOT-SEMI-91A7
+																	524 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":3}, connects PO-1190 to LOT-SEMI-91A7
+																	525 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0EzJTdE
+																526 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":6}, connects LOT-SEMI-91A7 to PO-1190
+																	527 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":6}, connects LOT-SEMI-91A7 to PO-1190
+																	528 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0E2JTdE
+																529 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":11}, connects LOT-SEMI-91A7 to SUPPLIER-044
+																	530 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":11}, connects LOT-SEMI-91A7 to SUPPLIER-044
+																	531 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0ExMSU3RA==
+																532 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":12}, connects SUPPLIER-044 to LOT-SEMI-91A7
+																	533 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":12}, connects SUPPLIER-044 to LOT-SEMI-91A7
+																	534 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0ExMiU3RA==
+																535 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":18}, connects LOT-SEMI-91A7 to CERT-SEMI-91A7
+																	536 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":18}, connects LOT-SEMI-91A7 to CERT-SEMI-91A7
+																	537 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0ExOCU3RA==
+																538 container Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":19}, connects CERT-SEMI-91A7 to LOT-SEMI-91A7
+																	539 graphics symbol Edge TRACE_RELATIONSHIPS{"RELATIONSHIP_ID":19}, connects CERT-SEMI-91A7 to LOT-SEMI-91A7
+																	540 image Edge with id MTZmYWxzZSUyQ1RSQUNFX1JFTEFUSU9OU0hJUFMlN0IlMjJSRUxBVElPTlNISVBfSUQlMjIlM0ExOSU3RA==
+																541 image Vertex PO-8841
+																542 image Vertex LOT-SEMI-91A7
+																543 image Vertex PO-5077
+																544 image Vertex PO-1190
+																545 image Vertex SUPPLIER-044
+																546 image Vertex CERT-SEMI-91A7
+														547 text 6 of 6  vertices 10 of 10  edges
+														548 slider Value: 16, Secondary Actions: Increment, Decrement
+														549 stepper (settable, float) 16
+														550 text of  16  elements ,  100.00 %
+														551 button Hide Legend
+														552 container
+															553 container Graph Legend
+																554 container
+																	555 button , Help: Collapse Vertices
+																	556 text Vertices
+																557 button , Help: Hide all vertices
+																558 container
+																	559 button , Help: Disable all vertex styling
+																560 container ENTITY
+																	561 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	562 container
+																		563 container
+																			564 text 臭 ENTITY_KEY
+																		565 container Click to disable this style
+																			566 image Vertex legend with id 7dfb3494
+																		567 text ENTITY
+																568 container LOT-SEMI-91A7
+																	569 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	570 container
+																		571 container Click to disable this style
+																			572 image Vertex legend with id 1785965241099
+																		573 text LOT-SEMI-91A7
+																574 container SUPPLIERS
+																	575 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	576 container
+																		577 container Click to disable this style
+																			578 image Vertex legend with id 1785965201258
+																		579 text SUPPLIERS
+																580 container PRODUCTION_ORDERS
+																	581 checkbox , Help: Click to hide the influenced vertices, Value: 1
+																	582 container
+																		583 container Click to disable this style
+																			584 image Vertex legend with id 1785965131834
+																		585 text PRODUCTION_ORDERS
+																586 container
+																	587 button , Help: Collapse Edges
+																	588 text Edges
+																589 button , Help: Hide all edges
+																590 container
+																	591 button , Help: Disable all edge styling
+																	592 toggle button Value: 0, If activated, a dotted line is shown between vertices that are reachable but their actual path is not currently visible because intermediate vertices are configured to be hidden.
+																		593 text 句
+																594 container Hidden Connection
+																	595 checkbox (disabled) , Help: The conditions of this legend item do not match any elements of the currently displayed graph, Value: 1
+																	596 container
+																		597 container The conditions of this legend item do not match any elements of the currently displayed graph
+																			598 container Edge legend
+																				599 graphics symbol Edge legend
+																				600 image Edge with id 1583324064459
+																		601 container The conditions of this legend item do not match any elements of the currently displayed graph
+																			602 text Hidden Connection
+																603 container RELATED_TO
+																	604 checkbox , Help: Click to hide the influenced edges, Value: 1
+																	605 container
+																		606 container Click to disable this style
+																			607 container Edge legend
+																				608 graphics symbol Edge legend
+																				609 image Edge with id -2c7d101f
+																		610 text RELATED_TO
+															611 image
+								612 text Copyright © 2026 Oracle and/or its affiliates.
+			613 pop up button Tab search
+			614 container
+				615 tab group
+					616 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 430 MB, Value: off
+						617 button Close
+					618 tab (settable, boolean) New Tab - Memory usage - 175 MB, Value: off
+						619 button Close
+					620 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 458 MB, Value: off
+						621 button Close
+					622 tab (selected, settable, boolean) Production Quality Network - Memory usage - 264 MB, Value: on
+						623 button Close
+					624 tab (settable, boolean) Experiment - OML - Memory usage - 139 MB, Value: off
+						625 button Close
+			626 button New Tab
+	627 close button
+	628 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	629 minimize button
+630 menu bar
+	631 Chrome
+	632 File
+	633 Edit
+	634 View
+	635 History
+	636 Bookmarks
+	637 Profiles
+	638 Tab
+	639 Window
+	640 Help
+
+The focused UI element is 466 button Show Code

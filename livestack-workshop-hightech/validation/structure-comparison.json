@@ -1,0 +1,439 @@
+[
+  {
+    "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+    "source_tasks": 4,
+    "target_tasks": 4,
+    "source_sql_blocks": 8,
+    "target_sql_blocks": 8,
+    "sql_structure_same": true,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Check the embedding model"
+      ],
+      [
+        "## Task 1: Check the embedding model",
+        "## Task 2: Create a component vector"
+      ],
+      [
+        "## Task 2: Create a component vector",
+        "## Task 3: Test the component vector"
+      ],
+      [
+        "## Task 3: Test the component vector",
+        "## Task 4: Find customer sites affected by a component concern"
+      ],
+      [
+        "## Task 4: Find customer sites affected by a component concern",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": [
+      "### Hands-on Scenario",
+      "## Conclusion"
+    ]
+  },
+  {
+    "lesson": "final-quiz/final-quiz.md",
+    "source_tasks": 1,
+    "target_tasks": 1,
+    "source_sql_blocks": 0,
+    "target_sql_blocks": 0,
+    "sql_structure_same": true,
+    "headings_same_count": true,
+    "changed_headings": [],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": []
+  },
+  {
+    "lesson": "getting-started/getting-started.md",
+    "source_tasks": 2,
+    "target_tasks": 2,
+    "source_sql_blocks": 1,
+    "target_sql_blocks": 1,
+    "sql_structure_same": true,
+    "headings_same_count": true,
+    "changed_headings": [],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": []
+  },
+  {
+    "lesson": "introduction/introduction.md",
+    "source_tasks": 0,
+    "target_tasks": 0,
+    "source_sql_blocks": 0,
+    "target_sql_blocks": 0,
+    "sql_structure_same": true,
+    "headings_same_count": true,
+    "changed_headings": [
+      [
+        "# Build Connected Manufacturing Solutions with Oracle AI Database",
+        "# Build Connected HighTech Solutions with Oracle AI Database"
+      ],
+      [
+        "### SEER MANUFACTURING data model",
+        "### Seer HighTech data model"
+      ],
+      [
+        "## Running the manufacturing demo",
+        "## Running the HighTech demo"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {
+      "### SEER HIGHTECH data model": "### Seer HighTech data model"
+    },
+    "removed_editorial_headings": []
+  },
+  {
+    "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+    "source_tasks": 3,
+    "target_tasks": 3,
+    "source_sql_blocks": 4,
+    "target_sql_blocks": 4,
+    "sql_structure_same": true,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Look at the locations as points"
+      ],
+      [
+        "## Task 1: Look at the locations as points",
+        "## Task 2: Find the closest plants to a demand region"
+      ],
+      [
+        "## Task 2: Find the closest plants to a demand region",
+        "## Task 3: Route customer sites to the closest plant"
+      ],
+      [
+        "## Task 3: Route customer sites to the closest plant",
+        "## Next Steps"
+      ],
+      [
+        "## Conclusion: Use location in a production decision",
+        "## Application example"
+      ],
+      [
+        "## Next Steps",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": [
+      "### Hands-on Scenario",
+      "## Conclusion: Use location in a production decision"
+    ]
+  },
+  {
+    "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+    "source_tasks": 2,
+    "target_tasks": 2,
+    "source_sql_blocks": 1,
+    "target_sql_blocks": 1,
+    "sql_structure_same": true,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Run a converged production investigation"
+      ],
+      [
+        "## Task 1: Run a converged production investigation",
+        "## Task 2: Change the investigation question"
+      ],
+      [
+        "## Task 2: Change the investigation question",
+        "## Next Steps"
+      ],
+      [
+        "## Next Steps",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": [
+      "### Hands-on Scenario"
+    ]
+  },
+  {
+    "lesson": "production-order-duality/production-order-duality.md",
+    "source_tasks": 6,
+    "target_tasks": 6,
+    "source_sql_blocks": 14,
+    "target_sql_blocks": 14,
+    "sql_structure_same": true,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Store flexible application data as JSON"
+      ],
+      [
+        "### Thomas's three JSON choices",
+        "## Task 2: Create a JSON Collection Table"
+      ],
+      [
+        "## Task 1: Store flexible application data as JSON",
+        "## Task 3: Read a customer site document from relational data"
+      ],
+      [
+        "## Task 2: Create a JSON Collection Table",
+        "## Task 4: Enable document inserts and updates"
+      ],
+      [
+        "## Task 3: Read a customer site document from relational data",
+        "## Task 5: Create and update a JSON production order"
+      ],
+      [
+        "## Task 4: Enable document inserts and updates",
+        "## Task 6: Project JSON fields with SQL"
+      ],
+      [
+        "## Task 5: Create and update a JSON production order",
+        "## Conclusion: Choose the right JSON approach"
+      ],
+      [
+        "## Task 6: Project JSON fields with SQL",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": [
+      "### Hands-on Scenario",
+      "### Thomas's three JSON choices"
+    ]
+  },
+  {
+    "lesson": "production-quality-network/production-quality-network.md",
+    "source_tasks": 7,
+    "target_tasks": 7,
+    "source_sql_blocks": 6,
+    "target_sql_blocks": 6,
+    "sql_structure_same": true,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Follow a flagged production order with SQL"
+      ],
+      [
+        "## Task 1: Follow a flagged production order with SQL",
+        "## Task 2: Read the same connections as a graph"
+      ],
+      [
+        "## Task 2: Read the same connections as a graph",
+        "## Task 3: Trace four-hop quality traceability"
+      ],
+      [
+        "## Task 3: Trace four-hop quality traceability",
+        "## Task 4: Find production orders that share traceability records"
+      ],
+      [
+        "## Task 4: Find production orders that share traceability records",
+        "## Task 5: Visualize the relationship using Oracle Graph Studio"
+      ],
+      [
+        "## Task 5: Visualize the relationship using Oracle Graph Studio",
+        "## Task 6: Download and import the HighTech notebook"
+      ],
+      [
+        "## Task 6: Download and import the manufacturing notebook",
+        "## Task 7: Run and interpret the Graph Studio notebook"
+      ],
+      [
+        "## Task 7: Run and interpret the Graph Studio notebook",
+        "### Optional graph-algorithms extension"
+      ],
+      [
+        "### Optional graph-algorithms extension",
+        "## Appendix: Create the Property Graph"
+      ],
+      [
+        "## Conclusion: Make Relationships Easy to Review",
+        "## Application example"
+      ],
+      [
+        "## Appendix: Create the Property Graph",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": [
+      "### Hands-on Scenario",
+      "## Conclusion: Make Relationships Easy to Review"
+    ]
+  },
+  {
+    "lesson": "quality-review-oml/quality-review-oml.md",
+    "source_tasks": 4,
+    "target_tasks": 4,
+    "source_sql_blocks": 5,
+    "target_sql_blocks": 5,
+    "sql_structure_same": true,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Read the training data"
+      ],
+      [
+        "## Task 1: Read the training data",
+        "## Task 2: Compare models with AutoML (optional)"
+      ],
+      [
+        "## Task 2: Compare models with AutoML (optional)",
+        "## Task 3: Create a GLM in SQL Developer Web"
+      ],
+      [
+        "## Task 3: Create the selected model in SQL Developer Web",
+        "## Task 4: Score sample component measurements in SQL"
+      ],
+      [
+        "## Task 4: Score new component inspection measurements in SQL",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {
+      "## Task 3: Create the selected model in SQL Developer Web": "## Task 3: Create a GLM in SQL Developer Web",
+      "## Task 4: Score new component inspection measurements in SQL": "## Task 4: Score sample component measurements in SQL"
+    },
+    "removed_editorial_headings": [
+      "### Hands-on Scenario",
+      "## Conclusion: Put the Prediction Beside the Business Data"
+    ]
+  },
+  {
+    "lesson": "selectai/selectai.md",
+    "source_tasks": 6,
+    "target_tasks": 6,
+    "source_sql_blocks": 9,
+    "target_sql_blocks": 9,
+    "sql_structure_same": true,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "# Ask Manufacturing Questions with Select AI",
+        "# Ask HighTech Questions with Select AI"
+      ],
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Check the Select AI profile"
+      ],
+      [
+        "## Task 1: Check the Select AI profile",
+        "## Task 2: Add the HighTech tables to the profile"
+      ],
+      [
+        "## Task 2: Add the manufacturing tables to the profile",
+        "## Task 3: Ask a question and inspect the SQL"
+      ],
+      [
+        "## Task 3: Ask a question and inspect the SQL",
+        "## Task 4: Run the question in the database"
+      ],
+      [
+        "## Task 4: Run the question in the database",
+        "## Task 5: Improve the business question"
+      ],
+      [
+        "## Task 5: Improve the business question",
+        "## Task 6: Explain the result"
+      ],
+      [
+        "## Task 6: Explain the result",
+        "## Next Steps"
+      ],
+      [
+        "## Conclusion: Ask, Inspect, and Refine",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": null,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": [
+      "### Hands-on Scenario",
+      "## Conclusion: Ask, Inspect, and Refine"
+    ]
+  },
+  {
+    "lesson": "selectai-agent/selectai-agent.md",
+    "source_tasks": 5,
+    "target_tasks": 5,
+    "source_sql_blocks": 15,
+    "target_sql_blocks": 15,
+    "sql_structure_same": false,
+    "headings_same_count": false,
+    "changed_headings": [
+      [
+        "# Build a Manufacturing Agent with Select AI Agent",
+        "# Build a HighTech Agent with Select AI Agent"
+      ],
+      [
+        "### Hands-on Scenario",
+        "## Task 1: Check the profile and table access"
+      ],
+      [
+        "## Task 1: Check the profile and table access",
+        "## Task 2: Register the SQL tool"
+      ],
+      [
+        "## Task 2: Register the SQL tool",
+        "## Task 3: Create Nina's agent, task, and team"
+      ],
+      [
+        "## Task 3: Create Nina's agent, task, and team",
+        "## Task 4: Run a HighTech question"
+      ],
+      [
+        "## Task 4: Run a manufacturing question",
+        "## Task 5: Inspect what the agent did"
+      ],
+      [
+        "## Task 5: Inspect what the agent did",
+        "## Conclusion: Give the agent a controlled way to work"
+      ],
+      [
+        "## Conclusion: Give the agent a controlled way to work",
+        "## Next Steps"
+      ],
+      [
+        "## Appendix: Reset the workshop objects",
+        "## Acknowledgements"
+      ]
+    ],
+    "live_validation_departure": {
+      "reason": "Deterministic answer comparison and tool input/output inspection after incorrect live agent totals",
+      "one_comparison_added": true,
+      "remaining_sql_unchanged": true
+    },
+    "fresh_sandbox_reset_appendix_removed": true,
+    "authorized_sql_change": true,
+    "editorial_headings_preserved": true,
+    "approved_heading_changes": {},
+    "removed_editorial_headings": [
+      "### Hands-on Scenario",
+      "## Appendix: Reset the workshop objects"
+    ]
+  }
+]

@@ -195,5 +195,5 @@ In this lab, you will:
 2. Lab 3 creates the apps at [Slack API: Your Apps](https://api.slack.com/apps). Keep the Slack bot and app tokens, channel IDs, owner member ID, and Assistant Agent bot ID in a secure deployment worksheet. Use the personal Slack workspace from the prerequisites.
 ## Acknowledgements
 
-- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
+- Authors: Cyrce Salinas Rojas and Ilan Gómez guerrero
 - Last Updated: Cyrce Salinas Rojas, September 2026

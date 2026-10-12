@@ -6,6 +6,8 @@ This lab focuses on databases that use Transparent Data Encryption (TDE). You wi
 
 Estimated Time: 35 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:hrYaJrgg1mg)
+
 ### Objectives
 
 In this lab, you will:
@@ -34,11 +36,12 @@ The two CDBs, *CDB19ENC* and *CDB26ENC*, have already been configured for TDE.
     </copy>
     ```
 
-3. Start the database.
+3. Start the database and open the keystore.
 
     ``` sql
     <copy>
     startup
+    administer key management set keystore open force keystore identified by oracle_4U;
     </copy>
     ```
 

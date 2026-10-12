@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "customer_sites": true,
+    "plants": true,
+    "production_orders": true,
+    "components": true,
+    "production_order_lines": true
+  },
+  "relationships": [
+    {
+      "child": "components",
+      "foreign_key": "plant_id",
+      "parent": "plants",
+      "parent_key": "plant_id",
+      "valid": true,
+      "cardinality": "Each child has one required parent; a parent may have zero or many children."
+    },
+    {
+      "child": "production_orders",
+      "foreign_key": "plant_id",
+      "parent": "plants",
+      "parent_key": "plant_id",
+      "valid": true,
+      "cardinality": "Each child has one required parent; a parent may have zero or many children."
+    },
+    {
+      "child": "production_orders",
+      "foreign_key": "customer_site_id",
+      "parent": "customer_sites",
+      "parent_key": "customer_site_id",
+      "valid": true,
+      "cardinality": "Each child has one required parent; a parent may have zero or many children."
+    },
+    {
+      "child": "production_order_lines",
+      "foreign_key": "production_order_id",
+      "parent": "production_orders",
+      "parent_key": "production_order_id",
+      "valid": true,
+      "cardinality": "Each child has one required parent; a parent may have zero or many children."
+    },
+    {
+      "child": "production_order_lines",
+      "foreign_key": "component_id",
+      "parent": "components",
+      "parent_key": "component_id",
+      "valid": true,
+      "cardinality": "Each child has one required parent; a parent may have zero or many children."
+    }
+  ],
+  "scope": "Both core diagrams show selected columns from five of fifteen tables. The 1:N notation expresses maximum multiplicity, not mandatory child rows. Raster names, PK/FK labels, and arrow directions checked visually and with OCR."
+}

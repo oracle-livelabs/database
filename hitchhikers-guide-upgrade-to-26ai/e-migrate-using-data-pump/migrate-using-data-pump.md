@@ -8,6 +8,8 @@ A Data Pump migration is most suitable for smaller databases or when you need to
 
 Estimated Time: 15 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:-5VOgkqt9q8)
+
 ### Objectives
 
 In this lab, you will:
@@ -911,7 +913,7 @@ You need to make a few more changes to the new PDB before you can start the impo
 
 6. Examine the Data Pump log file for critical issues. A full import can produce some errors or warnings, especially when moving to a higher release and a different architecture.
 
-    * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` ddo not exist in newer releases of Oracle AI Database, causing the grants to fail.
+    * The roles `EM_EXPRESS_ALL`, `EM_EXPRESS_BASIC` and `DATAPATCH_ROLE` do not exist in newer releases of Oracle AI Database, causing the grants to fail.
     * The same applies to the `ORACLE_OCM` user.
     * An error related to traditional auditing, which is desupported in newer releases.
     * The import completed with 33 errors. In this lab, these errors are expected and are related to objects that do not exist in the target release. Review the log to confirm that there are no errors affecting the application data or objects you are migrating.

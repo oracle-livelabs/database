@@ -1,0 +1,43 @@
+- link "Database Actions,":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+  - generic: Database Actions
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - generic "Show Info":
+    - button "Show Info":
+      - generic: 
+      - generic: Show Info
+  - generic "Worksheet Query Result":
+    - application:
+      - generic: This is a data grid with 1 rows and 1 columns.
+      - generic: agent_answer
+      - generic: "1"
+      - text: "| component_name | category | total_material_value | planned_units | |-------------------------------------|---------------|----------------------|---------------| | Pressure interface module P15 Rev A | Sensing | 585580 | 2546 | | Pressure interface module P07 Rev A | Sensing | 532450 | 2315 | | Encoder interface module P09 Rev A | Motor control | 520800 | 2480 | | Encoder interface module P01 Rev A | Motor control | 519750 | 2475 | | Pressure interface module P14 Rev A | Sensing | 511290 | 2223 |"
+      - button:
+        - generic: 
+      - status: Enter navigation mode, press F2 to enter edit or actionable mode.
+      - generic: . Contains Controls.
+      - generic: Row 1, Column 1.
+    - text: 
+    - heading "Column \"AGENT_ANSWER\" row 1" [level=3]
+    - textbox [active]
+    - button "Close":
+      - generic: Close
+- list:
+  - listitem: Copyright © 2026, Oracle and/or its affiliates.
+  - link "About Oracle":
+    - /url: https://www.oracle.com/us/corporate/
+  - link "Contact Us":
+    - /url: https://www.oracle.com/us/corporate/contact/
+  - link "Legal Notices":
+    - /url: https://www.oracle.com/us/legal/
+  - link "Terms Of Use":
+    - /url: https://www.oracle.com/us/legal/terms/
+  - link "Your Privacy Rights":
+    - /url: https://www.oracle.com/us/legal/privacy/
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert

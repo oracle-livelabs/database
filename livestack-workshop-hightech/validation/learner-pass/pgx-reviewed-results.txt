@@ -1,0 +1,1335 @@
+- text:  
+- banner:
+  - button:
+    - generic: 
+    - generic: Navigation
+  - link:
+    - /url: .homepage
+  - button:
+    - generic: 
+    - generic: Help
+  - button:
+    - generic: 
+    - generic: ATTACHED
+  - button:
+    - generic: 
+    - generic: LLUSER
+    - generic: 
+    - text:        
+- button
+- navigation:
+  - heading [level=2]: Graph Tools
+  - list:
+    - button:
+      - generic: 
+      - generic: Overview
+    - button:
+      - generic: Graph Explorer
+    - button:
+      - generic: Modeler
+    - button:
+      - generic: 
+      - generic: Graphs
+    - button:
+      - generic: 
+      - generic: Notebooks
+    - button:
+      - generic: 
+      - generic: Templates
+  - heading [level=2]: Administrator Dashboard
+  - list:
+    - button:
+      - generic: 
+      - generic: Jobs
+- main:
+  - main:
+    - button:
+      - generic: Modify Notebook
+      - generic: 
+    - button [active]:
+      - generic: Run Paragraphs
+      - generic: 
+    - button:
+      - generic: Restart Session
+      - generic: 
+    - button:
+      - generic: Delete Notebook
+      - generic: 
+    - text:  
+    - button:
+      - generic: Update Notebook State
+      - generic: 
+    - button:
+      - generic: 
+      - generic: Actions
+      - generic: 
+      - text:   
+    - toolbar:
+      - button:
+        - generic: 
+        - generic: Additional Actions
+        - generic: 
+        - text:      
+      - button:
+        - generic: Clear Result
+        - generic: 
+      - button:
+        - generic: Clear Paragraph Dependencies
+        - generic: 
+      - button:
+        - generic: Copy embedded notebook path to clipboard
+        - generic: 
+      - button:
+        - generic: Share Notebook
+        - generic: 
+      - button:
+        - generic: Clone Notebook
+        - generic: 
+      - button:
+        - generic: Export Notebook
+        - generic:  
+      - button:
+        - generic: Print Notebook
+        - generic: 
+      - button:
+        - generic: 
+        - generic: Actions
+        - generic: 
+        - text:       
+    - text: 
+    - text:    
+    - button:
+      - generic: Run Paragraph
+      - generic: 
+    - button:
+      - generic: Enter Dependency Mode
+      - generic: 
+    - button:
+      - generic: Comments
+      - generic: 
+    - button:
+      - generic: Expand
+      - generic: 
+    - button [disabled]:
+      - generic: Show/Hide Line Numbers
+      - generic: 
+    - button:
+      - generic: Show Code
+      - generic: 
+    - button:
+      - generic: Visibility
+      - generic: 
+    - button:
+      - generic: 
+      - generic: Settings
+      - generic: 
+      - text:         
+    - text: 
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - heading [level=1]: Material Flow Investigation
+    - paragraph: "This optional notebook accompanies the HighTech workshop's production-quality graph lab. It teaches PGX algorithms using physical component movements between work centers. It is not the SQL/PGQ production-quality graph. Prerequisites: a PGQL property graph named MATERIAL_FLOW_GRAPH over WORK_CENTERS and MATERIAL_TRANSFERS, the TRANSFERS edge label, the CENTER_ID vertex property, and access to the in-memory PGX server. The loader creates the tables; run the optional PGQL graph definition from its final comment before using this notebook. Centers 534, 597, 934, 387, and 406 are sample dataset IDs. Outputs have been cleared. Run every paragraph in sequence to produce results; rankings, paths, and counts depend on the loaded graph."
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph:
+      - text: Run the first
+      - code: "%python-pgx"
+      - text: paragraph. The built-in
+      - code: session
+      - text: reads the graph from the database into the in-memory server and creates a
+      - code: PgXGraph
+      - text: object for the algorithms.
+    - code:
+      - textbox
+      - generic: "%python-pgx"
+      - generic: GRAPH_NAME="MATERIAL_FLOW_GRAPH"
+      - generic: "# try getting the graph from the in-memory graph server"
+      - generic: graph = session.get_graph(GRAPH_NAME)
+      - generic: "# if it does not exist read it into memory"
+      - generic: "if (graph == None) :"
+      - generic: session.read_graph_by_name(GRAPH_NAME, "pg_pgql")
+      - generic: print("Graph "+ GRAPH_NAME + " successfully loaded")
+      - generic: graph = session.get_graph(GRAPH_NAME)
+      - generic: "else :"
+      - generic: print("Graph '"+ GRAPH_NAME + "' already loaded")
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - generic: Graph 'MATERIAL_FLOW_GRAPH' already loaded
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph:
+      - text: Run the PGQL query to display 100 graph elements. In
+      - code: MATCH (s)-[t]->(d)
+      - text: ","
+      - code: s
+      - text: is the source vertex,
+      - code: t
+      - text: the directed edge, and
+      - code: d
+      - text: the destination.
+      - code: LIMIT
+      - text: caps the returned elements.
+    - paragraph:
+      - text: For more syntax examples, see the
+      - link:
+        - /url: https://pgql-lang.org/
+        - text: PGQL specification
+      - text: or the PGQL tutorial in the Getting Started notebook folder.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* Query and visualize 100 elements (nodes and edges) of MATERIAL_FLOW_GRAPH */
+      - generic: SELECT *
+      - generic: FROM MATCH (s)-[t]->(d) ON material_flow_graph
+      - generic: LIMIT 100
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 59 of 105 vertices
+    - generic: 41 of 100 edges
+    - slider: "100"
+    - spinbutton: "100"
+    - text: of 205 elements, 48.78%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: CENTER
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+      - checkbox [checked]: 
+      - generic: TRANSFERS
+    - iframe
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: This shows the use of bind parameters in a query. The center id value is entered at runtime.
+    - paragraph:
+      - text: Enter
+      - strong: "534"
+      - text: as the center id, and then execute the paragraph.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: "/* Check if there are any circular material-transfer chains of between 1 and 5 hops starting from the user-supplied center # */"
+      - generic: SELECT v,e,v2
+      - generic: "FROM MATCH ANY (a)-[:TRANSFERS]->{1,5}(b) ON material_flow_graph ONE ROW PER STEP (v,e,v2)"
+      - generic: "WHERE a.center_id=${center_id} AND id(a) = id(b)"
+    - generic: center_id
+    - textbox: "534"
+    - button [disabled]:
+      - generic: Clear is only available for Programmatic Forms
+      - generic: 
+    - button:
+      - generic: Reset
+      - generic: 
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 0 of 0 vertices
+    - generic: 0 of 0 edges
+    - slider: "0"
+    - spinbutton: "0"
+    - text: of 0 elements, NaN%
+    - button:
+      - generic: 
+    - iframe
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph:
+      - text: Find the 10 centers with the most transfers.
+      - code: IN_DEGREE
+      - text: and
+      - code: OUT_DEGREE
+      - text: count incoming and outgoing edges for each vertex. Choose
+      - strong: Table
+      - text: after running the ranking query to read the numeric columns if Graph Studio opens a graph.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* List 10 centers with the most number of material transfers (that is, incoming + outgoing edges) */
+      - generic: SELECT a.center_id, (in_degree(a) + out_degree(a)) AS num_transfers
+      - generic: FROM MATCH (a) ON material_flow_graph
+      - generic: ORDER BY num_transfers DESC
+      - generic: LIMIT 10
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - button:
+      - generic: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 10 of 10 vertices
+    - generic: 0 of 0 edges
+    - slider: "10"
+    - spinbutton: "10"
+    - text: of 10 elements, 100.00%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: CENTER
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+    - iframe
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: Review the centers with the highest degree. The fixture includes center 934 as a starting point for a circular material-transfer investigation. A high degree means many connected transfers; inspect those transfers before drawing conclusions about quality. The next query checks four-hop cycles with ONE ROW PER STEP so you can see each vertex and edge.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* Check if there are any circular material-transfer chains of length 4 from center 934 */
+      - generic: SELECT v,e,v2
+      - generic: "FROM MATCH ALL (a)-[:TRANSFERS]->{4}(b) ON material_flow_graph ONE ROW PER STEP (v,e,v2)"
+      - generic: WHERE a.center_id=934 AND id(a) = id(b)
+      - generic: LIMIT 100
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 6 of 6 vertices
+    - generic: 12 of 12 edges
+    - slider: "18"
+    - spinbutton: "18"
+    - text: of 18 elements, 100.00%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: CENTER
+      - checkbox [checked]: 
+      - generic: Untitled Legend - 1
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+      - checkbox [checked]: 
+      - generic: TRANSFERS
+    - iframe
+    - code:
+      - textbox
+      - generic: "%md"
+      - generic: Compare the cycle counts and paths from the four-hop query with the following five-hop query.
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: Compare the cycle counts and paths from the four-hop query with the following five-hop query.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* Check if there are any circular material-transfer chains of length 5 from center 934 */
+      - generic: SELECT v,e,v2
+      - generic: "FROM MATCH ALL (a)-[:TRANSFERS]->{5}(b) ON material_flow_graph ONE ROW PER STEP (v,e,v2)"
+      - generic: WHERE a.center_id=934 AND id(a) = id(b)
+      - generic: LIMIT 100
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 6 of 6 vertices
+    - generic: 12 of 12 edges
+    - slider: "18"
+    - spinbutton: "18"
+    - text: of 18 elements, 100.00%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: CENTER
+      - checkbox [checked]: 
+      - generic: Untitled Legend - 1
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+      - checkbox [checked]: 
+      - generic: TRANSFERS
+    - iframe
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%python-pgx"
+      - generic: graph = session.get_graph("MATERIAL_FLOW_GRAPH")
+      - generic: analyst.pagerank(graph);
+    - generic: 
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* List centers in descending order of pagerank values*/
+      - generic: SELECT a.center_id, a.pagerank AS pageRank
+      - generic: FROM MATCH (a) ON material_flow_graph
+      - generic: ORDER BY PageRank DESC
+      - generic: LIMIT 10
+    - generic: 
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: Compare the ranking with the degree query. Do not assume a particular center ranks first. The following six-hop query starts at sample center 934. In the graph visualization, highlight centers with higher PageRank; the supplied style threshold is illustrative and may need adjustment.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* Add highlights to symbolize center nodes by PageRank values. Highlight centers connected to 934 by their computed PageRank.
+      - generic: Choose the hierarchical view. */
+      - generic: SELECT v,e,v2
+      - generic: "FROM MATCH ANY (n)-[:TRANSFERS]->{6}(m) ON material_flow_graph ONE ROW PER STEP (v,e,v2)"
+      - generic: WHERE n.center_id = 934
+      - generic: LIMIT 100
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 10 of 10 vertices
+    - generic: 15 of 15 edges
+    - slider: "25"
+    - spinbutton: "25"
+    - text: of 25 elements, 100.00%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: CENTER
+      - checkbox [checked]: 
+      - generic: Untitled Legend - 1
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+      - checkbox [checked]: 
+      - generic: TRANSFERS
+    - iframe
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph:
+      - text: Compare each center’s
+      - strong: PageRank
+      - text: with the
+      - strong: number of material transfers
+      - text: you counted earlier.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* List centers in descending order of pagerank values*/
+      - generic: SELECT a.center_id, a.pagerank AS pageRank
+      - generic: FROM MATCH (a) ON material_flow_graph
+      - generic: ORDER BY PageRank DESC
+      - generic: LIMIT 5
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* List 10 centers with the most number of material transfers (that is, incoming + outgoing edges) */
+      - generic: SELECT a.center_id, (in_degree(a) + out_degree(a)) AS num_transfers
+      - generic: FROM MATCH (a) ON material_flow_graph
+      - generic: ORDER BY num_transfers DESC
+      - generic: LIMIT 5
+    - generic: 
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* Check the shortest path between center 934 and center 387 */
+      - generic: SELECT v,e,v2
+      - generic: FROM MATCH SHORTEST (a)-[:TRANSFERS]->+(b) ON material_flow_graph ONE ROW PER STEP (v,e,v2)
+      - generic: WHERE a.center_id=934 AND b.center_id=387
+    - generic: 
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* Find the top 3 shortest paths between center 934 and center 387 */
+      - generic: SELECT v,e,v2
+      - generic: FROM MATCH TOP 3 SHORTEST (a)-[:TRANSFERS]->+ (b) ON material_flow_graph ONE ROW PER STEP (v,e,v2)
+      - generic: WHERE a.center_id=934 AND b.center_id=387
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* Find the top 5 shortest paths between center 934 and center 387 */
+      - generic: SELECT v,e,v2
+      - generic: FROM MATCH TOP 5 SHORTEST (a)-[:TRANSFERS]->+ (b) ON material_flow_graph ONE ROW PER STEP (v,e,v2)
+      - generic: WHERE a.center_id=934 AND b.center_id=387
+    - generic: 
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%python-pgx"
+      - generic: vertices = graph.create_vertex_set()
+      - generic: vertices.add_all([graph.get_vertex("WORK_CENTERS(934)"),graph.get_vertex("WORK_CENTERS(387)")])
+      - generic: analyst.personalized_pagerank(graph, vertices);
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - generic: "VertexProperty(name: personalized_pagerank_2, type: double, graph: MATERIAL_FLOW_GRAPH)"
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: SELECT a.center_id, a.personalized_pagerank AS review_proximity FROM MATCH (a) ON material_flow_graph
+      - generic: ORDER BY review_proximity DESC
+    - text: 
+    - tablist:
+      - tab:
+        - img: 
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - button:
+      - generic: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - textbox:
+      - /placeholder: Type to search
+    - application:
+      - rowgroup:
+        - row:
+          - columnheader:
+            - generic: CENTER_ID
+            - generic: 
+          - columnheader:
+            - generic: REVIEW_PROXIMITY
+            - generic: 
+      - rowgroup:
+        - row:
+          - cell: "387"
+          - cell: "0.18357520255854715"
+        - row:
+          - cell: "934"
+          - cell: "0.1536660945700729"
+        - row:
+          - cell: "406"
+          - cell: "0.14756398868071"
+        - row:
+          - cell: "1"
+          - cell: "0.10625287512412299"
+        - row:
+          - cell: "2"
+          - cell: "0.0903143438704584"
+    - status
+    - generic: Select Row
+    - status: Page 1 content loaded
+    - generic: 4Pagination
+    - region:
+      - generic: Page
+      - textbox: "1"
+      - generic: of 20
+      - text: (
+      - generic: 1-5 of 100 items
+      - text: )
+      - button [disabled]:
+        - text: 
+        - generic: First Page
+      - button [disabled]:
+        - text: 
+        - generic: Previous Page
+      - generic: Page
+      - text: "1"
+      - link:
+        - /url: "#"
+        - generic: Page
+        - text: "2"
+      - link:
+        - /url: "#"
+        - generic: Page
+        - text: "3"
+      - link:
+        - /url: "#"
+        - generic: Page
+        - text: "4"
+      - link:
+        - /url: "#"
+        - generic: Page
+        - text: "5"
+      - text: ...
+      - link:
+        - /url: "#"
+        - generic: Page
+        - text: "20"
+      - button:
+        - text: 
+        - generic: Next Page
+      - button:
+        - text: 
+        - generic: Last Page
+    - button [disabled]:
+      - generic: Load More
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: Review the personalized PageRank results from your run. Then inspect sample center 406 and its immediate neighbors. No position in the ranking is assumed.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* show the material transfers for center id 406 */
+      - generic: SELECT *
+      - generic: FROM MATCH (v1)-[e1]->(a)-[e2]->(v2) ON material_flow_graph
+      - generic: WHERE a.center_id=406
+    - generic: 
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: Use shortest_path_hop_distance to compute the minimum number of directed transfer hops from centers 934 and 387 to other centers. Smaller distances mean graph proximity, not a confirmed defect. Run both Python paragraphs. They store separate properties named hop_dist_from_934 and hop_dist_from_387 on the loaded graph.
+    - code:
+      - textbox
+      - generic: "%python-pgx"
+      - generic: "# Compute directed hop distance from center 934"
+      - generic: vertex = graph.get_vertex("WORK_CENTERS(934)")
+      - generic: analyst.shortest_path_hop_distance(graph, vertex, "hop_dist_from_934")
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - generic: "AllPaths(source: PgxVertex[provider=WORK_CENTERS,key=934,ID=WORK_CENTERS(934)])"
+    - code:
+      - textbox
+      - generic: "%python-pgx"
+      - generic: vertex = graph.get_vertex("WORK_CENTERS(387)")
+      - generic: analyst.shortest_path_hop_distance(graph, vertex, "hop_dist_from_387")
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - generic: "AllPaths(source: PgxVertex[provider=WORK_CENTERS,key=387,ID=WORK_CENTERS(387)])"
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - text: /* show the number of centers with a certain number of hops in descending order for
+      - text: "#934*/"
+      - generic: SELECT COUNT(a.center_id), a.hop_dist_from_934 AS hops FROM MATCH (a) ON material_flow_graph
+      - generic: WHERE hops > 0
+      - generic: GROUP BY hops
+      - generic: ORDER BY hops
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - text: /* show the number of centers with a certain number of hops in descending order for
+      - text: "#387*/"
+      - generic: SELECT COUNT(a.center_id), a.hop_dist_from_387 AS hops FROM MATCH (a) ON material_flow_graph
+      - generic: WHERE hops > 0
+      - generic: GROUP BY hops
+      - generic: ORDER BY hops
+    - generic: 
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: SELECT a.center_id, a.hop_dist_from_934 AS hops, in_degree(a) + out_degree(a) AS num_transfers FROM MATCH (a) ON material_flow_graph
+      - generic: WHERE hops > 0 AND hops <=2
+      - generic: ORDER BY num_transfers DESC
+    - generic: 
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: SELECT a.center_id, a.hop_dist_from_387 AS hops, in_degree(a) + out_degree(a) AS num_transfers FROM MATCH (a) ON material_flow_graph
+      - generic: WHERE hops > 0 AND hops <=2
+      - generic: ORDER BY num_transfers DESC
+    - generic: 
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: Compare center 406 with the degree, personalized PageRank, and hop-distance results from your run. The final query visualizes two-hop paths from sample centers 934 and 387. Verify whether 406 appears instead of assuming a connection.
+    - code:
+      - textbox
+      - generic: "%pgql-pgx"
+      - generic: /* show 2-hop centers from 934 and 387 */
+      - generic: SELECT * FROM MATCH (a) -[e]-> (m)-[e1]->(d) ON material_flow_graph
+      - generic: WHERE a.center_id in (934, 387)
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 6 of 6 vertices
+    - generic: 10 of 10 edges
+    - slider: "16"
+    - spinbutton: "16"
+    - text: of 16 elements, 100.00%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: CENTER
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+      - checkbox [checked]: 
+      - generic: TRANSFERS
+    - iframe
+- generic: Copyright © 2026 Oracle and/or its affiliates.
+- text:        

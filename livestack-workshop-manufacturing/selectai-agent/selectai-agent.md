@@ -1,16 +1,14 @@
 # Build a Manufacturing Agent with Select AI Agent
 
-![Nina: manufacturing lab banner](images/nina.png)
-
 ## Introduction
-
-> **Validation status:** The manual LLUSER walkthrough and authentic manufacturing captures are recorded in the [validation report](../validation/validation-report.md). Green-button and Terraform provisioning remain untested.
 
 Nina Patel has used Select AI for individual questions. Her production-review screen now needs an assistant that can handle a request and follow-up questions.
 
-Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the manufacturing tables configured in the previous lab.
+Jessica gives Nina’s agent one SQL tool using the `GENAI` profile from Lab 7.
 
 In this lab, you create an agent, give it the built-in SQL query tool, and run a question through its team. The instructions ask for read-only answers. SQL still runs with the database user’s privileges. `LLUSER` owns the workshop objects, so it is not an example of a production account with restricted access.
+
+![Nina: manufacturing lab banner](images/nina.png)
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
@@ -36,22 +34,11 @@ In this lab, you create an agent, give it the built-in SQL query tool, and run a
 
 Estimated Time: **15 minutes**
 
-### Hands-on Scenario
-
-| Step                | Manufacturing focus                                                                                  |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| Business Problem    | Nina needs a manufacturing answer that can feed a production-review screen.                            |
-| Technical Challenge | The agent must use database data through an approved capability, not unrestricted access.      |
-| Persona Focus       | You follow Nina as she turns a Select AI question into a small manufacturing assistant.              |
-| What You Will See   | An agent receives a request, calls its SQL tool, and returns a manufacturing answer.                 |
-| Database Capability | Select AI Agent, `DBMS_CLOUD_AI_AGENT`, AI profiles, and a built-in SQL tool.                   |
-| Outcome             | Nina has a controlled agent that can answer questions from the manufacturing schema.                |
-
 > **Prerequisite:** Complete [Lab 7: Ask Manufacturing Questions with Select AI](?lab=selectai). This lab uses the `GENAI` profile and its `object_list`.
 
 ## Task 1: Check the profile and table access
 
-The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_list` limits the tables Select AI may use when it generates SQL. Database privileges provide the second control: the SQL still runs as the current database user and cannot read tables that user cannot access.
+The SQL tool uses the `GENAI` profile. Its `object_list` supplies schema information to guide SQL generation. Database privileges determine which objects the current user can access.
 
 1. Check the profile:
 
@@ -94,7 +81,7 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
 
     The workshop objects use names beginning with `NINA_MANUFACTURING_`. If you already ran this lab, you can reuse the existing objects or run the reset block in the appendix before starting again.
 
-4. Use the model verified for this agent exercise. First record the current model from `USER_CLOUD_AI_PROFILE_ATTRIBUTES` so you can restore it after Task 5. The supplied stack starts with `cohere.command-a-03-2025`.
+4. Set the model for this agent exercise. First record the current model from `USER_CLOUD_AI_PROFILE_ATTRIBUTES` so you can restore it after Task 5. The supplied stack starts with `cohere.command-a-03-2025`.
 
     ```sql
     <copy>
@@ -104,7 +91,7 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
     </copy>
     ```
 
-    In the manual walkthrough, Cohere repeated successful SQL tool calls until the browser request timed out. The same question completed with `meta.llama-3.3-70b-instruct`. Use the latter for this exercise with the configured Chicago inference endpoint. This changes the shared `GENAI` profile for concurrent calls too; use the workshop database and restore its previous model afterward.
+    Use `meta.llama-3.3-70b-instruct` for this exercise with the configured Chicago inference endpoint. This changes the shared `GENAI` profile for concurrent calls too; use the workshop database and restore its previous model afterward.
 
     Run this block with **Run Script (F5)**:
 
@@ -139,8 +126,7 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     </copy>
     ```
 
-    The tool lets the agent ask Select AI to generate and run SQL. It uses the profile’s table list and the current database user’s privileges.
-  
+
 2. Confirm the tool definition:
 
     ```sql
@@ -202,7 +188,6 @@ Define the agent’s role and task, then connect them in a team that can call th
     </copy>
     ```
 
-    Run the team to bring together Nina’s role, the task instructions, and the SQL tool.
   
 ## Task 4: Run a manufacturing question
 
@@ -220,13 +205,9 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
     </copy>
     ```
 
-    ![agent answer](images/sql-agent-answer.png)
+    ![Manufacturing agent answer with ranked component material values](images/sql-agent-answer.png)
 
-    
-  
-    Database Actions does not keep an agent conversation ID for this call, so the query creates one and passes it to `RUN_TEAM`. The ID lets Oracle record the prompt and response in the agent conversation history.
-
-    
+    Each execution creates a new conversation ID and passes it to `RUN_TEAM` to record the prompt and response. Repeat the relevant names and details in a new question; this example does not reuse the previous conversation.
 
 2. Review the answer.
 
@@ -238,7 +219,7 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
 ## Task 5: Inspect what the agent did
 
-Nina needs more than a final answer. She also wants to know whether the agent called the approved tool and how the request was processed.
+Check that Nina’s agent called the approved SQL tool.
 
 1. Review the latest team runs:
 
@@ -255,11 +236,7 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![agent history](images/sql-agent-history.png)
-
-    
-
-    
+    ![Select AI Agent team execution history](images/sql-agent-history.png)
 
 2. Review the latest tool calls:
 
@@ -277,11 +254,7 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![agent tools](images/sql-agent-tools.png)
-
-    
-
-  
+    ![Select AI Agent SQL tool invocation history](images/sql-agent-tools.png)
 
     The history should show `NINA_MANUFACTURING_SQL_TOOL`. Nina and Jessica can use it to check which tool the agent called.
 
@@ -302,17 +275,13 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    Confirm that `RESTORED_MODEL` matches the value recorded before the test. The successful reference run completed in about 32 seconds with one SQL tool call. Runtime and wording vary. An earlier timed-out request may still appear as `RUNNING` with no end time in history; that row alone does not prove that it is still executing.
+    Confirm that `RESTORED_MODEL` matches the value recorded before this exercise. Runtime and wording vary. If a request times out, its history row may still appear as `RUNNING` with no end time; that row alone does not prove that it is still executing.
 
 ## Conclusion: Give the agent a controlled way to work
 
-In Lab 7, Nina used Select AI to turn a question into SQL. In this lab, she gave an agent a role, a task, and one approved SQL tool. The agent can handle a broader request and decide when it needs database information, while the database still controls the profile, object list, privileges, and tool history.
+Nina’s assistant can answer manufacturing questions through its SQL tool, and Jessica can inspect the tool history or disable the team. The profile’s `object_list` guides SQL generation; database grants and row-level policies determine access.
 
-The application can call this assistant with a request. Jessica can review its tools and disable the tool or team when access is no longer needed.
-
-Two controls apply to table access. The profile’s `object_list` guides which tables the tool considers. Database grants and row-level policies determine which data the session can read. Give an application agent only the access it needs.
-
-The example asks the agent to return read-only answers. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
+This example requests read-only answers. Before allowing changes to data, use a narrowly defined function tool, clear instructions, and user confirmation.
 
 ## Appendix: Reset the workshop objects
 

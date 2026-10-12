@@ -1,0 +1,14 @@
+{
+  "baseline_files": 115,
+  "current_files": 116,
+  "unchanged_from_starting_snapshot": false,
+  "matches_preexisting_archive": true,
+  "archive_compared_files": 116,
+  "conversion_source_write_actions": 0,
+  "source_restored_by_this_task": false,
+  "existing_source_archive_sha256": "3ea15c2fcde6f583aa855abc60dc56639335e97df8154f2fd0f519535e8244ba",
+  "note": "Eleven existing files differ from the starting snapshot, including six banners, and one introduction image was added. Cause not established; no source writes or restoration were performed by this conversion. All 116 current source files match the existing source archive.",
+  "baseline_changed_banner_count": 6,
+  "baseline_changed_existing_file_count": 11,
+  "baseline_added_file_count": 1
+}

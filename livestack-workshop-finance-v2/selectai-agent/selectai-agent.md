@@ -104,6 +104,12 @@ The SQL tool is the agent's only database capability in this lab. It uses the `G
     ```sql
     <copy>
     BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'GENAI',
+        attribute_name  => 'model',
+        attribute_value => 'xai.grok-4.3'
+      );
+
       DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
         tool_name   => 'NINA_FINANCE_SQL_TOOL',
         attributes  => '{"tool_type": "SQL", "tool_params": {"profile_name": "genai"}}',

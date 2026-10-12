@@ -6,6 +6,8 @@ In this lab, you will upgrade an entire CDB to Oracle AI Database 26ai. Then, yo
 
 Estimated Time: 55 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:fjxBuzAB-ic)
+
 ### Objectives
 
 In this lab, you will:

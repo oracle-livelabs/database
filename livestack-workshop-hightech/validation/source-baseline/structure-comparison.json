@@ -1,0 +1,91 @@
+[
+  {
+    "position": 1,
+    "lesson": "introduction",
+    "source_tasks": 0,
+    "target_tasks": 0,
+    "source_sql_blocks": 0,
+    "target_sql_blocks": 0
+  },
+  {
+    "position": 2,
+    "lesson": "getting-started",
+    "source_tasks": 2,
+    "target_tasks": 2,
+    "source_sql_blocks": 1,
+    "target_sql_blocks": 1
+  },
+  {
+    "position": 3,
+    "lesson": "production-operations-dashboard",
+    "source_tasks": 2,
+    "target_tasks": 2,
+    "source_sql_blocks": 1,
+    "target_sql_blocks": 1
+  },
+  {
+    "position": 4,
+    "lesson": "production-order-duality",
+    "source_tasks": 6,
+    "target_tasks": 6,
+    "source_sql_blocks": 14,
+    "target_sql_blocks": 14
+  },
+  {
+    "position": 5,
+    "lesson": "component-quality-vector-search",
+    "source_tasks": 4,
+    "target_tasks": 4,
+    "source_sql_blocks": 8,
+    "target_sql_blocks": 8
+  },
+  {
+    "position": 6,
+    "lesson": "production-quality-network",
+    "source_tasks": 7,
+    "target_tasks": 7,
+    "source_sql_blocks": 6,
+    "target_sql_blocks": 6
+  },
+  {
+    "position": 7,
+    "lesson": "plant-routing-spatial",
+    "source_tasks": 3,
+    "target_tasks": 3,
+    "source_sql_blocks": 4,
+    "target_sql_blocks": 4
+  },
+  {
+    "position": 8,
+    "lesson": "quality-review-oml",
+    "source_tasks": 4,
+    "target_tasks": 4,
+    "source_sql_blocks": 5,
+    "target_sql_blocks": 5
+  },
+  {
+    "position": 9,
+    "lesson": "selectai",
+    "source_tasks": 6,
+    "target_tasks": 6,
+    "source_sql_blocks": 9,
+    "target_sql_blocks": 9
+  },
+  {
+    "position": 10,
+    "lesson": "selectai-agent",
+    "source_tasks": 5,
+    "target_tasks": 5,
+    "source_sql_blocks": 12,
+    "target_sql_blocks": 15,
+    "justification": "Three added blocks record the original model, select the model verified in the agent test, and restore and verify the original model. Five tasks and their order are unchanged."
+  },
+  {
+    "position": 11,
+    "lesson": "final-quiz",
+    "source_tasks": 1,
+    "target_tasks": 1,
+    "source_sql_blocks": 0,
+    "target_sql_blocks": 0
+  }
+]

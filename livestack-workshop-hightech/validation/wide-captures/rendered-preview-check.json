@@ -1,0 +1,8 @@
+{
+  "lab": "selectai-agent",
+  "image": "images/sql-agent-answer.png",
+  "complete": true,
+  "naturalWidth": 905,
+  "naturalHeight": 734,
+  "current_instruction_checkpoint_visible": true
+}

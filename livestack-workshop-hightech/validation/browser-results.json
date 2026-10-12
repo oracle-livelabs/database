@@ -1,0 +1,31 @@
+{
+  "scope": "Local HTTP preview using Oracle hosted LiveLabs renderer, not sandbox provisioning or Oracle execution.",
+  "primary_lesson_pages": 11,
+  "alternate_tenancy_launcher": true,
+  "all_present_learner_images_load": true,
+  "image_note": "Expanded task images plus five lazy images opened directly; intro illustrations and changed Nina banner refreshed. Technical SVG and quiz badge loaded separately.",
+  "sql_copy_buttons": {
+    "getting-started": 1,
+    "production-operations-dashboard": 1,
+    "production-order-duality": 14,
+    "component-quality-vector-search": 8,
+    "production-quality-network": 6,
+    "plant-routing-spatial": 4,
+    "quality-review-oml": 5,
+    "selectai": 9,
+    "selectai-agent": 15
+  },
+  "getting_started_task2_crosslink": "Opened requested task and expanded its content.",
+  "quiz": {
+    "correct": 7,
+    "total": 7,
+    "score_percent": 100,
+    "hightech_badge_loaded": true
+  },
+  "limitations": [
+    "No cloud reservation was created.",
+    "No Oracle database commands were run.",
+    "External destination links were preserved; external destinations were not comprehensively retested.",
+    "Responsive layouts and full accessibility audit were not run."
+  ]
+}

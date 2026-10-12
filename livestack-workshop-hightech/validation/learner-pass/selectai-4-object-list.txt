@@ -1,0 +1,38 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 1264
++								1264 toolbar
++									1265 button Clear Output
++										1266 text 
++										1267 text Clear Output
++									1268 button Show info
++										1269 text 
++										1270 text Show info
++									1271 button Open in new tab
++										1272 text 
++										1273 text Open in new tab
++									1274 button Share Query Results
++										1275 text 
++										1276 text Share Query Results
++									1277 pop up button Download
++										1278 text Download
++										1279 text 
++									1280 text Execution time: 0.017 seconds
++								1281 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									1282 container dbt-sql-worksheet__query-output-grid
++										1283 text This is a data grid with 1 rows and 3 columns.
++										1284 container
++											1285 text PROFILE_NAME
++											1286 text ATTRIBUTE_NAME
++											1287 text ATTRIBUTE_VALUE
++										1288 text 1
++										1289 container
++											1290 text GENAI
++											1291 text object_list
++											1292 text [{"owner": "LLUSER", "name": "COMPONENTS"}, {"owner": "LLUSER", "name": "PRODUCTION_ORDERS"}, {"owner": "LLUSER", "name": "PRODUCTION_ORDER_LINES"}, {"owner": "LLUSER", "name": "CUSTOMER_SITES"}]
+~			60 link Description:    1, Help: Processes
++				1293 text 
+~				62 text 1
+~			64 link 7:18:19 PM - 1 rows total
+~				65 text 7:18:19 PM - 1 rows total
+The focused UI element is 813 button Run Statement (Ctrl+⏎, ⌘+⏎)

@@ -1,0 +1,63 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 1054
++								1054 toolbar
++									1055 button Clear Output
++										1056 text 
++										1057 text Clear Output
++									1058 button Show info
++										1059 text 
++										1060 text Show info
++									1061 button Open in new tab
++										1062 text 
++										1063 text Open in new tab
++									1064 button Share Query Results
++										1065 text 
++										1066 text Share Query Results
++									1067 pop up button Download
++										1068 text Download
++										1069 text 
++									1070 text Execution time: 0.03 seconds
++								1071 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									1072 container dbt-sql-worksheet__query-output-grid
++										1073 text This is a data grid with 7 rows and 3 columns.
++										1074 container
++											1075 text PROFILE_NAME
++											1076 text ATTRIBUTE_NAME
++											1077 text ATTRIBUTE_VALUE
++										1078 container
++											1079 text 1
++											1080 text 2
++											1081 text 3
++											1082 text 4
++											1083 text 5
++											1084 text 6
++											1085 text 7
++										1086 container
++											1087 text GENAI
++											1088 text comments
++											1089 text true
++											1090 text GENAI
++											1091 text credential_name
++											1092 text OCI$RESOURCE_PRINCIPAL
++											1093 text GENAI
++											1094 text model
++											1095 text cohere.command-a-03-2025
++											1096 text GENAI
++											1097 text object_list
++											1098 text [{"owner": "LLUSER", "name": "COMPONENTS"}, {"owner": "LLUSER", "name": "PRODUCTION_ORDERS"}, {"owner": "LLUSER", "name": "PRODUCTION_ORDER_LINES"}, {"owner": "LLUSER", "name": "CUSTOMER_SITES"}]
++											1099 text GENAI
++											1100 text oci_compartment_id
++											1101 text ocid1.compartment.oc1..aaaaaaaamjwm6mbomcfbudoouyuhw5l2slqj74yvhqs76pfatwkmispnxora
++											1102 text GENAI
++											1103 text provider
++											1104 text oci
++											1105 text GENAI
++											1106 text region
++											1107 text us-chicago-1
+~			60 link Description:    1, Help: Processes
++				1108 text 
+~				62 text 1
+~			64 link 7:18:04 PM - 7 rows total
+~				65 text 7:18:04 PM - 7 rows total
+The focused UI element is 813 button Run Statement (Ctrl+⏎, ⌘+⏎)

@@ -8,6 +8,8 @@ Transportable tablespaces are suitable for larger databases, which is not always
 
 Estimated Time: 20 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:j0Exv5HSXFY)
+
 ### Objectives
 
 In this lab, you will:

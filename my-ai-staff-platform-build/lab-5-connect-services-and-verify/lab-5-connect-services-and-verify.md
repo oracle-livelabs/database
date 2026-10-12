@@ -185,5 +185,5 @@ In this lab, you will:
 
 ## Acknowledgements
 
-- Authors: Cyrce Salinas Rojas and Ilan Gomez Guerrero
-- Last Updated: Ilan Gomez Guerrero, September 2026
+- Authors: Cyrce Salinas Rojas and Ilan Gómez guerrero
+- Last Updated: Cyrce Salinas Rojas, September 2026

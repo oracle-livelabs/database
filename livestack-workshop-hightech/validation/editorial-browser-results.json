@@ -1,0 +1,20 @@
+{
+  "scope": "Local LiveLabs rendering after prose changes; no database execution",
+  "pages": [
+    "introduction",
+    "production-order-duality",
+    "production-quality-network",
+    "plant-routing-spatial"
+  ],
+  "expanded_tasks_verified": {
+    "production-order-duality": 6,
+    "production-quality-network": 7,
+    "plant-routing-spatial": 3
+  },
+  "screenshots_reviewed": [
+    "production-order-duality",
+    "plant-routing-spatial"
+  ],
+  "introduction_team_table_rendered": true,
+  "recap_headings_removed": true
+}

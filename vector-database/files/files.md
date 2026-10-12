@@ -24,4 +24,4 @@ Estimated Time: X
 ## Acknowledgements
 
 * **Author** - Oracle LiveLabs workshop authoring team
-* **Last Updated By/Date** - Codex, May 28, 2026
+* **Last Updated By/Date** - May 28, 2026

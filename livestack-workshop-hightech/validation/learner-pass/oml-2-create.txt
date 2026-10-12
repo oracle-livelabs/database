@@ -1,0 +1,253 @@
+- generic "Selector":
+  - button "Selector":
+    - generic: 
+    - generic: Selector
+- link "Database Actions, Go to Launchpad":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+- generic: "| SQL"
+- search:
+  - button "Search Database (⌘+K)":
+    - generic: Search Database (⌘+K)
+    - generic: 
+- text:                      
+- generic "Need Help?":
+  - button "Need Help?":
+    - generic: 
+    - generic: Need Help?
+- button "LLUSER User Menu":
+  - generic: 
+  - generic "LLUSER"
+  - generic: 
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - text:                                                                                                                                                                                                                                                                                
+  - generic "Resize":
+    - button "Expand"
+  - toolbar "Editing Toolbar":
+    - button "BROWSER[Worksheet ]*":
+      - generic "[Worksheet ]*":
+        - generic "BROWSER"
+        - generic: "[Worksheet ]*"
+      - generic: 
+    - generic "New file":
+      - button "":
+        - generic: 
+        - generic: New file
+        - generic: 
+        - text:  
+    - generic "Open... (Ctrl+O, ⌘+O)":
+      - button "Open... (Ctrl+O, ⌘+O)":
+        - generic: 
+        - generic: Open... (Ctrl+O, ⌘+O)
+    - generic "Save (Ctrl+S, ⌘+S)":
+      - button "Save (Ctrl+S, ⌘+S)":
+        - generic: 
+        - generic: Save (Ctrl+S, ⌘+S)
+    - generic "Run Statement (Ctrl+⏎, ⌘+⏎)":
+      - button "Run Statement (Ctrl+⏎, ⌘+⏎)":
+        - generic: 
+        - generic: Run Statement (Ctrl+⏎, ⌘+⏎)
+    - button "Run Statement Options":
+      - generic: 
+      - text:  
+    - generic "Run Script (F5)":
+      - button "Run Script (F5)" [active]:
+        - generic:  
+        - generic: Run Script (F5)
+    - generic "Create Chart (Ctrl+F11, ⌘+F11)":
+      - button "Create Chart (Ctrl+F11, ⌘+F11)":
+        - generic:  
+        - generic: Create Chart (Ctrl+F11, ⌘+F11)
+    - generic "Explain Plan (F10)":
+      - button "Explain Plan (F10)":
+        - generic: 
+        - generic: Explain Plan (F10)
+    - generic "Autotrace (F6)":
+      - button "Autotrace (F6)":
+        - generic: 
+        - generic: Autotrace (F6)
+    - generic "Download Editor Content (Ctrl+I, ⌘+I)":
+      - button "Download Editor Content (Ctrl+I, ⌘+I)":
+        - generic: 
+        - generic: Download Editor Content (Ctrl+I, ⌘+I)
+    - generic "Format (Ctrl+F7, ⌘+F7)":
+      - button "Format (Ctrl+F7, ⌘+F7)":
+        - generic: 
+        - generic: Format (Ctrl+F7, ⌘+F7)
+    - generic "Convert Case (Ctrl+B, ⌘+B)":
+      - button "":
+        - generic: 
+        - generic: Convert Case (Ctrl+B, ⌘+B)
+        - generic: 
+    - generic "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+      - button "Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)":
+        - generic: 
+        - generic: Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+  - toolbar "Editing Toolbar":
+    - text: .
+    - paragraph:
+      - generic: "Consumer group:"
+    - generic "Consumer group":
+      - button "LOW":
+        - generic: LOW
+        - generic: 
+    - generic "Data Load":
+      - button "Data Load":
+        - generic: Data Load
+    - generic "Open In Fullscreen":
+      - button "Open In Fullscreen":
+        - generic: 
+        - generic: Open In Fullscreen
+    - generic "Tour":
+      - button "Tour":
+        - generic: 
+        - generic: Tour
+    - generic "Help (F1)":
+      - button "Help (F1)":
+        - generic: 
+        - generic: Help (F1)
+  - tabpanel:
+    - code:
+      - textbox "Editor content"
+      - textbox
+      - generic: "38"
+      - generic: "39"
+      - generic: "40"
+      - generic: "41"
+      - generic: "42"
+      - generic: "43"
+      - generic: case_id_column_name => 'COMPONENT_ID',
+      - generic: target_column_name => 'REVIEW_LABEL',
+      - generic: settings_table_name => 'OTTO_QUALITY_REVIEW_SETTINGS'
+      - generic: );
+      - generic: END;
+      - generic: /
+      - generic: "33"
+      - generic: 
+      - generic: "34"
+      - generic: 
+      - list:
+        - generic: BEGIN
+        - generic: DBMS_DATA_MINING.CREATE_MODEL(
+  - generic "Resize":
+    - button "Collapse" [expanded]
+  - tablist:
+    - tab "Query Result":
+      - generic: Query Result
+    - tab "Script Output" [selected]:
+      - generic: Script Output
+    - tab "DBMS Output":
+      - generic: DBMS Output
+    - tab "Explain Plan":
+      - generic: Explain Plan
+    - tab "More Tabs":
+      - img "More Tabs": 
+  - generic "Help":
+    - button "Help":
+      - generic: 
+      - generic: Help
+  - text:         
+  - tabpanel "Script Output":
+    - toolbar "oj.Translations.getTranslatedString( 'core.components.code_editor.menu.code_editor_menu_label' )":
+      - generic "Clear output":
+        - button "Clear output":
+          - generic: 
+          - generic: Clear output
+      - generic "Download script output":
+        - button "Download script output":
+          - generic: 
+          - generic: Download script output
+    - generic: Table OTTO_QUALITY_REVIEW_SETTINGS dropped.
+    - generic: "Elapsed: 00:00:00.094"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "DROP TABLE IF EXISTS otto_quality_review_settings":
+      - button:
+        - generic: 
+    - generic: Table OTTO_QUALITY_REVIEW_SETTINGS created.
+    - generic: "Elapsed: 00:00:00.008"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "CREATE TABLE otto_quality_review_settings ( setting_name VARCHAR2(30), setting_value VARCHAR2(4000) )":
+      - button:
+        - generic: 
+    - generic: 1 row inserted.
+    - generic: "Elapsed: 00:00:00.025"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "INSERT INTO otto_quality_review_settings (setting_name, setting_value) VALUES ('ALGO_NAME', 'ALGO_GENERALIZED_LINEAR_MODEL')":
+      - button:
+        - generic: 
+    - generic: 1 row inserted.
+    - generic: "Elapsed: 00:00:00.003"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "INSERT INTO otto_quality_review_settings (setting_name, setting_value) VALUES ('PREP_AUTO', 'ON')":
+      - button:
+        - generic: 
+    - generic: 1 row inserted.
+    - generic: "Elapsed: 00:00:00.003"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "INSERT INTO otto_quality_review_settings (setting_name, setting_value) VALUES ('ODMS_RANDOM_SEED', '20260604')":
+      - button:
+        - generic: 
+    - generic: Commit complete.
+    - generic: "Elapsed: 00:00:00.002"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "COMMIT":
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.257"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "DECLARE l_model_count NUMBER; BEGIN SELECT COUNT(*) INTO l_model_count FROM user_mining_models WHERE model_name = 'OTTO_QUALITY_REVIEW_MODEL'; IF l_model_count > 0 THEN DBMS_DATA_MINING.DROP_MODEL('OTTO_QUALITY_REVIEW_MODEL'); END IF; END;":
+      - button:
+        - generic: 
+    - generic: PL/SQL procedure successfully completed.
+    - generic: "Elapsed: 00:00:00.553"
+    - generic "Copy to clipboard":
+      - button "Copy to clipboard":
+        - generic: 
+        - generic: Copy to clipboard
+    - generic "BEGIN DBMS_DATA_MINING.CREATE_MODEL( model_name => 'OTTO_QUALITY_REVIEW_MODEL', mining_function => DBMS_DATA_MINING.CLASSIFICATION, data_table_name => 'OML_QUALITY_TRAINING_V', case_id_column_name => 'COMPONENT_ID', target_column_name => 'REVIEW_LABEL', settings_table_name => 'OTTO_QUALITY_REVIEW_SETTINGS' ); END;":
+      - button:
+        - generic: 
+  - text:          
+- generic "Errors":
+  - generic: 
+  - generic: "1"
+- generic "Warnings":
+  - generic: 
+  - generic: "0"
+- generic "Processes":
+  - generic: 
+  - generic: "0"
+- generic: "|"
+- generic: 7:17:00 PM - SQL executed by LLUSER
+- generic: 
+- link "Powered by ORDS":
+  - /url: https://oracle.com/rest
+  - generic: Powered by ORDS
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert

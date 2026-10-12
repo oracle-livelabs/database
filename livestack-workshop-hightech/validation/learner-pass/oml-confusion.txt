@@ -1,0 +1,276 @@
+- dialog "Model Detail - GLM_6FD5EDF725":
+  - heading "Model Detail - GLM_6FD5EDF725" [level=1]
+  - generic "Close":
+    - button "Close":
+      - generic: 
+      - generic: Close
+  - tablist:
+    - tab "Prediction Impacts":
+      - generic: Prediction Impacts
+    - tab "Confusion Matrix" [active] [selected]:
+      - generic: Confusion Matrix
+  - text:  
+  - tabpanel "Confusion Matrix":
+    - application "Confusion Matrix":
+      - generic: This is a data grid with 2 rows and 2 columns.
+      - 'generic "Predicted: REVIEW"': REVIEW
+      - 'generic "Predicted: STABLE"': STABLE
+      - 'generic "Actual: REVIEW"': REVIEW
+      - 'generic "Actual: STABLE"': STABLE
+      - generic: 40.82 %
+      - generic: 0.00 %
+      - generic: 0.00 %
+      - generic: 59.18 %
+      - status
+      - generic: Actual
+      - generic: Predicted
+- paragraph: Experiment - OML
+- text:               
+- banner:
+  - generic "OML Navigation":
+    - button "":
+      - generic: 
+  - img "Oracle Logo": 
+  - heading "Machine Learning" [level=1]
+  - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"':
+    - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"':
+      - button:
+        - 'generic "Project: LLUSER Project Workspace: LLUSER Workspace"': 
+        - generic: LLUSER Project
+        - generic: LLUSER Workspace
+  - button "":
+    - generic: 
+    - text: 
+  - separator
+  - button "LLUSER":
+    - generic: 
+    - generic: LLUSER
+  - generic "Help for current page":
+    - button "Help for current page":
+      - generic: 
+      - generic: Help for current page
+  - generic:      
+  - generic:          
+  - generic:  
+- main:
+  - link "Back to Experiments":
+    - /url: "#"
+    - text: <- Experiments
+  - heading "Component Quality Review (Learner Pass)" [level=1]
+  - generic:            
+  - text: 
+  - generic "Completed":
+    - button "Completed":
+      - generic: 
+      - generic: Completed
+  - generic "Edit":
+    - button "Edit":
+      - generic: 
+      - generic: Edit
+  - button "Start":
+    - generic: 
+    - generic: Start
+    - generic: 
+  - generic: 
+  - button "Settings": 
+  - heading "Settings" [level=1]
+  - heading "Balanced Accuracy" [level=1]
+  - 'application "Data Visualization: Chart"':
+  - heading "Leader Board" [level=1]
+  - toolbar "Leaderboard Actions":
+    - button "Deploy" [disabled]:
+      - generic: Deploy
+    - button "Rename" [disabled]:
+      - generic: Rename
+    - button "Create Notebook" [disabled]:
+      - generic: Create Notebook
+    - generic "Metrics":
+      - button "Metrics":
+        - generic: Metrics
+  - generic "Leaderboard Table":
+    - application:
+      - rowgroup:
+        - row "Algorithm Model Name Balanced Accuracy Accuracy ROC AUC":
+          - columnheader "Algorithm":
+            - generic: Algorithm
+            - generic: 
+          - columnheader "Model Name":
+            - generic: Model Name
+            - generic: 
+          - columnheader "Balanced Accuracy":
+            - generic: Balanced Accuracy
+            - generic: 
+          - columnheader "Accuracy":
+            - generic: Accuracy
+            - generic: 
+          - columnheader "ROC AUC":
+            - generic: ROC AUC
+            - generic: 
+      - rowgroup:
+        - row "Decision Tree DT_0DFE22E3C7 1.0000 1.0000 0.0000":
+          - cell "Decision Tree"
+          - cell "DT_0DFE22E3C7":
+            - link "DT_0DFE22E3C7":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "0.0000":
+            - generic: "0.0000"
+        - row "Generalized Linear Model GLM_6FD5EDF725 1.0000 1.0000 0.0000":
+          - cell "Generalized Linear Model"
+          - cell "GLM_6FD5EDF725":
+            - link "GLM_6FD5EDF725":
+              - /url: javascript:void(0);
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "0.0000":
+            - generic: "0.0000"
+        - row "Generalized Linear Model (Ridge Regression) GLMR_3B8DBDC80C 1.0000 1.0000 0.0000":
+          - cell "Generalized Linear Model (Ridge Regression)"
+          - cell "GLMR_3B8DBDC80C":
+            - link "GLMR_3B8DBDC80C":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "0.0000":
+            - generic: "0.0000"
+        - row "Neural Network NN_950C709CE8 1.0000 1.0000 0.0000":
+          - cell "Neural Network"
+          - cell "NN_950C709CE8":
+            - link "NN_950C709CE8":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "0.0000":
+            - generic: "0.0000"
+        - row "Random Forest RF_9DE490826F 1.0000 1.0000 0.0000":
+          - cell "Random Forest"
+          - cell "RF_9DE490826F":
+            - link "RF_9DE490826F":
+              - /url: javascript:void(0);
+            - generic:  
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "1.0000":
+            - generic: "1.0000"
+          - cell "0.0000":
+            - generic: "0.0000"
+    - status
+    - generic: Table with 5 columns and more than 5 rows
+    - generic: Row 2
+    - generic: Column 1
+    - generic: Select Row
+    - generic: unselected Contains Controls
+  - generic:  
+  - generic:  
+  - generic: 
+  - generic:  
+  - button "Features" [expanded]: 
+  - heading "Features" [level=1]
+  - toolbar:
+    - button "Refresh" [disabled]:
+      - generic: 
+      - generic: Refresh
+    - generic:   
+    - textbox "Filter"
+  - generic "Features":
+    - application " Refresh":
+      - rowgroup:
+        - row "Name Importance Type":
+          - columnheader
+          - columnheader "Name":
+            - generic: Name
+            - generic: 
+          - columnheader "Importance":
+            - generic: Importance
+            - generic: 
+          - columnheader "Type":
+            - generic: Type
+            - generic: 
+      - rowgroup:
+        - 'row "AVG_DEFECT_RATE_PCT Feature importance: 0.551 NUMBER"':
+          - cell
+          - cell "AVG_DEFECT_RATE_PCT"
+          - 'cell "Feature importance: 0.551"':
+            - 'img "Feature importance: 0.551"':
+          - cell "NUMBER"
+        - 'row "AVG_DOWNTIME_MINUTES Feature importance: 0.167 NUMBER"':
+          - cell
+          - cell "AVG_DOWNTIME_MINUTES"
+          - 'cell "Feature importance: 0.167"':
+            - 'img "Feature importance: 0.167"':
+          - cell "NUMBER"
+        - 'row "MAJOR_STOPPAGES Feature importance: 0.083 NUMBER"':
+          - cell
+          - cell "MAJOR_STOPPAGES"
+          - 'cell "Feature importance: 0.083"':
+            - 'img "Feature importance: 0.083"':
+          - cell "NUMBER"
+        - 'row "MINOR_STOPPAGES Feature importance: 0.067 NUMBER"':
+          - cell
+          - cell "MINOR_STOPPAGES"
+          - 'cell "Feature importance: 0.067"':
+            - 'img "Feature importance: 0.067"':
+          - cell "NUMBER"
+        - 'row "TOTAL_REJECTED_UNITS Feature importance: 0.050 NUMBER"':
+          - cell
+          - cell "TOTAL_REJECTED_UNITS"
+          - 'cell "Feature importance: 0.050"':
+            - 'img "Feature importance: 0.050"':
+          - cell "NUMBER"
+        - 'row "TOTAL_REWORK_MINUTES Feature importance: 0.050 NUMBER"':
+          - cell
+          - cell "TOTAL_REWORK_MINUTES"
+          - 'cell "Feature importance: 0.050"':
+            - 'img "Feature importance: 0.050"':
+          - cell "NUMBER"
+        - 'row "UNIT_COST Feature importance: 0.027 NUMBER"':
+          - cell
+          - cell "UNIT_COST"
+          - 'cell "Feature importance: 0.027"':
+            - 'img "Feature importance: 0.027"':
+          - cell "NUMBER"
+        - 'row "CATEGORY Feature importance: 0.005 VARCHAR2"':
+          - cell
+          - cell "CATEGORY"
+          - 'cell "Feature importance: 0.005"':
+            - 'img "Feature importance: 0.005"':
+          - cell "VARCHAR2"
+        - 'row "MATERIAL_VALUE Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "MATERIAL_VALUE"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "PLANNED_UNITS Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "PLANNED_UNITS"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "TOTAL_INSPECTED_UNITS Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "TOTAL_INSPECTED_UNITS"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+        - 'row "TOTAL_OBSERVATIONS Feature importance: 0.000 NUMBER"':
+          - cell
+          - cell "TOTAL_OBSERVATIONS"
+          - 'cell "Feature importance: 0.000"':
+            - 'img "Feature importance: 0.000"':
+          - cell "NUMBER"
+    - status
+    - generic: Select Row
+- contentinfo

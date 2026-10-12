@@ -1,0 +1,491 @@
+{
+  "passed": true,
+  "lesson_words_before": 8873,
+  "lesson_words_after": 6817,
+  "reduction_percent": 23.2,
+  "task_count": 40,
+  "sql_blocks": 64,
+  "image_references": 63,
+  "lessons": [
+    {
+      "lesson": "component-quality-vector-search",
+      "before": 909,
+      "after": 582,
+      "changed": true
+    },
+    {
+      "lesson": "final-quiz",
+      "before": 81,
+      "after": 81,
+      "changed": false
+    },
+    {
+      "lesson": "getting-started",
+      "before": 465,
+      "after": 340,
+      "changed": true
+    },
+    {
+      "lesson": "introduction",
+      "before": 555,
+      "after": 496,
+      "changed": true
+    },
+    {
+      "lesson": "plant-routing-spatial",
+      "before": 924,
+      "after": 638,
+      "changed": true
+    },
+    {
+      "lesson": "production-operations-dashboard",
+      "before": 552,
+      "after": 454,
+      "changed": true
+    },
+    {
+      "lesson": "production-order-duality",
+      "before": 1424,
+      "after": 999,
+      "changed": true
+    },
+    {
+      "lesson": "production-quality-network",
+      "before": 1070,
+      "after": 807,
+      "changed": true
+    },
+    {
+      "lesson": "quality-review-oml",
+      "before": 922,
+      "after": 789,
+      "changed": true
+    },
+    {
+      "lesson": "selectai",
+      "before": 909,
+      "after": 753,
+      "changed": true
+    },
+    {
+      "lesson": "selectai-agent",
+      "before": 1062,
+      "after": 878,
+      "changed": true
+    }
+  ],
+  "preservation": [
+    {
+      "file": "component-quality-vector-search/component-quality-vector-search.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "final-quiz/final-quiz.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "getting-started/getting-started.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "introduction/introduction.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "plant-routing-spatial/plant-routing-spatial.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "production-operations-dashboard/production-operations-dashboard.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "production-order-duality/production-order-duality.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "production-quality-network/production-quality-network.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "quality-review-oml/quality-review-oml.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "selectai/selectai.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    },
+    {
+      "file": "selectai-agent/selectai-agent.md",
+      "code_identical": true,
+      "headings_identical": true,
+      "objectives_identical": true,
+      "images_identical": true
+    }
+  ],
+  "all_other_files_identical": [
+    {
+      "file": "README.md",
+      "identical": true
+    },
+    {
+      "file": "component-quality-vector-search/images/gilly.png",
+      "identical": true
+    },
+    {
+      "file": "component-quality-vector-search/images/sql-embedding-model.jpg",
+      "identical": true
+    },
+    {
+      "file": "component-quality-vector-search/images/sql-vector-customer-sites.png",
+      "identical": true
+    },
+    {
+      "file": "component-quality-vector-search/images/sql-vector-distance.png",
+      "identical": true
+    },
+    {
+      "file": "component-quality-vector-search/images/sql-vector-similarity.png",
+      "identical": true
+    },
+    {
+      "file": "component-quality-vector-search/images/sql-vector-values.png",
+      "identical": true
+    },
+    {
+      "file": "final-quiz/images/livestack-hightech-badge.svg",
+      "identical": true
+    },
+    {
+      "file": "getting-started/images/database-actions-development-sql.svg",
+      "identical": true
+    },
+    {
+      "file": "getting-started/images/database-actions-login-main-user.svg",
+      "identical": true
+    },
+    {
+      "file": "getting-started/images/reservation-login-copy-password.svg",
+      "identical": true
+    },
+    {
+      "file": "getting-started/images/reservation-login-info.svg",
+      "identical": true
+    },
+    {
+      "file": "getting-started/images/reservation-login-open-link.svg",
+      "identical": true
+    },
+    {
+      "file": "getting-started/images/sql-connection.jpg",
+      "identical": true
+    },
+    {
+      "file": "introduction/images/seer-hightech-erd-illustrated.png",
+      "identical": true
+    },
+    {
+      "file": "introduction/images/seer-hightech-erd.svg",
+      "identical": true
+    },
+    {
+      "file": "introduction/images/seer-hightech-introduction.png",
+      "identical": true
+    },
+    {
+      "file": "plant-routing-spatial/images/moon.png",
+      "identical": true
+    },
+    {
+      "file": "plant-routing-spatial/images/sql-spatial-chicago.png",
+      "identical": true
+    },
+    {
+      "file": "plant-routing-spatial/images/sql-spatial-new-york.png",
+      "identical": true
+    },
+    {
+      "file": "plant-routing-spatial/images/sql-spatial-points.png",
+      "identical": true
+    },
+    {
+      "file": "plant-routing-spatial/images/sql-spatial-routing.png",
+      "identical": true
+    },
+    {
+      "file": "production-operations-dashboard/images/jessica.png",
+      "identical": true
+    },
+    {
+      "file": "production-operations-dashboard/images/sql-dashboard-followup.png",
+      "identical": true
+    },
+    {
+      "file": "production-operations-dashboard/images/sql-dashboard.png",
+      "identical": true
+    },
+    {
+      "file": "production-order-duality/images/sql-duality-contract.png",
+      "identical": true
+    },
+    {
+      "file": "production-order-duality/images/sql-duality-document.png",
+      "identical": true
+    },
+    {
+      "file": "production-order-duality/images/sql-duality-projection.png",
+      "identical": true
+    },
+    {
+      "file": "production-order-duality/images/sql-duality-relational.png",
+      "identical": true
+    },
+    {
+      "file": "production-order-duality/images/sql-duality-released.png",
+      "identical": true
+    },
+    {
+      "file": "production-order-duality/images/thomas.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/files/getting-started-material-flow-graph.dsnb",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/files/hightech-production-quality-graph-studio.dsnb",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/bob.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/graph-import-dialog.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/graph-import-file.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/graph-launch.jpg",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/graph-notebook-top.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/graph-notebooks.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/graph-studio-overview.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/live-09-graph-notebook-table.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/live-10-graph-production-network.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/live-11-graph-shared-lot.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/sql-graph-direct.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/sql-graph-four-hop.png",
+      "identical": true
+    },
+    {
+      "file": "production-quality-network/images/sql-graph-shared.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/oml-confusion-matrix.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/oml-home.jpg",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/oml-launch.jpg",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/oml-leaderboard.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/oml-model-comparison.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/oml-prediction-impact.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/oml-settings.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/otto.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/sql-oml-model.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/sql-oml-scoring.png",
+      "identical": true
+    },
+    {
+      "file": "quality-review-oml/images/sql-oml-training.png",
+      "identical": true
+    },
+    {
+      "file": "selectai/images/nina-hightech.png",
+      "identical": true
+    },
+    {
+      "file": "selectai/images/sql-ai-answer.png",
+      "identical": true
+    },
+    {
+      "file": "selectai/images/sql-ai-generated.png",
+      "identical": true
+    },
+    {
+      "file": "selectai/images/sql-ai-narration.png",
+      "identical": true
+    },
+    {
+      "file": "selectai/images/sql-ai-object-list.png",
+      "identical": true
+    },
+    {
+      "file": "selectai/images/sql-ai-refined-answer.png",
+      "identical": true
+    },
+    {
+      "file": "selectai/images/sql-ai-refined-generated.png",
+      "identical": true
+    },
+    {
+      "file": "selectai-agent/images/.gitkeep",
+      "identical": true
+    },
+    {
+      "file": "selectai-agent/images/nina-hightech.png",
+      "identical": true
+    },
+    {
+      "file": "selectai-agent/images/sql-agent-answer.png",
+      "identical": true
+    },
+    {
+      "file": "selectai-agent/images/sql-agent-history.png",
+      "identical": true
+    },
+    {
+      "file": "selectai-agent/images/sql-agent-tools.png",
+      "identical": true
+    },
+    {
+      "file": "stack/README.md",
+      "identical": true
+    },
+    {
+      "file": "stack/adb.tf",
+      "identical": true
+    },
+    {
+      "file": "stack/create_user.sql.tmpl",
+      "identical": true
+    },
+    {
+      "file": "stack/genai.tf",
+      "identical": true
+    },
+    {
+      "file": "stack/genai_connection.sql.tmpl",
+      "identical": true
+    },
+    {
+      "file": "stack/load_data/hightech-platform-handoff-loader.sql",
+      "identical": true
+    },
+    {
+      "file": "stack/load_data/hightech-platform-handoff-loader.zip",
+      "identical": true
+    },
+    {
+      "file": "stack/main.tf",
+      "identical": true
+    },
+    {
+      "file": "stack/output.tf",
+      "identical": true
+    },
+    {
+      "file": "stack/variables.tf",
+      "identical": true
+    },
+    {
+      "file": "workshops/sandbox/index.html",
+      "identical": true
+    },
+    {
+      "file": "workshops/sandbox/manifest.json",
+      "identical": true
+    },
+    {
+      "file": "workshops/tenancy/index.html",
+      "identical": true
+    },
+    {
+      "file": "workshops/tenancy/manifest.json",
+      "identical": true
+    }
+  ],
+  "method": "Words excluding fenced code, image markup, HTML tags, and link destinations; includes headings and instructions."
+}

@@ -6,6 +6,8 @@ Oracle AI Database 26ai is a *Long-Term Support Release* with Premier Support un
 
 Estimated Workshop Time: 120 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:2cCZbaTnc3s)
+
 ### Objectives
 
 In this workshop, you will:

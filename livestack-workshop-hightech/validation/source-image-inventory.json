@@ -1,0 +1,909 @@
+[
+  {
+    "image": "getting-started/images/reservation-login-info.svg",
+    "placements": [
+      {
+        "lesson": "getting-started/getting-started.md",
+        "line": 42,
+        "section": "## Task 1: Launch the LiveLabs environment",
+        "alt": "Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows",
+        "original_markdown": "    ![Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows](images/reservation-login-info.svg \" \")"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "getting-started/images/reservation-login-copy-password.svg",
+    "placements": [
+      {
+        "lesson": "getting-started/getting-started.md",
+        "line": 52,
+        "section": "## Task 2: Open SQL Worksheet",
+        "alt": "Reservation Information dialog with the Copy button highlighted for the Password row",
+        "original_markdown": "    ![Reservation Information dialog with the Copy button highlighted for the Password row](images/reservation-login-copy-password.svg \" \")"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "getting-started/images/sql-connection.jpg",
+    "placements": [
+      {
+        "lesson": "getting-started/getting-started.md",
+        "line": 86,
+        "section": "## Task 2: Open SQL Worksheet",
+        "alt": "SQL Worksheet connection query showing the user and current schema",
+        "original_markdown": "    ![SQL Worksheet connection query showing the user and current schema](images/sql-connection.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "getting-started/images/database-actions-development-sql.svg",
+    "placements": [
+      {
+        "lesson": "getting-started/getting-started.md",
+        "line": 64,
+        "section": "## Task 2: Open SQL Worksheet",
+        "alt": "Database Actions tools page with Development selected and SQL highlighted in the left tools menu",
+        "original_markdown": "    ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg \" \")"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "getting-started/images/database-actions-login-main-user.svg",
+    "placements": [
+      {
+        "lesson": "getting-started/getting-started.md",
+        "line": 60,
+        "section": "## Task 2: Open SQL Worksheet",
+        "alt": "Database Actions login screen showing LLUSER as the selected username",
+        "original_markdown": "    ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg \" \")"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "getting-started/images/reservation-login-open-link.svg",
+    "placements": [
+      {
+        "lesson": "getting-started/getting-started.md",
+        "line": 56,
+        "section": "## Task 2: Open SQL Worksheet",
+        "alt": "Reservation Information dialog with the Open Link button highlighted for the Login URL row",
+        "original_markdown": "    ![Reservation Information dialog with the Open Link button highlighted for the Login URL row](images/reservation-login-open-link.svg \" \")"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-embedding-model.jpg",
+    "placements": [
+      {
+        "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+        "line": 62,
+        "section": "## Task 1: Check the embedding model",
+        "alt": "Available ADMIN embedding model in SQL Worksheet",
+        "original_markdown": "    ![Available ADMIN embedding model in SQL Worksheet](images/sql-embedding-model.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "component-quality-vector-search/images/gilly.png",
+    "placements": [
+      {
+        "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+        "line": 3,
+        "section": "# Search Components by Meaning",
+        "alt": "Gilly: manufacturing lab banner",
+        "original_markdown": "![Gilly: manufacturing lab banner](images/gilly.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-customer-sites.png",
+    "placements": [
+      {
+        "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+        "line": 230,
+        "section": "## Task 4: Find customer sites affected by a component concern",
+        "alt": "component customer follow-up",
+        "original_markdown": "    ![component customer follow-up](images/sql-vector-customer-sites.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-distance.png",
+    "placements": [
+      {
+        "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+        "line": 157,
+        "section": "## Task 3: Test the component vector",
+        "alt": "Components ranked by vector distance",
+        "original_markdown": "    ![Components ranked by vector distance](images/sql-vector-distance.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-values.png",
+    "placements": [
+      {
+        "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+        "line": 129,
+        "section": "## Task 2: Create a component vector",
+        "alt": "Component rows populated with vector embeddings",
+        "original_markdown": "    ![Component rows populated with vector embeddings](images/sql-vector-values.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "component-quality-vector-search/images/sql-vector-similarity.png",
+    "placements": [
+      {
+        "lesson": "component-quality-vector-search/component-quality-vector-search.md",
+        "line": 184,
+        "section": "## Task 3: Test the component vector",
+        "alt": "Components ranked by semantic similarity",
+        "original_markdown": "    ![Components ranked by semantic similarity](images/sql-vector-similarity.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/demo-network-overview.jpg",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 28,
+        "section": "## Introduction",
+        "alt": "SEER MANUFACTURING risk graph",
+        "original_markdown": "![SEER MANUFACTURING risk graph](images/demo-network-overview.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/bob.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 3,
+        "section": "# Trace a Production Quality Network",
+        "alt": "Bob: manufacturing lab banner",
+        "original_markdown": "![Bob: manufacturing lab banner](images/bob.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/live-11-graph-shared-lot.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 392,
+        "section": "## Task 7: Run and interpret the Graph Studio notebook",
+        "alt": "Production orders linked to the shared material lot",
+        "original_markdown": "    ![Production orders linked to the shared material lot](images/live-11-graph-shared-lot.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/sql-graph-four-hop.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 258,
+        "section": "## Task 3: Trace four-hop quality traceability",
+        "alt": "Entities reached within four graph hops of production order PO-8841",
+        "original_markdown": "    ![Entities reached within four graph hops of production order PO-8841](images/sql-graph-four-hop.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/graph-notebooks.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 351,
+        "section": "## Task 6: Download and import the manufacturing notebook",
+        "alt": "Graph Studio Notebooks page for LLUSER",
+        "original_markdown": "    ![Graph Studio Notebooks page for LLUSER](images/graph-notebooks.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/live-09-graph-notebook-table.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 373,
+        "section": "## Task 7: Run and interpret the Graph Studio notebook",
+        "alt": "Ranked production order results in Graph Studio",
+        "original_markdown": "    ![Ranked production order results in Graph Studio](images/live-09-graph-notebook-table.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/sql-graph-direct.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 214,
+        "section": "## Task 2: Read the same connections as a graph",
+        "alt": "Direct entities connected to production order PO-8841",
+        "original_markdown": "    ![Direct entities connected to production order PO-8841](images/sql-graph-direct.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/graph-import-dialog.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 355,
+        "section": "## Task 6: Download and import the manufacturing notebook",
+        "alt": "Graph Studio notebook import dialog",
+        "original_markdown": "    ![Graph Studio notebook import dialog](images/graph-import-dialog.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/demo-network-query.jpg",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 32,
+        "section": "## Introduction",
+        "alt": "SEER MANUFACTURING risk graph query and results",
+        "original_markdown": "![SEER MANUFACTURING risk graph query and results](images/demo-network-query.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/sql-graph-shared.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 315,
+        "section": "## Task 4: Find production orders that share traceability records",
+        "alt": "Production orders connected through shared traceability entities",
+        "original_markdown": "    ![Production orders connected through shared traceability entities](images/sql-graph-shared.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/graph-launch.jpg",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 331,
+        "section": "## Task 5: Visualize the relationship using Oracle Graph Studio",
+        "alt": "Database Actions Launchpad for the LLUSER workshop user",
+        "original_markdown": "    ![Database Actions Launchpad for the LLUSER workshop user](images/graph-launch.jpg \" \")"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/graph-import-file.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 359,
+        "section": "## Task 6: Download and import the manufacturing notebook",
+        "alt": "Manufacturing notebook selected for import",
+        "original_markdown": "    ![Manufacturing notebook selected for import](images/graph-import-file.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/live-10-graph-production-network.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 387,
+        "section": "## Task 7: Run and interpret the Graph Studio notebook",
+        "alt": "Production order graph from PO-8841",
+        "original_markdown": "    ![Production order graph from PO-8841](images/live-10-graph-production-network.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/graph-studio-overview.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 339,
+        "section": "## Task 5: Visualize the relationship using Oracle Graph Studio",
+        "alt": "Graph Studio overview page signed in as LLUSER",
+        "original_markdown": "    ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-quality-network/images/graph-notebook-top.png",
+    "placements": [
+      {
+        "lesson": "production-quality-network/production-quality-network.md",
+        "line": 369,
+        "section": "## Task 7: Run and interpret the Graph Studio notebook",
+        "alt": "Production Quality Network notebook introduction",
+        "original_markdown": "    ![Production Quality Network notebook introduction](images/graph-notebook-top.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai/images/sql-ai-refined-answer.png",
+    "placements": [
+      {
+        "lesson": "selectai/selectai.md",
+        "line": 187,
+        "section": "## Task 5: Improve the business question",
+        "alt": "Select AI result for the refined component-ranking question",
+        "original_markdown": "    ![Select AI result for the refined component-ranking question](images/sql-ai-refined-answer.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai/images/sql-ai-answer.png",
+    "placements": [
+      {
+        "lesson": "selectai/selectai.md",
+        "line": 151,
+        "section": "## Task 4: Run the question in the database",
+        "alt": "Select AI result for the scheduled material-value question",
+        "original_markdown": "    ![Select AI result for the scheduled material-value question](images/sql-ai-answer.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai/images/sql-ai-generated.png",
+    "placements": [
+      {
+        "lesson": "selectai/selectai.md",
+        "line": 129,
+        "section": "## Task 3: Ask a question and inspect the SQL",
+        "alt": "SQL generated for the scheduled material-value question",
+        "original_markdown": "    ![SQL generated for the scheduled material-value question](images/sql-ai-generated.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai/images/sql-ai-object-list.png",
+    "placements": [
+      {
+        "lesson": "selectai/selectai.md",
+        "line": 105,
+        "section": "## Task 2: Add the manufacturing tables to the profile",
+        "alt": "Select AI profile object list for the manufacturing tables",
+        "original_markdown": "    ![Select AI profile object list for the manufacturing tables](images/sql-ai-object-list.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai/images/sql-ai-narration.png",
+    "placements": [
+      {
+        "lesson": "selectai/selectai.md",
+        "line": 209,
+        "section": "## Task 6: Explain the result",
+        "alt": "Select AI narrative for the refined manufacturing result",
+        "original_markdown": "    ![Select AI narrative for the refined manufacturing result](images/sql-ai-narration.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai/images/sql-ai-refined-generated.png",
+    "placements": [
+      {
+        "lesson": "selectai/selectai.md",
+        "line": 173,
+        "section": "## Task 5: Improve the business question",
+        "alt": "SQL generated for the refined component-ranking question",
+        "original_markdown": "    ![SQL generated for the refined component-ranking question](images/sql-ai-refined-generated.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai/images/nina.png",
+    "placements": [
+      {
+        "lesson": "selectai/selectai.md",
+        "line": 3,
+        "section": "# Ask Manufacturing Questions with Select AI",
+        "alt": "Nina: manufacturing lab banner",
+        "original_markdown": "![Nina: manufacturing lab banner](images/nina.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai-agent/images/sql-agent-tools.png",
+    "placements": [
+      {
+        "lesson": "selectai-agent/selectai-agent.md",
+        "line": 262,
+        "section": "## Task 5: Inspect what the agent did",
+        "alt": "Select AI Agent SQL tool invocation history",
+        "original_markdown": "    ![Select AI Agent SQL tool invocation history](images/sql-agent-tools.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai-agent/images/sql-agent-answer.png",
+    "placements": [
+      {
+        "lesson": "selectai-agent/selectai-agent.md",
+        "line": 213,
+        "section": "## Task 4: Run a manufacturing question",
+        "alt": "Manufacturing agent answer with ranked component material values",
+        "original_markdown": "    ![Manufacturing agent answer with ranked component material values](images/sql-agent-answer.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai-agent/images/sql-agent-history.png",
+    "placements": [
+      {
+        "lesson": "selectai-agent/selectai-agent.md",
+        "line": 244,
+        "section": "## Task 5: Inspect what the agent did",
+        "alt": "Select AI Agent team execution history",
+        "original_markdown": "    ![Select AI Agent team execution history](images/sql-agent-history.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "selectai-agent/images/nina.png",
+    "placements": [
+      {
+        "lesson": "selectai-agent/selectai-agent.md",
+        "line": 3,
+        "section": "# Build a Manufacturing Agent with Select AI Agent",
+        "alt": "Nina: manufacturing lab banner",
+        "original_markdown": "![Nina: manufacturing lab banner](images/nina.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-chicago.png",
+    "placements": [
+      {
+        "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+        "line": 172,
+        "section": "## Task 2: Find the closest plants to a demand region",
+        "alt": "Plants ranked by distance to the Chicago manufacturing region",
+        "original_markdown": "    ![Plants ranked by distance to the Chicago manufacturing region](images/sql-spatial-chicago.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "plant-routing-spatial/images/demo-spatial-map.jpg",
+    "placements": [
+      {
+        "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+        "line": 30,
+        "section": "## Introduction",
+        "alt": "SEER MANUFACTURING plant capacity and routing map",
+        "original_markdown": "![SEER MANUFACTURING plant capacity and routing map](images/demo-spatial-map.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-points.png",
+    "placements": [
+      {
+        "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+        "line": 77,
+        "section": "## Task 1: Look at the locations as points",
+        "alt": "Plant point geometry and GeoJSON results",
+        "original_markdown": "    ![Plant point geometry and GeoJSON results](images/sql-spatial-points.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "plant-routing-spatial/images/moon.png",
+    "placements": [
+      {
+        "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+        "line": 3,
+        "section": "# Find the Closest Manufacturing Plant",
+        "alt": "Moon: manufacturing lab banner",
+        "original_markdown": "![Moon: manufacturing lab banner](images/moon.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-new-york.png",
+    "placements": [
+      {
+        "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+        "line": 118,
+        "section": "## Task 2: Find the closest plants to a demand region",
+        "alt": "Plants ranked by distance to the New York manufacturing region",
+        "original_markdown": "    ![Plants ranked by distance to the New York manufacturing region](images/sql-spatial-new-york.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "plant-routing-spatial/images/sql-spatial-routing.png",
+    "placements": [
+      {
+        "lesson": "plant-routing-spatial/plant-routing-spatial.md",
+        "line": 256,
+        "section": "## Task 3: Route customer sites to the closest plant",
+        "alt": "Customer sites matched to their closest active plant",
+        "original_markdown": "    ![Customer sites matched to their closest active plant](images/sql-spatial-routing.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "introduction/images/seer-manufacturing-erd.svg",
+    "placements": [],
+    "referenced": false
+  },
+  {
+    "image": "introduction/images/demo-welcome.jpg",
+    "placements": [
+      {
+        "lesson": "introduction/introduction.md",
+        "line": 54,
+        "section": "## Running the manufacturing demo",
+        "alt": "SEER MANUFACTURING LiveStack welcome page",
+        "original_markdown": "![SEER MANUFACTURING LiveStack welcome page](images/demo-welcome.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "introduction/images/seer-manufacturing-introduction.png",
+    "placements": [
+      {
+        "lesson": "introduction/introduction.md",
+        "line": 7,
+        "section": "## Introduction",
+        "alt": "Jessica and Thomas review a component inspection concern beside a manufacturing planning board.",
+        "original_markdown": "![Jessica and Thomas review a component inspection concern beside a manufacturing planning board.](images/seer-manufacturing-introduction.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "introduction/images/seer-manufacturing-erd-illustrated.png",
+    "placements": [
+      {
+        "lesson": "introduction/introduction.md",
+        "line": 15,
+        "section": "### SEER MANUFACTURING data model",
+        "alt": "Illustrated SEER MANUFACTURING ERD: customer sites and plants connect to production orders; plants supply components; production orders and components connect through order lines.",
+        "original_markdown": "![Illustrated SEER MANUFACTURING ERD: customer sites and plants connect to production orders; plants supply components; production orders and components connect through order lines.](images/seer-manufacturing-erd-illustrated.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "final-quiz/images/livestack-manufacturing-badge.svg",
+    "placements": [],
+    "referenced": false
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-contract.png",
+    "placements": [
+      {
+        "lesson": "production-order-duality/production-order-duality.md",
+        "line": 276,
+        "section": "## Task 4: Enable document inserts and updates",
+        "alt": "Duality-view insert and update settings in SQL Worksheet",
+        "original_markdown": "    ![Duality-view insert and update settings in SQL Worksheet](images/sql-duality-contract.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-released.png",
+    "placements": [
+      {
+        "lesson": "production-order-duality/production-order-duality.md",
+        "line": 392,
+        "section": "## Task 5: Create and update a JSON production order",
+        "alt": "Released production order created and updated through the duality view",
+        "original_markdown": "    ![Released production order created and updated through the duality view](images/sql-duality-released.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-relational.png",
+    "placements": [
+      {
+        "lesson": "production-order-duality/production-order-duality.md",
+        "line": 442,
+        "section": "## Task 6: Project JSON fields with SQL",
+        "alt": "Matching production-order fields read from the relational tables",
+        "original_markdown": "    ![Matching production-order fields read from the relational tables](images/sql-duality-relational.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-projection.png",
+    "placements": [
+      {
+        "lesson": "production-order-duality/production-order-duality.md",
+        "line": 422,
+        "section": "## Task 6: Project JSON fields with SQL",
+        "alt": "Production-order fields projected from the JSON document",
+        "original_markdown": "    ![Production-order fields projected from the JSON document](images/sql-duality-projection.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-order-duality/images/sql-duality-document.png",
+    "placements": [
+      {
+        "lesson": "production-order-duality/production-order-duality.md",
+        "line": 188,
+        "section": "## Task 3: Read a customer site document from relational data",
+        "alt": "JSON production-order document returned from the duality view",
+        "original_markdown": "    ![JSON production-order document returned from the duality view](images/sql-duality-document.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-order-duality/images/thomas.png",
+    "placements": [
+      {
+        "lesson": "production-order-duality/production-order-duality.md",
+        "line": 11,
+        "section": "## Introduction",
+        "alt": "Thomas introduces the JSON production-order application lab",
+        "original_markdown": "![Thomas introduces the JSON production-order application lab](images/thomas.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/oml-prediction-impact.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 124,
+        "section": "## Task 2: Compare models with AutoML (optional)",
+        "alt": "GLM prediction impact for inspection features",
+        "original_markdown": "    ![GLM prediction impact for inspection features](images/oml-prediction-impact.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/oml-home.jpg",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 92,
+        "section": "## Task 2: Compare models with AutoML (optional)",
+        "alt": "Oracle Machine Learning home page with AutoML available",
+        "original_markdown": "    ![Oracle Machine Learning home page with AutoML available](images/oml-home.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/otto.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 3,
+        "section": "# Build a Quality Review Watchlist with Oracle Machine Learning",
+        "alt": "Otto: manufacturing lab banner",
+        "original_markdown": "![Otto: manufacturing lab banner](images/otto.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/oml-confusion-matrix.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 120,
+        "section": "## Task 2: Compare models with AutoML (optional)",
+        "alt": "GLM confusion matrix for component quality classifications",
+        "original_markdown": "    ![GLM confusion matrix for component quality classifications](images/oml-confusion-matrix.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/sql-oml-scoring.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 332,
+        "section": "## Task 4: Score new component inspection measurements in SQL",
+        "alt": "Component quality-review predictions and probabilities",
+        "original_markdown": "    ![Component quality-review predictions and probabilities](images/sql-oml-scoring.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/sql-oml-model.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 199,
+        "section": "## Task 3: Create the selected model in SQL Developer Web",
+        "alt": "Created quality model in SQL Worksheet",
+        "original_markdown": "    ![Created quality model in SQL Worksheet](images/sql-oml-model.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/sql-oml-training.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 68,
+        "section": "## Task 1: Read the training data",
+        "alt": "Manufacturing inspection training rows",
+        "original_markdown": "    ![Manufacturing inspection training rows](images/sql-oml-training.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/oml-settings.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 104,
+        "section": "## Task 2: Compare models with AutoML (optional)",
+        "alt": "Manufacturing classification experiment settings",
+        "original_markdown": "    ![Manufacturing classification experiment settings](images/oml-settings.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/oml-launch.jpg",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 88,
+        "section": "## Task 2: Compare models with AutoML (optional)",
+        "alt": "Machine Learning launch from Database Actions",
+        "original_markdown": "    ![Machine Learning launch from Database Actions](images/oml-launch.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/oml-leaderboard.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 110,
+        "section": "## Task 2: Compare models with AutoML (optional)",
+        "alt": "Completed Component Quality Review leaderboard",
+        "original_markdown": "    ![Completed Component Quality Review leaderboard](images/oml-leaderboard.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "quality-review-oml/images/oml-model-comparison.png",
+    "placements": [
+      {
+        "lesson": "quality-review-oml/quality-review-oml.md",
+        "line": 114,
+        "section": "## Task 2: Compare models with AutoML (optional)",
+        "alt": "AutoML model comparison",
+        "original_markdown": "    ![AutoML model comparison](images/oml-model-comparison.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-operations-dashboard/images/demo-dashboard.jpg",
+    "placements": [
+      {
+        "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+        "line": 203,
+        "section": "## Application example",
+        "alt": "SEER MANUFACTURING operations command center",
+        "original_markdown": "![SEER MANUFACTURING operations command center](images/demo-dashboard.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-operations-dashboard/images/sql-dashboard-followup.png",
+    "placements": [
+      {
+        "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+        "line": 191,
+        "section": "## Task 2: Change the investigation question",
+        "alt": "Result after changing the investigation phrase",
+        "original_markdown": "![Result after changing the investigation phrase](images/sql-dashboard-followup.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-operations-dashboard/images/demo-dashboard-charts.jpg",
+    "placements": [
+      {
+        "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+        "line": 205,
+        "section": "## Application example",
+        "alt": "SEER MANUFACTURING operations charts",
+        "original_markdown": "![SEER MANUFACTURING operations charts](images/demo-dashboard-charts.jpg)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-operations-dashboard/images/sql-dashboard.png",
+    "placements": [
+      {
+        "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+        "line": 168,
+        "section": "## Task 1: Run a converged production investigation",
+        "alt": "Converged production-quality query result",
+        "original_markdown": "    ![Converged production-quality query result](images/sql-dashboard.png)"
+      }
+    ],
+    "referenced": true
+  },
+  {
+    "image": "production-operations-dashboard/images/jessica.png",
+    "placements": [
+      {
+        "lesson": "production-operations-dashboard/production-operations-dashboard.md",
+        "line": 9,
+        "section": "## Introduction",
+        "alt": "Jessica introduces the converged production-quality dashboard lab",
+        "original_markdown": "![Jessica introduces the converged production-quality dashboard lab](images/jessica.png)"
+      }
+    ],
+    "referenced": true
+  }
+]

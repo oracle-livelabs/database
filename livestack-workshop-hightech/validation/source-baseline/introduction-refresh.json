@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-22",
+  "source_files_unchanged_during_refresh": 115,
+  "source_hash_comparison": "PASS",
+  "illustrated_erd_tables": 5,
+  "illustrated_erd_relationships": 5,
+  "schema_changed": false,
+  "loader_changed": false,
+  "manual_database_capture_count_changed": false,
+  "generator": "built-in image_gen",
+  "browser_render": "PASS: opening scene and illustrated ERD displayed beside introduction text",
+  "erd_visual_review": "PASS: five correctly named tables, displayed PK/FK columns, five 1:N relationships",
+  "thomas_pointing_arm": "Corrected continuous jacket sleeve from shoulder through elbow and wrist to pointing hand; visually reviewed.",
+  "introduction_image_sha256": "026840c0749819931ddeb763a7a95124cb50c3dbe2e7ff59940a044f724914e9"
+}

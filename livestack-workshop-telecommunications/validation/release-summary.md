@@ -1,5 +1,14 @@
 # SEER Telecomms conversion handoff
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 The target repository is `/Users/mkowalik/Documents/GitHub/oracle-livelabs/database/livestack-workshop-telecommunications`. All 116 source files remain unchanged, verified against the initial hashes and inventory.
 
 ## Completed
@@ -25,3 +34,8 @@ No Terraform plan/apply or LiveLabs green-button provisioning was attempted. Val
 The complete workshop ZIP and standalone stack ZIP exclude only macOS metadata. Packaging verifies CRC integrity and compares every archive entry with the latest target file. `archive-integrity.json` records archive sizes, SHA-256 values, entry counts and source protection. The standalone SQL is identical to the main loader in both archives.
 
 See `manual-database-validation.md`, `schema-contract.md`, `screenshots.md`, `domain-audit.json` and `archive-integrity.json` beside this report. The workshop ZIP also contains the full validation directory and selected live transcripts.
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

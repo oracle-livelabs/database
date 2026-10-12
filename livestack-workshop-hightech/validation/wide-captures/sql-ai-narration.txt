@@ -1,0 +1,43 @@
+- link "Database Actions,":
+  - /url: https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+  - generic: Database Actions
+- text:            
+- main "Main Drawer":
+  - generic: 
+  - generic "Show Info":
+    - button "Show Info":
+      - generic: 
+      - generic: Show Info
+  - generic "Worksheet Query Result":
+    - application:
+      - generic: This is a data grid with 1 rows and 1 columns.
+      - generic: explanation
+      - generic: "1"
+      - text: "The top five components with the highest scheduled material value are: 1. **Pressure interface module P15 Rev A** (Sensing): Total material value of 585,580 USD for 2,546 planned units. 2. **Pressure interface module P07 Rev A** (Sensing): Total material value of 532,450 USD for 2,315 planned units. 3. **Encoder interface module P09 Rev A** (Motor control): Total material value of 520,800 USD for 2,480 planned units. 4. **Encoder interface module P01 Rev A** (Motor control): Total material value of 519,750 USD for 2,475 planned units. 5. **Pressure interface module P14 Rev A** (Sensing): Total material value of 511,290 USD for 2,223 planned units. These values represent the total cost of materials planned for production, excluding setup costs, for released, in-production, or completed orders."
+      - button [disabled]:
+        - generic: 
+      - status: Enter navigation mode, press F2 to enter edit or actionable mode.
+      - generic: . Contains Controls.
+      - generic: Row 1, Column 1.
+    - text: 
+    - heading "Column \"EXPLANATION\" row 1" [level=3]
+    - textbox
+    - button "Close":
+      - generic: Close
+- list:
+  - listitem: Copyright © 2026, Oracle and/or its affiliates.
+  - link "About Oracle":
+    - /url: https://www.oracle.com/us/corporate/
+  - link "Contact Us":
+    - /url: https://www.oracle.com/us/corporate/contact/
+  - link "Legal Notices":
+    - /url: https://www.oracle.com/us/legal/
+  - link "Terms Of Use":
+    - /url: https://www.oracle.com/us/legal/terms/
+  - link "Your Privacy Rights":
+    - /url: https://www.oracle.com/us/legal/privacy/
+- text:   
+- textbox "Clipboard"
+- button "Copy"
+- alert
+- alert

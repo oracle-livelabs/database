@@ -1,0 +1,312 @@
+{
+  "scenario": "Electronic module assembly and electrical test using purchased packaged semiconductor lots; no wafer fabrication or software-service business.",
+  "catalog": [
+    [
+      "Power control module",
+      "High-Tg FR-4 / lead-free",
+      "SMT assembly and electrical test",
+      "Power electronics",
+      "MOSFET switching stability and low leakage current"
+    ],
+    [
+      "Gate driver module",
+      "High-Tg FR-4 / lead-free",
+      "SMT assembly and isolation test",
+      "Power electronics",
+      "Gate timing and switching noise control"
+    ],
+    [
+      "Motor control module",
+      "High-Tg FR-4 / lead-free",
+      "SMT assembly and load test",
+      "Motor control",
+      "Current sensing and stable motor control"
+    ],
+    [
+      "Encoder interface module",
+      "FR-4 / lead-free",
+      "SMT assembly and signal test",
+      "Motor control",
+      "Pulse timing and position signal integrity"
+    ],
+    [
+      "Sensor interface module",
+      "FR-4 / lead-free",
+      "SMT assembly and calibration",
+      "Sensing",
+      "Low-noise analog input and measurement accuracy"
+    ],
+    [
+      "Temperature monitor module",
+      "FR-4 / lead-free",
+      "SMT assembly and thermal test",
+      "Sensing",
+      "Temperature measurement and thermal drift"
+    ],
+    [
+      "Pressure interface module",
+      "FR-4 / lead-free",
+      "SMT assembly and calibration",
+      "Sensing",
+      "Bridge excitation and pressure signal accuracy"
+    ],
+    [
+      "Digital input module",
+      "FR-4 / lead-free",
+      "SMT assembly and functional test",
+      "Industrial I/O",
+      "Input isolation and logic threshold integrity"
+    ],
+    [
+      "Communication module",
+      "FR-4 / lead-free",
+      "SMT assembly and communication test",
+      "Communications",
+      "Bus signal integrity and communication reliability"
+    ],
+    [
+      "Digital output module",
+      "FR-4 / lead-free",
+      "SMT assembly and load test",
+      "Industrial I/O",
+      "Output switching and short-circuit detection"
+    ],
+    [
+      "Servo interface module",
+      "High-Tg FR-4 / lead-free",
+      "SMT assembly and signal test",
+      "Motor control",
+      "Command timing and feedback signal accuracy"
+    ],
+    [
+      "Power supply module",
+      "High-Tg FR-4 / lead-free",
+      "SMT assembly and burn-in",
+      "Power electronics",
+      "Voltage regulation and thermal stability"
+    ]
+  ],
+  "text_mapping": [
+    [
+      "SEER MANUFACTURING",
+      "SEER HIGHTECH"
+    ],
+    [
+      "SEER_MANUFACTURING",
+      "SEER_HIGHTECH"
+    ],
+    [
+      "Seer Manufacturing",
+      "Seer HighTech"
+    ],
+    [
+      "NINA_MANUFACTURING",
+      "NINA_HIGHTECH"
+    ],
+    [
+      "seer-manufacturing",
+      "seer-hightech"
+    ],
+    [
+      "livestack-manufacturing",
+      "livestack-hightech"
+    ],
+    [
+      "manufacturing-platform-handoff-loader",
+      "hightech-platform-handoff-loader"
+    ],
+    [
+      "manufacturing-production-quality-graph-studio",
+      "hightech-production-quality-graph-studio"
+    ],
+    [
+      "Connected Manufacturing Solutions",
+      "Connected HighTech Solutions"
+    ],
+    [
+      "Ask Manufacturing Questions",
+      "Ask HighTech Questions"
+    ],
+    [
+      "Build a Manufacturing Agent",
+      "Build a HighTech Agent"
+    ],
+    [
+      "New York Manufacturing Region",
+      "New York Electronics Region"
+    ],
+    [
+      "Chicago Manufacturing Region",
+      "Chicago Electronics Region"
+    ],
+    [
+      "LOT-ST-91A7",
+      "LOT-SEMI-91A7"
+    ],
+    [
+      "LOT-ST-220",
+      "LOT-SEMI-220"
+    ],
+    [
+      "CERT-ST-91A7",
+      "CERT-SEMI-91A7"
+    ],
+    [
+      "Material lot ST-91A7",
+      "Semiconductor lot SEMI-91A7"
+    ],
+    [
+      "Steel lot ST-220",
+      "Semiconductor lot SEMI-220"
+    ],
+    [
+      "Material certificate ST-91A7",
+      "Lot certificate SEMI-91A7"
+    ],
+    [
+      "MACHINE-CNC-017",
+      "MACHINE-ATE-017"
+    ],
+    [
+      "CNC machine 017",
+      "Electrical test station 017"
+    ],
+    [
+      "MACHINE-GR-003",
+      "MACHINE-SMT-003"
+    ],
+    [
+      "Grinding machine 003",
+      "SMT placement machine 003"
+    ],
+    [
+      "Steel supplier 044",
+      "Semiconductor supplier 044"
+    ],
+    [
+      "Dimensional inspection 0199",
+      "Electrical inspection 0199"
+    ],
+    [
+      "precision bearing wear and dimensional defects requiring quality review",
+      "power control module leakage current and switching faults requiring quality review"
+    ],
+    [
+      "precision bearing with low vibration and tight dimensional tolerance",
+      "power control module with stable MOSFET switching and low leakage current"
+    ],
+    [
+      "machining capacity and material availability",
+      "electronics assembly capacity and semiconductor availability"
+    ],
+    [
+      "bearing dimensional-tolerance concern",
+      "power-module leakage-current concern"
+    ],
+    [
+      "bearing-quality concern",
+      "power-module quality concern"
+    ],
+    [
+      "Dimensional inspection found out-of-tolerance parts; isolate the material lot and inspect machine setup.",
+      "Electrical test found out-of-spec modules; isolate the semiconductor lot and check test-station calibration."
+    ],
+    [
+      "Inspection measurements are within tolerance; continue routine sampling.",
+      "Electrical test measurements are within limits; continue routine sampling."
+    ],
+    [
+      "Industrial Customer Site",
+      "Electronics Customer Site"
+    ],
+    [
+      "materialCertificate",
+      "lotCertificate"
+    ],
+    [
+      "inspectionReport",
+      "electricalTestReport"
+    ],
+    [
+      "material certificates",
+      "lot certificates"
+    ],
+    [
+      "material certificate",
+      "lot certificate"
+    ],
+    [
+      "material-certificate",
+      "lot-certificate"
+    ],
+    [
+      "Work center",
+      "Work center"
+    ],
+    [
+      ": machining",
+      ": SMT assembly"
+    ],
+    [
+      ": inspection",
+      ": electrical test"
+    ],
+    [
+      ": assembly",
+      ": module integration"
+    ],
+    [
+      ": dispatch",
+      ": packing and fulfillment"
+    ],
+    [
+      "Precision bearing",
+      "Power control module"
+    ],
+    [
+      "Bearing housing",
+      "Gate driver module"
+    ],
+    [
+      "Drive shaft",
+      "Motor control module"
+    ],
+    [
+      "Helical gear",
+      "Encoder interface module"
+    ],
+    [
+      "Hydraulic manifold",
+      "Sensor interface module"
+    ],
+    [
+      "Valve spool",
+      "Temperature monitor module"
+    ],
+    [
+      "Pump impeller",
+      "Pressure interface module"
+    ],
+    [
+      "Motor bracket",
+      "Digital input module"
+    ],
+    [
+      "Sensor enclosure",
+      "Communication module"
+    ],
+    [
+      "Conveyor roller",
+      "Digital output module"
+    ],
+    [
+      "Actuator rod",
+      "Servo interface module"
+    ],
+    [
+      "Heat exchanger plate",
+      "Power supply module"
+    ]
+  ],
+  "schema_policy": "Keep 15 tables and 18 foreign keys; generic component/plant/order names remain. Components are sellable electronic module revisions. Production orders are customer-backed build commitments, not a second sales-order table. Trace entities record purchased semiconductor lots, test equipment, suppliers and lot certificates."
+}

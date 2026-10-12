@@ -1,0 +1,208 @@
+Window: "Experiment - OML", App: Google Chrome.
+0 standard window Experiment - OML - Google Chrome, Secondary Actions: Raise, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/oml/index.html?ojr=experiment-leaderboard%3Bid%3D604%3Bname%3DComponent%2520Quality%2520Review%3Bsaved%3Dtrue
+	1 container Experiment - OML - Google Chrome, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/oml/index.html?ojr=experiment-leaderboard%3Bid%3D604%3Bname%3DComponent%2520Quality%2520Review%3Bsaved%3Dtrue
+		2 container
+			3 toolbar
+				4 button Back
+				5 button (disabled) Forward
+				6 button Reload
+				7 container
+					8 pop up button View site information
+					9 text field (settable) Address and search bar, Placeholder: Search Google or type a URL, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/oml/index.html?ojr=experiment-leaderboard%3Bid%3D604%3Bname%3DComponent%2520Quality%2520Review%3Bsaved%3Dtrue
+					10 button This page is allowed to edit files
+					11 button Save your password
+					12 button Bookmark this tab
+				13 container
+					14 pop up button Obsidian Web Clipper
+Has access to this site
+					15 pop up button Extensions
+				16 button You
+				17 pop up button Chrome
+			18 container
+				19 scroll area
+					20 HTML content Experiment - OML, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/oml/index.html?ojr=experiment-leaderboard%3Bid%3D604%3Bname%3DComponent%2520Quality%2520Review%3Bsaved%3Dtrue
+						21 container Model Detail - GLM_7A3B0C76BC
+							22 container
+								23 heading Model Detail - GLM_7A3B0C76BC, Value: 1
+									24 text Model Detail - GLM_7A3B0C76BC
+								25 button Close
+							26 container
+								27 tab group
+									28 tab (settable, integer) Prediction Impacts, Value: 0
+									29 tab (selected) Confusion Matrix, Value: 1
+								30 container Confusion Matrix
+									31 container Confusion Matrix
+										32 text This is a data grid with 2 rows and 2 columns.
+										33 container
+											34 text REVIEW
+											35 text STABLE
+										36 container
+											37 text REVIEW
+											38 text STABLE
+										39 container
+											40 text 40.82 % 0.00 % 0.00 % 59.18 %
+										41 container
+											42 text Actual
+											43 text Predicted
+						44 container
+							45 text Experiment - OML
+							46 container
+								47 container OML Navigation
+									48 button 
+								49 image Oracle Logo
+								50 heading Machine Learning, Help: Application Name, Value: 1
+									51 text Machine Learning
+								52 container Project: LLUSER Project Workspace: LLUSER Workspace
+									53 button 
+								54 pop up button 
+									55 text 
+								56 splitter
+								57 container
+									58 pop up button LLUSER
+										59 text 
+										60 text LLUSER
+										61 image
+									62 button Help for current page
+							63 container
+								64 link Back to Experiments, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/oml/index.html?ojr=experiment-leaderboard%3Bid%3D604%3Bname%3DComponent%2520Quality%2520Review%3Bsaved%3Dtrue#
+								65 heading Component Quality Review, Value: 1
+									66 text Component Quality Review
+								67 button Completed
+								68 button Edit
+								69 pop up button Start
+									70 text 
+									71 text Start
+									72 text 
+								73 button Settings
+								74 heading Settings, Value: 1
+									75 text Settings
+								76 heading Balanced Accuracy, Value: 1
+									77 text Balanced Accuracy
+								78 container Data Visualization: Chart
+									79 container
+										80 text 0.0
+										81 text 0.2
+										82 text 0.4
+										83 text 0.6
+										84 text 0.8
+										85 text 1.0
+								86 heading Leader Board, Value: 1
+									87 text Leader Board
+								88 toolbar Leaderboard Actions
+									89 button Deploy
+									90 button Rename
+									91 button Create Notebook
+									92 button Metrics
+								93 container Leaderboard Table
+									94 container selected
+										95 container
+											96 text Algorithm
+											97 text Model Name
+											98 text Balanced Accuracy
+										99 text Decision Tree
+										100 container
+											101 link DT_E01D1BC602, Value: javascript:void(0);
+										102 text 1.0000
+										103 text Generalized Linear Model
+										104 container
+											105 link GLM_7A3B0C76BC, Value: javascript:void(0);
+										106 text 1.0000
+										107 text Generalized Linear Model (Ridge Regression)
+										108 container
+											109 link GLMR_FDB62BF17C, Value: javascript:void(0);
+										110 text 1.0000
+										111 text Neural Network
+										112 container
+											113 link NN_61C42DF4A2, Value: javascript:void(0);
+										114 text 1.0000
+										115 text Random Forest
+										116 container
+											117 link RF_77C9EF05E9, Value: javascript:void(0);
+										118 text 1.0000
+									119 container
+										120 text Table with 3 columns and more than 5 rows Row 2 Column 1 Select Row
+									121 text selected
+									122 text unselected Contains Controls
+								123 container
+									124 button Features
+									125 container
+										126 heading Features, Value: 1
+											127 text Features
+									128 toolbar
+										129 button (disabled) Refresh
+										130 container
+											131 text field (settable) Filter
+									132 container Features
+										133 container  Refresh Filter
+											134 container
+												135 text Name
+												136 text Importance
+												137 text Type
+											138 text AVG_DEFECT_RATE_PCT
+											139 image Feature importance: 0.551
+											140 text NUMBER
+											141 text AVG_DOWNTIME_MINUTES
+											142 image Feature importance: 0.167
+											143 text NUMBER
+											144 text MAJOR_STOPPAGES
+											145 image Feature importance: 0.083
+											146 text NUMBER
+											147 text MINOR_STOPPAGES
+											148 image Feature importance: 0.067
+											149 text NUMBER
+											150 text TOTAL_REJECTED_UNITS
+											151 image Feature importance: 0.050
+											152 text NUMBER
+											153 text TOTAL_REWORK_MINUTES
+											154 image Feature importance: 0.050
+											155 text NUMBER
+											156 text UNIT_COST
+											157 image Feature importance: 0.027
+											158 text NUMBER
+											159 text CATEGORY
+											160 image Feature importance: 0.005
+											161 text VARCHAR2
+											162 text MATERIAL_VALUE
+											163 image Feature importance: 0.000
+											164 text NUMBER
+											165 text PLANNED_UNITS
+											166 image Feature importance: 0.000
+											167 text NUMBER
+											168 text TOTAL_INSPECTED_UNITS
+											169 image Feature importance: 0.000
+											170 text NUMBER
+											171 text TOTAL_OBSERVATIONS
+											172 image Feature importance: 0.000
+											173 text NUMBER
+										174 container
+											175 text Select Row
+			176 pop up button Tab search
+			177 container
+				178 tab group
+					179 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 430 MB, Value: off
+						180 button Close
+					181 tab (settable, boolean) New Tab - Memory usage - 175 MB, Value: off
+						182 button Close
+					183 tab (settable, boolean) SQL | Oracle Database Actions - Memory usage - 458 MB, Value: off
+						184 button Close
+					185 tab (settable, boolean) Production Quality Network - Memory usage - 264 MB, Value: off
+						186 button Close
+					187 tab (selected, settable, boolean) Experiment - OML - Memory usage - 139 MB, Value: on
+						188 button Close
+			189 button New Tab
+	190 close button
+	191 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	192 minimize button
+193 menu bar
+	194 Chrome
+	195 File
+	196 Edit
+	197 View
+	198 History
+	199 Bookmarks
+	200 Profiles
+	201 Tab
+	202 Window
+	203 Help
+
+The focused UI element is 29 tab (selected) Confusion Matrix, Value: 1

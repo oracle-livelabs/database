@@ -1,0 +1,54 @@
+{
+  "date": "2026-09-29",
+  "workflow": "LiveLabs green-button reservation learner walkthrough",
+  "database_region": "South Korea Central (Seoul)",
+  "genai_region": "us-chicago-1",
+  "authenticated_user": "LLUSER",
+  "provisioning": {
+    "resource_manager_apply": "succeeded",
+    "corrected_loader_extraction_sequence": "passed",
+    "database_actions_login": "passed",
+    "loader_completion_evidence": "Fresh-schema object inventory and fixture counts matched the canonical manufacturing loader",
+    "spatial_author_grant": "present",
+    "genai_profile": "enabled",
+    "property_graph": "present",
+    "embedding_model": "present"
+  },
+  "fresh_fixture_counts": {
+    "plants": 16,
+    "components": 192,
+    "production_orders": 3739,
+    "production_order_lines": 4985,
+    "quality_observations": 1536,
+    "work_centers": 105,
+    "material_transfers": 114
+  },
+  "labs": {
+    "getting_started": "Database Actions opened as LLUSER and SQL Worksheet ran",
+    "dashboard": "Converged manufacturing query returned 10 rows",
+    "duality": "All 14 SQL blocks passed; order 900001 and line 990001 were inserted and updated through the duality view",
+    "vector": "ADMIN.ALL_MINILM_L12_V2 found; 192 embeddings populated; similarity and affected-site queries passed",
+    "graph_sql": "Relational and SQL/PGQ queries passed; direct, one-to-four-hop, and shared-entity results matched",
+    "graph_studio": "Notebook imported; compute attached; 9-row table and both graph visualizations rendered; shared-lot view showed 6 vertices and 10 edges",
+    "spatial": "All four queries passed; plant GeoJSON, regional distance, and nearest-plant routing returned results",
+    "oml_sql": "GLM created and 12 scoring rows returned REVIEW/STABLE probabilities",
+    "oml_automl": "Experiment completed with five models at 1.0000 balanced accuracy; GLM confusion matrix showed REVIEW 40.82 percent, STABLE 59.18 percent, and zero off-diagonal errors",
+    "select_ai": "All nine blocks passed; SHOWSQL, RUNSQL, and NARRATE returned matching manufacturing results",
+    "select_ai_agent": "Tool, agent, task, and team created; run SUCCEEDED with one SQL tool invocation in 108.654 seconds; Cohere model restored and verified",
+    "final_quiz": "Fresh authenticated workshop run scored 7/7 and displayed the manufacturing completion badge"
+  },
+  "post_lab_state": {
+    "production_orders": 3740,
+    "production_order_lines": 4986,
+    "reserved_order_id": 900001,
+    "reserved_line_id": 990001,
+    "teaching_vector_column_present": true
+  },
+  "observations": [
+    "Database Actions showed a few trailing Unknown Command or line-number messages when Run Script parsed content after a successful single statement; the expected result or object state was verified and no required lab retained an unresolved Oracle error"
+  ],
+  "remaining": [
+    "Run Terraform CLI validation locally if CLI-level equivalence is required",
+    "Run destroy and confirm resource cleanup when the reservation test is closed"
+  ]
+}

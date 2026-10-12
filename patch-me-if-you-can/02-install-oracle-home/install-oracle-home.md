@@ -1,16 +1,19 @@
 # Install Oracle Home
 
-Out-of-place patching starts with the creation of a new Oracle home. In this lab, you will use AutoUpgrade to install and patch an Oracle home.
-
 ## Introduction
 
+Out-of-place patching starts with the creation of a new Oracle home. In this lab, you will use AutoUpgrade to install and patch an Oracle home.
+
 Estimated Time: 5 Minutes
+
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:TYlnvpYBXNQ)
 
 ### Objectives
 
 In this lab, you will:
 
 * Install an Oracle home using AutoUpgrade
+* Create gold image using AutoUpgrade
 
 ### Prerequisites
 
@@ -66,6 +69,9 @@ None.
     </copy>
     ```
 
+    * AutoUpgrade needs around 20 minutes to install the Oracle home. 
+    * While the installation completes you move on.
+
 3. AutoUpgrade may display *Processing config file ...* for a while as it reads and catalogs the ZIP files in */home/oracle/patch-repo*.
 
     <details>
@@ -110,9 +116,9 @@ None.
 
 6. If you have a brand-new server with no existing Oracle home, you can still use `-mode create_home`. AutoUpgrade creates the Oracle home with the default settings rather than copying them from a source Oracle home. In this case, you can specify most of the `runInstaller` settings by using `patch1.home_settings`.
 
-7. **It takes around 20 minutes to install a new Oracle home, patch it, and create a gold image.**
+7. **Leave AutoUpgrade running for now. You will return to this AutoUpgrade job in a later lab.**
 
-8. Leave AutoUpgrade running and move on to the next lab.
+8. It takes around 20 minutes to install a new Oracle home, patch it, and create a gold image. In that time, you continue with the new lab.
 
 You may now [*proceed to the next lab*](#next).
 

@@ -1,0 +1,188 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+1 AXWebArea SQL | Oracle Database Actions, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet
+	2 container
+		3 container
+			4 button Selector
+				2015 text 
+				6 text Selector
+			7 link Description: Database Actions, Go to Launchpad, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+			8 text  |  SQL
+			9 button Search Database (⌘+K)
+				10 text Search Database (⌘+K)
+				2016 text 
+			12 button Need Help?
+				2017 text 
+				14 text Need Help?
+			15 pop up button LLUSER User Menu
+				2018 text 
+				17 text LLUSER
+				2019 text 
+		19 container Description: Main Drawer, ID: mainDrawer
+			20 container navigator_worksheet__layout
+				473 button (collapsed) Expand
+				474 container code-playground-7184793285291993
+					475 container
+						476 toolbar Editing Toolbar
+							477 container
+								478 pop up button BROWSER [Worksheet ]*
+									479 container worksheet-dropdown
+										480 text [Worksheet ]*
+									2020 text 
+								482 pop up button 
+									2021 text 
+									484 text New file
+									2022 text 
+								486 button Open... (Ctrl+O, ⌘+O)
+									2023 text 
+									488 text Open... (Ctrl+O, ⌘+O)
+								489 button Save (Ctrl+S, ⌘+S)
+									2024 text 
+									491 text Save (Ctrl+S, ⌘+S)
+							492 container
+								493 container code-editor-run-statement-container
+									494 button Run Statement (Ctrl+⏎, ⌘+⏎)
+										2050 text 
+										496 text Run Statement (Ctrl+⏎, ⌘+⏎)
+									497 pop up button Run Statement Options
+										2026 text 
+								499 button Run Script (F5)
+									2027 text 
+									2028 text 
+									502 text Run Script (F5)
+								503 button Create Chart (Ctrl+F11, ⌘+F11)
+									2029 text 
+									2030 text 
+									506 text Create Chart (Ctrl+F11, ⌘+F11)
+								507 button Explain Plan (F10)
+									2031 text 
+									509 text Explain Plan (F10)
+								510 button Autotrace (F6)
+									2032 text 
+									512 text Autotrace (F6)
+							513 container
+								514 button Download Editor Content (Ctrl+I, ⌘+I)
+									2033 text 
+									516 text Download Editor Content (Ctrl+I, ⌘+I)
+								517 button Format (Ctrl+F7, ⌘+F7)
+									2034 text 
+									519 text Format (Ctrl+F7, ⌘+F7)
+								520 pop up button 
+									2035 text 
+									522 text Convert Case (Ctrl+B, ⌘+B)
+									2036 text 
+								524 button Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+									2037 text 
+									526 text Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+						527 toolbar Editing Toolbar
+							528 container consumer-groups-selector
+								529 text Consumer group:
+								530 container Consumer group
+									531 pop up button LOW
+										532 text LOW
+										2038 text 
+							534 container
+								535 button Data Load
+									536 text Data Load
+								537 button Open In Fullscreen
+									2039 text 
+									539 text Open In Fullscreen
+								540 button Tour
+									2040 text 
+									542 text Tour
+								543 button Help (F1)
+									2041 text 
+									545 text Help (F1)
+					546 container
+						547 container code-editor-panel
+							548 container
+								549 editor (settable) Editor content
+								1960 container
+									2051 text 1  3 
+									1962 content list
+										2052 container
+											2053 text SELECT
+											2054 text  so.component_name,
+										2055 container
+											2056 text ROUND
+											2057 text (
+											2058 text 1
+											2059 text -
+											2060 text  VECTOR_DISTANCE
+											2061 text (
+						550 button (expanded) Collapse
+						551 container output-panel
+							552 tab group dbt-panel-tabbar
+								553 tab (selected, settable, boolean) Query Result, Value: 1, ID: query_result-tab-label
+								554 tab (selectable, settable, boolean) Script Output, Value: 0, ID: script_output-tab-label
+								634 tab (selectable, settable, boolean) DBMS Output, Value: 0, ID: dbms_output-tab-label
+								635 tab (selectable, settable, boolean) Explain Plan, Value: 0, ID: explain_plan-tab-label
+								555 tab (selectable, settable, boolean) More Tabs, Value: 0
+							556 container slot__afterControls
+								557 button Help
+									2042 text 
+									559 text Help
+							1861 container Description: Query Result, ID: query_result-tab-panel
+								2062 toolbar
+									2063 button Clear Output
+										2064 text 
+										2065 text Clear Output
+									2066 button Show info
+										2067 text 
+										2068 text Show info
+									2069 button Open in new tab
+										2070 text 
+										2071 text Open in new tab
+									2072 button Share Query Results
+										2073 text 
+										2074 text Share Query Results
+									2075 pop up button Download
+										2076 text Download
+										2077 text 
+									2078 text Execution time: 0.28 seconds
+								2079 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
+									2080 container dbt-sql-worksheet__query-output-grid
+										2081 text This is a data grid with 5 rows and 3 columns.
+										2082 container
+											2083 text COMPONENT_NAME
+											2084 text CATEGORY
+											2085 text SIMILARITY
+										2086 container
+											2087 text 1
+											2088 text 2
+											2089 text 3
+											2090 text 4
+											2091 text 5
+										2092 container
+											2093 text Power control module P09 Rev A
+											2094 text Power electronics
+											2095 text 0.7635
+											2096 text Power control module P03 Rev A
+											2097 text Power electronics
+											2098 text 0.763
+											2099 text Power control module P02 Rev A
+											2100 text Power electronics
+											2101 text 0.7602
+											2102 text Power control module P07 Rev A
+											2103 text Power electronics
+											2104 text 0.7563
+											2105 text Power control module P12 Rev A
+											2106 text Power electronics
+											2107 text 0.7506
+		577 container
+			578 link Description:    1, Help: Errors
+				2048 text 
+				580 text 1
+			581 link Description:    0, Help: Warnings
+				2049 text 
+				583 text 0
+			584 link Description:    0, Help: Processes
+				2108 text 
+				586 text 0
+			587 text   |  
+			588 link 7:00:06 PM - 5 rows total
+				589 text 7:00:06 PM - 5 rows total
+			590 link Description: Powered by ORDS, Value: oracle.com/rest
+		591 text entry area (settable) Clipboard
+		592 button Copy
+
+The focused UI element is 494 button Run Statement (Ctrl+⏎, ⌘+⏎)

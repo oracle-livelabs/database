@@ -1,0 +1,193 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+1 AXWebArea SQL | Oracle Database Actions, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet
+	2 container
+		3 container
+			4 button Selector
+				1648 text 
+				6 text Selector
+			7 link Description: Database Actions, Go to Launchpad, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+			8 text  |  SQL
+			9 button Search Database (⌘+K)
+				10 text Search Database (⌘+K)
+				1649 text 
+			12 button Need Help?
+				1650 text 
+				14 text Need Help?
+			15 pop up button LLUSER User Menu
+				1651 text 
+				17 text LLUSER
+				1652 text 
+		19 container Description: Main Drawer, ID: mainDrawer
+			20 container navigator_worksheet__layout
+				473 button (collapsed) Expand
+				474 container code-playground-7184793285291993
+					475 container
+						476 toolbar Editing Toolbar
+							477 container
+								478 pop up button BROWSER [Worksheet ]*
+									479 container worksheet-dropdown
+										480 text [Worksheet ]*
+									1653 text 
+								482 pop up button 
+									1654 text 
+									484 text New file
+									1655 text 
+								486 button Open... (Ctrl+O, ⌘+O)
+									1656 text 
+									488 text Open... (Ctrl+O, ⌘+O)
+								489 button Save (Ctrl+S, ⌘+S)
+									1657 text 
+									491 text Save (Ctrl+S, ⌘+S)
+							492 container
+								493 container code-editor-run-statement-container
+									494 button Run Statement (Ctrl+⏎, ⌘+⏎)
+										1683 text 
+										496 text Run Statement (Ctrl+⏎, ⌘+⏎)
+									497 pop up button Run Statement Options
+										1659 text 
+								499 button Run Script (F5)
+									1660 text 
+									1661 text 
+									502 text Run Script (F5)
+								503 button Create Chart (Ctrl+F11, ⌘+F11)
+									1662 text 
+									1663 text 
+									506 text Create Chart (Ctrl+F11, ⌘+F11)
+								507 button Explain Plan (F10)
+									1664 text 
+									509 text Explain Plan (F10)
+								510 button Autotrace (F6)
+									1665 text 
+									512 text Autotrace (F6)
+							513 container
+								514 button Download Editor Content (Ctrl+I, ⌘+I)
+									1666 text 
+									516 text Download Editor Content (Ctrl+I, ⌘+I)
+								517 button Format (Ctrl+F7, ⌘+F7)
+									1667 text 
+									519 text Format (Ctrl+F7, ⌘+F7)
+								520 pop up button 
+									1668 text 
+									522 text Convert Case (Ctrl+B, ⌘+B)
+									1669 text 
+								524 button Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+									1670 text 
+									526 text Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+						527 toolbar Editing Toolbar
+							528 container consumer-groups-selector
+								529 text Consumer group:
+								530 container Consumer group
+									531 pop up button LOW
+										532 text LOW
+										1671 text 
+							534 container
+								535 button Data Load
+									536 text Data Load
+								537 button Open In Fullscreen
+									1672 text 
+									539 text Open In Fullscreen
+								540 button Tour
+									1673 text 
+									542 text Tour
+								543 button Help (F1)
+									1674 text 
+									545 text Help (F1)
+					546 container
+						547 container code-editor-panel
+							548 container
+								549 editor (settable) Editor content
+								1380 container
+									1684 text 1 
+									1382 content list
+										1685 container
+											1686 text SELECT
+											1687 text  component_id,
+						550 button (expanded) Collapse
+						551 container output-panel
+							552 tab group dbt-panel-tabbar
+								553 tab (selected, settable, boolean) Query Result, Value: 1, ID: query_result-tab-label
+								554 tab (selectable, settable, boolean) Script Output, Value: 0, ID: script_output-tab-label
+								634 tab (selectable, settable, boolean) DBMS Output, Value: 0, ID: dbms_output-tab-label
+								635 tab (selectable, settable, boolean) Explain Plan, Value: 0, ID: explain_plan-tab-label
+								555 tab (selectable, settable, boolean) More Tabs, Value: 0
+							556 container slot__afterControls
+								557 button Help
+									1675 text 
+									559 text Help
+							1389 container Description: Query Result, ID: query_result-tab-panel
+								1688 toolbar
+									1689 button Clear Output
+										1690 text 
+										1691 text Clear Output
+									1692 button Show info
+										1693 text 
+										1694 text Show info
+									1695 button Open in new tab
+										1696 text 
+										1697 text Open in new tab
+									1698 button Share Query Results
+										1699 text 
+										1700 text Share Query Results
+									1701 pop up button Download
+										1702 text Download
+										1703 text 
+									1704 text Execution time: 0.006 seconds
+								1705 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
+									1706 container dbt-sql-worksheet__query-output-grid
+										1707 text This is a data grid with 5 rows and 5 columns.
+										1708 container
+											1709 text COMPONENT_ID
+											1710 text COMPONENT_NAME
+											1711 text CATEGORY
+											1712 text SUBCATEGORY
+											1713 text EMBEDDING_TEXT
+										1714 container
+											1715 text 1
+											1716 text 2
+											1717 text 3
+											1718 text 4
+											1719 text 5
+										1720 container
+											1721 text 138
+											1722 text Temperature monitor module P12 Rev A
+											1723 text Sensing
+											1724 text Temperature measurement and thermal drift
+											1725 text Temperature monitor module P12 Rev A. Category: Sensing. Subcategory: Temperature measurement and thermal drift
+											1726 text 150
+											1727 text Temperature monitor module P13 Rev A
+											1728 text Sensing
+											1729 text Temperature measurement and thermal drift
+											1730 text Temperature monitor module P13 Rev A. Category: Sensing. Subcategory: Temperature measurement and thermal drift
+											1731 text 162
+											1732 text Temperature monitor module P14 Rev A
+											1733 text Sensing
+											1734 text Temperature measurement and thermal drift
+											1735 text Temperature monitor module P14 Rev A. Category: Sensing. Subcategory: Temperature measurement and thermal drift
+											1736 text 173
+											1737 text Sensor interface module P15 Rev A
+											1738 text Sensing
+											1739 text Low-noise analog input and measurement accuracy
+											1740 text Sensor interface module P15 Rev A. Category: Sensing. Subcategory: Low-noise analog input and measurement accuracy
+											1741 text 177
+											1742 text Communication module P15 Rev A
+											1743 text Communications
+											1744 text Bus signal integrity and communication reliability
+											1745 text Communication module P15 Rev A. Category: Communications. Subcategory: Bus signal integrity and communication reliability
+		577 container
+			578 link Description:    1, Help: Errors
+				1681 text 
+				580 text 1
+			581 link Description:    0, Help: Warnings
+				1682 text 
+				583 text 0
+			584 link Description:    0, Help: Processes
+				1746 text 
+				586 text 0
+			587 text   |  
+			588 link 6:59:37 PM - 5 rows total
+				589 text 6:59:37 PM - 5 rows total
+			590 link Description: Powered by ORDS, Value: oracle.com/rest
+		591 text entry area (settable) Clipboard
+		592 button Copy
+
+The focused UI element is 494 button Run Statement (Ctrl+⏎, ⌘+⏎)

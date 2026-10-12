@@ -1,4 +1,4 @@
-# Create an API key for the user 
+# Create an API key for the user
 resource "tls_private_key" "api" {
   algorithm = "RSA"
   rsa_bits  = 2048
@@ -6,7 +6,7 @@ resource "tls_private_key" "api" {
 
 # Upload the key to the LiveLabs user
 resource "oci_identity_api_key" "api" {
-  provider  = oci.home                 
+  provider  = oci.home
   user_id   = var.ociUserOcid
   key_value = tls_private_key.api.public_key_pem
 }
@@ -14,7 +14,7 @@ resource "oci_identity_api_key" "api" {
 # Render the SQL from the template using the key credentials created above and the LiveLabs variabled provided
 resource "local_file" "genai_connection" {
   depends_on      = [oci_identity_api_key.api]
-  filename        = "${path.module}/genai_connection.sql"  
+  filename        = "${path.module}/genai_connection.sql"
   file_permission = "0600"
   content = templatefile("${path.module}/genai_connection.sql.tmpl", {
     private_key_pem     = tls_private_key.api.private_key_pem
@@ -26,5 +26,3 @@ resource "local_file" "genai_connection" {
     ociGenAiModel       = var.ociGenAiModel
   })
 }
-
-

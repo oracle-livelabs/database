@@ -1,0 +1,60 @@
+# Build Connected HighTech Solutions with Oracle AI Database
+
+## Introduction
+
+Jessica Chan, the DBA at SEER HIGHTECH, starts the morning with a question from the quality team. Electrical testing has flagged excessive leakage current in a power control module assembled with a purchased semiconductor lot. Which production orders use that component, and what should the team review before work continues?
+
+![Jessica and Thomas review a component inspection concern beside an electronics assembly planning board.](images/seer-hightech-introduction.png)
+
+Jessica brings the team together around the records in Oracle AI Database. Follow their investigation through JSON, vector search, graphs, spatial queries, machine learning, and AI. Run the queries and inspect the results before deciding what the quality team should do next.
+
+### SEER HIGHTECH data model
+
+SEER HIGHTECH assembles and tests electronic control modules using purchased packaged semiconductors. It does not fabricate wafers. `COMPONENTS` holds plant-specific module revisions; `PRODUCTION_ORDERS` records customer-backed build commitments for those modules. Test observations flag modules for review, and the graph traces shared semiconductor lots, suppliers, test equipment, and lot certificates before fulfillment.
+
+This diagram shows how customer sites, plants, module revisions, production orders, and order lines connect.
+
+![Illustrated SEER HIGHTECH ERD: customer sites and plants connect to production orders; plants supply components; production orders and components connect through order lines.](images/seer-hightech-erd-illustrated.png)
+
+*One plant per production order. Each component revision belongs to one plant and specifies a board material grade and assembly/test route. Production-order lines record quantities and unit costs.* [Open the illustrated ERD](images/seer-hightech-erd-illustrated.png) or the [text-based schema diagram](images/seer-hightech-erd.svg).
+
+### What the team builds
+
+| Team member                   | Requirement                                                     | What you will see                                                                                                                          |
+| -------------------------------| -----------------------------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------------------|
+| Jessica, DBA                  | Build the query behind a Production Quality and Operations dashboard.         | One SQL result combines relational quality-alert data, semantic component matching, JSON production order data, and location data.                         |
+| Thomas, application developer | Give the application flexible production order documents.            | JSON columns, JSON collections, and JSON Relational Duality Views provide different ways to serve application data.                        |
+| Gilly, AI engineer            | Find components related to a production-quality question.                       | Jessica loads an ONNX embedding model into the database, and Gilly creates vectors where the component data already lives.                   |
+| Bob, graph specialist         | Find connected production orders and entities in a production quality investigation.  | A property graph uses the existing relational data to show paths that become difficult to manage with repeated SQL joins.                  |
+| Moon, spatial expert          | Route work using plant and region locations.           | The database calculates distance from geographic data that the application can also display.                                               |
+| Otto, data scientist          | Flag components for quality review.                 | Oracle Machine Learning trains and scores a model inside the database, using the component and inspection data.                             |
+| Nina, production analyst            | Ask HighTech questions without writing every query from scratch. | Select AI generates SQL that Nina can inspect, run, and refine. Select AI Agent adds an approved SQL query tool and records the agent activity. |
+
+<details>
+<summary><strong>Learn more: What does "converged database" mean?</strong></summary>
+
+> A **converged database** handles several data types and kinds of work in one database. Here, teams use relational rows, JSON documents, vectors, graphs, geographic data, machine learning models, and AI-assisted SQL.
+>
+> Teams use the form their application needs and keep the records and access controls together. They can query these data types without maintaining a separate store for each one.
+
+</details>
+
+### Objectives
+
+- Follow Jessica and her team as they investigate a component quality concern.
+- Use relational SQL, JSON, vectors, graphs, spatial data, Oracle Machine Learning, Select AI, and Select AI Agent in practical tasks.
+- See how one Oracle AI Database can support different data types without separate copies of the manufacturing records.
+- Understand how database privileges, AI profile settings, approved tools, and execution history help teams control access and review AI results.
+- Explain how each query would support a SEER HIGHTECH application.
+
+Estimated Workshop Time: **90 minutes**
+
+## Running the HighTech demo
+
+A HighTech application can use these queries to review module test failures, trace affected build commitments, and assess fulfillment options. The supporting stack provisions the workshop database and services; it does not deploy a separate application server.
+
+## Acknowledgements
+
+* **Author** - Matt Kowalik
+* **Contributor** - Kevin Lazarz
+* **Last Updated By/Date** - Matt Kowalik, September 2026

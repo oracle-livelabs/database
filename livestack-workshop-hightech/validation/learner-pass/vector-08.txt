@@ -1,0 +1,261 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+1 AXWebArea SQL | Oracle Database Actions, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet
+	2 container
+		3 container
+			4 button Selector
+				2108 text 
+				6 text Selector
+			7 link Description: Database Actions, Go to Launchpad, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+			8 text  |  SQL
+			9 button Search Database (⌘+K)
+				10 text Search Database (⌘+K)
+				2109 text 
+			12 button Need Help?
+				2110 text 
+				14 text Need Help?
+			15 pop up button LLUSER User Menu
+				2111 text 
+				17 text LLUSER
+				2112 text 
+		19 container Description: Main Drawer, ID: mainDrawer
+			20 container navigator_worksheet__layout
+				473 button (collapsed) Expand
+				474 container code-playground-7184793285291993
+					475 container
+						476 toolbar Editing Toolbar
+							477 container
+								478 pop up button BROWSER [Worksheet ]*
+									479 container worksheet-dropdown
+										480 text [Worksheet ]*
+									2113 text 
+								482 pop up button 
+									2114 text 
+									484 text New file
+									2115 text 
+								486 button Open... (Ctrl+O, ⌘+O)
+									2116 text 
+									488 text Open... (Ctrl+O, ⌘+O)
+								489 button Save (Ctrl+S, ⌘+S)
+									2117 text 
+									491 text Save (Ctrl+S, ⌘+S)
+							492 container
+								493 container code-editor-run-statement-container
+									494 button Run Statement (Ctrl+⏎, ⌘+⏎)
+										2143 text 
+										496 text Run Statement (Ctrl+⏎, ⌘+⏎)
+									497 pop up button Run Statement Options
+										2119 text 
+								499 button Run Script (F5)
+									2120 text 
+									2121 text 
+									502 text Run Script (F5)
+								503 button Create Chart (Ctrl+F11, ⌘+F11)
+									2122 text 
+									2123 text 
+									506 text Create Chart (Ctrl+F11, ⌘+F11)
+								507 button Explain Plan (F10)
+									2124 text 
+									509 text Explain Plan (F10)
+								510 button Autotrace (F6)
+									2125 text 
+									512 text Autotrace (F6)
+							513 container
+								514 button Download Editor Content (Ctrl+I, ⌘+I)
+									2126 text 
+									516 text Download Editor Content (Ctrl+I, ⌘+I)
+								517 button Format (Ctrl+F7, ⌘+F7)
+									2127 text 
+									519 text Format (Ctrl+F7, ⌘+F7)
+								520 pop up button 
+									2128 text 
+									522 text Convert Case (Ctrl+B, ⌘+B)
+									2129 text 
+								524 button Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+									2130 text 
+									526 text Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+						527 toolbar Editing Toolbar
+							528 container consumer-groups-selector
+								529 text Consumer group:
+								530 container Consumer group
+									531 pop up button LOW
+										532 text LOW
+										2131 text 
+							534 container
+								535 button Data Load
+									536 text Data Load
+								537 button Open In Fullscreen
+									2132 text 
+									539 text Open In Fullscreen
+								540 button Tour
+									2133 text 
+									542 text Tour
+								543 button Help (F1)
+									2134 text 
+									545 text Help (F1)
+					546 container
+						547 container code-editor-panel
+							548 container
+								549 editor (settable) Editor content
+						550 button (expanded) Collapse
+						551 container output-panel
+							552 tab group dbt-panel-tabbar
+								553 tab (selected, settable, boolean) Query Result, Value: 1, ID: query_result-tab-label
+								554 tab (selectable, settable, boolean) Script Output, Value: 0, ID: script_output-tab-label
+								634 tab (selectable, settable, boolean) DBMS Output, Value: 0, ID: dbms_output-tab-label
+								635 tab (selectable, settable, boolean) Explain Plan, Value: 0, ID: explain_plan-tab-label
+								555 tab (selectable, settable, boolean) More Tabs, Value: 0
+							556 container slot__afterControls
+								557 button Help
+									2135 text 
+									559 text Help
+							1861 container Description: Query Result, ID: query_result-tab-panel
+								2144 toolbar
+									2145 button Clear Output
+										2146 text 
+										2147 text Clear Output
+									2148 button Show info
+										2149 text 
+										2150 text Show info
+									2151 button Open in new tab
+										2152 text 
+										2153 text Open in new tab
+									2154 button Share Query Results
+										2155 text 
+										2156 text Share Query Results
+									2157 pop up button Download
+										2158 text Download
+										2159 text 
+									2160 text Execution time: 0.282 seconds
+								2161 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
+									2162 container dbt-sql-worksheet__query-output-grid
+										2163 text This is a data grid with 9 rows and 10 columns.
+										2164 container
+											2165 text COMPONENT_NAME
+											2166 text SIMILARITY
+											2167 text SITE_NAME
+											2168 text CONTACT_NAME
+											2169 text EMAIL
+											2170 text PRODUCTION_ORDER_ID
+											2171 text ORDER_STATUS
+											2172 text CREATED_AT
+											2173 text QUANTITY
+											2174 text LINE_TOTAL
+										2175 container
+											2176 text 1
+											2177 text 2
+											2178 text 3
+											2179 text 4
+											2180 text 5
+											2181 text 6
+											2182 text 7
+											2183 text 8
+											2184 text 9
+										2185 container
+											2186 text Power control module P02 Rev A
+											2187 text 0.7602
+											2188 text Electronics Customer Site 0114
+											2189 text Contact0114 Example
+											2190 text production0114@example.com
+											2191 text 11135
+											2192 text planned
+											2193 text 08/20/2026, 10:00:00 AM
+											2194 text 37
+											2195 text 4625
+											2196 text Power control module P02 Rev A
+											2197 text 0.7602
+											2198 text Electronics Customer Site 1010
+											2199 text Contact1010 Example
+											2200 text production1010@example.com
+											2201 text 13055
+											2202 text planned
+											2203 text 08/20/2026, 10:00:00 AM
+											2204 text 33
+											2205 text 4125
+											2206 text Power control module P02 Rev A
+											2207 text 0.7602
+											2208 text Electronics Customer Site 0130
+											2209 text Contact0130 Example
+											2210 text production0130@example.com
+											2211 text 11151
+											2212 text in_production
+											2213 text 08/20/2026, 10:00:00 AM
+											2214 text 73
+											2215 text 9125
+											2216 text Power control module P02 Rev A
+											2217 text 0.7602
+											2218 text Electronics Customer Site 0946
+											2219 text Contact0946 Example
+											2220 text production0946@example.com
+											2221 text 10943
+											2222 text planned
+											2223 text 08/20/2026, 10:00:00 AM
+											2224 text 30
+											2225 text 3750
+											2226 text Power control module P02 Rev A
+											2227 text 0.7602
+											2228 text Electronics Customer Site 0898
+											2229 text Contact0898 Example
+											2230 text production0898@example.com
+											2231 text 11919
+											2232 text in_production
+											2233 text 08/20/2026, 10:00:00 AM
+											2234 text 97
+											2235 text 12125
+											2236 text Power control module P02 Rev A
+											2237 text 0.7602
+											2238 text Electronics Customer Site 0882
+											2239 text Contact0882 Example
+											2240 text production0882@example.com
+											2241 text 11903
+											2242 text planned
+											2243 text 08/20/2026, 10:00:00 AM
+											2244 text 28
+											2245 text 3500
+											2246 text Power control module P02 Rev A
+											2247 text 0.7602
+											2248 text Electronics Customer Site 0962
+											2249 text Contact0962 Example
+											2250 text production0962@example.com
+											2251 text 10959
+											2252 text in_production
+											2253 text 08/20/2026, 10:00:00 AM
+											2254 text 67
+											2255 text 8375
+											2256 text Power control module P02 Rev A
+											2257 text 0.7602
+											2258 text Electronics Customer Site 0834
+											2259 text Contact0834 Example
+											2260 text production0834@example.com
+											2261 text 12879
+											2262 text in_production
+											2263 text 08/20/2026, 10:00:00 AM
+											2264 text 127
+											2265 text 15875
+											2266 text Power control module P02 Rev A
+											2267 text 0.7602
+											2268 text Electronics Customer Site 0818
+											2269 text Contact0818 Example
+											2270 text production0818@example.com
+											2271 text 12863
+											2272 text planned
+											2273 text 08/20/2026, 10:00:00 AM
+											2274 text 26
+											2275 text 3250
+		577 container
+			578 link Description:    1, Help: Errors
+				2141 text 
+				580 text 1
+			581 link Description:    0, Help: Warnings
+				2142 text 
+				583 text 0
+			584 link Description:    0, Help: Processes
+				2276 text 
+				586 text 0
+			587 text   |  
+			588 link 7:00:14 PM - 58 rows total
+				589 text 7:00:14 PM - 58 rows total
+			590 link Description: Powered by ORDS, Value: oracle.com/rest
+		591 text entry area (settable) Clipboard
+		592 button Copy
+
+The focused UI element is 494 button Run Statement (Ctrl+⏎, ⌘+⏎)

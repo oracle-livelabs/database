@@ -1,0 +1,462 @@
+[
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "change": "These are four operations in one investigation."
+  },
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "change": "3. Review the result as the component-level data"
+  },
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "change": "Use the first row to explain why a component needs attention."
+  },
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "change": "Jessica can use this SQL result for the dashboard table"
+  },
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "change": "Jessica meets with a production analyst"
+  },
+  {
+    "file": "production-operations-dashboard/production-operations-dashboard.md",
+    "change": "The query sorts by similarity first,"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "Removed repeated conclusion"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "Otto is checking that the training data"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "This shows how a data scientist chooses a model:"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "This task is optional. AutoML can take"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "Compare the models and their balanced accuracy"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "If you skipped the optional AutoML task,"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "The model reads the training view,"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "This creates a small synthetic scenario"
+  },
+  {
+    "file": "quality-review-oml/quality-review-oml.md",
+    "change": "One SQL result returns the prediction,"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas Brune develops production applications"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas wants each JSON document"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas asks Jessica, the DBA,"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "The application uses this document structure,"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas starts with data that belongs"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas now needs a collection of application documents."
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "`WITH ETAG` adds"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas now tests the document structure"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "This query selects the JSON `DATA` column"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "2. Expand the document in SQL Worksheet."
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "The same production order now has two useful forms:"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "The view currently allows updates but not new top-level documents."
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "You are changing the duality-view definition,"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "This duality view uses two relational tables."
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Oracle created or replaced the duality view."
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "The view can now receive a new JSON production order document"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas now tests a complete customer site production order."
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "This statement updates only `status`"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas has checked that the application can display"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas's document is still available for SQL analysis."
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "The SQL uses `JSON_VALUE`"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas does not need to hand-build this document"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "Thomas does not have to choose one JSON model"
+  },
+  {
+    "file": "production-order-duality/production-order-duality.md",
+    "change": "For Thomas, `PRODUCTION_ORDERS_DV`"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Removed repeated conclusion"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Oracle Spatial can support a production-routing map"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "An application can map the electronics assembly"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Moon starts with the simplest spatial question:"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "An `SDO_GEOMETRY` point is Oracle Spatial's"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "`SDO_UTIL.TO_GEOJSON` converts that geometry"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "The same stored location supports"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Moon has not created a second map database."
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Moon keeps each plant\u2019s location"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "The query also returns `DEMAND_INDEX`,"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "This is a useful regional result,"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Moon now needs a result that an operations application"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Customer site `LOCATION` is"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "A dashboard can use this result"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "Compare the customer sites and candidate plants with"
+  },
+  {
+    "file": "plant-routing-spatial/plant-routing-spatial.md",
+    "change": "You used Oracle Spatial to find customer sites"
+  },
+  {
+    "file": "selectai-agent/selectai-agent.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "selectai-agent/selectai-agent.md",
+    "change": "The tool lets the agent ask Select AI"
+  },
+  {
+    "file": "selectai-agent/selectai-agent.md",
+    "change": "Nina needs more than a final answer."
+  },
+  {
+    "file": "selectai/selectai.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "selectai/selectai.md",
+    "change": "Removed repeated conclusion"
+  },
+  {
+    "file": "selectai/selectai.md",
+    "change": "Select AI uses an AI profile to identify"
+  },
+  {
+    "file": "selectai/selectai.md",
+    "change": "The profile needs a list of tables that Select AI may use."
+  },
+  {
+    "file": "selectai/selectai.md",
+    "change": "Nina has reviewed the SQL. She now asks"
+  },
+  {
+    "file": "selectai/selectai.md",
+    "change": "Nina's first question gives her a component ranking,"
+  },
+  {
+    "file": "selectai/selectai.md",
+    "change": "The explanation is a convenience for a production analyst."
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Removed repeated conclusion"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The same application can expose the graph query"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Jessica has already written a query for Bob."
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "In this lab, a **hop** means"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Jessica now needs four separate SELECT statements."
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Jessica can add another relationship step,"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "This is the problem Bob's graph approach"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Bob has already created the `PRODUCTION_QUALITY_NETWORK`"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "In graph terms, the production order and connected objects"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The result returns the same columns as Jessica's query."
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "This query treats the production quality data as a graph."
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "This is much easier than writing the same logic"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The graph pattern says the investigation"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "RELATIONSHIP_HOPS shows the entity's level"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "2. Review the high-risk entities."
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "These rows matter because they show"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The result gives investigators a risk-sorted list"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Bob now moves from one flagged production order"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The pattern starts at production order `a`,"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The result shows the two production orders,"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Oracle Graph Studio displays the production orders"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "In the following tasks, use Graph Studio"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The supplied `.dsnb` file is a native"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "You already ran the SQL/PGQ patterns"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Use the table to rank connected entities."
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "This uses the investigation pattern from Task 3"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "Note how the production orders and material lots"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The fixture requires material lot"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "You have used SQL/PGQ to list connected"
+  },
+  {
+    "file": "production-quality-network/production-quality-network.md",
+    "change": "The statement defines the graph structure over"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Removed repeated Hands-on Scenario"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Removed repeated conclusion"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "The combined text gives the model"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Each component now has its own 384-dimensional vector."
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Now Gilly tests the new column"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Use the ranked components to focus"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Vector distance is useful for checking the search,"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "The query uses the same vectors and the same cosine calculation."
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Gilly now connects the component search to customer orders."
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "The result shows customer sites with orders for components related"
+  },
+  {
+    "file": "component-quality-vector-search/component-quality-vector-search.md",
+    "change": "Gilly creates vectors for components,"
+  },
+  {
+    "file": "getting-started/getting-started.md",
+    "change": "Open the LiveLabs reservation for this workshop."
+  },
+  {
+    "file": "getting-started/getting-started.md",
+    "change": "Open SQL Worksheet as `LLUSER`. Run each query"
+  },
+  {
+    "file": "getting-started/getting-started.md",
+    "change": "This check makes sure SQL Worksheet"
+  },
+  {
+    "file": "getting-started/getting-started.md",
+    "change": "You can now continue to the HighTech labs."
+  }
+]

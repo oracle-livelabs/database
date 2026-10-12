@@ -1,0 +1,139 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 1053
++								1053 toolbar
++									1054 button Clear Output
++										1055 text 
++										1056 text Clear Output
++									1057 button Show info
++										1058 text 
++										1059 text Show info
++									1060 button Open in new tab
++										1061 text 
++										1062 text Open in new tab
++									1063 button Share Query Results
++										1064 text 
++										1065 text Share Query Results
++									1066 pop up button Download
++										1067 text Download
++										1068 text 
++									1069 text Execution time: 0.027 seconds
++								1070 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									1071 container dbt-sql-worksheet__query-output-grid
++										1072 text This is a data grid with 9 rows and 10 columns.
++										1073 container
++											1074 text COMPONENT_ID
++											1075 text COMPONENT_NAME
++											1076 text CATEGORY
++											1077 text PREDICTED_REVIEW
++											1078 text REVIEW_SCORE
++											1079 text REVIEW_PCT
++											1080 text PLANNED_UNITS
++											1081 text MATERIAL_VALUE
++											1082 text TOTAL_OBSERVATIONS
++											1083 text MAJOR_STOPPAGES
++										1084 container
++											1085 text 1
++											1086 text 2
++											1087 text 3
++											1088 text 4
++											1089 text 5
++											1090 text 6
++											1091 text 7
++											1092 text 8
++											1093 text 9
++										1094 container
++											1095 text 1
++											1096 text Power control module P01 Rev A
++											1097 text Power electronics
++											1098 text REVIEW
++											1099 text 0.99999921
++											1100 text 100
++											1101 text 1531
++											1102 text 191375
++											1103 text 12
++											1104 text 6
++											1105 text 3
++											1106 text Motor control module P01 Rev A
++											1107 text Motor control
++											1108 text REVIEW
++											1109 text 0.99999921
++											1110 text 100
++											1111 text 1563
++											1112 text 265710
++											1113 text 12
++											1114 text 6
++											1115 text 5
++											1116 text Sensor interface module P01 Rev A
++											1117 text Sensing
++											1118 text REVIEW
++											1119 text 0.99999921
++											1120 text 100
++											1121 text 569
++											1122 text 88195
++											1123 text 12
++											1124 text 6
++											1125 text 7
++											1126 text Pressure interface module P01 Rev A
++											1127 text Sensing
++											1128 text REVIEW
++											1129 text 0.99999921
++											1130 text 100
++											1131 text 1466
++											1132 text 337180
++											1133 text 12
++											1134 text 6
++											1135 text 9
++											1136 text Communication module P01 Rev A
++											1137 text Communications
++											1138 text REVIEW
++											1139 text 0.99999921
++											1140 text 100
++											1141 text 1485
++											1142 text 96525
++											1143 text 12
++											1144 text 6
++											1145 text 11
++											1146 text Servo interface module P01 Rev A
++											1147 text Motor control
++											1148 text REVIEW
++											1149 text 0.99999921
++											1150 text 100
++											1151 text 537
++											1152 text 77865
++											1153 text 12
++											1154 text 6
++											1155 text 2
++											1156 text Gate driver module P01 Rev A
++											1157 text Power electronics
++											1158 text STABLE
++											1159 text 0.00008122
++											1160 text 0.01
++											1161 text 524
++											1162 text 44540
++											1163 text 12
++											1164 text 1
++											1165 text 4
++											1166 text Encoder interface module P01 Rev A
++											1167 text Motor control
++											1168 text STABLE
++											1169 text 0.00008122
++											1170 text 0.01
++											1171 text 2478
++											1172 text 520380
++											1173 text 12
++											1174 text 1
++											1175 text 6
++											1176 text Temperature monitor module P01 Rev A
++											1177 text Sensing
++											1178 text STABLE
++											1179 text 0.00008122
++											1180 text 0.01
++											1181 text 2498
++											1182 text 237310
++											1183 text 12
++											1184 text 1
++				1185 text 
+~			64 link 7:17:33 PM - 12 rows total
+~				65 text 7:17:33 PM - 12 rows total
+The focused UI element is 813 button Run Statement (Ctrl+⏎, ⌘+⏎)

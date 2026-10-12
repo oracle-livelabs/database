@@ -1,0 +1,66 @@
+{
+  "workshoptitle": "Build Connected Transportation Solutions with Oracle AI Database",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Meet Seer Transport and the passenger service decisions explored in the workshop.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Getting Started",
+      "description": "Open the LiveLabs database environment and SQL Worksheet.",
+      "filename": "../../getting-started/getting-started.md"
+    },
+    {
+      "title": "Lab 1: Build a Converged Operations Query",
+      "description": "Combine disruption signals, service meaning, bookings, and station access in one SQL result.",
+      "filename": "../../service-operations-dashboard/service-operations-dashboard.md"
+    },
+    {
+      "title": "Lab 2: Build a JSON Booking Model",
+      "description": "Compare JSON columns, collections, and relational duality for a passenger booking application.",
+      "filename": "../../booking-duality/booking-duality.md"
+    },
+    {
+      "title": "Lab 3: Review a Semantic Service Search",
+      "description": "Find services related to a disruption and identify affected passengers.",
+      "filename": "../../service-vector-search/service-vector-search.md"
+    },
+    {
+      "title": "Lab 4: Investigate a Service Disruption Network",
+      "description": "Trace connected trips, routes, stations, vehicles, and cases with SQL/PGQ and Graph Studio.",
+      "filename": "../../service-disruption-network/service-disruption-network.md"
+    },
+    {
+      "title": "Lab 5: Route Passengers to the Closest Station",
+      "description": "Use Oracle Spatial to match passengers in a service region with active stations.",
+      "filename": "../../station-spatial/station-spatial.md"
+    },
+    {
+      "title": "Lab 6: Build a Service Demand Watchlist",
+      "description": "Train and score an in-database model for transport service demand.",
+      "filename": "../../service-demand-oml/service-demand-oml.md"
+    },
+    {
+      "title": "Lab 7: Ask Transportation Questions with Select AI",
+      "description": "Inspect generated SQL for service, booking, passenger, and fare questions.",
+      "filename": "../../selectai/selectai.md"
+    },
+    {
+      "title": "Lab 8: Build a Transportation Agent with Select AI Agent",
+      "description": "Run a transportation question through an approved SQL tool and inspect its history.",
+      "filename": "../../selectai-agent/selectai-agent.md"
+    },
+    {
+      "title": "Lab 9: Final Quiz",
+      "description": "Check your understanding with scored questions.",
+      "filename": "../../final-quiz/final-quiz.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems and directions for receiving Live Help.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}

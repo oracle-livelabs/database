@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/badge.png
+badge: images/healthcare.png
 ```
 
 ## Introduction

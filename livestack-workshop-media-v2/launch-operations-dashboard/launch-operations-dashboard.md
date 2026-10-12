@@ -1,219 +1,252 @@
-# Build a Midnight Harbor Launch Command Center
+# Build a Midnight Harbor Launch Operations Dashboard
+
+<!-- markdownlint-configure-file
+{
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  }
+}
+-->
 
 ## Introduction
 
-Jessica Chan is the database administrator responsible for keeping Seer Media's media data reliable and useful. Every morning, the launch operations team asks her a familiar question: **which title needs attention first, and can Seer Media respond if a launch signal becomes operational work?**
+Jessica Chan is Seer Media's database administrator. The launch operations team
+asks her: **which content asset needs attention first, and where can the team
+respond?**
 
-Jessica can see the answer taking shape in the Launch Operations Dashboard, but the supporting data is spread across different forms. Launch signals and title exposure are relational rows. Viewing-session activity is available as JSON viewing-session documents. The AI engineering team has also prepared vector representations of title descriptions for another use case. Location information for live-event operations hubs and audience regions is stored as GeoJSON. The data is connected by business meaning, but that does not automatically make the investigation easy to query.
+The dashboard needs data in several forms: relational rows for audience signals
+and content reach, JSON documents for campaign orders, and vectors for content
+descriptions. Distribution hubs and audience regions use `SDO_GEOMETRY`, which
+can also be returned as GeoJSON. Jessica needs to combine these records in one
+query.
 
-In the past, Jessica might have had to maintain reporting extracts, coordinate a search index, ask an application team for viewing-session data, and reconcile a separate map or service-capacity system. That creates more copies of sensitive media data, more security boundaries, and more opportunities for the dashboard answer and the operational detail to disagree. Her challenge is not simply finding another database feature. It is giving the launch team one answer they can trace back to the same governed data.
+Jessica needs a query that joins these records and lets the launch team trace
+each result to its source. Maintaining separate reporting extracts, search
+indexes, document stores, and maps would add more copies of sensitive data, more
+security boundaries, and more opportunities for the data to drift.
 
-Jessica sees an opportunity in Oracle AI Database's converged architecture. A converged database lets one governed database support different data models and workloads together. Relational tables and views remain the foundation, while JSON documents, vectors, spatial geometry, graphs, machine-learning, and graph results can be queried alongside them. This means Jessica can answer a question that crosses those data types without complex and expensive integration across separate systems.
+Oracle AI Database lets Jessica query relational rows, JSON documents, vectors,
+and geographic data together. She can join the media records already in the
+database to build the dashboard result.
 
-In this lab, you take Jessica's role as the DBA. You will write the converged SQL query behind the Midnight Harbor Launch Command Center. It combines relational launch signals, vector search, JSON viewing-session data, and spatial venue data in one Oracle AI Database, without separate systems or data copies.
+In this lab, you take Jessica's role as the DBA. You will write the converged
+SQL query behind the Launch Operations Dashboard. It combines relational data,
+vector search, JSON campaign data, and distribution geography in one Oracle AI
+Database, without separate systems or data copies.
 
-![jessica](images/jessica.png)
+![Jessica introduces the media launch dashboard query](images/media-jessica.png)
 
 ### Objectives
 
-- Explain what Oracle AI Database convergence means in a media decision workflow.
-- Run one query that combines relational, vector, JSON, and spatial database capabilities.
-- Modify the query to investigate a different launch-performance question and explain the change in results.
+* Explain what Oracle AI Database convergence means in a media decision workflow.
+* Run one query that combines relational, vector, JSON, and spatial database capabilities.
+* Modify the query to investigate a different launch-performance question and
+  explain the change in results.
 
 Estimated Time: **10 minutes**
 
 ### Hands-on Scenario
 
-| Step                | Media & Entertainment focus                                                                                                  |
-| ---------------------| ----------------------------------------------------------------------------------------------------------------|
-| Business Problem    | Business users need a quick way to find launch-weekend performance priorities, exposure, viewing-session activity, and service information. |
-| Technical Challenge | The answer crosses launch signals, title meaning, viewing sessions, and service geography.                         |
-| Persona Focus       | Jessica Chan, the DBA, builds the query that gives business users this dashboard view.                         |
-| What You Will Do    | Use a single SQL statement that combines several data types.                                                   |
-| Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together.                   |
-| Outcome             | The learner can explain convergence through a useful business result rather than a feature list.               |
+| Step | Media & Entertainment focus |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Business Problem | Business users need a quick way to find launch-weekend performance priorities, social reach, campaign activity, and distribution information. |
+| Technical Challenge | The answer crosses launch signals, content asset meaning, campaign orders, and distribution geography. |
+| Persona Focus | Jessica Chan, the DBA, builds the query that gives business users this dashboard view. |
+| What You Will Do | Use a single SQL statement that combines several data types. |
+| Database Capability | Relational SQL, AI Vector Search, JSON Relational Duality, and Oracle Spatial work together. |
+| Outcome | The launch team can compare content relevance, audience activity, campaign demand, and the nearest distribution hub in one result. |
 
-Persona focus: You are Jessica Chan, the DBA. Your job is to build one governed query that gives business users a connected view of launch-weekend performance priorities and operations.
+Persona focus: You are Jessica Chan, the DBA. Your job is to build one governed
+query that gives business users a connected view of launch signals, campaign
+activity, and distribution geography.
 
-> **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
+> **SQL Worksheet reminder:** See [Getting Started, Task 2][link-1] for the
+> steps to open SQL Worksheet and run SQL.
 
 ## Task 1: Run a converged launch investigation
 
-The dashboard is a starting point for the decision, not the decision itself. Run the query below to produce a compact investigation view for high-criticality titles.
+Run the query below to review content assets with high-momentum audience signals.
 
 The query intentionally crosses four data models:
 
-- **Relational:** `LAUNCH_SIGNALS_V`, title mentions, and media views calculate launch-weekend performance priorities and exposure.
-- **Vector:** `CONTENT_EMBEDDINGS` and `VECTOR_DISTANCE` find titles related by meaning to the investigation phrase.
-- **JSON:** `VIEWING_SESSIONS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so viewing session activity can be counted.
-- **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest live-event operations hub to the high-demand Midnight Harbor premiere district region using latitude and longitude information stored as GeoJSON.
+* **Relational:** `MEDIA_AUDIENCE_SIGNALS_V`, `POST_PRODUCT_MENTIONS`, and
+  `MEDIA_CONTENT_ASSETS_V` connect audience momentum to content assets and
+  studios.
+* **Vector:** `PRODUCT_EMBEDDINGS` and `VECTOR_DISTANCE` find content assets
+  related by meaning to the investigation phrase.
+* **JSON:** `JSON_TABLE` extracts nested line items from `ORDERS_DV` documents
+  to count active campaign orders and requested units.
+* **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest distribution hub to the
+  seeded Northeast Streaming Corridor using `FULFILLMENT_CENTERS.LOCATION` and
+  `DEMAND_REGIONS.BOUNDARY` geometry.
 
-    These are four operations in one investigation. Every row combines launch-weekend performance priority with viewing-session activity, semantic relevance, and service-routing context.
+    These are four operations in one investigation. Every row combines
+    launch-weekend performance priority with campaign activity, semantic
+    relevance, and distribution context.
 
-1. Open SQL Worksheet as `LLUSER`. 
+1. Open SQL Worksheet as `LLUSER`.
 
-2. Run the query (note the comments that help to locate the specific use of different data types):
+2. Run the query. Its comments identify each data-model operation:
 
     ```sql
     <copy>
-    -- RELATIONAL DATA: aggregate high-criticality records and join them
-    -- to governed title and distribution-hub views.
-    WITH launch_risk AS (
-        SELECT fp.title_id,
-               fp.title_name,
-               fi.institution_name,
-               fp.content_genre,
-               COUNT(DISTINCT rs.signal_id) AS high_risk_signals,
-               ROUND(AVG(rs.criticality_score), 1) AS avg_criticality,
-               SUM(rs.exposure_count) AS exposure_count,
-               SUM(rs.cases_opened_count) AS cases_opened
-        FROM launch_signals_v rs
-        JOIN community_title_mentions ppm
-          ON ppm.post_id = rs.signal_id
-        JOIN content_titles_v fp
-          ON fp.title_id = ppm.title_id
-        JOIN distribution_partners_v fi
-          ON fi.institution_id = fp.institution_id
-        WHERE rs.criticality_score >= 80
-        GROUP BY fp.title_id,
-                 fp.title_name,
-                 fi.institution_name,
-                 fp.content_genre
+    -- RELATIONAL DATA: aggregate high-momentum audience signals and
+    -- join them to content assets and their studios or labels.
+    WITH launch_priority AS (
+        SELECT ca.product_id AS content_asset_id,
+               ca.content_asset,
+               ca.studio_or_label,
+               ca.content_category,
+               COUNT(DISTINCT sig.audience_signal_id) AS high_momentum_signals,
+               ROUND(AVG(sig.virality_score), 1) AS avg_virality,
+               SUM(sig.views_count) AS social_views,
+               SUM(sig.shares_count) AS social_shares
+        FROM media_audience_signals_v sig
+        JOIN post_product_mentions ppm
+          ON ppm.post_id = sig.audience_signal_id
+        JOIN media_content_assets_v ca
+          ON ca.product_id = ppm.product_id
+        WHERE sig.virality_score >= 80
+        GROUP BY ca.product_id,
+                 ca.content_asset,
+                 ca.studio_or_label,
+                 ca.content_category
     ),
-    -- VECTOR DATA: compare the investigation question with stored
-    -- title embeddings to rank titles by meaning, not exact wording.
+    -- VECTOR DATA: rank assets by meaning using the loader's embeddings.
     semantic_match AS (
-        SELECT p.title_id,
+        SELECT pe.product_id AS content_asset_id,
                ROUND(1 - VECTOR_DISTANCE(
-               pe.embedding,
+                   pe.embedding,
                    VECTOR_EMBEDDING(
                        ADMIN.ALL_MINILM_L12_V2
-                       USING 'Midnight Harbor launch engagement requiring audience operations review' AS DATA
+                       USING 'Midnight Harbor premiere campaign and audience engagement' AS DATA
                    ),
                    COSINE
                ), 4) AS semantic_similarity
-        FROM content_embeddings pe
-        JOIN titles p
-          ON p.title_id = pe.title_id
+        FROM product_embeddings pe
+        WHERE pe.embedding_model = 'all_MiniLM_L12_v2'
     ),
-    -- JSON DATA: read viewing session documents from the duality view and
-    -- project nested viewing events into relational rows with JSON_TABLE.
-    session_activity AS (
-        SELECT jt.title_id,
-               COUNT(DISTINCT jt.session_id) AS active_sessions,
-               SUM(jt.watch_minutes) AS watch_minutes_in_active_sessions
-        FROM viewing_sessions_dv od
+    -- JSON DATA: project campaign orders and their nested asset line items.
+    -- The loader's JSON contract retains productId and quantity keys.
+    campaign_activity AS (
+        SELECT jt.content_asset_id,
+               COUNT(DISTINCT jt.campaign_order_id) AS active_campaign_orders,
+               SUM(jt.requested_units) AS active_requested_units
+        FROM orders_dv od
         CROSS APPLY JSON_TABLE(
             od.data,
             '$'
             COLUMNS (
-                session_id NUMBER PATH '$._id',
-                session_status VARCHAR2(30) PATH '$.status',
+                campaign_order_id NUMBER PATH '$._id',
+                campaign_status VARCHAR2(30) PATH '$.status',
                 NESTED PATH '$.items[*]' COLUMNS (
-                    title_id NUMBER PATH '$.titleId',
-                    watch_minutes NUMBER PATH '$.watchMinutes'
+                    content_asset_id NUMBER PATH '$.productId',
+                    requested_units NUMBER PATH '$.quantity'
                 )
             )
         ) jt
-        WHERE jt.session_status IN ('confirmed', 'checked_in')
-        GROUP BY jt.title_id
+        WHERE jt.campaign_status IN ('confirmed', 'processing')
+        GROUP BY jt.content_asset_id
     ),
-    -- SPATIAL DATA: calculate the distance from each launch hub point
-    -- to the New York audience-region boundary.
+    -- SPATIAL DATA: calculate distance to the audience-region boundary.
     nearest_hub AS (
-        SELECT sc.hub_name,
-               sc.city,
-               sc.state_province,
+        SELECT fc.center_name AS distribution_hub,
+               fc.city,
+               fc.state_province,
                dr.region_name,
                dr.demand_index,
-               ROUND(
-                   SDO_GEOM.SDO_DISTANCE(
-                       sc.location,
-                       dr.boundary,
-                       0.005,
-                       'unit=KM'
-                   ),
-                   2
-               ) AS distance_to_demand_region_km
-        FROM live_event_hubs sc
-        CROSS JOIN audience_regions dr
-        WHERE dr.region_name = 'New York Visitor Region'
+               ROUND(SDO_GEOM.SDO_DISTANCE(
+                   fc.location, dr.boundary, 0.005, 'unit=KM'
+               ), 2) AS distance_to_demand_region_km
+        FROM fulfillment_centers fc
+        CROSS JOIN demand_regions dr
+        WHERE dr.region_name = 'Northeast Streaming Corridor'
+          AND fc.is_active = 1
         ORDER BY SDO_GEOM.SDO_DISTANCE(
-                     sc.location,
-                     dr.boundary,
-                     0.005,
-                     'unit=KM'
-                 )
+                     fc.location, dr.boundary, 0.005, 'unit=KM'
+                 ), fc.center_id
         FETCH FIRST 1 ROW ONLY
     )
-    -- CONVERGED RESULT: join the outputs of the four data-model operations
-    -- into one dashboard investigation result.
-    SELECT pr.title_name,
-           pr.institution_name,
-           pr.content_genre,
-           pr.high_risk_signals,
-           pr.avg_criticality,
-           pr.exposure_count,
-           pr.cases_opened,
+    -- CONVERGED RESULT: combine the four data-model operations.
+    SELECT lp.content_asset,
+           lp.studio_or_label,
+           lp.content_category,
+           lp.high_momentum_signals,
+           lp.avg_virality,
+           lp.social_views,
+           lp.social_shares,
            sm.semantic_similarity,
-           NVL(ta.active_sessions, 0) AS active_sessions,
-           NVL(ta.watch_minutes_in_active_sessions, 0) AS active_watch_minutes,
-           nsc.hub_name AS nearest_launch_hub,
-           nsc.city || ', ' || nsc.state_province AS hub_location,
-           nsc.region_name AS demand_region,
-           nsc.demand_index,
-           nsc.distance_to_demand_region_km
-    FROM launch_risk pr
+           NVL(ca.active_campaign_orders, 0) AS active_campaign_orders,
+           NVL(ca.active_requested_units, 0) AS active_requested_units,
+           nh.distribution_hub AS nearest_distribution_hub,
+           nh.city || ', ' || nh.state_province AS hub_location,
+           nh.region_name AS demand_region,
+           nh.demand_index,
+           nh.distance_to_demand_region_km
+    FROM launch_priority lp
     LEFT JOIN semantic_match sm
-      ON sm.title_id = pr.title_id
-    LEFT JOIN session_activity ta
-      ON ta.title_id = pr.title_id
-    CROSS JOIN nearest_hub nsc
-    -- Put titles closest to the investigation question first.
-    -- Exposure breaks ties so the result still favors larger business impact.
+      ON sm.content_asset_id = lp.content_asset_id
+    LEFT JOIN campaign_activity ca
+      ON ca.content_asset_id = lp.content_asset_id
+    CROSS JOIN nearest_hub nh
     ORDER BY sm.semantic_similarity DESC NULLS LAST,
-             pr.exposure_count DESC
+             lp.social_views DESC,
+             lp.content_asset_id
     FETCH FIRST 10 ROWS ONLY;
     </copy>
     ```
 
-3. Review the result as the title-level data behind Jessica's command center. Each row combines launch signals, semantic match, viewing-session activity, and venue location. This gives the dashboard a ranked title table and the details a business user needs when deciding what to review.
+3. Review the ranked content assets. Each row combines audience signals,
+    semantic similarity, campaign activity, and distribution-hub location.
 
-    ![SQL Worksheet showing the ranked title result behind Jessica's dashboard](images/product-level-dashboard.jpg " ")
+    ![SQL Worksheet showing the ranked content assets behind Jessica's dashboard](images/media-dashboard-baseline.jpg)
 
-    Your numbers may be different if the demo data has changed. Each row should include all four types of data.
+    Your numbers may be different if the demo data has changed. Each row should
+    include all four types of data.
 
-Use the first row to explain the business takeaway: the risk and viewing session values show why the title needs attention, the semantic match explains why it fits the question, and the service location shows where follow-up could begin. Jessica now has the query behind the dashboard's ranked title table and detail view, combining relational risk data, vector search, JSON viewing session data, and spatial distance in one result that a business user can inspect.
+Use the first row to explain the result. Audience activity and campaign demand
+help the team decide what to review; similarity shows how closely the asset
+matches the question. The hub is the closest active hub to the selected demand
+region and repeats across the returned assets. The query ranks assets by
+similarity, then social views; it does not calculate a combined
+operations-priority score.
 
-With separate systems, Jessica would need complex and expensive integration across a risk system, search service, document store, and mapping system before the dashboard could show this view. Oracle AI Database keeps these data types together, so she can build the dashboard with SQL. KPI cards and other dashboard components can use additional SQL over the same database.
+The query supplies a dashboard view without assembling results from separate
+audience, search, document, and mapping systems. Other dashboard components can
+use additional SQL over the same database.
 
 ## Task 2: Change the investigation question
 
-Jessica meets with a launch analyst to review the results at the data level before she builds the dashboard. They start with titles related to **Midnight Harbor launch engagement requiring audience operations review**. Change the embedded investigation phrase to:
-
+1. Jessica and a launch analyst review content assets related to **Midnight
+    Harbor premiere campaign and audience engagement**. Change the embedded
+    investigation phrase to:
 
     ```text
     live-event capacity and audience engagement
     ```
 
-    ![Media SQL Worksheet showing the changed Midnight Harbor investigation phrase](images/2026-08-18-004703.jpg)
+    ![Live Media dashboard results after changing the investigation phrase](images/media-dashboard-new-question.jpg)
 
+2. Run the query again and compare the top rows.
 
-Run the query again and compare the top rows.
+    * Which assets moved into or out of the top ten?
+    * Which retain high social reach but have lower similarity to the new question?
+    * Does active campaign demand change their operations priority?
 
-1. Which titles moved into or out of the top ten?
-2. Which titles still have high relational exposure but a lower semantic similarity to the new question?
-3. Does the viewing session activity make you more or less concerned about the operational impact?
-
-The result is viewed by semantic similarity first, so changing the question changes the review queue. Exposure breaks ties and keeps larger business impact near the top. The same governed query can answer a different business question without rebuilding a search index or moving the content catalog data.
-
+The query sorts by similarity first, then social reach. Changing the question
+can change the review order while using the same stored vectors and campaign
+data.
 
 ## Next Steps
 
-Next, use JSON Relational Duality to expose the same viewing session data as JSON for an application while keeping SQL access for the database team.
+Next, use JSON Relational Duality to expose the same campaign-order data as JSON
+for an application while keeping SQL access for the database team.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Author** - Teodor Constantin Nechita
+* **Contributor** - Vahn Kessler
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026
+
+[link-1]: ?lab=getting-started#Task2:OpenSQLWorksheet

@@ -1,0 +1,139 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 638
++								638 toolbar
++									639 button Clear Output
++										640 text 
++										641 text Clear Output
++									642 button Show info
++										643 text 
++										644 text Show info
++									645 button Open in new tab
++										646 text 
++										647 text Open in new tab
++									648 button Share Query Results
++										649 text 
++										650 text Share Query Results
++									651 pop up button Download
++										652 text Download
++										653 text 
++									654 text Execution time: 0.539 seconds
++								655 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									656 container dbt-sql-worksheet__query-output-grid
++										657 text This is a data grid with 9 rows and 10 columns.
++										658 container
++											659 text REGION_NAME
++											660 text DEMAND_INDEX
++											661 text CUSTOMER_SITE_ID
++											662 text SITE_NAME
++											663 text CONTACT_NAME
++											664 text EMAIL
++											665 text PRIORITY_CLASS
++											666 text PLANT_NAME
++											667 text PLANT_CITY
++											668 text DAILY_CAPACITY_UNITS
++										669 container
++											670 text 1
++											671 text 2
++											672 text 3
++											673 text 4
++											674 text 5
++											675 text 6
++											676 text 7
++											677 text 8
++											678 text 9
++										679 container
++											680 text New York Electronics Region
++											681 text 91
++											682 text 421
++											683 text Electronics Customer Site 0421
++											684 text Contact0421 Example
++											685 text production0421@example.com
++											686 text priority
++											687 text SEER Jersey City Plant
++											688 text Jersey City
++											689 text 2300
++											690 text New York Electronics Region
++											691 text 91
++											692 text 643
++											693 text Electronics Customer Site 0643
++											694 text Contact0643 Example
++											695 text production0643@example.com
++											696 text priority
++											697 text SEER Edison Plant
++											698 text Edison
++											699 text 1925
++											700 text New York Electronics Region
++											701 text 91
++											702 text 537
++											703 text Electronics Customer Site 0537
++											704 text Contact0537 Example
++											705 text production0537@example.com
++											706 text standard
++											707 text SEER Newark Plant
++											708 text Newark
++											709 text 2050
++											710 text New York Electronics Region
++											711 text 91
++											712 text 389
++											713 text Electronics Customer Site 0389
++											714 text Contact0389 Example
++											715 text production0389@example.com
++											716 text critical
++											717 text SEER Brooklyn Plant
++											718 text Brooklyn
++											719 text 2175
++											720 text New York Electronics Region
++											721 text 91
++											722 text 101
++											723 text Electronics Customer Site 0101
++											724 text Contact0101 Example
++											725 text production0101@example.com
++											726 text critical
++											727 text SEER Jersey City Plant
++											728 text Jersey City
++											729 text 2300
++											730 text New York Electronics Region
++											731 text 91
++											732 text 323
++											733 text Electronics Customer Site 0323
++											734 text Contact0323 Example
++											735 text production0323@example.com
++											736 text critical
++											737 text SEER Edison Plant
++											738 text Edison
++											739 text 1925
++											740 text New York Electronics Region
++											741 text 91
++											742 text 15
++											743 text Electronics Customer Site 0015
++											744 text Contact0015 Example
++											745 text production0015@example.com
++											746 text standard
++											747 text SEER Newark Plant
++											748 text Newark
++											749 text 2050
++											750 text New York Electronics Region
++											751 text 91
++											752 text 709
++											753 text Electronics Customer Site 0709
++											754 text Contact0709 Example
++											755 text production0709@example.com
++											756 text priority
++											757 text SEER Brooklyn Plant
++											758 text Brooklyn
++											759 text 2175
++											760 text New York Electronics Region
++											761 text 91
++											762 text 5
++											763 text Electronics Customer Site 0005
++											764 text Contact0005 Example
++											765 text production0005@example.com
++											766 text critical
++											767 text SEER Edison Plant
++											768 text Edison
++											769 text 1925
++				770 text 
+~			64 link 7:13:55 PM - 25 rows total
+~				65 text 7:13:55 PM - 25 rows total
+The focused UI element is 99 button Run Statement (Ctrl+⏎, ⌘+⏎)

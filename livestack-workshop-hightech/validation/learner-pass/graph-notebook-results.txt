@@ -1,0 +1,605 @@
+- text:  
+- banner:
+  - button:
+    - generic: 
+    - generic: Navigation
+  - link:
+    - /url: .homepage
+  - button:
+    - generic: 
+    - generic: Help
+  - button:
+    - generic: 
+    - generic: ATTACHED
+  - button:
+    - generic: 
+    - generic: LLUSER
+    - generic: 
+    - text:        
+- button
+- navigation:
+  - heading [level=2]: Graph Tools
+  - list:
+    - button:
+      - generic: 
+      - generic: Overview
+    - button:
+      - generic: Graph Explorer
+    - button:
+      - generic: Modeler
+    - button:
+      - generic: 
+      - generic: Graphs
+    - button:
+      - generic: 
+      - generic: Notebooks
+    - button:
+      - generic: 
+      - generic: Templates
+  - heading [level=2]: Administrator Dashboard
+  - list:
+    - button:
+      - generic: 
+      - generic: Jobs
+- main:
+  - main:
+    - button:
+      - generic: Modify Notebook
+      - generic: 
+    - button [active]:
+      - generic: Run Paragraphs
+      - generic: 
+    - button:
+      - generic: Restart Session
+      - generic: 
+    - button:
+      - generic: Delete Notebook
+      - generic: 
+    - text:  
+    - button:
+      - generic: Update Notebook State
+      - generic: 
+    - button:
+      - generic: 
+      - generic: Actions
+      - generic: 
+      - text:   
+    - toolbar:
+      - button:
+        - generic: 
+        - generic: Additional Actions
+        - generic: 
+        - text:      
+      - button:
+        - generic: Clear Result
+        - generic: 
+      - button:
+        - generic: Clear Paragraph Dependencies
+        - generic: 
+      - button:
+        - generic: Copy embedded notebook path to clipboard
+        - generic: 
+      - button:
+        - generic: Share Notebook
+        - generic: 
+      - button:
+        - generic: Clone Notebook
+        - generic: 
+      - button:
+        - generic: Export Notebook
+        - generic:  
+      - button:
+        - generic: Print Notebook
+        - generic: 
+      - button:
+        - generic: 
+        - generic: Actions
+        - generic: 
+        - text:       
+    - text: 
+    - text:    
+    - button:
+      - generic: Run Paragraph
+      - generic: 
+    - button:
+      - generic: Enter Dependency Mode
+      - generic: 
+    - button:
+      - generic: Comments
+      - generic: 
+    - button:
+      - generic: Expand
+      - generic: 
+    - button [disabled]:
+      - generic: Show/Hide Line Numbers
+      - generic: 
+    - button:
+      - generic: Show Code
+      - generic: 
+    - button:
+      - generic: Visibility
+      - generic: 
+    - button:
+      - generic: 
+      - generic: Settings
+      - generic: 
+      - text:         
+    - text: 
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph:
+      - strong: Production Quality Network with Property Graph
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph:
+      - text: Start at production order
+      - code: PO-8841
+      - text: and follow one or two relationship hops. In
+      - code: MATCH
+      - text: ","
+      - code: (seed IS entity)
+      - text: is the starting order,
+      - code: "-[e IS related_to]->{1,2}"
+      - text: sets the path length, and
+      - code: (reached IS entity)
+      - text: identifies the connected entities.
+    - paragraph:
+      - code: WHERE
+      - text: selects the starting order;
+      - code: COLUMNS
+      - text: returns graph properties as a SQL table. Compare the reached entities and their risk scores.
+    - code:
+      - textbox
+      - generic: "%sql"
+      - generic: SELECT DISTINCT entity_key, display_name, entity_type,
+      - generic: risk_score, risk_level, material_value, source_system
+      - generic: FROM GRAPH_TABLE ( production_quality_network
+      - generic: "MATCH (seed IS entity) -[e IS related_to]->{1,2} (reached IS entity)"
+      - generic: WHERE seed.entity_key = 'PO-8841'
+      - generic: COLUMNS (
+      - generic: reached.entity_key AS entity_key,
+      - generic: reached.display_name AS display_name,
+      - generic: reached.entity_type AS entity_type,
+      - generic: reached.risk_score AS risk_score,
+      - generic: reached.risk_level AS risk_level,
+      - generic: reached.material_value AS material_value,
+      - generic: reached.source_system AS source_system
+      - generic: )
+      - generic: )
+      - generic: ORDER BY risk_score DESC
+      - generic: FETCH FIRST 25 ROWS ONLY;
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - button:
+      - generic: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - textbox:
+      - /placeholder: Type to search
+    - application:
+      - rowgroup:
+        - row:
+          - columnheader:
+            - generic: ENTITY_KEY
+            - generic: 
+          - columnheader:
+            - generic: DISPLAY_NAME
+            - generic: 
+          - columnheader:
+            - generic: ENTITY_TYPE
+            - generic: 
+          - columnheader:
+            - generic: RISK_SCORE
+            - generic: 
+          - columnheader:
+            - generic: RISK_LEVEL
+            - generic: 
+          - columnheader:
+            - generic: MATERIAL_VALUE
+            - generic: 
+          - columnheader:
+            - generic: SOURCE_SYSTEM
+            - generic: 
+      - rowgroup:
+        - row:
+          - cell: PO-8841
+          - cell: Production order 8841
+          - cell: production_order
+          - cell: "96"
+          - cell: high
+          - cell: "250"
+          - cell: MES
+        - row:
+          - cell: LOT-SEMI-91A7
+          - cell: Semiconductor lot SEMI-91A7
+          - cell: material_lot
+          - cell: "94"
+          - cell: high
+          - cell: "0"
+          - cell: QMS
+        - row:
+          - cell: PO-5077
+          - cell: Production order 5077
+          - cell: production_order
+          - cell: "91"
+          - cell: high
+          - cell: "250"
+          - cell: MES
+        - row:
+          - cell: INSPECTION-0199
+          - cell: Electrical inspection 0199
+          - cell: inspection
+          - cell: "89"
+          - cell: high
+          - cell: "0"
+          - cell: QMS
+        - row:
+          - cell: MACHINE-ATE-017
+          - cell: Electrical test station 017
+          - cell: machine
+          - cell: "88"
+          - cell: high
+          - cell: "0"
+          - cell: QMS
+    - status
+    - generic: Select Row
+    - status: Page 1 content loaded
+    - generic: 4Pagination
+    - region:
+      - generic: Page
+      - textbox: "1"
+      - generic: of 2
+      - text: (
+      - generic: 1-5 of 9 items
+      - text: )
+      - button [disabled]:
+        - text: 
+        - generic: First Page
+      - button [disabled]:
+        - text: 
+        - generic: Previous Page
+      - generic: Page
+      - text: "1"
+      - link:
+        - /url: "#"
+        - generic: Page
+        - text: "2"
+      - button:
+        - text: 
+        - generic: Next Page
+      - button:
+        - text: 
+        - generic: Last Page
+    - button [disabled]:
+      - generic: Load More
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph: Visualize the previous query result
+    - code:
+      - textbox
+      - generic: "%sql"
+      - generic: SELECT *
+      - generic: FROM GRAPH_TABLE (
+      - generic: production_quality_network
+      - generic: "MATCH (src IS entity)-[e IS related_to]->{1,2}(dst IS entity)"
+      - generic: WHERE src.entity_key = 'PO-8841'
+      - generic: ONE ROW PER STEP (v1, e1, v2)
+      - generic: COLUMNS (
+      - generic: vertex_id(src) AS seed_id,
+      - generic: vertex_id(v1) AS v1_id,
+      - generic: edge_id(e1) AS e1_id,
+      - generic: vertex_id(v2) AS v2_id
+      - generic: )
+      - generic: );
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 9 of 9 vertices
+    - generic: 12 of 12 edges
+    - slider: "21"
+    - spinbutton: "21"
+    - text: of 21 elements, 100.00%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: 臭
+      - generic: ENTITY_KEY
+      - generic: ENTITY
+      - checkbox [checked]: 
+      - generic: RISK_SCORE >= 90
+      - checkbox [checked]: 
+      - generic: RISK_SCORE < 90
+      - checkbox [checked]: 
+      - generic: RISK_SCORE <= 50
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+      - checkbox [checked]: 
+      - generic: RELATED_TO
+    - iframe
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text: 
+    - paragraph:
+      - strong: Shared Entity Connections
+    - generic: 
+    - text: 
+    - text:    
+    - button:
+      - generic: Run Paragraph
+      - generic: 
+    - button:
+      - generic: Enter Dependency Mode
+      - generic: 
+    - button:
+      - generic: Comments
+      - generic: 
+    - button:
+      - generic: Expand
+      - generic: 
+    - button:
+      - generic: Show/Hide Line Numbers
+      - generic: 
+    - button:
+      - generic: Hide Code
+      - generic: 
+    - button:
+      - generic: Visibility
+      - generic: 
+    - button:
+      - generic: 
+      - generic: Settings
+      - generic: 
+      - text:         
+    - text: 
+    - code:
+      - textbox
+      - generic: "%sql"
+      - generic: SELECT *
+      - generic: FROM GRAPH_TABLE (
+      - generic: production_quality_network
+      - generic: MATCH (production_order IS entity) -[e IS related_to]- (material_lot IS entity)
+      - generic: WHERE material_lot.entity_key = 'LOT-SEMI-91A7'
+      - generic: COLUMNS (
+      - generic: vertex_id(production_order) AS production_order_id,
+      - generic: edge_id(e) AS related_to_id,
+      - generic: vertex_id(material_lot) AS material_lot_id
+      - generic: )
+      - generic: );
+    - text: 
+    - tablist:
+      - tab [selected]:
+        - img: 
+      - tab:
+        - img: 
+      - tab:
+        - img: 
+    - text: 
+    - separator
+    - button:
+      - generic: 
+      - generic: Settings
+    - button:
+      - generic: 
+      - generic: Download As
+      - generic: 
+      - text:   
+    - button:
+      - generic: 
+    - button [pressed]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - button [disabled]:
+      - generic: 
+    - button:
+      - generic: 
+    - search:
+      - generic: 
+      - textbox:
+        - /placeholder: Search graph
+      - button:
+        - generic: 
+      - button [disabled]:
+        - generic: 
+    - iframe
+    - application:
+    - generic: 6 of 6 vertices
+    - generic: 10 of 10 edges
+    - slider: "16"
+    - spinbutton: "16"
+    - text: of 16 elements, 100.00%
+    - button:
+      - generic: 
+    - application:
+      - button [expanded]: 
+      - text: Vertices
+      - button: 
+      - button: 
+      - checkbox [checked]: 
+      - generic: 臭
+      - generic: ENTITY_KEY
+      - generic: ENTITY
+      - checkbox [checked]: 
+      - generic: LOT-SEMI-91A7
+      - checkbox [checked]: 
+      - generic: SUPPLIERS
+      - checkbox [checked]: 
+      - generic: PRODUCTION_ORDERS
+      - button [expanded]: 
+      - text: Edges
+      - button: 
+      - button: 
+      - button:
+        - generic: 句
+      - checkbox [checked] [disabled]: 
+      - generic: Hidden Connection
+      - checkbox [checked]: 
+      - generic: RELATED_TO
+    - iframe
+    - generic: 789ms @ a few seconds ago
+- generic: Copyright © 2026 Oracle and/or its affiliates.
+- text:        

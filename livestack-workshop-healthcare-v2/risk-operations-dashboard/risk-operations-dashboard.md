@@ -4,13 +4,9 @@
 
 Jessica Chen is the database administrator responsible for keeping Seer Health Network's operational data reliable, governed, and useful. Each morning, the care operations team asks a practical question: **which care services need attention first, and what evidence should guide the response?**
 
-The answer crosses several forms of data. Quality and capacity signals are relational records. Active service requests are available as JSON documents. Stored vector embeddings describe care services by meaning. Care sites and logistics locations are represented with spatial coordinates. The data is connected by the operational decision, but that does not automatically make the investigation easy to query.
+Jessica needs to connect quality and capacity signals, JSON requests, vector embeddings, and logistics locations. Oracle AI Database brings these together in one query, without reconciling data across separate systems.
 
-In the past, Jessica might have had to maintain reporting extracts, coordinate a separate search index, ask an application team for service-request data, and reconcile information from a separate logistics or mapping system. That creates more copies of sensitive healthcare data, more security boundaries, and more opportunities for the dashboard result and the operational detail to disagree. Her challenge is not simply finding another database feature. It is giving the care operations team one answer they can trace back to the same governed data.
-
-Jessica sees an opportunity in Oracle AI Database's converged architecture. A converged database lets one governed database support different data models and workloads together. Relational tables and views remain the foundation, while JSON documents, vectors, and spatial geometry can be queried alongside them. Across the broader workshop, the same foundation also supports property graphs, machine learning, Select AI, and governed agent actions. This means Jessica can answer questions that cross these capabilities without complex and expensive integration across separate systems.
-
-In this lab, you take Jessica's role as the DBA and build the converged SQL query behind the Care Operations Dashboard. Relational SQL identifies care services with critical or high-priority signals. AI Vector Search ranks those services against the investigation question. JSON Relational Duality exposes active request activity without duplicating the relational data. Oracle Spatial adds a logistics-routing reference by calculating the distance between the Miami Oncology Care Center and the active Hialeah site supporting the qPCR Respiratory Panel.
+In this lab, you take Jessica's role as the DBA and build the converged SQL query behind the Care Operations Dashboard. You combine relational, vector, JSON, and spatial data to connect service pressure, active requests, and logistics context.
 
 ![jessica](images/jessica.png)
 
@@ -236,6 +232,8 @@ Jessica meets with a care operations analyst to review the results at the data l
     - Which care services moved into or out of the top ten?
     - Which services still have several high-priority signals but a lower semantic similarity to the new question?
     - Does the active request activity make you more or less concerned about the operational impact?
+
+![SQL Worksheet showing the ranked healthcare service result from the converged query](images/product-level-dashboard-modified.png " ")
 
 The result is ordered by semantic similarity first, so changing the question changes the review queue. High-priority signal count breaks ties. The same governed query can answer a different business question without rebuilding a search index or moving the care-service data.
 

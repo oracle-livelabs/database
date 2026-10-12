@@ -1,0 +1,220 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+1 AXWebArea SQL | Oracle Database Actions, URL: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet
+	2 container
+		3 container
+			4 button Selector
+				2276 text 
+				6 text Selector
+			7 link Description: Database Actions, Go to Launchpad, Value: rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/
+			8 text  |  SQL
+			9 button Search Database (⌘+K)
+				10 text Search Database (⌘+K)
+				2277 text 
+			12 button Need Help?
+				2278 text 
+				14 text Need Help?
+			15 pop up button LLUSER User Menu
+				2279 text 
+				17 text LLUSER
+				2280 text 
+		19 container Description: Main Drawer, ID: mainDrawer
+			20 container navigator_worksheet__layout
+				473 button (collapsed) Expand
+				474 container code-playground-7184793285291993
+					475 container
+						476 toolbar Editing Toolbar
+							477 container
+								478 pop up button BROWSER [Worksheet ]*
+									479 container worksheet-dropdown
+										480 text [Worksheet ]*
+									2281 text 
+								482 pop up button 
+									2282 text 
+									484 text New file
+									2283 text 
+								486 button Open... (Ctrl+O, ⌘+O)
+									2284 text 
+									488 text Open... (Ctrl+O, ⌘+O)
+								489 button Save (Ctrl+S, ⌘+S)
+									2285 text 
+									491 text Save (Ctrl+S, ⌘+S)
+							492 container
+								493 container code-editor-run-statement-container
+									494 button Run Statement (Ctrl+⏎, ⌘+⏎)
+										2311 text 
+										496 text Run Statement (Ctrl+⏎, ⌘+⏎)
+									497 pop up button Run Statement Options
+										2287 text 
+								499 button Run Script (F5)
+									2288 text 
+									2289 text 
+									502 text Run Script (F5)
+								503 button Create Chart (Ctrl+F11, ⌘+F11)
+									2290 text 
+									2291 text 
+									506 text Create Chart (Ctrl+F11, ⌘+F11)
+								507 button Explain Plan (F10)
+									2292 text 
+									509 text Explain Plan (F10)
+								510 button Autotrace (F6)
+									2293 text 
+									512 text Autotrace (F6)
+							513 container
+								514 button Download Editor Content (Ctrl+I, ⌘+I)
+									2294 text 
+									516 text Download Editor Content (Ctrl+I, ⌘+I)
+								517 button Format (Ctrl+F7, ⌘+F7)
+									2295 text 
+									519 text Format (Ctrl+F7, ⌘+F7)
+								520 pop up button 
+									2296 text 
+									522 text Convert Case (Ctrl+B, ⌘+B)
+									2297 text 
+								524 button Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+									2298 text 
+									526 text Clear (Ctrl+Alt+Delete, ⌘+⌥+⌫)
+						527 toolbar Editing Toolbar
+							528 container consumer-groups-selector
+								529 text Consumer group:
+								530 container Consumer group
+									531 pop up button LOW
+										532 text LOW
+										2299 text 
+							534 container
+								535 button Data Load
+									536 text Data Load
+								537 button Open In Fullscreen
+									2300 text 
+									539 text Open In Fullscreen
+								540 button Tour
+									2301 text 
+									542 text Tour
+								543 button Help (F1)
+									2302 text 
+									545 text Help (F1)
+					546 container
+						547 container code-editor-panel
+							548 container
+								549 editor (settable) Editor content
+								2312 container
+									2313 text 3  81 
+									2314 content list
+										2315 container
+											2316 text FROM
+											2317 text (
+										2318 container
+											2319 text JOIN
+											2320 text  trace_relationships r4
+						550 button (expanded) Collapse
+						551 container output-panel
+							552 tab group dbt-panel-tabbar
+								553 tab (selected, settable, boolean) Query Result, Value: 1, ID: query_result-tab-label
+								554 tab (selectable, settable, boolean) Script Output, Value: 0, ID: script_output-tab-label
+								634 tab (selectable, settable, boolean) DBMS Output, Value: 0, ID: dbms_output-tab-label
+								635 tab (selectable, settable, boolean) Explain Plan, Value: 0, ID: explain_plan-tab-label
+								555 tab (selectable, settable, boolean) More Tabs, Value: 0
+							556 container slot__afterControls
+								557 button Help
+									2303 text 
+									559 text Help
+							1861 container Description: Query Result, ID: query_result-tab-panel
+								2321 toolbar
+									2322 button Clear Output
+										2323 text 
+										2324 text Clear Output
+									2325 button Show info
+										2326 text 
+										2327 text Show info
+									2328 button Open in new tab
+										2329 text 
+										2330 text Open in new tab
+									2331 button Share Query Results
+										2332 text 
+										2333 text Share Query Results
+									2334 pop up button Download
+										2335 text Download
+										2336 text 
+									2337 text Execution time: 0.249 seconds
+								2338 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
+									2339 container dbt-sql-worksheet__query-output-grid
+										2340 text This is a data grid with 9 rows and 5 columns.
+										2341 container
+											2342 text PRODUCTION_ORDER_KEY
+											2343 text CONNECTED_KEY
+											2344 text CONNECTED_TYPE
+											2345 text RELATIONSHIP_PATH
+											2346 text CONNECTED_RISK
+										2347 container
+											2348 text 1
+											2349 text 2
+											2350 text 3
+											2351 text 4
+											2352 text 5
+											2353 text 6
+											2354 text 7
+											2355 text 8
+											2356 text 9
+										2357 container
+											2358 text PO-8841
+											2359 text PO-8841
+											2360 text production_order
+											2361 text PROCESSED_ON -> PROCESSES_ORDER -> HAS_INSPECTION -> INSPECTS_ORDER
+											2362 text 96
+											2363 text PO-8841
+											2364 text PO-8841
+											2365 text production_order
+											2366 text HAS_INSPECTION -> INSPECTS_ORDER
+											2367 text 96
+											2368 text PO-8841
+											2369 text PO-8841
+											2370 text production_order
+											2371 text HAS_INSPECTION -> INSPECTS_ORDER -> USES_LOT -> USED_IN_ORDER
+											2372 text 96
+											2373 text PO-8841
+											2374 text PO-8841
+											2375 text production_order
+											2376 text HAS_INSPECTION -> INSPECTS_ORDER -> PROCESSED_ON -> PROCESSES_ORDER
+											2377 text 96
+											2378 text PO-8841
+											2379 text PO-8841
+											2380 text production_order
+											2381 text HAS_INSPECTION -> INSPECTS_ORDER -> HAS_INSPECTION -> INSPECTS_ORDER
+											2382 text 96
+											2383 text PO-8841
+											2384 text PO-8841
+											2385 text production_order
+											2386 text USES_LOT -> USED_IN_ORDER -> USES_LOT -> USED_IN_ORDER
+											2387 text 96
+											2388 text PO-8841
+											2389 text PO-8841
+											2390 text production_order
+											2391 text PROCESSED_ON -> PROCESSES_ORDER
+											2392 text 96
+											2393 text PO-8841
+											2394 text PO-8841
+											2395 text production_order
+											2396 text PROCESSED_ON -> PROCESSES_ORDER -> PROCESSED_ON -> PROCESSES_ORDER
+											2397 text 96
+											2398 text PO-8841
+											2399 text PO-8841
+											2400 text production_order
+											2401 text PROCESSED_ON -> PROCESSES_ORDER -> USES_LOT -> USED_IN_ORDER
+											2402 text 96
+		577 container
+			578 link Description:    1, Help: Errors
+				2309 text 
+				580 text 1
+			581 link Description:    0, Help: Warnings
+				2310 text 
+				583 text 0
+			584 link Description:    1, Help: Processes
+				2403 text 
+				586 text 1
+			587 text   |  
+			588 link 7:01:28 PM - 64 rows total
+				589 text 7:01:28 PM - 64 rows total
+			590 link Description: Powered by ORDS, Value: oracle.com/rest
+		591 text entry area (settable) Clipboard
+		592 button Copy
+
+The focused UI element is 494 button Run Statement (Ctrl+⏎, ⌘+⏎)

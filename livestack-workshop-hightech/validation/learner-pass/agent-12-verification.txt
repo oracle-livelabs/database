@@ -1,0 +1,59 @@
+Browser tab: 1, Title: "SQL | Oracle Database Actions", URL: "https://rddainsuh6u1okc-livestackhightechtest.adb.us-ashburn-1.oraclecloudapps.com/ords/lluser/_sdw/?nav=worksheet".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 1895
++								1895 toolbar
++									1896 button Clear Output
++										1897 text 
++										1898 text Clear Output
++									1899 button Show info
++										1900 text 
++										1901 text Show info
++									1902 button Open in new tab
++										1903 text 
++										1904 text Open in new tab
++									1905 button Share Query Results
++										1906 text 
++										1907 text Share Query Results
++									1908 pop up button Download
++										1909 text Download
++										1910 text 
++									1911 text Execution time: 0.015 seconds
++								1912 container Description: Worksheet Query Result, ID: dbt-sql-worksheet__query-output
++									1913 container dbt-sql-worksheet__query-output-grid
++										1914 text This is a data grid with 5 rows and 4 columns.
++										1915 container
++											1916 text COMPONENT_NAME
++											1917 text CATEGORY
++											1918 text TOTAL_MATERIAL_VALUE
++											1919 text PLANNED_UNITS
++										1920 container
++											1921 text 1
++											1922 text 2
++											1923 text 3
++											1924 text 4
++											1925 text 5
++										1926 container
++											1927 text Pressure interface module P15 Rev A
++											1928 text Sensing
++											1929 text 585580
++											1930 text 2546
++											1931 text Pressure interface module P07 Rev A
++											1932 text Sensing
++											1933 text 532450
++											1934 text 2315
++											1935 text Encoder interface module P09 Rev A
++											1936 text Motor control
++											1937 text 520800
++											1938 text 2480
++											1939 text Encoder interface module P01 Rev A
++											1940 text Motor control
++											1941 text 519750
++											1942 text 2475
++											1943 text Pressure interface module P14 Rev A
++											1944 text Sensing
++											1945 text 511290
++											1946 text 2223
++				1947 text 
+~			64 link 7:30:18 PM - 5 rows total
+~				65 text 7:30:18 PM - 5 rows total
+The focused UI element is 813 button Run Statement (Ctrl+⏎, ⌘+⏎)
