@@ -66,6 +66,8 @@ Check `GENAI` and its object list. Generated SQL runs with the current database 
     </copy>
     ```
 
+    ![Lab 8 Task 1 Step 2](images/l8-t1-s2.png)
+
     The list should contain only the workshop tables needed for this lab: `UTILITY_SERVICES_V`, `UTILITY_SERVICE_REQUESTS`, `UTILITY_REQUEST_ITEMS`, and `SERVICE_POINTS_V`. The `object_list` guides SQL generation; it is not a replacement for database grants.
 
 3. Check the agent objects already in your schema:
@@ -134,6 +136,8 @@ Register the SQL tool with `GENAI` so it uses the object list checked in Task 1.
     /
     </copy>
     ```
+
+    ![Lab 8 Task 2 Step 2](images/l8-t2-s2.png)
 
     The object list guides SQL generation; it does not enforce read-only access. LLUSER owns the workshop tables, so check the actual SQL calls in Task 5.
 
@@ -245,7 +249,7 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![Successful Utilities team history](images/cap-055.png)
+    ![Successful Utilities team history](images/l8-t5-s1.png)
 
 2. Review the latest tool calls:
 
@@ -263,7 +267,7 @@ Nina needs more than a final answer. She also wants to know whether the agent ca
     </copy>
     ```
 
-    ![Utilities SQL tool audit history](images/cap-056.png)
+    ![Utilities SQL tool audit history](images/l8-t5-s1.png)
 
     The history should show `NINA_UTILITIES_SQL_TOOL`. This gives Nina and Jessica a database record of the agent activity instead of treating the answer as an unexplained chat response.
 
@@ -294,6 +298,6 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

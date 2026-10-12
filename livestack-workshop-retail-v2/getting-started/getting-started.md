@@ -9,7 +9,7 @@ Open your LiveLabs reservation, sign in to Autonomous Database 26ai, and prepare
 
 > - **Database Actions** is the browser-based Oracle Database workspace you use in this workshop. It gives you access to SQL Worksheet, object browsing, and development tools without installing a desktop database client.
 >
-> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. It shows query results, script output, and errors, so it becomes the main place where you connect the application screens in this workshop to database evidence.
+> - **SQL Worksheet** is the tool inside Database Actions where you paste and run SQL statements. Use it to inspect query results, script output, and errors throughout the workshop.
 >
 > - `LLUSER` is the account for the retail exercises. Sign in with this account so the tables, views, models, graph, and functions used in later labs are available to your worksheet.
 
@@ -28,7 +28,7 @@ In this lab, you will:
 
 ## Task 1: Launch the LiveLabs environment
 
-Start from the LiveLabs reservation so Database Actions opens with the correct workshop resources. The goal is simply to get into the environment that already contains the database and sign-in details for this workshop.
+Open the prepared workshop resources and sign-in details from your LiveLabs reservation.
 
 1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
 
@@ -44,7 +44,7 @@ Start from the LiveLabs reservation so Database Actions opens with the correct w
 
 ## Task 2: Open SQL Worksheet
 
-Open SQL Worksheet as the workshop user before running the retail queries. SQL Worksheet is where you will ask the database each question and immediately see the evidence returned as a table.
+Open SQL Worksheet as LLUSER before running the retail queries. Use it to run each query and inspect the returned rows.
 
 1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
 
@@ -66,7 +66,7 @@ Open SQL Worksheet as the workshop user before running the retail queries. SQL W
 
     *Figure 4: Sign in to Database Actions as `LLUSER` with the password from the reservation information.*
 
-5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
+5. In Database Actions, select **Development**, then select **SQL** from the tools menu.
 
     ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
 
@@ -114,4 +114,5 @@ With SQL Worksheet connected as `LLUSER`, continue to Lab 1 and investigate the 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

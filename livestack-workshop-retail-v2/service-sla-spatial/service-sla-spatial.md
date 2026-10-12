@@ -8,7 +8,7 @@ Oracle AI Database already holds customer and fulfillment-center points, demand-
 
 Moon wants a business-user dashboard to answer a practical question:
 
-> A customer needs a product. **Which nearby centers have stock worth reviewing for fulfillment?**
+> A customer needs a product. **Which nearby centers have the product on hand?**
 
 In this lab, you start with a stored point, compare distances, and join location to product inventory. You will also compare two demand regions using their stored geometry.
 
@@ -72,19 +72,11 @@ Moon starts with the simplest question: **where are the centers?** The same loca
     </copy>
     ```
 
+    **Expected output: Center geometry**
+
     ![SQL Worksheet showing the query and result for Task 1: Look at fulfillment locations as points, SQL block 1](images/sql-lab-5-01.jpg)
 
     `SDO_UTIL.TO_WKTGEOMETRY` turns the stored point into readable text. `DBMS_LOB.SUBSTR` limits the worksheet display to 80 characters; it does not change the underlying geometry.
-
-    **Expected output: Center geometry**
-
-    | Center | City | State | Latitude | Longitude | Geometry |
-    | --- | --- | --- | --- | --- | --- |
-    | NYC Metro Hub | Edison | New Jersey | 40.5187 | -74.4121 | POINT (-74.4121 40.5187) |
-    | LA Mega Center | Ontario | California | 34.0633 | -117.6509 | POINT (-117.6509 34.0633) |
-    | Chicago Midwest Hub | Joliet | Illinois | 41.525 | -88.0817 | POINT (-88.0817 41.525) |
-    | Dallas South Central | Lancaster | Texas | 32.5921 | -96.7561 | POINT (-96.7561 32.5921) |
-    | Atlanta Southeast | Union City | Georgia | 33.5871 | -84.5421 | POINT (-84.5421 33.5871) |
 
 2. Compare the latitude and longitude with the WKT value.
 
@@ -92,7 +84,7 @@ Moon starts with the simplest question: **where are the centers?** The same loca
 
 ## Task 2: Find nearby centers and compare demand regions
 
-Moon first ranks active centers for one customer. She then changes the question from a customer point to a regional polygon so the team can review both kinds of location evidence.
+Moon first ranks active centers for one customer. She then changes the question from a customer point to a regional polygon so the team can compare distances to a customer and to a region.
 
 1. Find the five nearest active centers to customer `1`:
 
@@ -111,19 +103,11 @@ Moon first ranks active centers for one customer. She then changes the question 
     </copy>
     ```
 
+    **Expected output: Nearby active centers**
+
     ![SQL Worksheet showing the query and result for Task 2: Find nearby centers and compare demand regions, SQL block 2](images/sql-lab-5-02.jpg)
 
     `CROSS JOIN` pairs the selected customer with each active center. `SDO_GEOM.SDO_DISTANCE` compares their points, `0.005` supplies the geometry tolerance, and `'unit=MILE'` requests miles. The unrounded distance determines the ordering.
-
-    **Expected output: Nearby active centers**
-
-    | Center | City | State | Miles |
-    | --- | --- | --- | --- |
-    | LA Mega Center | Ontario | California | 33.2 |
-    | Las Vegas West | North Las Vegas | Nevada | 229 |
-    | San Francisco Bay | Fremont | California | 319.1 |
-    | Phoenix Desert Hub | Goodyear | Arizona | 340.9 |
-    | Reno West Hub | Sparks | Nevada | 385.7 |
 
     LA Mega Center ranks first at about 33.2 miles. This query has not checked product stock; that is the next task.
 
@@ -152,15 +136,9 @@ Moon first ranks active centers for one customer. She then changes the question 
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Find nearby centers and compare demand regions, SQL block 3](images/sql-lab-5-03.jpg)
-
     **Expected output: Ten centers ordered by distance to New York Metro**
 
-    | CENTER\_NAME | BOUNDARY\_DISTANCE\_KM | REGION\_NAME | DEMAND\_INDEX |
-    | --- | --- | --- | --- |
-    | NYC Metro Hub | 9.48 | New York Metro | 91 |
-    | Philadelphia Mid-Atlantic | 160.48 | New York Metro | 91 |
-    | Baltimore East Coast | 187.21 | New York Metro | 91 |
+    ![SQL Worksheet showing the query and result for Task 2: Find nearby centers and compare demand regions, SQL block 3](images/sql-lab-5-03.jpg)
 
     The query returns the shortest separation between each point and the region geometry, in kilometers. A point inside or touching the polygon has distance zero. A center outside the region has a positive distance to the polygon. This query considers all centers; it does not filter their active status.
 
@@ -197,15 +175,9 @@ Moon first ranks active centers for one customer. She then changes the question 
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Find nearby centers and compare demand regions, SQL block 4](images/sql-lab-5-04.jpg)
-
     **Expected output: Chicago comparison**
 
-    | CENTER\_NAME | BOUNDARY\_DISTANCE\_KM | BOUNDARY\_DISTANCE\_MILES | DEMAND\_INDEX |
-    | --- | --- | --- | --- |
-    | Chicago Midwest Hub | 0 | 0 | 78 |
-    | Indianapolis Heartland | 210.23 | 130.63 | 78 |
-    | Detroit Great Lakes | 337.95 | 210 | 78 |
+    ![SQL Worksheet showing the query and result for Task 2: Find nearby centers and compare demand regions, SQL block 4](images/sql-lab-5-04.jpg)
 
     Chicago Midwest Hub has zero distance because its point intersects the Chicago region. The difference between the New York and Chicago results comes from the selected polygon. A demand index gives the team regional context; neither it nor spatial distance guarantees a delivery commitment.
 
@@ -241,17 +213,9 @@ Distance alone cannot tell a planner where to fulfill an order. Moon adds the pr
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Combine distance with inventory, SQL block 5](images/sql-lab-5-05.jpg)
-
     **Expected output: Distance and stock**
 
-    | Center | City | State | Product | On Hand | Miles |
-    | --- | --- | --- | --- | --- | --- |
-    | LA Mega Center | Ontario | California | StormRunner Trail Shell | 393 | 33.2 |
-    | Las Vegas West | North Las Vegas | Nevada | StormRunner Trail Shell | 78 | 229 |
-    | Seattle Pacific NW | Kent | Washington | StormRunner Trail Shell | 293 | 941.4 |
-    | San Antonio South TX | New Braunfels | Texas | StormRunner Trail Shell | 267 | 1217.4 |
-    | Houston Gulf Coast | Missouri City | Texas | StormRunner Trail Shell | 446 | 1366.3 |
+    ![SQL Worksheet showing the query and result for Task 3: Combine distance with inventory, SQL block 5](images/sql-lab-5-05.jpg)
 
     This query keeps positive `QUANTITY_ON_HAND` and orders the returned centers by distance. It does not subtract reserved units, filter active status, or check workload. A planner must review those conditions before assigning an order. The SQL provides stock and location evidence for that decision.
 
@@ -266,7 +230,7 @@ Distance alone cannot tell a planner where to fulfill an order. Moon adds the pr
     <details>
     <summary><strong>Challenge answer: distance and on-hand stock are separate signals</strong></summary>
 
-    Minneapolis North Central ranks first for customer `2`, at 358.5 miles with 494 units of the selected product on hand. The location changes the ranking; the product stays the same. Review available-to-promise quantity, active status, workload, and the delivery promise before allocating stock.
+    Minneapolis North Central ranks first for customer `2`, at 358.5 miles with 494 units of the selected product on hand. The location changes the ranking; the product stays the same. Review the quantity available to promise to the customer, center active status, workload, and promised delivery date before allocating stock.
 
     Run this solution to compare:
 
@@ -296,13 +260,9 @@ Distance alone cannot tell a planner where to fulfill an order. Moon adds the pr
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 3: Combine distance with inventory, SQL block 6](images/sql-lab-5-06.jpg)
-
     **Expected output: First stocked location for customer 2**
 
-    | Center | Product | On Hand | Miles |
-    | --- | --- | --- | --- |
-    | Minneapolis North Central | StormRunner Trail Shell | 494 | 358.5 |
+    ![SQL Worksheet showing the query and result for Task 3: Combine distance with inventory, SQL block 6](images/sql-lab-5-06.jpg)
 
     </details>
 
@@ -312,7 +272,7 @@ Moon moved from stored points to ranked centers, then added product stock to the
 
 Oracle Spatial keeps the calculation beside the customer, center, product, and inventory rows. SQL returns the geometry and operating details needed for review. The team can explain its options without reconciling a separate map database with an inventory report.
 
-Moon hands the location and stock evidence to Otto, who will put a demand score beside product activity so the team can examine which products deserve attention.
+Otto will now add model scores to the product activity data to help the team review demand.
 
 ## Next Steps
 
@@ -321,4 +281,5 @@ For a deeper hands-on workshop focused on Oracle Spatial, open the [Oracle Spati
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
