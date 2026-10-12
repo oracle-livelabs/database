@@ -174,8 +174,6 @@ Gilly creates one vector per product from its name, category, and subcategory, w
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Create a product vector, SQL block 6](images/sql-lab-3-06.jpg)
-
     **Expected output:** The commit completes.
 
 5. Inspect the new column alongside its source product.

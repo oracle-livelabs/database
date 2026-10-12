@@ -280,6 +280,6 @@ Gilly has built the search behind the application and connected it to a business
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
+* **Author** - Kevin Lazarz, Linda Foinding
 * **Contributor** - Eugenio Galiano, Pat Shepherd
 * **Last Updated By/Date** - Oracle Database Product Management, September 2026
