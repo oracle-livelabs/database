@@ -100,13 +100,19 @@ In this lab, you will:
     - **`AI_FOR_YOU` password:** Create a different strong password of at least
      12 characters. This is used for the `AI_FOR_YOU` application schema.
 
+    ![Configure the compartment, region, and SSH public key](images/configurate-information.png)
+
     - **Autonomous Database tier:** Select one of the two Autonomous Database tier, be sure to select Always-free only if you select your home region in **Region**. The Developer is recommended if this is not a fresh new OCI account or if you already have an Always free ADB.
 
     - **Autonomous Database workload:** Choose OLTP Workload Type
 
-    ![Configure the compartment, region, and SSH public key](images/configurate-information.png)
     ![Configure the autonomous database](images/adb-tier.png)
     ![Configure the autonomous database workload](images/adb-workload.png)
+
+    - **Compute Host:** Select between Compute Shape *VM.Standard.A1.Flex* or *VM.Standard.E5.Flex*. 
+    A1.Flex is the recommended shape as the Always Free Option but usually triggers a *No Host Capacity in Region* in that case choose the E5.Flex Paid Option.  
+
+    ![Select A1.Flex if error is thorwn select E5.Flex](images/shape_selection.png)
 
 5. Select **Next**, review the values, leave **Run apply** selected, then
     select **Create**. Resource Manager starts the apply automatically.
@@ -224,9 +230,7 @@ In this lab, you will:
     codex --version
     python3 --version
     python3.12 --version
-    node --version
     java -version
-    /opt/sqlcl/bin/sql -version
     test -x ~/livelabs-ai-staff/agents/pipeline/venv/bin/python
     test -x ~/livelabs-ai-staff/agents/assistant/venv/bin/python
     test -x ~/livelabs-ai-staff/agents/brand-agent/venv/bin/python
