@@ -8,7 +8,7 @@ The workshop follows service requests, reliability signals, restoration relation
 
 ## Application reference
 
-[Seer Utility Network LiveStack Demo](http://134.98.142.113:8505/).
+[Energy & Utilities LiveStack runbook workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4429).
 
 The welcome-page image shows the application. The opening scene and ERD are educational illustrations.
 

@@ -50,7 +50,7 @@ Estimated Workshop Time: **90 minutes**, with additional time for the optional A
 
 ## Application example
 
-Explore the [Seer Utility Network LiveStack Demo](http://134.98.142.113:8505/).
+Follow the [Energy & Utilities LiveStack runbook workshop](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4429) to explore the demo application.
 
 The application follows a Gulf Coast resilience event across electricity, gas, water and wastewater, and oil-and-gas operations. Its pages connect operational signals, restoration relationships, field logistics, service requests, analytics, and AI-assisted questions. The workshop begins with one pressure concern so you can follow the data and SQL step by step.
 
