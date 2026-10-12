@@ -52,7 +52,7 @@ Persona focus: You are reviewing Bob's graph solution for the Monday demand revi
 
 ## Task 1: Follow creator connections with SQL
 
-Jessica has written a query that ranks direct creator connections by their stored strength. It works well for one hop. Bob wants to show what changes when the team follows a creator's connections through another creator.
+Jessica has written a query that ranks direct creator connections by their stored strength. Bob uses it as a one-hop baseline, then follows a connection through another creator to see how the result changes.
 
 1. Run Jessica's ordinary SQL query:
 
@@ -366,7 +366,7 @@ Two creators can be relevant to the same review even when they have no direct co
 
 ## Task 5: Open Graph Studio and import the Retail notebook
 
-The SQL results answer precise questions. Bob now wants a visual map that lets the team select a creator, inspect a link, and explain a shared brand without reconstructing the path from several rows.
+After answering precise questions with SQL, Bob opens a visual map so the team can select a creator, inspect a link, and explain a shared brand without reconstructing the path from several rows.
 
 1. Return to the Database Actions launchpad and confirm that the workshop user is `LLUSER`.
 
@@ -421,11 +421,11 @@ Bob followed direct creator connections, extended the search over several hops, 
 
 Graph Studio presents the same recorded relationships as an interactive network. A reviewer can inspect a creator, follow a connection, and explain why two creators appear in the same brand review. These paths add context to the product signals from the previous lab.
 
-Bob hands that context to Moon. The next question is operational: where can Seer Sporting Goods review fulfillment options for the products receiving attention?
+Bob hands the relationship context to Moon, whose operational question is where Seer Sporting Goods can review fulfillment options for products receiving attention.
 
 ## Appendix: How the property graph maps the Retail tables
 
-The existing graph contains these mappings. This is a reference for reading the patterns; the workshop database already contains the graph.
+Because the workshop database already contains this graph, use the mappings below as a reference for reading its patterns.
 
 | Relational table | Graph label | Role |
 | --- | --- | --- |

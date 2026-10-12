@@ -33,8 +33,6 @@ Review her implementation: create service embeddings, rank matches by meaning, a
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **Schema names:** `PRODUCTS` stores utility services and supplies; `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS` link them to requests and service points.
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
@@ -45,8 +43,8 @@ Similarity search needs vectors for the service text and the question, produced 
 
 1. Run the following query to see which embedding models are available:
 
-    <copy>
     ```sql
+    <copy>
     SELECT owner,
            model_name,
            algorithm,
@@ -54,14 +52,14 @@ Similarity search needs vectors for the service text and the question, produced 
     FROM all_mining_models
     WHERE mining_function = 'EMBEDDING'
     ORDER BY owner, model_name;
-    ```
     </copy>
+    ```
 
     **Expected output: Available Embedding Models**
 
     ![LLUSER embedding model](images/cap-017.png)
 
-    Initialization loads `LLUSER.ALL_MINILM_L12_V2`, and the loader checks that it returns 384 dimensions. If it is absent, stop here. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
+    Initialization loads `LLUSER.ALL_MINILM_L12_V2`. If it is absent, stop here. This compact model turns text into 384-number vectors. The `EMBEDDING` value confirms that the model can turn text into vectors for similarity search.
 
 2. Review what this means for Gilly's application.
 
@@ -75,8 +73,8 @@ Gilly decides that one vector per service is enough. Each service record is shor
 
 1. Review the text Gilly will embed:
 
-    <copy>
     ```sql
+    <copy>
     SELECT product_id,
            product_name,
            category,
@@ -85,25 +83,25 @@ Gilly decides that one vector per service is enough. Each service record is shor
              '. Subcategory: ' || subcategory AS embedding_text
     FROM products
     FETCH FIRST 5 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     The combined text gives the model the service name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the service is.
 
 2. Add a vector column to `PRODUCTS`:
 
-    <copy>
     ```sql
+    <copy>
     ALTER TABLE products ADD (product_embedding VECTOR(384));
-    ```
     </copy>
+    ```
 
     The column has 384 dimensions because `ALL_MINILM_L12_V2` produces 384-dimensional vectors.
 
 3. Create the service vectors inside Oracle Database:
 
-    <copy>
     ```sql
+    <copy>
     UPDATE products
     SET product_embedding = VECTOR_EMBEDDING(
       LLUSER.ALL_MINILM_L12_V2 USING
@@ -112,21 +110,21 @@ Gilly decides that one vector per service is enough. Each service record is shor
     WHERE product_embedding IS NULL;
 
     COMMIT;
-    ```
     </copy>
+    ```
 
     The model reads the text in each row and writes the vector back to that same row. No service text leaves the database.
 
 4. Verify the new column and its data:
 
-    <copy>
     ```sql
+    <copy>
     SELECT product_id,
            product_name,
            product_embedding
     FROM products;
-    ```
     </copy>
+    ```
 
     ![Stored service embeddings](images/cap-018.png)
 
@@ -142,8 +140,8 @@ Now Gilly tests the new column with a simple vector query. She asks for utility 
 
     The SQL creates an embedding for the phrase `gas pipeline pressure and leak response`, compares it with the vectors in `PRODUCTS.PRODUCT_EMBEDDING`, and returns the cosine distance. A smaller distance means the two vectors are closer in meaning, so the query orders the smallest distance first.
 
-    <copy>
     ```sql
+    <copy>
     SELECT p.product_name,
            p.category,
            VECTOR_DISTANCE(
@@ -153,8 +151,8 @@ Now Gilly tests the new column with a simple vector query. She asks for utility 
     FROM products p
     ORDER BY vector_distance
     FETCH FIRST 5 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     **Expected output: Utility Service Matches**
 
@@ -167,8 +165,8 @@ Now Gilly tests the new column with a simple vector query. She asks for utility 
 
     Display `1 - distance` as similarity, rounded to four decimal places. Higher values now mean closer matches.
 
-    <copy>
     ```sql
+    <copy>
     SELECT p.product_name,
            p.category,
            ROUND(1 - VECTOR_DISTANCE(
@@ -178,8 +176,8 @@ Now Gilly tests the new column with a simple vector query. She asks for utility 
     FROM products p
     ORDER BY similarity DESC
     FETCH FIRST 5 ROWS ONLY;
-    ```
     </copy>
+    ```
 
     This changes the display, not the matching calculation.
 
@@ -191,8 +189,8 @@ Turn the service matches into a follow-up list with request status, date, and se
 
 1. Run the following query for the concern `gas pipeline pressure and leak response`:
 
-    <copy>
     ```sql
+    <copy>
     WITH matched_products AS (
         SELECT p.product_id,
                p.product_name,
@@ -223,8 +221,8 @@ Turn the service matches into a follow-up list with request status, date, and se
     WHERE o.order_status NOT IN ('cancelled', 'returned')
     ORDER BY mp.similarity DESC,
              o.created_at DESC;
-    ```
     </copy>
+    ```
 
     The first part ranks utility services by meaning. The remaining joins use ordinary relational keys to find the matching order items, orders, and customers.
 

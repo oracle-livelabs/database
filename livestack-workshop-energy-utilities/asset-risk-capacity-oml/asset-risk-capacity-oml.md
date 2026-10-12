@@ -33,8 +33,6 @@ Train a model in Oracle AI Database to classify services as `SURGE` or `STABLE`,
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 ## Task 1: Read the training data
@@ -47,8 +45,8 @@ The outcome table records the predictor cutoff and later outcome window. Keep th
 
 1. Run the training-data query:
 
-    <copy>
     ```sql
+    <copy>
     SELECT product_id,
            category,
            unit_price,
@@ -62,8 +60,8 @@ The outcome table records the predictor cutoff and later outcome window. Keep th
     FROM ll_utility_demand_training_v
     ORDER BY product_id
     FETCH FIRST 10 ROWS ONLY;
-    ```
     </copy>
+    ```
 
 2. Identify the parts of each row.
 
@@ -97,7 +95,7 @@ AutoML takes several minutes. Skip to Task 3 to focus on training and scoring wi
     | Prediction type | `Classification`        |
     | Case ID         | `PRODUCT_ID`            |
 
-    Select **Start**, then **Faster Results**, and wait for the model leaderboard. Runtime varies; the validation run completed in about three minutes.
+    Select **Start**, then **Faster Results**, and wait for the model leaderboard. Runtime varies and can take several minutes.
 
     ![Utility Demand Surge experiment settings](images/cap-043.png)
 
@@ -127,8 +125,8 @@ The settings table selects the algorithm. `PREP_AUTO` enables automatic preparat
 
 1. Create the settings table and train the model:
 
-    <copy>
     ```sql
+    <copy>
 
     DROP TABLE IF EXISTS ll_utility_demand_settings;
 
@@ -173,22 +171,22 @@ The settings table selects the algorithm. `PREP_AUTO` enables automatic preparat
       );
     END;
     /
-    ```
     </copy>
+    ```
 
     The model reads the training view, learns the relationship between the features and `DEMAND_CLASS`, and stores the trained model in the database. No service or signal data leaves Oracle Database during training.
 
 2. Confirm that Oracle created the model:
 
-    <copy>
     ```sql
+    <copy>
     SELECT model_name,
            mining_function,
            algorithm
     FROM user_mining_models
     WHERE model_name = 'LL_UTILITY_DEMAND_GLM';
-    ```
     </copy>
+    ```
 
     The result should show `CLASSIFICATION` and `GENERALIZED_LINEAR_MODEL`. Otto now has a database model that SQL can call.
 
@@ -198,8 +196,8 @@ Create a what-if scoring table by changing selected training-row inputs. These s
 
 1. Create the scoring table and add the new activity snapshot:
 
-    <copy>
     ```sql
+    <copy>
 
     DROP TABLE IF EXISTS ll_utility_demand_scoring;
 
@@ -267,15 +265,15 @@ Create a what-if scoring table by changing selected training-row inputs. These s
     WHERE row_num <= 12;
 
     COMMIT;
-    ```
     </copy>
+    ```
 
     The scoring table omits `DEMAND_CLASS`; the target label must not be supplied as a predictor.
 
 2. Run the scoring query:
 
-    <copy>
     ```sql
+    <copy>
     WITH scored_products AS (
       SELECT product_id,
              category,
@@ -315,8 +313,8 @@ Create a what-if scoring table by changing selected training-row inputs. These s
       ON p.product_id = sp.product_id
     ORDER BY sp.surge_score DESC,
              p.product_id;
-    ```
     </copy>
+    ```
 
 3. Read the result as a dashboard user.
 
