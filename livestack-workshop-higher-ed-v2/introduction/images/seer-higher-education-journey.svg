@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="215" viewBox="0 0 1200 215" role="img" aria-labelledby="title desc">
+<title id="title">Student-support operations learning path</title><desc id="desc">Eight steps connect request data, services, locations, demand predictions, and student-support questions.</desc>
+<rect width="1200" height="215" rx="20" fill="#f6f8fa"/><text x="35" y="42" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#222">One support-operations journey</text>
+<g font-family="Arial,sans-serif" text-anchor="middle" font-size="15" fill="#263746">
+<g><rect x="28" y="75" width="128" height="98" rx="12" fill="#e6f0f6"/><text x="92" y="108" font-weight="700">1 · Connect</text><text x="92" y="135">requests + context</text></g>
+<path d="M157 124h15" stroke="#647786" stroke-width="3"/><path d="m170 118 8 6-8 6" fill="none" stroke="#647786" stroke-width="3"/>
+<g><rect x="180" y="75" width="128" height="98" rx="12" fill="#eee9f6"/><text x="244" y="108" font-weight="700">2 · Model</text><text x="244" y="135">JSON request</text></g>
+<path d="M309 124h15" stroke="#647786" stroke-width="3"/><path d="m322 118 8 6-8 6" fill="none" stroke="#647786" stroke-width="3"/>
+<g><rect x="332" y="75" width="128" height="98" rx="12" fill="#f8eee4"/><text x="396" y="108" font-weight="700">3 · Match</text><text x="396" y="135">meaning + service</text></g>
+<path d="M461 124h15" stroke="#647786" stroke-width="3"/><path d="m474 118 8 6-8 6" fill="none" stroke="#647786" stroke-width="3"/>
+<g><rect x="484" y="75" width="128" height="98" rx="12" fill="#e8f2e8"/><text x="548" y="108" font-weight="700">4 · Explore</text><text x="548" y="135">support network</text></g>
+<path d="M613 124h15" stroke="#647786" stroke-width="3"/><path d="m626 118 8 6-8 6" fill="none" stroke="#647786" stroke-width="3"/>
+<g><rect x="636" y="75" width="128" height="98" rx="12" fill="#f6f1d9"/><text x="700" y="108" font-weight="700">5 · Locate</text><text x="700" y="135">campus services</text></g>
+<path d="M765 124h15" stroke="#647786" stroke-width="3"/><path d="m778 118 8 6-8 6" fill="none" stroke="#647786" stroke-width="3"/>
+<g><rect x="788" y="75" width="128" height="98" rx="12" fill="#f4e8e7"/><text x="852" y="108" font-weight="700">6 · Forecast</text><text x="852" y="135">service demand</text></g>
+<path d="M917 124h15" stroke="#647786" stroke-width="3"/><path d="m930 118 8 6-8 6" fill="none" stroke="#647786" stroke-width="3"/>
+<g><rect x="940" y="75" width="108" height="98" rx="12" fill="#e7edf5"/><text x="994" y="108" font-weight="700">7 · Ask</text><text x="994" y="135">Select AI</text></g>
+<path d="M1049 124h15" stroke="#647786" stroke-width="3"/><path d="m1062 118 8 6-8 6" fill="none" stroke="#647786" stroke-width="3"/>
+<g><rect x="1072" y="75" width="100" height="98" rx="12" fill="#e6f0f6"/><text x="1122" y="108" font-weight="700">8 · Assist</text><text x="1122" y="135">read-only agent</text></g>
+</g></svg>
