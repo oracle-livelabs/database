@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Nina Patel is a risk analyst at Seer Sporting Goods. She has used Select AI to ask one retail question at a time. That works for a quick answer, but her customer-review screen needs a repeatable assistant that can answer a request through a defined database capability.
+Nina Patel is a retail analyst at Seer Sporting Goods. She has used Select AI to ask one retail question at a time. That works for a quick answer, but her customer-review screen needs a repeatable assistant that can answer a request through a defined database capability.
 
 Jessica, the DBA, gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the retail tables configured in the previous lab. The profile supplies the object scope, and the database user's privileges still apply when the generated SQL runs.
 
@@ -40,7 +40,7 @@ Estimated Time: **15 minutes**
 | Database Capability | Select AI Agent, DBMS_CLOUD_AI_AGENT, AI profiles, and a built-in SQL tool. |
 | Outcome | The application can call a retail assistant whose result and tool activity Nina can review. |
 
-Persona focus: You are Nina Patel, the risk analyst, working with Jessica to make the assistant's database work visible.
+Persona focus: You are Nina Patel, the retail analyst, working with Jessica to make the assistant's database work visible.
 
 > **Prerequisite:** Complete [Lab 7: Ask Retail Questions with Select AI](?lab=selectai). This lab uses its GENAI profile, enforced four-table object list, and direct revenue reference query.
 
@@ -127,7 +127,7 @@ The tool will use the existing profile rather than create another provider conne
 
 ## Task 2: Register the SQL tool
 
-Jessica exposes one named SQL capability. It uses GENAI and the four retail tables configured in Lab 7. Nina will set the model once for the profile, then register the tool against that profile.
+Jessica registers one named SQL capability that uses `GENAI` and the four retail tables configured in Lab 7. Nina will set the model once for the profile, then register the tool against that profile.
 
 1. Set the requested model and create the tool.
 
@@ -390,7 +390,7 @@ In Lab 7, Nina used Select AI to turn individual questions into SQL. Here she de
 
 The database still supplies the product and order facts. The profile determines the tool's configured object scope, database privileges control access, and the history records the activity. Instructions guide the agent; the recorded run and the reference query give the team evidence to assess the result.
 
-This completes the team's retail investigation. Jessica connected the data, Thomas exposed the order document, Gilly found relevant products, Bob followed creator relationships, Moon compared fulfillment options, Otto added model scores, and Nina made the final questions and assistant activity reviewable.
+The team’s retail investigation now connects Jessica’s data query, Thomas’s order document, Gilly’s product matches, Bob’s creator relationships, Moon’s fulfillment options, Otto’s model scores, and Nina’s reviewable questions and assistant activity.
 
 ## Appendix: Reset the workshop objects
 

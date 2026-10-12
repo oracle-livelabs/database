@@ -57,13 +57,13 @@ Persona focus: You are Thomas, working with Jessica to decide how the applicatio
 
 ### Thomas's three JSON choices
 
-A JSON column holds application settings alongside a relational key. A collection holds documents the application owns. A duality view defines a document over the order tables that other teams already use. All three support SQL access in the same database, but only the duality view in this lab writes directly to the existing order rows.
+A JSON column holds application settings alongside a relational key; a collection holds documents the application owns; and a duality view defines a document over the order tables that other teams already use. All three support SQL access in the same database, but only the duality view in this lab writes directly to the existing order rows.
 
 > **SQL Worksheet reminder:** Need a reminder on how to open and use the SQL Worksheet? Return to [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the step-by-step guide showing how to run SQL statements.
 
 ## Task 1: Store flexible application data as JSON
 
-Thomas starts with optional screen settings. The order already exists, so he stores an order key beside a native JSON value instead of adding a relational column for every new screen option.
+Thomas starts with optional screen settings for an existing order, storing its key beside a native JSON value instead of adding a relational column for every new option.
 
 1. Create the application-data table. Run the create-and-insert steps in Tasks 1 and 2 once in this workshop schema. If you revisit the lab, use the existing demonstration tables and continue with their read queries.
 
@@ -134,7 +134,7 @@ Thomas starts with optional screen settings. The order already exists, so he sto
 
 ## Task 2: Create a JSON Collection Table
 
-Thomas next tries a document collection. Each row owns a document in `DATA`; it is separate from the source order tables. He copies one existing order so the team can compare the two approaches using familiar data.
+Thomas next tries a document collection in which each row owns a document in `DATA`, separate from the source order tables. He copies one existing order so the team can compare the two approaches using familiar data.
 
 1. Create the collection with document version tags.
 
@@ -251,7 +251,7 @@ Thomas now tests the payload his order feature should consume. `ORDERS_DV` suppl
 
 ## Task 4: Enable document inserts and updates
 
-The existing duality view allows updates. Thomas also needs to accept a new order with nested items. Jessica changes the view's write contract while the database continues to enforce the underlying relational keys and data types.
+The existing duality view allows updates, but Thomas also needs to accept a new order with nested items. Jessica changes the view's write contract while the database continues to enforce the underlying relational keys and data types.
 
 1. Inspect the current document capabilities.
 
@@ -331,11 +331,11 @@ The existing duality view allows updates. Thomas also needs to accept a new orde
     | --- | --- | --- | --- |
     | ORDERS_DV | true | true | false |
 
-Thomas can now submit an order document. In an application, Jessica would also grant the intended access to the view; enabling an operation in its definition does not itself grant access to another user.
+Thomas can now submit an order document through the view. In an application, Jessica would also grant the intended access, because enabling an operation in the view definition does not itself grant access to another user.
 
 ## Task 5: Create and update a JSON order
 
-Thomas tests one complete order. The application writes JSON, then Jessica checks the relational rows to confirm what changed.
+Thomas tests a complete order by writing a JSON document, then Jessica checks the relational rows to confirm what changed.
 
 1. Insert the supplied order document.
 
@@ -415,7 +415,7 @@ Thomas tests one complete order. The application writes JSON, then Jessica check
 
     | Order | Status | Customer Email | Item | Product | Quantity | Unit Price | Line Total |
     | ---: | --- | --- | ---: | --- | ---: | ---: | ---: |
-    | 900001 | pending | mary.smith1@example.com | 990001 | StormRunner Trail Shell | 2 | 189.99 | 379.98 |
+    | 900001 | pending | `mary.smith1@example.com` | 990001 | StormRunner Trail Shell | 2 | 189.99 | 379.98 |
 
     A repeated visit can show `confirmed` if the next update has already run. The line total is calculated from the relational quantity and unit price.
 
@@ -498,7 +498,7 @@ Jessica still needs SQL for reporting and analysis. Here she projects selected f
 
     | Order | Status | Customer Email |
     | ---: | --- | --- |
-    | 900001 | confirmed | mary.smith1@example.com |
+    | 900001 | confirmed | `mary.smith1@example.com` |
 
 2. Read the same values directly from the relational tables.
 
@@ -516,7 +516,7 @@ Jessica still needs SQL for reporting and analysis. Here she projects selected f
 
     | ORDER_ID | ORDER_STATUS | EMAIL |
     | ---: | --- | --- |
-    | 900001 | confirmed | mary.smith1@example.com |
+    | 900001 | confirmed | `mary.smith1@example.com` |
 
     Compare the values despite the different column headings. Thomas can use the document shape in the application while Jessica joins and analyzes the same order with SQL.
 

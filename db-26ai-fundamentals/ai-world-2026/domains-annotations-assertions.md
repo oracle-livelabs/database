@@ -203,7 +203,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see four rows, all from `PLAYERS`: `CREDIT_LIMIT`, `DATE_OF_BIRTH`, `GOVERNMENT_ID` and `HOME_ADDRESS`. Right now the label only describes the data. In **Lab 5**, this same list decides which columns the floor hosts can't see. A label you add once becomes a security rule.
+    You should see four rows, all from `PLAYERS`: `CREDIT_LIMIT`, `DATE_OF_BIRTH`, `GOVERNMENT_ID` and `HOME_ADDRESS`.
 
     ![Query Result lists the four sensitive PLAYERS columns, with what each one holds.](images/domains-annotations-assertions-02.png " ")
 
@@ -540,7 +540,7 @@ This lab assumes you have:
 
 You built the Silverleaf Casino floor and loaded a night of play. Along the way, you put four rules in the database instead of in application code.
 
-Because these rules live in the database, every app, script and user gets them without extra code. That includes apps you add later, including an AI agent. In **Lab 2**, the same assertion stops a bad JSON write. In **Lab 5**, the `sensitive` annotations become access rules.
+Because these rules live in the database, every app, script and user gets them without extra code. That includes apps you add later, including an AI agent. In **Lab 2**, the same assertion stops a bad JSON write.
 
 Vera's tip says someone is cheating, but the usual reports show an ordinary night. Before she digs in, **Lab 2** finishes the build: it connects the casino's website and tablets to these tables, so every way in follows the same rules.
 

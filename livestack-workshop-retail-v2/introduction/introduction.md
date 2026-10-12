@@ -4,7 +4,7 @@
 
 Jessica Chan is the database administrator at Seer Sporting Goods. Monday starts with a demand spike in trail-running products. Her colleagues need order documents for the shopping application, relevant product matches, creator relationships, fulfillment options, demand scores, and answers they can take into a review meeting.
 
-The requests look different, but they share one problem. The data is already in Oracle AI Database, and each team wants to use it in a different way:
+The product and order records are already in Oracle AI Database. Each colleague needs a different way to work with them:
 
 - Thomas needs orders and their items as JSON for a web and mobile application.
 - Gilly needs semantic search that finds products related to a customer's question.
@@ -29,7 +29,7 @@ This workshop follows Jessica and her colleagues through a connected review: not
 | Bob, graph specialist | Investigate creator and brand relationships. | Relational joins and a property graph expose direct connections, longer paths, and shared brands. |
 | Moon, spatial expert | Compare fulfillment options for customers and regions. | Geographic calculations combine with recorded stock, while maps show the same locations. |
 | Otto, data scientist | Build a product demand watchlist. | Oracle Machine Learning trains and scores a demonstration model beside product and activity data. |
-| Nina, risk analyst | Ask retail questions without writing every query from scratch. | Select AI exposes generated SQL for review; Select AI Agent adds a defined SQL tool and execution history. |
+| Nina, retail analyst | Ask retail questions without writing every query from scratch. | Select AI exposes generated SQL for review; Select AI Agent adds a defined SQL tool and execution history. |
 
 Jessica's first query combines relational, JSON, vector, and spatial evidence. Later labs explore graph relationships, machine learning, and AI in their own tasks. A location is useful context, a vector score measures semantic proximity, and a model score supports review; none of these alone establishes future demand or a delivery promise.
 
