@@ -39,8 +39,6 @@ The LiveStack Field Operations Logistics Map illustrates how an application pres
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **Schema names:** `CUSTOMERS` represents service points; `FULFILLMENT_CENTERS` represents field logistics sites.
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
@@ -272,6 +270,6 @@ For more spatial exercises, open the [Oracle Spatial LiveLabs workshop](https://
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

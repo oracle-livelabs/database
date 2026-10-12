@@ -33,8 +33,6 @@ Review her implementation: create service embeddings, rank matches by meaning, a
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
-
 > **Schema names:** `PRODUCTS` stores utility services and supplies; `ORDERS`, `ORDER_ITEMS`, and `CUSTOMERS` link them to requests and service points.
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
@@ -87,6 +85,8 @@ Gilly decides that one vector per service is enough. Each service record is shor
     FETCH FIRST 5 ROWS ONLY;
     </copy>
     ```
+
+    ![Lab 3 Task 2 Step 1](images/l3-t2-s1.png)
 
     The combined text gives the model the service name and its business classification. Gilly does not need to embed price, dates, or other values that do not describe what the service is.
 
@@ -242,6 +242,6 @@ Gilly can now turn an operational concern into a service-point follow-up list. N
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

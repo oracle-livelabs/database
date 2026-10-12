@@ -7,17 +7,17 @@ Jessica Chan is the database administrator at Seer Sporting Goods. Monday starts
 The product and order records are already in Oracle AI Database. Each colleague needs a different way to work with them:
 
 - Thomas needs orders and their items as JSON for a web and mobile application.
-- Gilly needs semantic search that finds products related to a customer's question.
+- Gilly needs semantic search that finds products related to a retail operations question.
 - Bob needs to follow creator connections and the brands they promote.
 - Moon needs to calculate distances between customers, fulfillment centers, and demand regions.
 - Otto needs to train and score a product demand model.
-- Nina needs to ask retail questions in ordinary language and inspect the evidence behind an answer.
+- Nina needs to ask retail questions in ordinary language and check the answers against database results.
 
-![team](images/team.png)
+![The Seer Sporting Goods team](images/team.png)
 
 Jessica helps each team use the existing records in the form its application needs. Relational tables remain the source for products and orders. JSON documents, vectors, graph relationships, spatial calculations, machine learning, and AI-assisted SQL work alongside those records.
 
-This workshop follows Jessica and her colleagues through a connected review: notice a product signal, inspect the order, find related products, follow creator relationships, compare fulfillment options, review model scores, and ask a defined assistant for database facts. Each lab focuses on one requirement and hands the next business question to a colleague.
+Follow Jessica and her colleagues as they review product attention, inspect orders, find related products, trace creator relationships, compare fulfillment options, review model scores, and query retail data through an AI assistant. Each lab addresses one requirement and introduces the next colleague’s question.
 
 ### What the team builds
 
@@ -25,7 +25,7 @@ This workshop follows Jessica and her colleagues through a connected review: not
 | --- | --- | --- |
 | Jessica, DBA | Build the query behind a retail review dashboard. | One SQL result combines product signals, semantic matches, JSON order activity, and regional location context. |
 | Thomas, application developer | Give the application flexible order documents. | JSON columns, JSON collections, and JSON Relational Duality Views provide three ways to serve application data. |
-| Gilly, AI engineer | Find products related to a shopping question. | An in-database ONNX model creates product vectors; search results connect to existing orders and customers. |
+| Gilly, AI engineer | Find products related to an operations question. | An in-database ONNX model creates product vectors; search results connect to existing orders and customers. |
 | Bob, graph specialist | Investigate creator and brand relationships. | Relational joins and a property graph expose direct connections, longer paths, and shared brands. |
 | Moon, spatial expert | Compare fulfillment options for customers and regions. | Geographic calculations combine with recorded stock, while maps show the same locations. |
 | Otto, data scientist | Build a product demand watchlist. | Oracle Machine Learning trains and scores a demonstration model beside product and activity data. |
@@ -56,4 +56,5 @@ Estimated Workshop Time: **130 minutes**, including Getting Started and the quiz
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

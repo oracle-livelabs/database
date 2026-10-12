@@ -279,7 +279,7 @@ This lab assumes you have:
 
     Two notes about following the dealer are new: 22:10, where players seem to follow the dealer to Blackjack 4, and 21:45, where Victor Lang calls Elliot his lucky dealer. 
 
-    The closest is the 21:20 note, then 22:10, 20:15, 22:58 and 21:45. Read in time order, the five tell the story of the night:
+    The closest is the 21:20 note, then 22:10, 20:15, 22:58 and 21:45. Read together, the five tell the story of the night:
 
     * **21:20:** during a payout, some chips move from one seat to the next.
     * **22:10:** some players seem to follow the dealer to Blackjack 4.
@@ -340,7 +340,7 @@ This lab assumes you have:
     </copy>
     ```
 
-    You should see the same five notes as in Task 3 step 2, in the same order. This time, the approximate search found them through the index. It checked only the partitions nearest Vera's question, not every note.
+    You should see the same five notes as in Task 3 step 2, in the same order. `FETCH APPROX` lets the database use the index, but it doesn't force it. The database chooses how to run each query, and with only 32 notes, reading every note is faster than using the index, so that's what it does here. On millions of notes, it would use the index and check only the partitions nearest Vera's question.
 
     That's the trade an approximate search makes. An exact search compares the question with every vector, so it always returns the true closest notes, but it gets slower as the notes pile up. An approximate search skips most of the notes, so it stays fast on millions of rows, but now and then it can miss a close one. `TARGET ACCURACY 95` sets how much of that you accept. On Sunday's 32 notes, the answer is exactly the same. On years of notes, Vera would still get her answer quickly.
 

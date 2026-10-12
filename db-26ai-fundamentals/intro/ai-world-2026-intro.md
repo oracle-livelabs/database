@@ -15,16 +15,16 @@ In this workshop, you will:
 * Uncover the collusion ring with a SQL property graph, path patterns and Personalized PageRank
 * Search the surveillance notes by meaning with AI Vector Search and an in-database embedding model
 * Protect the evidence with end users, data roles and data grants, then compare what each person sees
-* (Bonus) Write shorter, safer queries with `JOIN TO ONE`, aggregation filters, `QUALIFY`, `DATEDIFF` and `DATEADD`
 * (Bonus) Connect an AI agent to the casino database through the SQLcl MCP server, and watch the data grants decide what it sees
+* (Bonus) Write shorter, safer queries with `JOIN TO ONE`, aggregation filters, `QUALIFY`, `DATEDIFF` and `DATEADD`
 
 ### Prerequisites
 
 This workshop assumes you have:
 
 * A LiveLabs sandbox reservation for this workshop
-* A web browser. There's nothing to install for Labs 1 to 6, because they run in the Database Actions SQL worksheet.
-* For the bonus Lab 7 only: Visual Studio Code on your own computer and a GitHub account
+* A web browser. There's nothing to install for Labs 1 to 5 or Lab 7, because they run in the Database Actions SQL worksheet.
+* For the bonus Lab 6 only: Visual Studio Code on your own computer and a GitHub account
 
 ## The Silverleaf Casino
 
@@ -64,8 +64,8 @@ Because the rules live in the database, every way in gets the same rules. That c
 | Lab 3: Uncover the Collusion Ring with Property Graphs | 15 minutes |
 | Lab 4: Search the Surveillance Log with AI Vector Search | 15 minutes |
 | Lab 5: Protect the Evidence with Deep Data Security | 20 minutes |
-| Lab 6: (Bonus) New SQL Features | 10 minutes |
-| Lab 7: (Bonus) Connect an AI Agent with the SQLcl MCP Server | 20 minutes |
+| Lab 6: (Bonus) Connect an AI Agent with the SQLcl MCP Server | 15 minutes |
+| Lab 7: (Bonus) New SQL Features | 10 minutes |
 
 
 You may now **proceed to the next lab**.
