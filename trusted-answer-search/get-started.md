@@ -6,6 +6,12 @@ Trusted Answer Search can be deployed on **Oracle Autonomous Database Serverless
 
 **Estimated time:** 5 minutes
 
+### Objectives
+
+* Verify that your green-button reservation has provisioned the Trusted Answer Search environment.
+* Locate the Admin URL and Published Wiki Search URL, and confirm your TASADMIN credentials.
+* Confirm where to begin the hands-on labs and continue to Lab 1.
+
 ### Prerequisites
 
 * The **Admin URL** from your LiveLabs reservation or Terraform `admin_url` output.
