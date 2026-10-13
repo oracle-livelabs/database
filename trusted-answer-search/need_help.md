@@ -28,6 +28,6 @@ You can find the official installation download page available at [Get Oracle Tr
 
 **Author** 
 
-* Markus Kissling, Product Manager
+* Markus Kissling, Product Manager, Trusted Answer Search
   
 **Last Updated Date** - October, 2026
