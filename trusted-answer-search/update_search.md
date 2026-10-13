@@ -424,6 +424,6 @@ You may now **proceed to Lab 2**.
 
 **Authors**
 
-* Markus Kissling, Product Manager
+* Markus Kissling, Product Manager, Trusted Answer Search
 
 **Last Updated Date** - October, 2026
