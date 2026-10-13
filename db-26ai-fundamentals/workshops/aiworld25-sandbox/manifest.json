@@ -13,8 +13,8 @@
         "filename": "../../ai-world-2025/green-button-setup-ai-25.md"
     },
       {
-        "title": "Lab 1: Domains and Annotations",
-        "description": "Learn how Oracle AI Database 26ai's Data Usecase Domains and Schema Annotations solve healthcare data governance challenges.",
+        "title": "Lab 1: Data Use Case Domains and Schema Annotations",
+        "description": "Learn how Oracle AI Database 26ai's Data Use Case Domains and Schema Annotations solve healthcare data governance challenges.",
         "type": "livelabs",
         "filename": "../../ai-world-2025/domains-annotations.md"
     },

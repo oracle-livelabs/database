@@ -1,73 +1,84 @@
 # Workshop with a single set of labs
 
-## Instructions - Delete this file when finished
+## Instructions—delete this file when finished
 
-1. Open the sample-workshop template in Atom or Visual Studio Code
-2. We pre-created 5 folders.  A workshop is created out of multiple labs.
-3. Remove the comments like this one: *List objectives for this lab*
-4. Make sure you use lower case folder and file name and dashes for spaces (setup-adb NOT Setup_ADB)
-5. Your image names should have descriptive names. Not just adb1, adb2, adb3.  For handicap accessibility, we need the image descriptions to explain what the image looks like.  Remember all lowercase and dashes.
-6. Download our QA doc from WMS.  We find workshops get in production quicker when you know what's needed to move to production up front and you use the skeleton.
+Estimated Time: X
 
-PS:  You do not need a Readme.md.  Readme's exist only at the top library levels. We direct all traffic to LiveLabs since we can't track usage on GitHub.  Do not create any direct links to GitHub, your workshop may be super popular but we can't track it so no one will know.
+### Objectives
 
-## Absolute Path for Oracle Cloud menu Navigation
+- Understand the required structure for single-workshop labs.
+- Apply naming, accessibility, and linting standards before publishing.
+- Know how to reference prerequisite labs and build manifests correctly.
+- Reuse the sample folder layout to create parent/child workshop variants.
 
-**Lab 1: Provision an Instance -> Step 0: Use these Standardized Pictures for Oracle Cloud Navigation (Commonly for Provisioning)** - We've included a list of common screenshots for navigating the Oracle Cloud Menu. Please read this section and use the relevant absolute path images where appropriate.  This will future proof your workshop in case of Oracle Cloud user interface updates.
 
-## Folder Structure
+1. Open the sample-workshop template in your editor (VS Code or Atom).
+2. Five lab folders are pre-created; a workshop is a sequence of multiple labs.
+3. Remove placeholder comments such as *List objectives for this lab*.
+4. Use lowercase folder/filenames with dashes (`setup-adb`, not `Setup_ADB`).
+5. Give images descriptive, lowercase, dashed names (e.g., `adb-network-policy.png`) and write meaningful alt text.
+6. Download the QA checklist from WMS before you begin; teams ship faster when they understand the production requirements and follow the skeleton early.
 
-In this example, the goal is to create several "children" workshops from one longer "parent" workshop. The children are made up of parts from the parent.
+> **Reminder:** Don’t add `README.md` files inside workshops. Readmes live at the repo root because we route traffic through LiveLabs for usage tracking. Avoid direct GitHub links; traffic that bypasses LiveLabs can’t be measured.
 
+## Absolute path guidance for Oracle Cloud navigation
+
+**Lab 1: Provision an Instance → Step 0.** Use the standardized Oracle Cloud menu screenshots we provide so future UI changes don’t break your lab.
+
+## Folder structure
+
+One “parent” workshop can become several “child” workshops by reusing subsets of labs:
+
+```
 sample-workshop/
-        -- individual labs
+  provision/
+  setup/
+  dataload/
+  query/
+  introduction/
+    introduction.md   # Treats the full workshop as a lab
 
-        provision/
-        setup/
-        dataload/
-        query/
-        introduction/
-          introduction.md       -- description of the everything workshop, note that it is a "lab" since there is only one
+  workshops/
+    freetier/
+      index.html
+      manifest.json
+    livelabs/
+      index.html
+      manifest.json
+```
 
-    workshops/
-       freetier/                -- freetier version of the workshop
-        index.html
-        manifest.json
-       livelabs/                -- livelabs version of the workshop
-        index.html
-        manifest.json
+### Tenancy vs. Sandbox
 
+- **Tenancy:** Free Trial, paid, or Always Free accounts (brown button)
+- **Sandbox:** Oracle-provided tenancy reservations (green button)
+- **Desktop:** NoVNC environment packaged inside a compute instance
 
-### FreeTier vs LiveLabs
+### About the workshop
 
-* "FreeTier" - includes Free Trials, Paid Accounts, and for some workshops, Always Free accounts (brown button)
-* "LiveLabs" - these are workshops that use Oracle-provided tenancies (green button)
-* "Desktop"  - this is a new deployment where the workshop is encapsulated in a NoVNC environment running in a compute instance
+- All six labs run in sequence.
+- The introduction lab describes the full set; reuse it for child workshops unless a unique intro is required.
+- See `product-name-workshop/tenancy/manifest.json` for the manifest layout.
+- “Lab n:” prefixes in titles are optional.
 
-### About the Workshop
+### Referencing prerequisite labs
 
-The workshop includes all 6 of the individual labs in a single sequence.
+Reuse existing labs via absolute URLs:
 
-The folder structure includes an Introduction "lab" that describes the workshop as a complete set of 6 labs. Note: you may not need to have a different introduction for each of the parent and child versions of the workshops, this is illustrative only.
+```
+"filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+```
 
-Look at the product-name-workshop/freetier folder and look at the manifest.json file to see the structure.
+Reference local labs with relative paths:
 
-> **Note:** The use of "Lab n:" in the titles is optional
+```
+"filename": "../../provision/provision.md"
+```
 
-The Prerequisite "lab" is the first lab in a common folder on the oracle-livelabs/common repo. Because this lab already exists, we can use a RAW/absolute URL instead:
+### Example
 
-  ```
-  "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"        },
-  ```
+- Live lab: https://oracle-livelabs.github.io/apex/spreadsheet/workshops/freetier/
+- Source: https://github.com/oracle-livelabs/apex/tree/main/spreadsheet
 
-The manifest.json file needs to know the location of each lab relative to where it exists in the hierarchy. In this structure, labs are located two levels up, for example:
-
-  ```
-  "filename": "../../provision/provision.md"
-  ```
-
-### For example:
-
-This [APEX Workshop](https://oracle-livelabs.github.io/apex/spreadsheet/workshops/freetier/) is a good example of a workshop with a single set of labs: [https://github.com/oracle-livelabs/apex/tree/main/spreadsheet](https://github.com/oracle-livelabs/apex/tree/main/spreadsheet).
-
-
+## Acknowledgements
+* **Author** - LiveLabs Team
+* **Last Updated By/Date** - LiveLabs Team, 2026

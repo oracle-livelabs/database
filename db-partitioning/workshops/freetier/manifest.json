@@ -13,13 +13,13 @@
         {
             "title": "Get Started",
             "description": "This is the prerequisites for customers.",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
         },
         {
             "title": "Lab 1: Provision an Oracle Autonomous Database",
             "description": "Provision an Oracle Autonomous Database",
             "type": "freetier",
-            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-provision/adb-provision-conditional.md"
+            "filename": "https://livelabs.oracle.com/cdn/adb/shared/adb-provision/adb-provision-conditional.md"
         },
         {
             "title": "Lab 2: Range Partitioning",
@@ -56,7 +56,7 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }

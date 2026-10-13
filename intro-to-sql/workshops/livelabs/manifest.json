@@ -9,18 +9,18 @@
         },
         {
             "title": "Get Started",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
             "title": "Lab 1: Provision an Oracle Autonomous Database",
             "description": "Provision an Autonomous Database",
             "type": "livelabs",
-            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-provision/adb-provision-conditional.md"
+            "filename": "https://livelabs.oracle.com/cdn/adb/shared/adb-provision/adb-provision-conditional.md"
         },
         {
             "title": "Lab 2: Connect to Oracle Autonomous Database with SQL Worksheet and Run your First Query",
             "description": "Connect to an Autonomous Database",
-            "filename": "https://oracle-livelabs.github.io/adb/shared/adb-sqldevweb/adb-sqldevweb.md"
+            "filename": "https://livelabs.oracle.com/cdn/adb/shared/adb-sqldevweb/adb-sqldevweb.md"
         },
         {
             "title": "Lab 3: Run Basic Oracle SQL Commands",
@@ -30,7 +30,7 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
         }
     ]
 }

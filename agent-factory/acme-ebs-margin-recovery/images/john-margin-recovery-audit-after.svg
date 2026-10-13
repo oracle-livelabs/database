@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-label="Mock screenshot of action audit after margin recovery case creation">
+  <rect width="1200" height="720" fill="#f7f4ef"/>
+  <rect x="0" y="0" width="1200" height="64" fill="#312d2a"/>
+  <text x="32" y="40" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#ffffff">Private Agent Factory - REST Source Test</text>
+  <text x="930" y="40" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#d9d2c8">ACME EBS Action Service</text>
+
+  <rect x="52" y="92" width="1096" height="596" rx="10" fill="#ffffff" stroke="#d8d0c6"/>
+  <text x="82" y="130" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#2f2a24">Operation: listActionAudit</text>
+  <text x="82" y="156" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6d6258">After running John's agent, the governed case and audit record are visible.</text>
+
+  <rect x="82" y="192" width="1036" height="454" rx="8" fill="#1f2428"/>
+  <text x="110" y="226" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">{</text>
+  <text x="132" y="254" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"margin_notes"</text>
+  <text x="258" y="254" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: [ ... ],</text>
+  <text x="132" y="282" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"margin_recovery_cases"</text>
+  <text x="344" y="282" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: [</text>
+  <text x="158" y="310" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">{</text>
+  <text x="184" y="338" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"case_id"</text>
+  <text x="278" y="338" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: </text>
+  <text x="296" y="338" font-family="Menlo, Consolas, monospace" font-size="15" fill="#b8e986">"MRC-10482"</text>
+  <text x="184" y="366" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"order_number"</text>
+  <text x="318" y="366" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: </text>
+  <text x="336" y="366" font-family="Menlo, Consolas, monospace" font-size="15" fill="#b8e986">"SO-48192"</text>
+  <text x="184" y="394" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"customer_name"</text>
+  <text x="326" y="394" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: </text>
+  <text x="344" y="394" font-family="Menlo, Consolas, monospace" font-size="15" fill="#b8e986">"Northstar Mining Ltd."</text>
+  <text x="184" y="422" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"account_owner"</text>
+  <text x="326" y="422" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: </text>
+  <text x="344" y="422" font-family="Menlo, Consolas, monospace" font-size="15" fill="#b8e986">"Elena Brooks"</text>
+  <text x="184" y="450" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"status"</text>
+  <text x="254" y="450" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: </text>
+  <text x="272" y="450" font-family="Menlo, Consolas, monospace" font-size="15" fill="#b8e986">"PENDING_COMMERCIAL_REVIEW"</text>
+  <text x="184" y="478" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"audit_id"</text>
+  <text x="278" y="478" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: </text>
+  <text x="296" y="478" font-family="Menlo, Consolas, monospace" font-size="15" fill="#b8e986">"AUD-93F18A42"</text>
+  <text x="158" y="506" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">}</text>
+  <text x="132" y="534" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">],</text>
+  <text x="132" y="562" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"audit"</text>
+  <text x="204" y="562" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: [ { </text>
+  <text x="258" y="562" font-family="Menlo, Consolas, monospace" font-size="15" fill="#9ad1ff">"action"</text>
+  <text x="338" y="562" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">: </text>
+  <text x="356" y="562" font-family="Menlo, Consolas, monospace" font-size="15" fill="#b8e986">"CREATE_MARGIN_RECOVERY_CASE"</text>
+  <text x="620" y="562" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea"> } ]</text>
+  <text x="110" y="618" font-family="Menlo, Consolas, monospace" font-size="15" fill="#d7e2ea">}</text>
+
+  <rect x="700" y="300" width="372" height="164" rx="8" fill="#fff5e6" stroke="#e0c38b"/>
+  <text x="724" y="332" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#5f4a1d">Governance proof</text>
+  <text x="724" y="364" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#5f4a1d">The agent created a review case and audit event.</text>
+  <text x="724" y="392" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#5f4a1d">Source ERP tables remain unchanged.</text>
+  <text x="724" y="420" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#5f4a1d">Human owners still approve the next action.</text>
+</svg>

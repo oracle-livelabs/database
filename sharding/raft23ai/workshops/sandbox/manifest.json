@@ -11,17 +11,19 @@
     {
       "title": "Get Started",
       "description": "Login to Oracle Cloud",
-      "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-23ai.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-23ai.md"
     },
     {
       "title": "Lab 1: Initialize Environment",
       "description": "Initialize Environment",
-      "filename": "../../initialize-environment/initialize-environment.md"
+      "filename": "../../initialize-environment/initialize-environment.md",
+      "type": "sandbox"
     },
     {
       "title": "Lab 2: Demo UI Application for Raft Replication",
       "description": "Demo UI Application for Raft Replication",
-      "filename": "../../ui-app/raft-demo-ui-app.md"
+      "filename": "../../ui-app/raft-demo-ui-app.md",
+      "type": "sandbox"
     },
     {
       "title": "Lab 3: Explore Raft Replication Topology",
@@ -31,12 +33,13 @@
     {
       "title": "Troubleshooting: Guide for Raft Replication Test Cases",
       "description": "Troubleshooting Guide for Raft Replication Test Cases",
-      "filename": "../../troubleshooting/troubleshooting.md"
+      "filename": "../../troubleshooting/troubleshooting.md",
+      "type": "sandbox"
     },
     {
       "title": "Need Help?",
       "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-      "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
     }
   ]
 }

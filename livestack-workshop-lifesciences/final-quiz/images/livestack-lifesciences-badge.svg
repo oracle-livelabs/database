@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360" role="img" aria-labelledby="title desc">
+  <title id="title">Life Sciences LiveStack workshop badge</title>
+  <desc id="desc">Badge for completing the Life Sciences LiveStack workshop.</desc>
+  <rect width="600" height="360" rx="24" fill="#f8f7f4"/>
+  <circle cx="300" cy="150" r="82" fill="#efe7dc" stroke="#7b6f63" stroke-width="6"/>
+  <path d="M258 150 C258 112 342 112 342 150 C342 188 258 188 258 150 Z" fill="none" stroke="#312d2a" stroke-width="8"/>
+  <path d="M300 82 V218" stroke="#312d2a" stroke-width="8"/>
+  <text x="300" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#262322">Seer Lifesciences</text>
+  <text x="300" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#4a4a4a">Oracle AI Database 26ai LiveStack</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Campaign order duality view</title>
+  <desc id="desc">Campaign order rows and JSON documents are two views of the same data.</desc>
+  <rect width="900" height="360" rx="18" fill="#faf9f7"/>
+  <text x="36" y="48" font-family="Arial" font-size="24" font-weight="700" fill="#312d2a">JSON Relational Duality for campaign orders</text>
+  <rect x="50" y="94" width="240" height="190" rx="14" fill="#fff" stroke="#d8d2c8"/>
+  <text x="76" y="132" font-family="Arial" font-size="17" font-weight="700" fill="#374151">Relational source</text>
+  <text x="76" y="166" font-family="Arial" font-size="15" fill="#374151">ORDERS</text>
+  <text x="76" y="194" font-family="Arial" font-size="15" fill="#374151">ORDER_ITEMS</text>
+  <text x="76" y="222" font-family="Arial" font-size="15" fill="#374151">CUSTOMERS</text>
+  <text x="76" y="250" font-family="Arial" font-size="15" fill="#374151">FULFILLMENT_CENTERS</text>
+  <rect x="355" y="94" width="190" height="190" rx="14" fill="#fff7ed" stroke="#c74634"/>
+  <text x="388" y="132" font-family="Arial" font-size="17" font-weight="700" fill="#374151">ORDERS_DV</text>
+  <text x="388" y="166" font-family="Arial" font-size="15" fill="#374151">_id</text>
+  <text x="388" y="194" font-family="Arial" font-size="15" fill="#374151">customerId</text>
+  <text x="388" y="222" font-family="Arial" font-size="15" fill="#374151">status, total</text>
+  <text x="388" y="250" font-family="Arial" font-size="15" fill="#374151">items[]</text>
+  <rect x="610" y="94" width="240" height="190" rx="14" fill="#fff" stroke="#d8d2c8"/>
+  <text x="636" y="132" font-family="Arial" font-size="17" font-weight="700" fill="#374151">Application and SQL</text>
+  <text x="636" y="166" font-family="Arial" font-size="15" fill="#374151">API-ready campaign JSON</text>
+  <text x="636" y="194" font-family="Arial" font-size="15" fill="#374151">SQL/JSON projection</text>
+  <text x="636" y="222" font-family="Arial" font-size="15" fill="#374151">Governed joins</text>
+  <text x="636" y="250" font-family="Arial" font-size="15" fill="#374151">No document copy</text>
+  <path d="M304 188h34" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M334 172l24 16-24 16z" fill="#7a3e2f"/>
+  <path d="M560 188h34" stroke="#7a3e2f" stroke-width="5" stroke-linecap="round"/><path d="M590 172l24 16-24 16z" fill="#7a3e2f"/>
+</svg>

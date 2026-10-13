@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="560" viewBox="0 0 1440 560" role="img" aria-labelledby="title desc">
+  <title id="title">Measure cold-chain coverage with spatial SQL</title>
+  <desc id="desc">Trial-site and depot coordinates stay joinable to capacity and supply evidence.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+    <filter id="shadow" x="-8%" y="-10%" width="116%" height="128%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="560" fill="#f8fafc"/>
+  <rect x="40" y="40" width="1360" height="480" rx="18" fill="#ffffff" stroke="#cbd5e1"/>
+
+<text x="720" y="86" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#111827" text-anchor="middle"><tspan x="720" dy="0">Measure cold-chain coverage with spatial SQL</tspan></text>
+<text x="720" y="122" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#475569" text-anchor="middle"><tspan x="720" dy="0">Trial-site and depot coordinates stay joinable to capacity and supply evidence.</tspan></text>
+<g filter="url(#shadow)">
+<rect x="92" y="168" width="300" height="178" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<path d="M92,182 Q92,168 106,168 H378 Q392,168 392,182 V224 H92 Z" fill="#dbeafe"/>
+<text x="242.0" y="204" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle"><tspan x="242.0" dy="0">Location Points</tspan></text>
+<text x="242.0" y="258" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#334155" text-anchor="middle"><tspan x="242.0" dy="0">trial sites</tspan><tspan x="242.0" dy="29">cold-chain depots</tspan><tspan x="242.0" dy="29">active facilities</tspan></text>
+</g>
+<path d="M420 257.0 H484" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+<g filter="url(#shadow)">
+<rect x="512" y="168" width="300" height="178" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<path d="M512,182 Q512,168 526,168 H798 Q812,168 812,182 V224 H512 Z" fill="#dcfce7"/>
+<text x="662.0" y="204" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle"><tspan x="662.0" dy="0">Oracle Spatial</tspan></text>
+<text x="662.0" y="258" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#334155" text-anchor="middle"><tspan x="662.0" dy="0">SDO_GEOMETRY</tspan><tspan x="662.0" dy="29">SDO_DISTANCE</tspan><tspan x="662.0" dy="29">miles between sites</tspan></text>
+</g>
+<path d="M840 257.0 H904" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+<g filter="url(#shadow)">
+<rect x="932" y="168" width="300" height="178" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<path d="M932,182 Q932,168 946,168 H1218 Q1232,168 1232,182 V224 H932 Z" fill="#fef3c7"/>
+<text x="1082.0" y="204" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#111827" text-anchor="middle"><tspan x="1082.0" dy="0">Operations Response</tspan></text>
+<text x="1082.0" y="258" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#334155" text-anchor="middle"><tspan x="1082.0" dy="0">nearest depot</tspan><tspan x="1082.0" dy="29">capacity check</tspan><tspan x="1082.0" dy="29">route priority</tspan></text>
+</g>
+<rect x="92" y="430" width="1256" height="64" rx="14" fill="#111827"/>
+<text x="720" y="469" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle"><tspan x="720" dy="0">Outcome: location evidence stays joinable to orders, inventory, and site priority.</tspan></text>
+</svg>

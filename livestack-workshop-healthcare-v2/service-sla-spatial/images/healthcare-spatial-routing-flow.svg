@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#fbfaf8"/>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#2f2b29">Choose a Logistics Site with Spatial and Operating Evidence</text>
+  <text x="60" y="108" font-family="Arial, sans-serif" font-size="19" fill="#4b4744">Distance narrows the search. Service, status, and load complete the workshop decision.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="70" y="205" width="250" height="200" rx="18" fill="#fff1ed" stroke="#c74634" stroke-width="3"/>
+    <text x="195" y="250" text-anchor="middle" font-size="15" font-weight="700" fill="#c74634">ORIGIN</text>
+    <circle cx="195" cy="300" r="28" fill="#c74634"/>
+    <circle cx="195" cy="300" r="10" fill="#fff"/>
+    <text x="195" y="360" text-anchor="middle" font-size="22" font-weight="700" fill="#2f2b29">Miami Care Site</text>
+
+    <path d="M320 305H440" stroke="#8d8883" stroke-width="5"/>
+    <path d="M430 292l22 13-22 13z" fill="#8d8883"/>
+    <text x="380" y="278" text-anchor="middle" font-size="14" font-weight="700" fill="#4b4744">8.5 MILES</text>
+
+    <rect x="452" y="205" width="290" height="200" rx="18" fill="#edf7f2" stroke="#3f7d68" stroke-width="3"/>
+    <text x="597" y="250" text-anchor="middle" font-size="15" font-weight="700" fill="#3f7d68">NEAREST ACTIVE MATCH</text>
+    <text x="597" y="302" text-anchor="middle" font-size="23" font-weight="700" fill="#2f2b29">Hialeah Site</text>
+    <text x="597" y="340" text-anchor="middle" font-size="17" fill="#4b4744">qPCR Respiratory Panel</text>
+    <text x="597" y="370" text-anchor="middle" font-size="17" fill="#4b4744">Status: ACTIVE</text>
+
+    <path d="M742 305H842" stroke="#8d8883" stroke-width="5"/>
+    <path d="M832 292l22 13-22 13z" fill="#8d8883"/>
+    <text x="792" y="278" text-anchor="middle" font-size="14" font-weight="700" fill="#4b4744">CHECK LOAD</text>
+
+    <rect x="854" y="205" width="350" height="200" rx="18" fill="#edf6f9" stroke="#287c99" stroke-width="3"/>
+    <text x="1029" y="250" text-anchor="middle" font-size="15" font-weight="700" fill="#287c99">CAPACITY EVIDENCE</text>
+    <text x="890" y="302" font-size="19" font-weight="700" fill="#2f2b29">Total capacity</text>
+    <text x="1145" y="302" text-anchor="end" font-size="19" fill="#4b4744">250,000</text>
+    <text x="890" y="340" font-size="19" font-weight="700" fill="#2f2b29">Current load</text>
+    <text x="1145" y="340" text-anchor="end" font-size="19" fill="#4b4744">61.5%</text>
+    <text x="890" y="378" font-size="19" font-weight="700" fill="#2f2b29">Estimated available</text>
+    <text x="1145" y="378" text-anchor="end" font-size="19" fill="#4b4744">96,250</text>
+
+    <rect x="180" y="510" width="920" height="120" rx="18" fill="#fffdfb" stroke="#d8d2cc" stroke-width="2"/>
+    <text x="640" y="558" text-anchor="middle" font-size="23" font-weight="700" fill="#c74634">Spatial answers “how far?” Relational columns answer “does it fit?”</text>
+    <text x="640" y="598" text-anchor="middle" font-size="18" fill="#4b4744">A real routing decision also checks inventory, transport time, patient needs, and local policy.</text>
+  </g>
+</svg>

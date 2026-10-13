@@ -29,7 +29,7 @@ This lab assumes you have:
 1. Open the navigation menu and click **Definitions**.
 
 2. In the **Workflows** tab,  click the `acme_bank_loan_processing_workflow` workflow.
-   ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
+    ![Select a workflow that you want to view in the Workflow UI](images/click-workflow.png)
 
 3. View the workflow definition in UI to understand the different components of the workflow and how the workflow is executed.
    ![View the selected workflow in Workflow UI](images/view-workflow.png)
@@ -40,7 +40,7 @@ This GenAI task is used to extract details for a loan application.
 
 1. In the Workflow definition, let's look at the first task, which is a GenAI task.
 
-   ![View the GenAI task](images/genai.png)
+    ![View the GenAI task](images/genai.png)
 
 2. Let's look at the input parameters required by this task. It requires the LLM profile definition that we viewed in Lab 4 and the prompt template that we viewed in Lab 5.
 
@@ -51,7 +51,7 @@ This is how the building blocks that we viewed earlier are pieced together insid
 1. In the Workflow definition, scroll down to view the Agentic Planner task.
 
 2. Click the task to view the associated code.
-   ![View the GenAI task](images/agentic-planner.png)
+    ![View the GenAI task](images/agentic-planner.png)
 
 3. Let's look at the input parameters required by agentic planner. It requires the LLM profile definition that we viewed in Lab 4, the prompt template that we viewed in Lab 5, the MCP server definitions that we viewed in Lab 4, and tasks that were defined previously in this workflow.
 
@@ -62,7 +62,7 @@ This is how the building blocks that we viewed earlier are pieced together insid
 1. In the Workflow definition, scroll down to view an HTTP task.
 
 2. Click the task to view the associated code.
-   ![View an HTTP task](images/http-task.png)
+    ![View an HTTP task](images/http-task.png)
 
 3. Let's view the input parameters required by HTTP task.
 
@@ -71,7 +71,7 @@ This is how the building blocks that we viewed earlier are pieced together insid
 1. In the Workflow definition, scroll down to view a human task.
 
 2. Click the task to view the associated code.
-   ![View a Human task](images/human-task.png)
+    ![View a Human task](images/human-task.png)
 
 3. Let's view the input parameters required by a Human task.
 

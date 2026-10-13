@@ -6,3 +6,9 @@
 env.sh
 .vscode
 .idea
+
+# LiveLabs authoring metadata
+**/traceability.md
+**/validation-result.md
+**/validation-results.md
+**/workshop-details.md

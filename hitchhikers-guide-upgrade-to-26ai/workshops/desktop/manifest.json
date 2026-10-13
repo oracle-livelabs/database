@@ -1,0 +1,90 @@
+{
+  "workshoptitle": "Hitchhiker's Guide for Upgrading to Oracle AI Database",
+  "support": "https://community.oracle.com/tech/developers/categories/database-26ai",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "The Introduction to Upgrade to 26ai Workshop.",
+      "filename": "../../00-introduction/introduction.md"
+    },
+    {
+      "title": "Get Started with noVNC Remote Desktop",
+      "description": "Using noVNC Remote Desktop",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/remote-desktop/using-novnc-remote-desktop.md"
+    },
+    {
+      "title": "Lab 1: Initialize Environment",
+      "description": "Initialize Environment",
+      "filename": "../../01-initialize-environment/initialize-environment.md"
+    },
+    {
+      "title": "Lab 2: Upgrade Non-CDB Using Refreshable Clone PDB",
+      "filename": "../../02-upg-refresh-clone/upg-refresh-clone.md"
+    },
+    {
+      "title": "Lab 3: Upgrade Non-CDB Using Plug-In",
+      "filename": "../../03-noncdb-plug-in-upg/noncdb-plug-in-upg.md"
+    },
+    {
+      "title": "Lab 4: Upgrade PDB Using Unplug-Plug",
+      "filename": "../../04-pdb-unplug-plug-upg/pdb-unplug-plug-upg.md"
+    },
+    {
+      "title": "Lab 5: Upgrade PDB Using Replay Upgrade",
+      "filename": "../../05-pdb-replay-upg/pdb-replay-upg.md"
+    },
+    {
+      "title": "Lab 6: Check Upgrades",
+      "filename": "../../06-check-upgrades/check-upgrades.md"
+    },
+    {
+      "title": "Lab 7: Troubleshooting",
+      "filename": "../../07-troubleshooting/troubleshooting.md"
+    },
+    {
+      "title": "Lab 8: Use AI Vector Search",
+      "filename": "../../08-use-ai/use-ai.md"
+    },
+    {
+      "title": "Lab 9: Check Your Understanding",
+      "description": "Review key upgrade concepts with a scored quiz.",
+      "filename": "../../09-check-your-understanding/check-your-understanding.md"
+    },
+    {
+      "title": "OPTIONAL Lab A: Upgrade CDB and Restore",
+      "description": "Upgrade a full CDB and restore.",
+      "filename": "../../a-upg-cdb-flashback/upg-cdb-flashback.md"
+    },
+    {
+      "title": "OPTIONAL Lab B: Upgrade Encrypted PDB Using Unplug-plug",
+      "description": "Upgrade a single encrypted PDB by plugging in to a new CDB.",
+      "filename": "../../b-enc-pdb-unplug-plug-upg/enc-pdb-unplug-plug-upg.md"
+    },
+    {
+      "title": "OPTIONAL Lab C: Upgrade encrypted PDB Using Refreshable Clone",
+      "description": "Upgrade a single encrypted PDB using a refreshable clone PDB.",
+      "filename": "../../c-enc-pdb-refresh-upg/enc-pdb-refresh-upg.md"
+    },
+    {
+      "title": "OPTIONAL Lab D: Downgrade PDB",
+      "description": "Downgrade a single PDB back to 19c.",
+      "filename": "../../d-pdb-dwgrd/pdb-dwgrd.md"
+    },
+    {
+      "title": "OPTIONAL Lab E: Migrate Data Using Data Pump",
+      "description": "Migrate just the data using a full Data Pump export.",
+      "filename": "../../e-migrate-using-data-pump/migrate-using-data-pump.md"
+    },
+    {
+      "title": "OPTIONAL Lab F: Migrate Data using Full Transportable Export/Import",
+      "description": "Migrate all data using transportable tablespaces.",
+      "filename": "../../f-migrate-using-ftex/migrate-using-ftex.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}

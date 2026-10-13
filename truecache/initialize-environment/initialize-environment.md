@@ -4,37 +4,32 @@
 
 In this lab we will review and startup all components required to successfully run this workshop.
 
-*Estimated Time:* 10 Minutes.
-
-Watch the video for a quick walk through of the Initialize Environment lab.
-
-[Initialize Environment lab](youtube:e3EXx3BMhec)
-
-Watch the video for a quick walk through of the Lab1.
-[Lab1](videohub:1_2ee2tbuw) 
+*Estimated Time:* 10 minutes.
 
 ### Objectives
-- Initialize the workshop environment.
+- Validate that the Primary database, True Cache, and application containers are available.
 
 ### Prerequisites
 This lab assumes you have:
-- A Free Tier, Paid or LiveLabs Oracle Cloud account
+- A Free Tier, paid OCI, or LiveLabs Oracle Cloud account
 - You have completed:
-    - Lab: Prepare Setup(*Free-tier* and *Paid Tenants* only)
-    - Lab: Environment Setup((*Free-tier* and *Paid Tenants* only))
+    - Lab 1: Prepare Setup (*Free Tier* and *paid tenancies* only)
+    - Lab 2: Environment Setup (*Free Tier* and *paid tenancies* only)
 
 ## Task 1: Validate That Required Processes Are Up and Running.
-1. With access to your remote desktop session, validate your environment before you start the subsequent labs. The following processes should be up and running:
+0. If you cannot launch the remote desktop, select View Login Info in the upper-left corner, then select Open Link in the Terraform Outputs section.
+    ![terraform url](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/terraformurl.png " ")
+1. Access your remote desktop session and validate your environment before you start the subsequent labs. The following processes should be up and running:
 
     - Oracle primary database container
-    - Oracle True Cache  container
+    - Oracle True Cache container
     - Client app container
 
-2.  Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal and follow these steps to validate the services.
+2. Select Activities in the upper-left corner, then select the Terminal icon next to Chrome.
 
-![activities_terminal_icon](images/activities_terminal_icon.png " ")
+    ![activities_terminal_icon](images/activities_terminal_icon.png " ")
 
-3. Log in to Podman and check for podman containers.
+3. List the Podman containers.
 
         ```
         <copy>
@@ -43,35 +38,26 @@ This lab assumes you have:
         ```
     ![podman containers](https://oracle-livelabs.github.io/database/truecache/initialize-environment/images/truecache-podman.png " ")
 
-4. If a container is stopped and not in running state then try to restart it.
+4. If a container is not running, start the pre-provisioned containers using the following command.
 
         ```
         <copy>
-        sudo podman stop <container ID/NAME>
+        sudo podman start prod truedb appclient
         </copy>
         ```
-        ```
-        <copy>
-        sudo podman start <container ID/NAME>
-        </copy>
-        ```
-5. For multiple containers, run the following to restart all at once.
+5. Verify that all containers are running.
 
         ```
         <copy>
-        sudo podman container stop $(sudo podman container list -qa)
-        </copy>
-        ```
-        ```
-        <copy>
-        sudo podman container start $(sudo podman container list -qa)
+        sudo podman ps --format 'table {{.Names}}\t{{.Status}}'
         </copy>
         ```
 
-You may now proceed to the next lab.
+Wait until `prod` and `truedb` report **healthy** and all three containers are running. If a named container is missing from `sudo podman ps -a`, contact the lab administrator.
+
+Continue to the next lab.
 
 ## Acknowledgements
-* **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
-* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025
-
+* **Authors** - Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Nithin Thekkupadam Narayanan, Sarvesh Gupta
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Sep 2026

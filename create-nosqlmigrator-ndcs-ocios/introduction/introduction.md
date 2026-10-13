@@ -6,7 +6,7 @@ In this workshop you will perform a data migration from Oracle NoSQL Database Cl
 
 This workshop walks you through the steps to download the Migrator utility to a Cloud Shell, create source and sink configuration templates for the Migrator utility, and migrate data from Oracle NoSQL database Cloud Service to OCI Object Storage.
 
-Estimated Lab Time: 30 Minutes
+Estimated Lab Time: 35 Minutes
 
 ### About NoSQL Database
 
@@ -47,4 +47,4 @@ You may proceed to the next lab.
 
 ## Acknowledgements
 * **Author** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance
-* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, August 2025
+* **Last Updated By/Date** - Ramya Umesh, Principal UA Developer, DB OnPrem Tech Svcs & User Assistance, December 2025

@@ -1,0 +1,26 @@
+{
+  "workshoptitle": "Make Search Trusted, Faster, and Cheaper on your Application with Trusted Answer Search",
+  "help": "livelabs-help-database_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction to Trusted Answer Search",
+      "filename": "../../introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "filename": "../../get-started.md"
+    },
+    {
+      "title": "Lab 1: Make Wikimedia Search Trusted",
+      "filename": "../../update_search.md"
+    },
+    {
+      "title": "Lab 2: Prove and Operate Trusted Search",
+      "filename": "../../advanced.md"
+    },
+    {
+      "title": "Need Help?",
+      "filename": "../../need_help.md"
+    }
+  ]
+}

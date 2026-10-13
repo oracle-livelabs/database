@@ -1,0 +1,241 @@
+[
+  {
+    "name" : "State and Local Government/Community Partner Network",
+    "description" : "Explore community-partner relationships that support coordinated public-service response.",
+    "tags" : null,
+    "version" : "7",
+    "layout" : "zeppelin",
+    "type" : "Default",
+    "snapshot" : false,
+    "isEditable" : true,
+    "isRunnable" : true,
+    "template" : "dsrgmn3y",
+    "templateConfig" : "{\"visualization\":{\"filters\":[{\"_id\":1583324064459,\"type\":\"styling\",\"enabled\":true,\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"target\":\"edge\",\"properties\":{\"colors\":[\"rgba(0, 0, 0, 0.1)\"],\"style\":[\"dashed\"],\"legendTitle\":[\"Hidden Connection\"]}},{\"_id\":1590499315755,\"type\":\"aggregation\",\"enabled\":true,\"conditions\":{\"operator\":\"and\",\"conditions\":[]},\"component\":\"vertex\",\"target\":\"vertex\",\"properties\":{},\"aggregation\":[{\"source\":\"\",\"type\":\"average\"}]}],\"version\":4}}",
+    "paragraphs" : [
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "",
+          "**Community Partner Network with Property Graph**",
+          "",
+          "This notebook shows how a public-service team can use a property graph to understand how programs, partner organizations, and handoffs connect. The `INFLUENCER_NETWORK` graph models a public-service program such as Benefits Eligibility, the community partner that promotes it, and organizations connected through `CONNECTS_TO` handoffs.",
+          "",
+          "In this workshop's graph model, a `brand` vertex represents a public-service program and an `influencer` vertex represents a community partner. The labels come from the graph objects, while the learner-facing question is about finding useful coordination paths between programs and partners.",
+          "",
+          "Run each graph paragraph with its play button, then use the visual result to discuss coordination evidence. A connection is a lead for human review; it is not proof of eligibility, service quality, or authorization to refer."
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1788699724065,
+          "endTime" : 1788699724105,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p><strong>Community Partner Network with Property Graph</strong></p>\n<p>This notebook shows how a public-service team can use a property graph to understand how programs, partner organizations, and handoffs connect. The <code>INFLUENCER_NETWORK</code> graph models a public-service program such as Benefits Eligibility, the community partner that promotes it, and organizations connected through <code>CONNECTS_TO</code> handoffs.</p>\n<p>In this workshop's graph model, a <code>brand</code> vertex represents a public-service program and an <code>influencer</code> vertex represents a community partner. The labels come from the graph objects, while the learner-facing question is about finding useful coordination paths between programs and partners.</p>\n<p>Run each graph paragraph with its play button, then use the visual result to discuss coordination evidence. A connection is a lead for human review; it is not proof of eligibility, service quality, or authorization to refer.</p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "**Visual exercise 1: direct partner handoffs**",
+          "",
+          "This first graph query starts at the `Benefits Eligibility` program and follows the path to a source partner and then to a connected partner. Read the `MATCH` pattern from left to right: the program is connected to the source through a `promotes` relationship, and the source reaches the partner through a `connects_to` handoff.",
+          "",
+          "The `WHERE` clause anchors the search on one program, while `COLUMNS` returns the vertex and edge identifiers that Graph Studio needs to draw the result. Look for the program, the starting partner, the connected partners, and the relationship types that join them. This view helps a coordinator see which organizations are already connected before planning outreach."
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : null,
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1788699756289,
+          "endTime" : 1788699756359,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p><strong>Visual exercise 1: direct partner handoffs</strong></p>\n<p>This first graph query starts at the <code>Benefits Eligibility</code> program and follows the path to a source partner and then to a connected partner. Read the <code>MATCH</code> pattern from left to right: the program is connected to the source through a <code>promotes</code> relationship, and the source reaches the partner through a <code>connects_to</code> handoff.</p>\n<p>The <code>WHERE</code> clause anchors the search on one program, while <code>COLUMNS</code> returns the vertex and edge identifiers that Graph Studio needs to draw the result. Look for the program, the starting partner, the connected partners, and the relationship types that join them. This view helps a coordinator see which organizations are already connected before planning outreach.</p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%sql",
+          "SELECT *",
+          "FROM GRAPH_TABLE (",
+          "  influencer_network",
+          "    MATCH (program IS brand)<-[program_link IS promotes]-(source IS influencer)-[handoff IS connects_to]->(partner IS influencer)",
+          "      WHERE program.brand_name = 'Benefits Eligibility'",
+          "        COLUMNS (",
+          "            vertex_id(program) AS program_id,",
+          "                vertex_id(source) AS source_partner_id,",
+          "                    edge_id(program_link) AS program_link_id,",
+          "                        edge_id(handoff) AS handoff_id,",
+          "                            vertex_id(partner) AS connected_partner_id",
+          "                              )",
+          "                              );"
+        ],
+        "selectedVisualization" : "visualization",
+        "visualizationConfig" : "[{\"visualization\":{\"version\":10,\"ruleBasedStyles\":[{\"_id\":\"d7c6d90\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"vertex\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"BRAND\"}]},\"component\":\"vertex\",\"style\":{\"color\":\"#8FBFD0\"},\"legendTitle\":\"BRAND\",\"isDefaultRule\":true},{\"_id\":\"-71f57e66\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"vertex\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"INFLUENCER\"}]},\"component\":\"vertex\",\"style\":{\"color\":\"#F0CC71\"},\"legendTitle\":\"INFLUENCER\",\"isDefaultRule\":true},{\"_id\":\"31d21dd\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"PROMOTES\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"PROMOTES\",\"isDefaultRule\":true},{\"_id\":\"-2ce1f8e1\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"CONNECTS_TO\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"CONNECTS_TO\",\"isDefaultRule\":true},{\"stylingEnabled\":true,\"visibilityEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"style\":{\"dasharray\":\"5\",\"color\":\"rgba(0, 0, 0, 0.1)\"},\"properties\":{\"style\":[\"dashed\"]},\"_id\":1583324064459,\"target\":\"edge\",\"type\":\"styling\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"legendTitle\":\"Hidden Connection\",\"_fromTemplate\":true}],\"lastColumns\":[\"PROGRAM_ID\",\"SOURCE_PARTNER_ID\",\"PROGRAM_LINK_ID\",\"HANDOFF_ID\",\"CONNECTED_PARTNER_ID\"]}}]",
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1788699825077,
+          "endTime" : 1788699826879,
+          "interpreter" : "sql",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "{\"schema\":\"LLUSER\",\"name\":\"default\",\"resultSetId\":\"78fba877-73e3-4081-80cf-8719d1f354f0\",\"graph\":{\"vertices\":[{\"id\":\"BRANDS{\\\"BRAND_ID\\\":1}\",\"properties\":{\"BRAND_CATEGORY\":\"Health and Human Services\",\"BRAND_ID\":1,\"BRAND_NAME\":\"Benefits Eligibility\",\"SOCIAL_TIER\":\"statewide\"},\"labels\":[\"BRAND\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":1}\",\"properties\":{\"CITY\":\"Denver\",\"ENGAGEMENT_RATE\":0.081,\"NICHE\":\"Benefits Eligibility\",\"IS_VERIFIED\":1,\"HANDLE\":\"@co-benefits\",\"PLATFORM\":\"community\",\"INFLUENCE_SCORE\":94,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":1,\"FOLLOWER_COUNT\":85000,\"DISPLAY_NAME\":\"Colorado Benefits Network\"},\"labels\":[\"INFLUENCER\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":2}\",\"properties\":{\"CITY\":\"Grand Junction\",\"ENGAGEMENT_RATE\":0.074,\"NICHE\":\"Family Support\",\"IS_VERIFIED\":1,\"HANDLE\":\"@western-slope-family\",\"PLATFORM\":\"partner\",\"INFLUENCE_SCORE\":89,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":2,\"FOLLOWER_COUNT\":42000,\"DISPLAY_NAME\":\"Western Slope Family Resource Alliance\"},\"labels\":[\"INFLUENCER\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":3}\",\"properties\":{\"CITY\":\"Denver\",\"ENGAGEMENT_RATE\":0.068,\"NICHE\":\"Human Services\",\"IS_VERIFIED\":1,\"HANDLE\":\"@county-human-services\",\"PLATFORM\":\"agency\",\"INFLUENCE_SCORE\":87,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":3,\"FOLLOWER_COUNT\":61000,\"DISPLAY_NAME\":\"County Human Services Collaborative\"},\"labels\":[\"INFLUENCER\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":4}\",\"properties\":{\"CITY\":\"Fort Collins\",\"ENGAGEMENT_RATE\":0.063,\"NICHE\":\"Housing\",\"IS_VERIFIED\":1,\"HANDLE\":\"@front-range-housing\",\"PLATFORM\":\"partner\",\"INFLUENCE_SCORE\":82,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":4,\"FOLLOWER_COUNT\":36000,\"DISPLAY_NAME\":\"Front Range Housing Partnership\"},\"labels\":[\"INFLUENCER\"]}],\"edges\":[{\"id\":\"BRAND_INFLUENCER_LINKS{\\\"LINK_ID\\\":1}\",\"properties\":{\"AVG_ENGAGEMENT\":0.081,\"POST_COUNT\":18,\"RELATIONSHIP_TYPE\":\"ambassador\"},\"labels\":[\"PROMOTES\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":1}\",\"target\":\"BRANDS{\\\"BRAND_ID\\\":1}\"},{\"id\":\"BRAND_INFLUENCER_LINKS{\\\"LINK_ID\\\":2}\",\"properties\":{\"AVG_ENGAGEMENT\":0.074,\"POST_COUNT\":14,\"RELATIONSHIP_TYPE\":\"organic\"},\"labels\":[\"PROMOTES\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":2}\",\"target\":\"BRANDS{\\\"BRAND_ID\\\":1}\"},{\"id\":\"INFLUENCER_CONNECTIONS{\\\"CONNECTION_ID\\\":1}\",\"properties\":{\"CONNECTION_TYPE\":\"collaborates\",\"INTERACTION_COUNT\":42,\"STRENGTH\":0.92},\"labels\":[\"CONNECTS_TO\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":1}\",\"target\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":2}\"},{\"id\":\"INFLUENCER_CONNECTIONS{\\\"CONNECTION_ID\\\":2}\",\"properties\":{\"CONNECTION_TYPE\":\"follows\",\"INTERACTION_COUNT\":35,\"STRENGTH\":0.88},\"labels\":[\"CONNECTS_TO\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":1}\",\"target\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":3}\"},{\"id\":\"INFLUENCER_CONNECTIONS{\\\"CONNECTION_ID\\\":3}\",\"properties\":{\"CONNECTION_TYPE\":\"collaborates\",\"INTERACTION_COUNT\":28,\"STRENGTH\":0.81},\"labels\":[\"CONNECTS_TO\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":2}\",\"target\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":4}\"}],\"numResults\":3,\"graphOwner\":\"LLUSER\",\"graphName\":\"INFLUENCER_NETWORK\",\"isLastResultSet\":true,\"vertexIdColumnNames\":[\"PROGRAM_ID\",\"SOURCE_PARTNER_ID\",\"CONNECTED_PARTNER_ID\"],\"edgeIdColumnNames\":[\"PROGRAM_LINK_ID\",\"HANDOFF_ID\"]},\"table\":\"PROGRAM_ID\\tSOURCE_PARTNER_ID\\tPROGRAM_LINK_ID\\tHANDOFF_ID\\tCONNECTED_PARTNER_ID\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"BRANDS\\\",\\\"KEY_VALUE\\\":{\\\"BRAND_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"BRAND_INFLUENCER_LINKS\\\",\\\"KEY_VALUE\\\":{\\\"LINK_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCER_CONNECTIONS\\\",\\\"KEY_VALUE\\\":{\\\"CONNECTION_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":2}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"BRANDS\\\",\\\"KEY_VALUE\\\":{\\\"BRAND_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"BRAND_INFLUENCER_LINKS\\\",\\\"KEY_VALUE\\\":{\\\"LINK_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCER_CONNECTIONS\\\",\\\"KEY_VALUE\\\":{\\\"CONNECTION_ID\\\":2}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":3}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"BRANDS\\\",\\\"KEY_VALUE\\\":{\\\"BRAND_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":2}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"BRAND_INFLUENCER_LINKS\\\",\\\"KEY_VALUE\\\":{\\\"LINK_ID\\\":2}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCER_CONNECTIONS\\\",\\\"KEY_VALUE\\\":{\\\"CONNECTION_ID\\\":3}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":4}}\"}",
+              "type" : "NETWORK"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%md",
+          "**Visual exercise 2: two-hop coordination path**",
+          "",
+          "Now start with Colorado Benefits Network (`@co-benefits`) and follow two `connects_to` edges. Read the `MATCH` pattern as a three-part path: `source` is the starting partner, `middle` is the intermediary, and `destination` is the organization reached through the second handoff.",
+          "",
+          "The `WHERE` clause keeps the investigation focused on one known partner, and `COLUMNS` returns the source, intermediary, destination, and both handoff identifiers for the graph visualization. Use the intermediary and destination to discuss a focused coordination conversation; the path is evidence to review, not an automatic referral or eligibility decision."
+        ],
+        "selectedVisualization" : "html",
+        "visualizationConfig" : "[{\"visualization\":{\"ruleBasedStyles\":[{\"stylingEnabled\":true,\"visibilityEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"style\":{\"dasharray\":\"5\",\"color\":\"rgba(0, 0, 0, 0.1)\"},\"properties\":{\"style\":[\"dashed\"]},\"_id\":1583324064459,\"target\":\"edge\",\"type\":\"styling\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"legendTitle\":\"Hidden Connection\",\"_fromTemplate\":true},{\"_id\":\"d7c6d90\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"vertex\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"BRAND\"}]},\"component\":\"vertex\",\"style\":{\"color\":\"#8FBFD0\"},\"legendTitle\":\"BRAND\",\"isDefaultRule\":true},{\"_id\":\"-71f57e66\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"vertex\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"INFLUENCER\"}]},\"component\":\"vertex\",\"style\":{\"color\":\"#F0CC71\"},\"legendTitle\":\"INFLUENCER\",\"isDefaultRule\":true},{\"_id\":\"31d21dd\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"PROMOTES\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"PROMOTES\",\"isDefaultRule\":true},{\"_id\":\"-2ce1f8e1\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"CONNECTS_TO\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"CONNECTS_TO\",\"isDefaultRule\":true}],\"displaySizeOnLoad\":10,\"lastColumns\":[\"PROGRAM_ID\",\"SOURCE_PARTNER_ID\",\"PROGRAM_LINK_ID\",\"HANDOFF_ID\",\"CONNECTED_PARTNER_ID\"],\"version\":11}}]",
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1788699867219,
+          "endTime" : 1788699867453,
+          "interpreter" : "md",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "<p><strong>Visual exercise 2: two-hop coordination path</strong></p>\n<p>Now start with Colorado Benefits Network (<code>@co-benefits</code>) and follow two <code>connects_to</code> edges. Read the <code>MATCH</code> pattern as a three-part path: <code>source</code> is the starting partner, <code>middle</code> is the intermediary, and <code>destination</code> is the organization reached through the second handoff.</p>\n<p>The <code>WHERE</code> clause keeps the investigation focused on one known partner, and <code>COLUMNS</code> returns the source, intermediary, destination, and both handoff identifiers for the graph visualization. Use the intermediary and destination to discuss a focused coordination conversation; the path is evidence to review, not an automatic referral or eligibility decision.</p>\n",
+              "type" : "HTML"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      },
+      {
+        "row" : 0,
+        "col" : 0,
+        "sizeX" : 0,
+        "width" : 0,
+        "title" : null,
+        "hasTitle" : false,
+        "message" : [
+          "%sql",
+          "SELECT *",
+          "FROM GRAPH_TABLE (",
+          "  influencer_network",
+          "    MATCH (source IS influencer)-[first_edge IS connects_to]->(middle IS influencer)-[second_edge IS connects_to]->(destination IS influencer)",
+          "      WHERE source.handle = '@co-benefits'",
+          "        COLUMNS (",
+          "            vertex_id(source) AS source_partner_id,",
+          "                edge_id(first_edge) AS first_handoff_id,",
+          "                    vertex_id(middle) AS intermediary_partner_id,",
+          "                        edge_id(second_edge) AS second_handoff_id,",
+          "                            vertex_id(destination) AS destination_partner_id",
+          "                              )",
+          "                              );"
+        ],
+        "selectedVisualization" : "visualization",
+        "visualizationConfig" : "[{\"visualization\":{\"ruleBasedStyles\":[{\"stylingEnabled\":true,\"visibilityEnabled\":true,\"aggregationEnabled\":true,\"modifierStyles\":{},\"style\":{\"dasharray\":\"5\",\"color\":\"rgba(0, 0, 0, 0.1)\"},\"properties\":{\"style\":[\"dashed\"]},\"_id\":1583324064459,\"target\":\"edge\",\"type\":\"styling\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"legendTitle\":\"Hidden Connection\",\"_fromTemplate\":true},{\"_id\":\"d7c6d90\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"vertex\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"BRAND\"}]},\"component\":\"vertex\",\"style\":{\"color\":\"#8FBFD0\"},\"legendTitle\":\"BRAND\",\"isDefaultRule\":true},{\"_id\":\"-71f57e66\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"vertex\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"INFLUENCER\"}]},\"component\":\"vertex\",\"style\":{\"color\":\"#F0CC71\"},\"legendTitle\":\"INFLUENCER\",\"isDefaultRule\":true},{\"_id\":\"31d21dd\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"PROMOTES\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"PROMOTES\",\"isDefaultRule\":true},{\"_id\":\"-2ce1f8e1\",\"stylingEnabled\":true,\"visibilityEnabled\":true,\"target\":\"edge\",\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"labels\",\"operator\":\"CONTAINS\",\"value\":\"CONNECTS_TO\"}]},\"component\":\"edge\",\"style\":{\"color\":\"#8B8580\"},\"legendTitle\":\"CONNECTS_TO\",\"isDefaultRule\":true}],\"displaySizeOnLoad\":9,\"lastColumns\":[\"SOURCE_PARTNER_ID\",\"FIRST_HANDOFF_ID\",\"INTERMEDIARY_PARTNER_ID\",\"SECOND_HANDOFF_ID\",\"DESTINATION_PARTNER_ID\"],\"version\":11}}]",
+        "hideCode" : false,
+        "hideResult" : false,
+        "hideGutter" : true,
+        "hideVizConfig" : false,
+        "hideInIFrame" : false,
+        "enabled" : true,
+        "forms" : "[]",
+        "result" : {
+          "startTime" : 1788699908970,
+          "endTime" : 1788699909757,
+          "interpreter" : "sql",
+          "taskStatus" : "SUCCESS",
+          "status" : "SUCCESS",
+          "results" : [
+            {
+              "message" : "{\"schema\":\"LLUSER\",\"name\":\"default\",\"resultSetId\":\"86f68d29-a1a1-45c2-afbc-beb06759395f\",\"graph\":{\"vertices\":[{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":1}\",\"properties\":{\"CITY\":\"Denver\",\"ENGAGEMENT_RATE\":0.081,\"NICHE\":\"Benefits Eligibility\",\"IS_VERIFIED\":1,\"HANDLE\":\"@co-benefits\",\"PLATFORM\":\"community\",\"INFLUENCE_SCORE\":94,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":1,\"FOLLOWER_COUNT\":85000,\"DISPLAY_NAME\":\"Colorado Benefits Network\"},\"labels\":[\"INFLUENCER\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":2}\",\"properties\":{\"CITY\":\"Grand Junction\",\"ENGAGEMENT_RATE\":0.074,\"NICHE\":\"Family Support\",\"IS_VERIFIED\":1,\"HANDLE\":\"@western-slope-family\",\"PLATFORM\":\"partner\",\"INFLUENCE_SCORE\":89,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":2,\"FOLLOWER_COUNT\":42000,\"DISPLAY_NAME\":\"Western Slope Family Resource Alliance\"},\"labels\":[\"INFLUENCER\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":3}\",\"properties\":{\"CITY\":\"Denver\",\"ENGAGEMENT_RATE\":0.068,\"NICHE\":\"Human Services\",\"IS_VERIFIED\":1,\"HANDLE\":\"@county-human-services\",\"PLATFORM\":\"agency\",\"INFLUENCE_SCORE\":87,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":3,\"FOLLOWER_COUNT\":61000,\"DISPLAY_NAME\":\"County Human Services Collaborative\"},\"labels\":[\"INFLUENCER\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":4}\",\"properties\":{\"CITY\":\"Fort Collins\",\"ENGAGEMENT_RATE\":0.063,\"NICHE\":\"Housing\",\"IS_VERIFIED\":1,\"HANDLE\":\"@front-range-housing\",\"PLATFORM\":\"partner\",\"INFLUENCE_SCORE\":82,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":4,\"FOLLOWER_COUNT\":36000,\"DISPLAY_NAME\":\"Front Range Housing Partnership\"},\"labels\":[\"INFLUENCER\"]},{\"id\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":5}\",\"properties\":{\"CITY\":\"Pueblo\",\"ENGAGEMENT_RATE\":0.071,\"NICHE\":\"Emergency Support\",\"IS_VERIFIED\":1,\"HANDLE\":\"@emergency-coalition\",\"PLATFORM\":\"partner\",\"INFLUENCE_SCORE\":86,\"REGION\":\"Colorado\",\"INFLUENCER_ID\":5,\"FOLLOWER_COUNT\":55000,\"DISPLAY_NAME\":\"Emergency Services Coalition\"},\"labels\":[\"INFLUENCER\"]}],\"edges\":[{\"id\":\"INFLUENCER_CONNECTIONS{\\\"CONNECTION_ID\\\":1}\",\"properties\":{\"CONNECTION_TYPE\":\"collaborates\",\"INTERACTION_COUNT\":42,\"STRENGTH\":0.92},\"labels\":[\"CONNECTS_TO\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":1}\",\"target\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":2}\"},{\"id\":\"INFLUENCER_CONNECTIONS{\\\"CONNECTION_ID\\\":2}\",\"properties\":{\"CONNECTION_TYPE\":\"follows\",\"INTERACTION_COUNT\":35,\"STRENGTH\":0.88},\"labels\":[\"CONNECTS_TO\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":1}\",\"target\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":3}\"},{\"id\":\"INFLUENCER_CONNECTIONS{\\\"CONNECTION_ID\\\":3}\",\"properties\":{\"CONNECTION_TYPE\":\"collaborates\",\"INTERACTION_COUNT\":28,\"STRENGTH\":0.81},\"labels\":[\"CONNECTS_TO\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":2}\",\"target\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":4}\"},{\"id\":\"INFLUENCER_CONNECTIONS{\\\"CONNECTION_ID\\\":4}\",\"properties\":{\"CONNECTION_TYPE\":\"mentioned\",\"INTERACTION_COUNT\":22,\"STRENGTH\":0.75},\"labels\":[\"CONNECTS_TO\"],\"source\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":3}\",\"target\":\"INFLUENCERS{\\\"INFLUENCER_ID\\\":5}\"}],\"numResults\":2,\"graphOwner\":\"LLUSER\",\"graphName\":\"INFLUENCER_NETWORK\",\"isLastResultSet\":true,\"vertexIdColumnNames\":[\"SOURCE_PARTNER_ID\",\"INTERMEDIARY_PARTNER_ID\",\"DESTINATION_PARTNER_ID\"],\"edgeIdColumnNames\":[\"FIRST_HANDOFF_ID\",\"SECOND_HANDOFF_ID\"]},\"table\":\"SOURCE_PARTNER_ID\\tFIRST_HANDOFF_ID\\tINTERMEDIARY_PARTNER_ID\\tSECOND_HANDOFF_ID\\tDESTINATION_PARTNER_ID\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCER_CONNECTIONS\\\",\\\"KEY_VALUE\\\":{\\\"CONNECTION_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":2}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCER_CONNECTIONS\\\",\\\"KEY_VALUE\\\":{\\\"CONNECTION_ID\\\":3}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":4}}\\n{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":1}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCER_CONNECTIONS\\\",\\\"KEY_VALUE\\\":{\\\"CONNECTION_ID\\\":2}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":3}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCER_CONNECTIONS\\\",\\\"KEY_VALUE\\\":{\\\"CONNECTION_ID\\\":4}}\\t{\\\"GRAPH_OWNER\\\":\\\"LLUSER\\\",\\\"GRAPH_NAME\\\":\\\"INFLUENCER_NETWORK\\\",\\\"ELEM_TABLE\\\":\\\"INFLUENCERS\\\",\\\"KEY_VALUE\\\":{\\\"INFLUENCER_ID\\\":5}}\"}",
+              "type" : "NETWORK"
+            }
+          ],
+          "forms" : "[]"
+        },
+        "relations" : [ ],
+        "dynamicFormParams" : "{}"
+      }
+    ]
+  }
+]

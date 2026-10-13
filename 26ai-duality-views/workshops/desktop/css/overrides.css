@@ -1,0 +1,21 @@
+/* Only target FreeSQL embedded worksheets */
+#contentBox iframe[data-freesql-src],
+#contentBox iframe[src*="freesql.com/embedded"] {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+
+  /* Give the embed enough space for editor + results */
+  height: clamp(560px, 70vh, 820px) !important;
+  min-height: 560px !important;
+
+  /* Neutralize HOL iframe styling that can affect layout */
+  padding: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+#contentBox iframe.freesql-pending,
+#contentBox iframe.freesql-loading {
+  background: #f8fafc !important;
+}

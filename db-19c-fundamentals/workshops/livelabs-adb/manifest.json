@@ -11,7 +11,7 @@
          {
             "title": "Get Started",
             "description": "Log in to Oracle Cloud",
-            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login-livelabs2.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-livelabs2.md"
         },
         {
             "title": "Introduction",
@@ -23,7 +23,7 @@
             "title": "Lab 1: Verify Setup",
             "description": "Finish LiveLabs setup",
             "publisheddate": "3/24/2020",
-            "filename": "https://oracle-livelabs.github.io/common/labs/setup-compute/verify-setup-19c-livelabs.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/setup-compute/verify-setup-19c-livelabs.md"
         },
         {
             "title": "Lab 2: Start Labs Here",
@@ -34,7 +34,7 @@
         {
             "title": "Need Help?",
             "description": "Solutions to Common Problems and Directions for Receiving Live Help",
-            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-livelabs.md"
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
         }
     ]
 }

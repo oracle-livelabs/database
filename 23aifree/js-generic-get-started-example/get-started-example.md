@@ -2,9 +2,13 @@
 
 ## Introduction
 
-Before jumping into the description of JavaScript features and all their details let's begin with a practical example. Enhancing data quality is a focus area for many businesses. Poor data quality prevents analysts from making properly informed decisions, and it all starts at the source system. In this lab you will read about validating email addresses, a common scenario in many applications. Validating email addresses isn't a new problem, and there are plenty of solutions available. This lab explores the open source `validator.js` module's `isEmail()` function and demonstrates how to use it in your application.
+Before jumping into the description of JavaScript features and all their details, let's begin with a practical example. Enhancing data quality is a focus area for many businesses. Poor data quality prevents analysts from making well-informed decisions, and it all starts at the source system. In this lab, you'll learn about validating email addresses, a common scenario in many applications.
+
+Validating email addresses isn't a new problem, and there are plenty of solutions available. This lab explores the open source `validator.js` module's `isEmail()` function and demonstrates how to use it in your application.
 
 > If you intend to use `validator.js` in your own project please refer to validator's GitHub project site for more details about the project's license and implications of use.
+
+This lab works best with the Chrome browser or one of the many other browsers derived off it.
 
 Estimated Time: 10 minutes
 
@@ -12,9 +16,8 @@ Estimated Time: 10 minutes
 
 In this lab, you will:
 
-- Create a schema to store the JavaScript module
-- Download the ECMAScript version of the `validator.js` module
-- Create an MLE module in the database
+- Use Database Actions to interact with your database
+- Download the ECMAScript version of the `validator.js` module and store it in the database
 - Expose the module to PL/SQL and SQL
 - Validate email addresses
 
@@ -22,284 +25,146 @@ In this lab, you will:
 
 This lab assumes you have:
 
-- Access to an Oracle Database 23ai Free instance
-- Sufficient privileges to create a database user
+- Access to an Oracle AI Database 26ai instance via Database Actions
+- Accessed Database Actions
 
-## Task 1: Create a schema to store the JavaScript module
+## Task 1: Create a new user
 
-All the steps in this lab can either be completed in `sqlplus` or `sqlcl`. The instructions refer to `sqlplus` but apart from the initial connection the two options are identical. Instead of typing the instructions you can use the "copy" button to copy the code to the clipboard. Select the terminal window you want to paste the code into, then hit CTRL + SHIFT + V to insert the text at your cursor's position.
+The default user you are connecting to when starting Database Actions—the ADMIN user—is a superuser. Just like with any other system, you shouldn't use superusers for regular tasks.
 
-1. Start by connecting to the database as `SYS`
+1. Access your Autonomous Database
 
-    ```sql
-    <copy>sqlplus / as sysdba</copy>
-    ```
+    After you logged into Oracle Cloud Console you can access your Autonomous AI Database. Access the hamburger menu in the top-left corner, then click on Oracle AI Database > Autonomous AI Database. Change your compartment by clicking on nnnn (root) and entering the compartment from your login details.
 
-    Should you get the message `connected to an idle instance` or `sqlplus: command not found` you need to source the correct environment variables first:
+2. Log into Database Actions
 
-    ```bash
-    <copy>ORACLE_SID=FREE ORAENV_ASK=NO source oraenv</copy>
-    ```
+    Select Database Actions -> Users in the landing page of your Autonomous Database.
+    ![Select Database Actions -> Database Users](./images/create-user-01.png)
 
-    Verify the success by echoing both `ORACLE_SID` and `ORACLE_HOME`:
+    Control is transferred to Database Actions in a new browser tab.
 
-    ```bash
-    <copy>echo "ORACLE_SID is set to ${ORACLE_SID} for ORACLE_HOME ${ORACLE_HOME}"</copy>
-    ```
+3. Create the Emily account
 
-    If you see the following output on your screen you are all set:
+    Complete the user creation wizard as shown in the screenshot.
 
-    ```
-    ORACLE_SID is set to FREE for ORACLE_HOME /opt/oracle/product/23c/dbhomeFree
-    ```
+    ![Create the EMILY account](./images/create-user-02.png)
 
-2. Once you are successfully connected to the database, switch to the pre-created Pluggable Database (PDB) `freepdb1`
+    Don't forget to enable the "REST enabled" switch.
 
-    ```sql
-    <copy>alter session set container = freepdb1;</copy>
-    ```
+4. Assign Roles
 
-    Verify whether you are in the correct container using the following query:
+    Proceed to the second tab in the user creation wizard.
 
-    ```sql
-    <copy>select sys_context('userenv','con_name') as container_name;</copy>
-    ```
+    ![Proceed to add roles](./images/create-user-03.png)
 
-    If you see `FREEPDB1` you are good to go.
+    Assign the following roles:
 
-    ```
-    CONTAINER_NAME
-    ------------------------------------
-    FREEPDB1
-    ```
+    - `SODA_APP`
+    - `DB_DEVELOPER_ROLE`
 
-3. Create a new user in freepdb1 with the necessary privileges to create, store and run JavaScript code
+    Please tick the _Granted_ and _Default_ checkboxes for each of these.
 
-    In this step you prepare the creation of the developer account. The instructions in the following snippet create a new account, named `emily`. It will be used to store JavaScript modules in the database.
+5. Finish the user creation
 
-    Save the snippet in a file, for example `${HOME}/hol23c/setup.sql` and execute it in `sqlcl` or `sqlplus`. You can use graphical text editors installed on the system via the Activities button or the command line.
+    Click on the "Create User" button to create the database account and enable it.
 
-    ```sql
-    <copy>set echo on
-    drop user if exists emily cascade;
+This concludes the user creation.
 
-    create user emily identified by &secretpassword
-    default tablespace users quota unlimited on users;
+## Task 2: Create the Validator Module
 
-    grant create session to emily;
-    grant db_developer_role to emily;
-    grant execute on javascript to emily;
+Sign out of the ADMIN account using the menu in the top right corner, and log back in as EMILY. Using the hamburger menu, select _JavaScript_ in the leftmost column. Make sure you are using the _Editor_ tab.
 
-    host mkdir /home/oracle/hol23c 2> /dev/null || echo "directory exists"
+1. Load the Validator Module into the database
 
-    drop directory if exists javascript_src_dir;
-    create directory javascript_src_dir as '/home/oracle/hol23c';
-    grant read, write on directory javascript_src_dir to emily;
+    Click on the globe icon (the one in the red circle) to open the "Load from URL" dialog. JavaScript modules can be loaded into the database in many ways, the browser's "Load from URL" being the most convenient.
 
-    exit</copy>
-    ```
+    ![Load from URL dialog](./images/create-validator-module-01.png)
 
-    You should still be connected to `freebdb1` as `SYS` as per the previous step. If not, connect to `freepdb1` as `SYS` before executing the following command:
+    Enter the following URL: `https://cdn.jsdelivr.net/npm/validator@13.15.23/+esm`
 
-    ```sql
-    <copy>start ${HOME}/hol23c/setup.sql</copy>
-    ```
+    Oracle's JavaScript engine requires modules to adhere to the ECMAScript format. CommonJS modules or other formats aren't supported. Click on "open" to load the module into the editor.
 
-    Here is some sample output of an execution:
+2. Store the module in the database
 
-    ```
-    SQL> @hol23c/setup
-    SQL> drop user if exists emily cascade;
+    With the source code loaded into the editor, it's time to persist the module in the database. You do so by assigning it a name, `validator_module`, and clicking on the save button, highlighted in the following screenshot.
 
-    User dropped.
+    ![saving the validator module in the database](./images/create-validator-module-02.png)
 
-    SQL> create user emily identified by &secretpassword
-      2  default tablespace users quota unlimited on users;
-    Enter value for secretpassword: yoursupersecretpasswordhere
-    old   1: create user emily identified by &secretpassword
-    new   1: create user emily identified by yoursupersecretpasswordhere
+3. View the status
 
-    User created.
+    After clicking on the save button the module is stored in the database. It's shown in the tree view in the left and can be used from now on. The end result is visible in the following screenshot:
 
-    SQL> grant create session to emily;
+    ![Database Actions after the module has been saved](./images/create-validator-module-03.png).
 
-    Grant succeeded.
+This concludes the loading of the JavaScript module in the database.
 
-    SQL> grant db_developer_role to emily;
+## Task 3: Make the JavaScript code available to SQL and PL/SQL
 
-    Grant succeeded.
+You can make any function defined in a JavaScript module available to SQL and PL/SQL. This is done using a call specification. A call specification essentially maps a name in the SQL namespace to a JavaScript function within a module. You are going to create one in this task.
 
-    SQL> grant execute on javascript to emily;
+1. Create a call specification
 
-    Grant succeeded.
+    All of the previous activities can equally be performed via SQL. DDL statements are available to create and drop JavaScript modules, and perform many more tasks. In the following section you are going to switch to SQL. To do so, click on the hamburger menu on the top left, then select SQL under the development column. This opens a SQL worksheet.
 
-    SQL> host mkdir /home/oracle/hol23c 2> /dev/null || echo "directory exists"
-    directory exists
-    
-    SQL> drop directory if exists javascript_src_dir;
+2. Create the JavaScript call specification
 
-    Directory dropped.
-
-    SQL> create directory javascript_src_dir as '/home/oracle/hol23c';
-
-    Directory created.
-
-    SQL> grant read, write on directory javascript_src_dir to emily;
-
-    Grant succeeded.
-
-    SQL> exit
-    ```
-
-    You will be prompted you for a password to be assigned to the user. Please remember the password, you will need it later.
-
-4. ORDS-enable the new schema
-
-    With the new account created you need to enable it for use with Oracle Restful Data Service (ORDS). You will point Database Actions against the schema in later modules. Connect to the database as the `emily` user:
-
-    ```bash
-    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
-    ```
-
-    REST-enable the schema by calling `ords.enable_schema()`
+    Enter the following DDL statement and execute it in the SQL worksheet:
 
     ```sql
     <copy>
-    begin
-        ords.enable_schema;
-        commit;
-    end;
+    create or replace function is_email(p_str varchar2)
+    return boolean as
+    mle module validator_module
+    signature 'default.isEmail';
     /
     </copy>
     ```
 
-    This command should complete with acknowledgement that the command completed successfully as shown in this example:
+    This statement allows you to call the function `is_email` in SQL and PL/SQL. Instead of a PL/SQL body, you find a reference to the `validator_module` you created earlier. As the name suggests, validator.js allows you to perform lots of [validations against strings](https://www.jsdelivr.com/package/npm/validator). One of the functions available to you is called `isEmail()`. This is now available for use.
 
-    ```
-    SQL> begin
-      2    ords.enable_schema;
-      3    commit;
-      4  end;
-    SQL> /
+3. Validate some email addresses
 
-    PL/SQL procedure successfully completed.
-    ```
-
-    Now disconnect from the database in preparation of the next step.
-
-## Task 2: Get the ECMAScript version of the validator.js module
-
-The `validator` module can be downloaded from multiple sources. As long as you pick a trustworthy one it doesn't really matter where the file originates from. Ensure that you get the ECMAScript (ESM) version of the module from your preferred Content Delivery Network (CDN) as they are the only ones supported in Oracle. The necessary file has been staged on Object Storage and can be copied to the directory pointed at by `javascript_src_dir` as follows:
-
-```bash
-<copy>
-curl -Lo /home/oracle/hol23c/validator.min.js 'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/validator.min.jsvalidator.min.js' 
-</copy>
-```
-
-## Task 3: Create the JavaScript module in the database
-
-JavaScript in Oracle Database 23ai Free allows you to load JavaScript modules using the `BFILE` clause, specifying a directory object and file name. You prepared for the `create mle module` command in the previous step, now it's time to execute it:
-
-1. Connect to the database as the `emily` user:
-
-    ```bash
-    <copy>sqlplus emily/yourNewPasswordGoesHere@localhost/freepdb1</copy>
-    ```
-
-2. With the session established, create the module as follows:
+    The stage is now set to validate email addresses. Enter the following code into the worksheet:
 
     ```sql
     <copy>
-    create  mle module validator
-    language javascript
-    using bfile (javascript_src_dir, 'validator.min.js');
-    /
+    select isEmail('user-no-domain') as test1;
+    select isEmail('@domain.but.no.user') as test2;
+    select isEmail('user@example.com') as test3;
     </copy>
     ```
 
-3. Verify the module has been created:
-
-    ```sql
-    <copy>
-    col MODULE_NAME for a30
-    col LANGUAGE_NAME for a30
-
-    select 
-        module_name, 
-        language_name 
-    from 
-        user_mle_modules
-    where
-        module_name = 'VALIDATOR';</copy>
-    ```
-
-    The query should return exactly 1 row as shown here:
+    Run these statements as a script or individual statements and see validator.isEmail() in action. If you ran these commands as a script, you should see the following output:
 
     ```
-    MODULE_NAME                    LANGUAGE_NAME
-    ------------------------------ ------------------------------
-    VALIDATOR                      JAVASCRIPT
+    TEST1 
+    ----- 
+    false 
+
+
+    Elapsed: 00:00:00.172
+    1 rows selected.
+
+    Copy to clipboard
+
+    TEST2 
+    ----- 
+    false 
+
+
+    Elapsed: 00:00:00.004
+    1 rows selected.
+
+    Copy to clipboard
+
+    TEST3 
+    ----- 
+    true  
+
+
+    Elapsed: 00:00:00.006
+    1 rows selected.
     ```
-
-You can read more about creating JavaScript modules in Oracle Database 23ai Free in chapter 2 of the JavaScript Developer's Guide.
-
-## Task 4: Expose the module's functionality to PL/SQL and SQL
-
-With the module successfully created in the schema the hardest part is complete. The validator module exposes quite a few string validators for any purpose imaginable, the project's GitHub page lists them all in a convenient tabular format. As per the introduction to this lab the goal is to validate email addresses. A PL/SQL call specification links the module's JavaScript functions to SQL and PL/SQL. In this simple case a stand-alone function does the trick:
-
-```sql
-<copy>
-create or replace function isEmail(
-  p_str varchar2
-) return boolean
-as mle module validator
-signature 'default.isEmail';
-/
-</copy>
-```
-
-The validator library's `index.js` (in src/index.js in the project’s Github repository) declares the validator object as the module's default export, requiring the use of the `default` keyword in the function's signature.
-
-In case where multiple JavaScript functions are made available to PL/SQL and SQL you should follow the industry's best practice and encapsulate them in a package.
-
-Please refer to chapter 5 in the JavaScript Developer's Guide for more information about call specifications and module calls.
-
-## Task 5: Validate email addresses
-
-After the JavaScript module has been created in the schema and exposed to SQL and PL/SQL it can be used like any other PL/SQL code unit. Go ahead and validate a few email addresses:
-
-```sql
-<copy>
-select isEmail('user-no-domain') as test1;
-select isEmail('@domain.but.no.user') as test2;
-select isEmail('user@example.com') as test3;
-</copy>
-```
-
-You can see that the function works as expected:
-
-```
-SQL> select isEmail('user-no-domain') as test1;
-
-TEST1
------------
-FALSE
-
-SQL> select isEmail('@domain.but.no.user') as test2;
-
-TEST2
------------
-FALSE
-
-SQL> select isEmail('user@example.com') as test3;
-
-TEST3
------------
-TRUE
-```
-
-You many now proceed to the next lab.
 
 ## Learn More
 

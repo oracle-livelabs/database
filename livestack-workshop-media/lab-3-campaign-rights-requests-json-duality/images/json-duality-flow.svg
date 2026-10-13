@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="660" viewBox="0 0 1380 660" role="img" aria-labelledby="title desc">
+  <title id="title">JSON Relational Duality concept flow</title>
+  <desc id="desc">One governed media campaign request is exposed as relational rows, a JSON document, and operating evidence.</desc>
+  <rect width="1380" height="660" fill="#f6f3ef"/>
+  <rect x="28" y="28" width="1324" height="604" rx="28" fill="#ffffff" stroke="#d8d0c5" stroke-width="2"/>
+  <text x="60" y="76" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#312d2a">One Campaign Request, Multiple Trusted Shapes</text>
+  <text x="60" y="104" font-family="Arial, sans-serif" font-size="16" fill="#6c655f">Request `476` remains one governed transaction while different teams read it in the form they need.</text>
+  <rect x="72" y="170" width="250" height="182" rx="22" fill="#fff7f4" stroke="#c74634" stroke-width="2"/>
+  <text x="102" y="212" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#7d2f25">Relational Truth</text>
+  <text x="102" y="252" font-family="Arial, sans-serif" font-size="18" fill="#312d2a">ORDERS</text>
+  <text x="102" y="282" font-family="Arial, sans-serif" font-size="18" fill="#312d2a">ORDER_ITEMS</text>
+  <text x="102" y="312" font-family="Arial, sans-serif" font-size="18" fill="#312d2a">SHIPMENTS</text>
+  <rect x="398" y="144" width="430" height="236" rx="24" fill="#f5efe8" stroke="#aa643b" stroke-width="2"/>
+  <text x="432" y="194" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#714121">JSON Relational Duality</text>
+  <text x="432" y="232" font-family="Consolas, monospace" font-size="20" fill="#312d2a">ORDERS_DV</text>
+  <text x="432" y="270" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Oracle keeps the governed relational rows.</text>
+  <text x="432" y="296" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">The application reads one JSON request document.</text>
+  <text x="432" y="322" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">No copied request store. No sync drift.</text>
+  <rect x="934" y="120" width="312" height="154" rx="22" fill="#e9f3f6" stroke="#437c94" stroke-width="2"/>
+  <text x="962" y="164" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#255164">App Document</text>
+  <text x="962" y="204" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">JSON payload for order detail,</text>
+  <text x="962" y="228" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">ORDS APIs, and UI panels.</text>
+  <rect x="934" y="322" width="312" height="154" rx="22" fill="#edf6ef" stroke="#4c825c" stroke-width="2"/>
+  <text x="962" y="366" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f593b">Operational Evidence</text>
+  <text x="962" y="406" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Relational queries, shipment views,</text>
+  <text x="962" y="430" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">and SQL verification.</text>
+  <path d="M322 260 H372" stroke="#c74634" stroke-width="4" fill="none"/>
+  <polygon points="372,260 356,252 356,268" fill="#c74634"/>
+  <path d="M828 214 H908" stroke="#437c94" stroke-width="4" fill="none"/>
+  <polygon points="908,214 892,206 892,222" fill="#437c94"/>
+  <path d="M828 400 H908" stroke="#4c825c" stroke-width="4" fill="none"/>
+  <polygon points="908,400 892,392 892,408" fill="#4c825c"/>
+</svg>

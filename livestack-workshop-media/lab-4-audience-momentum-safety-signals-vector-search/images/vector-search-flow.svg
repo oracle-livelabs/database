@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="660" viewBox="0 0 1360 660" role="img" aria-labelledby="title desc">
+  <title id="title">AI Vector Search concept flow</title>
+  <desc id="desc">Audience signal text and content asset descriptions are embedded in Oracle and ranked with VECTOR_DISTANCE.</desc>
+  <rect width="1360" height="660" fill="#f6f3ef"/>
+  <rect x="28" y="28" width="1304" height="604" rx="28" fill="#ffffff" stroke="#d8d0c5" stroke-width="2"/>
+  <text x="60" y="76" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#312d2a">From Audience Signal Language to Ranked Content-Asset Matches</text>
+  <rect x="76" y="162" width="258" height="144" rx="22" fill="#fff7f4" stroke="#c74634" stroke-width="2"/>
+  <text x="108" y="206" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#7d2f25">Signal Phrase</text>
+  <text x="108" y="246" font-family="Arial, sans-serif" font-size="18" fill="#312d2a">sports rights</text>
+  <text x="108" y="272" font-family="Arial, sans-serif" font-size="18" fill="#312d2a">highlight clips</text>
+  <rect x="388" y="146" width="318" height="176" rx="22" fill="#f5efe8" stroke="#aa643b" stroke-width="2"/>
+  <text x="420" y="194" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#714121">VECTOR_EMBEDDING</text>
+  <text x="420" y="232" font-family="Consolas, monospace" font-size="18" fill="#312d2a">ALL_MINILM_L12_V2</text>
+  <text x="420" y="264" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">Oracle rebuilds embeddings during</text>
+  <text x="420" y="286" font-family="Arial, sans-serif" font-size="15" fill="#312d2a">the deterministic load.</text>
+  <rect x="774" y="146" width="470" height="176" rx="22" fill="#e9f3f6" stroke="#437c94" stroke-width="2"/>
+  <text x="822" y="194" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#255164">Stored Embeddings</text>
+  <text x="822" y="232" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Content asset descriptions, creator signal text, and</text>
+  <text x="822" y="256" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">launch context are embedded and indexed before</text>
+  <text x="822" y="280" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">live similarity scoring begins.</text>
+  <rect x="332" y="382" width="412" height="150" rx="22" fill="#edf6ef" stroke="#4c825c" stroke-width="2"/>
+  <text x="366" y="426" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#2f593b">VECTOR_DISTANCE</text>
+  <text x="366" y="462" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">Compares the live signal vector to stored content-asset</text>
+  <text x="366" y="486" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">vectors and applies deterministic tie-break ordering.</text>
+  <rect x="802" y="382" width="444" height="150" rx="22" fill="#f0edf7" stroke="#796087" stroke-width="2"/>
+  <text x="836" y="426" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#5b4768">Ranked Media Matches</text>
+  <text x="836" y="462" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">The best-fit assets become the shortlist for planners,</text>
+  <text x="836" y="486" font-family="Arial, sans-serif" font-size="16" fill="#312d2a">rights teams, and downstream AI assistance.</text>
+  <path d="M334 234 H372" stroke="#c74634" stroke-width="4" fill="none"/>
+  <polygon points="372,234 356,226 356,242" fill="#c74634"/>
+  <path d="M548 322 V358" stroke="#aa643b" stroke-width="4" fill="none"/>
+  <polygon points="548,358 540,342 556,342" fill="#aa643b"/>
+  <path d="M1008 322 V356 H744" stroke="#437c94" stroke-width="4" fill="none"/>
+  <polygon points="744,356 760,348 760,364" fill="#437c94"/>
+  <path d="M744 458 H780" stroke="#4c825c" stroke-width="4" fill="none"/>
+  <polygon points="780,458 764,450 764,466" fill="#4c825c"/>
+</svg>

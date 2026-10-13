@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">RecipeShare iOS Workshop Architecture</title>
+  <desc id="desc">Architecture diagram showing the workshop stack: macOS host running container runtime with Oracle Database Free, ORDS, and Fusabase backend, paired with the Fusabase web console on localhost:8080, connected via fusabase-config.json to the iOS Simulator running the RecipeShare app and the Fusabase iOS SDK with Auth, Data, and Storage modules.</desc>
+  <style>
+    .bg { fill: #f7f3ec; }
+    .host { fill: #ffffff; stroke: #59636d; stroke-width: 3; }
+    .inner { fill: #f7f3ec; stroke: #59636d; stroke-width: 2; }
+    .chip { fill: #ffffff; stroke: #59636d; stroke-width: 2; }
+    .console { fill: #ffffff; stroke: #59636d; stroke-width: 3; }
+    .connector { fill: none; stroke: #59636d; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .arrow { fill: #59636d; stroke: none; }
+    .label { fill: #2d3640; font-family: Arial, Helvetica, sans-serif; }
+    .mono { fill: #2d3640; font-family: Menlo, Monaco, Consolas, monospace; }
+    .title { font-size: 36px; font-weight: 700; }
+    .cardTitle { font-size: 22px; font-weight: 700; }
+    .chipLabel { font-size: 18px; font-weight: 600; text-anchor: middle; }
+    .config { font-size: 18px; font-weight: 600; text-anchor: middle; }
+    .url { font-size: 18px; text-anchor: middle; }
+    .small { font-size: 16px; }
+  </style>
+
+  <rect class="bg" width="1200" height="900" />
+
+  <text x="60" y="64" class="label title">Workshop Architecture</text>
+
+  <!-- TOP ROW: Backend region -->
+  <!-- Outer macOS Host card -->
+  <rect x="60" y="110" width="780" height="240" rx="20" class="host" />
+  <text x="80" y="142" class="label cardTitle">macOS Host</text>
+
+  <!-- Inner: Container Runtime -->
+  <rect x="90" y="166" width="720" height="160" rx="14" class="inner" />
+  <text x="110" y="194" class="label cardTitle">Container Runtime (Podman or Docker)</text>
+
+  <!-- Three backend chips -->
+  <rect x="130" y="216" width="200" height="90" rx="12" class="chip" />
+  <text x="230" y="252" class="label chipLabel">Oracle</text>
+  <text x="230" y="276" class="label chipLabel">Database Free</text>
+
+  <rect x="360" y="216" width="200" height="90" rx="12" class="chip" />
+  <text x="460" y="252" class="label chipLabel">ORDS</text>
+  <text x="460" y="276" class="mono chipLabel" font-size="14">REST gateway</text>
+
+  <rect x="590" y="216" width="200" height="90" rx="12" class="chip" />
+  <text x="690" y="252" class="label chipLabel">Fusabase</text>
+  <text x="690" y="276" class="label chipLabel">Backend</text>
+
+  <!-- Console card -->
+  <rect x="880" y="110" width="260" height="240" rx="20" class="console" />
+  <text x="900" y="142" class="label cardTitle">Fusabase</text>
+  <text x="900" y="170" class="label cardTitle">Console</text>
+  <text x="1010" y="240" class="mono url">localhost:8080</text>
+  <text x="1010" y="280" class="label small" text-anchor="middle">Auth · Database</text>
+  <text x="1010" y="304" class="label small" text-anchor="middle">Storage · Rules</text>
+
+  <!-- Console ↔ Backend bidirectional arrow -->
+  <path d="M840 230 H880" class="connector" />
+  <polygon points="836,224 848,230 836,236" class="arrow" />
+  <polygon points="884,224 872,230 884,236" class="arrow" />
+
+  <!-- VERTICAL CONNECTOR: fusabase-config.json -->
+  <path d="M600 350 V550" class="connector" stroke-dasharray="6,6" />
+  <polygon points="594,348 600,360 606,348" class="arrow" />
+  <polygon points="594,552 600,540 606,552" class="arrow" />
+
+  <rect x="470" y="430" width="260" height="40" rx="10" class="chip" />
+  <text x="600" y="456" class="mono config">fusabase-config.json</text>
+
+  <!-- BOTTOM ROW: Client region -->
+  <rect x="60" y="560" width="1080" height="280" rx="20" class="host" />
+  <text x="80" y="594" class="label cardTitle">iOS Simulator</text>
+
+  <!-- Inner: RecipeShare App -->
+  <rect x="90" y="616" width="480" height="200" rx="14" class="inner" />
+  <text x="110" y="644" class="label cardTitle">RecipeShare App</text>
+  <text x="110" y="668" class="label small">SwiftUI · Views · Services</text>
+
+  <rect x="130" y="694" width="180" height="60" rx="10" class="chip" />
+  <text x="220" y="730" class="label chipLabel">AuthService</text>
+
+  <rect x="340" y="694" width="200" height="60" rx="10" class="chip" />
+  <text x="440" y="730" class="label chipLabel">RecipeService</text>
+
+  <!-- App ↔ SDK arrow -->
+  <path d="M580 716 H630" class="connector" />
+  <polygon points="576,710 588,716 576,722" class="arrow" />
+  <polygon points="634,710 622,716 634,722" class="arrow" />
+
+  <!-- Inner: Fusabase iOS SDK -->
+  <rect x="630" y="616" width="480" height="200" rx="14" class="inner" />
+  <text x="650" y="644" class="label cardTitle">Fusabase iOS SDK</text>
+  <text x="650" y="668" class="label small">Swift Package · 4 modules</text>
+
+  <rect x="660" y="694" width="130" height="60" rx="10" class="chip" />
+  <text x="725" y="730" class="label chipLabel">Auth</text>
+
+  <rect x="800" y="694" width="130" height="60" rx="10" class="chip" />
+  <text x="865" y="730" class="label chipLabel">Database</text>
+
+  <rect x="940" y="694" width="130" height="60" rx="10" class="chip" />
+  <text x="1005" y="730" class="label chipLabel">Storage</text>
+
+  <text x="600" y="876" class="label small" text-anchor="middle">RecipeShare iOS Workshop · powered by Oracle Backend for Firebase Anywhere</text>
+
+</svg>

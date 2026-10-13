@@ -6,6 +6,8 @@ HeatWave seamlessly integrates with existing Oracle services, such as Oracle Ana
 
 In this lab you will build a LAMP stack and deploy a prebuilt  HeatWave RAG Chat Application. The application  is designed to make interacting with HeatWave GenAI Retrieval-Augmented Generation (RAG) capabilities straightforward and user-friendly.
 
+**Note:** The application code in this lab is intended for educational purposes only. It is designed to help developers learn and practice application development skills with HeatWave. The code is not designed to be used in a production environment
+
 ### Objectives
 
 In this lab, you will be guided through the following tasks:
@@ -19,7 +21,7 @@ In this lab, you will be guided through the following tasks:
 
 ### Prerequisites
 
-- Completed Lab 5.
+- Completed Lab **Perform Retrieval Augmented Generation**.
 
 ### About the HeatWave RAG Chat Application
 
@@ -129,10 +131,10 @@ _Estimated Time:_ 20 minutes
 
 ## Task 3: Install PHP
 
-1. Using Visual Studio Code, install PHP 7.4.
+1. Using Visual Studio Code, install PHP 8.2.
 
     ```bash
-    <copy> sudo dnf module install php:7.4 -y</copy>
+    <copy> sudo dnf install @php:8.2 -y</copy>
     ```
 
     ![Install PHP](./images/install-php.png "Install PHP")
@@ -319,6 +321,11 @@ _Estimated Time:_ 20 minutes
     ```bash
     <copy>cd /var/www/html</copy>
     ```
+<!--
+The application source files are in this workshop developHEATWAVE-GENAI/delop-app/files folder
+The PAR bucket is at Tenancy mysqlpm  compartment mysqlpm/livelabs/mysql_gen_ai/php-rag-chat-app/app.zip
+Contact perside.foster@oracle.com for more details
+-->
 
 2. Download the application code.
 
@@ -420,4 +427,4 @@ You may now **proceed to the next lab**.
 
 - **Author** - Aijaz Fatima, Product Manager 
 - **Contributors** - Perside Foster, MySQL Principal Solution Engineer
-- **Last Updated By/Date** - Aijaz Fatima, Product Manager, September 2024
+- ***Last Updated By/Date** - Perside Lafrance Foster, Open Source Principal Partner Solution Engineer, December 2025
