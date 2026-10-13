@@ -80,7 +80,7 @@ Thomas starts with optional screen settings for an existing order, storing its k
 
     **Expected output:** The table is created with a numeric primary key and a native JSON column.
 
-2. Add settings for the first existing order.
+2. Add settings for the first existing order by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -91,24 +91,16 @@ Thomas starts with optional screen settings for an existing order, storing its k
                        'features' VALUE JSON_ARRAY('live-status','saved-delivery-address')
                        RETURNING JSON)
     FROM (SELECT order_id FROM orders ORDER BY order_id FETCH FIRST 1 ROW ONLY);
-    </copy>
-    ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Store flexible application data as JSON, SQL block 2](images/sql-lab-2-02.jpg)
-
-    **Expected output:** One row is inserted, using the existing order's key.
-
-3. Save the row.
-
-    ```sql
-    <copy>
     COMMIT;
     </copy>
     ```
 
-    **Expected output:** The commit completes.
+    ![Lab 2 Task 1 Step 2](images/l2-t1-s2.png)
 
-4. Read the JSON values with SQL.
+    **Expected output:** One row is inserted, using the existing order's key.
+
+3. Read the JSON values with SQL.
 
     ```sql
     <copy>
@@ -142,7 +134,7 @@ Thomas next tries a document collection in which each row owns a document in `DA
 
     **Expected output:** The JSON Collection Table is created.
 
-2. Assemble an order document from the existing order and its items, then insert it into the collection.
+2. Assemble an order document from the existing order and its items, then insert it into the collection by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -161,24 +153,16 @@ Thomas next tries a document collection in which each row owns a document in `DA
       FROM order_items oi WHERE oi.order_id=o.order_id
      ) FORMAT JSON RETURNING JSON)
     FROM orders o JOIN retail_app_data t ON t.order_id=o.order_id;
-    </copy>
-    ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Create a JSON Collection Table, SQL block 6](images/sql-lab-2-06.jpg)
-
-    **Expected output:** One document is inserted. Its nested `items` array is ordered by item ID.
-
-3. Commit the document.
-
-    ```sql
-    <copy>
     COMMIT;
     </copy>
     ```
 
-    **Expected output:** The commit completes.
+    ![Lab 2 Task 2 Step 2](images/l2-t2-s2.png)
 
-4. Inspect the stored document.
+    **Expected output:** One document is inserted. Its nested `items` array is ordered by item ID.
+
+3. Inspect the stored document.
 
     ```sql
     <copy>
@@ -307,7 +291,7 @@ Thomas can now submit an order document through the view. In an application, Jes
 
 Thomas tests a complete order by writing a JSON document, then Jessica checks the relational rows to confirm what changed.
 
-1. Insert the supplied order document.
+1. Insert the supplied order document by selecting **Run Script (F5)**.
 
     The payload reserves order **900001** and item **990001**, using existing customer **1** and product **1**. Its first-run status is `pending`. The existence check skips the insert when that order already exists, preserving the earlier record if you revisit the exercise.
 
@@ -337,24 +321,16 @@ Thomas tests a complete order by writing a JSON document, then Jessica checks th
       FROM orders
       WHERE order_id = 900001
     );
-    </copy>
-    ```
-
-    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 13](images/sql-lab-2-13.jpg)
-
-    **Expected output:** One document is inserted on the first run; zero rows are inserted when the reserved order already exists.
-
-2. Commit the order.
-
-    ```sql
-    <copy>
     COMMIT;
     </copy>
     ```
 
-    **Expected output:** The commit completes.
+    ![Lab 2 Task 5 Step 1](images/l2-t5-s1.png)
 
-3. Read the corresponding relational order and item.
+    **Expected output:** One document is inserted on the first run; zero rows are inserted when the reserved order already exists.
+
+
+2. Read the corresponding relational order and item.
 
     ```sql
     <copy>
@@ -383,31 +359,23 @@ Thomas tests a complete order by writing a JSON document, then Jessica checks th
 
     A repeated visit can show `confirmed` if the next update has already run. The line total is calculated from the relational quantity and unit price.
 
-4. Confirm the order by changing the JSON status.
+3. Confirm the order by changing the JSON status by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
     UPDATE orders_dv
     SET data = JSON_TRANSFORM(data, SET '$.status' = 'confirmed')
     WHERE JSON_VALUE(data, '$._id' RETURNING NUMBER) = 900001;
-    </copy>
-    ```
 
-    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 16](images/sql-lab-2-16.jpg)
-
-    **Expected output:** One document is updated. `JSON_TRANSFORM` changes the selected status field; it does not replace the item array.
-
-5. Commit the update.
-
-    ```sql
-    <copy>
     COMMIT;
     </copy>
     ```
 
-    **Expected output:** The commit completes.
+    ![Lab 2 Task 5 Step 3](images/l2-t5-s3.png)
 
-6. Predict the relational change, then inspect it. Should changing only `$.status` alter the quantity or line total?
+    **Expected output:** One document is updated. `JSON_TRANSFORM` changes the selected status field; it does not replace the item array.
+
+4. Predict the relational change, then inspect it. Should changing only `$.status` alter the quantity or line total?
 
     ```sql
     <copy>
