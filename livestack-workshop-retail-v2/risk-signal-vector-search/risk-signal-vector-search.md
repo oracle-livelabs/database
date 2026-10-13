@@ -104,7 +104,7 @@ Similarity search needs a compatible representation for both the stored text and
 
     **Expected output: Existing embedding coverage**
 
-    ![Lab 2 Task 1 Step 2](images/l2-t1-s2.png)
+    ![Lab 2 Task 1 Step 2](images/sql-lab-3-02.jpg)
 
     Gilly will add a new demonstration column to `PRODUCTS` to make the text-to-vector step visible. The existing embedding tables continue to serve their current queries.
 
