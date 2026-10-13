@@ -49,6 +49,11 @@ Plans cover mobile voice and data, fixed wireless, fiber, and IoT. Each plan inc
 
 Estimated Workshop Time: **90 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Telecommunication/Workshop/Scene-00-Introduction-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Application Demo
 
 For the application walkthrough, open the [telecommunications application demo on LiveLabs](https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4421). Follow the game-day 5G congestion incident from the **Welcome** screen.
