@@ -79,6 +79,8 @@ Use the existing `GENAI` profile in your `LLUSER` schema. You will inspect its s
 
     **Expected output:** The available nonsecret settings. The next task supplies the Retail object list.
 
+    **Note:** These settings reflect the existing GENAI profile and may differ by reservation. The model and object-list values in the screenshot are examples, not fixed expected values. Task 2 configures the Retail object list and enforcement settings. Task 3 explicitly requests `xai.grok-4.3` for its call, so its model can differ from the profile model shown here.
+
 ## Task 2: Add the retail tables to the profile
 
 Nina's questions require products, orders, order items, and customers. Use the current schema name so the same block works in each learner reservation.

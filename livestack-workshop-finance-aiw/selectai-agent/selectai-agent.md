@@ -286,6 +286,6 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
+* **Author** - Kevin Lazarz, Linda Foinding
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Database Product Management, August 2026

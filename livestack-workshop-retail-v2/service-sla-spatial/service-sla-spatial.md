@@ -272,7 +272,7 @@ Moon moved from stored points to ranked centers, then added product stock to the
 
 Oracle Spatial keeps the calculation beside the customer, center, product, and inventory rows. SQL returns the geometry and operating details needed for review. The team can explain its options without reconciling a separate map database with an inventory report.
 
-Otto will now add model scores to the product activity data to help the team review demand.
+Moon hands the location and stock evidence to Otto, who will put a demand score beside product activity so the team can examine which products deserve attention.
 
 ## Next Steps
 
