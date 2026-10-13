@@ -106,8 +106,6 @@ Thomas starts with optional screen settings for an existing order, storing its k
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Store flexible application data as JSON, SQL block 3](images/sql-lab-2-03.jpg)
-
     **Expected output:** The commit completes.
 
 4. Read the JSON values with SQL.
@@ -178,8 +176,6 @@ Thomas next tries a document collection in which each row owns a document in `DA
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Create a JSON Collection Table, SQL block 7](images/sql-lab-2-07.jpg)
-
     **Expected output:** The commit completes.
 
 4. Inspect the stored document.
@@ -233,7 +229,7 @@ Thomas now tests the payload his order feature should consume. `ORDERS_DV` suppl
 
 ## Task 4: Enable document inserts and updates
 
-The existing duality view allows updates, but Thomas also needs to accept a new order with nested items. Jessica enables inserts through the view while the database continues to enforce the underlying relational keys and data types.
+The existing duality view allows updates, but Thomas also needs to accept a new order with nested items. Jessica changes the view's write contract while the database continues to enforce the underlying relational keys and data types.
 
 1. Inspect the current document capabilities.
 
@@ -356,8 +352,6 @@ Thomas tests a complete order by writing a JSON document, then Jessica checks th
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 14](images/sql-lab-2-14.jpg)
-
     **Expected output:** The commit completes.
 
 3. Read the corresponding relational order and item.
@@ -410,8 +404,6 @@ Thomas tests a complete order by writing a JSON document, then Jessica checks th
     COMMIT;
     </copy>
     ```
-
-    ![SQL Worksheet showing the query and result for Task 5: Create and update a JSON order, SQL block 17](images/sql-lab-2-17.jpg)
 
     **Expected output:** The commit completes.
 
