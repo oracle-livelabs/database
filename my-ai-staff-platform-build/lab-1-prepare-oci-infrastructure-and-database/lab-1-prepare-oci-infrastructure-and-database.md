@@ -37,15 +37,38 @@ In this lab, you will:
 
     ![Shape Details](./images/09_shape_details.png)
 
-3. Create a new VCN and a Public Subnet, with a CIDR Block in the default 10.0.0.0/24
+    Review **Basic information** and confirm that the image is Oracle Linux 9
+    and that the shape, OCPUs, and memory match the values above. The console
+    may display a different example shape depending on regional capacity; use
+    the workshop values rather than the example value shown in the screenshot.
+    Select **Next**.
 
-    ![Creation of new VCN](./images/13_vcn_creation.png)
+    ![Review the compute image and shape under Basic information](./images/25-compute-basic-information.png "Review the compute image and shape under Basic information")
+
+    On the **Security** page, keep the default Shielded instance setting and
+    select **Next**.
+
+    ![Keep the default compute security setting and continue](./images/26-compute-security-settings.png "Keep the default compute security setting and continue")
+
+3. On the **Networking** page, select **Create new virtual cloud network** and
+    enter a unique VCN name. Select **Create new public subnet**, enter a
+    unique subnet name, and use `10.0.0.0/24` as the CIDR block.
+
+    ![Create a new VCN and public subnet for the compute instance](./images/27-compute-create-vcn-public-subnet.png "Create a new VCN and public subnet for the compute instance")
+
+    Keep **Automatically assign private IPv4 address** selected. Enable
+    **Automatically assign public IPv4 address** so that you can connect to the
+    instance directly by SSH, then select **Next**.
+
+    ![Automatically assign private and public IPv4 addresses](./images/28-compute-public-ip-assignment.png "Automatically assign private and public IPv4 addresses")
 
 4. Under **Add SSH keys**, choose **Generate a key pair** and download the private key immediately, or upload a public key that you already control. OCI needs the public key during launch; the connection configuration happens after the instance is created.
 
     ![Example to Generate SSH Keys](./images/10_ssh_keys.png)
 
-    After that all Instance Configuration left can be left as default.
+    Continue through **Storage** with the default settings. On **Review**,
+    confirm the image, shape, networking, and SSH key selections, then select
+    **Create**.
 
 5. Find the security list for the instance subnet. In OCI Console, open the running instance, locate the **Primary VNIC** or **Subnet** link, open the subnet, and then open its attached **Security Lists**.
 
@@ -69,7 +92,7 @@ In this lab, you will:
 
     Leave the default egress rules unchanged unless your tenancy has a custom network policy. Egress controls outbound traffic from the instance; SSH access from your laptop uses an ingress rule.
 
-9. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Networking** > **Primary VNIC** > **Public IPv4 address**.
+7. After the instance reaches **Running** state, copy its public IP from OCI Console. Open the instance details page and locate **Networking** > **Primary VNIC** > **Public IPv4 address**.
 
     Complete the following public IP assignment steps only if the public IP field shows `-`. If a public IP already appears, copy it and skip to step 8.
 
@@ -87,7 +110,7 @@ In this lab, you will:
 
     Return to the instance details page and copy the new **Public IPv4 address**. Use this value as `<instance-public-ip>` in the SSH commands below.
 
-10. Configure the downloaded key on your laptop. Use the command set that matches your operating system, and replace the placeholder values.
+8. Configure the downloaded key on your laptop. Use the command set that matches your operating system, and replace the placeholder values.
 
     For macOS or Linux, open Terminal and run:
 
@@ -110,7 +133,7 @@ In this lab, you will:
     </copy>
     ```
 
-    In `nano`, paste this host entry at the end of the file. Replace `<instance-public-ip>` with the public IP from step 8. Save with `Ctrl+O`, press `Enter`, then exit with `Ctrl+X`.
+    In `nano`, paste this host entry at the end of the file. Replace `<instance-public-ip>` with the public IP from step 7. Save with `Ctrl+O`, press `Enter`, then exit with `Ctrl+X`.
 
     ```ssh
     <copy>
@@ -144,7 +167,7 @@ In this lab, you will:
 
     If Windows reports that `ssh` is not recognized, install the OpenSSH Client optional feature or use VS Code Remote - SSH.
 
-11. In VS Code, open the Command Palette, choose **Remote-SSH: Connect to Host**, and select `my-ai-staff-oci`. Edit the agent `.env` files on the instance through this connection; do not copy secrets into an unprotected local project folder or commit them.
+9. In VS Code, open the Command Palette, choose **Remote-SSH: Connect to Host**, and select `my-ai-staff-oci`. Edit the agent `.env` files on the instance through this connection; do not copy secrets into an unprotected local project folder or commit them.
 
 ## Task 2: Provision Autonomous Database 26ai
 

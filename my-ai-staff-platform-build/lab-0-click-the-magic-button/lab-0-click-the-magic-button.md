@@ -224,9 +224,7 @@ In this lab, you will:
     codex --version
     python3 --version
     python3.12 --version
-    node --version
     java -version
-    /opt/sqlcl/bin/sql -version
     test -x ~/livelabs-ai-staff/agents/pipeline/venv/bin/python
     test -x ~/livelabs-ai-staff/agents/assistant/venv/bin/python
     test -x ~/livelabs-ai-staff/agents/brand-agent/venv/bin/python
