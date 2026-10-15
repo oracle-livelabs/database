@@ -33,6 +33,11 @@ Train a model in Oracle AI Database to classify services as `SURGE` or `STABLE`,
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-08-Service-Demand-Watchlist-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 ## Task 1: Read the training data

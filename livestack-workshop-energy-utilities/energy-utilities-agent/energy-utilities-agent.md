@@ -32,6 +32,11 @@ The built-in SQL tool uses Select AI actions such as `runsql` and `showsql`; thi
 
 Estimated Time: **15 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-10-Select-AI-Agent-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 > **Prerequisite:** Complete [Lab 7: Ask Energy & Utilities Questions with Select AI](?lab=ask-energy-utilities). This lab uses the `GENAI` profile and its `object_list`.
 
 > **AI setup:** The SQL tool retains `GENAI`. You create a separate reasoning profile and remove it with the agent objects in the reset step.
