@@ -13,9 +13,9 @@ Estimated Time: 30 minutes
 In this lab, you will:
 
 - Review the Assistant Agent command groups and cross-agent routing.
+- Review Brand Agent commands, strategy setup, briefs, grading, and detailed feedback.
 - Follow Content Agent research, artifact approval, Drive delivery, and Publish Agent handoff.
 - Review Creative Agent image revision and approval controls.
-- Review Brand Agent grading and automatic edits.
 - Understand the purpose of the featured Slack channels.
 
 ### Prerequisites
@@ -25,9 +25,9 @@ In this lab, you will:
 - AI Staff services running and the featured Slack apps installed.
 - Gmail, Calendar, Drive, and publishing features configured in Lab 4 if you want to reproduce those examples.
 
-## Task 1: Use the Assistant Agent as Your Personal Control Surface
+## Task 1: Assistant Agent
 
-1. Open a direct message with **Assistant Agent** and enter _what can you do?_ to display the command guide.
+1. Open a direct message with **Assistant Agent** and enter *what can you do?* to display the command guide.
 
     ![Assistant Agent command guide in a Slack direct message](./images/04-assistant-agent-command-guide.png "Assistant Agent command guide in a Slack direct message")
 
@@ -44,7 +44,7 @@ In this lab, you will:
 
     ![Assistant Agent status, post lookup, and waiting-work responses](./images/05-assistant-agent-status-and-post-lookup.png "Assistant Agent status, post lookup, and waiting-work responses")
 
-    In this example, `status` confirms that the agents and database are available. `where is post 1002` returns the post state and links to its run thread. `what is waiting for me` reports whether a workflow waits at an approval pause.
+    In this example, *status* confirms that the agents and database are available. *where is post 1002* returns the post state and links to its run thread. *what is waiting for me* reports whether a workflow waits at an approval pause.
 
 3. Paste a Topic or a Supported Link into the Assistant DM to start a content request.
 
@@ -64,25 +64,64 @@ In this lab, you will:
 
     The reply repeats the reminder text and the delivery time in the configured time zone. The reminder service sends the reminder when it becomes due.
 
+    ![Assistant Agent sends the reminder at its scheduled time](./images/11b-assistant-agent-reminder-delivered.png "Assistant Agent sends the reminder at its scheduled time")
+
+    The delivered message repeats the due time and reminder text. This follow-up confirms that the reminder service completed the request instead of only storing it.
+
 6. Ask the Assistant to check your email.
 
     ![Assistant Agent starts email triage and posts the result to inbox](./images/12-assistant-agent-email-triage.png "Assistant Agent starts email triage and posts the result to inbox")
 
     The direct message stays concise. It reports that the inbox check started, then points you to `#inbox` for the shared result.
 
-## Task 2: Follow Content Agent Runs, Approvals, and Delivery
+## Task 2: Brand Agent and your Personal Strategy
+
+1. Open a direct message with **Brand Agent** and enter *what can you do?*.
+
+    ![Brand Agent command guide in a Slack direct message](./images/14-brand-agent-command-guide.png "Brand Agent command guide in a Slack direct message")
+
+    The command guide groups the available work into four areas:
+
+    - **Grading:** Grade every generated format for a post, or select LinkedIn, newsletter, short videos, research, or slides. Enter *detail* after a grade run to see the flagged lines.
+    - **Briefs:** Enter *brief for &lt;post-number&gt;* to create a brief from the post and active strategy.
+    - **Strategy:** Enter *strategy status* to review the active profile. Enter *setup strategy* for a threaded interview, or use *setup strategy: &lt;field block&gt;* when you already have structured profile details.
+    - **Quick checks:** Enter *does this sound like me?* followed by text to compare a draft with the active brand voice.
+
+2. Enter *setup strategy* and complete the threaded interview.
+
+    ![Brand Agent strategy review, approval, and generated profile files](./images/15-brand-agent-strategy-created.png "Brand Agent strategy review, approval, and generated profile files")
+
+    The interview collects your role, main goal, topics, tone, content formats, and optional secondary goals. Brand Agent summarizes the answers before it writes anything. React with the green check mark to create the strategy or the red cross to cancel.
+
+    After approval, Brand Agent creates the brand guide, general strategy, funnel strategy, and content-plan files. It also updates the active profile. Enter *strategy status* to review the saved summary before you grade or brief a post.
+
+3. Enter *brief &lt;post-number&gt;* to generate a brief. This command can also be sent in `#briefing`.
+
+    ![Brand Agent brief with selected formats and publishing goal](./images/16-brand-agent-brief.png "Brand Agent brief with selected formats and publishing goal")
+
+    The production brief turns the post topic and active strategy into a shared guide for downstream agents. It identifies the selected formats and records a publishing goal for each deliverable. Review the brief before drafting when the team needs to agree on the topic, readers, or message.
+
+4. Grade one format or every generated format for a post.
+
+    ![Brand Agent grade summary and detailed diagnostic feedback](./images/17-brand-agent-grading-detail.png "Brand Agent grade summary and detailed diagnostic feedback")
+
+    Enter a command such as *grade 1002 newsletter*. Brand Agent evaluates the artifact against the active profile and reports the original and improved grades. Enter *detail newsletter*, or *detail*, to inspect test results, flagged lines, missing support, and the reason for each finding.
+
+    Read the detail response before assuming that automatic edits reached the source file. In this example, the workspace denied write access. Brand Agent completed the review, but it could not change the source or create the `.grade` sidecar. Correct the file permissions, rerun the grade, and confirm that the output no longer reports a write failure.
+
+## Task 3: Content Runs (#content_starts and #content_runs)
 
 1. Open `#content-runs`, select a post, and open its thread.
 
     ![Content Agent research phase and first review pause in content-runs](./images/01-content-runs-research-pause.png "Content Agent research phase and first review pause in content-runs")
 
-    Content Agent posts each pipeline as a top-level message in `#content-runs`. The thread holds every update for that post. In this example, the agent reports the research phase as running, marks it complete, and stops at **PAUSE 1**. The research brief appears in the same thread so you can review its topic, evidence, opportunities, and trade-offs before format creation begins.
+    Content Agent posts each pipeline as a top-level message in `#content-runs`. The thread holds every update for that post. In this example, the agent reports the research phase as running, marks it complete, and stops at **PAUSE 1**. The research brief appears in the same thread so you can review its topic, source support, opportunities, and trade-offs before formats begin.
 
 2. Review the generated Markdown artifacts and approve their Drive delivery.
 
     ![Content Agent artifact previews and Markdown Drive approval](./images/02-content-agent-markdown-drive-approval.png "Content Agent artifact previews and Markdown Drive approval")
 
-    Here, the user replies `skip` at **PAUSE 3**, and Content Agent resumes the post. It displays the research brief, LinkedIn post, and newsletter with their artifact filenames and previews.
+    Here, the user replies *skip* at **PAUSE 3**, and Content Agent resumes the post. It displays the research brief, LinkedIn post, and newsletter with their artifact filenames and previews.
 
     The **Markdown Drive approval** message lists every file awaiting delivery. React with the green check mark to approve all listed Markdown artifacts for Drive. Keep the approval in the post thread so it applies to the correct files.
 
@@ -90,46 +129,35 @@ In this lab, you will:
 
     ![Content Agent completes Drive delivery and Publish Agent confirms the handoff](./images/03-content-agent-drive-delivery.png "Content Agent completes Drive delivery and Publish Agent confirms the handoff")
 
-    After approval, Content Agent records the decision, verifies the files, and uploads each artifact. The completion message links to the delivered LinkedIn, newsletter, and research files. Publish Agent then confirms that it received the approved brief and uploaded it to Drive. These messages close the approval trail for the post.
+    After approval, Content Agent records the decision, verifies the files, and uploads each artifact. The final message links to the delivered LinkedIn, newsletter, and research files. Publish Agent then confirms that it received the approved brief and uploaded it to Drive. These messages close the approval trail for the post.
 
-## Task 3: Review Creative Agent Image Approval
+## Task 4: Creative Agent and #creative_studio
 
-1. Send an image request to Creative Agent in the #creative_studio channel.
+1. Send an image request to Creative Agent in the `#creative-studio` channel.
 
     ![Creative Agent image draft, edit, and approval flow](./images/08-creative-agent-image-approval.png "Creative Agent image draft, edit, and approval flow")
 
     Creative Agent posts a candidate with a version number and asks for one of two responses:
 
-    - Reply `approve` to accept the displayed revision.
-    - Reply `revise: <changes>` to generate another candidate from your feedback.
+    - Reply *approve* to accept the displayed revision.
+    - Reply *revise: &lt;changes&gt;* to generate another candidate from your feedback.
 
 2. Review the new candidate after requesting a change, then approve the correct version.
 
     The approval message identifies the accepted image and version. Only the approved PNG becomes eligible for later delivery. This gate prevents an older draft from moving forward by mistake.
 
-## Task 4: Review Brand Agent Grading
+## Task 5: Other Channels
 
-1. Ask Brand Agent to grade a post format, such as `grade 1002 newsletter`.
-
-    ![Brand Agent grades and automatically corrects a newsletter](./images/14-brand-agent-grade.png "Brand Agent grades and automatically corrects a newsletter")
-
-    Brand Agent evaluates the selected artifact against the approved brand strategy. In this example, it reports the original grade and the improved grade after automatic edits. Reply `detail newsletter`, or the shorter `detail`, to see the lines that triggered feedback.
-
-## Task 5: Understand the Featured Channels
-
-1. Use `#content-start` for new content topics and supported source URLs.
-
-    ![A URL routed by Assistant Agent appears in content-start](./images/07-content-start-routed-url.png "A URL routed by Assistant Agent appears in content-start")
-
-    Each top-level message represents one intake request. Content Agent replies in a thread so the format choice, progress, failures, approvals, and final handoff stay with that request. Requests can originate in the channel or arrive through Assistant Agent routing.
-
-2. Use `#ideas` as a shared capture queue for future work.
+1. Use `#ideas` as a shared capture queue for future work.
 
     ![Ideas channel with workshop, reading, and exam ideas](./images/09-ideas-channel.png "Ideas channel with workshop, reading, and exam ideas")
 
     Post a short idea, a link, or a goal as a top-level message. Assistant Agent records the item and replies in its thread. Separate threads keep follow-up details attached to each idea without turning the channel into one long chat.
+    Afterward, send *whats on my idea list* to the Assistant Agent. It displays a similar list.
 
-3. Review `#inbox` after an email check or inbox sweep.
+    ![Ideas List from the Assistant](./images/18-idea-list.png)
+
+2. Review `#inbox` after an email check or inbox sweep.
 
     ![Inbox channel triage summary from Assistant Agent](./images/13-inbox-triage-summary.png "Inbox channel triage summary from Assistant Agent")
 
