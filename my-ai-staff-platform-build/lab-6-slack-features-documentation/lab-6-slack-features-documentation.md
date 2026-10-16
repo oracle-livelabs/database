@@ -109,7 +109,7 @@ In this lab, you will:
 
     Read the detail response before assuming that automatic edits reached the source file. In this example, the workspace denied write access. Brand Agent completed the review, but it could not change the source or create the `.grade` sidecar. Correct the file permissions, rerun the grade, and confirm that the output no longer reports a write failure.
 
-## Task 3: Content Runs (#content_starts and #content_runs)
+## Task 3: Content Runs (#content-starts and #content-runs)
 
 1. Open `#content-runs`, select a post, and open its thread.
 
@@ -131,7 +131,7 @@ In this lab, you will:
 
     After approval, Content Agent records the decision, verifies the files, and uploads each artifact. The final message links to the delivered LinkedIn, newsletter, and research files. Publish Agent then confirms that it received the approved brief and uploaded it to Drive. These messages close the approval trail for the post.
 
-## Task 4: Creative Agent and #creative_studio
+## Task 4: Creative Agent and #creative-studio
 
 1. Send an image request to Creative Agent in the `#creative-studio` channel.
 
