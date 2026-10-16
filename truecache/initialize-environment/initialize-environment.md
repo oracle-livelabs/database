@@ -6,11 +6,6 @@ In this lab we will review and startup all components required to successfully r
 
 *Estimated Time:* 10 minutes.
 
-<if type="nonsandbox">
-Watch the video for a quick walk-through of Lab 3: Initialize Environment.
-[Lab 3](videohub:1_y0sporip)
-</if>
-
 ### Objectives
 - Validate that the Primary database, True Cache, and application containers are available.
 

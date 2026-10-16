@@ -17,8 +17,8 @@ This lab assumes you have:
     - Lab: Environment Setup (*Free-tier* and *Paid Tenants* only)
     - Lab: Get started (*Login to the LiveLabs Sandbox Environment* only)
 
-## Task 1: Get started with your workshop.
-1. From the top left corner within the liveLabs browser session, click on "Activities". It will show widgets list in vertical order.
+## Task 1: View Both Workshop Browser Windows.
+1. If two browser windows are not visible, click "Activities" in the upper-left corner of the LiveLabs browser session to display the widgets list. It will show widgets list in vertical order.
 
     ![activities_raft_livelabs](images/activities_link_top_left_corner.png " ")
 

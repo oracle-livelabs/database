@@ -8,6 +8,10 @@ This baseline does not start background write or read-pressure jobs. The optiona
 
 *Estimated Time:* 15 minutes.
 
+### Video Preview
+
+[Performance Comparison and Lag Observability walkthrough](videohub:1_1lzjnseg)
+
 ### Objectives
 
 - Compare read latency and throughput with consistent run settings.
@@ -20,7 +24,7 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
 
 ## Task 1: Set the Run Options
 
-1. Load the database credentials and enter the application container.
+1. From **Host Control**, load the database credentials and enter the application container.
 
     ```bash
     <copy>
@@ -29,7 +33,9 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
     </copy>
     ```
 
-2. At the application-container prompt, set the shared options once for this session.
+2. At the application-container prompt, label this window **App Client** using the terminal-title command from Initialize Environment.
+
+3. Set the shared options once for this session.
 
     ```bash
     <copy>
@@ -55,6 +61,8 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
 
     **Expected:** the output identifies the Primary read node. Record read p50, p95, p99, and TPS from the completed run.
 
+    ![Example Primary workload summary; measurements vary by environment](images/performance-primary-summary.png)
+
 2. Run the same workload on True Cache and wait for completion.
 
     ```bash
@@ -67,7 +75,9 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
 
     **Expected:** the output identifies the True Cache read node. Record the same four metrics. The direct-connection flags are retained from the current guide for compatibility with the supplied client.
 
-3. Compare your results. Lower latency is better; higher TPS indicates greater throughput for this workload.
+    ![Example True Cache workload summary; measurements vary by environment](images/performance-true-cache-summary.png)
+
+4. Compare your results. Lower latency is better; higher TPS indicates greater throughput for this workload.
 
     | Metric | Primary | True Cache |
     | --- | --- | --- |
@@ -78,11 +88,11 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
 
     Keep sub-millisecond precision when the application reports it. Results depend on cache state, shared CPU resources, and other activity; a fixed improvement is not a pass criterion. Do not compare runs with different thread counts or background loads as an equivalent baseline.
 
-4. Type `exit` to return to the host. This also discards the session's exported run options.
+5. Type `exit` to return to the host prompt. This also discards the session's exported run options. Relabel the window **Host Control** using the terminal-title command from Initialize Environment before continuing.
 
 ## Task 3: Inspect Lag and Cache Statistics
 
-1. From the host terminal, enter True Cache.
+1. From **Host Control**, enter True Cache.
 
     ```bash
     <copy>
@@ -90,7 +100,9 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
     </copy>
     ```
 
-2. At the container prompt, open SQL*Plus.
+2. At the container prompt, label this window **True Cache SQL** using the terminal-title command from Initialize Environment.
+
+3. Open SQL*Plus.
 
     ```bash
     <copy>
@@ -98,7 +110,7 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
     </copy>
     ```
 
-3. At `SQL>`, inspect the current statistics.
+4. At `SQL>`, inspect the current statistics.
 
     ```sql
     <copy>
@@ -112,13 +124,15 @@ Complete the JDBC lab and cache warmup. Start with a host terminal. Let any Fast
 
     **Expected:** current replication and cache statistics. Zero lag can be normal after the workload finishes. An empty or unavailable value is not proof of zero lag.
 
-4. For the optional exercise below, keep this session open. Otherwise, type `exit` to leave SQL*Plus and `exit` to return to the host.
+    ![Example SQL*Plus output for apply and transport lag](images/performance-lag-statistics.png)
+
+5. For the optional exercise below, keep this session open. Otherwise, type `exit` to leave SQL*Plus and `exit` to return to **Host Control**.
 
 ## Optional Exercise: Observe a Primary Update
 
 This changes the balance of one sample account by 1 and commits it. Use only the disposable lab data. It is a replication demonstration, not a sustained write-pressure benchmark.
 
-Open a second desktop Terminal window and enter Primary.
+Open a separate desktop Terminal window from **Activities > Terminal** for **Primary SQL**. Enter Primary from its host prompt, then label the window **Primary SQL** using the terminal-title command from Initialize Environment.
 
 ```bash
 <copy>

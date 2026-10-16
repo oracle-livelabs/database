@@ -6,6 +6,10 @@ Run the supplied BasicApp to see one logical JDBC connection use Primary for rea
 
 *Estimated Time:* 5 minutes.
 
+### Video Preview
+
+[Use True Cache through JDBC walkthrough](videohub:1_gja8um8t)
+
 ### Objectives
 
 - Run BasicApp and inspect its database-role output.
@@ -28,6 +32,8 @@ sudo podman exec -e DB_PASS="$DB_PASS" -it appclient /bin/bash
 
 The environment file supplies the database password, not the remote-desktop password. If it is missing or `DB_PASS` is empty, stop and contact the lab administrator.
 
+At the application-container prompt, label this window **App Client** using the terminal-title command from Initialize Environment.
+
 ## Task 2: Run BasicApp
 
 At the application-container prompt, run:
@@ -41,9 +47,11 @@ cd /stage/clientapp/BasicApp
 
 **Expected:** the output identifies Primary first, then True Cache on service `SALES1_TC`. Check the role/service output, not only whether the application exits. Any Oracle error means the validation has not passed.
 
+![BasicApp output showing Primary and True Cache route transitions](images/jdbc-basicapp-routing.png)
+
 BasicApp changes the connection's read-only state with `setReadOnly(true)` and `setReadOnly(false)`. The driver can change the physical read route while the application keeps one logical connection; read-write work remains on Primary.
 
-Type `exit` at the container prompt to return to the host.
+Type `exit` at the container prompt to return to the host. Relabel the window **Host Control** using the terminal-title command from Initialize Environment.
 
 ## Completion
 

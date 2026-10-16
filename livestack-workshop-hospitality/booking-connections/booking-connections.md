@@ -34,6 +34,11 @@ Compare ordinary SQL joins with SQL Property Graph Queries (SQL/PGQ), then explo
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Hospitality/Workshop/Scene-05-Hospitality.mp4">
+  Your browser does not support the video tag.
+</video>
+
 > **SQL Worksheet reminder:** See [Getting Started Task 2: Open SQL Worksheet](?lab=getting-started#Task2:OpenSQLWorksheet) for the steps to paste and run SQL.
 
 ## Task 1: Follow a suspicious reservation with SQL
@@ -291,6 +296,11 @@ Bob now moves from one suspicious reservation to a broader booking review questi
     The result shows the two reservations, the information they share, the relationship type on each side, and the risk score for each reservation. `COMBINED_RISK` helps the analyst review the strongest reservation pairs first. A shared identifier may have a legitimate explanation. Use it to decide which reservations to review together.
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Hospitality/Workshop/Scene-06-Hospitality.mp4">
+  Your browser does not support the video tag.
+</video>
 
 Oracle Graph Studio displays the reservations and identifiers as an interactive network. Bob can select nodes and follow relationships to find clusters, shared devices, and links between reservations.
 

@@ -8,6 +8,10 @@ This exercise demonstrates availability of an already-read data set. It does not
 
 *Estimated Time:* 15 minutes.
 
+### Video Preview
+
+[Availability and Failover walkthrough](videohub:1_1oq8mc2k)
+
 ### Objectives
 
 - Observe an eligible cached read while Primary is stopped.
@@ -17,11 +21,11 @@ This exercise demonstrates availability of an already-read data set. It does not
 
 Complete cache warmup and the performance comparison. Both database containers must be healthy before starting. Finish other workloads and use only the disposable workshop environment.
 
-You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** for stopping and restoring Primary. Always complete the restore task, even if the read test fails.
+Keep two desktop Terminal windows for this lab: **True Cache SQL** for the read, and **Host Control** for stopping and restoring Primary. Set each window title using the method in Initialize Environment. Always complete the restore task, even if the read test fails.
 
 ## Task 1: Read the Sample on True Cache
 
-1. In the first host terminal, enter True Cache.
+1. From **Host Control**, enter True Cache.
 
     ```bash
     <copy>
@@ -29,7 +33,7 @@ You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** 
     </copy>
     ```
 
-2. At the container prompt, open SQL*Plus.
+2. At the container prompt, label this window **True Cache SQL** using the terminal-title command from Initialize Environment, then open SQL*Plus.
 
     ```bash
     <copy>
@@ -52,9 +56,11 @@ You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** 
 
     **Expected:** role `TRUE CACHE`, then five account rows. Keep this SQL*Plus session open. Reading the rows before the outage is essential to the demonstration.
 
+    ![Example True Cache role and baseline account rows](images/availability-baseline-read.png)
+
 ## Task 2: Stop Primary and Repeat the Read
 
-1. Open the second desktop Terminal window. Leave it at the host prompt and stop Primary.
+1. Open a separate desktop Terminal window for **Host Control**. Leave it at the host prompt and stop Primary.
 
     ```bash
     <copy>
@@ -65,7 +71,9 @@ You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** 
 
     **Expected:** `prod` is stopped; `truedb` and `appclient` remain running. Only Primary is stopped by this command.
 
-2. Return to the True Cache `SQL>` prompt. Type `/` and press Enter to rerun the last SQL statement, the five-row read.
+    ![Container status immediately after stopping Primary](images/availability-primary-stopped.png)
+
+2. Return to the **True Cache SQL** `SQL>` prompt. Type `/` and press Enter to rerun the last SQL statement, the five-row read.
 
     **Expected:** the same five rows while Primary is stopped. Do not run a different query before `/`, because SQL*Plus repeats the last statement in its buffer.
 
@@ -73,7 +81,7 @@ You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** 
 
 ## Task 3: Restore Primary
 
-1. In the host window, start Primary.
+1. In **Host Control**, start Primary.
 
     ```bash
     <copy>
@@ -91,7 +99,7 @@ You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** 
 
     If it remains stopped or unhealthy, contact the lab administrator. Do not proceed to the next lab with Primary down.
 
-3. After Primary is healthy, enter its container in the same host window.
+3. After Primary is healthy, enter its container in **Host Control**.
 
     ```bash
     <copy>
@@ -99,7 +107,7 @@ You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** 
     </copy>
     ```
 
-4. At the Primary container prompt, open SQL*Plus.
+4. At the Primary container prompt, label this window **Primary SQL** using the terminal-title command from Initialize Environment, then open SQL*Plus.
 
     ```bash
     <copy>
@@ -119,9 +127,9 @@ You will use two desktop Terminal windows: **True Cache** for SQL, and **Host** 
 
     **Expected:** `PRIMARY`, `READ WRITE`, and active service `SALES1`. If the service result is empty, use **Troubleshooting** below and verify it again.
 
-6. In the True Cache window, type `/` again. The sample read should still succeed after Primary returns.
+6. In **True Cache SQL**, type `/` again. The sample read should still succeed after Primary returns.
 
-7. In both windows, type `exit` to leave SQL*Plus, then `exit` to leave the container.
+7. In **Primary SQL** and **True Cache SQL**, type `exit` to leave SQL*Plus, then `exit` to leave the container.
 
 ## Completion
 

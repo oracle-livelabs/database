@@ -8,6 +8,11 @@ Jessica Chan, the DBA at SEER MANUFACTURING, starts the morning with a question 
 
 Jessica’s team investigates the quality concern using records in Oracle AI Database. Follow their work through JSON, vector search, graphs, spatial queries, machine learning and AI. Run the queries and inspect the results before deciding what the quality team should do next.
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Manufacturing/Workshop/Scene-00-Meet-the-Manufacturing-Team-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### SEER MANUFACTURING data model
 
 SEER MANUFACTURING is a fictional manufacturer. This diagram shows how customer sites, plants, component revisions, production orders, and order lines connect.

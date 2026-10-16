@@ -1,30 +1,25 @@
 # Final Quiz
 
-<!-- markdownlint-configure-file
-{
-  "MD013": {
-    "code_blocks": false,
-    "tables": false
-  }
-}
--->
-
 ```quiz-config
 passing: 75
-badge: images/livestack-badge-higher-ed.png
+badge: images/higher-ed-badge.svg
 ```
 
 ## Introduction
 
-Use this scored quiz to review the Oracle AI Database capabilities used in the
-Seer Higher Education workshop.
+Use this scored quiz to review the Oracle AI Database capabilities used in the Seer Higher Education workshop.
 
 ### Objectives
 
-* Connect each database capability to the operations question it supports.
-* Earn the workshop badge by answering the scored questions.
+- Connect each database capability to the operations question it supports.
+- Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Higher Education/Workshop/Scene-11-Closing-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Task 1: Answer the quiz questions
 

@@ -2,12 +2,12 @@
 
 ```quiz-config
 passing: 75
-badge: images/badge.png
+badge: images/badge2.png
 ```
 
 ## Introduction
 
-Use this scored quiz to check how Seer Transport connects passenger service decisions to database evidence.
+Use this scored quiz to check how Seer Transport uses database queries to support passenger service decisions.
 
 ### Objectives
 
@@ -15,6 +15,11 @@ Use this scored quiz to check how Seer Transport connects passenger service deci
 - Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-11-Closing-Keep-the-Transportation-Work-Connected-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Task 1: Answer the quiz questions
 
@@ -51,7 +56,7 @@ Estimated Time: **3 minutes**
 
     Q: How should an operations analyst use the OML surge probability?
     - Treat it as a guaranteed future event.
-    * Use it to rank services for review alongside demand and booking evidence.
+    * Use it to rank services for review alongside service activity and booking data.
     - Ignore the model inputs after scoring.
     - Interpret every score as a confirmed disruption.
     > A probability supports prioritization, but the team still checks the service activity behind the score.
@@ -59,9 +64,9 @@ Estimated Time: **3 minutes**
     Q: What keeps a Select AI answer reviewable?
     - The AI model can query every table automatically.
     - The explanation is guaranteed to be identical each time.
-    * The profile limits approved objects and Nina can inspect the generated SQL.
+    * Nina can inspect the generated SQL and check it against the requested calculation.
     - The answer comes only from general model knowledge.
-    > Nina uses SHOWSQL before RUNSQL and compares the result with her business question.
+    > Nina uses SHOWSQL to inspect generated SQL. To execute that exact statement, she runs it in SQL Worksheet; RUNSQL submits the question again for generation and execution.
 
     Q: What is the advantage of a converged database in this workshop?
     - Each capability needs a separate specialist database.
@@ -76,4 +81,5 @@ Estimated Time: **3 minutes**
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+**Contributor** - Teodor Constantin Nechita\
+* **Last Updated By/Date** - Teodor Constantin Nechita, October 2026

@@ -2,7 +2,7 @@
 
 ## About This Workshop
 
-Run this hands-on workshop to learn how Oracle True Cache improves scalability by offloading read queries and reducing the number of requests and connections sent to the primary database. The workshop uses a compute instance running an online transaction processing application and a primary database configured with Oracle True Cache. The demo application is a Java program that uses the 26ai JDBC driver to simulate a heavy transaction workload and demonstrate how routing read-only queries to True Cache affects application performance.
+Run this hands-on workshop to learn how Oracle True Cache improves scalability by offloading read queries and reducing the number of requests and connections sent to the primary database. The workshop uses a compute instance running an online transaction processing application and a primary database configured with Oracle True Cache. The demo application is a Java program that uses the 26ai JDBC driver to simulate a heavy transaction workload and demonstrates how routing read-only queries to True Cache affects application performance.
 
 ### About Oracle True Cache
 
@@ -37,12 +37,12 @@ Once you complete your setup, the next lab will cover:
 
 ## Choose Your Workshop Path
 
-The DBW26 workshop provides two ways to learn the same True Cache workflow:
+The AI World 26 workshop provides two ways to learn the same True Cache workflow:
 
 - **FastLab:** use the visual command center for a quick guided demonstration.
 - **Full LiveLab:** use the terminal to run the database, Java, and Podman commands directly.
 
-Choose either FastLab or the Full LiveLab for one workshop run. You can complete both, but the routing, warmup, performance, availability, and vector-search demonstrations overlap, so some work will repeat. If you are resuming a workshop, continue with the next incomplete section.
+Choose either FastLab or the Full LiveLab for one workshop run. You can complete both, but the routing, warmup, performance, availability, and vector-search demonstrations overlap, so some work will repeat. If you are returning to a workshop you started earlier, continue with the next lab you have not completed.
 
 Both paths use the same LiveLabs remote desktop. For **FastLab**, open Google Chrome inside the remote desktop and navigate to `http://127.0.0.1:8080/`; this opens the local command center. For the **Full LiveLab**, keep this workshop guide open and select **Activities**, then **Terminal**, when the lab asks you to run commands. The detailed labs do not require the FastLab command center.
 
