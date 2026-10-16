@@ -122,9 +122,9 @@ In this lab, you will:
 
 ## Task 3: Run Tier 1 Platform Health Checks
 
-1. Validate that `contentkit-assistant`, `contentkit-pipeline`, `contentkit-brand`, `contentkit-data`, `contentkit-ops`, and `contentkit-publish` are active. 
-2. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003) and Data Agent (8004).
-3. Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or the Fast Path was not loaded or the wallet/database configuration is wrong.
+1. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003) and Data Agent (8004).
+
+    Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or the Fast Path was not loaded or the wallet/database configuration is wrong.
 
     ```
     <copy>
@@ -137,7 +137,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or the Fast Path.
+2. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or the Fast Path.
 
 ## Task 4: Run Tier 2 and Tier 3 Slack Validation
 
