@@ -66,9 +66,17 @@ In this lab, you will:
 
     ![Example to Generate SSH Keys](./images/10_ssh_keys.png)
 
-    Continue through **Storage** with the default settings. On **Review**,
-    confirm the image, shape, networking, and SSH key selections, then select
-    **Create**.
+    On **Storage**, leave the boot-volume size, performance, encryption, and
+    block-volume options at their default values, then select **Next**.
+
+    ![Keep the default compute storage settings and continue](./images/29-compute-storage-defaults.png "Keep the default compute storage settings and continue")
+
+    On **Review**, confirm that the image, shape, OCPUs, memory, networking,
+    public IP, and SSH key selections match the workshop instructions. The
+    screenshot illustrates the Review page layout; correct any example value
+    that differs from your workshop configuration. Select **Create**.
+
+    ![Review the compute configuration and create the instance](./images/30-compute-review-create.png "Review the compute configuration and create the instance")
 
 5. Find the security list for the instance subnet. In OCI Console, open the running instance, locate the **Primary VNIC** or **Subnet** link, open the subnet, and then open its attached **Security Lists**.
 
