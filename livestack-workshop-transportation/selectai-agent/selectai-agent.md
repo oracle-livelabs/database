@@ -33,6 +33,11 @@ In this lab, you create the agent objects, connect the agent to the SQL tool, an
 - Review the agent's tool history and explain why the tool boundary matters.
 
 Estimated Time: **15 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-10-Lab-08-Build-a-Transportation-Agent-with-Select-AI-Agent-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 ### Hands-on Scenario
 
 | Step                | Transportation focus                                                                                  |
