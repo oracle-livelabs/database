@@ -4,7 +4,7 @@
 
 AI Staff uses Slack direct messages, shared channels, and threads for different kinds of work. Direct messages give you a personal control surface. Channels make team activity visible. Threads keep each request, approval, and delivery action attached to the correct job.
 
-This lab documents the features shown in the current Slack examples. You will review each featured agent and its approval controls. You will also inspect `#content-start`, `#ideas`, and `#inbox`.
+This lab documents the features shown in the current Slack examples. You will review each featured agent and its approval controls. You will also inspect `#content-start`, `#ops`, `#ideas`, and `#inbox`.
 
 Estimated Time: 30 minutes
 
@@ -38,8 +38,6 @@ In this lab, you will:
     - **Your day:** Create an approved calendar event, check or sort email, request a calendar and inbox brief, review weekly metrics, log a receipt, import a CSV file, list event signups, or prepare an outbound email for approval.
     - **Reminders, ideas, and personal context:** Create and list reminders, review saved ideas, upload a resume, compare it with a job role, or ask a career or personal request based on approved documents.
 
-    The Assistant also sends proactive briefings and due reminders when you enable those automations. Available commands depend on the external services configured for your system.
-
 2. Use the Assistant to check the platform and inspect current work.
 
     ![Assistant Agent status, post lookup, and waiting-work responses](./images/05-assistant-agent-status-and-post-lookup.png "Assistant Agent status, post lookup, and waiting-work responses")
@@ -62,11 +60,9 @@ In this lab, you will:
 
     ![Assistant Agent confirms a scheduled reminder](./images/11-assistant-agent-reminder.png "Assistant Agent confirms a scheduled reminder")
 
-    The reply repeats the reminder text and the delivery time in the configured time zone. The reminder service sends the reminder when it becomes due.
+    The reply repeats the reminder text and the delivery time in the configured time zone. When the reminder becomes due, Assistant Agent sends a notification in the indicated time.
 
-    ![Assistant Agent sends the reminder at its scheduled time](./images/11b-assistant-agent-reminder-delivered.png "Assistant Agent sends the reminder at its scheduled time")
-
-    The delivered message repeats the due time and reminder text. This follow-up confirms that the reminder service completed the request instead of only storing it.
+    ![Example of a reminder delivered by Assistant Agent](./images/11b-assistant-agent-reminder-delivered.png "Example of a reminder delivered by Assistant Agent")
 
 6. Ask the Assistant to check your email.
 
@@ -87,21 +83,39 @@ In this lab, you will:
     - **Strategy:** Enter *strategy status* to review the active profile. Enter *setup strategy* for a threaded interview, or use *setup strategy: &lt;field block&gt;* when you already have structured profile details.
     - **Quick checks:** Enter *does this sound like me?* followed by text to compare a draft with the active brand voice.
 
-2. Enter *setup strategy* and complete the threaded interview.
+2. Enter *setup strategy* to start the threaded interview.
+
+    ![Brand Agent starts the strategy interview and asks for profile details](./images/20-brand-agent-strategy-interview.png "Brand Agent starts the strategy interview and asks for profile details")
+
+    Brand Agent asks one question at a time in the command thread. Provide the profile name, professional role, main goal, topics, and preferred tone. Keep every answer in that thread so the setup remains separate from grading and other Brand Agent requests.
+
+3. Select the content formats for the strategy.
+
+    ![Brand Agent presents the available content formats during strategy setup](./images/21-brand-agent-strategy-content-formats.png "Brand Agent presents the available content formats during strategy setup")
+
+    Reply with one or more format names or numbers separated by commas. In this example, *1,2,4* selects LinkedIn Post, Newsletter, and Research. Brand Agent next asks for optional secondary goals; reply *skip* when you do not want to add any.
+
+4. Review and approve the completed strategy.
 
     ![Brand Agent strategy review, approval, and generated profile files](./images/15-brand-agent-strategy-created.png "Brand Agent strategy review, approval, and generated profile files")
 
-    The interview collects your role, main goal, topics, tone, content formats, and optional secondary goals. Brand Agent summarizes the answers before it writes anything. React with the green check mark to create the strategy or the red cross to cancel.
+    Brand Agent summarizes the profile name, role, main goal, topics, tone, and formats before it writes anything. React with the green check mark to create the strategy or the red cross to cancel.
 
     After approval, Brand Agent creates the brand guide, general strategy, funnel strategy, and content-plan files. It also updates the active profile. Enter *strategy status* to review the saved summary before you grade or brief a post.
 
-3. Enter *brief &lt;post-number&gt;* to generate a brief. This command can also be sent in `#briefing`.
+5. Upload a headshot image in the Brand Agent direct message.
+
+    ![Brand Agent saves an uploaded image as the active headshot](./images/22-brand-agent-headshot-upload-review.png "Brand Agent saves an uploaded image as the active headshot")
+
+    Open the uploaded image thread to confirm the result. Brand Agent saves the file as `strategy/headshots/active-headshot.png`, making it the active headshot for the brand profile.
+
+6. Enter *brief &lt;post-number&gt;* to generate a brief. This command can also be sent in `#briefing`.
 
     ![Brand Agent brief with selected formats and publishing goal](./images/16-brand-agent-brief.png "Brand Agent brief with selected formats and publishing goal")
 
     The production brief turns the post topic and active strategy into a shared guide for downstream agents. It identifies the selected formats and records a publishing goal for each deliverable. Review the brief before drafting when the team needs to agree on the topic, readers, or message.
 
-4. Grade one format or every generated format for a post.
+7. Grade one format or every generated format for a post.
 
     ![Brand Agent grade summary and detailed diagnostic feedback](./images/17-brand-agent-grading-detail.png "Brand Agent grade summary and detailed diagnostic feedback")
 
@@ -109,15 +123,27 @@ In this lab, you will:
 
     Read the detail response before assuming that automatic edits reached the source file. In this example, the workspace denied write access. Brand Agent completed the review, but it could not change the source or create the `.grade` sidecar. Correct the file permissions, rerun the grade, and confirm that the output no longer reports a write failure.
 
-## Task 3: Content Runs (#content-starts and #content-runs)
+## Task 3: Content Runs (`#content-start` and `#content-runs`)
 
-1. Open `#content-runs`, select a post, and open its thread.
+1. Submit a topic or supported source link in `#content-start`.
+
+    ![Content requests and a routed source link in content-start](./images/07-content-start-routed-url.png "Content requests and a routed source link in content-start")
+
+    Start each request as a top-level message. Use its thread for the agent response and follow-up details, which keeps separate content ideas from mixing together. Requests sent through Assistant Agent also appear here when the Assistant routes them to the content workflow.
+
+2. Open the request thread and choose which formats to generate.
+
+    ![Content Agent presents format choices and starts a selected format in a content-start thread](./images/23-content-start-thread-format-selection.png "Content Agent presents format choices and starts a selected format in a content-start thread")
+
+    Content Agent lists the formats configured by your active strategy. Reply *go* to generate all configured formats, *go &lt;format&gt;* to generate one format, or *cancel* to stop the request. In this example, *go Newsletter* starts a newsletter-only pipeline. Content Agent assigns the post number and directs later updates to `#content-runs`.
+
+3. Open `#content-runs`, select the new post, and open its thread.
 
     ![Content Agent research phase and first review pause in content-runs](./images/01-content-runs-research-pause.png "Content Agent research phase and first review pause in content-runs")
 
     Content Agent posts each pipeline as a top-level message in `#content-runs`. The thread holds every update for that post. In this example, the agent reports the research phase as running, marks it complete, and stops at **PAUSE 1**. The research brief appears in the same thread so you can review its topic, source support, opportunities, and trade-offs before formats begin.
 
-2. Review the generated Markdown artifacts and approve their Drive delivery.
+4. Review the generated Markdown artifacts and approve their Drive delivery.
 
     ![Content Agent artifact previews and Markdown Drive approval](./images/02-content-agent-markdown-drive-approval.png "Content Agent artifact previews and Markdown Drive approval")
 
@@ -125,7 +151,7 @@ In this lab, you will:
 
     The **Markdown Drive approval** message lists every file awaiting delivery. React with the green check mark to approve all listed Markdown artifacts for Drive. Keep the approval in the post thread so it applies to the correct files.
 
-3. Confirm the Drive upload and Publish Agent handoff.
+5. Confirm the Drive upload and Publish Agent handoff.
 
     ![Content Agent completes Drive delivery and Publish Agent confirms the handoff](./images/03-content-agent-drive-delivery.png "Content Agent completes Drive delivery and Publish Agent confirms the handoff")
 
@@ -163,7 +189,14 @@ In this lab, you will:
 
     The summary shows new-message counts, categories, suggested work, internal labels, drafts awaiting approval, and any immediate need. The channel holds shared results, while commands and approvals can remain in the Assistant DM.
 
+3. Use `#ops` to check the health of the platform services.
+
+    ![Ops Agent reports ContentKit platform health in the ops channel](./images/19-ops-platform-status.png "Ops Agent reports ContentKit platform health in the ops channel")
+
+    Enter *status* in `#ops`. Ops Agent checks File Editor, Brand, Data, Pipeline, Content, Creative, Publish, and Ops. A green check mark beside every service means that the platform is ready for agent workflows.
+
 ## Acknowledgements
 
 - Authors: Cyrce Salinas Rojas and Ilan Gómez Guerrero
+- Built with permission from the author(s).
 - Last Updated: Ilan Gómez Guerrero, October 2026

@@ -56,9 +56,9 @@ In this lab, you will:
 
     ![Create a new VCN and public subnet for the compute instance](./images/27-compute-create-vcn-public-subnet.png "Create a new VCN and public subnet for the compute instance")
 
-    Keep **Automatically assign private IPv4 address** selected. Enable
-    **Automatically assign public IPv4 address** so that you can connect to the
-    instance directly by SSH, then select **Next**.
+    Keep **Automatically assign private IPv4 address** selected. It will not be
+    able to activate **Automatically assign public IPv4 address** due to the VCN
+    and the subnet arent previously created.
 
     ![Automatically assign private and public IPv4 addresses](./images/28-compute-public-ip-assignment.png "Automatically assign private and public IPv4 addresses")
 
