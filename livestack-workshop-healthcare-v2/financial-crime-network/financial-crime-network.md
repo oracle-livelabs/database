@@ -36,6 +36,11 @@ Bob also needs to communicate the pathway to reviewers who may not want to inter
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-05-Connected-Care-Pathways-Unified-Recording.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Operating Story
 
 | Step | Healthcare focus |
@@ -342,6 +347,11 @@ Bob narrows the pathway to one question: **which recorded paths connect the pati
     The two rows show why the quality signal belongs in the same operational review: one recorded path reaches it through the care gap, and another reaches it through the condition. The query exposes those relationships without implying clinical causality.
 
 ## Task 5: Visualize the Care Pathway with Oracle Graph Studio
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-06-Graph-Studio-Pickup-Recording.mp4">
+  Your browser does not support the video tag.
+</video>
 
 Bob’s SQL/PGQ queries showed which conditions, care gaps, encounters, treatments, providers, and quality signals connect to the patient journey. The results give him a precise evidence trail, but rows alone can make it difficult for a care operations reviewer to see how those facts form one connected pathway.
 

@@ -42,6 +42,11 @@ Thomas's application needs a payload with the service request and its line items
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-03-JSON-Application-Model-Wait-Trimmed-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 > **Schema names:** `ORDERS` stores service requests, `ORDER_ITEMS` stores their items, and `CUSTOMERS` represents service points.
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
