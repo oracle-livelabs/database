@@ -30,6 +30,11 @@ Jessica can join the relational entity and relationship tables. As the investiga
 
 Estimated Time: **15 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-05-Operational-Event-Graph-Wait-Trimmed-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 ## Task 1: Follow an operational event with SQL
@@ -267,6 +272,11 @@ Bob now asks which entities share a pipeline segment, crew, or work order.
 ![Pairs with shared connections and their supporting relationship types.](images/cap-024.png)
 
 ## Task 5: Visualize the relationship using Oracle Graph Studio
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-06-Graph-Studio-Wait-Trimmed-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 Bob uses Graph Studio to explain the paths behind the SQL result. Keep the same workshop identity and graph so the visualization can be compared with the relational records.
 

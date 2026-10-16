@@ -15,6 +15,11 @@ The product and order records are already in Oracle AI Database. Each colleague 
 
 ![The Seer Sporting Goods team](images/team.png)
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Retail/Workshop/Retail-Scene-00-Opening.mp4">
+  Your browser does not support the video tag.
+</video>
+
 Jessica helps each team use the existing records in the form its application needs. Relational tables remain the source for products and orders. JSON documents, vectors, graph relationships, spatial calculations, machine learning, and AI-assisted SQL work alongside those records.
 
 Follow Jessica and her colleagues as they review product attention, inspect orders, find related products, trace creator relationships, compare fulfillment options, review model scores, and query retail data through an AI assistant. Each lab addresses one requirement and introduces the next colleague’s question.

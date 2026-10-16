@@ -4,6 +4,11 @@
 
 Seer Transport operates regional passenger service across routes, stations, and scheduled trips. When a busy corridor is disrupted, dispatchers need to identify affected services and passengers, check available capacity, and decide where to respond first.
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-00-Meet-the-Seer-Transport-Team-Branded-Pronunciation-Corrected.mp4">
+  Your browser does not support the video tag.
+</video>
+
 Jessica Chan, the database administrator, helps the team answer those questions from connected data in Oracle AI Database. Each colleague has a different task:
 
 - Thomas Brune, application developer, needs booking data as JSON for a passenger application.
