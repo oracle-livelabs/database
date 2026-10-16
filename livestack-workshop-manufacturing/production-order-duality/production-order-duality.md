@@ -8,6 +8,12 @@ Compare three options: a JSON column, a JSON Collection Table, and a duality vie
 
 ![Thomas introduces the JSON production-order application lab](images/thomas.png)
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Manufacturing/Workshop/Scene-03-JSON-Production-Order-Application-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
+
 <details>
 <summary><strong>Key terms: JSON columns, JSON collections, and JSON Relational Duality</strong></summary>
 

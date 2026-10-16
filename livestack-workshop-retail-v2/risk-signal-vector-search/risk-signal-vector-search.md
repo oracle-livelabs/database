@@ -104,7 +104,7 @@ Similarity search needs a compatible representation for both the stored text and
 
     **Expected output: Existing embedding coverage**
 
-    ![SQL Worksheet showing the query and result for Task 1: Check the embedding model, SQL block 2](images/sql-lab-3-02.jpg)
+    ![Lab 2 Task 1 Step 2](images/sql-lab-3-02.jpg)
 
     Gilly will add a new demonstration column to `PRODUCTS` to make the text-to-vector step visible. The existing embedding tables continue to serve their current queries.
 
@@ -147,7 +147,7 @@ Gilly creates one vector per product from its name, category, and subcategory, w
 
     **Expected output:** The table is altered to include `PRODUCT_EMBEDDING`, a 384-dimensional vector column. The separately populated `PRODUCT_EMBEDDINGS` and `POST_EMBEDDINGS` tables are unchanged.
 
-3. Generate vectors for rows that do not yet have one.
+3. Generate vectors for rows that do not yet have one by selecting **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -157,28 +157,18 @@ Gilly creates one vector per product from its name, category, and subcategory, w
         product_name || '. Category: ' || category ||
         '. Subcategory: ' || subcategory AS DATA)
     WHERE product_embedding IS NULL;
+
+    COMMIT;
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Create a product vector, SQL block 5](images/sql-lab-3-05.jpg)
+    ![Lab 2 Task 2 Step 3](images/l3-t2-s3.png)
 
     The screenshot shows a later run in a reservation where the vectors already exist.
 
     **Expected output:** On the first run, the model generates a vector for each of the 187 products. A later run skips vectors already present because of the `IS NULL` condition.
 
-4. Commit the generated vectors.
-
-    ```sql
-    <copy>
-    COMMIT;
-    </copy>
-    ```
-
-    ![SQL Worksheet showing the query and result for Task 2: Create a product vector, SQL block 6](images/sql-lab-3-06.jpg)
-
-    **Expected output:** The commit completes.
-
-5. Inspect the new column alongside its source product.
+4. Inspect the new column alongside its source product.
 
     ```sql
     <copy>

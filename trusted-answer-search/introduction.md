@@ -59,6 +59,6 @@ You may now **proceed to the next lab**.
 
 **Authors**
 
-* Markus Kissling, Product Manager 
+* Markus Kissling, Product Manager, Trusted Answer Search 
 
 **Last Updated Date** - October, 2026

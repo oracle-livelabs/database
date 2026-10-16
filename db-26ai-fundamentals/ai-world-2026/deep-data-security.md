@@ -50,7 +50,7 @@ When a query runs, the database rewrites it to add the data grant's condition. T
 
 ## Task 1: Create the end users and their data roles
 
-1. Start with the first question: who is asking? Today, every app signs in with the same shared account, so the database can't tell Nina from Vera. Give each of them an **end user**. Their names match `nina` and `vera` in the **Lab 1** `casino_staff` table. Clear the editor, paste the block, and click **Run Script** (F5).
+1. Today, every app signs in with the same shared account, so the database can't tell Nina from Vera. DDS gives the database an **end user**. Clear the editor, paste the block, and click **Run Script** (F5).
 
     ```sql
     <copy>
@@ -63,43 +63,72 @@ When a query runs, the database rewrites it to add the data grant's condition. T
 
     > **Note:** End users created with a password, like these two, are **local end users**: the database stores them. Oracle meant them for testing, demos and simple apps, and this lab uses them only because it has no identity provider. In production, Nina and Vera would exist only in the identity provider. 
 
-2. End users have their own place in the data dictionary. Look for Vera and Nina among end users, then among database users. Clear the editor, paste both queries, and click **Run Script**.
+2. End users have their own place in the data dictionary. First, look for Vera and Nina among end users. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
-    -- Look for Vera and Nina among end users, then among database users
+    -- Look for Vera and Nina among end users
     SELECT username, account_status, authentication_type
     FROM dba_end_users
     WHERE username IN ('NINA', 'VERA')
     ORDER BY username;
+    </copy>
+    ```
+
+    You should see `NINA` and `VERA` in `DBA_END_USERS`, both `OPEN`, with `PASSWORD` sign-in.
+
+    Notice that the database stores the names in upper case. The casino tables store `nina` and `vera` in lower case, so every rule in this lab compares names with `UPPER()`.
+
+3. Now look for them among ordinary database users, such as ADMIN. Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- Look for Vera and Nina among database users
     SELECT COUNT(*) AS database_users_named_nina_or_vera
     FROM dba_users
     WHERE username IN ('NINA', 'VERA');
     </copy>
     ```
 
-    You should see `NINA` and `VERA` in `DBA_END_USERS`, both `OPEN`, with `PASSWORD` sign-in. The second query returns 0, because neither one is a database user. The database now knows Nina and Vera by name, which the shared account could never tell it.
+    The query returns 0, because neither one is a database user. The database now knows Nina and Vera by name, which the shared account could never tell it.
 
-    Notice that the database stores the names in upper case. The casino tables store `nina` and `vera` in lower case, so every rule in this lab compares names with `UPPER()`.
+4. Nina isn't the casino's only floor host. Marco, Priya and Owen do the same job and need the same access. A **data role** holds the access for one job. Data grants go to the role, and the role goes to each person who does that job. When the casino hires a new floor host, one statement gives them every floor-host rule. When a rule changes, you change it once, for the role, not for each person.
 
-3. Nina isn't the casino's only floor host. Marco, Priya and Owen do the same job and need the same access. A **data role** holds the access for one job. Data grants go to the role, and the role goes to each person who does that job. When the casino hires a new floor host, one statement gives them every floor-host rule. When a rule changes, you change it once, for the role, not for each person.
-
-    Data grants decide what someone can read or change. Signing in is different. It still uses the classic `CREATE SESSION` privilege that Oracle has had for decades. 
-    
-    A **privilege** is permission to do one action, and a **database role** is a named set of privileges. You can't give a database role to an end user directly. Instead, you put it inside each data role, and the end user gets it through their data role.
-
-    Create a data role for surveillance and one for floor hosts. Then create an ordinary database role that holds `CREATE SESSION`, put it inside both data roles, and give each person their data role. These data roles are separate from the `staff_role` values in **Lab 1**, which only label each person's job in the casino tables. Clear the editor, paste the block, and click **Run Script**.
+    Create a data role for surveillance and one for floor hosts. These data roles are separate from the `staff_role` values in **Lab 1**, which only label each person's job in the casino tables. Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
     -- New in 26ai: a data role for each job
     CREATE DATA ROLE IF NOT EXISTS surveillance_role;
     CREATE DATA ROLE IF NOT EXISTS floor_host_role;
+    </copy>
+    ```
+
+    Script Output confirms the two data roles.
+
+5. Data grants decide what someone can read or change. Signing in is different. 
+    
+    A **privilege** is permission to do one action, and a **database role** is a named set of privileges. You can't give a database role to an end user directly. Instead, you put it inside each data role, and the end user gets it through their data role.
+
+    Create an ordinary database role that holds `CREATE SESSION`, and put it inside both data roles. This block is ordinary Oracle SQL. Clear the editor, paste the block, and click **Run Script**.
+
+    ```sql
+    <copy>
     -- Ordinary Oracle SQL: a database role that holds the sign-in privilege
     CREATE ROLE IF NOT EXISTS staff_logon_role;
     GRANT CREATE SESSION TO staff_logon_role;
-    -- Put the sign-in role inside both data roles, then give each person their data role
+    -- Put the sign-in role inside both data roles
     GRANT staff_logon_role TO surveillance_role, floor_host_role;
+    </copy>
+    ```
+
+    Script Output confirms the role and both grants. The last line puts a database role inside the two data roles with the ordinary `GRANT` statement.
+
+6. Now give each person their data role, then check who holds which role. Clear the editor, paste the block, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- New in 26ai: give each person their data role
     GRANT DATA ROLE surveillance_role TO vera;
     GRANT DATA ROLE floor_host_role TO nina;
     -- Check who holds which role
@@ -110,7 +139,7 @@ When a query runs, the database rewrites it to add the data grant's condition. T
     </copy>
     ```
 
-    You should see four rows. Data role `FLOOR_HOST_ROLE` goes to end user `NINA`, and `SURVEILLANCE_ROLE` goes to `VERA`. The database role `STAFF_LOGON_ROLE` goes to both data roles. The `GRANT staff_logon_role` line is the ordinary `GRANT` statement. 
+    You should see four rows. Data role `FLOOR_HOST_ROLE` goes to end user `NINA`, and `SURVEILLANCE_ROLE` goes to `VERA`. The database role `STAFF_LOGON_ROLE` goes to both data roles.
     
     Vera and Nina can now sign in, but neither role can read a single row yet. Every end user starts there: no access, until a data grant says otherwise.
 
@@ -153,17 +182,11 @@ When a query runs, the database rewrites it to add the data grant's condition. T
 
     > **Note:** `ALL COLUMNS EXCEPT` also covers columns added to `players` later. Floor hosts see any new column unless you add it to the list.
 
-2. Now write the rest of the casino's rules:
-
-    * Floor hosts see the play sessions of their own players, so Nina can see when Victor played.
-    * Vera investigates the whole floor, so surveillance sees every player, session and chip transfer, and the case file.
-    * Everyone on staff can read the dealers and gaming tables.
-
-    Clear the editor, paste the block, and click **Run Script**.
+2. Now write the rest of the casino's rules, one group at a time. Floor hosts also see the play sessions of their own players, so Nina can see when Victor played. Clear the editor, paste the statement, and click **Run Script**.
 
     ```sql
     <copy>
-    -- The remaining grants for floor hosts, surveillance and all staff
+    -- The floor hosts' grant on play_sessions: only their own players' sessions
     CREATE OR REPLACE DATA GRANT host_sessions
       AS SELECT
       ON play_sessions
@@ -171,6 +194,16 @@ When a query runs, the database rewrites it to add the data grant's condition. T
                             FROM admin.players p
                            WHERE UPPER(p.host_username) = UPPER(ORA_END_USER_CONTEXT.username))
       TO floor_host_role;
+    </copy>
+    ```
+
+    `host_sessions` lets floor hosts read the play sessions of their own players. Its subquery finds those players in `players`.
+
+3. Vera investigates the whole floor, so surveillance sees every player, session and chip transfer, and the case file. Clear the editor, paste the block, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- The surveillance grants: every row and column of five tables
     CREATE OR REPLACE DATA GRANT surveillance_players
       AS SELECT ON players TO surveillance_role;
     CREATE OR REPLACE DATA GRANT surveillance_sessions
@@ -181,6 +214,16 @@ When a query runs, the database rewrites it to add the data grant's condition. T
       AS SELECT ON case_files TO surveillance_role;
     CREATE OR REPLACE DATA GRANT surveillance_case_players
       AS SELECT ON case_players TO surveillance_role;
+    </copy>
+    ```
+
+    The five `surveillance_` grants have no column list and no `WHERE` clause. Vera reads every row and column of those tables.
+
+4. Everyone on staff can read the dealers and gaming tables. Clear the editor, paste the block, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- The grants for all staff: dealers and gaming tables
     CREATE OR REPLACE DATA GRANT staff_dealers
       AS SELECT ON dealers TO surveillance_role, floor_host_role;
     CREATE OR REPLACE DATA GRANT staff_gaming_tables
@@ -188,17 +231,13 @@ When a query runs, the database rewrites it to add the data grant's condition. T
     </copy>
     ```
 
-    What the grants say:
-
-    * `host_sessions` lets floor hosts read the play sessions of their own players. Its subquery finds those players in `players`.
-    * The five `surveillance_` grants have no column list and no `WHERE` clause. Vera reads every row and column of those tables.
-    * `staff_dealers` and `staff_gaming_tables` name both roles. Dealers and gaming tables hold nothing sensitive.
+    `staff_dealers` and `staff_gaming_tables` name both roles. Dealers and gaming tables hold nothing sensitive.
 
     Floor hosts get no grant on `chip_transfers`, `case_files` or `case_players`. They also have no privilege on `casino_graph` or the `chip_loop_players` view. You don't write rules to hide things: whatever a data role isn't granted stays out of reach. In **Lab 3**, the case file said `SURVEILLANCE`, but nothing enforced it. Now only `surveillance_role` can read it.
 
     These rules live in the database, not in an app. When Nina's AI assistant goes live, it gets them without a line of new code, and so does every app the casino builds later.
 
-3. Every rule now lives in one place that you can query. If the casino's auditors ask who can read the case file, nobody has to dig through each app's code. The data dictionary view `DBA_DATA_GRANTS` records every data grant. This query shows one row per grant and role, with its columns and row rule. Clear the editor, paste the query, and click **Run Statement**.
+5. Every rule now lives in one place that you can query. If the casino's auditors ask who can read the case file, nobody has to dig through each app's code. The data dictionary view `DBA_DATA_GRANTS` records every data grant. This query shows one row per grant and role, with its columns and row rule. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -215,9 +254,9 @@ When a query runs, the database rewrites it to add the data grant's condition. T
     </copy>
     ```
 
-    You should see 11 rows: four for `FLOOR_HOST_ROLE` and seven for `SURVEILLANCE_ROLE`. Find `HOST_PLAYERS`. Its `COLUMNS` value lists `CREDIT_LIMIT`, `DATE_OF_BIRTH`, `FULL_NAME`, `HOST_USERNAME`, `LOYALTY_TIER` and `PLAYER_ID`, but not `GOVERNMENT_ID` or `HOME_ADDRESS`. A NULL `COLUMNS` value means every column, and a `PREDICATE` of `1 = 1` means every row, because 1 always equals 1.
+    You should see 11 rows: four for `FLOOR_HOST_ROLE` and seven for `SURVEILLANCE_ROLE`. Find `HOST_PLAYERS`. Its `COLUMNS` value lists `CREDIT_LIMIT`, `DATE_OF_BIRTH`, `FAVORITE_GAME`, `FULL_NAME`, `HOST_USERNAME`, `LOYALTY_TIER` and `PLAYER_ID`, but not `GOVERNMENT_ID` or `HOME_ADDRESS`. A NULL `COLUMNS` value means every column, and a `PREDICATE` of `1 = 1` means every row, because 1 always equals 1.
 
-    ![Query Result lists 11 data grants, with HOST_PLAYERS limited to six columns and a row rule on the host's username.](images/deep-data-security-03.png " ")
+    ![Query Result lists 11 data grants, with HOST_PLAYERS limited to seven columns and a row rule on the host's username.](images/deep-data-security-03.png " ")
 
 ## Task 3: Sign in as Nina and Vera
 
@@ -350,20 +389,6 @@ So far, you've been signed in as ADMIN, and ADMIN sees everything. To prove the 
 
     ![Query Result shows Victor Lang three times, with government ID and address NULL on Nina's row.](images/deep-data-security-05.png " ")
 
-3. Nina is planning a dinner for the casino's VIPs, so she asks her AI assistant for every VIP on the floor. The AI assistant writes a new query for her question, and the query says nothing about Nina. Clear the editor, paste the query, and click **Run Statement**.
-
-    ```sql
-    <copy>
-    -- Nina's AI assistant asks for every VIP on the floor
-    SELECT full_name, loyalty_tier, host_username
-    FROM admin.players@as_nina
-    WHERE loyalty_tier = 'VIP';
-    </copy>
-    ```
-
-    You should see one row: Victor Lang. The floor has five VIPs, but the other four belong to other hosts. The `WHERE` clause can narrow what Nina sees, but no query can widen it.
-
-    This is where filters in app code fail. The AI assistant wrote this query for Nina's question, and no developer added "only Nina's players". The database added it.
 
 ## Task 5: Keep the case file from Nina
 
@@ -405,15 +430,13 @@ So far, you've been signed in as ADMIN, and ADMIN sees everything. To prove the 
 
     ![Script Output shows ORA-00942 for the CASE_FILES table, followed by ORA-02063 naming the AS_NINA link.](images/deep-data-security-07.png " ")
 
-    At the end of this session, you'll watch an AI agent, like Nina's AI assistant, sign in as Nina and as Vera. It connects through the SQLcl MCP server and sees exactly what they saw here. The database decides what an agent sees, not the agent.
+
 
 ## Conclusion
 
 You protected Vera's evidence, and Nina's AI assistant can go live. Nina sees her ten players and their sessions, without their government IDs or home addresses. She can't see other hosts' VIPs, and she can't open the case file. Vera sees everything her investigation needs.
 
-Before this lab, the casino's apps filtered rows in their own code while signed in with a shared account that could read every table. The AI assistant writes a new query for each question, so it would have skipped those filters, and Nina could have learned about the case without meaning to. Now the database knows who is asking, and the rules live in the database as data grants: plain SQL that you can read in one view. Every app, script and AI assistant gets the same answers, without a line of new code.
 
-The database could filter rows before 26ai, too. A Virtual Private Database policy adds a `WHERE` clause to every query on a table, whichever app sends it. Data grants improve on it in two ways. A Virtual Private Database rule is a PL/SQL function that builds its `WHERE` clause as text, so to learn what the rule allows, you read the function's code. A data grant is the rule itself, in SQL, and `DBA_DATA_GRANTS` shows its condition and columns. And with a shared account, a Virtual Private Database policy learns who is asking from a name the app sets in the session. The database can't check that name, so any program that uses the shared account could claim to be Vera and open the case file. With data grants, Nina signs in as herself, and the database checks her password or her identity provider's token. No app needs a shared account that can read every table.
 
 That's the thread through this workshop: the rules live in the database. Domains and an assertion checked every write, including JSON from the tablets at the gaming tables. The graph read the same rows as SQL. Data grants now decide what every end user can see. So every app, JSON document, graph query and AI agent gets the same answers from the same rules.
 
