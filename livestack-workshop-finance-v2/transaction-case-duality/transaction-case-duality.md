@@ -6,7 +6,7 @@ Thomas Brune is an application developer at Seer Bank. He and his team are build
 
 Thomas needs transaction data as a JSON payload that a web or mobile application can consume directly. One payload can group account details, transaction status, line items, and optional app-specific attributes. JSON lets him evolve that payload as the product changes. The data already lives in Oracle AI Database, so his question is how to use JSON without giving up relational keys, SQL, transactions, and database controls.
 
-Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right approach for each application feature without creating a second copy of customer data.
+Thomas asks Jessica, the DBA, to walk through three ways to work with JSON in Oracle AI Database. They start with a JSON value in a relational table, then a collection of JSON documents, and finally a JSON Relational Duality View over existing relational rows. The goal is to choose the right JSON approach for each application feature. The JSON Collection Table exercise stores a sample document separately so you can compare that approach; the JSON Relational Duality View exposes existing relational rows as JSON without copying them into another store.
 
 ![thomas](images/thomas.png)
 
@@ -169,25 +169,23 @@ Thomas now needs a collection of application documents. Unlike the JSON column i
     </copy>
     ```
 
-    Thomas now has a document collection that a document API can access, and SQL can query the same `DATA` column. The collection stores the documents; it is separate from the relational `ORDERS` and `ORDER_ITEMS` tables.
+    Thomas now has a document collection that a document API can access, and SQL can query the same `DATA` column. This exercise intentionally creates a separate sample document for comparison. In Task 3, `ORDERS_DV` exposes existing relational rows as JSON without storing a second transaction copy.
 
 ## Task 3: Read a customer document from relational data
 
 Thomas now tests the document shape his application can consume directly.
 
-1. Run this query:
-
-
-
-    This query selects the JSON `DATA` column from `ORDERS_DV` so Thomas can inspect the document shape in SQL Worksheet.
+This query selects the JSON `DATA` column from `ORDERS_DV` so Thomas can inspect the document shape in SQL Worksheet.
 
     <details>
-    <summary><strong>Why this matters to Thomas</strong></summary>
+    <summary><strong>Optional context: Why this matters to Thomas</strong></summary>
 
     > Thomas can use a JSON Collection Table when the application owns the document. But the transaction already has relational tables that Jessica and other teams rely on.
     > The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the transaction into another store.
 
     </details>
+
+1. Run this query:
 
     ```sql
     <copy>
@@ -269,7 +267,7 @@ The existing `ORDERS_DV` lets an application update an existing transaction docu
 
     Oracle created or replaced the duality view. Verify the new capabilities in the next step.
 
-2. Run the capability query again.
+3. Run the capability query again.
 
     ```sql
     <copy>

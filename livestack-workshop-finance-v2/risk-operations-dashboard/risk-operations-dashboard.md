@@ -53,7 +53,7 @@ The query intentionally crosses four data models:
 - **JSON:** `ORDERS_DV` is read as a document, and `JSON_TABLE` projects its nested line items into rows so transaction activity can be counted.
 - **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest service center to the high-demand New York Metro region using latitude and longitude information stored as GeoJSON.
 
-    These are four operations in one investigation. Every row combines product risk with transaction activity, semantic relevance, and service-routing context.
+These are four operations in one investigation. Every row combines product risk with transaction activity, semantic relevance, and service-routing context.
 
 1. Open SQL Worksheet as `LLUSER`. 
 
@@ -188,7 +188,7 @@ The query intentionally crosses four data models:
 
     ![SQL Worksheet showing the ranked product result behind Jessica's dashboard](images/product-level-dashboard.png " ")
 
-    Your numbers may be different if the demo data has changed. Each row should include all four types of data.
+    With the workshop data loaded, review how each row combines the four data types described above. Compare the risk, transaction, semantic-match, and service-location columns.
 
 Use the first row to explain the business takeaway: the risk and transaction values show why the product needs attention, the semantic match explains why it fits the question, and the service location shows where follow-up could begin. Jessica now has the query behind the dashboard's ranked product table and detail view, combining relational risk data, vector search, JSON transaction data, and spatial distance in one result that a business user can inspect.
 
@@ -196,8 +196,7 @@ With separate systems, Jessica would need complex and expensive integration acro
 
 ## Task 2: Change the investigation question
 
-Jessica meets with a risk analyst to review the results at the data level before she builds the dashboard. They start with products related to **fraud and AML exposure requiring operational review**. Change the embedded investigation phrase to:
-
+Jessica and a risk analyst review the query before she builds the dashboard. In Task 1, the `VECTOR_EMBEDDING` call uses the phrase `fraud and AML exposure requiring operational review`. Replace that phrase with `client service workload and transaction capacity`, then run the full query again.
 
 ```text
 client service workload and transaction capacity
@@ -205,8 +204,7 @@ client service workload and transaction capacity
 
 ![2026-08-18-004703](images/2026-08-18-004703.png)
 
-
-Run the query again and compare the top rows.
+Compare the top ten products with the first result. Note which products moved and whether their exposure and transaction activity fit the new question. To rerun the first investigation, restore `fraud and AML exposure requiring operational review` in the `VECTOR_EMBEDDING` call.
 
 1. Which products moved into or out of the top ten?
 2. Which products still have high relational exposure but a lower semantic similarity to the new question?

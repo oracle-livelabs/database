@@ -102,7 +102,7 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
 
     This is the converged-database advantage. Moon can keep the center's location beside its name, capacity, operating status, and current load. SQL can calculate distance and return those center details, while `SDO_UTIL.TO_GEOJSON` gives the application the same location for a map. The team does not have to copy coordinates into a separate mapping system and keep the copies synchronized.
 
-## Task 2: Find the closest centers to a demand region
+## Task 2: Measure center distance to a demand-region boundary
 
 New York Metro has a demand index of `91`, making it a useful region for the first routing review. Moon now measures the distance from each service-center point to the region boundary.
 
@@ -142,7 +142,7 @@ New York Metro has a demand index of `91`, making it a useful region for the fir
 
     The `ROUND(..., 2)` around the function result only formats the answer to two decimal places. It does not change the spatial calculation.
 
-    The query also returns `DEMAND_INDEX`, so Moon can read location and demand together. The center with the smallest distance is the first center operations should check for available capacity.
+    The query also returns `DEMAND_INDEX`, so Moon can read location and demand together. It ranks centers by distance to the region boundary. A center inside or touching the region has a distance of `0`, so this result does not identify a single best center when several centers are inside the region. Task 3 assigns each customer to the nearest active center.
 
     **Expected output: New York Service Coverage**
 
@@ -150,9 +150,9 @@ New York Metro has a demand index of `91`, making it a useful region for the fir
 
     ![result](images/task21.png)
 
-2. Try another region.
+2. Compare distances for another region.
 
-    Change the region name to `Chicago Metro`, add a miles calculation, and run the modified query:
+    In the `WHERE` clause, replace `'New York Metro'` with `'Chicago Metro'`. Add the second `SDO_GEOM.SDO_DISTANCE` expression shown below using `'unit=MILE'`, then run the query. The kilometer and mile columns describe the same distance in different units. For Joliet Midwest Risk Desk, both values should be `0` because the center is inside the region. Restore `'New York Metro'` in the `WHERE` clause to rerun the first example.
 
     ```sql
     <copy>
@@ -278,15 +278,15 @@ Moon now needs a result that an operations application can use: customers inside
 
 3. Change the query to `Chicago Metro`.
 
-    Compare the customers and assigned centers with the New York result. The spatial predicates stay the same; only the region changes. This is the kind of query an operations dashboard can run when a business user selects a different demand region.
+    In the `WHERE` clause, replace `'New York Metro'` with `'Chicago Metro'`, then run the query again. Compare the returned customer IDs and assigned centers with the New York results. The spatial predicates and nearest-center calculation stay the same. Restore `'New York Metro'` in the condition to rerun the first example. The result should list Chicago Metro customers and their closest active centers.
 
-    ![result](images/task31.png)
+    ![SQL Worksheet results for customers routed within Chicago Metro](images/task32.png)
 
 ## Conclusion: Turn Location into a Service Decision
 
 Moon's analysis moves from a point, to distance, to customer routing. A business user can select a high-demand region and get a list of customers, their closest service center, and the distance to that center. That is a useful dashboard result because it tells the user what action to take, not just where the data is located.
 
-This shows why Spatial in Oracle AI Database matters. One convergent query can identify customers with spatial functions, join them to relational customer and center data, and include capacity and current load in the same result. The dashboard can show the map and the business details from one database, without moving data between a mapping system, a customer system, and an operations system.
+Oracle Spatial calculates with the stored locations, while SQL joins them to customer and service-center details. The same query can return the data a dashboard needs for its map and service decisions.
 
 ## Next Steps
 

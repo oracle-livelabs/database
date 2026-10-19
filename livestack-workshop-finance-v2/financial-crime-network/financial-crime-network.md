@@ -6,9 +6,7 @@ Bob Green is a seasoned graph specialist at Seer Bank. He has worked on fraud de
 
 Bob's starting point is simple: fraud patterns often hide in relationships, not in one transaction row. One account may not reveal the full picture, but a shared device, reused phone number, mule payee, or repeated IP address can reveal coordinated activity.
 
-In this lab, you will use Bob's approach to investigate the fraud network in two views. You will start with the basic parts of a graph, use SQL/PGQ to follow connections. Then you will open Graph Studio and run the same investigation as a visual graph, where the relationships become easier to explore and explain. Think of the SQL as the evidence trail and Graph Studio as the investigator’s map.
-
-Graph Studio is Oracle Database's visual workspace for property graphs. It lets an investigator see nodes, edges, and paths as an interactive network while keeping the graph backed by the same governed database data. Bob will uses SQL/PGQ when he need a precise, repeatable result set, such as a ranked list of entities or a filtered path count. He then uses Graph Studio when he needs to explore a network visually, select a node, follow adjacent relationships, and explain a fraud ring to another reviewer. Later in this workshop, you use it to turn the SQL evidence for `ACCT-8841` into an investigation map.
+In this lab, you will use Bob's approach to investigate the fraud network in two views. First, you will learn the basic parts of a graph and use SQL/PGQ to follow connections. Then you will open Graph Studio to inspect the network visually. SQL returns a precise, repeatable result, such as a ranked list of entities or a path count. Think of the SQL results as the evidence trail and Graph Studio as the investigator's map. Graph Studio shows nodes, edges, and paths as an interactive network backed by the same database data. Bob uses the table to review query results and the graph to explain how accounts connect.
 
 ![bob](images/image-graph.png)
 
@@ -185,9 +183,9 @@ In this lab, a **hop** means one relationship step. The account to a device is o
 
     Jessica now needs four separate query branches. The first branch follows one relationship step, the second follows two, the third follows three, and the fourth follows four. Each additional hop adds another relationship join and another entity join. The `UNION` combines the four path lengths and removes duplicate rows. This returns the same one-through-four-hop range as Bob's graph query, but it is much longer and harder to change.
 
-3. Review how the SQL grows more complex when it does not use  graph query.
+3. Compare the repeated joins in this query with the shorter graph pattern in Task 2.
 
-    Jessica can add another relationship step, but she must join `FRAUD_ENTITIES` and `FRAUD_RELATIONSHIPS` again. Four hops need four relationship joins and five instances of the entity table. If she wants to support several possible path lengths, the query needs more joins, unions, and duplicate handling. The SQL becomes harder to read just as the investigation becomes more important.
+    Each additional hop requires another relationship join and entity join. Four hops need four relationship joins and five instances of the entity table. If Jessica supports several path lengths, the query needs more joins, unions, and duplicate handling. The SQL becomes harder to read as the investigation grows.
 
     This is the problem Bob's graph approach is meant to solve. The relationships already exist in relational tables, but a graph query can express the path directly.
 
@@ -328,27 +326,25 @@ Bob now moves from one suspicious account to a broader fraud question: **which a
 
     ![investigate](images/investigate.png)
 
-## Task 5: Visualize the relationship using Oracle Graph Studio
+## Task 5: Open Graph Studio
 
-Now, what if Bob wanted people to be able to have pattern visualization at their disposal? The SQL above showed which accounts and identifiers are connected; the same relationships can also be shown visually. With Oracle Graph Studio, Bob can use the same accounts and turn them into an interactive network. This will help Bob spot clusters, shared devices, and visualize links between accounts.
-
-In the following tasks, you will use Graph Studio to turn the SQL evidence for `ACCT-8841` into an investigation map.
+Bob has traced connected accounts and identifiers in SQL. He now opens Graph Studio to show the same relationships as an interactive network, helping the fraud team inspect clusters, shared devices, and paths around `ACCT-8841`.
 
 1. Start from the Database Actions Launchpad. Confirm that the upper-right corner shows `LLUSER`. If the dark-theme message appears, click **Done**.
 
     ![Database Actions Launchpad for the LLUSER workshop account](images/database-actions-launchpad.png " ")
 
-3. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
+2. On the **Development** tab, select **Graph Studio** from the left-side tool list and click **Open**.
 
     ![Open Graph Studio from the Database Actions launchpad](images/graph-database-actions-launchpad.png " ")
 
-4. If prompted, sign in with the `LLUSER` and the workshop password supplied.
+3. If prompted, sign in as `LLUSER` with the workshop password.
 
-5. Confirm that the Graph Studio home page opens. The landing page provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
+4. Confirm that the Graph Studio home page opens. The landing page provides **Graphs**, **Notebooks**, **Templates**, and **Jobs**.
 
     ![Graph Studio overview page signed in as LLUSER](images/graph-studio-overview.png " ")
 
-## Task 5: Download and import the finance notebook
+## Task 6: Download and import the finance notebook
 
 The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnable investigation guide that combines SQL/PGQ paragraphs and graph visualizations.
 
@@ -369,11 +365,13 @@ The supplied `.dsnb` file is a native Graph Studio notebook: a reusable, runnabl
     ![Import the Fraud Network notebook file into Graph Studio](images/graph-import-file.png " ")
 
 
-## Task 6: Run and interpret the Graph Studio notebook
+## Task 7: Run and interpret the Graph Studio notebook
 
-You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of that investigation in Graph Studio so you can compare the query results with the visual graph experience. The notebook shows the `ACCT-8841` path and the `DEV-fp-91a7` shared-device view.
+You already ran the SQL/PGQ patterns in SQL Worksheet. Now run selected parts of that investigation in Graph Studio so you can compare the table and visual graph. The notebook shows paths from `ACCT-8841` and a shared-device view centered on `DEV-fp-91a7`.
 
-The advantage of Graph Studio is investigative context: a table ranks the connected entities, while the visual graph reveals the paths and shared infrastructure that explain why they are connected.
+The notebook repeats the investigation from Task 3 with a shorter path limit: it follows one or two hops from `ACCT-8841` and returns a prioritized table. Task 3's SQL Worksheet query follows up to four hops, so the result sets cover different path lengths.
+
+A table ranks connected entities, while the graph shows the paths and shared infrastructure behind those connections.
 
 1. Start at the top of the **Fraud Network** notebook. Read the explanation for the `ACCT-8841` traversal, then run the first SQL paragraph.
 
@@ -381,7 +379,7 @@ The advantage of Graph Studio is investigative context: a table ranks the connec
 
 2. Review the results in table format in the graph studio notebook:
 
-    This is the same investigation pattern you ran in SQL Worksheet as task 3 above: start from `ACCT-8841`, follow one or two relationship hops, and return the connected entities as a prioritized table.
+    This notebook query starts from `ACCT-8841`, follows one or two relationship hops, and returns the connected entities as a prioritized table. Task 3's SQL Worksheet query follows up to four hops, so compare the path lengths before comparing the returned entities.
 
     | Paragraph | Result | Investigation purpose |
     | --- | --- | --- |
@@ -403,7 +401,7 @@ The red device, `DEV-fp-91a7`, at the center links multiple account vertices, in
 
 > **Generated result note:** Graph layouts and node positions can vary between runs. Entity keys, relationship evidence, and query results remain the evidence to compare.
 
-Congratulations, you have successfully navigated Graph Studio. In this workshop, you used SQL/PGQ for a precise, repeatable result set, such as a ranked list of entities or a filtered path count. You then used Graph Studio to explore a network visually, select a node, follow adjacent relationships, and understand a fraud ring. And finally, you used it to turn the SQL evidence for `ACCT-8841` into an investigation map!
+Bob used SQL/PGQ to return a repeatable table of connected entities, then opened the network in Graph Studio to inspect paths and shared devices. The SQL is his evidence trail; the graph is his investigation map around `ACCT-8841`. The table supports sorting and filtering, while the graph helps the fraud team explain how the accounts connect.
 
 ## Conclusion: Make Relationships Easy to Review
 
