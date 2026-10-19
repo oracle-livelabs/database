@@ -454,6 +454,6 @@ For Thomas, `ORDERS_DV` is the right choice for the transaction feature because 
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

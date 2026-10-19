@@ -368,6 +368,6 @@ Oracle AI Database makes the model part of the dashboard query. A business user 
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

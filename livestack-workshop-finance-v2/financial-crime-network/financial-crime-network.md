@@ -478,6 +478,6 @@ The statement defines the graph structure over the relational tables. It does no
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano, Ramu Murakami Gutierrez
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
