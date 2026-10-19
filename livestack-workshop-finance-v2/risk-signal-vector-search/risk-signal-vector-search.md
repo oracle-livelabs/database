@@ -167,7 +167,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
     The SQL creates an embedding for the phrase `mortgage pre-approval risk`, compares it with the vectors in `PRODUCTS.PRODUCT_EMBEDDING`, and returns the cosine distance. A smaller distance means the two vectors are closer in meaning, so the query orders the smallest distance first.
 
     <details>
-    <summary><strong>Why this matters to Gilly</strong></summary>
+    <summary><strong>Optional context: Why this matters to Gilly</strong></summary>
 
     > Gilly could export the text to an external embedding pipeline or search service. That would create extra copies of sensitive finance text and make it harder to show which data the application searched.
     >
@@ -200,7 +200,7 @@ Now Gilly tests the new column with a simple vector query. She asks for products
 
 3. Show the result as a similarity score:
 
-    Vector distance is useful for checking the search, but business users may not know what a cosine distance means. Gilly changes the display to a similarity score. She subtracts the distance from `1`, so a higher score means a closer match, and rounds the result to four decimal places.
+    A cosine distance can be harder to interpret in a business review, so Gilly displays cosine similarity as `1 - cosine distance` and rounds it to four decimal places. A higher value indicates a closer match; treat it as a ranking aid, not a confidence percentage.
 
     ```sql
     <copy>
@@ -272,7 +272,7 @@ Gilly now has the business requirement for the application. A business user shou
 
 2. Review the business result.
 
-    Gilly does not vectorize every order or customer. She vectorizes the product data once, then builds a converged query that combines vector search with SQL joins for exact transaction and contact details. This keeps the search flexible while the final customer list remains precise and easy to act on.
+    Gilly creates and stores one vector for each product, rather than vectorizing every order or customer. She then combines vector search with SQL joins for exact transaction and contact details. This keeps the search flexible while the final customer list remains precise and easy to act on.
 
 ## Conclusion
 
@@ -280,6 +280,6 @@ Gilly has built the search behind the application and connected it to a business
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano, Pat Shepherd
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
