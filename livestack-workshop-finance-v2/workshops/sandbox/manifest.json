@@ -34,7 +34,7 @@
     },
     {
       "title": "Lab 5: Route Customers to the Closest Service Center",
-      "description": "Use Oracle Spatial for service center and SLA region analysis.",
+      "description": "Use Oracle Spatial to analyze demand regions, customer locations, and service-center coverage.",
       "filename": "../../service-sla-spatial/service-sla-spatial.md"
     },
     {
