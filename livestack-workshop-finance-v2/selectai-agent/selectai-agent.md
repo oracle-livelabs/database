@@ -6,7 +6,7 @@ Nina Patel has used Select AI to ask one finance question at a time. That works 
 
 Jessica, the DBA, does not want to give an AI system unrestricted access to the database. She gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the finance tables configured in the previous lab.
 
-In this lab, you create the agent objects, connect the agent to the SQL tool, and run a question through the team. The agent uses the approved tool and returns an answer. The tool remains read-only, and the SQL still runs with the database user's privileges.
+In this lab, you create the agent objects, connect the agent to the SQL tool, and run a question through the team. The SQL runs with the database user's privileges. Do not assume the task instructions or profile object list make the tool read-only; verify the tool's permitted actions and the user's database privileges before treating this setup as read-only.
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
@@ -25,7 +25,7 @@ In this lab, you create the agent objects, connect the agent to the SQL tool, an
 
 - Confirm that the `GENAI` profile from the previous lab is available.
 - Verify which finance tables the SQL tool may use.
-- Register a read-only SQL tool for the finance schema.
+- Register a SQL tool for the finance schema.
 - Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
 - Run a finance question through the team.
 - Review the agent's tool history and explain why the tool boundary matters.
@@ -97,7 +97,7 @@ The agent's SQL tool uses the existing `GENAI` profile. The profile's `object_li
 
 ## Task 2: Register the SQL tool
 
-The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile's object list limits the schema metadata available for generated SQL.
+The SQL tool is the agent's only database capability in this lab. It uses the `GENAI` profile, so the profile's object list limits which schema objects Select AI considers when generating SQL. Database grants determine which data the current user can access. The profile list alone does not enforce read-only behavior.
 
 1. Register the tool:
 
@@ -209,9 +209,9 @@ Database Actions does not support the `SELECT AI AGENT` command directly. Use `D
 
     Look for the product ranking, category, revenue, and units sold. The exact wording may vary because an AI provider generates the response, but the answer should be based on the finance tables available through `GENAI`.
   
-    > **Note:** This team has a read-only SQL tool. It can query the data, but the task instructions do not give it a tool for inserting, updating, or deleting records.
+    > **Access note:** The task instructions tell the agent not to change records, but that instruction and the profile's object list do not restrict database privileges. Before describing this setup as read-only, confirm that the SQL tool permits only read statements and that the database user cannot write to the relevant objects.
 
-3. Optional challenge: ask a follow-up question that connects the highest-revenue product to its customers and orders. A more detailed request may take longer because the agent has to interpret more steps.
+3. Optional challenge: ask which customers ordered the highest-revenue product and request the related order details. Check whether the agent calls the SQL tool and whether its answer is supported by the returned data.
 
 ## Task 5: Inspect what the agent did
 
@@ -262,7 +262,7 @@ That is the next step from Select AI to Select AI Agent: the application can cal
 
 The table boundary has two parts. The profile's `object_list` tells the SQL tool which tables to consider, while database grants decide which rows the session can actually read. Both should be kept narrow when an agent is used by an application.
 
-The example remains read-only on purpose. Before an agent is allowed to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
+The example is intended for read-only review. Verify that the SQL tool and database privileges prevent writes before relying on that boundary. If an agent needs to change data, the team should add a narrowly defined function tool, clear instructions, and a confirmation step for the user.
 
 ## Appendix: Reset the workshop objects
 
@@ -286,6 +286,6 @@ Read the [Oracle AI Database Select AI Agent documentation](https://docs.oracle.
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

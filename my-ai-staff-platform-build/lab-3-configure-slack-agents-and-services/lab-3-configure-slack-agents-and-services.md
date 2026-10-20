@@ -292,24 +292,7 @@ In this lab, you will:
 
     For example, use `America/Mexico_City` for the Mexico City time zone.
 
-3. Copy the Slack member ID for the deployment owner.
-
-    In Slack, select your name to open the member card. Then select **View full profile**.
-
-    ![Open the full Slack member profile](./images/33_open_slack_member_profile.png)
-
-    In the full profile, select the three-dot menu and select **Copy member ID**.
-
-    ![Copy the Slack member ID](./images/34_copy_slack_member_id.png)
-
-    Add the copied `U...` value to both variables:
-
-    ```text
-    SLACK_ASSISTANT_USER_ID=U...
-    SLACK_CREATIVE_OWNER_ID=U...
-    ```
-
-4. Confirm the bot display names.
+3. Confirm the bot display names.
 
     ```text
     ASSISTANT_BOT_NAME=Assistant Agent
@@ -321,7 +304,7 @@ In this lab, you will:
     PUBLISH_BOT_NAME=Publish Agent
     ```
 
-5. Confirm that `.env.shared` still contains the database values from Lab 1 or the Fast Path.
+4. Confirm that `.env.shared` still contains the database values from Lab 1 or the Fast Path output.
 
     ```text
     ADB_DSN=<database-service-name-ending-in-_low>
@@ -345,11 +328,17 @@ In this lab, you will:
     `ADB_DSN=mydatabase_low`. Do not copy the full connection description or
     the path to `tnsnames.ora`.
 
-6. Leave values for later integrations blank.
+
+    ![Copy the low value](./images/adb_low.png)
+
+    ![Copy the low value](./images/env_example.png)
+
+
+5. Leave values for later integrations blank.
 
     Lab 4 and later labs configure SMTP, Cloudflare, MailerLite, Substack, Google, and other optional integrations. Do not add placeholder secrets for those services in this lab.
 
-7. Save `.env.shared` and apply the required file permissions.
+6. Save `.env.shared` and apply the required file permissions.
 
     ```bash
     <copy>
@@ -362,7 +351,7 @@ In this lab, you will:
     </copy>
     ```
 
-8. Validate the environment files.
+7. Validate the environment files.
 
     ```bash
     <copy>

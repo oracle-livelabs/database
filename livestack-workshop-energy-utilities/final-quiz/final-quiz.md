@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/energy-utilities-badge.svg
+badge: images/livestack-badge-energy-utilities.png
 ```
 
 ## Introduction
@@ -15,6 +15,11 @@ Use this scored quiz to check whether you can explain how the database results s
 - Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-11-Keep-the-Utility-Work-Connected-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Task 1: Answer the quiz questions
 
@@ -73,10 +78,8 @@ Estimated Time: **3 minutes**
 
 2. When you achieve the passing score, the quiz displays your completion badge.
 
-    ![Completed Utilities quiz showing 100 percent and the downloadable badge.](images/quiz-complete.png)
-
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle Database Service Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

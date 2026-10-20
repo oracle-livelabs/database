@@ -1,21 +1,8 @@
 # Getting Started
 
-<!-- markdownlint-configure-file
-{
-  "MD033": {
-    "allowed_elements": [
-      "details",
-      "summary",
-      "strong"
-    ]
-  }
-}
--->
-
 ## Introduction
 
-This workshop runs in a **LiveLabs Sandbox**, which prepares the database,
-High-Tech data, workshop user, and services automatically.
+This workshop runs in a **LiveLabs Sandbox**, which prepares the database, High-Tech data, workshop user, and services automatically.
 
 <details>
 <summary><strong>Key terms: Database Actions, SQL Worksheet, and LLUSER</strong></summary>
@@ -31,6 +18,11 @@ High-Tech data, workshop user, and services automatically.
 
 Estimated Time: **5 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/High-Tech/Workshop/Scene-01-Getting-Started-Prepare-Database-Actions.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Objectives
 
 * Launch the LiveLabs workshop environment.
@@ -43,11 +35,9 @@ Estimated Time: **5 minutes**
 
 2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
 
-3. Wait for the sandbox environment to finish provisioning. In **My
-    Reservations**, select **Launch Workshop** for this reservation.
+3. Wait for the sandbox environment to finish provisioning. In **My Reservations**, select **Launch Workshop** for this reservation.
 
-4. Select **View Login Info** and keep the database credentials available for
-    the next task.
+4. Select **View Login Info** and keep the database credentials available for the next task.
 
     ![Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows](images/reservation-login-info.svg " ")
 
@@ -63,14 +53,11 @@ Estimated Time: **5 minutes**
 
     ![Reservation Information dialog with the Open Link button highlighted for the Login URL row](images/reservation-login-open-link.svg " ")
 
-4. On the Database Actions sign-in page, confirm that **Username** shows
-    `LLUSER`, paste the password from the reservation information, and select
-    **Sign in**.
+4. On the Database Actions sign-in page, confirm that **Username** shows `LLUSER`, paste the password from the reservation information, and select **Sign in**.
 
     ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
 
-5. Before SQL Worksheet opens, select **Development**, then select **SQL** from
-    the tools menu.
+5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
 
     ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
 

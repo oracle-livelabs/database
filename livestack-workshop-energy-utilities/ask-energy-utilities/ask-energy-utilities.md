@@ -32,7 +32,10 @@ Generate SQL, inspect its tables and calculations, then request the result. Refi
 
 Estimated Time: **10 minutes**
 
-> **Video pending:** A Utilities walkthrough for this lesson has not yet been recorded.
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-09-Select-AI-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
@@ -224,6 +227,6 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 ## Acknowledgements
 
-* **Authors** - Matt Kowalik, Kevin Lazarz
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026
