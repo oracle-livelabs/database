@@ -136,9 +136,9 @@ In this lab, you will:
 
     ![Oracle Autonomous Database provisioning email with a Launch Database Actions button and getting started links](./images/provisioning-email-generic.png =65%x*)
 
-Record the database name, region, compartment, and ADMIN credentials. Continue to **Lab 2: Check existing Lakehouse and prepare access**.
+    Record the database name, region, compartment, and ADMIN credentials. Continue to **Lab 2: Check existing Lakehouse and prepare access**.
 
-Please [proceed to the next lab](#next).
+    Please [proceed to the next lab](#next).
 
 ## Learn more
 

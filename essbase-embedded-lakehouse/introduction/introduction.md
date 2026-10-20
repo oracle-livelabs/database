@@ -1,6 +1,6 @@
 # Introduction
 
-## About this Workshop
+## Introduction
 
 In this workshop, you will use Essbase embedded in an Autonomous AI Lakehouse to explore a Sporting Goods sales scenario. You will provision an Autonomous AI Lakehouse, prepare access for a workshop user, launch Essbase from Database Actions, and import a prepared Sales application into Essbase. You will then inspect and query a cube to confirm that the application loaded successfully.
 

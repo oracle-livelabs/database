@@ -1,6 +1,8 @@
 # Need help?
 
 ## Introduction
+
+Estimated Time: 10 minutes
 This page is designed to help you solve some common problems users face in this LiveLab.
 
 After reading those troubleshooting tips, if you still find yourself stuck or would like to report an issue with the workshop, click the question mark icon in the upper right corner to contact the LiveLabs team directly via email.
@@ -8,6 +10,11 @@ After reading those troubleshooting tips, if you still find yourself stuck or wo
 ![Help button](./images/help-button2.png)
 
 For more about getting support using our email, see Task 1 below.
+
+### Objectives
+
+- Troubleshoot common workshop access issues.
+- Gather the details needed to request help from the LiveLabs team.
 
 ### Common Issues Table of Contents
   - [Connectivity Issues?](#ConnectivityIssues?)
@@ -18,6 +25,7 @@ For more about getting support using our email, see Task 1 below.
 This will construct an email in your default mail application that is auto-populated to address our LiveLabs support inbox and will also include your current workshop in the subject line. Follow the steps below to contact us and get a quick resolution to your issue.
 
 1. In the subject line please provide the **Workshop Name** (see example).
+
     ![Email](./images/e-mail.png)
 
 2. Include the **Lab Number**, **Task Number**, and **Step Number** where you've encounter the issue. Also, include the **environment** where you are running this workshop (your tenancy or the LiveLabs sandbox tenancy).
