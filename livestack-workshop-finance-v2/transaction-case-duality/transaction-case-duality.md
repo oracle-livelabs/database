@@ -177,13 +177,13 @@ Thomas now tests the document shape his application can consume directly.
 
 This query selects the JSON `DATA` column from `ORDERS_DV` so Thomas can inspect the document shape in SQL Worksheet.
 
-    <details>
-    <summary><strong>Optional context: Why this matters to Thomas</strong></summary>
+<details>
+<summary><strong>Optional context: Why this matters to Thomas</strong></summary>
 
-    > Thomas can use a JSON Collection Table when the application owns the document. But the transaction already has relational tables that Jessica and other teams rely on.
-    > The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the transaction into another store.
+> Thomas can use a JSON Collection Table when the application owns the document. But the transaction already has relational tables that Jessica and other teams rely on.
+> The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the transaction into another store.
 
-    </details>
+</details>
 
 1. Run this query:
 
