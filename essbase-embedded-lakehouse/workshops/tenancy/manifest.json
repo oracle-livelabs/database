@@ -17,11 +17,11 @@
       "filename": "../../provision/provision.md"
     },
     {
-      "title": "Lab 2: Check the Existing ADB and Prepare Access",
+      "title": "Lab 2: Check the Existing ADB and Verify Admin Access",
       "filename": "../../check/check.md"
     },
     {
-      "title": "Lab 3: Launch Embedded Essbase",
+      "title": "Lab 3: Enable Embedded Essbase and Create the Workshop User",
       "filename": "../../launch/launch.md"
     },
     {

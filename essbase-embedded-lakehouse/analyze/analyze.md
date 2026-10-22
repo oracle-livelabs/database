@@ -72,7 +72,7 @@ This lab assumes you have:
 
     ![SmartView](images/sv8.png)
 
-6. You will be prompted to sign in to Essbase. Use the Essbase user credentials from Lab 2.
+6. You will be prompted to sign in to Essbase. Use the Essbase user credentials from Lab 3.
 
     ![SmartView](images/sv9.png)
 

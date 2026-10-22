@@ -1,10 +1,10 @@
-# Launch Embedded Essbase
+# Enable Embedded Essbase and Create the Workshop User
 
 ## Introduction
 
-In this lab, you will enable embedded Essbase from the OCI Console, sign in as the database ADMIN user for the initial setup, and then verify access with the Essbase user created in Lab 2. You will confirm that the Essbase home page is available before importing the PeakGear Sporting Goods application in the next lab.
+In this lab, you will enable embedded Essbase from the OCI Console and sign in as the database ADMIN user for initial provisioning and catalog setup. After provisioning completes, you will create the workshop database user, grant the Essbase role, and verify access before importing the PeakGear Sporting Goods application in the next lab.
 
-Estimated Time: 10 minutes
+Estimated Time: 35 minutes
 
 ### About Essbase
 
@@ -14,18 +14,19 @@ Essbase provides multidimensional cubes for analyzing business data. In this wor
 
 In this lab, you will:
 
-- Launch Essbase from the OCI Console.
+- Enable and provision Essbase from the OCI Console.
 - Sign in to Essbase and verify that it provisioned properly.
-- Confirm the Import action is available for the Essbase user.
+- Create a workshop user with Web Access and the Essbase Power User role after provisioning.
+- Confirm the Import action is available for the workshop user.
 
 ### Prerequisites
 
 This lab assumes you have:
 
 - Access to the existing Autonomous AI Lakehouse and permission to enable embedded Essbase.
-- OCI Console access, the database ADMIN credentials, and the workshop user's credentials from Labs 1 and 2.
+- OCI Console access and the database ADMIN credentials verified in Lab 2.
 
-## Task 1: Launch Essbase from AI Lakehouse
+## Task 1: Enable and Provision Essbase from AI Lakehouse
 
 1. Return to your AI Lakehouse details page.
 
@@ -109,9 +110,59 @@ This lab assumes you have:
     | **Bucketname** | The exact bucket name created above |
     | **Private key passphrase** | Enter it only if the private key was created with a passphrase |
 
-11. Click **Test**. If the test succeeds, click **Save** and confirm the catalog loaded. Then sign out of the Essbase ADMIN user.
+11. Wait for initial Essbase provisioning to finish, then click **Test**. If the test succeeds, click **Save** and confirm the catalog loaded. Then sign out of the Essbase ADMIN user.
 
-12. Sign in with the workshop user created in Lab 2. Confirm that the Essbase Applications page opens and **Import** is available.
+## Task 3: Create and Enable the Workshop Database User
+
+Complete Tasks 1 and 2 before creating the workshop user. The Essbase role is available only after Essbase has been enabled and provisioned.
+
+1. Open Database Actions for your Lakehouse and sign in as the database **ADMIN** user. Open the hamburger menu in the top left corner. Under **Administration**, select **Database Users**.
+
+    ![Database Actions menu with Administration and Database Users highlighted](../check/images/ailh_6.png)
+
+2. Select **Create User**.
+
+    ![Database Users page with Create User button highlighted](../check/images/ailh_7.png)
+
+3. Enter a username for the workshop user and create a password that meets the displayed requirements. Keep the credentials saved for future use.
+
+    ![Create User panel with username and password fields highlighted](../check/images/ailh_8a.png)
+
+4. Set the **Quota on tablespace DATA** to the amount approved for your workshop environment. The minimum of 25M is enough for the scope of this workshop.
+
+    ![Create User panel with DATA tablespace quota set to 25M](../check/images/ailh_8b.png)
+
+5. Enable **REST, GraphQL, MongoDB API, and Web Access** for the new user.
+
+    ![Create User panel with REST, GraphQL, MongoDB API, and Web access switches enabled](../check/images/ailh_8c.png)
+
+6. Open **Granted Roles**. For both **DWROLE** and **ESSBASEPOWERUSER** Grant and set to Default so the user can access the Data Studio tools used in this workshop. Confirm that both **CONNECT** and **RESOURCE** are Granted and Default as well.
+
+    > **Note:** If the Essbase role is missing, return to Task 1 and confirm Essbase is enabled and its initial provisioning has completed. Reopen the Create User form after provisioning finishes.
+
+    ![Granted Roles tab showing DWROLE and ESSBASE_POWER_USER selected in Granted and Default columns](../check/images/temp3.png)
+
+7. Select **Create User** and confirm that Database Actions reports that the user was created.
+
+8. Find the new user's card on the **Database Users** page. Confirm that the account is open and shows **REST Enabled**.
+
+    ![Database Users page showing ESSBASEUSER account with REST Enabled badge](../check/images/aidp_10.png)
+
+## Task 4: Sign In as the Workshop User and Verify Access
+
+1. Sign out of the **ADMIN** session, or open a separate private browser window.
+
+    ![ADMIN profile menu open with Sign Out highlighted](../check/images/ailh_11.png)
+
+2. Sign in with the Essbase user's credentials from Task 3 to test the credentials.
+
+    ![Database Actions sign-in form with ESSBASEUSER username, masked password, and Sign in button](../check/images/ailh_12.png)
+
+3. Open the Essbase URL saved in Task 1 and sign in with the workshop user created in Task 3. Confirm that the Essbase Applications page opens and **Import** is available.
+
+4. Keep the workshop user credentials for Lab 4 and the optional Smart View and MCP labs.
+
+    You have enabled Essbase, configured its catalog, and verified the workshop user. In the next lab, you will import the PeakGear application.
 
     You may now **proceed to the next lab**.
 

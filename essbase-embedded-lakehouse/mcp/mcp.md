@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this optional lab, you will connect Codex to the Essbase MCP server embedded in your AI Lakehouse. You will use the read-only `viewer` profile based on your ESSBASEUSER created in Lab 2 to list the Essbase applications available to the user. Screenshots in this lab are based on MacOS, but Windows commands will be provided as well.
+In this optional lab, you will connect Codex to the Essbase MCP server embedded in your AI Lakehouse. You will use the read-only `viewer` profile based on your ESSBASEUSER created in Lab 3 to list the Essbase applications available to the user. Screenshots in this lab are based on MacOS, but Windows commands will be provided as well.
 
 Estimated Time: 20 minutes
 
