@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this workshop, you will use Essbase embedded in an Autonomous AI Lakehouse to explore a Sporting Goods sales scenario. You will provision an Autonomous AI Lakehouse, prepare access for a workshop user, launch Essbase from Database Actions, and import a prepared Sales application into Essbase. You will then inspect and query a cube to confirm that the application loaded successfully.
+In this workshop, you will use Essbase embedded in an Autonomous AI Lakehouse to explore a Sporting Goods sales scenario. You will provision an Autonomous AI Lakehouse, enable and provision embedded Essbase, create the workshop user with the required permissions, and import a prepared Sales application into Essbase. You will then inspect and query a cube to confirm that the application loaded successfully.
 
 Two optional labs extend the exercise. With Oracle Smart View, you can compare Sporting Goods sales by period, product, and store, then drill through a cube summary to the supporting Lakehouse transaction records. With an approved MCP client, you can connect to Essbase using read-only access and list the applications available to your user.
 
@@ -14,7 +14,8 @@ Estimated Workshop Time: 2 hours 30 minutes
 
 In this workshop, you will:
 
-- Provision an Autonomous AI Lakehouse, confirm access, and configure an Essbase user.
+- Provision an Autonomous AI Lakehouse and confirm ADMIN access.
+- Enable and provision Essbase before creating the workshop user and granting its Essbase role.
 - Launch embedded Essbase from Database Actions.
 - Import a prepared Sporting Goods application and verify its cube, data, and import job.
 - Optionally, analyze the sales data in Smart View and drill through to Lakehouse transaction detail.
@@ -31,10 +32,6 @@ This workshop assumes you have:
 For optional Lab 5, you need a compatible Microsoft Excel and Oracle Smart View setup.
 
 For optional Lab 6, you need a MCP-compatible AI client with the connection and authentication details for your Essbase environment.
-
-## Task 1: Review the Workshop Flow
-
-1. Review the labs in the workshop menu, then select **Get Started** to sign in to your Oracle Cloud tenancy.
 
 ## Learn More
 
