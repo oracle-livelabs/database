@@ -1,0 +1,45 @@
+{
+  "workshoptitle": "Essbase on AI Lakehouse",
+  "help": "livelabs-help-essbase_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Introduction to the Essbase on AI Lakehouse workshop.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Sign in to your Oracle Cloud tenancy.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Lab 1: Provision an Oracle Autonomous AI Database",
+      "filename": "../../provision/provision.md"
+    },
+    {
+      "title": "Lab 2: Check the Existing ADB and Prepare Access",
+      "filename": "../../check/check.md"
+    },
+    {
+      "title": "Lab 3: Launch Embedded Essbase",
+      "filename": "../../launch/launch.md"
+    },
+    {
+      "title": "Lab 4: Import the Prepared PeakGear Application",
+      "filename": "../../import/import.md"
+    },
+    {
+      "title": "Lab 5: Analyze through SmartView",
+      "filename": "../../analyze/analyze.md"
+    },
+    {
+        "title": "Lab 6: Connect through MCP",
+        "filename": "../../mcp/mcp.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "../../need-help/need-help.md"
+    }
+  ]
+}
