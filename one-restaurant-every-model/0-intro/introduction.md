@@ -6,7 +6,7 @@
 
 Nine of the top ten databases on DB-Engines carry the "multi-model" label — the label stopped differentiating. The guarantees never did: one ACID transaction boundary, one cost-based optimizer, one consistency model, one governance domain, and shared access surfaces over the *same* data.
 
-![Multi-model is a storage claim; converged is a guarantees claim](images/multimodel-vs-converged.svg "Multi-model vs converged")
+![Multi-model is a storage claim; converged is a guarantees claim](images/multimodel-vs-converged.png "Multi-model vs converged")
 
 In this workshop you will not hear that thesis — you will **run** it, in three acts, on a single restaurant data model:
 
@@ -14,7 +14,7 @@ In this workshop you will not hear that thesis — you will **run** it, in three
 - **Act II — The Truth.** You discover the JSON collection you created using the MongoDB API **is already a SQL-queryable table** — same bytes, no import, no CDC — and shred it into a canonical relational schema where the drift is structurally impossible.
 - **Act III — The Projections.** You get your document back as a JSON Relational Duality View assembled live from the canonical rows, add per-field write governance the engine enforces against every API, read the same data through REST, project a property graph over orders your own Mongo shell wrote, and finish with semantic vector search — capped by one SQL statement that joins graph, relational, and vector access in a single optimizer plan.
 
-![One dataset, five doors — every surface opens onto the same canonical data](images/converged-doors.svg "One dataset, five doors")
+![One dataset, five doors — every surface opens onto the same canonical data](images/converged-doors.png "One dataset, five doors")
 
 Every lab layers on the artifacts of the one before it. You leave with the same document ergonomics you walked in with — plus one copy of the truth underneath every surface.
 
