@@ -237,7 +237,7 @@ Estimated Lab Time: 7 minutes
 
     That short result list is the cohort design paying off: the only people who order the core burger are the classic crowd, so the only things that can come back are what that crowd eats. A graph over undifferentiated customers would have returned the whole menu in popularity order.
 
-    ![The MATCH arrows are just joins — each element becomes a row source in your plan](images/match-to-plan.svg "MATCH to plan")
+    ![The MATCH arrows are just joins — each element becomes a row source in your plan](images/match-to-plan.png "MATCH to plan")
 
     > On a polyglot stack this module is: Mongo → change streams/Debezium → a graph database, with its own consistency timeline to operate and pay for. Here it was two pastes.
 

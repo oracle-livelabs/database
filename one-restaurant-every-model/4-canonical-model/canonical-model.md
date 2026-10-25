@@ -153,7 +153,7 @@ Estimated Lab Time: 10 minutes
     ```
     Note that the last three tables, `extra`, `item_option`, and `item_special_hours` are not used in this liveLab. They're part of the schema for future Livelabs.
 
-    ![Canonical chain schema ERD — chain catalog plus the menu_item junction](images/restaurant-erd.svg "Canonical chain schema")
+    ![Canonical chain schema ERD — chain catalog plus the menu_item junction](images/restaurant-erd.png "Canonical chain schema")
 
 2. Entry gate — one query, one answer. Run the following statement in the **SQL Worksheet**:
 
