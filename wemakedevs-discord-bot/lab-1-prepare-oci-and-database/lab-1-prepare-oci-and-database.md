@@ -40,39 +40,39 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
 1. Sign in to the [OCI Console](https://cloud.oracle.com/) and open **Compute** > **Instances**. Select **Create instance**.
 
-    ![Open the Create instance page in OCI Console](./images/01_create_instance.png)
+    ![Open the Create instance page in OCI Console](./images/lab-1-01-create-instance.png)
 
 2. Enter a name such as `discord-bot-host`. Choose **Oracle Linux 9** as the image. The example uses an Arm-based `VM.Standard.A1.Flex` shape. If your region has no A1 capacity, select another supported flexible shape and use the same Oracle Linux release.
 
-    ![Select Oracle Linux 9 as the Compute image](./images/08_image_instance.png)
+    ![Select Oracle Linux 9 as the Compute image](./images/lab-1-02-select-oracle-linux.png)
 
 3. Set the shape to 2 OCPUs and 12 GB of memory. Review the estimated cost and confirm that the shape is available in your region before launching.
 
-    ![Choose the flexible Compute shape](./images/08_instance_shape.png)
+    ![Choose the flexible Compute shape](./images/lab-1-03-select-compute-shape.png)
 
-    ![Set the instance OCPU and memory values](./images/09_shape_details.png)
+    ![Set the instance OCPU and memory values](./images/lab-1-04-set-ocpu-memory.png)
 
 4. Under **Networking**, create a VCN if you do not already have one for this workshop. Use a VCN CIDR such as `10.0.0.0/16` and a public subnet CIDR such as `10.0.0.0/24`. Ensure the subnet route table has a route to an Internet Gateway. Associate the primary VNIC of the instance with this subnet.
 
-    ![Create a VCN and subnet for the Compute instance](./images/13_vcn_creation.png)
+    ![Create a VCN and subnet for the Compute instance](./images/lab-1-05-create-vcn-subnet.png)
 
 5. Under **Add SSH keys**, choose **Generate a key pair** and download the private key. Or provide a public key you control. Store the private key securely; OCI will not let you download it again.
 
-    ![Generate or provide the SSH public key during instance creation](./images/10_ssh_keys.png)
+    ![Generate or provide the SSH public key during instance creation](./images/lab-1-06-configure-ssh-key.png)
 
 6. Review the remaining settings and select **Create**. Wait until the instance state is **Running**.
 
 7. Open the instance details, then follow **Primary VNIC** to the subnet and its attached **Security Lists**.
 
-    ![Open the instance details page](./images/11_instance_details.png)
+    ![Open the instance details page](./images/lab-1-07-instance-details.png)
 
-    ![Open the subnet from the instance VNIC details](./images/12_subnet_click.png)
+    ![Open the subnet from the instance VNIC details](./images/lab-1-08-open-subnet.png)
 
-    ![Open the security list attached to the subnet](./images/05_security_list.png)
+    ![Open the security list attached to the subnet](./images/lab-1-09-open-security-list.png)
 
 8. Add an **Ingress Rule** for SSH from your administrator workstation. Use your current public IP with a `/32` mask. Do not use `0.0.0.0/0` for SSH.
 
-    ![Add an ingress rule to the subnet security list](./images/06_ingress_rules.png)
+    ![Review ingress rules on the subnet security list](./images/lab-1-10-ingress-rules.png)
 
     | Field | Value |
     | --- | --- |
@@ -82,7 +82,7 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     | Destination port range | `22` |
     | Description | `SSH from administrator workstation` |
 
-    This rule lets you administer the host. Discord does not use SSH. Remove any SSH rule from `0.0.0.0/0`; the screenshot shows an old rule. In Task 4, open web ports for Nginx and Certbot.
+    This rule lets you administer the host. Discord does not use SSH. The screenshot shows an existing SSH rule from `0.0.0.0/0`; delete it, then add the `/32` rule above. TCP `80` and `443` may remain public for Nginx and Certbot. Keep port `3000` closed to the internet.
 
     In Task 4, add these web rules:
 
@@ -97,15 +97,15 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
 9. Check whether the primary VNIC already has a public IPv4 address. If it does, record it for SSH and continue. If the field shows `-`, open **Networking** and select the **Primary VNIC**.
 
-    ![Open Networking and select the instance primary VNIC](./images/22_public_ip_networking.png)
+    ![Open Networking and select the instance primary VNIC](./images/lab-1-11-open-primary-vnic.png)
 
 10. On the VNIC page, open **IP administration**. In the private IP row, open the actions menu and select **Edit**.
 
-    ![Edit the primary VNIC private IP settings](./images/23_public_ip_edit_private_ip.png)
+    ![Edit the primary VNIC private IP settings](./images/lab-1-12-edit-private-ip.png)
 
 11. Select **Reserved public IP**. Create or select a reserved address for this instance; the IP certificate and Discord endpoint depend on a stable address. Keep **Use VCN, subnet or VNIC route table** selected, then select **Update**.
 
-    ![Assign an ephemeral or reserved public IP address](./images/24_public_ip_assign.png)
+    ![Assign an ephemeral or reserved public IP address](./images/lab-1-13-assign-public-ip.png)
 
 12. Return to the instance details and record the **Reserved Public IPv4 address**. Restrict SSH to your workstation IP as described above. Use this IP directly for the certificate and Discord endpoint; you do not need a domain or DNS record.
 
@@ -122,12 +122,12 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
     If you saved the key elsewhere, use its actual path. After the SSH command succeeds, verify that your prompt identifies the `opc` account on the Compute host.
 
-2. From the SSH session, update Oracle Linux and install Git and Nano.
+2. From the SSH session, update Oracle Linux and install Nano and the ZIP utility.
 
     ```sh
     <copy>
     sudo dnf update -y
-    sudo dnf install -y git nano
+    sudo dnf install -y nano unzip
     </copy>
     ```
 
@@ -146,13 +146,19 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
 ## Task 3: Create Autonomous Database and Download the Wallet
 
-1. In OCI Console, open **Oracle AI Database** > **Autonomous AI Database**. Select **Create Autonomous AI Database**. Choose transaction processing and a supported version. Pick a shape and storage that fit the workshop. Always Free capacity varies by region and tenancy.
+1. In OCI Console, open **Oracle AI Database** > **Autonomous AI Database** and select **Create Autonomous AI Database**. Enter the database name and compartment. The first image shows the creation form with Lakehouse selected; choose **Transaction Processing** for this workshop, as shown in the second image. Select a supported version and a shape and storage that fit the workshop. Always Free capacity varies by region and tenancy.
 
-    ![Transaction Processing workload choice for Autonomous AI Database](./images/03_transaction_processing.png)
+    ![Autonomous AI Database creation form](./images/lab-1-14-database-create-form.png)
+
+    ![Select the Transaction Processing workload for Autonomous AI Database](./images/lab-1-15-select-autonomous-db-workload.png)
 
 2. Set a database administrator password in your password manager. Start database creation and wait until the state is **Available**.
 
 3. Open the database details page, select **Database connection**, and download the instance wallet. Set a strong wallet password. Keep the downloaded ZIP on your workstation until you transfer it over SSH.
+
+    ![Open Database connection from the Autonomous AI Database details page](./images/lab-1-16-open-database-connection.png)
+
+    ![Select the instance wallet and download the wallet credentials](./images/lab-1-17-download-instance-wallet.png)
 
 4. From your workstation, create the bot directory on Compute and transfer the wallet. Replace the key filename and host address. Do not put the wallet password in a command.
 
@@ -243,6 +249,8 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
+    ![Configure the Nginx HTTP site and validate its configuration](./images/lab-1-18-configure-nginx-http-site.png)
+
 5. Test the HTTP challenge path. On Compute, create a test file and request it locally. From a computer outside OCI, request the same file by public IP. The response must not time out.
 
     ```sh
@@ -252,6 +260,8 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
+    ![Receive HTTP 200 when testing the ACME challenge path locally](./images/lab-1-19-test-acme-path-locally.png)
+
     From your workstation, replace `YOUR_PUBLIC_IP` and request the public path:
 
     ```sh
@@ -259,6 +269,8 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     curl -i http://YOUR_PUBLIC_IP/.well-known/acme-challenge/test
     </copy>
     ```
+
+    ![Receive HTTP 200 when testing the ACME challenge path through the public IP](./images/lab-1-20-test-acme-path-publicly.png)
 
 6. Install Certbot 5.4 or newer from Snap. After the reboot, reconnect to Compute and wait for Snap initialization before installing Certbot.
 
@@ -273,6 +285,8 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
+    ![Install Snap packages and reboot the Compute host](./images/lab-1-21-install-snapd-and-reboot.png)
+
     After reconnecting, run:
 
     ```sh
@@ -283,6 +297,8 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     sudo /snap/bin/certbot --version
     </copy>
     ```
+
+    ![Install Certbot from Snap and confirm its version](./images/lab-1-22-install-certbot.png)
 
     Confirm the installed version is 5.4 or newer. Use `/snap/bin/certbot` with `sudo` so the command path is explicit.
 
@@ -313,10 +329,11 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
     Let’s Encrypt IP certificates expire after about six days. Certbot must renew them automatically. The certificate files are normally `/etc/letsencrypt/live/YOUR_PUBLIC_IP/fullchain.pem` and `/etc/letsencrypt/live/YOUR_PUBLIC_IP/privkey.pem`. Keep the private key off the workshop ZIP.
 
-9. Replace the HTTP-only site with this HTTP redirect and HTTPS reverse proxy. Replace every `YOUR_PUBLIC_IP` with the reserved IPv4 address.
+9. Replace the HTTP-only site with an HTTP redirect and HTTPS reverse proxy. Run this command as shown to create the configuration with `YOUR_PUBLIC_IP` placeholders:
 
-    ```nginx
+    ```sh
     <copy>
+    sudo tee /etc/nginx/conf.d/hackathon-bot.conf >/dev/null <<'EOF'
     server {
         listen 80;
         server_name YOUR_PUBLIC_IP;
@@ -347,10 +364,21 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
             proxy_set_header X-Forwarded-Proto $scheme;
         }
     }
+    EOF
     </copy>
     ```
 
-    Save the configuration as `/etc/nginx/conf.d/hackathon-bot.conf`, then validate and reload Nginx:
+    Open the file in Nano:
+
+    ```sh
+    <copy>
+    sudo nano /etc/nginx/conf.d/hackathon-bot.conf
+    </copy>
+    ```
+
+    Press `Ctrl+\`, enter `YOUR_PUBLIC_IP`, and press **Enter**. Enter the reserved IPv4 address from Task 1, press **Enter**, then press `A` to replace every occurrence. Press `Ctrl+O`, **Enter** to save, then `Ctrl+X` to exit.
+
+    Validate the edited configuration and reload Nginx:
 
     ```sh
     <copy>
@@ -401,9 +429,7 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
     Expect a `502` until Lab 2 starts the bot. A TLS result of `0` confirms the certificate.
 
-3. Restrict SSH to your administrator IP. Allow inbound TCP 80 and 443. Keep TCP 3000 closed to public ingress.
-
-4. Continue to Lab 2. After the bot starts on port 3000, Nginx will proxy requests to it.
+3. Continue to Lab 2. After the bot starts on port 3000, Nginx will proxy requests to it.
 
 ## Acknowledgements
 

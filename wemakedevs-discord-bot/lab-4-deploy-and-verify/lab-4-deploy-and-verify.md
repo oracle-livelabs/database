@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Test the bot under systemd. Check Discord, model, and agent features. Review logs and the optional GitHub deploy flow.
+Test the bot under systemd. Check Discord, model, and agent features, then review the service logs.
 
 Estimated Time: 30 minutes.
 
@@ -13,7 +13,7 @@ In this lab, you will:
 - Run the application as the `opc` user with a protected environment file.
 - Confirm the Nginx HTTPS proxy and Discord interaction handshake.
 - Test the configured bot commands, bot mentions, file handling, and agent privacy behavior.
-- Review service status, logs, restart behavior, and the optional deployment workflow.
+- Review service status, logs, and restart behavior.
 
 ### Prerequisites
 
@@ -24,7 +24,7 @@ In this lab, you will:
 
 ## Task 1: Check the Asset Link and Register Commands
 
-1. Confirm that the workshop owner replaced the temporary Object Storage URL in Lab 2. Confirm the ZIP still contains the approved source revision and has no `.env`, wallet, credentials, private keys, `.git`, or `node_modules`.
+1. Confirm that the Object Storage link in Lab 2 downloads the ZIP. Confirm the ZIP contains the approved source package and has no `.env`, wallet, credentials, private keys, or `node_modules`.
 
 2. Confirm that `opc` owns `.env` and that its mode is `600`. Do not print the file contents.
 

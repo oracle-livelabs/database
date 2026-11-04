@@ -24,21 +24,12 @@ In this workshop, you will:
 - Discord Developer Portal access and a private server where you can install a test bot.
 - An OpenRouter API key and a model available to your account.
 - Reserve a public IPv4 address. The workshop uses an IP certificate, so you do not need a domain or DNS account.
-- A published bot ZIP and active Object Storage PAR from the workshop owner. The links in the labs are temporary placeholders until replaced.
+- The [hackathon-bot ZIP in OCI Object Storage](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/hackathon-bot.zip).
 - A workstation with a browser, SSH/SFTP client, and a secure password manager.
 
 ## Architecture
 
-```text
-Discord interactions ──HTTPS 443──> Nginx on OCI Compute ──HTTP 3000──> Bot
-                                      Certbot IP certificate           │
-                                                                      ├── HTTPS ──> OpenRouter
-                                                                      ├── TLS/wallet ──> Autonomous Database
-                                                                      └── Discord Gateway outbound connection
-
-Learner workstation ──SSH 22 from trusted IP──> OCI Compute
-Learner workstation ──HTTPS──> Object Storage PAR (bot ZIP)
-```
+![Architecture diagram showing Discord, a learner workstation, OCI Compute with Nginx and the bot, Object Storage, OpenRouter, and Autonomous Database](./images/introduction-architecture.png)
 
 Keep Compute port 3000 closed to public ingress. Nginx proxies traffic locally to the bot on that port. Permit public TCP 80 for Certbot validation and redirects, and TCP 443 for Discord HTTPS. Keep SSH limited to the administrator IP.
 
