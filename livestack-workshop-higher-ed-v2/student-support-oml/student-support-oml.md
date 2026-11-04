@@ -29,6 +29,11 @@ The model predicts an operational workload label from aggregated, synthetic term
 
 Estimated Time: **15 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Higher Education/Workshop/Scene-08-Oracle-Machine-Learning-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step | Higher Education focus |

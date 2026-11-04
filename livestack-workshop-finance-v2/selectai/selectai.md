@@ -72,8 +72,10 @@ Select AI uses an AI profile to identify the AI provider and the database object
 
     The workshop profile is expected to be named `GENAI`. Confirm that it is enabled. If the query shows a different profile name, use that name in the following tasks.
 
-2. Review the profile attributes:
-  
+2. Set the model used by this lab.
+
+    This command changes the `GENAI` profile's `model` attribute to `xai.grok-4.3`. That model and its provider must be configured for the workshop reservation. If the reservation does not support it, stop and ask the workshop administrator which model to use; do not change or copy credentials. The query below lets you review the profile attributes after the change.
+
     ```sql
     <copy>
     BEGIN
@@ -157,7 +159,7 @@ Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use
 
 2. Read the generated SQL before running it.
 
-    Check whether the statement uses the expected product and sales data, returns five rows, and calculates revenue in a sensible way. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
+    Check that the SQL uses product and order data, sorts calculated revenue from highest to lowest, and returns up to five products. Review the selected columns and revenue calculation against the question. If the SQL does not clearly answer it, do not run it; revise the prompt or ask for help. Select AI can generate a statement that looks valid but answers a different question, so Nina reviews the SQL before using the result.
 
 ## Task 4: Run the question in the database
 
@@ -215,9 +217,9 @@ Nina's first question gives her a product ranking, but she also needs enough det
   
     ![task5](images/task52.png)
 
-3. Compare the first and second questions.
+3. Compare the two results.
 
-  The second prompt gives Nina a result she can take into a review meeting. The business user did not need to know the table names or write the joins, but Nina still checked the SQL and made the requested columns explicit.
+    The revised question should return the product name, category, total revenue, and units sold for the five highest-revenue products. Check that the SQL requests these fields and that the result includes them. If a field is missing, revise the question and inspect the SQL again. Nina still reviews the generated SQL before using the answer.
 
 ## Task 6: Explain the result
 
@@ -257,6 +259,6 @@ For the full list of Select AI actions, profile attributes, and supported provid
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz, Linda Foinding
-* **Contributor** - Eugenio Galiano
-* **Last Updated By/Date** - Oracle Database Product Management, August 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

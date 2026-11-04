@@ -28,6 +28,11 @@ A property graph gives Bob a direct way to ask how a trip, route, station, vehic
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-05-Lab-04-Investigate-Direct-Service-Disruption-Relationships-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step | Transportation focus |
@@ -275,6 +280,11 @@ Two trips can share a station or vehicle without a direct relationship between t
 2. Review the asset linking each pair. Dispatchers can check whether the shared vehicle needs reassignment or whether station capacity is constraining both trips.
 
 ## Task 5: Open Graph Studio and import the notebook
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-06-Lab-04-Explore-the-Service-Network-in-Graph-Studio-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 1. In Database Actions, select **Development**, select **Graph Studio**.
 

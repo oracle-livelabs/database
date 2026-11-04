@@ -1,34 +1,25 @@
 # Build a Converged Dashboard Query
 
-<!-- markdownlint-configure-file
-{
-  "MD013": {
-    "code_blocks": false,
-    "tables": false
-  }
-}
--->
-
 ## Introduction
 
-Jessica Chan, Seer High-Tech’s DBA, starts with the quality team’s morning
-question: **which component needs attention first, and which production orders
-and customer sites may be affected?**
+Jessica Chan, Seer High-Tech’s DBA, starts with the quality team’s morning question: **which component needs attention first, and which production orders and customer sites may be affected?**
 
-Build Jessica’s dashboard query from relational alerts, JSON orders, component
-vectors, and plant locations.
+Build Jessica’s dashboard query from relational alerts, JSON orders, component vectors, and plant locations.
 
 ![Jessica introduces the converged production-quality dashboard lab](images/jessica.png)
 
 ### Objectives
 
-* Explain how one database query combines the data needed for a
-  production-quality review.
+* Explain how one database query combines the data needed for a production-quality review.
 * Run one query that combines relational, vector, JSON, and spatial database capabilities.
-* Modify the query to investigate a different production-quality question and
-  explain the change in results.
+* Modify the query to investigate a different production-quality question and explain the change in results.
 
 Estimated Time: **10 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/High-Tech/Workshop/Scene-02-Lab-1-Converged-High-Tech-Dashboard-Query.mp4">
+  Your browser does not support the video tag.
+</video>
 
 > **SQL Worksheet reminder:** See
 > [Getting Started Task 2: Open SQL Worksheet][link-1] for the steps to paste
@@ -40,14 +31,10 @@ Run the query to find components with severe quality alerts.
 
 The query combines four data types:
 
-* **Relational:** Calculate quality impact from alerts and the links between
-  observations and components.
-* **Vector:** `VECTOR_DISTANCE` ranks component embeddings against the
-  investigation phrase.
-* **JSON:** `JSON_TABLE` reads line items from `PRODUCTION_ORDERS_DV` as rows so
-  the query can count order activity.
-* **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest plant to New York
-  Electronics Region.
+* **Relational:** Calculate quality impact from alerts and the links between observations and components.
+* **Vector:** `VECTOR_DISTANCE` ranks component embeddings against the investigation phrase.
+* **JSON:** `JSON_TABLE` reads line items from `PRODUCTION_ORDERS_DV` as rows so the query can count order activity.
+* **Spatial:** `SDO_GEOM.SDO_DISTANCE` finds the closest plant to New York Electronics Region.
 
 1. Open SQL Worksheet as `LLUSER`.
 
@@ -181,17 +168,13 @@ The query combines four data types:
 
     ![Converged production-quality query result](images/sql-dashboard.png)
 
-3. Which component ranks first? Compare its urgent alerts, active orders,
-    average severity, and similarity score.
+3. Which component ranks first? Compare its urgent alerts, active orders, average severity, and similarity score.
 
-    `NEAREST_PLANT` gives regional context; it does not reassign an order. Do
-    not add alert counts to estimate unique affected orders, since one order can
-    have more than one alert.
+    `NEAREST_PLANT` gives regional context; it does not reassign an order. Do not add alert counts to estimate unique affected orders, since one order can have more than one alert.
 
 ## Task 2: Change the investigation question
 
-Jessica now asks about assembly capacity. Replace the embedded investigation
-phrase with:
+Jessica now asks about assembly capacity. Replace the embedded investigation phrase with:
 
 ```text
 electronics assembly capacity and semiconductor availability
@@ -200,10 +183,8 @@ electronics assembly capacity and semiconductor availability
 Run the query again and compare the top rows.
 
 1. Which components moved into or out of the top ten?
-2. Which components still have high quality impact in the relational data but
-    match the new question less closely?
-3. Which components have the most active production orders or units that may
-    need review?
+2. Which components still have high quality impact in the relational data but match the new question less closely?
+3. Which components have the most active production orders or units that may need review?
 
 Which component would Jessica investigate first now?
 
@@ -211,22 +192,18 @@ Which component would Jessica investigate first now?
 
 ## Next Steps
 
-Next, use JSON Relational Duality to expose the same production order data as
-JSON for an application while keeping SQL access for the database team.
+Next, use JSON Relational Duality to expose the same production order data as JSON for an application while keeping SQL access for the database team.
 
 ## Application example
 
-The [High-Tech LiveStack demo][link-2] shows these signals in a product and
-commitment control tower.
+The [High-Tech LiveStack demo][link-2] shows these signals in a product and commitment control tower.
 
 ![LiveStack High-Tech Demo: Product & Commitment Control Tower](images/demo-dashboard.jpg)
 
-<!-- markdownlint-disable-next-line MD036 -->
 *LiveStack High-Tech Demo: Product & Commitment Control Tower*
 
 ![LiveStack High-Tech Demo: Product & Commitment Control Tower](images/demo-dashboard-charts.jpg)
 
-<!-- markdownlint-disable-next-line MD036 -->
 *LiveStack High-Tech Demo: Product & Commitment Control Tower*
 
 ## Acknowledgements

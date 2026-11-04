@@ -93,7 +93,17 @@ In this lab, you will:
     </copy>
     ```
 
+    Open the thread created by the Brand Agent and answer each question there.
+
+    ![Start the Brand Agent strategy interview in a Slack direct message](./images/02-brand-agent-setup-strategy.png "Start the Brand Agent strategy interview in a Slack direct message")
+
 3. Answer the Brand Agent questions with customer-specific information. The interview gathers the user's role, audience, offer, voice, content pillars, funnel goals, and publishing preferences. When complete, the Brand Agent generates a personalized strategy profile for the user.
+
+    At the final review, react with the green check mark to create the strategy.
+    Confirm that the agent reports **User strategy created** and lists the
+    generated strategy files.
+
+    ![Confirm creation of the personalized Brand Agent strategy](./images/03-brand-agent-strategy-created.png "Confirm creation of the personalized Brand Agent strategy")
 
 4. Review the current strategy summary.
 
@@ -103,13 +113,18 @@ In this lab, you will:
     </copy>
     ```
 
+    Confirm that the response reports **Strategy status: complete** and shows
+    the expected user, domain, content focus, and strategy files.
+
+    ![Review the completed Brand Agent strategy status](./images/04-brand-agent-strategy-status.png "Review the completed Brand Agent strategy status")
+
 5. Confirm that the generated strategy reflects the customer before running content workflows. If the summary is incomplete, send `setup strategy` again and refine the answers in the same Brand Agent thread.
 
 ## Task 3: Run Tier 1 Platform Health Checks
 
-1. Validate that `contentkit-assistant`, `contentkit-pipeline`, `contentkit-brand`, `contentkit-data`, `contentkit-ops`, and `contentkit-publish` are active. 
-2. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003) and Data Agent (8004).
-3. Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or the Fast Path was not loaded or the wallet/database configuration is wrong.
+1. Check all loopback-only `/health` endpoints: file editor (8001), Brand Agent (8002), Ops Agent (8003) and Data Agent (8004).
+
+    Validate database health and memory recall from the Data Agent endpoint. Empty recall results are acceptable; the response must return `"status": "ok"`. A 500 response usually means the ONNX model from Lab 1 or the Fast Path was not loaded or the wallet/database configuration is wrong.
 
     ```
     <copy>
@@ -122,7 +137,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or the Fast Path.
+2. If database or memory checks fail, revisit the wallet, `AI_FOR_YOU` schema, and `MINILM_V2` model setup from Lab 1 on the manual path or the Fast Path.
 
 ## Task 4: Run Tier 2 and Tier 3 Slack Validation
 
@@ -135,7 +150,7 @@ In this lab, you will:
     ```
     ![Smoke Test Example](./images/01_smoke_test.png)
 
-2. Validate each Slack agent with a direct command. Brand Agent strategy validation already happened in Task 1, so this table focuses on the remaining runtime agents.
+2. Validate each Slack agent with a direct command. Brand Agent strategy validation already happened in Task 2, so this table focuses on the remaining runtime agents.
 
     | Agent | Where to send it | Command | Expected result |
     | --- | --- | --- | --- |
@@ -156,12 +171,32 @@ In this lab, you will:
     </copy>
     ```
 
-5. Make sure correct channel-membership, Socket Mode, or token issues before continuing.
+    Confirm that the Assistant Agent acknowledges the reminder and shows the
+    scheduled delivery time.
+
+    ![Create a reminder with the Assistant Agent in Slack](./images/05-assistant-agent-reminder-created.png "Create a reminder with the Assistant Agent in Slack")
+
+    Wait for the scheduled time and confirm that the Assistant Agent sends the
+    reminder message.
+
+    ![Confirm delivery of the Assistant Agent reminder](./images/06-assistant-agent-reminder-delivered.png "Confirm delivery of the Assistant Agent reminder")
+
+5. Resolve any channel-membership, Socket Mode, or token issues before continuing.
 
 ## Task 5: Execute One End-to-End Workflow
 
-1. Submit a topic in `#content-start` and follow the Content Agent prompt to begin the run.
-2. Progress through each workflow pause and approval checkpoint with `continue`, `edit`, `done`, or `approve` as requested in the active thread.
+1. Submit a topic in `#content-start` and wait for the Content Agent to create a
+    thread for the run.
+
+    ![Submit a content topic in the content-start Slack channel](./images/07-content-start-topic.png "Submit a content topic in the content-start Slack channel")
+
+2. Open the thread and reply `go` to use all configured formats, or
+    `go <format>` to select one of the formats listed by the Content Agent.
+    Confirm that the agent reports the new post number and directs subsequent
+    updates to `#content-runs`. Progress through later workflow pauses with
+    `continue`, `edit`, `done`, or `approve` as requested in the active thread.
+
+    ![Choose a content format and start the Content Agent pipeline](./images/08-content-agent-start-pipeline.png "Choose a content format and start the Content Agent pipeline")
 3. Trigger at least one Creative Agent asset revision, then approve the Brand Agent grade-gated content.
 4. Confirm that the Content Agent hands the final item to the Publish Agent in `#publishing`, then run `publish <post-number>` to validate the configured delivery behavior.
 

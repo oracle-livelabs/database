@@ -25,7 +25,7 @@ Seer Equity needs AI that can:
 
 ### What You Will Learn
 
-This lab shows you the spectrum from zero-shot (no data access) to SELECT AI (read-only) to SELECT AI AGENT (read/write/coordinate). you will see exactly where each approach works and where it fails.
+This lab shows you the spectrum from zero-shot (no data access) to SELECT AI (read-only) to SELECT AI AGENT (read/write/coordinate). You will see exactly where each approach works and where it fails.
 
 **What you will build:** A comparison demonstrating when to use chat vs agents, plus an agent that can both read AND update loan data.
 
@@ -76,6 +76,8 @@ Before you begin, you are going to import a notebook that has all of the command
 
 ## Task 2: Experience Zero-Shot Prompting
 
+Run the SQL paragraphs in notebook order. Select a paragraph and use its **Run Paragraph** button, then wait for the result before continuing. The notebook-wide **Run Paragraphs** button also runs cleanup, so use the individual paragraph controls while following the lab. Agent responses can take several minutes. Run cleanup after you have reviewed the results.
+
 Zero-shot queries go directly to the LLM for general knowledge answers. Use `SELECT AI CHAT` to ask questions without involving your database.
 
 1. Set the profile.
@@ -98,7 +100,7 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
     ```sql
     <copy>
-    SELECT AI CHAT How do I process a loan application;
+    SELECT AI CHAT How do I process a loan application at Seer Equity;
     </copy>
     ```
 
@@ -114,7 +116,7 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
     ```sql
     <copy>
-    SELECT AI CHAT What is the status of loan LOAN-12345;
+    SELECT AI CHAT What is the status of loan application LOAN-12345 at Seer Equity;
     </copy>
     ```
 
@@ -128,7 +130,7 @@ Zero-shot queries go directly to the LLM for general knowledge answers. Use `SEL
 
     ```sql
     <copy>
-    SELECT AI CHAT Update loan LOAN-12345 to approved;
+    SELECT AI CHAT Update loan application LOAN-12345 to approved;
     </copy>
     ```
 
@@ -148,25 +150,25 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
     CREATE TABLE sample_loans (
         application_id  VARCHAR2(20) PRIMARY KEY,
         applicant       VARCHAR2(100),
-        status          VARCHAR2(30),
-        amount          NUMBER(12,2),
+        loan_status     VARCHAR2(20),
+        loan_amount     NUMBER(12,2),
         loan_type       VARCHAR2(30),
         application_date DATE DEFAULT SYSDATE
     );
 
     -- Add comments so Select AI understands the table
-    COMMENT ON TABLE sample_loans IS 'Seer Equity loan applications with status tracking.';
-    COMMENT ON COLUMN sample_loans.application_id IS 'Unique loan application identifier. Examples: LOAN-12345, LOAN-12346.';
-    COMMENT ON COLUMN sample_loans.applicant IS 'Name of the person or business applying for the loan';
-    COMMENT ON COLUMN sample_loans.status IS 'Application status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';
-    COMMENT ON COLUMN sample_loans.amount IS 'Requested loan amount in US dollars';
+    COMMENT ON TABLE sample_loans IS 'Seer Equity loan applications with applicant, status, amount, and type.';
+    COMMENT ON COLUMN sample_loans.application_id IS 'Unique application identifier. Examples: LOAN-12345, LOAN-12346.';
+    COMMENT ON COLUMN sample_loans.applicant IS 'Name of person or business applying for the loan';
+    COMMENT ON COLUMN sample_loans.loan_status IS 'Application status: PENDING, UNDER_REVIEW, APPROVED, or DENIED';
+    COMMENT ON COLUMN sample_loans.loan_amount IS 'Requested loan amount in US dollars';
     COMMENT ON COLUMN sample_loans.loan_type IS 'Type of loan: Personal, Auto, Mortgage, or Business';
-    COMMENT ON COLUMN sample_loans.application_date IS 'Date the application was submitted';
+    COMMENT ON COLUMN sample_loans.application_date IS 'Date when the application was submitted';
 
     -- Insert sample data
     INSERT INTO sample_loans VALUES ('LOAN-12345', 'Acme Corp', 'UNDER_REVIEW', 150000, 'Business', SYSDATE - 3);
-    INSERT INTO sample_loans VALUES ('LOAN-12346', 'TechStart', 'PENDING', 45000, 'Business', SYSDATE - 1);
-    INSERT INTO sample_loans VALUES ('LOAN-12347', 'GlobalCo', 'APPROVED', 275000, 'Mortgage', SYSDATE - 7);
+    INSERT INTO sample_loans VALUES ('LOAN-12346', 'TechStart LLC', 'PENDING', 75000, 'Business', SYSDATE - 1);
+    INSERT INTO sample_loans VALUES ('LOAN-12347', 'GlobalCo Inc', 'APPROVED', 250000, 'Business', SYSDATE - 7);
     COMMIT;
     </copy>
     ```
@@ -200,7 +202,7 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
 
     ```sql
     <copy>
-    SELECT AI NARRATE What is the status of loan LOAN-12345;
+    SELECT AI NARRATE What is the status of loan application LOAN-12345;
     </copy>
     ```
 
@@ -210,13 +212,13 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
 
 4. Now try to update using SELECT AI.
 
-    **Observe:** SELECT AI cannot update data. It can only read.
+    **Observe:** `SELECT AI NARRATE` can read data, but it cannot perform this update. If it returns an error saying the generated statement is not a SELECT statement, that is an expected result for this step. Continue to the next verification paragraph to confirm that the status is still `UNDER_REVIEW`; do not rerun the setup paragraphs.
 
     > This command is already in your notebook - just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT AI NARRATE Update loan LOAN-12345 to approved;
+    SELECT AI NARRATE Update loan application LOAN-12345 to approved;
     </copy>
     ```
 
@@ -228,7 +230,7 @@ Before we look at agents, let's see what SELECT AI (without CHAT or AGENT) can d
 
     ```sql
     <copy>
-    SELECT application_id, status FROM sample_loans WHERE application_id = 'LOAN-12345';
+    SELECT application_id, loan_status FROM sample_loans WHERE application_id = 'LOAN-12345';
     </copy>
     ```
 
@@ -255,14 +257,15 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     ) RETURN VARCHAR2 AS
         v_result VARCHAR2(500);
     BEGIN
-        SELECT 'Loan ' || application_id || ': ' || status || 
-               ', Applicant: ' || applicant || 
-               ', Amount: $' || amount ||
-               ', Type: ' || loan_type
+        SELECT 'Application ' || application_id || ': ' || loan_status ||
+               ', Applicant: ' || applicant ||
+               ', Amount: $' || TO_CHAR(loan_amount, '999,999') ||
+               ', Type: ' || loan_type ||
+               ', Date: ' || TO_CHAR(application_date, 'YYYY-MM-DD')
         INTO v_result
         FROM sample_loans
         WHERE application_id = p_application_id;
-        
+
         RETURN v_result;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
@@ -287,27 +290,27 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
         p_new_status     VARCHAR2
     ) RETURN VARCHAR2 AS
         PRAGMA AUTONOMOUS_TRANSACTION;
-        v_old_status VARCHAR2(30);
+        v_old_status VARCHAR2(20);
     BEGIN
         -- Get current status
-        SELECT status INTO v_old_status
+        SELECT loan_status INTO v_old_status
         FROM sample_loans
         WHERE application_id = p_application_id;
-        
+
         -- Update the status
         UPDATE sample_loans
-        SET status = UPPER(p_new_status)
+        SET loan_status = UPPER(p_new_status)
         WHERE application_id = p_application_id;
-        
+
         COMMIT;
-        
-        RETURN 'Loan ' || p_application_id || ' updated from ' || v_old_status || ' to ' || UPPER(p_new_status);
+
+        RETURN 'Application ' || p_application_id || ' status updated from ' || v_old_status || ' to ' || UPPER(p_new_status);
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            RETURN 'Loan application ' || p_application_id || ' not found. Cannot update.';
+            RETURN 'Application ' || p_application_id || ' not found. Cannot update.';
         WHEN OTHERS THEN
             ROLLBACK;
-            RETURN 'Error updating loan: ' || SQLERRM;
+            RETURN 'Error updating application: ' || SQLERRM;
     END;
     /
     </copy>
@@ -326,9 +329,9 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'LOAN_LOOKUP_TOOL',
-            attributes  => '{"instruction": "Look up loan application status and details by application ID. Parameter: P_APPLICATION_ID (the loan number, e.g. LOAN-12345). Use this to check current status before making updates.",
+            attributes  => '{"instruction": "Look up loan application status and details by application ID. Parameter: P_APPLICATION_ID (the application number, e.g. LOAN-12345). Use this to check current application status before making updates.",
                             "function": "lookup_loan"}',
-            description => 'Retrieves loan status, applicant, amount, and type by application ID'
+            description => 'Retrieves loan application status, applicant, amount, and date by application ID'
         );
     END;
     /
@@ -336,7 +339,7 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'LOAN_UPDATE_TOOL',
-            attributes  => '{"instruction": "Update a loan application status. Parameters: P_APPLICATION_ID (the loan number), P_NEW_STATUS (PENDING, UNDER_REVIEW, APPROVED, or DENIED). Only call this after confirming the current status with LOAN_LOOKUP_TOOL.",
+            attributes  => '{"instruction": "Update a loan application status. Parameters: P_APPLICATION_ID (the application number), P_NEW_STATUS (PENDING, UNDER_REVIEW, APPROVED, or DENIED). Only call this after confirming the current status with LOAN_LOOKUP_TOOL.",
                             "function": "update_loan_status"}',
             description => 'Updates loan application status to a new value'
         );
@@ -359,7 +362,7 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
         DBMS_CLOUD_AI_AGENT.CREATE_AGENT(
             agent_name  => 'LOAN_MGMT_AGENT',
             attributes  => '{"profile_name": "genai",
-                            "role": "You are a loan management agent for Seer Equity. You can look up loan applications and update their status. Always look up a loan first before updating it. Never make up loan information - always use your tools."}',
+                            "role": "You are a loan application management agent for Seer Equity. You can look up loan applications and update their status. Always look up an application first before updating it. Never make up application information - always use your tools."}',
             description => 'Agent that can look up and update loan applications'
         );
     END;
@@ -368,9 +371,9 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'LOAN_MGMT_TASK',
-            attributes  => '{"instruction": "Help with loan application inquiries and updates. When asked to check a loan, use LOAN_LOOKUP_TOOL. When asked to update a loan, first use LOAN_LOOKUP_TOOL to verify current status, then use LOAN_UPDATE_TOOL to make the change. Do not ask clarifying questions - just do it. User request: {query}",
+            attributes  => '{"instruction": "Help with loan application inquiries and status updates. When asked to check an application, use LOAN_LOOKUP_TOOL. When asked to update an application, first use LOAN_LOOKUP_TOOL to verify current status, then use LOAN_UPDATE_TOOL to make the change. Do not ask clarifying questions - just do it. User request: {query}",
                             "tools": ["LOAN_LOOKUP_TOOL", "LOAN_UPDATE_TOOL"]}',
-            description => 'Task for loan lookups and updates'
+            description => 'Task for loan application lookups and updates'
         );
     END;
     /
@@ -380,7 +383,7 @@ In this lab, we're using **function-based tools** instead of SQL tools. A functi
             team_name   => 'LOAN_MGMT_TEAM',
             attributes  => '{"agents": [{"name": "LOAN_MGMT_AGENT", "task": "LOAN_MGMT_TASK"}],
                             "process": "sequential"}',
-            description => 'Team for loan management'
+            description => 'Team for loan application management'
         );
     END;
     /
@@ -399,7 +402,7 @@ Now let's see the real power of agents: coordinating multiple tools and making c
 
     ```sql
     <copy>
-    SELECT application_id, applicant, status FROM sample_loans WHERE application_id = 'LOAN-12345';
+    SELECT application_id, applicant, loan_status FROM sample_loans WHERE application_id = 'LOAN-12345';
     </copy>
     ```
 
@@ -414,7 +417,7 @@ Now let's see the real power of agents: coordinating multiple tools and making c
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('LOAN_MGMT_TEAM');
-    SELECT AI AGENT Check loan LOAN-12345 and if it is under review, approve it;
+    SELECT AI AGENT Check loan application LOAN-12345 and if it is under review, mark it as approved;
     </copy>
     ```
 
@@ -434,7 +437,9 @@ Now let's see the real power of agents: coordinating multiple tools and making c
 
     ```sql
     <copy>
-    SELECT application_id, applicant, status FROM sample_loans WHERE application_id = 'LOAN-12345';
+    SELECT application_id, applicant, loan_status AS status_after_agent
+    FROM sample_loans
+    WHERE application_id = 'LOAN-12345';
     </copy>
     ```
 
@@ -448,7 +453,7 @@ Now let's see the real power of agents: coordinating multiple tools and making c
 
     ```sql
     <copy>
-    SELECT AI AGENT Check loan LOAN-12346 and if it is under review, approve it;
+    SELECT AI AGENT Check loan application LOAN-12346 and if it is under review, mark it as approved;
     </copy>
     ```
 
@@ -466,7 +471,7 @@ Every tool call is logged. Let's see the execution history.
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         tool_name,
         TO_CHAR(start_date, 'HH24:MI:SS') as called_at,
         SUBSTR(output, 1, 80) as result
@@ -478,7 +483,7 @@ Every tool call is logged. Let's see the execution history.
 
     ![Task Information](./images/task6_1.png " ")
 
-    You can see the sequence: lookup, then update (or just lookup if no update was needed).
+    Use the timestamps to identify the calls for your latest request. The rows are displayed newest first, so read those calls from the earliest timestamp to the latest to reconstruct the sequence: lookup, then update, or just lookup when no update was needed.
 
 ## Task 7: When to Use Each Approach
 

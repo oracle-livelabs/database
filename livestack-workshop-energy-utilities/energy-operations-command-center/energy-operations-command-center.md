@@ -16,6 +16,11 @@ Build the SQL behind her Energy Operations Command Center. One query combines re
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-02-Converged-Dashboard-Wait-Trimmed-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 > **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
 
 ## Task 1: Run a converged risk investigation

@@ -4,6 +4,10 @@
 
 Jessica Chen is the database administrator at Seer Health Network. Her team is improving care operations, coordinating service requests, investigating quality and capacity signals, routing logistics support, forecasting demand, and adding governed AI to healthcare workflows.
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-00-Meet-the-Seer-Health-Team-Pickup-Recording.mp4">
+  Your browser does not support the video tag.
+</video>
 The requests look different, but they share one problem. The data is already in Oracle AI Database, and each team needs to use it in a different way:
 
 - Thomas needs care service requests as JSON for an operational application.

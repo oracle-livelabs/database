@@ -20,6 +20,7 @@ In this workshop, you will:
 - Configure required Google Drive delivery with OAuth.
 - Run layered verification and execute one complete Slack-driven content workflow.
 - Enable AI Staff Gmail and Calendar, voice transcription, and email reminders when those services are part of the deployment.
+- Explore the Slack features available through the featured agents, direct messages, channels, threads, and approval controls.
 
 ### Prerequisites
 
@@ -75,8 +76,9 @@ The Fast Path has been created if you have already used your Always Free Resourc
 3. Lab 3: Configure Slack Agents, Environment Files, and Services
 4. Lab 4: Configure External Services
 5. Lab 5: Connect Services and Verify the Deployment
+6. Lab 6: Explore Slack Agent Features
 
 ## Acknowledgements
 
 - Contributor: Cyrca Salinas Rojas
-- Last Updated By/Date: Cyrce Salinas Rojas, August 2026
+- Last Updated By/Date: Ilan Gómez Guerrero, October 2026
