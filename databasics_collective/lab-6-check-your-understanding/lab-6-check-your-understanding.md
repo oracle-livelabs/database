@@ -61,14 +61,6 @@ Estimated Time: 10 minutes
     > The enrollment primary key begins with STUDENT_ID. The additional B-tree index supports access from the course side when the optimizer finds it useful.
     ```
 
-## Task 2: Review your result
-
-1. Read the explanation after each answer, including the questions you answered correctly.
-
-2. If you missed a question, return to the related lab and review that section before trying again.
-
-3. Reach 75 percent or higher to finish the lab.
-
 ## Acknowledgements
 
 * **Author** - Oracle University Program

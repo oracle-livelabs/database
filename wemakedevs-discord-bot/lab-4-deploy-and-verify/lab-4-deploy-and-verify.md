@@ -108,7 +108,7 @@ In this lab, you will:
 
 ## Task 3: Verify the Discord Endpoint and Bot Features
 
-1. In the Discord Developer Portal, set **Interactions Endpoint URL** to `https://<your-public-ip>/interactions`, using the reserved IP from Lab 1. Save it. Discord verifies the URL with a signed interaction handshake. Confirm that the portal accepts it.
+1. In the Discord Developer Portal, confirm that **Interactions Endpoint URL** remains set to `https://<your-public-ip>/interactions`, using the reserved IP from Lab 1. Lab 2 saved and verified this URL while the bot was running in the foreground. The systemd service now handles the same endpoint.
 
 2. In the private test server, run `/ask` with a short learning question. Mention the bot in a message. Confirm each request receives one response.
 
