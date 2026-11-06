@@ -13,7 +13,7 @@ In this lab, you will:
 - Download and inspect the bot ZIP through the workshop object-scoped PAR.
 - Configure Discord slash-command and interaction settings.
 - Add OpenRouter settings without recording credential values in the workshop.
-- Install locked dependencies, register six commands, and start the bot.
+- Install locked dependencies, register seven commands, and start the bot.
 
 ### Prerequisites
 
@@ -230,7 +230,9 @@ In this lab, you will:
     </copy>
     ```
 
-2. Confirm that registration reports six commands: `/ask`, `/db`, `/research`, `/study`, `/oci`, and `/agent`.
+2. Confirm that registration reports seven commands: `/ask`, `/db`, `/research`, `/study`, `/oci`, `/agent`, and `/memory`.
+
+    ![Confirm that all seven global Discord commands were registered](./images/lab-2-26-register-global-commands.png)
 
 3. Start the bot in the foreground.
 
@@ -240,48 +242,33 @@ In this lab, you will:
     </copy>
     ```
 
-4. Keep this SSH session open. Confirm the logs show the HTTP listener on port `3000` and a successful Discord Gateway login.
+4. Keep this SSH session open. Confirm that the terminal reports the HTTP listener on port `3000` and a successful Discord Gateway login. Leave `npm start` running while Discord verifies the endpoint.
 
-5. Open a second SSH session and verify the bot locally and through Nginx. Replace `YOUR_RESERVED_PUBLIC_IP` with the reserved Compute IPv4 address.
-
-    ```sh
-    <copy>
-    sudo ss -ltnp | grep ':3000'
-    curl -i http://127.0.0.1:3000/interactions
-    curl -i https://YOUR_RESERVED_PUBLIC_IP/interactions
-    </copy>
-    ```
-
-    A browser-style `GET` request can return `401`, `404`, or `405` because Discord verification uses a signed `POST`. It must not return `502 Bad Gateway`. A `502` response means Nginx is available but cannot reach the bot on `127.0.0.1:3000`.
-
-6. If the public request returns `502`, leave `npm start` running and check the listener, SELinux setting, Nginx configuration, and Nginx error log:
-
-    ```sh
-    <copy>
-    sudo ss -ltnp | grep ':3000'
-    getsebool httpd_can_network_connect
-    sudo setsebool -P httpd_can_network_connect 1
-    sudo nginx -t
-    sudo systemctl reload nginx
-    sudo tail -n 50 /var/log/nginx/error.log
-    </copy>
-    ```
-
-    If nothing listens on port `3000`, return to the first SSH session and review the `npm start` error. Privately reopen `.env` and confirm that `APP_ID`, `DISCORD_TOKEN`, `PUBLIC_KEY`, and `PORT=3000` are set. The public key must come from **General Information**; it is not the bot token. Do not print, share, or screenshot `.env`.
-
-7. After the public request stops returning `502`, keep `npm start` running and configure the Discord endpoint:
+5. Configure the Discord endpoint:
 
     - Return to the Discord Developer Portal and open **General Information**.
     - In **Interactions Endpoint URL**, enter `https://<your-reserved-public-ip>/interactions`.
     - Replace `<your-reserved-public-ip>` with the reserved Compute IPv4 address from Lab 1. Do not include port `3000` in the public URL.
     - Select **Save Changes**. Discord immediately sends a signed verification request through Nginx to the running bot.
-    - Confirm that the portal accepts and saves the URL. If the connectivity checks pass but Discord still rejects the URL, review the running bot log and verify that `PUBLIC_KEY` exactly matches the value on **General Information**, then try again.
+    - Confirm that the portal accepts and saves the URL. This confirms that the public IP, HTTPS certificate, Nginx proxy, bot process, and Discord signature verification work together.
 
     ![Set and save the Discord interactions endpoint URL](./images/lab-2-16-set-interactions-endpoint.png)
 
-8. After Discord accepts the endpoint, run `/ask` in the test server with a short learning question. Mention the bot with a short question and confirm a reply.
+    ![Confirm that Discord saved the application changes](./images/lab-2-27-confirm-interactions-endpoint-saved.png)
 
-9. Stop the foreground process with `Ctrl+C`. Lab 4 will run the bot under systemd.
+6. If Discord rejects the URL, keep `npm start` running and review its terminal output. Check these values before trying again:
+
+    - The URL uses the reserved public IP assigned to this Compute instance.
+    - OCI ingress allows TCP port `443`.
+    - The HTTPS certificate covers the reserved public IP and has not expired.
+    - Nginx is running with the configuration created in Lab 1.
+    - `PUBLIC_KEY` exactly matches the application public key on **General Information**. It is not the bot token.
+
+    Do not continue until Discord accepts and saves the URL.
+
+7. Run `/ask` in the test server with a short learning question. Confirm that the bot replies.
+
+8. Stop the foreground process with `Ctrl+C`. Lab 4 will run the bot under systemd.
 
 ## Data Handling Checkpoint
 
