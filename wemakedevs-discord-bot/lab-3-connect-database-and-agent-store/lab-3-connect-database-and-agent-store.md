@@ -174,9 +174,7 @@ In this lab, you will:
 
 1. In the Discord test server, enter `/db`. For **action**, select **Discover schema tables and views for the approved catalog**. This is the `scan` action.
 
-2. Submit the command. Confirm that the response includes `AGENT_PROFILES` from the selected table-owner schema.
-
-3. Leave the foreground bot process running. Lab 4 stops it before creating the permanent systemd service.
+    ![Select the schema discovery action for the db command](./images/lab-3-04-select-db-scan-action.png)
 
 ## Acknowledgements
 

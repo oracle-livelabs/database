@@ -242,7 +242,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Keep this SSH session open. Confirm that the terminal reports the HTTP listener on port `3000` and a successful Discord Gateway login. Leave `npm start` running while Discord verifies the endpoint.
+4. Keep this SSH session open. Confirm that the terminal reports `Listening on port 3000`. This bot receives Discord interactions through HTTPS and does not require a Discord Gateway login. Leave `npm start` running while Discord verifies the endpoint.
 
 5. Configure the Discord endpoint:
 
