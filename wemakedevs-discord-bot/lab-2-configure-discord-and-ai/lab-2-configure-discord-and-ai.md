@@ -13,7 +13,7 @@ In this lab, you will:
 - Download and inspect the bot ZIP through the workshop object-scoped PAR.
 - Configure Discord slash-command and interaction settings.
 - Add OpenRouter settings without recording credential values in the workshop.
-- Install locked dependencies, register seven commands, and start the bot.
+- Install locked dependencies, register six commands, and start the bot.
 
 ### Prerequisites
 
@@ -136,79 +136,34 @@ In this lab, you will:
 
     The application ID is the Discord application identifier. The public key is in the app **General Information** page. The bot token is in the **Bot** page. These values serve different purposes.
 
+11. Complete this step after Task 4 Step 3 starts the bot in the foreground:
+
+    - Return to the Discord Developer Portal and open **General Information**.
+    - In **Interactions Endpoint URL**, enter `https://<your-reserved-public-ip>/interactions`.
+    - Replace `<your-reserved-public-ip>` with the reserved Compute IPv4 address from Lab 1. Do not include port `3000` in the public URL.
+    - Keep the bot running and complete the endpoint checks in Task 4 Step 5. The public request must not return `502 Bad Gateway`.
+    - Select **Save Changes**. Discord sends a signed verification request through Nginx to the bot.
+    - Confirm that the portal accepts and saves the endpoint URL.
+
+    ![Set and save the Discord interactions endpoint URL](./images/lab-2-16-set-interactions-endpoint.png)
+
 ## Task 3: Configure OpenRouter
 
-1. Open [OpenRouter](https://openrouter.ai/). Select **Sign up**. If you already have an account, select **Sign in** instead and continue with Step 6.
-
-    ![Open the OpenRouter website and select Sign up](./images/lab-2-17-openrouter-home.png)
-
-2. Create an account with an available identity provider or enter your email address and password. Review the linked terms and policies, accept them if appropriate, and select **Continue**.
-
-    ![Create an OpenRouter account](./images/lab-2-18-openrouter-sign-up.png)
-
-3. Select **Individual**, then select **Next**. Complete any additional profile prompts with the options appropriate for you until the payment page appears.
-
-    ![Select the Individual OpenRouter account type](./images/lab-2-19-openrouter-account-type.png)
-
-4. When OpenRouter offers payment setup, select **I'll do this later**. Adding a payment method is not required for the workshop setup. Complete any remaining onboarding prompts until OpenRouter confirms that the workspace is ready.
-
-    ![Skip payment setup during OpenRouter onboarding](./images/lab-2-20-openrouter-skip-payment.png)
-
-5. Select **Go to Dashboard**.
-
-    ![Finish OpenRouter onboarding and open the dashboard](./images/lab-2-21-openrouter-onboarding-complete.png)
-
-6. In the dashboard, select **API Keys**.
-
-    ![Open API Keys from the OpenRouter dashboard](./images/lab-2-22-openrouter-api-keys-navigation.png)
-
-7. Select **New key**.
-
-    ![Create a new OpenRouter API key](./images/lab-2-23-openrouter-new-key.png)
-
-8. Enter `Oracle Agent Bot` as the key name. Choose an expiration and credit limit appropriate for this workshop, then select **Create**. Do not use an unlimited, non-expiring key unless your organization requires it.
-
-    ![Configure the OpenRouter API key settings](./images/lab-2-24-openrouter-key-settings.png)
-
-9. Select the copy icon. Store the key only in the protected `.env` file in the next step; OpenRouter does not display the complete key again.
-
-    ![Copy the newly created OpenRouter API key](./images/lab-2-25-openrouter-copy-key.png)
-
-10. Use `openrouter/free` for this workshop. The [OpenRouter Free Models Router](https://openrouter.ai/openrouter/free) selects a currently available free model that supports the request. This avoids depending on one free model that may later be removed. Free requests are rate-limited and the selected model can change between requests. For a fixed model, choose one from the [current free-model collection](https://openrouter.ai/collections/free-models) and copy its identifier, including the `:free` suffix when shown.
-
-    In the SSH session, open the bot environment file.
-
-    ```sh
-    <copy>
-    nano /home/opc/hackathon-bot/.env
-    </copy>
-    ```
-
-11. Add the OpenRouter settings. Replace `YOUR_OPENROUTER_API_KEY` with the key copied in Step 9. Keep the key on the same line as the variable name and do not add spaces around `=`.
+1. Add the OpenRouter API key and a model identifier available to your account. Keep the default agent data-collection preference set to `deny` unless you have reviewed and approved the provider policy.
 
     ```text
     <copy>
-    OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
-    OPENROUTER_MODEL=openrouter/free
+    OPENROUTER_API_KEY=
+    OPENROUTER_MODEL=
     OPENROUTER_STUDY_MODEL=
     OPENROUTER_DATETIME_TIMEZONE=America/Mexico_City
     OPENROUTER_AGENT_DATA_COLLECTION=deny
-    OPENROUTER_MEMORY_MODEL=
     </copy>
     ```
 
-    | Variable | Required | Purpose |
-    | --- | --- | --- |
-    | `OPENROUTER_API_KEY` | Yes | Authenticates the bot with OpenRouter. Treat it as a secret and never place it in screenshots, workshop notes, or chat. |
-    | `OPENROUTER_MODEL` | Yes | Sets the default model for the bot's AI requests. `openrouter/free` routes each request to a compatible free model available at that time. |
-    | `OPENROUTER_STUDY_MODEL` | No | Overrides the model used by `/study`. Leave it empty to use `OPENROUTER_MODEL`. |
-    | `OPENROUTER_DATETIME_TIMEZONE` | No | Sets the IANA timezone used by the bot's datetime tool. Replace the example with your timezone if needed. An invalid value falls back to `America/New_York`. |
-    | `OPENROUTER_AGENT_DATA_COLLECTION` | No | Controls provider eligibility for `/agent`. Keep `deny` so agent requests use providers that do not collect data. Use `allow` only after reviewing the provider policy. Any other value is treated as `deny`. |
-    | `OPENROUTER_MEMORY_MODEL` | No | Selects a separate model for optional user-memory decisions and validation. This workshop does not enable user memory, so leave it empty. |
+    `OPENROUTER_STUDY_MODEL` is optional; the bot falls back to `OPENROUTER_MODEL`. The timezone is optional and uses an IANA timezone name. Check the current `.env.sample` for any new optional settings.
 
-    With `OPENROUTER_AGENT_DATA_COLLECTION=deny`, the free router has fewer eligible providers. A request can fail temporarily if no compatible free provider satisfies both the requested features and the data policy.
-
-12. Save `.env`, then confirm its permissions.
+2. Save `.env`, then confirm its permissions.
 
     ```sh
     <copy>
@@ -230,9 +185,7 @@ In this lab, you will:
     </copy>
     ```
 
-2. Confirm that registration reports seven commands: `/ask`, `/db`, `/research`, `/study`, `/oci`, `/agent`, and `/memory`.
-
-    ![Confirm that all seven global Discord commands were registered](./images/lab-2-26-register-global-commands.png)
+2. Confirm that registration reports six commands: `/ask`, `/db`, `/research`, `/study`, `/oci`, and `/agent`.
 
 3. Start the bot in the foreground.
 
@@ -242,31 +195,36 @@ In this lab, you will:
     </copy>
     ```
 
-4. Keep this SSH session open. Confirm that the terminal reports `Listening on port 3000`. This bot receives Discord interactions through HTTPS and does not require a Discord Gateway login. Leave `npm start` running while Discord verifies the endpoint.
+4. Keep this SSH session open. Confirm the logs show the HTTP listener on port `3000` and a successful Discord Gateway login.
 
-5. Configure the Discord endpoint:
+5. Open a second SSH session and verify the bot locally and through Nginx. Replace `YOUR_RESERVED_PUBLIC_IP` with the reserved Compute IPv4 address.
 
-    - Return to the Discord Developer Portal and open **General Information**.
-    - In **Interactions Endpoint URL**, enter `https://<your-reserved-public-ip>/interactions`.
-    - Replace `<your-reserved-public-ip>` with the reserved Compute IPv4 address from Lab 1. Do not include port `3000` in the public URL.
-    - Select **Save Changes**. Discord immediately sends a signed verification request through Nginx to the running bot.
-    - Confirm that the portal accepts and saves the URL. This confirms that the public IP, HTTPS certificate, Nginx proxy, bot process, and Discord signature verification work together.
+    ```sh
+    <copy>
+    sudo ss -ltnp | grep ':3000'
+    curl -i http://127.0.0.1:3000/interactions
+    curl -i https://YOUR_RESERVED_PUBLIC_IP/interactions
+    </copy>
+    ```
 
-    ![Set and save the Discord interactions endpoint URL](./images/lab-2-16-set-interactions-endpoint.png)
+    A browser-style `GET` request can return `401`, `404`, or `405` because Discord verification uses a signed `POST`. It must not return `502 Bad Gateway`. A `502` response means Nginx is available but cannot reach the bot on `127.0.0.1:3000`.
 
-    ![Confirm that Discord saved the application changes](./images/lab-2-27-confirm-interactions-endpoint-saved.png)
+6. If the public request returns `502`, leave `npm start` running and check the listener, SELinux setting, Nginx configuration, and Nginx error log:
 
-6. If Discord rejects the URL, keep `npm start` running and review its terminal output. Check these values before trying again:
+    ```sh
+    <copy>
+    sudo ss -ltnp | grep ':3000'
+    getsebool httpd_can_network_connect
+    sudo setsebool -P httpd_can_network_connect 1
+    sudo nginx -t
+    sudo systemctl reload nginx
+    sudo tail -n 50 /var/log/nginx/error.log
+    </copy>
+    ```
 
-    - The URL uses the reserved public IP assigned to this Compute instance.
-    - OCI ingress allows TCP port `443`.
-    - The HTTPS certificate covers the reserved public IP and has not expired.
-    - Nginx is running with the configuration created in Lab 1.
-    - `PUBLIC_KEY` exactly matches the application public key on **General Information**. It is not the bot token.
+    If nothing listens on port `3000`, return to the first SSH session and review the `npm start` error. Privately reopen `.env` and confirm that `APP_ID`, `DISCORD_TOKEN`, `PUBLIC_KEY`, and `PORT=3000` are set. The public key must come from **General Information**; it is not the bot token. Do not print, share, or screenshot `.env`.
 
-    Do not continue until Discord accepts and saves the URL.
-
-7. Run `/ask` in the test server with a short learning question. Confirm that the bot replies.
+7. Return to Task 2 Step 11. Keep `npm start` running while you save the interactions endpoint in the Discord Developer Portal. After Discord accepts it, run `/ask` in the test server with a short learning question. Mention the bot with a short question and confirm a reply.
 
 8. Stop the foreground process with `Ctrl+C`. Lab 4 will run the bot under systemd.
 

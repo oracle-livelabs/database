@@ -318,8 +318,6 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
-    ![Request and remove the staging IP certificate](./images/lab-1-23-request-staging-ip-certificate.png)
-
 8. Request the publicly trusted IP certificate:
 
     ```sh
@@ -389,8 +387,6 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
-    ![Validate the HTTPS Nginx configuration and reload Nginx](./images/lab-1-24-validate-https-nginx-config.png)
-
 10. Add a deploy hook so Nginx reloads after Certbot renews the short-lived certificate. Then test renewal and confirm the Certbot timer is active.
 
     ```sh
@@ -405,8 +401,6 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     sudo snap services certbot
     </copy>
     ```
-
-    ![Test Certbot renewal and confirm the renewal timer](./images/lab-1-25-test-certbot-renewal.png)
 
     The Discord interactions endpoint will be `https://YOUR_PUBLIC_IP/interactions`. Enter this URL in the Discord application settings in Lab 2. See [Let’s Encrypt IP certificate instructions](https://letsencrypt.org/2026/03/11/shorter-certs-certbot).
 
