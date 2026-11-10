@@ -27,21 +27,6 @@ In this workshop, you will:
 - The [hackathon-bot ZIP in OCI Object Storage](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/hackathon-bot.zip).
 - A workstation with a browser, SSH/SFTP client, and a secure password manager.
 
-## Architecture
-
-![Architecture diagram showing Discord, a learner workstation, OCI Compute with Nginx and the bot, Object Storage, OpenRouter, and Autonomous Database](./images/introduction-architecture.png)
-
-Keep Compute port 3000 closed to public ingress. Nginx proxies traffic locally to the bot on that port. Permit public TCP 80 for Certbot validation and redirects, and TCP 443 for Discord HTTPS. Keep SSH limited to the administrator IP.
-
-The ZIP excludes `.env`, wallet files, and credentials. Download the wallet from Autonomous Database, transfer it securely to Compute, and create `.env` there. Use synthetic data. Channel members can see bot replies in a server channel.
-
-## Workshop Labs
-
-1. Lab 1: Prepare OCI Compute, Autonomous Database, wallet access, and an HTTPS endpoint (35 minutes).
-2. Lab 2: Download the bot package and configure Discord and OpenRouter (25 minutes).
-3. Lab 3: Set up Autonomous Database accounts and connect the bot (30 minutes).
-4. Lab 4: Run the service and verify Discord workflows (30 minutes).
-
 ## Acknowledgements
 
 - Authors: Cyrce Salinas Rojas and Ilan Gómez Guerrero
