@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Bob Green is a seasoned graph specialist at Seer Sporting Goods. The Monday demand review has already connected product searches with customer and order data. Bob now wants to understand the creator relationships behind the social signals.
+Bob Green is a graph specialist at Seer Sporting Goods. The Monday demand review has already connected product searches with customer and order data. Bob now wants to understand the creator relationships behind the social signals.
 
 His starting point is simple: one post does not show the whole network. A creator can promote a brand, connect to another creator, or share a brand relationship with someone the team already follows. Bob needs to make those recorded relationships easy to inspect before the team decides where to focus its attention.
 
-In this lab, you will use Bob's approach in two views. Start with ordinary SQL, then use SQL Property Graph Queries (SQL/PGQ) to express the same relationships as paths. Finally, open Graph Studio and explore the connections as an interactive network. SQL supplies a repeatable evidence table; Graph Studio helps a reviewer follow the relationships visually.
+Start with relational SQL, then use SQL Property Graph Queries (SQL/PGQ) to express the same creator and brand relationships as paths. Finally, explore them in Graph Studio. Compare the SQL results with the relationships shown in the interactive graph.
 
 ![Bob Green, graph specialist](images/image-graph.png)
 
@@ -34,6 +34,16 @@ In this lab, you will use Bob's approach in two views. Start with ordinary SQL, 
 - Import the Retail notebook into Graph Studio and interpret its visual results.
 
 Estimated Time: **20 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Retail/Workshop/Retail-Scene-05-Creator-Influence-Network.mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Retail/Workshop/Retail-Scene-06-Graph-Studio.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Hands-on Scenario
 
@@ -72,19 +82,11 @@ Jessica has written a query that ranks direct creator connections by their store
     </copy>
     ```
 
+    **Expected output: Direct creator connections**
+
     ![SQL Worksheet showing the query and result for Task 1: Follow creator connections with SQL, SQL block 1](images/sql-lab-4-01.jpg)
 
     The query joins `INFLUENCERS` twice: once for the source creator and once for the destination. `INFLUENCER_CONNECTIONS` supplies the edge and its properties.
-
-    **Expected output: Direct creator connections**
-
-    | From Creator | To Creator | Link | Strength |
-    | --- | --- | --- | --- |
-    | @route\_lily\_295 | @river\_jace\_382 | reshared | 1 |
-    | @climb\_lily\_455 | @terrain\_drew\_202 | duet | 0.999 |
-    | @coach\_dane\_443 | @fit\_noah\_239 | reshared | 0.999 |
-    | @coach\_zoe\_225 | @alpine\_mia\_18 | mentioned | 0.999 |
-    | @endurance\_maya\_221 | @coach\_zoe\_160 | inspired\_by | 0.999 |
 
     Strength is a stored property of the relationship. It does not measure sales caused by that creator.
 
@@ -123,23 +125,15 @@ Jessica has written a query that ranks direct creator connections by their store
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 1: Follow creator connections with SQL, SQL block 2](images/sql-lab-4-02.jpg)
-
-    The first branch follows one creator link; the second follows two. `UNION` combines those alternatives. The outer joins attach the brand and promoter to each reached creator. The intermediate creator join keeps the path subject to the same row visibility as the graph query you will run later.
-
     **Expected output: Brand relationships and reached creators**
 
-    | Brand | Promoter | Reached | Relationship |
-    | --- | --- | --- | --- |
-    | ApexRide | @alpine\_hope\_381 | @camp\_faye\_151 | organic |
-    | ApexRide | @alpine\_hope\_381 | @camp\_faye\_474 | organic |
-    | ApexRide | @alpine\_hope\_381 | @camp\_marcus\_131 | organic |
-    | ApexRide | @alpine\_hope\_381 | @climb\_gus\_415 | organic |
-    | ApexRide | @alpine\_hope\_381 | @climb\_luna\_172 | organic |
+    ![SQL Worksheet showing the query and result for Task 1: Follow creator connections with SQL, SQL block 2](images/sql-lab-4-02.jpg)
+
+    The first branch follows one creator link; the second follows two. `UNION` combines those alternatives. The joins in the outer query attach the brand and promoter to each reached creator. The intermediate creator join keeps the path subject to the same row visibility as the graph query you will run later.
 
 3. Review how the SQL changes with the path length.
 
-    Another hop requires another connection join. Bob can express the same variable path length directly in a graph pattern, while keeping these relational tables as the source of the evidence.
+    Another hop requires another connection join. Bob can express the same variable path length directly in a graph pattern, while querying the same relational tables.
 
 ## Task 2: Read the same connections as a graph
 
@@ -155,13 +149,9 @@ Bob has already defined the `INFLUENCER_NETWORK` property graph over the Retail 
     </copy>
     ```
 
-    ![SQL Worksheet showing the query and result for Task 2: Read the same connections as a graph, SQL block 3](images/sql-lab-4-03.jpg)
-
     **Expected output: Graph name**
 
-    | Graph |
-    | --- |
-    | INFLUENCER\_NETWORK |
+    ![SQL Worksheet showing the query and result for Task 2: Read the same connections as a graph, SQL block 3](images/sql-lab-4-03.jpg)
 
 2. Run Bob's SQL/PGQ version of the direct-connections query:
 
@@ -196,7 +186,7 @@ Bob has already defined the `INFLUENCER_NETWORK` property graph over the Retail 
     | From Creator and To Creator | The same creator handles in the same order |
     | Link and Strength | The same relationship type and stored strength |
 
-    The question and evidence stay the same. Bob changes how the query expresses the relationship.
+    Both queries return the same connections and properties. The graph version expresses each connection as a path.
 
 ## Task 3: Trace brand relationships through the network
 
@@ -224,19 +214,11 @@ Bob now asks which creators are connected to a brand's promoters. A path can hel
     </copy>
     ```
 
+    **Expected output: One creator hop beyond a promoter**
+
     ![SQL Worksheet showing the query and result for Task 3: Trace brand relationships through the network, SQL block 5](images/sql-lab-4-05.jpg)
 
     The arrow pointing toward `b` follows the stored `PROMOTES` direction from creator to brand. The next arrow follows `CONNECTS_TO` from the promoter to another creator.
-
-    **Expected output: One creator hop beyond a promoter**
-
-    | Brand | Promoter | Reached | Relationship |
-    | --- | --- | --- | --- |
-    | ApexRide | @alpine\_hope\_381 | @gear\_mia\_238 | organic |
-    | ApexRide | @alpine\_hope\_381 | @gear\_mia\_436 | organic |
-    | ApexRide | @alpine\_hope\_381 | @outdoor\_kara\_155 | organic |
-    | ApexRide | @alpine\_hope\_381 | @run\_finn\_501 | organic |
-    | ApexRide | @alpine\_mia\_143 | @alpine\_hope\_321 | affiliate |
 
 2. Expand the creator path to one or two hops:
 
@@ -260,19 +242,11 @@ Bob now asks which creators are connected to a brand's promoters. A path can hel
     </copy>
     ```
 
+    **Expected output: The same five rows as the extended SQL query in Task 1**
+
     ![SQL Worksheet showing the query and result for Task 3: Trace brand relationships through the network, SQL block 6](images/sql-lab-4-06.jpg)
 
     `->{1,2}` permits either one or two creator connections. The promotion relationship is unchanged. `DISTINCT` removes duplicate output rows when different paths reach the same combination.
-
-    **Expected output: The same five rows as the extended SQL query in Task 1**
-
-    | Brand | Promoter | Reached | Relationship |
-    | --- | --- | --- | --- |
-    | ApexRide | @alpine\_hope\_381 | @camp\_faye\_151 | organic |
-    | ApexRide | @alpine\_hope\_381 | @camp\_faye\_474 | organic |
-    | ApexRide | @alpine\_hope\_381 | @camp\_marcus\_131 | organic |
-    | ApexRide | @alpine\_hope\_381 | @climb\_gus\_415 | organic |
-    | ApexRide | @alpine\_hope\_381 | @climb\_luna\_172 | organic |
 
     Compare the result with Jessica's two-branch query. The graph pattern states the allowed path lengths in one place.
 
@@ -348,17 +322,11 @@ Two creators can be relevant to the same review even when they have no direct co
     </copy>
     ```
 
+    **Expected output: Up to 25 creator pairs with a shared brand**
+
     ![SQL Worksheet showing the query and result for Task 4: Find creators who share a brand relationship, SQL block 8](images/sql-lab-4-08.jpg)
 
     The pattern goes from creator `a` to a shared brand and back to creator `b`. The ID comparison keeps each creator pair in one direction instead of repeating it in reverse.
-
-    **Expected output: Up to 25 creator pairs with a shared brand**
-
-    | CREATOR\_A | BRAND\_NAME | CREATOR\_B | A\_RELATIONSHIP | B\_RELATIONSHIP |
-    | --- | --- | --- | --- | --- |
-    | @cycle\_aria\_110 | ApexRide | @coach\_zoe\_483 | affiliate | organic |
-    | @cycle\_aria\_110 | ApexRide | @gear\_mia\_238 | affiliate | affiliate |
-    | @cycle\_aria\_110 | ApexRide | @outdoor\_kara\_478 | affiliate | organic |
 
 2. Read one row as a business reviewer.
 
@@ -372,9 +340,15 @@ After answering precise questions with SQL, Bob opens a visual map so the team c
 
 2. On **Development**, select **Graph Studio** and click **Open**. If prompted, sign in with the workshop username and password from **View Login Info**.
 
+    ![Graph Studio in the Database Actions Development menu](images/graph-studio-location.png)
+
 3. Open **Notebooks**. Download [retail-creator-network-graph-studio.dsnb](files/retail-creator-network-graph-studio.dsnb). If your browser displays the file, use **Save Link As** to save it locally.
 
+    ![Notebooks in the Graph Studio navigation menu](images/notebooks-location.png)
+
 4. Click **Import**, select or drag the downloaded file into the import window, and click **Import**. Open **Retail Creator Network**.
+
+    ![Import button on the Graph Studio Notebooks page](images/import-location.png)
 
 5. Read the opening paragraph. The main notebook uses `%sql` paragraphs against `LLUSER.INFLUENCER_NETWORK`, the same database graph used in SQL Worksheet. The optional final section explains the separate in-memory PGX workflow.
 
@@ -478,4 +452,5 @@ The notebook's optional memory load follows Oracle's [SQL property graph loading
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

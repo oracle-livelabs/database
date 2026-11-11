@@ -2,16 +2,11 @@
 
 ## Introduction
 
-**Create a Custom AI Agent Using The Managed MCP Servers for Exadata Database Service** shows how to build a custom AI agent in Oracle AI Database Private Agent Factory that uses both data plane and control plane MCP servers.
+In this lab, you will build a **Retail Data Insights Agent** in Oracle AI Database Private Agent Factory. The agent uses the **Database Tools MCP Server** to discover sample retail database objects and query their data.
 
-In this lab, you will explore **Oracle AI Database Private Agent Factory**, a no-code environment for building, deploying, and managing AI agents grounded in enterprise data.
+The workshop provides this connection under the name **MCP Server for Exadata Database Service**. You will configure its `schema_information` and `sql_run` tools, connect them to an Agent, and test questions about stores, inventory, stockout risk, and replenishment recommendations.
 
-Using Agent Builder, you will create a custom AI agent for Exadata Database Service that combines AI models, agent workflows, and two MCP servers:
-
-- **Data plane:** The Database Tools MCP Server gives the agent access to configured database tools, such as SQL queries and approved SQL Reports, to answer questions about database data.
-- **Control plane:** Managed MCP Servers for OCI Database Services give the agent access to supported OCI control-plane tools for Exadata infrastructure, VM clusters, databases, and related operational information.
-
-Together, these MCP tools let the agent use enterprise data and Exadata resource context to answer questions across both areas, including health-check questions about the database and its infrastructure. Access to data and database operations remains governed by the configured tools and permissions.
+The configured database tools and permissions govern access to the sample data. Compare the agent's answers with returned query results to verify its findings.
 
 **Estimated Time:** 10 minutes
 
@@ -20,9 +15,9 @@ Together, these MCP tools let the agent use enterprise data and Exadata resource
 In this lab, you will:
 
 - Create a custom AI agent using Agent Builder in Private Agent Factory.
-- Connect the agent to the Database Tools MCP Server to access configured database tools.
-- Connect the agent to the Managed MCP Server for OCI Database Services to access supported Exadata control-plane tools.
-- Test natural-language questions that combine database results with Exadata infrastructure and database information.
+- Connect the agent to the workshop's Database Tools MCP Server.
+- Select the `schema_information` and `sql_run` tools for database discovery and read-only queries.
+- Test retail-data questions and verify the answers against returned tool results.
 
 ### Prerequisites
 
@@ -35,7 +30,7 @@ Before starting this lab, verify that the following resources are available:
 
 > **Note:** The database, AI models, network access, IAM configuration, and supporting resources required for this workshop are provided as part of the workshop environment unless otherwise specified.
 
-You will use **Agent Builder** to create a custom AI agent that interacts with Oracle AI Database through the managed MCP Server preconfigured for this workshop.
+You will use **Agent Builder** to create a custom AI agent that interacts with Oracle AI Database through the Database Tools MCP Server connection prepared for this workshop.
 
 Model Context Protocol provides a standardized interface through which an AI agent can discover and invoke approved tools. In this workshop, the MCP Server provides the governed connection between Private Agent Factory and Oracle AI Database.
 
@@ -54,10 +49,10 @@ Custom AI Agent
 MCP Tool
   |
   v
-Exadata Database Service MCP Server
+Database Tools MCP Server
   |
   v
-Oracle AI Database
+Oracle AI Database (sample retail data)
 ```
 
 ## Task 1: Review the Preconfigured MCP Server
@@ -275,7 +270,7 @@ In this task, you will locate and review the MCP Server that has already been co
 
 9. Compare the answer with the returned tool data. Check the date range, totals, and calculations against the query results. 
 
-    Congratulations! You have now created a custom AI agent that can interact with Oracle AI Database through the managed MCP Server.
+    Congratulations! You have now created a custom AI agent that can interact with Oracle AI Database through the configured Database Tools MCP Server.
 
     This architecture enables AI applications to use enterprise database capabilities through a standardized MCP interface while database access remains governed independently from the agent.
 
@@ -285,4 +280,4 @@ In this task, you will locate and review the MCP Server that has already been co
 
 * Leo Alvarado, Vishal Patil, Product Management, Oracle Database Cloud Services, Multicloud
 
-**Last Updated Date** - October, 2026
+**Last Updated Date** - November 11, 2026

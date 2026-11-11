@@ -4,6 +4,10 @@
 
 Jessica Chan is the database administrator at **Seer Higher Education**, a fictional institution coordinating advising, tutoring, and student-support services across its Harbor Campus. Each team asks for a different view of the same work: an application needs a flexible request document, advisors need to find relevant services, planners need to see connected support relationships and campus locations, and operations leaders need to anticipate service demand.
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Higher Education/Workshop/Scene-00-Introduction-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 The underlying information belongs together. Student and program records are relational. Support requests also have flexible details, natural-language descriptions, service locations, and relationships between students, courses, advisors, and resources. If every team exports its own copy, staff must reconcile records and permissions before they can act.
 
 Jessica's team uses Oracle AI Database as a shared foundation. The labs show how relational SQL, JSON, AI Vector Search, property graphs, Oracle Spatial, Oracle Machine Learning, Select AI, and Select AI Agent work with connected Higher Education data. The examples use fictional, synthetic records. They focus on service operations and capacity planning rather than making academic or admissions decisions about individual students.

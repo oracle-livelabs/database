@@ -21,9 +21,9 @@ In this lab, you will build Seer Equity's risk assessment workflow. The agent wi
 1. Create loan applications with proper tracking IDs
 2. Assess risk based on loan type and amount
 3. Route appropriately:
-   - **Under $50K personal/auto** → Auto-approve (low risk)
-   - **$50K–$250K** → Underwriter review
-   - **Over $250K or mortgages** → Senior underwriter
+   - **Non-mortgage loans under $50K** → `AUTO_APPROVE` assessment; skip routing
+   - **$50K to under $250K** → Underwriter review
+   - **$250K or more, or any mortgage** → Senior underwriter
 4. Log every step for audit compliance
 
 **What you will build:** A loan risk assessment workflow with conditional routing and audit trail.
@@ -74,6 +74,8 @@ Before you begin, import a notebook that has all of the commands for this lab in
 You should now be on the screen with the notebook imported. This workshop will have all of the screenshots and detailed information; however, the notebook will have the commands and basic instructions for completing the lab.
 
 ## Task 2: Create the Tracking Infrastructure
+
+Run the SQL paragraphs in notebook order. Select a paragraph and use its **Run Paragraph** button, then wait for the result before continuing. The notebook-wide **Run Paragraphs** button also runs cleanup, so use the individual paragraph controls while following the lab. Agent responses can take several minutes. Run cleanup after you have reviewed the results.
 
 You will create tables that log every step the agent takes. This lets you watch the execution unfold like a movie—critical for audit trails in financial services.
 
@@ -128,15 +130,15 @@ The function generates a unique ID like `LOAN-250108-1001` and inserts the appli
         v_application_id VARCHAR2(20);
     BEGIN
         v_application_id := 'LOAN-' || TO_CHAR(SYSDATE, 'YYMMDD') || '-' || loan_applications_seq.NEXTVAL;
-        
+
         -- Log the step
-        INSERT INTO workflow_log (step_name, step_detail) 
+        INSERT INTO workflow_log (step_name, step_detail)
         VALUES ('CREATE_APPLICATION', 'Created ' || v_application_id || ' for ' || p_applicant || ', $' || TO_CHAR(p_amount, '999,999'));
-        
+
         -- Create the application
         INSERT INTO loan_applications (application_id, applicant_name, loan_amount, loan_type, risk_status)
         VALUES (v_application_id, p_applicant, p_amount, p_loan_type, 'SUBMITTED');
-        
+
         COMMIT;
         RETURN 'Created loan application ' || v_application_id || ' for $' || TO_CHAR(p_amount, '999,999') || ' (' || p_loan_type || ' loan)';
     END;
@@ -150,9 +152,9 @@ The function generates a unique ID like `LOAN-250108-1001` and inserts the appli
 
 This function determines the risk level based on loan amount and type. At Seer Equity:
 
-- Personal loans under $50K → **`AUTO_APPROVE`** (low risk, standard terms)
-- Personal/Auto loans $50K–$250K → **`UNDERWRITER_REVIEW`** (moderate risk)
-- Any loan $250K+ OR all Mortgage loans → **`SENIOR_UNDERWRITER`** (high value/complexity)
+- Non-mortgage loans under $50K → **`AUTO_APPROVE`** assessment
+- Non-mortgage loans from $50K to under $250K → **`UNDERWRITER_REVIEW`**
+- Any loan of $250K or more, or any mortgage → **`SENIOR_UNDERWRITER`**
 
 The agent will use this result to decide whether to call the routing tool.
 
@@ -170,9 +172,9 @@ The agent will use this result to decide whether to call the routing tool.
         v_result VARCHAR2(200);
     BEGIN
         -- Log the step
-        INSERT INTO workflow_log (step_name, step_detail) 
+        INSERT INTO workflow_log (step_name, step_detail)
         VALUES ('ASSESS_RISK', 'Assessing risk for $' || TO_CHAR(p_amount, '999,999') || ' ' || p_loan_type || ' loan');
-        
+
         -- Apply Seer Equity risk rules
         IF UPPER(p_loan_type) = 'MORTGAGE' THEN
             v_result := 'SENIOR_UNDERWRITER: All mortgage loans require senior review';
@@ -183,7 +185,7 @@ The agent will use this result to decide whether to call the routing tool.
         ELSE
             v_result := 'AUTO_APPROVE: Personal loans under $50K auto-approved';
         END IF;
-        
+
         COMMIT;
         RETURN v_result;
     END;
@@ -212,14 +214,14 @@ This is where you will see the agent make decisions. It reads the risk assessmen
         PRAGMA AUTONOMOUS_TRANSACTION;
     BEGIN
         -- Log the step
-        INSERT INTO workflow_log (step_name, step_detail) 
+        INSERT INTO workflow_log (step_name, step_detail)
         VALUES ('ROUTE_UNDERWRITING', 'Routing ' || p_application_id || ' for ' || p_review_level);
-        
+
         -- Update status
-        UPDATE loan_applications 
+        UPDATE loan_applications
         SET risk_status = 'PENDING_' || p_review_level
         WHERE application_id = p_application_id;
-        
+
         COMMIT;
         RETURN 'Routed ' || p_application_id || ' for ' || p_review_level || ' review';
     END;
@@ -248,14 +250,14 @@ This is how you guide agent behavior: through clear instructions in tool definit
                             "function": "create_loan_application"}',
             description => 'Creates a loan application and returns the application ID'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'ASSESS_RISK_TOOL',
             attributes  => '{"instruction": "Assess risk level for a loan application. Parameters: P_AMOUNT (loan amount as number), P_LOAN_TYPE (personal, auto, mortgage, or business). Returns AUTO_APPROVE, UNDERWRITER_REVIEW, or SENIOR_UNDERWRITER.",
                             "function": "assess_loan_risk"}',
             description => 'Returns the required review level based on amount and loan type'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'ROUTE_UNDERWRITING_TOOL',
             attributes  => '{"instruction": "Route a loan application for underwriting review. Only call this if ASSESS_RISK_TOOL returned UNDERWRITER_REVIEW or SENIOR_UNDERWRITER. Do NOT call this for AUTO_APPROVE. Parameters: P_APPLICATION_ID (the LOAN-YYMMDD-NNNN format ID), P_REVIEW_LEVEL (UNDERWRITER or SENIOR_UNDERWRITER).",
@@ -288,14 +290,14 @@ This combination of role + task instruction shapes how the agent plans its work.
                             "role": "You are a loan processing agent for Seer Equity. Process loan applications by: 1) Creating the application, 2) Assessing the risk, 3) Only routing for underwriting if risk assessment requires it. If assessment says AUTO_APPROVE, do not route."}',
             description => 'Agent demonstrating loan processing execution loop'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'LOAN_EXEC_TASK',
             attributes  => '{"instruction": "Process the loan application: 1. Call CREATE_LOAN_TOOL to create the application 2. Call ASSESS_RISK_TOOL to determine risk level 3. If result contains UNDERWRITER_REVIEW or SENIOR_UNDERWRITER, call ROUTE_UNDERWRITING_TOOL. If result is AUTO_APPROVE, do NOT call ROUTE_UNDERWRITING_TOOL - just confirm the loan is auto-approved. User request: {query}",
                             "tools": ["CREATE_LOAN_TOOL", "ASSESS_RISK_TOOL", "ROUTE_UNDERWRITING_TOOL"]}',
             description => 'Task for loan execution demo'
         );
-        
+
         DBMS_CLOUD_AI_AGENT.CREATE_TEAM(
             team_name   => 'LOAN_EXEC_TEAM',
             attributes  => '{"agents": [{"name": "LOAN_EXEC_AGENT", "task": "LOAN_EXEC_TASK"}],
@@ -309,7 +311,7 @@ This combination of role + task instruction shapes how the agent plans its work.
 
     ![Notebook cell showing agent, task, and team creation](images/task2_6.png)
 
-## Task 3: Submit a $75,000 Auto Loan (Underwriter Review Path)
+## Task 8: Submit a $75,000 Auto Loan (Underwriter Review Path)
 
 Now let's run a request and trace every step. This $75,000 auto loan should trigger the full three-step workflow: create the application, assess risk (returns `UNDERWRITER_REVIEW`), then route for underwriter review.
 
@@ -348,7 +350,7 @@ Now let's run a request and trace every step. This $75,000 auto loan should trig
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         step_name,
         step_detail,
         TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time
@@ -359,19 +361,19 @@ Now let's run a request and trace every step. This $75,000 auto loan should trig
 
     ![Workflow log showing three steps: CREATE_APPLICATION, ASSESS_RISK, ROUTE_UNDERWRITING](images/task3_3.png)
 
-## Task 4: Trace the Agent's Tool Calls
+## Task 9: Trace the Agent's Tool Calls
 
 Oracle maintains its own history of tool calls. These views show you the inputs and outputs of each tool the agent invoked.
 
 1. Check the tool execution history.
 
-    You should see `CREATE_LOAN_TOOL`, `ASSESS_RISK_TOOL`, and `ROUTE_UNDERWRITING_TOOL` in sequence.
+    Use the timestamps to identify `CREATE_LOAN_TOOL`, `ASSESS_RISK_TOOL`, and `ROUTE_UNDERWRITING_TOOL` for this request. The rows are displayed newest first, so read the calls from the earliest timestamp to the latest to reconstruct the execution sequence.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         tool_name,
         TO_CHAR(start_date, 'HH24:MI:SS.FF3') as started,
         TO_CHAR(end_date, 'HH24:MI:SS.FF3') as ended,
@@ -392,7 +394,7 @@ Oracle maintains its own history of tool calls. These views show you the inputs 
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         application_id,
         applicant_name,
         TO_CHAR(loan_amount, '$999,999') as loan_amount,
@@ -406,7 +408,7 @@ Oracle maintains its own history of tool calls. These views show you the inputs 
 
     ![Loan applications table showing John Smith's record with PENDING_UNDERWRITER status](images/task4_2.png)
 
-## Task 5: Trace Different Execution Paths
+## Task 10: Trace Different Execution Paths
 
 Different loan parameters trigger different routing paths—and sometimes skip a tool entirely. This is where you will see the agent make real decisions based on data.
 
@@ -423,7 +425,7 @@ Different loan parameters trigger different routing paths—and sometimes skip a
     </copy>
     ```
 
-    ![Notebook cell showing Jane Doe auto loan submission](images/task5_1.png)
+    ![Notebook cell showing Jane Doe personal loan submission](images/task5_1.png)
 
 2. Check the workflow log for auto-approve.
 
@@ -439,16 +441,16 @@ Different loan parameters trigger different routing paths—and sometimes skip a
 
     ![Workflow log showing only two steps for auto-approve path](images/task5_2.png)
 
-3. Verify the auto-approved loan.
+3. Verify the stored status for the auto-approve assessment.
 
-    Jane's loan should have status **SUBMITTED** (not `PENDING_UNDERWRITER`), because it was auto-approved and didn't need routing.
+    Jane's loan should have status **`SUBMITTED`**. In this lab, `AUTO_APPROVE` is the risk assessment's recommendation: the agent skips routing, but no tool changes the stored status to approved. `SUBMITTED` is the expected database result. Lab 10 demonstrates a stored `AUTO_APPROVED` status.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT application_id, applicant_name, TO_CHAR(loan_amount, '$999,999') as amount, risk_status 
-    FROM loan_applications 
+    SELECT application_id, applicant_name, TO_CHAR(loan_amount, '$999,999') as amount, risk_status
+    FROM loan_applications
     WHERE applicant_name = 'Jane Doe';
     </copy>
     ```
@@ -478,7 +480,9 @@ Different loan parameters trigger different routing paths—and sometimes skip a
 
     ```sql
     <copy>
-    SELECT step_name, step_detail FROM workflow_log ORDER BY log_id;
+    SELECT step_name, step_detail AS mortgage_step_detail
+    FROM workflow_log
+    ORDER BY log_id;
     </copy>
     ```
 
@@ -492,35 +496,35 @@ Different loan parameters trigger different routing paths—and sometimes skip a
 
     ```sql
     <copy>
-    SELECT application_id, applicant_name, TO_CHAR(loan_amount, '$999,999') as amount, loan_type, risk_status 
-    FROM loan_applications 
+    SELECT application_id, applicant_name, TO_CHAR(loan_amount, '$999,999') as amount, loan_type, risk_status
+    FROM loan_applications
     WHERE applicant_name = 'Bob Wilson';
     </copy>
     ```
 
     ![Loan record showing Bob Wilson with PENDING_SENIOR_UNDERWRITER status](images/task5_6.png)
 
-## Task 6: Compare All Three Execution Paths
+## Task 11: Compare All Three Execution Paths
 
 Let's see all loan applications side by side. Notice how different amounts and loan types led to different statuses—same agent, same tools, but different execution paths based on the data.
 
 | Amount | Type | Status | Why |
 |--------|------|--------|-----|
-| $25,000 | Personal | SUBMITTED | Auto-approved, under $50K |
-| $75,000 | Auto | `PENDING_UNDERWRITER` | Between $50K–$250K |
+| $25,000 | Personal | `SUBMITTED` | `AUTO_APPROVE` assessment; no routing |
+| $75,000 | Auto | `PENDING_UNDERWRITER` | $50K to under $250K |
 | $350,000 | Mortgage | `PENDING_SENIOR_UNDERWRITER` | Mortgages require senior review |
 
 > This command is already in your notebook—just click the play button (▶) to run it.
 
 ```sql
 <copy>
-SELECT 
+SELECT
     application_id,
     applicant_name,
     TO_CHAR(loan_amount, '$999,999') as loan_amount,
     loan_type,
     risk_status,
-    CASE 
+    CASE
         WHEN loan_amount < 50000 AND loan_type != 'mortgage' THEN 'Auto-approved'
         WHEN loan_type = 'mortgage' THEN 'Senior underwriter (mortgage)'
         WHEN loan_amount >= 250000 THEN 'Senior underwriter (high value)'
@@ -533,7 +537,7 @@ ORDER BY created_at;
 
 ![All three loan applications side by side with different statuses and routing reasons](images/task6_1.png)
 
-## Task 7: Understand the Execution Pattern
+## Task 12: Understand the Execution Pattern
 
 Every agent execution follows this pattern:
 
@@ -547,41 +551,9 @@ Every agent execution follows this pattern:
 
     The key insight: **step 5 is where decisions happen**. The agent reads the risk assessment and decides whether to route. This is what makes agents intelligent—they adapt based on data.
 
-1. Query the complete execution timeline.
+Review the existing **Examine the Workflow Log** and **Check the Tool Execution History** outputs for the examples above. Compare the tool names, timestamps, and stored loan statuses to see which path each request took.
 
-    > This command is already in your notebook—just click the play button (▶) to run it.
-
-    ```sql
-    <copy>
-    SELECT 
-        'TOOL: ' || tool_name as step,
-        TO_CHAR(start_date, 'HH24:MI:SS.FF3') as time,
-        SUBSTR(output, 1, 50) as output
-    FROM USER_AI_AGENT_TOOL_HISTORY
-    WHERE start_date > SYSTIMESTAMP - INTERVAL '5' MINUTE
-    ORDER BY start_date;
-    </copy>
-    ```
-
-    ![Tool history showing the complete execution timeline](images/task7_1.png)
-
-2. Compare with your workflow log.
-
-    > This command is already in your notebook—just click the play button (▶) to run it.
-
-    ```sql
-    <copy>
-    SELECT 
-        'LOG: ' || step_name as step,
-        TO_CHAR(logged_at, 'HH24:MI:SS.FF3') as time,
-        step_detail as output
-    FROM workflow_log
-    WHERE logged_at > SYSTIMESTAMP - INTERVAL '5' MINUTE
-    ORDER BY logged_at;
-    </copy>
-    ```
-
-    ![Workflow log entries matching tool execution timeline](images/task7_2.png)
+The workflow log is cleared before each example. To compare earlier loans, use the output already displayed in their verification paragraphs rather than rerunning an earlier log query after the next example has cleared the log.
 
 ## Summary
 
@@ -589,10 +561,10 @@ In this lab, you traced the complete agent execution loop at Seer Equity:
 
 * **Logging**: Added `workflow_log` entries to see each step
 * **Conditional execution**: Agent called the routing tool only when risk assessment required it
-* **Three paths**: Auto-approve, underwriter review, senior underwriter review
+* **Three paths**: `AUTO_APPROVE` assessment without routing, underwriter review, and senior underwriter review
 * **Verification**: Checked both logs and actual database records
 
-**Key takeaway:** The agent orchestrates, the LLM thinks, the tools act. Every step is logged. Every action is traceable. This is what makes agents production-ready for financial services—small loans auto-approve in seconds, complex loans get routed appropriately, and compliance has a complete audit trail.
+**Key takeaway:** The agent uses the risk assessment result to decide whether routing is needed. The workflow log, tool history, and stored loan statuses let you verify what happened for each request.
 
 ## Learn More
 

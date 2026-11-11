@@ -1,48 +1,25 @@
 # Build a High-Tech Agent with Select AI Agent
 
-<!-- markdownlint-configure-file
-{
-  "MD013": {
-    "code_blocks": false,
-    "tables": false
-  },
-  "MD033": {
-    "allowed_elements": [
-      "details",
-      "summary",
-      "strong"
-    ]
-  }
-}
--->
-
 ## Introduction
 
-Nina Patel has used Select AI for individual questions. Her production-review
-screen now needs an assistant that can handle a request and follow-up questions.
+Nina Patel has used Select AI for individual questions. Her production-review screen now needs an assistant that can handle a request and follow-up questions.
 
-Jessica gives the agent one tool: SQL through the `GENAI` profile configured in
-the previous lab.
+Jessica gives the agent one tool: SQL through the `GENAI` profile configured in the previous lab.
 
-Create an agent, task and team, then run Nina’s question and verify the answer.
-The instructions request read-only answers, but SQL still runs with `LLUSER`’s
-owner privileges.
+Create an agent, task and team, then run Nina’s question and verify the answer. The instructions request read-only answers, but SQL still runs with `LLUSER`’s owner privileges.
 
 ![Nina: High-Tech lab banner](images/nina-hightech.png)
 
 <details>
 <summary><strong>Key terms: agent, tool, task, and team</strong></summary>
 
-> * An **agent** is a configured role that follows instructions when it handles
->   a request.
+> * An **agent** is a configured role that follows instructions when it handles a request.
 >
-> * A **tool** is a capability the agent is allowed to call. In this lab, the
->   tool runs SQL through the `GENAI` profile.
+> * A **tool** is a capability the agent is allowed to call. In this lab, the tool runs SQL through the `GENAI` profile.
 >
 > * A **task** tells the agent what to do and which tools it may use.
 >
-> * A **team** connects the agent and task so an application or SQL session can
->   run them together.
+> * A **team** connects the agent and task so an application or SQL session can run them together.
 
 </details>
 
@@ -53,10 +30,14 @@ owner privileges.
 * Register a SQL query tool for the High-Tech schema.
 * Create an agent, task, and team with `DBMS_CLOUD_AI_AGENT`.
 * Run a High-Tech question through the team.
-* Review the agent’s tool history and explain why its available tools should be
-  limited.
+* Review the agent’s tool history and explain why its available tools should be limited.
 
 Estimated Time: **15 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/High-Tech/Workshop/Scene-10-Lab-8-High-Tech-Operations-Agent-with-Select-AI-Agent.mp4">
+  Your browser does not support the video tag.
+</video>
 
 > **Prerequisite:** Complete
 > [Lab 7: Ask High-Tech Questions with Select AI](?lab=selectai). This lab uses
@@ -64,8 +45,7 @@ Estimated Time: **15 minutes**
 
 ## Task 1: Check the profile and table access
 
-The agent reuses `GENAI`. Its `object_list` guides SQL generation; database
-privileges determine actual access.
+The agent reuses `GENAI`. Its `object_list` guides SQL generation; database privileges determine actual access.
 
 1. Check the profile:
 
@@ -78,8 +58,7 @@ privileges determine actual access.
     </copy>
     ```
 
-    The profile should be enabled. If it is not present, complete Lab 7 first or
-    ask the DBA which profile to use.
+    The profile should be enabled. If it is not present, complete Lab 7 first or ask the DBA which profile to use.
 
 2. Check the tables listed in the profile:
 
@@ -94,8 +73,7 @@ privileges determine actual access.
     </copy>
     ```
 
-    Confirm the four required tables: `COMPONENTS`, `PRODUCTION_ORDERS`,
-    `PRODUCTION_ORDER_LINES`, and `CUSTOMER_SITES`.
+    Confirm the four required tables: `COMPONENTS`, `PRODUCTION_ORDERS`, `PRODUCTION_ORDER_LINES`, and `CUSTOMER_SITES`.
 
 3. Check the agents in your schema:
 
@@ -108,12 +86,9 @@ privileges determine actual access.
     </copy>
     ```
 
-    No agents with names beginning with `NINA_HIGHTECH_` are expected. You
-    create Nina’s agent in Task 3.
+    No agents with names beginning with `NINA_HIGHTECH_` are expected. You create Nina’s agent in Task 3.
 
-4. Set the model for this agent exercise. First record the current model from
-    `USER_CLOUD_AI_PROFILE_ATTRIBUTES` so you can restore it after Task 5. The
-    supplied stack starts with `cohere.command-a-03-2025`.
+4. Set the model for this agent exercise. First record the current model from `USER_CLOUD_AI_PROFILE_ATTRIBUTES` so you can restore it after Task 5. The supplied stack starts with `cohere.command-a-03-2025`.
 
     ```sql
     <copy>
@@ -123,10 +98,7 @@ privileges determine actual access.
     </copy>
     ```
 
-    Use `meta.llama-3.3-70b-instruct` with the configured Chicago endpoint for
-    this exercise. Changing the shared `GENAI` profile also affects other
-    requests that use it. Use the workshop database and restore the previous
-    model afterward using the instructions in Task 5, step 3.
+    Use `meta.llama-3.3-70b-instruct` with the configured Chicago endpoint for this exercise. Changing the shared `GENAI` profile also affects other requests that use it. Use the workshop database and restore the previous model afterward using the instructions in Task 5, step 3.
 
     Run this block with **Run Script (F5)**:
 
@@ -175,8 +147,7 @@ Register the SQL tool against `GENAI`.
 
 ## Task 3: Create Nina's agent, task, and team
 
-Define the agent’s role and task, then connect them in a team that can call the
-SQL tool.
+Define the agent’s role and task, then connect them in a team that can call the SQL tool.
 
 1. Create the agent:
 
@@ -225,9 +196,7 @@ SQL tool.
 
 ## Task 4: Run a High-Tech question
 
-Database Actions does not support the `SELECT AI AGENT` command directly. Use
-`DBMS_CLOUD_AI_AGENT.RUN_TEAM` in SQL Worksheet and provide the team name in the
-function call.
+Database Actions does not support the `SELECT AI AGENT` command directly. Use `DBMS_CLOUD_AI_AGENT.RUN_TEAM` in SQL Worksheet and provide the team name in the function call.
 
 1. Ask the agent:
 
@@ -243,14 +212,11 @@ function call.
 
     ![High-Tech agent answer with ranked component material values](images/sql-agent-answer.png)
 
-    The query creates a conversation ID so Oracle can record the prompt and
-    response in its history.
+    The query creates a conversation ID so Oracle can record the prompt and response in its history.
 
 2. Review the answer.
 
-    Compare all five agent rows with the SQL result below. Check each component,
-    category, rank, material value, and planned units. Every row needs both
-    numeric totals.
+    Compare all five agent rows with the SQL result below. Check each component, category, rank, material value, and planned units. Every row needs both numeric totals.
 
     ```sql
     <copy>
@@ -267,20 +233,15 @@ function call.
     </copy>
     ```
 
-    If a value differs, inspect the tool input and output in Task 5. Keep the
-    verified SQL result as the basis for Nina’s decision.
+    If a value differs, inspect the tool input and output in Task 5. Keep the verified SQL result as the basis for Nina’s decision.
 
-    > **Note:** The instructions request read-only answers. They do not revoke
-    > the database privileges of `LLUSER`. Use a separately restricted account
-    > for a production assistant.
+    > **Note:** The instructions request read-only answers. They do not revoke the database privileges of `LLUSER`. Use a separately restricted account for a production assistant.
 
-3. Optional challenge: ask which customer sites and orders use the highest-value
-    component. More complex requests may take longer.
+3. Optional challenge: ask which customer sites and orders use the highest-value component. More complex requests may take longer.
 
 ## Task 5: Inspect what the agent did
 
-Nina checks whether the agent called the approved tool and how it processed her
-request.
+Nina checks whether the agent called the approved tool and how it processed her request.
 
 1. Review the latest team runs:
 
@@ -319,13 +280,9 @@ request.
 
     ![Select AI Agent SQL tool invocation history](images/sql-agent-tools.png)
 
-    Open `INPUT` and `OUTPUT` for `NINA_HIGHTECH_SQL_TOOL`. Do the returned
-    values match the answer you checked in Task 4? `SUCCEEDED` confirms the call
-    finished, not that its figures are correct.
+    Open `INPUT` and `OUTPUT` for `NINA_HIGHTECH_SQL_TOOL`. Do the returned values match the answer you checked in Task 4? `SUCCEEDED` confirms the call finished, not that its figures are correct.
 
-3. Restore the original model even if the agent request fails. The value below
-    is the supplied stack default. If you recorded a different value in Task 1,
-    use that value instead. Run with **Run Script (F5)**.
+3. Restore the original model even if the agent request fails. The value below is the supplied stack default. If you recorded a different value in Task 1, use that value instead. Run with **Run Script (F5)**.
 
     ```sql
     <copy>
@@ -342,16 +299,13 @@ request.
     </copy>
     ```
 
-    Confirm that `RESTORED_MODEL` matches the value you recorded in Task 1. A
-    timed-out request may leave a `RUNNING` history row without an end time.
+    Confirm that `RESTORED_MODEL` matches the value you recorded in Task 1. A timed-out request may leave a `RUNNING` history row without an end time.
 
 ## Conclusion: Give the agent a controlled way to work
 
-Jessica can inspect the tool history or disable the team. For production,
-restrict access with database grants and row-level policies.
+Jessica can inspect the tool history or disable the team. For production, restrict access with database grants and row-level policies.
 
-This example requests read-only answers. Before allowing changes to data, use a
-narrowly defined function tool, clear instructions, and user confirmation.
+This example requests read-only answers. Before allowing changes to data, use a narrowly defined function tool, clear instructions, and user confirmation.
 
 ## Next Steps
 

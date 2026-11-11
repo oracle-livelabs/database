@@ -52,6 +52,11 @@ The application uses this document shape, while Oracle Database keeps the reques
 
 Estimated Time: **20 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-03-JSON-Care-Service-Request-Pickup-Recording.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step | Healthcare focus |

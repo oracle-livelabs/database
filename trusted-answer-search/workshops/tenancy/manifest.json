@@ -11,23 +11,11 @@
       "filename": "../../get-started.md"
     },
     {
-      "title": "Lab 1: Import ONNX Embedding Model",
-      "filename": "../../embedding.md"
-    },
-    {
-      "title": "Lab 2: Run the Backend Installer",
-      "filename": "../../backend.md"
-    },
-    {
-      "title": "Lab 3: Load APEX Apps and Sample Data",
-      "filename": "../../install.md"
-    },
-    {
-      "title": "Lab 4: Make Wikimedia Search Trusted",
+      "title": "Lab 1: Make Wikimedia Search Trusted",
       "filename": "../../update_search.md"
     },
     {
-      "title": "Lab 5: Prove and Operate Trusted Search",
+      "title": "Lab 2: Prove and Operate Trusted Search",
       "filename": "../../advanced.md"
     },
     {

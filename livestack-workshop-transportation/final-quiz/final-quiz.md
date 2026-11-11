@@ -16,6 +16,11 @@ Use this scored quiz to check how Seer Transport uses database queries to suppor
 
 Estimated Time: **3 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-11-Closing-Keep-the-Transportation-Work-Connected-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Task 1: Answer the quiz questions
 
 1. Complete the scored quiz.

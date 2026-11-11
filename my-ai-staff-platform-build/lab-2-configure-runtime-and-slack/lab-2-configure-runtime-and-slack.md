@@ -23,12 +23,75 @@ In this lab, you will:
 
 ## Task 1: Install Runtime Packages and Tooling
 
-1. Connect to the OCI compute instance from your laptop. Use either method:
-    - **VS Code:** Install the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) if it is not already installed. In VS Code, open the Command Palette, select **Remote-SSH: Connect to Host**, choose `my-ai-staff-oci`, and open a new terminal with **Terminal > New Terminal**. The commands below must run in that remote terminal.
-       ![Visual Studio Code Marketplace page for the Remote - SSH extension, with the Install button highlighted](./images/08_remote_ssh_extension_install.png)
-    - **Laptop terminal:** Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes to the remote `opc` shell, run the commands below. The `my-ai-staff-oci` alias and key are configured in Lab 1 Task 1.
+1. Connect to the OCI compute instance from your laptop. Use VS Code Remote -
+    SSH or a local terminal.
 
-    Once connected, update system packages:
+    **VS Code Remote - SSH**
+
+    - Install the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+      from Microsoft if it is not already installed.
+
+      ![Visual Studio Code Marketplace page for the Remote - SSH extension, with the Install button highlighted](./images/08_remote_ssh_extension_install.png)
+
+    - Open the **Extensions** view and confirm that **Remote - SSH** appears
+      under **Installed**. Then select the **Remote Explorer** icon in the
+      Activity Bar.
+
+      ![Remote SSH extension installed and Remote Explorer icon highlighted](./images/09_remote_ssh_extension_installed.png)
+
+    - In **Remote Explorer**, select the plus icon labeled **New Remote**.
+
+      ![Add a new SSH remote from Remote Explorer](./images/10_remote_explorer_add_host.png)
+
+    - If the `my-ai-staff-oci` host configured in Lab 1 is not already listed,
+      enter this SSH connection command. Replace the placeholders with the
+      private-key path on your laptop and the compute instance public IP:
+
+      ```bash
+      <copy>
+      ssh -i <private-key-path> opc@<instance-public-ip>
+      </copy>
+      ```
+
+      ![Enter the OCI instance SSH connection command](./images/11_remote_ssh_connection_command.png)
+
+    - If prompted, save the connection in your user SSH configuration file,
+      normally `~/.ssh/config`. Select the saved host under **SSH** in Remote
+      Explorer. It may appear as `my-ai-staff-oci` or as the instance public IP.
+
+      ![Select the saved OCI SSH host in Remote Explorer](./images/12_remote_host_saved.png)
+
+    - On the first connection, accept the SSH host fingerprint and select
+      **Linux** if VS Code asks for the remote platform. Wait until VS Code
+      finishes connecting, then select **Terminal > New Terminal**. Confirm
+      that the terminal prompt belongs to the remote `opc` user. Run all
+      remaining commands in this remote terminal.
+
+    **Laptop terminal on macOS or Linux**
+
+    Run `ssh my-ai-staff-oci` from a local terminal. After the prompt changes
+    to the remote `opc` shell, run the commands below. The `my-ai-staff-oci`
+    alias and key are configured in Lab 1, Task 1.
+
+      ```bash
+      <copy>
+      ssh my-ai-staff-oci
+      </copy>
+      ```
+
+    **Laptop terminal on Windows**
+
+    Lab 1 configures the private key but does not create the
+    `my-ai-staff-oci` alias on Windows. Open PowerShell or Windows Terminal,
+    replace `<instance-public-ip>`, and run:
+
+      ```powershell
+      <copy>
+      ssh -i "$env:USERPROFILE\.ssh\my-ai-staff-oci.key" opc@<instance-public-ip>
+      </copy>
+      ```
+
+    **Once connected, update system packages:**
 
     ```
     <copy>

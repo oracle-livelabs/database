@@ -12,7 +12,7 @@ You will give an agent a multi-step task and watch how it decomposes the work.
 
 At Seer Equity, preparing for a client call is tedious. A loan officer needs to pull together information from multiple places:
 
-- **Contact info**: How does this client prefer to be reached?
+- **Contact info**: What email address is on file for this applicant?
 - **Loan history**: What applications do they have pending?
 - **Rate eligibility**: What tier are they in?
 - **Credit information**: What credit tier applies?
@@ -76,11 +76,13 @@ You should now be on the screen with the notebook imported. This workshop will h
 
 ## Task 2: Create a Multi-Tool Agent
 
+Run the SQL paragraphs in notebook order. Select a paragraph and use its **Run Paragraph** button, then wait for the result before continuing. The notebook-wide **Run Paragraphs** button also runs cleanup, so use the individual paragraph controls while following the lab. Agent responses can take several minutes. Run cleanup after you have reviewed the results.
+
 To see planning in action, we need an agent with multiple tools. When an agent has several tools available, it has to figure out which ones to use and in what order. This decision-making process is what we call "planning."
 
 1. Create sample data tables.
 
-    First, we need some data for the agent to work with. We'll create two tables: one for applicants (with their contact info and credit tier) and one for their loans.
+    First, we need some data for the agent to work with. We'll create `demo_applicants` for applicant names, credit tiers, and email addresses, and `demo_applications` for their loan application history. Use `APPL-001` for Acme Industries in the following examples.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
@@ -91,26 +93,24 @@ To see planning in action, we need an agent with multiple tools. When an agent h
         applicant_id    VARCHAR2(20) PRIMARY KEY,
         name            VARCHAR2(100),
         credit_tier     VARCHAR2(20),
-        contact_email   VARCHAR2(100),
-        contact_pref    VARCHAR2(20)
+        contact_email   VARCHAR2(100)
     );
 
-    INSERT INTO demo_applicants VALUES ('APP-001', 'Acme Corp', 'PREFERRED', 'sarah@acme.com', 'EMAIL');
-    INSERT INTO demo_applicants VALUES ('APP-002', 'TechStart', 'STANDARD', 'info@techstart.com', 'PHONE');
+    INSERT INTO demo_applicants VALUES ('APPL-001', 'Acme Industries', 'PREFERRED', 'loans@acme.com');
+    INSERT INTO demo_applicants VALUES ('APPL-002', 'TechStart LLC', 'STANDARD', 'finance@techstart.com');
 
-    -- Loan application table
-    CREATE TABLE demo_loans (
-        loan_id       VARCHAR2(20) PRIMARY KEY,
-        applicant_id  VARCHAR2(20),
-        status        VARCHAR2(30),
-        amount        NUMBER(12,2),
-        loan_type     VARCHAR2(30),
-        rate          NUMBER(5,2)
+    -- Application table
+    CREATE TABLE demo_applications (
+        application_id  VARCHAR2(20) PRIMARY KEY,
+        applicant_id    VARCHAR2(20),
+        loan_status     VARCHAR2(20),
+        loan_amount     NUMBER(12,2),
+        application_date DATE
     );
 
-    INSERT INTO demo_loans VALUES ('LOAN-100', 'APP-001', 'APPROVED', 150000, 'Business', 7.9);
-    INSERT INTO demo_loans VALUES ('LOAN-101', 'APP-001', 'PENDING', 75000, 'Personal', 8.5);
-    INSERT INTO demo_loans VALUES ('LOAN-102', 'APP-002', 'UNDER_REVIEW', 45000, 'Auto', 9.9);
+    INSERT INTO demo_applications VALUES ('LOAN-100', 'APPL-001', 'APPROVED', 150000, SYSDATE - 2);
+    INSERT INTO demo_applications VALUES ('LOAN-101', 'APPL-001', 'PENDING', 75000, SYSDATE);
+    INSERT INTO demo_applications VALUES ('LOAN-102', 'APPL-002', 'APPROVED', 50000, SYSDATE - 5);
 
     COMMIT;
     </copy>
@@ -130,8 +130,7 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     CREATE OR REPLACE FUNCTION get_applicant(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS
         v_result VARCHAR2(500);
     BEGIN
-        SELECT 'Applicant: ' || name || ', Credit Tier: ' || credit_tier || 
-               ', Contact: ' || contact_email || ' (' || contact_pref || ')'
+        SELECT 'Applicant: ' || name || ', Credit Tier: ' || credit_tier || ', Email: ' || contact_email
         INTO v_result FROM demo_applicants WHERE applicant_id = p_applicant_id;
         RETURN v_result;
     EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found: ' || p_applicant_id;
@@ -143,28 +142,25 @@ To see planning in action, we need an agent with multiple tools. When an agent h
         v_result CLOB := '';
         v_count NUMBER := 0;
     BEGIN
-        FOR rec IN (SELECT loan_id, status, amount, loan_type, rate 
-                    FROM demo_loans WHERE applicant_id = p_applicant_id ORDER BY amount DESC) LOOP
-            v_result := v_result || rec.loan_id || ': ' || rec.status || ', $' || rec.amount || 
-                       ' ' || rec.loan_type || ' at ' || rec.rate || '%' || CHR(10);
+        FOR rec IN (SELECT application_id, loan_status, loan_amount, application_date
+                    FROM demo_applications WHERE applicant_id = p_applicant_id ORDER BY application_date DESC) LOOP
+            v_result := v_result || rec.application_id || ': ' || rec.loan_status || ', $' || TO_CHAR(rec.loan_amount, '999,999') || CHR(10);
             v_count := v_count + 1;
         END LOOP;
-        IF v_count = 0 THEN RETURN 'No loans found for applicant.'; END IF;
-        RETURN 'Found ' || v_count || ' loans:' || CHR(10) || v_result;
+        IF v_count = 0 THEN RETURN 'No loan applications found for applicant.'; END IF;
+        RETURN 'Found ' || v_count || ' loan applications:' || CHR(10) || v_result;
     END;
     /
 
-    -- Tool 3: Check rate eligibility
-    CREATE OR REPLACE FUNCTION check_rate_eligibility(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS
+    -- Tool 3: Check if applicant is eligible for premium rates
+    CREATE OR REPLACE FUNCTION check_premium_eligibility(p_applicant_id VARCHAR2) RETURN VARCHAR2 AS
         v_tier VARCHAR2(20);
     BEGIN
         SELECT credit_tier INTO v_tier FROM demo_applicants WHERE applicant_id = p_applicant_id;
         IF v_tier = 'PREFERRED' THEN
-            RETURN 'PREFERRED RATES: Eligible for rates starting at 7.9% APR. Up to $500K limit.';
-        ELSIF v_tier = 'STANDARD' THEN
-            RETURN 'STANDARD RATES: Eligible for rates starting at 9.9% APR. Up to $100K limit.';
+            RETURN 'ELIGIBLE: Applicant has Preferred credit tier - qualifies for premium rates (7.9% APR).';
         ELSE
-            RETURN 'SUBPRIME RATES: Rates starting at 14.9% APR. Up to $25K limit.';
+            RETURN 'NOT ELIGIBLE: Applicant has ' || v_tier || ' credit tier - standard rates apply (12.9% APR).';
         END IF;
     EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Applicant not found.';
     END;
@@ -185,9 +181,9 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'GET_APPLICANT_TOOL',
-            attributes  => '{"instruction": "Get applicant details by ID. Parameter: P_APPLICANT_ID (e.g. APP-001). Returns name, credit tier, and contact info.",
+            attributes  => '{"instruction": "Get loan applicant details by ID. Parameter: P_APPLICANT_ID (e.g. APPL-001). Returns name, credit tier, and email.",
                             "function": "get_applicant"}',
-            description => 'Retrieves applicant name, credit tier, and contact preferences'
+            description => 'Retrieves applicant name, credit tier, and contact email'
         );
     END;
     /
@@ -195,19 +191,19 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
             tool_name   => 'GET_LOANS_TOOL',
-            attributes  => '{"instruction": "Get all loans for an applicant. Parameter: P_APPLICANT_ID (e.g. APP-001). Returns loan IDs, statuses, amounts, and rates.",
+            attributes  => '{"instruction": "Get all loan applications for an applicant. Parameter: P_APPLICANT_ID (e.g. APPL-001). Returns application IDs, statuses, and amounts.",
                             "function": "get_applicant_loans"}',
-            description => 'Retrieves applicant loan history with status and rates'
+            description => 'Retrieves applicant loan application history with status and amounts'
         );
     END;
     /
 
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-            tool_name   => 'CHECK_RATES_TOOL',
-            attributes  => '{"instruction": "Check rate eligibility for an applicant. Parameter: P_APPLICANT_ID (e.g. APP-001). Returns eligible rate tier and limits.",
-                            "function": "check_rate_eligibility"}',
-            description => 'Checks what rate tier the applicant qualifies for'
+            tool_name   => 'CHECK_PREMIUM_TOOL',
+            attributes  => '{"instruction": "Check if applicant qualifies for premium loan rates. Parameter: P_APPLICANT_ID (e.g. APPL-001). Returns ELIGIBLE or NOT ELIGIBLE with rate information.",
+                            "function": "check_premium_eligibility"}',
+            description => 'Checks if applicant credit tier qualifies for premium rates'
         );
     END;
     /
@@ -237,8 +233,8 @@ To see planning in action, we need an agent with multiple tools. When an agent h
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'PLANNING_TASK',
-            attributes  => '{"instruction": "Answer loan officer inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}",
-                            "tools": ["GET_APPLICANT_TOOL", "GET_LOANS_TOOL", "CHECK_RATES_TOOL"]}',
+            attributes  => '{"instruction": "Answer loan applicant inquiries by using the available tools. Do not ask clarifying questions - use the tools to look up the information and report what you find. User request: {query}",
+                            "tools": ["GET_APPLICANT_TOOL", "GET_LOANS_TOOL", "CHECK_PREMIUM_TOOL"]}',
             description => 'Task with multiple tools for planning demonstration'
         );
     END;
@@ -269,19 +265,21 @@ Let's start with a simple request that needs only one tool.
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
-    SELECT AI AGENT Who is applicant APP-001;
+    SELECT AI AGENT Who is applicant APPL-001;
     </copy>
     ```
 
     ![Task Information](./images/task_3_1.png " ")
 
-2. Check the tool history to see the plan execution.
+2. Check the tool history to see the executed calls.
+
+    The rows are displayed newest first. Use the timestamps to identify the calls for this request; read them from the earliest timestamp to the latest when checking their execution order.
 
     > This command is already in your notebook—just click the play button (▶) to run it.
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         tool_name,
         TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at,
         SUBSTR(output, 1, 60) as result
@@ -305,7 +303,7 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 
     ```sql
     <copy>
-    SELECT AI AGENT Give me a complete picture of applicant APP-001 including their loans and rate eligibility;
+    SELECT AI AGENT Give me a complete picture of applicant APPL-001 including their loan history and rate eligibility;
     </copy>
     ```
 
@@ -317,7 +315,7 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         tool_name,
         TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at,
         SUBSTR(output, 1, 60) as result
@@ -332,9 +330,9 @@ Now let's ask a question that requires multiple tools, just like a loan officer 
     **Observe:** The agent planned to use multiple tools:
     - `GET_APPLICANT_TOOL` to get basic info
     - `GET_LOANS_TOOL` to get loan history
-    - `CHECK_RATES_TOOL` to verify rate eligibility
+    - `CHECK_PREMIUM_TOOL` to verify rate eligibility
 
-3. Notice the sequence. The agent determined the logical order.
+3. Use the timestamps to reconstruct the execution sequence. The history shows the tool calls that completed; it does not display a separate plan before execution.
 
 ## Task 5: See How Instructions Shape Planning
 
@@ -349,8 +347,8 @@ The task instruction guides how the agent plans. Let's modify it.
     BEGIN
         DBMS_CLOUD_AI_AGENT.CREATE_TASK(
             task_name   => 'STRUCTURED_TASK',
-            attributes  => '{"instruction": "For applicant inquiries, ALWAYS follow this exact sequence: 1. First, look up the applicant using GET_APPLICANT_TOOL 2. Then, get their loans using GET_LOANS_TOOL 3. Finally, check rate eligibility using CHECK_RATES_TOOL. Report all findings. User request: {query}",
-                            "tools": ["GET_APPLICANT_TOOL", "GET_LOANS_TOOL", "CHECK_RATES_TOOL"]}',
+            attributes  => '{"instruction": "For applicant inquiries, ALWAYS follow this exact sequence: 1. First, look up the applicant using GET_APPLICANT_TOOL 2. Then, get their loan history using GET_LOANS_TOOL 3. Finally, check premium rate eligibility using CHECK_PREMIUM_TOOL. Report all findings. User request: {query}",
+                            "tools": ["GET_APPLICANT_TOOL", "GET_LOANS_TOOL", "CHECK_PREMIUM_TOOL"]}',
             description => 'Task with explicit planning instructions'
         );
     END;
@@ -379,7 +377,7 @@ The task instruction guides how the agent plans. Let's modify it.
     ```sql
     <copy>
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('PLANNING_TEAM');
-    SELECT AI AGENT Tell me about applicant APP-001;
+    SELECT AI AGENT Tell me about applicant APPL-001;
     </copy>
     ```
 
@@ -391,7 +389,7 @@ The task instruction guides how the agent plans. Let's modify it.
 
     ```sql
     <copy>
-    SELECT 
+    SELECT
         tool_name,
         TO_CHAR(start_date, 'HH24:MI:SS.FF3') as called_at
     FROM USER_AI_AGENT_TOOL_HISTORY
@@ -402,7 +400,7 @@ The task instruction guides how the agent plans. Let's modify it.
 
     ![Task Information](./images/task_5_3.png " ")
 
-**Observe:** The agent followed the explicit plan: applicant first, then loans, then rate eligibility, in that order. This is how Jennifer's 10-15 minute prep becomes a 10-second agent call.
+**Observe:** Check that the calls for this request followed the instructed sequence: applicant first, then loan applications, then premium rate eligibility. The history is displayed newest first, so use timestamps to read the execution order. Response time can vary.
 
 ## Task 6: Understand Why Planning Matters
 
@@ -419,7 +417,7 @@ Query the complete execution sequence:
 
 ```sql
 <copy>
-SELECT 
+SELECT
     tool_name,
     TO_CHAR(start_date, 'HH24:MI:SS') as started,
     TO_CHAR(end_date, 'HH24:MI:SS') as ended
@@ -463,12 +461,12 @@ EXEC DBMS_CLOUD_AI_AGENT.DROP_TASK('STRUCTURED_TASK', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_AGENT('PLANNING_AGENT', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_APPLICANT_TOOL', TRUE);
 EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('GET_LOANS_TOOL', TRUE);
-EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_RATES_TOOL', TRUE);
-DROP TABLE demo_loans PURGE;
+EXEC DBMS_CLOUD_AI_AGENT.DROP_TOOL('CHECK_PREMIUM_TOOL', TRUE);
+DROP TABLE demo_applications PURGE;
 DROP TABLE demo_applicants PURGE;
 DROP FUNCTION get_applicant;
 DROP FUNCTION get_applicant_loans;
-DROP FUNCTION check_rate_eligibility;
+DROP FUNCTION check_premium_eligibility;
 </copy>
 ```
 
