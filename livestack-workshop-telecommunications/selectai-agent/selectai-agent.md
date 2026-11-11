@@ -32,6 +32,11 @@ Create the agent, task, and team, then check its answer and tool history. Instru
 
 Estimated Time: **15 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Telecommunication/Workshop/Scene-10-Telecom-Agent-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 Give Nina's assistant one SQL tool, then verify its answer and tool-call history.

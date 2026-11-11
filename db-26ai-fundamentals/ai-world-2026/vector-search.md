@@ -37,7 +37,7 @@ This lab assumes you have:
 
     ```sql
     <copy>
-    -- Load the all-MiniLM-L12-v2 embedding model, then check that it is there
+    -- Load the all-MiniLM-L12-v2 embedding model
     DECLARE
       l_uri VARCHAR2(400) := 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/eLddQappgBJ7jNi6Guz9m9LOtYe2u8LWY19GfgU8flFK4N9YgP4kTlrE9Px3pE12/n/adwc4pm/b/OML-Resources/o/all_MiniLM_L12_v2.onnx';
     BEGIN
@@ -57,19 +57,27 @@ This lab assumes you have:
                                   model_name => 'ALL_MINILM_L12_V2');
     END;
     /
+    </copy>
+    ```
+
+    Script Output shows that the PL/SQL procedure completed. What the block does:
+
+    * `DBMS_CLOUD.GET_OBJECT` copies the file `all_MiniLM_L12_v2.onnx` into the database's `DATA_PUMP_DIR` directory.
+    * `DBMS_VECTOR.LOAD_ONNX_MODEL` loads the file as a model named `ALL_MINILM_L12_V2`. SQL calls the model by that name.
+    * The first call drops any earlier copy of the model, so you can run the block again.
+
+2. Check that the model is there. Loaded models appear in the data dictionary view `USER_MINING_MODELS`, next to any other models in your schema. Clear the editor, paste the query, and click **Run Script**.
+
+    ```sql
+    <copy>
+    -- Check that the embedding model is loaded
     SELECT model_name, mining_function, algorithm
     FROM user_mining_models
     WHERE model_name = 'ALL_MINILM_L12_V2';
     </copy>
     ```
 
-    Script Output ends with one row: `ALL_MINILM_L12_V2`, with mining function `EMBEDDING` and algorithm `ONNX`. What the block does:
-
-    * `DBMS_CLOUD.GET_OBJECT` copies the file `all_MiniLM_L12_v2.onnx` into the database's `DATA_PUMP_DIR` directory.
-    * `DBMS_VECTOR.LOAD_ONNX_MODEL` loads the file as a model named `ALL_MINILM_L12_V2`. SQL calls the model by that name.
-    * The first call drops any earlier copy of the model, so you can run the block again.
-
-    The model now lives in the database, like a table or a view. Your notes never leave the database to become vectors.
+    Script Output shows one row: `ALL_MINILM_L12_V2`, with mining function `EMBEDDING` and algorithm `ONNX`. The model now lives in the database, like a table or a view. Your notes never leave the database to become vectors.
 
     ![Script Output shows the ALL_MINILM_L12_V2 model with mining function EMBEDDING and algorithm ONNX.](images/vector-search-01.png " ")
 
@@ -177,16 +185,25 @@ This lab assumes you have:
 
     Script Output shows 32 rows inserted, then the commit. In `table_id`, 3 and 4 are Blackjack 3 and Blackjack 4, the IDs from **Lab 1**. Skim a few notes. Most describe an ordinary Sunday: free meals, a jammed slot machine, a spilled drink.
 
-    > **Note:** The block starts by deleting earlier notes, so you can run it again. If you do, run step 3 again too.
 
-3. `VECTOR_EMBEDDING` runs the model on a piece of text and returns its vector. This `UPDATE` stores a vector for every note. The query then shows part of one vector, from the 20:15 note by the blackjack supervisor. Clear the editor, paste the block, and click **Run Script**.
+3. `VECTOR_EMBEDDING` runs the model on a piece of text and returns its vector. This `UPDATE` stores a vector for every note. Clear the editor, paste the block, and click **Run Script**.
 
     ```sql
     <copy>
-    -- Turn every note into a vector, then look at one of them
+    -- Turn every note into a vector
     UPDATE surveillance_notes
     SET note_vector = VECTOR_EMBEDDING(ALL_MINILM_L12_V2 USING note_text AS data);
     COMMIT;
+    </copy>
+    ```
+
+    Script Output shows 32 rows updated, then the commit.
+
+4. Now look at part of one vector, from the 20:15 note by the blackjack supervisor. Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- Look at the vector for one note
     SELECT TO_CHAR(noted_at, 'HH24:MI') AS noted,
            noted_by,
            VECTOR_DIMENSION_COUNT(note_vector) AS dimensions,
@@ -196,9 +213,9 @@ This lab assumes you have:
     </copy>
     ```
 
-    Script Output shows 32 rows updated, then one row. `DIMENSIONS` is 384. `VECTOR_START` shows the first few numbers in scientific notation, so `2.73836795E-002` means about 0.027.
+    You should see one row. `DIMENSIONS` is 384. `VECTOR_START` shows the first few numbers in scientific notation, so `2.738...E-002` means about 0.027. The last few digits can differ slightly on your database.
 
-    ![Script Output shows 32 rows updated, then the 20:15 note with 384 dimensions and the start of its vector.](images/vector-search-02.png " ")
+    ![Query Result shows the 20:15 note by the blackjack supervisor, with 384 dimensions and the start of its vector.](images/vector-search-02.png " ")
 
 ## Task 3: Search the notes by meaning
 
@@ -218,6 +235,10 @@ This lab assumes you have:
     Query Result shows no rows. The keyword search found nothing.
 
 2. Now Vera tries a **search by meaning**. She describes the first thing the graph found in **Lab 3**, in plain words: players passing chips to each other. `VECTOR_EMBEDDING` turns her question into a vector with the same model. `VECTOR_DISTANCE` measures how far each note's vector is from it.
+
+    The last argument, `COSINE`, says how to measure that distance. **Cosine distance** compares the directions two vectors point in, and ignores how long they are. A distance of 0 means they point the same way, and the number grows as they point further apart. Text embedding models like all-MiniLM-L12-v2 are trained so that meaning shows up in a vector's direction, which is why cosine is the usual choice for text, and the metric this model is meant to be used with.
+
+    `VECTOR_DISTANCE` can measure distance in other ways too. `EUCLIDEAN` measures the straight-line distance between two vectors, and `DOT` compares them with a dot product. `EUCLIDEAN_SQUARED`, `MANHATTAN`, `HAMMING` and `JACCARD` suit other models and other kinds of vectors, such as binary ones. The rule of thumb is to use the metric your embedding model was built for. If you leave the metric out, `VECTOR_DISTANCE` uses cosine.
 
     A smaller distance means a closer meaning, so the query sorts by distance and keeps the closest five. Clear the editor, paste the query, and click **Run Statement**.
 
@@ -309,20 +330,30 @@ This lab assumes you have:
       ORGANIZATION NEIGHBOR PARTITIONS
       DISTANCE COSINE
       WITH TARGET ACCURACY 95;
-    SELECT index_name, index_type, index_subtype, status
-    FROM user_indexes
-    WHERE index_name = 'SURVEILLANCE_NOTES_IVF';
     </copy>
     ```
 
-    Script Output ends with one row: `SURVEILLANCE_NOTES_IVF`, type `VECTOR`, subtype `NEIGHBOR_PARTITIONS_IVF`, status `VALID`. How the statement reads:
+    Script Output confirms that the index was created. How the statement reads:
 
     * `DROP INDEX IF EXISTS` removes the index from an earlier run, so you can run the block again.
     * `ORGANIZATION NEIGHBOR PARTITIONS` makes this an IVF index.
     * `DISTANCE COSINE` matches the searches. The database uses the index only when the distance metrics match.
     * `WITH TARGET ACCURACY 95` asks a search to find, on average, 95 percent of the rows an exact search would.
 
-2. Now run the search from Task 3 step 2 as an **approximate search**. The query changes in one place: `FETCH APPROX` instead of `FETCH`. That one word lets the database use the index. Clear the editor, paste the query, and click **Run Statement**.
+2. Check the new index in `USER_INDEXES`, the data dictionary view that lists every index in your schema. Clear the editor, paste the query, and click **Run Statement**.
+
+    ```sql
+    <copy>
+    -- Check the vector index
+    SELECT index_name, index_type, index_subtype, status
+    FROM user_indexes
+    WHERE index_name = 'SURVEILLANCE_NOTES_IVF';
+    </copy>
+    ```
+
+    You should see one row: `SURVEILLANCE_NOTES_IVF`, type `VECTOR`, subtype `NEIGHBOR_PARTITIONS_IVF`, status `VALID`.
+
+3. Now run the search from Task 3 step 2 as an **approximate search**. The query changes in one place: `FETCH APPROX` instead of `FETCH`. That one word lets the database use the index. Clear the editor, paste the query, and click **Run Statement**.
 
     ```sql
     <copy>
@@ -346,7 +377,6 @@ This lab assumes you have:
 
     Think about what you just did. The casino's players, play sessions, chip transfers and case files were already in this database from **Lab 1** to **Lab 3**. To add AI search, you didn't set up a new system or move any of that data. You loaded a model, stored the notes with one `VECTOR` column beside their text, and created one index. AI Vector Search is part of Oracle AI Database itself, so it extended what the casino already had.
 
-    Many teams instead add a separate vector database, a product built only to store and search vectors. Then the notes live in two places. Every new or changed note has to be copied across, or the two copies drift apart. The second system needs its own security rules, its own backups and its own plan for when a server fails. And a question like Vera's in Task 3 step 3 needs application code: search the vector database, look up each result's table in the casino database, then filter.
 
     Here, there's one copy of the data. A new note can be searched as soon as it's stored with its vector. Vera's question from Task 3 step 3, a search by meaning joined and filtered with business data, is one SQL query, and it runs the same way with `FETCH APPROX`. The vectors also get everything the database already gives the casino's other tables: the same security, the same backups, the same protection when a server fails, and the same room to grow. So any app that uses this database, old or new, can add a search by meaning with plain SQL. That includes an AI assistant that looks up the right notes before it answers a staff member's question.
 

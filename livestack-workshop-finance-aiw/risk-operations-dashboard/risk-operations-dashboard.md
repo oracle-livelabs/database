@@ -221,6 +221,6 @@ Next, use JSON Relational Duality to expose the same transaction data as JSON fo
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
+* **Author** - Kevin Lazarz, Linda Foinding
 * **Contributor** - Eugenio Galiano
 * **Last Updated By/Date** - Oracle Database Product Management, August 2026

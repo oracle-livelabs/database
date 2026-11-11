@@ -28,6 +28,6 @@ You can find the official installation download page available at [Get Oracle Tr
 
 **Author** 
 
-* Allen Hosler, Principal Product Manager, Database Applied AI
-
-**Last Updated Date** - May, 2026
+* Markus Kissling, Product Manager, Trusted Answer Search
+  
+**Last Updated Date** - October, 2026

@@ -8,6 +8,17 @@ You will follow those connections with SQL/PGQ, then explore the same relationsh
 
 ![Bob: manufacturing lab banner](images/bob.png)
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Manufacturing/Workshop/Scene-05-Trace-a-Production-Quality-Network-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Manufacturing/Workshop/Scene-06-Visualize-Production-Quality-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
+
 <details>
 <summary><strong>Key terms: property graph, vertex, edge, and SQL Property Graph Queries (SQL/PGQ)</strong></summary>
 

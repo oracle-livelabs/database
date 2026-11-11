@@ -36,6 +36,12 @@ In this lab, you check the available Select AI profile, ask a Life Sciences ques
 
 Estimated Time: **10 minutes**
 
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Life Sciences/Workshop/LS-4484-Scene-09-Select-AI.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step                | Life Sciences focus                                                                                |

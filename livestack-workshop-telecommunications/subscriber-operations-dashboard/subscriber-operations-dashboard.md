@@ -16,6 +16,11 @@ Build her dashboard query by combining service alerts, plan-description vectors,
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Telecommunication/Workshop/Scene-02-Converged-Dashboard-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 You are Jessica. Use the first dashboard row to explain which plan the support team should review first.

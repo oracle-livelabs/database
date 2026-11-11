@@ -32,6 +32,11 @@ The graph is a projection of synthetic student, course, advisor, and support-ser
 
 Estimated Time: **15 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Higher Education/Workshop/Scene-05-Direct-Support-Relationships-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step | Higher Education focus |
@@ -172,6 +177,11 @@ FETCH FIRST 25 ROWS ONLY;
 A shared course or service can help an advisor plan group support. It does not prove that two students know each other or need the same intervention.
 
 ## Task 5: Open Graph Studio
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Higher Education/Workshop/Scene-06-Graph-Studio-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 1. Open **Database Actions** and confirm that the signed-in account is `LLUSER`.
 2. Select **Development**, then **Graph Studio**.

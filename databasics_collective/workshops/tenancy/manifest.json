@@ -1,0 +1,53 @@
+{
+    "workshoptitle": "Databasics Collective: Oracle Autonomous Database Fundamentals",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Lab 1: Explore Oracle Autonomous Database",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../lab-1-explore-autonomous-database/lab-1-explore-autonomous-database.md"
+        },
+        {
+            "title": "Lab 2: Design a Relational Schema",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../lab-2-schemas-relationships-and-constraints/lab-2-schemas-relationships-and-constraints.md"
+        },
+        {
+            "title": "Lab 3: Create and Manage Data Structures",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../lab-3-create-and-manage-data-structures/lab-3-create-and-manage-data-structures.md"
+        },
+        {
+            "title": "Lab 4: Query and Change Data Safely",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../lab-4-query-and-change-data/lab-4-query-and-change-data.md"
+        },
+        {
+            "title": "Lab 5: Add Schema Objects and Indexes",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../lab-5-schema-objects-and-indexes/lab-5-schema-objects-and-indexes.md"
+        },
+        {
+            "title": "Lab 6: Check Your Understanding",
+            "description": "Review the main database concepts from the workshop.",
+            "type": "livelabs",
+            "filename": "../../lab-6-check-your-understanding/lab-6-check-your-understanding.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Template to link to Need Help lab at the end of workshop.",
+            "filename": "https://raw.githubusercontent.com/oracle-livelabs/common/main/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

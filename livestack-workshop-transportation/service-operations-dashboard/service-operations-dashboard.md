@@ -22,6 +22,11 @@ In this lab, you take Jessica's role as the DBA. You will write the converged SQ
 - Modify the query to investigate a different risk question and explain the change in results.
 
 Estimated Time: **10 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-02-Lab-01-Build-a-Converged-Operations-Query-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 ### Hands-on Scenario
 
 | Step                | Transportation focus                                                                                                  |

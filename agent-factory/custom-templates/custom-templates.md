@@ -20,7 +20,7 @@ By the end of this lab, you will be able to:
 
 - Access to the workshop Private Agent Factory instance using the credentials provided by your instructor.
 - Permission to create, edit, and publish your own custom flows.
-- The shared **AIW26-PAF-HOL6004-BOO6096** language model and the template's Alpha Vantage and CoinGecko MCP connections. The workshop administrator prepares network access and any required tool credentials.
+- An instructor-provided language model and working Alpha Vantage and CoinGecko MCP connections. The workshop administrator prepares network access and any required tool credentials.
 
 ## Task 1: Import and name the template
 
@@ -52,7 +52,7 @@ By the end of this lab, you will be able to:
     | Chat output | Returns the agent's response to the chat. |
     | Sticky notes | Explain the template; they do not execute. |
 
-3. In the **Agent** node, check **Select LLM to use**. The HOL template selects **AIW26-PAF-HOL6004-BOO6096 (openai_compatible)**. Keep that shared model selected. **Backup-AIW2026-PAF-HOL6004-BOO6096** is available if your instructor directs you to use it; names can differ in another instance.
+3. In the **Agent** node, check **Select LLM to use**. Select the model specified by your instructor. The imported template may select `xai.grok-4.3 (oci)`; available names and models depend on the instance.
 
 4. Inspect the MCP server nodes and their notes. The template supplies URLs directly in the nodes; the **MCP server** list can remain unselected when an inline URL is configured. Alpha Vantage and CoinGecko do not have to appear on the **MCP Servers** settings page for these inline connections to be used. Keep the supplied connections and credentials. If a model or tool connection is missing, ask the instructor to check it. Click **Save** in the toolbar if your changes enable it.
 
@@ -155,4 +155,4 @@ For a guided extension, choose **Optional Lab 5: Linux Monitoring** (15 minutes)
 - Allen Hosler, Principal Product Manager, Database Applied AI
 - Kumar G. Varun, Lead PM, Oracle Database Applied AI
 
-**Last Updated Date** - October 21, 2026
+**Last Updated Date** - November 11, 2026

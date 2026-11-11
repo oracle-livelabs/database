@@ -1,4 +1,4 @@
-# Lab 4: Make Wikimedia Search Trusted
+# Lab 1: Make Wikimedia Search Trusted
 
 ## Introduction
 
@@ -181,7 +181,7 @@ Before Maya fixes anything as an administrator, she captures the user signal fro
 
 This does not require Maya to rebuild the app or retrain a model. The portal captured real user feedback that administrators can review.
 
-In Lab 5, you will see this same feedback show up in the Admin app.
+In Lab 2, you will see this same feedback show up in the Admin app.
 
 ## Task 6: Create a Governed Draft
 
@@ -418,12 +418,12 @@ controls the targets, parameters, and production rollout.
 </copy>
 ```
 
-You may now **proceed to Lab 5**.
+You may now **proceed to Lab 2**.
 
 ## Acknowledgements
 
 **Authors**
 
-* Allen Hosler, Principal Product Manager, Database Applied AI
+* Markus Kissling, Product Manager, Trusted Answer Search
 
-**Last Updated Date** - May, 2026
+**Last Updated Date** - October, 2026
