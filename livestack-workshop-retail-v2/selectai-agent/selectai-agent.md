@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Nina Patel is a risk analyst at Seer Sporting Goods. She has used Select AI to ask one retail question at a time. That works for a quick answer, but her customer-review screen needs a repeatable assistant that can answer a request through a defined database capability.
+Nina Patel is a retail analyst at Seer Sporting Goods. She has used Select AI to ask one retail question at a time. That works for a quick answer, but her customer-review screen needs a repeatable assistant that can answer a request through a defined database capability.
 
 Jessica, the DBA, gives Nina's agent one approved tool: a SQL tool that uses the `GENAI` profile and the retail tables configured in the previous lab. The profile supplies the object scope, and the database user's privileges still apply when the generated SQL runs.
 
@@ -24,27 +24,32 @@ In this lab, you create the agent objects, connect the agent to that SQL tool, a
 - Confirm that the GENAI profile and Retail object list from Lab 7 are available.
 - Register the SQL tool and create Nina's agent, task, and team.
 - Run a retail question while retaining its conversation ID across worksheet requests.
-- Inspect the exact team's status and all recorded tool invocations.
+- Inspect the matching team execution’s status and all recorded tool calls.
 - Compare the answer with the direct revenue evidence from Lab 7.
 
 Estimated Time: **15 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Retail/Workshop/Retail-Scene-10-Select-AI-Agent.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Hands-on Scenario
 
 | Step | Retail focus |
 | --- | --- |
-| Business Problem | Nina needs an assistant whose retail answers can support a customer-review screen. |
-| Technical Challenge | The request must use an approved database capability and leave inspectable execution evidence. |
+| Business Problem | Nina needs an assistant that answers product and order questions for a review screen. |
+| Technical Challenge | The assistant must use the approved SQL tool and record its activity for review. |
 | Persona Focus | You follow Nina and Jessica as they turn a Select AI question into a defined assistant. |
-| What You Will See | Agent setup, a team answer, and history correlated with the exact request. |
-| Database Capability | Select AI Agent, DBMS_CLOUD_AI_AGENT, AI profiles, and a built-in SQL tool. |
+| What You Will See | Agent setup, an answer, and execution history matched to the request. |
+| Database Capability | Select AI Agent, DBMS\_CLOUD\_AI\_AGENT, AI profiles, and a built-in SQL tool. |
 | Outcome | The application can call a retail assistant whose result and tool activity Nina can review. |
 
-Persona focus: You are Nina Patel, the risk analyst, working with Jessica to make the assistant's database work visible.
+Persona focus: You are Nina Patel, the retail analyst, working with Jessica to make the assistant's database work visible.
 
 > **Prerequisite:** Complete [Lab 7: Ask Retail Questions with Select AI](?lab=selectai). This lab uses its GENAI profile, enforced four-table object list, and direct revenue reference query.
 
-> **SQL Worksheet reminder:** Use [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet). Run each block separately. Open the full CLOB value when an answer is longer than the result cell.
+> **SQL Worksheet reminder:** Use [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet). Run each block separately. For PL/SQL blocks ending in /, select the complete block and use Run Script. Open the full CLOB value when an answer is longer than the result cell.
 
 ## Task 1: Check the profile and table access
 
@@ -79,7 +84,7 @@ The tool will use the existing profile rather than create another provider conne
 
     ![SQL Worksheet showing the query and result for Task 1: Check the profile and table access, SQL block 2](images/sql-lab-8-02.jpg)
 
-    **Expected output:** The object list contains PRODUCTS, ORDERS, ORDER_ITEMS, and CUSTOMERS in the learner schema. Lab 7 sets `object_list_mode` to `all` and `enforce_object_list` to `true`. These settings constrain SQL generation and object use; they do not grant database privileges.
+    **Expected output:** The object list contains PRODUCTS, ORDERS, ORDER\_ITEMS, and CUSTOMERS in the learner schema. Lab 7 sets `object_list_mode` to `all` and `enforce_object_list` to `true`. These settings constrain SQL generation and object use; they do not grant database privileges.
 
 3. Check for the exact names this lab will create.
 
@@ -127,7 +132,7 @@ The tool will use the existing profile rather than create another provider conne
 
 ## Task 2: Register the SQL tool
 
-Jessica exposes one named SQL capability. It uses GENAI and the four retail tables configured in Lab 7. Nina will set the model once for the profile, then register the tool against that profile.
+Jessica registers one named SQL capability that uses `GENAI` and the four retail tables configured in Lab 7. Nina will set the model once for the profile, then register the tool against that profile.
 
 1. Set the requested model and create the tool.
 
@@ -168,7 +173,7 @@ Jessica exposes one named SQL capability. It uses GENAI and the four retail tabl
 
     ![SQL Worksheet showing the query and result for Task 2: Register the SQL tool, SQL block 6](images/sql-lab-8-06.jpg)
 
-    **Expected output:** One enabled NINA_RETAIL_SQL_TOOL entry with the Retail description.
+    **Expected output:** One enabled NINA\_RETAIL\_SQL\_TOOL entry with the Retail description.
 
 ## Task 3: Create Nina's agent, task, and team
 
@@ -210,7 +215,7 @@ The tool needs a role and a defined task before an application can use the assis
 
     ![SQL Worksheet showing the query and result for Task 3: Create Nina's agent, task, and team, SQL block 8](images/sql-lab-8-08.jpg)
 
-    **Expected output:** The task is created with NINA_RETAIL_SQL_TOOL as its tool. The `{query}` placeholder receives Nina's question when the team runs.
+    **Expected output:** The task is created with NINA\_RETAIL\_SQL\_TOOL as its tool. The `{query}` placeholder receives Nina's question when the team runs.
 
     The instructions request one tool call and prohibit changes to records. Those instructions state the intended behavior. Task 5 will show the actual invocation count; do not assume the requested count proves what happened.
 
@@ -231,7 +236,7 @@ The tool needs a role and a defined task before an application can use the assis
 
     ![SQL Worksheet showing the query and result for Task 3: Create Nina's agent, task, and team, SQL block 9](images/sql-lab-8-09.jpg)
 
-    **Expected output:** The team is created. NINA_RETAIL_TEAM connects NINA_RETAIL_AGENT with NINA_RETAIL_TASK and is the unit called by the application.
+    **Expected output:** The team is created. NINA\_RETAIL\_TEAM connects NINA\_RETAIL\_AGENT with NINA\_RETAIL\_TASK and is the unit called by the application.
 
 ## Task 4: Run a retail question
 
@@ -249,7 +254,7 @@ Nina needs to recognize her request later in the history. A SQL Worksheet can is
 
     ![SQL Worksheet showing the query and result for Task 4: Run a retail question, SQL block 10](images/sql-lab-8-10.jpg)
 
-    **Expected output:** NINA_RETAIL_REQUEST is created with one row. Keep this row while reviewing the request; do not add additional IDs to the table.
+    **Expected output:** NINA\_RETAIL\_REQUEST is created with one row. Keep this row while reviewing the request; do not add additional IDs to the table.
 
 2. Run the team with the saved ID and the product-revenue question.
 
@@ -271,7 +276,7 @@ Nina needs to recognize her request later in the history. A SQL Worksheet can is
 
     **Expected output:** A CLOB answer containing five distinct product IDs, their names and categories, total revenue, and units sold. The provider determines the wording, so inspect the facts rather than expecting an identical sentence.
 
-    The prompt makes product identity and calculation explicit: group by PRODUCT_ID, name, and category; sum historical LINE_TOTAL and QUANTITY; include all orders. Grouping only by a repeated product name can merge different products and produce a different answer. This is why the refined prompt asks for IDs and an explicit tie-breaker. Compare the answer with [Lab 7 Task 4's direct revenue query](?lab=selectai#Task4:Runthequestioninthedatabase). The supplied data ranks SummitPulse GPS Watch first at **443,998.89** revenue and **111** units. Compare product identities as well as labels because some names repeat.
+    The prompt makes product identity and calculation explicit: group by PRODUCT\_ID, name, and category; sum historical LINE\_TOTAL and QUANTITY; include all orders. Grouping only by a repeated product name can merge different products and produce a different answer. This is why the refined prompt asks for IDs and an explicit tie-breaker. Compare the answer with [Lab 7 Task 4's direct revenue query](?lab=selectai#Task4:Runthequestioninthedatabase). The supplied data ranks SummitPulse GPS Watch first at **443,998.89** revenue and **111** units. Compare product identities as well as labels because some names repeat.
 
 3. Keep the answer for the history review.
 
@@ -305,11 +310,11 @@ Nina needs to connect the answer to the work the team performed. Querying the mo
 
     | Column | Successful-run evidence |
     | --- | --- |
-    | CONVERSATION_ID | Matches the single saved request row |
-    | TEAM_NAME | NINA_RETAIL_TEAM |
-    | TEAM_EXEC_ID | Identifies this recorded team run |
+    | CONVERSATION\_ID | Matches the single saved request row |
+    | TEAM\_NAME | NINA\_RETAIL\_TEAM |
+    | TEAM\_EXEC\_ID | Identifies this recorded team run |
     | STATE | SUCCEEDED |
-    | START_DATE and END_DATE | Both populated for the completed run |
+    | START\_DATE and END\_DATE | Both populated for the completed run |
 
     A failed or incomplete run must be investigated before using its answer. No rows means this query has not found the matching team execution. The task's internal conversation can differ from the caller's ID; use the direct team-history match shown here.
 
@@ -339,7 +344,7 @@ Nina needs to connect the answer to the work the team performed. Querying the mo
 
     ![SQL Worksheet showing the query and result for Task 5: Inspect what the agent did, SQL block 13](images/sql-lab-8-13.jpg)
 
-    **Expected output:** The tool history identifies NINA_RETAIL_SQL_TOOL, NINA_RETAIL_AGENT, and NINA_RETAIL_TASK for the matching team execution. Each completed call has an end timestamp. Review all returned rows, including any repeated or unexpected calls.
+    **Expected output:** The tool history identifies NINA\_RETAIL\_SQL\_TOOL, NINA\_RETAIL\_AGENT, and NINA\_RETAIL\_TASK for the matching team execution. Each completed call has an end timestamp. Review all returned rows, including any repeated or unexpected calls.
 
 3. Count the calls, including the case where none were recorded.
 
@@ -373,10 +378,10 @@ Nina needs to connect the answer to the work the team performed. Querying the mo
 
     | Column | What to check |
     | --- | --- |
-    | TOTAL_INVOCATIONS | Actual calls for each matching team execution, including zero |
-    | COMPLETED_INVOCATIONS | Calls with a populated end timestamp |
-    | APPROVED_TOOL_INVOCATIONS | Calls to NINA_RETAIL_SQL_TOOL |
-    | OTHER_TOOL_INVOCATIONS | Zero for this one-tool task |
+    | TOTAL\_INVOCATIONS | Actual calls for each matching team execution, including zero |
+    | COMPLETED\_INVOCATIONS | Calls with a populated end timestamp |
+    | APPROVED\_TOOL\_INVOCATIONS | Calls to NINA\_RETAIL\_SQL\_TOOL |
+    | OTHER\_TOOL\_INVOCATIONS | Zero for this one-tool task |
 
     For the intended single-call flow, the first three counts are **1**, and other-tool invocations are **0**. Use the actual values your run records. More than one call means the agent did not follow the single-call instruction exactly; zero calls does not prove the answer used database evidence. An end timestamp records completion, so also check the team state and the answer's facts rather than treating a timestamp alone as success.
 
@@ -390,7 +395,7 @@ In Lab 7, Nina used Select AI to turn individual questions into SQL. Here she de
 
 The database still supplies the product and order facts. The profile determines the tool's configured object scope, database privileges control access, and the history records the activity. Instructions guide the agent; the recorded run and the reference query give the team evidence to assess the result.
 
-This completes the team's retail investigation. Jessica connected the data, Thomas exposed the order document, Gilly found relevant products, Bob followed creator relationships, Moon compared fulfillment options, Otto added model scores, and Nina made the final questions and assistant activity reviewable.
+The team has reviewed products from several perspectives: Jessica combined the data, Thomas presented orders as JSON, Gilly found related products, Bob traced creator relationships, Moon compared fulfillment options, Otto added model scores, and Nina checked AI-assisted answers and tool activity.
 
 ## Appendix: Reset the workshop objects
 
@@ -449,4 +454,5 @@ Continue to the [Final Quiz](?lab=final-quiz). For API details, see Oracle's [Se
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

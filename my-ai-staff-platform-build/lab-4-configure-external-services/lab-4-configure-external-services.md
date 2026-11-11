@@ -173,9 +173,44 @@ In this lab, you will:
     </copy>
     ```
 
-    The script prints an authorization URL. Open it in your local browser, sign in with the test user, and approve access.
+    Keep the terminal open while you complete the browser flow. The script
+    prints an authorization URL and waits for the redirect URL. Python support
+    warnings may appear before the URL; continue if the authorization URL is
+    displayed. Copy the complete authorization URL and open it in **a browser on
+    your computer**.
 
-    Google redirects the browser to `http://localhost:8765`. The page does not need to load. Copy the complete address-bar URL and paste it into the script prompt on the compute instance.
+    ![Copy the Google OAuth authorization URL printed by the setup script](./images/32-google-oauth-copy-authorization-url.png "Copy the Google OAuth authorization URL printed by the setup script")
+
+    Select the same workshop Gmail account that you added as a test user in
+    step 18.
+
+    ![Select the Google OAuth test account](./images/33-google-oauth-select-test-account.png "Select the Google OAuth test account")
+
+    Because the OAuth app is in Testing mode, Google may display an
+    unverified-app warning. Confirm that the page identifies your
+    `my-ai-staff` app, then select **Continue**.
+
+    ![Continue to the unverified Google OAuth test app](./images/34-google-oauth-continue-unverified-app.png "Continue to the unverified Google OAuth test app")
+
+    Review the requested Drive, Calendar, and Gmail permissions. Keep all
+    requested permissions selected and select **Continue**.
+
+    ![Approve the requested Google Drive Calendar and Gmail permissions](./images/35-google-oauth-approve-permissions.png "Approve the requested Google Drive Calendar and Gmail permissions")
+
+    Google redirects the browser to `http://localhost:8765`. The page is
+    expected to report that it cannot be reached because the callback listener
+    is running on the compute instance, not on your computer. Do not reload the
+    page. Select and copy the complete address-bar URL, including all query
+    parameters.
+
+    ![Copy the complete localhost redirect URL from the browser address bar](./images/36-google-oauth-copy-localhost-redirect.png "Copy the complete localhost redirect URL from the browser address bar")
+
+    Return to the compute-instance terminal, paste the complete URL at the
+    `Paste the redirect URL or authorization code` prompt, and press `Enter`.
+    The script reports the connected email address, calendar count, and saved
+    refresh-token location.
+
+    ![Paste the redirect URL and confirm successful Google OAuth setup](./images/37-google-oauth-paste-redirect-url.png "Paste the redirect URL and confirm successful Google OAuth setup")
 
 26. Confirm that the script reports the connected email address and the number of available calendars. Verify that it wrote the refresh token without displaying the token:
 

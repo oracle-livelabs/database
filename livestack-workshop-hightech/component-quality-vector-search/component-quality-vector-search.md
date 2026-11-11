@@ -1,26 +1,8 @@
 # Search Components by Meaning
 
-<!-- markdownlint-configure-file
-{
-  "MD013": {
-    "code_blocks": false,
-    "tables": false
-  },
-  "MD033": {
-    "allowed_elements": [
-      "details",
-      "summary",
-      "strong"
-    ]
-  }
-}
--->
-
 ## Introduction
 
-Gilly Bourne, Seer High-Tech’s AI engineer, needs to answer **which customer
-sites may be affected by a power-module leakage-current concern?** The
-inspection wording may differ from the component descriptions.
+Gilly Bourne, Seer High-Tech’s AI engineer, needs to answer **which customer sites may be affected by a power-module leakage-current concern?** The inspection wording may differ from the component descriptions.
 
 Help Gilly turn matches by meaning into a customer follow-up list.
 
@@ -54,6 +36,11 @@ Help Gilly turn matches by meaning into a customer follow-up list.
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/High-Tech/Workshop/Scene-04-Lab-3-Search-High-Tech-Components-by-Meaning.mp4">
+  Your browser does not support the video tag.
+</video>
+
 > **SQL Worksheet reminder:** See
 > [Getting Started Task 2: Open SQL Worksheet][link-1] for the steps to paste
 > and run SQL.
@@ -86,8 +73,7 @@ Jessica has loaded an embedding model. Check that Gilly can use it.
 
 ## Task 2: Create a component vector
 
-Each component description is short enough for one vector. Gilly combines its
-name, category and subcategory.
+Each component description is short enough for one vector. Gilly combines its name, category and subcategory.
 
 1. Review the text Gilly will embed:
 
@@ -177,14 +163,11 @@ Gilly tests whether the vectors find components related to the leakage-current c
 
 2. Review the ranked components.
 
-    Which power control or gate driver modules rank closest to the concern? Note
-    their distances before Gilly sends them for inspection; similarity alone
-    does not confirm a defect.
+    Which power control or gate driver modules rank closest to the concern? Note their distances before Gilly sends them for inspection; similarity alone does not confirm a defect.
 
 3. Show the result as a similarity score:
 
-    For the application display, Gilly uses `1 - cosine distance`: a higher
-    score means a closer match. The query rounds it to four decimal places.
+    For the application display, Gilly uses `1 - cosine distance`: a higher score means a closer match. The query rounds it to four decimal places.
 
     ```sql
     <copy>
@@ -204,8 +187,7 @@ Gilly tests whether the vectors find components related to the leakage-current c
 
 ## Task 4: Find customer sites affected by a component concern
 
-Gilly joins component matches to customer orders, limiting follow-up to planned,
-released, and in-production orders.
+Gilly joins component matches to customer orders, limiting follow-up to planned, released, and in-production orders.
 
 1. Run the following query for the concern
     `power control module with stable MOSFET switching and low leakage current`:
@@ -253,9 +235,7 @@ released, and in-production orders.
 
 2. Identify customer sites for Gilly’s follow-up list.
 
-    For each matched component, check the production order, status, date, and
-    customer contact. The vectors find components; the joins supply the orders
-    and contacts.
+    For each matched component, check the production order, status, date, and customer contact. The vectors find components; the joins supply the orders and contacts.
 
 ## Acknowledgements
 

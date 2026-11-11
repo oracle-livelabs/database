@@ -25,7 +25,7 @@ Watch the video for a quick walk through of the Explore Raft Replication Topolog
 ### Objectives
 In this lab, you will:
 * Explore Raft Replication environment.
-* Testing the use-cases
+* Test the use-cases
 
 ### Prerequisites
 This lab assumes you have:
@@ -39,9 +39,9 @@ This lab assumes you have:
 
 ## Task 1: Check for containers in your VM
 
-1. To open a new terminal (if not opened it already), Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal.
+1. To open a new terminal (if not opened already), Click on Activities (shown on top left corner) >> Terminal icon (shown on the bottom of the screen which is next to Chrome icon) to Launch the Terminal.
 
-    From podman container Details, verify all containers are running:
+    From podman container details, verify all containers are running:
     
     ```
     <copy>
@@ -65,7 +65,7 @@ This lab assumes you have:
 
    ![<terminal_gsm1_tab>](./images/terminal_gsm1_tab.png " ")
 
-   Similarly, open one more tab (from top left corner of the Terminal, click on the "File" and choose first option "New Tab") and switched to **appclient** container.
+   Similarly, open one more tab (from top left corner of the Terminal, click on the "File" and choose first option "New Tab") and switch to **appclient** container.
 
     ```
     <copy>
@@ -98,7 +98,7 @@ For more details check [Raft Replication Configuration and Management] (https://
 
     ![<config shard>](./images/t2-2-config-shard-1.png " ")
 
-3. Lists all of the database shards and the chunks that they contain.
+2. List all of the database shards and the chunks that they contain.
 
     ```
     <copy>
@@ -108,7 +108,7 @@ For more details check [Raft Replication Configuration and Management] (https://
 
     ![<configuration_of_chunks>](./images/t2-3-config-chunks-1.png " ")
 
-4. Check the status of replication units and chunk distribution across all RUs.
+3. Check the status of replication units and chunk distribution across all RUs.
 
     ```
     <copy>
@@ -118,7 +118,7 @@ For more details check [Raft Replication Configuration and Management] (https://
 
     ![<status_RU_chunks>](./images/t2-4-status-ru-chunks.png " ")
 
-5. Display the replication type.
+4. Display the replication type.
 
     ```
     <copy>
@@ -131,7 +131,7 @@ For more details check [Raft Replication Configuration and Management] (https://
 
 ## Task 3: Changing the Replication Unit Leader
 
-Using SWITCHOVER RU, you can change which replica is the leader for the specified replication unit.
+Using "switchover ru", you can change which replica is the leader for the specified replication unit.
 
 The -shard option makes the replication unit member on the specified shard database the new leader of the given RU. 
 

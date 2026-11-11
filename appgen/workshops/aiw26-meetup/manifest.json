@@ -1,0 +1,12 @@
+{
+  "workshoptitle": "Welcome to AppGen: Meet Oracle's AI App Development Platform [MET6099]",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Meetup Instructions and Feedback",
+      "description": "Start AppGen, choose one or more short activities, and provide structured feedback within a 15–20 minute walk-up visit.",
+      "type": "livelabs",
+      "filename": "../../appgen.md"
+    }
+  ]
+}

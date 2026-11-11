@@ -78,6 +78,11 @@ Graph Studio to explore and explain them.
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/Workshop/Scene-05-Lab-04-Partner-Handoffs-SQL-PGQ-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Hands-on Scenario
 
 | Step | State and local government focus |
@@ -448,6 +453,11 @@ coordinate a response.
     ![SQL Worksheet result showing partners sharing a public-service program](images/partners-sharing-public-service-program.png " ")
 
 ## Task 5: Open Graph Studio
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/Workshop/Scene-06-Lab-04-Partner-Coordination-Graph-Studio-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 The SQL/PGQ tasks returned repeatable rows. Now open Graph Studio to explore the
 same `INFLUENCER_NETWORK` relationships as an interactive map. SQL gives a

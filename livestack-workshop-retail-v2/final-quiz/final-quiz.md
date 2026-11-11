@@ -7,7 +7,7 @@ badge: images/badge.png
 
 ## Introduction
 
-Use this scored quiz to check whether you can connect Seer Sporting Goods' retail decisions to the database evidence explored in Labs 1–8. Each question covers one part of the team's journey, from Jessica's connected query to Nina's inspectable assistant.
+Use this scored quiz to check how Seer Sporting Goods answers retail questions with the database capabilities and results covered in Labs 1–8. Each question covers one team member’s work, from Jessica’s dashboard query to Nina’s assistant.
 
 ### Objectives
 
@@ -16,6 +16,11 @@ Use this scored quiz to check whether you can connect Seer Sporting Goods' retai
 - Earn the workshop badge by answering at least six of the eight questions correctly.
 
 Estimated Time: **5 minutes**
+
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Retail/Workshop/Retail-Scene-11-Closing.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Task 1: Answer the quiz questions
 
@@ -79,11 +84,12 @@ Estimated Time: **5 minutes**
     > Match the captured conversation and team execution to its completed status and actual tool activity, then inspect the returned facts and invocation count. Instructions describe the intended behavior; execution history shows what happened. Select AI success alone does not prove that the agent ran its tool.
     ```
 
-2. Review the explanations. A score of **75% or higher**—at least **six of eight** correct—unlocks the Retail Workshop completion badge.
+2. Review the explanations. A score of **75% or higher**, meaning **at least six of eight** correct answers, unlocks the Retail Workshop completion badge.
 
-Jessica and the team have followed one connected investigation: product signals, order documents, semantic matches, creator relationships, fulfillment options, model scores, natural-language questions, and an assistant whose work can be inspected. Use the evidence behind each result when deciding what the retail operation should do next.
+Jessica and the team have followed one connected investigation: product signals, order documents, semantic matches, creator relationships, fulfillment options, model scores, natural-language questions, and an assistant whose work can be inspected. Check the source records, calculations, and limitations of each result before deciding what the retail operation should do next.
 
 ## Acknowledgements
 
 * **Author** - Linda Foinding, Principal Database Product Manager
-* **Last Updated By/Date** - Oracle Database Product Management, October 2026
+* **Contributor** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

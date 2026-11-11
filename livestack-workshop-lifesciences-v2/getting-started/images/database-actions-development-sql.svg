@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="630" viewBox="0 0 1120 630" role="img" aria-labelledby="title desc">
+  <title id="title">Database Actions Development SQL menu</title>
+  <desc id="desc">Database Actions tools page with Development selected and SQL highlighted in the left menu.</desc>
+  <rect width="1120" height="630" fill="#f4f2f0"/>
+  <rect x="0" y="14" width="1120" height="600" rx="7" fill="#fff"/>
+  <rect x="0" y="14" width="1120" height="10" rx="7" fill="#594b43"/>
+  <rect x="0" y="24" width="1120" height="32" fill="#fff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#555">
+    <text x="8" y="39">Pinned &amp; Recently Visited</text>
+    <text x="207" y="39" fill="#111">Development</text>
+    <text x="323" y="39">Data Studio</text>
+    <text x="428" y="39">Downloads</text>
+    <text x="531" y="39">Related Services</text>
+    <text x="668" y="39">Administration</text>
+    <text x="801" y="39">Monitoring</text>
+  </g>
+  <line x1="0" y1="56" x2="1106" y2="56" stroke="#dedede"/>
+  <rect x="198" y="15" width="113" height="39" fill="none" stroke="#e60000" stroke-width="5"/>
+  <path d="M256 111l0-56" stroke="#e60000" stroke-width="6" stroke-linecap="round"/>
+  <path d="M256 55l-13 22h26z" fill="#e60000"/>
+  <text x="329" y="100" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700" fill="#e60000">1</text>
+
+  <rect x="8" y="58" width="183" height="552" fill="#fafafa"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#111">
+    <rect x="8" y="58" width="183" height="47" fill="#fff"/>
+    <path d="M31 77h13l7 7v17h-20z" fill="none" stroke="#111"/>
+    <path d="M44 77v8h8" fill="none" stroke="#111"/>
+    <text x="58" y="91">SQL</text>
+
+    <rect x="8" y="105" width="183" height="46" fill="#f4f4f4"/>
+    <path d="M32 125h16v14h-16z" fill="none" stroke="#111"/>
+    <path d="M35 122v20m10-20v20" stroke="#111"/>
+    <text x="58" y="136">Data Modeler</text>
+
+    <rect x="8" y="151" width="183" height="47" fill="#fff"/>
+    <path d="M32 177l15-15m-15 0l15 15" stroke="#111" stroke-width="1.5"/>
+    <text x="58" y="181">REST</text>
+
+    <rect x="8" y="198" width="183" height="47" fill="#f4f4f4"/>
+    <ellipse cx="38" cy="218" rx="7" ry="4" fill="none" stroke="#111"/>
+    <path d="M31 218v13c0 2.5 14 2.5 14 0v-13" fill="none" stroke="#111"/>
+    <text x="58" y="228">Liquibase</text>
+
+    <rect x="8" y="245" width="183" height="47" fill="#fff"/>
+    <text x="31" y="275" font-family="Menlo, Consolas, monospace" font-size="17">{ }</text>
+    <text x="58" y="275">JSON</text>
+
+    <rect x="8" y="292" width="183" height="47" fill="#f4f4f4"/>
+    <rect x="32" y="315" width="4" height="12" fill="#111"/>
+    <rect x="38" y="309" width="4" height="18" fill="#111"/>
+    <rect x="44" y="318" width="4" height="9" fill="#111"/>
+    <text x="58" y="321">Charts</text>
+
+    <rect x="8" y="339" width="183" height="47" fill="#fff"/>
+    <text x="58" y="367">Scheduling</text>
+    <rect x="31" y="354" width="17" height="13" rx="2" fill="none" stroke="#111"/>
+    <line x1="31" y1="358" x2="48" y2="358" stroke="#111"/>
+  </g>
+  <rect x="4" y="52" width="188" height="58" fill="none" stroke="#e60000" stroke-width="5"/>
+  <text x="105" y="109" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700" fill="#e60000">2</text>
+
+  <text x="209" y="97" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#111">SQL</text>
+  <text x="209" y="124" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#111">The SQL worksheet is where most of your work will be performed. Running SQL queries and scripts,</text>
+  <text x="209" y="143" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#111">creating and browsing objects, loading data, exporting data to CSV or JSON, and so much more.</text>
+  <rect x="209" y="153" width="576" height="300" fill="#f0f0f0" stroke="#e0e0e0"/>
+  <rect x="229" y="166" width="533" height="142" fill="#fff"/>
+  <rect x="229" y="307" width="533" height="116" fill="#fff"/>
+  <g font-family="Menlo, Consolas, monospace" font-size="10">
+    <text x="253" y="187" fill="#0072bc">1</text><text x="274" y="187" fill="#0000cc">drop</text><text x="303" y="187"> table demo_emps;</text>
+    <text x="253" y="204" fill="#0072bc">2</text><text x="274" y="204" fill="#0000cc">drop</text><text x="303" y="204"> materialized view demo_emps_mv;</text>
+    <text x="253" y="221" fill="#0072bc">3</text>
+    <text x="253" y="238" fill="#0072bc">4</text><text x="274" y="238" fill="#0000cc">create table</text><text x="342" y="238"> demo_emps (</text>
+    <text x="253" y="255" fill="#0072bc">5</text><text x="294" y="255">id number primary key,</text>
+    <text x="253" y="272" fill="#0072bc">6</text><text x="294" y="272">name varchar2(255),</text>
+    <text x="253" y="289" fill="#0072bc">7</text><text x="294" y="289">sal number</text>
+  </g>
+  <text x="209" y="484" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#111">Documentation</text>
+  <text x="209" y="518" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#006c99">Loading Data</text>
+  <rect x="922" y="537" width="115" height="38" rx="3" fill="#fff" stroke="#777"/>
+  <text x="936" y="561" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#111">Walk through</text>
+  <rect x="1041" y="537" width="64" height="38" rx="3" fill="#6b625e"/>
+  <text x="1056" y="561" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#fff">Open</text>
+  <path d="M1081 79h13m-6-6v13" stroke="#111"/>
+</svg>

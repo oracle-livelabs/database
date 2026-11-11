@@ -223,7 +223,7 @@ If you skipped the optional AutoML task, use this setting as the model selected 
 
 ## Task 4: Score new product activity in SQL
 
-Otto now receives a new activity snapshot for the next reporting period. He stores it in a separate scoring table. The model was trained with historical rows from `OML_DEMAND_TRAINING_V`; it will now score rows it did not see during training.
+Otto needs to score activity for the next reporting period. The workshop does not provide new production observations, so this exercise creates a simulated next-period snapshot from the first 12 rows of `OML_DEMAND_TRAINING_V`. The query adds fixed increments to those historical values to demonstrate scoring; these rows are not new production observations. The model scores them from a separate table.
 
 1. Create the scoring table and add the new activity snapshot:
 
@@ -299,7 +299,7 @@ Otto now receives a new activity snapshot for the next reporting period. He stor
     </copy>
     ```
 
-    This creates a small next-period snapshot from the workshop data. 
+    Otto's exercise snapshot copies the first 12 training rows and adds fixed increments to activity and sales values. These simulated values demonstrate scoring; they are not newly observed business data.
     >Note: The table has the model inputs, but it does not contain `SURGE_LABEL`. That label belongs to the historical training data and must not be passed to the model as an input.
 
 2. Run the scoring query:
@@ -368,6 +368,6 @@ Oracle AI Database makes the model part of the dashboard query. A business user 
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="title desc">
+  <title id="title">WeMakeDevs Discord bot architecture on OCI</title>
+  <desc id="desc">Discord interactions travel through Nginx to the Node.js bot on OCI Compute. The bot connects outward to Discord Gateway, OpenRouter, and Autonomous Database. An administrator connects by restricted SSH, and Compute downloads the bot ZIP from Object Storage.</desc>
+  <defs>
+    <marker id="redArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M1 1 L11 6 L1 11 Z" fill="#C74634"/></marker>
+    <marker id="darkArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M1 1 L11 6 L1 11 Z" fill="#5B5653"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#292524}
+      .heading{font-size:34px;font-weight:700}
+      .subtitle{font-size:18px;fill:#625b57}
+      .zone-title{font-size:22px;font-weight:700;fill:#9E3528}
+      .card-title{font-size:23px;font-weight:700}
+      .label{font-size:18px}
+      .small{font-size:16px;fill:#625b57}
+      .zone{fill:#FBF4F2;stroke:#C74634;stroke-width:2.5}
+      .card{fill:#fff;stroke:#d7cfca;stroke-width:2}
+      .accent{fill:#C74634}
+      .red-line{fill:none;stroke:#C74634;stroke-width:3.5;marker-end:url(#redArrow);stroke-linecap:round;stroke-linejoin:round}
+      .dark-line{fill:none;stroke:#5B5653;stroke-width:3;marker-end:url(#darkArrow);stroke-linecap:round;stroke-linejoin:round}
+      .tag{fill:#fff;stroke:#e2d9d4;stroke-width:1}
+    </style>
+  </defs>
+  <rect width="1600" height="920" fill="#FAF8F6"/>
+  <text x="60" y="58" class="heading">Discord learning bot on Oracle Cloud Infrastructure</text>
+  <text x="60" y="91" class="subtitle">Inbound interactions, local application traffic, and outbound service connections follow separate paths.</text>
+
+  <!-- Discord entry point -->
+  <rect x="600" y="120" width="420" height="125" rx="18" class="card"/>
+  <rect x="600" y="120" width="10" height="125" rx="5" class="accent"/>
+  <text x="810" y="166" text-anchor="middle" class="card-title">Discord</text>
+  <text x="810" y="198" text-anchor="middle" class="label">Interactions endpoint and Gateway</text>
+  <text x="810" y="225" text-anchor="middle" class="small">HTTPS interactions · outbound Gateway connection</text>
+
+  <!-- OCI Compute boundary -->
+  <rect x="430" y="285" width="700" height="535" rx="22" class="zone"/>
+  <text x="465" y="326" class="zone-title">OCI Compute · public subnet</text>
+  <text x="465" y="353" class="small">Oracle Linux · reserved public IPv4 · Nginx and bot on one host</text>
+
+  <rect x="490" y="390" width="230" height="145" rx="16" class="card"/>
+  <rect x="490" y="390" width="8" height="145" rx="4" class="accent"/>
+  <text x="605" y="433" text-anchor="middle" class="card-title">Nginx</text>
+  <text x="605" y="466" text-anchor="middle" class="label">HTTPS · TCP 443</text>
+  <text x="605" y="499" text-anchor="middle" class="small">Certbot IP certificate</text>
+
+  <rect x="850" y="390" width="230" height="145" rx="16" class="card"/>
+  <rect x="850" y="390" width="8" height="145" rx="4" class="accent"/>
+  <text x="965" y="433" text-anchor="middle" class="card-title">Node.js bot</text>
+  <text x="965" y="466" text-anchor="middle" class="label">systemd service</text>
+  <text x="965" y="499" text-anchor="middle" class="small">Discord commands and agents</text>
+
+  <!-- Straight local path -->
+  <path d="M720 462 H840" class="red-line"/>
+  <rect x="725" y="421" width="110" height="29" rx="8" class="tag"/>
+  <text x="780" y="441" text-anchor="middle" class="small">HTTP 3000</text>
+  <text x="785" y="509" text-anchor="middle" class="small">localhost</text>
+
+  <!-- Simple network policy strip -->
+  <rect x="490" y="690" width="620" height="86" rx="14" fill="#fff" stroke="#d7cfca" stroke-width="2"/>
+  <text x="520" y="724" class="label" style="font-weight:700">Network access</text>
+  <text x="520" y="753" class="small">22: administrator /32 · 80 and 443: public · 3000: local only</text>
+
+  <!-- Inbound Discord interaction path: red -->
+  <path d="M700 245 V300 H605 V380" class="red-line"/>
+  <rect x="455" y="264" width="190" height="28" rx="8" class="tag"/>
+  <text x="550" y="284" text-anchor="middle" class="small">Signed HTTPS · port 443</text>
+
+  <!-- Outbound Discord Gateway path: charcoal -->
+  <path d="M965 390 V265 H1165 V182 H1020" class="dark-line"/>
+
+  <!-- Administrator and package sources -->
+  <rect x="60" y="395" width="290" height="145" rx="16" class="card"/>
+  <rect x="60" y="395" width="8" height="145" rx="4" class="accent"/>
+  <text x="205" y="441" text-anchor="middle" class="card-title">Administrator</text>
+  <text x="205" y="474" text-anchor="middle" class="label">Workstation</text>
+  <text x="205" y="507" text-anchor="middle" class="small">SSH from trusted public IP</text>
+  <path d="M350 468 H420" class="dark-line"/>
+  <rect x="350" y="428" width="86" height="28" rx="8" class="tag"/>
+  <text x="393" y="448" text-anchor="middle" class="small">SSH · 22</text>
+
+  <rect x="60" y="650" width="290" height="145" rx="16" class="card"/>
+  <rect x="60" y="650" width="8" height="145" rx="4" class="accent"/>
+  <text x="205" y="696" text-anchor="middle" class="card-title">OCI Object Storage</text>
+  <text x="205" y="729" text-anchor="middle" class="label">hackathon-bot.zip</text>
+  <text x="205" y="762" text-anchor="middle" class="small">Object-scoped PAR · HTTPS</text>
+  <path d="M350 723 H420" class="dark-line"/>
+  <rect x="351" y="682" width="79" height="28" rx="8" class="tag"/>
+  <text x="390" y="702" text-anchor="middle" class="small">ZIP</text>
+
+  <!-- Outbound application services -->
+  <rect x="1260" y="350" width="280" height="140" rx="16" class="card"/>
+  <rect x="1260" y="350" width="8" height="140" rx="4" class="accent"/>
+  <text x="1400" y="397" text-anchor="middle" class="card-title">OpenRouter</text>
+  <text x="1400" y="432" text-anchor="middle" class="label">Model responses</text>
+  <text x="1400" y="463" text-anchor="middle" class="small">HTTPS</text>
+  <path d="M1080 425 H1250" class="red-line"/>
+
+  <rect x="1260" y="585" width="280" height="155" rx="16" class="card"/>
+  <rect x="1260" y="585" width="8" height="155" rx="4" class="accent"/>
+  <text x="1400" y="630" text-anchor="middle" class="card-title">Autonomous Database</text>
+  <text x="1400" y="665" text-anchor="middle" class="label">Agent profile schema</text>
+  <text x="1400" y="698" text-anchor="middle" class="small">TLS connection · wallet</text>
+  <path d="M1080 500 H1175 V662 H1250" class="red-line"/>
+  <rect x="1050" y="545" width="108" height="28" rx="8" class="tag"/>
+  <text x="1104" y="565" text-anchor="middle" class="small">TLS + wallet</text>
+
+  <text x="60" y="866" class="small">Only TCP 80 and 443 are public web ports. The bot port stays local to the Compute host.</text>
+</svg>

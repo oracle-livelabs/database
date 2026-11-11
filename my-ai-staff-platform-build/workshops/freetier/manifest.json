@@ -42,6 +42,11 @@
             "filename": "../../lab-5-connect-services-and-verify/lab-5-connect-services-and-verify.md"
         },
         {
+            "title": "Lab 6: Explore Slack Agent Features",
+            "description": "Review screenshot-led examples of agent conversations, approvals, recovery controls, and shared Slack channels",
+            "filename": "../../lab-6-slack-features-documentation/lab-6-slack-features-documentation.md"
+        },
+        {
             "title": "Need Help?",
             "description": "Solutions to common problems and directions for receiving live help",
             "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"

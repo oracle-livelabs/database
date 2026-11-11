@@ -14,7 +14,7 @@
     },
     {
       "title": "Lab 1: Build a Converged Operations Query",
-      "description": "Combine disruption signals, service meaning, bookings, and station access in one SQL result.",
+      "description": "Combine disruption reports, text similarity, booking activity, and station locations in one SQL result.",
       "filename": "../../service-operations-dashboard/service-operations-dashboard.md"
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "title": "Lab 3: Review a Semantic Service Search",
-      "description": "Find services related to a disruption and identify affected passengers.",
+      "description": "Find services related to a disruption description and review their associated bookings and passengers.",
       "filename": "../../service-vector-search/service-vector-search.md"
     },
     {
@@ -39,7 +39,7 @@
     },
     {
       "title": "Lab 6: Build a Service Demand Watchlist",
-      "description": "Train and score an in-database model for transport service demand.",
+      "description": "Train and score an in-database demand model using synthetic service activity.",
       "filename": "../../service-demand-oml/service-demand-oml.md"
     },
     {
