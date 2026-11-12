@@ -1,0 +1,13 @@
+{
+  "test_query": "check purchases that have not gone through",
+  "ground_truth": [
+    {
+      "search_target_title": "Open Stock Orders",
+      "target_inputs": [
+        {
+          ":ORDER_SIDE": "BUY"
+        }
+      ]
+    }
+  ]
+}
