@@ -7,7 +7,7 @@ This workshop runs in a **LiveLabs Sandbox**. Provisioning automatically prepare
 Once your environment is ready, open **View Login Info** in your reservation. Use the supplied link and credentials to sign in to Database Actions as `LLUSER`, then open SQL Worksheet.
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Manufacturing/Workshop/Scene-01-Prepare-Database-Actions-Branded.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Manufacturing/Workshop/Scene-01-Prepare-Database-Actions-Branded.mp4">
   Your browser does not support the video tag.
 </video>
 

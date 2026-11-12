@@ -37,7 +37,7 @@ Bob also needs to communicate the pathway to reviewers who may not want to inter
 Estimated Time: **10 minutes**
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-05-Connected-Care-Pathways-Unified-Recording.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-05-Connected-Care-Pathways-Unified-Recording.mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -349,7 +349,7 @@ Bob narrows the pathway to one question: **which recorded paths connect the pati
 ## Task 5: Visualize the Care Pathway with Oracle Graph Studio
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-06-Graph-Studio-Pickup-Recording.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-06-Graph-Studio-Pickup-Recording.mp4">
   Your browser does not support the video tag.
 </video>
 
