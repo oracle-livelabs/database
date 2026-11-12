@@ -1,64 +1,17 @@
-# Introduction to Trusted Answer Search
+# Build and Evaluate Search with Demo Brokerage
 
 ## Introduction
 
-Welcome to **Make Search Trusted, Faster, and Cheaper on your Application with Trusted Answer Search**.
+You manage search for Demo Brokerage. With **Oracle Trusted Answer Search**, customers search for reports using everyday words. Trusted Answer Search finds a configured report and supplies its input values; the report displays the data.
 
-Most enterprise applications already know the right answers. The problem is that users do not always know the exact report name, filter value, URL pattern, or navigation path. Trusted Answer Search maps natural-language questions to trusted application targets and validated inputs, so users get the right action instead of a creative paragraph.
+Create your own search space, import the sample report configuration, then make **Open Stock Orders** searchable. Publish it, use the website widget, and turn a recorded search into an evaluation set. Run six query checks, use administrator feedback to recover a missing report, then rerun the same set to measure the improvement.
 
-**Estimated Workshop Time:**
+Trusted Answer Search and the report website are already installed. All report data is fictional; you cannot place or change orders.
 
-* 35 minutes.
-
-### Objectives
-
-In this workshop, you will:
-
-* Understand the language-to-application-action architecture.
-* Install Trusted Answer Search manually, or use a prebuilt green button environment.
-* Work with a real Wikimedia analytics search space.
-* Correct a bad ranking using expert feedback.
-* Teach the system a new phrase without retraining a model.
-* Prove search quality with metrics, search history, and regression tests.
-
-## Task 1: Understand the Core Idea
-
-Traditional generative AI is powerful, but it is not always the right tool for bounded enterprise application navigation. If the application has 80 approved reports, you usually do not want the system to invent report 81 just because the user sounded confident.
-
-Trusted Answer Search uses Oracle AI Vector Search to match user language against curated descriptions, sample queries, and controlled value sets. The application remains in control of the final action.
-
-The result is:
-
-* Natural-language input from users.
-* Trusted targets managed by application experts.
-* Validated parameters such as project, language, period, and frequency.
-* Deterministic application actions instead of improvised generated answers.
-
-## Task 2: Understand the Workshop Story
-
-You will use a Wikimedia analytics sample application.
-
-The story starts with an everyday enterprise problem:
-
-> A user asks for a report in plain English, but the search system initially picks the wrong result.
-
-Then you will act as the application expert:
-
-1. Find the incorrect ranking.
-2. Clone a published search-space version into a draft.
-3. Downvote the bad result.
-4. Rerun the same query.
-5. Watch the correct report move to Rank #1.
-6. Run quality checks before trusting the change.
-
-The point is simple: **human-guided search improvement without retraining or redeployment**.
-
-You may now **proceed to the next lab**.
+Continue to **Get Started**. Installation and authentication setup are outside this workshop.
 
 ## Acknowledgements
 
-**Authors**
+**Authors:** Markus Kissling, Akshay S Kulkarni, and Kishy Kumar
 
-* Markus Kissling, Product Manager, Trusted Answer Search 
-
-**Last Updated Date** - October, 2026
+**Last Updated Date:** October 2026

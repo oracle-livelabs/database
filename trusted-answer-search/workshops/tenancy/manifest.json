@@ -1,9 +1,9 @@
 {
-  "workshoptitle": "Make Search Trusted, Faster, and Cheaper on your Application with Trusted Answer Search",
+  "workshoptitle": "Build and Evaluate Search with Demo Brokerage",
   "help": "livelabs-help-database_us@oracle.com",
   "tutorials": [
     {
-      "title": "Introduction to Trusted Answer Search",
+      "title": "Introduction",
       "filename": "../../introduction.md"
     },
     {
@@ -11,12 +11,12 @@
       "filename": "../../get-started.md"
     },
     {
-      "title": "Lab 1: Make Wikimedia Search Trusted",
-      "filename": "../../update_search.md"
+      "title": "Create a Search Space and Import Reports",
+      "filename": "../../create-search-space.md"
     },
     {
-      "title": "Lab 2: Prove and Operate Trusted Search",
-      "filename": "../../advanced.md"
+      "title": "Add and Evaluate a Search",
+      "filename": "../../update_search.md"
     },
     {
       "title": "Need Help?",
