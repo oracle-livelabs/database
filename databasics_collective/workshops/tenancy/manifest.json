@@ -9,6 +9,12 @@
             "filename": "../../introduction/introduction.md"
         },
         {
+            "title": "Getting Started",
+            "description": "",
+            "type": "livelabs",
+            "filename": "../../getting-started/getting-started.md"
+        },
+        {
             "title": "Lab 1: Explore Oracle Autonomous Database",
             "description": "",
             "type": "livelabs",
@@ -21,16 +27,16 @@
             "filename": "../../lab-2-schemas-relationships-and-constraints/lab-2-schemas-relationships-and-constraints.md"
         },
         {
-            "title": "Lab 3: Create and Manage Data Structures",
+            "title": "Lab 3: Query and Change Data Safely",
             "description": "",
             "type": "livelabs",
-            "filename": "../../lab-3-create-and-manage-data-structures/lab-3-create-and-manage-data-structures.md"
+            "filename": "../../lab-3-query-and-change-data/lab-3-query-and-change-data.md"
         },
         {
-            "title": "Lab 4: Query and Change Data Safely",
+            "title": "Lab 4: Create and Manage Data Structures",
             "description": "",
             "type": "livelabs",
-            "filename": "../../lab-4-query-and-change-data/lab-4-query-and-change-data.md"
+            "filename": "../../lab-4-create-and-manage-data-structures/lab-4-create-and-manage-data-structures.md"
         },
         {
             "title": "Lab 5: Add Schema Objects and Indexes",
@@ -40,7 +46,7 @@
         },
         {
             "title": "Lab 6: Check Your Understanding",
-            "description": "Review the main database concepts from the workshop.",
+            "description": "",
             "type": "livelabs",
             "filename": "../../lab-6-check-your-understanding/lab-6-check-your-understanding.md"
         },
