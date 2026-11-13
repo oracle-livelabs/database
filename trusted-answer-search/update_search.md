@@ -195,6 +195,8 @@ You have connected a new search destination to an existing webpage. Trusted Answ
     ```
 
    Press **Enter** and compare its new rank with the position you recorded. The saved feedback associates this query with the relevant target. Confirm that it moved to rank 1.
+
+   The target value set maps **purchases** to `BUY`. Your upvote improves the ranking of **Open Stock Orders** for this query; it does not supply the `BUY` input.
 5. Open **Search Targets** and select **Open Stock Orders**. In **Admin Feedback**, find the exact query **check purchases that have not gone through** and confirm its upvote. The query appears here separately from **Sample Queries**. Close the target and return to **Query Tester**. Use the copy button in step 4 to rerun the same purchase query before continuing.
 
     ![Admin Feedback table showing the exact purchase query with a saved thumbs-up](images/lab-saved-admin-feedback.png)
@@ -211,8 +213,6 @@ You have connected a new search destination to an existing webpage. Trusted Answ
     ```
 
    Check that its order-side input is `ALL`, the default. You already saw the corresponding four-order report in Get Started.
-
-The value set resolves **purchases** to `BUY`; the upvote identifies the relevant report for this query. These are two separate checks. Apply feedback to the draft before publishing.
 
 ## Task 3: Publish and Try the Widget
 
@@ -327,7 +327,7 @@ Follow these steps to apply the feedback:
     | Total Queries | 6 | 6 |
     | Passed Queries | 5 | 6 |
     | P5 | 83.33% | 100% |
-    | Open Stock Orders for the equity-trades query | Not returned | Rank 1, input `ALL` |
+    | Query: **Review unexecuted equity trades.** | Not returned | Rank 1, input `ALL` |
 
     ![Two completed six-query evaluations: run 27 has five passed queries and P5 83.33; run 28 has six passed queries and P5 100](images/lab-evaluation-before-after.png)
 
