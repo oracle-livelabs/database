@@ -5,7 +5,7 @@
 Jessica Chan, the DBA at Seer Hotels, starts the morning with a question from guest services. A hotel has reported a problem with accessible-room availability. Which guests have booked the affected stay offers, and what should the team check before arranging assistance?
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Hospitality/Workshop/Scene-00-Hospitality.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Hospitality/Workshop/Scene-00-Hospitality.mp4">
   Your browser does not support the video tag.
 </video>
 ![Jessica and Thomas review an accessible-room concern and affected reservations in the Seer Hotels lobby.](images/seer-hotels-introduction.png)
