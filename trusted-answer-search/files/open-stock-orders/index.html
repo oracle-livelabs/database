@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Stock Orders | Demo Brokerage</title><meta name="description" content="Review fictional stock orders awaiting execution, filtered by buy or sell.">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="/assets/css/brokerage-pages.css">
+<style>[hidden]{display:none!important}.order-note{margin:0 0 1rem;color:#625d58}.rw-table{min-width:44rem}</style>
+<script src="open-stock-orders.js" defer></script></head><body class="rw-page">
+<a class="rw-skip" href="#main-content">Skip to content</a>
+<header class="rw-app-header"><a class="rw-brand" href="/" aria-label="Demo Brokerage search"><span><small>Oracle Trusted Answer Search</small><strong>Demo Brokerage</strong></span></a></header>
+<nav class="rw-app-nav" aria-label="Primary"><a href="/today/">Accounts</a><a href="/portfolio-map/">Portfolio</a><a href="/stock/ORCL/">Markets</a><a href="/goal-simulator/">Planning</a><a href="/statement-vault/">Documents &amp; activity</a><a href="/service-security/">Support</a></nav>
+<main id="main-content" class="rw-main"><div class="rw-breadcrumb"><a href="/">Back to search</a><span aria-hidden="true">/</span><span>Orders</span><span aria-hidden="true">/</span><span aria-current="page">Open Stock Orders</span></div>
+<header class="rw-page-header"><div><p class="rw-kicker">Orders</p><h1>Open Stock Orders</h1><p class="rw-page-description">Stock orders still waiting to be fully executed.</p></div><div class="rw-page-meta"><span class="rw-badge rw-badge-neutral">Sample data</span><span>Fictional workshop report</span></div></header>
+<div class="rw-canvas"><div class="rw-view-toolbar"><form class="rw-filters" id="order-filter" method="get"><label for="order-side">Order side<select id="order-side" name="order_side"><option value="ALL">All open orders</option><option value="BUY">Buy orders</option><option value="SELL">Sell orders</option></select></label><button class="rw-button rw-button-outline" type="submit">Apply view</button></form></div>
+<p class="rw-view-status" id="view-status" role="status" aria-live="polite">All open orders</p>
+<p class="order-note">This read-only sample shows pending orders, not completed trades. No orders can be placed, changed, or cancelled here.</p>
+<section class="rw-scoreboard" aria-label="Order counts"><article class="rw-metric"><p class="rw-metric-label">Open orders</p><p class="rw-metric-value" id="order-count">4</p><p class="rw-metric-detail" id="order-scope">All open orders</p></article><article class="rw-metric"><p class="rw-metric-label">Shares remaining</p><p class="rw-metric-value" id="remaining-shares">85</p><p class="rw-metric-detail">Across the selected open orders</p></article></section>
+<section class="rw-panel"><header class="rw-section-heading"><div><h2 id="orders-heading">All open orders</h2><p>Each row is one fictional order. Remaining shares have not yet been filled.</p></div></header><div class="rw-table-scroll" tabindex="0" role="region" aria-labelledby="orders-heading"><table class="rw-table"><caption class="rw-sr-only">Fictional open stock orders for the selected side</caption><thead><tr><th scope="col">Order</th><th scope="col">Stock</th><th scope="col">Side</th><th scope="col" class="rw-number">Shares ordered</th><th scope="col" class="rw-number">Shares filled</th><th scope="col" class="rw-number">Shares remaining</th><th scope="col">Status</th></tr></thead><tbody>
+<tr data-side="BUY" data-remaining="20"><th scope="row">DEMO-101</th><td>Oracle (ORCL)</td><td>Buy</td><td class="rw-number">20</td><td class="rw-number">0</td><td class="rw-number">20</td><td>Open</td></tr>
+<tr data-side="BUY" data-remaining="40"><th scope="row">DEMO-102</th><td>Apple (AAPL)</td><td>Buy</td><td class="rw-number">50</td><td class="rw-number">10</td><td class="rw-number">40</td><td>Partially filled</td></tr>
+<tr data-side="SELL" data-remaining="15"><th scope="row">DEMO-103</th><td>Microsoft (MSFT)</td><td>Sell</td><td class="rw-number">15</td><td class="rw-number">0</td><td class="rw-number">15</td><td>Open</td></tr>
+<tr data-side="SELL" data-remaining="10"><th scope="row">DEMO-104</th><td>NVIDIA (NVDA)</td><td>Sell</td><td class="rw-number">25</td><td class="rw-number">15</td><td class="rw-number">10</td><td>Partially filled</td></tr>
+</tbody></table></div></section>
+<noscript><p class="rw-note">JavaScript is required to apply the order-side filter. This page currently shows all four sample orders.</p></noscript>
+</div></main><footer class="rw-footer"><p>Fictional data for demonstration only. Not investment advice.</p></footer></body></html>

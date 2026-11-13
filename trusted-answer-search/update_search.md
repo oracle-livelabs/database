@@ -1,429 +1,381 @@
-# Lab 1: Make Wikimedia Search Trusted
+# Add and Evaluate a Search
 
 ## Introduction
 
-Maya is preparing for a Wikimedia planning meeting. Her team needs answers about readership, edits, devices, languages, projects, and country trends across Wikimedia properties such as Wikipedia, Wiktionary, Wikibooks, Wikimedia Commons, and Wikidata.
+Start in your new **Brokerage Lab** space and its **LiveLab Draft** version. The imported reports provide the starting configuration; Open Stock Orders is not yet a search target.
 
-The data exists. That is not the problem.
+Your task is to make the **Open Stock Orders** report discoverable through natural-language search. The report shows stock orders still waiting to be fully executed, and accepts `BUY`, `SELL`, or `ALL` as its order-side input. You will enter the report's details as a search target, then create a target value set to connect words such as **purchases** to those accepted input values.
 
-The problem is that the analytics site has many reports, filters, project names, language codes, and URL patterns. Users know what they want, but they do not always know the exact page or parameter combination that gets them there.
+After completing the target, you will test the search, improve its ranking with administrator feedback, publish it, and save a recorded search as a repeatable evaluation.
 
-A generic LLM search box can sound helpful, but for this kind of bounded application workflow, a confident wrong answer is worse than no answer. Maya does not need a paragraph that guesses. She needs the application to open the right trusted report with the right controlled inputs.
-
-Trusted Answer Search maps natural-language questions to curated application targets such as reports, URLs, or SQL-driven views. The application keeps control of what can be returned, while users get a natural-language search experience.
-
-**Estimated time:** 25 minutes
+Estimated Time: 18 minutes
 
 ### Objectives
 
-In this lab, you will:
+* Configure a search target and a manual value set for report inputs.
+* Use administrator feedback, publish the search, and review widget telemetry.
+* Build and rerun an evaluation set to compare search results before and after feedback.
 
-* Search the published Wikimedia portal using natural language.
-* See a natural-language question map to a trusted report target.
-* Inspect extracted target inputs such as language, project, period, and frequency.
-* Leave end-user feedback in the published portal.
-* Clone a published search-space version into a governed draft.
-* Correct a bad ranking with expert feedback.
-* Teach the system a new business phrase with a curated description.
-* Confirm deterministic, repeatable search behavior.
+## Task 1: Create a Search Target
 
-### Prerequisites
+A search target describes a destination and tells Trusted Answer Search which report to open. Start with the report details; when you reach its input mapping, create the value set from the same form.
 
-You need:
+### Enter the Report Details
 
-* The Trusted Answer Search **Admin URL**.
-* The **Published Wiki Search URL**.
-* The `TASADMIN` username.
-* The `TASADMIN` password.
-* A loaded and published `trusted_search` search space.
-
-If you are using the green button environment, these values are provided for you.
-
-> **Learn more:** For product concepts, see the Oracle Database documentation for [Trusted Answer Search overview](https://docs.oracle.com/en/database/oracle/oracle-database/26/otasc/trusted-answer-search-overview.html), especially the sections on search targets, target actions, target inputs, target value sets, feedback-aware relevance, and reliability characteristics.
-
-## Task 1: Search Like an End User
-
-Maya starts where her users start: the published search application.
-
-1. Open the **Published Wiki Search URL** in a new browser tab.
-2. Sign in with the `TASADMIN` username and password if prompted.
-3. Search for:
+1. Open **Search Targets**, confirm **LiveLab Draft**, and select **Create Target**.
+2. Paste the following into **Search Target Title**:
 
     ```text
     <copy>
-    How has French Wiktionary readership changed by month over the last year?
+    Open Stock Orders
     </copy>
     ```
 
-This is a normal business question. The user did not type a report name, language code, project code, time-window code, or URL.
-
-Open the top result if the portal shows a link or action. The result opens a Wikimedia analytics page instead of generating a free-form answer.
-
-## Task 2: Inspect the Same Query in Admin
-
-Now Maya opens the Admin app to see what the search system actually resolved.
-
-1. Open the **Admin URL**.
-2. Sign in with:
+    Paste the following into **Search Target Description**:
 
     ```text
     <copy>
-    Username: TASADMIN
-    Password: {your TASADMIN password}
+    Review pending stock orders that have not yet been fully executed. Show buy orders, sell orders, or all open orders, including partially filled orders. This report does not show completed trades or cash transfers.
     </copy>
     ```
 
-3. In the left navigation menu, click **Query Tester**.
-4. Run the same query:
+    ![Create Search Target form with Open Stock Orders as the title and the supplied report description](images/lab-target-details.png)
+
+    *Enter the report title and description in Step 1: General Information.*
+
+3. In **Step 2: Select Target Action**, choose **URL**. Return to the **Open Stock Orders** report tab and copy its base URL ending in `/open-stock-orders/`, without a query string. Return to the target form, paste that URL, and append:
 
     ```text
     <copy>
-    How has French Wiktionary readership changed by month over the last year?
+    ?order_side=:ORDER_SIDE
     </copy>
     ```
 
-### Observe
+    The finished URL ends in `/open-stock-orders/?order_side=:ORDER_SIDE`. The placeholder `:ORDER_SIDE` is replaced with `BUY`, `SELL`, or `ALL` when Trusted Answer Search resolves the query.
 
-The top result should be a total page views trend target, and the query should resolve controlled inputs similar to:
+4. Below the URL, find the detected `:ORDER_SIDE` input. It needs a target value set to supply the report's accepted values and match words such as **purchases** to `BUY`.
+5. Select **Create New Target Set** below the input mappings. The **Add Target Value Set** dialog opens over your target form. Complete the next section, then return to finish the target.
 
-```text
-<copy>
-Language: fr
-Project: wiktionary
-Period: 1-year
-Frequency: monthly
-</copy>
-```
+### Create the Target Value Set
 
-![Structured Inputs](images/structured-inputs.jpg)
-
-Trusted Answer Search did not invent a free-form answer. It selected a trusted report target and extracted values the application can execute.
-
-## Task 3: Notice the Application Action
-
-Open the top result or inspect the corresponding search target.
-
-The result opens a Wikimedia analytics page using a trusted target action. For this sample, the target action is a URL template with controlled placeholders.
-
-For example, a target action can look like:
-
-```text
-<copy>
-https://stats.wikimedia.org/#/:language.:project.org/reading/total-page-views/normal|bar|:period|~total|:frequency
-</copy>
-```
-
-When the user asks about French Wiktionary over the last year by month, Trusted Answer Search resolves the placeholders and the application can open the correct report.
-
-This is the key distinction:
-
-* A chatbot tries to answer.
-* Trusted Answer Search routes the user to a trusted application action.
-
-## Task 4: Find a Search Result That Needs Expert Help
-
-Maya now tests a shorter analyst-style query:
-
-```text
-<copy>
-Total page views MoM all projects
-</copy>
-```
-
-The expected target is:
-
-```text
-<copy>
-Total Page Views - All Projects
-</copy>
-```
-
-But the initial top result may be:
-
-```text
-<copy>
-Top Viewed Articles - All Projects
-</copy>
-```
-
-![Initial Query Results](images/initial-ranking.png)
-
-The application has the right report, but the query is messy. `MoM` is shorthand. `All projects` is broad. This is exactly where enterprise search usually becomes frustrating: close, plausible, and still wrong.
-
-## Task 5: Leave End-User Feedback
-
-Before Maya fixes anything as an administrator, she captures the user signal from the portal.
-
-1. Return to the **Published Wiki Search URL**.
-2. Search again:
+1. In the dialog, paste the following into **Name**:
 
     ```text
     <copy>
-    Total page views MoM all projects
+    LAB_ORDER_SIDE
     </copy>
     ```
 
-3. If the incorrect result appears near the top, click the thumbs-down icon for:
+    Paste the following into **Description**:
 
     ```text
     <copy>
-    Top Viewed Articles - All Projects
+    Order side for the Open Stock Orders report
     </copy>
     ```
 
-4. If the expected result appears, click the thumbs-up icon for:
+    For **Source**, select **Manual**.
+
+    **Manual** means that you enter the allowed values and synonyms yourself. This exercise does not use an LLM.
+
+2. Add these three rows. For each row, paste its **Value** and **Synonym(s)**, then select **+ Add** before entering the next row.
+
+    **All orders — Value:**
 
     ```text
     <copy>
-    Total Page Views - All Projects
+    ALL
     </copy>
     ```
 
-This does not require Maya to rebuild the app or retrain a model. The portal captured real user feedback that administrators can review.
-
-In Lab 2, you will see this same feedback show up in the Admin app.
-
-## Task 6: Create a Governed Draft
-
-Before Maya changes anything, she creates a draft.
-
-The green-button environment starts with `trusted_search` already published. That is intentional: the published version powers the end-user portal app. Published versions are read-only, so production search behavior is protected.
-
-1. In the left navigation menu, click **Search Spaces**.
-2. Open the `trusted_search` search space.
-3. Find the published version.
-4. If a draft version already exists from an earlier attempt, either use that draft or delete it before cloning.
-
-    > **Note:** A search space can have only one draft version at a time. For the cleanest walkthrough, delete the existing draft, then clone the published version again.
-
-5. If no draft exists, open the actions menu for the published version.
-6. Click **Clone**.
-7. Enter a label such as:
+    **Synonym(s):**
 
     ```text
     <copy>
-    LiveLab Draft
+    all orders, all open orders
     </copy>
     ```
 
-8. Click **Create**.
+    Select **+ Add**.
 
-![Search Space Versions Screen](images/navigate-to-search-space.png)
-
-You now have a safe workspace for changes. The published portal keeps using the trusted version while Maya experiments in the draft.
-
-## Task 7: Reproduce the Problem in the Draft
-
-1. In the left navigation menu, click **Query Tester**.
-2. In the search-space version selector, choose your draft version.
-3. Run the same query:
+    **Buy orders — Value:**
 
     ```text
     <copy>
-    Total page views MoM all projects
+    BUY
     </copy>
     ```
 
-4. Confirm that the incorrect result is still near the top:
+    **Synonym(s):**
 
     ```text
     <copy>
-    Top Viewed Articles - All Projects
+    buy, buying, purchases
     </copy>
     ```
 
-This matters because the correction happens in a draft. You are not changing production behavior by clicking around.
+    Select **+ Add**.
 
-## Task 8: Correct the Ranking with Feedback
-
-1. Find the incorrect result:
+    **Sell orders — Value:**
 
     ```text
     <copy>
-    Top Viewed Articles - All Projects
+    SELL
     </copy>
     ```
 
-2. Click **Downvote**.
-3. Run the exact same query again:
+    **Synonym(s):**
 
     ```text
     <copy>
-    Total page views MoM all projects
+    sell, selling, sales
     </copy>
     ```
 
-### Observe
+    Select **+ Add**.
 
-The correct result should move to Rank #1:
-
-```text
-<copy>
-Total Page Views - All Projects
-</copy>
-```
-
-![Corrected Draft Ranking](images/draft-corrected-ranking.jpg)
-
-The model was not retrained. The app was not redeployed. Maya gave the system expert evidence, and the draft behavior changed.
-
-### Expected result
-
-After the downvote, the rerun should show:
-
-```text
-<copy>
-Rank #1: Total Page Views - All Projects
-Frequency: monthly
-Period: 2-year
-</copy>
-```
-
-## Task 9: Teach a New Business Phrase
-
-Leadership does not always say "page views." Sometimes they say "traffic trend." Maya can teach the search space that business phrase directly.
-
-1. In the left navigation menu, click **Search Targets**.
-2. Search for:
+3. Paste the following into **Default Value**, then select the offered `ALL` value:
 
     ```text
     <copy>
-    Total Page Views - All Projects
+    ALL
     </copy>
     ```
 
-3. Open the target.
-4. In the **Descriptions** region, click **Add Description**.
-5. Enter:
+    Leave **Default Display Value** blank and keep the remaining options unchanged. Select **Save** to return to the search-target form.
+
+    ![Manual value-set rows for ALL, BUY, and SELL with their synonyms, default ALL, and blank Default Display Value](images/lab-manual-value-set.png)
+
+    *The three value rows, ALL default, and blank Default Display Value should match this view.*
+
+    When a query does not identify an order side, the default includes both buys and sells.
+
+### Finish the Search Target
+
+1. In the `:ORDER_SIDE` row under **Target Value Set**, choose the newly created `LAB_ORDER_SIDE`. This connects your values and synonyms to the report's URL input. If the input row is missing, paste the following into **Target input name**, select **Add mapping**, then choose the value set:
 
     ```text
     <copy>
-    Wikimedia traffic trend over time
+    :ORDER_SIDE
     </copy>
     ```
 
-6. Click **Add**.
+    ![Target input ORDER_SIDE mapped to the LAB_ORDER_SIDE target value set](images/lab-target-input-mapping.png)
 
-## Task 10: Test the New Phrase
+    *Choose `LAB_ORDER_SIDE` for the detected :ORDER_SIDE input.*
 
-1. Return to **Query Tester**.
-2. Confirm your draft version is still selected.
-3. Run:
+2. In **Step 3: Target type**, select **Text Target**. This matches the meaning of a query to the target's title, description, and sample queries. Add each example below with **Add Sample Query**:
 
     ```text
     <copy>
-    Wikimedia traffic trend
+    Show my open buy orders.
     </copy>
     ```
 
-### Observe
+    ```text
+    <copy>
+    Show my pending sell orders.
+    </copy>
+    ```
 
-The top result should be:
+3. Skip the optional tags. Select **Create Search Target** and check that **Open Stock Orders** appears in the draft's targets.
 
-```text
-<copy>
-Total Page Views - All Projects
-</copy>
-```
+You have connected a new search destination to an existing webpage. Trusted Answer Search does not create the report or place stock orders.
 
-The matched description should include:
+## Task 2: Test Queries and Improve Ranking with Admin Feedback
 
-```text
-<copy>
-Wikimedia traffic trend over time
-</copy>
-```
+1. Open **Query Tester**, select **LiveLab Draft**, enter this search query, and press **Enter**:
 
-You taught the search system new application language with curation, not prompt engineering.
+    ```text
+    <copy>
+    check purchases that have not gone through
+    </copy>
+    ```
 
-## Task 11: Confirm Controlled Value Mapping
+2. Find **Open Stock Orders** and record its rank before feedback. Because you configured **purchases** as a synonym for `BUY`, that should be its order-side input. Open **Target URL**: the report should show **Buy orders**, **2** open orders, and **60** shares remaining. Return to Query Tester. In the workshop starting configuration, this target ranks third. If your result differs, check **Workshop Troubleshooting** before continuing.
+3. Select **Upvote** on **Open Stock Orders** and check for **Admin Upvoted**.
+4. Run the **same search query again**:
 
-Run:
+    ```text
+    <copy>
+    check purchases that have not gone through
+    </copy>
+    ```
 
-```text
-<copy>
-Show page views for all Wikimedia projects over the past 24 months
-</copy>
-```
+    Press **Enter** and compare its new rank with the position you recorded. The saved feedback associates this query with the relevant target. Confirm that it moved to rank 1.
 
-### Observe
+    The target value set maps **purchases** to `BUY`. Your upvote improves the ranking of **Open Stock Orders** for this query; it does not supply the `BUY` input.
+5. Open **Search Targets** and select **Open Stock Orders**. In **Admin Feedback**, find the exact query **check purchases that have not gone through** and confirm its upvote. The query appears here separately from **Sample Queries**. Close the target and return to **Query Tester**. Use the copy button in step 4 to rerun the same purchase query before continuing.
 
-The top result should be:
+    ![Admin Feedback table showing the exact purchase query with a saved thumbs-up](images/lab-saved-admin-feedback.png)
 
-```text
-<copy>
-Total Page Views - All Projects
-</copy>
-```
+    *The exact query and its upvote are saved under Admin Feedback on the target.*
 
-The phrase:
+6. Review a result that does not answer this query. **Income Timeline** shows income rather than unexecuted stock purchases. Select its **Downvote** and confirm the saved feedback. Rerun the query to inspect the results. Downvote applies to this query and target; it does not delete the target. Do not downvote a useful report simply to change the ranking.
+7. Run this query:
 
-```text
-<copy>
-past 24 months
-</copy>
-```
+    ```text
+    <copy>
+    Show my open orders.
+    </copy>
+    ```
 
-maps to the controlled value:
+    Check that its order-side input is `ALL`, the default. You already saw the corresponding four-order report in Get Started.
 
-```text
-<copy>
-Period: 2-year
-</copy>
-```
+## Task 3: Publish and Try the Widget
 
-That mapping comes from a target value set. The user can speak naturally, but the application receives a valid value.
+Publishing lets the website's search widget use the tested configuration. Publish only in this disposable workshop environment.
 
-## Task 12: Confirm Deterministic Search
+1. Open **Search Spaces**, open the versions for **Brokerage Lab**, and open the three-dot menu for **LiveLab Draft**. Select **Publish**, confirm if prompted, and check that this version is marked **Published**.
+2. In the Demo Brokerage website's search tab, paste this query and press **Enter** or select **Search**:
 
-Run this query twice:
+    ```text
+    <copy>
+    check purchases that have not gone through
+    </copy>
+    ```
 
-```text
-<copy>
-Show total page views for Wikimedia Commons over the last 2 years
-</copy>
-```
+3. Select **Open Stock Orders**. Confirm that the report opens with **Buy orders** selected. This result click is the activity you will inspect next.
 
-### Observe
+## Task 4: Review Telemetry
 
-The Rank #1 result should be the same both times:
+1. Return to Admin and confirm **Brokerage Lab** is selected. Open **Dashboard** > **Telemetry**, set **Data interval** to **Last Day**, and open **Clicked Search Targets**. Find `check purchases that have not gone through` from the widget search.
 
-```text
-<copy>
-Total Page Views - Wikimedia Commons
-</copy>
-```
+    If your query appears under **Searches with No Clicked Search Target**, return to the Demo Brokerage widget and click **Open Stock Orders** in the search results. Then refresh the Dashboard and open **Clicked Search Targets**.
 
-For bounded enterprise workflows, repeatability is not boring. It is the difference between a search feature and a compliance meeting with snacks.
+2. Read **Total Searches**, **Searches with a Clicked Result**, and **Click-Through Rate**. The rate divides searches with a clicked result by total searches. Explain which part of your widget activity contributes to each count; Query Tester searches are excluded.
 
-## Summary
+A result click records usage; it does not prove correctness. Next, save the query with the expected target and input so you can check it again after changes.
 
-In this lab, you:
+Dashboard describes published search activity. Query Tester searches are separate and do not count toward the widget's **Total Searches** or **Click-Through Rate**.
 
-* Used a natural-language portal to reach a trusted Wikimedia report.
-* Saw target inputs extracted from normal user language.
-* Left user feedback in the published portal.
-* Created a governed draft from a published version.
-* Corrected a bad ranking with expert feedback.
-* Added a curated description for a new business phrase.
-* Saw a synonym map to a controlled application value.
-* Confirmed deterministic search behavior.
+## Task 5: Build an Evaluation Set and Improve Search Accuracy
 
-The main idea:
+An evaluation set stores queries and their expected targets and inputs. Import a benchmark and add your recorded widget search. Run the six-query set, investigate a failed check, then use administrator feedback and rerun the same set.
 
-```text
-<copy>
-Trusted Answer Search lets users ask naturally while the application still
-controls the targets, parameters, and production rollout.
-</copy>
-```
+### Import the Benchmark and Add Your Widget Search
 
-You may now **proceed to Lab 2**.
+1. Open **Test Runs**. Confirm **Brokerage Lab** and **LiveLab Draft**, marked **Published**. Select **Create Evaluation Set** and paste this into **Name**:
+
+    ```text
+    <copy>
+    Brokerage Quick Check
+    </copy>
+    ```
+
+2. Upload `brokerage-quick-check.json` downloaded in Get Started and select **Create**. The file contains five queries and expected results: four for the imported reports and one for the Open Stock Orders target you created.
+3. Open **Dashboard** > **Telemetry** > **Clicked Search Targets**. Set **Data interval** to **Last Day**. Select the checkbox beside `check purchases that have not gone through`, then select the checklist icon, **Add selected searches to an evaluation set**. Choose **Brokerage Quick Check** if prompted.
+
+    ![Clicked Search Targets with the purchase query selected and the checklist icon in the toolbar](images/lab-dashboard-add-to-evaluation.png)
+
+    *Select the query's checkbox, then the checklist icon between the comment and trash icons.*
+
+4. For **Ground Truth Source**, choose **Curate manually**. Click **Search for a target...**, clear the prefilled target, scroll through the list, and select **Open Stock Orders**.
+5. Click `:ORDER_SIDE` and select **BUY** from the offered values. Typing without selecting is insufficient. Select **Save to Eval Set**. Your set now contains six queries.
+
+### Run the Evaluation Before Feedback
+
+1. Open **Test Runs** > **Create Test Runs**. Open **Brokerage Quick Check** and confirm **six** queries. The details panel shows five rows per page; select **Next** to inspect the remaining row.
+
+    | Query | Expected target | Expected input |
+    | --- | --- | --- |
+    | Show how much of my portfolio is in bonds. | Allocation Explorer | `:ASSET_CLASS = FIXED_INCOME` |
+    | Show me Oracle stock performance. | Market Lens | `:STOCK_TICKERS = ORCL` |
+    | Map my retirement accounts. | Portfolio Map | `:ACCOUNT_SCOPE = RETIREMENT` |
+    | Open my brokerage statement. | Statement Vault | `:DOCUMENT_CATEGORY = STATEMENT` |
+    | check purchases that have not gone through | Open Stock Orders | `:ORDER_SIDE = BUY` |
+    | Review unexecuted equity trades. | Open Stock Orders | `:ORDER_SIDE = ALL` |
+
+2. Close the details panel. Confirm **LiveLab Draft (Published)**. If an LLM selector appears under **Run Options**, choose **Disable LLM**. Clear **Search latency profiling enabled**, then select **Run** beside **Brokerage Quick Check**.
+3. Open **View Test Runs** and wait for **COMPLETED**. Record this **Run ID** as your **Before feedback** run. Expect **6 Total Queries**, **5 Passed Queries**, and **P5 = 83.33%**.
+4. **Why is P5 below 100%?** Open the **Run ID** and find the query with status **FAIL**: **Review unexecuted equity trades.** Compare its **Ground Truth** with **Matched Search Targets**. The expected result is **Open Stock Orders**, input `ALL`, but it is absent from the five returned results. Confirm that the other five queries pass before continuing. If a different check fails, stop and report the result to the workshop owner.
+
+    ![Failed equity-trades query expecting Open Stock Orders with ALL, with five other matched reports and an Expected result missing message](images/lab-evaluation-failed-query.png)
+
+    *Ground Truth identifies the expected report and input. FAIL and Expected result missing show that the report was not returned.*
+
+    The customer uses different words: **equity** means stock, and **unexecuted** means awaiting execution. Open Stock Orders answers this request. No buy or sell side is specified, so the expected input is `ALL`. You already created the target; the failed check reveals a retrieval problem.
+
+    For these questions, **PASS** means the expected target is returned with the expected input, even below rank 1. **P1**, **P3**, and **P5** measure how often expected targets appear within the first one, three, and five results. Five of six targets within the top five gives P5 = 83.33%.
+
+### Correct the Missing Match
+
+For this comparison, use the following sequence:
+
+1. Set **Edit Published Versions? → Yes** so you can save administrator feedback on the published version.
+2. Apply feedback and rerun the evaluation against that **same version**.
+3. Set **Edit Published Versions? → No** to prevent further edits. Your saved feedback remains effective.
+
+### Follow these steps to apply the feedback:
+
+1. Open **Settings**. Under **Search Space Settings**, confirm **Brokerage Lab**, set **Edit Published Versions?** to **Yes**, and select **Save** in that section. This allows you to save feedback on the published version used in your first evaluation.
+2. Open **Query Tester**, confirm **LiveLab Draft (Published)**, paste the same query, and press **Enter**:
+
+    ```text
+    <copy>
+    Review unexecuted equity trades.
+    </copy>
+    ```
+
+3. Select **Choose Another Target**. Paste the following into the search box and select **Go**:
+
+    ```text
+    <copy>
+    Open Stock Orders
+    </copy>
+    ```
+
+4. Select the radio button beside **Open Stock Orders**, then click **Choose to mark as best**. This upvotes the report for this query.
+5. Back in **Query Tester**, click the query field and press **Enter** to rerun the same search. Confirm **Open Stock Orders** appears at **rank 1** with `:ORDER_SIDE = ALL`.
+
+### Run the Same Evaluation Again
+
+1. Open **Test Runs** > **Create Test Runs**. Keep **LiveLab Draft (Published)** and **Brokerage Quick Check** selected. Choose **Disable LLM** if shown and clear **Search latency profiling enabled** again; it can be selected again when you return to this page. Select **Run**.
+2. Open **View Test Runs**, wait for **COMPLETED**, and record the new **Run ID** as **After feedback**. Compare it with your first run:
+
+    | Check | Before feedback | After feedback |
+    | --- | --- | --- |
+    | Total Queries | 6 | 6 |
+    | Passed Queries | 5 | 6 |
+    | P5 | 83.33% | 100% |
+    | Query: **Review unexecuted equity trades.** | Not returned | Rank 1, input `ALL` |
+
+    ![Two completed six-query evaluations: run 27 has five passed queries and P5 83.33; run 28 has six passed queries and P5 100](images/lab-evaluation-before-after.png)
+
+    *In this example, run 27 (lower row) is before feedback and run 28 (upper row) is after feedback. Your run IDs will differ.*
+
+3. Open the new **Run ID**. Confirm **Review unexecuted equity trades.** now shows **PASS** with **Open Stock Orders**, rank **1**, and `:ORDER_SIDE = ALL`. Check that the other five queries still pass, including the purchase query with `BUY`.
+4. Compare **P1** and **P3** as well. In the verified workshop run, P1 changed from **66.67% to 83.33%** and P3 from **83.33% to 100%**. The bond query still passed at rank 2, so P1 remained below 100%.
+5. Return to **Settings** > **Search Space Settings** for **Brokerage Lab**, set **Edit Published Versions?** to **No**, and select **Save**. Your feedback remains saved.
+
+You first improved a report that was already retrieved for the purchase query. Here, feedback brought a missing report into the results, and the unchanged evaluation measured the improvement. If the documented baseline or final checks differ, stop and report both run IDs to the workshop owner; do not change the expected answers to make the run pass.
+
+## Task 6: Verify a Sell-Order Search
+
+Check that the report also opens correctly for a sell-order query.
+
+1. Open **Query Tester**. Select **Brokerage Lab** and the version labeled **LiveLab Draft**, now marked **Published**.
+2. Paste this query and press **Enter**:
+
+    ```text
+    <copy>
+    check sales that have not gone through
+    </copy>
+    ```
+
+3. Find **Open Stock Orders** in the results. Record its rank and check that its resolved input is `:ORDER_SIDE = SELL`.
+4. Select **Target URL** for that result. Check these fields on the report:
+
+    | Report field | Expected value |
+    | --- | --- |
+    | Order side | **Sell orders** |
+    | Open orders | **2** |
+    | Shares remaining | **25** |
+
+Your `LAB_ORDER_SIDE` value set maps **sales** to `SELL`. The search target's URL passes that value to the report. The saved evaluation contains **six** queries and checks both `BUY` and `ALL` for this report; this additional Query Tester search is not added to the evaluation set.
 
 ## Acknowledgements
 
-**Authors**
+**Authors:** Markus Kissling, Akshay S Kulkarni, and Kishy Kumar
 
-* Markus Kissling, Product Manager, Trusted Answer Search
-
-**Last Updated Date** - October, 2026
+**Last Updated Date:** October 2026
