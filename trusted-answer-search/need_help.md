@@ -1,4 +1,4 @@
-# Need Help?
+# Workshop Troubleshooting
 
 This page is a reference, not an additional exercise.
 

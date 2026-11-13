@@ -192,7 +192,7 @@ You have connected a new search destination to an existing webpage. Trusted Answ
     </copy>
     ```
 
-2. Find **Open Stock Orders** and record its rank before feedback. Because you configured **purchases** as a synonym for `BUY`, that should be its order-side input. Open **Target URL**: the report should show **Buy orders**, **2** open orders, and **60** shares remaining. Return to Query Tester. In the workshop starting configuration, this target ranks third. If your result differs, check **Need Help?** before continuing.
+2. Find **Open Stock Orders** and record its rank before feedback. Because you configured **purchases** as a synonym for `BUY`, that should be its order-side input. Open **Target URL**: the report should show **Buy orders**, **2** open orders, and **60** shares remaining. Return to Query Tester. In the workshop starting configuration, this target ranks third. If your result differs, check **Workshop Troubleshooting** before continuing.
 3. Select **Upvote** on **Open Stock Orders** and check for **Admin Upvoted**.
 4. Run the **same search query again**:
 

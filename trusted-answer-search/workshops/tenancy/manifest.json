@@ -19,8 +19,12 @@
       "filename": "../../update_search.md"
     },
     {
-      "title": "Need Help?",
+      "title": "Workshop Troubleshooting",
       "filename": "../../need_help.md"
+    },
+    {
+      "title": "Need Help?",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
     }
   ]
 }
