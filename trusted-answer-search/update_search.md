@@ -232,6 +232,9 @@ Publishing lets the website's search widget use the tested configuration. Publis
 ## Task 4: Review Telemetry
 
 1. Return to Admin and confirm **Brokerage Lab** is selected. Open **Dashboard** > **Telemetry**, set **Data interval** to **Last Day**, and open **Clicked Search Targets**. Find `check purchases that have not gone through` from the widget search.
+
+    If your query appears under **Searches with No Clicked Search Target**, return to the Demo Brokerage widget and click **Open Stock Orders** in the search results. Then refresh the Dashboard and open **Clicked Search Targets**.
+
 2. Read **Total Searches**, **Searches with a Clicked Result**, and **Click-Through Rate**. The rate divides searches with a clicked result by total searches. Explain which part of your widget activity contributes to each count; Query Tester searches are excluded.
 
 A result click records usage; it does not prove correctness. Next, save the query with the expected target and input so you can check it again after changes.
