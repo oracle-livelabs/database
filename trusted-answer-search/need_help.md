@@ -2,6 +2,15 @@
 
 This page is a reference, not an additional exercise.
 
+**Estimated Time:** As needed.
+
+### Objectives
+
+Use this page to:
+
+- Troubleshoot application access, search configuration, and evaluation results.
+- Identify when to contact the workshop owner and what information to provide.
+
 - **Cannot find the applications or credentials?** Open **View Login Info** > **Environment Details** in the reservation. Use the application login, not your OCI Console password.
 - **Missing Workshop Files URL or report?** Ask the workshop owner to complete preparation. The Trusted Answer Search ZIP alone does not include the workshop report or its download page.
 - **Brokerage Lab already exists?** Ask for a fresh reservation; do not erase another learner's content. The installed Demo Brokerage sample is separate from the space you create.
@@ -13,7 +22,7 @@ This page is a reference, not an additional exercise.
 - **The documented baseline differs?** Before feedback, the purchase query `check purchases that have not gone through` should return Open Stock Orders at rank 3. The first evaluation should have five passes and one missing-target failure for `Review unexecuted equity trades.` (Open Stock Orders/ALL), giving P5 = 83.33%. Confirm Brokerage Lab and LiveLab Draft; previous feedback can change the starting results. Record the exact query and observed ranks, then stop and report the mismatch to the workshop owner. Do not substitute another query or change expected answers.
 - **Upvote or Choose Another Target is disabled on the published version?** In Settings > Search Space Settings for Brokerage Lab, set Edit Published Versions? to Yes and save. Return to Query Tester and confirm the same version. Restore No after the feedback comparison, including when you stop because results differ.
 - **Feedback does not improve the results?** Keep the observed outcome and both run IDs. Confirm the exact query, version and expected input, then report the result to the workshop owner. A saved upvote alone is not proof of improvement.
-- **Recorded query missing?** Set Dashboard > Telemetry to Last Day. Find the clicked purchase query under Clicked Search Targets. The equity-trades query is already in the imported benchmark; you do not add it from the Dashboard. Query Tester searches do not contribute to widget totals or click-through rate.
+- **Recorded query missing?** Set Dashboard > Telemetry to Last Day. Find the clicked purchase query under Clicked Search Targets. The equity-trades query is already in the imported benchmark; you do not add it from the Dashboard. Query Tester searches do not contribute to widget totals or click-through rate. If the query appears under **Searches with No Clicked Search Target**, return to the Demo Brokerage widget and click **Open Stock Orders** in the search results. Then refresh the Dashboard and open **Clicked Search Targets**.
 - **No Disable LLM option?** This selector is absent when there are no LLM profiles. Continue without it; this exercise uses a manual value set.
 - **Evaluation count is not six?** Check for a missing or repeated query: five imported checks (including the equity-trades query expecting Open Stock Orders/ALL) and the widget purchase query expecting Open Stock Orders/BUY. Evaluation Set Details shows five rows per page; use Next to inspect the sixth.
 - **Another evaluation query changes or fails?** This exercise applies feedback only to the documented equity-trades query. Record unexpected changes to any of the other five and report both run IDs; do not apply additional feedback or change the expected answers during the comparison. A correct target/input below rank 1 can still PASS.

@@ -1,5 +1,14 @@
 # Get Started
 
+## Introduction
+
+Estimated Time: 2 minutes
+
+### Objectives
+
+* Locate the prepared Admin, Demo Brokerage, and Workshop Files applications.
+* Download the import files and verify the Open Stock Orders report.
+
 ## Open the Prepared Applications
 
 > **Using a LiveLabs sandbox?** When you receive the environment-ready email, open **My Reservations** and select **Launch Workshop**. Open **View Login Info** > **Environment Details** to find your **Admin URL**, **Demo Brokerage URL**, **Workshop Files URL**, and application login.

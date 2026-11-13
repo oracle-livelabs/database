@@ -4,6 +4,13 @@
 
 Create an empty space, import the configuration for existing brokerage reports, and test an imported target before adding your own.
 
+Estimated Time: 5 minutes
+
+### Objectives
+
+* Create Brokerage Lab and its draft version.
+* Import the existing report targets and value sets, then test an imported search.
+
 ## Task 1: Create Your Search Space
 
 1. In Admin, open **Search Spaces** and select **Create Search Space**.
@@ -15,7 +22,7 @@ Create an empty space, import the configuration for existing brokerage reports, 
     </copy>
     ```
 
-   For **Give the initial version a label**, paste:
+    For **Give the initial version a label**, paste:
 
     ```text
     <copy>
@@ -23,7 +30,7 @@ Create an empty space, import the configuration for existing brokerage reports, 
     </copy>
     ```
 
-   Leave the optional fields blank and select **Create**.
+    Leave the optional fields blank and select **Create**.
 3. Select **Brokerage Lab** in the header's **Search Space** selector. Select **LiveLab Draft**, marked **Draft**, while configuring and testing. After you publish it, the same version label remains but its status becomes **Published**. Do not edit the installed **Demo Brokerage** sample.
 4. Open **Settings** > **Search Space Settings**. For this fictional demo, set **Visibility** to **PUBLIC** if it is not already public, and save the search space settings. This allows the workshop website's widget to query the space after publication. Keep **Edit Published Versions?** off.
 

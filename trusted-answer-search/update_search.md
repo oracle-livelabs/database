@@ -8,6 +8,14 @@ Your task is to make the **Open Stock Orders** report discoverable through natur
 
 After completing the target, you will test the search, improve its ranking with administrator feedback, publish it, and save a recorded search as a repeatable evaluation.
 
+Estimated Time: 18 minutes
+
+### Objectives
+
+* Configure a search target and a manual value set for report inputs.
+* Use administrator feedback, publish the search, and review widget telemetry.
+* Build and rerun an evaluation set to compare search results before and after feedback.
+
 ## Task 1: Create a Search Target
 
 A search target describes a destination and tells Trusted Answer Search which report to open. Start with the report details; when you reach its input mapping, create the value set from the same form.
@@ -23,7 +31,7 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   Paste the following into **Search Target Description**:
+    Paste the following into **Search Target Description**:
 
     ```text
     <copy>
@@ -43,7 +51,7 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   The finished URL ends in `/open-stock-orders/?order_side=:ORDER_SIDE`. The placeholder `:ORDER_SIDE` is replaced with `BUY`, `SELL`, or `ALL` when Trusted Answer Search resolves the query.
+    The finished URL ends in `/open-stock-orders/?order_side=:ORDER_SIDE`. The placeholder `:ORDER_SIDE` is replaced with `BUY`, `SELL`, or `ALL` when Trusted Answer Search resolves the query.
 
 4. Below the URL, find the detected `:ORDER_SIDE` input. It needs a target value set to supply the report's accepted values and match words such as **purchases** to `BUY`.
 5. Select **Create New Target Set** below the input mappings. The **Add Target Value Set** dialog opens over your target form. Complete the next section, then return to finish the target.
@@ -58,7 +66,7 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   Paste the following into **Description**:
+    Paste the following into **Description**:
 
     ```text
     <copy>
@@ -66,13 +74,13 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   For **Source**, select **Manual**.
+    For **Source**, select **Manual**.
 
-   **Manual** means that you enter the allowed values and synonyms yourself. This exercise does not use an LLM.
+    **Manual** means that you enter the allowed values and synonyms yourself. This exercise does not use an LLM.
 
 2. Add these three rows. For each row, paste its **Value** and **Synonym(s)**, then select **+ Add** before entering the next row.
 
-   **All orders — Value:**
+    **All orders — Value:**
 
     ```text
     <copy>
@@ -80,7 +88,7 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   **Synonym(s):**
+    **Synonym(s):**
 
     ```text
     <copy>
@@ -88,9 +96,9 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   Select **+ Add**.
+    Select **+ Add**.
 
-   **Buy orders — Value:**
+    **Buy orders — Value:**
 
     ```text
     <copy>
@@ -98,7 +106,7 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   **Synonym(s):**
+    **Synonym(s):**
 
     ```text
     <copy>
@@ -106,9 +114,9 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   Select **+ Add**.
+    Select **+ Add**.
 
-   **Sell orders — Value:**
+    **Sell orders — Value:**
 
     ```text
     <copy>
@@ -116,7 +124,7 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   **Synonym(s):**
+    **Synonym(s):**
 
     ```text
     <copy>
@@ -124,7 +132,7 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   Select **+ Add**.
+    Select **+ Add**.
 
 3. Paste the following into **Default Value**, then select the offered `ALL` value:
 
@@ -134,13 +142,13 @@ A search target describes a destination and tells Trusted Answer Search which re
     </copy>
     ```
 
-   Leave **Default Display Value** blank and keep the remaining options unchanged. Select **Save** to return to the search-target form.
+    Leave **Default Display Value** blank and keep the remaining options unchanged. Select **Save** to return to the search-target form.
 
     ![Manual value-set rows for ALL, BUY, and SELL with their synonyms, default ALL, and blank Default Display Value](images/lab-manual-value-set.png)
 
     *The three value rows, ALL default, and blank Default Display Value should match this view.*
 
-When a query does not identify an order side, the default includes both buys and sells.
+    When a query does not identify an order side, the default includes both buys and sells.
 
 ### Finish the Search Target
 
@@ -154,7 +162,7 @@ When a query does not identify an order side, the default includes both buys and
 
     ![Target input ORDER_SIDE mapped to the LAB_ORDER_SIDE target value set](images/lab-target-input-mapping.png)
 
-    *Choose LAB_ORDER_SIDE for the detected :ORDER_SIDE input.*
+    *Choose `LAB_ORDER_SIDE` for the detected :ORDER_SIDE input.*
 
 2. In **Step 3: Target type**, select **Text Target**. This matches the meaning of a query to the target's title, description, and sample queries. Add each example below with **Add Sample Query**:
 
@@ -194,9 +202,9 @@ You have connected a new search destination to an existing webpage. Trusted Answ
     </copy>
     ```
 
-   Press **Enter** and compare its new rank with the position you recorded. The saved feedback associates this query with the relevant target. Confirm that it moved to rank 1.
+    Press **Enter** and compare its new rank with the position you recorded. The saved feedback associates this query with the relevant target. Confirm that it moved to rank 1.
 
-   The target value set maps **purchases** to `BUY`. Your upvote improves the ranking of **Open Stock Orders** for this query; it does not supply the `BUY` input.
+    The target value set maps **purchases** to `BUY`. Your upvote improves the ranking of **Open Stock Orders** for this query; it does not supply the `BUY` input.
 5. Open **Search Targets** and select **Open Stock Orders**. In **Admin Feedback**, find the exact query **check purchases that have not gone through** and confirm its upvote. The query appears here separately from **Sample Queries**. Close the target and return to **Query Tester**. Use the copy button in step 4 to rerun the same purchase query before continuing.
 
     ![Admin Feedback table showing the exact purchase query with a saved thumbs-up](images/lab-saved-admin-feedback.png)
@@ -212,7 +220,7 @@ You have connected a new search destination to an existing webpage. Trusted Answ
     </copy>
     ```
 
-   Check that its order-side input is `ALL`, the default. You already saw the corresponding four-order report in Get Started.
+    Check that its order-side input is `ALL`, the default. You already saw the corresponding four-order report in Get Started.
 
 ## Task 3: Publish and Try the Widget
 
@@ -286,9 +294,9 @@ An evaluation set stores queries and their expected targets and inputs. Import a
 
     *Ground Truth identifies the expected report and input. FAIL and Expected result missing show that the report was not returned.*
 
-The customer uses different words: **equity** means stock, and **unexecuted** means awaiting execution. Open Stock Orders answers this request. No buy or sell side is specified, so the expected input is `ALL`. You already created the target; the failed check reveals a retrieval problem.
+    The customer uses different words: **equity** means stock, and **unexecuted** means awaiting execution. Open Stock Orders answers this request. No buy or sell side is specified, so the expected input is `ALL`. You already created the target; the failed check reveals a retrieval problem.
 
-For these questions, **PASS** means the expected target is returned with the expected input, even below rank 1. **P1**, **P3**, and **P5** measure how often expected targets appear within the first one, three, and five results. Five of six targets within the top five gives P5 = 83.33%.
+    For these questions, **PASS** means the expected target is returned with the expected input, even below rank 1. **P1**, **P3**, and **P5** measure how often expected targets appear within the first one, three, and five results. Five of six targets within the top five gives P5 = 83.33%.
 
 ### Correct the Missing Match
 
@@ -298,7 +306,7 @@ For this comparison, use the following sequence:
 2. Apply feedback and rerun the evaluation against that **same version**.
 3. Set **Edit Published Versions? → No** to prevent further edits. Your saved feedback remains effective.
 
-Follow these steps to apply the feedback:
+### Follow these steps to apply the feedback:
 
 1. Open **Settings**. Under **Search Space Settings**, confirm **Brokerage Lab**, set **Edit Published Versions?** to **Yes**, and select **Save** in that section. This allows you to save feedback on the published version used in your first evaluation.
 2. Open **Query Tester**, confirm **LiveLab Draft (Published)**, paste the same query, and press **Enter**:
