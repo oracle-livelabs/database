@@ -31,7 +31,7 @@ In this lab, you will:
 
 We have two simple binary files, a PDF file of pangrams, and a zip file containing four text files. Download these to a location on your local machine.
 
-* [pangrams.pdf](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/pangrams.pdf "pangrams.pdf download")
+* [pangrams.pdf](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/data-management-library-files/pangrams.pdf "pangrams.pdf download")
 * [files.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/files.zip "files.zip download")
 
 I suggest you take a look at those files before we continue. You will find that the PDF file contains the usual list of pangrams, and the zip file consists of three files, with the following text in them:

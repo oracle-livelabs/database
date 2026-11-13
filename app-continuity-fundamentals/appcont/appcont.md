@@ -26,7 +26,7 @@ Watch the video below for an overview of the Application Continuity lab
 2. Connect to the **oracle** user and download the sample program from the Object Store
 
     ````
-    wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/o1MMs9aKPV5BX67UyQ1FPefYaZErG6itdpWhjcBnvE7bgPmKsyyU96Dw2ToGY_7b/n/c4u04/b/livelabsfiles/o/labfiles/ACDemo_19c.zip
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/ACDemo_19c.zip
     ````
 3. Unzip the ACDemo_19c.zip file
     ````

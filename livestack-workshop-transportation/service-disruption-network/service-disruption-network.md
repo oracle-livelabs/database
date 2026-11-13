@@ -29,7 +29,7 @@ A property graph gives Bob a direct way to ask how a trip, route, station, vehic
 Estimated Time: **10 minutes**
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-05-Lab-04-Investigate-Direct-Service-Disruption-Relationships-Branded.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-05-Lab-04-Investigate-Direct-Service-Disruption-Relationships-Branded.mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -282,7 +282,7 @@ Two trips can share a station or vehicle without a direct relationship between t
 ## Task 5: Open Graph Studio and import the notebook
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-06-Lab-04-Explore-the-Service-Network-in-Graph-Studio-Branded.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FTransportation%2FWorkshop%2FScene-06-Lab-04-Explore-the-Service-Network-in-Graph-Studio-Branded.mp4">
   Your browser does not support the video tag.
 </video>
 

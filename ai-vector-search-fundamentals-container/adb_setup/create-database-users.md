@@ -223,7 +223,7 @@ As the ADMIN user you will copy an ONNX model to the DATA\_PUMP\_DIR directory.
     <copy>
     BEGIN
       dbms_cloud.get_object(
-        object_uri=>'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/all_MiniLM_L12_v2.onnx',
+        object_uri=>'https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/all_MiniLM_L12_v2.onnx',
         directory_name=>'DATA_PUMP_DIR',
         file_name=>'all_MiniLM_L12_v2.onnx'
       );
@@ -245,7 +245,7 @@ As the ADMIN user you will import the NATIONALPARKS and INCIDENT schemas in the 
     DECLARE
       l_job_state      VARCHAR2(1000);
       l_job_handle     NUMBER;
-      dumpFile         VARCHAR2(1024)  := 'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/natparks3.dmp';
+      dumpFile         VARCHAR2(1024)  := 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/natparks3.dmp';
       logFile          VARCHAR2(1024)  := 'natparks3_imp.log';
       logDir           VARCHAR2(20)     := 'DATA_PUMP_DIR';
       logType          NUMBER          := dbms_datapump.ku$_file_type_log_file;
@@ -297,13 +297,13 @@ In this task you will import the workshop's APEX workspaces and applications:
 
     ```[]
     <copy>
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/LRZbkPLpnHd4zLZLo5xHS0xTwGXWLFaFyPD-6CkABY_QHvJOPkIyZrHlrB2gFT08/n/c4u04/b/livelabsfiles/o/apex_natparks_workspace.sql
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/apex_natparks_workspace.sql
 
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/tPJpzAsya_op_ROTWARlTILuGYHXCN95QJrzwV8gAMXqx8FNnOU8y8Rb1FwoWWCn/n/c4u04/b/livelabsfiles/o/apex_natparks_f108.sql
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/apex_natparks_f108.sql
 
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/JS5lvyF8XTN6VLRL-1rlATyfXCYWEWJJU98vIR0OqiVTgGS7aYwk6qcjXVdqqzwP/n/c4u04/b/livelabsfiles/o/apex_incident_workspace.sql
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/apex_incident_workspace.sql
 
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/pNd8hlqGW6gLM4y-Cd-LzAYZdwLnpZodrVQQwgVswcp_xAs9zMPwCaSSlkA_9sZL/n/c4u04/b/livelabsfiles/o/apex_incident_f101.sql
+    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/apex_incident_f101.sql
     </copy>
     ```
 

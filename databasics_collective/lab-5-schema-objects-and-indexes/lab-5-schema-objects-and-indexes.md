@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The tables are done. Finish the schema with a sequence, a view, a synonym, and three B-tree indexes.
+The reservation supplied the four core tables and their rows. Add a sequence, a view, a synonym, and three B-tree indexes to finish the schema.
 
 Here is what each object is for:
 
@@ -84,10 +84,10 @@ A regular view gives a useful query a name. It reads the current rows from the b
            c.course_title,
            e.enrolled_on,
            e.grade
-    FROM   dbc_students s
-    JOIN   dbc_departments d ON d.department_id = s.department_id
-    JOIN   dbc_enrollments e ON e.student_id = s.student_id
-    JOIN   dbc_courses c ON c.course_id = e.course_id;
+    FROM   students s
+    JOIN   departments d ON d.department_id = s.department_id
+    JOIN   enrollments e ON e.student_id = s.student_id
+    JOIN   courses c ON c.course_id = e.course_id;
     </copy>
     ```
 
@@ -130,7 +130,7 @@ A B-tree index keeps ordered key values and their row locations. It can help Ora
     <copy>
     SELECT table_name, index_name, uniqueness
     FROM   user_indexes
-    WHERE  table_name LIKE 'DBC\_%' ESCAPE '\'
+    WHERE  table_name IN ('DEPARTMENTS', 'STUDENTS', 'COURSES', 'ENROLLMENTS')
     ORDER  BY table_name, index_name;
     </copy>
     ```
@@ -142,19 +142,19 @@ A B-tree index keeps ordered key values and their row locations. It can help Ora
     ```sql
     <copy>
     CREATE INDEX dbc_students_dept_ix
-        ON dbc_students (department_id);
+        ON students (department_id);
 
     CREATE INDEX dbc_courses_dept_ix
-        ON dbc_courses (department_id);
+        ON courses (department_id);
 
     CREATE INDEX dbc_enroll_course_ix
-        ON dbc_enrollments (course_id);
+        ON enrollments (course_id);
     </copy>
     ```
 
     Oracle creates three standard B-tree indexes on foreign key columns. It may use them for joins and targeted searches when they cost less than a full table scan.
 
-3. The primary key on `DBC_ENROLLMENTS` already starts with `STUDENT_ID`. The new index starts with `COURSE_ID`, which supports searches from the other side of the relationship.
+3. The primary key on `ENROLLMENTS` already starts with `STUDENT_ID`. The new index starts with `COURSE_ID`, which supports searches from the other side of the relationship.
 
     Oracle normally creates or reuses an index for a primary key or unique rule. It does not automatically index foreign key columns. That is why you checked the existing indexes first.
 
@@ -182,6 +182,7 @@ Oracle records schema details in data dictionary views. Names that begin with `U
     SELECT object_type, COUNT(*) AS object_count
     FROM   user_objects
     WHERE  object_name LIKE 'DBC\_%' ESCAPE '\'
+       OR  object_name IN ('DEPARTMENTS', 'STUDENTS', 'COURSES', 'ENROLLMENTS')
     GROUP  BY object_type
     ORDER  BY object_type;
     </copy>
@@ -199,7 +200,7 @@ Oracle records schema details in data dictionary views. Names that begin with `U
            c.column_name
     FROM   user_indexes i
     JOIN   user_ind_columns c ON c.index_name = i.index_name
-    WHERE  i.table_name LIKE 'DBC\_%' ESCAPE '\'
+    WHERE  i.table_name IN ('DEPARTMENTS', 'STUDENTS', 'COURSES', 'ENROLLMENTS')
     ORDER  BY i.table_name, i.index_name, c.column_position;
     </copy>
     ```
@@ -222,5 +223,5 @@ Oracle records schema details in data dictionary views. Names that begin with `U
 
 ## Acknowledgements
 
-* **Author** - Oracle University Program
-* **Last Updated By/Date** - Oracle University Program, October 2026
+* **Author** - Ilan Gómez Guerrero
+* **Last Updated By/Date** - Ilan Gómez Guerrero, November 2026
