@@ -1,4 +1,4 @@
-# Add and Evaluate a Search
+# Lab 2: Add and Evaluate a Search
 
 ## Introduction
 
@@ -180,7 +180,7 @@ A search target describes a destination and tells Trusted Answer Search which re
 
 3. Skip the optional tags. Select **Create Search Target** and check that **Open Stock Orders** appears in the draft's targets.
 
-You have connected a new search destination to an existing webpage. Trusted Answer Search does not create the report or place stock orders.
+    You have connected a new search destination to an existing webpage. Trusted Answer Search does not create the report or place stock orders.
 
 ## Task 2: Test Queries and Improve Ranking with Admin Feedback
 
@@ -245,9 +245,9 @@ Publishing lets the website's search widget use the tested configuration. Publis
 
 2. Read **Total Searches**, **Searches with a Clicked Result**, and **Click-Through Rate**. The rate divides searches with a clicked result by total searches. Explain which part of your widget activity contributes to each count; Query Tester searches are excluded.
 
-A result click records usage; it does not prove correctness. Next, save the query with the expected target and input so you can check it again after changes.
+    A result click records usage; it does not prove correctness. Next, save the query with the expected target and input so you can check it again after changes.
 
-Dashboard describes published search activity. Query Tester searches are separate and do not count toward the widget's **Total Searches** or **Click-Through Rate**.
+    Dashboard describes published search activity. Query Tester searches are separate and do not count toward the widget's **Total Searches** or **Click-Through Rate**.
 
 ## Task 5: Build an Evaluation Set and Improve Search Accuracy
 
@@ -300,7 +300,7 @@ An evaluation set stores queries and their expected targets and inputs. Import a
 
 ### Correct the Missing Match
 
-For this comparison, use the following sequence:
+    For this comparison, use the following sequence:
 
 1. Set **Edit Published Versions? → Yes** so you can save administrator feedback on the published version.
 2. Apply feedback and rerun the evaluation against that **same version**.
@@ -348,7 +348,7 @@ For this comparison, use the following sequence:
 4. Compare **P1** and **P3** as well. In the verified workshop run, P1 changed from **66.67% to 83.33%** and P3 from **83.33% to 100%**. The bond query still passed at rank 2, so P1 remained below 100%.
 5. Return to **Settings** > **Search Space Settings** for **Brokerage Lab**, set **Edit Published Versions?** to **No**, and select **Save**. Your feedback remains saved.
 
-You first improved a report that was already retrieved for the purchase query. Here, feedback brought a missing report into the results, and the unchanged evaluation measured the improvement. If the documented baseline or final checks differ, stop and report both run IDs to the workshop owner; do not change the expected answers to make the run pass.
+    You first improved a report that was already retrieved for the purchase query. Here, feedback brought a missing report into the results, and the unchanged evaluation measured the improvement. If the documented baseline or final checks differ, stop and report both run IDs to the workshop owner; do not change the expected answers to make the run pass.
 
 ## Task 6: Verify a Sell-Order Search
 
@@ -372,7 +372,7 @@ Check that the report also opens correctly for a sell-order query.
     | Open orders | **2** |
     | Shares remaining | **25** |
 
-Your `LAB_ORDER_SIDE` value set maps **sales** to `SELL`. The search target's URL passes that value to the report. The saved evaluation contains **six** queries and checks both `BUY` and `ALL` for this report; this additional Query Tester search is not added to the evaluation set.
+    Your `LAB_ORDER_SIDE` value set maps **sales** to `SELL`. The search target's URL passes that value to the report. The saved evaluation contains **six** queries and checks both `BUY` and `ALL` for this report; this additional Query Tester search is not added to the evaluation set.
 
 ## Acknowledgements
 

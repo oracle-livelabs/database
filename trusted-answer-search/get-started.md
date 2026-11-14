@@ -29,7 +29,7 @@ Keep the report tab open. Later, you will use its URL as the destination for you
 
 A search space holds report destinations (search targets) and the allowed input values (target value sets). You will create **Brokerage Lab**, edit its draft, and publish it for the widget. The widget is already connected to that exact space name; use it as written. It will not return your space's results until you publish.
 
-Continue to **Create a Search Space and Import Reports**.
+Continue to **Lab 1: Create a Search Space and Import Reports**.
 
 > **Using your own environment?** Download Trusted Answer Search from the [Oracle Trusted Answer Search website](https://www.oracle.com/database/trusted-answer-search/) and follow the extracted ZIP's `README.md`. The workshop owner must prepare the website, report, workshop downloads, and widget connection described in the workshop setup notes before the exercise.
 
