@@ -31,7 +31,11 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-3. Read the result. Your user and schema should both be `DATABASICS`. `SERVICE_NAME` shows the service used by the worksheet. `CONTAINER_NAME` shows the pluggable database that contains your schema.
+3. Read the result. It should show `DATABASICS` for both the current user and schema. `SERVICE_NAME` shows the service used by the worksheet, and `CONTAINER_NAME` shows the pluggable database that contains your schema.
+
+    The result should show your current session details, with `DATABASICS` as both the user and schema.
+
+    ![Database Actions showing DATABASICS session context values](images/session-context.png)
 
 ## Task 2: Inspect the database version
 
@@ -39,13 +43,13 @@ Estimated Time: 10 minutes
 
     ```sql
     <copy>
-    SELECT banner_full
-    FROM   v$version
-    WHERE  banner_full LIKE 'Oracle Database%';
+    SELECT product, version, version_full, status
+    FROM   product_component_version
+    ORDER  BY product;
     </copy>
     ```
 
-2. Write down the database version. Some newer features depend on the version, but this workshop stays with common Oracle Database features.
+2. Find the Oracle AI Database row and read `VERSION_FULL`. This view lists version information for the database and its components. It avoids filtering on a product name that can vary by release.
 
 ## Task 3: Inspect your schema
 
@@ -60,6 +64,14 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
+    The result should list the four ready workshop tables. You can also find them in the Database Actions table navigator.
+
+    ![Database Actions listing the four core workshop tables](images/core-tables.png)
+
+    The navigator shows the tables available in the DATABASICS schema and lets you expand a table to inspect its columns.
+
+    ![Database Actions showing the DATABASICS schema and its tables](images/tables-in-navigator.png)
+
 2. Count your objects by type.
 
     ```sql
@@ -71,19 +83,24 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-3. Check for objects from an earlier workshop run.
+    The result groups the objects owned by your user, such as tables, indexes, and any Database Actions support objects.
+
+    ![Query result showing schema objects grouped by type](images/object-counts.png)
+
+3. Look at the indexes that support the ready tables.
 
     ```sql
     <copy>
-    SELECT object_type, object_name, status
-    FROM   user_objects
-    WHERE  object_name LIKE 'DBC\_%' ESCAPE '\'
-       OR  object_name IN ('DEPARTMENTS', 'STUDENTS', 'COURSES', 'ENROLLMENTS')
-    ORDER  BY object_type, object_name;
+    SELECT table_name, index_name, uniqueness
+    FROM   user_indexes
+    WHERE  table_name IN ('DEPARTMENTS', 'STUDENTS', 'COURSES', 'ENROLLMENTS')
+    ORDER  BY table_name, index_name;
     </copy>
     ```
 
-4. You should find the four core tables. Database Actions may also create a `DBTOOLS$EXECUTION_HISTORY` table for its own use. If a core table is missing, the reservation setup has not finished.
+    The result should show indexes used by the primary key and unique constraints. Oracle creates or reuses these indexes to enforce those rules. This query only reads the data dictionary; it does not change your schema. Lab 5 adds separate indexes on foreign key columns so you can compare the list before and after. Database Actions may also create a `DBTOOLS$EXECUTION_HISTORY` table for its own use. If a core table is missing, the reservation setup has not finished.
+
+    ![Query output listing indexes for the core tables](images/existing-indexes.png)
 
 ## Task 4: Connect the concepts
 

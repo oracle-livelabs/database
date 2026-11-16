@@ -15,18 +15,33 @@ You will:
 
 Estimated Time: 15 minutes
 
-## Task 1: Find the repeated facts
+## Task 1: See what a flat report repeats
 
-1. Consider a single table with these columns:
+1. Run a report that combines student, department, course, and enrollment details.
 
-    ```text
-    STUDENT_ID, STUDENT_NAME, EMAIL, DEPARTMENT_NAME, DEPARTMENT_LOCATION,
-    COURSE_CODE, COURSE_TITLE, CREDITS, ENROLLED_ON, GRADE
+    ```sql
+    <copy>
+    SELECT s.student_id,
+           s.first_name || ' ' || s.last_name AS student_name,
+           s.email,
+           d.department_name,
+           d.location,
+           c.course_code,
+           c.course_title,
+           e.enrolled_on,
+           e.grade
+    FROM   students s
+    JOIN   departments d ON d.department_id = s.department_id
+    JOIN   enrollments e ON e.student_id = s.student_id
+    JOIN   courses c ON c.course_id = e.course_id
+    ORDER  BY s.student_id, c.course_code
+    FETCH FIRST 12 ROWS ONLY;
+    </copy>
     ```
 
-2. Look for facts that repeat. A student name and department would appear once for every enrollment. Course details would appear once for every student in that course.
+2. Student and department details repeat when a student takes several courses. Course details repeat for each student enrolled.
 
-3. Think about a department location change. You would need to update several rows, and missing one would leave conflicting data.
+3. Imagine changing a department location in this spreadsheet. You would edit many rows and could miss one. The ready schema stores each fact once and joins the tables for reports.
 
 ## Task 2: Separate the entities
 

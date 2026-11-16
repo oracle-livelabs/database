@@ -39,21 +39,32 @@ A sequence gives you new numbers without checking the highest value in a table. 
     </copy>
     ```
 
-    `USER_SEQUENCES` lists the sequences in your schema. If this query returns a row, `DBC_STUDENT_SEQ` already exists. Because Oracle caches sequence values, `LAST_NUMBER` may not be the next value you receive.
+    On a new reservation, the result should be empty because the sequence has not been created yet. If a row appears, it already exists. `LAST_NUMBER` is a cache value and may not be the next value you receive.
 
-2. If the query returns no rows, create the sequence.
+    ![Sequence lookup returning no row before it is created](images/sequence-check.png)
+
+2. Run this block with **Run Script** (F5). It creates the sequence if missing and can be run again safely.
 
     ```sql
     <copy>
-    CREATE SEQUENCE dbc_student_seq
-        START WITH 1100
-        INCREMENT BY 1
-        NOCYCLE
-        CACHE 20;
+    DECLARE
+        sequence_count PLS_INTEGER;
+    BEGIN
+        SELECT COUNT(*)
+        INTO   sequence_count
+        FROM   user_sequences
+        WHERE  sequence_name = 'DBC_STUDENT_SEQ';
+
+        IF sequence_count = 0 THEN
+            EXECUTE IMMEDIATE
+                'CREATE SEQUENCE dbc_student_seq START WITH 1100 INCREMENT BY 1 NOCYCLE CACHE 20';
+        END IF;
+    END;
+    /
     </copy>
     ```
 
-    The sequence starts at 1100 and adds one for each request. `NOCYCLE` stops it from returning to the beginning. `CACHE 20` keeps a small group of values ready in memory.
+    The script should finish without errors and leave `DBC_STUDENT_SEQ` available. It starts at 1100 and adds one for each request. `NOCYCLE` stops it from returning to the beginning. `CACHE 20` keeps a small group of values ready in memory.
 
 3. Read the next value without inserting a row.
 
@@ -64,7 +75,7 @@ A sequence gives you new numbers without checking the highest value in a table. 
     </copy>
     ```
 
-    `NEXTVAL` returns a new number and moves the sequence forward. `DUAL` gives the query one row to work with. The alias makes the output easier to read.
+    The result should be one new number in `NEXT_STUDENT_ID`. `NEXTVAL` returns a number and moves the sequence forward. `DUAL` gives the query one row to work with. Each request consumes a value even when you do not insert it.
 
 4. Oracle does not roll sequence values back. An unused cached value can also disappear when an instance stops. Gaps are normal, and they do not mean that table rows are missing.
 
@@ -91,7 +102,9 @@ A regular view gives a useful query a name. It reads the current rows from the b
     </copy>
     ```
 
-    The view saves the four-table query, not another copy of the data. `CREATE OR REPLACE` also lets you update the definition later without dropping the view first.
+    The result should report that the view was created. It saves the four-table query, not another copy of the data. `CREATE OR REPLACE` lets you update the definition later without dropping the view first.
+
+    ![SQL worksheet creating the student schedule view](images/create-schedule-view.png)
 
 2. Create a shorter private synonym for the view.
 
@@ -102,7 +115,9 @@ A regular view gives a useful query a name. It reads the current rows from the b
     </copy>
     ```
 
-    `DBC_SCHEDULE` is now a shorter name for the view. The synonym does not store data and does not copy the view.
+    The result should report that the synonym was created. `DBC_SCHEDULE` is a shorter name for the view; it does not store or copy data.
+
+    ![SQL worksheet creating the private synonym](images/create-synonym.png)
 
 3. Query through the synonym.
 
@@ -114,7 +129,9 @@ A regular view gives a useful query a name. It reads the current rows from the b
     </copy>
     ```
 
-    Oracle resolves `DBC_SCHEDULE` to the original view and runs its joins. You get the same rows as you would from `DBC_STUDENT_SCHEDULE_V`.
+    The result should show the schedule rows from the view. Oracle resolves `DBC_SCHEDULE` to the original view and runs its joins, so the rows match `DBC_STUDENT_SCHEDULE_V`.
+
+    ![Schedule results queried through the synonym](images/query-synonym.png)
 
 4. A regular view stores the query definition. A materialized view stores the query results on disk and must refresh when the base data changes. We will not create one in this workshop.
 
@@ -122,7 +139,7 @@ A regular view gives a useful query a name. It reads the current rows from the b
 
 ## Task 3: Add indexes for common joins
 
-A B-tree index keeps ordered key values and their row locations. It can help Oracle find a small set of rows without scanning the whole table. An index also uses storage and adds work when data changes, so do not index every column.
+Lab 1 showed indexes for primary key and unique constraints. Here, add three more on foreign keys. A B-tree stores ordered keys and row locations. It can speed up searches, but uses storage and adds write cost.
 
 1. Check which indexes already exist.
 
@@ -135,9 +152,11 @@ A B-tree index keeps ordered key values and their row locations. It can help Ora
     </copy>
     ```
 
-    `USER_INDEXES` lists the indexes in your schema. The filter keeps workshop tables, and the result shows whether each index allows duplicate values.
+    The result should show indexes on primary key and unique columns, but not the three foreign key index names yet. If one is already present, skip its `CREATE INDEX` statement.
 
-2. If the following indexes are absent, create them.
+    ![Existing primary key and unique constraint indexes before the exercise](images/indexes-before-practice.png)
+
+2. Create the missing indexes.
 
     ```sql
     <copy>
@@ -152,13 +171,15 @@ A B-tree index keeps ordered key values and their row locations. It can help Ora
     </copy>
     ```
 
-    Oracle creates three standard B-tree indexes on foreign key columns. It may use them for joins and targeted searches when they cost less than a full table scan.
+    The result should show three successful index creations. These indexes give Oracle another path for joins and searches, and it can use them when they cost less than a full table scan.
 
-3. The primary key on `ENROLLMENTS` already starts with `STUDENT_ID`. The new index starts with `COURSE_ID`, which supports searches from the other side of the relationship.
+    ![SQL worksheet creating the three foreign key indexes](images/create-foreign-key-indexes.png)
 
-    Oracle normally creates or reuses an index for a primary key or unique rule. It does not automatically index foreign key columns. That is why you checked the existing indexes first.
+3. Repeat Step 1. The three new indexes should now appear. This shows what `CREATE INDEX` changed.
 
-4. Use the workload to choose an index type.
+4. The primary key on `ENROLLMENTS` already starts with `STUDENT_ID`. The new index starts with `COURSE_ID`, which supports searches from the other side of the relationship. Oracle normally creates or reuses an index for a primary key or unique rule. It does not automatically index foreign key columns.
+
+5. Use the workload to choose an index type.
 
     | Index type | Typical use |
     | --- | --- |
@@ -167,9 +188,9 @@ A B-tree index keeps ordered key values and their row locations. It can help Ora
     | Function-based | Expressions such as `UPPER(last_name)` |
     | Specialized | Text, spatial, JSON, graph, or vector searches |
 
-5. Do not worry if Oracle scans the full table in this small example. The optimizer uses an index only when it estimates that the index will cost less.
+6. Do not worry if Oracle scans the full table in this small example. The optimizer uses an index only when it estimates that the index will cost less.
 
-6. Autonomous Database can evaluate B-tree indexes automatically. You created them yourself here so you can see how index selection works.
+7. Autonomous Database can manage indexes automatically. Create these three yourself to see how the index list changes.
 
 ## Task 4: Inspect the finished schema
 
@@ -188,7 +209,9 @@ Oracle records schema details in data dictionary views. Names that begin with `U
     </copy>
     ```
 
-    `USER_OBJECTS` lists everything owned by your user. `GROUP BY` collects matching object types, and `COUNT` totals them. You should see tables, indexes, a view, a sequence, and a synonym.
+    The result should group matching objects by type. `USER_OBJECTS` lists everything owned by your user; `GROUP BY` collects object types and `COUNT` totals them. Expect tables, indexes, a view, a sequence, and a synonym.
+
+    ![Object counts after creating the workshop schema objects](images/object-counts-after-practice.png)
 
 2. List the indexed columns in order.
 
@@ -205,7 +228,9 @@ Oracle records schema details in data dictionary views. Names that begin with `U
     </copy>
     ```
 
-    The join connects each index to its columns. `COLUMN_POSITION` shows the column order. The first column matters because it usually controls which searches can use the index well.
+    The result should list each index column and its position. The join connects each index to its columns. `COLUMN_POSITION` shows the order, and the first column usually controls which searches can use the index well.
+
+    ![Index columns and their positions for each core table](images/indexed-columns.png)
 
 3. Run the schedule query one last time.
 
@@ -217,7 +242,9 @@ Oracle records schema details in data dictionary views. Names that begin with `U
     </copy>
     ```
 
-    The view should still return the same schedule. Indexes do not change the data or the answer. They only give the optimizer another way to find the rows.
+    The result should show the same schedule rows as before. Indexes do not change the data or answer; they give the optimizer another way to find rows.
+
+    ![Final schedule query results from the view](images/schedule-view-results.png)
 
 4. Your schema now has data, constraints, a sequence, a view, a synonym, and indexes. Keep the objects for review unless your instructor asks you to reset the workshop schema.
 

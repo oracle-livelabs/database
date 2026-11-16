@@ -28,7 +28,9 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    `USER_TAB_COLUMNS` describes tables owned by your user. Find a `NUMBER`, a `VARCHAR2`, and a `DATE` column. A column marked `N` under `NULLABLE` requires a value.
+    The result should list each column name, data type, and whether it accepts nulls. Find a `NUMBER`, a `VARCHAR2`, and a `DATE` column. A column marked `N` under `NULLABLE` requires a value.
+
+    ![Core table column names, data types, and nullability](images/core-table-columns.png)
 
 2. List the rules on those tables.
 
@@ -41,7 +43,9 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    `P` means primary key, `R` foreign key, `U` unique, and `C` check or a required value. The reservation created these rules before you signed in.
+    The result should show the rules on each core table: `P` means primary key, `R` foreign key, `U` unique, and `C` check or required value. The reservation created these rules before you signed in.
+
+    ![Constraint types on the four preloaded tables](images/core-table-constraints.png)
 
 ## Task 2: Create a practice table
 
@@ -63,9 +67,13 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    `NOTE_ID` identifies each note. The foreign key only accepts a student already in `STUDENTS`. The check rule limits the status to two values. This step leaves the university tables untouched.
+    The result should report that the table was created. `NOTE_ID` identifies each note. The foreign key only accepts a student already in `STUDENTS`, and the check rule limits status to two values. The definition screenshot shows the statement used.
 
-2. Refresh the Tables list. You should see `LAB_STUDENT_NOTES` next to the four core tables.
+    ![SQL worksheet with the practice table definition](images/create-practice-table.png)
+
+2. Refresh the Tables list. You should see `LAB_STUDENT_NOTES` next to the four core tables. The result should show the new table and its columns.
+
+    ![Database Actions showing the new LAB_STUDENT_NOTES table and its columns](images/practice-table-created.png)
 
 ## Task 3: Change and check the practice table
 
@@ -78,7 +86,9 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    `ALTER TABLE` changes the structure. The default supplies the current date when a new row omits `NOTED_ON`.
+    The result should report that the table was altered. The default supplies the current date when a new row omits `NOTED_ON`. The screenshot shows the `ALTER TABLE` statement used.
+
+    ![SQL worksheet after adding the NOTED_ON date column](images/practice-table-altered.png)
 
 2. Check its columns and constraints.
 
@@ -96,7 +106,9 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    Find `NOTED_ON` and the primary key, foreign key, and check rule. Oracle also records the required columns as constraints.
+    The result should include the new `NOTED_ON` date column and show the primary key, foreign key, and check rule. Oracle also records required columns as constraints.
+
+    ![Practice table columns and constraints after ALTER TABLE](images/practice-table-columns-and-rules.png)
 
 ## Task 4: Remove the practice table
 
@@ -108,7 +120,9 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    This removes only `LAB_STUDENT_NOTES`. The four university tables and their rows remain. You can repeat this lab without a name conflict.
+    The result should report that `LAB_STUDENT_NOTES` was dropped. The four university tables and their rows remain, and you can repeat this lab without a name conflict.
+
+    ![Database Actions output confirming the practice table was dropped](images/practice-table-dropped.png)
 
 2. `CREATE`, `ALTER`, and `DROP` are DDL statements. Oracle commits pending work around DDL, so finish any practice transactions before changing a table structure.
 
