@@ -9,7 +9,24 @@ Estimated Time: 5 minutes
 ### Objectives
 
 * Create Brokerage Lab and its draft version.
-* Import the existing report targets and value sets, then test an imported search.
+* Import the existing report targets and value sets, then test a search query.
+
+## Understand the Core Concepts
+
+The following concepts describe the search configuration you will build in this workshop.
+
+| Concept | Meaning in this workshop |
+| --- | --- |
+| **Search space** | A versioned collection of search targets for an application or domain. You will create **Brokerage Lab** to hold your brokerage search configuration. |
+| **Search target** | A configured entry describing a destination users can find through search. **Open Stock Orders** will be your new target; its report webpage already exists. |
+| **Target action** | The URL or SQL associated with a search target. In this lab, the action is a URL that the widget opens when the user selects the report. |
+| **Target input** | A placeholder in the action that receives a resolved value. `:ORDER_SIDE` determines whether the report shows buy orders, sell orders, or all open orders. |
+| **Target value set** | Defines how values are resolved for a target input. You will configure `BUY`, `SELL`, and `ALL`, with synonyms such as **purchases** for `BUY`. |
+| **Search space version** | A particular version of the search configuration. You will configure and test a **draft**, then **publish** it for searches through the widget. |
+
+After you configure the target and value set in Lab 2, a search for **"check purchases that have not gone through"** finds the **Open Stock Orders** target. The configured value set maps **purchases** to `BUY`, supplying the `:ORDER_SIDE` input in its URL action. Selecting the result opens the existing report with its buy-order view.
+
+For more details, see [Core concepts in Oracle Trusted Answer Search](https://docs.oracle.com/en/database/oracle/oracle-database/26/otasc/trusted-answer-search-concepts.html).
 
 ## Task 1: Create Your Search Space
 
@@ -51,7 +68,7 @@ Estimated Time: 5 minutes
 
     The files register existing report URLs, descriptions, sample queries, and input mappings. Importing them does not create report webpages or copy brokerage account data into Trusted Answer Search. **Open Stock Orders** and `LAB_ORDER_SIDE` are deliberately absent: you will add them next.
 
-## Task 3: Try an Imported Search
+## Task 3: Test a Search Query
 
 1. Open **Query Tester**, choose **LiveLab Draft**, and search for:
 
