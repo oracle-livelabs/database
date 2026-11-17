@@ -19,7 +19,7 @@ Estimated Time: 10 minutes
 
 1. Sign in to Database Actions with your workshop user and open the SQL Worksheet.
 
-2. Run this query.
+2. Run this query to read details about the session you are currently using. `SYS_CONTEXT` returns information about that session; `DUAL` is Oracle's one-row table, so the query can return the values without reading a workshop table.
 
     ```sql
     <copy>
@@ -32,8 +32,6 @@ Estimated Time: 10 minutes
     ```
 
 3. Read the result. It should show `DATABASICS` for both the current user and schema. `SERVICE_NAME` shows the service used by the worksheet, and `CONTAINER_NAME` shows the pluggable database that contains your schema.
-
-    The result should show your current session details, with `DATABASICS` as both the user and schema.
 
     ![Database Actions showing DATABASICS session context values](images/session-context.png)
 
@@ -50,6 +48,8 @@ Estimated Time: 10 minutes
     ```
 
 2. Find the Oracle AI Database row and read `VERSION_FULL`. This view lists version information for the database and its components. It avoids filtering on a product name that can vary by release.
+
+    ![Database version query and result in Database Actions](images/database-version.png)
 
 ## Task 3: Inspect your schema
 
@@ -72,7 +72,7 @@ Estimated Time: 10 minutes
 
     ![Database Actions showing the DATABASICS schema and its tables](images/tables-in-navigator.png)
 
-2. Count your objects by type.
+2. Count your objects by type. This checks the schema's structure, not the number of rows stored in the tables.
 
     ```sql
     <copy>

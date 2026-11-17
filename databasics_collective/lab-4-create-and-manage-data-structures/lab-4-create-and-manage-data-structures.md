@@ -67,11 +67,11 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should report that the table was created. `NOTE_ID` identifies each note. The foreign key only accepts a student already in `STUDENTS`, and the check rule limits status to two values. The definition screenshot shows the statement used.
+    The result should report that the table was created. `NOTE_ID` identifies each note, and `NUMBER` stores that identifier. `VARCHAR2` stores the note and status text. `NOT NULL` requires a student and note text; the status is also required, but its default supplies `OPEN` when you omit it. The foreign key only accepts an existing student, and the check rule limits status to `OPEN` or `CLOSED`. This creates an empty practice table and leaves the four core tables unchanged. The definition screenshot shows the statement used.
 
     ![SQL worksheet with the practice table definition](images/create-practice-table.png)
 
-2. Refresh the Tables list. You should see `LAB_STUDENT_NOTES` next to the four core tables. The result should show the new table and its columns.
+2. Refresh the Tables list because Database Actions may not update the navigator immediately after DDL. You should see `LAB_STUDENT_NOTES` next to the four core tables. The table has columns and rules but no note rows yet; this confirms that the new structure exists.
 
     ![Database Actions showing the new LAB_STUDENT_NOTES table and its columns](images/practice-table-created.png)
 
@@ -86,7 +86,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should report that the table was altered. The default supplies the current date when a new row omits `NOTED_ON`. The screenshot shows the `ALTER TABLE` statement used.
+    The result should report that the table was altered. `ALTER TABLE` changes the practice table's structure, and the default supplies the current date when a new row omits `NOTED_ON`. The screenshot shows the statement used.
 
     ![SQL worksheet after adding the NOTED_ON date column](images/practice-table-altered.png)
 
@@ -106,7 +106,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should include the new `NOTED_ON` date column and show the primary key, foreign key, and check rule. Oracle also records required columns as constraints.
+    These data dictionary queries inspect the table design rather than its rows. The first result should include the new `NOTED_ON` date column; the second should show the primary key, foreign key, and check rule. Oracle also records required columns as constraints.
 
     ![Practice table columns and constraints after ALTER TABLE](images/practice-table-columns-and-rules.png)
 
@@ -120,7 +120,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should report that `LAB_STUDENT_NOTES` was dropped. The four university tables and their rows remain, and you can repeat this lab without a name conflict.
+    The result should report that `LAB_STUDENT_NOTES` was dropped. `PURGE` removes the practice table instead of keeping it in the recycle bin. The four university tables and their rows remain, and you can repeat this lab without a name conflict.
 
     ![Database Actions output confirming the practice table was dropped](images/practice-table-dropped.png)
 

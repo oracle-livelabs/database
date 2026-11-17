@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The reservation has already loaded three departments, 60 students, 10 courses, and 285 enrollments. Use those rows to practice queries. Then try an insert, update, and delete inside a transaction that you roll back.
+The reservation has already loaded three departments, 60 students, 10 courses, and 285 enrollments. Use those rows to practice queries. Then make a few temporary data changes, inspect them, and restore the sample values.
 
 ### Objectives
 
@@ -11,7 +11,7 @@ You will:
 - Check the loaded rows.
 - Filter, sort, join, and aggregate data with `SELECT`.
 - Practice targeted `INSERT`, `UPDATE`, and `DELETE` statements.
-- Control a transaction with `SAVEPOINT`, `ROLLBACK`, and `COMMIT`.
+- Make data changes and restore the workshop rows safely.
 
 Estimated Time: 25 minutes
 
@@ -114,67 +114,135 @@ Estimated Time: 25 minutes
 
 3. The foreign keys give you the join conditions. Each department, student, and course still lives in only one table.
 
-## Task 4: Test data changes inside a transaction
+## Task 4: Make, inspect, and restore data changes
 
-Database Actions runs each statement or script in its own session. A savepoint only works in the session that created it. Run this whole block as one script with **Run Script** (F5 or Fn+F5 on some Mac keyboards). Do not run statements one by one.
+Database Actions can run each worksheet operation in a different session. A `SAVEPOINT` created in one operation is not available to a later one, which causes `ORA-01086`. To let you run the checks separately, this exercise uses committed practice changes and then restores the original sample values with SQL. It does not use `ROLLBACK` across operations.
 
-1. Run the full script and compare the results before and after the rollback.
+### Step 1: Make three practice changes
 
-    ```sql
-    <copy>
-    SAVEPOINT before_practice;
+Run these statements together with **Run Script** (F5 or Fn+F5 on some Mac keyboards). `INSERT` adds a temporary student, `UPDATE` changes the status of student 1002, and `DELETE` removes the enrollment identified by student 1004 and course 2002. The `WHERE` conditions target only the intended rows. Run this block once; the following steps inspect the changes before cleanup.
 
-    INSERT INTO students
-        (student_id, first_name, last_name, email, department_id,
-         enrollment_date, status)
-    VALUES
-        (1999, 'Sam', 'Rivera', 'sarivera@university.com', 10,
-         SYSDATE, 'ACTIVE');
+```sql
+<copy>
+INSERT INTO students
+    (student_id, first_name, last_name, email, department_id,
+     enrollment_date, status)
+VALUES
+    (1999, 'Sam', 'Rivera', 'sarivera@university.com', 10,
+     SYSDATE, 'ACTIVE');
 
-    UPDATE students
-    SET    status = 'PAUSED'
-    WHERE  student_id = 1002;
+UPDATE students
+SET    status = 'PAUSED'
+WHERE  student_id = 1002;
 
-    DELETE FROM enrollments
-    WHERE  student_id = 1004
-      AND  course_id = 2002;
+DELETE FROM enrollments
+WHERE  student_id = 1004
+  AND  course_id = 2002;
+</copy>
+```
 
-    SELECT student_id, first_name, last_name, status
-    FROM   students
-    WHERE  student_id IN (1002, 1999)
-    ORDER  BY student_id;
+The script output should report one inserted row, one updated row, and one deleted row.
 
-    SELECT COUNT(*) AS enrollment_rows_before_rollback
-    FROM   enrollments
-    WHERE  student_id = 1004
-      AND  course_id = 2002;
+![Database Actions output for the practice insert, update, and delete](images/practice-dml-output.png)
 
-    ROLLBACK TO before_practice;
+### Step 2: Check the student changes
 
-    SELECT COUNT(*) AS practice_student_rows_after_rollback
-    FROM   students
-    WHERE  student_id = 1999;
+Run this query as a separate operation.
 
-    SELECT student_id, status
-    FROM   students
-    WHERE  student_id = 1002;
+```sql
+<copy>
+SELECT student_id, first_name, last_name, status
+FROM   students
+WHERE  student_id IN (1002, 1999)
+ORDER  BY student_id;
+</copy>
+```
 
-    SELECT COUNT(*) AS enrollment_rows_after_rollback
-    FROM   enrollments
-    WHERE  student_id = 1004
-      AND  course_id = 2002;
+The result should show student 1002 as `PAUSED` and Sam Rivera as `ACTIVE`.
 
-    COMMIT;
-    </copy>
-    ```
+![Query results showing the student rows after the practice changes](images/students-after-dml.png)
 
-    Before rollback, the first student query should show Sam and student 1002 as `PAUSED`. The enrollment count should be zero because the practice delete removed that row. The script output should report one inserted row, one updated row, and one deleted row.
+### Step 3: Check the enrollment change
 
-    ![Database Actions script output showing insert, update, and delete](images/transaction-changes.png)
+Run this query separately. It checks whether the enrollment for student 1004 in course 2002 is still present.
 
-    After `ROLLBACK TO`, the checks should show no Sam row, student 1002 back to `ACTIVE`, and the enrollment restored with a count of one. The final `COMMIT` ends the clean transaction; none of the practice changes remain.
+```sql
+<copy>
+SELECT COUNT(*) AS enrollment_rows_after_delete
+FROM   enrollments
+WHERE  student_id = 1004
+  AND  course_id = 2002;
+</copy>
+```
 
-    ![Database Actions results confirming rollback restored the original rows](images/rollback-restored-data.png)
+The result should be zero because Step 1 deleted that enrollment.
+
+![Enrollment count query returning zero after the delete](images/enrollment-deleted-count.png)
+
+### Step 4: Restore the starting data
+
+Run this cleanup block with **Run Script**. These statements reverse the practice changes: `DELETE` removes the temporary student, `UPDATE` returns student 1002 to the seeded `ACTIVE` status, and `INSERT` restores the enrollment with its original date and grade. This cleanup restores the sample rows; it is not a transaction rollback.
+
+```sql
+<copy>
+DELETE FROM students
+WHERE  student_id = 1999;
+
+UPDATE students
+SET    status = 'ACTIVE'
+WHERE  student_id = 1002;
+
+INSERT INTO enrollments (student_id, course_id, enrolled_on, grade)
+VALUES (1004, 2002, DATE '2026-09-03', 'C');
+</copy>
+```
+
+The output should report one deleted student, one updated student, and one inserted enrollment. These values match the sample data loaded for the workshop.
+
+![Database Actions output for restoring the original sample data](images/restore-practice-data-output.png)
+
+### Step 5: Verify the data is restored
+
+Run each check separately.
+
+```sql
+<copy>
+SELECT COUNT(*) AS temporary_student_rows
+FROM   students
+WHERE  student_id = 1999;
+</copy>
+```
+
+The result should be zero because the temporary student was removed.
+
+![Temporary student count query returning zero after cleanup](images/temporary-student-removed.png)
+
+```sql
+<copy>
+SELECT student_id, status
+FROM   students
+WHERE  student_id = 1002;
+</copy>
+```
+
+The result should show student 1002 with status `ACTIVE` again.
+
+![Student status query showing the original ACTIVE value](images/student-status-restored.png)
+
+```sql
+<copy>
+SELECT COUNT(*) AS restored_enrollment_rows
+FROM   enrollments
+WHERE  student_id = 1004
+  AND  course_id = 2002;
+</copy>
+```
+
+The result should be one because the enrollment was restored.
+
+![Enrollment count query returning one after cleanup](images/enrollment-restored-count.png)
+
+All three checks should match the original data. The cleanup statements restore the rows explicitly because a rollback cannot reach across separate worksheet operations.
 
 ## Acknowledgements
 
