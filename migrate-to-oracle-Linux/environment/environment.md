@@ -194,15 +194,9 @@ Estimated Time: 45 minutes
 
 1. Select **Red Hat Enterprise Linux**.
 
-1. Choose **Import from an Object Storage URL** and paste the following complete PAR URL:
+1. Choose **Import from an Object Storage URL** and paste the complete prepared-image PAR URL supplied privately by the workshop owner.
 
-    ```bash
-    <copy>
-    https://objectstorage.us-ashburn-1.oraclecloud.com/p/5cCz6xJ700aKu3iGGOlglQ9T4O_etfbUaM5JXvURXgX7URJMqYSwTInAaShXzC1j/n/idhwewbjlvpy/b/custom-image/o/rhel-9-8-apache-source-image-20261025-0915
-    </copy>
-    ```
-
-    **Keep the PAR URL private**
+    If you do not have the URL, request it from the workshop owner before continuing. Keep the URL private; do not include it in workshop files, screenshots, or public messages.
 
 1. Select **OCI** as the image type. The launch mode is selected from the exported metadata automatically.
 
