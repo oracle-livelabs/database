@@ -1,0 +1,62 @@
+{
+  "workshoptitle": "Migrate Red Hat Enterprise Linux to Oracle Linux",
+  "help": "livelabs-help-oci_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Workshop goals, architecture, agenda, and required labs.",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Sign in to OCI and confirm access to the tenancy and compartment used for this workshop.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
+    },
+    {
+      "title": "Lab 1: Build and Verify the Migration Environment",
+      "description": "Required. Build and Verify the Migration Environment.",
+      "filename": "../../environment/environment.md"
+    },
+    {
+      "title": "Lab 2: Linux Command-Line Quickstart (Optional)",
+      "description": "Optional Linux command-line practice.",
+      "filename": "../../linux-quickstart/linux-quickstart.md"
+    },
+    {
+      "title": "Lab 3: Assess Readiness and Protect the Source",
+      "description": "Required. Assess Readiness and Protect the Source.",
+      "filename": "../../migration-readiness/migration-readiness.md"
+    },
+    {
+      "title": "Lab 4: Migrate to Oracle Linux",
+      "description": "Required. Migrate to Oracle Linux.",
+      "filename": "../../migrate-rhel-to-oracle-linux/migrate-rhel-to-oracle-linux.md"
+    },
+    {
+      "title": "Lab 5: Explore Rebootless Patching with Ksplice",
+      "description": "Required. Explore Rebootless Patching with Ksplice.",
+      "filename": "../../ksplice/ksplice.md"
+    },
+    {
+      "title": "Lab 6: Explore Oracle Linux Kernel Choices",
+      "description": "Required. Explore Oracle Linux Kernel Choices.",
+      "filename": "../../kernel-choices/kernel-choices.md"
+    },
+    {
+      "title": "Lab 7: OS Management Hub Quickstart on OCI",
+      "description": "Required. OS Management Hub Quickstart on OCI.",
+      "filename": "../../os-management-hub/os-management-hub.md"
+    },
+    {
+      "title": "Lab 8: Automate Post-Migration Verification with Oracle Linux Automation Engine",
+      "description": "Required. Automate Post-Migration Verification with Oracle Linux Automation Engine.",
+      "filename": "../../automation-engine/automation-engine.md"
+    },
+    
+    {
+      "title": "Need Help?",
+      "description": "Troubleshooting resources and directions for getting assistance during the workshop.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
