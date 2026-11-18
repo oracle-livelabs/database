@@ -97,7 +97,9 @@ In the following sections, we will create different duality views on top of the 
 
 ## Task 1: Create a JSON document representation matching the original json collection
 
-The first view gives us the same store menu view as the JSON collection, including the identical JSON documents as initially stored, where local overrides of price and item name silently change the content without proper identification. Since this view does not distinguish whether the item information is coming from Corporate or from a local store, this JSON collection representation is read only.
+The first view gives us the same store menu view as the JSON collection, including the identical JSON documents as initially stored, where local overrides of price and item name silently change the content without proper identification. Since this view does not distinguish whether the item information is coming from Corporate or from a local store, this JSON collection representation is read only.  
+  
+Note: you need to create the Duality View by running the command as script in Database Actions.
 
 ```sql
 <copy>

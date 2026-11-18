@@ -24,10 +24,10 @@ This lab assumes you have:
 
     <!-- 
 <if type="advanced">
-    - [sample-mkplc-advanced.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/ll-orm-mkplc-tenancy-advanced.zip)
+    - [sample-mkplc-advanced.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/JsqfrhyU1XL4XO9bVtcIwGUSyFvXdh-C3bAQlm8tBCjCubXXjibfvAWeJkHFOmbj/n/c4u02/b/hosted_workshops/o/stacks/ll-orm-mkplc-tenancy-advanced.zip)
 </if>
 <if type="basics">
-    - [sample-mkplc-basics.zip](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/tfC_fKB7HB5Wo1pvpYu1fHifVw-E7MZruSx9l5J6ebjhGZOwsFawUiJlJhzgR7Hy/n/c4u02/b/hosted_workshops/o/stacks/ll-orm-mkplc-tenancy-basics.zip)
+    - [sample-mkplc-basics.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/JsqfrhyU1XL4XO9bVtcIwGUSyFvXdh-C3bAQlm8tBCjCubXXjibfvAWeJkHFOmbj/n/c4u02/b/hosted_workshops/o/stacks/ll-orm-mkplc-tenancy-basics.zip)
 </if>
     -->
  

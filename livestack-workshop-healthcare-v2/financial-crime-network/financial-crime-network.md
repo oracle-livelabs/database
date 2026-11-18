@@ -36,6 +36,11 @@ Bob also needs to communicate the pathway to reviewers who may not want to inter
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-05-Connected-Care-Pathways-Unified-Recording.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Operating Story
 
 | Step | Healthcare focus |
@@ -81,6 +86,8 @@ In this lab, a **hop** means one relationship step. Moving from the patient jour
     ```
 
     The query joins `HC_CARE_NODES` twice: once for the patient journey and once for the connected care fact. `HC_CARE_EDGES` supplies the relationship between them.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/direct-care-connections.png " ")
 
     **Expected output: Direct care connections**
 
@@ -144,6 +151,8 @@ In this lab, a **hop** means one relationship step. Moving from the patient jour
     ```
 
     Jessica now needs a separate query branch for each path length. The first branch follows one relationship; the second adds another relationship and another node join. `UNION ALL` preserves both recorded paths when different clinical contexts reach the same quality signal.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/one-hop-and-two-hop-paths.png " ")
 
     **Expected output: One-hop and two-hop paths**
 
@@ -211,6 +220,8 @@ In graph terms, the journey and connected care facts are **vertices**. Each row 
 
     The result has the same shape as Jessica's query. The difference is the way Bob describes the investigation: start at one vertex, follow one edge, and return the connected vertex.
 
+    ![Direct Connections](images/direct-connections-sql-pgqs.png " ")
+
     **Expected output: Direct connections with SQL/PGQ**
 
     | Journey ID | Connected Node ID | Connected Care Fact | Type | Relationship | Evidence Score | Risk Score |
@@ -260,6 +271,8 @@ Bob now follows every care fact within one or two hops of the patient journey. T
     ```
 
     `DISTINCT` returns each connected care fact once even when more than one path reaches it. The result therefore contains eight nodes, while the relational path query returned nine rows because it preserved both paths into the quality signal.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/connected-care-facts.png " ")
 
     **Expected output: Connected care facts**
 
@@ -322,6 +335,8 @@ Bob narrows the pathway to one question: **which recorded paths connect the pati
 
 2. Review the business result.
 
+    ![Open Graph Studio from the Database Actions launchpad](images/quality-signal-evidence-paths.png " ")
+
     **Expected output: Quality-signal evidence paths**
 
     | Clinical Context | Type | Quality Signal | First Relationship | Second Relationship | First Score | Second Score |
@@ -332,6 +347,11 @@ Bob narrows the pathway to one question: **which recorded paths connect the pati
     The two rows show why the quality signal belongs in the same operational review: one recorded path reaches it through the care gap, and another reaches it through the condition. The query exposes those relationships without implying clinical causality.
 
 ## Task 5: Visualize the Care Pathway with Oracle Graph Studio
+
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-06-Graph-Studio-Pickup-Recording.mp4">
+  Your browser does not support the video tag.
+</video>
 
 Bob’s SQL/PGQ queries showed which conditions, care gaps, encounters, treatments, providers, and quality signals connect to the patient journey. The results give him a precise evidence trail, but rows alone can make it difficult for a care operations reviewer to see how those facts form one connected pathway.
 
@@ -396,6 +416,8 @@ Run the notebook paragraphs from top to bottom. Use the triangle **Run** button 
 2. Under **Visualize the same pathway**, run the next SQL paragraph.
 
     Graph Studio draws the patient journey and every relationship used to reach those care facts. The result should contain **9 vertices** and **9 edges**. Select a vertex to inspect its `NODE_LABEL`, `NODE_TYPE`, `RISK_SCORE`, and `PATHWAY_VOLUME`. Select an edge to inspect its `RELATIONSHIP_TYPE` and `EVIDENCE_SCORE`.
+
+    > **Note:** Below the first graph, increase the displayed element count to **18** to show the complete pathway: **9 vertices and 9 edges**.
 
     ![Graph Studio visualization of the patient journey and connected care facts](images/healthcare-pathway-graph-studio.png " ")
 

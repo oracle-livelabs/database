@@ -1,0 +1,89 @@
+{
+  "workshoptitle": "Improve application performance with True Cache - DBW26",
+  "help": "livelabs-help-db_us@oracle.com",
+  "variables": [
+    "../../variables/variables.json",
+    "../../variables/variables-in-another-file.json"
+  ],
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Overview of Oracle True Cache and the workshop objectives",
+      "filename": "../../introduction/introduction.md"
+    },
+    {
+      "title": "Get Started",
+      "description": "Sign in to Oracle Cloud",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login-23ai.md"
+    },
+    {
+      "title": "FastLab: Quick Guided Demo",
+      "description": "Complete the six-step guided True Cache demonstration in the visual command center",
+      "filename": "../../fastlab/fastlab_dbw26.md",
+      "type": "nonsandbox"
+    },
+    {
+      "title": "Lab 1: Prepare Setup",
+      "description": "How to download your ORM stack and update security rules for an existing VCN",
+      "publisheddate": "09/28/2020",
+      "filename": "../../prepare-setup/prepare-setup.md"
+    },
+    {
+      "title": "Lab 2: Environment Setup",
+      "description": "How to provision the workshop environment and connect to it",
+      "publisheddate": "06/30/2020",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/setup-compute-generic/setup-compute-novnc.md"
+    },
+    {
+      "title": "Lab 3: Initialize Environment",
+      "description": "Validate the pre-provisioned containers and start the database services",
+      "filename": "../../initialize-environment/initialize-environment_dbw26.md",
+      "type": "nonsandbox"
+    },
+    {
+      "title": "Lab 4: Prepare and Warm True Cache",
+      "description": "Review the preloaded transaction objects, apply KEEP, and warm True Cache",
+      "filename": "../../data-load/data-load_dbw26.md",
+      "type": "nonsandbox"
+    },
+    {
+      "title": "Lab 5: Use True Cache through JDBC",
+      "description": "Validate JDBC read routing to Primary and True Cache",
+      "filename": "../../jdbc/jdbc-routing_dbw26.md",
+      "type": "nonsandbox"
+    },
+    {
+      "title": "Lab 6: Performance Comparison and Lag Observability",
+      "description": "Compare Primary and True Cache read latency and review replication statistics",
+      "filename": "../../performance/performance_dbw26.md",
+      "type": "nonsandbox"
+    },
+    {
+      "title": "Lab 7: Availability and Failover",
+      "description": "Verify True Cache reads while Primary is stopped and restore Primary",
+      "filename": "../../availability/availability_dbw26.md",
+      "type": "nonsandbox"
+    },
+    {
+      "title": "Lab 8: New Feature: Semantic Cache with Vector Search",
+      "description": "Use native Oracle AI Vector Search with the existing transaction payment data",
+      "filename": "../../vector-search/vector-search_dbw26.md",
+      "type": "nonsandbox"
+    },
+    {
+      "title": "Clean Up the Stack and Instances",
+      "description": "Release the OCI resources used by the workshop",
+      "filename": "../../cleanup/cleanup.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+    },
+    {
+      "title": "Quiz: True Cache Fundamentals",
+      "description": "Check your understanding of Oracle True Cache and the workshop workflow.",
+      "filename": "../../quiz-true-cache/quiz-true-cache.md"
+    }
+  ]
+}

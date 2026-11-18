@@ -17,6 +17,11 @@ Use this lab to open the LiveLabs reservation, access the provisioned **Autonomo
 
 Estimated Time: **5 minutes**
 
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-01-Getting-Started-Light-Background-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Objectives
 
 In this lab, you will:
@@ -79,9 +84,10 @@ Open SQL Worksheet as the workshop user before running the finance queries. SQL 
     *Figure 6: Use SQL Worksheet to confirm the active user, paste each workshop SQL block, run the statement, and review the result table.*
 
     - Confirm the user dropdown shows the main workshop user, usually `LLUSER`.
-    - Paste each workshop SQL block into the editor.
-    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
-    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Paste and run each copied block separately.
+    - For `SELECT` queries, use **Run Statement (Ctrl+Enter or Command+Enter)** and read **Query Result**.
+    - For PL/SQL blocks and multi-statement scripts, use **Run Script (F5)** and read **Script Output**.
+    - Wait for each request to finish before continuing.
     - Use **Navigator** only when you want to inspect tables, views, or other objects.
 
 7. Run this check.

@@ -75,6 +75,6 @@ Estimated Time: **3 minutes**
 
 ## Acknowledgements
 
-* **Authors** - Pat Shepherd, Linda Foinding
-* **Contributors** - Teodor Nechita
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

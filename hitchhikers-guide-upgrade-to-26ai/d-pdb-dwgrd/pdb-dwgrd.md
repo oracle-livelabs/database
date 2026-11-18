@@ -8,6 +8,8 @@ The PDB, *YELLOW*, has already been upgraded to the new release of Oracle AI Dat
 
 Estimated Time: 30 minutes
 
+[Lab walkthrough by Daniel Overby Hansen, Oracle](youtube:B9rI7owT6aU)
+
 ### Objectives
 
 In this lab, you will:
@@ -166,7 +168,7 @@ You start the downgrade process while the PDB is still running the new release o
 
 Now that the PDB is open in downgrade mode, you can start the process.
 
-1. Use the `dbdowngrade` cript to start the downgrade process. The script completes in only a few minutes.
+1. Use the `dbdowngrade` script to start the downgrade process. The script completes in only a few minutes.
 
     ``` bash
     <copy>

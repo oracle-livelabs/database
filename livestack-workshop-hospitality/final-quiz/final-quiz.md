@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/livestack-hospitality-badge.svg
+badge: images/livestack-badge-hospitality.png
 ```
 
 ## Introduction
@@ -15,6 +15,11 @@ Use this quiz to check how the database results support the Seer Hotels tasks yo
 - Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
+
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Hospitality/Workshop/Scene-11-Hospitality.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Task 1: Answer the quiz questions
 
@@ -29,18 +34,18 @@ Estimated Time: **3 minutes**
     > A duality view presents relational rows as a JSON document. Applications get the payload they need, while analysts still use SQL, keys, joins, and database controls against the same source.
 
     Q: In the vector lab, what does the similarity score help an analyst do?
-    - Prove that a guest concern confirms booking abuse.
+    - Confirm that a guest’s booked room fails to meet their accessibility requirements.
     - Replace the stay offer and reservation tables with embeddings only.
     * Rank stay offers by how closely they match the search phrase.
     - Count how many rows exist in each hospitality table.
     > The query turns vector distance into a similarity score, where a higher score means the stored stay offer text is closer in meaning to the search phrase.
 
-    Q: What business problem does the property graph lab solve for booking abuse investigators?
+    Q: What business problem does the property graph lab solve for booking reviewers?
     - It scores future revenue for stay offers and segments.
     * It explains connections across reservations and shared entities.
     - It stores service coverage regions for operations teams.
     - It replaces relationship data with flat stay offer totals.
-    > The graph lab focuses on relationship data. A booking abuse analyst can prioritize connected reservations, devices, payment tokens, IP addresses, and phones without relying on fragile chains of manual joins.
+    > The graph lab focuses on relationship data. A booking reviewer can prioritize connected reservations, devices, payment tokens, IP addresses, and phones without relying on fragile chains of manual joins.
 
     Q: Why does Seer Hotels use spatial data in the guest-routing lab?
     - To make coverage decisions outside the shared database.

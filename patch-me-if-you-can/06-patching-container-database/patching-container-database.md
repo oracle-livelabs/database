@@ -8,6 +8,8 @@ It is safer and easier to patch a database using AutoUpgrade. By patching a data
 
 Estimated Time: 15 Minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:EQnq90NAb4U)
+
 ### Objectives
 
 In this lab, you will:

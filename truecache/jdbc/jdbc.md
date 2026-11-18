@@ -25,14 +25,14 @@ This lab assumes you have:
 
 ## Task 1: Run the application
 
-1. Login to application podman container
+1. Log in to the application Podman container.
 
     ```
     <copy>
     sudo podman exec -it appclient /bin/bash
     </copy>
     ```
-![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
+    ![app container](https://oracle-livelabs.github.io/database/truecache/jdbc/images/appcontainer.png " ")
 
 2. Go to the directory /stage/clientapp 
 
@@ -49,7 +49,7 @@ This lab assumes you have:
      sh TransactionApp.sh
     </copy>
     ```
-![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp.png " ")
+    ![transaction app](https://oracle-livelabs.github.io/database/truecache/jdbc/images/transactionapp.png " ")
 
 3. Observe the improve in performance while using True Cache.
 
@@ -57,10 +57,10 @@ This lab assumes you have:
 
 ## Learn More
 
-[True Cache documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/using-oracle-true-cache-your-applications.html)
+[True Cache documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/using-oracle-true-cache-your-applications.html)
 
 
 ## Acknowledgements
-* **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
-* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025
+* **Authors** - Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Nithin Thekkupadam Narayanan, Sarvesh Gupta
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Sep 2026

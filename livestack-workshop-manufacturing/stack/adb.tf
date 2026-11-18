@@ -78,9 +78,19 @@ resource "null_resource" "sqlcl-load-data-atp2" {
 resource "null_resource" "sqlcl-load-data-atp3" {
   provisioner "local-exec" {
     working_dir = path.module
-    command     = "sql -cloudconfig atp_wallet.zip admin/${local.new_password}@ATP${var.resId}_high @load_data/manufacturing-platform-handoff-loader.sql ${local.new_password} ATP${var.resId}_high"
+    command     = "unzip -o -q load_data/manufacturing-platform-handoff-loader.zip"
   }
   depends_on = [
     null_resource.sqlcl-load-data-atp2
+  ]
+}
+
+resource "null_resource" "sqlcl-load-data-atp4" {
+  provisioner "local-exec" {
+    working_dir = path.module
+    command     = "sql -cloudconfig atp_wallet.zip admin/${local.new_password}@ATP${var.resId}_high @manufacturing-platform-handoff-loader.sql ${local.new_password} ATP${var.resId}_high"
+  }
+  depends_on = [
+    null_resource.sqlcl-load-data-atp3
   ]
 }

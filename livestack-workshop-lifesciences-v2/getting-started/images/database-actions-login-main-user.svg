@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="497" height="402" viewBox="0 0 497 402" role="img" aria-labelledby="title desc">
+  <title id="title">Database Actions login screen with LLUSER selected</title>
+  <desc id="desc">Login form showing username LLUSER, a password field, a disabled Sign in button, and a Sign in with SSO button.</desc>
+  <rect width="497" height="402" fill="#f2f1ef"/>
+  <rect x="7" y="9" width="480" height="381" rx="7" fill="#fff"/>
+  <text x="368" y="43" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000">Advanced</text>
+  <path d="M444 35l6 6 6-6" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+  <text x="26" y="68" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000">Username</text>
+  <rect x="27" y="79" width="439" height="44" rx="4" fill="#fafbfd" stroke="#c2cfe0"/>
+  <text x="43" y="106" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000">LLUSER</text>
+  <text x="26" y="145" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#000">Password</text>
+  <rect x="27" y="156" width="439" height="44" rx="4" fill="#fafbfd" stroke="#c2cfe0"/>
+  <path d="M438 178c2.5-3.2 5.2-4.8 8-4.8s5.5 1.6 8 4.8c-2.5 3.2-5.2 4.8-8 4.8s-5.5-1.6-8-4.8z" fill="none" stroke="#000"/>
+  <circle cx="446" cy="178" r="2.2" fill="#000"/>
+  <rect x="27" y="220" width="439" height="44" rx="4" fill="#d3d3d3"/>
+  <text x="224" y="248" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#848484">Sign in</text>
+  <line x1="53" y1="296" x2="229" y2="296" stroke="#b4b4b4"/>
+  <text x="239" y="301" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#000">or</text>
+  <line x1="263" y1="296" x2="439" y2="296" stroke="#b4b4b4"/>
+  <rect x="27" y="326" width="439" height="45" rx="4" fill="#fff" stroke="#006c99"/>
+  <circle cx="188" cy="346" r="5" fill="none" stroke="#006c99"/>
+  <path d="M192 350l9 9m-3-3v5m-2-7l-3 3" fill="none" stroke="#006c99" stroke-linecap="round"/>
+  <text x="203" y="353" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#006c99">Sign in with SSO</text>
+</svg>

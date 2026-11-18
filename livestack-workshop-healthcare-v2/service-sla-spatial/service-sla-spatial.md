@@ -46,6 +46,11 @@ Distance narrows Moon's search, but it does not complete the decision. A nearby 
 
 Estimated Time: **10 minutes**
 
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Workshop/Scene-07-Spatial-Routing-Pickup-Recording.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Operating Story
 
 | Step | Healthcare focus |
@@ -93,6 +98,8 @@ That is the Oracle AI Database advantage in this lab: one location supports spat
     ```
 
     `LOCATION` is the database point. `LATITUDE` and `LONGITUDE` make the value easy to read, `SRID` identifies the coordinate system, and `LOCATION_GEOJSON` gives an application a map-ready representation of the same point. `SDO_UTIL.TO_GEOJSON` returns a CLOB, so `DBMS_LOB.SUBSTR` limits the displayed text to 160 characters; it does not change the stored geometry.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/requesting-care-site-point.png " ")
 
     **Expected output: Requesting care-site point**
 
@@ -161,6 +168,8 @@ Moon now compares Miami Oncology Care Center with every active logistics site. T
     - `'unit=MILE'` tells Oracle to return the distance in miles.
 
     The `ROUND(..., 1)` around the function result formats the answer to one decimal place. It does not change the spatial calculation. `LOGISTICS_SITE_ID` breaks a tie deterministically if two sites have the same distance.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/nearest-active-logistics-sites.png " ")
 
     **Expected output: Nearest active logistics sites**
 
@@ -263,6 +272,8 @@ Moon now needs a result that a care operations application can use. Request `170
     1. `request_requirement` joins the request, care site, line item, and care service so Moon does not have to hard-code the requested service.
     2. `qualified_sites` keeps active logistics sites that support the requested service and have a current load below 80 percent. It also calculates estimated available units as `capacity × (1 - current load percentage)` and measures the distance from the requesting care site.
     3. The final query orders the qualified sites by distance and uses `LOGISTICS_SITE_ID` as a deterministic tie-breaker before returning the closest one.
+
+    ![Open Graph Studio from the Database Actions launchpad](images/qualified-routing-decision.png " ")
 
     **Expected output: Qualified routing decision**
 

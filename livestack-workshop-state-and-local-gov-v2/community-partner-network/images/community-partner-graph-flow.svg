@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="t d">
   <title id="t">Community partner graph flow</title><desc id="d">Benefits Eligibility connects to Colorado Benefits Network and then through one or two partner handoffs.</desc>
   <rect width="900" height="360" rx="22" fill="#f7f8fa"/><style>.h{font:700 27px Arial;fill:#18243b}.s{font:15px Arial;fill:#41506a}.b{font:700 15px Arial;fill:#1f2937}.c{font:13px Arial;fill:#43516a}</style>
-  <text x="34" y="46" class="h">Explain Community Coordination with Graph Paths</text><text x="34" y="72" class="s">INFLUENCER_NETWORK turns public programs and partner relationships into SQL/PGQ evidence.</text>
+  <text x="34" y="46" class="h">Explain Community Coordination with Graph Paths</text><text x="34" y="72" class="s">Use INFLUENCER_NETWORK to query program connections and partner handoffs.</text>
   <g transform="translate(32 127)"><rect width="170" height="112" rx="55" fill="#fff2e8" stroke="#d56b42" stroke-width="2"/><text x="85" y="45" text-anchor="middle" class="b">Benefits</text><text x="85" y="66" text-anchor="middle" class="b">Eligibility</text><text x="85" y="88" text-anchor="middle" class="c">BRANDS vertex</text></g>
   <path d="M210 183h78" stroke="#7d8799" stroke-width="4"/><text x="249" y="168" text-anchor="middle" class="c">Promotes</text><path d="m288 183-13-9v18z" fill="#7d8799"/>
   <g transform="translate(296 127)"><rect width="184" height="112" rx="55" fill="#e9f6ee" stroke="#2a9d8f" stroke-width="2"/><text x="92" y="45" text-anchor="middle" class="b">Colorado Benefits</text><text x="92" y="66" text-anchor="middle" class="b">Network</text><text x="92" y="88" text-anchor="middle" class="c">Seed Partner</text></g>

@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Building and Operating My AI Staff on Oracle Cloud Infrastructure",
+    "workshoptitle": "From One Agent to an AI Staff with Oracle AI Database",
     "help": "livelabs-help-db_us@oracle.com",
     "tutorials": [
         {
@@ -40,6 +40,11 @@
             "title": "Lab 5: Connect Services and Verify the Deployment",
             "description": "Activate services and run local, Slack, database, OAuth, and end-to-end verification",
             "filename": "../../lab-5-connect-services-and-verify/lab-5-connect-services-and-verify.md"
+        },
+        {
+            "title": "Lab 6: Explore Slack Agent Features",
+            "description": "Review screenshot-led examples of agent conversations, approvals, recovery controls, and shared Slack channels",
+            "filename": "../../lab-6-slack-features-documentation/lab-6-slack-features-documentation.md"
         },
         {
             "title": "Need Help?",

@@ -75,7 +75,7 @@ In this lab, you will learn:
         X         XMLTYPE;
     BEGIN
         BLOB_IN := DBMS_CLOUD.GET_OBJECT(CREDENTIAL_NAME => null, 
-                                    OBJECT_URI => 'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/livelab-xmldoc-1.xml'
+                                    OBJECT_URI => 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/livelab-xmldoc-1.xml'
         );
         X := XMLTYPE(BLOB_IN, nls_charset_id('AL32UTF8'));
         INSERT INTO PURCHASEORDER VALUES (
@@ -96,7 +96,7 @@ In this lab, you will learn:
         DBMS_CLOUD.CREATE_EXTERNAL_TABLE (
             table_name =>'STAGING_TABLE',  credential_name =>null,  
             format => json_object('delimiter' value '%$#^@%$', 'recorddelimiter' value '0x''02'''),
-            file_uri_list =>'https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/livelab-xmldoc-2.xml',
+            file_uri_list =>'https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/livelab-xmldoc-2.xml',
             column_list => 'xml_document clob',
             field_list => 'xml_document CHAR(1000000)'
         );

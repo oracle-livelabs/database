@@ -1,0 +1,75 @@
+{
+    "workshoptitle": "AI Vector Search with Private AI Services Container",
+    "help": "livelabs-help-pts_us@oracle.com",
+    "variables": ["../../variables/variables.json",
+        "../../variables/variables-in-another-file.json"],
+    "include": {
+     "adb-goto-service-body.md":"https://livelabs.oracle.com/cdn/common/building-blocks/tasks/adb/goto-service-body.md",
+     "adb-provision-body.md":"https://livelabs.oracle.com/cdn/common/building-blocks/tasks/adb/provision-body.md"
+    },
+    "tutorials": [
+        {
+            "title": "Get Started",
+            "description": "Register for a Free Tier account",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/pre-register-free-tier-account.md"
+        },
+        {
+            "title": "Lab 1: Create an Autonomous Database",
+            "description":"Setup an Always Free autonomous database instance",
+            "type": "freetier",
+            "filename":"https://livelabs.oracle.com/cdn/common/building-blocks/blocks/adb/provision/provision-console.md"
+        },
+        {
+            "title": "Lab 2: Create User and Populate Tables",
+            "description":"Create a database user and populate tables",
+            "filename":"../../adb_setup/create-database-users.md"
+        },
+        {
+            "title": "Lab 3: Introduction",
+            "description": "Introduction to AI Vector Search with Private AI Services Container.",
+            "filename": "../../1-introduction/introduction.md"
+        },
+        {
+            "title": "Lab 4: Container Embeddings",
+            "description": "Generate and store vectors with Private AI Services Container",
+            "filename": "../../2-embedding_models/text_embeddings.md"
+        },
+        {
+            "title": "Lab 5: Exhaustive Search",
+            "description": "Understanding Exhaustive Similarity Search",
+            "filename": "../../3-exhaustive_search/exhaustive_search.md"
+        },
+        {
+            "title": "Lab 6: Approximate Search",
+            "description": "Understanding Approximate Similarity Search",
+            "filename": "../../4-approximate_search/approx_search.md"
+        },
+        {
+            "title": "Lab 7: Image Search",
+            "description": "Search image BLOBs with container-hosted CLIP models",
+            "filename": "../../5-image_search/image_search.md"
+        },
+        {
+            "title": "Lab 8: Generate Text with the Container LLM",
+            "description": "Generate text from SQL and PL/SQL with a container-hosted LLM",
+            "filename": "../../6-generate-text/generate-text.md"
+        },
+        {
+            "title": "Lab 9: APEX Demo",
+            "description": "Use container-generated vectors in an APEX application",
+            "type": "tenancy",
+            "filename": "../../6-apex_demo/apex_demo.md"
+        },
+        {
+            "title": "Lab 10: Retrieval Augmented Generation (RAG)",
+            "description": "Build RAG with container-hosted embedding and generation models",
+            "type": "tenancy",
+            "filename": "../../rag/rag.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to Common Problems and Directions for Receiving Live Help",
+            "filename":"https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}

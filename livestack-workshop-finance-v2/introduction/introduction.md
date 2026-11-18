@@ -5,7 +5,7 @@
 Jessica Chan is the database administrator at Seer Bank. Her teams are building new customer applications, improving risk and fraud reviews, routing service work, and adding AI to finance dashboards.
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F00-Finance%20Workshop_Intro_with-CC.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F00-Finance%20Workshop_Intro_with-CC.mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -20,7 +20,7 @@ The requests look different, but they share one problem. The data is already in 
 
 ![team](images/team.png)
 
-Jessica's job is to help each team meet its requirement without creating a new data copy or a separate security model for every feature. She uses Oracle AI Database as the shared foundation: relational tables remain the source for finance records, while JSON, vectors, graphs, spatial data, machine learning, and AI services work with those same records.
+Jessica helps each team use the finance data it needs while the records remain in Oracle AI Database. Oracle AI Database is the shared foundation for the labs, which show how teams use JSON, vector search, graphs, spatial data, machine learning, and AI-assisted SQL with that data.
 
 This workshop follows Jessica and her colleagues as they solve these problems and help the bank innovate for customers. Each lab focuses on one business requirement, but the database remains the common thread. You will see how the teams use different data types and database capabilities together, and how Jessica keeps access, SQL, and results visible.
 
@@ -37,7 +37,7 @@ This workshop follows Jessica and her colleagues as they solve these problems an
 | Nina, risk analyst            | Ask finance questions without writing every query from scratch. | Select AI generates SQL that Nina can inspect, run, and refine. Select AI Agent adds a restricted SQL tool and records the agent activity. |
 
 
-The point is not to use every capability in every query. The point is that Jessica does not have to move the data into a separate database whenever a requirement changes. The same finance records can support:
+Each lab uses the capability that fits its requirement. Jessica can keep the finance records in Oracle AI Database as the teams' needs change. The same records can support:
 
 - An application payload.
 - A vector search.
@@ -68,6 +68,6 @@ Estimated Workshop Time: **90 minutes**
 
 ## Acknowledgements
 
-* **Author** - Kevin Lazarz
-* **Contributor** - Eugenio Galiano, Pat Shepherd, Linda Foinding
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Author** - Pat Shepherd, Senior Principal Database Product Manager
+* **Contributor** - Linda Foinding, Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

@@ -2,8 +2,14 @@
 
 ```quiz-config
 passing: 75
-badge: images/livestack-manufacturing-badge.svg
+badge: images/livestack-badge-manufacturing.png
 ```
+
+
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Manufacturing/Workshop/Scene-11-Keep-Manufacturing-Work-Connected-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Introduction
 

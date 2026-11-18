@@ -57,7 +57,7 @@ For this workshop, we provide the environment. You'll need:
 
 Before you begin, you are going to import a notebook that has all of the commands for this lab into Oracle Machine Learning. This way you don't have to copy and paste them over to run them.
 
-1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
+1. If you have not already downloaded the lab notebooks in a previous lab, [click this download link](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/notebooks.zip) to get the notebooks zip file.
 
 2. Unzip the downloaded `notebooks.zip` file on your computer.
 
@@ -725,6 +725,8 @@ Switch to the underwriting agent and review applications.
 
 3. Approve the applications.
 
+    Run the approval paragraphs below. If the agent asks you to select an application ID, it has not approved that loan yet. Copy the matching ID from your pending list, add it to the full approval request in the corresponding notebook paragraph, and run only that paragraph again. Use the ID from your own run, not an ID shown in a screenshot. Keep the full request, such as "Approve the personal loan application", followed by the ID; do not submit a new loan or rerun setup.
+
     ```sql
     <copy>
     SELECT AI AGENT Approve the personal loan application;
@@ -739,6 +741,27 @@ Switch to the underwriting agent and review applications.
 
     ![Notebook Information](./images/task13_3_1.png " ")
     ![Notebook Information](./images/task13_3_2.png " ")
+
+4. Verify the final stored statuses.
+
+    Run the notebook paragraph **Verify Final Status**. You should see four records: the $25,000 personal and $35,000 auto loans are `AUTO_APPROVED`; the $75,000 personal and $250,000 mortgage loans are `APPROVED`. The blocked application should not have created a record. The reviewer label may be `UNDERWRITER` or the underwriting agent name.
+
+    ```sql
+    <copy>
+    SELECT la.application_id,
+           ap.name as applicant,
+           TO_CHAR(la.loan_amount, '$999,999') as amount,
+           la.loan_type,
+           la.risk_status,
+           NVL(la.decided_by, '-') as decided_by,
+           TO_CHAR(la.decided_at, 'HH24:MI:SS') as decided_at
+    FROM loan_applications la
+    JOIN loan_applicants ap ON la.applicant_id = ap.applicant_id
+    ORDER BY la.submitted_at;
+    </copy>
+    ```
+
+    If either reviewed loan is still `PENDING_REVIEW`, return to its approval paragraph and supply the application ID from your pending list. Verify the stored result before continuing to the audit trail or cleanup.
 
 ## Task 14: Review the Audit Trail
 

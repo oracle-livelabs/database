@@ -1,0 +1,12 @@
+{
+  "workshoptitle": "Top 10 Must-Have Enterprise Agents: Design, Build, and Productize Them Today [BOO6096]",
+  "help": "livelabs-help-db_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Bootcamp Instructions",
+      "description": "Watch the agent presentations and demos, with optional hands-on participation using presenter-provided Private Agent Factory access.",
+      "type": "livelabs",
+      "filename": "../../aiw26-bootcamp/bootcamp.md"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+    "workshoptitle": "Build the WeMakeDevs Discord Learning Bot with Oracle Autonomous Database",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Workshop overview, architecture, outcomes, and prerequisites.",
+            "type": "livelabs",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "Sign in to OCI and select the workshop tenancy and region.",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/cloud-login/cloud-login.md"
+        },
+        {
+            "title": "Lab 1: Prepare OCI Compute, Autonomous Database, and HTTPS",
+            "description": "Create the OCI host and database, transfer the wallet securely, and configure Nginx HTTPS with a reserved-IP certificate.",
+            "type": "livelabs",
+            "filename": "../../lab-1-prepare-oci-and-database/lab-1-prepare-oci-and-database.md"
+        },
+        {
+            "title": "Lab 2: Download the Bot and Configure Discord and OpenRouter",
+            "description": "Download the bot ZIP, configure Discord and OpenRouter, register six commands, and verify startup.",
+            "type": "livelabs",
+            "filename": "../../lab-2-configure-discord-and-ai/lab-2-configure-discord-and-ai.md"
+        },
+        {
+            "title": "Lab 3: Set Up Agent Profiles",
+            "description": "Run the agent-store schema in SQL Actions, configure the wallet, and verify profile persistence.",
+            "type": "livelabs",
+            "filename": "../../lab-3-connect-database-and-agent-store/lab-3-connect-database-and-agent-store.md"
+        },
+        {
+            "title": "Lab 4: Run the Bot as a Service and Verify Its Features",
+            "description": "Run systemd, check the HTTPS endpoint and Gateway, exercise configured features, and review operations.",
+            "type": "livelabs",
+            "filename": "../../lab-4-deploy-and-verify/lab-4-deploy-and-verify.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Find help with LiveLabs workshop issues.",
+            "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+        }
+    ]
+}

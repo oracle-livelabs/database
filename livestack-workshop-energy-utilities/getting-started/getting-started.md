@@ -2,61 +2,91 @@
 
 ## Introduction
 
-You use Database Actions SQL Worksheet for every learner-facing SQL task. The workshop account is `LLUSER`; your reservation supplies the password and launch URL.
+The Energy & Utilities workshop runs in a **LiveLabs Sandbox**, launched using the green **Start** button. LiveLabs automatically prepares the database, workshop data, and required tools.
+
+Once provisioning is complete, open **View Login Info** in your reservation. Use the supplied credentials to sign in as `LLUSER` and open **SQL Worksheet**, where you will run the lab queries.
 
 Estimated Time: **5 minutes**
 
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-01-Getting-Started-Wait-Trimmed-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
 ### Objectives
 
-- Open the LiveLabs reservation information.
-- Sign in to Database Actions as `LLUSER`.
-- Verify the Energy and Utilities dataset before starting Lab 1.
+In this lab, you will:
+
+- Launch the LiveLabs workshop environment.
+- Use the reservation login information to open Database Actions.
+- Confirm that SQL Worksheet is connected as the workshop schema user.
 
 ## Task 1: Launch the LiveLabs environment
 
-1. Click **View Login Info** in the LiveLabs reservation panel.
-2. Copy the database password and open the supplied Database Actions URL.
-3. Sign in with username `LLUSER` and the password from the reservation. Do not save the password in a script or workshop file.
+Open the LiveLabs reservation for this workshop. It contains the database link and sign-in details.
 
-> **Checkpoint:** Keep the reservation tab open. It contains the environment details you may need if your Database Actions session expires.
+1. Sign in to [LiveLabs](https://livelabs.oracle.com) with your Oracle account.
+
+2. Open this workshop, select **Start**, and select **Run on LiveLabs Sandbox**.
+
+3. Wait for your sandbox to finish provisioning. In **My Reservations**, select **Launch Workshop** for this reservation.
+
+4. Select **View Login Info** and keep the database credentials available for the next task.
+
+    ![Reservation Information dialog showing Terraform Outputs with Login, Password, and Login URL rows](images/reservation-login-info.svg " ")
 
 ## Task 2: Open SQL Worksheet
 
-1. On the Database Actions launchpad, select **SQL**.
-2. Run the following connection and dataset check.
+Open SQL Worksheet as `LLUSER`. Run each query there and review the returned table.
+
+1. In the **Reservation Information** dialog, confirm that **1 - Login** shows `LLUSER`.
+
+2. Select **Copy** for **2 - Password**.
+
+    ![Reservation Information dialog with the Copy button highlighted for the Password row](images/reservation-login-copy-password.svg " ")
+
+3. Select **Open Link** for **3 - Login URL**.
+
+    ![Reservation Information dialog with the Open Link button highlighted for the Login URL row](images/reservation-login-open-link.svg " ")
+
+4. On the Database Actions sign-in page, confirm that **Username** shows `LLUSER`, paste the password from the reservation information, and select **Sign in**.
+
+    ![Database Actions login screen showing LLUSER as the selected username](images/database-actions-login-main-user.svg " ")
+
+5. Before SQL Worksheet opens, select **Development**, then select **SQL** from the tools menu.
+
+    ![Database Actions tools page with Development selected and SQL highlighted in the left tools menu](images/database-actions-development-sql.svg " ")
+
+6. Use the same SQL Worksheet pattern throughout the workshop.
+
+    - Confirm the user dropdown shows `LLUSER`.
+    - Paste each workshop SQL block into the editor.
+    - Select **Run Statement** or press **Ctrl+Enter** to run the current SQL statement.
+    - Review the output in **Query Result** or **Script Output**, depending on the step.
+    - Use **Navigator** only when you want to inspect tables, views, or other objects.
+
+7. Run this check.
+
+    Both `USER` and `CURRENT_SCHEMA` should show `LLUSER`. The first identifies the signed-in user; the second determines where unqualified table names resolve.
 
     ```sql
+    <copy>
     SELECT USER AS "User",
            SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "Schema",
-           SYSTIMESTAMP AS "Checked At"
-    FROM dual;
-
-    SELECT COUNT(*) AS eu_utility_service_requests
-    FROM eu_utility_service_requests;
+           SYSTIMESTAMP AS "Checked At";
+    </copy>
     ```
 
-3. Confirm that `User` and `Schema` are `LLUSER`. Confirm the request count is greater than zero.
+    ![SQL Worksheet showing the LLUSER connection check results](images/sql-connection.jpg " ")
 
-    ![SQL Worksheet showing the LLUSER connection check](images/sql-worksheet-connection-check.png " ")
+    **Expected output: Connected SQL Worksheet Session**
 
-    **Expected output pattern**
-
-    | Check | Expected evidence |
-    | --- | --- |
-    | Connected user | `LLUSER` |
-    | Current schema | `LLUSER` |
-    | Dataset | `EU_UTILITY_SERVICE_REQUESTS` count is greater than zero. |
-
-## Task 3: Use SQL Worksheet throughout the workshop
-
-1. Use each SQL code block's **Copy** button, then paste one block at a time into the worksheet.
-2. Select the statement or block you want to run, then use **Run Statement**.
-3. Review the result grid and any script output before moving to the next step.
-4. Keep this browser tab open. Each lab links back to this task when a worksheet reminder is useful.
-
-> **Troubleshooting:** If an object is missing, stop and tell the workshop facilitator. The lab loader must complete before learners begin.
+    | User | Schema | Checked At |
+    | --- | --- | --- |
+    | LLUSER | LLUSER | Current SQL Worksheet timestamp |
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

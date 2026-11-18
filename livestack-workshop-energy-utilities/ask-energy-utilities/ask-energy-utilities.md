@@ -1,175 +1,232 @@
-# Ask Energy and Utilities Questions with Select AI
+# Ask Energy & Utilities Questions with Select AI
 
 ## Introduction
 
-Nina Patel is an operations analyst. She knows the business question she wants to ask, but she does not want every answer to begin with finding the right view, column, join, and filter. Jessica has configured a Select AI profile for the governed Energy and Utilities query surfaces.
+Nina Patel, Seer Utility Network's operations analyst, wants to know which utility services have the highest request value. Jessica has configured a Select AI profile so Nina can ask in ordinary language.
 
-Nina follows a deliberate pattern: ask, inspect the generated SQL, run it only when it makes sense, refine the question, and compare any narration with the database result.
+Generate SQL, inspect its tables and calculations, then request the result. Refine the question when the answer lacks the details Nina needs.
 
-Estimated Time: **10 minutes**
-
-### Objectives
-
-- Check the Select AI profile and permitted objects.
-- Generate SQL from a utility operations question.
-- Run and refine the question.
-- Explain why generated SQL and narration still require review.
-
-### Hands-on Scenario
-
-Nina needs the five field operations sites with the most open requests, plus the capacity evidence needed for an operations review.
-
-> **SQL Worksheet reminder:** Return to [Getting Started Task 2](?lab=getting-started#Task2:OpenSQLWorksheet) if you need the launch and execution steps.
-
-> **Platform prerequisite — live validation pending:** Live execution requires an enabled, LLUSER-accessible `EU_GENAI` profile, an approved provider credential and model, working provider connectivity, and an `object_list` limited to the governed Energy and Utilities views used in this lab. If the profile is unavailable, stop after Task 1 and tell the facilitator. The workshop loader does not create or modify profiles, credentials, models, or provider connectivity.
-
-> **Data-use disclosure:** Select AI sends the learner's prompt and applicable schema metadata or other configured context to the AI provider. Do not include passwords, credentials, personal data, confidential operational details, or other sensitive information in a prompt. Task 6 separately explains when returned database values may also be sent to the provider.
-
-## Task 1: Check the Select AI profile
-
-1. Run the profile inventory.
-
-    <copy>
-    ```sql
-    SELECT profile_name, status, description
-    FROM user_cloud_ai_profiles
-    WHERE profile_name = 'EU_GENAI';
-    ```
-    </copy>
-
-2. Confirm the profile is enabled. If it is missing, stop and tell the facilitator; do not substitute an unapproved profile.
-
-## Task 2: Add the governed utility views
-
-1. Set a narrow list of business-facing views for this lab. This changes only the Energy and Utilities profile context used by these exercises.
-
-    <copy>
-    ```sql
-    BEGIN
-      DBMS_CLOUD_AI.SET_ATTRIBUTE(
-        profile_name    => 'EU_GENAI',
-        attribute_name  => 'object_list',
-        attribute_value =>
-          '[{"owner":"' || USER || '","name":"EU_FIELD_LOGISTICS_SITES_V"},' ||
-           '{"owner":"' || USER || '","name":"EU_ASSET_CAPACITY_V"},' ||
-           '{"owner":"' || USER || '","name":"EU_UTILITY_SERVICES_V"}]'
-      );
-    END;
-    /
-    ```
-    </copy>
-
-2. Verify the setting without exposing credentials.
-
-    <copy>
-    ```sql
-    SELECT profile_name, attribute_name, attribute_value
-    FROM user_cloud_ai_profile_attributes
-    WHERE profile_name = 'EU_GENAI'
-      AND attribute_name = 'object_list';
-    ```
-    </copy>
-
-    The `object_list` supplies a limited set of schema metadata as model context for natural-language SQL generation. It does not grant access and is not an authorization boundary. The LLUSER session privileges and database security controls, including Virtual Private Database (VPD) or row-level policies, remain the enforcement controls.
-
-## Task 3: Ask a question and inspect the SQL
-
-Database Actions SQL Worksheet uses `DBMS_CLOUD_AI.GENERATE` rather than the `SELECT AI` convenience command.
-
-1. Generate SQL without executing it.
-
-    <copy>
-    ```sql
-    SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five field operations sites have the most open utility service requests? Include the site name, site type, current load percentage, open request count, and a capacity alert count where quantity on hand is at or below the reorder point.',
-             profile_name => 'EU_GENAI',
-             action       => 'showsql'
-           ) AS generated_sql
-    FROM dual;
-    ```
-    </copy>
-
-2. Check that the generated statement uses only permitted objects, orders by open work descending, and limits the result to five rows.
-
-## Task 4: Run the reviewed question
-
-1. After reviewing the generated SQL, run the same question.
-
-    <copy>
-    ```sql
-    SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Which five field operations sites have the most open utility service requests? Include the site name, site type, current load percentage, open request count, and a capacity alert count where quantity on hand is at or below the reorder point.',
-             profile_name => 'EU_GENAI',
-             action       => 'runsql'
-           ) AS answer
-    FROM dual;
-    ```
-    </copy>
-
-2. Treat the rows as dynamic. Confirm that there are no more than five sites and that each count comes from request or inventory rows.
-
-    **Expected output pattern**
-
-    | Check | Expected behavior |
-    | --- | --- |
-    | Row limit | At most five sites. |
-    | Ordering | Sites with more open requests appear first. |
-    | Evidence | Site type, load, open work, and capacity alerts support the review. |
-
-## Task 5: Improve the business question
-
-1. Ask for capacity-at-risk services and inspect the SQL first.
-
-    <copy>
-    ```sql
-    SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Show Gas Utility services with capacity at risk. Include the service name, field logistics site, quantity on hand, quantity reserved, reorder point, and capacity status. Order the most constrained rows first.',
-             profile_name => 'EU_GENAI',
-             action       => 'showsql'
-           ) AS generated_sql
-    FROM dual;
-    ```
-    </copy>
-
-2. Check that the SQL joins service, inventory, and site data; filters Gas Utility records; and orders constrained capacity sensibly. Then change `showsql` to `runsql` and run it.
-
-## Task 6: Explain the result
-
-1. Use narration only for data approved for the configured provider. `NARRATE` can send returned database values to that provider and produces prose, not a structured or authoritative result.
-
-    <copy>
-    ```sql
-    SELECT DBMS_CLOUD_AI.GENERATE(
-             prompt       => 'Summarize the five field operations sites with the most open utility service requests. Cite the site name, site type, open request count, capacity alert count, and current load percentage.',
-             profile_name => 'EU_GENAI',
-             action       => 'narrate'
-           ) AS explanation
-    FROM dual;
-    ```
-    </copy>
-
-2. Compare every number in the narration with the Task 4 database result.
-
-> **Checkpoint:** AI wording and generated SQL are dynamic. `SHOWSQL`, database privileges, the profile metadata scope, and result comparison keep the operation reviewable. The object list improves relevance; database security controls authorization.
-
-> **🎯 Interactive challenge:** Add a request-status constraint to the prompt. Inspect the generated SQL and identify the predicate that implements it before you run the query.
+![nina](images/nina.png)
 
 <details>
-<summary><strong>Challenge answer</strong></summary>
+<summary><strong>Key terms: Select AI, AI profile, generated SQL, and natural-language prompt</strong></summary>
 
-The exact SQL can vary. It should include a clear status predicate, use only permitted objects, preserve the requested columns, and retain the five-row limit.
+> - **Select AI** lets a user work with database information through a natural-language question.
+>
+> - An **AI profile** connects Select AI to an AI provider and identifies the database objects that may be used for the question.
+>
+> - **Generated SQL** is the SQL statement created from the question. Nina should inspect it before relying on the result.
+>
+> - A **natural-language prompt** is the question sent to Select AI, such as `Which five utility services have the highest total request value?`
 
 </details>
 
-## Conclusion: Ask, inspect, and refine
+### Objectives
 
-Nina asked in ordinary language without giving up SQL visibility. She inspected the query, bounded the object list, ran an approved question, and checked the explanation against database evidence.
+- Check which Select AI profile is available in the schema.
+- Add the utilities tables that Select AI may use to the profile.
+- Generate SQL from an Energy & Utilities question and inspect it.
+- Run a natural-language question through `DBMS_CLOUD_AI.GENERATE`.
+- Improve a question so the result contains the business details Nina needs.
+- Explain why generated SQL still requires review.
+
+Estimated Time: **10 minutes**
+
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FUtilities%2FWorkshop%2FScene-09-Select-AI-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
+
+> **SQL Worksheet:** [Getting Started: open SQL Worksheet as LLUSER](?lab=getting-started), Task 2.
+
+> **AI setup:** Initialization creates the LLUSER-owned `GENAI` profile and credential. This lab configures its four Utilities views.
+
+## Task 1: Check the Select AI profile
+
+First, confirm that `GENAI` is available in `LLUSER`.
+
+1. Run this query:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           status,
+           description
+    FROM user_cloud_ai_profiles
+    ORDER BY profile_name;
+    </copy>
+    ```
+
+    Confirm that `GENAI` is enabled. If it is missing or disabled, ask the facilitator to resolve setup before continuing.
+
+2. Review the profile attributes:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    ORDER BY profile_name, attribute_name;
+    </copy>
+    ```
+
+    The attributes show how the profile is configured and which database objects are available to Select AI. Do not copy credentials. In Task 2, you will change only the profile's `object_list`.
+
+## Task 2: Add the utilities tables to the profile
+
+Add the four views that supply service, request, item, and service-point data.
+
+1. Add the utilities tables to the profile:
+
+    ```sql
+    <copy>
+    BEGIN
+      DBMS_CLOUD_AI.SET_ATTRIBUTE(
+        profile_name    => 'genai',
+        attribute_name  => 'object_list',
+        attribute_value => '[{"owner": "' || USER || '", "name": "UTILITY_SERVICES_V"}, {"owner": "' || USER || '", "name": "UTILITY_SERVICE_REQUESTS"}, {"owner": "' || USER || '", "name": "UTILITY_REQUEST_ITEMS"}, {"owner": "' || USER || '", "name": "SERVICE_POINTS_V"}]'
+      );
+    END;
+    /
+    </copy>
+    ```
+
+2. Confirm the object list:
+
+    ```sql
+    <copy>
+    SELECT profile_name,
+           attribute_name,
+           attribute_value
+    FROM user_cloud_ai_profile_attributes
+    WHERE profile_name = 'GENAI'
+      AND attribute_name = 'object_list';
+    </copy>
+    ```
+
+    The result should list `UTILITY_SERVICES_V`, `UTILITY_SERVICE_REQUESTS`, `UTILITY_REQUEST_ITEMS`, and `SERVICE_POINTS_V`. Select AI can now use these tables when it translates Nina's questions into SQL.
+
+    ![GENAI approved Utilities views](images/cap-048.png)
+
+## Task 3: Ask a question and inspect the SQL
+
+Nina starts with a simple question: which utility services have the highest request value? She first asks Select AI to show the SQL without running it.
+
+Database Actions does not support the `SELECT AI` keyword. In SQL Worksheet, use `DBMS_CLOUD_AI.GENERATE` and provide the profile name directly.
+
+1. Run the question with the `GENAI` profile:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Which five utility services have the highest total request value?',
+             profile_name => 'genai',
+             action       => 'showsql'
+           ) AS generated_sql;
+    </copy>
+    ```
+
+    ![Generated SQL for the first question](images/cap-049.png)
+
+2. Read the generated SQL before running it.
+
+    Check whether the statement uses the expected service and service-request activity, returns five rows, and calculates request value in a sensible way. Select AI can generate a valid-looking statement that does not answer the question precisely, so the generated SQL is part of the result Nina reviews.
+
+## Task 4: Run the question in the database
+
+Nina has reviewed the SQL. She now asks Select AI to run the question and return the database result.
+
+1. Run the same question with the `runsql` action:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Which five utility services have the highest total request value?',
+             profile_name => 'genai',
+             action       => 'runsql'
+           ) AS answer;
+    </copy>
+    ```
+
+    ![Database result for the first question](images/cap-050.png)
+
+2. Compare the answer with the SQL you inspected in Task 3.
+
+    Check the returned services, row count, and request-value calculation against the question.
+
+    > **Note:** `runsql` generates and runs SQL for the prompt. Do not assume it executes the statement previously returned by `showsql`; compare the result. See the [action reference](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/dbms-cloud-ai-package.html).
+
+## Task 5: Improve the business question
+
+Nina's first question gives her a service ranking, but she also needs enough detail to decide what to review. She changes the question to request the service category, total request value, and units requested.
+
+1. Use `showsql` to inspect this revised prompt:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five utility services with the highest total request-item value. Include the service name, utility category, total request-item value, and units requested.',
+             profile_name => 'genai',
+             action       => 'showsql'
+           ) AS generated_sql;
+    </copy>
+    ```
+
+    ![Generated SQL for the refined question](images/cap-051.png)
+
+2. Review the generated SQL, then run the revised question with `runsql`:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Show the five utility services with the highest total request-item value. Include the service name, utility category, total request-item value, and units requested.',
+             profile_name => 'genai',
+             action       => 'runsql'
+           ) AS answer;
+    </copy>
+    ```
+
+    ![Refined database result](images/cap-052.png)
+
+3. Compare the first and second questions.
+
+    Check whether the added category and quantity columns make the ranking more useful for Nina's review.
+
+## Task 6: Explain the result
+
+Nina wants a short explanation of the revised result. Select AI can run the SQL and ask the AI provider to describe the returned rows.
+
+1. Run the revised question with the `narrate` action:
+
+    ```sql
+    <copy>
+    SELECT DBMS_CLOUD_AI.GENERATE(
+             prompt       => 'Explain in two sentences which utility service has the highest total request-item value and why it should be reviewed. Use the database result; do not invent an operational cause.',
+             profile_name => 'genai',
+             action       => 'narrate'
+           ) AS explanation;
+    </copy>
+    ```
+
+    ![Compare the narration with the database result](images/cap-053.png)
+
+2. Review the explanation against the SQL result.
+
+    In the captured example, zone 3 and zone 6 tie at 1404, but the narration mentions only zone 3 and speculates about inefficiency. The query does not establish that cause. Identify these unsupported claims before reusing an AI explanation.
+
+    > **Note:** The `narrate` action sends the query result to the AI provider configured in the profile. Use it only for data approved for that provider.
+
+## Conclusion: Ask, Inspect, and Refine
+
+Nina now has a service ranking and a way to check the SQL behind it. Check the AI explanation against the database result.
 
 ## Next Steps
 
-In Lab 8, Nina and Jessica place the same read-only data access behind an explicit agent tool, task, and team.
+For the full list of Select AI actions, profile attributes, and supported providers, see the [Oracle AI Database 26ai Select AI documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/).
 
 ## Acknowledgements
 
-* **Author** - Oracle Database Product Management
-* **Last Updated By/Date** - Oracle Database Product Management, September 2026
+* **Authors** - Matt Kowalik
+* **Contributors** - Teodor C. Nechita
+* **Last Updated By/Date** - Teodor C. Nechita, October 2026

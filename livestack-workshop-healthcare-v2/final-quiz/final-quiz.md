@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/badge.png
+badge: images/healthcare.png
 ```
 
 ## Introduction
@@ -15,6 +15,11 @@ Use this scored quiz to review one key idea from each of the eight hands-on labs
 - Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **4 minutes**
+
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FHealthcare%2FScene-11-Final-Quiz-Live-Overview-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Task 1: Answer the quiz questions
 

@@ -2,7 +2,7 @@
 
 ```quiz-config
 passing: 75
-badge: images/livestack-telecommunications-badge.svg
+badge: images/livestack-badge-telecommunications.png
 ```
 
 ## Introduction
@@ -15,6 +15,11 @@ Use this quiz to check how the database results support the SEER Telecomms tasks
 - Earn the workshop badge by answering the scored questions.
 
 Estimated Time: **3 minutes**
+
+<video controls width="100%">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/Telecommunication/Workshop/Scene-11-Telecommunications-Conclusion-Branded.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Task 1: Answer the quiz questions
 

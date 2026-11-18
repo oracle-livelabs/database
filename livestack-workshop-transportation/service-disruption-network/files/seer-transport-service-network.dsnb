@@ -1,0 +1,183 @@
+[
+  {
+    "name": "Seer Transport Service Network",
+    "description": null,
+    "tags": null,
+    "version": "7",
+    "layout": "zeppelin",
+    "type": "Default",
+    "snapshot": false,
+    "isEditable": true,
+    "isRunnable": true,
+    "template": "dsrgmn3y",
+    "templateConfig": "{\"visualization\":{\"filters\":[{\"_id\":1583324064459,\"type\":\"styling\",\"enabled\":true,\"conditions\":{\"operator\":\"and\",\"conditions\":[{\"property\":\"hiddenConnection\",\"operator\":\"*\",\"value\":\"\"}]},\"component\":\"edge\",\"target\":\"edge\",\"properties\":{\"colors\":[\"rgba(0, 0, 0, 0.1)\"],\"style\":[\"dashed\"],\"legendTitle\":[\"Hidden Connection\"]}},{\"_id\":1590499315755,\"type\":\"aggregation\",\"enabled\":true,\"conditions\":{\"operator\":\"and\",\"conditions\":[]},\"component\":\"vertex\",\"target\":\"vertex\",\"properties\":{},\"aggregation\":[{\"source\":\"\",\"type\":\"average\"}]}],\"version\":4}}",
+    "paragraphs": [
+      {
+        "row": 0,
+        "col": 0,
+        "sizeX": 0,
+        "width": 12,
+        "title": null,
+        "hasTitle": false,
+        "message": [
+          "%md",
+          "",
+          "# Seer Transport Service Network",
+          "Follow trip TRIP-8841 through connected routes, stations, vehicles, and disruption cases."
+        ],
+        "selectedVisualization": "html",
+        "visualizationConfig": null,
+        "hideCode": true,
+        "hideResult": false,
+        "hideGutter": true,
+        "hideVizConfig": false,
+        "hideInIFrame": false,
+        "enabled": true,
+        "forms": "[]",
+        "relations": [],
+        "dynamicFormParams": "{}"
+      },
+      {
+        "row": 0,
+        "col": 0,
+        "sizeX": 0,
+        "width": 12,
+        "title": null,
+        "hasTitle": false,
+        "message": [
+          "%md",
+          "",
+          "Run the table query first. Compare its entity keys and risk scores with the SQL Worksheet result."
+        ],
+        "selectedVisualization": "html",
+        "visualizationConfig": null,
+        "hideCode": true,
+        "hideResult": false,
+        "hideGutter": true,
+        "hideVizConfig": false,
+        "hideInIFrame": false,
+        "enabled": true,
+        "forms": "[]",
+        "relations": [],
+        "dynamicFormParams": "{}"
+      },
+      {
+        "row": 0,
+        "col": 0,
+        "sizeX": 0,
+        "width": 12,
+        "title": null,
+        "hasTitle": false,
+        "message": [
+          "%sql",
+          "SELECT DISTINCT entity_key, display_name, entity_type, risk_score, risk_level, affected_capacity, channel\nFROM GRAPH_TABLE (service_disruption_network\n  MATCH (seed IS entity) -[e IS related_to]->{1,2} (reached IS entity)\n  WHERE seed.entity_key = 'TRIP-8841'\n  COLUMNS (\n    reached.entity_key AS entity_key,\n    reached.display_name AS display_name,\n    reached.entity_type AS entity_type,\n    reached.risk_score AS risk_score,\n    reached.risk_level AS risk_level,\n    reached.affected_capacity AS affected_capacity,\n    reached.channel AS channel\n  )\n)\nORDER BY risk_score DESC\nFETCH FIRST 25 ROWS ONLY;"
+        ],
+        "selectedVisualization": "table",
+        "visualizationConfig": null,
+        "hideCode": false,
+        "hideResult": false,
+        "hideGutter": true,
+        "hideVizConfig": false,
+        "hideInIFrame": false,
+        "enabled": true,
+        "forms": "[]",
+        "relations": [],
+        "dynamicFormParams": "{}"
+      },
+      {
+        "row": 0,
+        "col": 0,
+        "sizeX": 0,
+        "width": 12,
+        "title": null,
+        "hasTitle": false,
+        "message": [
+          "%md",
+          "",
+          "This graph view draws the trip and its connections within two relationship hops. Select an edge to inspect the relationship."
+        ],
+        "selectedVisualization": "html",
+        "visualizationConfig": null,
+        "hideCode": true,
+        "hideResult": false,
+        "hideGutter": true,
+        "hideVizConfig": false,
+        "hideInIFrame": false,
+        "enabled": true,
+        "forms": "[]",
+        "relations": [],
+        "dynamicFormParams": "{}"
+      },
+      {
+        "row": 0,
+        "col": 0,
+        "sizeX": 0,
+        "width": 12,
+        "title": null,
+        "hasTitle": false,
+        "message": [
+          "%sql",
+          "SELECT *\nFROM GRAPH_TABLE (\n  service_disruption_network\n  MATCH (src IS entity)-[e IS related_to]->{1,2}(dst IS entity)\n  WHERE src.entity_key = 'TRIP-8841'\n  ONE ROW PER STEP (v1, e1, v2)\n  COLUMNS (\n    vertex_id(src) AS seed_id,\n    vertex_id(v1) AS v1_id,\n    edge_id(e1) AS e1_id,\n    vertex_id(v2) AS v2_id\n  )\n);"
+        ],
+        "selectedVisualization": "visualization",
+        "visualizationConfig": null,
+        "hideCode": false,
+        "hideResult": false,
+        "hideGutter": true,
+        "hideVizConfig": false,
+        "hideInIFrame": false,
+        "enabled": true,
+        "forms": "[]",
+        "relations": [],
+        "dynamicFormParams": "{}"
+      },
+      {
+        "row": 0,
+        "col": 0,
+        "sizeX": 0,
+        "width": 12,
+        "title": null,
+        "hasTitle": false,
+        "message": [
+          "%md",
+          "",
+          "The final query finds trip pairs connected through one shared station or vehicle. Compare the keys with Task 4 in the lab."
+        ],
+        "selectedVisualization": "html",
+        "visualizationConfig": null,
+        "hideCode": true,
+        "hideResult": false,
+        "hideGutter": true,
+        "hideVizConfig": false,
+        "hideInIFrame": false,
+        "enabled": true,
+        "forms": "[]",
+        "relations": [],
+        "dynamicFormParams": "{}"
+      },
+      {
+        "row": 0,
+        "col": 0,
+        "sizeX": 0,
+        "width": 12,
+        "title": null,
+        "hasTitle": false,
+        "message": [
+          "%sql",
+          "SELECT trip_a, shared_entity, shared_type, trip_b\nFROM GRAPH_TABLE (service_disruption_network\n  MATCH (a IS entity)-[e1 IS related_to]->(shared IS entity)<-[e2 IS related_to]-(b IS entity)\n  WHERE a.entity_type = 'trip' AND b.entity_type = 'trip'\n    AND a.entity_id < b.entity_id\n    AND shared.entity_type IN ('station','vehicle')\n  COLUMNS (a.entity_key AS trip_a, shared.entity_key AS shared_entity,\n           shared.entity_type AS shared_type, b.entity_key AS trip_b)\n)\nFETCH FIRST 25 ROWS ONLY;"
+        ],
+        "selectedVisualization": "table",
+        "visualizationConfig": null,
+        "hideCode": false,
+        "hideResult": false,
+        "hideGutter": true,
+        "hideVizConfig": false,
+        "hideInIFrame": false,
+        "enabled": true,
+        "forms": "[]",
+        "relations": [],
+        "dynamicFormParams": "{}"
+      }
+    ]
+  }
+]

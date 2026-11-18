@@ -1,5 +1,14 @@
 # SEER Telecomms tables and sample data
 
+### Objectives
+
+In this lab, you will:
+* TODO: Add objectives
+
+
+Estimated Time: TODO - x minutes
+
+
 The main loader is [telecommunications-platform-handoff-loader.sql](../stack/load_data/telecommunications-platform-handoff-loader.sql). This document describes the table definitions and sample data used in the labs.
 
 ## Model and accounting rules
@@ -273,3 +282,8 @@ PLAN_EMBEDDINGS receives 192 rows through VECTOR_EMBEDDING during loading, in ad
 | `NETWORK_SITES_V` | `CITY`, `SITE_ID`, `SITE_NAME`, `STATE_PROVINCE` |
 | `SERVICE_ALERTS_V` | `AFFECTED_SUBSCRIBERS`, `ALERT_ID`, `SERVICE_CASES_OPENED`, `SEVERITY_SCORE` |
 | `SERVICE_ORDERS_DV` | `DATA` |
+
+## Acknowledgements
+
+* **Author** - TODO: Your Name, Your Title, Your Organization
+* **Last Updated By/Date** - TODO: Your Name, Month Year

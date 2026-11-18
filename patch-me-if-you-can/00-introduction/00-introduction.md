@@ -6,6 +6,8 @@ In this workshop, you will familiarize yourself with patching Oracle AI Database
 
 Estimated Workshop Time: 90 minutes
 
+[Lab walkthrough by Mike Dietrich, Oracle](youtube:m1AH18Yctu0)
+
 ### Objectives
 
 In this workshop, you will:
@@ -54,7 +56,7 @@ You may now [*proceed to the next lab*](#next).
 * Webinar, [Release and Patching Strategies for Oracle Database 23ai](https://www.youtube.com/watch?v=sF-rmD78zIo)
 * Webinar, [One-Button Patching - makes life easier for every Oracle DBA](https://youtu.be/brnBavVLyM0)
 
-## Acknowledgments
+## Acknowledgements
 
 * **Author** - Daniel Overby Hansen
 * **Contributors** - Rodrigo Jorge, Alex Zaballa, Mike Dietrich, Alejandro Diaz

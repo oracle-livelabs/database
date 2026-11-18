@@ -359,7 +359,7 @@ Estimated Lab Time: 8 minutes
 
 ## Task 3: Record the Bet
 
-![The three dials — every pattern is a bet on these settings](images/three-dials.svg "The three dials")
+![The three dials — every pattern is a bet on these settings](images/three-dials.png "The three dials")
 
 You just set three dials, whether you meant to or not:
 

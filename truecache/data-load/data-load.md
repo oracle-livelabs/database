@@ -35,7 +35,7 @@ This lab assumes you have:
     sudo podman exec -it prod /bin/bash
     </copy>
     ```
-![primary database](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataload.png " ")
+    ![primary database](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataload.png " ")
 2. Connect to the database as a sysdba user
     ```
     <copy>
@@ -65,7 +65,7 @@ This lab assumes you have:
     </copy>
     ```
 
-![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
+    ![dataload step1](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep1.png " ")
 
 6. Exit from the sysdba session by pressing exit 
     ```
@@ -73,7 +73,7 @@ This lab assumes you have:
     exit
     </copy>
     ```
-7.  Check the hostname of the linux box , by entering hostname command
+7. Check the hostname of the linux box, by entering hostname command
      ```
     <copy>
     hostname
@@ -101,7 +101,7 @@ This lab assumes you have:
     </copy>
     ```
 
-![dataload step3](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep3.png " ")
+    ![dataload step3](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep3.png " ")
 
 ## Task 2: Load Data into the Tables
 
@@ -112,10 +112,10 @@ This lab assumes you have:
     @step4.sql
     </copy>
     ```
-![dataload step4](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep4.png " ")
+    ![dataload step4](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadstep4.png " ")
 
 2. After completing step4, you should see a commit complete message.
-![dataload commit](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadcommit.png " ")
+    ![dataload commit](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadcommit.png " ")
 
 3. Exit from the sqlplus session by entering exit 
     ```
@@ -132,12 +132,12 @@ This lab assumes you have:
     sudo podman exec -i -t truedb /bin/bash
     </copy>
     ```
-![dataload truecache](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecache.png " ")
+    ![dataload truecache](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecache.png " ")
 
-2. Login to the truecache using the transaction user using the format <truecache_hostname>:1521/SALES1_TC
+2. Log in to True Cache as the transactions user by using the format `<truecache_hostname>:1521/SALES1_TC`.
 
-sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
-![dataload truecache login](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachelogin.png " ")
+    sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
+    ![dataload truecache login](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecachelogin.png " ")
 
 
 3. Verify the True Cache role.
@@ -146,7 +146,7 @@ sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
     SELECT DATABASE_ROLE FROM V$DATABASE;
     </copy>
     ```
-![dataload truecache verify](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecacheverify.png " ")
+    ![dataload truecache verify](https://oracle-livelabs.github.io/database/truecache/data-load/images/dataloadtruecacheverify.png " ")
 
 4. Exit from the sqlplus session by entering exit 
     ```
@@ -155,12 +155,12 @@ sqlplus transactions/<***PASSWORDFROMSTEP1****>@truedb:1521/SALES1_TC
     </copy>
     ```
 
-You may now proceed to the next lab.
+Continue to the next lab.
 
 ## Learn More
-[True Cache documentation] (https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/configuring-true-cache.html)
+[True Cache documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/odbtc/configuring-true-cache.html)
 
 ## Acknowledgements
-* **Authors** - Sambit Panda, Consulting Member of Technical Staff , Vivek Vishwanathan Software Developer, Oracle Database Product Management
-* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Ilam Siva
-* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Aug 2025
+* **Authors** - Sambit Panda, Consulting Member of Technical Staff, Oracle Database Product Management
+* **Contributors** - Pankaj Chandiramani, Shefali Bhargava, Jyoti Verma, Nithin Thekkupadam Narayanan, Sarvesh Gupta
+* **Last Updated By/Date** - Sambit Panda, Consulting Member of Technical Staff, Sep 2026
