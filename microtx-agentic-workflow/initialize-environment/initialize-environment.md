@@ -61,8 +61,6 @@ ocr-service-645bc8d988-9jr7s               2/2     Running   0          21s
 otmm-console-747cf6dd74-nb6zn              2/2     Running   0          24s
 otmm-tcs-0                                 2/2     Running   0          24s
 workflow-server-7659b6ff7-m86p8            1/2     Running   0          24s
-[2026-11-17 08:27:56] INFO  Discovered Istio virtual-service routes:
-otmm/microtx hosts=  paths=/health /admin/v1 /api/v1 /metrics /config /workflow-server /workflow-ui/ws /workflow-ui /ws /workflow-fb /consoleui /consoleapi /oidc/logout /openid-connect/logout /console/oidc/redirect /console/
 otmm/notification-service hosts=  paths= /notification-service/
 [2026-11-17 08:27:56] INFO  ************************************************************
 ...
