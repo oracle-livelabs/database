@@ -30,17 +30,14 @@ This lab assumes you have:
 1. Click **Activities** in the remote desktop window to open a new terminal.
 
 2. From your remote desktop session as an *oracle* user, run the following commands to set up MicroTx Workflows.
-2. From your remote desktop session as an *oracle* user, run the following commands to set up MicroTx Workflows.
 
     ```
     <copy>
     cd $HOME/WorkflowScripts
     ./setup_microtx.sh
-    ./setup_microtx.sh
     </copy>
     ```
 
-    Wait until the MicroTx setup is complete. *This can take 5-6 minutes to deploy and start all the services.* Wait until all services are started. When the MicroTx setup is complete, the following messages are displayed.
     Wait until the MicroTx setup is complete. *This can take 5-6 minutes to deploy and start all the services.* Wait until all services are started. When the MicroTx setup is complete, the following messages are displayed.
 
     **Example output**
@@ -158,73 +155,8 @@ The following SQL statements are provided for reference only. They describe the 
 
     These statements document the preconfigured environment. During the lab, use the queue to publish and inspect loan application event messages through TxEventQ.
 
-
-## Informational: TxEventQ Setup
-
-The *LOAN\_APPLICATION\_EVENTS* transactional event queue, queue startup, and *LOAN\_APP\_CONSUMER* subscriber are already configured on the LiveLabs VM database. No queue setup is required during this lab.
-
-The queue is configured with *multiple_consumers => TRUE*, allowing multiple subscribers to receive the published events—for example, email, chat, SMS, or other notification services.
-
-The following SQL statements are provided for reference only. They describe the existing TxEventQ configuration and should not be executed unless specifically instructed.
-
-1. Transactional Event Queue
-
-    The following statement creates the *LOAN\_APPLICATION\_EVENTS* transactional event queue. The queue accepts JSON payloads published by the Java application as JMS text messages.
-
-    ```sql
-    <copy>
-    BEGIN
-    DBMS_AQADM.CREATE_TRANSACTIONAL_EVENT_QUEUE(
-        queue_name         => 'LOAN_APPLICATION_EVENTS',
-        multiple_consumers => TRUE,
-        queue_payload_type => DBMS_AQADM.JMS_TYPE,
-        comment            => 'Loan application events - JSON payload via JMS'
-    );
-    END;
-    /
-    </copy>
-    ```
-
-2. Queue Status
-    The queue is started and available to receive and deliver loan application event messages.
-
-    ```sql
-    <copy>
-    BEGIN
-    DBMS_AQADM.START_QUEUE(
-        queue_name => 'LOAN_APPLICATION_EVENTS'
-    );
-    END;
-    /
-    </copy>
-    ```
-
-3. Queue Subscriber
-    The *LOAN\_APP\_CONSUMER* subscriber is registered to consume messages from the queue.
-
-    ```sql
-    <copy>
-    BEGIN
-    DBMS_AQADM.ADD_SUBSCRIBER(
-        queue_name => 'LOAN_APPLICATION_EVENTS',
-        subscriber => SYS.AQ$_AGENT(
-        'LOAN_APP_CONSUMER',
-        NULL,
-        NULL
-        )
-    );
-    END;
-    /
-    </copy>
-    ```
-
-    These statements document the preconfigured environment. During the lab, use the queue to publish and inspect loan application event messages through TxEventQ.
-
-
 ## Acknowledgements
-
 
 * **Author** - Sylaja Kannan, Consulting User Assistance Developer
 * **Contributors** - Brijesh Kumar Deo and Bharath MC
-* **Last Updated By/Date** - Sylaja Kannan, September 2026
 * **Last Updated By/Date** - Sylaja Kannan, September 2026
