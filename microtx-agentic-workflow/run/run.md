@@ -138,7 +138,7 @@ This lab assumes you have:
 2. Under **Oracle Connections**, right-click **livelabsUser**, and then click **Connect** to connect to the `livelabUser` schema.
     ![Connect to the livelabUser schema](images/sql-connect.png)
 
-3. Enter the following query to retrieve the status of an application. Replace `<workflow-id>` with the value that you have copied in step 1.
+3. Enter the following query to retrieve the status of an application. Replace `<loanApplicationId>` with the value that you have copied in step 1.
 
     ```
     <copy>
