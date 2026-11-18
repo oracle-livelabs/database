@@ -1,4 +1,4 @@
-# Oracle Backend with Supabase APIs
+# Build a Party App on Oracle Backend with Supabase APIs
 
 ## Introduction
 

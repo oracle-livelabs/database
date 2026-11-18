@@ -1,5 +1,5 @@
 {
-  "workshoptitle": "Oracle Backend with Supabase APIs",
+  "workshoptitle": "Build a Party App on Oracle Backend with Supabase APIs",
   "help": "fusabase",
   "tutorials": [
     {
@@ -43,7 +43,7 @@
       "description": "Create the event-access helper and conditional SELECT Grant, then query the permitted guest list."
     },
     {
-      "title": "Lab 7: Upload and retrieve files",
+      "title": "Lab 7: Photo upload",
       "filename": "../../upload-files/upload-files.md",
       "description": "Configure storage Grants, upload an event cover, and retrieve its saved path."
     },

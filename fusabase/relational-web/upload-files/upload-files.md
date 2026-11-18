@@ -1,4 +1,4 @@
-# Upload and retrieve objects
+# Photo upload
 
 ## Introduction
 
