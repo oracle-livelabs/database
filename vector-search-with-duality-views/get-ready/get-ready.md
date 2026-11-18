@@ -32,17 +32,17 @@ Estimated Time: 15 minutes
 
 ## Task 2: Prepare both embedding models in Object Storage
 
-1. Download the [multilingual E5-small model archive](https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/3ZkNN9ORHrCvTFBx5wXh_UnWT5SkudyzqzOFWkEwcDW32yRA1ZbOF-qeG-KQK7ba/n/adwc4pm/b/OML-ai-models/o/multilingual_e5_small_augmented.zip) to your computer.
+1. Download the [multilingual E5-small model archive](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/multilingual_e5_small_augmented.zip) to your computer.
 
     - Extract the archive into a separate local folder, such as `models/e5-small/`, and locate `multilingual_e5_small.onnx`.
     - E5-small produces 384-dimensional vectors.
 
-2. Download the [multilingual E5-base model archive](https://objectstorage.us-ashburn-1.oraclecloud.com/p/SixA8FrMqul15N-qFEm5EsxusdyVzxEarw_GVAoNesn13VFy0EtdEsGUhtU0i8S8/n/adwc4pm/b/OML-ai-models/o/multilingual_e5_base_augmented.zip) to your computer.
+2. Download the [multilingual E5-base model archive](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/947D91JvPa6rhbK2wU8CcNkuaj3J4Mt6AWHCaRj9vRfDCuwSMDtLAVuLURpNPG2N/n/c4u04/b/livelabsfiles/o/labfiles/multilingual_e5_base_augmented.zip) to your computer.
 
     - Extract the archive into a different local folder, such as `models/e5-base/`, and locate `multilingual_e5_base.onnx`.
     - E5-base produces 768-dimensional vectors.
 
-The embedding model shapes semantic-search quality. Models represent meaning differently. More dimensions can capture finer distinctions and may improve results. This workshop provides E5-small and E5-base for a consistent lab experience. You are welcome to bring a compatible ONNX model, using its dimension count when you define the vector column.
+    The embedding model shapes semantic-search quality. Models represent meaning differently. More dimensions can capture finer distinctions and may improve results. This workshop provides E5-small and E5-base for a consistent lab experience. You are welcome to bring a compatible ONNX model, using its dimension count when you define the vector column.
 
 3. Open the OCI navigation menu. Select **Storage**, then **Buckets**. Select the workshop compartment, and create or open a bucket for the models.
 
