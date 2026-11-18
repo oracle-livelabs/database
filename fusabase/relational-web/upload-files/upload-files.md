@@ -191,7 +191,7 @@ Use your accounts from earlier labs. Sign out between accounts, or use separate 
 
 2. Click **Upload cover**. You should see **Cover saved.** and your image.
 
-3. Return to **My events**, open the invitation again, and reload it. The same image appears, because the event stores its path.
+3. Return to **My events**. Your event card now shows the cover. Open the invitation again and reload it. The same image appears, because the event stores its path.
 
     ![Gather showing the stored cover after reopening the invitation](images/dinner-cover-reopened.png)
 

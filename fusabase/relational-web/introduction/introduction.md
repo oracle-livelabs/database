@@ -4,7 +4,7 @@
 
 In this workshop, you will build an event web app called Gather with Oracle Backend with Supabase APIs. In your app, organizers share event invitations, and signed-in guests RSVP to unlock the guest list.
 
-![Gather showing an event invitation, a saved RSVP, and the guest list](images/gather-event-invitation.png)
+![Gather My events page showing three upcoming events with their cover images](images/gather-my-events.png)
 
 ### Objectives
 
