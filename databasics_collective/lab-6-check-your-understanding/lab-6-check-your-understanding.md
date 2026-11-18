@@ -2,7 +2,7 @@
 
 ## Introduction
 
-You built a small campus database. Finish with six questions about the choices you made along the way.
+You explored a ready campus database and practiced changing its structure and data. Finish with six questions about those choices.
 
 ```quiz-config
 passing: 75
@@ -54,7 +54,7 @@ Estimated Time: 10 minutes
     - A B-tree index.
     > A regular view saves the query definition and reads current data from the base tables whenever you use it.
 
-    Q: Why did you add an index on DBC_ENROLLMENTS(COURSE_ID)?
+    Q: Why did you add an index on ENROLLMENTS(COURSE_ID)?
     - To change the course IDs stored in the table.
     - To guarantee that every course has at least one student.
     * To give Oracle another path for joins and searches that begin with COURSE_ID.
@@ -71,5 +71,5 @@ Estimated Time: 10 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle University Program
-* **Last Updated By/Date** - Oracle University Program, November 2026
+* **Author** - Ilan Gómez Guerrero
+* **Last Updated By/Date** - Ilan Gómez Guerrero, November 2026

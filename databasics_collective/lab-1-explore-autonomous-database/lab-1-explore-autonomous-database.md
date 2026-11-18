@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before you create anything, take a quick look at the database you are using. Autonomous Database handles patching, backups, and routine tuning. You will focus on your schema, SQL, and data.
+Your reservation already has the university tables and sample rows. Start by checking your connection and finding them in your schema. Autonomous Database handles patching, backups, and routine tuning.
 
 ### Objectives
 
@@ -11,7 +11,7 @@ You will:
 - Identify your current user, schema, service, and container.
 - Distinguish the database from the objects in your schema.
 - Use data dictionary views to inspect your environment.
-- Confirm whether workshop objects already exist.
+- Confirm that the four core tables are ready.
 
 Estimated Time: 10 minutes
 
@@ -31,7 +31,7 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-3. Read the result. Your user and schema will normally have the same name. `SERVICE_NAME` shows the service used by the worksheet. `CONTAINER_NAME` shows the pluggable database that contains your schema.
+3. Read the result. Your user and schema should both be `DATABASICS`. `SERVICE_NAME` shows the service used by the worksheet. `CONTAINER_NAME` shows the pluggable database that contains your schema.
 
 ## Task 2: Inspect the database version
 
@@ -55,6 +55,7 @@ Estimated Time: 10 minutes
     <copy>
     SELECT table_name
     FROM   user_tables
+    WHERE  table_name IN ('DEPARTMENTS', 'STUDENTS', 'COURSES', 'ENROLLMENTS')
     ORDER  BY table_name;
     </copy>
     ```
@@ -77,11 +78,12 @@ Estimated Time: 10 minutes
     SELECT object_type, object_name, status
     FROM   user_objects
     WHERE  object_name LIKE 'DBC\_%' ESCAPE '\'
+       OR  object_name IN ('DEPARTMENTS', 'STUDENTS', 'COURSES', 'ENROLLMENTS')
     ORDER  BY object_type, object_name;
     </copy>
     ```
 
-4. If the last query returns rows, your instructor may have prepared the schema already. Ask whether you are using demo-ready mode. Do not remove the objects unless your instructor asks you to reset the workshop schema.
+4. You should find the four core tables. Database Actions may also create a `DBTOOLS$EXECUTION_HISTORY` table for its own use. If a core table is missing, the reservation setup has not finished.
 
 ## Task 4: Connect the concepts
 
@@ -103,5 +105,5 @@ Estimated Time: 10 minutes
 
 ## Acknowledgements
 
-* **Author** - Oracle University Program
-* **Last Updated By/Date** - Oracle University Program, October 2026
+* **Author** - Ilan Gómez Guerrero
+* **Last Updated By/Date** - Ilan Gómez Guerrero, November 2026

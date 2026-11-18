@@ -198,7 +198,7 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
 
 <if type="Java">
 
-1. Download the provided [HelloWorld.java](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.java) file and move it to the `test/src/main/java` directory.
+1. Download the provided [HelloWorld.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.java) file and move it to the `test/src/main/java` directory.
 
 2. Review the sample application. You can access the [JavaAPI Reference Guide](https://docs.oracle.com/en/cloud/paas/nosql-cloud/csnjv/index.html) to reference Java classes, methods, and interfaces included in this sample application.
 
@@ -235,7 +235,7 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
 
 <if type="Python">
 
-1. Download the provided [HelloWorld.py](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.py) file and move it to your home directory.
+1. Download the provided [HelloWorld.py](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.py) file and move it to your home directory.
 
 2. Review the sample application. You can access the [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html) to reference Python classes and methods included in this sample application.
 
@@ -274,7 +274,7 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
 </if>
 <if type="Go">
 
-1. Download the provided [HelloWorld.go](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.go) file and move it to your home directory.
+1. Download the provided [HelloWorld.go](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.go) file and move it to your home directory.
 
 2. Review the sample application. You can access the [Go API docs](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb?utm_source=godoc) to reference Go classes and methods included in this sample application.
 
@@ -338,7 +338,7 @@ You can add the SDK NuGet Package as a reference to your project by using .Net C
 <if type="Node.js">
 The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
 
-1. For JavaScript applications, download the [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/hP3lO4cVou3C1XqL-oxJi4F3IC3fsqwO6jsoq4b4-j6uhJ3DjFffEJwf6O5M0ABf/n/c4u04/b/livelabsfiles/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts] (https://objectstorage.us-ashburn-1.oraclecloud.com/p/-_rOKBbY7zRRg6fyYdm3vvRIatks_zGuJ3ZX4QhRDm8UfgAqsotpcDo4phLRuQAL/n/c4u04/b/livelabsfiles/o/HelloWorld.ts) file and move it to your home directory.
+1. For JavaScript applications, download the [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts] (https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/HelloWorld.ts) file and move it to your home directory.
 
 2. Review the sample application. You can access the [Node.js API  Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
@@ -375,7 +375,7 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 </if>
 <if type="C-sharp">
 
-1. Download the provided [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs) file and move it to your home directory.
+1. Download the provided [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/data-management-library-files/HelloWorld.cs) file and move it to your home directory.
 
 2. Review the sample application. You can access the [.NET API  Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
 
