@@ -1,0 +1,14 @@
+{
+  "release": "26.3",
+  "retrieved_on": "2026-10-26",
+  "source_page": "https://www.oracle.com/database/trusted-answer-search/",
+  "archive_filename": "tas-installer-26.3-macos-and-linux.zip",
+  "sha256": "4a65fb5f829c471717ff378757bebe581b9670f5565c56563b1d19b4a113cf9c",
+  "sample_search_space": "Demo Brokerage",
+  "sample_targets": 20,
+  "sample_value_sets": 5,
+  "sample_test_queries": 21,
+  "lab_seed_questions": 4,
+  "learner_added_questions": 1,
+  "workshop_report": "Open Stock Orders"
+}

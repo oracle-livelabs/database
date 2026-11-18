@@ -484,7 +484,7 @@ VALUES
 
 5. Click the link to download the pre-created notebook. We will explain the code below.
 
-    * [Download the Graph Notebook](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/23ai_demo.dsnb)
+    * [Download the Graph Notebook](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/23ai_demo.dsnb)
 
 6. Either drag and drop the notebook that was just downloaded inside of graph studio, or click inside the Drag and Drop field to upload the file.
     ![Updating the our customers view](images/im13-se.png " ")

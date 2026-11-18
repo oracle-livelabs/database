@@ -88,7 +88,7 @@ To be able to access your compute instances, you need to configure egress and in
 
 ## Task 2: Create a `workshop-staged` compute instance
 
-1. Download [db19cnf-workshop-staged.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/db19cnf-workshop-staged.zip) to a directory on your local computer.
+1. Download [db19cnf-workshop-staged.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/data-management-library-files/db19cnf-workshop-staged.zip) to a directory on your local computer.
 
 2. On the home page in Oracle Cloud Infrastructure, click **Create a stack**.
 
@@ -160,7 +160,7 @@ To be able to access your compute instances, you need to configure egress and in
 
 ## Task 3: Create a `workshop-installed` compute instance
 
-1. Download [db19cnf-workshop-installed.zip](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/labfiles/db19cnf-workshop-installed.zip) to a directory on your local computer.
+1. Download [db19cnf-workshop-installed.zip](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/labfiles/db19cnf-workshop-installed.zip) to a directory on your local computer.
 
 2. On the home page in Oracle Cloud Infrastructure, click **Create a stack**.
 

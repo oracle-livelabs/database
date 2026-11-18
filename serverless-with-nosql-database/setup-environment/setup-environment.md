@@ -84,7 +84,7 @@ In this task we will copy over a data bundle stored on object storage and place 
     <copy>
       cd $HOME
       rm -rf serverless-with-nosql-database BaggageData serverless-with-nosql-database.zip demo-lab-nosql-main
-      curl https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/data-management-library-files/demo-lab-nosql.zip -o serverless-with-nosql-database.zip
+      curl https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/data-management-library-files/demo-lab-nosql.zip -o serverless-with-nosql-database.zip
       unzip serverless-with-nosql-database.zip
       mv demo-lab-nosql serverless-with-nosql-database
       cp ~/NoSQLLabPrivateKey.pem  ~/serverless-with-nosql-database/express-nosql

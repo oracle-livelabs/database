@@ -58,7 +58,7 @@ database user’s privileges.
 Estimated Time: **15 minutes**
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/Workshop/Scene-10-Lab-08-Governed-Public-Service-AI-Agent-Branded.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/Workshop/Scene-10-Lab-08-Governed-Public-Service-AI-Agent-Branded.mp4">
   Your browser does not support the video tag.
 </video>
 
