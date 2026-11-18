@@ -1,0 +1,26 @@
+{
+  "workshoptitle": "Prepare the RHEL Migration Environment: Instructor Workshop",
+  "help": "livelabs-help-linux_us@oracle.com",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "description": "Review instructor prerequisites, image preparation, and the student handoff.",
+      "filename": "../../instructor-introduction/instructor-introduction.md"
+    },
+    {
+      "title": "Lab 1: Acquire and Import the RHEL Source Image",
+      "description": "Obtain and import the authorized raw RHEL image.",
+      "filename": "../../acquire-import-rhel/acquire-import-rhel.md"
+    },
+    {
+      "title": "Lab 2: Prepare and Export the RHEL Application Image",
+      "description": "Prepare RHEL with Apache, remove registration, capture and export the reusable image, and create its object-read PAR.",
+      "filename": "../../launch-baseline-rhel/launch-baseline-rhel.md"
+    },
+    {
+      "title": "Need Help?",
+      "description": "Review common solutions and options for assistance.",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-freetier.md"
+    }
+  ]
+}
