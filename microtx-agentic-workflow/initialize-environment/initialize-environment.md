@@ -43,45 +43,46 @@ This lab assumes you have:
     **Example output**
 
     ```text
-    [2026-09-03 12:38:41] INFO  ************************************************************
-    [2026-09-03 12:38:41] INFO  === MicroTx setup completed successfully ===
-    [2026-09-03 12:38:41] INFO  Oracle restart phase: completed
-    [2026-09-03 12:38:41] INFO  Minikube profile: minikube
-    [2026-09-03 12:38:41] INFO  Istio ingress address: 10.101.253.115
-    MicroTx Console URL: http://10.101.253.115/consoleui/
-    [2026-09-03 12:38:41] INFO  Tunnel log: /home/oracle/WorkflowScripts/.microtx/tunnel.log
-    [2026-09-03 12:38:41] INFO  Session log: /home/oracle/WorkflowScripts/.microtx/logs/setup_microtx_20260903_123644_383599.log
-    NAME             NAMESPACE  REVISION  UPDATED                                  STATUS    CHART                                APP VERSION
-    loan-app-demo    otmm       1         2026-09-03 07:54:05.13585969 +0000 UTC  deployed  workflow-sample-microservices-0.1.0  1.0
-    otmm             otmm       1         2026-09-02 15:15:15.304751328 +0000 UTC deployed  microtx-26.1.2                       26.1.2
-    NAME                                       READY   STATUS    RESTARTS   AGE
-    doc-process-mcp-server-7c99f589c-jn4bc     2/2     Running   0          4h44m
-    loan-compliance-service-5c8c8b474b-qpdcp   2/2     Running   0          4h44m
-    loan-processing-agent-7b8f6f4b5c-tzq8b     2/2     Running   0          4h44m
-    notification-service-586688b6cc-hshnf      2/2     Running   0          4h44m
-    ocr-service-59d499d5bf-j7hxq               2/2     Running   0          4h44m
-    otmm-console-d8b8ffc89-rhfj8               2/2     Running   0          21h
-    otmm-tcs-0                                 2/2     Running   0          21h
-    workflow-server-7659b6ff7-q4wtd            2/2     Running   0          21h
-    [2026-09-03 12:38:41] INFO  Discovered Istio virtual-service routes:
-    otmm/microtx hosts=  paths=/health /admin/v1 /api/v1 /metrics /config /workflow-server /workflow-ui/ws /workflow-ui /ws /workflow-fb /consoleui /consoleapi /oidc/logout /openid-connect/logout /console/oidc/redirect /console/
-    otmm/notification-service hosts=  paths=/notification-service/
-    [2026-09-03 12:38:41] INFO  ************************************************************
+[2026-11-17 08:27:56] INFO  ************************************************************
+[2026-11-17 08:27:56] INFO  === MicroTx setup completed successfully ===
+[2026-11-17 08:27:56] INFO  Oracle restart phase: completed
+[2026-11-17 08:27:56] INFO  Minikube profile: minikube
+[2026-11-17 08:27:56] INFO  Istio ingress address: 10.107.xx.xx
+MicroTx Console URL: http://10.107.xx.xx/consoleui/
+NAME         	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                              	APP VERSION
+loan-app-demo	otmm     	1       	2026-11-17 08:27:35.174395784 +0000 UTC	deployed	workflow-sample-microservices-0.1.0	1.0
+otmm         	otmm     	1       	2026-11-17 08:27:32.443313115 +0000 UTC	deployed	microtx-26.1.2                     	26.1.2
+NAME                                       READY   STATUS    RESTARTS   AGE
+doc-process-mcp-server-5868d8487c-2n65x    2/2     Running   0          21s
+loan-compliance-service-77fd44668d-fckng   2/2     Running   0          21s
+loan-processing-agent-747b698d89-28xsv     2/2     Running   0          21s
+notification-service-554d8d96b7-ktxtk      2/2     Running   0          21s
+ocr-service-645bc8d988-9jr7s               2/2     Running   0          21s
+otmm-console-747cf6dd74-nb6zn              2/2     Running   0          24s
+otmm-tcs-0                                 2/2     Running   0          24s
+workflow-server-7659b6ff7-m86p8            1/2     Running   0          24s
+[2026-11-17 08:27:56] INFO  Discovered Istio virtual-service routes:
+otmm/microtx hosts=  paths=/health /admin/v1 /api/v1 /metrics /config /workflow-server /workflow-ui/ws /workflow-ui /ws /workflow-fb /consoleui /consoleapi /oidc/logout /openid-connect/logout /console/oidc/redirect /console/
+otmm/notification-service hosts=  paths= /notification-service/
+[2026-11-17 08:27:56] INFO  ************************************************************
+...
+[2026-11-17 08:27:57] INFO  Phase 4/4: optionally configuring external NGINX access completed.
+
+********************************************************************************
+* MicroTx Console URL: http://10.107.xx.xx/consoleui/                          *
+* Please open this MicroTx URL in a browser.                                   *
+********************************************************************************
     ```
 
-3. Copy the following MicroTx Console URL to access the MicroTx Workflows GUI:
+3. Copy the private MicroTx Console URL from the final `MicroTx Console URL` message in the terminal output. For example:
 
-    ```
-    <copy>
-    http://10.101.253.115/consoleui/
-    </copy>
+    ```text
+    MicroTx Console URL: http://10.107.xx.xx/consoleui/
     ```
 
-    >**Note:** *The IP address in this URL is a reference IP address. The IP address in your environment might be different. Use the MicroTx Console URL displayed in the setup output.*
+4. In the LiveLabs Workshop VM remote desktop window, click **Activities**, and then click the Chrome browser icon to launch the browser.
 
-4. Click **Activities** in the remote desktop window, and then click the Chrome browser icon to launch the browser.
-
-5. Paste the MicroTx Console URL in a browser tab to access the MicroTx Workflows GUI.
+5. Paste the URL you copied into the browser to access the MicroTx Workflows GUI.
 
 6. If the following options are displayed, then click **Workflow**.
     ![MicroTx Workflows UI Options](images/initial-screen-options.png)
