@@ -1,0 +1,50 @@
+---
+- name: Verify the migrated workshop VM
+  hosts: workshop
+  gather_facts: true
+  become: false
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+
+  tasks:
+    - name: Display the operating system and running kernel
+      ansible.builtin.debug:
+        msg:
+          - "OS: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"
+          - "Kernel: {{ ansible_facts['kernel'] }}"
+
+    - name: Confirm Oracle Linux 9.8 and UEK
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['distribution'] == 'OracleLinux'
+          - ansible_facts['distribution_version'] == '9.8'
+          - "'el9uek' in ansible_facts['kernel']"
+        success_msg: Oracle Linux 9.8 is running UEK.
+        fail_msg: Review the OS and kernel checks from Labs 4 and 6.
+
+    - name: Gather service information
+      ansible.builtin.service_facts:
+
+    - name: Confirm Apache is enabled and running
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['services'].get('httpd.service', {}).get('state') == 'running'
+          - ansible_facts['services'].get('httpd.service', {}).get('status') == 'enabled'
+        success_msg: Apache is enabled and running.
+        fail_msg: Review the Apache service checks from the earlier labs.
+
+    - name: Request the workshop application page
+      ansible.builtin.uri:
+        url: http://127.0.0.1/
+        return_content: true
+        status_code: 200
+        use_proxy: false
+        timeout: 10
+      register: workshop_page
+
+    - name: Confirm the application marker
+      ansible.builtin.assert:
+        that:
+          - "'MIGRATION_WORKLOAD_OK' in workshop_page['content']"
+        success_msg: MIGRATION_WORKLOAD_OK is present in the application page.
+        fail_msg: The application responded but the workshop marker is missing.
