@@ -14,7 +14,7 @@ badge: images/badge.png
 You will:
 
 - Review the main ideas from the workshop.
-- Check when to use constraints, transactions, views, and indexes.
+- Review constraints, schema objects, and indexes.
 - Identify which database tasks Oracle Autonomous Database manages for you.
 
 Estimated Time: 10 minutes
@@ -42,11 +42,11 @@ Estimated Time: 10 minutes
     * A foreign key from the enrollment table to the student table.
     > The foreign key requires the referenced student row to exist before Oracle accepts the enrollment.
 
-    Q: You test an UPDATE and a DELETE after creating a savepoint. How can you undo only those practice changes?
-    * Run ROLLBACK TO the savepoint.
-    - Run COMMIT before checking the rows.
-    - Drop and recreate the affected tables.
-    > A savepoint marks a place inside the transaction. ROLLBACK TO returns to that point without removing work done before it.
+    Q: In Lab 3, why does the workshop use cleanup statements to restore the sample rows?
+    - A DELETE statement cannot be rolled back in Oracle.
+    * The separate worksheet operations may use different sessions, so a savepoint from an earlier operation is unavailable.
+    - A savepoint can only be used with CREATE TABLE.
+    > A savepoint belongs to the session that created it. Lab 3 runs its checks separately, so it restores the practice values explicitly instead of relying on a savepoint across operations.
 
     Q: You want to reuse the four-table schedule query without storing another copy of its results. Which object fits that need?
     - A sequence.

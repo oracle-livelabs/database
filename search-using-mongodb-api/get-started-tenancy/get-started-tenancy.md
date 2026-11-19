@@ -58,7 +58,7 @@ In this lab, you will:
 
 1. Download the multilingual E5-base archive provided for this workshop to your local computer:
 
-    [Download multilingual E5-base ONNX model](https://objectstorage.us-ashburn-1.oraclecloud.com/p/SixA8FrMqul15N-qFEm5EsxusdyVzxEarw_GVAoNesn13VFy0EtdEsGUhtU0i8S8/n/adwc4pm/b/OML-ai-models/o/multilingual_e5_base_augmented.zip)
+    [Download multilingual E5-base ONNX model](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/947D91JvPa6rhbK2wU8CcNkuaj3J4Mt6AWHCaRj9vRfDCuwSMDtLAVuLURpNPG2N/n/c4u04/b/livelabsfiles/o/labfiles/multilingual_e5_base_augmented.zip)
 
 2. Extract the ZIP archive on your local computer and locate `multilingual_e5_base.onnx`.
 
