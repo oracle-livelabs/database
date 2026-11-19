@@ -55,13 +55,7 @@ This lab assumes you have:
 
 ## Task 4: Complete the Google action
 
-1. In VS Code, open `starter/actions.js` and review the existing import:
-
-    ```javascript
-    import { createClient } from '@fusabase/fusabase-relational';
-    ```
-
-    Google sign-in uses `client.auth` on the client that `connect()` already creates, so you don't need another import. The **Continue with Google** button calls `googleSignIn(client)`.
+1. In VS Code, open `starter/actions.js`. Google sign-in uses `client.auth`, the same auth client you used in Lab 3. The **Continue with Google** button calls `googleSignIn(client)`.
 
 2. Find `socialProviders` directly above `googleSignIn`. Select the export and the whole placeholder function, including its declaration and closing brace.
 
@@ -117,13 +111,7 @@ This lab assumes you have:
 
     ![Gather after signing out, with public event details and the guest-list prompt](images/google-signed-out-dinner.png)
 
-7. If `starter/actions.js` doesn't work after this lab, run this from the workshop root:
-
-    ```bash
-    cp checkpoints/lab-8/actions.js starter/actions.js
-    ```
-
-    Keep your own `starter/config.js`. The checkpoint doesn't include the provider setup from Tasks 1–3.
+7. If `starter/actions.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `lab-8/actions.js`, and use that file's contents to replace `starter/actions.js`. Keep your own `starter/config.js`.
 
 ## Troubleshooting
 

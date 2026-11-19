@@ -12,7 +12,7 @@ In this lab, you will:
 - create the event and RSVP tables in SQL Editor
 - register your app and copy its configuration
 - install the Oracle Backend with Supabase APIs JavaScript SDK
-- paste the configuration into `starter/config.js`
+- paste the configuration into `starter/config.js` and export its client
 
 Estimated Time: 20 minutes
 
@@ -75,15 +75,25 @@ This lab assumes you have:
 
     A project groups your apps and their shared services. Quickstart sets up the authentication and storage that later labs use.
 
-5. On **Your projects**, open the `LiveLab` card marked **RELATIONAL**. You should see `LiveLab` on the project home. Keep this project selected for the rest of the lab.
+5. On **Your projects**, click the `LiveLab` card marked **RELATIONAL**.
 
-    ![Fusabase console project home showing LiveLab and the Web registration button](images/task-1-project-ready.png)
+    ![Your projects page with the LiveLab RELATIONAL card highlighted](images/task-1-open-project.png)
+
+    You should see `LiveLab` on the project home. Keep this project selected for the rest of the lab.
+
+    ![Fusabase console project home with the LiveLab project selector highlighted](images/task-1-project-ready.png)
 
 ## Task 3: Create the event table with SQL Editor
 
 You'll create both tables in SQL Editor: the event table in this task and the RSVP table in Task 4.
 
-1. In the Fusabase console, open **Database** and select the **SQL Editor** tab.
+1. In the Fusabase console, click **Database**, then click **Get started**.
+
+    ![Database page with Database in the navigation and the Get started button highlighted](images/task-2-database-get-started.png)
+
+    Select the **SQL Editor** tab.
+
+    ![Database page with the SQL Editor tab highlighted](images/task-2-sql-editor-tab.png)
 
 2. In the worksheet, replace any example query with the following SQL. `PRIMARY KEY` makes each event key unique, and `NOT NULL` requires a value. `COVER_PATH` allows nulls because an event cover is optional.
 
@@ -113,7 +123,7 @@ You'll create both tables in SQL Editor: the event table in this task and the RS
 
 Each row stores one user's response to one event. A user can respond to many events, but only once per event.
 
-1. In the Fusabase console, open **Database > SQL Editor**.
+1. Go back to the **SQL Editor** tab.
 
 2. Replace the worksheet content with the following SQL. The composite `PRIMARY KEY` allows one response per user per event. The `FOREIGN KEY` links each response to an event in `GATHER_EVENTS`.
 
@@ -155,59 +165,70 @@ Each row stores one user's response to one event. A user can respond to many eve
 
     ![Fusabase console showing the SDK npm installation command and Next](images/task-4-install-sdk.png)
 
-4. At **Configure SDK**, find the `const fusabaseConfig = {` object. Copy the property lines inside its braces, from `schema` to `auth_id`. Keep this dialog open, because you also need the separate `ords_host` value below the object.
+4. At **Configure SDK**, copy all of the code.
 
-    ![Fusabase console with the configuration properties and separate ORDS host highlighted](images/task-4-config-properties.png)
+    ![Fusabase console Configure SDK step showing the generated SDK code](images/task-4-config-properties.png)
 
-5. In your IDE, open the workshop's `starter/` folder. Copy `config.example.js`, name the copy `config.js`, and open `starter/config.js`.
+5. In your IDE, open the workshop's `starter/` folder and create a file named `config.js`. Paste the code into `starter/config.js`.
 
-    ![VS Code showing starter/config.js beside config.example.js in the Explorer](images/task-4-ide-config-file-gather.jpg)
+    ![VS Code with the new starter/config.js file and the pasted Configure SDK code highlighted](images/task-4-ide-config-file-gather.jpg)
 
-6. Select only the placeholder property lines inside the existing `export const config = {` block, leaving the wrapper and closing `};` in place. Paste the property lines from the Fusabase console.
-
-    ![VS Code with only the configuration property lines selected for replacement](images/task-4-ide-paste-config-gather.jpg)
-
-    Don't paste `const fusabaseConfig =`, the Fusabase console's imports, or its `createClient` and service setup calls.
-
-7. Return to **Configure SDK** and copy the URL from the separate `const ords_host = '…';` line. Add it as the `ords_host` property inside your object, with a comma after the preceding property. Keep the trailing `/`.
-
-8. Compare your file with this structure:
+6. At the end of `starter/config.js`, add this line:
 
     ```javascript
-    export const config = {
-      schema: "testuser",
-      app_name: "Gather",
-      app_type: "WEB",
-      app_id: "APP_ID",
-      objs_type: "base",
-      backend_type: "RELATIONAL",
-      project_id: "PROJECT_ID",
-      storage_bucket: "STORAGE_BUCKET",
-      auth_type: "base",
-      auth_id: "AUTH_ID",
-      ords_host: "http://localhost:8080/ords/testuser/"
-    };
+    <copy>export { fusabase };</copy>
     ```
 
-    Replace `APP_ID`, `PROJECT_ID`, `STORAGE_BUCKET`, and `AUTH_ID` with your values from the Fusabase console. If your `schema`, `objs_type`, `auth_type`, or host differ from this example, keep yours.
+    ![VS Code with export { fusabase }; highlighted on the last line of starter/config.js](images/task-4-ide-config-export-gather.jpg)
 
-    | Property | Purpose |
+    The code you pasted creates your SDK client, `fusabase`, from your project's settings. Your file should look like this, with your own IDs and bucket name:
+
+    ```javascript
+    import { createClient } from "@fusabase/fusabase-relational";
+    const fusabaseConfig = {
+        schema: 'testuser',
+        app_name: 'Gather',
+        app_type: 'WEB',
+        app_id: 'APP_ID',
+        objs_type: 'base',
+        backend_type: 'RELATIONAL',
+        project_id: 'PROJECT_ID',
+        storage_bucket: 'STORAGE_BUCKET',
+        auth_type: 'base',
+        auth_id: 'AUTH_ID'};
+
+    const ords_host = 'http://localhost:8080/ords/testuser/';
+
+    const fusabase = createClient(
+      ords_host,
+      fusabaseConfig
+    );
+
+    // Relational database
+    const fusabase_db = fusabase;
+
+    // Relational storage
+    const fusabase_storage = fusabase.storage;
+
+    // Relational auth
+    const fusabase_auth = fusabase.auth;
+
+    export { fusabase };
+    ```
+
+    | Setting | Purpose |
     | --- | --- |
     | `schema` | Database schema containing your project data |
     | `app_name`, `app_type`, `app_id` | Your registered web app |
-    | `backend_type` | Backend type; keep `RELATIONAL` |
+    | `backend_type` | Backend type for the relational SDK |
     | `project_id` | LiveLab project you created in Task 2 |
     | `objs_type`, `storage_bucket` | Storage service and bucket for event covers |
     | `auth_type`, `auth_id` | Application-user authentication service |
-    | `ords_host` | Schema-specific ORDS URL, including its trailing slash |
+    | `ords_host` | Schema-specific ORDS URL that `createClient` connects to |
 
-9. Save `starter/config.js`. Check the export wrapper, the commas, and `ords_host` inside the object against this view.
+7. Save `starter/config.js`. In the Fusabase console, click **Done**.
 
-    ![VS Code showing the completed config.js structure and ORDS host inside the exported object](images/task-4-ide-config-complete-gather.jpg)
-
-    In the Fusabase console, click **Done**.
-
-10. To copy the configuration again, for example after you change the enabled services, open **Project settings > Applications**, select **Gather**, and expand **SDK config**.
+8. To copy the configuration again, for example after you change the enabled services, open **Project settings > Applications**, select **Gather**, and expand **SDK config**.
 
     ![Fusabase console application settings with Applications, Gather, and SDK config highlighted](images/task-4-find-config.png)
 
@@ -233,31 +254,15 @@ Each row stores one user's response to one event. A user can respond to many eve
 
     You can also use another static HTTP server, such as `python3 -m http.server 8000`. Serve the whole workshop root so both `starter/` and `node_modules/` are reachable.
 
-4. Open [the starter app](http://localhost:8000/starter/?ui=canvas). With your configuration saved, you should see the green **Connected to Fusabase** tag in the header. You don't need to edit `starter/actions.js` or add any initialization code.
+4. Open [the starter app](http://localhost:8000/starter/?ui=canvas). With `starter/config.js` saved, you should see the green **Connected to Fusabase** tag in the header. You don't need to edit `starter/actions.js` in this lab.
 
-    ![Gather Canvas layout with the green Connected to Fusabase tag and an empty event list](images/task-6-canvas-connected.png)
+    ![Gather app with the green Connected to Fusabase tag highlighted in the header and an empty event list](images/task-6-canvas-connected.png)
 
-## Task 7: Verify the connection
-
-The green tag means your app loaded your configuration and started the SDK client. It doesn't prove database access or permissions, which Lab 4 sets up with Grants. Don't add broad Grants to clear errors.
-
-1. You should see the green **Connected to Fusabase** tag beside **Sign in** and an empty event list. Other buttons show a message about a later lab, which is expected.
-
-2. Open your browser's developer console. You should see no module import, configuration, or uncaught JavaScript errors.
-
-3. In the Fusabase console, open **Database > Table Editor**. Both tables should still have zero rows.
-
-4. If `starter/actions.js` doesn't work after this lab, run this from the workshop root:
-
-    ```bash
-    cp checkpoints/lab-2/actions.js starter/actions.js
-    ```
-
-    Keep your own `starter/config.js`. The checkpoint doesn't create the project, tables, or keys, so complete Tasks 1–5 and the SDK install in Task 6 first.
+5. If `starter/actions.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `lab-2/actions.js`, and use that file's contents to replace `starter/actions.js`. Keep your own `starter/config.js`.
 
 ## Troubleshooting
 
-- **Not configured or a configuration message:** create `starter/config.js`, replace every placeholder, and check the `config` export, commas, quotes, and trailing `/` in `ords_host`. Then reload.
+- **Not configured or a configuration message:** check that `starter/config.js` contains all of the **Configure SDK** code and ends with `export { fusabase };`. Then reload.
 - **SDK module fails to load:** run `npm install @fusabase/fusabase-relational` at the workshop root. Serve that root, not only `starter/`.
 - **Browser reports a CORS error:** open the app at `http://localhost:8000`. Another port or `127.0.0.1` is a different origin that the backend might not allow.
 - **RSVP table creation fails:** create `GATHER_EVENTS` first, because the RSVP foreign key references it. Use the uppercase names exactly.

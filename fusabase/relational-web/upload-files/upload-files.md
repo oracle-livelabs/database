@@ -21,15 +21,11 @@ This lab assumes you have:
 
 - Successfully completed all previous labs.
 
-## Task 1: Check storage and event permissions
+## Task 1: Check storage settings
 
 1. In the **Fusabase console**, open **LiveLab > Storage > Storage settings**. You should see **Basic file system** and the bucket name from Lab 2. Leave them as they are.
 
     ![Storage settings showing the Basic file system and bucket](images/storage-settings-complete.png)
-
-2. Open **Database > Table Editor > Grants** and choose **Actions > Edit** for `GATHER_EVENTS_UPDATE`. It should list Lab 4's five columns, including `COVER_PATH`, and the `ORGANIZER_ID` condition. You don't need to change it, so click **Cancel**.
-
-    ![Event Grant with the five editable columns and organizer condition](images/event-update.png)
 
 ## Task 2: Let guests view cover images
 
@@ -86,21 +82,11 @@ A storage upload needs INSERT and UPDATE, plus SELECT to read its own object. Th
 
     ![Saved storage Grants with their actions and roles](images/grants-final.png)
 
-4. Choose **Actions > Edit** for `GATHER_COVERS_OWN` and scroll through its role, **Custom condition**, and SQL. Check the `put` and user-path conditions, then click **Cancel**.
-
-    ![Owner upload Grant fields and authenticated role](images/own-fields.png)
-
-    ![Owner upload Grant restricted to the current object store and put requests](images/own-condition-start.png)
-
-    ![Owner upload Grant comparing the path user ID with the authenticated user ID](images/own-condition-end.png)
-
-    > Note: Grants add up. Don't add **View all rows** or **Change all rows** for storage, and remove any broader storage Grant you added.
-
 ## Task 4: Upload and attach the cover
 
 When you click **Upload cover**, the app passes the event ID, signed-in user, selected file, and bucket to `uploadCover()`.
 
-1. Open `starter/actions.js` in VS Code. The `createClient` import and `connect()` already give you `client`, so you don't need a new import.
+1. Open `starter/actions.js` in VS Code.
 
 2. Select the Lab 7 TODO comment and the whole `uploadCover()` function. Keep `listGuests()`, `loadCover()`, and the optional sign-in TODOs.
 
@@ -181,11 +167,9 @@ Use your accounts from earlier labs. Sign out between accounts, or use separate 
 - Alex Gather (organizer)
 - Sam Gather (guest)
 
-1. As Alex, create an event or open one you organize. Under **Event cover**, click **Choose File** and select the sample image from your repo:
+1. As Alex, create an event or open one you organize. Under **Event cover**, click **Choose File**.
 
-    - `starter/images/sunday-supper-cover.png`
-
-    You should see its filename beside the file picker.
+    The workshop includes a sample cover image for you to upload. In the file picker, go to your `gather-workshop` folder, open `starter/images`, and select `sunday-supper-cover.png`. You should see its filename beside the file picker.
 
     ![Organizer selecting an image before uploading](images/dinner-file-selected-complete.png)
 
@@ -195,23 +179,21 @@ Use your accounts from earlier labs. Sign out between accounts, or use separate 
 
     ![Gather showing the stored cover after reopening the invitation](images/dinner-cover-reopened.png)
 
-4. Copy **Share invite**, sign out, and open the invitation link. The cover and event details are still visible.
+4. In the Fusabase console, open **Storage > Files**, then open the `covers` folder, your user ID folder, and your event ID folder. You should see the image you uploaded. The folders match the path your app saved in the event's `COVER_PATH`: `covers/USER_ID/EVENT_ID/`.
+
+    ![Fusabase console Storage Files showing the uploaded cover under covers, the user ID, and the event ID](images/storage-cover-file.png)
+
+5. Return to your app, copy **Share invite**, sign out, and open the invitation link. The cover and event details are still visible.
 
     ![Signed-out visitor viewing the stored cover](images/dinner-cover-public.png)
 
-5. Sign in as Sam and open Alex's invitation. Sam can see the cover, but has no **Event cover** upload control or **Edit details** button.
+6. Sign in as Sam and open Alex's invitation. Sam can see the cover, but has no **Event cover** upload control or **Edit details** button.
 
     ![Another account viewing the invitation without organizer edit controls](images/dinner-cover-guest.png)
 
-6. Sign back in as Alex. The cover is unchanged. Hiding controls only makes the app clearer; the Grants enforce access.
+7. Sign back in as Alex. The cover is unchanged. Hiding controls only makes the app clearer; the Grants enforce access.
 
-7. If `starter/actions.js` doesn't work after this lab, run this from the workshop root:
-
-    ```bash
-    cp checkpoints/lab-7/actions.js starter/actions.js
-    ```
-
-    Keep your own `starter/config.js`. The checkpoint doesn't create the storage Grants, so complete Tasks 1–3 first.
+8. If `starter/actions.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `lab-7/actions.js`, and use that file's contents to replace `starter/actions.js`. Keep your own `starter/config.js`.
 
 ## Troubleshooting
 
