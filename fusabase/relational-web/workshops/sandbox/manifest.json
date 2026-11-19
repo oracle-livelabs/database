@@ -1,0 +1,66 @@
+{
+  "workshoptitle": "Build a Party App on Oracle Backend with Supabase APIs",
+  "help": "fusabase",
+  "tutorials": [
+    {
+      "title": "Introduction",
+      "filename": "../../introduction/introduction.md",
+      "description": "Explore Gather and the relational SDK learning progression."
+    },
+    {
+      "title": "Get Started",
+      "filename": "../../get-started/get-started.md",
+      "description": "Create an OCI Free Tier account or use an account you already have, then confirm OCI Console sign-in."
+    },
+    {
+      "title": "Lab 1: Set up the environment",
+      "filename": "../../start-environment/start-environment.md",
+      "description": "Install Docker or Podman, download the stack, configure OCI IAM, enter your environment values, and verify Fusabase console sign-in."
+    },
+    {
+      "title": "Lab 2: Connect your app",
+      "filename": "../../connect-app/connect-app.md",
+      "description": "Create empty tables, register Gather, install the SDK, and paste your configuration to connect automatically."
+    },
+    {
+      "title": "Lab 3: Authenticate users",
+      "filename": "../../authenticate-users/authenticate-users.md",
+      "description": "Implement email/password authentication and session changes."
+    },
+    {
+      "title": "Lab 4: Read and write data",
+      "filename": "../../read-and-write-data/read-and-write-data.md",
+      "description": "Create event Grants, save and edit owned events, and share public invitation links."
+    },
+    {
+      "title": "Lab 5: Query and update related data",
+      "filename": "../../query-related-data/query-related-data.md",
+      "description": "Create own-RSVP Grants and insert, read, and update one response per event."
+    },
+    {
+      "title": "Lab 6: Secure data access with Grants",
+      "filename": "../../secure-data-access/secure-data-access.md",
+      "description": "Create the event-access helper and conditional SELECT Grant, then query the permitted guest list."
+    },
+    {
+      "title": "Lab 7: Photo upload",
+      "filename": "../../upload-files/upload-files.md",
+      "description": "Configure storage Grants, upload an event cover, and retrieve its saved path."
+    },
+    {
+      "title": "Lab 8: Add Google sign-in",
+      "filename": "../../google-sign-in/google-sign-in.md",
+      "description": "Optional. Configure Google in the provider consoles and add SDK popup sign-in."
+    },
+    {
+      "title": "Lab 9: Add GitHub sign-in",
+      "filename": "../../github-sign-in/github-sign-in.md",
+      "description": "Optional. Configure GitHub OAuth and add SDK popup sign-in, independently of Google."
+    },
+    {
+      "title": "Need Help?",
+      "description": "Solutions to common problems",
+      "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
+    }
+  ]
+}
