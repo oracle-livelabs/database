@@ -114,7 +114,7 @@ Organizers and guests who have responded should see the guest list. A Grant on `
 
 When you click **View guest list**, the app calls `listGuests(client, eventId)`.
 
-1. In VS Code, open `starter/actions.js`. The `createClient` import and `connect()` already give you `client`, so you don’t need a new import.
+1. In VS Code, open `starter/actions.js`.
 
 2. Select the Lab 6 TODO comment and the `listGuests` function only. Keep the Lab 7 and optional sign-in TODOs.
 
@@ -173,23 +173,11 @@ Use these accounts from earlier labs, or click **Create account** to add one. Si
 
     ![Gather excluding a signed-out visitor](images/dinner-signed-out.png)
 
-7. Sign in as Alex, open Alex’s event, and click **View guest list** without responding. You should see both guests and no Alex row, even though Alex’s selector defaults to Going.
+7. Sign in as Alex, open Alex’s event, and click **View guest list** without responding. You should see both guests and no Alex row.
 
     ![Organizer viewing guests without an RSVP of their own](images/dinner-organizer.png)
 
-8. As Jamie, create another event, submit an RSVP there, and share its link with Sam.
-
-9. As Sam, open that link and click **View guest list** without responding. The list stays empty, because a response to Alex’s event doesn’t unlock another event’s guest list.
-
-    ![Gather excluding another event’s guests](images/lunch-cross-event.png)
-
-10. If `starter/actions.js` doesn’t work after this lab, run this from the workshop root:
-
-    ```bash
-    cp checkpoints/lab-6/actions.js starter/actions.js
-    ```
-
-    Keep your own `starter/config.js`. The checkpoint doesn’t create the helper or Grants, so complete Tasks 1 and 2 first.
+8. If `starter/actions.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `lab-6/actions.js`, and use that file’s contents to replace `starter/actions.js`. Keep your own `starter/config.js`.
 
 ## Troubleshooting
 

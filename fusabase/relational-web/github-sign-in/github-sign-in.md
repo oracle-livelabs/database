@@ -73,13 +73,7 @@ This lab assumes you have:
 
 > Note: If you skipped Lab 8, leave the `googleSignIn` TODO in place. In step 4, use the GitHub-only line.
 
-1. In VS Code, open `starter/actions.js` and review the existing import:
-
-    ```javascript
-    import { createClient } from '@fusabase/fusabase-relational';
-    ```
-
-    GitHub sign-in uses `client.auth` on the client that `connect()` already creates, so you don't need another import or an HTML edit. The **Continue with GitHub** button calls `githubSignIn(client)`.
+1. In VS Code, open `starter/actions.js`. GitHub sign-in uses `client.auth`, so you don't need an HTML edit. The **Continue with GitHub** button calls `githubSignIn(client)`.
 
 2. Find `githubSignIn` near the end of the file. Select the whole placeholder function, including its declaration and closing brace. Leave `googleSignIn` as it is.
 
@@ -157,13 +151,7 @@ This lab assumes you have:
 
     ![Gather email/password sign-in with both optional providers skipped](images/github-skipped.png)
 
-8. If `starter/actions.js` doesn't work after this lab, run this from the workshop root:
-
-    ```bash
-    cp checkpoints/lab-9/actions.js starter/actions.js
-    ```
-
-    Keep your own `starter/config.js`. If you skipped Lab 8, change `socialProviders` to `['github']`. To keep other changes or skipped labs, copy only `githubSignIn` and add `'github'` to your array.
+8. If `starter/actions.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `lab-9/actions.js`, and use that file's contents to replace `starter/actions.js`. Keep your own `starter/config.js`. If you skipped Lab 8, change `socialProviders` to `['github']` in that file.
 
 ## Troubleshooting
 

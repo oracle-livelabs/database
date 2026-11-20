@@ -79,7 +79,7 @@ These Grants let signed-in guests read, add, and update only their own RSVP.
 
 ## Task 2: Read your response
 
-1. Open `starter/actions.js` in VS Code. The `createClient` import and `connect()` already give you `client`, so you don't need a new import. Select the whole `loadOwnRsvp` function.
+1. Open `starter/actions.js` in VS Code and select the whole `loadOwnRsvp` function.
 
     ![VS Code showing the Lab 5 read placeholder selected](images/read-before.png)
 
@@ -176,31 +176,21 @@ These Grants let signed-in guests read, add, and update only their own RSVP.
 
     ![Gather showing the saved declined response after reloading](images/response-declined.png)
 
-5. Sign out, open the same link, and try to save an RSVP. The app should ask you to sign in.
-
-    ![Gather signed out and excluding an RSVP save](images/signin-required.png)
-
-6. Sign in as Alex and open the link. Alex's selector shouldn't show Sam's response. Alex can save a separate response but can't edit Sam's.
-
-7. Sign back in as Sam and reload. Sam's declined response should still be there.
-
-8. In the Fusabase console, open **Database > Table Editor > Tables** and select `GATHER_RSVPS`. You should see one row for your event and Sam, with Sam's display name and `can't go` status.
+5. In the Fusabase console, open **Database > Table Editor > Tables** and select `GATHER_RSVPS`. You should see one row for your event and Sam, with Sam's display name and `can't go` status.
 
     ![Fusabase console showing Sam Gather’s saved declined RSVP with its event and user IDs](images/database-rsvp-declined.png)
 
-9. In your app, change your response to **Maybe** and save. Refresh the console and select `GATHER_RSVPS` again. The same row should now show `maybe`.
+6. In your app, change your response to **Maybe** and save. Refresh the console and select `GATHER_RSVPS` again. The same row should now show `maybe`.
 
     ![Fusabase console showing the same RSVP row updated to maybe after saving in Gather](images/database-rsvp-updated.png)
 
-    > Note: As TESTUSER, you see every response in the console. Guests see only their own.
+7. Sign out, open the same link, and try to save an RSVP. The app should ask you to sign in.
 
-10. If `starter/actions.js` doesn't work after this lab, run this from the workshop root:
+    ![Gather signed out and excluding an RSVP save](images/signin-required.png)
 
-    ```bash
-    cp checkpoints/lab-5/actions.js starter/actions.js
-    ```
+8. Sign in as Alex and open the link. Alex's selector shouldn't show Sam's response. Alex can save a separate response but can't edit Sam's.
 
-    Keep your own `starter/config.js`. The checkpoint doesn't create tables, keys, or Grants, so complete the console setup first.
+9. If `starter/actions.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `lab-5/actions.js`, and use that file's contents to replace `starter/actions.js`. Keep your own `starter/config.js`.
 
 ## Troubleshooting
 

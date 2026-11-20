@@ -139,17 +139,39 @@ Create two applications in the same OCI IAM identity domain: `OracleDB` for the 
 | `IAM_ORDS_CLIENT_SECRET` | The **Client secret** on the same ORDS application's **OAuth configuration** page. |
 | `IAM_DATABASE_SCOPE` | The fully qualified database scope authorized for the ORDS application. With the names in this lab, it is `OracleDBDB_ACCESS_SCOPE`. |
 
-1. In the OCI Console, open **Identity & Security > Domains** and select your domain. Copy its **Domain URL** for `IAM_DOMAIN_URL`.
+1. In the OCI Console, open **Identity & Security > Domains** and select your domain.
 
-2. In **Integrated applications**, select **Add application > Confidential Application > Launch workflow**.
+    ![OCI Console navigation menu with Identity & Security and Domains highlighted](images/dds-iam-domains-menu.png)
+
+    ![Domains list with the Default domain highlighted](images/dds-iam-select-domain.png)
+
+    Click **Copy** next to **Domain URL** for `IAM_DOMAIN_URL` and paste it into a text file. You'll collect the rest of your values in the same file as you go.
+
+    ![Domain details page with the Copy button next to Domain URL highlighted](images/dds-iam-domain-url.png)
+
+2. Click **Integrated applications**, then click **Add application**.
+
+    ![Integrated applications tab and Add application button highlighted](images/dds-iam-integrated-applications.png)
+
+    Select **Confidential Application** and click **Launch workflow**.
 
     ![Add a confidential application in the IAM identity domain](images/dds-iam-add-confidential.png)
 
 3. For **Name**, enter `OracleDB`. Leave the optional **Application URL** empty and click **Submit**.
 
-4. Open **OAuth configuration > Edit OAuth configuration**. Under **Resource server configuration**, select **Configure this application as a resource server now** and enter `OracleDB` for **Primary audience**.
+4. Open **OAuth configuration > Edit OAuth configuration**.
 
-5. Enable **Add scopes** and click **Add**. Enter these values, leave **Requires user consent** off, and add the scope.
+    ![OAuth configuration tab and Edit OAuth configuration button highlighted](images/dds-iam-edit-oauth-configuration.png)
+
+    Under **Resource server configuration**, select **Configure this application as a resource server now** and enter `OracleDB` for **Primary audience**. Keep this page open.
+
+    ![Resource server configuration with the resource server option and OracleDB primary audience highlighted](images/dds-iam-resource-server.png)
+
+5. Enable **Add scopes** and click **Add**.
+
+    ![Add scopes toggle enabled and the Add button highlighted](images/dds-iam-enable-scopes.png)
+
+    Enter these values, leave **Requires user consent** off, and add the scope.
 
     | Field | Value |
     | --- | --- |
@@ -159,16 +181,18 @@ Create two applications in the same OCI IAM identity domain: `OracleDB` for the 
 
     ![Add the DB_ACCESS_SCOPE scope to the database resource application](images/dds-iam-database-scope.png)
 
-6. Under **Client configuration**:
-
-    - select **Configure this application as a client now**
-    - enable **Client credentials**
-    - select **Specific** for authorized resources
-    - select **Anywhere** for the client IP policy
-
     ![Database resource server configuration with the OracleDB audience and database scope](images/dds-iam-database-resource.png)
 
-    > Note: This workshop uses **Anywhere** for the client IP policy. If your domain uses a network perimeter, ask your administrator for a policy that lets the database and ORDS reach IAM.
+6. Scroll down the page. Under **Client configuration**:
+
+    - select **Configure this application as a client now**
+    - under **Allowed grant types**, enable **Client credentials**
+    - under **Client IP address**, select **Anywhere**
+    - under **Token issuance policy > Authorized resources**, select **Specific**
+
+    ![Client configuration with the client option, Client credentials, Anywhere, and Specific highlighted](images/dds-iam-database-client.png)
+
+    > Note: This workshop uses **Anywhere** for **Client IP address**. If your domain uses a network perimeter, ask your administrator for a policy that lets the database and ORDS reach IAM.
 
 7. Click **Submit**, then select **Actions > Activate**. In the confirmation dialog, click **Activate application**.
 
@@ -176,18 +200,24 @@ Create two applications in the same OCI IAM identity domain: `OracleDB` for the 
 
 8. On the `OracleDB` application's **Details** page, copy the **Application ID**, not the OAuth **Client ID**, for `IAM_DATABASE_APP_ID`.
 
+    ![OracleDB application Details page with the Copy button next to Application ID highlighted](images/dds-iam-database-app-id.png)
+
 9. Create another confidential application named `fusabase` by repeating steps 2 and 3 with that name.
 
 10. Open the `fusabase` application's **OAuth configuration > Edit OAuth configuration**. Under **Client configuration**:
 
     - select **Configure this application as a client now**
-    - enable **Client credentials**
-    - select **Anywhere** for the client IP policy
-    - select **Specific** under **Authorized resources**
+    - under **Allowed grant types**, enable **Client credentials**
+    - under **Client IP address**, select **Anywhere**
+    - under **Token issuance policy > Authorized resources**, select **Specific**
 
-    ![Enable the client credentials grant for the ORDS application](images/dds-iam-ords-client-credentials.png)
+    ![ORDS application client configuration with the client option, Client credentials, Anywhere, and Specific highlighted](images/dds-iam-ords-client-credentials.png)
 
-11. Enable **Add resources** and click **Add scope**. Expand `OracleDB`, select `OracleDBDB_ACCESS_SCOPE`, and click **Add**.
+11. On the same screen, enable **Add resources** and click **Add scope**.
+
+    ![Add resources toggle enabled and the Add scope button highlighted](images/dds-iam-ords-add-resources.png)
+
+    Expand `OracleDB`, select `OracleDBDB_ACCESS_SCOPE`, and click **Add**.
 
     ![Authorize the ORDS application to request the OracleDBDB_ACCESS_SCOPE scope](images/dds-iam-ords-allowed-scope.png)
 
@@ -203,7 +233,15 @@ Create two applications in the same OCI IAM identity domain: `OracleDB` for the 
 
     ![The OracleDB and fusabase applications listed as active](images/dds-iam-applications-active.png)
 
-15. In the domain's **Settings** tab, click **Edit domain settings**. Under **Access signing certificate**, enable **Configure client access**. This makes the public signing keys available to the database.
+15. Open the domain's **Settings** tab.
+
+    ![Domain page with the Settings tab highlighted](images/dds-iam-domain-settings-tab.png)
+
+    Scroll down and click **Edit domain settings**.
+
+    ![Domain settings with the Edit domain settings button highlighted](images/dds-iam-edit-domain-settings.png)
+
+    Under **Access signing certificate**, enable **Configure client access**. This makes the public signing keys available to the database.
 
     ![Enable public access to the identity domain signing certificate](images/dds-iam-public-signing-certificate.png)
 
@@ -211,11 +249,13 @@ Create two applications in the same OCI IAM identity domain: `OracleDB` for the 
 
     ![Confirm and save the identity domain settings change](images/dds-iam-confirm-domain-settings.png)
 
-17. To check that the signing keys are public, open this address in a browser where you aren't signed in to OCI. Replace `DOMAIN_HOST` with your domain's host.
+17. To check that the signing keys are public, open this address in a browser where you aren't signed in to OCI. Replace `DOMAIN_URL` with the **Domain URL** you saved in step 1.
 
     ```text
-    https://DOMAIN_HOST/admin/v1/SigningCert/jwk
+    DOMAIN_URL/admin/v1/SigningCert/jwk
     ```
+
+    For example, if your Domain URL is `https://idcs-abc123.identity.oraclecloud.com:443`, open `https://idcs-abc123.identity.oraclecloud.com:443/admin/v1/SigningCert/jwk`.
 
     You should see JSON with a `keys` array. If you get `401 Unauthorized` or a sign-in prompt, repeat steps 15 and 16.
 

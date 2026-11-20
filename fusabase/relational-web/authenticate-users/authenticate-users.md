@@ -40,13 +40,7 @@ This lab assumes you have:
 
 You will complete four functions in `starter/actions.js`. The app's forms and buttons are already built, so change only the function named in each step.
 
-1. Return to VS Code and open `starter/actions.js`. At the top of the file, find the SDK import:
-
-    ```javascript
-    import { createClient } from '@fusabase/fusabase-relational';
-    ```
-
-    `connect()` uses `createClient()` to create the client from your Lab 2 configuration. The authentication methods are on `client.auth`, so you don't need a new import.
+1. Return to VS Code and open `starter/actions.js`. The app imports the `fusabase` client you exported from `starter/config.js` in Lab 2 and passes it to each function as `client`. The authentication methods are on `client.auth`, so you don't need an import.
 
 2. Find the `signUp` function. The app passes the client, email, password, and display name to this function. Select the whole function, including its declaration and closing brace.
 
@@ -186,13 +180,7 @@ Your app needs to know when a user signs in, signs out, or returns with an exist
 
 7. Sign in again with the account details you used to sign up. Select **My events**. The app should still ask you to complete Lab 4.
 
-8. If `starter/actions.js` doesn't work after this lab, run this from the workshop root:
-
-    ```bash
-    cp checkpoints/lab-3/actions.js starter/actions.js
-    ```
-
-    Keep your own `starter/config.js`. The checkpoint doesn't include Fusabase console setup, so complete Labs 1–2 and Task 1 first. Then reload your app and repeat this task.
+8. If `starter/actions.js` does not work after this lab, navigate to the `checkpoints` folder in your repo, open `lab-3/actions.js`, and use that file's contents to replace `starter/actions.js`. Keep your own `starter/config.js`.
 
 ## Troubleshooting
 
