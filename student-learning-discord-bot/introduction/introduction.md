@@ -1,4 +1,4 @@
-# Build the WeMakeDevs Discord Learning Bot with Oracle Autonomous Database
+# Build the Discord Learning Bot with Oracle Autonomous Database
 
 ## Introduction
 
