@@ -409,7 +409,7 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
 <if type="Rust">
 
-1.  Download the [HelloWorld.rs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service/o/helloworld-rsHelloWorld.rs) file, navigate to the `HelloWorld/src` folder, and replace the contents of `main.rs` with those from the downloaded file. Edit the `main.rs` file in editor using
+1.  Download the [HelloWorld.rs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service/helloworld-rsHelloWorld.rs) file, navigate to the `HelloWorld/src` folder, and replace the contents of `main.rs` with those from the downloaded file. Edit the `main.rs` file in editor using
     ```
     <copy>
     vi main.rs

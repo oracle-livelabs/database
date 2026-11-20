@@ -221,7 +221,7 @@ With the command above, npm creates the `node_modules` directory in the current 
 
 <if type="Java">
 
-1.  Download the provided [Hello World.java](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.java) file and move it to the `test/src/main/java` directory.
+1.  Download the provided [Hello World.java](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service-authenticate-with-instance-principal/HelloWorld.java) file and move it to the `test/src/main/java` directory.
 
 2.  Review the sample application. You can access the JavaAPI Reference Guide to know more about Java classes, methods, and interfaces included in this sample application.
 
@@ -249,7 +249,7 @@ With the command above, npm creates the `node_modules` directory in the current 
 
 <if type="Python">
 
-1.  Download the provided [HelloWorld.py](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.py) file.
+1.  Download the provided [HelloWorld.py](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service-authenticate-with-instance-principal/HelloWorld.py) file.
 
 2.  Review the sample application. You can access the [Python API Reference Guide](https://nosql-python-sdk.readthedocs.io/en/latest/api.html) to reference Python classes and methods included in this sample application.
 
@@ -281,7 +281,7 @@ With the command above, npm creates the `node_modules` directory in the current 
 
 <if type="Go">
 
-1.  Download the provided [HelloWorld.go](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.go) file and move it to your desired directory.
+1.  Download the provided [HelloWorld.go](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service-authenticate-with-instance-principal/HelloWorld.go) file and move it to your desired directory.
 
 2.  Review the sample application. You can access the [Go API docs](https://pkg.go.dev/github.com/oracle/nosql-go-sdk/nosqldb) to reference Go classes and methods included in this sample application.
 
@@ -353,7 +353,7 @@ Replace the placeholder for region with the name of your region. Save the file a
 
 The given code sample in JavaScript and TypeScript use the [ES6 modules](https://docs.oracle.com/pls/topic/lookup?ctx=en/database/other-databases/nosql-database/24.1/nsdev&id=node_ecma_mod).
 
-1.  For JavaScript applications, download the [HelloWorld.js](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.ts) file and move it to your home directory.
+1.  For JavaScript applications, download the [HelloWorld.js](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service-authenticate-with-instance-principal/HelloWorld.js) file and move it to your home directory. For TypeScript applications, download the [HelloWorld.ts](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service-authenticate-with-instance-principal/HelloWorld.ts) file and move it to your home directory.
 
 2.  Review the sample application. You can access the [Node.js API Reference Guide](https://oracle.github.io/nosql-node-sdk/index.html) to reference Node.js classes and methods included in this sample application.
 
@@ -379,7 +379,7 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
 <if type="C-sharp">
 
-1.  Download the provided [HelloWorld.cs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.cs) file and move it to your home directory.
+1.  Download the provided [HelloWorld.cs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service-authenticate-with-instance-principal/HelloWorld.cs) file and move it to your home directory.
 
 2.  Review the sample application. You can access the [.NET API Reference Guide](https://oracle.github.io/nosql-dotnet-sdk/index.html) to reference .NET classes and methods included in this sample application.
 
@@ -407,7 +407,7 @@ The given code sample in JavaScript and TypeScript use the [ES6 modules](https:/
 
 <if type="Rust">
 
-1.  Download the [HelloWorld.rs](https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/n/c4u04/b/nosql-cloud-service-authenticate-with-instance-principal/o/HelloWorld.rs) file, navigate to the HelloWorld/src folder. The src folder already contains a `main.rs` file. Replace the content of main.rs with those from the downloaded file.
+1.  Download the [HelloWorld.rs](https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/nosql-cloud-service-authenticate-with-instance-principal/HelloWorld.rs) file, navigate to the HelloWorld/src folder. The src folder already contains a `main.rs` file. Replace the content of main.rs with those from the downloaded file.
 
     To edit the `main.rs` file in editor, run the command below:
     ```
