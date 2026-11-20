@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="title desc">
-  <title id="title">WeMakeDevs Discord bot architecture on OCI</title>
+  <title id="title">Discord learning bot architecture on OCI</title>
   <desc id="desc">Discord interactions travel through Nginx to the Node.js bot on OCI Compute. The bot connects outward to Discord Gateway, OpenRouter, and Autonomous Database. An administrator connects by restricted SSH, and Compute downloads the bot ZIP from Object Storage.</desc>
   <defs>
     <marker id="redArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M1 1 L11 6 L1 11 Z" fill="#C74634"/></marker>
