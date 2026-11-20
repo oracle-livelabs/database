@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Build and deploy a Discord learning bot. It answers prompts, researches topics, creates study guides and quizzes, teaches Oracle Cloud topics, and runs reusable learning agents.
+Build and deploy a Discord learning bot. It answers prompts, researches topics, creates study guides and quizzes, teaches Oracle topics, runs reusable agents, remembers channel-scoped preferences, and finds accessible LiveLabs workshops by meaning with direct workshop links.
 
-Run the bot on OCI Compute. Nginx handles Discord HTTPS and forwards requests to the bot on the same host. Certbot gets and renews a short-lived certificate for the reserved public IP. You do not need a domain. The bot uses a separate Discord Gateway connection for mentions. OpenRouter supplies model responses. Autonomous Database stores agent profiles.
+Run the bot on OCI Compute. Nginx handles Discord HTTPS and forwards requests to the bot on the same host. Certbot gets and renews a short-lived certificate for the reserved public IP. You do not need a domain. OpenRouter supplies model responses. Autonomous Database stores agent profiles, personal notes, the LiveLabs catalog, and vector embeddings.
 
 Estimated Workshop Time: 120 minutes.
 
@@ -15,8 +15,8 @@ In this workshop, you will:
 - Prepare an OCI host, network rules, Autonomous Database, and TLS endpoint.
 - Download an approved bot package from OCI Object Storage.
 - Configure a Discord application and OpenRouter without committing credentials.
-- Set up database access and scan the agent-profile schema.
-- Run the bot as a Linux service and verify its current features.
+- Set up private database storage and a prevalidated LiveLabs catalog with semantic vector search.
+- Run automated production setup and verify all nine commands.
 
 ### Prerequisites
 
@@ -39,7 +39,7 @@ The ZIP excludes `.env`, wallet files, and credentials. Download the wallet from
 
 1. Lab 1: Prepare OCI Compute, Autonomous Database, wallet access, and an HTTPS endpoint (35 minutes).
 2. Lab 2: Download the bot package and configure Discord and OpenRouter (25 minutes).
-3. Lab 3: Set up Autonomous Database accounts and connect the bot (30 minutes).
+3. Lab 3: Configure database storage, memory, and LiveLabs search (35 minutes).
 4. Lab 4: Run the service and verify Discord workflows (30 minutes).
 
 ## Acknowledgements

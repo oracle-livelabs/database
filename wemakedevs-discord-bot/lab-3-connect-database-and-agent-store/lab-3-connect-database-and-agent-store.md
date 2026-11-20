@@ -1,57 +1,51 @@
-# Lab 3: Set Up Agent Profiles
+# Lab 3: Configure Database Storage and LiveLabs Search
 
 ## Introduction
 
-Connect the bot to Autonomous Database and create `AGENT_PROFILES`. This lab uses one schema file: `agent-store-schema.sql`. Run it in OCI Database Actions SQL Worksheet as the schema owner. The recommended setup uses one database user. Separate owner and runtime accounts are optional. The `/db` test scans `AGENT_PROFILES` metadata. It does not query rows.
+Connect the bot to Autonomous Database. Create private agent and memory tables, then install the prevalidated LiveLabs catalog and its in-database embedding model. The recommended workshop setup uses one non-`ADMIN` database user. Optional settings can separate these features later.
 
-Estimated Time: 30 minutes.
+Estimated Time: 35 minutes.
 
 ### Objectives
 
 In this lab, you will:
 
-- Use one database user or optionally separate the schema owner and bot account.
-- Run `agent-store-schema.sql` through OCI Database Actions SQL Worksheet.
-- Grant the bot account access to the agent profile table.
-- Configure the bot to use node-oracledb Thin mode and the Autonomous Database wallet.
-- Verify the agent table with the `/db` schema scan.
+- Configure one database user for the workshop features.
+- Create the agent profile and personal-memory tables.
+- Validate wallet-backed node-oracledb connections without exposing secrets.
+- Install the LiveLabs catalog, model, and vector embeddings.
+- Verify database status, private storage, and semantic search.
 
 ### Prerequisites
 
-- Finish Labs 1 and 2. Extract the bot package on Compute.
-- Autonomous Database is available, and its wallet ZIP is on Compute.
+- Finish Labs 1 and 2. Extract the current bot package on Compute.
+- Autonomous Database is available, and its wallet is under `/home/opc/hackathon-bot/wallet`.
 - Turn on Database Actions for the Autonomous Database.
-- Database credentials for one account, or temporary credentials for optional separate accounts.
+- Database credentials for a non-`ADMIN` user with a quota on `DATA`.
 
-## Task 1: Choose the Database Users
+## Task 1: Prepare the Database User
 
-1. Choose one of these account layouts:
+1. Use one non-`ADMIN` database user for this workshop. It owns the private bot tables and the LiveLabs model. The empty optional settings in `.env` will fall back to `ADB_USER` and `ADB_PASSWORD`.
 
-    - **One user—recommended for this workshop:** Use the provided non-`ADMIN` user to own `AGENT_PROFILES` and connect the bot. The optional `AGENT_STORE_*` settings will fall back to `ADB_USER` and `ADB_PASSWORD`.
-    - **Separate users—optional:** Create one schema owner and one bot runtime account. `BOT_AGENT_OWNER` and `BOT_AGENT_APP` are example Oracle usernames, not `.env` variable names.
-
-2. To create separate users, connect to Database Actions SQL Worksheet as `ADMIN`. Replace the password markers and run this block. `BOT_AGENT_OWNER` and `BOT_AGENT_APP` are example names; you can choose others.
+2. In Database Actions, connect as `ADMIN`. Replace `<BOT_DATABASE_USER>` with the existing workshop user and grant only the privileges needed for setup.
 
     ```sql
     <copy>
-    CREATE USER BOT_AGENT_OWNER IDENTIFIED BY "<TEMP_OWNER_PASSWORD>"
-      QUOTA 20M ON DATA;
-    GRANT CREATE SESSION, CREATE TABLE TO BOT_AGENT_OWNER;
-
-    CREATE USER BOT_AGENT_APP IDENTIFIED BY "<TEMP_APP_PASSWORD>";
-    GRANT CREATE SESSION TO BOT_AGENT_APP;
+    GRANT CREATE SESSION, CREATE TABLE, CREATE MINING MODEL
+      TO <BOT_DATABASE_USER>;
+    ALTER USER <BOT_DATABASE_USER> QUOTA 100M ON DATA;
+    GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR
+      TO <BOT_DATABASE_USER>;
     </copy>
     ```
 
-    Use temporary passwords that you do not use elsewhere; SQL Actions may retain statement history. A password must not contain its username or parts such as `BOT`, `AGENT`, `OWNER`, or `APP`. Skip this step if you will use one existing user.
+    `CREATE MINING MODEL` and directory access let the one-time installer load Oracle's public ONNX model. They do not grant access to another application's tables.
 
-    ![Create the optional owner and bot database users with the passwords redacted](./images/lab-3-01-create-separate-database-users.png)
-
-3. Before Task 2, make sure the table owner can sign in to Database Actions. In **Administration > Database Users**, enable **Web Access** for that user. The bot account does not need Web Access. If you use the provided user, confirm Web Access is already enabled. See [Oracle Database Actions access instructions](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-database-actions.html).
+3. Make sure the workshop user can sign in to Database Actions. In **Administration > Database Users**, enable **Web Access** for that user. See [Oracle Database Actions access instructions](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-database-actions.html).
 
 ## Task 2: Create the Agent Profile Table
 
-1. In Database Actions, connect as the provided ADB_* user or your custom table owner. Run the fresh-install `agent-store-schema.sql` below with **Run Script**. This user needs `CREATE TABLE` and a table quota. The script creates `AGENT_PROFILES`, which stores settings so `/agent` can reload profiles after restarts. Use it only when that table does not already exist.
+1. In Database Actions, connect as the workshop database user. Run this fresh-install schema with **Run Script**. If `AGENT_PROFILES` already exists, use the retry-safe `db/agent-store-schema.sql` from the current bot package instead.
 
     ```sql
     <copy>
@@ -81,7 +75,7 @@ In this lab, you will:
         CHECK (LANGUAGE IN ('auto', 'en', 'es')),
       CONSTRAINT AGENT_PROFILES_VERSION_CK CHECK (VERSION_NO >= 1)
     );
-    
+
     CREATE UNIQUE INDEX AGENT_PROFILES_NAME_UQ
       ON AGENT_PROFILES (UPPER(NAME));
     </copy>
@@ -89,15 +83,7 @@ In this lab, you will:
 
     ![Create the AGENT_PROFILES table and unique name index](./images/lab-3-02-create-agent-profiles-table.png)
 
-2. If you created a separate bot account, stay connected as the table owner and grant it access. Replace `BOT_AGENT_APP` if you chose a different name. Skip this step when one user owns and uses the table:
-
-    ```sql
-    <copy>
-    GRANT SELECT, INSERT, UPDATE, DELETE ON AGENT_PROFILES TO BOT_AGENT_APP;
-    </copy>
-    ```
-
-3. Confirm the table exists:
+2. Confirm the table exists.
 
     ```sql
     <copy>
@@ -107,9 +93,9 @@ In this lab, you will:
 
     ![Confirm that AGENT_PROFILES exists in the table-owner schema](./images/lab-3-03-confirm-agent-profiles-table.png)
 
-## Task 3: Configure Bot Database Access
+## Task 3: Configure and Validate Database Access
 
-1. On Compute, identify a service name in the wallet file `tnsnames.ora`. Use the matching `*_low` service alias for the workshop.
+1. On Compute, identify a low service name in the wallet.
 
     ```sh
     <copy>
@@ -118,14 +104,12 @@ In this lab, you will:
     </copy>
     ```
 
-2. Edit `/home/opc/hackathon-bot/.env` and choose one configuration below. Enter the wallet password from Lab 1.
-
-    **One user—recommended:** Set the required `ADB_*` values. Leave the optional agent-store and catalog values empty. The bot uses `ADB_USER` and `ADB_PASSWORD` for the agent store, and scans the schema owned by `ADB_USER`.
+2. Edit `/home/opc/hackathon-bot/.env`. Enter the database and wallet credentials. Keep the optional account overrides blank so they use the generic ADB account.
 
     ```text
     <copy>
-    ADB_USER=<PROVIDED_DATABASE_USER>
-    ADB_PASSWORD=<PROVIDED_DATABASE_USER_PASSWORD>
+    ADB_USER=<BOT_DATABASE_USER>
+    ADB_PASSWORD=<BOT_DATABASE_USER_PASSWORD>
     ADB_CONNECT_STRING=<TNS_ALIAS_FROM_WALLET>
     ADB_WALLET_DIR=/home/opc/hackathon-bot/wallet
     ADB_WALLET_PASSWORD=<WALLET_PASSWORD_FROM_LAB_1>
@@ -133,54 +117,97 @@ In this lab, you will:
     AGENT_STORE_USER=
     AGENT_STORE_PASSWORD=
     AGENT_STORE_OWNER=
+    USER_MEMORY_USER=
+    USER_MEMORY_PASSWORD=
+    USER_MEMORY_OWNER=
+    LIVELABS_DB_USER=
+    LIVELABS_DB_PASSWORD=
     </copy>
     ```
 
-    **Separate users—optional:** Connect as `BOT_AGENT_APP` and point the catalog and agent store to the schema owned by `BOT_AGENT_OWNER`. The blank `AGENT_STORE_USER` and `AGENT_STORE_PASSWORD` values still fall back to `ADB_USER` and `ADB_PASSWORD`.
-
-    ```text
-    <copy>
-    ADB_USER=BOT_AGENT_APP
-    ADB_PASSWORD=<BOT_AGENT_APP_PASSWORD>
-    ADB_CONNECT_STRING=<TNS_ALIAS_FROM_WALLET>
-    ADB_WALLET_DIR=/home/opc/hackathon-bot/wallet
-    ADB_WALLET_PASSWORD=<WALLET_PASSWORD_FROM_LAB_1>
-    ADB_CATALOG_OWNER=BOT_AGENT_OWNER
-    AGENT_STORE_USER=
-    AGENT_STORE_PASSWORD=
-    AGENT_STORE_OWNER=BOT_AGENT_OWNER
-    </copy>
-    ```
-
-    | Optional variable | When empty |
+    | Optional setting | Default when blank |
     | --- | --- |
-    | `AGENT_STORE_USER` | Uses `ADB_USER`. |
-    | `AGENT_STORE_PASSWORD` | Uses `ADB_PASSWORD`. |
-    | `AGENT_STORE_OWNER` | Uses `ADB_USER`. Set it when another user owns `AGENT_PROFILES`. |
-    | `ADB_CATALOG_OWNER` | Uses `ADB_USER`. Set it when `/db` must scan another user's schema. |
+    | `AGENT_STORE_USER`, `AGENT_STORE_PASSWORD` | `ADB_USER`, `ADB_PASSWORD` |
+    | `AGENT_STORE_OWNER` | `ADB_USER` |
+    | `USER_MEMORY_USER`, `USER_MEMORY_PASSWORD` | Agent store account, then ADB account |
+    | `USER_MEMORY_OWNER` | Agent store owner, then memory account |
+    | `LIVELABS_DB_USER`, `LIVELABS_DB_PASSWORD` | `ADB_USER`, `ADB_PASSWORD` |
 
-3. Confirm that `.env` still contains your Discord and OpenRouter settings from Lab 2. Set mode `600` again and do not display the file contents.
+3. Protect `.env`, then run deployment preflight. It checks required variables, permissions, wallet files, ADB, agent storage, and the LiveLabs database connection without printing secret values.
 
     ```sh
     <copy>
-    chmod 600 /home/opc/hackathon-bot/.env
-    stat -c '%a %U %n' /home/opc/hackathon-bot/.env
+    cd /home/opc/hackathon-bot
+    chmod 600 .env
+    npm run setup:check
     </copy>
     ```
 
-4. Start the bot temporarily in the foreground with `npm start` from the bot directory. Check its output for errors and leave it running for the scan in Task 4. Lab 4 stops this process and enables the permanent systemd service. Node-oracledb uses Thin mode by default; the bot does not require Oracle Instant Client.
+## Task 4: Install Memory and LiveLabs Search
 
-## Task 4: Verify the Agent Profile Schema
+1. Install and verify personal memory. These commands use the configured account, create or upgrade the private tables, run isolation checks, and remove their synthetic test notes.
 
-1. In the Discord test server, enter `/db`. For **action**, select **Discover schema tables and views for the approved catalog**. This is the `scan` action.
+    ```sh
+    <copy>
+    npm run memory:setup
+    npm run memory:check
+    </copy>
+    ```
 
-    ![Select the schema discovery action for the db command](./images/lab-3-04-select-db-scan-action.png)
+    Confirm that setup installs the memory tables and that the check reports persistence, deduplication, isolation, retrieval, deletion, stale-write rejection, and `/db` catalog protection.
 
-2. Submit the command. Confirm that the response includes `AGENT_PROFILES` from the selected table-owner schema.
+    ![Install the personal-memory tables and run the database checks](./images/lab-3-05-install-and-check-memory.png)
 
-3. Leave the foreground bot process running. Lab 4 stops it before creating the permanent systemd service.
+2. Review what the LiveLabs installer loads. The packaged `data/livelabs/workshops.csv` contains `Title`, `Description`, and `URL`. The workshop release contains 146 unique workshops whose links were confirmed accessible before packaging. Learners do not need to filter the CSV or edit its URLs. Semantic vectors are generated from each title and description; the URL is stored so Discord can return a direct link.
+
+3. Install LiveLabs semantic search.
+
+    ```sh
+    <copy>
+    npm run livelabs:install
+    </copy>
+    ```
+
+    The installer downloads Oracle's public `all-MiniLM-L12-v2` ONNX file only when needed. It loads the model, creates or verifies the schema, merges the packaged CSV, deactivates catalog entries that are no longer packaged, generates missing embeddings, checks row state, and runs a semantic query. The initial embedding pass can take several minutes. Later runs reuse the model and unchanged vectors.
+
+    ![Install and verify LiveLabs semantic search](./images/lab-3-06-install-livelabs-search.png)
+
+4. Confirm the final catalog check reports all active rows as `READY`, no `PENDING`, `FAILED`, or `MISSING_URL` rows, and the same number of `WITH_VECTOR` rows as active rows. For the packaged catalog in this workshop, a fresh installation reports 146 active, ready, and vectorized rows. An upgraded database can retain older rows as inactive, so `TOTAL` can be higher than 146.
+
+5. Run a command-line semantic search without reinstalling the catalog.
+
+    ```sh
+    <copy>
+    npm run livelabs:test -- "I want to learn Oracle AI Vector Search"
+    </copy>
+    ```
+
+    Confirm that the result includes relevant workshop titles, descriptions, and clickable LiveLabs URLs.
+
+    ![Run a standalone LiveLabs semantic-search test](./images/lab-3-07-test-livelabs-search.png)
+
+## Task 5: Verify the Database-Backed Features
+
+1. Start the bot temporarily and leave it running for these checks.
+
+    ```sh
+    <copy>
+    npm start
+    </copy>
+    ```
+
+2. In Discord, run `/db` and select **Check the bot connection to ADB**. Confirm the connection is available. Private agent, memory, and LiveLabs tables are intentionally excluded from generic `/db` discovery and queries.
+
+3. Open `/agent`, create a small test agent, and confirm it remains available after a bot restart.
+
+4. Keep the command-line LiveLabs result from Task 4 for comparison with the Discord result in Lab 4.
+
+5. State a harmless preference in the channel, ask a generic follow-up, and use `/memory` to inspect the private channel-scoped note. Model-based automatic saving can skip ambiguous statements; use a clear first-person preference.
+
+6. Leave the foreground process running. Lab 4 stops it before automated systemd setup.
 
 ## Acknowledgements
 
 - Authors: Cyrce Salinas Rojas and Ilan Gómez Guerrero
 - Last Updated: Ilan Gómez Guerrero, November 2026
+- Learn More: [Use an in-database transformer model](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/use-retrieval-augmented-generation-and-vectors.html)

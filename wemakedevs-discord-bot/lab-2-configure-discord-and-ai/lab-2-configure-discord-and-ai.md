@@ -13,7 +13,7 @@ In this lab, you will:
 - Download and inspect the bot ZIP through the workshop object-scoped PAR.
 - Configure Discord slash-command and interaction settings.
 - Add OpenRouter settings without recording credential values in the workshop.
-- Install locked dependencies, register seven commands, and start the bot.
+- Install locked dependencies, register nine commands, and start the bot.
 
 ### Prerequisites
 
@@ -35,7 +35,7 @@ In this lab, you will:
     </copy>
     ```
 
-3. Inspect the archive before extraction. Confirm its top-level folder is `hackathon-bot/`. Inside that folder, confirm it contains `.env.sample`, `LICENSE`, `package.json`, `package-lock.json`, `app.js`, `agents/`, and `db/`. Confirm it does not contain `.env`, wallets, keys, credentials, or `node_modules`.
+3. Inspect the archive before extraction. Confirm its top-level folder is `hackathon-bot/`. Inside that folder, confirm it contains `.env.sample`, `LICENSE`, package files, `app.js`, `agents/`, `db/`, `livelabs/`, `scripts/`, and `data/livelabs/workshops.csv`. Confirm it does not contain `.env`, wallets, keys, credentials, or `node_modules`.
 
     ```sh
     <copy>
@@ -230,9 +230,7 @@ In this lab, you will:
     </copy>
     ```
 
-2. Confirm that registration reports seven commands: `/ask`, `/db`, `/research`, `/study`, `/oci`, `/agent`, and `/memory`.
-
-    ![Confirm that all seven global Discord commands were registered](./images/lab-2-26-register-global-commands.png)
+2. Confirm that registration reports nine commands: `/ask`, `/db`, `/research`, `/study`, `/oci`, `/ai-db`, `/agent`, `/livelabs`, and `/memory`.
 
 3. Start the bot in the foreground.
 
@@ -242,7 +240,7 @@ In this lab, you will:
     </copy>
     ```
 
-4. Keep this SSH session open. Confirm that the terminal reports `Listening on port 3000`. This bot receives Discord interactions through HTTPS and does not require a Discord Gateway login. Leave `npm start` running while Discord verifies the endpoint.
+4. Keep this SSH session open. Confirm that the terminal reports `Listening on port 3000` and does not report a Discord Gateway login failure. HTTPS handles slash commands, while a separate Gateway connection handles bot mentions. Leave `npm start` running while Discord verifies the endpoint.
 
 5. Configure the Discord endpoint:
 
@@ -272,7 +270,7 @@ In this lab, you will:
 
 ## Data Handling Checkpoint
 
-The bot sends `/ask`, `/research`, `/study`, `/oci`, and agent prompts to OpenRouter. It processes each attachment for the current request and does not store it permanently. Do not test with private information. Server replies appear to channel members.
+The bot sends `/ask`, `/research`, `/study`, `/oci`, `/ai-db`, and agent prompts to OpenRouter. It processes each attachment for the current request and does not store it permanently. Do not test with private information. Server replies appear to channel members.
 
 ## Acknowledgements
 

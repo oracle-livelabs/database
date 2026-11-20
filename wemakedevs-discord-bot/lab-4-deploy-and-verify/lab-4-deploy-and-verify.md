@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Test the bot under systemd. Check Discord, model, and agent features, then review the service logs.
+Use the repository's production installer to test, register, and run the bot under systemd. Check Discord, database-backed features, Nginx, and service logs.
 
 Estimated Time: 30 minutes.
 
@@ -10,19 +10,19 @@ Estimated Time: 30 minutes.
 
 In this lab, you will:
 
-- Run the application as the `opc` user and load its protected `.env` file through the application.
+- Run automated preflight, tests, LiveLabs checks, command registration, and service installation.
 - Confirm the Nginx HTTPS proxy and Discord interaction handshake.
-- Test the configured bot commands, bot mentions, file handling, and agent privacy behavior.
+- Test all nine bot commands, mentions, file handling, memory isolation, and agent behavior.
 - Review service status, logs, and restart behavior.
 
 ### Prerequisites
 
 - Completion of Labs 1 through 3.
-- A PAR, Discord app, OpenRouter settings, database wallet, agent schema, and reserved IP certificate.
+- A PAR, Discord app, OpenRouter settings, database wallet, private schemas, LiveLabs vectors, and reserved IP certificate.
 - The reserved Compute public IPv4 address and a valid, renewed Let’s Encrypt IP certificate.
 - A private Discord server where you can test all bot features.
 
-## Task 1: Check the Asset Link and Register Commands
+## Task 1: Run Automated Production Setup
 
 1. Confirm that the Object Storage link in Lab 2 downloads the ZIP. Confirm the ZIP contains the approved source package and has no `.env`, wallet, credentials, private keys, or `node_modules`.
 
@@ -39,61 +39,30 @@ In this lab, you will:
 
     The output must show mode `600`, owner `opc`, and `.env is readable by opc`.
 
-3. Register the commands after any configuration changes.
+3. Stop the foreground process from Lab 3 with `Ctrl+C`. Run the production setup from the application directory.
 
     ```sh
     <copy>
     cd /home/opc/hackathon-bot
-    npm run register
+    npm run setup:production
     </copy>
     ```
 
-## Task 2: Create and Start the systemd Service
+    The command installs locked dependencies, validates configuration and database access, runs tests, safely rechecks LiveLabs, registers nine commands, installs or updates the systemd unit, starts the service, and displays recent logs. It preserves an existing unit as `discord-example.service.previous`.
 
-1. Stop the foreground process from Lab 3 with `Ctrl+C`.
+## Task 2: Inspect the Service and Nginx
 
-2. Create the service file. This command writes the unit to `/etc/systemd/system/discord-example.service` and runs the bot as the unprivileged `opc` user. The application imports `dotenv/config`, so Node reads `.env` from the working directory. Do not add an `EnvironmentFile=` entry; direct systemd access to files under `/home/opc` can be rejected by the operating-system security policy.
-
-    ```sh
-    <copy>
-    sudo tee /etc/systemd/system/discord-example.service >/dev/null <<'EOF'
-    [Unit]
-    Description=Discord learning bot
-    After=network-online.target nginx.service
-    Wants=network-online.target nginx.service
-
-    [Service]
-    Type=simple
-    User=opc
-    Group=opc
-    WorkingDirectory=/home/opc/hackathon-bot
-    ExecStart=/usr/bin/node /home/opc/hackathon-bot/app.js
-    Restart=on-failure
-    RestartSec=5
-    NoNewPrivileges=true
-    PrivateTmp=true
-
-    [Install]
-    WantedBy=multi-user.target
-    EOF
-    </copy>
-    ```
-
-    Lab 1 installs system-wide Node at `/usr/bin/node`. If `command -v node` reports another path, update `ExecStart` to that absolute path.
-
-3. Reload systemd, enable the service, and restart it. The restart ensures that systemd uses the unit you just created and that Node reloads `.env`.
+1. Display the generated unit. Confirm it uses the actual repository path, current Node executable, and unprivileged `opc` account. The app loads `.env` through `dotenv` from its working directory.
 
     ```sh
     <copy>
-    sudo systemctl daemon-reload
-    sudo systemctl enable discord-example.service
-    sudo systemctl restart discord-example.service
+    sudo systemctl cat discord-example.service
     sudo systemctl is-active discord-example.service
     sudo systemctl is-enabled discord-example.service
     </copy>
     ```
 
-4. Review only the log entries from the current start and confirm that the bot reports `Listening on port 3000`. This application uses Discord HTTP interactions and does not require a Discord Gateway login.
+2. Review the current logs and confirm the bot reports `Listening on port 3000`.
 
     ```sh
     <copy>
@@ -106,7 +75,7 @@ In this lab, you will:
 
     ![Confirm that the systemd service is listening on port 3000](./images/lab-4-01-confirm-service-listening.png)
 
-5. Confirm Nginx is active and can proxy to the bot on port 3000. From the Compute host, check the service and configuration if requests fail.
+3. Confirm Nginx is active and can proxy to the bot on port 3000. From the Compute host, check the service and configuration if requests fail.
 
     ```sh
     <copy>
@@ -166,15 +135,29 @@ In this lab, you will:
 
     ![Confirm the OCI response and Markdown attachment](./images/lab-4-15-confirm-oci-response.png)
 
-7. Lab 3 Task 4 verifies the `/db` schema scan. Skip `/db` status and lookup; this workshop tests only the scan.
+7. Run `/ai-db` with AI Vector Search or Select AI. Confirm that the response focuses on the selected Oracle AI Database topic.
 
-8. Enter `/agent` and submit the command. Confirm that the private Agent Center displays **Run agent**, **Create agent**, and **Browse agents**.
+8. Run `/db` and select **Check the bot connection to ADB**. Confirm the connection is available. Do not expect private agent, memory, or LiveLabs tables in generic schema discovery.
+
+9. Enter `/live`, then select `/livelabs query` from the command list.
+
+    ![Select the livelabs query command in Discord](./images/lab-4-29-select-livelabs-command.png)
+
+    In `query`, describe the Oracle product or skill you want to learn. For example, enter `I want to learn how to use OCI Object Storage`, then submit the command.
+
+    ![Enter a natural-language learning goal for LiveLabs search](./images/lab-4-30-enter-livelabs-query.png)
+
+    Confirm that the bot returns semantically relevant workshop titles and descriptions. Select a blue title and verify that it opens the corresponding LiveLabs workshop.
+
+    ![Review LiveLabs matches with direct workshop links](./images/lab-4-31-review-livelabs-matches.png)
+
+10. Enter `/agent` and submit the command. Confirm that the private Agent Center displays **Run agent**, **Create agent**, and **Browse agents**.
 
     ![Open the Agent Center with the agent command](./images/lab-4-16-open-agent-center.png)
 
     ![View the private Agent Center controls](./images/lab-4-17-view-agent-center.png)
 
-9. Select **Create agent**. Enter a non-sensitive name, goal, and response style. Select a preset and response language, submit the form, review the preview, and save the agent.
+11. Select **Create agent**. Enter a non-sensitive name, goal, and response style. Select a preset and response language, submit the form, review the preview, and save the agent.
 
     ![Enter the new agent profile details](./images/lab-4-18-create-agent-profile.png)
 
@@ -184,13 +167,13 @@ In this lab, you will:
 
     ![Confirm that the agent was saved](./images/lab-4-21-confirm-agent-saved.png)
 
-10. Select **Test privately** and enter a sample request. Confirm that the response says **Only you can see this**. Select **Edit**, change one profile field, and save the update.
+12. Select **Test privately** and enter a sample request. Confirm that the response says **Only you can see this**. Select **Edit**, change one profile field, and save the update.
 
     ![Confirm the private agent test response](./images/lab-4-22-confirm-private-agent-test.png)
 
     ![Edit a field in the saved agent profile](./images/lab-4-23-edit-agent.png)
 
-11. Return to **Run agent**, select the saved agent, and enter a non-sensitive request. Confirm that the normal response is visible in the server channel. Then browse the agent, review its details, and delete the workshop test agent.
+13. Return to **Run agent**, select the saved agent, and enter a non-sensitive request. Confirm that the normal response is visible in the server channel. Then browse the agent, review its details, and delete the workshop test agent.
 
     ![Select the saved agent to run](./images/lab-4-24-select-agent-to-run.png)
 
@@ -202,9 +185,19 @@ In this lab, you will:
 
     ![Confirm permanent deletion of the workshop test agent](./images/lab-4-28-delete-agent.png)
 
-12. Ask for another long answer if neither previous test produced an attachment. Confirm that the bot sends a Markdown attachment when the response exceeds the Discord message limit.
+## Task 4: Verify Repeatable Updates
 
-13. Check data handling. Model prompts go to OpenRouter. Agent profiles remain in Autonomous Database. Channel members can see normal agent runs. Use no private learner, customer, or production data.
+1. Run the update workflow. It repeats preflight, tests, command registration, service refresh, restart, and log checks without rebuilding unchanged LiveLabs vectors.
+
+    ```sh
+    <copy>
+    cd /home/opc/hackathon-bot
+    npm run deploy
+    sudo systemctl is-active discord-example.service
+    </copy>
+    ```
+
+2. If you deploy from a Git checkout, review `.github/workflows/deploy.yml`. The workflow pulls the approved branch, installs locked dependencies, synchronizes LiveLabs when configured, and runs the same deployment checks. The Object Storage ZIP workflow does not contain `.git`; keep ZIP delivery and Git deployment as separate options.
 
 ## Acknowledgements
 
