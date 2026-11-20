@@ -15,18 +15,35 @@ You will:
 
 Estimated Time: 15 minutes
 
-## Task 1: Find the repeated facts
+## Task 1: See what a flat report repeats
 
-1. Consider a single table with these columns:
+1. Run a report that combines student, department, course, and enrollment details.
 
-    ```text
-    STUDENT_ID, STUDENT_NAME, EMAIL, DEPARTMENT_NAME, DEPARTMENT_LOCATION,
-    COURSE_CODE, COURSE_TITLE, CREDITS, ENROLLED_ON, GRADE
+    ```sql
+    <copy>
+    SELECT s.student_id,
+           s.first_name || ' ' || s.last_name AS student_name,
+           s.email,
+           d.department_name,
+           d.location,
+           c.course_code,
+           c.course_title,
+           e.enrolled_on,
+           e.grade
+    FROM   students s
+    JOIN   departments d ON d.department_id = s.department_id
+    JOIN   enrollments e ON e.student_id = s.student_id
+    JOIN   courses c ON c.course_id = e.course_id
+    ORDER  BY s.student_id, c.course_code
+    FETCH FIRST 12 ROWS ONLY;
+    </copy>
     ```
 
-2. Look for facts that repeat. A student name and department would appear once for every enrollment. Course details would appear once for every student in that course.
+    The query joins each student to their department, then joins each enrollment to its course. Matching ID columns connect the related rows. Because a student can take several courses, their name, email, and department can appear on several report rows. `ORDER BY` keeps the preview in a predictable order, while `FETCH FIRST 12 ROWS ONLY` limits it to a small sample.
 
-3. Think about a department location change. You would need to update several rows, and missing one would leave conflicting data.
+2. Look for repeated details in the result. Student and department details repeat when a student takes several courses. Course details repeat for each student enrolled. This is the duplication a flat report creates when it is used as the main way to store data.
+
+3. Imagine changing a department location in this spreadsheet. You would edit many rows and could miss one. The ready schema stores each fact once and joins the tables for reports.
 
 ## Task 2: Separate the entities
 
@@ -38,6 +55,8 @@ Estimated Time: 15 minutes
     | `STUDENTS` | One row per student | `STUDENT_ID` |
     | `COURSES` | One row per course | `COURSE_ID` |
     | `ENROLLMENTS` | One row per student and course pair | `STUDENT_ID`, `COURSE_ID` |
+
+    A primary key is the stable identifier for one row. The first three tables use one ID column; `ENROLLMENTS` uses the student and course IDs together because an enrollment is identified by that pair. IDs keep relationships stable even if names or titles change.
 
 2. Read this compact entity relationship diagram.
 
@@ -61,8 +80,10 @@ Estimated Time: 15 minutes
     | Every row has a stable identifier | `PRIMARY KEY` |
     | Each student email and course code is different | `UNIQUE` |
     | Names, titles, and required relationships must have a value | `NOT NULL` |
-    | A student or course must reference an existing department | `FOREIGN KEY` |
-    | Status, grade, and credit values must stay in an allowed range | `CHECK` |
+    | Students and courses must reference an existing department; enrollments must reference an existing student and course | `FOREIGN KEY` |
+    | Status must be `ACTIVE`, `PAUSED`, or `GRADUATED`; grade must be A, B, C, D, F, or empty; credits must be 1–6 | `CHECK` |
+
+    These constraints protect the data when rows are inserted or changed. For example, a `FOREIGN KEY` prevents a course from referring to a department that is not in `DEPARTMENTS`, while `CHECK` limits values such as `STATUS` to the set the workshop recognizes.
 
 2. Review the physical model used by the ready tables.
 
@@ -74,13 +95,13 @@ Estimated Time: 15 minutes
     ENROLLMENTS(student_id, course_id, enrolled_on, grade)
     ```
 
-3. Check the foreign keys. Each one points to a primary key. The enrollment table combines its two foreign keys to create its own primary key.
+3. Trace each foreign key in the model: `STUDENTS.DEPARTMENT_ID` and `COURSES.DEPARTMENT_ID` point to `DEPARTMENTS.DEPARTMENT_ID`; `ENROLLMENTS.STUDENT_ID` and `ENROLLMENTS.COURSE_ID` point to their matching parent keys. The two enrollment columns also form a composite primary key, so the same student-course pair cannot be entered twice.
 
 4. The entities give you the main idea, or conceptual model. Keys and relationships turn it into a logical model. Lab 3 queries the ready data. Lab 4 uses these rules in a small practice table.
 
 ## Task 4: Connect the design to the reservation
 
-1. Constraint and index names start with `DBC_` so you can recognize them in the schema. Terraform loaded the four core tables and their sample rows before you signed in.
+1. The reservation setup created the four core tables, their constraints, and the sample rows before you signed in. Constraint and index names start with `DBC_`, which helps you recognize workshop-created objects in the schema.
 
 2. Lab 3 queries the loaded rows. Lab 4 lets you inspect their columns and rules, then create a separate practice table.
 
