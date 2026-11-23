@@ -43,7 +43,7 @@ Estimated Time: 15 minutes
 
 2. Look for repeated details in the result. Student and department details repeat when a student takes several courses. Course details repeat for each student enrolled. This is the duplication a flat report creates when it is used as the main way to store data.
 
-3. Imagine changing a department location in this spreadsheet. You would edit many rows and could miss one. The ready schema stores each fact once and joins the tables for reports.
+3. Imagine changing a department location in this spreadsheet. You would edit many rows and could miss one, leaving different rows with conflicting locations for the same department. The ready schema stores each fact once and joins the tables for reports.
 
 ## Task 2: Separate the entities
 
@@ -83,7 +83,7 @@ Estimated Time: 15 minutes
     | Students and courses must reference an existing department; enrollments must reference an existing student and course | `FOREIGN KEY` |
     | Status must be `ACTIVE`, `PAUSED`, or `GRADUATED`; grade must be A, B, C, D, F, or not assigned yet; credits must be 1–6 | `CHECK` |
 
-    These constraints protect the data when rows are inserted or changed. A `NOT NULL` rule requires a value. A `CHECK` rule accepts only values that match its condition; for example, a grade can be `A` through `F` or `NULL` (not assigned yet). A `FOREIGN KEY` prevents a course from referring to a department that is not in `DEPARTMENTS`, while `UNIQUE` prevents duplicate values in the specified column or columns.
+    These constraints protect the data when rows are inserted or changed. A `NOT NULL` rule requires a value. A `CHECK` rule accepts only values that match its condition; for example, a grade can be `A` through `F` or `NULL` (not assigned yet). A `FOREIGN KEY` prevents a course from referring to a department that is not in `DEPARTMENTS`, while `UNIQUE` prevents duplicate values in the specified column or columns. In this schema, the enrollment foreign key points to `STUDENTS.STUDENT_ID`, so an enrollment cannot refer to a student who is not in the `STUDENTS` table.
 
 2. Review the physical model used by the ready tables.
 
