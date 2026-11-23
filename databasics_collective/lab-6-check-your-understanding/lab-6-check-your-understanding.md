@@ -17,7 +17,7 @@ You will:
 - Review constraints, schema objects, and indexes.
 - Identify which database tasks Oracle Autonomous Database manages for you.
 
-Estimated Time: 10 minutes
+Estimated Time: 5 minutes
 
 ## Task 1: Complete the knowledge check
 
