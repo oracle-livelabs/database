@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Your reservation includes an Autonomous Database and a preloaded workshop dataset. In this lab, open the reservation details, sign in to Database Actions, and open the SQL Worksheet.
+Your LiveLabs reservation is the temporary workshop environment assigned to you. It includes an Autonomous Database and a preloaded dataset. Database Actions is the browser-based tool you will use to work with the database. In this lab, open the reservation details, sign in, and open the SQL Worksheet, where you can write and run SQL statements.
 
 ### Objectives
 
