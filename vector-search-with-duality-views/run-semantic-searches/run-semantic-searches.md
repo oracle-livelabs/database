@@ -119,17 +119,7 @@ Estimated Time: 20 minutes
     WITH TARGET ACCURACY 90;
     ```
 
-    Sample output:
-
-    ```json
-    {"title":"Saving Private Ryan","year":1998,"genre":["War","Drama","Action"],"main_subject":"Invasion of Normandy"}
-    {"title":"Avengers: Infinity War","year":2018,"genre":["Action","Sci-Fi","Adventure"],"main_subject":"genocide"}
-    {"title":"Avengers: Endgame","year":2019,"genre":["Action","Adventure"],"main_subject":null}
-    {"title":"Suicide Squad","year":2016,"genre":["Sci-Fi","Action","Adventure","Crime","Fantasy"],"main_subject":null}
-    {"title":"The Avengers","year":2012,"genre":["Action","Sci-Fi","Adventure"],"main_subject":"alien invasion"}
-    ```
-
-    This query returns the five closest movie documents using semantic similarity. Compare the results with the keyword search from Lab 1.
+    This query returns the title, year, genre, and main subject for the five closest movies. Compare the results with the keyword search from Lab 1.
 
 ## Task 4: Combine semantic search with filters
 
