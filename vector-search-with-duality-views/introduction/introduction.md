@@ -18,6 +18,7 @@ Estimated Workshop Time: 60–90 minutes
 - Autonomous AI Database 26ai with AI Vector Search enabled.
 - SQL worksheet or SQLcl access.
 - Either an ONNX embedding model already available to the database, or access to an Oracle Cloud Infrastructure Object Storage bucket where you can upload the provided models.
+- **Lab 5 requires a paid OCI tenancy** with access to OCI Generative AI.
 
 ### Objectives
 

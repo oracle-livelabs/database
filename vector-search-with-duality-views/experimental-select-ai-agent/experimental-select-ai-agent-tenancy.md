@@ -19,6 +19,7 @@ Estimated Time: 30 minutes
 
 ### Prerequisites
 
+- A paid OCI tenancy with access to OCI Generative AI.
 - Completed Labs 1 through 4, including the populated E5-base embeddings and `MOVIES_DV`.
 - A database with Select AI Agent available and permission to create PL/SQL functions.
 - Access to an OCI API signing key and a compartment with an approved Generative AI chat model.

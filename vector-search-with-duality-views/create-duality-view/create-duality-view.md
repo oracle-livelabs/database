@@ -143,7 +143,9 @@ Estimated Time: 30 minutes
 
 ## Task 5: Combine text and vector results with INTERSECT
 
-1. Return movies that appear in both the title search for `avengers` and the 20 nearest semantic matches.
+1. Return movies that appear in both the title search for `men` and the 20 nearest semantic matches.
+
+    Use `men` to look for X-Men titles while keeping the semantic request about a team of heroes unchanged. Compare the results with the `avengers` searches in earlier labs to see how the keyword changes the intersection.
 
     `JSON_TEXTCONTAINS` uses the `TITLE_IDX` JSON search index on `MOVIES.DATA`. The vector branch returns fields from `MOVIES_DV`, while its ID subquery ranks the relational `EMBEDDING_E5_BASE` column with `SUMMARY_BASE_VEC_IDX`.
 
@@ -154,7 +156,7 @@ Estimated Time: 30 minutes
              JSON_VALUE(data, '$.year' RETURNING NUMBER) AS year,
              JSON_QUERY(data, '$.genre' RETURNING VARCHAR2(1000)) AS genre
       FROM movies
-      WHERE JSON_TEXTCONTAINS(data, '$.title', 'avengers', 1)
+      WHERE JSON_TEXTCONTAINS(data, '$.title', 'men', 1)
     ),
     nearest_movies AS (
       SELECT m.id
