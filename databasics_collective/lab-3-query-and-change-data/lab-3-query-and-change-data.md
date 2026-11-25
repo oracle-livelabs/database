@@ -2,14 +2,14 @@
 
 ## Introduction
 
-The reservation has already loaded three departments, 60 students, 10 courses, and 285 enrollments. Use those rows to practice queries. Then make a few temporary data changes, inspect them, and restore the sample values.
+The reservation has already loaded three departments, 60 students, 10 courses, and 285 enrollments. Use those rows to practice SQL, the language for asking the database questions and changing data. Then make a few temporary data changes, inspect them, and restore the sample values.
 
 ### Objectives
 
 You will:
 
 - Check the loaded rows.
-- Filter, sort, join, and aggregate data with `SELECT`.
+- Read, filter, sort, join, and summarize data with `SELECT`.
 - Practice targeted `INSERT`, `UPDATE`, and `DELETE` statements.
 - Make data changes and restore the workshop rows safely.
 
@@ -51,7 +51,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    `WHERE` keeps only rows matching both conditions: department 10 and active status. `ORDER BY` sorts them by last name, then first name. The result should contain active Computer Science students.
+    `WHERE` keeps only rows matching both conditions: department 10 and active status. `AND` means both conditions must be true. `ORDER BY` sorts the results by last name, then first name. The result should contain active Computer Science students.
 
     ![Active students returned by the department and status filters](images/active-students-query.png)
 
@@ -90,7 +90,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    The result should show one row per enrollment with the student name, department, and course. The joins follow the primary and foreign keys from one table to the next. The `||` operator combines first and last names for display.
+    The result should show one row per enrollment with the student name, department, and course. The joins follow the primary and foreign keys from one table to the next. The short letters after table names (`s`, `d`, `e`, and `c`) are **aliases**, temporary names used to keep column references shorter. The `||` operator combines first and last names for display.
 
     ![Four-table join showing student, department, and course details](images/student-course-join.png)
 
@@ -108,7 +108,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    The result should show each course and its enrollment count. `GROUP BY` collects rows by course, and `COUNT` totals students. `LEFT JOIN` keeps courses with no enrollments too; those courses show a count of zero.
+    The result should show each course and its enrollment count. `GROUP BY` gathers matching rows into one result group per course, and `COUNT` totals the matching students. `LEFT JOIN` keeps every course in the result even when no enrollment matches; those courses show a count of zero.
 
     ![Course enrollment totals returned by the aggregate query](images/course-enrollment-counts.png)
 
@@ -116,11 +116,11 @@ Estimated Time: 25 minutes
 
 ## Task 4: Make, inspect, and restore data changes
 
-Database Actions can run each worksheet operation in a different session. A `SAVEPOINT` created in one operation is not available to a later one, which causes `ORA-01086`. To let you run the checks separately, this exercise uses committed practice changes and then restores the original sample values with SQL. It does not use `ROLLBACK` across operations.
+Database Actions may run separate worksheet operations in different **sessions** (connections to the database). A **transaction** is a group of data changes. `COMMIT` saves those changes permanently; `ROLLBACK` undoes changes that have not been committed. A `SAVEPOINT` marks a point inside a transaction so you can undo changes back to that point. It belongs to the session that created it, so a later operation in another session cannot use it; Oracle reports `ORA-01086`. This exercise checks each change separately, then restores the original sample values with SQL instead of using a savepoint across operations.
 
 ### Step 1: Make three practice changes
 
-Run these statements together with **Run Script** (F5 or Fn+F5 on some Mac keyboards). `INSERT` adds a temporary student, `UPDATE` changes the status of student 1002, and `DELETE` removes the enrollment identified by student 1004 and course 2002. The `WHERE` conditions target only the intended rows. Run this block once; the following steps inspect the changes before cleanup.
+Run these statements together with **Run Script** (F5 or Fn+F5 on some Mac keyboards). `INSERT`, `UPDATE`, and `DELETE` are SQL commands that add, change, and remove rows; together they are called **DML** (data manipulation language). `INSERT` adds a temporary student, `UPDATE` changes the status of student 1002, and `DELETE` removes the enrollment identified by student 1004 and course 2002. The `WHERE` conditions target only the intended rows. Run this block once; the following steps inspect the changes before cleanup.
 
 ```sql
 <copy>
@@ -141,7 +141,7 @@ WHERE  student_id = 1004
 </copy>
 ```
 
-The script output should report one inserted row, one updated row, and one deleted row.
+`SYSDATE` supplies the database's current date and time. The script output should report one inserted row, one updated row, and one deleted row.
 
 ![Database Actions output for the practice insert, update, and delete](images/practice-dml-output.png)
 
@@ -181,7 +181,7 @@ The result should be zero because Step 1 deleted that enrollment.
 
 ### Step 4: Restore the starting data
 
-Run this cleanup block with **Run Script**. These statements reverse the practice changes: `DELETE` removes the temporary student, `UPDATE` returns student 1002 to the seeded `ACTIVE` status, and `INSERT` restores the enrollment with its original date and grade. This cleanup restores the sample rows; it is not a transaction rollback.
+Run this cleanup block with **Run Script**. These statements reverse the practice changes: `DELETE` removes the temporary student, `UPDATE` returns student 1002 to the seeded `ACTIVE` status, and `INSERT` restores the enrollment with its original date and grade. The `DATE '2026-09-03'` value is an Oracle date literal: a date written in a fixed year-month-day format. This cleanup restores the sample rows; it is not a transaction rollback.
 
 ```sql
 <copy>

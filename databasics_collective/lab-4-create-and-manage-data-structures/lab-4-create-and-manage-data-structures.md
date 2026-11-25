@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The reservation already contains the four university tables and their data. Look at how they were built, then create a small practice table of your own. The practice table will not change the workshop data.
+The reservation already contains the four university tables and their data. Look at how they were built, then create a small practice table of your own. A **column** describes one kind of value, and a **row** holds one record. The practice table will not change the workshop data.
 
 ### Objectives
 
@@ -28,7 +28,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should list each column name, data type, and whether it accepts nulls. Find a `NUMBER`, a `VARCHAR2`, and a `DATE` column. A column marked `N` under `NULLABLE` requires a value.
+    The result should list each column name, data type, and whether it accepts nulls. A **data type** tells Oracle what kind of value a column can store: `NUMBER` stores numeric values, `VARCHAR2` stores text, and `DATE` stores dates and times. A column marked `N` under `NULLABLE` requires a value; `NULL` means no value is present.
 
     ![Core table column names, data types, and nullability](images/core-table-columns.png)
 
@@ -43,7 +43,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should show the rules on each core table: `P` means primary key, `R` foreign key, `U` unique, and `C` check or required value. The reservation created these rules before you signed in.
+    The result should show the rules on each core table. In `CONSTRAINT_TYPE`, `P` means primary key, `R` foreign key, `U` unique, and `C` check constraint. Oracle also represents `NOT NULL` as a check constraint in this view. A **foreign key** links a column to an existing key in another table, preserving the relationship between the rows. The reservation created these rules before you signed in.
 
     ![Constraint types on the four preloaded tables](images/core-table-constraints.png)
 
@@ -67,7 +67,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should report that the table was created. `NOTE_ID` identifies each note, and `NUMBER` stores that identifier. `VARCHAR2` stores the note and status text. `NOT NULL` requires a student and note text; the status is also required, but its default supplies `OPEN` when you omit it. The foreign key only accepts an existing student, and the check rule limits status to `OPEN` or `CLOSED`. This creates an empty practice table and leaves the four core tables unchanged. The definition screenshot shows the statement used.
+    The result should report that the table was created. `NOTE_ID` identifies each note, and `NUMBER(6)` stores a number with up to six significant digits. `VARCHAR2(200)` stores text up to 200 characters. `NOT NULL` requires a value; `DEFAULT 'OPEN'` fills in `OPEN` when an insert omits the status. The foreign key only accepts an existing student, and the check constraint limits status to `OPEN` or `CLOSED`. This creates an empty practice table and leaves the four core tables unchanged. The definition screenshot shows the statement used.
 
     ![SQL worksheet with the practice table definition](images/create-practice-table.png)
 
@@ -86,7 +86,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should report that the table was altered. `ALTER TABLE` changes the practice table's structure, and the default supplies the current date when a new row omits `NOTED_ON`. The screenshot shows the statement used.
+    The result should report that the table was altered. `ALTER TABLE` changes a table's structure. The `DATE` type stores a date and time, and `SYSDATE` supplies the database's current date and time when a new row omits `NOTED_ON`. The screenshot shows the statement used.
 
     ![SQL worksheet after adding the NOTED_ON date column](images/practice-table-altered.png)
 
@@ -106,7 +106,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    These data dictionary queries inspect the table design rather than its rows. The first result should include the new `NOTED_ON` date column; the second should show the primary key, foreign key, and check rule. Oracle also records required columns as constraints.
+    These **data dictionary** queries read Oracle's built-in catalog of information about database objects; they inspect the table design rather than its rows. The first result should include the new `NOTED_ON` date column; the second should show the primary key, foreign key, and check rule. Oracle also records required columns as constraints.
 
     ![Practice table columns and constraints after ALTER TABLE](images/practice-table-columns-and-rules.png)
 
@@ -120,11 +120,11 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The result should report that `LAB_STUDENT_NOTES` was dropped. `PURGE` removes the practice table instead of keeping it in the recycle bin. The four university tables and their rows remain, and you can repeat this lab without a name conflict.
+    The result should report that `LAB_STUDENT_NOTES` was dropped. `DROP TABLE` removes a table definition and its rows. `PURGE` also removes it from Oracle's recycle bin, where dropped tables can otherwise be recovered. The four university tables and their rows remain, and you can repeat this lab without a name conflict.
 
     ![Database Actions output confirming the practice table was dropped](images/practice-table-dropped.png)
 
-2. `CREATE`, `ALTER`, and `DROP` are DDL statements. Oracle commits pending work around DDL, so finish any practice transactions before changing a table structure.
+2. `CREATE`, `ALTER`, and `DROP` are **DDL** (data definition language) statements: they create, change, or remove database structures. Oracle automatically commits pending changes before and after DDL, so finish any practice transactions (groups of data changes) before changing a table structure; `ROLLBACK` cannot undo that DDL change.
 
 ## Acknowledgements
 

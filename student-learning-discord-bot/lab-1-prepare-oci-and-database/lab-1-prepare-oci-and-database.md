@@ -42,7 +42,7 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
     ![Open the Create instance page in OCI Console](./images/lab-1-01-create-instance.png)
 
-2. Enter a name such as `discord-bot-host`. Choose **Oracle Linux 9** as the image. The example uses an Arm-based `VM.Standard.A1.Flex` shape. If your region has no A1 capacity, select another supported flexible shape and use the same Oracle Linux release.
+2. Enter a name such as `discord-bot-host`. Choose the latest **Oracle Linux 9** image available. Node.js 24 is in the Oracle Linux 9.7 application stream, so use version 9.7 or newer. The example uses an Arm-based `VM.Standard.A1.Flex` shape. If your region has no A1 capacity, select another supported flexible shape and keep the same operating system version.
 
     ![Select Oracle Linux 9 as the Compute image](./images/lab-1-02-select-oracle-linux.png)
 

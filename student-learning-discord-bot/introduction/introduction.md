@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Build and deploy a Discord learning bot. It answers prompts, researches topics, creates study guides and quizzes, teaches Oracle topics, runs reusable agents, remembers channel-scoped preferences, and finds accessible LiveLabs workshops by meaning with direct workshop links.
+This workshop deploys a Discord learning bot on OCI Compute. OpenRouter supplies model responses, and Autonomous Database stores agent profiles and personal notes and powers semantic search over LiveLabs workshops.
 
 Run the bot on OCI Compute. Nginx handles Discord HTTPS and forwards requests to the bot on the same host. Certbot gets and renews a short-lived certificate for the reserved public IP. You do not need a domain. OpenRouter supplies model responses. Autonomous Database stores agent profiles, personal notes, the LiveLabs catalog, and vector embeddings.
 
-Estimated Workshop Time: 120 minutes.
+Estimated Workshop Time: 125 minutes.
 
 ### Objectives
 
@@ -15,7 +15,7 @@ In this workshop, you will:
 - Prepare an OCI host, network rules, Autonomous Database, and TLS endpoint.
 - Download an approved bot package from OCI Object Storage.
 - Configure a Discord application and OpenRouter without committing credentials.
-- Set up private database storage and a prevalidated LiveLabs catalog with semantic vector search.
+- Set up private database storage and semantic search over the bundled LiveLabs catalog.
 - Run automated production setup and verify all nine commands.
 
 ### Prerequisites
@@ -24,7 +24,7 @@ In this workshop, you will:
 - Discord Developer Portal access and a private server where you can install a test bot.
 - An OpenRouter API key and a model available to your account.
 - Reserve a public IPv4 address. The workshop uses an IP certificate, so you do not need a domain or DNS account.
-- The [hackathon-bot ZIP in OCI Object Storage](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/hackathon-bot.zip).
+- The hackathon-bot ZIP in OCI Object Storage
 - A workstation with a browser, SSH/SFTP client, and a secure password manager.
 
 ## Architecture
