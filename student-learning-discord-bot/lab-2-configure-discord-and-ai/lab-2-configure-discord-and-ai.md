@@ -204,7 +204,7 @@ In this lab, you will:
     | `OPENROUTER_DATETIME_TIMEZONE` | No | Sets the IANA timezone used by the bot's datetime tool. Replace the example with your timezone if needed. An invalid value falls back to `America/New_York`. |
     | `OPENROUTER_AGENT_DATA_COLLECTION` | No | Controls provider eligibility for `/agent`. Keep `deny` unless you have reviewed and accepted a provider's data policy. Any other value is treated as `deny`. |
 
-The data-collection setting applies to `/agent`. The bot uses `OPENROUTER_MODEL` for other AI features, including memory in Lab 3; there is no separate memory-model setting. With `deny`, some free-model requests may have fewer compatible providers.
+    The data-collection setting applies to `/agent`. The bot uses `OPENROUTER_MODEL` for other AI features, including memory in Lab 3; there is no separate memory-model setting. With `deny`, some free-model requests may have fewer compatible providers.
 
 12. Save `.env`, then confirm its permissions.
 
