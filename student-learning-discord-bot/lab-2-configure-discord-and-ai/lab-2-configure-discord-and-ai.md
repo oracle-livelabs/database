@@ -18,13 +18,13 @@ In this lab, you will:
 ### Prerequisites
 
 - Finish Lab 1. You need system Node.js 24, SSH access, a reserved IP, and a valid IP certificate.
-- The [hackathon-bot ZIP in OCI Object Storage](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/hackathon-bot.zip).
+- The hackathon-bot ZIP in OCI Object Storage
 - Discord Developer Portal access and a private test server.
 - An OpenRouter API key and model name available to your account.
 
 ## Task 1: Download and Inspect the Bot Package
 
-1. Open the [hackathon-bot ZIP link](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/hackathon-bot.zip). Anyone with this link can download the file.
+1. Open the hackathon-bot ZIP link. Anyone with this link can download the file.
 
 2. Download the package to the Compute host with the Object Storage PAR.
 
@@ -117,7 +117,7 @@ In this lab, you will:
 
         ![Select the private Discord server and continue](./images/lab-2-14-select-discord-server.png)
 
-    - Review the authorization page. It must request only **View Channels**, **Send Messages**, **Read Message History**, and **Attach Files**. If it shows **Ban Members**, **Create Polls**, **Send Messages in Threads**, or another permission, close the dialog, return to Step 8, remove the extra permission, save the changes, and reopen the install link.
+    - Review the authorization page. It should request **View Channels**, **Send Messages**, **Read Message History**, and **Attach Files** only. If you see another permission, close the dialog and remove it from the **Installation** settings. Save the change, then reopen the install link.
 
         ![Review the requested bot permissions before authorization](./images/lab-2-15-authorize-bot-permissions.png)
 
@@ -193,7 +193,6 @@ In this lab, you will:
     OPENROUTER_STUDY_MODEL=
     OPENROUTER_DATETIME_TIMEZONE=America/Mexico_City
     OPENROUTER_AGENT_DATA_COLLECTION=deny
-    OPENROUTER_MEMORY_MODEL=
     </copy>
     ```
 
@@ -203,10 +202,9 @@ In this lab, you will:
     | `OPENROUTER_MODEL` | Yes | Sets the default model for the bot's AI requests. `openrouter/free` routes each request to a compatible free model available at that time. |
     | `OPENROUTER_STUDY_MODEL` | No | Overrides the model used by `/study`. Leave it empty to use `OPENROUTER_MODEL`. |
     | `OPENROUTER_DATETIME_TIMEZONE` | No | Sets the IANA timezone used by the bot's datetime tool. Replace the example with your timezone if needed. An invalid value falls back to `America/New_York`. |
-    | `OPENROUTER_AGENT_DATA_COLLECTION` | No | Controls provider eligibility for `/agent`. Keep `deny` so agent requests use providers that do not collect data. Use `allow` only after reviewing the provider policy. Any other value is treated as `deny`. |
-    | `OPENROUTER_MEMORY_MODEL` | No | Selects a separate model for optional user-memory decisions and validation. This workshop does not enable user memory, so leave it empty. |
+    | `OPENROUTER_AGENT_DATA_COLLECTION` | No | Controls provider eligibility for `/agent`. Keep `deny` unless you have reviewed and accepted a provider's data policy. Any other value is treated as `deny`. |
 
-    With `OPENROUTER_AGENT_DATA_COLLECTION=deny`, the free router has fewer eligible providers. A request can fail temporarily if no compatible free provider satisfies both the requested features and the data policy.
+The data-collection setting applies to `/agent`. The bot uses `OPENROUTER_MODEL` for other AI features, including memory in Lab 3; there is no separate memory-model setting. With `deny`, some free-model requests may have fewer compatible providers.
 
 12. Save `.env`, then confirm its permissions.
 
@@ -270,7 +268,7 @@ In this lab, you will:
 
 ## Data Handling Checkpoint
 
-The bot sends `/ask`, `/research`, `/study`, `/oci`, `/ai-db`, and agent prompts to OpenRouter. It processes each attachment for the current request and does not store it permanently. Do not test with private information. Server replies appear to channel members.
+The bot sends prompts to OpenRouter. In Lab 3, it can also save non-sensitive preferences as private notes in Autonomous Database and use them as context for later replies in that same channel. Use the `/memory` command to review or delete your notes. Do not use private information in this workshop. Server replies are visible to channel members, and uploaded files are processed for the current request rather than stored permanently by the bot.
 
 ## Acknowledgements
 

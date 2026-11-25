@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Connect the bot to Autonomous Database. Create private agent and memory tables, then install the prevalidated LiveLabs catalog and its in-database embedding model. The recommended workshop setup uses one non-`ADMIN` database user. Optional settings can separate these features later.
+Connect the bot to Autonomous Database. Create a non-`ADMIN` user for the workshop, set up its agent and memory tables, then load the bundled LiveLabs catalog for semantic search. The optional `*_USER` settings can point to separate accounts, but this lab uses one user for all three features.
 
 Estimated Time: 35 minutes.
 
@@ -21,13 +21,23 @@ In this lab, you will:
 - Finish Labs 1 and 2. Extract the current bot package on Compute.
 - Autonomous Database is available, and its wallet is under `/home/opc/hackathon-bot/wallet`.
 - Turn on Database Actions for the Autonomous Database.
-- Database credentials for a non-`ADMIN` user with a quota on `DATA`.
+- Access to Database Actions as `ADMIN` so you can create a non-`ADMIN` workshop user.
 
 ## Task 1: Prepare the Database User
 
-1. Use one non-`ADMIN` database user for this workshop. It owns the private bot tables and the LiveLabs model. The empty optional settings in `.env` will fall back to `ADB_USER` and `ADB_PASSWORD`.
+1. Connect to Database Actions as `ADMIN`. From the Autonomous Database page, open **Database actions > Database Users**.
 
-2. In Database Actions, connect as `ADMIN`. Replace `<BOT_DATABASE_USER>` with the existing workshop user and grant only the privileges needed for setup.
+    ![Open Database Users from the Autonomous Database page](./images/lab-3-08-open-database-users.png)
+
+    On the **Database Users** page, select **Create User**.
+
+    ![Select Create User in Database Actions](./images/lab-3-09-select-create-user.png)
+
+    Enter a username and password, then create the user. Follow the password rules shown; the default policy requires 12–30 characters with uppercase, lowercase, and a number. The password cannot contain the username. Save both values securely. Leave Web Access off for now; you will enable it in Step 3.
+
+    ![Enter the new database user and password](./images/lab-3-10-create-workshop-user.png)
+
+2. Still connected as `ADMIN`, replace `<BOT_DATABASE_USER>` with the user you just created and grant the permissions used in this lab.
 
     ```sql
     <copy>
@@ -39,13 +49,13 @@ In this lab, you will:
     </copy>
     ```
 
-    `CREATE MINING MODEL` and directory access let the one-time installer load Oracle's public ONNX model. They do not grant access to another application's tables.
+    `CREATE MINING MODEL` and directory access let the installer load Oracle's public ONNX model. These privileges do not grant access to another application's tables.
 
-3. Make sure the workshop user can sign in to Database Actions. In **Administration > Database Users**, enable **Web Access** for that user. See [Oracle Database Actions access instructions](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-database-actions.html).
+3. In **Administration > Database Users**, enable **Web Access** for the workshop user so you can use it in the next task. See [Oracle Database Actions access instructions](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/connect-database-actions.html).
 
 ## Task 2: Create the Agent Profile Table
 
-1. In Database Actions, connect as the workshop database user. Run this fresh-install schema with **Run Script**. If `AGENT_PROFILES` already exists, use the retry-safe `db/agent-store-schema.sql` from the current bot package instead.
+1. In OCI Database Actions, connect as the workshop user you created in Task 1. Open **SQL Actions > SQL Worksheet**. Run the fresh-install [agent-store-schema.sql](./files/agent-store-schema.sql) below with **Run Script**. This creates the profile table owned by the account you used to connect.
 
     ```sql
     <copy>
@@ -168,7 +178,7 @@ In this lab, you will:
     </copy>
     ```
 
-    The installer downloads Oracle's public `all-MiniLM-L12-v2` ONNX file only when needed. It loads the model, creates or verifies the schema, merges the packaged CSV, deactivates catalog entries that are no longer packaged, generates missing embeddings, checks row state, and runs a semantic query. The initial embedding pass can take several minutes. Later runs reuse the model and unchanged vectors.
+    On the first run, the installer downloads Oracle's public `all-MiniLM-L12-v2` ONNX file, loads it into the database, imports the workshop CSV, and creates vectors for its entries. It then checks the catalog and runs a sample search. This can take several minutes. Later runs reuse the model and existing vectors; rows no longer in the CSV become inactive.
 
     ![Install and verify LiveLabs semantic search](./images/lab-3-06-install-livelabs-search.png)
 
@@ -198,13 +208,13 @@ In this lab, you will:
 
 2. In Discord, run `/db` and select **Check the bot connection to ADB**. Confirm the connection is available. Private agent, memory, and LiveLabs tables are intentionally excluded from generic `/db` discovery and queries.
 
-3. Open `/agent`, create a small test agent, and confirm it remains available after a bot restart.
+3. In Discord, open `/agent` and create a small test agent. In the SSH session, stop the foreground bot with `Ctrl+C`, then run `npm start` again. Return to `/agent` and confirm the saved profile is still available.
 
 4. Keep the command-line LiveLabs result from Task 4 for comparison with the Discord result in Lab 4.
 
 5. State a harmless preference in the channel, ask a generic follow-up, and use `/memory` to inspect the private channel-scoped note. Model-based automatic saving can skip ambiguous statements; use a clear first-person preference.
 
-6. Leave the foreground process running. Lab 4 stops it before automated systemd setup.
+6. Leave `npm start` running. Lab 4 stops the foreground process before setting up systemd.
 
 ## Acknowledgements
 

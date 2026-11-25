@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use the repository's production installer to test, register, and run the bot under systemd. Check Discord, database-backed features, Nginx, and service logs.
+Use the included production installer to check configuration, register commands, and run the bot under systemd. Then verify Discord, database features, Nginx, and service logs.
 
 Estimated Time: 30 minutes.
 
@@ -48,11 +48,11 @@ In this lab, you will:
     </copy>
     ```
 
-    The command installs locked dependencies, validates configuration and database access, runs tests, safely rechecks LiveLabs, registers nine commands, installs or updates the systemd unit, starts the service, and displays recent logs. It preserves an existing unit as `discord-example.service.previous`.
+    The installer checks configuration and database access, runs the tests, refreshes LiveLabs, and registers the nine commands. It then installs or updates the systemd unit, starts the service, and shows recent logs. If a previous unit exists, the installer saves a copy as `discord-example.service.previous`.
 
 ## Task 2: Inspect the Service and Nginx
 
-1. Display the generated unit. Confirm it uses the actual repository path, current Node executable, and unprivileged `opc` account. The app loads `.env` through `dotenv` from its working directory.
+1. Display the generated unit. Confirm it uses `/home/opc/hackathon-bot`, `/usr/bin/node`, and the unprivileged `opc` account. The app loads `.env` from its working directory.
 
     ```sh
     <copy>
@@ -137,7 +137,9 @@ In this lab, you will:
 
 7. Run `/ai-db` with AI Vector Search or Select AI. Confirm that the response focuses on the selected Oracle AI Database topic.
 
-8. Run `/db` and select **Check the bot connection to ADB**. Confirm the connection is available. Do not expect private agent, memory, or LiveLabs tables in generic schema discovery.
+8. Run `/db` and select **Check the bot connection to ADB**. Confirm the connection is available. Private agent, memory, and LiveLabs tables are not shown in generic `/db` discovery.
+
+    Run `/memory`, choose **List notes**, and confirm the note you created in Lab 3 appears only to you. Do not add private information to the workshop server.
 
 9. Enter `/live`, then select `/livelabs query` from the command list.
 
@@ -185,19 +187,17 @@ In this lab, you will:
 
     ![Confirm permanent deletion of the workshop test agent](./images/lab-4-28-delete-agent.png)
 
-## Task 4: Verify Repeatable Updates
+## Task 4: Check a Service Restart
 
-1. Run the update workflow. It repeats preflight, tests, command registration, service refresh, restart, and log checks without rebuilding unchanged LiveLabs vectors.
+1. Restart the service and confirm it returns to the running state. This checks that systemd can bring the bot back after a stop or host maintenance.
 
     ```sh
     <copy>
-    cd /home/opc/hackathon-bot
-    npm run deploy
+    sudo systemctl restart discord-example.service
     sudo systemctl is-active discord-example.service
+    sudo journalctl -u discord-example.service -n 20 --no-pager
     </copy>
     ```
-
-2. If you deploy from a Git checkout, review `.github/workflows/deploy.yml`. The workflow pulls the approved branch, installs locked dependencies, synchronizes LiveLabs when configured, and runs the same deployment checks. The Object Storage ZIP workflow does not contain `.git`; keep ZIP delivery and Git deployment as separate options.
 
 ## Acknowledgements
 

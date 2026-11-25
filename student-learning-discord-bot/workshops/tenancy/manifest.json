@@ -33,7 +33,7 @@
         },
         {
             "title": "Lab 4: Run the Bot as a Service and Verify Its Features",
-            "description": "Run automated production setup, check HTTPS, exercise nine commands, and verify repeatable updates.",
+            "description": "Run automated setup, verify the Discord commands, and check that the service restarts cleanly.",
             "type": "livelabs",
             "filename": "../../lab-4-deploy-and-verify/lab-4-deploy-and-verify.md"
         },
