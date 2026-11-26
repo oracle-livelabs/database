@@ -2,29 +2,29 @@
 
 ## Introduction
 
-This workshop uses the same Autonomous AI Database and model setup as the MongoDB API movie-search workshop. You will work in Database Actions or another SQL client, so you do not install MongoDB Shell or create a MongoDB API connection.
+Connect to an Autonomous AI Database in your own OCI tenancy and prepare the embedding models used in the labs. You will use Database Actions or another SQL client to run SQL, and your Object Storage bucket to stage the model files.
 
 Estimated Time: 15 minutes
 
 ### Objectives
 
-- Sign in to OCI and open the workshop database.
+- Sign in to your OCI tenancy and open your Autonomous AI Database.
 - Open a SQL worksheet for the database.
 - Download both supplied ONNX models, upload them to separate Object Storage folders, and create a PAR URL for each model.
 
 ## Task 1: Sign in to OCI and open the database
 
-1. Sign in to [Oracle Cloud Infrastructure](https://cloud.oracle.com/) with the workshop credentials or your OCI tenancy credentials.
+1. Sign in to [Oracle Cloud Infrastructure](https://cloud.oracle.com/) with your OCI tenancy credentials. Select the region where your Autonomous AI Database is provisioned.
 
 2. Open the OCI navigation menu, select **Oracle AI Database**, and then select **Autonomous AI Database**.
 
     ![OCI navigation menu with Oracle AI Database and Autonomous AI Database highlighted](images/navigate-to-autonomous-ai-database.png)
 
-3. Select the compartment supplied for your workshop.
+3. Select the compartment where you want to work or where your Autonomous AI Database is provisioned.
 
-4. Open the provisioned Autonomous AI Database and confirm that its lifecycle state is **Available**.
+4. Open the Autonomous AI Database you will use for the labs and confirm that its lifecycle state is **Available**.
 
-5. Select **Database Actions**, and then open **SQL**.
+5. Select **Database Actions**, and then open **SQL**. If prompted, sign in with the database user credentials you will use for the labs.
 
     ![Autonomous AI Database details page with the Database Actions menu open and SQL selected](images/open-database-actions.png)
 
@@ -44,7 +44,7 @@ Estimated Time: 15 minutes
 
     The embedding model shapes semantic-search quality. Models represent meaning differently. More dimensions can capture finer distinctions and may improve results. This workshop provides E5-small and E5-base for a consistent lab experience. You are welcome to bring a compatible ONNX model, using its dimension count when you define the vector column.
 
-3. Open the OCI navigation menu. Select **Storage**, then **Buckets**. Select the workshop compartment, and create or open a bucket for the models.
+3. Open the OCI navigation menu. Select **Storage**, then **Buckets**. Select the compartment in your tenancy where you want to store the models. Create a bucket or open an existing bucket that you have permission to upload files to.
 
     ![OCI navigation menu with Storage and Buckets highlighted](images/open-object-storage-buckets.png)
 
@@ -52,7 +52,7 @@ Estimated Time: 15 minutes
 
 5. Upload the extracted `multilingual_e5_base.onnx` file to a different folder, such as `models/e5-base/`.
 
-6. Open the menu for each uploaded ONNX file and select **Create Pre-Authenticated Request**. Allow **Object Read** access, set an expiry date after your workshop session, and copy each PAR URL.
+6. Open the menu for each uploaded ONNX file and select **Create Pre-Authenticated Request**. Allow **Object Read** access, set an expiry date that gives you enough time to complete the labs, and copy each PAR URL.
 
     - Copy the E5-small PAR URL. You will use it to load the model in Lab 2.
     - Copy the E5-base PAR URL. You will use it to load the model in Lab 3.
@@ -72,4 +72,4 @@ If you want to learn more, see [AI Vector Search Overview](https://docs.oracle.c
 ## Acknowledgements
 
 * **Author** - Gael Palomino
-* **Last Updated By/Date** - Gael Palomino, August 2026
+* **Last Updated By/Date** - Gael Palomino, November 2026

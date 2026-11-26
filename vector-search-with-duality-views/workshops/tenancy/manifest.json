@@ -12,7 +12,7 @@
       "title": "Get Ready",
       "description": "Prepare OCI, Database Actions, and the ONNX model.",
       "type": "livelabs",
-      "filename": "../../get-ready/get-ready.md"
+      "filename": "../../get-ready-tenancy/get-ready-tenancy.md"
     },
     {
       "title": "Lab 1: Create JSON and Vector Data, Then Run Text Search",
