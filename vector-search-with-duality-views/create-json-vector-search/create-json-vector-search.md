@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Create the movie search table with a stable identifier, the original JSON movie document, and a separate vector column for semantic metadata. This design lets the application JSON remain unchanged while you add, rebuild, or drop a vector index.
+Create a movie search table with a stable identifier, the original JSON document, and a separate vector column for semantic metadata. You can add, rebuild, or drop a vector index while keeping the application JSON unchanged.
 
 Estimated Time: 20 minutes
 
@@ -27,7 +27,7 @@ Estimated Time: 20 minutes
     /
     ```
 
-    `COPY_COLLECTION` creates the collection when it does not already exist, then loads each JSON document from the matching files. In this workshop, `MOVIE_COLLECTION` exposes the imported JSON document in its `DATA` column.
+    `COPY_COLLECTION` creates the collection if needed and loads the JSON documents from the matching files. The imported collection, `MOVIE_COLLECTION`, stores these documents in its `DATA` column.
 
 2. Confirm that the collection contains 3800 documents.
 
@@ -48,7 +48,7 @@ Estimated Time: 20 minutes
     );
     ```
 
-    `DATA` keeps the original application document. `EMBEDDING_E5_SMALL` is separate semantic-search metadata. Lab 2 populates this column with the 384-dimensional multilingual E5-small model; if you use another model, change the vector dimension to match it.
+    `DATA` keeps the original application document. `EMBEDDING_E5_SMALL` is separate semantic-search metadata. Lab 2 populates this column with the 384-dimensional multilingual E5-small model. If you use another model, change the vector dimension to match it.
 
 2. Copy each MongoDB document identifier and its original JSON into the table. Leave the `embedding_e5_small` column empty for now.
 
@@ -96,7 +96,7 @@ Estimated Time: 20 minutes
     WHERE JSON_TEXTCONTAINS(data, '$.title', 'Avengers');
     ```
 
-    This is lexical search: it matches the indexed `title` text, not semantic meaning. Lab 2 uses the vector index to search the meaning encoded in movie summaries.
+    This lexical search matches words in the indexed `title` text. In Lab 2, you will use a vector index to search movie summaries by meaning.
 
 2. Search for movies with either `Avengers` or `Captain` in the title.
 
@@ -124,4 +124,4 @@ Estimated Time: 20 minutes
 ## Acknowledgements
 
 * **Author** - Gael Palomino
-* **Last Updated By/Date** - Gael Palomino, August 2026
+* **Last Updated By/Date** - Gael Palomino, November 2026

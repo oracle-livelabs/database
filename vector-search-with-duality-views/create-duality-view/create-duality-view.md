@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Imagine a movie-discovery application that accepts a natural-language request such as “a team of heroes working together to protect others.” The application wants complete movie documents in JSON, while the database team wants to keep the source data relational, maintain embeddings in a native `VECTOR` column, and use an HNSW index to answer the semantic search efficiently. Maintaining separate JSON and search copies would create synchronization work and make model or index changes harder to manage.
+Imagine a movie-discovery application that accepts natural-language requests such as “a team of heroes working together to protect others.” The application needs complete movie documents in JSON. The database team needs relational source data, embeddings in a native `VECTOR` column, and an HNSW index for efficient semantic search. Maintaining separate JSON and search copies would add synchronization work and complicate model or index changes.
 
-Create a JSON-relational duality view to bridge those needs. The view exposes the movie JSON and the migrated E5-base vector as one document, while the underlying `MOVIES` table remains the system of record. The application can consume the document shape, and SQL can still search the underlying vector column and `SUMMARY_BASE_VEC_IDX`. This pattern is useful for catalog search, recommendations, and retrieval applications that need document-style responses without giving up relational integrity, indexing, or a gradual embedding-model migration.
+Create a JSON-relational duality view to meet both needs. The view exposes the movie JSON and the migrated E5-base vector as one document. The underlying `MOVIES` table remains the system of record. The application receives JSON documents, while SQL can search the underlying vector column using `SUMMARY_BASE_VEC_IDX`. This pattern suits catalog search, recommendations, and retrieval applications. It combines document-style responses with relational integrity, indexing, and gradual embedding-model migration.
 
 Estimated Time: 30 minutes
 
@@ -66,13 +66,13 @@ Estimated Time: 30 minutes
     WITH TARGET ACCURACY 90;
     ```
 
-    The result is read directly from the duality view as one JSON document. Compare these documents with the E5-small results from Lab 2.
+    The query reads each result directly from the duality view as a JSON document. Compare these documents with the E5-small results from Lab 2.
 
 ## Task 3: Inspect the execution plan
 
 1. Ask the optimizer to describe the expected execution path for the duality-view search.
 
-    `EXPLAIN PLAN FOR` does not execute the query. It records the estimated operations for the direct duality-view JSON-vector expression.
+    `EXPLAIN PLAN FOR` does not execute the query. It records the estimated operations for the query over the duality view.
 
 2. Generate the execution plan for the same query.
 
@@ -107,9 +107,9 @@ Estimated Time: 30 minutes
 
 ## Task 4: Combine semantic search with filters
 
-1. Add metadata filters to the semantic search. This query finds movies about a team of heroes, while restricting the results to Action movies released in 2000 or later.
+1. Add metadata filters to the semantic search. Find movies about a team of heroes and limit the results to Action movies released in 2000 or later.
 
-    Apply the structured filters to the matching relational rows for the indexed vector search. The vector expression remains on `MOVIES.EMBEDDING_E5_BASE`, so the nearest-neighbor subquery can use `SUMMARY_BASE_VEC_IDX` while the outer query returns fields from `MOVIES_DV`.
+    Apply the structured filters to the relational rows in the vector search. The vector expression uses `MOVIES.EMBEDDING_E5_BASE`, allowing the nearest-neighbor subquery to use `SUMMARY_BASE_VEC_IDX`. The outer query returns movie fields from `MOVIES_DV`.
 
     Match `_id` as `VARCHAR2(255)` to preserve the original document identifier and match the type of `MOVIES.ID`.
 
@@ -147,7 +147,7 @@ Estimated Time: 30 minutes
 
     Use `men` to look for X-Men titles while keeping the semantic request about a team of heroes unchanged. Compare the results with the `avengers` searches in earlier labs to see how the keyword changes the intersection.
 
-    `JSON_TEXTCONTAINS` uses the `TITLE_IDX` JSON search index on `MOVIES.DATA`. The vector branch returns fields from `MOVIES_DV`, while its ID subquery ranks the relational `EMBEDDING_E5_BASE` column with `SUMMARY_BASE_VEC_IDX`.
+    `JSON_TEXTCONTAINS` uses the `TITLE_IDX` JSON search index on `MOVIES.DATA`. The vector branch returns fields from `MOVIES_DV`. Its ID subquery ranks the relational `EMBEDDING_E5_BASE` column using `SUMMARY_BASE_VEC_IDX`.
 
     ```sql
     -- Text results INTERSECT vector results
@@ -191,9 +191,9 @@ Estimated Time: 30 minutes
     FETCH FIRST 3 ROWS ONLY;
     ```
 
-    `INTERSECT` returns distinct title, year, and genre values found by both searches. The vector branch uses `VECTOR_DISTANCE` only to rank its 20 nearest candidates; the distance is not returned. The final query sorts the shared results by year and title and returns at most three rows.
+    `INTERSECT` returns distinct title, year, and genre combinations found by both searches. The vector branch uses `VECTOR_DISTANCE` to rank its 20 nearest candidates. The output contains only movie fields. The final query sorts the shared results by year and title and returns at most three rows.
 
 ## Acknowledgements
 
 - **Author** - Gael Palomino
-- **Last Updated By/Date** - Gael Palomino, August 2026
+- **Last Updated By/Date** - Gael Palomino, November 2026

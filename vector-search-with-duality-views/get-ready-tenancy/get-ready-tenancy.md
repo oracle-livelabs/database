@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Connect to an Autonomous AI Database in your own OCI tenancy and prepare the embedding models used in the labs. You will use Database Actions or another SQL client to run SQL, and your Object Storage bucket to stage the model files.
+Connect to an Autonomous AI Database in your own OCI tenancy and prepare the embedding models used in the labs. Use Database Actions or another SQL client to run SQL. Stage the model files in your Object Storage bucket.
 
 Estimated Time: 15 minutes
 
@@ -14,17 +14,17 @@ Estimated Time: 15 minutes
 
 ## Task 1: Sign in to OCI and open the database
 
-1. Sign in to [Oracle Cloud Infrastructure](https://cloud.oracle.com/) with your OCI tenancy credentials. Select the region where your Autonomous AI Database is provisioned.
+1. Sign in to [Oracle Cloud Infrastructure](https://cloud.oracle.com/) with your OCI tenancy credentials. Select the region that contains your Autonomous AI Database.
 
 2. Open the OCI navigation menu, select **Oracle AI Database**, and then select **Autonomous AI Database**.
 
     ![OCI navigation menu with Oracle AI Database and Autonomous AI Database highlighted](images/navigate-to-autonomous-ai-database.png)
 
-3. Select the compartment where you want to work or where your Autonomous AI Database is provisioned.
+3. Select the compartment where you plan to work, or the one containing your Autonomous AI Database.
 
 4. Open the Autonomous AI Database you will use for the labs and confirm that its lifecycle state is **Available**.
 
-5. Select **Database Actions**, and then open **SQL**. If prompted, sign in with the database user credentials you will use for the labs.
+5. Select **Database Actions**, and then open **SQL**. If prompted, sign in with the database credentials you will use for the labs.
 
     ![Autonomous AI Database details page with the Database Actions menu open and SQL selected](images/open-database-actions.png)
 
@@ -42,9 +42,9 @@ Estimated Time: 15 minutes
     - Extract the archive into a different local folder, such as `models/e5-base/`, and locate `multilingual_e5_base.onnx`.
     - E5-base produces 768-dimensional vectors.
 
-    The embedding model shapes semantic-search quality. Models represent meaning differently. More dimensions can capture finer distinctions and may improve results. This workshop provides E5-small and E5-base for a consistent lab experience. You are welcome to bring a compatible ONNX model, using its dimension count when you define the vector column.
+    The embedding model shapes semantic-search quality. Models represent meaning differently. More dimensions can capture finer distinctions and may improve results. This workshop provides E5-small and E5-base for a consistent lab experience. You can also bring a compatible ONNX model. Use its dimension count when you define the vector column.
 
-3. Open the OCI navigation menu. Select **Storage**, then **Buckets**. Select the compartment in your tenancy where you want to store the models. Create a bucket or open an existing bucket that you have permission to upload files to.
+3. Open the OCI navigation menu. Select **Storage**, then **Buckets**. Select the compartment in your tenancy where you want to store the models. Create a bucket or open one where you can upload files.
 
     ![OCI navigation menu with Storage and Buckets highlighted](images/open-object-storage-buckets.png)
 
@@ -52,7 +52,7 @@ Estimated Time: 15 minutes
 
 5. Upload the extracted `multilingual_e5_base.onnx` file to a different folder, such as `models/e5-base/`.
 
-6. Open the menu for each uploaded ONNX file and select **Create Pre-Authenticated Request**. Allow **Object Read** access, set an expiry date that gives you enough time to complete the labs, and copy each PAR URL.
+6. Open the menu for each uploaded ONNX file and select **Create Pre-Authenticated Request**. Allow **Object Read** access and set an expiry date after you expect to finish the labs. Copy each PAR URL.
 
     - Copy the E5-small PAR URL. You will use it to load the model in Lab 2.
     - Copy the E5-base PAR URL. You will use it to load the model in Lab 3.
