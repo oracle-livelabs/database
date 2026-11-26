@@ -60,9 +60,9 @@ Estimated Time: 20 minutes
     COMMIT;
     ```
 
-    `DATA` remains the original JSON document and is not rewritten by this update. The embedding is stored outside the document in the relational `EMBEDDING_E5_SMALL` `VECTOR` column, so search metadata can evolve independently from the application JSON. In Lab 3, you will add `EMBEDDING_E5_BASE` as a second relational vector column over the same movie rows, with its own dimensions and index, without duplicating or re-ingesting the documents.
+    This update leaves the original JSON in `DATA` unchanged. It stores the embedding outside the document in the relational `EMBEDDING_E5_SMALL` `VECTOR` column, so search metadata can evolve independently. In Lab 3, you will add `EMBEDDING_E5_BASE` to the same movie rows. This second relational vector column has its own dimensions and index, without duplicating or re-ingesting the documents.
 
-2. Verify the number of generated vectors match the number of document rows.
+2. Verify that the number of generated vectors matches the number of document rows.
 
     ```sql
     SELECT COUNT(*) AS embedded_movies
@@ -91,7 +91,7 @@ Estimated Time: 20 minutes
     WITH TARGET ACCURACY 95;
     ```
 
-    The index is built from the embeddings you have generated and committed. It indexes the relational `EMBEDDING_E5_SMALL` column while the original JSON documents in `DATA` remain unchanged. Task 3 uses the same `COSINE` distance metric to search these vectors.
+    This index uses the embeddings you generated and committed. It indexes the relational `EMBEDDING_E5_SMALL` column and leaves the original JSON documents in `DATA` unchanged. Task 3 uses the same `COSINE` distance metric to search these vectors.
 
 ## Task 3: Run a nearest-neighbor search
 
@@ -123,7 +123,7 @@ Estimated Time: 20 minutes
 
 ## Task 4: Combine semantic search with filters
 
-1. Add metadata filters to the semantic search. This query finds movies about a team of heroes, while restricting the results to Action movies released in 2000 or later.
+1. Add metadata filters to the semantic search. Find movies about a team of heroes and limit the results to Action movies released in 2000 or later.
 
     ```sql
     SELECT JSON_VALUE(m.data, '$.title'
@@ -147,7 +147,7 @@ Estimated Time: 20 minutes
     WITH TARGET ACCURACY 90;
     ```
 
-    The vector search supplies the semantic ranking, while the `WHERE` clause applies structured filters from the movie document.
+    Vector search ranks the matches by meaning. The `WHERE` clause applies structured filters from the movie document.
 
 ## Task 5: Combine text and vector results with INTERSECT
 
@@ -189,9 +189,9 @@ Estimated Time: 20 minutes
     FETCH FIRST 3 ROWS ONLY;
     ```
 
-    `INTERSECT` returns distinct title, year, and genre values found by both searches. The vector branch uses `VECTOR_DISTANCE` only to rank its 20 nearest candidates; the distance is not returned. The final query sorts the shared results by year and title and returns at most three rows.
+    `INTERSECT` returns distinct title, year, and genre combinations found by both searches. The vector branch uses `VECTOR_DISTANCE` to rank its 20 nearest candidates. The output contains only movie fields. The final query sorts the shared results by year and title and returns at most three rows.
 
 ## Acknowledgements
 
 * **Author** - Gael Palomino
-* **Last Updated By/Date** - Gael Palomino, August 2026
+* **Last Updated By/Date** - Gael Palomino, November 2026

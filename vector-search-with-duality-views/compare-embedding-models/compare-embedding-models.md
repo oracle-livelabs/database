@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The original JSON documents do not determine which embedding model you use. You can keep several vector columns and indexes beside the same `DATA` column, then direct each search to the model that best serves the workload. A model with more dimensions can encode finer distinctions, but it is not automatically more relevant for every language, domain, or question. Test the result quality with representative queries before selecting a model.
+You can use several embedding models over the same JSON documents. Keep their vector columns and indexes beside the same `DATA` column, and direct each search to the appropriate model. More dimensions can encode finer distinctions, but they do not guarantee better relevance for every language, domain, or question. Compare results with queries that reflect your application.
 
-Keeping multiple models for the same data is useful when different applications or search experiences need different representations. For example, a multilingual model can support broad discovery across languages, while a larger or domain-tuned model can capture finer distinctions for detailed searches. Each model has its own vector column and index, but both are generated from the same movie documents. This allows workloads to use the appropriate search path and supports a gradual migration without changing or duplicating the original JSON data.
+Multiple models are useful when applications need different representations of the same data. A multilingual model can support discovery across languages. A larger or domain-tuned model can capture finer distinctions for detailed searches. Each model has its own vector column and index, with embeddings generated from the same movie documents. Applications can use different search paths while you migrate gradually, keeping the original JSON data unchanged.
 
-In this lab, you migrate from multilingual E5-small to E5-base. E5-small produces 384-dimensional vectors, while E5-base produces 768-dimensional vectors. You will add and index E5-base independently, then run the same kind of semantic search with the new model. If you have another compatible ONNX embedding model, repeat this pattern with its own vector column and index.
+In this lab, you migrate from multilingual E5-small to E5-base. E5-small produces 384-dimensional vectors, while E5-base produces 768-dimensional vectors. You will add and index E5-base independently, then run semantic searches with the new model. If you have another compatible ONNX embedding model, repeat this pattern with its own vector column and index.
 
 Estimated Time: 20 minutes
 
@@ -58,7 +58,7 @@ Estimated Time: 20 minutes
     ADD embedding_e5_base VECTOR(768, FLOAT32);
     ```
 
-    The new column does not alter the original JSON in `DATA` or the existing 384-dimensional `EMBEDDING_E5_SMALL` column. Each model has an independent storage and indexing path.
+    The new column does not alter the original JSON in `DATA` or the existing 384-dimensional `EMBEDDING_E5_SMALL` column. Each model uses its own vector column and index.
 
 ## Task 3: Generate and index the E5-base embeddings
 
@@ -79,7 +79,7 @@ Estimated Time: 20 minutes
 
 2. Gather optimizer statistics on `MOVIES` after populating the embeddings and before creating the vector index.
 
-    Run this block as the workshop user that owns `MOVIES`. The statistics describe the populated table and help the optimizer estimate query costs when choosing an access path.
+    Run this block as the workshop user who owns `MOVIES`. The statistics describe the populated table and help the optimizer estimate query costs and choose an access path.
 
     ```sql
     BEGIN
@@ -126,11 +126,11 @@ Estimated Time: 20 minutes
 2. Compare these titles with the E5-small search from Lab 2.
 
     - Different models can rank the same movies differently. Measure relevance against questions and languages that matter to your application.
-    - To try your own compatible ONNX model, add another appropriately sized vector column, load the model, generate vectors, and create a separate index. Keep the existing model and index until you have validated the new results.
+    - To try your own compatible ONNX model, add a vector column with matching dimensions. Load the model, generate vectors, and create a separate index. Keep the existing model and index until you validate the new results.
 
 ## Task 5: Combine semantic search with filters
 
-1. Add metadata filters to the E5-base semantic search. This query finds movies about a team of heroes, while restricting the results to Action movies released in 2000 or later.
+1. Add metadata filters to the E5-base semantic search. Find movies about a team of heroes and limit the results to Action movies released in 2000 or later.
 
     ```sql
     SELECT JSON_VALUE(m.data, '$.title'
@@ -154,7 +154,7 @@ Estimated Time: 20 minutes
     WITH TARGET ACCURACY 90;
     ```
 
-    The E5-base vector supplies the semantic ranking, while the `WHERE` clause applies structured filters from the movie document.
+    The E5-base vector search ranks the matches by meaning. The `WHERE` clause applies structured filters from the movie document.
 
 ## Task 6: Combine text and vector results with INTERSECT
 
@@ -196,9 +196,9 @@ Estimated Time: 20 minutes
     FETCH FIRST 3 ROWS ONLY;
     ```
 
-    `INTERSECT` returns distinct title, year, and genre values found by both searches. The vector branch uses `VECTOR_DISTANCE` only to rank its 20 nearest candidates; the distance is not returned. The final query sorts the shared results by year and title and returns at most three rows.
+    `INTERSECT` returns distinct title, year, and genre combinations found by both searches. The vector branch uses `VECTOR_DISTANCE` to rank its 20 nearest candidates. The output contains only movie fields. The final query sorts the shared results by year and title and returns at most three rows.
 
 ## Acknowledgements
 
 * **Author** - Gael Palomino
-* **Last Updated By/Date** - Gael Palomino, August 2026
+* **Last Updated By/Date** - Gael Palomino, November 2026

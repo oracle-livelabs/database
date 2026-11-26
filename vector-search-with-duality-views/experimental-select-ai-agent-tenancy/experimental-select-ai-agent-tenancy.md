@@ -4,9 +4,9 @@
 
 A movie fan may remember a theme before a title: "heroes working together against an alien threat." In Lab 4, you searched for requests like this through `MOVIES_DV`. Now you will build an assistant that finds relevant movies and explains its recommendations in everyday language.
 
-Two models support the assistant. `MULTILINGUAL_E5_BASE` turns the question into a vector. A database function uses that vector to retrieve matching movie documents through the duality view. The generative model configured in Select AI uses those documents to write an answer. You will register the function as a tool and instruct an agent to use it. Then you will inspect the history to see which documents supported the response.
+Two models support the assistant. `MULTILINGUAL_E5_BASE` turns the question into a vector. A database function uses that vector to retrieve matching movie documents through the duality view. The generative model in your Select AI profile uses those documents to write an answer. You will register the function as a tool and instruct an agent to use it. Then you will inspect the history to see which documents supported the response.
 
-In your own tenancy, you first configure the OCI credential and Select AI profile. You will check model availability in your region and compartment before choosing the profile's generative model.
+First, configure the OCI credential and Select AI profile in your tenancy. Check model availability in your region and compartment before choosing the profile's generative model.
 
 Estimated Time: 30 minutes
 
@@ -30,7 +30,7 @@ If your administrator has already prepared a profile, use its name wherever `OCI
 
 1. Confirm the Select AI package privileges (optional when running as `ADMIN`).
 
-    If you are connected as `ADMIN`, continue at Step 2. For another workshop user, ask your database administrator to grant any missing package privileges to your workshop schema. The administrator runs these statements:
+    If you are connected as `ADMIN`, continue at Step 2. For another workshop user, ask your database administrator to grant any missing package privileges to that schema. The administrator runs these statements:
 
     ```sql
     GRANT EXECUTE ON DBMS_CLOUD TO <WORKSHOP_USER>;
@@ -40,7 +40,7 @@ If your administrator has already prepared a profile, use its name wherever `OCI
 
 2. Create an OCI API signing-key credential if `OCI_GENAI_CREDS` does not already exist.
 
-    Replace the placeholders with your OCI user OCID, tenancy OCID, API signing private key, and key fingerprint. Use a private key without a passphrase. Provide the key body on one line, without the PEM `BEGIN` and `END` lines. Retain any trailing `=` padding in the key body and keep the real values out of shared workshop files.
+    Replace the placeholders with your OCI user OCID, tenancy OCID, API signing private key, and key fingerprint. Use a private key without a passphrase. Provide the key body on one line, without the PEM `BEGIN` and `END` lines. Retain any trailing `=` padding in the key body. Keep the real values out of shared workshop files.
 
     ```sql
     BEGIN
@@ -57,7 +57,7 @@ If your administrator has already prepared a profile, use its name wherever `OCI
 
 3. Check which OCI Generative AI chat models are available for your region and compartment.
 
-    In the OCI Console, select your region and open **Analytics & AI** > **Generative AI**. Select your compartment, open **Playground** > **Chat**, and check the model list. Availability depends on the region, compartment, and tenancy access. The preferred models for this workshop are:
+    In the OCI Console, select your region and open **Analytics & AI** > **Generative AI**. Select your compartment and open **Playground** > **Chat**. Check the model list. Availability depends on the region, compartment, and tenancy access. The preferred models for this workshop are:
 
     - `xai.grok-4.7`
     - `google.gemini-2.5-pro`
@@ -78,7 +78,7 @@ If your administrator has already prepared a profile, use its name wherever `OCI
 
     The `provider_endpoint` attribute is optional for the default public endpoint. Supply your regional endpoint or remove that attribute.
 
-    The `object_list` supplies `MOVIES_DV` as database context for SQL generation. Database privileges control access to the data. The view exposes movie JSON under `movie` and the E5-base vector under `embedding`.
+    The `object_list` identifies `MOVIES_DV` as database context for SQL generation. Database privileges control access to the data. The view exposes movie JSON under `movie` and the E5-base vector under `embedding`.
 
     ```sql
     BEGIN
@@ -105,7 +105,7 @@ If your administrator has already prepared a profile, use its name wherever `OCI
     /
     ```
 
-    For OCI Generative AI on Autonomous Database, a network ACL grant is not required. See [Oracle's Select AI profile guidance](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/manage-ai-profiles.html). The `oci_apiformat` attribute is omitted for the standard on-demand model-name configuration; use it only when required by the selected OCI chat model or endpoint.
+    For OCI Generative AI on Autonomous Database, a network ACL grant is not required. See [Oracle's Select AI profile guidance](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/manage-ai-profiles.html). This standard on-demand model-name configuration omits `oci_apiformat`. Use that attribute only if your selected OCI chat model or endpoint requires it.
 
 5. Set the profile for the current session and test that Select AI can call its configured generative model.
 
@@ -115,13 +115,13 @@ If your administrator has already prepared a profile, use its name wherever `OCI
     SELECT AI "Tell me about movies with superheroes saving others";
     ```
 
-    Continue when you receive a response. This checks the profile before you build the custom movie-search tool. In Task 4, you will route the question through the agent and inspect its tool calls. If this check fails, verify the endpoint, credential, model availability, compartment, and required privileges with your administrator.
+    Continue when you receive a response. This confirms that the profile works before you build the custom movie-search tool. In Task 4, you will send a question through the agent and inspect its tool calls. If the check fails, ask your administrator to verify the endpoint, credential, model availability, compartment, and required privileges.
 
 ## Task 2: Create the movie-search tool
 
 1. Create a function that embeds a movie question with E5-base and searches the duality view.
 
-    The function searches the view's `embedding` field, which maps to `MOVIES.EMBEDDING_E5_BASE`. It returns up to five `movie` objects as newline-delimited JSON. These documents supply the agent's context; the vector values stay out of the response.
+    The function searches the view's `embedding` field, which maps to `MOVIES.EMBEDDING_E5_BASE`. It returns up to five `movie` objects as newline-delimited JSON. These documents supply the agent's context. The response contains movie data without the vector values.
 
     ```sql
     CREATE OR REPLACE FUNCTION search_movies (
@@ -180,7 +180,7 @@ If your administrator has already prepared a profile, use its name wherever `OCI
 
 3. Inspect the registered tool before the agent uses it.
 
-    Inspect the tool definition and check that its input schema includes `P_QUERY`. This is the argument the agent will populate with the movie question.
+    Check that the tool definition includes `P_QUERY` in its input schema. The agent passes the movie question through this argument.
 
     ```sql
     SELECT DBMS_CLOUD_AI_AGENT.DESCRIBE_TOOL(
@@ -191,7 +191,7 @@ If your administrator has already prepared a profile, use its name wherever `OCI
 
 ## Task 3: Create the movie agent and team
 
-The agent defines the assistant's role, the task tells it how to answer, and the team connects the two. This lab uses one agent and one task.
+The agent defines the assistant's role. The task tells it how to answer, and the team connects the two. This lab uses one agent and one task.
 
 1. Create an agent that uses the Select AI profile and bases its answers on retrieved movie documents.
 
@@ -242,7 +242,7 @@ The agent defines the assistant's role, the task tells it how to answer, and the
     /
     ```
 
-4. Confirm that the team is discoverable.
+4. Confirm that the team appears in the team list.
 
     ```sql
     SELECT DBMS_CLOUD_AI_AGENT.LIST_TEAMS() AS teams
@@ -253,7 +253,7 @@ The agent defines the assistant's role, the task tells it how to answer, and the
 
 1. Set the agent team and ask a natural-language question with Select AI.
 
-    The `AGENT` action sends the question to the team you select with `SET_TEAM`. Its task instructs the agent to call `MOVIE_SEARCH_TOOL` and use the returned movie documents to answer.
+    The `AGENT` action sends the question to the team you selected with `SET_TEAM`. The task instructs the agent to call `MOVIE_SEARCH_TOOL` and answer using the returned movie documents.
 
     ```sql
     EXEC DBMS_CLOUD_AI_AGENT.SET_TEAM('MOVIE_AGENT_TEAM');
@@ -286,7 +286,7 @@ The agent defines the assistant's role, the task tells it how to answer, and the
 
     Compare the recommendations. Does each answer reflect the theme of its question? The next step lets you check the movie documents the tool actually returned.
 
-2. Inspect the tool history to confirm that the agent applied the created retrieval tool.
+2. Inspect the tool history to confirm that the agent called your retrieval tool.
 
     ```sql
     SELECT team_exec_id,
@@ -304,7 +304,7 @@ The agent defines the assistant's role, the task tells it how to answer, and the
     FETCH FIRST 5 ROWS ONLY;
     ```
 
-    Find the tool call for your latest question. `INPUT` shows the value passed to `p_query`; `OUTPUT` contains the retrieved movie JSON. Compare those documents with the answer and note the `TEAM_EXEC_ID` so you can identify the same run below. If there is no corresponding tool call, the response has not demonstrated use of your retrieval tool.
+    Find the tool call for your latest question. `INPUT` shows the value passed to `p_query`; `OUTPUT` contains the retrieved movie JSON. Compare those documents with the answer. Note the `TEAM_EXEC_ID` to find the same run in the next step. Without a corresponding tool call, the history does not confirm that the agent used your retrieval tool.
 
 3. Inspect the team and task history for the same runs.
 
@@ -333,9 +333,9 @@ The agent defines the assistant's role, the task tells it how to answer, and the
     FETCH FIRST 5 ROWS ONLY;
     ```
 
-    Match the `TEAM_EXEC_ID` across the three views. A completed run should have a `SUCCEEDED` state, a call to `MOVIE_SEARCH_TOOL`, and an answer supported by the tool output. These records trace the question through the team, search function, and final response.
+    Match the `TEAM_EXEC_ID` across the three views. Look for a `SUCCEEDED` state, a call to `MOVIE_SEARCH_TOOL`, and an answer supported by the tool output. These records trace the question through the team, search function, and final response.
 
-You have built a movie assistant over the same JSON and relational embeddings used in the earlier labs. The duality view supplies the movie documents and retrieval vectors through one interface; the tool makes that search available to the agent.
+You have built a movie assistant over the same JSON and relational embeddings used in the earlier labs. The duality view supplies the movie documents and retrieval vectors through one interface. The tool makes that search available to the agent.
 
 ## Learn More
 
